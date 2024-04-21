@@ -272,11 +272,19 @@ function newWave(level,layer){
     let spawn=[[],[],[],[],[],[],[],[]]
     let index=0
     for(let a=0,la=types.wave[game.mission][display.cycle].length;a<la;a++){
-        for(let b=0,lb=ceil(types.wave[game.mission][display.cycle][a][1]*game.players/2*(game.classicRespawn?0.5:1));b<lb;b++){
+        if(types.wave[game.mission][display.cycle][a][1]==1){
             if(types.wave[game.mission][display.cycle][a][0]=='Spy'){
                 spawn[floor(random(0,4))].push(types.wave[game.mission][display.cycle][a][0])
             }else{
                 spawn[floor(random(4,8))].push(types.wave[game.mission][display.cycle][a][0])
+            }
+        }else{
+            for(let b=0,lb=ceil(types.wave[game.mission][display.cycle][a][1]*game.players/2*(game.classicRespawn?0.5:1));b<lb;b++){
+                if(types.wave[game.mission][display.cycle][a][0]=='Spy'){
+                    spawn[floor(random(0,4))].push(types.wave[game.mission][display.cycle][a][0])
+                }else{
+                    spawn[floor(random(4,8))].push(types.wave[game.mission][display.cycle][a][0])
+                }
             }
         }
     }

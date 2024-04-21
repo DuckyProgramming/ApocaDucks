@@ -17,6 +17,7 @@ function mainloop(layer){
                     }
                 }
             }
+            graphics.main[0].noStroke()
             for(let a=0,la=game.players;a<la;a++){
                 graphics.main[0].fill(255,display.anim)
                 graphics.main[0].textSize(60)

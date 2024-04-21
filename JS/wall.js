@@ -95,17 +95,30 @@ class wall{
             break
         }
         this.layer.pop()
+        /*for(let a=0,la=4;a<la;a++){
+            if(!this.redundant[a]){
+                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                    this.layer.stroke(255,this.select?150:50,this.select?50:0)
+                    this.layer.line(
+                        this.boundary[a][b][0].x<this.position.x?this.boundary[a][b][0].x+1:this.boundary[a][b][0].x-1,
+                        this.boundary[a][b][0].y<this.position.y?this.boundary[a][b][0].y+1:this.boundary[a][b][0].y-1,
+                        this.boundary[a][b][1].x<this.position.x?this.boundary[a][b][1].x+1:this.boundary[a][b][1].x-1,
+                        this.boundary[a][b][1].y<this.position.y?this.boundary[a][b][1].y+1:this.boundary[a][b][1].y-1
+                    )
+                }
+            }
+        }*/
     }
     update(){
         for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 let c=this.collide[a][b]
-                if(a==0&&(c.type==5||c.type==8||c.type==17)){
+                if(a==0&&(c.type==5||c.type==8||c.type==17||c.type==28)){
                     let d=-1
-                    if(inBoxBox(this,c)){
-                        d=collideBoxBoxIndex1(this,c)
-                    }else if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
+                    if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
                         d=collideBoxBoxIndex2(this,c)
+                    }else if(inBoxBox(this,c)){
+                        d=collideBoxBoxIndex1(this,c)
                     }
                     if(d>=0&&!this.redundant[d]){
                         switch(d){
@@ -138,10 +151,10 @@ class wall{
                 }else if(inBoxBox(this,c)&&(c.active||a==1)){
                     switch(a){
                         case 0:
-                            if(c.type!=7&&c.type!=23){
+                            if(c.type!=7&&c.type!=23&&c.type!=25){
                                 c.active=false
                                 c.speed=0
-                                if(c.type==2||c.type==3||c.type==16||c.type==21||c.type==22){
+                                if(c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||c.type==26||c.type==27){
                                     c.explode()
                                 }
                             }

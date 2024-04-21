@@ -484,6 +484,18 @@ class player{
             case 29:
 				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,24,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
+            case 30:
+                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,25,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit))
+            break
+			case 31:
+				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,26,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+			break
+			case 32:
+				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,27,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+			break
+            case 33:
+				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,28,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit))
+			break
 		}
         if(this.weapon.uses<=0&&this.id>0){
             this.weaponType=-1
@@ -584,7 +596,13 @@ class player{
             }else if(this.manage[1]==0&&floor(random(0,120))==0&&this.weaponType==5&&dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y)>300){
                 this.manage[1]=1
             }
-            if(this.id==0){
+            if(this.playerData.name=='PistolJump'){
+                if(this.manage[2]==0&&(floor(random(0,120))==0||floor(random(0,30))==0&&this.position.y>entities.players[this.target].position.y)){
+                    this.manage[2]=1
+                }else if(this.manage[2]==1&&(floor(random(0,60))==0||floor(random(0,30))==0&&this.position.y<entities.players[this.target].position.y)){
+                    this.manage[2]=0
+                }
+            }else if(this.id==0){
                 if(this.manage[2]==0&&(floor(random(0,240))==0||floor(random(0,60))==0&&this.position.y>entities.players[this.target].position.y)){
                     this.manage[2]=1
                 }else if(this.manage[2]==1&&(floor(random(0,60))==0||floor(random(0,30))==0&&this.position.y<entities.players[this.target].position.y)){
@@ -615,7 +633,11 @@ class player{
                     this.jump.time=0
                     this.jump.active=10
                 }
-                this.velocity.y=min(-14,this.velocity.y-1.5)
+                if(this.playerData.name=='PistolJump'){
+                    this.velocity.y=min(-21,this.velocity.y-2.25)
+                }else{
+                    this.velocity.y=min(-14,this.velocity.y-1.5)
+                }
             }
             if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0){
                 this.attack()
@@ -683,7 +705,7 @@ class player{
             }
             if(this.weapon.reload>0){
                 this.weapon.reload-=this.playerData.reloadBuff
-            }else if(this.weapon.ammo<this.weaponData.ammo){
+            }else if(this.weapon.ammo<this.weaponData.ammo&&this.weapon.ammo<this.weapon.uses){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
             }
@@ -704,6 +726,9 @@ class player{
         }
         if(this.collect.time>0){
             this.collect.time--
+            if(this.weaponType==11||this.weaponType==13||this.weaponType==14){
+                this.collect.time-=2
+            }
         }else if(this.life>0&&this.id>0){
             this.life=min(this.base.life,this.life+this.base.life/300)
         }
