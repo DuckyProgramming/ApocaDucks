@@ -7,7 +7,7 @@ function mainloop(layer){
 			for(let c=0,lc=1;c<lc;c++){
                 for(let a=0,la=run.fore.length;a<la;a++){
                     for(let b=0,lb=run.fore[a].length;b<lb;b++){
-                                        run.fore[a][b].layer=graphics.main[c]
+                        run.fore[a][b].layer=graphics.main[c]
                         run.fore[a][b].display()
                     }
                 }
@@ -25,7 +25,7 @@ function mainloop(layer){
             graphics.main[0].fill(255)
             graphics.main[0].textSize(20)
             switch(game.level){
-                case 1:
+                case 0: case 1:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/3-40)
                 break
                 case 4:

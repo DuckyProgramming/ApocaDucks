@@ -69,16 +69,16 @@ class wall{
                         }
                     }
                 }
-                if(c.position.y==this.position.y+this.height/2+c.height/2&&c.position.x-c.width/2<=this.position.x-this.width/2&&c.position.x+c.width/2>=this.position.x+this.width/2){
+                if(abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&c.position.x-c.width/2<=this.position.x-this.width/2&&c.position.x+c.width/2>=this.position.x+this.width/2){
                     this.redundant[0]=true
                 }
-                if(c.position.y==this.position.y-this.height/2-c.height/2&&c.position.x-c.width/2<=this.position.x-this.width/2&&c.position.x+c.width/2>=this.position.x+this.width/2){
+                if(abs(c.position.y-(this.position.y-this.height/2-c.height/2))<1&&c.position.x-c.width/2<=this.position.x-this.width/2&&c.position.x+c.width/2>=this.position.x+this.width/2){
                     this.redundant[1]=true
                 }
-                if(c.position.x==this.position.x+this.width/2+c.width/2&&c.position.y-c.height/2<=this.position.y-this.height/2&&c.position.y+c.height/2>=this.position.y+this.height/2){
+                if(abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&c.position.y-c.height/2<=this.position.y-this.height/2&&c.position.y+c.height/2>=this.position.y+this.height/2){
                     this.redundant[2]=true
                 }
-                if(c.position.x==this.position.x-this.width/2-c.width/2&&c.position.y-c.height/2<=this.position.y-this.height/2&&c.position.y+c.height/2>=this.position.y+this.height/2){
+                if(abs(c.position.x-(this.position.x-this.width/2-c.width/2))<1&&c.position.y-c.height/2<=this.position.y-this.height/2&&c.position.y+c.height/2>=this.position.y+this.height/2){
                     this.redundant[3]=true
                 }
             }
@@ -100,43 +100,48 @@ class wall{
         for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 let c=this.collide[a][b]
-                if(inBoxBox(this,c)&&(c.active||a==1)){
+                if(a==0&&(c.type==5||c.type==8||c.type==17)){
+                    let d=-1
+                    if(inBoxBox(this,c)){
+                        d=collideBoxBoxIndex1(this,c)
+                    }else if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
+                        d=collideBoxBoxIndex2(this,c)
+                    }
+                    if(d>=0&&!this.redundant[d]){
+                        switch(d){
+                            case 0:
+                                if(c.velocity.y<0){
+                                    c.position.y=this.position.y+this.height/2+c.height/2
+                                    c.velocity.y*=-1
+                                }
+                            break
+                            case 1:
+                                if(c.velocity.y>0){
+                                    c.position.y=this.position.y-this.height/2-c.height/2
+                                    c.velocity.y*=-1
+                                }
+                            break
+                            case 2:
+                                if(c.velocity.x<0){
+                                    c.position.x=this.position.x+this.width/2+c.width/2
+                                    c.velocity.x*=-1
+                                }
+                            break
+                            case 3:
+                                if(c.velocity.x>0){
+                                    c.position.x=this.position.x-this.width/2-c.width/2
+                                    c.velocity.x*=-1
+                                }
+                            break
+                        }
+                    }
+                }else if(inBoxBox(this,c)&&(c.active||a==1)){
                     switch(a){
                         case 0:
-                            if(c.type==5||c.type==8){
-                                let d=collideBoxBox(this,c)
-                                if(!this.redundant[d]){
-                                    switch(d){
-                                        case 0:
-                                            if(c.velocity.y<0){
-                                                c.position.y=this.position.y+this.height/2+c.height/2
-                                                c.velocity.y*=-1
-                                            }
-                                        break
-                                        case 1:
-                                            if(c.velocity.y>0){
-                                                c.position.y=this.position.y-this.height/2-c.height/2
-                                                c.velocity.y*=-1
-                                            }
-                                        break
-                                        case 2:
-                                            if(c.velocity.x<0){
-                                                c.position.x=this.position.x+this.width/2+c.width/2
-                                                c.velocity.x*=-1
-                                            }
-                                        break
-                                        case 3:
-                                            if(c.velocity.x>0){
-                                                c.position.x=this.position.x-this.width/2-c.width/2
-                                                c.velocity.x*=-1
-                                            }
-                                        break
-                                    }
-                                }
-                            }else if(c.type!=7){
+                            if(c.type!=7&&c.type!=23){
                                 c.active=false
                                 c.speed=0
-                               if(c.type==2||c.type==3){
+                                if(c.type==2||c.type==3||c.type==16||c.type==21||c.type==22){
                                     c.explode()
                                 }
                             }
