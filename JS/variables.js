@@ -1,4 +1,4 @@
-game={level:5,players:2,wins:[0,0,0,0],time:0,gaming:1,mission:0,
+game={level:5,players:2,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,
 classicRespawn:false,invis:false}
 types={
   wave:[

@@ -167,7 +167,7 @@ class player{
         this.layer.noStroke()
         this.layer.textSize(10)
         if(this.playerData.name=='Spy'){
-            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
+            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\n${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
         }else if(this.id>0){
             this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
         }else{
@@ -705,7 +705,7 @@ class player{
             }
             if(this.weapon.reload>0){
                 this.weapon.reload-=this.playerData.reloadBuff
-            }else if(this.weapon.ammo<this.weaponData.ammo&&this.weapon.ammo<this.weapon.uses){
+            }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||this.id==0||this.id>=game.gaming+1)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
             }

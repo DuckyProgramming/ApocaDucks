@@ -222,7 +222,6 @@ function generateLevel(level,layer){
     entities.projectiles=[]
     entities.walls=[[],[]]
     let tileset=[layer.width/level[0].length,layer.height/level.length]
-	let weapon=floor(random(0,types.player.length))
     let index=0
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
@@ -269,36 +268,19 @@ function newLoop(){
 }
 function newWave(level,layer){
 	display.anim=1
-    let spawn=[[],[],[],[],[],[],[],[]]
-    let index=0
+    game.stack=[]
+    game.sendTime=0
+    game.index=0
     for(let a=0,la=types.wave[game.mission][display.cycle].length;a<la;a++){
         if(types.wave[game.mission][display.cycle][a][1]==1){
-            if(types.wave[game.mission][display.cycle][a][0]=='Spy'){
-                spawn[floor(random(0,4))].push(types.wave[game.mission][display.cycle][a][0])
-            }else{
-                spawn[floor(random(4,8))].push(types.wave[game.mission][display.cycle][a][0])
-            }
+            game.stack.push([floor(random(0,4))+(types.wave[game.mission][display.cycle][a][0]=='Spy'?0:4),types.wave[game.mission][display.cycle][a][0]])
         }else{
             for(let b=0,lb=ceil(types.wave[game.mission][display.cycle][a][1]*game.players/2*(game.classicRespawn?0.5:1));b<lb;b++){
-                if(types.wave[game.mission][display.cycle][a][0]=='Spy'){
-                    spawn[floor(random(0,4))].push(types.wave[game.mission][display.cycle][a][0])
-                }else{
-                    spawn[floor(random(4,8))].push(types.wave[game.mission][display.cycle][a][0])
-                }
+                game.stack.push([floor(random(0,4))+(types.wave[game.mission][display.cycle][a][0]=='Spy'?0:4),types.wave[game.mission][display.cycle][a][0]])
             }
         }
     }
     let tileset=[layer.width/level[0].length,layer.height/level.length]
-    for(let a=0,la=level.length;a<la;a++){
-        for(let b=0,lb=level[a].length;b<lb;b++){
-            if(int(level[a][b])>=1&&int(level[a][b])<=8){
-                for(let d=0,ld=spawn[int(level[a][b])-1].length;d<ld;d++){
-                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0]+random(-20,20),tileset[1]/2+a*tileset[1]+random(-20,20),0,0,[],true,findName(spawn[int(level[a][b])-1][d],types.player),index))
-                    index++
-                }
-            }
-        }
-    }
     display.cycle++
 }
 function findName(name,list){
@@ -328,18 +310,36 @@ function runTransition(layer){
         layer.rect(layer.width*(1-1/4*transition.anim),layer.height/2,layer.width/2*transition.anim,layer.height*(1-transition.anim))
     }
 }
-function checkEnd(){
-    let total=0
-    for(let a=0,la=entities.players.length;a<la;a++){
-        if(entities.players[a].id==0&&entities.players[a].life>0){
-            total++
+function checkEnd(level,layer){
+    if(game.stack.length>0){
+        if(game.sendTime>0){
+            game.sendTime--
+        }else{
+            let tileset=[layer.width/level[0].length,layer.height/level.length]
+            for(let a=0,la=level.length;a<la;a++){
+                for(let b=0,lb=level[a].length;b<lb;b++){
+                    if(int(level[a][b])>=1&&int(level[a][b])<=8&&int(level[a][b])==game.stack[0][0]+1){
+                        entities.players.push(new player(layer,tileset[0]/2+b*tileset[0]+random(-20,20),tileset[1]/2+a*tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                        game.index++
+                    }
+                }
+            }
+            game.sendTime=30
+            game.stack.splice(0,1)
         }
-    }
-    if(total==0){
-        display.wait--
-        if(display.wait<=0){
-            newWave(levels[game.level],graphics.main[0])
-            display.wait=150
+    }else{
+        let total=0
+        for(let a=0,la=entities.players.length;a<la;a++){
+            if(entities.players[a].id==0&&entities.players[a].life>0){
+                total++
+            }
+        }
+        if(total==0){
+            display.wait--
+            if(display.wait<=0){
+                newWave(level,layer)
+                display.wait=150
+            }
         }
     }
 }

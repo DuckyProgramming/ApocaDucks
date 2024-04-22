@@ -52,7 +52,7 @@ function mainloop(layer){
             }
         break
     }
-    checkEnd()
+    checkEnd(levels[game.level],graphics.main[0])
     game.time++
 }
 function draw(){
