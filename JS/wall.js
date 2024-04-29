@@ -113,7 +113,11 @@ class wall{
         for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 let c=this.collide[a][b]
-                if(a==0&&(c.type==5||c.type==8||c.type==17||c.type==28)){
+                if(a==0&&(
+                    c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
+                    c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
+                    c.type==52
+                )){
                     let d=-1
                     if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
                         d=collideBoxBoxIndex2(this,c)
@@ -147,14 +151,28 @@ class wall{
                                 }
                             break
                         }
+                        if(c.type==30){
+                            c.bounces++
+                            if(c.bounces>=3){
+                                c.explode()
+                                c.active=false
+                            }
+                        }
                     }
                 }else if(inBoxBox(this,c)&&(c.active||a==1)){
                     switch(a){
                         case 0:
-                            if(c.type!=7&&c.type!=23&&c.type!=25){
+                            if(
+                                c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
+                                c.type!=40&&c.type!=46
+                            ){
                                 c.active=false
                                 c.speed=0
-                                if(c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||c.type==26||c.type==27){
+                                if(
+                                    c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
+                                    c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
+                                    c.type==48||c.type==53||c.type==54
+                                ){
                                     c.explode()
                                 }
                             }

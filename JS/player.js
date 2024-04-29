@@ -30,10 +30,10 @@ class player{
         this.die={timer:0,killer:0}
         this.stats={kills:0,deaths:0}
         this.invincible=0
-        if(this.playerData.name=='Spy'){
+        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
             this.copy=floor(random(0,game.players))
         }
-        if(this.weaponType==14||this.playerData.name=='HyperPistol'||this.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'){
+        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.name=='HyperCaffeinePistol'){
             this.active=0
         }
         this.visible=0
@@ -41,7 +41,11 @@ class player{
         this.manage=[0,0,0]
         this.infoAnim.bar=[0,0]
         this.target=floor(random(0,game.gaming))
+        this.time=0
         this.critBuff=0
+        this.defendBuff=0
+        this.stunTime=0
+        this.vulnerableTime=0
     }
     setupGraphics(){
         this.direction=this.position.x<this.layer.width/2?{main:54,goal:54}:{main:-54,goal:-54}
@@ -102,7 +106,7 @@ class player{
         this.layer.noStroke()
         this.layer.fill(150,this.fade*this.infoAnim.life)
         this.layer.rect(0,0,30,4,2)
-        if(this.id>0||this.playerData.name=='Spy'){
+        if(this.id>0||this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
             if(this.weaponType>=0){
                     if(this.weaponData.ammo>3){
                         this.layer.rect(0,-14,30,4,2)
@@ -166,20 +170,47 @@ class player{
         this.layer.fill(255,this.fade)
         this.layer.noStroke()
         this.layer.textSize(10)
-        if(this.playerData.name=='Spy'){
+        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
             this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\n${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
         }else if(this.id>0){
             this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
         }else{
             this.layer.text(this.playerData.name,0,-17.5-42.5*this.playerData.sizeBuff)
         }
+        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'){
+            this.layer.stroke(255,150,150,this.fade)
+            this.layer.strokeWeight(2)
+            if(sin(this.direction.main)<0){
+                this.layer.line(-80,-60,-80,60)
+            }else{
+                this.layer.line(80,-60,80,60)
+            }
+            this.layer.fill(255,150,150,this.fade*0.2)
+            if(sin(this.direction.main)<0){
+                this.layer.triangle(-80,-60,-80,60,0,0)
+            }else{
+                this.layer.triangle(80,-60,80,60,0,0)
+            }
+        }
         this.layer.scale(this.size)
         if(this.playerData.crit==1||this.critBuff>0){
             this.layer.fill(150,255,255,this.fade)
             regStar(this.layer,0,this.skin.body.level,12,45,45,9,9,0)
         }
+        if(this.defendBuff>0){
+            this.layer.fill(255,255,150,this.fade)
+            regStar(this.layer,0,this.skin.body.level,12,45,45,9,9,15)
+        }
+        if(this.stunTime>0){
+            this.layer.fill(255,255,150,this.fade)
+            regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,0)
+        }
+        if(this.vulnerableTime>0){
+            this.layer.fill(255,150,150,this.fade)
+            regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,20)
+        }
         switch(this.weaponType){
-            case 6: case 17:
+            case 6: case 17: case 45:
                 this.layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
                 this.layer.strokeWeight(3)
                 this.layer.line(
@@ -193,7 +224,7 @@ class player{
                     6000+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y
                 )
             break
-            case 12:
+            case 12: case 69:
                 this.layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
                 this.layer.strokeWeight(3)
                 this.layer.line(
@@ -213,6 +244,20 @@ class player{
                 this.layer.line(
                     this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y+4,
                     6000+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y+4
+                )
+            break
+            case 54:
+                this.layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
+                this.layer.strokeWeight(3)
+                this.layer.line(
+                    this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y,
+                    -600+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y
+                )
+                this.layer.stroke(255,0,0,this.infoAnim.bar[1]*0.5*this.fade)
+                this.layer.strokeWeight(3)
+                this.layer.line(
+                    this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y,
+                    600+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x+constrain(sin(this.direction.main)*3,-1,1)*10,this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y
                 )
             break
         }
@@ -321,11 +366,11 @@ class player{
     setColor(){
         switch(this.id){
             case 0:
-                if(this.playerData.name=='Tank'){
+                if(this.playerData.name=='Tank'||this.name=='BallingTank'){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='HeavyTank'){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[200,205,210],body:[195,195,200],legs:[180,185,190],arms:[185,190,195]}}
-                }else if(this.playerData.name=='Spy'){
+                }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
                     this.color=[
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,25,255],body:[225,15,255],legs:[210,0,255],arms:[215,5,255]}},
@@ -352,7 +397,7 @@ class player{
         this.base.color={eye:{back:this.color.eye.back},beak:{main:this.color.beak.main,mouth:this.color.beak.mouth,nostril:this.color.beak.nostril},skin:{head:this.color.skin.head,body:this.color.skin.body,legs:this.color.skin.legs,arms:this.color.skin.arms}}
     }
     newWeapon(){
-        this.type=floor(random(0,9))
+        this.type=floor(random(0,9))+floor(random(0,1.2))*9
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
         this.weaponData=types.weapon[this.weaponType]
@@ -361,7 +406,7 @@ class player{
     }
     respawn(){
         this.manage[1]=0
-        this.type=floor(random(0,9))
+        this.type=floor(random(0,9))+floor(random(0,1.2))*9
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
         this.weaponData=types.weapon[this.weaponType]
@@ -379,6 +424,9 @@ class player{
         this.setColor()
         this.base.control=0
     }
+    takeDamage(damage){
+        this.life-=damage*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?1/3:1)
+    }
 	attack(){
         this.visible=15
 		this.weapon.cooldown=this.weaponData.cooldown
@@ -389,121 +437,226 @@ class player{
 			this.weapon.cooldown*=0.1
 		}
         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
+        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size]
 		switch(this.weaponType){
 			case 0:
 				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,1,(sin(this.direction.main)<0?-90:90)+random(-10,10),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-10,10),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit,this.index))
 				}
 			break
-			case 1: case 2: case 4:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,1,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+			case 1: case 2: case 4: case 34:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
 			case 3:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,2,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
 			case 5:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,3,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],3,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
             case 6:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 7:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,5,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
 			break
             case 8:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,6,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
             break
             case 9:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,7,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],7,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
             break
             case 10:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,8,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit,this.index))
             break
-            case 11:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,9,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+            case 11: case 62:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
             break
             case 12:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 13:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,10,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],10,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
             break
-            case 14:
-                if(this.active>0){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,11,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+            case 14: case 66:
+                if(this.active>0||this.id>0){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],11,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                 }else{
                     this.weapon.ammo++
                 }
             break
             case 15:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,12,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 16:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,13,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],13,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 17:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,14,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],14,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
 			case 18:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,2,(sin(this.direction.main)<0?-90:90)+random(-5,5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(sin(this.direction.main)<0?-90:90)+random(-5,5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
             case 19:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,15,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit,this.index))
             break
 			case 20:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,16,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
             case 21:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,17,(sin(this.direction.main)<0?-90:90)+random(-30,30),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],17,(sin(this.direction.main)<0?-90:90)+random(-30,30),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
 			break
             case 22:
 				for(let a=0,la=15;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,1,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit,this.index))
 				}
 			break
             case 23:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,18,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],18,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 24:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,19,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],19,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
-            case 25:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,20,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit))
+            case 25: case 46:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
 			case 26:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,21,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],21,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
 			case 27:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,22,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],22,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
             case 28:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,23,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],23,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
             break
-            case 29:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,24,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+            case 29: case 48:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],24,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 30:
-                entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,25,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],25,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
             break
 			case 31:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,26,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
 			case 32:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,27,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],27,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
             case 33:
-				entities.projectiles.push(new projectile(this.layer,this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size,28,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],28,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
 			break
+            case 35:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],29,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit,this.index))
+            break
+            case 36:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],30,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+			case 37:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],31,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+			case 38:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],32,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 39:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],33,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+            break
+            case 40:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+            case 41:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],35,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+            case 42:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],36,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+            break
+            case 43:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],37,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
+            break
+            case 44:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],38,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+            break
+            case 45:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+            case 47:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],40,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
+            break
+			case 49:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],41,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 50:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(sin(this.direction.main)<0?90:-90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+			case 51:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(sin(this.direction.main)<0?-90:90)+random(-5,5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 52:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],42,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit,this.index))
+            break
+            case 53:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+            case 54:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+			break
+            case 55:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+            case 56:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+			break
+            case 57: case 68:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],44,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+			case 58:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],45,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 59:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],46,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,abs(this.velocity.x),crit,this.index))
+            break
+			case 60:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],47,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+			case 61:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],48,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 62:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+			break
+            case 63:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+			break
+            case 64:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],49,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+			case 65:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],52,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+			case 67:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],53,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 69:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+			case 70:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],54,(sin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+            case 71:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],51,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+			break
+
 		}
         if(this.weapon.uses<=0&&this.id>0){
             this.weaponType=-1
         }
 	}
     update(){
+        this.time++
         switch(this.weaponType){
-            case 6: case 12: case 17:
+            case 6: case 12: case 17: case 45: case 54: case 69:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],sin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],sin(this.direction.main)>0,0,1,5)]
             break
         }
@@ -547,7 +700,7 @@ class player{
         this.previous.position.y=this.position.y
         this.position.x+=this.velocity.x
         this.position.y+=this.velocity.y
-        if(this.weaponType==14||this.playerData.name=='BigHyperPistol'){
+        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'){
             if(this.active>0){
                 this.life=this.base.life
                 this.active--
@@ -556,13 +709,13 @@ class player{
                     this.color=this.base.color
                 }
             }else if(this.active==0&&this.life<this.base.life){
-                this.active=300
+                this.active=this.playerData.name=='BigHyperMedic'?600:this.playerData.name=='ShortHyperMedic'?120:300
                 this.color.skin.head=mergeColor(this.color.skin.head,[255,255,255],0.6)
                 this.color.skin.body=mergeColor(this.color.skin.body,[255,255,255],0.6)
                 this.color.skin.legs=mergeColor(this.color.skin.legs,[255,255,255],0.6)
                 this.color.skin.arms=mergeColor(this.color.skin.arms,[255,255,255],0.6)
             }
-        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'){
+        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.name=='HyperCaffeinePistol'){
             if(this.active>0){
                 this.life=this.base.life
                 this.active--
@@ -572,6 +725,9 @@ class player{
                 }
             }else if(this.active==0&&this.life<this.base.life){
                 this.active=150
+                if(this.name=='HyperCaffeinePistol'){
+                    this.critBuff=max(this.critBuff,150)
+                }
                 this.color.skin.head=mergeColor(this.color.skin.head,[255,255,255],0.6)
                 this.color.skin.body=mergeColor(this.color.skin.body,[255,255,255],0.6)
                 this.color.skin.legs=mergeColor(this.color.skin.legs,[255,255,255],0.6)
@@ -596,7 +752,7 @@ class player{
             }else if(this.manage[1]==0&&floor(random(0,120))==0&&this.weaponType==5&&dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y)>300){
                 this.manage[1]=1
             }
-            if(this.playerData.name=='PistolJump'){
+            if(this.playerData.name=='PistolJump'||this.playerData.name=='FastPunchJump'||this.playerData.name=='BigRocketLauncherJump'){
                 if(this.manage[2]==0&&(floor(random(0,120))==0||floor(random(0,30))==0&&this.position.y>entities.players[this.target].position.y)){
                     this.manage[2]=1
                 }else if(this.manage[2]==1&&(floor(random(0,60))==0||floor(random(0,30))==0&&this.position.y<entities.players[this.target].position.y)){
@@ -615,11 +771,11 @@ class player{
                     this.manage[2]=0
                 }
             }
-            if(this.manage[0]==0&&this.life>0){
+            if(this.manage[0]==0&&this.life>0&&this.stunTime<=0){
                 this.direction.goal=-54
                 this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                 this.runAnim(1/30)
-            }else if(this.manage[0]==1&&this.life>0){
+            }else if(this.manage[0]==1&&this.life>0&&this.stunTime<=0){
                 this.direction.goal=54
                 this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                 this.runAnim(1/30)
@@ -633,7 +789,7 @@ class player{
                     this.jump.time=0
                     this.jump.active=10
                 }
-                if(this.playerData.name=='PistolJump'){
+                if(this.playerData.name=='PistolJump'||this.playerData.name=='FastPunchJump'||this.playerData.name=='BigRocketLauncherJump'){
                     this.velocity.y=min(-21,this.velocity.y-2.25)
                 }else{
                     this.velocity.y=min(-14,this.velocity.y-1.5)
@@ -646,11 +802,11 @@ class player{
 					if(this.life>0){
             this.inputs.push([inputs.keys[this.id-1][0],inputs.keys[this.id-1][1],inputs.keys[this.id-1][2],inputs.keys[this.id-1][3]])
 					}
-            if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0){
+            if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0&&this.stunTime<=0){
                 this.direction.goal=-54
                 this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                 this.runAnim(1/30)
-            }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0){
+            }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0&&this.stunTime<=0){
                 this.direction.goal=54
                 this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                 this.runAnim(1/30)
@@ -673,11 +829,11 @@ class player{
             if(this.selector>=this.inputs.length){
                 this.control=0
             }else{
-                if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0){
+                if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0){
                     this.direction.goal=-54
                     this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                     this.runAnim(1/30)
-                }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0){
+                }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0){
                     this.direction.goal=54
                     this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff
                     this.runAnim(1/30)
@@ -726,7 +882,7 @@ class player{
         }
         if(this.collect.time>0){
             this.collect.time--
-            if(this.weaponType==11||this.weaponType==13||this.weaponType==14){
+            if(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==66){
                 this.collect.time-=2
             }
         }else if(this.life>0&&this.id>0){
@@ -774,23 +930,53 @@ class player{
             }
         }
         switch(this.playerData.name){
-            case 'RocketLauncherHeal':
+            case 'RocketLauncherHeal': case 'FastPunchHeal':
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==0&&entities.players[a].id==0){
                         entities.players[a].life=min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life/600)
                     }
                 }
             break
-            case 'RocketLauncherBuff':
+            case 'RocketLauncherBuff': case 'BigRocketLauncherBuff': case 'BigCritRocketLauncherBuff': case 'BigSpamRocketLauncherBuff': case 'RocketLauncherHealSelfBuff':
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==0&&entities.players[a].id==0){
-                        entities.players[a].critBuff=15
+                        entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                     }
+                }
+            break
+            case 'BigCritRocketLauncherDefendBuff': case 'BigRocketLauncherDefendBuff':
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==0&&entities.players[a].id==0){
+                        entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
+                    }
+                }
+            break
+            case 'MedicShield': case 'HyperMedicShield':
+                for(let a=0,la=entities.projectiles.length;a<la;a++){
+                    if((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)&&inBoxBox({position:{x:this.position.x+(sin(this.direction.main)<0?-75:75),y:this.position.y},width:20,height:120},entities.projectiles[a])&&entities.projectiles[a].active){
+                        entities.projectiles[a].active=false
+
+                    }
+                }
+            break
+            case 'EngineerSpawner':
+                if(this.time%300==0){
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
+                    game.index++
                 }
             break
         }
         if(this.critBuff>0){
             this.critBuff--
+        }
+        if(this.defendBuff>0){
+            this.defendBuff--
+        }
+        if(this.stunTime>0){
+            this.stunTime--
+        }
+        if(this.vulnerableTime>0){
+            this.vulnerableTime--
         }
         if(this.DOT.active>0){
             this.DOT.active--

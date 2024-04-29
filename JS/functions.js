@@ -237,7 +237,7 @@ function generateLevel(level,layer){
             for(let b=0,lb=level[a].length;b<lb;b++){
                 if(int(level[a][b])==c+1){
                     index--
-                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9)),index))
+                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9))+floor(random(0,1.2))*9,index))
                 }
             }
         }
@@ -271,12 +271,12 @@ function newWave(level,layer){
     game.stack=[]
     game.sendTime=0
     game.index=0
-    for(let a=0,la=types.wave[game.mission][display.cycle].length;a<la;a++){
-        if(types.wave[game.mission][display.cycle][a][1]==1){
-            game.stack.push([floor(random(0,4))+(types.wave[game.mission][display.cycle][a][0]=='Spy'?0:4),types.wave[game.mission][display.cycle][a][0]])
+    for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){
+        if(types.mission[game.mission].wave[display.cycle][a][1]==1){
+            game.stack.push([floor(random(0,4))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:4),types.mission[game.mission].wave[display.cycle][a][0]])
         }else{
-            for(let b=0,lb=ceil(types.wave[game.mission][display.cycle][a][1]*game.players/2*(game.classicRespawn?0.5:1));b<lb;b++){
-                game.stack.push([floor(random(0,4))+(types.wave[game.mission][display.cycle][a][0]=='Spy'?0:4),types.wave[game.mission][display.cycle][a][0]])
+            for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*constrain(game.players/2,0,1)*(game.classicRespawn?0.5:1));b<lb;b++){
+                game.stack.push([floor(random(0,4))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:4),types.mission[game.mission].wave[display.cycle][a][0]])
             }
         }
     }
@@ -324,7 +324,7 @@ function checkEnd(level,layer){
                     }
                 }
             }
-            game.sendTime=30
+            game.sendTime=types.mission[game.mission].sendTime*2/max(1,game.gaming)
             game.stack.splice(0,1)
         }
     }else{
