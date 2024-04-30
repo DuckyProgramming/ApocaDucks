@@ -14,7 +14,7 @@ class projectile{
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
-			case 57: case 59:
+			case 57: case 59: case 63:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 			break
@@ -180,6 +180,30 @@ class projectile{
 				]
 				this.velocity={x:this.speed*sin(this.direction),y:this.speed*cos(this.direction)-4}
 			break
+			case 62:
+				this.width=3
+				this.height=3
+				this.speed=4.2
+				this.bounces=0
+				this.time=time*(this.id==0?0.6:1)
+				this.previous={position:{x:this.position.x,y:this.position.y}}
+				this.midpoint={position:{x:this.position.x,y:this.position.y}}
+				this.past=[
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y],
+					[this.position.x,this.position.y]
+				]
+				this.velocity={x:this.speed*sin(this.direction),y:this.speed*cos(this.direction)-4}
+			break
 		}
 		this.timer=0
         this.fade=1
@@ -303,11 +327,11 @@ class projectile{
 				this.layer.ellipse(0,0,3)
 			break
 			case 11:
-				this.layer.fill(240-80*this.crit*200,240,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
 				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-80*this.crit*200,200,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,200,120+this.crit*200,this.fade)
 				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-80*this.crit*200,160,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,160,120+this.crit*200,this.fade)
 				this.layer.rect(0,2,1,4)
 				this.layer.fill(200,250,200,this.fade)
 				this.layer.ellipse(0,0,3)
@@ -649,11 +673,11 @@ class projectile{
 				}
 			break
 			case 38:
-				this.layer.fill(240-80*this.crit*200,240,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-80*this.crit*200,200,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-80*this.crit*200,160,120+this.crit*200,this.fade)
+				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,2,1,4)
 				this.layer.fill(200,250,250,this.fade)
 				this.layer.quad(-4,0,0,-1,1,0,0,4)
@@ -1013,6 +1037,29 @@ class projectile{
 				this.layer.fill(250,this.fade)
 				this.layer.ellipse(0,0,8)
 			break
+			case 62:
+				this.layer.rotate(-this.direction)
+				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,0.75)
+				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,1.5)
+				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,2.25)
+				this.layer.fill(250,this.fade)
+				this.layer.ellipse(0,0,5)
+			break
+			case 63:
+				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				this.layer.rect(0,4,1,8)
+				this.layer.fill(240-this.crit*200,240,80+this.crit*200,this.fade)
+				this.layer.rect(0,3,1,6)
+				this.layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
+				this.layer.rect(0,2,1,4)
+				this.layer.fill(200,250,250,this.fade)
+				this.layer.quad(-4,0,0,-1,1,0,0,4)
+				this.layer.fill(200,250,200,this.fade)
+				this.layer.ellipse(0,0,3)
+			break
 
         }
         this.layer.pop()
@@ -1208,7 +1255,7 @@ class projectile{
 			this.type==36||this.type==37||this.type==38||this.type==39||this.type==40||
 			this.type==42||this.type==43||this.type==44||this.type==46||this.type==49||
 			this.type==50||this.type==51||this.type==52||this.type==57||this.type==59||
-			this.type==60||this.type==61
+			this.type==60||this.type==61||this.type==63
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}else if(
@@ -1229,7 +1276,7 @@ class projectile{
 		}
 		switch(this.type){
 			case 5: case 8: case 17: case 28: case 29: case 30: case 34: case 35: case 42: case 51:
-			case 52: case 60: case 61:
+			case 52: case 60: case 61: case 62:
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
 				this.previous.position.x=this.position.x
@@ -1243,7 +1290,7 @@ class projectile{
 				case 14: case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24:
 				case 25: case 26: case 27: case 31: case 32: case 33: case 36: case 37: case 38: case 39:
 				case 40: case 41: case 43: case 44: case 45: case 46: case 47: case 48: case 49: case 50:
-				case 53: case 54: case 55: case 56: case 57: case 58: case 59:
+				case 53: case 54: case 55: case 56: case 57: case 58: case 59: case 63:
 				    this.position.x+=this.speed*sin(this.direction)
 				    this.position.y-=this.speed*cos(this.direction)
 				break
@@ -1253,7 +1300,7 @@ class projectile{
 						this.explode()
 					}
 				break
-				case 5: case 17: case 28: case 30: case 34: case 35: case 51: case 52: case 60: case 61:
+				case 5: case 17: case 28: case 30: case 34: case 35: case 51: case 52: case 60: case 61: case 62:
 					if(a==2){
 						this.midpoint.position.x=this.position.x
 						this.midpoint.position.y=this.position.y
@@ -1351,6 +1398,9 @@ class projectile{
 						}else if(this.type==38&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
 							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life)
 							entities.players[a].critBuff=max(240,entities.players[a].critBuff)
+						}else if(this.type==63&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
+							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life)
+							entities.players[a].defendBuff=max(240,entities.players[a].defendBuff)
 						}else if(
 							this.type==2||this.type==16||this.type==21||this.type==22||this.type==26||
 							this.type==27||this.type==30||this.type==31||this.type==32||this.type==41||
