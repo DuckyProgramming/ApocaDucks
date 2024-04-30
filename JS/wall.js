@@ -116,7 +116,7 @@ class wall{
                 if(a==0&&(
                     c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                     c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
-                    c.type==52
+                    c.type==52||c.type==60||c.type==61
                 )){
                     let d=-1
                     if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
@@ -151,7 +151,7 @@ class wall{
                                 }
                             break
                         }
-                        if(c.type==30){
+                        if(c.type==30||c.type==60){
                             c.bounces++
                             if(c.bounces>=3){
                                 c.explode()
@@ -171,7 +171,8 @@ class wall{
                                 if(
                                     c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
                                     c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
-                                    c.type==48||c.type==53||c.type==54
+                                    c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
+                                    c.type==58
                                 ){
                                     c.explode()
                                 }

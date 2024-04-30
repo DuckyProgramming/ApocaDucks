@@ -57,9 +57,21 @@
 53 - barrage rocket launcher heal self , 21
 54 - barrage flame rocket launcher , 45
 
-projectile graphics!!!!
+74 - slow rocket launcher flip
+75 - swapper sniper
+76 - crit apply medic shield
+77 - barrage radius rocket launcher
+78 - pistol stop vulnerable
+79 - spread sniper heal self
+80 - flame baller
+81 - baller heal self stop
 
-
+56 - slow flip rocket , 2
+57 - swapper sniper , 14
+58 - barrage radius rocket , 26
+59 - pistol stop vulnerable , 43
+60 - flame baller , 5
+61 - baller heal self stop , 5
 
 
 

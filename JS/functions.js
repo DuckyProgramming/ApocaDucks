@@ -113,6 +113,12 @@ function smoothAnim(anim,trigger,minPoint,maxPoint,speed){
 function formatTime(frames){
     return `${floor(frames/216000)}:${floor(frames/3600)%60<10?`0`:``}${floor(frames/3600)%60}:${floor(frames/60)%60<10?`0`:``}${floor(frames/60)%60}.${floor(frames%60/6*100)<10?`0`:``}${floor(frames%60/6*100)<100?`0`:``}${floor(frames%60/6*100)}`
 }
+function updateMouse(layer){
+	inputs.mouse.x=mouseX
+	inputs.mouse.y=mouseY
+	inputs.rel.x=(inputs.mouse.x-width/2)/stage.scale+layer.width/2
+	inputs.rel.y=(inputs.mouse.y-height/2)/stage.scale+layer.height/2
+}
 //graphical
 function setupBase(){
     colorMode(RGB,255,255,255,1)
@@ -161,46 +167,46 @@ function tripletColor(color1,color2,color3,key){
 function displayMain(layer){
     let key=[]
     for(let a=0,la=game.players;a<la;a++){
-        key.push(entities.players[a].weaponType==6?2:1)
+        key.push(entities.players[a].weaponType==6||entities.players[a].weaponType==12?2:1)
     }
     let scaleKey=4
     stage.scale=min(width/layer[0].width,height/layer[0].height)
-    if(game.players==1){
+    if(game.gaming==1){
         image(layer[0],width/2,height/2,
                         layer[0].width*stage.scale,layer[0].height*stage.scale,
             
                         entities.players[0].position.x-layer[0].width/2/scaleKey*key[0]*2,entities.players[0].position.y-layer[0].height/2/scaleKey*key[0]*2,
             
                         layer[0].width/scaleKey*key[0]*2,layer[0].height/scaleKey*key[0]*2)
-    }else if(game.players==2){
+    }else if(game.gaming==2){
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2,
-                        layer[0].width*stage.scale*0.5,layer[0].height*stage.scale,
-            
-                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0]*2,
-            
-                        layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0]*2)
-        image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale,
             
                         entities.players[1].position.x-layer[0].width/2/scaleKey*key[1],entities.players[1].position.y-layer[0].height/2/scaleKey*key[1]*2,
                         
                         layer[0].width/scaleKey*key[1],layer[0].height/scaleKey*key[1]*2)
+        image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2,
+                        layer[0].width*stage.scale*0.5,layer[0].height*stage.scale,
+            
+                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0]*2,
+            
+                        layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0]*2)
     }else{
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2-layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0],
+                        entities.players[1].position.x-layer[0].width/2/scaleKey*key[1],entities.players[1].position.y-layer[0].height/2/scaleKey*key[1],
             
-                        layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0])
-                        if(key.length>=2){
+                        layer[0].width/scaleKey*key[1],layer[0].height/scaleKey*key[1])
+                        if(game.gaming>=2){
         image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2-layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[1].position.x-layer[0].width/2/scaleKey*key[1],entities.players[1].position.y-layer[0].height/2/scaleKey*key[1],
+                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0],
                         
-                        layer[0].width/scaleKey*key[1],layer[0].height/scaleKey*key[1])
+                        layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0])
                         }
-                        if(key.length>=3){
+                        if(game.gaming>=3){
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2+layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
@@ -208,7 +214,7 @@ function displayMain(layer){
             
                         layer[0].width/scaleKey*key[2],layer[0].height/scaleKey*key[2])
                         }
-                        if(key.length>=4){
+                        if(game.gaming>=4){
         image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2+layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
@@ -268,7 +274,6 @@ function newLoop(){
 }
 function newWave(level,layer){
 	display.anim=1
-    game.stack=[]
     game.sendTime=0
     game.index=0
     for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){

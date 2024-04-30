@@ -1,10 +1,34 @@
 function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
-    newLoop()
 }
 function windowResized(){
     resizeCanvas(windowWidth-40,windowHeight-40)
+}
+function mouseClicked(){
+    updateMouse(graphics.main[0])
+    switch(stage.scene){
+        case 'menu':
+            for(let a=0,la=4;a<la;a++){
+                for(let b=0,lb=8;b<lb;b++){
+                    if(inPointBox({position:inputs.mouse},{position:{x:((a+0.5)/la*0.6+0.2)*width,y:80+b*80+(b>=2?80:0)+40},width:200,height:60})){
+                        if(b==0){
+                            menu.players=a+1
+                        }else if(b==1){
+                            menu.gaming=a+1
+                        }else{
+                            game.players=menu.players
+                            game.gaming=menu.gaming
+                            game.mission=a+b*4-8
+                            entities.players=[]
+                            newLoop()
+                            stage.scene='main'
+                        }
+                    }
+                }
+            }
+        break
+    }
 }
 function keyPressed(){
     switch(key){

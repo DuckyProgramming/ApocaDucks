@@ -2,18 +2,48 @@ function mainloop(layer){
     clear()
     background(150)
     switch(stage.scene){
+        case 'menu':
+            for(let a=0,la=4;a<la;a++){
+                for(let b=0,lb=8;b<lb;b++){
+                    if(b==0&&menu.players==a+1||b==1&&menu.gaming==a+1){
+                        fill(100,200,100)
+                    }else{
+                        fill(100)
+                    }
+                    rect(((a+0.5)/la*0.6+0.2)*width,80+b*80+(b>=2?80:0)+40,200,60,10)
+                }
+            }
+            fill(0)
+            for(let a=0,la=4;a<la;a++){
+                for(let b=0,lb=8;b<lb;b++){
+                    textSize(20)
+                    text(b==0?`${a+1} Players`:b==1?`${a+1} Gaming`:`${types.mission[a+b*4-8].name}`,((a+0.5)/la*0.6+0.2)*width,80+b*80+(b>=2?80:0)+40)
+                    if(b>=2){
+                        textSize(15)
+                        text(`${['Easy','Medium','Hard','Expert'][types.mission[a+b*4-8].difficulty]}`,((a+0.5)/la*0.6+0.2)*width-40,100+b*80+(b>=2?80:0)+40)
+                        text(`${types.mission[a+b*4-8].wave.length} Waves`,((a+0.5)/la*0.6+0.2)*width+40,100+b*80+(b>=2?80:0)+40)
+                    }
+                }
+            }
+        break
         case 'main':
             graphics.main[0].background(0)
-			for(let c=0,lc=1;c<lc;c++){
-                for(let a=0,la=run.fore.length;a<la;a++){
-                    for(let b=0,lb=run.fore[a].length;b<lb;b++){
-                        run.fore[a][b].layer=graphics.main[c]
+            for(let a=0,la=run.fore.length;a<la;a++){
+                for(let b=0,lb=run.fore[a].length;b<lb;b++){
+                    if(!run.fore[a][b].exploded){
                         run.fore[a][b].display()
                     }
                 }
-                for(let a=0,la=run.info.length;a<la;a++){
-                    for(let b=0,lb=run.info[a].length;b<lb;b++){
-                        run.info[a][b].displayInfo()
+            }
+            for(let a=0,la=run.info.length;a<la;a++){
+                for(let b=0,lb=run.info[a].length;b<lb;b++){
+                    run.info[a][b].displayInfo()
+                }
+            }
+            for(let a=0,la=run.fore.length;a<la;a++){
+                for(let b=0,lb=run.fore[a].length;b<lb;b++){
+                    if(run.fore[a][b].exploded){
+                        run.fore[a][b].display()
                     }
                 }
             }
@@ -50,9 +80,9 @@ function mainloop(layer){
                     }
                 }
             }
+            checkEnd(levels[game.level],graphics.main[0])
         break
     }
-    checkEnd(levels[game.level],graphics.main[0])
     game.time++
 }
 function draw(){
