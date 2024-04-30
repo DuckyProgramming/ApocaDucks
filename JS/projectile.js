@@ -673,11 +673,11 @@ class projectile{
 				}
 			break
 			case 38:
-				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
+				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
+				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,x,120+this.crit*200,240+this.crit*40,this.fade)
+				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
 				this.layer.rect(0,2,1,4)
 				this.layer.fill(200,250,250,this.fade)
 				this.layer.quad(-4,0,0,-1,1,0,0,4)
@@ -1431,7 +1431,7 @@ class projectile{
 							entities.players[a].life=entities.players[a].base.life
 						}else if(this.type==38&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
 							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life)
-							entities.players[a].critBuff=max(240,entities.players[a].critBuff)
+							entities.players[a].critBuff=max(300,entities.players[a].critBuff)
 						}else if(this.type==63&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
 							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life)
 							entities.players[a].defendBuff=max(240,entities.players[a].defendBuff)

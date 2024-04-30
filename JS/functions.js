@@ -350,6 +350,7 @@ function checkEnd(level,layer){
 }
 function setupGraphics(){
     setupBase()
+    //graphics.main.push(createGraphics(2000,800))
     graphics.main.push(createGraphics(3000,1200))
     //graphics.main.push(createGraphics(4500,1800))
     setupLayer(graphics.main[0])

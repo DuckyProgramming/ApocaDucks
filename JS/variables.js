@@ -1621,8 +1621,8 @@ types={
       name:'PlayerBallerEngineer',sizeBuff:1,lifeBuff:3,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:35,
     },{
-      name:'PlayerHyperMedic',sizeBuff:1,lifeBuff:3,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
+      name:'PlayerCritApplyMedic',sizeBuff:1,lifeBuff:3,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:44,
     },
     
     {
@@ -1646,6 +1646,9 @@ types={
     },{
       name:'Punch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'CritPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:9,
     },{
       name:'RapidPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:9,
@@ -3108,15 +3111,15 @@ levels=[
         "#    #   #   #   #  ",
         "##################  ",
     ],[
-				"          7         ",
+				"      7      8      ",
 				"                    ",
-        "         ###        ",
+        "5                  6",
         "                    ",
         "#    ###    ###    #",
-        "#  5  ##     #   6 #",
+        "#     ##     #     #",
         "#     ##     #     #",
         "## ######## #### ###",
-        "#  ##   # 8 ###  ###",
+        "#  ##   #   ###  ###",
         "#   # # #   ###  ###",
         "#     #   ######   #",
         "## #### #    #   # #",
