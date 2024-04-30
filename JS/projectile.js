@@ -124,7 +124,7 @@ class projectile{
 				]
 				this.velocity={x:this.speed*sin(this.direction),y:this.speed*cos(this.direction)-4}
 			break
-			case 31: case 47: case 56:
+			case 31: case 47: case 56: case 64:
 				this.speed=2
 				this.time=time*2
 			break
@@ -1060,6 +1060,26 @@ class projectile{
 				this.layer.fill(200,250,200,this.fade)
 				this.layer.ellipse(0,0,3)
 			break
+			case 64:
+				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				this.layer.rect(0,4,1,8)
+				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				this.layer.rect(0,3,1,6)
+				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				this.layer.rect(0,2,1,4)
+				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				this.layer.ellipse(0,0,6,20)
+				this.layer.fill(250,0,250,this.fade)
+				this.layer.rect(0,0,8,8)
+				if(!this.active&&this.fade<1){
+					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					this.layer.ellipse(0,0,240-this.fade*240)
+					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					this.layer.ellipse(0,0,160-this.fade*160)
+					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					this.layer.ellipse(0,0,80-this.fade*80)
+				}
+			break
 
         }
         this.layer.pop()
@@ -1242,6 +1262,20 @@ class projectile{
 					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.damage/6,10,this.crit,this.index))
 				}
 			break
+			case 64:
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
+					if(entities.players[b].life>0&&c<120&&(this.id==0?1:0)!=(entities.players[b].id==0?1:0)){
+						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8)
+						entities.players[b].die.killer=this.id
+						entities.players[b].collect.time=600
+						entities.players[b].confuseTime=max(entities.players[b].confuseTime,360)
+						if(game.invis){
+							entities.players[b].visible=15
+						}
+					}
+				}
+			break
 		}
 	}
     update(){
@@ -1262,7 +1296,7 @@ class projectile{
 			this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
 			this.type==26||this.type==27||this.type==30||this.type==31||this.type==32||
 			this.type==41||this.type==45||this.type==47||this.type==53||this.type==54||
-			this.type==55||this.type==56||this.type==58
+			this.type==55||this.type==56||this.type==58||this.type==64
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,10)
 		}else if(this.type==48){
@@ -1290,7 +1324,7 @@ class projectile{
 				case 14: case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24:
 				case 25: case 26: case 27: case 31: case 32: case 33: case 36: case 37: case 38: case 39:
 				case 40: case 41: case 43: case 44: case 45: case 46: case 47: case 48: case 49: case 50:
-				case 53: case 54: case 55: case 56: case 57: case 58: case 59: case 63:
+				case 53: case 54: case 55: case 56: case 57: case 58: case 59: case 63: case 64:
 				    this.position.x+=this.speed*sin(this.direction)
 				    this.position.y-=this.speed*cos(this.direction)
 				break
@@ -1405,7 +1439,7 @@ class projectile{
 							this.type==2||this.type==16||this.type==21||this.type==22||this.type==26||
 							this.type==27||this.type==30||this.type==31||this.type==32||this.type==41||
 							this.type==45||this.type==47||this.type==48||this.type==53||this.type==54||
-							this.type==55||this.type==56||this.type==58
+							this.type==55||this.type==56||this.type==58||this.type==64
 						){
 							if(this.type==41){
 								entities.players[a].takeDamage(this.damage)

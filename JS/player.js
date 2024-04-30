@@ -50,6 +50,7 @@ class player{
         this.defendBuff=0
         this.stunTime=0
         this.vulnerableTime=0
+        this.confuseTime=0
     }
     setupGraphics(){
         this.direction=this.position.x<this.layer.width/2?{main:54,goal:54}:{main:-54,goal:-54}
@@ -212,7 +213,11 @@ class player{
         }
         if(this.vulnerableTime>0){
             this.layer.fill(255,150,150,this.fade)
-            regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,20)
+            regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,40/3)
+        }
+        if(this.confuseTime>0){
+            this.layer.fill(255,100,255,this.fade)
+            regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,80/3)
         }
         switch(this.weaponType){
             case 6: case 17: case 45:
@@ -442,6 +447,7 @@ class player{
         this.defendBuff=0
         this.stunTime=0
         this.vulnerableTime=0
+        this.confuseTime=0
     }
     takeDamage(damage){
         this.life-=damage*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?1/3:1)
@@ -711,6 +717,9 @@ class player{
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
+			case 86:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],64,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
 
 		}
         if(this.weapon.uses<=0&&this.id>0){
@@ -928,10 +937,10 @@ class player{
         }
         if(this.weaponType>=0){
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff
+                this.weapon.cooldown-=this.playerData.reloadBuff*(this.confuseTime>0?1/3:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff
+                this.weapon.reload-=this.playerData.reloadBuff*(this.confuseTime>0?1/3:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||this.id==0||this.id>=game.gaming+1)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -1048,6 +1057,9 @@ class player{
         }
         if(this.vulnerableTime>0){
             this.vulnerableTime--
+        }
+        if(this.confuseTime>0){
+            this.confuseTime--
         }
         if(this.DOT.active>0){
             this.DOT.active--

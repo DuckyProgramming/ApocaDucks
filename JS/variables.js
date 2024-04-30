@@ -1368,7 +1368,7 @@ types={
           ['RapidBaller',5],
           ['HeavyPunch',1],
           ['PushPistol',9],
-          ['BigRapidSlowRocketLauncherFlip',2],
+          ['BigRapidSlowRocketLauncherConfuse',2],
           ['HyperMedic',4],
           ['RapidBaller',6],
           ['CritPunchHealSelf',4],
@@ -1378,7 +1378,7 @@ types={
           ['Flamethrower',6],
           ['CritSpreadSniper',2],
           ['Medic',2],
-          ['BigRapidSlowRocketLauncherFlip',1],
+          ['BigRapidSlowRocketLauncherConfuse',1],
           ['BigBaller',1],
           ['HyperMedic',6],
           ['FastCritApplyMedic',6],
@@ -1389,7 +1389,7 @@ types={
           ['Flamethrower',6],
           ['BigLongCritFlamethrower',2],
           ['Tank',1],
-          ['BigRapidSlowRocketLauncherFlip',2],
+          ['BigRapidSlowRocketLauncherConfuse',2],
           ['RocketLauncherDefendBuff',1],
           ['RocketLauncherBuff',2],
           ['RocketLauncherHeal',3],
@@ -1411,7 +1411,7 @@ types={
           ['SwapperSniperBoss',1],
         ],[
           ['Tank',1],
-          ['BigRapidSlowRocketLauncherFlip',3],
+          ['BigRapidSlowRocketLauncherConfuse',3],
           ['BigDamageOverTimeMachineGun',3],
           ['Flamethrower',6],
           ['BigBarrageRadiusRocketLauncher',1],
@@ -2285,6 +2285,9 @@ types={
     },{
       name:'SpreadMachineGunBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:85,
+    },{
+      name:'BigRapidSlowRocketLauncherConfuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:4,crit:0,weapon:86,
     },
   ],weapon:[
 		{
@@ -3001,7 +3004,7 @@ types={
 			speed:1.4,
       uses:30,
 		},{
-			name:'Spread Sniper heal Self',
+			name:'Spread Sniper Heal Self',
 			ammo:1,
 			damage:105,
 			cooldown:120,
@@ -3063,6 +3066,15 @@ types={
 			reload:1,
 			speed:0.9,
       uses:250,
+		},{
+			name:'Slow Rocket Launcher Confuse',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:3,
 		},
 	],
 }
@@ -3236,7 +3248,7 @@ levels=[
       "                                ###   #### #                      #",
       "                        #####                       #     #       #",
       "                            #                    ###### #######  ##",
-      "                            #   #     #                     #     #",
+      "                            #   #     #      #              #     #",
       "                   #######  #  #########     #                  7 #",
       "                   #                   #  ###############         #",
       "                                       #                        ###",

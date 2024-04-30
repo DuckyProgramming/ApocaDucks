@@ -172,7 +172,7 @@ class wall{
                                     c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
                                     c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
                                     c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
-                                    c.type==58
+                                    c.type==58||c.type==64
                                 ){
                                     c.explode()
                                 }
