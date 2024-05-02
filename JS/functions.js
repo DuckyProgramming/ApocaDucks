@@ -241,7 +241,11 @@ function generateLevel(level,layer){
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
-                if(int(level[a][b])==c+1){
+                if(int(level[a][b])==c+1&&!game.pvp){
+                    index--
+                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9))+floor(random(0,1.2))*9,index))
+                }
+                if(level[a][b]=='qwer'[c]&&game.pvp){
                     index--
                     entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9))+floor(random(0,1.2))*9,index))
                 }
@@ -329,7 +333,7 @@ function checkEnd(level,layer){
                     }
                 }
             }
-            game.sendTime=types.mission[game.mission].sendTime*2/max(1,game.gaming)
+            game.sendTime=types.mission[game.mission].sendTime*2/max(1,game.gaming)*(game.pvp?10:1)
             game.stack.splice(0,1)
         }
     }else{
@@ -350,6 +354,7 @@ function checkEnd(level,layer){
 }
 function setupGraphics(){
     setupBase()
+    //graphics.main.push(createGraphics(1500,750))
     //graphics.main.push(createGraphics(2000,800))
     graphics.main.push(createGraphics(3000,1200))
     //graphics.main.push(createGraphics(4500,1800))

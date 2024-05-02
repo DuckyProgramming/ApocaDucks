@@ -17,6 +17,9 @@ class player{
         this.fade=0
         this.size=0.5*this.playerData.sizeBuff
         this.life=100*this.playerData.lifeBuff
+        if(game.pvp&&this.id>0){
+            this.life/=3
+        }
         this.dead=false
         this.velocity={x:0,y:0}
         this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
@@ -954,6 +957,7 @@ class player{
         }else{
             if(
                 dist(this.position.x,this.position.y,this.layer.width/2,this.layer.height/3)<50&&(game.level==0||game.level==1)||
+                dist(this.position.x,this.position.y,this.layer.width/2-100,this.layer.height/3-120)<50&&game.level==3||
                 dist(this.position.x,this.position.y,this.layer.width/2,this.layer.height/3-40)<50&&game.level==4||
                 dist(this.position.x,this.position.y,150,this.layer.height-320)<50&&game.level==5||
                 this.id>=game.gaming+1){
@@ -975,20 +979,36 @@ class player{
             this.life=min(this.base.life,this.life+this.base.life/300)
         }
         if(this.position.x<0){
-            this.position.x=0
-            this.velocity.x=0
+            if(game.level==3){
+                this.position.x=this.layer.width
+            }else{
+                this.position.x=0
+                this.velocity.x=0
+            }
         }
         if(this.position.x>this.layer.width){
-            this.position.x=this.layer.width
-            this.velocity.x=0
+            if(game.level==3){
+                this.position.x=0
+            }else{
+                this.position.x=this.layer.width
+                this.velocity.x=0
+            }
         }
         if(this.position.y<0){
-            this.position.y=0
-            this.velocity.y=0
+            if(game.level==3){
+                this.position.y=this.layer.height
+            }else{
+                this.position.y=0
+                this.velocity.y=0
+            }
         }
         if(this.position.y>this.layer.height){
-            this.life=0
-            this.die.killer=-1
+            if(game.level==3){
+                this.position.y=0
+            }else{
+                this.life=0
+                this.die.killer=-1
+            }
         }
         if(this.life<=0){
             this.life=0
@@ -996,7 +1016,7 @@ class player{
                 this.dead=true
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==this.die.killer){
-                        entities.players[a].stats.kills++
+                        entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?0.2:1)*10)/10
                     }
                 }
                 this.stats.deaths++
@@ -1041,7 +1061,6 @@ class player{
                 for(let a=0,la=entities.projectiles.length;a<la;a++){
                     if((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)&&inBoxBox({position:{x:this.position.x+(sin(this.direction.main)<0?-75:75),y:this.position.y},width:20,height:120},entities.projectiles[a])&&entities.projectiles[a].active){
                         entities.projectiles[a].active=false
-
                     }
                 }
             break

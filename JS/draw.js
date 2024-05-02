@@ -59,6 +59,9 @@ function mainloop(layer){
                 case 0: case 1:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/3-40)
                 break
+                case 3:
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2-100,graphics.main[0].height/3-120)
+                break
                 case 4:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/3)
                 break
