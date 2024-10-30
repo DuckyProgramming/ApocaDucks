@@ -30,7 +30,23 @@ function mainloop(layer){
             graphics.main[0].background(0)
             for(let a=0,la=run.fore.length;a<la;a++){
                 for(let b=0,lb=run.fore[a].length;b<lb;b++){
-                    if(!run.fore[a][b].exploded){
+                    let visible=false
+                    let key=[]
+                    for(let c=0,lc=game.players;c<lc;c++){
+                        key.push(entities.players[c].weaponType==6||entities.players[c].weaponType==12?2:1)
+                    }
+                    let scaleKey=game.level==6?8:4
+                    for(let c=0,lc=game.players;c<lc;c++){
+                        if(
+                            run.fore[a][b].position.x+run.fore[a][b].width>entities.players[c].position.x-graphics.main[0].width/scaleKey*key[c]*1.2&&
+                            run.fore[a][b].position.x-run.fore[a][b].width<entities.players[c].position.x+graphics.main[0].width/scaleKey*key[c]*1.2&&
+                            run.fore[a][b].position.y+run.fore[a][b].height>entities.players[c].position.y-graphics.main[0].height/scaleKey*key[c]*1.2&&
+                            run.fore[a][b].position.y-run.fore[a][b].height<entities.players[c].position.y+graphics.main[0].height/scaleKey*key[c]*1.2
+                        ){
+                            visible=true
+                        }
+                    }
+                    if(!run.fore[a][b].exploded&&visible){
                         run.fore[a][b].display()
                     }
                 }
@@ -56,7 +72,7 @@ function mainloop(layer){
             graphics.main[0].fill(255)
             graphics.main[0].textSize(20)
             switch(game.level){
-                case 0: case 1:
+                case 0: case 1: case 2:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/3-40)
                 break
                 case 3:
@@ -67,6 +83,9 @@ function mainloop(layer){
                 break
                 case 5:
                     graphics.main[0].text('Weapons\nHere',150,graphics.main[0].height-320)
+                break
+                case 6:
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2-150,450)
                 break
             }
             if(display.anim>0){
@@ -84,6 +103,9 @@ function mainloop(layer){
                 }
             }
             checkEnd(levels[game.level],graphics.main[0])
+            if(game.past){
+                runTransition(graphics.main[0])
+            }
         break
     }
     game.time++

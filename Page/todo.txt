@@ -75,3 +75,12 @@
 
 
 
+for(let a=0,la=types.mission.length;a<la;a++){
+    for(let b=0,lb=types.mission[a].wave.length;b<lb;b++){
+        for(let c=0,lc=types.mission[a].wave[b].length;c<lc;c++){
+            if(findName(types.mission[a].wave[b][c][0],types.player)==-1){
+                print(types.mission[a].wave[b][c][0],findName(types.mission[a].wave[b][c][0],types.player))
+            }
+        }
+    }
+}

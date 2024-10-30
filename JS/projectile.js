@@ -1022,7 +1022,7 @@ class projectile{
 					this.layer.ellipse(0,0,60-this.fade*60)
 				}
 			break
-			case 51:
+			case 61:
 				this.layer.rotate(-this.direction)
 				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
@@ -1123,12 +1123,12 @@ class projectile{
 						if(game.invis){
 							entities.players[b].visible=15
 						}
-						entities.players[b].velocity.x+=15*(1.5-c/120)*sin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=15*(1.5-c/120)*cos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].velocity.x+=30*(1.5-c/120)*sin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].velocity.y-=30*(1.5-c/120)*cos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
 					}
 				}
 			break
-			case 21: case 58:
+			case 21: case 53:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||game.pvp)){
@@ -1289,7 +1289,7 @@ class projectile{
 			this.type==36||this.type==37||this.type==38||this.type==39||this.type==40||
 			this.type==42||this.type==43||this.type==44||this.type==46||this.type==49||
 			this.type==50||this.type==51||this.type==52||this.type==57||this.type==59||
-			this.type==60||this.type==61||this.type==63
+			this.type==60||this.type==61||this.type==62||this.type==63
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}else if(
@@ -1504,7 +1504,7 @@ class projectile{
 								}
 							}
 						}else if(this.type==57){
-							entities.players[a].newWeaponSet(9)
+							entities.players[a].newWeapon()
 						}else if(this.type==59){
 							entities.players[a].vulnerableTime=max(entities.players[a].vulnerableTime,300)
 							entities.players[a].stunTime=max(entities.players[a].stunTime,120)

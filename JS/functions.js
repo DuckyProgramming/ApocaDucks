@@ -50,9 +50,9 @@ function intersect(p1,q1,p2,q2){
     o4==0&&onSegment(p2,q1,q2)
 } 
 function collideBoxBox(static,mobile){
-    if(inBoxBox(static,{position:mobile.previous.position,width:mobile.width-1,height:mobile.height-1})){
+    /*if(inBoxBox(static,{position:mobile.previous.position,width:mobile.width-1,height:mobile.height-1})){
         return basicCollideBoxBox(static,mobile)
-    }
+    }*/
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
             if(intersect(mobile.position,mobile.previous.position,
@@ -62,7 +62,7 @@ function collideBoxBox(static,mobile){
             }
         }
     }
-    return basicCollideBoxBox(static,mobile)
+    //return basicCollideBoxBox(static,mobile)
 }
 function collideBoxBoxIndex1(static,mobile){
     for(let a=0,la=static.boundary.length;a<la;a++){
@@ -169,40 +169,61 @@ function displayMain(layer){
     for(let a=0,la=game.players;a<la;a++){
         key.push(entities.players[a].weaponType==6||entities.players[a].weaponType==12?2:1)
     }
-    let scaleKey=4
+    let marker=[-1,-1,-1,-1]
+    for(let a=entities.players.length-1,la=0;a>=la;a--){
+        if(entities.players[a].id>0&&entities.players[a].id<=4&&marker[entities.players[a].id-1]==-1&&entities.players[a].control==0&&entities.players[a].life>0){
+            marker[entities.players[a].id-1]=a
+        }
+    }
+    for(let a=entities.players.length-1,la=0;a>=la;a--){
+        if(entities.players[a].id>0&&entities.players[a].id<=4&&marker[entities.players[a].id-1]==-1&&entities.players[a].control==1&&entities.players[a].life>0){
+            marker[entities.players[a].id-1]=a
+        }
+    }
+    for(let a=entities.players.length-1,la=0;a>=la;a--){
+        if(entities.players[a].id>0&&entities.players[a].id<=4&&marker[entities.players[a].id-1]==-1&&entities.players[a].control==0){
+            marker[entities.players[a].id-1]=a
+        }
+    }
+    for(let a=0,la=marker.length;a<la;a++){
+        if(marker[a]==-1){
+            marker[a]=0
+        }
+    }
+    let scaleKey=game.level==6?8:4
     stage.scale=min(width/layer[0].width,height/layer[0].height)
     if(game.gaming==1){
         image(layer[0],width/2,height/2,
                         layer[0].width*stage.scale,layer[0].height*stage.scale,
             
-                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0]*2,entities.players[0].position.y-layer[0].height/2/scaleKey*key[0]*2,
+                        entities.players[marker[0]].position.x-layer[0].width/2/scaleKey*key[0]*2,entities.players[marker[0]].position.y-layer[0].height/2/scaleKey*key[0]*2,
             
                         layer[0].width/scaleKey*key[0]*2,layer[0].height/scaleKey*key[0]*2)
     }else if(game.gaming==2){
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale,
             
-                        entities.players[1].position.x-layer[0].width/2/scaleKey*key[1],entities.players[1].position.y-layer[0].height/2/scaleKey*key[1]*2,
+                        entities.players[marker[1]].position.x-layer[0].width/2/scaleKey*key[1],entities.players[marker[1]].position.y-layer[0].height/2/scaleKey*key[1]*2,
                         
                         layer[0].width/scaleKey*key[1],layer[0].height/scaleKey*key[1]*2)
         image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale,
             
-                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0]*2,
+                        entities.players[marker[0]].position.x-layer[0].width/2/scaleKey*key[0],entities.players[marker[0]].position.y-layer[0].height/2/scaleKey*key[0]*2,
             
                         layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0]*2)
     }else{
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2-layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[1].position.x-layer[0].width/2/scaleKey*key[1],entities.players[1].position.y-layer[0].height/2/scaleKey*key[1],
+                        entities.players[marker[1]].position.x-layer[0].width/2/scaleKey*key[1],entities.players[marker[1]].position.y-layer[0].height/2/scaleKey*key[1],
             
                         layer[0].width/scaleKey*key[1],layer[0].height/scaleKey*key[1])
                         if(game.gaming>=2){
         image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2-layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[0].position.x-layer[0].width/2/scaleKey*key[0],entities.players[0].position.y-layer[0].height/2/scaleKey*key[0],
+                        entities.players[marker[0]].position.x-layer[0].width/2/scaleKey*key[0],entities.players[marker[0]].position.y-layer[0].height/2/scaleKey*key[0],
                         
                         layer[0].width/scaleKey*key[0],layer[0].height/scaleKey*key[0])
                         }
@@ -210,7 +231,7 @@ function displayMain(layer){
         image(layer[0],width/2-layer[0].width*stage.scale*0.25,height/2+layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[2].position.x-layer[0].width/2/scaleKey*key[2],entities.players[2].position.y-layer[0].height/2/scaleKey*key[2],
+                        entities.players[marker[2]].position.x-layer[0].width/2/scaleKey*key[2],entities.players[marker[2]].position.y-layer[0].height/2/scaleKey*key[2],
             
                         layer[0].width/scaleKey*key[2],layer[0].height/scaleKey*key[2])
                         }
@@ -218,7 +239,7 @@ function displayMain(layer){
         image(layer[0],width/2+layer[0].width*stage.scale*0.25,height/2+layer[0].height*stage.scale*0.25,
                         layer[0].width*stage.scale*0.5,layer[0].height*stage.scale*0.5,
             
-                        entities.players[3].position.x-layer[0].width/2/scaleKey*key[3],entities.players[3].position.y-layer[0].height/2/scaleKey*key[3],
+                        entities.players[marker[3]].position.x-layer[0].width/2/scaleKey*key[3],entities.players[marker[3]].position.y-layer[0].height/2/scaleKey*key[3],
             
                         layer[0].width/scaleKey*key[3],layer[0].height/scaleKey*key[3])
                         }
@@ -235,28 +256,41 @@ function generateLevel(level,layer){
 				case '#': case '.':
                     entities.walls[1].push(new wall(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],tileset[0],tileset[1],1))
                 break
+                case '@':
+                    entities.walls[1].push(new wall(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],tileset[0],tileset[1],2))
+                break
             }
         }
     }
+    let weapon=game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
                 if(int(level[a][b])==c+1&&!game.pvp){
                     index--
-                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9))+floor(random(0,1.2))*9,index))
+                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,game.past?weapon:game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9,index))
                 }
-                if(level[a][b]=='qwer'[c]&&game.pvp){
+                if(level[a][b]=='qwerty'[c]&&game.pvp){
                     index--
-                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,floor(random(0,9))+floor(random(0,1.2))*9,index))
+                    entities.players.push(new player(layer,tileset[0]/2+b*tileset[0],tileset[1]/2+a*tileset[1],c+1,0,[],true,game.past?weapon:game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9,index))
                 }
             }
         }
     }
+    entities.walls.forEach(set=>set.forEach(item=>item.checkHorizontal()))
+    entities.walls.forEach(set=>set.forEach(item=>item.checkVertical()))
+    entities.walls.forEach(set=>set.forEach(item=>item.checkRedundancy()))
     for(let a=0,la=entities.walls.length;a<la;a++){
         for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-            entities.walls[a][b].checkRedundancy()
+            entities.walls[a][b].stopGap()
+            if(entities.walls[a][b].remove){
+                entities.walls[a].splice(b,1)
+                b--
+                lb--
+            }
         }
     }
+    entities.walls.forEach(set=>set.forEach(item=>item.checkBar()))
     run.back=[entities.players]
     run.fore=[entities.projectiles,entities.players,entities.walls[0],entities.walls[1]]
     run.info=[entities.players]
@@ -282,10 +316,10 @@ function newWave(level,layer){
     game.index=0
     for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){
         if(types.mission[game.mission].wave[display.cycle][a][1]==1){
-            game.stack.push([floor(random(0,4))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:4),types.mission[game.mission].wave[display.cycle][a][0]])
+            game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
         }else{
-            for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*constrain(game.players/2,0,1)*(game.classicRespawn?0.5:1));b<lb;b++){
-                game.stack.push([floor(random(0,4))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:4),types.mission[game.mission].wave[display.cycle][a][0]])
+            for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*constrain(game.players/2,0,1)*(game.classicRespawn?0.5:1))*game.diff;b<lb;b++){
+                game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
             }
         }
     }
@@ -302,14 +336,14 @@ function findName(name,list){
 }
 function runTransition(layer){
     if(transition.trigger){
-        transition.anim+=0.1
+        transition.anim+=0.05
         if(transition.anim>=1){
             transition.trigger=false
             stage.scene=transition.scene
             newLoop()
         }
     }else if(transition.anim>0){
-        transition.anim-=0.1
+        transition.anim-=0.05
     }
     if(transition.anim>0){
         layer.fill(0)
@@ -320,43 +354,80 @@ function runTransition(layer){
     }
 }
 function checkEnd(level,layer){
-    if(game.stack.length>0){
-        if(game.sendTime>0){
-            game.sendTime--
-        }else{
-            let tileset=[layer.width/level[0].length,layer.height/level.length]
-            for(let a=0,la=level.length;a<la;a++){
-                for(let b=0,lb=level[a].length;b<lb;b++){
-                    if(int(level[a][b])>=1&&int(level[a][b])<=8&&int(level[a][b])==game.stack[0][0]+1){
-                        entities.players.push(new player(layer,tileset[0]/2+b*tileset[0]+random(-20,20),tileset[1]/2+a*tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
-                        game.index++
-                    }
+    if(game.past){
+        if(!transition.trigger){
+            let ids=[]
+            for(let a=0,la=entities.players.length;a<la;a++){
+                if(!ids.includes(entities.players[a].id)&&entities.players[a].life>0){
+                    ids.push(entities.players[a].id)
                 }
             }
-            game.sendTime=types.mission[game.mission].sendTime*2/max(1,game.gaming)*(game.pvp?10:1)
-            game.stack.splice(0,1)
-        }
-    }else{
-        let total=0
-        for(let a=0,la=entities.players.length;a<la;a++){
-            if(entities.players[a].id==0&&entities.players[a].life>0){
-                total++
+            if(ids.length<=1){
+                if(ids.length==1){
+                    game.wins[ids[0]-1]++
+                }
+                transition.scene='main'
+                transition.trigger=true
             }
         }
-        if(total==0){
-            display.wait--
-            if(display.wait<=0){
-                newWave(level,layer)
-                display.wait=150
+    }else{
+        if(game.stack.length>0){
+            if(game.sendTime>0){
+                game.sendTime--
+            }else{
+                let tileset=[layer.width/level[0].length,layer.height/level.length]
+                for(let a=0,la=level.length;a<la;a++){
+                    for(let b=0,lb=level[a].length;b<lb;b++){
+                        if(level[a][b]=='123456ABCDEFD'[game.stack[0][0]]){
+                            entities.players.push(new player(layer,tileset[0]/2+b*tileset[0]+random(-20,20),tileset[1]/2+a*tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                            game.index++
+                        }
+                    }
+                }
+                game.sendTime=types.mission[game.mission].sendTime*2/max(1,game.gaming)*(game.pvp?10:1)/game.diff
+                game.stack.splice(0,1)
+            }
+        }else{
+            let total=0
+            let subTotal=0
+            for(let a=0,la=entities.players.length;a<la;a++){
+                if(entities.players[a].id==0&&entities.players[a].life>0){
+                    total++
+                }
+                if(entities.players[a].id==0&&entities.players[a].base.life>2000){
+                    subTotal++
+                }
+            }
+            if(total<5&&subTotal==0){
+                display.wait--
+                if(display.wait<=0){
+                    newWave(level,layer)
+                    display.wait=150
+                }
             }
         }
     }
 }
 function setupGraphics(){
     setupBase()
-    //graphics.main.push(createGraphics(1500,750))
+    switch(game.level){
+        case 1:
+            graphics.main.push(createGraphics(1700,750))
+        break
+        case 5:
+            graphics.main.push(createGraphics(3000,1300))
+        break
+        case 6:
+            graphics.main.push(createGraphics(3600,2000))
+        break
+        default:
+            graphics.main.push(createGraphics(2500,1000))
+        break
+    }
+    //graphics.main.push(createGraphics(1200,800))
+
     //graphics.main.push(createGraphics(2000,800))
-    graphics.main.push(createGraphics(3000,1200))
+    //
     //graphics.main.push(createGraphics(4500,1800))
     setupLayer(graphics.main[0])
 }
