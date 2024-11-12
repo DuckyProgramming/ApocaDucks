@@ -1,8 +1,20 @@
+boats
+
+
+
+
+
+mission 21
+dead ringer impostor
+
+
+
+
 38 - pulse rocket , 3
 39 - flamethrower heal self , 8
 40 - pellet baller , 7
 41 - baller heal self , 7
-42 - machine gun crit self , 29
+42 - machine gun crit self , 29d
 43 - damage over time punch , 9
 44 - crit apply medic , 11
 45 - sniper heal self , 6

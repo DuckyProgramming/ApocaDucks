@@ -28,6 +28,7 @@ function mainloop(layer){
         break
         case 'main':
             graphics.main[0].background(0)
+            graphics.main[0].image(graphics.pane[0],graphics.main[0].width/2,graphics.main[0].height/2)
             for(let a=0,la=run.fore.length;a<la;a++){
                 for(let b=0,lb=run.fore[a].length;b<lb;b++){
                     let visible=false
@@ -35,7 +36,7 @@ function mainloop(layer){
                     for(let c=0,lc=game.players;c<lc;c++){
                         key.push(entities.players[c].weaponType==6||entities.players[c].weaponType==12?2:1)
                     }
-                    let scaleKey=game.level==6?8:4
+                    let scaleKey=game.level==6?8:game.level==8?8:4
                     for(let c=0,lc=game.players;c<lc;c++){
                         if(
                             run.fore[a][b].position.x+run.fore[a][b].width>entities.players[c].position.x-graphics.main[0].width/scaleKey*key[c]*1.2&&
@@ -64,10 +65,19 @@ function mainloop(layer){
                 }
             }
             graphics.main[0].noStroke()
-            for(let a=0,la=game.players;a<la;a++){
-                graphics.main[0].fill(255,display.anim)
-                graphics.main[0].textSize(60)
-                graphics.main[0].text('Wave '+display.cycle,entities.players[a].position.x,entities.players[a].position.y-100+100*display.anim)
+            if(display.anim>0){
+                for(let a=0,la=game.players;a<la;a++){
+                    graphics.main[0].fill(255,display.anim)
+                    graphics.main[0].textSize(60)
+                    graphics.main[0].text('Wave '+display.cycle,entities.players[a].position.x,entities.players[a].position.y-100+100*display.anim)
+                }
+            }
+            if(display.win>0){
+                for(let a=0,la=game.players;a<la;a++){
+                    graphics.main[0].fill(255,display.win)
+                    graphics.main[0].textSize(60)
+                    graphics.main[0].text('Battle Royale',entities.players[a].position.x,entities.players[a].position.y-100+100*display.win)
+                }
             }
             graphics.main[0].fill(255)
             graphics.main[0].textSize(20)
@@ -87,16 +97,36 @@ function mainloop(layer){
                 case 6:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2-150,450)
                 break
+                case 7:
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/2+360)
+                break
+                case 8:
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width-150,graphics.main[0].height-420)
+                break
             }
             if(display.anim>0){
                 display.anim-=0.01
             }
+            if(display.win>0){
+                display.win-=0.01
+            }
+            graphics.main[0].image(graphics.pane[1],graphics.main[0].width/2,graphics.main[0].height/2)
             displayMain(graphics.main)
             for(let a=0,la=run.fore.length;a<la;a++){
                 for(let b=0,lb=run.fore[a].length;b<lb;b++){
                     run.fore[a][b].update()
                     if(run.fore[a][b].remove){
                         run.fore[a].splice(b,1)
+                        b--
+                        lb--
+                    }
+                }
+            }
+            for(let a=0,la=run.update.length;a<la;a++){
+                for(let b=0,lb=run.update[a].length;b<lb;b++){
+                    run.update[a][b].update()
+                    if(run.update[a][b].remove){
+                        run.update[a].splice(b,1)
                         b--
                         lb--
                     }

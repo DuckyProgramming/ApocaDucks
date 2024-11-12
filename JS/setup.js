@@ -17,6 +17,7 @@ function mouseClicked(){
                         }else if(b==1){
                             menu.gaming=a+1
                         }else{
+                            initialGraphics()
                             game.players=menu.players
                             game.gaming=menu.gaming
                             game.mission=a+b*4-8
