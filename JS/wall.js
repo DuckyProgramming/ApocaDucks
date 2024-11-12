@@ -351,7 +351,7 @@ class wall{
         this.layer.pop()
         /*this.layer.stroke(255,150,50)
         this.layer.noFill()
-        this.layer.rect(this.bounder.position.x,this.bounder.position.y,this.bounder.width,this.bounder.height)*/
+        this.layer.rect(this.bounder.position.x,this.bounder.position.y,this.bounder.width-10,this.bounder.height-10)*/
     }
     displayOver(){
         this.layer.push()
@@ -386,7 +386,7 @@ class wall{
         this.layer.pop()
         /*this.layer.stroke(50,50+this.type*100,200)
         this.layer.strokeWeight(4)
-        for(let a=0,la=4;a<la;a++){
+        for(let a=0,la=1;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                 this.layer.line(
                     this.position.x+this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
@@ -406,21 +406,21 @@ class wall{
                 }
             break
             case 6:
-                this.position.x+=3
-                this.bounder.position.x+=3
+                this.position.x+=2
+                this.bounder.position.x+=2
                 for(let a=0,la=this.boundary.length;a<la;a++){
                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                            this.boundary[a][b][c].x+=3
+                            this.boundary[a][b][c].x+=2
                         }
                     }
                 }
-                if(this.time>this.layer.width*0.064){
-                    this.position.y+=3
+                if(this.time>this.layer.width*0.1){
+                    this.position.y+=2
                     for(let a=0,la=this.boundary.length;a<la;a++){
                         for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                             for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                this.boundary[a][b][c].y+=3
+                                this.boundary[a][b][c].y+=2
                             }
                         }
                     }
@@ -433,7 +433,7 @@ class wall{
                     }
                 }else{
                     for(let a=0,la=this.carry.length;a<la;a++){
-                        this.carry[a].position.x+=3
+                        this.carry[a].position.x+=2
                     }
                 }
                 if(this.position.x>this.layer.height+50){
@@ -519,59 +519,51 @@ class wall{
                             if(!this.redundant[d]){
                                 switch(d){
                                     case 0:
-                                        if(c.velocity.y<0){
-                                            c.position.y=this.position.y+this.height/2+c.height/2
-                                            c.previous.position.y=this.position.y+this.height/2+c.height/2
-                                            c.velocity.y=0
-                                        }
+                                        c.position.y=this.position.y+this.height/2+c.height/2
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2
+                                        c.velocity.y=0
                                     break
                                     case 1:
-                                        if(c.velocity.y>0){
-                                            c.position.y=this.position.y-this.height/2-c.height/2
-                                            c.previous.position.y=this.position.y-this.height/2-c.height/2
-                                            c.velocity.y=0
-                                            c.jump.time=5
-                                            if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol')&&c.weapon.uses>0){
-                                                c.jump.double=1
-                                            }
-                                            switch(this.type){
-                                                case 2:
-                                                    c.bounceTime=15
-                                                break
-                                                case 3:
-                                                    c.velocity.y=-10
-                                                    c.takeDamage(50)
-                                                break
-                                                case 4:
-                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                        this.reload=600
-                                                        for(let e=0,le=12;e<le;e++){
-                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
-                                                            let mult=random(1.25,2.5)
-                                                            entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                                                            entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-                                                        }
+                                        c.position.y=this.position.y-this.height/2-c.height/2
+                                        c.previous.position.y=this.position.y-this.height/2-c.height/2
+                                        c.velocity.y=0
+                                        c.jump.time+=5
+                                        if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol')&&c.weapon.uses>0){
+                                            c.jump.double=1
+                                        }
+                                        switch(this.type){
+                                            case 2:
+                                                c.bounceTime=15
+                                            break
+                                            case 3:
+                                                c.velocity.y=-10
+                                                c.takeDamage(50)
+                                            break
+                                            case 4:
+                                                if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                    this.reload=600
+                                                    for(let e=0,le=12;e<le;e++){
+                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
+                                                        let mult=random(1.25,2.5)
+                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                     }
-                                                break
-                                            }
-                                            if(c.parachute){
-                                                c.parachute=false
-                                            }
+                                                }
+                                            break
+                                        }
+                                        if(c.parachute){
+                                            c.parachute=false
                                         }
                                     break
                                     case 2:
-                                        if(c.velocity.x<0){
-                                            c.position.x=this.position.x+this.width/2+c.width/2
-                                            c.previous.position.x=this.position.x+this.width/2+c.width/2
-                                            c.velocity.x=0
-                                        }
+                                        c.position.x=this.position.x+this.width/2+c.width/2
+                                        c.previous.position.x=this.position.x+this.width/2+c.width/2
+                                        c.velocity.x=0
                                     break
                                     case 3:
-                                        if(c.velocity.x>0){
-                                            c.position.x=this.position.x-this.width/2-c.width/2
-                                            c.previous.position.x=this.position.x-this.width/2-c.width/2
-                                            c.velocity.x=0
-                                        }
+                                        c.position.x=this.position.x-this.width/2-c.width/2
+                                        c.previous.position.x=this.position.x-this.width/2-c.width/2
+                                        c.velocity.x=0
                                     break
                                 }
                             }

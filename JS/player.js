@@ -883,10 +883,6 @@ class player{
             this.direction.goal+=360
         }
         this.collect.life=this.collect.life*0.9+this.life*0.1
-        this.previous.position.x=this.position.x
-        this.previous.position.y=this.position.y
-        this.position.x+=this.velocity.x
-        this.position.y+=this.velocity.y
         if(this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'){
             if(this.active>0){
                 this.life=this.base.life
@@ -1473,8 +1469,14 @@ class player{
             this.color.skin.arms=mergeColor(this.color.skin.arms,[255,255,255],0.6)
             this.base.control=0
         }
-        this.velocity.x*=0.85
-        this.velocity.y+=1.5
+        if(!this.disable2){
+            this.velocity.x*=0.85
+            this.velocity.y+=1.5
+            this.previous.position.x=this.position.x
+            this.previous.position.y=this.position.y
+            this.position.x+=this.velocity.x
+            this.position.y+=this.velocity.y
+        }
         if(this.parachute){
             this.velocity.x*=0.5
             this.velocity.y*=0.75

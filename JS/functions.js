@@ -57,12 +57,13 @@ function collideBoxBox(static,mobile){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
             if(intersect(mobile.position,mobile.previous.position,
                 {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
-                {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})){
+                {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
+            ){
                 return a
             }
         }
     }
-    return 0
+    return -1
     //return basicCollideBoxBox(static,mobile)
 }
 function collideBoxBoxIndex1(static,mobile){
