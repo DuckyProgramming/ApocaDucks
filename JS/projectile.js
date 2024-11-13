@@ -1447,10 +1447,12 @@ class projectile{
 							entities.players[a].life=entities.players[a].base.life
 						}else if(this.type==38&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
 							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-							entities.players[a].critBuff=max(300,entities.players[a].critBuff)
+							entities.players[a].critBuff=max(480,entities.players[a].critBuff)
 						}else if(this.type==63&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
 							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
 							entities.players[a].defendBuff=max(240,entities.players[a].defendBuff)
+						}else if(this.type==6||this.type==15||this.type==33){
+							entities.players[a].takeDamage(this.damage*(entities.players[a].life>=1000?3:entities.players[a].life>=500?2:1))
 						}else if(
 							this.type==2||this.type==16||this.type==21||this.type==22||this.type==26||
 							this.type==27||this.type==30||this.type==31||this.type==32||this.type==41||

@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false]
-        this.standard=this.type!=5
+        this.standard=this.type!=5&&this.type!=7
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
             [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
@@ -24,6 +24,11 @@ class wall{
                     this.balls=[]
                     for(let a=0,la=this.width*this.height/225;a<la;a++){
                         this.balls.push([-this.width/2+(a*0.19%1)*this.width,random(-this.height/2,this.height/2),random(30,40),random(0,1)])
+                    }
+                }else if(game.level==8){
+                    this.balls=[]
+                    for(let a=0,la=(this.width-10)*(this.height-10)/400;a<la;a++){
+                        this.balls.push([-this.width/2+(a*0.205%1)*(this.width-10)+5,random(-this.height/2+5,this.height/2-5),random(15,45),random(0,1)])
                     }
                 }
             break
@@ -285,7 +290,7 @@ class wall{
                 }
             }
         }
-        this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
+        this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
     }
     display(){
         this.layer.push()
@@ -310,6 +315,9 @@ class wall{
                 }else if(game.level==6){
                     this.layer.fill(30+this.position.y/this.layer.height*30,60-this.position.y/this.layer.height*15,30)
                     this.layer.rect(0,0,this.width+1,this.height+1)
+                }else if(game.level==8){
+                    this.layer.fill(100)
+                    this.layer.rect(0,0,this.width+1,this.height+1,2)
                 }else{
                     this.layer.fill(120)
                     this.layer.rect(0,0,this.width+1,this.height+1)
@@ -344,6 +352,14 @@ class wall{
                 this.layer.fill(40,120,40)
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
+            case 7:
+                this.layer.fill(50)
+                this.layer.rect(0,0,this.width+1,this.height+1)
+                this.layer.fill(70)
+                for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                    this.layer.rect(0,-this.height/2+(a+0.5)*game.tileset[1],this.width+1,game.tileset[1]/5)
+                }
+            break
         }
         //this.layer.stroke(255,150,50)
         //this.layer.noFill()
@@ -367,6 +383,15 @@ class wall{
                             30+this.balls[a][3]*30
                         )
                         regPoly(this.layer,this.balls[a][0],this.balls[a][1],floor(random(4,9)),this.balls[a][2]/2,this.balls[a][2]/2,random(0,360))
+                    }
+                }else if(game.level==8){
+                    for(let a=0,la=this.balls.length;a<la;a++){
+                        this.layer.fill(
+                            85+this.balls[a][3]*30,
+                            85+this.balls[a][3]*30,
+                            85+this.balls[a][3]*30
+                        )
+                        regStar(this.layer,this.balls[a][0],this.balls[a][1],floor(random(4,7)),this.balls[a][2]*0.5,this.balls[a][2]*0.5,this.balls[a][2]*0.3,this.balls[a][2]*0.3,random(0,360))
                     }
                 }
             break
@@ -441,133 +466,135 @@ class wall{
                 }
             break
         }
-        for(let a=0,la=this.collide.length;a<la;a++){
-            for(let b=0,lb=this.collide[a].length;b<lb;b++){
-                let c=this.collide[a][b]
-                if(a==0&&(
-                    c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
-                    c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
-                    c.type==52||c.type==60||c.type==61||c.type==62
-                )){
-                    let d=-1
-                    if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
-                        d=collideBoxBoxIndex2(this,c)
-                    }else if(inBoxBox(this,c)){
-                        d=collideBoxBoxIndex1(this,c)
-                    }
-                    if(d>=0&&!this.redundant[d]){
-                        switch(d){
-                            case 0:
-                                if(c.velocity.y<0){
-                                    c.position.y=this.position.y+this.height/2+c.height/2
-                                    c.velocity.y*=-1
-                                }
-                            break
-                            case 1:
-                                if(c.velocity.y>0){
-                                    c.position.y=this.position.y-this.height/2-c.height/2
-                                    c.velocity.y*=-1
-                                }
-                            break
-                            case 2:
-                                if(c.velocity.x<0){
-                                    c.position.x=this.position.x+this.width/2+c.width/2
-                                    c.velocity.x*=-1
-                                }
-                            break
-                            case 3:
-                                if(c.velocity.x>0){
-                                    c.position.x=this.position.x-this.width/2-c.width/2
-                                    c.velocity.x*=-1
-                                }
-                            break
+        if(this.type!=7){
+            for(let a=0,la=this.collide.length;a<la;a++){
+                for(let b=0,lb=this.collide[a].length;b<lb;b++){
+                    let c=this.collide[a][b]
+                    if(a==0&&(
+                        c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
+                        c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
+                        c.type==52||c.type==60||c.type==61||c.type==62
+                    )){
+                        let d=-1
+                        if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
+                            d=collideBoxBoxIndex2(this,c)
+                        }else if(inBoxBox(this,c)){
+                            d=collideBoxBoxIndex1(this,c)
                         }
-                        if(c.type==30||c.type==60){
-                            c.bounces++
-                            if(c.bounces>=3){
-                                c.explode()
-                                c.active=false
-                            }
-                        }
-                    }
-                }else if(a==0&&inBoxBox(this,c)&&c.active){
-                    if(
-                        c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
-                        c.type!=40&&c.type!=46
-                    ){
-                        c.active=false
-                        c.speed=0
-                        if(
-                            c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
-                            c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
-                            c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
-                            c.type==58||c.type==64
-                        ){
-                            c.explode()
-                        }
-                    }
-                }else if(a==1&&inBoxBox(this.bounder,c)&&!(this.type==5&&(c.id>0||this.exploded))){
-                    let d=collideBoxBox(this,c)
-                    switch(this.type){
-                        case 5:
-                            if(!this.exploded){
-                                this.exploded=true
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,200,2,false,-1))
-                            }
-                        break
-                        default:
-                            if(!this.redundant[d]){
-                                switch(d){
-                                    case 0:
+                        if(d>=0&&!this.redundant[d]){
+                            switch(d){
+                                case 0:
+                                    if(c.velocity.y<0){
                                         c.position.y=this.position.y+this.height/2+c.height/2
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2
-                                        c.velocity.y=0
-                                    break
-                                    case 1:
+                                        c.velocity.y*=-1
+                                    }
+                                break
+                                case 1:
+                                    if(c.velocity.y>0){
                                         c.position.y=this.position.y-this.height/2-c.height/2
-                                        c.previous.position.y=this.position.y-this.height/2-c.height/2
-                                        c.velocity.y=0
-                                        c.jump.time+=5
-                                        if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol')&&c.weapon.uses>0){
-                                            c.jump.double=1
-                                        }
-                                        switch(this.type){
-                                            case 2:
-                                                c.bounceTime=15
-                                            break
-                                            case 3:
-                                                c.velocity.y=-10
-                                                c.takeDamage(50)
-                                            break
-                                            case 4:
-                                                if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                    this.reload=600
-                                                    for(let e=0,le=12;e<le;e++){
-                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
-                                                        let mult=random(1.25,2.5)
-                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-                                                    }
-                                                }
-                                            break
-                                        }
-                                        if(c.parachute){
-                                            c.parachute=false
-                                        }
-                                    break
-                                    case 2:
+                                        c.velocity.y*=-1
+                                    }
+                                break
+                                case 2:
+                                    if(c.velocity.x<0){
                                         c.position.x=this.position.x+this.width/2+c.width/2
-                                        c.previous.position.x=this.position.x+this.width/2+c.width/2
-                                        c.velocity.x=0
-                                    break
-                                    case 3:
+                                        c.velocity.x*=-1
+                                    }
+                                break
+                                case 3:
+                                    if(c.velocity.x>0){
                                         c.position.x=this.position.x-this.width/2-c.width/2
-                                        c.previous.position.x=this.position.x-this.width/2-c.width/2
-                                        c.velocity.x=0
-                                    break
+                                        c.velocity.x*=-1
+                                    }
+                                break
+                            }
+                            if(c.type==30||c.type==60){
+                                c.bounces++
+                                if(c.bounces>=3){
+                                    c.explode()
+                                    c.active=false
                                 }
                             }
-                        break
+                        }
+                    }else if(a==0&&inBoxBox(this,c)&&c.active){
+                        if(
+                            c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
+                            c.type!=40&&c.type!=46
+                        ){
+                            c.active=false
+                            c.speed=0
+                            if(
+                                c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
+                                c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
+                                c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
+                                c.type==58||c.type==64
+                            ){
+                                c.explode()
+                            }
+                        }
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&!(this.type==5&&(c.id>0||this.exploded))){
+                        let d=collideBoxBox(this,c)
+                        switch(this.type){
+                            case 5:
+                                if(!this.exploded){
+                                    this.exploded=true
+                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,200,2,false,-1))
+                                }
+                            break
+                            default:
+                                if(!this.redundant[d]){
+                                    switch(d){
+                                        case 0:
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1
+                                            c.velocity.y=0
+                                        break
+                                        case 1:
+                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1
+                                            c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1
+                                            c.velocity.y=0
+                                            c.jump.time+=5
+                                            if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol')&&c.weapon.uses>0){
+                                                c.jump.double=1
+                                            }
+                                            switch(this.type){
+                                                case 2:
+                                                    c.bounceTime=15
+                                                break
+                                                case 3:
+                                                    c.velocity.y=-10
+                                                    c.takeDamage(50)
+                                                break
+                                                case 4:
+                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                        this.reload=600
+                                                        for(let e=0,le=12;e<le;e++){
+                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
+                                                            let mult=random(1.25,2.5)
+                                                            entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                            entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                        }
+                                                    }
+                                                break
+                                            }
+                                            if(c.parachute){
+                                                c.parachute=false
+                                            }
+                                        break
+                                        case 2:
+                                            c.position.x=this.position.x+this.width/2+c.width/2+0.1
+                                            c.previous.position.x=this.position.x+this.width/2+c.width/2+0.1
+                                            c.velocity.x=0
+                                        break
+                                        case 3:
+                                            c.position.x=this.position.x-this.width/2-c.width/2-0.1
+                                            c.previous.position.x=this.position.x-this.width/2-c.width/2-0.1
+                                            c.velocity.x=0
+                                        break
+                                    }
+                                }
+                            break
+                        }
                     }
                 }
             }

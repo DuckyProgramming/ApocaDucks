@@ -1,4 +1,4 @@
-game={level:8,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,
+game={level:8,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,tileset:[0,0],
 classicRespawn:true,invis:false,pvp:false,randomizer:false,randomSpawn:false,past:false}
 menu={players:1,gaming:1}
 types={
@@ -8,7 +8,7 @@ types={
       sendTime:30,
       difficulty:0,
       wave:[
-        /*[
+        [
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -39,7 +39,7 @@ types={
           ['BigMachineGun',1],
           ['BigCritRocketLauncher',1],
           ['HyperMedic',1],
-        ],*/
+        ],
       ],
     },{
       name:`Duck Infiltration`,
@@ -1575,7 +1575,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'PlayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:2,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:2,
     },{
       name:'PlayerRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:3,
@@ -1584,7 +1584,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
     },{
       name:'PlayerBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:7,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:7,
     },{
       name:'PlayerFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
@@ -1593,7 +1593,7 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:10,
     },{
       name:'PlayerMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
     },
 
     {
@@ -1604,7 +1604,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:15,
     },{
       name:'PlayerSpamMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:34,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:34,
     },{
       name:'PlayerBarrageRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:3,crit:0,weapon:31,
@@ -1613,7 +1613,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:12,
     },{
       name:'PlayerBombBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:36,
     },{
       name:'PlayerFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:19,
@@ -2322,7 +2322,7 @@ types={
 			stop:30,
 			reload:10,
 			speed:1.4,
-      uses:30,
+      uses:40,
 		},{
 			name:'Machine Gun',
 			ammo:30,
@@ -3108,7 +3108,11 @@ graphics={main:[],pane:[]}
 entities={projectiles:[],players:[],walls:[]}
 deployer={spawn:[],timer:0}
 run={fore:[],info:[],back:[]}
-inputs={mouse:{x:0,y:0},rel:{x:0,y:0},keys:[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]}
+inputs={
+  mouse:{x:0,y:0},rel:{x:0,y:0},
+  keys:[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]],
+  tap:[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]],
+}
 transition={trigger:false,anim:0,scene:stage.scene}
 levels=[
     [
@@ -3486,18 +3490,18 @@ levels=[
       "                                                                                                   123",
       "                                                                                                   456",
       "                                                                                                   ###",
-      "                                                                                                     #",
-      "                                                                                     $               #",
-      "                                                                                   ####              #",
-      "                                                                                 #######            ##",
-      "                                                                                ##   ###### $     ####",
-      "                                                                                      ######### #%####",
+      "                                                                                                   | #",
+      "                                                                                     $             | #",
+      "                                                                                   ####            | #",
+      "                                                                                 #######           |##",
+      "                                                                                ##  |###### $     ####",
+      "                                                                                    | ######### #%####",
       "                                                  ##                   $ ###%##    ## ######### ######",
-      "                                              ## ####    ######      ##########@   ## #######   ######",
-      "                                         ####### #### #######       ################# ####### #@######",
-      "                                        ##       ####           #####################         ########",
-      "                                                 ####   $  $  #######################@################",
-      "ABCD                      $  ########      #####@####@################################################",
+      "                                              ## ####    ######      ##########@   ## ####### | ######",
+      "                                         ####### #### #######|      ################# ####### #@######",
+      "                                        ##    |  ####  |     |  #####################  |      ########",
+      "                                         |    |  ####  |$  $ |#######################@################",
+      "ABCD                      $  ########    | #####@####@################################################",
       "                      $  ############@#%##############################################################",
       "                 $  ##################################################################################",
       "!!!!!!!!!!!!!!########################################################################################",

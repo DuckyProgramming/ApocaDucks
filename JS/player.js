@@ -212,7 +212,7 @@ class player{
             this.layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35-42.5*this.playerData.sizeBuff)
             this.layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
         }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
-            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\n${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
+            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
         }else if(game.randomizer&&this.id>0){
             this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38-42.5*this.playerData.sizeBuff)
             this.layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
@@ -1243,6 +1243,9 @@ class player{
                 }
             }
             this.attacking=inputs.keys[this.id-1][3]
+            if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol')&&this.weapon.uses>0&&inputs.tap[this.id-1][3]){
+                this.weapon.cooldown=0
+            }
             if(inputs.keys[this.id-1][3]&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&this.weaponType>=0){
                 this.attack()
             }
@@ -1479,7 +1482,7 @@ class player{
         }
         if(this.parachute){
             this.velocity.x*=0.5
-            this.velocity.y*=0.75
+            this.velocity.y*=0.7
         }
         if(this.id==0){
             if(game.invis){

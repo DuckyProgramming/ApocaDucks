@@ -136,6 +136,7 @@ function mainloop(layer){
             if(game.past){
                 runTransition(graphics.main[0])
             }
+            inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
         break
     }
     game.time++
