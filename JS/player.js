@@ -51,6 +51,7 @@ class player{
         this.critBuff=0
         this.defendBuff=0
         this.stunTime=0
+        this.stuckTime=0
         this.vulnerableTime=0
         this.confuseTime=0
         this.bounceTime=0
@@ -556,11 +557,16 @@ class player{
         this.critBuff=0
         this.defendBuff=0
         this.stunTime=0
+        this.stuckTime=0
         this.vulnerableTime=0
         this.confuseTime=0
     }
     takeDamage(damage){
-        this.life-=damage*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?1/3:1)
+        let preLife=this.life
+        this.life-=damage*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)
+        if(preLife>=this.base.life&&this.life<=0&&this.id>0){
+            this.life=1
+        }
     }
 	attack(){
         this.visible=15
@@ -1161,11 +1167,11 @@ class player{
                         this.manage[2]=0
                     }
                 }
-                if(this.manage[0]==0&&this.life>0&&this.stunTime<=0){
+                if(this.manage[0]==0&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
                     this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*(game.level==6&&this.playerData.speedBuff<1?this.playerData.speedBuff*0.5+0.5:this.playerData.speedBuff)*(this.id>0&&game.randomizer?2:1)
                     this.runAnim(1/30)
-                }else if(this.manage[0]==1&&this.life>0&&this.stunTime<=0){
+                }else if(this.manage[0]==1&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
                     this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*(game.level==6&&this.playerData.speedBuff<1?this.playerData.speedBuff*0.5+0.5:this.playerData.speedBuff)*(this.id>0&&game.randomizer?2:1)
                     this.runAnim(1/30)
@@ -1174,7 +1180,7 @@ class player{
                 }else if(this.animSet.loop>=1){
                     this.animSet.loop=0
                 }
-                if(this.manage[2]==1&&this.life>0&&(this.jump.time>0||this.jump.active>0)){
+                if(this.manage[2]==1&&this.life>0&&(this.jump.time>0||this.jump.active>0)&&this.stuckTime<=0){
                     if(this.jump.time>0){
                         this.jump.time=0
                         this.jump.active=10
@@ -1203,11 +1209,11 @@ class player{
 					if(this.life>0){
             this.inputs.push([inputs.keys[this.id-1][0],inputs.keys[this.id-1][1],inputs.keys[this.id-1][2],inputs.keys[this.id-1][3]])
 					}
-            if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0&&this.stunTime<=0){
+            if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                 this.direction.goal=-54
                 this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
                 this.runAnim(1/30)
-            }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0&&this.stunTime<=0){
+            }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                 this.direction.goal=54
                 this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
                 this.runAnim(1/30)
@@ -1216,7 +1222,7 @@ class player{
             }else if(this.animSet.loop>=1){
                 this.animSet.loop=0
             }
-            if(inputs.keys[this.id-1][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0||this.jump.double)){
+            if(inputs.keys[this.id-1][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0||this.jump.double)&&this.stuckTime<=0){
                 if(this.jump.time>0){
                     this.jump.time=0
                     this.jump.active=10
@@ -1253,11 +1259,11 @@ class player{
             if(this.selector>=this.inputs.length){
                 this.control=0
             }else{
-                if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0){
+                if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
                     this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
                     this.runAnim(1/30)
-                }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0){
+                }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
                     this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
                     this.runAnim(1/30)
@@ -1266,7 +1272,7 @@ class player{
                 }else if(this.animSet.loop>=1){
                     this.animSet.loop=0
                 }
-                if(this.inputs[this.selector][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0)){
+                if(this.inputs[this.selector][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0)&&this.stuckTime<=0){
                     if(this.jump.time>0){
                         this.jump.time=0
                         this.jump.active=10
@@ -1318,7 +1324,7 @@ class player{
             if(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66){
                 this.collect.time-=3
             }
-        }else if(this.life>0&&this.id>0&&this.size<2.25*0.5){
+        }else if(this.life>0&&this.id>0&&this.size<2.25*0.5&&!game.pvp){
             this.life=min(max(this.life,this.base.life),this.life+this.base.life/(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66?150:300))
         }
         if(!this.disable){
@@ -1436,6 +1442,9 @@ class player{
         if(this.stunTime>0){
             this.stunTime--
         }
+        if(this.stuckTime>0){
+            this.stuckTime--
+        }
         if(this.vulnerableTime>0){
             this.vulnerableTime--
         }
@@ -1482,7 +1491,7 @@ class player{
         }
         if(this.parachute){
             this.velocity.x*=0.5
-            this.velocity.y*=0.7
+            this.velocity.y*=2/3
         }
         if(this.id==0){
             if(game.invis){

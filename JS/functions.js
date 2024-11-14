@@ -55,7 +55,7 @@ function collideBoxBox(static,mobile){
     }*/
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(intersect(mobile.position,mobile.previous.position,
+            if(intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
                 {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
                 {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
             ){
@@ -69,7 +69,7 @@ function collideBoxBox(static,mobile){
 function collideBoxBoxIndex1(static,mobile){
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(intersect(mobile.position,mobile.midpoint.position,
+            if(intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
                 {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
                 {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})){
                 return a
@@ -273,7 +273,32 @@ function generateLevel(level,layer){
                     entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.4)*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,5))
                 break
                 case '|':
-                    entities.walls[0].push(new wall(graphics.pane[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    entities.walls[1].push(new wall(graphics.pane[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                break
+                case '^':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,8))
+                break
+                case '*':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,9))
+                break
+                case '_':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,10))
+                break
+                case '-':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,11))
+                break
+                case '&':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,12))
+                break
+                case '+':
+                    entities.walls[1].push(new wall(graphics.pane[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,11))
+                break
+                case '`':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],13))
+                break
+                case '=':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,14))
                 break
             }
         }
@@ -464,7 +489,7 @@ function checkEnd(level,layer){
                                 entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                 if(game.level==8){
                                     entities.players[entities.players.length-1].position.x=[entities.players[floor(random(0,game.players))].position.x+random(-30,30),layer.width*0.6][floor(random(0,2))]
-                                    entities.players[entities.players.length-1].position.ys=1000
+                                    entities.players[entities.players.length-1].position.y=1000
                                     entities.players[entities.players.length-1].parachute=true
                                 }
                                 game.index++

@@ -7,7 +7,8 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false]
-        this.standard=this.type!=5&&this.type!=7
+        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14
+        this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
             [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
@@ -32,12 +33,15 @@ class wall{
                     }
                 }
             break
-            case 4:
+            case 4: case 13:
                 this.reload=0
             break
             case 6:
                 this.carry=[]
                 this.disable=false
+            break
+            case 8: case 9: case 12:
+                this.recharge=0
             break
         }
     }
@@ -360,6 +364,58 @@ class wall{
                     this.layer.rect(0,-this.height/2+(a+0.5)*game.tileset[1],this.width+1,game.tileset[1]/5)
                 }
             break
+            case 8:
+                for(let a=0,la=4;a<la;a++){
+                    if(cos(a*90+this.time)>0){
+                        this.layer.fill(60+cos(a*90+this.time)*40,55+cos(a*90+this.time)*40,50+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
+                        this.layer.fill(240+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,60+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
+                        this.layer.fill(60+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.1,this.height*0.4)
+                        this.layer.rect(this.width/2*sin(a*90+this.time)-this.width*cos(a*90+this.time)*0.12,0,this.width*cos(a*90+this.time)*0.08,this.height*0.4)
+                        this.layer.rect(this.width/2*sin(a*90+this.time)+this.width*cos(a*90+this.time)*0.12,0,this.width*cos(a*90+this.time)*0.08,this.height*0.4)
+                    }
+                }
+            break
+            case 9:
+                for(let a=0,la=4;a<la;a++){
+                    if(cos(a*90+this.time)>0){
+                        this.layer.fill(60+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,180+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
+                        this.layer.fill(160+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
+                        this.layer.fill(240+cos(a*90+this.time)*40,40+cos(a*90+this.time)*40,40+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.45,this.height*0.15)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.15,this.height*0.45)
+                    }
+                }
+            break
+            case 11:
+                this.layer.fill(60)
+                this.layer.rect(0,this.height/4+1,this.width/3-2,this.height/2-2)
+                this.layer.rect(-this.width/3,this.height/4+1,this.width/3-2,this.height/2-2)
+                this.layer.rect(this.width/3,this.height/4+1,this.width/3-2,this.height/2-2)
+                this.layer.rect(-this.width/6,-this.height/4+1,this.width/3-2,this.height/2-2)
+                this.layer.rect(this.width/6,-this.height/4+1,this.width/3-2,this.height/2-2)
+            break
+            case 12:
+                for(let a=0,la=4;a<la;a++){
+                    if(cos(a*90+this.time)>0){
+                        this.layer.fill(120+cos(a*90+this.time)*40,160+cos(a*90+this.time)*40,200+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
+                        this.layer.fill(120+cos(a*90+this.time)*40,240+cos(a*90+this.time)*40,240+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
+                        this.layer.fill(40+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,1-this.recharge/60)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),-this.height*0.08,this.width*cos(a*90+this.time)*0.1,this.height*0.3)
+                        this.layer.rect(this.width/2*sin(a*90+this.time),this.height*0.18,this.width*cos(a*90+this.time)*0.1,this.height*0.1)
+                    }
+                }
+            break
+            case 13:
+                this.layer.fill(220-this.reload/6,220-this.reload/6,120)
+                this.layer.rect(0,0,this.width+1,this.height+1)
+            break
         }
         //this.layer.stroke(255,150,50)
         //this.layer.noFill()
@@ -433,6 +489,7 @@ class wall{
             case 6:
                 this.position.x+=2
                 this.bounder.position.x+=2
+                this.velocity.x=2
                 for(let a=0,la=this.boundary.length;a<la;a++){
                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
@@ -442,6 +499,7 @@ class wall{
                 }
                 if(this.time>this.layer.width*0.1){
                     this.position.y+=2
+                    this.velocity.y=2
                     for(let a=0,la=this.boundary.length;a<la;a++){
                         for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                             for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
@@ -465,15 +523,28 @@ class wall{
                     this.remove=true
                 }
             break
+            case 8: case 9: case 12:
+                if(this.recharge>0){
+                    this.recharge--
+                }
+            break
+            case 13:
+                if(this.reload>0){
+                    this.reload--
+                    if(this.reload==599||this.reload==579||this.reload==559){
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,100,180,false,-1))
+                    }
+                }
+            break
         }
         if(this.type!=7){
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
-                    if(a==0&&(
+                    if(a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&(
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
-                        c.type==52||c.type==60||c.type==61||c.type==62
+                        c.type==52||c.type==60||c.type==61||c.type==62||c.type==65
                     )){
                         let d=-1
                         if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
@@ -508,7 +579,7 @@ class wall{
                                     }
                                 break
                             }
-                            if(c.type==30||c.type==60){
+                            if(c.type==30||c.type==60||c.type==65){
                                 c.bounces++
                                 if(c.bounces>=3){
                                     c.explode()
@@ -516,7 +587,9 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==0&&inBoxBox(this,c)&&c.active){
+                    }else if(a==0&&inBoxBox(this,c)&&c.active&&
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14
+                    ){
                         if(
                             c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                             c.type!=40&&c.type!=46
@@ -532,14 +605,42 @@ class wall{
                                 c.explode()
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&!(this.type==5&&(c.id>0||this.exploded))){
+                    }else if(a==1&&inBoxBox(this.bounder,c)
+                        &&!(this.type==5&&(c.id>0||this.exploded))
+                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=c.weaponData.uses*game.ammoMult||c.weapon.uses<=0))
+                        &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life))
+                        &&!(this.type==10&&(c.id>0))
+                        &&!(this.type==11&&(c.id<=0))
+                        &&!(this.type==12&&(c.id<=0||this.recharge>0))
+                    ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
                             case 5:
-                                if(!this.exploded){
-                                    this.exploded=true
-                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,200,2,false,-1))
-                                }
+                                this.exploded=true
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,200,2,false,-1))
+                            break
+                            case 8:
+                                this.recharge=1800
+                                c.weapon.uses=min(c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
+                            break
+                            case 9:
+                                this.recharge=1800
+                                c.life=min(c.base.life,c.life+c.base.life/2)
+                            break
+                            case 10:
+                                c.manage[2]=true
+                                c.target.position.x=this.position.x+game.tileset[0]
+                            break
+                            case 11:
+                                c.defendBuff=5
+                            break
+                            case 12:
+                                this.recharge=1800
+                                c.critBuff=240
+                            break
+                            case 14:
+                                c.manage[2]=true
+                                c.target.position.x=this.position.x-game.tileset[0]
                             break
                             default:
                                 if(!this.redundant[d]){
@@ -564,6 +665,7 @@ class wall{
                                                 case 3:
                                                     c.velocity.y=-10
                                                     c.takeDamage(50)
+                                                    c.collect.time=max(c.collect.time,30)
                                                 break
                                                 case 4:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
@@ -579,6 +681,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
+                                                c.stuckTime=60
                                             }
                                         break
                                         case 2:
@@ -590,6 +693,13 @@ class wall{
                                             c.position.x=this.position.x-this.width/2-c.width/2-0.1
                                             c.previous.position.x=this.position.x-this.width/2-c.width/2-0.1
                                             c.velocity.x=0
+                                            switch(this.type){
+                                                case 13:
+                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                        this.reload=600
+                                                    }
+                                                break
+                                            }
                                         break
                                     }
                                 }
