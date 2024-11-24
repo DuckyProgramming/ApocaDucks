@@ -33,7 +33,7 @@ class wall{
                     }
                 }
             break
-            case 4: case 13:
+            case 4: case 13: case 15:
                 this.reload=0
             break
             case 6:
@@ -42,6 +42,42 @@ class wall{
             break
             case 8: case 9: case 12:
                 this.recharge=0
+            break
+            case 17:
+                if(game.level==8){
+                    this.balls=[]
+                    for(let a=0,la=(this.width-10)*(this.height-10)/800;a<la;a++){
+                        let pos=(a*0.205%1)
+                        this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5+(this.height-10)*pos,this.height/2-5),random(15,45),random(0,1)])
+                    }
+                }
+            break
+            case 18:
+                if(game.level==8){
+                    this.balls=[]
+                    for(let a=0,la=(this.width-10)*(this.height-10)/800;a<la;a++){
+                        let pos=(a*0.205%1)
+                        this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5+(this.height-10)*(1-pos),this.height/2-5),random(15,45),random(0,1)])
+                    }
+                }
+            break
+            case 20:
+                if(game.level==8){
+                    this.balls=[]
+                    for(let a=0,la=(this.width-10)*(this.height-10)/800;a<la;a++){
+                        let pos=(a*0.205%1)
+                        this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5,-this.height/2+5+(this.height-10)*(1-pos)),random(15,45),random(0,1)])
+                    }
+                }
+            break
+            case 21:
+                if(game.level==8){
+                    this.balls=[]
+                    for(let a=0,la=(this.width-10)*(this.height-10)/800;a<la;a++){
+                        let pos=(a*0.205%1)
+                        this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5,-this.height/2+5+(this.height-10)*pos),random(15,45),random(0,1)])
+                    }
+                }
             break
         }
     }
@@ -78,12 +114,68 @@ class wall{
         }
     }
     checkRedundancy(){
-        this.boundary=[
-            [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
-            [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
-            [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
-            [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
-        ]
+        switch(this.type){
+            case 17:
+                this.boundary=[
+                    [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [],
+                ]
+            break
+            case 18:
+                this.boundary=[
+                    [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                ]
+            break
+            case 20:
+                this.boundary=[
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                ]
+            break
+            case 21:
+                this.boundary=[
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                ]
+            break
+            default:
+                this.boundary=[
+                    [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [],
+                    [],
+                ]
+            break
+        }
         if(this.position.y+this.height/2>=this.layer.height){
             this.redundant[0]=true
             this.boundary[0]=[]
@@ -393,11 +485,12 @@ class wall{
             break
             case 11:
                 this.layer.fill(60)
-                this.layer.rect(0,this.height/4+1,this.width/3-2,this.height/2-2)
-                this.layer.rect(-this.width/3,this.height/4+1,this.width/3-2,this.height/2-2)
-                this.layer.rect(this.width/3,this.height/4+1,this.width/3-2,this.height/2-2)
-                this.layer.rect(-this.width/6,-this.height/4+1,this.width/3-2,this.height/2-2)
-                this.layer.rect(this.width/6,-this.height/4+1,this.width/3-2,this.height/2-2)
+                for(let a=0,la=this.width/game.tileset[0]*2;a<la;a++){
+                    this.layer.rect(-this.width/2+(0.5+a)/la*this.width,this.height/4+1,this.width/la-2,this.height/2-2)
+                }
+                for(let a=0,la=this.width/game.tileset[0]*2-1;a<la;a++){
+                    this.layer.rect(-this.width/2+(1+a)/(la+1)*this.width,-this.height/4+1,this.width/(la+1)-2,this.height/2-2)
+                }
             break
             case 12:
                 for(let a=0,la=4;a<la;a++){
@@ -416,21 +509,75 @@ class wall{
                 this.layer.fill(220-this.reload/6,220-this.reload/6,120)
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
+            case 15:
+                this.layer.fill(220-this.reload/6,120,220-this.reload/6)
+                this.layer.rect(0,0,this.width+1,this.height+1)
+            break
+            case 17:
+                if(game.level==8){
+                    this.layer.fill(100)
+                }else{
+                    this.layer.fill(120)
+                }
+                this.layer.triangle(
+                    -this.width/2-0.5,-this.height/2-0.5,
+                    -this.width/2-0.5,this.height/2+0.5,
+                    this.width/2+0.5,this.height/2+0.5
+                )
+            break
+            case 18:
+                if(game.level==8){
+                    this.layer.fill(100)
+                }else{
+                    this.layer.fill(120)
+                }
+                this.layer.triangle(
+                    this.width/2+0.5,-this.height/2-0.5,
+                    -this.width/2-0.5,this.height/2+0.5,
+                    this.width/2+0.5,this.height/2+0.5
+                )
+            break
+            case 20:
+                if(game.level==8){
+                    this.layer.fill(100)
+                }else{
+                    this.layer.fill(120)
+                }
+                this.layer.triangle(
+                    -this.width/2-0.5,-this.height/2-0.5,
+                    -this.width/2-0.5,this.height/2+0.5,
+                    this.width/2+0.5,-this.height/2-0.5
+                )
+            break
+            case 21:
+                if(game.level==8){
+                    this.layer.fill(100)
+                }else{
+                    this.layer.fill(120)
+                }
+                this.layer.triangle(
+                    -this.width/2-0.5,-this.height/2-0.5,
+                    this.width/2+0.5,-this.height/2-0.5,
+                    this.width/2+0.5,this.height/2+0.5
+                )
+            break
         }
         //this.layer.stroke(255,150,50)
         //this.layer.noFill()
         //this.layer.rect(0,0,this.width,this.height)
         this.layer.pop()
-        /*this.layer.stroke(255,150,50)
-        this.layer.noFill()
-        this.layer.rect(this.bounder.position.x,this.bounder.position.y,this.bounder.width-10,this.bounder.height-10)*/
+        if(false){
+            this.layer.stroke(255,150,50)
+            this.layer.noFill()
+            this.layer.rect(this.bounder.position.x,this.bounder.position.y,this.bounder.width-10,this.bounder.height-10)
+        }
     }
     displayOver(){
         this.layer.push()
         this.layer.translate(this.position.x,this.position.y)
         this.layer.noStroke()
         switch(this.type){
-            case 1:
+            case 1: case 17: case 18: case 20: case 21:
                 if(game.level==6){
                     for(let a=0,la=this.balls.length;a<la;a++){
                         this.layer.fill(
@@ -467,7 +614,7 @@ class wall{
         this.layer.pop()
         /*this.layer.stroke(50,50+this.type*100,200)
         this.layer.strokeWeight(4)
-        for(let a=0,la=1;a<la;a++){
+        for(let a=0,la=8;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                 this.layer.line(
                     this.position.x+this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
@@ -487,23 +634,23 @@ class wall{
                 }
             break
             case 6:
-                this.position.x+=2
-                this.bounder.position.x+=2
-                this.velocity.x=2
+                this.position.x+=1.5
+                this.bounder.position.x+=1.5
+                this.velocity.x=1.5
                 for(let a=0,la=this.boundary.length;a<la;a++){
                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                            this.boundary[a][b][c].x+=2
+                            this.boundary[a][b][c].x+=1.5
                         }
                     }
                 }
-                if(this.time>this.layer.width*0.1){
-                    this.position.y+=2
-                    this.velocity.y=2
+                if(this.time>this.layer.width*2/15){
+                    this.position.y+=1.5
+                    this.velocity.y=1.5
                     for(let a=0,la=this.boundary.length;a<la;a++){
                         for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                             for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                this.boundary[a][b][c].y+=2
+                                this.boundary[a][b][c].y+=1.5
                             }
                         }
                     }
@@ -516,7 +663,7 @@ class wall{
                     }
                 }else{
                     for(let a=0,la=this.carry.length;a<la;a++){
-                        this.carry[a].position.x+=2
+                        this.carry[a].position.x+=1.5
                     }
                 }
                 if(this.position.x>this.layer.height+50){
@@ -532,7 +679,36 @@ class wall{
                 if(this.reload>0){
                     this.reload--
                     if(this.reload==599||this.reload==579||this.reload==559){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,100,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,150,180,false,-1))
+                    }
+                }
+            break
+            case 15:
+                if(this.reload>0){
+                    this.reload--
+                    if(this.reload==599||this.reload==559){
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-33,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-39,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-45,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-51,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-57,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,-1,150,180,false,-1))
+                    }else if(this.reload==579){
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-36,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-42,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-48,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-54,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-60,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-66,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-72,-1,150,180,false,-1))
                     }
                 }
             break
@@ -541,17 +717,21 @@ class wall{
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
-                    if(a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&(
+                    if(a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&(
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
-                        c.type==52||c.type==60||c.type==61||c.type==62||c.type==65
+                        c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
+                        c.type==68||c.type==69||c.type==70
                     )){
                         let d=-1
-                        if(inBoxBox(this,{position:c.midpoint.position,width:c.width,height:c.height})){
+                        if(d==-1){
                             d=collideBoxBoxIndex2(this,c)
-                        }else if(inBoxBox(this,c)){
+                        }
+                        if(d==-1){
                             d=collideBoxBoxIndex1(this,c)
                         }
+                        let incident
+                        let vecBall
                         if(d>=0&&!this.redundant[d]){
                             switch(d){
                                 case 0:
@@ -578,6 +758,54 @@ class wall{
                                         c.velocity.x*=-1
                                     }
                                 break
+                                case 4:
+                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                    incident=atan2(game.tileset[0],-game.tileset[1])
+                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                        c.position.x+=c.velocity.x*0.1
+                                        c.position.y+=c.velocity.y*0.1
+                                    }
+                                break
+                                case 5:
+                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                    incident=atan2(-game.tileset[0],-game.tileset[1])
+                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                        c.position.x+=c.velocity.x*0.1
+                                        c.position.y+=c.velocity.y*0.1
+                                    }
+                                break
+                                case 6:
+                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                    c.velocity.y=0
+                                    incident=atan2(-game.tileset[0],game.tileset[1])
+                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                        c.position.x+=c.velocity.x*0.1
+                                        c.position.y+=c.velocity.y*0.1
+                                    }
+                                break
+                                case 7:
+                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                    c.velocity.y=0
+                                    incident=atan2(game.tileset[0],game.tileset[1])
+                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                        c.position.x+=c.velocity.x*0.1
+                                        c.position.y+=c.velocity.y*0.1
+                                    }
+                                break
                             }
                             if(c.type==30||c.type==60||c.type==65){
                                 c.bounces++
@@ -587,30 +815,50 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==0&&inBoxBox(this,c)&&c.active&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14
+                    }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16
                     ){
-                        if(
-                            c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
-                            c.type!=40&&c.type!=46
+                        let d=collideBoxBox(this,c)
+                        if(d>=0&&!this.redundant[d]||c.timer==0&&inBoxBox(this,c)
+                            &&!(this.type==17&&inPointTriangle(c.position,[
+                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
+                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
+                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2}
+                            ]))&&!(this.type==18&&inPointTriangle(c.position,[
+                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
+                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2},
+                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2}
+                            ]))&&!(this.type==20&&inPointTriangle(c.position,[
+                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
+                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
+                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2}
+                            ]))&&!(this.type==21&&inPointTriangle(c.position,[
+                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
+                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
+                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2}
+                            ]))
                         ){
-                            c.active=false
-                            c.speed=0
                             if(
-                                c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
-                                c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
-                                c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
-                                c.type==58||c.type==64
+                                c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
+                                c.type!=40&&c.type!=46
                             ){
-                                c.explode()
+                                c.active=false
+                                c.speed=0
+                                if(
+                                    c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
+                                    c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
+                                    c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
+                                    c.type==58||c.type==64||c.type==66
+                                ){
+                                    c.explode()
+                                }
                             }
                         }
                     }else if(a==1&&inBoxBox(this.bounder,c)
                         &&!(this.type==5&&(c.id>0||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=c.weaponData.uses*game.ammoMult||c.weapon.uses<=0))
                         &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life))
-                        &&!(this.type==10&&(c.id>0))
-                        &&!(this.type==11&&(c.id<=0))
+                        &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                     ){
                         let d=collideBoxBox(this,c)
@@ -632,7 +880,17 @@ class wall{
                                 c.target.position.x=this.position.x+game.tileset[0]
                             break
                             case 11:
-                                c.defendBuff=5
+                                if(c.id>0){
+                                    c.defendBuff=15
+                                }else{
+                                    c.velocity.x*=0.75
+                                    if(c.velocity.y<0){
+                                        c.velocity.y*=0.75
+                                    }
+                                    if(c.jump.active>0){
+                                        c.jump.active=0
+                                    }
+                                }
                             break
                             case 12:
                                 this.recharge=1800
@@ -649,13 +907,20 @@ class wall{
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1
                                             c.velocity.y=0
+                                            switch(this.type){
+                                                case 15:
+                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                        this.reload=600
+                                                    }
+                                                break
+                                            }
                                         break
                                         case 1:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1
                                             c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1
                                             c.velocity.y=0
-                                            c.jump.time+=5
-                                            if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol')&&c.weapon.uses>0){
+                                            c.jump.time=5
+                                            if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump')&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             switch(this.type){
@@ -678,10 +943,17 @@ class wall{
                                                         }
                                                     }
                                                 break
+                                                case 15:
+                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                        this.reload=600
+                                                    }
+                                                break
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                c.stuckTime=60
+                                                if(!game.pvp){
+                                                    c.stuckTime=60
+                                                }
                                             }
                                         break
                                         case 2:
@@ -694,12 +966,50 @@ class wall{
                                             c.previous.position.x=this.position.x-this.width/2-c.width/2-0.1
                                             c.velocity.x=0
                                             switch(this.type){
-                                                case 13:
+                                                case 13: case 15:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
                                                         this.reload=600
                                                     }
                                                 break
                                             }
+                                        break
+                                        case 4:
+                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.velocity.y=0
+                                            c.jump.time+=5
+                                            if(c.parachute){
+                                                c.parachute=false
+                                                if(!game.pvp){
+                                                    c.stuckTime=60
+                                                }
+                                            }
+                                            c.velocity.x*=1-this.height/this.width*0.1
+                                        break
+                                        case 5:
+                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.velocity.y=0
+                                            c.jump.time+=5
+                                            if(c.parachute){
+                                                c.parachute=false
+                                                if(!game.pvp){
+                                                    c.stuckTime=60
+                                                }
+                                            }
+                                            c.velocity.x*=1-this.height/this.width*0.1
+                                        break
+                                        case 6:
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.velocity.y=0
+                                            c.velocity.x*=1-this.height/this.width*0.1
+                                        break
+                                        case 7:
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.velocity.y=0
+                                            c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                     }
                                 }

@@ -31,6 +31,12 @@ function inPointBox(point,box){
 function inBoxBox(box1,box2){
     return box1.position.x>box2.position.x-box1.width/2-box2.width/2&&box1.position.x<box2.position.x+box1.width/2+box2.width/2&&box1.position.y>box2.position.y-box1.height/2-box2.height/2&&box1.position.y<box2.position.y+box1.height/2+box2.height/2
 }
+function triangleArea(triangle){
+    return abs(triangle[0].x*(triangle[1].y-triangle[2].y)+triangle[1].x*(triangle[2].y-triangle[0].y)+triangle[2].x*(triangle[0].y-triangle[1].y))
+}
+function inPointTriangle(point,triangle){
+    return abs(triangleArea(triangle)-(triangleArea([point,triangle[0],triangle[1]])+triangleArea([point,triangle[0],triangle[2]])+triangleArea([point,triangle[1],triangle[2]])))<1
+}
 function onSegment(p,q,r){ 
     return q.x<=max(p.x,r.x)&&q.x>=min(p.x, r.x)&&q.y<=max(p.y,r.y)&&q.y>=min(p.y, r.y)
 }
@@ -55,11 +61,69 @@ function collideBoxBox(static,mobile){
     }*/
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
-                {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
-                {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
-            ){
-                return a
+            if(a<=3){
+                if(intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
+                    {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
+                ){
+                    return a
+                }
+            }else if(a==4){
+                if(
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==5){
+                if(
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==6){
+                if(
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==7){
+                if(
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                ){
+                    return a
+                }
             }
         }
     }
@@ -69,26 +133,146 @@ function collideBoxBox(static,mobile){
 function collideBoxBoxIndex1(static,mobile){
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
-                {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
-                {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})){
-                return a
+            if(a<=3){
+                if(intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
+                    {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
+                ){
+                    return a
+                }
+            }else if(a==4){
+                if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==5){
+                if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==6){
+                if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==7){
+                if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.position,{x:mobile.midpoint.position.x-static.velocity.x,y:mobile.midpoint.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
             }
         }
     }
-    return basicCollideBoxBox(static,mobile)
+    return -1
+    //return basicCollideBoxBox(static,mobile)
 }
 function collideBoxBoxIndex2(static,mobile){
     for(let a=0,la=static.boundary.length;a<la;a++){
         for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(intersect(mobile.midpoint.position,mobile.previous.position,
-                {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
-                {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})){
-                return a
+            if(a<=3){
+                if(intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)},
+                    {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)})
+                ){
+                    return a
+                }
+            }else if(a==4){
+                if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==5){
+                if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==6){
+                if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
+            }else if(a==7){
+                if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
+                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x-static.velocity.x,y:mobile.previous.position.y-static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return a
+                }
             }
         }
     }
-    return basicCollideBoxBox(static,mobile)
+    return -1
+    //return basicCollideBoxBox(static,mobile)
 }
 function basicCollideBoxBox(static,mobile){
     let u=atan2(mobile.position.x-static.position.x,mobile.position.y-static.position.y)
@@ -171,7 +355,7 @@ function tripletColor(color1,color2,color3,key){
 function displayMain(layer){
     let key=[]
     for(let a=0,la=game.players;a<la;a++){
-        key.push(entities.players[a].weaponType==6||entities.players[a].weaponType==12?2:1)
+        key.push(entities.players[a].parachute?4:entities.players[a].weaponType==6||entities.players[a].weaponType==12||entities.players[a].weaponType==92||entities.players[a].weaponType==93?2:1)
     }
     let marker=[-1,-1,-1,-1]
     for(let a=entities.players.length-1,la=0;a>=la;a--){
@@ -300,6 +484,24 @@ function generateLevel(level,layer){
                 case '=':
                     entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,14))
                 break
+                case '~':
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))
+                break
+                case '>':
+                    entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],17))
+                break
+                case '<':
+                    entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
+                break
+                case '[':
+                    entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],20))
+                break
+                case ']':
+                    entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],21))
+                break
+                case '/':
+                    entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,18))
+                break
             }
         }
     }
@@ -314,6 +516,11 @@ function generateLevel(level,layer){
                 if(level[a][b]=='qwerty'[c]&&game.pvp){
                     index--
                     entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.past?weapon:game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9,index))
+                    if(game.level==8&&a<5){
+                        entities.players[entities.players.length-1].position.x=layer.width/2
+                        entities.players[entities.players.length-1].position.y=1000
+                        entities.players[entities.players.length-1].parachute=true
+                    }
                 }
             }
         }
@@ -375,7 +582,7 @@ function newWave(level,layer){
     if(display.cycle>=types.mission[game.mission].wave.length){
         display.win=1
         display.wait=999999999999999999999
-        game.classicRespawn=true
+        game.classicRespawn=false
         game.pvp=true
     }else{
         if(game.level==8){
@@ -467,7 +674,7 @@ function checkEnd(level,layer){
                                 c--
                                 lc--
                             }
-                            deployer.timer=300
+                            deployer.timer=360
                         }
                     }
                 }
@@ -476,7 +683,7 @@ function checkEnd(level,layer){
                 deployer.timer--
             }
         }
-        if(game.stack.length>0){
+        if(game.stack.length>0&&!game.assault){
             if(game.sendTime>0){
                 game.sendTime--
             }else{
@@ -542,7 +749,7 @@ function initialGraphics(){
             graphics.main.push(createGraphics(5000,3000))
         break
         default:
-            graphics.main.push(createGraphics(2500,1600))
+            graphics.main.push(createGraphics(2560,1600))
         break
     }
     //graphics.main.push(createGraphics(1200,800))

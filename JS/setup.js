@@ -10,18 +10,23 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=8;b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:((a+0.5)/la*0.6+0.2)*width,y:80+b*80+(b>=2?80:0)+40},width:200,height:60})){
+                for(let b=0,lb=10;b<lb;b++){
+                    if(inPointBox({position:inputs.mouse},{position:{x:((a+0.5)/la*0.6+0.2)*width,y:80+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40},width:200,height:60})){
                         if(b==0){
                             menu.players=a+1
                         }else if(b==1){
                             menu.gaming=a+1
+                        }else if(b==2){
+                            menu.level=a+5
+                        }else if(b==3){
+                            game[['classicRespawn','invis','pvp','randomizer'][a]]=!game[['classicRespawn','invis','pvp','randomizer'][a]]
                         }else{
-                            initialGraphics()
                             game.players=menu.players
                             game.gaming=menu.gaming
-                            game.mission=a+b*4-8
+                            game.level=menu.level
+                            game.mission=a+b*4-16
                             entities.players=[]
+                            initialGraphics()
                             newLoop()
                             stage.scene='main'
                         }

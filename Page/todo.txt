@@ -1,8 +1,3 @@
-mission 21
-dead ringer impostor
-
-
-
 
 38 - pulse rocket , 3
 39 - flamethrower heal self , 8

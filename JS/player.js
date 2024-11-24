@@ -31,7 +31,7 @@ class player{
         this.jump={time:0,double:0,active:0}
         this.base={life:this.life,position:{x:this.position.x,y:this.position.y},control:0}
         this.collect={life:this.life,time:0}
-        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses*game.ammoMult)}
+        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*game.ammoMult)}
         this.DOT={damage:0,active:0}
         this.die={timer:0,killer:0}
         this.stats={kills:0,deaths:0}
@@ -60,10 +60,19 @@ class player{
         this.disable=false
         this.attacking=0
 
+        if(this.id>0){
+            this.newWeapon()
+        }
+
         if(this.id>0&&game.randomizer){
             this.life*=2
             this.base.life*=2
             this.collect.life*=2
+        }
+        if(this.id!=1&&game.assault){
+            this.life*=0.5
+            this.base.life*=0.5
+            this.collect.life*=0.5
         }
         /*if(this.id==0){
             this.critBuff=999999
@@ -260,7 +269,7 @@ class player{
             regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,80/3)
         }
         switch(this.weaponType){
-            case 6: case 17: case 45: case 75:
+            case 6: case 17: case 45: case 75: case 92: case 93:
                 this.layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
                 this.layer.strokeWeight(3)
                 this.layer.line(
@@ -463,11 +472,11 @@ class player{
         this.base.color={eye:{back:this.color.eye.back},beak:{main:this.color.beak.main,mouth:this.color.beak.mouth,nostril:this.color.beak.nostril},skin:{head:this.color.skin.head,body:this.color.skin.body,legs:this.color.skin.legs,arms:this.color.skin.arms}}
     }
     newWeapon(){
-        this.type=game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9
+        this.type=game.randomizer?floor(random(40,types.player.length)):floor(random(0,20))==0?floor(random(36,40)):floor(random(0,9))+floor(random(0,1.5))*floor(random(1,4))*9
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
         this.weaponData=types.weapon[this.weaponType]
-        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses*game.ammoMult)}
+        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*game.ammoMult)}
         this.weapon.cooldown=30
         if(game.randomizer){
             this.width=8*this.playerData.sizeBuff
@@ -491,7 +500,7 @@ class player{
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
         this.weaponData=types.weapon[this.weaponType]
-        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses*game.ammoMult)}
+        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*game.ammoMult)}
         this.weapon.cooldown=30
         if(game.randomizer){
             this.width=8*this.playerData.sizeBuff
@@ -511,6 +520,7 @@ class player{
         }
     }
     respawn(){
+        this.jump={time:0,double:0,active:0}
         this.manage[1]=0
         if(!game.past){
             this.type=game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9
@@ -519,7 +529,7 @@ class player{
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
         this.weaponData=types.weapon[this.weaponType]
-        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses*game.ammoMult)}
+        this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*game.ammoMult)}
         if(game.randomizer){
             this.width=8*this.playerData.sizeBuff
             this.height=24*this.playerData.sizeBuff
@@ -560,6 +570,11 @@ class player{
         this.stuckTime=0
         this.vulnerableTime=0
         this.confuseTime=0
+        if(game.level==8&&this.base.position.y<game.tileset[1]*5){
+            this.position.x=this.layer.width/2
+            this.position.y=1000
+            this.parachute=true
+        }
     }
     takeDamage(damage){
         let preLife=this.life
@@ -594,7 +609,7 @@ class player{
 			case 5:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],3,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
-            case 6:
+            case 6: case 92: case 93:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
 			break
             case 7:
@@ -839,6 +854,55 @@ class player{
 			case 87:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(sin(this.direction.main)<0?-90:90)+random(-22.5,22.5),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
 			break
+			case 88:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],66,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,600,crit,this.index))
+			break
+			case 89:
+				for(let a=0,la=10;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-10,10),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit,this.index))
+				}
+			break
+			case 90:
+				for(let a=0,la=10;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(sin(this.direction.main)<0?-90:90)+random(-10,10),this.id,this.weaponData.damage*this.playerData.damageBuff,180,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=random(0.75,1.5)
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=random(0.75,1.5)
+				}
+			break
+            case 91:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],67,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+			break
+			case 94:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,720,crit,this.index))
+			break
+            case 95:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],69,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit,this.index))
+            break
+            case 96:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],70,(sin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff,360,crit,this.index))
+            break
+            case 97:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+                if(this.weapon.ammo%3==0){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],71,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,15,crit,this.index))
+                }
+            break
+            case 98:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(sin(this.direction.main)<0?-90:90)+random(-15,15),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+                if(this.weapon.ammo%5==0){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff*2,300,crit,this.index))
+                }
+            break
+            case 99:
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<450){
+				        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,atan2(entities.players[a].position.x-spawn[0],spawn[1]-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                }
+			break
+            case 100:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],72,(sin(this.direction.main)<0?-90:90)+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+            break
 
 		}
         if(this.weapon.uses<=0&&this.id>0&&!game.randomizer){
@@ -849,7 +913,7 @@ class player{
         this.attacking=false
         this.time++
         switch(this.weaponType){
-            case 6: case 12: case 17: case 45: case 54: case 69: case 75:
+            case 6: case 12: case 17: case 45: case 54: case 69: case 75: case 92: case 93:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],sin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],sin(this.direction.main)>0,0,1,5)]
             break
         }
@@ -898,7 +962,7 @@ class player{
                     this.color=this.base.color
                 }
             }else if(this.active==0&&this.life<this.base.life){
-                this.active=this.playerData.name=='BigHyperMedic'?600:this.playerData.name=='ShortHyperMedic'?120:300
+                this.active=this.playerData.name=='BigHyperMedic'?480:this.playerData.name=='ShortHyperMedic'?120:240
                 this.color.skin.head=mergeColor(this.color.skin.head,[255,255,255],0.6)
                 this.color.skin.body=mergeColor(this.color.skin.body,[255,255,255],0.6)
                 this.color.skin.legs=mergeColor(this.color.skin.legs,[255,255,255],0.6)
@@ -931,7 +995,7 @@ class player{
                     this.target.position.y=this.layer.height*0.1
                     this.manage[1]=false
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&abs(this.position.x-entities.players[a].position.x)<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&abs(this.position.x-entities.players[a].position.x)<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
@@ -942,7 +1006,7 @@ class player{
                         this.manage[1]=true
                     }else{
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1000&&entities.players[a].life>0){
+                            if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1000&&entities.players[a].life>0){
                                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
                             }
                         }
@@ -988,7 +1052,7 @@ class player{
                             }
                         }else{
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&entities.players[a].life>0){
+                                if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&entities.players[a].life>0){
                                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                 }
                             }
@@ -1041,27 +1105,27 @@ class player{
                 }else if(game.level==7){
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&(
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&(
                             dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300
                         )&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&(
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&(
                             dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y-this.layer.width)<300
                         )&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y-this.layer.width])
                         }
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&(
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&(
                             dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y+this.layer.width)<300
                         )&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y+this.layer.width])
                         }
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&(
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&(
                             dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y-this.layer.height)<300
                         )&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y-this.layer.height])
                         }
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&(
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&(
                             dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y+this.layer.height)<300
                         )&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y+this.layer.height])
@@ -1100,7 +1164,7 @@ class player{
                         break
                     }
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0)&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
+                        if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
@@ -1211,18 +1275,18 @@ class player{
 					}
             if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                 this.direction.goal=-54
-                this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
+                this.velocity.x-=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.id!=1&&game.assault?0.45:1)
                 this.runAnim(1/30)
             }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                 this.direction.goal=54
-                this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)
+                this.velocity.x+=(this.weaponType==-1?1.6:this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.id!=1&&game.assault?0.45:1)
                 this.runAnim(1/30)
             }else if(this.animSet.loop<1&&this.animSet.loop>0){
                 this.runAnim(1/30)
             }else if(this.animSet.loop>=1){
                 this.animSet.loop=0
             }
-            if(inputs.keys[this.id-1][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0||this.jump.double)&&this.stuckTime<=0){
+            if(inputs.keys[this.id-1][2]&&this.life>0&&(this.jump.time>0||this.jump.active>0||this.jump.double==1&&inputs.tap[this.id-1][2])&&this.stuckTime<=0){
                 if(this.jump.time>0){
                     this.jump.time=0
                     this.jump.active=10
@@ -1244,12 +1308,9 @@ class player{
                         this.velocity.y=min(-14,this.velocity.y-1.5)
                     }
                 }
-                if(this.jump.active==1&&this.jump.double==1){
-                    inputs.keys[this.id-1][2]=false
-                }
             }
             this.attacking=inputs.keys[this.id-1][3]
-            if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol')&&this.weapon.uses>0&&inputs.tap[this.id-1][3]){
+            if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse')&&this.weapon.uses>0&&inputs.tap[this.id-1][3]){
                 this.weapon.cooldown=0
             }
             if(inputs.keys[this.id-1][3]&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&this.weaponType>=0){
@@ -1283,7 +1344,7 @@ class player{
                         this.velocity.y=min(-14,this.velocity.y-1.5)
                     }
                 }
-                this.attacking=inputs.keys[this.selector][3]
+                this.attacking=this.inputs[this.selector][3]
                 if(this.inputs[this.selector][3]&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&this.weaponType>=0){
                     this.attack()
                 }
@@ -1308,7 +1369,7 @@ class player{
                 dist(this.position.x,this.position.y,150,this.layer.height-320)<50&&game.level==5||
                 dist(this.position.x,this.position.y,this.layer.width/2-150,450)<80&&game.level==6||
                 dist(this.position.x,this.position.y,this.layer.width/2,this.layer.height/2+360)<80&&game.level==7||
-                dist(this.position.x,this.position.y,this.layer.width-150,this.layer.height-420)<80&&game.level==8||
+                dist(this.position.x,this.position.y,this.layer.width-150,this.layer.height-520)<80&&game.level==8||
                 this.id>=game.gaming+1){
                 this.newWeapon()
             }
@@ -1319,13 +1380,13 @@ class player{
         if(this.jump.active>0){
             this.jump.active--
         }
-        if(this.collect.time>0){
+        if(this.collect.time>0&&(this.playerData.name!='PlayerImmortal'||this.weaponData.uses<=0)){
             this.collect.time--
-            if(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66){
+            if(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||this.weaponType==83||this.weaponType==100){
                 this.collect.time-=3
             }
         }else if(this.life>0&&this.id>0&&this.size<2.25*0.5&&!game.pvp){
-            this.life=min(max(this.life,this.base.life),this.life+this.base.life/(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66?150:300))
+            this.life=min(max(this.life,this.base.life),this.life+this.base.life/(this.playerData.name=='PlayerImmortal'&&this.weaponData.uses>0?60:(this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||this.weaponType==83||this.weaponType==100)&&this.weaponData.uses>0?150:300))
         }
         if(!this.disable){
             if(this.position.x<0){
@@ -1384,13 +1445,14 @@ class player{
                 this.stats.deaths++
             }else{
                 this.die.timer++
-                if(this.die.timer>180&&!game.classicRespawn&&!game.past){
+                if(this.die.timer>(game.assault?60:180)&&game.classicRespawn&&!game.past){
                     this.respawn()
                 }
-                if(this.die.timer>=90&&game.classicRespawn&&!game.past&&!game.pvp){
+                if(this.die.timer>=90&&!game.classicRespawn&&!game.past&&!game.pvp){
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(inBoxBox(this,entities.players[a])&&this.id!=entities.players[a].id&&!entities.players[a].dead&&this.id>0&&entities.players[a].id>0){
                             this.life=this.id>=game.gaming+1?this.base.life:this.base.life*0.2
+                            this.invincible=60
                             this.dead=false
                         }
                     }
@@ -1490,7 +1552,7 @@ class player{
             this.position.y+=this.velocity.y
         }
         if(this.parachute){
-            this.velocity.x*=0.5
+            this.velocity.x*=game.pvp?(game.assault?0.8:0.99):0.5
             this.velocity.y*=2/3
         }
         if(this.id==0){

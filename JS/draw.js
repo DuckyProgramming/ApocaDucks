@@ -4,24 +4,24 @@ function mainloop(layer){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=8;b<lb;b++){
-                    if(b==0&&menu.players==a+1||b==1&&menu.gaming==a+1){
+                for(let b=0,lb=10;b<lb;b++){
+                    if(b==0&&menu.players==a+1||b==1&&menu.gaming==a+1||b==2&&menu.level==a+5||b==3&&game[['classicRespawn','invis','pvp','randomizer'][a]]){
                         fill(100,200,100)
                     }else{
                         fill(100)
                     }
-                    rect(((a+0.5)/la*0.6+0.2)*width,80+b*80+(b>=2?80:0)+40,200,60,10)
+                    rect(((a+0.5)/la*0.6+0.2)*width,80+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40,200,60,10)
                 }
             }
             fill(0)
             for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=8;b<lb;b++){
+                for(let b=0,lb=10;b<lb;b++){
                     textSize(20)
-                    text(b==0?`${a+1} Players`:b==1?`${a+1} Gaming`:`${types.mission[a+b*4-8].name}`,((a+0.5)/la*0.6+0.2)*width,80+b*80+(b>=2?80:0)+40)
-                    if(b>=2){
+                    text(b==0?`${a+1} Players`:b==1?`${a+1} Gaming`:b==2?['Basic','Vietnam','Pacman','Normandy'][a]:b==3?['Auto-Respawn','Invisible','PvP','Randomizer'][a]:`${types.mission[a+b*4-16].name}`,((a+0.5)/la*0.6+0.2)*width,80+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40)
+                    if(b>=4){
                         textSize(15)
-                        text(`${['Easy','Medium','Hard','Expert'][types.mission[a+b*4-8].difficulty]}`,((a+0.5)/la*0.6+0.2)*width-40,100+b*80+(b>=2?80:0)+40)
-                        text(`${types.mission[a+b*4-8].wave.length} Waves`,((a+0.5)/la*0.6+0.2)*width+40,100+b*80+(b>=2?80:0)+40)
+                        text(`${['Easy','Medium','Hard','Expert'][types.mission[a+b*4-16].difficulty]}`,((a+0.5)/la*0.6+0.2)*width-40,100+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40)
+                        text(`${types.mission[a+b*4-16].wave.length} Waves`,((a+0.5)/la*0.6+0.2)*width+40,100+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40)
                     }
                 }
             }
@@ -34,7 +34,7 @@ function mainloop(layer){
                     let visible=false
                     let key=[]
                     for(let c=0,lc=game.players;c<lc;c++){
-                        key.push(entities.players[c].weaponType==6||entities.players[c].weaponType==12?2:1)
+                        key.push(entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93?2:1)
                     }
                     let scaleKey=game.level==6?8:game.level==8?8:4
                     for(let c=0,lc=game.players;c<lc;c++){
@@ -101,7 +101,7 @@ function mainloop(layer){
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/2+360)
                 break
                 case 8:
-                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width-150,graphics.main[0].height-420)
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width-150,graphics.main[0].height-520)
                 break
             }
             if(display.anim>0){
