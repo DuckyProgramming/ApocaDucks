@@ -33,7 +33,7 @@ class wall{
                     }
                 }
             break
-            case 4: case 13: case 15:
+            case 4: case 13: case 15: case 23:
                 this.reload=0
             break
             case 6:
@@ -433,7 +433,7 @@ class wall{
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
             case 4:
-                this.layer.fill(220-this.reload/6,120,120)
+                this.layer.fill(220-this.reload/5,120,120)
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
             case 5:
@@ -506,11 +506,11 @@ class wall{
                 }
             break
             case 13:
-                this.layer.fill(220-this.reload/6,220-this.reload/6,120)
+                this.layer.fill(220-this.reload/5,220-this.reload/5,120)
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
             case 15:
-                this.layer.fill(220-this.reload/6,120,220-this.reload/6)
+                this.layer.fill(220-this.reload/5,170-this.reload/10,120)
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
             case 17:
@@ -560,6 +560,10 @@ class wall{
                     this.width/2+0.5,-this.height/2-0.5,
                     this.width/2+0.5,this.height/2+0.5
                 )
+            break
+            case 23:
+                this.layer.fill(220-this.reload/5,120,220-this.reload/5)
+                this.layer.rect(0,0,this.width+1,this.height+1)
             break
         }
         //this.layer.stroke(255,150,50)
@@ -628,7 +632,7 @@ class wall{
     update(){
         this.time++
         switch(this.type){
-            case 4:
+            case 4: case 23:
                 if(this.reload>0){
                     this.reload--
                 }
@@ -678,15 +682,15 @@ class wall{
             case 13:
                 if(this.reload>0){
                     this.reload--
-                    if(this.reload==599||this.reload==579||this.reload==559){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,150,180,false,-1))
+                    if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,200,180,false,-1))
                     }
                 }
             break
             case 15:
                 if(this.reload>0){
                     this.reload--
-                    if(this.reload==599||this.reload==559){
+                    if(this.reload==479||this.reload==439){
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,-1,150,180,false,-1))
@@ -698,7 +702,7 @@ class wall{
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,-1,150,180,false,-1))
-                    }else if(this.reload==579){
+                    }else if(this.reload==459){
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,-1,150,180,false,-1))
                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,-1,150,180,false,-1))
@@ -721,7 +725,7 @@ class wall{
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
-                        c.type==68||c.type==69||c.type==70
+                        c.type==68||c.type==69||c.type==70||c.type==73
                     )){
                         let d=-1
                         if(d==-1){
@@ -760,7 +764,7 @@ class wall{
                                 break
                                 case 4:
                                     c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                    incident=atan2(game.tileset[0],-game.tileset[1])
+                                    incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
                                         c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
@@ -771,7 +775,7 @@ class wall{
                                 break
                                 case 5:
                                     c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                    incident=atan2(-game.tileset[0],-game.tileset[1])
+                                    incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
                                         c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
@@ -784,7 +788,7 @@ class wall{
                                     c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                     c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                     c.velocity.y=0
-                                    incident=atan2(-game.tileset[0],game.tileset[1])
+                                    incident=atan2(-game.tileset[0*this.height/this.width],game.tileset[0])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
                                         c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
@@ -797,7 +801,7 @@ class wall{
                                     c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                     c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                     c.velocity.y=0
-                                    incident=atan2(game.tileset[0],game.tileset[1])
+                                    incident=atan2(game.tileset[0*this.height/this.width],game.tileset[0])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
                                         c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
@@ -807,7 +811,7 @@ class wall{
                                     }
                                 break
                             }
-                            if(c.type==30||c.type==60||c.type==65){
+                            if(c.type==30||c.type==60||c.type==65||c.type==73){
                                 c.bounces++
                                 if(c.bounces>=3){
                                     c.explode()
@@ -910,7 +914,7 @@ class wall{
                                             switch(this.type){
                                                 case 15:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                        this.reload=600
+                                                        this.reload=480
                                                     }
                                                 break
                                             }
@@ -934,9 +938,9 @@ class wall{
                                                 break
                                                 case 4:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                        this.reload=600
-                                                        for(let e=0,le=12;e<le;e++){
-                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
+                                                        this.reload=480
+                                                        for(let e=0,le=15;e<le;e++){
+                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,240,false,-1))
                                                             let mult=random(1.25,2.5)
                                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -945,7 +949,18 @@ class wall{
                                                 break
                                                 case 15:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                        this.reload=600
+                                                        this.reload=480
+                                                    }
+                                                break
+                                                case 23:
+                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                        this.reload=480
+                                                        for(let e=0,le=15;e<le;e++){
+                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-157.5,-112.5),-1,40,240,false,-1))
+                                                            let mult=random(1.25,2.5)
+                                                            entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                            entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                        }
                                                     }
                                                 break
                                             }
@@ -959,16 +974,16 @@ class wall{
                                         case 2:
                                             c.position.x=this.position.x+this.width/2+c.width/2+0.1
                                             c.previous.position.x=this.position.x+this.width/2+c.width/2+0.1
-                                            c.velocity.x=0
+                                            c.velocity.x=this.velocity.x
                                         break
                                         case 3:
                                             c.position.x=this.position.x-this.width/2-c.width/2-0.1
                                             c.previous.position.x=this.position.x-this.width/2-c.width/2-0.1
-                                            c.velocity.x=0
+                                            c.velocity.x=this.velocity.x
                                             switch(this.type){
                                                 case 13: case 15:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                        this.reload=600
+                                                        this.reload=480
                                                     }
                                                 break
                                             }
@@ -976,7 +991,7 @@ class wall{
                                         case 4:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                             c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.velocity.y=0
+                                            c.velocity.y=this.velocity.y
                                             c.jump.time+=5
                                             if(c.parachute){
                                                 c.parachute=false
@@ -989,7 +1004,7 @@ class wall{
                                         case 5:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                             c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.velocity.y=0
+                                            c.velocity.y=this.velocity.y
                                             c.jump.time+=5
                                             if(c.parachute){
                                                 c.parachute=false
@@ -1002,13 +1017,13 @@ class wall{
                                         case 6:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.velocity.y=0
+                                            c.velocity.y=this.velocity.y
                                             c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                         case 7:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.velocity.y=0
+                                            c.velocity.y=this.velocity.y
                                             c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                     }

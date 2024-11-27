@@ -55,6 +55,7 @@ class player{
         this.vulnerableTime=0
         this.confuseTime=0
         this.bounceTime=0
+        this.dizzyTime=0
         this.exploded=false
         this.parachute=false
         this.disable=false
@@ -267,6 +268,12 @@ class player{
         if(this.confuseTime>0){
             this.layer.fill(255,100,255,this.fade)
             regStar(this.layer,0,this.skin.body.level,9,45,45,9,9,80/3)
+        }
+        if(this.dizzyTime>0){
+            this.layer.fill(255,this.fade)
+            for(let a=0,la=3;a<la;a++){
+                this.layer.ellipse(18*sin(this.time*3+a*120),this.skin.head.level-18+4.5*cos(this.time*3+a*120),3)
+            }
         }
         switch(this.weaponType){
             case 6: case 17: case 45: case 75: case 92: case 93:
@@ -570,6 +577,7 @@ class player{
         this.stuckTime=0
         this.vulnerableTime=0
         this.confuseTime=0
+        this.dizzyTime=0
         if(game.level==8&&this.base.position.y<game.tileset[1]*5){
             this.position.x=this.layer.width/2
             this.position.y=1000
@@ -594,6 +602,7 @@ class player{
 		}
         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
         let spawn=[this.position.x+this.offset.position.x+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(sin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[sin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+        let projectilesLength=entities.projectiles.length
 		switch(this.weaponType){
 			case 0:
 				for(let a=0,la=10;a<la;a++){
@@ -905,6 +914,12 @@ class player{
             break
 
 		}
+        if(entities.projectiles.length>projectilesLength){
+            for(let a=projectilesLength,la=entities.projectiles.length;a<la;a++){
+                entities.projectiles[a].previous.position.x=this.position.x
+                entities.projectiles[a].previous.position.y=this.position.y
+            }
+        }
         if(this.weapon.uses<=0&&this.id>0&&!game.randomizer){
             this.weaponType=-1
         }
@@ -1353,10 +1368,10 @@ class player{
         }
         if(this.weaponType>=0){
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(this.confuseTime>0?1/3:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(this.confuseTime>0?1/3:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>=game.gaming+1)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -1510,7 +1525,7 @@ class player{
         if(this.vulnerableTime>0){
             this.vulnerableTime--
         }
-        if(this.confuseTime>0){
+        if(this.confuseTime>0||this.dizzyTime>0){
             this.confuseTime--
         }
         if(this.bounceTime>0){
@@ -1554,6 +1569,10 @@ class player{
         if(this.parachute){
             this.velocity.x*=game.pvp?(game.assault?0.8:0.99):0.5
             this.velocity.y*=2/3
+        }
+        if(this.dizzyTime>0){
+            this.dizzyTime--
+            this.velocity.x*=0.8
         }
         if(this.id==0){
             if(game.invis){
