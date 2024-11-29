@@ -1,6 +1,7 @@
 game={level:5,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,tileset:[0,0],
 classicRespawn:false,invis:false,pvp:false,randomizer:false,randomSpawn:false,past:false,assault:false}
 menu={players:1,gaming:1,level:5}
+dev={sight:false}
 types={
   mission:[
     {
@@ -9,9 +10,9 @@ types={
       difficulty:0,
       wave:[
         [
-          ['Tank',6],
-          //['Pistol',6],
-          //['Flamethrower',4],
+          //['Tank',6],
+          ['Pistol',6],
+          ['Flamethrower',4],
         ],[
           ['RocketLauncher',3],
           ['Baller',3],
@@ -1578,7 +1579,7 @@ types={
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'PlayerRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:3,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:3,
     },{
       name:'PlayerSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
@@ -1607,7 +1608,7 @@ types={
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:34,
     },{
       name:'PlayerClusterRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:88,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:88,
     },{
       name:'PlayerSpreadSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:12,
@@ -1636,7 +1637,7 @@ types={
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:42,
     },{
       name:'PlayerPushRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:20,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:20,
     },{
       name:'PlayerMachineSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:92,
@@ -1665,7 +1666,7 @@ types={
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:16,
     },{
       name:'PlayerRocketLauncherHealSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:26,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:26,
     },{
       name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
@@ -2456,7 +2457,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Flamethrower',
 			ammo:50,
@@ -2584,7 +2585,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Shotgun Burst',
 			ammo:4,
@@ -2692,7 +2693,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Spam Machine Gun',
 			ammo:50,
@@ -2755,7 +2756,7 @@ types={
 			stop:90,
 			reload:15,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Baller Heal Self',
 			ammo:3,
@@ -2764,7 +2765,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Machine Gun Crit Self',
 			ammo:30,
@@ -2845,7 +2846,7 @@ types={
 			stop:120,
 			reload:120,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Push Spam Rocket Launcher',
 			ammo:1,
@@ -2890,7 +2891,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Short Pistol',
 			ammo:10,
@@ -2980,7 +2981,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:36,
 		},{
 			name:'Hyper Medic Shield',
 			ammo:10,
@@ -3034,7 +3035,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Pushier Rocket Launcher',
 			ammo:1,
@@ -3115,7 +3116,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Baller Heal Self Stop',
 			ammo:3,
@@ -3124,7 +3125,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Barrage Pellet Baller',
 			ammo:5,
@@ -3133,7 +3134,7 @@ types={
 			stop:90,
 			reload:15,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Defend Apply Medic',
 			ammo:10,
@@ -3507,7 +3508,7 @@ levels=[
       "#                  #            #   #              #####          #",
       "###################################################################",
     ],[
-      "D                                                                            E",
+      "ABCDEF                                                                        ",
       "                                                                              ",
       "                                                                              ",
       "###                                                                       ####",
@@ -3519,7 +3520,7 @@ levels=[
       "#                                                                            #",
       "#                                                                            #",
       "# ########                                                             ##### #",
-      "#  ##########   1           2       3              4     5        6  ######  #",
+      "#  ##########                                                        ######  #",
       "#   #########       #   #       ##          #####     #              #####   #",
       "#   ########## ####### ################    #################    ########     #",
       "#@  #####      ####### #################   ##################  #########     #",
@@ -3548,19 +3549,19 @@ levels=[
       "#####   ##          ###@###### ######        ########## ##       ###       ###",
       "#####   ##      ###   ######## #####            ######  ##   #   ###       ###",
       "#####   ##@## #####    ######   ###              #####       #             ###",
-      "#####    #### #####@#                  ##        ##### @####### ######   # ###",
+      "#####    #### #####@#                  #`        ##### @####### ######   # ###",
       "#####    #### #######      e   ## ###@@##          ### ######## #######@##  ##",
       "#####@   #### ##               ## #######                   ###  #########  ##",
-      "######    ###            #####@##           @@####     F                ##   #",
+      "######    ###            #####@##           @@####                      ##   #",
       "######    ###@##### #@@# ########           ######                           #",
       "######    ######### ####                        #### #@### ####@##### ####@# #",
       "###### q   #####              ###@##                 ##### ########## ###### #",
-      "###### A   #####      ##@ ##########   ##@@@###            ########## ###### #",
-      "######     #####      ### ##########   ########@####       #####   w    #### #",
-      "######@##  ##### ##@#####          B     ###########@##  #@#####   C    #### #",
-      "#########        #######                        #######  ###            #### #",
-      "#########                 ##########@@@########              ########@#      #",
-      "#########@######@########@#############################@@###################@#",
+      "######     #####      ##@ ##########   ##@@@###            ########## ###### #",
+      "######     #####      ### ##########   ########@####       1234#   w    #### #",
+      "######@#%# ##### ##@#####                ###########@##  #@#####        #### #",
+      "##########       #######                        #######  ###            #### #",
+      "##########                ##########@@@########              ########@#      #",
+      "##########@#####@########@#############################@@###################@#",
     ],[
       "#########    ################    ####    ################    #########",
       "#                                ####                                #",

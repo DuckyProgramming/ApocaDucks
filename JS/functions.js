@@ -355,7 +355,7 @@ function tripletColor(color1,color2,color3,key){
 function displayMain(layer){
     let key=[]
     for(let a=0,la=game.players;a<la;a++){
-        key.push(entities.players[a].parachute?4:entities.players[a].weaponType==6||entities.players[a].weaponType==12||entities.players[a].weaponType==92||entities.players[a].weaponType==93?2:1)
+        key.push(dev.sight?4:entities.players[a].parachute?4:entities.players[a].weaponType==6||entities.players[a].weaponType==12||entities.players[a].weaponType==92||entities.players[a].weaponType==93?2:1)
     }
     let marker=[-1,-1,-1,-1]
     for(let a=entities.players.length-1,la=0;a>=la;a--){
@@ -506,6 +506,37 @@ function generateLevel(level,layer){
                     entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],23))
                 break
             }
+        }
+    }
+    if(game.level==6){
+        let spawns=[]
+        for(let a=0,la=level.length;a<la;a++){
+            for(let b=0,lb=level[a].length;b<lb;b++){
+                if(a<la-1&&b<lb-5&&floor(random(0,12))==0&&
+                    level[a][b]==' '&&level[a][b+1]==' '&&level[a][b+2]==' '&&level[a][b+3]==' '&&level[a][b+4]==' '&&
+                    level[a+1][b]=='#'&&level[a+1][b+1]=='#'&&level[a+1][b+2]=='#'&&level[a+1][b+3]=='#'&&level[a+1][b+4]=='#'
+                ){
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+(b+2)*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.5,11))
+                    b+=5
+                }else if(a<la-1&&b<lb-4&&floor(random(0,11))==0&&
+                    level[a][b]==' '&&level[a][b+1]==' '&&level[a][b+2]==' '&&level[a][b+3]==' '&&
+                    level[a+1][b]=='#'&&level[a+1][b+1]=='#'&&level[a+1][b+2]=='#'&&level[a+1][b+3]=='#'
+                ){
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+(b+1.5)*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.5,11))
+                    b+=4
+                }else if(a<la-1&&b<lb-3&&floor(random(0,2))==0&&
+                    level[a][b]==' '&&level[a][b+1]==' '&&level[a][b+2]==' '&&
+                    level[a+1][b]=='#'&&level[a+1][b+1]=='#'&&level[a+1][b+2]=='#'
+                ){
+                    spawns.push([game.tileset[0]/2+(b+1)*game.tileset[0],game.tileset[1]/2+a*game.tileset[1]])
+                    b+=3
+                }
+            }
+        }
+        for(let a=0,la=min(9,spawns.length);a<la;a++){
+            let index=floor(random(0,spawns.length))
+            entities.walls[0].push(new wall(graphics.main[0],spawns[index][0],spawns[index][1],game.tileset[0]*0.4,game.tileset[1]*0.4,[8,9,12][a%3]))
+            spawns.splice(index,1)
         }
     }
     let weapon=game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9
@@ -697,7 +728,11 @@ function checkEnd(level,layer){
                                 deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                             }else{
                                 entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
-                                if(game.level==8){
+                                if(game.level==6){
+                                    entities.players[entities.players.length-1].position.x=floor(random(0,layer.width))
+                                    entities.players[entities.players.length-1].position.y=0
+                                    entities.players[entities.players.length-1].parachute=true
+                                }else if(game.level==8){
                                     entities.players[entities.players.length-1].position.x=[entities.players[floor(random(0,game.players))].position.x+random(-30,30),layer.width*0.6][floor(random(0,2))]
                                     entities.players[entities.players.length-1].position.y=1000
                                     entities.players[entities.players.length-1].parachute=true

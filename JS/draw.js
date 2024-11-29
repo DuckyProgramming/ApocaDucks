@@ -34,7 +34,7 @@ function mainloop(layer){
                     let visible=false
                     let key=[]
                     for(let c=0,lc=game.players;c<lc;c++){
-                        key.push(entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93?2:1)
+                        key.push(dev.sight?4:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93?2:1)
                     }
                     let scaleKey=game.level==6?8:game.level==8?8:4
                     for(let c=0,lc=game.players;c<lc;c++){
@@ -52,16 +52,17 @@ function mainloop(layer){
                     }
                 }
             }
-            for(let a=0,la=run.info.length;a<la;a++){
-                for(let b=0,lb=run.info[a].length;b<lb;b++){
-                    run.info[a][b].displayInfo()
-                }
-            }
             for(let a=0,la=run.fore.length;a<la;a++){
                 for(let b=0,lb=run.fore[a].length;b<lb;b++){
                     if(run.fore[a][b].exploded){
                         run.fore[a][b].display()
                     }
+                }
+            }
+            graphics.main[0].image(graphics.pane[1],graphics.main[0].width/2,graphics.main[0].height/2)
+            for(let a=0,la=run.info.length;a<la;a++){
+                for(let b=0,lb=run.info[a].length;b<lb;b++){
+                    run.info[a][b].displayInfo()
                 }
             }
             graphics.main[0].noStroke()
@@ -95,7 +96,7 @@ function mainloop(layer){
                     graphics.main[0].text('Weapons\nHere',150,graphics.main[0].height-320)
                 break
                 case 6:
-                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2-150,450)
+                    graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2+1300,graphics.main[0].height-120)
                 break
                 case 7:
                     graphics.main[0].text('Weapons\nHere',graphics.main[0].width/2,graphics.main[0].height/2+360)
@@ -110,7 +111,6 @@ function mainloop(layer){
             if(display.win>0){
                 display.win-=0.01
             }
-            graphics.main[0].image(graphics.pane[1],graphics.main[0].width/2,graphics.main[0].height/2)
             displayMain(graphics.main)
             for(let a=0,la=run.fore.length;a<la;a++){
                 for(let b=0,lb=run.fore[a].length;b<lb;b++){

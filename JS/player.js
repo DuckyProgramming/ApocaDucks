@@ -139,6 +139,22 @@ class player{
         this.layer.push()
         this.layer.translate(this.position.x+this.offset.position.x,this.position.y-42.5*this.playerData.sizeBuff+this.offset.position.y)
         this.layer.noStroke()
+        this.layer.fill(180,this.fade)
+        this.layer.noStroke()
+        this.layer.textSize(10)
+        if(this.id>0&&game.past){
+            this.layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35)
+            this.layer.text(this.playerData.name,0,-18.5)
+        }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
+            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
+        }else if(game.randomizer&&this.id>0){
+            this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38)
+            this.layer.text(this.playerData.name,0,-18.5)
+        }else if(this.id>0){
+            this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name}`,0,-35)
+        }else{
+            this.layer.text(this.playerData.name,0,-17.5)
+        }
         this.layer.fill(150,this.fade*this.infoAnim.life)
         this.layer.rect(0,0,30,4,2)
         if(this.id>0||this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
@@ -215,22 +231,6 @@ class player{
             this.layer.stroke(160,this.fade)
             this.layer.strokeWeight(5)
             this.layer.arc(0,-80,80,20,-165,-15)
-        }
-        this.layer.fill(180,this.fade)
-        this.layer.noStroke()
-        this.layer.textSize(10)
-        if(this.id>0&&game.past){
-            this.layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35-42.5*this.playerData.sizeBuff)
-            this.layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
-        }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
-            this.layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
-        }else if(game.randomizer&&this.id>0){
-            this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38-42.5*this.playerData.sizeBuff)
-            this.layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
-        }else if(this.id>0){
-            this.layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
-        }else{
-            this.layer.text(this.playerData.name,0,-17.5-42.5*this.playerData.sizeBuff)
         }
         if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'){
             this.layer.stroke(255,150,150,this.fade)
@@ -1382,7 +1382,7 @@ class player{
                 dist(this.position.x,this.position.y,this.layer.width/2-100,this.layer.height/3-120)<50&&game.level==3||
                 dist(this.position.x,this.position.y,this.layer.width/2,this.layer.height/3-40)<50&&game.level==4||
                 dist(this.position.x,this.position.y,150,this.layer.height-320)<50&&game.level==5||
-                dist(this.position.x,this.position.y,this.layer.width/2-150,450)<80&&game.level==6||
+                dist(this.position.x,this.position.y,this.layer.width/2+1300,graphics.main[0].height-120)<80&&game.level==6||
                 dist(this.position.x,this.position.y,this.layer.width/2,this.layer.height/2+360)<80&&game.level==7||
                 dist(this.position.x,this.position.y,this.layer.width-150,this.layer.height-520)<80&&game.level==8||
                 this.id>=game.gaming+1){

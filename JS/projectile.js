@@ -33,6 +33,7 @@ class projectile{
 				this.height=4
 				this.speed=6
 				this.bounces=0
+				this.bounceTimer=0
 				this.time=time*(this.id==0?0.6:1)
 				this.midpoint={position:{x:this.position.x,y:this.position.y}}
 				this.past=[
@@ -1197,11 +1198,11 @@ class projectile{
 				this.layer.fill(240,0,240,this.fade)
 				this.layer.ellipse(0,0,4,10)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					this.layer.fill(240-this.crit*200,80+this.crit*160,200,this.fade)
 					this.layer.ellipse(0,0,180-this.fade*180)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					this.layer.fill(240-this.crit*200,80+this.crit*160,140,this.fade)
 					this.layer.ellipse(0,0,120-this.fade*120)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					this.layer.fill(240-this.crit*200,80+this.crit*160,80,this.fade)
 					this.layer.ellipse(0,0,60-this.fade*60)
 				}
 			break
@@ -1491,7 +1492,12 @@ class projectile{
 			case 52: case 60: case 61: case 62: case 65: case 68: case 69: case 70: case 73:
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
-				this.velocity.y*=0.98
+				if(this.type!=68){
+					this.velocity.y*=0.98
+				}
+				if(this.bounceTimer>0){
+					this.bounceTimer--
+				}
 			break
 		}
         for(let a=0,la=(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57)?6:4;a<la;a++){
