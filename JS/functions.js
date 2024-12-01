@@ -451,7 +451,11 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.pane[1],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1],3))
                 break
                 case '%':
-                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],4))
+                    if(game.level==7){
+                        entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*2,game.tileset[1],4))
+                    }else{
+                        entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],4))
+                    }
                 break
                 case '$':
                     entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.4)*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,5))
@@ -460,7 +464,7 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.pane[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
                 break
                 case '^':
-                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,8))
+                    entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+(b+(game.level==7?0.5:0))*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,8))
                 break
                 case '*':
                     entities.walls[0].push(new wall(graphics.main[0],game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,9))

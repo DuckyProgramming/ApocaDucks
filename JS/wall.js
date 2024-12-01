@@ -433,24 +433,40 @@ class wall{
                 this.layer.rect(0,0,this.width+1,this.height+1)
             break
             case 4:
-                this.layer.fill(220-this.reload/5,120,120)
-                if(game.level==6){
-                    this.layer.beginShape()
-                    for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
-                        this.layer.vertex(-this.width/2+a*game.tileset[0]/9,-this.height/2-(a%3>=1?2:0))
+                if(game.level==7){
+                    this.layer.noFill()
+                    this.layer.stroke(250-this.reload/5,120,120)
+                    this.layer.strokeWeight(4)
+                    for(let a=0,la=4;a<la;a++){
+                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                            this.layer.line(
+                                this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
+                                this.boundary[a][b][0].y+(a==0?-2:a==1?2:2)-this.position.y,
+                                this.boundary[a][b][1].x+(a==2?-2:a==3?2:-2)-this.position.x,
+                                this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
+                            )
+                        }
                     }
-                    for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
-                        this.layer.vertex(this.width/2+(a%3>=1?2:0),-this.height/2+a*game.tileset[1]/9)
-                    }
-                    for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
-                        this.layer.vertex(this.width/2-a*game.tileset[0]/9,this.height/2+(a%3>=1?2:0))
-                    }
-                    for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
-                        this.layer.vertex(-this.width/2-(a%3>=1?2:0),this.height/2-a*game.tileset[1]/9)
-                    }
-                    this.layer.endShape()
                 }else{
-                    this.layer.rect(0,0,this.width+1,this.height+1)
+                    this.layer.fill(220-this.reload/5,120,120)
+                    if(game.level==6){
+                        this.layer.beginShape()
+                        for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
+                            this.layer.vertex(-this.width/2+a*game.tileset[0]/9,-this.height/2-(a%3>=1?2:0))
+                        }
+                        for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
+                            this.layer.vertex(this.width/2+(a%3>=1?2:0),-this.height/2+a*game.tileset[1]/9)
+                        }
+                        for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
+                            this.layer.vertex(this.width/2-a*game.tileset[0]/9,this.height/2+(a%3>=1?2:0))
+                        }
+                        for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
+                            this.layer.vertex(-this.width/2-(a%3>=1?2:0),this.height/2-a*game.tileset[1]/9)
+                        }
+                        this.layer.endShape()
+                    }else{
+                        this.layer.rect(0,0,this.width+1,this.height+1)
+                    }
                 }
             break
             case 5:
@@ -1004,6 +1020,15 @@ class wall{
                                                                     let mult=random(2,5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                }
+                                                            break
+                                                            case 7:
+                                                                for(let f=0,lf=3;f<lf;f++){
+                                                                    for(let e=0,le=4-f%2;e<le;e++){
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-180-4+le*4-e*10,-1,100,240,false,-1))
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=(4-f)
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=(4-f)
+                                                                    }
                                                                 }
                                                             break
                                                             default:

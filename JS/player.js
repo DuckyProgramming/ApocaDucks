@@ -249,6 +249,7 @@ class player{
             }
         }
         this.layer.scale(this.size)
+        this.layer.noStroke()
         if(this.playerData.crit==1||this.critBuff>0){
             this.layer.fill(150,255,255,this.fade)
             regStar(this.layer,0,this.skin.body.level,12,45,45,9,9,0)
@@ -1458,7 +1459,7 @@ class player{
                     }
                 }
                 this.stats.deaths++
-            }else{
+            }else if(this.id>0){
                 this.die.timer++
                 if(this.die.timer>(game.assault?60:180)&&game.classicRespawn&&!game.past){
                     this.respawn()
@@ -1574,7 +1575,7 @@ class player{
             this.dizzyTime--
             this.velocity.x*=0.8
         }
-        if(this.id==0){
+        if(this.id==0&&!game.body){
             if(game.invis){
                 this.fade=smoothAnim(this.fade,this.visible>0&&!this.dead,0,1,10)
             }else{

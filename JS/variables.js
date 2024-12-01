@@ -1,5 +1,5 @@
 game={level:5,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,tileset:[0,0],
-classicRespawn:false,invis:false,pvp:false,randomizer:false,randomSpawn:false,past:false,assault:false}
+classicRespawn:false,invis:false,pvp:false,randomizer:false,randomSpawn:false,past:false,assault:false,body:false}
 menu={players:1,gaming:1,level:5}
 dev={sight:false}
 types={
@@ -3573,7 +3573,7 @@ levels=[
       "#                                                                    #",
       "#                                                                    #",
       "#                                                                    #",
-      "#                                                                    #",
+      "#                                 ^                                  #",
       "#    ########    ####    ####################    ####    ########    #",
       "#    ########    ####    ####################    ####    ########    #",
       "                 ####            ####            ####                 ",
@@ -3616,7 +3616,7 @@ levels=[
       "#                ####            ####            ####                #",
       "#                ####            ####            ####                #",
       "#                ####            ####            ####                #",
-      "#    ########################    ####    ########################    #",
+      "#    #########% #############    ####    #############% #########    #",
       "#    ########################    ####    ########################    #",
       "                                                                      ",
       "                                                                      ",
