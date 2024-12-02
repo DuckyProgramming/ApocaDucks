@@ -20,6 +20,7 @@ class projectile{
 				this.time=random(time,time*2)
 			break
 			case 2: case 16: case 21: case 22: case 27: case 32: case 45: case 48: case 55: case 66:
+			case 78:
 				this.speed=5
 				this.time=time
 			break
@@ -52,17 +53,17 @@ class projectile{
 				]
 				this.velocity={x:this.speed*sin(this.direction),y:this.speed*cos(this.direction)-(this.type==68?0:4)}
 			break
-			case 6: case 33:
+			case 6: case 33: case 79:
 				this.speed=random(3,5)
 				this.time=random(time,time*2)
 			break
-			case 7: case 23: case 40: case 46:
-				this.width*=15
-				this.height*=15
+			case 7: case 23: case 40: case 46: case 76: case 77:
+				this.width*=5
+				this.height*=5
 				this.speed=time/4
 				this.time=5
 			break
-			case 15:
+			case 15: case 74: case 75:
 				this.speed=random(4,6.5)
 				this.time=random(time,time*2)
 			break
@@ -210,6 +211,10 @@ class projectile{
 				this.speed=random(6,8.75)
 				this.time=random(time,time*2)
 			break
+			case 80:
+				this.speed=1.5
+				this.time=time
+			break
 		}
 		this.timer=0
         this.fade=1
@@ -220,1000 +225,1076 @@ class projectile{
 			this.damage*=3
 		}
     }
-    display(){
-        this.layer.push()
-        this.layer.translate(this.position.x,this.position.y)
-        this.layer.rotate(this.direction)
-		this.layer.noStroke()
+    display(layer){
+        layer.push()
+        layer.translate(this.position.x,this.position.y)
+        layer.rotate(this.direction)
+		layer.noStroke()
         switch(this.type){
 			case 1:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 2:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 3:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,480-this.fade*480)
-					this.layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,360-this.fade*360)
-					this.layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,240+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,120-this.fade*120)
+					layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
+					layer.ellipse(0,0,480-this.fade*480)
+					layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
+					layer.ellipse(0,0,360-this.fade*360)
+					layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,240+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
 				}
 			break
 			case 4:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,12,1,24)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,9,1,18)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,6,1,12)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3,4)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
 			break
 			case 5: case 68:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
 			break
 			case 6:
-				this.layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,60*(1-this.time/this.base.time))
-				this.layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,30*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
 			break
 			case 7:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,30-this.fade*30)
+					layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
 				}
 			break
 			case 8:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,12)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				this.layer.ellipse(0,0,4)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,12)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.ellipse(0,0,4)
 			break
 			case 9:
-				this.layer.fill(40,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(40,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(40,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(150,250,150,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(40,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(40,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(40,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(150,250,150,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 10:
-				this.layer.fill(120,240,120+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(120,200,120+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(120,160,120+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(200,250,200,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(120,240,120+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(120,200,120+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(120,160,120+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(200,250,200,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 11:
-				this.layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,200,120+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,160,120+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(200,250,200,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,200,120+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,160,120+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(200,250,200,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 12:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 13:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 14:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,12,1,24)
-				this.layer.rect(0,12,24,1)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,9,1,18)
-				this.layer.rect(0,12,18,1)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,6,1,12)
-				this.layer.rect(0,12,12,1)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3,4)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.rect(0,12,24,1)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.rect(0,12,18,1)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.rect(0,12,12,1)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
 			break
 			case 15:
-				this.layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,60*(1-this.time/this.base.time))
-				this.layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,30*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
 			break
 			case 16:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 17:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[12][0]-this.position.x,this.past[12][1]-this.position.y,8)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,10)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[12][0]-this.position.x,this.past[12][1]-this.position.y,8)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,10)
 			break
 			case 18:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
-				this.layer.rect(0,0,6,2)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
+				layer.rect(0,0,6,2)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 19:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,3,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
+				layer.ellipse(0,0,3,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 20:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,4)
-				this.layer.fill(100,250,100,this.fade)
-				this.layer.ellipse(0,0,2)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,4)
+				layer.fill(100,250,100,this.fade)
+				layer.ellipse(0,0,2)
 			break
 			case 21:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,40,40,this.fade)
-				this.layer.ellipse(0,0,4,12)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,40,40,this.fade)
+				layer.ellipse(0,0,4,12)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,120,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,80,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,40,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,120,this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,80,this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,40,this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 22:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,240,40,this.fade)
-				this.layer.ellipse(0,0,4,12)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,240,40,this.fade)
+				layer.ellipse(0,0,4,12)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,480-this.fade*480)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,320-this.fade*320)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,480-this.fade*480)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,320-this.fade*320)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
 				}
 			break
 			case 23:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,180,180+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,30-this.fade*30)
+					layer.fill(240-this.crit*200,180,180+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
 				}
 			break
 			case 24:
-				this.layer.fill(240-this.crit*200,60,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,40,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,20,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,60,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,40,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,20,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 25:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,36-this.fade*36,27-this.fade*27)
+					layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,36-this.fade*36,27-this.fade*27)
 				}
 			break
 			case 26:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,7)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,5)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,3)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,8,20)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,7)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,5)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,3)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,8,20)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 27:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,240,40,this.fade)
-				this.layer.ellipse(0,0,4,12)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,240,40,this.fade)
+				layer.ellipse(0,0,4,12)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 28:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				regPoly(this.layer,0,0,16,4,4,0)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				regPoly(layer,0,0,16,4,4,0)
 			break
 			case 29:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,12)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				this.layer.ellipse(0,0,4)
-				this.layer.rotate(this.time*2)
-				this.layer.quad(0,-1,-5,0,0,1,5,0)
-				this.layer.quad(0,-5,-1,0,0,5,1,0)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,12)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.ellipse(0,0,4)
+				layer.rotate(this.time*2)
+				layer.quad(0,-1,-5,0,0,1,5,0)
+				layer.quad(0,-5,-1,0,0,5,1,0)
 			break
 			case 30:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				this.layer.rect(0,0,4)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.rect(0,0,4)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,180-this.fade*180)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,120-this.fade*120)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,60-this.fade*60)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,180-this.fade*180)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,60-this.fade*60)
 				}
 			break
 			case 31:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.rect(0,0,8,8)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.rect(0,0,8,8)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 32:
-				this.layer.stroke(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.strokeWeight(1)
-				this.layer.noFill()
-				this.layer.ellipse(0,0,6,20)
+				layer.stroke(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.strokeWeight(1)
+				layer.noFill()
+				layer.ellipse(0,0,6,20)
 				if(!this.active&&this.fade<1){
-					this.layer.noStroke()
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.noStroke()
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 33:
-				this.layer.fill(240-this.crit*200,120+this.crit*120,120+this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,60*(1-this.time/this.base.time))
-				this.layer.fill(240-this.crit*200,160+this.crit*80,160+this.crit*120,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,30*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,120+this.crit*120,120+this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,160+this.crit*80,160+this.crit*120,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
 			break
 			case 34:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,5)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,5)
 			break
 			case 35:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,250,200,this.fade)
-				this.layer.ellipse(0,0,8)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,250,200,this.fade)
+				layer.ellipse(0,0,8)
 			break
 			case 36:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(200,250,250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(200,250,250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 37:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,30-this.fade*30)
+					layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
 				}
 			break
 			case 38:
-				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(200,250,250,this.fade)
-				this.layer.quad(-4,0,0,-1,1,0,0,4)
-				this.layer.fill(200,250,200,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(200,250,250,this.fade)
+				layer.quad(-4,0,0,-1,1,0,0,4)
+				layer.fill(200,250,200,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 39:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,12,1,24)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,9,1,18)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,6,1,12)
-				this.layer.fill(250,200,200,this.fade)
-				this.layer.ellipse(0,0,3,4)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(250,200,200,this.fade)
+				layer.ellipse(0,0,3,4)
 			break
 			case 40:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,40-this.fade*40)
-					this.layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,30-this.fade*30)
+					layer.fill(100-this.crit*200,250,100+this.crit*200,this.fade)
+					layer.ellipse(0,0,40-this.fade*40)
+					layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
 				}
 			break
 			case 41:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.triangle(-3,0,3,0,0,-15)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.triangle(-3,0,3,0,0,-15)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 42:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,9)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,9)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 43:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,250,0,this.fade)
-				this.layer.ellipse(0,0,6,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,250,0,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 44:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,125,0,this.fade)
-				this.layer.ellipse(0,0,6,3)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,125,0,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 45:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
-				this.layer.ellipse(0,0,4,20)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
+				layer.ellipse(0,0,4,20)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 46:
 				if(!this.active&&this.fade<1){
-					this.layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,30-this.fade*30)
-					this.layer.rect(0,0,10-this.fade*10,40-this.fade*40)
-					this.layer.rect(0,0,40-this.fade*40,10-this.fade*10)
+					layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
+					layer.rect(0,0,10-this.fade*10,40-this.fade*40)
+					layer.rect(0,0,40-this.fade*40,10-this.fade*10)
 				}
 			break
 			case 47:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(250,125,0,this.fade)
-				this.layer.rect(0,0,8,8)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(250,125,0,this.fade)
+				layer.rect(0,0,8,8)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 48:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(40,this.fade)
-				this.layer.rect(0,0,4,4)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(40,this.fade)
+				layer.rect(0,0,4,4)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(100,this.fade*3)
-					this.layer.ellipse(0,0,1200-this.fade*1200)
+					layer.fill(100,this.fade*3)
+					layer.ellipse(0,0,1200-this.fade*1200)
 				}
 			break
 			case 49:
-				this.layer.fill(240-this.crit*200,60,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,40,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,20,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,this.fade)
-				this.layer.rect(0,0,3)
+				layer.fill(240-this.crit*200,60,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,40,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,20,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.rect(0,0,3)
 			break
 			case 50:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,12,1,24)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,9,1,18)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,6,1,12)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3,4)
-				this.layer.fill(100,250,100,this.fade)
-				this.layer.ellipse(0,0,2,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
+				layer.fill(100,250,100,this.fade)
+				layer.ellipse(0,0,2,3)
 			break
 			case 51:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.rotate(this.time*4)
-				this.layer.fill(150,0,0,this.fade)
-				this.layer.quad(-2,0,0,-10,2,0,0,10)
-				this.layer.quad(-10,0,0,-2,10,0,0,2)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.rotate(this.time*4)
+				layer.fill(150,0,0,this.fade)
+				layer.quad(-2,0,0,-10,2,0,0,10)
+				layer.quad(-10,0,0,-2,10,0,0,2)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
 			break
 			case 52:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1.5)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1.5)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
 			break
 			case 53:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,7)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,5)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,3)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,40,40,this.fade)
-				this.layer.ellipse(0,0,4,12)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,7)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,5)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,3)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,40,40,this.fade)
+				layer.ellipse(0,0,4,12)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,120,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,80,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,40,this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,120,this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,80,this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,40,this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 54:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,7)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,5)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,3)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
-				this.layer.ellipse(0,0,4,20)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,7)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,5)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,3)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
+				layer.ellipse(0,0,4,20)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 55:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240-this.crit*200,240+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,3,10)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(240-this.crit*200,240+this.crit*200,40+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240-this.crit*200,240+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,3,10)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 56:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
-				this.layer.rect(0,0,10,12)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.rect(0,0,8,8)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
+				layer.rect(0,0,10,12)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.rect(0,0,8,8)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 57:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,12,1,24)
-				this.layer.rect(0,16,12,1)
-				this.layer.rect(0,8,12,1)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,9,1,18)
-				this.layer.rect(0,16,9,1)
-				this.layer.rect(0,8,9,1)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,6,1,12)
-				this.layer.rect(0,16,6,1)
-				this.layer.rect(0,8,6,1)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3,4)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.rect(0,16,12,1)
+				layer.rect(0,8,12,1)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.rect(0,16,9,1)
+				layer.rect(0,8,9,1)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.rect(0,16,6,1)
+				layer.rect(0,8,6,1)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
 			break
 			case 58:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,7)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,5)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,3)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,240,40,this.fade)
-				this.layer.ellipse(0,0,4,12)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,7)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,5)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,3)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,240,40,this.fade)
+				layer.ellipse(0,0,4,12)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,480-this.fade*480)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,320-this.fade*320)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,480-this.fade*480)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,320-this.fade*320)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
 				}
 			break
 			case 59:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,250,0,this.fade)
-				this.layer.ellipse(0,0,6,3)
-				this.layer.fill(250,125,0,this.fade)
-				this.layer.ellipse(0,0,3,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,250,0,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.fill(250,125,0,this.fade)
+				layer.ellipse(0,0,3,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 60:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,10)
-				this.layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
-				this.layer.ellipse(0,0,4,10)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,10)
+				layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
+				layer.ellipse(0,0,4,10)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,180-this.fade*180)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,120-this.fade*120)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,60-this.fade*60)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,180-this.fade*180)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,60-this.fade*60)
 				}
 			break
 			case 61:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.rotate(this.time*4)
-				this.layer.fill(150,0,150,this.fade)
-				this.layer.quad(-2,0,0,-10,2,0,0,10)
-				this.layer.quad(-10,0,0,-2,10,0,0,2)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.rotate(this.time*4)
+				layer.fill(150,0,150,this.fade)
+				layer.quad(-2,0,0,-10,2,0,0,10)
+				layer.quad(-10,0,0,-2,10,0,0,2)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
 			break
 			case 62:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,0.75)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,1.5)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,2.25)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,5)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,0.75)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,1.5)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,2.25)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,5)
 			break
 			case 63:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,240,80+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(200,250,250,this.fade)
-				this.layer.quad(-4,0,0,-1,1,0,0,4)
-				this.layer.fill(200,250,200,this.fade)
-				this.layer.ellipse(0,0,3)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,240,80+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(200,250,250,this.fade)
+				layer.quad(-4,0,0,-1,1,0,0,4)
+				layer.fill(200,250,200,this.fade)
+				layer.ellipse(0,0,3)
 			break
 			case 64:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(250,0,250,this.fade)
-				this.layer.rect(0,0,8,8)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(250,0,250,this.fade)
+				layer.rect(0,0,8,8)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 65:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,8)
-				this.layer.fill(250-this.crit*200,250-this.crit*50,this.crit*200,this.fade)
-				this.layer.rect(0,0,4)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
+				layer.fill(250-this.crit*200,250-this.crit*50,this.crit*200,this.fade)
+				layer.rect(0,0,4)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,180-this.fade*180)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,120-this.fade*120)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,60-this.fade*60)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,180-this.fade*180)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,60-this.fade*60)
 				}
 			break
 			case 66:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6,20)
-				this.layer.fill(240,this.fade)
-				this.layer.quad(-2.5,0,0,-1,2.5,0,0,1)
-				this.layer.quad(-1,0,0,-2.5,1,0,0,2.5)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(240,this.fade)
+				layer.quad(-2.5,0,0,-1,2.5,0,0,1)
+				layer.quad(-1,0,0,-2.5,1,0,0,2.5)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,240-this.fade*240)
-					this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,160-this.fade*160)
-					this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					this.layer.ellipse(0,0,80-this.fade*80)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 			case 67:
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,3)
-				this.layer.fill(250,0,250,this.fade)
-				this.layer.rect(0,0,2)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(250,0,250,this.fade)
+				layer.rect(0,0,2)
 			break
 			case 69:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,12)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				regStar(this.layer,0,0,8,1,1,6,6,this.time*2)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,12)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				regStar(layer,0,0,8,1,1,6,6,this.time*2)
 			break
 			case 70:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,12)
-				this.layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
-				this.layer.ellipse(0,0,6)
-				this.layer.rect(0,0,1,10)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,12)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.ellipse(0,0,6)
+				layer.rect(0,0,1,10)
 			break
 			case 71:
-				this.layer.fill(240-this.crit*200,140,20+this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,60*(1-this.time/this.base.time))
-				this.layer.fill(240-this.crit*200,200,20+this.crit*200,this.fade*this.time/this.base.time)
-				this.layer.ellipse(0,0,30*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,140,20+this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.fill(240-this.crit*200,200,20+this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
 			break
 			case 72:
-				this.layer.fill(40,240,40+this.crit*200,this.fade)
-				this.layer.rect(0,4,1,8)
-				this.layer.fill(40,160,40+this.crit*200,this.fade)
-				this.layer.rect(0,3,1,6)
-				this.layer.fill(40,80,40+this.crit*200,this.fade)
-				this.layer.rect(0,2,1,4)
-				this.layer.fill(150,250,150,this.fade)
-				this.layer.ellipse(0,0,3)
-				this.layer.fill(250-this.crit*200,250,100+this.crit*150,this.fade)
-				this.layer.ellipse(0,0,2)
+				layer.fill(40,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(40,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(40,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(150,250,150,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(250-this.crit*200,250,100+this.crit*150,this.fade)
+				layer.ellipse(0,0,2)
 			break
 			case 73:
-				this.layer.rotate(-this.direction)
-				this.layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				this.layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				this.layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				this.layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
-				this.layer.fill(250,this.fade)
-				this.layer.ellipse(0,0,10)
-				this.layer.fill(240,0,240,this.fade)
-				this.layer.ellipse(0,0,4,10)
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,10)
+				layer.fill(240,0,240,this.fade)
+				layer.ellipse(0,0,4,10)
 				if(!this.active&&this.fade<1){
-					this.layer.fill(240-this.crit*200,80+this.crit*160,200,this.fade)
-					this.layer.ellipse(0,0,180-this.fade*180)
-					this.layer.fill(240-this.crit*200,80+this.crit*160,140,this.fade)
-					this.layer.ellipse(0,0,120-this.fade*120)
-					this.layer.fill(240-this.crit*200,80+this.crit*160,80,this.fade)
-					this.layer.ellipse(0,0,60-this.fade*60)
+					layer.fill(240-this.crit*200,80+this.crit*160,200,this.fade)
+					layer.ellipse(0,0,180-this.fade*180)
+					layer.fill(240-this.crit*200,80+this.crit*160,140,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
+					layer.fill(240-this.crit*200,80+this.crit*160,80,this.fade)
+					layer.ellipse(0,0,60-this.fade*60)
+				}
+			break
+			case 74:
+				layer.fill(200-this.crit*200,200,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.fill(160-this.crit*160,160,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
+			break
+			case 75:
+				layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				regStar(layer,0,0,5,80*(1-this.time/this.base.time),80*(1-this.time/this.base.time),60*(1-this.time/this.base.time),60*(1-this.time/this.base.time),this.position.x+this.position.y)
+				layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				regStar(layer,0,0,5,40*(1-this.time/this.base.time),40*(1-this.time/this.base.time),30*(1-this.time/this.base.time),30*(1-this.time/this.base.time),this.position.x+this.position.y)
+			break
+			case 76:
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*240,240,160+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
+				}
+			break
+			case 77:
+				if(!this.active&&this.fade<1){
+					layer.fill(250-this.crit*200,250,100+this.crit*200,this.fade)
+					layer.ellipse(0,0,40-this.fade*40,30-this.fade*30)
+					layer.fill(200-this.crit*200,200,200+this.crit*200,this.fade)
+					layer.ellipse(0,0,30-this.fade*30)
+				}
+			break
+			case 78:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(250,125,0,this.fade)
+				layer.ellipse(0,0,6)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
+				}
+			break
+			case 79:
+				layer.strokeWeight(1)
+				layer.noFill()
+				layer.stroke(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,60*(1-this.time/this.base.time))
+				layer.stroke(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,30*(1-this.time/this.base.time))
+			break
+			case 80:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.ellipse(0,0,6,20)
+				layer.fill(40,0,80,this.fade)
+				layer.rect(0,0,6,2)
+				layer.rect(0,-3,6,2)
+				layer.rect(0,3,6,2)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,160-this.fade*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,80-this.fade*80)
 				}
 			break
 
         }
-        this.layer.pop()
+        layer.pop()
     }
 	explode(){
 		this.exploded=true
 		switch(this.type){
-			case 2: case 26: case 31: case 32: case 41: case 48:
+			case 2: case 26: case 31: case 32: case 41: case 48: case 80:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp)){
@@ -1329,7 +1410,7 @@ class projectile{
 					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.damage/6,10,this.crit,this.index))
 				}
 			break
-			case 47:
+			case 47: case 78:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp)){
@@ -1438,6 +1519,12 @@ class projectile{
 					}
 				}
 			break
+			case 75:
+				let turn75=floor(random(0,72))
+				for(let b=0,lb=5;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+b*72+turn75,this.id,this.damage/2,180,this.crit,this.index))
+				}
+			break
 		}
 	}
     update(){
@@ -1453,7 +1540,8 @@ class projectile{
 			this.type==50||this.type==51||this.type==52||this.type==57||this.type==59||
 			this.type==60||this.type==61||this.type==62||this.type==63||this.type==67||
 			this.type==68||this.type==69||this.type==70||this.type==71||this.type==72||
-			this.type==73
+			this.type==73||this.type==74||this.type==75||this.type==76||this.type==77||
+			this.type==79
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}else if(
@@ -1461,7 +1549,7 @@ class projectile{
 			this.type==26||this.type==27||this.type==30||this.type==31||this.type==32||
 			this.type==41||this.type==45||this.type==47||this.type==53||this.type==54||
 			this.type==55||this.type==56||this.type==58||this.type==64||this.type==65||
-			this.type==66
+			this.type==66||this.type==78||this.type==80
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,10)
 		}else if(this.type==48){
@@ -1470,19 +1558,19 @@ class projectile{
         if(this.fade<=0){
 			this.remove=true
         }
-		if((game.level==3||game.level==7)&&this.position.y>this.layer.height+10){
+		if((game.level==3||game.level==7)&&this.position.y>game.edge[1]+10){
 			this.position.y=-10
 			this.previous.position.y=-10
-		}else if((game.level==3||game.level==7)&&this.position.x>this.layer.width+10){
+		}else if((game.level==3||game.level==7)&&this.position.x>game.edge[0]+10){
 			this.position.x=-10
 			this.previous.position.x=-10
 		}else if((game.level==3||game.level==7)&&this.position.y<-10){
-			this.position.y=this.layer.height+10
-			this.previous.position.y=this.layer.height+10
+			this.position.y=game.edge[1]+10
+			this.previous.position.y=game.edge[1]+10
 		}else if((game.level==3||game.level==7)&&this.position.x<-10){
-			this.position.x=this.layer.width+10
-			this.previous.position.x=this.layer.width+10
-		}else if(this.position.x<-50||this.position.x>this.layer.width*3+50||this.position.y>this.layer.height+50){
+			this.position.x=game.edge[0]+10
+			this.previous.position.x=game.edge[0]+10
+		}else if(this.position.x<-50||this.position.x>game.edge[0]*3+50||this.position.y>game.edge[1]+50){
 			this.active=false
 		}
 		this.previous.position.x=this.position.x
@@ -1507,7 +1595,7 @@ class projectile{
 				case 25: case 26: case 27: case 31: case 32: case 33: case 36: case 37: case 38: case 39:
 				case 40: case 41: case 43: case 44: case 45: case 46: case 47: case 48: case 49: case 50:
 				case 53: case 54: case 55: case 56: case 57: case 58: case 59: case 63: case 64: case 66:
-				case 67: case 71: case 72:
+				case 67: case 71: case 72: case 74: case 75: case 76: case 77: case 78: case 79:
 				    this.position.x+=this.speed*sin(this.direction)
 				    this.position.y-=this.speed*cos(this.direction)
 				break
@@ -1654,72 +1742,101 @@ class projectile{
 						}
 					}
 				break
+				case 80:
+					this.position.x+=this.speed*sin(this.direction)
+				    this.position.y-=this.speed*cos(this.direction)
+					if(this.timer%5==0&&this.active&&a==0){
+						let minimum=300
+						for(let a=0,la=entities.players.length;a<la;a++){
+							if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)){
+								minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+							}
+						}
+						if(minimum<300){
+							for(let a=0,la=entities.players.length;a<la;a++){
+								if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+									this.direction=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+									a=la
+								}
+							}
+						}
+					}
+				break
 			}
 			if(this.active){
-				for(let a=0,la=entities.players.length;a<la;a++){
-				    if(inBoxBox(this,entities.players[a])&&(((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)||this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72)&&
-						!(this.id==-1&&this.timer<10&&entities.players[a].id>0)&&
-						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72)&&this.index==entities.players[a].index)&&
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72)&&
+						!(this.id==-1&&this.timer<10&&entities.players[b].id>0)&&
+						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72)&&this.index==entities.players[b].index)&&
 						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57)&&this.timer<5&&this.id==0)&&
-						entities.players[a].life>0&&entities.players[a].invincible<=0&&this.active
+						entities.players[b].life>0&&entities.players[b].invincible<=0&&this.active
 					){
 				        this.active=false
-						if(this.id==-1&&entities.players[a].id>0&&this.type==6){
+						if(this.id==-1&&entities.players[b].id>0&&this.type==6){
 							this.damage*=0.25
 						}
-						if(this.type==9&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-						}else if(this.type==10&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=min(entities.players[a].life+this.damage*3*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-						}else if(this.type==11&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=entities.players[a].base.life
-						}else if(this.type==38&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-							entities.players[a].critBuff=max(480,entities.players[a].critBuff)
-						}else if(this.type==63&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-							entities.players[a].defendBuff=max(240,entities.players[a].defendBuff)
-						}else if(this.type==6||this.type==15||this.type==33){
-							entities.players[a].takeDamage(this.damage*(entities.players[a].life>=1000?3:entities.players[a].life>=500?2:1))
-						}else if(this.type==72&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp){
-							entities.players[a].life=min(entities.players[a].life+this.damage*(entities.players[a].base.life/100),entities.players[a].base.life*2)
-							entities.players[a].jump.double=1
+						if(this.type==9&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),entities.players[b].base.life*2)
+						}else if(this.type==10&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=min(entities.players[b].life+this.damage*3*(entities.players[b].base.life/100),entities.players[b].base.life*2)
+						}else if(this.type==11&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=entities.players[b].base.life
+						}else if(this.type==38&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),entities.players[b].base.life*2)
+							entities.players[b].critBuff=max(480,entities.players[b].critBuff)
+						}else if(this.type==63&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),entities.players[b].base.life*2)
+							entities.players[b].defendBuff=max(240,entities.players[b].defendBuff)
+						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75){
+							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000?3:entities.players[b].life>=500?2:1))
+							if(this.type==75){
+								this.explode()
+							}
+						}else if(this.type==72&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),entities.players[b].base.life*2)
+							entities.players[b].jump.double=1
 						}else if(
 							this.type==2||this.type==16||this.type==21||this.type==22||this.type==26||
 							this.type==27||this.type==30||this.type==31||this.type==32||this.type==41||
 							this.type==45||this.type==47||this.type==48||this.type==53||this.type==54||
 							this.type==55||this.type==56||this.type==58||this.type==60||this.type==64||
-							this.type==65||this.type==66||this.type==73
+							this.type==65||this.type==66||this.type==73||this.type==78||this.type==80
 						){
 							if(this.type==41){
-								entities.players[a].takeDamage(this.damage)
+								entities.players[b].takeDamage(this.damage)
 							}
 							this.explode()
 						}else{
-				        	entities.players[a].takeDamage(this.damage)
+				        	entities.players[b].takeDamage(this.damage)
 						}
 						if(this.type==12){
-							entities.players[a].velocity.x+=this.speed*sin(this.direction)*3
-							entities.players[a].velocity.y-=this.speed*cos(this.direction)*3
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*3
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*3
 						}else if(this.type==13){
-							entities.players[a].weapon.cooldown=min(entities.players[a].weaponData.cooldown+15,entities.players[a].weapon.cooldown+15)
+							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
 						}else if(this.type==40){
-							entities.players[a].weapon.cooldown=min(entities.players[a].weaponData.cooldown+60,entities.players[a].weapon.cooldown+60)
+							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+60,entities.players[b].weapon.cooldown+60)
 						}else if(this.type==14||this.type==46){
-							entities.players[a].weaponType=-1
+							entities.players[b].weaponType=-1
 						}else if(this.type==16){
-							entities.players[a].velocity.x+=this.speed*sin(this.direction)*3.6
-							entities.players[a].velocity.y-=this.speed*cos(this.direction)*3.6
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*3.6
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*3.6
 						}else if(this.type==18){
-							entities.players[a].velocity.y-=this.speed*abs(sin(this.direction)*3)
+							entities.players[b].velocity.y-=this.speed*abs(sin(this.direction)*3)
 						}else if(this.type==19){
-							entities.players[a].velocity.x+=this.speed*sin(this.direction)*-3
-							entities.players[a].velocity.y-=this.speed*cos(this.direction)*-3
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*-3
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*-3
 						}else if(this.type==55){
-							entities.players[a].velocity.x+=this.speed*sin(this.direction)*6
-							entities.players[a].velocity.y-=this.speed*cos(this.direction)*6
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*6
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*6
 						}else if(this.type==56){
-							entities.players[a].velocity.y-=this.speed*abs(sin(this.direction)*2)
+							entities.players[b].velocity.y-=this.speed*abs(sin(this.direction)*2)
+						}else if(this.type==74){
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*1.8
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*1.8
+						}else if(this.type==77){
+							entities.players[b].velocity.x+=this.speed*sin(this.direction)*24
+							entities.players[b].velocity.y-=this.speed*cos(this.direction)*24
 						}else if(
 							this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||
 							this.type==51
@@ -1736,9 +1853,9 @@ class projectile{
 								}
 							}
 						}else if(this.type==43){
-							entities.players[a].vulnerableTime=max(entities.players[a].vulnerableTime,300)
+							entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
 						}else if(this.type==44){
-							entities.players[a].stunTime=max(entities.players[a].stunTime,30)
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
 						}else if(this.type==49){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
@@ -1746,35 +1863,37 @@ class projectile{
 								}
 							}
 						}else if(this.type==57){
-							entities.players[a].newWeapon()
+							entities.players[b].newWeapon()
 						}else if(this.type==59){
-							entities.players[a].vulnerableTime=max(entities.players[a].vulnerableTime,300)
-							entities.players[a].stunTime=max(entities.players[a].stunTime,30)
+							entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
 						}else if(this.type==61){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
 									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
 								}
 							}
-							entities.players[a].stunTime=max(entities.players[a].stunTime,60)
+							entities.players[b].stunTime=max(entities.players[b].stunTime,60)
 						}else if(this.type==67){
-							entities.players[a].confuseTime=max(entities.players[a].confuseTime,360)
+							entities.players[b].confuseTime=max(entities.players[b].confuseTime,360)
+						}else if(this.type==76){
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
 						}
 						if(game.invis){
-							entities.players[a].visible=15
+							entities.players[b].visible=15
 						}
 						if(this.type==20){
-							entities.players[a].DOT.damage+=this.damage/180
-							entities.players[a].DOT.active=min(120,entities.players[a].DOT.active+20)
+							entities.players[b].DOT.damage+=this.damage/180
+							entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+20)
 						}else if(this.type==37||this.type==51){
-							entities.players[a].DOT.damage+=this.damage/180
-							entities.players[a].DOT.active=min(120,entities.players[a].DOT.active+60)
+							entities.players[b].DOT.damage+=this.damage/180
+							entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+60)
 						}else if(this.type==50){
-							entities.players[a].DOT.damage+=this.damage/360
-							entities.players[a].DOT.active=min(240,entities.players[a].DOT.active+90)
+							entities.players[b].DOT.damage+=this.damage/360
+							entities.players[b].DOT.active=min(240,entities.players[b].DOT.active+90)
 						}
-				        entities.players[a].die.killer=this.id
-				        entities.players[a].collect.time=450
+				        entities.players[b].die.killer=this.id
+				        entities.players[b].collect.time=450
 				    }
 				}
 			}

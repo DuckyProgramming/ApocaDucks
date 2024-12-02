@@ -9,22 +9,26 @@ function mouseClicked(){
     updateMouse(graphics.main[0])
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=10;b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:((a+0.5)/la*0.6+0.2)*width,y:80+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40},width:200,height:60})){
-                        if(b==0){
-                            menu.players=a+1
-                        }else if(b==1){
-                            menu.gaming=a+1
-                        }else if(b==2){
-                            menu.level=a+5
-                        }else if(b==3){
-                            game[['classicRespawn','invis','pvp','randomizer'][a]]=!game[['classicRespawn','invis','pvp','randomizer'][a]]
+            for(let a=0,la=10;a<la;a++){
+                for(let b=0,lb=a>=2?5:4;b<lb;b++){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:80+a*70+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+40},width:200,height:60})){
+                        if(a==0){
+                            menu.players=b+1
+                        }else if(a==1){
+                            menu.gaming=b+1
+                        }else if(a==2){
+                            menu.level=[6,7,8,12,13][b]
+                        }else if(a==3){
+                            game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]=!game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]
                         }else{
                             game.players=menu.players
                             game.gaming=menu.gaming
-                            game.level=menu.level
-                            game.mission=a+b*4-16
+                            if(game.classicWeapon||game.randomizer){
+                                game.level=menu.level
+                            }else{
+                                game.level=13
+                            }
+                            game.mission=a*5+b-20
                             entities.players=[]
                             initialGraphics()
                             newLoop()

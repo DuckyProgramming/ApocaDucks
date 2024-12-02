@@ -1,3 +1,40 @@
+102 - long flamethrower push,19
+103 - machine gun focus,2
+104 - punch stop,9
+105 - push punch,9
+106 - pistol quad,1
+107 - airstrike rocket launcher,3
+108 - rocket launcher stop,60
+109 - napalm flamethrower,19
+
+74 - long flamethrower push,15
+75 - napalm flamethrower,15
+76 - punch stop,7
+77 - push punch,7
+78 - rocket launcher stop,47
+
+110 - spread rocket launcher
+
+111 - phase flamethrower,8
+112 - engineer dualic,50
+113 - auto rocket launcher,87
+
+79 - phase flamethrower,6
+80 - auto rocket,2
+
+114 - booster
+
+
+
+
+
+
+
+
+
+
+
+
 
 38 - pulse rocket , 3
 39 - flamethrower heal self , 8
