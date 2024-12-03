@@ -1,6 +1,13 @@
 function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
+    for(let a=0,la=5;a<la;a++){
+        for(let b=0,lb=types.mission.length;b<lb;b++){
+            if(types.mission[b].difficulty==a){
+                menu.list.push(b)
+            }
+        }
+    }
 }
 function windowResized(){
     resizeCanvas(windowWidth-40,windowHeight-40)
@@ -10,8 +17,8 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=10;a<la;a++){
-                for(let b=0,lb=a>=2?5:4;b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:80+a*70+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+40},width:200,height:60})){
+                for(let b=0,lb=a>=4?6:a>=2?5:4;b<lb;b++){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:60+a*65+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+40},width:200,height:60})){
                         if(a==0){
                             menu.players=b+1
                         }else if(a==1){
@@ -28,12 +35,33 @@ function mouseClicked(){
                             }else{
                                 game.level=13
                             }
-                            game.mission=a*5+b-20
+                            game.mission=menu.list[a*6+b-24]
                             entities.players=[]
                             initialGraphics()
                             newLoop()
-                            stage.scene='main'
+                            stage.scene='wave'
                         }
+                    }
+                }
+            }
+        break
+        case 'wave':
+            for(let a=0,la=types.mission[game.mission].wave.length;a<la;a++){
+                let lb=types.mission[game.mission].wave[a].length
+                if(lb>40){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
+                        stage.scene='main'
+                        display.cycle=a
+                    }
+                }else if(lb>30){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2+floor(a/4)*310},width:200,height:610})){
+                        stage.scene='main'
+                        display.cycle=a
+                    }
+                }else{
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2-155+floor(a/4)*310},width:200,height:300})){
+                        stage.scene='main'
+                        display.cycle=a
                     }
                 }
             }
