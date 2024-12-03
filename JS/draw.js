@@ -3,26 +3,39 @@ function mainloop(layer){
     background(150)
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=10;a<la;a++){
-                for(let b=0,lb=a>=4?6:a>=2?5:4;b<lb;b++){
+            for(let a=0,la=5;a<la;a++){
+                for(let b=0,lb=a>=4?1:a>=2?5:4;b<lb;b++){
                     if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,12,13][b]||a==3&&game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]){
                         fill(100,200,100)
                     }else{
                         fill(100)
                     }
-                    rect(width/2+b*210-lb*105+105,60+a*65+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+40,200,55,10)
+                    rect(width/2+b*210-lb*105+105,60+a*70+(a>=2?10:0)+(a>=3?10:0)+(a>=4?10:0)+40,200,60,10)
                 }
             }
             fill(0)
-            for(let a=0,la=10;a<la;a++){
-                for(let b=0,lb=a>=4?6:a>=2?5:4;b<lb;b++){
+            for(let a=0,la=5;a<la;a++){
+                for(let b=0,lb=a>=4?1:a>=2?5:4;b<lb;b++){
                     textSize(20)
-                    text(a==0?`${b+1} Players`:a==1?`${b+1} Gaming`:a==2?['Vietnam','Pacman','Normandy','UNIMPLEMENTED','UNIMPLEMENTED'][b]:a==3?['Auto-Respawn','Invisible','PvP','Random Players','Random Weapons'][b]:`${types.mission[menu.list[a*6+b-24]].name}`,width/2+b*210-lb*105+105,60+a*65+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+40)
-                    if(a>=4){
-                        textSize(15)
-                        text(`${['Easy','Medium','Hard','Expert','Unfair'][types.mission[menu.list[a*6+b-24]].difficulty]}`,width/2+b*210-lb*105+105-40,60+a*65+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+60)
-                        text(`${types.mission[menu.list[a*6+b-24]].wave.length} Wave${types.mission[menu.list[a*6+b-24]].wave.length!=1?`s`:``}`,width/2+b*210-lb*105+105+40,60+a*65+(a>=2?20:0)+(a>=3?20:0)+(a>=4?20:0)+60)
-                    }
+                    text(a==4?`Proceed`:a==0?`${b+1} Players`:a==1?`${b+1} Gaming`:a==2?['Vietnam','Pacman','Normandy','UNIMPLEMENTED','UNIMPLEMENTED'][b]:a==3?['Auto-Respawn','Invisible','PvP','Random Players','Random Weapons'][b]:`${types.mission[menu.list[a*5+b-20]].name}`,width/2+b*210-lb*105+105,60+a*70+(a>=2?10:0)+(a>=3?10:0)+(a>=4?10:0)+40)
+                }
+            }
+        break
+        case 'mission':
+            for(let a=0,la=8;a<la;a++){
+                for(let b=0,lb=5;b<lb;b++){
+                    fill(100)
+                    rect(width/2+b*210-lb*105+105,100+a*70,200,60,10)
+                }
+            }
+            fill(0)
+            for(let a=0,la=8;a<la;a++){
+                for(let b=0,lb=5;b<lb;b++){
+                    textSize(20)
+                    text(types.mission[menu.list[a*5+b]].name,width/2+b*210-lb*105+105,100+a*70)
+                    textSize(15)
+                    text(`${['Easy','Medium','Hard','Expert','Unfair'][types.mission[menu.list[a*5+b]].difficulty]}`,width/2+b*210-lb*105+105-40,100+a*70+20)
+                    text(`${types.mission[menu.list[a*5+b]].wave.length} Wave${types.mission[menu.list[a*5+b]].wave.length!=1?`s`:``}`,width/2+b*210-lb*105+105+40,100+a*70+20)
                 }
             }
         break

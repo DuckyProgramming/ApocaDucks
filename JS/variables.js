@@ -93,7 +93,7 @@ types={
     },{
       name:`Duck Wrecking`,
       sendTime:30,
-      difficulty:1,
+      difficulty:0,
       wave:[
         [
           ['FastPunch',3],
@@ -127,7 +127,7 @@ types={
     },{
       name:`Duck Shaker`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Pistol',4],
@@ -195,7 +195,7 @@ types={
     },{
       name:`Duck Deletion`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Flamethrower',8],
@@ -300,7 +300,7 @@ types={
     },{
       name:`Broken Ducks`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Pistol',2],
@@ -497,7 +497,7 @@ types={
       difficulty:3,
       wave:[
         [
-          ['BigLongBaller',2],
+          ['BigLongBaller',6],
           ['HeavyPunch',8],
           ['Flamethrower',4],
           ['RemoverSniper',2],
@@ -599,16 +599,16 @@ types={
           ['Sniper',2],
           ['Spy',3],
         ],[
-          ['Flamethrower',18],
+          ['Flamethrower',6],
           ['BigRapidSlowRocketLauncher',2],
           ['HyperMedic',4],
-          ['MachineGun',10],
+          ['MachineGun',5],
           ['Flamethrower',4],
-          ['Pistol',15],
+          ['Pistol',5],
           ['Tank',2],
           ['BigMachineGun',2],
           ['HyperMedic',6],
-          ['PushPistol',15],
+          ['PushPistol',5],
           ['Sniper',3],
           ['Spy',3],
         ],
@@ -1609,7 +1609,7 @@ types={
           ['DeflectorMachineGun',2],
           ['BigBarrageCritRocketLauncher',2],
           ['LongPunchJump',3],
-          ['LongFlamethrowerPush',6],
+          ['LongPushFlamethrower',6],
           ['PistolParajump',6],
           ['Engineer',1],
           ['Sniper',2],
@@ -1922,10 +1922,10 @@ types={
       difficulty:1,
       wave:[
         [
-          ['LongFlamethrowerPush',3],
+          ['LongPushFlamethrower',3],
           ['BigSpreadSniper',1],
           ['SpreadSniper',4],
-          ['CritLongFlamethrowerPush',2],
+          ['CritLongPushFlamethrower',2],
           ['BigSpreadSniper',1],
           ['Pistol',4],
           ['BigRocketLauncher',1],
@@ -1946,7 +1946,7 @@ types={
           ['BigRocketLauncher',2],
           ['SpreadSniper',4],
           ['Pistol',4],
-          ['CritLongFlamethrowerPush',3],
+          ['CritLongPushFlamethrower',3],
           ['Punch',2],
           ['Spy',2],
         ],[
@@ -2035,7 +2035,7 @@ types={
           ['RadiusRocketLauncher',4],
         ],[
           ['Pistol',11],
-          ['FlamethrowerPush',4],
+          ['PushFlamethrower',4],
           ['BigBaller',1],
           ['RocketLauncher',3],
           ['BigLongFlamethrower',1],
@@ -2092,7 +2092,7 @@ types={
           ['RocketLauncherHeal',2],
           ['BigRapidBombBaller',2],
           ['BigHyperMedic',2],
-          ['BigFlamethrowerPush',2],
+          ['BigPushFlamethrower',2],
           ['BigDefendApplyMedic',2],
           ['BigRapidRocketLauncher',2],
           ['BigDefendApplyMedic',2],
@@ -2306,7 +2306,7 @@ types={
           ['Baller',8],
           ['BigDirectRocketLauncher',1],
           ['HyperPistol',4],
-          ['CritFlamethrowerPush',6],
+          ['CritPushFlamethrower',6],
           ['Pistol',5],
           ['Sniper',2],
           ['Spy',2],
@@ -2403,12 +2403,16 @@ types={
         ],[
           ['BigMachineGunDamaged',4],
           ['MachineGunDamaged',12],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
           ['BigCritRocketLauncherDamaged',4],
           ['PistolJumpDamaged',4],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
           ['HeavyShotgunDamaged',5],
           ['TankDamaged',1],
-          ['HyperMedic',5],
-          ['PlusMedic',5],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
         ],[
           ['TinyFastPunch',8],
           ['FastFlamethrower',4],
@@ -2434,7 +2438,7 @@ types={
           ['BigLongCritFlamethrower',1],
           ['FlamethrowerHealSelf',4],
           ['TinyFlamethrower',4],
-          ['LongFlamethrowerPush',6],
+          ['LongPushFlamethrower',6],
           ['FlamethrowingTank',1],
         ],[
           ['CritRadiusRocketLauncher',2],
@@ -2447,7 +2451,230 @@ types={
           ['BigBarrageRadiusRocketLauncher',2],
         ],
       ],
+    },{
+      name:`Duck's Doom`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['Pistol',16],
+          ['BigRocketLauncher',1],
+          ['Flamethrower',4],
+        ],[
+          ['Tank',1],
+          ['Baller',10],
+          ['MachineGun',8],
+          ['BigFastPistol',1],
+        ],[
+          ['PushPistol',1],
+          ['SpreadSniper',4],
+          ['RocketLauncher',8],
+          ['Flamethrower',1],
+          ['SpreadSniper',4],
+          ['Spy',2],
+        ],[
+          ['HeavyPunch',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+          ['FastPunch',4],
+          ['BigCritRocketLauncher',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+          ['FastPunch',4],
+          ['BigDamageOverTimeMachineGun',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+        ],[
+          ['Flamethrower',2],
+          ['BigSpamRocketLauncher',2],
+          ['PlusMedic',4],
+          ['Flamethrower',1],
+          ['RocketLauncher',5],
+          ['Pistol',3],
+          ['PushPistol',1],
+          ['Sniper',1],
+        ],[
+          ['Pistol',11],
+          ['MachineGun',6],
+          ['Baller',4],
+          ['Sniper',2],
+          ['Spy',2],
+        ],[
+          ['Tank',1],
+          ['RapidPunch',2],
+          ['MachineGun',4],
+          ['Tank',1],
+          ['BigMachineGun',1],
+          ['PlusMedic',5],
+          ['Spy',2],
+          ['Pistol',3],
+        ],
+      ],
+    },{
+      name:`Duck Gambit`,
+      sendTime:30,
+      difficulty:0,
+      wave:[
+        [
+          ['BigFastPistol',1],
+          ['Baller',9],
+        ],[
+          ['BigFlamethrower',1],
+          ['BigPunch',1],
+          ['HyperPistol',5],
+          ['Flamethrower',3],
+        ],[
+          ['BigShotgun',1],
+          ['BigFlipPistol',1],
+          ['BigFlamethrower',1],
+          ['BigBaller',1],
+          ['HyperMedic',2],
+        ],[
+          ['BigHeavyPushPistol',2],
+          ['RocketLauncherBuff',1],
+          ['BigFastPistol',1],
+          ['DeflectorMachineGun',4],
+          ['RocketLauncherDefendBuff',1],
+        ],[
+          ['Shotgun',7],
+          ['BigRocketLauncherBuff',1],
+          ['MedicShield',1],
+        ],[
+          ['Tank',1],
+          ['BigShotgun',1],
+          ['BigFlipPistol',1],
+          ['BigFlamethrower',1],
+          ['BigBaller',1],
+        ],[
+          ['BigPushFlamethrower',1],
+          ['BigRapidBaller',1],
+          ['BigHyperPistol',1],
+          ['BigRocketLauncher',1],
+        ],[
+          ['BigPistolJump',1],
+          ['BigRocketLauncherHeal',1],
+          ['BigRadiusRocketLauncher',1],
+          ['BigRocketLauncherHealSelf',1],
+          ['BigDeflectorMachineGun',1],
+        ],
+      ],
+    },{
+      name:`Ruined Ducks`,
+      sendTime:45,
+      difficulty:2,
+      wave:[
+        [
+          ['Pistol',6],
+          ['RocketLauncher',3],
+          ['Flamethrower',2],
+          ['Baller',4],
+          ['BigSpamRocketLauncher',1],
+          ['FastPunch',6],
+          ['AssaultRifle',2],
+          ['MachineGun',4],
+          ['BigPistolJump',1],
+          ['CritFlamethrower',1],
+          ['SpreadSniper',6],
+          ['BigShotgun',1],
+          ['Engineer',1],
+          ['Spy',3],
+        ],[
+          ['Tank',2],
+          ['BigMachineGun',1],
+          ['RocketLauncherBuff',2],
+          ['PushFlamethrower',2],
+          ['FastHeavyPunch',4],
+          ['BigSingleBaller',2],
+          ['MachineGun',4],
+          ['RocketLauncherDefendBuff',2],
+          ['Shotgun',10],
+          ['BigRapidSpreadRocketLauncher',1],
+          ['RapidBaller',2],
+          ['Flamethrower',2],
+          ['Engineer',1],
+          ['Sniper',2],
+          ['Spy',3],
+        ],[
+          ['MachineGunFirework',6],
+          ['Flamethrower',4],
+          ['BigCritDeflectorMachineGun',1],
+          ['HyperMedic',2],
+          ['RapidBaller',4],
+          ['HeavyPunch',2],
+          ['BigRocketLauncherDefendBuff',2],
+          ['Shotgun',4],
+          ['SingleBaller',11],
+          ['BigCritFlamethrower',1],
+          ['BigRapidCritBaller',1],
+          ['HeavyTank',1],
+          ['BigSpamRocketLauncher',1],
+          ['HyperMedic',1],
+          ['Engineer',1],
+        ],
+      ],
+    },{
+      name:`Dawn of Ducks`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['BigRocketLauncher',2],
+          ['Punch',9],
+          ['RocketLauncher',2],
+          ['PushShotgun',3],
+          ['TinyPunch',3],
+          ['Sniper',1],
+        ],[
+          ['BigFastLongPunch',2],
+          ['BigBaller',2],
+          ['AutoTank',1],
+          ['Pistol',6],
+          ['Baller',4],
+          ['RocketLauncher',4],
+          ['Spy',2],
+        ],[
+          ['Flamethrower',6],
+          ['PushFlamethrower',3],
+          ['FastPunch',4],
+          ['BigSpamRocketLauncher',2],
+          ['HyperMedic',1],
+          ['MachineGun',2],
+          ['Baller',2],
+          ['Sniper',1],
+        ],[
+          ['BigMachineGun',1],
+          ['BigSpamRocketLauncher',1],
+          ['TinyPunch',4],
+          ['RocketLauncher',5],
+          ['FlameSphere',5],
+          ['LightTank',2],
+          ['FastPunch',3],
+          ['Sniper',1],
+        ],[
+          ['BigRapidBaller',1],
+          ['BigFlamethrower',2],
+          ['BigRapidRocketLauncher',2],
+          ['CritShotgun',6],
+          ['AssaultRifle',3],
+          ['Baller',5],
+          ['HyperMedic',2],
+          ['Pistol',4],
+          ['Sniper',1],
+        ],[
+          ['PushFlamethrower',4],
+          ['BigPushShotgun',2],
+          ['LightTank',4],
+          ['HyperMedic',2],
+          ['BigRapidCritBaller',2],
+          ['BigBarrageCritRocketLauncher',1],
+          ['BigCritDeflectorMachineGun',1],
+          ['MachineGun',3],
+          ['Spy',1],
+          ['Sniper',1],
+        ],
+      ],
     },
+
   ],player:[
     {
       name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -2497,8 +2724,8 @@ types={
       name:'PlayerBombBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:36,
     },{
-      name:'PlayerLongFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:19,
+      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
     },{
       name:'PlayerBallerEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:35,
@@ -2514,8 +2741,8 @@ types={
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
     },{
-      name:'PlayerMachineGunCritSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:42,
+      name:'PlayerMachineGunFirework',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
     },{
       name:'PlayerPushRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:3,crit:0,weapon:20,
@@ -2569,8 +2796,8 @@ types={
       name:'PlayerAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },{
-      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:5,
+      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:5,
     },{
       name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:99,
@@ -2859,6 +3086,12 @@ types={
       name:'Shotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
+      name:'PushShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
+      name:'BigPushShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
       name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
@@ -2982,10 +3215,16 @@ types={
       name:'FastLongPunch',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:30,
     },{
+      name:'BigFastLongPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:30,
+    },{
       name:'BigPushRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:20,
     },{
       name:'PistolJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'BigPistolJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'PistolJumpDamaged',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3352,7 +3591,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:47,
     },{
       name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+      damageBufff:0.5,reloadBuff:1,crit:0,weapon:15,
     },{
       name:'BigHeavyPushPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
@@ -3398,6 +3637,9 @@ types={
     },{
       name:'VampireBallerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:3,crit:1,weapon:71,
+    },{
+      name:'TinyPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'TinyFastPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1.8,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
@@ -3495,10 +3737,10 @@ types={
       name:'BigRapidSlowRocketLauncherConfuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:86,
     },{
-      name:'LongFlamethrowerPush',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'LongPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:102,
     },{
-      name:'CritLongFlamethrowerPush',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'CritLongPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:102,
     },{
       name:'PistolParajump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3555,13 +3797,16 @@ types={
       name:'SegmentationBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.5,
       damageBuff:1,reloadBuff:4,crit:0,weapon:113,
     },{
-      name:'FlamethrowerPush',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'PushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:116,
     },{
-      name:'BigFlamethrowerPush',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      name:'BigPushFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:116,
     },{
-      name:'CritFlamethrowerPush',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'BigFastPushPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'CritPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:116,
     },{
       name:'BallerEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3602,6 +3847,21 @@ types={
     },{
       name:'CritPhasePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:122,
+    },{
+      name:'FastHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.8,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'SingleBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:123,
+    },{
+      name:'BigSingleBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:123,
+    },{
+      name:'MachineGunFirework',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:124,
+    },{
+      name:'FlameSphere',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:125,
     },
   ],weapon:[
 		{
@@ -4713,6 +4973,42 @@ types={
 			reload:10,
 			speed:1.4,
       uses:40,
+		},{
+			name:'Single Baller',
+			ammo:1,
+			damage:60,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Machine Gun Firework',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Flame Sphere',
+			ammo:1,
+			damage:125,
+			cooldown:300,
+			stop:300,
+			reload:300,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Push Shotgun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
 		},
 	],
 }

@@ -211,7 +211,7 @@ class projectile{
 				this.speed=random(6,8.75)
 				this.time=random(time,time*2)
 			break
-			case 80:
+			case 80: case 85:
 				this.speed=1.5
 				this.time=time
 			break
@@ -1338,6 +1338,17 @@ class projectile{
 				layer.stroke(250,this.fade)
 				layer.ellipse(0,0,3)
 			break
+			case 85:
+				layer.scale(0.6)
+				layer.fill(240-this.crit*200,120,this.crit*200,this.fade)
+				layer.ellipse(0,0,20)
+				regStar(layer,0,0,7,24,24,15,15,this.position.x+this.position.y)
+				regStar(layer,0,0,7,15,15,30,30,this.position.x+this.position.y)
+				layer.fill(240-this.crit*200,180,this.crit*200,this.fade)
+				layer.ellipse(0,0,10)
+				regStar(layer,0,0,7,16,16,10,10,this.position.x+this.position.y)
+				regStar(layer,0,0,7,10,10,20,20,this.position.x+this.position.y)
+			break
 
         }
         layer.pop()
@@ -1605,7 +1616,7 @@ class projectile{
 			this.type==60||this.type==61||this.type==62||this.type==63||this.type==67||
 			this.type==68||this.type==69||this.type==70||this.type==71||this.type==72||
 			this.type==73||this.type==74||this.type==75||this.type==76||this.type==77||
-			this.type==79||this.type==81||this.type==82||this.type==84
+			this.type==79||this.type==81||this.type==82||this.type==84||this.type==85
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}else if(
@@ -1827,8 +1838,15 @@ class projectile{
 						}
 					}
 				break
+				case 85:
+					this.position.x+=this.speed*sin(this.direction)
+				    this.position.y-=this.speed*cos(this.direction)
+					if(this.active&&a==0){
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.damage/5,10,this.crit,this.index))
+					}
+				break
 			}
-			if(this.active){
+			if(this.active&&this.type!=85){
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82)&&
 						!(this.id==-1&&this.timer<10&&entities.players[b].id>0)&&
