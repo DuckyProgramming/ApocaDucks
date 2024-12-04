@@ -44,7 +44,7 @@ function mainloop(layer){
                 let ticker=0
                 let lb=types.mission[game.mission].wave[a].length
                 fill(100)
-                if(lb>40){
+                if(lb>44){
                     let ticker2=0
                     rect(width/2+(a%4)*210-210,height/2+floor(a/4)*310,410,610,10)
                     fill(0)
@@ -62,29 +62,16 @@ function mainloop(layer){
                             }
                         }
                     }
-                }else if(lb>30){
+                }else if(lb>22){
                     rect(width/2+(a%4)*210-315,height/2+floor(a/4)*310,200,610,10)
                     fill(0)
                     textSize(25)
                     text(`Wave ${a+1}`,width/2+(a%4)*210-315,height/2-285+floor(a/4)*310)
-                    textSize(8)
+                    textSize(11.5)
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-269+ticker*10+floor(a/4)*310)
-                            ticker++
-                        }
-                    }
-                }else if(lb>18){
-                    rect(width/2+(a%4)*210-315,height/2-155+floor(a/4)*310,200,300,10)
-                    fill(0)
-                    textSize(25)
-                    text(`Wave ${a+1}`,width/2+(a%4)*210-315,height/2-285+floor(a/4)*310)
-                    textSize(8)
-                    for(let b=0;b<lb;b++){
-                        if(types.mission[game.mission].wave[a][b][0]!='Wait'){
-                            let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-269+ticker*10+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-269+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -110,7 +97,7 @@ function mainloop(layer){
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
                 graphics.main[c].background(0)
-                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93?2:1)
+                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==132||entities.players[c].weaponType==145?2:1)
                 key[c]*=0.75
                 if(game.level==6){
                     key[c]*=2/3

@@ -810,7 +810,8 @@ class wall{
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
-                        c.type==68||c.type==69||c.type==70||c.type==73||c.type==83
+                        c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
+                        c.type==95||c.type==97
                     )){
                         let d=-1
                         if(d==-1){
@@ -930,7 +931,7 @@ class wall{
                         ){
                             if(
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
-                                c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84
+                                c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89
                             ){
                                 c.active=false
                                 c.speed=0
@@ -938,7 +939,8 @@ class wall{
                                     c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
                                     c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
                                     c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
-                                    c.type==58||c.type==64||c.type==66||c.type==78||c.type==80
+                                    c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
+                                    c.type==86
                                 ){
                                     c.explode()
                                 }
@@ -1031,6 +1033,11 @@ class wall{
                                             if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump')&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
+                                            if(c.playerData.name=='PlayerPistolQuadrupleJump'){
+                                                c.jump.double=1
+                                                c.jump.triple=1
+                                                c.jump.quadruple=1
+                                            }
                                             switch(this.type){
                                                 case 2:
                                                     c.bounceTime=15
@@ -1038,7 +1045,7 @@ class wall{
                                                 case 3:
                                                     c.velocity.y=-10
                                                     c.takeDamage(50)
-                                                    c.collect.time=max(c.collect.time,30)
+                                                    c.collect.time=max(c.collect.time,150)
                                                 break
                                                 case 4:
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){

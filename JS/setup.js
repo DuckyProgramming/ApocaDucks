@@ -57,12 +57,12 @@ function mouseClicked(){
         case 'wave':
             for(let a=0,la=types.mission[game.mission].wave.length;a<la;a++){
                 let lb=types.mission[game.mission].wave[a].length
-                if(lb>40){
+                if(lb>44){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
                         stage.scene='main'
                         display.cycle=a
                     }
-                }else if(lb>30){
+                }else if(lb>22){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2+floor(a/4)*310},width:200,height:610})){
                         stage.scene='main'
                         display.cycle=a
