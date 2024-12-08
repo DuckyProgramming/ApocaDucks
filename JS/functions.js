@@ -78,9 +78,15 @@ function collideBoxBox(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==5){
                 if(
@@ -92,9 +98,15 @@ function collideBoxBox(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 9
                 }
             }else if(a==6){
                 if(
@@ -106,9 +118,15 @@ function collideBoxBox(static,mobile){
                     {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==7){
                 if(
@@ -120,9 +138,15 @@ function collideBoxBox(static,mobile){
                     {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                ){
+                    return 9
                 }
             }
         }
@@ -150,9 +174,15 @@ function collideBoxBoxIndex1(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==5){
                 if(
@@ -164,9 +194,15 @@ function collideBoxBoxIndex1(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 9
                 }
             }else if(a==6){
                 if(
@@ -178,9 +214,15 @@ function collideBoxBoxIndex1(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==7){
                 if(
@@ -192,9 +234,15 @@ function collideBoxBoxIndex1(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.position,{x:mobile.midpoint.position.x+static.velocity.x,y:mobile.midpoint.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 9
                 }
             }
         }
@@ -222,9 +270,15 @@ function collideBoxBoxIndex2(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==5){
                 if(
@@ -236,9 +290,15 @@ function collideBoxBoxIndex2(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})||
                     intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 9
                 }
             }else if(a==6){
                 if(
@@ -250,9 +310,15 @@ function collideBoxBoxIndex2(static,mobile){
                     {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
                     intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
                     {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y},
+                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 8
                 }
             }else if(a==7){
                 if(
@@ -263,10 +329,16 @@ function collideBoxBoxIndex2(static,mobile){
                     {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
                     {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})||
                     intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                        {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
+                        {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y})
                 ){
                     return a
+                }else if(
+                    intersect(mobile.midpoint.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
+                        {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y},
+                        {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                ){
+                    return 9
                 }
             }
         }
@@ -419,7 +491,6 @@ function displayMain(layer){
 function generateLevel(level,layer){
     entities.projectiles=[]
     entities.walls=[[],[]]
-    let index=0
     switch(game.level){
         case 1:
             game.edge=[1700,750]
@@ -436,8 +507,11 @@ function generateLevel(level,layer){
         case 8:
             game.edge=[5000,3000]
         break
+        case 15:
+            game.edge=[9300,2700]
+        break
         default:
-            game.edge=[3000,2000]
+            game.edge=[3400,1200]
         break
     }
     game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
@@ -447,17 +521,29 @@ function generateLevel(level,layer){
     graphics.pane=[]
     graphics.pane.push(createGraphics(game.edge[0],game.edge[1]))
     setupLayer(graphics.pane[0])
+    let reject=[]
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
             switch(level[a][b]){
 				case '#': case '.':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],1))
+                    if(!reject.includes(a*lb+b)){
+                        let extent=0
+                        for(let e=1,le=level.length-a;e<le;e++){
+                            if(level[a+e][b]=='#'){
+                                reject.push((a+e)*lb+b)
+                                extent++
+                            }else{
+                                e=le
+                            }
+                        }
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+extent/2)*game.tileset[1],game.tileset[0],game.tileset[1]*(1+extent),1))
+                    }
                 break
                 case '@':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],2))
                 break
                 case '!':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1],3))
+                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.1)*game.tileset[1],game.tileset[0],game.tileset[1]*0.8,3))
                 break
                 case '%':
                     if(game.level==7){
@@ -479,7 +565,14 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,9))
                 break
                 case '_':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,10))
+                    switch(game.level){
+                        case 8:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,10))
+                        break
+                        default:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
+                        break
+                    }
                 break
                 case '-':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,11))
@@ -488,8 +581,16 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,12))
                 break
                 case '+':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,11))
+                    switch(game.level){
+                        case 8:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.25)*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,11))
+                        break
+                        default:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
+                        break
+                    }
                 break
                 case '`':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],13))
@@ -521,6 +622,9 @@ function generateLevel(level,layer){
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],23))
                     }
+                break
+                case 'b':
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,25))
                 break
             }
         }
@@ -580,23 +684,47 @@ function generateLevel(level,layer){
             let index=floor(random(0,spawns.length))
             entities.walls[1].push(new wall(graphics.main,spawns[index][0],spawns[index][1],game.tileset[0]*0.4,game.tileset[1]*0.4,[8,9,12][a%3]))
             spawns.splice(index,1)
-        }
+        }   
+    }else if(game.level==15){
+        graphics.gradient=[new p5.LinearGradient(85,graphics.main[0].height)]
+        graphics.gradient[0].colors(
+            0.0,color(-75,-100,-25),
+            1.0,color(100,75,175)
+        )
     }
-    let weapon=game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9
+    let clump=[
+        [0,1,2,3,4,5,6,7,8,9,50,51],
+        [
+            10,11,12,13,14,15,16,17,18,19,52,56,
+            20,21,22,23,24,25,26,27,28,29,53,57,
+            30,31,32,33,34,35,36,37,38,39,54,58,
+            40,41,42,43,44,45,46,47,48,49,55,59
+        ]
+    ][floor(random(1.5))]
+    let weapon=clump[floor(random(0,clump.length))]
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
-                if(int(level[a][b])==c+1&&!game.pvp){
-                    index--
-                    entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||c>=game.gaming?(game.past?weapon:game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9):(game.level==13||game.level==14?0:game.weapon[c][0]),index))
+                let clump=[
+                    [0,1,2,3,4,5,6,7,8,9,50,51],
+                    [
+                        10,11,12,13,14,15,16,17,18,19,52,56,
+                        20,21,22,23,24,25,26,27,28,29,53,57,
+                        30,31,32,33,34,35,36,37,38,39,54,58,
+                        40,41,42,43,44,45,46,47,48,49,55,59
+                    ]
+                ][floor(random(1.5))]
+                if(int(level[a][b])==c+1&&(!game.pvp||game.level==13||game.level==14)){
+                    game.index++
+                    entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||c>=game.gaming?(game.past?weapon:game.randomizer?floor(random(60,types.player.length)):clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
                     if(game.level==13||game.level==14){
                         entities.players[entities.players.length-1].weaponType=-1
                     }
                 }
                 if(level[a][b]=='qwerty'[c]&&game.pvp){
-                    index--
-                    entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||c>=game.gaming?(game.past?weapon:game.randomizer?floor(random(18,types.player.length)):floor(random(0,9))+floor(random(0,1.2))*9):(game.level==13||game.level==14?0:game.weapon[c][0]),index))
-                    if(game.level==13||game.level==14){
+                    game.index++
+                    entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||c>=game.gaming?(game.past?weapon:game.randomizer?floor(random(60,types.player.length)):clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                    if(game.level==13||game.level==14){ 
                         entities.players[entities.players.length-1].weaponType=-1
                     }
                     if(game.level==8&&a<5){
@@ -615,6 +743,7 @@ function generateLevel(level,layer){
     entities.walls[0]=entities.walls[0].filter(item=>!item.remove)
     entities.walls[1]=entities.walls[1].filter(item=>!item.remove)
     entities.walls.forEach(set=>set.forEach(item=>item.formBoundary()))
+    entities.walls.forEach(set=>set.forEach(item=>item.checkPrimary()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkRedundancy()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkOverlay()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkGap()))
@@ -667,18 +796,22 @@ function newWave(level,layer){
         display.wait=999999999999999999999
         game.classicRespawn=false
         game.pvp=true
+        for(let a=0,la=game.players;a<la;a++){
+            if(entities.players[a].life<=40){
+                entities.players[a].respawn()
+            }
+        }
     }else{
         if(game.level==8){
             entities.walls[1].forEach(wall=>wall.exploded=false)
         }
         display.anim=1
         game.sendTime=0
-        game.index=0
         for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){
             if(types.mission[game.mission].wave[display.cycle][a][1]==1){
                 game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyTank'||types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(game.level==8?1.5:1)*game.diff);b<lb;b++){
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(game.level==8?1.5:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
                     game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyTank'||types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }
@@ -737,8 +870,7 @@ function checkEnd(level,layer){
                 fail=true
             }
         }
-        if(!fail){
-            game.index=0
+        if(!fail||game.peakWeapon){
             game.level=14
             entities.players=[]
             newLoop()
@@ -746,12 +878,11 @@ function checkEnd(level,layer){
     }else if(game.level==14){
         let fail=false
         for(let a=0,la=game.gaming;a<la;a++){
-            if(game.weapon[a].length<4){
+            if(game.weapon[a].length<4&&!game.peakWeapon||game.weapon[a].length<1){
                 fail=true
             }
         }
         if(!fail){
-            game.index=0
             game.level=menu.level
             entities.players=[]
             newLoop()
@@ -767,6 +898,8 @@ function checkEnd(level,layer){
                             entities.walls[1].splice(0,0,new wall(graphics.main,game.tileset[0]/2+(b-5)*game.tileset[0],game.tileset[1]/2+(a+2.4)*game.tileset[1],game.tileset[0]*5,game.tileset[1],6))
                             for(let a=0,la=3;a<la;a++){
                                 entities.walls[1][a].formBoundary()
+                                entities.walls[1][a].checkRedundancy()
+                                entities.walls[1][a].checkOverlay()
                                 entities.walls[1][a].checkGap()
                                 entities.walls[1][a].checkBar()
                                 entities.walls[1][a].formBounder()
@@ -784,7 +917,7 @@ function checkEnd(level,layer){
                                 tick++
                                 deployer.spawn.splice(0,1)
                             }
-                            deployer.timer=360
+                            deployer.timer=300
                         }
                     }
                 }
@@ -821,7 +954,7 @@ function checkEnd(level,layer){
                         }
                     }
                 }
-                game.sendTime=types.mission[game.mission].sendTime*4/max(1,game.gaming)*(game.pvp?10:1)/game.diff
+                game.sendTime=types.mission[game.mission].sendTime*2.75/max(1,game.gaming*0.5+0.5)*(game.classicRespawn?0.5:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==15?(game.index%6==0?5:0.5):1)
                 game.stack.splice(0,1)
             }
         }else{

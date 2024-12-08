@@ -177,7 +177,7 @@ class wall{
             break
         }
     }
-    checkRedundancy(){
+    checkPrimary(){
         if(this.position.y+this.height/2>=game.edge[1]){
             this.redundant[0]=true
             this.boundary[0]=[]
@@ -194,6 +194,8 @@ class wall{
             this.redundant[3]=true
             this.boundary[3]=[]
         }
+    }
+    checkRedundancy(){
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
@@ -367,6 +369,29 @@ class wall{
                                 }
                             }
                         }
+                        for(let g=4,lg=8;g<lg;g++){
+                            if(this.boundary[g].length>0&&c.boundary[g].length>0&&abs(this.width/this.height-c.width/c.height)<0.01){
+                                for(let e=0,le=this.boundary[g].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[g].length;f<lf;f++){
+                                        if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&(c.boundary[g][f][d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][d].y<this.boundary[g][e][d].y&&g>=6)){
+                                            this.boundary[g][e][d].x=c.boundary[g][f][d].x
+                                            this.boundary[g][e][d].y=c.boundary[g][f][d].y
+                                            c.boundary[g].splice(f,1)
+                                            f--
+                                            lf--
+                                            this.checkBar()
+                                        }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&(c.boundary[g][f][1-d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][1-d].y<this.boundary[g][e][d].y&&g>=6)){
+                                            this.boundary[g][e][d].x=c.boundary[g][f][1-d].x
+                                            this.boundary[g][e][d].y=c.boundary[g][f][1-d].y
+                                            c.boundary[g].splice(f,1)
+                                            f--
+                                            lf--
+                                            this.checkBar()
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -390,6 +415,7 @@ class wall{
                 }
             }
         }
+        this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
     }
     display(layer){
@@ -398,35 +424,60 @@ class wall{
         layer.noStroke()
         switch(this.type){
             case 1:
-                if(game.level==7){
-                    layer.noFill()
-                    layer.stroke(50,150,200)
-                    layer.strokeWeight(4)
-                    for(let a=0,la=4;a<la;a++){
-                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
-                            layer.line(
-                                this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
-                                this.boundary[a][b][0].y+(a==0?-2:a==1?2:2)-this.position.y,
-                                this.boundary[a][b][1].x+(a==2?-2:a==3?2:-2)-this.position.x,
-                                this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
-                            )
+                switch(game.level){
+                    case 7:
+                        layer.noFill()
+                        layer.stroke(50,150,200)
+                        layer.strokeWeight(4)
+                        for(let a=0,la=4;a<la;a++){
+                            for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                layer.line(
+                                    this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
+                                    this.boundary[a][b][0].y+(a==0?-2:a==1?2:2)-this.position.y,
+                                    this.boundary[a][b][1].x+(a==2?-2:a==3?2:-2)-this.position.x,
+                                    this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
+                                )
+                            }
                         }
-                    }
-                }else if(game.level==6){
-                    layer.fill(30+this.position.y/game.edge[1]*30,60-this.position.y/game.edge[1]*15,30)
-                    layer.rect(0,0,this.width+1,this.height+1)
-                }else if(game.level==8){
-                    layer.fill(100)
-                    layer.rect(0,0,this.width+1,this.height+1,2)
-                }else{
-                    layer.fill(120)
-                    layer.rect(0,0,this.width+1,this.height+1)
+                    break
+                    case 6:
+                        layer.fill(30+this.position.y/game.edge[1]*30,60-this.position.y/game.edge[1]*15,30)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    break
+                    case 8:
+                        layer.fill(100)
+                        layer.rect(0,0,this.width+1,this.height+1,2)
+                    break
+                    case 15:
+                        let gradient=[new p5.LinearGradient(90,this.height)]
+                        gradient[0].colors(
+                            0.0,color(180-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*60,150-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*60,240-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*120),
+                            1.0,color(180-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*60,150-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*60,240-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*120)
+                        )
+                        layer.translate(-this.width/2,-this.height/2)
+                        layer.fillGradient(gradient[0])
+                        layer.rect(this.width/2,this.height/2,this.width+1,this.height+1)
+                    break
+                    default:
+                        layer.fill(120)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    break
                 }
             break
             case 2:
                 if(game.level==6){
                     layer.fill(60+this.position.y/game.edge[1]*60,120-this.position.y/game.edge[1]*30,60)
                     layer.rect(0,0,this.width+1,this.height+1)
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
+                    layer.rect(0,0,this.width+1,this.height+1)
+                    layer.fill(120,200,120)
+                    layer.quad(
+                        -this.width/2,-this.height/2,
+                        -this.width/2+10,-this.height/2+15,
+                        this.width/2-10,-this.height/2+15,
+                        this.width/2,-this.height/2
+                    )
                 }else{
                     layer.fill(120,200,120)
                     layer.rect(0,0,this.width+1,this.height+1)
@@ -451,6 +502,16 @@ class wall{
                             )
                         }
                     }
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
+                    layer.rect(0,0,this.width+1,this.height+1)
+                    layer.fill(220-this.reload/5,120,120)
+                    layer.quad(
+                        -this.width/2,-this.height/2,
+                        -this.width/2+10,-this.height/2+15,
+                        this.width/2-10,-this.height/2+15,
+                        this.width/2,-this.height/2
+                    )
                 }else{
                     layer.fill(220-this.reload/5,120,120)
                     if(game.level==6){
@@ -486,11 +547,20 @@ class wall{
                 layer.rect(0,0,this.width+1,this.height+1)
             break
             case 7:
-                layer.fill(50)
-                layer.rect(0,0,this.width+1,this.height+1)
-                layer.fill(70)
-                for(let a=0,la=this.height/game.tileset[1];a<la;a++){
-                    layer.rect(0,-this.height/2+(a+0.5)*game.tileset[1],this.width+1,game.tileset[1]/5)
+                if(game.level==15){
+                    layer.fill(140,80,20)
+                    layer.rect(0,0,this.width+1,this.height)
+                    layer.fill(120,60,0)
+                    for(let a=0,la=this.height/game.tileset[1]*2;a<la;a++){
+                        layer.rect(0,-this.height/2+(a+0.5)/2*game.tileset[1],this.width+1,3)
+                    }
+                }else{
+                    layer.fill(50)
+                    layer.rect(0,0,this.width+1,this.height+1)
+                    layer.fill(70)
+                    for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                        layer.rect(0,-this.height/2+(a+0.5)*game.tileset[1],this.width+1,game.tileset[1]/5)
+                    }
                 }
             break
             case 8:
@@ -521,16 +591,29 @@ class wall{
                 }
             break
             case 11:
-                if(game.level==6){
-                    layer.fill(60+this.position.y/game.edge[1]*20,80-this.position.y/game.edge[1]*10,60)
+                if(game.level==15){
+                    layer.fill(160,100,40)
+                    layer.rect(0,this.height/4,this.width-2,this.height/2-2)
+                    layer.rect(0,-this.height/4+1,this.width-game.tileset[0]/2-2,this.height/2-2)
+                    layer.fill(140,80,20)
+                    for(let a=0,la=this.width/game.tileset[0]*2-1;a<la;a++){
+                        layer.rect(-this.width/2+(0.5+a)/la*this.width,this.height/4,2,this.height/2-2)
+                    }
+                    for(let a=0,la=this.width/game.tileset[0]*2-2;a<la;a++){
+                        layer.rect(-this.width/2+(1+a)/(la+1)*this.width,-this.height/4+1,2,this.height/2-2)
+                    }
                 }else{
-                    layer.fill(60)
-                }
-                for(let a=0,la=this.width/game.tileset[0]*2;a<la;a++){
-                    layer.rect(-this.width/2+(0.5+a)/la*this.width,this.height/4+1,this.width/la-2,this.height/2-2)
-                }
-                for(let a=0,la=this.width/game.tileset[0]*2-1;a<la;a++){
-                    layer.rect(-this.width/2+(1+a)/(la+1)*this.width,-this.height/4+1,this.width/(la+1)-2,this.height/2-2)
+                    if(game.level==6){
+                        layer.fill(60+this.position.y/game.edge[1]*20,80-this.position.y/game.edge[1]*10,60)
+                    }else{
+                        layer.fill(60)
+                    }
+                    for(let a=0,la=this.width/game.tileset[0]*2;a<la;a++){
+                        layer.rect(-this.width/2+(0.5+a)/la*this.width,this.height/4+1,this.width/la-2,this.height/2-2)
+                    }
+                    for(let a=0,la=this.width/game.tileset[0]*2-1;a<la;a++){
+                        layer.rect(-this.width/2+(1+a)/(la+1)*this.width,-this.height/4+1,this.width/(la+1)-2,this.height/2-2)
+                    }
                 }
             break
             case 12:
@@ -547,24 +630,36 @@ class wall{
                 }
             break
             case 13:
-                layer.fill(220-this.reload/5,220-this.reload/5,120)
-                if(game.level==6){
-                    layer.beginShape()
-                    for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
-                        layer.vertex(-this.width/2+a*game.tileset[0]/9,-this.height/2-(a%3>=1?2:0))
-                    }
-                    for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
-                        layer.vertex(this.width/2+(a%3>=1?2:0),-this.height/2+a*game.tileset[1]/9)
-                    }
-                    for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
-                        layer.vertex(this.width/2-a*game.tileset[0]/9,this.height/2+(a%3>=1?2:0))
-                    }
-                    for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
-                        layer.vertex(-this.width/2-(a%3>=1?2:0),this.height/2-a*game.tileset[1]/9)
-                    }
-                    layer.endShape()
-                }else{
+                if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
                     layer.rect(0,0,this.width+1,this.height+1)
+                    layer.fill(220-this.reload/5,220-this.reload/5,120)
+                    layer.quad(
+                        -this.width/2,-this.height/2,
+                        -this.width/2+10,-this.height/2+15,
+                        this.width/2-10,-this.height/2+15,
+                        this.width/2,-this.height/2
+                    )
+                }else{
+                    layer.fill(220-this.reload/5,220-this.reload/5,120)
+                    if(game.level==6){
+                        layer.beginShape()
+                        for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
+                            layer.vertex(-this.width/2+a*game.tileset[0]/9,-this.height/2-(a%3>=1?2:0))
+                        }
+                        for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
+                            layer.vertex(this.width/2+(a%3>=1?2:0),-this.height/2+a*game.tileset[1]/9)
+                        }
+                        for(let a=0,la=round(this.width/game.tileset[0])*9;a<la;a++){
+                            layer.vertex(this.width/2-a*game.tileset[0]/9,this.height/2+(a%3>=1?2:0))
+                        }
+                        for(let a=0,la=round(this.height/game.tileset[0])*9;a<la;a++){
+                            layer.vertex(-this.width/2-(a%3>=1?2:0),this.height/2-a*game.tileset[1]/9)
+                        }
+                        layer.endShape()
+                    }else{
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    }
                 }
             break
             case 15:
@@ -591,6 +686,8 @@ class wall{
             case 17:
                 if(game.level==8){
                     layer.fill(100)
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
                 }else{
                     layer.fill(120)
                 }
@@ -603,6 +700,8 @@ class wall{
             case 18:
                 if(game.level==8){
                     layer.fill(100)
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
                 }else{
                     layer.fill(120)
                 }
@@ -615,6 +714,8 @@ class wall{
             case 20:
                 if(game.level==8){
                     layer.fill(100)
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
                 }else{
                     layer.fill(120)
                 }
@@ -627,6 +728,8 @@ class wall{
             case 21:
                 if(game.level==8){
                     layer.fill(100)
+                }else if(game.level==15){
+                    layer.fill(180-((this.position.y)/game.edge[1]*1.5-0.5)*60,150-((this.position.y)/game.edge[1]*1.5-0.5)*60,240-((this.position.y)/game.edge[1]*1.5-0.5)*120)
                 }else{
                     layer.fill(120)
                 }
@@ -639,6 +742,29 @@ class wall{
             case 23:
                 layer.fill(220-this.reload/5,120,220-this.reload/5)
                 layer.rect(0,0,this.width+1,this.height+1)
+            break
+            case 24:
+                layer.fill(160,100,40)
+                layer.rect(0,0,this.width+1,this.height)
+                layer.fill(140,80,20)
+                for(let a=0,la=round(this.width/game.tileset[0]*2);a<la;a++){
+                    layer.rect(-this.width/2+(a+0.5)/2*game.tileset[0],0,game.tileset[1]/10,this.height)
+                }
+            break
+            case 25:
+                layer.fill(160,100,40)
+                layer.rect(0,0,this.width+1,this.height)
+                layer.fill(140,80,20)
+                for(let a=0,la=round(this.width/game.tileset[0]*2);a<la;a++){
+                    layer.rect(-this.width/2+(a+0.5)/2*game.tileset[0],0,game.tileset[1]/10,this.height)
+                }
+                layer.fill(120,200,120)
+                layer.quad(
+                    -this.width/2,-this.height/2,
+                    -this.width/2+10,-this.height/2+10,
+                    this.width/2-10,-this.height/2+10,
+                    this.width/2,-this.height/2
+                )
             break
         }
         //layer.stroke(255,150,50)
@@ -675,6 +801,20 @@ class wall{
                         )
                         regStar(layer,this.balls[a][0],this.balls[a][1],this.balls[a][5],this.balls[a][2]*0.5,this.balls[a][2]*0.5,this.balls[a][2]*0.3,this.balls[a][2]*0.3,this.balls[a][4])
                     }
+                }else if(game.level==15){
+                    layer.stroke(240,220,240)
+                    layer.strokeWeight(6)
+                    let list=[1,4,5]
+                    for(let a=0,la=list.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[list[a]].length;b<lb;b++){
+                            layer.line(
+                                this.boundary[list[a]][b][0].x-this.position.x,
+                                this.boundary[list[a]][b][0].y-this.position.y,
+                                this.boundary[list[a]][b][1].x-this.position.x,
+                                this.boundary[list[a]][b][1].y-this.position.y
+                            )
+                        }
+                    }
                 }
             break
             case 2:
@@ -686,6 +826,37 @@ class wall{
                             60+this.balls[a][3]*30
                         )
                         regPoly(layer,this.balls[a][0],this.balls[a][1],this.balls[a][5],this.balls[a][2]/2,this.balls[a][2]/2,this.balls[a][4])
+                    }
+                }else if(game.level==15){
+                    layer.stroke(240,220,240)
+                    layer.strokeWeight(6)
+                    let list=[1,4,5]
+                    for(let a=0,la=list.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[list[a]].length;b<lb;b++){
+                            layer.line(
+                                this.boundary[list[a]][b][0].x-this.position.x,
+                                this.boundary[list[a]][b][0].y-this.position.y,
+                                this.boundary[list[a]][b][1].x-this.position.x,
+                                this.boundary[list[a]][b][1].y-this.position.y
+                            )
+                        }
+                    }
+                }
+            break
+            case 4: case 13:
+                if(game.level==15){
+                    layer.stroke(240,220,240)
+                    layer.strokeWeight(6)
+                    let list=[1,4,5]
+                    for(let a=0,la=list.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[list[a]].length;b<lb;b++){
+                            layer.line(
+                                this.boundary[list[a]][b][0].x-this.position.x,
+                                this.boundary[list[a]][b][0].y-this.position.y,
+                                this.boundary[list[a]][b][1].x-this.position.x,
+                                this.boundary[list[a]][b][1].y-this.position.y
+                            )
+                        }
                     }
                 }
             break
@@ -760,13 +931,21 @@ class wall{
                     if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
                         switch(game.level){
                             case 6:
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-100,-80),-1,200,180,false,-1))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-160,-140),-1,200,180,false,-1))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(140,160),-1,200,180,false,-1))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(80,100),-1,200,180,false,-1))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-100,-80),-1,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-160,-140),-1,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(140,160),-1,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(80,100),-1,200,180,false,"none"))
+                            break
+                            case 15:
+                                for(let a=0,la=3;a<la;a++){
+                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-95-a*5+random(-2,2),-1,80,180,false,"none"))
+                                    let mult=random(1,2)
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                }
                             break
                             default:
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,200,180,false,-1))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,200,180,false,"none"))
                             break
                         }
                     }
@@ -776,28 +955,28 @@ class wall{
                 if(this.reload>0){
                     this.reload--
                     if(this.reload==479||this.reload==439){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-33,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-39,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-45,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-51,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-57,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-33,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-39,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-45,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-51,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-57,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,-1,150,180,false,"none"))
                     }else if(this.reload==459){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-36,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-42,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-48,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-54,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-60,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-66,-1,150,180,false,-1))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-72,-1,150,180,false,-1))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-36,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-42,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-48,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-54,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-60,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-66,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-72,-1,150,180,false,"none"))
                     }
                 }
             break
@@ -811,93 +990,198 @@ class wall{
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
                         c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
-                        c.type==95||c.type==97
+                        c.type==91||c.type==92||c.type==93||c.type==96||c.type==95||
+                        c.type==97||c.type==98
                     )){
-                        let d=-1
-                        if(d==-1){
-                            d=collideBoxBoxIndex2(this,c)
-                        }
-                        if(d==-1){
-                            d=collideBoxBoxIndex1(this,c)
-                        }
+                        let d=collideBoxBox(this,c)
                         let incident
                         let vecBall
                         if(d>=0&&!this.redundant[d]){
                             switch(d){
                                 case 0:
-                                    if(c.velocity.y<0){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.y<0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.y<0){
                                         c.position.y=this.position.y+this.height/2+c.height/2
                                         c.velocity.y*=-1
                                     }
                                 break
                                 case 1:
-                                    if(c.velocity.y>0){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.y>0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.y>0){
                                         c.position.y=this.position.y-this.height/2-c.height/2
                                         c.velocity.y*=-1
                                     }
                                 break
                                 case 2:
-                                    if(c.velocity.x<0){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x<0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.x<0){
                                         c.position.x=this.position.x+this.width/2+c.width/2
                                         c.velocity.x*=-1
                                     }
                                 break
                                 case 3:
-                                    if(c.velocity.x>0){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x>0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.x>0){
                                         c.position.x=this.position.x-this.width/2-c.width/2
                                         c.velocity.x*=-1
                                     }
                                 break
                                 case 4:
-                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                    incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
-                                        c.position.x+=c.velocity.x*0.1
-                                        c.position.y+=c.velocity.y*0.1
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x<0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else{
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }
                                 break
                                 case 5:
-                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                    incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
-                                        c.position.x+=c.velocity.x*0.1
-                                        c.position.y+=c.velocity.y*0.1
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x>0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else{
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }
                                 break
                                 case 6:
-                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                    c.velocity.y=0
-                                    incident=atan2(-game.tileset[0*this.height/this.width],game.tileset[0])
-                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
-                                        c.position.x+=c.velocity.x*0.1
-                                        c.position.y+=c.velocity.y*0.1
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x<0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else{
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        c.velocity.y=0
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }
                                 break
                                 case 7:
-                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                    c.velocity.y=0
-                                    incident=atan2(game.tileset[0*this.height/this.width],game.tileset[0])
-                                    vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                    if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                        c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                        c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
-                                        c.position.x+=c.velocity.x*0.1
-                                        c.position.y+=c.velocity.y*0.1
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x>0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else{
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        c.velocity.y=0
+                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
+                                    }
+                                break
+                                case 8:
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x<0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.x<0){
+                                        c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
+                                        c.velocity.x*=-1
+                                    }
+                                break
+                                case 9:
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                        if(c.velocity.x>0){
+                                            c.direction+=180
+                                            c.hit=[]
+                                            c.bounces++
+                                            if(c.bounces>=3){
+                                                c.active=false
+                                            }
+                                        }
+                                    }else if(c.velocity.x>0){
+                                        c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
+                                        c.velocity.x*=-1
                                     }
                                 break
                             }
-                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83)&&c.bounceTimer==0){
+                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
                                 if(c.bounces>=3){
@@ -912,21 +1196,21 @@ class wall{
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]||c.timer==0&&inBoxBox(this,c)
                             &&!(this.type==17&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
-                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
-                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2}
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2},
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2}
                             ]))&&!(this.type==18&&inPointTriangle(c.position,[
-                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
-                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2},
-                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2}
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2},
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2},
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2}
                             ]))&&!(this.type==20&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
-                                {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
-                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2}
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2},
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2}
                             ]))&&!(this.type==21&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2,y:this.position.y+this.height/2},
-                                {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
-                                {x:this.position.x-this.width/2,y:this.position.y-this.height/2}
+                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2},
+                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2}
                             ]))
                         ){
                             if(
@@ -958,7 +1242,7 @@ class wall{
                         switch(this.type){
                             case 5:
                                 this.exploded=true
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,16,0,-1,200,2,false,-1))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,16,0,-1,200,2,false,"none"))
                                 entities.projectiles[entities.projectiles.length-1].explode()
                                 entities.projectiles[entities.projectiles.length-1].active=false
                             break
@@ -1005,7 +1289,7 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
-                                if(!game.weapon[c.id-1].includes(this.weapon)&&(game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<4)){
+                                if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?1:4))){
                                     game.weapon[c.id-1].push(this.weapon)
                                     this.recharge=1800
                                 }
@@ -1039,7 +1323,7 @@ class wall{
                                                 c.jump.quadruple=1
                                             }
                                             switch(this.type){
-                                                case 2:
+                                                case 2: case 25:
                                                     c.bounceTime=15
                                                 break
                                                 case 3:
@@ -1053,7 +1337,7 @@ class wall{
                                                         switch(game.level){
                                                             case 6:
                                                                 for(let e=0,le=15;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-155,-175),-1,100,240,false,-1))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-155,-175),-1,100,240,false,"none"))
                                                                     let mult=random(2,5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -1062,15 +1346,22 @@ class wall{
                                                             case 7:
                                                                 for(let f=0,lf=3;f<lf;f++){
                                                                     for(let e=0,le=4-f%2;e<le;e++){
-                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-180-4+le*4-e*10,-1,100,240,false,-1))
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-180-4+le*4-e*10,-1,100,240,false,"none"))
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.x*=(4-f)
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.y*=(4-f)
                                                                     }
                                                                 }
                                                             break
+                                                            case 15:
+                                                                for(let e=0,le=3;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-150+e*15,-1,100,240,false,"none"))
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=2
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=2
+                                                                }
+                                                            break
                                                             default:
                                                                 for(let e=0,le=15;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,240,false,-1))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,240,false,"none"))
                                                                     let mult=random(1.25,2.5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -1088,7 +1379,7 @@ class wall{
                                                     if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
                                                         this.reload=480
                                                         for(let e=0,le=15;e<le;e++){
-                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-157.5,-112.5),-1,40,240,false,-1))
+                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-157.5,-112.5),-1,40,240,false,"none"))
                                                             let mult=random(1.25,2.5)
                                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -1121,9 +1412,8 @@ class wall{
                                             }
                                         break
                                         case 4:
-                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.velocity.y=this.velocity.y
+                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            c.velocity.y=c.velocity.x*this.height/this.width
                                             c.jump.time+=5
                                             if(c.parachute){
                                                 c.parachute=false
@@ -1134,9 +1424,8 @@ class wall{
                                             c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                         case 5:
-                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.velocity.y=this.velocity.y
+                                            c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            c.velocity.y=-c.velocity.x*this.height/this.width
                                             c.jump.time+=5
                                             if(c.parachute){
                                                 c.parachute=false
@@ -1147,16 +1436,22 @@ class wall{
                                             c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                         case 6:
-                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                            c.velocity.y=this.velocity.y
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            c.velocity.y=-c.velocity.x*this.height/this.width
                                             c.velocity.x*=1-this.height/this.width*0.1
                                         break
                                         case 7:
-                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                            c.velocity.y=this.velocity.y
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            c.velocity.y=c.velocity.x*this.height/this.width
                                             c.velocity.x*=1-this.height/this.width*0.1
+                                        break
+                                        case 8:
+                                            c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
+                                            c.velocity.x=0
+                                        break
+                                        case 9:
+                                            c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
+                                            c.velocity.x=0
                                         break
                                     }
                                 }

@@ -16,16 +16,18 @@ function mouseClicked(){
     updateMouse(graphics.main[0])
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=5;a<la;a++){
-                for(let b=0,lb=a>=4?1:a>=2?5:4;b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:60+a*70+(a>=2?10:0)+(a>=3?10:0)+(a>=4?10:0)+40},width:200,height:60})){
+            for(let a=0,la=6;a<la;a++){
+                for(let b=0,lb=[4,4,5,4,3,1][a];b<lb;b++){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:60+a*80+40},width:200,height:60})){
                         if(a==0){
                             menu.players=b+1
                         }else if(a==1){
                             menu.gaming=b+1
                         }else if(a==2){
-                            menu.level=[6,7,8,12,13][b]
+                            menu.level=[6,7,8,15,16][b]
                         }else if(a==3){
+                            menu.weapon=b
+                        }else if(a==4){
                             game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]=!game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]
                         }else{
                             stage.scene='mission'
@@ -38,6 +40,17 @@ function mouseClicked(){
             for(let a=0,la=8;a<la;a++){
                 for(let b=0,lb=5;b<lb;b++){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:100+a*70},width:200,height:60})){
+                        switch(menu.weapon){
+                            case 1:
+                                game.peakWeapon=true
+                            break
+                            case 2:
+                                game.classicWeapon=true
+                            break
+                            case 3:
+                                game.randomizer=true
+                            break
+                        }
                         game.players=menu.players
                         game.gaming=menu.gaming
                         if(game.classicWeapon||game.randomizer){
@@ -96,6 +109,18 @@ function keyPressed(){
         case 't': case 'T': inputs.keys[3][2]=true;inputs.tap[3][2]=true; break
         case 'g': case 'G': inputs.keys[3][3]=true;inputs.tap[3][3]=true; break
     }
+    if(game.emergencyKey){
+        switch(key){
+            case '[': case '{': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
+            case '|': case '\\': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
+            case '=': case '+': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
+            case ']': case '}': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+            case 'b': case 'B': inputs.keys[2][0]=true;inputs.tap[2][0]=true; break
+            case 'm': case 'M': inputs.keys[2][1]=true;inputs.tap[2][1]=true; break
+            case 'h': case 'H': inputs.keys[2][2]=true;inputs.tap[2][2]=true; break
+            case 'n': case 'N': inputs.keys[2][3]=true;inputs.tap[2][3]=true; break
+        }
+    }
 }
 function keyReleased(){
     switch(key){
@@ -115,5 +140,17 @@ function keyReleased(){
         case 'h': case 'H': inputs.keys[3][1]=false; break
         case 't': case 'T': inputs.keys[3][2]=false; break
         case 'g': case 'G': inputs.keys[3][3]=false; break
+    }
+    if(game.emergencyKey){
+        switch(key){
+            case '[': case '{': inputs.keys[0][0]=false; break
+            case '|': case '\\': inputs.keys[0][1]=false; break
+            case '=': case '+': inputs.keys[0][2]=false; break
+            case ']': case '}': inputs.keys[0][3]=false; break
+            case 'b': case 'B': inputs.keys[2][0]=false; break
+            case 'm': case 'M': inputs.keys[2][1]=false; break
+            case 'h': case 'H': inputs.keys[2][2]=false; break
+            case 'n': case 'N': inputs.keys[2][3]=false; break
+        }
     }
 }
