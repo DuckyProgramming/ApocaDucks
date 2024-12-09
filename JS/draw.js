@@ -54,7 +54,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                             if(ticker>=40){
                                 ticker-=40
@@ -71,7 +71,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -84,7 +84,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -102,13 +102,13 @@ function mainloop(layer){
                 }else{
                     graphics.main[c].background(0)
                 }
-                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151?2:1)
+                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166?2:1)
                 key[c]*=0.75
                 if(game.level==6){
                     key[c]*=3/4
                 }
                 bs.push([])
-                effective.push([constrain(entities.players[c].position.x,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(entities.players[c].position.y+(entities.players[c].weaponType==107?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                effective.push([constrain(entities.players[c].position.x,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(entities.players[c].position.y+(entities.players[c].weaponType==107||entities.players[c].weaponType==166?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
                 if(game.level==6){
@@ -190,7 +190,7 @@ function mainloop(layer){
                         graphics.main[a].text('Weapons\nHere',game.edge[0]-150,game.edge[1]-520)
                     break
                     case 15:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]-80,400)
+                        graphics.main[a].text('Weapons\nHere',game.edge[0]-80,720)
                     break
                 }
             }
@@ -214,6 +214,7 @@ function mainloop(layer){
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
+                entities.players[a].displayOver(graphics.main[a])
                 graphics.main[a].pop()
             }
             if(display.anim>0){

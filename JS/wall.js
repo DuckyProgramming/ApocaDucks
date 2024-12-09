@@ -766,6 +766,21 @@ class wall{
                     this.width/2,-this.height/2
                 )
             break
+            case 26:
+                layer.fill(160,100,40)
+                layer.rect(0,0,this.width+1,this.height)
+                layer.fill(140,80,20)
+                for(let a=0,la=round(this.width/game.tileset[0]*2);a<la;a++){
+                    layer.rect(-this.width/2+(a+0.5)/2*game.tileset[0],0,game.tileset[1]/10,this.height)
+                }
+                layer.fill(100,225,225)
+                layer.quad(
+                    -this.width/2,-this.height/2,
+                    -this.width/2+10,-this.height/2+10,
+                    this.width/2-10,-this.height/2+10,
+                    this.width/2,-this.height/2
+                )
+            break
         }
         //layer.stroke(255,150,50)
         //layer.noFill()
@@ -980,6 +995,11 @@ class wall{
                     }
                 }
             break
+            case 16:
+                if(this.recharge>0&&game.level==15){
+                    this.recharge--
+                }
+            break
         }
         if(this.type!=7){
             for(let a=0,la=this.collide.length;a<la;a++){
@@ -991,7 +1011,7 @@ class wall{
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
                         c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
                         c.type==91||c.type==92||c.type==93||c.type==96||c.type==95||
-                        c.type==97||c.type==98
+                        c.type==97||c.type==98||c.type==102||c.type==104
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1181,7 +1201,7 @@ class wall{
                                     }
                                 break
                             }
-                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98)&&c.bounceTimer==0){
+                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
                                 if(c.bounces>=3){
@@ -1215,7 +1235,8 @@ class wall{
                         ){
                             if(
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
-                                c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89
+                                c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
+                                c.type!=100&&c.type!=103
                             ){
                                 c.active=false
                                 c.speed=0
@@ -1224,7 +1245,7 @@ class wall{
                                     c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
                                     c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
                                     c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
-                                    c.type==86
+                                    c.type==86||c.type==101
                                 ){
                                     c.explode()
                                 }
@@ -1289,7 +1310,11 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
-                                if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?1:4))){
+                                if(game.level==15){
+                                    c.newWeaponSet(this.weapon)
+                                    this.weapon=listing[0][floor(random(listing[0].length))]
+                                    this.recharge=3600-(game.gaming-1)*600
+                                }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?1:4))){
                                     game.weapon[c.id-1].push(this.weapon)
                                     this.recharge=1800
                                 }
@@ -1353,11 +1378,14 @@ class wall{
                                                                 }
                                                             break
                                                             case 15:
-                                                                for(let e=0,le=3;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-150+e*15,-1,100,240,false,"none"))
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=2
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=2
+                                                                for(let e=0,le=5;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,e==2?73:60,-150+e*7.5,-1,100,240,false,"none"))
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=2-((e%2)*0.25)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=2-((e%2)*0.25)
                                                                 }
+                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135,-1,100,240,false,"none"))
+                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                                                             break
                                                             default:
                                                                 for(let e=0,le=15;e<le;e++){
@@ -1386,6 +1414,16 @@ class wall{
                                                         }
                                                     }
                                                 break
+                                                case 26:
+                                                    if(c.id>0){
+                                                        c.velocity.x=-160
+                                                        c.velocity.y=-40
+                                                        c.thrown=true
+                                                    }
+                                                break
+                                            }
+                                            if(c.thrown&&this.type!=26){
+                                                c.thrown=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
