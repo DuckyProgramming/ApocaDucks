@@ -1,14 +1,15 @@
-game={level:6,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,tileset:[0,0],edge:[0,0],emergencyKey:true,spawnIndex:0,
+game={level:6,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,diff:1,ammoMult:2,tileset:[0,0],edge:[0,0],emergencyKey:false,spawnIndex:0,
 classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,
 randomizer:false,classicWeapon:false,peakWeapon:false,
 weapon:[],weaponTick:[]}
 listing=[
-  [0,1,2,3,4,5,6,7,8,9,10,11,60,61,62],
+  [0,1,2,3,4,5,6,7,8,9,10,11,12,72,73,74,75],
   [
-    12,13,14,15,16,17,18,19,20,21,22,23,63,67,71,
-    24,25,26,27,28,29,30,31,32,33,34,35,64,68,72,
-    36,37,38,39,40,41,42,43,44,45,46,47,65,69,73,
-    48,49,50,51,52,53,54,55,56,57,58,59,66,70,74
+    12,13,14,15,16,17,18,19,20,21,22,23,76,81,86,91,
+    24,25,26,27,28,29,30,31,32,33,34,35,77,82,87,92,
+    36,37,38,39,40,41,42,43,44,45,46,47,78,83,88,93,
+    48,49,50,51,52,53,54,55,56,57,58,59,79,84,89,94,
+    60,61,62,63,64,65,66,67,68,69,70,71,80,85,90,95,
   ]
 ]
 menu={players:1,gaming:1,weapon:0,level:6,list:[]}
@@ -21,6 +22,7 @@ types={
       difficulty:0,
       wave:[
         [
+          //['Tank',10],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -2072,7 +2074,7 @@ types={
           ['Wait',5],
 
           ['PhaseCritRocketLauncher',3],
-          ['RocketLauncher',5],
+          ['RocketLauncherStop',5],
           ['PhaseFlamethrower',5],
           ['HeavyRocketLauncher',2],
           ['BigRapidRadiusRocketLauncher',2],
@@ -2147,7 +2149,7 @@ types={
           ['CritSpy',4],
           //40
 
-          ['Wait',20],
+          ['Wait',10],
 
           ['BigCritShotgun',2],
           ['BigCritPushPistol',2],
@@ -2173,7 +2175,7 @@ types={
           ['BigCritHeavyPistol',2],
           //20
 
-          ['Wait',20],
+          ['Wait',10],
 
           ['NapalmFlamethrower',5],
           ['PaperTank',1],
@@ -2183,7 +2185,7 @@ types={
           ['MegaTank',1],
           //10
 
-          ['Wait',20],
+          ['Wait',10],
 
           ['PistolingTank',1],
           ['RocketLaunchingTank',1],
@@ -2196,7 +2198,7 @@ types={
           ['SpyTank',1],
           //9
 
-          ['Wait',20],
+          ['Wait',10],
 
           ['SegmentationBoss',1],
           //1
@@ -2886,8 +2888,8 @@ types={
       name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
     },{
-      name:'PlayerAutoMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:143,
+      name:'PlayerSprayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
     },{
       name:'PlayerGarbageLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:3,crit:0,weapon:144,
@@ -2918,6 +2920,44 @@ types={
     },
 
     {
+      name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:177,
+    },{
+      name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
+    },{
+      name:'PlayerMachineGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:179,
+    },{
+      name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
+    },{
+      name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
+    },{
+      name:'PlayerBallerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:182,
+    },{
+      name:'PlayerFlamethrowerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:183,
+    },{
+      name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:184,
+    },{
+      name:'PlayerMedicception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:185,
+    },{
+      name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
+    },{
+      name:'PlayerAssaultRifleception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:187,
+    },{
+      name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:188,
+    },
+
+    {
       name:'PlayerRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:136,
     },{
@@ -2925,7 +2965,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:153,
     },{
       name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:133,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:133,
+    },{
+      name:'PlayerGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:176,
     },
     
     {
@@ -2935,11 +2978,11 @@ types={
       name:'PlayerOpticalInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:154,
     },{
-      name:'PlayerFlakzone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:165,
+      name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
     },{
-      name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:158,
+      name:'PlayerMinesweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:189,
     },{
       name:'PlayerDeployerM',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:152,
@@ -2947,8 +2990,14 @@ types={
       name:'PlayerDeployerR',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:159,
     },{
-      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
+      name:'PlayerDeployerS',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:173,
+    },{
+      name:'PlayerDeployerF',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:174,
+    },{
+      name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:158,
     },{
       name:'PlayerGlassCannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:160,
@@ -2964,6 +3013,24 @@ types={
     },{
       name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:5,reloadBuff:1,crit:0,weapon:5,
+    },{
+      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
+    },{
+      name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:190,
+    },{
+      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },
     
     {
@@ -2986,6 +3053,12 @@ types={
     },{
       name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:3,
+    },{
+      name:'ConstructSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:6,
+    },{
+      name:'ConstructFlamethrower',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },
     
     {
@@ -3019,7 +3092,7 @@ types={
       name:'EngineerDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
     },{
-      name:'HeavyEngineer',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyEngineer',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'BigEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3043,10 +3116,10 @@ types={
       name:'FastPunch',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
-      name:'HeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
     },{
-      name:'HeavyPunchDefendBuff',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPunchDefendBuff',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'BigRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3091,7 +3164,7 @@ types={
       name:'PlusMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:13,
     },{
-      name:'HeavyPlusMedic',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPlusMedic',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:13,
     },{
       name:'RapidPlusMedic',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
@@ -3103,29 +3176,29 @@ types={
       name:'CritSpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'PaperTank',sizeBuff:1.5,lifeBuff:4,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'PaperTank',sizeBuff:1.5,lifeBuff:4,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'LightTank',sizeBuff:1.5,lifeBuff:6,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'LightTank',sizeBuff:1.5,lifeBuff:6,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'Tank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'Tank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'TankDamaged',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'TankDamaged',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'TankSpawner',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'TankSpawner',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'SpyTank',sizeBuff:1,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'SpyTank',sizeBuff:1,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'HeavyTank',sizeBuff:1.5,lifeBuff:15,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'HeavyTank',sizeBuff:1.5,lifeBuff:15,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'MegaTank',sizeBuff:1.75,lifeBuff:25,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Baller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:7,
@@ -3187,7 +3260,7 @@ types={
       name:'BigCritFastPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'HeavyRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'PushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3215,13 +3288,13 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:16,
     },{
       name:'BigMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:11,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigMedicShield',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:11,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigMedicAura',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:11,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigCritRapidRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:3,
@@ -3277,10 +3350,10 @@ types={
       name:'BigPushShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
     },{
-      name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
-      name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunBurst',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3382,7 +3455,7 @@ types={
       name:'CritPullPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:1,weapon:24,
     },{
-      name:'CritHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'CritHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:1,weapon:9,
     },{
       name:'BigHyperPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3463,7 +3536,7 @@ types={
       name:'RapidBallerHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:41,
     },{
-      name:'HeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:1,weapon:6,
     },{
       name:'MachineGunCritSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3494,7 +3567,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:29,
     },{
       name:'BigHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:14,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
       name:'BigSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:12,
@@ -3532,7 +3605,7 @@ types={
       name:'DamageOverTimePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:46,
     },{
-      name:'HeavyDamageOverTimePistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyDamageOverTimePistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:46,
     },{
       name:'RapidPushRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3548,10 +3621,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:47,
     },{
       name:'BigPlusMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:13,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:13,
     },{
       name:'BigCleanMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:118,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:118,
     },{
       name:'SpyHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:48,
@@ -3571,10 +3644,10 @@ types={
       name:'BigDirectRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:49,
     },{
-      name:'BallingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'BallingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:50,
     },{
-      name:'FlamethrowingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'FlamethrowingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:115,
     },{
       name:'BigCritDamageOverTimeMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3679,7 +3752,7 @@ types={
       name:'BigFlameRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:58,
     },{
-      name:'HeavyPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FlipPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3725,7 +3798,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:63,
     },{
       name:'BigCritApplyMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:44,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:44,
     },{
       name:'RapidShortSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:54,
@@ -3775,7 +3848,7 @@ types={
       name:'CritDeflectorPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:47,
     },{
-      name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBufff:0.5,reloadBuff:1,crit:0,weapon:15,
     },{
       name:'BigHeavyPushPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
@@ -3814,7 +3887,7 @@ types={
       name:'BigHeavyDamageOverTimeSpreadSniper',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:69,
     },{
-      name:'HeavyDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:69,
     },{
       name:'BigBarrageFlameRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3850,7 +3923,7 @@ types={
       name:'CritPunchHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:28,
     },{
-      name:'HeavyPullPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPullPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
     },{
       name:'BigHeavyPullPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
@@ -3889,7 +3962,7 @@ types={
       name:'TinyCritPistolStopVulnerable',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:78,
     },{
-      name:'HeavySpreadSniperHealSelf',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavySpreadSniperHealSelf',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:1,weapon:79,
     },{
       name:'BigRapidFlameBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -3911,10 +3984,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:83,
     },{
       name:'BigDefendApplyMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:83,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:83,
     },{
       name:'PistolHurtSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:84,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:84,
     },{
       name:'SpreadMachineGunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:85,
@@ -3937,13 +4010,13 @@ types={
       name:'BigMachineGunFocus',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:103,
     },{
-      name:'HeavyPunchStop',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPunchStop',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:104,
     },{
-      name:'HeavyPushPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPushPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:105,
     },{
-      name:'PistolingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'PistolingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:106,
     },{
       name:'AirstrikeRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3968,7 +4041,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:110,
     },{
       name:'BigMultiHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:14,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
       name:'PhaseFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:111,
@@ -3976,7 +4049,7 @@ types={
       name:'EngineerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
     },{
-      name:'EngineeringTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'EngineeringTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:112,
     },{
       name:'SegmentationBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.5,
@@ -4003,13 +4076,13 @@ types={
       name:'EngineerNode',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:95,
     },{
-      name:'HyperTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'HyperTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'RocketLaunchingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'RocketLaunchingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:119,
     },{
-      name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:99,
     },{
       name:'RadiusGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4084,7 +4157,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Assault Rifle',
 			ammo:18,
@@ -4221,7 +4294,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Long Flamethrower',
 			ammo:50,
@@ -4239,7 +4312,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Spray Baller',
 			ammo:3,
@@ -4293,7 +4366,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Radius Rocket Launcher',
 			ammo:1,
@@ -4302,7 +4375,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Punch Heal Self',
 			ammo:1,
@@ -4347,7 +4420,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Long Baller',
 			ammo:3,
@@ -4374,7 +4447,7 @@ types={
 			stop:480,
 			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Grenadier',
 			ammo:2,
@@ -4392,7 +4465,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Phase Rocket Launcher',
 			ammo:1,
@@ -4401,7 +4474,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Flamethrower Heal Self',
 			ammo:50,
@@ -4500,7 +4573,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Baller Dualic',
 			ammo:1,
@@ -4518,7 +4591,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Light Engineer',
 			ammo:1,
@@ -4527,7 +4600,7 @@ types={
 			stop:180,
 			reload:180,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Pistol Vulnerable',
 			ammo:10,
@@ -4581,7 +4654,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Remover Punch',
 			ammo:1,
@@ -4599,7 +4672,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Smoke Rocket Launcher',
 			ammo:1,
@@ -4608,7 +4681,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Medic Shield',
 			ammo:10,
@@ -4707,7 +4780,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Spread Pushier Rocket Launcher',
 			ammo:1,
@@ -4716,7 +4789,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Slow Rocket Launcher Flip',
 			ammo:1,
@@ -4725,7 +4798,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Remover Sniper',
 			ammo:1,
@@ -4833,7 +4906,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Barrage Rocket Launcher Spread',
 			ammo:10,
@@ -4851,7 +4924,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Sniper Shotgun',
 			ammo:2,
@@ -4914,7 +4987,7 @@ types={
 			stop:480,
 			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Engineer Node',
 			ammo:1,
@@ -4923,7 +4996,7 @@ types={
 			stop:480,
 			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Flamethrower Dual',
 			ammo:50,
@@ -5031,7 +5104,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Napalm Flamethrower',
 			ammo:50,
@@ -5049,7 +5122,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Phase Flamethrower',
 			ammo:50,
@@ -5130,7 +5203,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Damage Over Time Sniper',
 			ammo:1,
@@ -5211,7 +5284,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Medic Armored',
 			ammo:10,
@@ -5373,7 +5446,7 @@ types={
 			stop:480,
 			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Slicer Linger',
 			ammo:4,
@@ -5516,7 +5589,7 @@ types={
 			cooldown:60,
 			stop:360,
 			reload:90,
-			speed:0.6,
+			speed:0.65,
       uses:4,
 		},{
 			name:'Push Machine Gun',
@@ -5608,6 +5681,168 @@ types={
 			reload:10,
 			speed:1.4,
       uses:30,
+		},{
+			name:'Deployer S',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Deployer F',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Sprayer Machine Gun',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Gunception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Shotgunception',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Pistolception',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Machine Gunception',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Rocket Launcherception',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Sniperception',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Ballerception',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Flamethrowerception',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Engineerception',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Medicception',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Slicerception',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Assault Rifleception',
+			ammo:18,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:54,
+		},{
+			name:'Grenadierception',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Minesweeper',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Rearguard',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 	],
 }
@@ -5615,7 +5850,7 @@ stage={scene:'menu'}
 display={wave:0,anim:0,win:0,cycle:0,wait:120}
 graphics={main:[],over:[],pane:[]}
 entities={projectiles:[],players:[],walls:[]}
-deployer={spawn:[],timer:0}
+deployer={spawn:[],timer:0,speed:0,position:0,interval:0,artillery:[1200,1200]}
 run={fore:[],info:[],back:[]}
 inputs={
   mouse:{x:0,y:0},rel:{x:0,y:0},
@@ -6016,138 +6251,147 @@ levels=[
       "!!!!!!!!!!!!!!##########################################################################################",
     ],[],[],[],[],
     [
-      "##########################################################################################################",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#                                                                                                        #",
-      "#   1      2      3      4      5      6                                                                 #",
-      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ######",
-      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #",
-      "#  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #",
-      "##########################################################################################################",
+      "#################################################################################################################",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#                                                                                                               #",
+      "#   1      2      3      4      5      6                                                                        #",
+      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ######",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #",
+      "#  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #",
+      "#################################################################################################################",
     ],[
-      "############################################################################################################",
-      "#                                                                                                          #",
-      "#                                                                                                          #",
-      "#                                                                                                          #",
-      "#                                                                #              #                      ### #",
-      "#                #                                                    #                                  # #",
-      "#          #            #           #           #                           #        #             #     # #",
-      "#                            #             #                 #                               #           # #",
-      "#                                                     #                                                  # #",
-      "#                                                                                                        # #",
-      "#      #                                                                                                 # #",
-      "#                                                                                                        # #",
-      "#                                                                                                        # #",
-      "##                                                                                                       # #",
-      "#                                                                                                        # #",
-      "#                                                                                                        # #",
-      "#    1      2      3      4      5      6                                                                # #",
-      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #",
-      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
-      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
-      "### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #### #",
-      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
-      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
-      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #",
-      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
-      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
-      "### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ########### #",
-      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
-      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ?   #",
-      "############################################################################################################",
+      "###################################################################################################################",
+      "#                                                                                                                 #",
+      "#                                                                                                                 #",
+      "#                                                                                                                 #",
+      "#                                                                #              #                             ### #",
+      "#                #                                                    #                                         # #",
+      "#          #            #           #           #                           #        #             #     #      # #",
+      "#                            #             #                 #                               #                  # #",
+      "#                                                     #                                                         # #",
+      "#                                                                                                               # #",
+      "#      #                                                                                                        # #",
+      "#                                                                                                               # #",
+      "#                                                                                                               # #",
+      "##                                                                                                              # #",
+      "#                                                                                                               # #",
+      "#                                                                                                               # #",
+      "#    1      2      3      4      5      6                                                                       # #",
+      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
+      "### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #### #",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
+      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
+      "### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### #### #",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #      # #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? # #",
+      "# ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ###### ############# #",
+      "#      #      #      #      #      #      #      #      #      #      #      #      #      #      #      #        #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ? #    ?   #",
+      "###################################################################################################################",
     ],[
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                                ",
-      "                                                                                                                                                                             123",
-      "                                                                                                                                                   ---                       456",
-      "                                                                                                                                               +_________+                  <###",
-      "                                                                                                                                               |         |   ---           #####",
-      "                                                                                                                                               |         |  <###>         /#####",
-      "                                                                                                                                          +c__b_+      <##@######>      <#######",
-      "                                                                                                                                          |     |   <##############>   <########",
-      "                                                                                                                                          |     | <##################%##########",
-      "                                                                                                                                          |    <#@##############################",
-      "                                                                                                                                          | --<#################################",
-      "                                                                                                                                        <##%####################################",
-      "                                                                                                                                    <#`#########################################",
-      "                                                                                                                                   <############################################",
-      "                                                                                                                                  ##############################################",
-      "                                                                                                                                 /##############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                 ###############################################",
-      "                                                                                                                                @###############################################",
-      "                                                                                                                                ################################################",
-      "                                                                                                                                ################################################",
-      "                                                                                                                 +_____+        ################################################",
-      "                                                                                                                 |     |        ]###############################################",
-      "                                                                                                                 |     |        =]##############################################",
-      "                                                                                                                 |     | <#%#>   *##############################################",
-      "                                                                                                                <#>--<##@######@################################################",
-      "                                                                                                               <################################################################",
-      "                                                                                                           <####################################################################",
-      "                                                                                                       <#%######################################################################",
-      "                                                                                                    <###########################################################################",
-      "                                                                                                   <############################################################################",
-      "                                                                                 ~                ##############################################################################",
-      "                                                           -- * --             +___+             /##############################################################################",
-      "                                                         +_________+           |   |           <################################################################################",
-      "                                                         |         |           |   |       <####################################################################################",
-      "                                                         |         | ---       |  <#@>    <#####################################################################################",
-      "                                                         |        <#@####>   <#########%########################################################################################",
-      "                                                         |     ############%####################################################################################################",
-      "                                                     --<@#>   /#################################################################################################################",
-      "                                                   <########%###################################################################################################################",
-      "                                                 <##############################################################################################################################",
-      "                                                <###############################################################################################################################",
-      "                                            <#%#################################################################################################################################",
-      "                             ^            <#####################################################################################################################################",
-      "ABC                       +_____+       <#######################################################################################################################################",
-      "DEF                       |     |    --<########################################################################################################################################",
-      "                          |     |  <############################################################################################################################################",
-      "####>                 --<##>   <################################################################################################################################################",
-      "##########__________#########%##################################################################################################################################################",
-      "###########!!!!!!!!#############################################################################################################################################################",
-      "################################################################################################################################################################################",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                           ",
+      "                                                                                                                                                                                        123",
+      "                                                                                                                                                             ---                        456",
+      "                                                                                                                                                         +_________+                  <####",
+      "                                                                                                                                                         |         |   ---           ######",
+      "                                                                                                                                                      *  |         |  <###>         /######",
+      "                                                                                                                                                   +c___b_+      <##@######>      <########",
+      "                                                                                                                                                   |      |   <##############>   <#########",
+      "                                                                                                                                                   |      |  <#################%###########",
+      "                                                                                                                                                   |     <#@###############################",
+      "                                                                                                                                                   | --<###################################",
+      "                                                                                                                                                 <##%######################################",
+      "                                                                                                                                             <#`###########################################",
+      "                                                                                                                                            <##############################################",
+      "                                                                                                                                           ################################################",
+      "                                                                                                                                          /################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                                          #################################################",
+      "                                                                                                                         ~               @#################################################",
+      "                                                                                                                       +___+             ##################################################",
+      "                                                                                                                    -- |   |             ##################################################",
+      "                                                                                                                  +_____+  |             ##################################################",
+      "                                                                                                                  |     |  |             ]#################################################",
+      "                                                                                                                  |     |  |  --<#>      =]################################################",
+      "                                                                                                                  |     |  | <######%#>   *################################################",
+      "                                                                                                                #@#>   <####@###########@##################################################",
+      "                                                                                                               /#####%#####################################################################",
+      "                                                                                                           <###############################################################################",
+      "                                                                                               d       <#%#################################################################################",
+      "                                                                                              +_+   <######################################################################################",
+      "                                                                                              | |  <#######################################################################################",
+      "                                                                                 *            | | #########################################################################################",
+      "                                                           -- ~ --             +___+          | |/#########################################################################################",
+      "                                                         +_________+           |   |          |<###########################################################################################",
+      "                                                         |         |           |   |       <#@#############################################################################################",
+      "                                                         |         | ---       |  <#@>    <################################################################################################",
+      "                                                         |        <#@####>   <#########%###################################################################################################",
+      "                                                         |     ############%###############################################################################################################",
+      "                                                     --<@#>   /############################################################################################################################",
+      "                                                   <########%##############################################################################################################################",
+      "                                                 <#########################################################################################################################################",
+      "                                                <##########################################################################################################################################",
+      "                                            <#%############################################################################################################################################",
+      "                             ^            <################################################################################################################################################",
+      "ABC                       +_____+       <##################################################################################################################################################",
+      "DEF                       |     |    --<###################################################################################################################################################",
+      "                          |     |  <#######################################################################################################################################################",
+      "####>                 --<##>   <###########################################################################################################################################################",
+      "##########__________#########%#############################################################################################################################################################",
+      "###########!!!!!!!!########################################################################################################################################################################",
+      "###########################################################################################################################################################################################",
     ],[
+      "dd^                                                                                                                                                                                                                                                       ",
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
@@ -6180,16 +6424,31 @@ levels=[
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
-      "                                                                                                ####                                                                                                                                                      ",
-      "                                                                                                |  #                                                                                                                                                      ",
-      "                                                        ## ######   #                        #  |  |                                                                               ######   ####     ###                                                  ",
-      "                           ####                         |   |   |   #                        ####  |                                                                               |    |    |         #                                                 D",
-      "A                          |       |                    |   |   |   #                        |  |  |       #   #   1 2 3 4 5 6       ##                                            #    |    |    |    #                                                 E",
-      "B                          #       |                    #####   |   |              #         |  |  |   <##################################>                                        #    #######   |    #                                                 F",
-      "C                          #   | ###                    |   |   |   |         #   ### <################################################################>                           |    |    |    |    |                            <#####################",
-      "############>     #        |   |   |                 #  |   |   |   |    <###################################################################################################>     |    |    |    |    |    <#############################################",
-      "#########################> |   |   |   #     #   <########################################################################################################################################################################################################",
-      "##########################################################################################################################################################################################################################################################",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                                                                                                                                                                          ",
+      "                                                                                                gggg                                                                                                                                                      ",
+      "                                                                                                |  g                                                            gg                                                                                        ",
+      "                                                        gg gggggg  gg                        g  |  |                                                        g   |                  gggggg   gggg     ggg                                                  ",
+      "                           gggg                         |   |   |   g                        gggg  |                                                        |   |   |              |    |    |         g                                  g  ggg|        D",
+      "A                          |       |                    |   |   |   g                        |  |  |       _   _   1 2 3 4 5 6       __                     gg  |  gg              g    |    |    |    g              gg  g               |  |  |        E",
+      "B                          g       |                    ggfgg   |   |              _         |  |  |   <##################################>       _         |   |   |              g    gfggggg   |    g          _   |   |             _ |  |  |        F",
+      "C                          g   | ggg                    |   |   |   |         _   <#> <##########@##@##################################################>    |   |   |   __         |    |    |    |    |        <###> |   |   _     <#####################",
+      "############>     _        |   |   |                 _  |   |   |   |    <####################################################################################@###@##########>     |    |    |    |    |    <###########@#################################",
+      "#########################> |   |   |   _     _   <############@###@###############################################################################################################@####@################@#################################################",
+      "##########################@####@####@#####################################################################################################################################################################################################################",
       "##########################################################################################################################################################################################################################################################",
       "##########################################################################################################################################################################################################################################################",
     ],

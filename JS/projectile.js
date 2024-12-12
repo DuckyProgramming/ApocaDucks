@@ -226,8 +226,8 @@ class projectile{
 			case 89: case 103:
 				this.speed=0
 				this.time=time
-				this.width*=40
-				this.height*=40
+				this.width*=50
+				this.height*=50
 				this.shocks=[]
 			break
 			case 91: case 92: case 93: case 96:
@@ -1429,14 +1429,14 @@ class projectile{
 				layer.stroke(255,255,100,this.fade)
 				layer.strokeWeight(4)
 				layer.noFill()
-				layer.ellipse(0,0,90)
+				layer.ellipse(0,0,120)
 				for(let a=0,la=this.shocks.length;a<la;a++){
 					layer.stroke(255,255,100,this.fade*this.shocks[a][2])
 					layer.line(
-						sin(this.shocks[a][0])*45,
-						cos(this.shocks[a][0])*45,
-						sin(this.shocks[a][1])*45,
-						cos(this.shocks[a][1])*45
+						sin(this.shocks[a][0])*60,
+						cos(this.shocks[a][0])*60,
+						sin(this.shocks[a][1])*60,
+						cos(this.shocks[a][1])*60
 					)
 				}
 			break
@@ -1639,14 +1639,14 @@ class projectile{
 				layer.stroke(255,100,100,this.fade)
 				layer.strokeWeight(4)
 				layer.noFill()
-				layer.ellipse(0,0,90)
+				layer.ellipse(0,0,120)
 				for(let a=0,la=this.shocks.length;a<la;a++){
 					layer.stroke(255,100,100,this.fade*this.shocks[a][2])
 					layer.line(
-						sin(this.shocks[a][0])*36,
-						cos(this.shocks[a][0])*36,
-						sin(this.shocks[a][1])*18,
-						cos(this.shocks[a][1])*18
+						sin(this.shocks[a][0])*48,
+						cos(this.shocks[a][0])*48,
+						sin(this.shocks[a][1])*24,
+						cos(this.shocks[a][1])*24
 					)
 				}
 			break
@@ -1814,7 +1814,7 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*constrain(1.2-this.timer/this.base.time*6,0.2,1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
-						entities.players[b].stunTime=max(entities.players[b].stunTime,120)
+						entities.players[b].stunTime=max(entities.players[b].stunTime,90)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -1862,8 +1862,8 @@ class projectile{
 						}
 					}
 				}
-				for(let b=0,lb=15;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?12:6),10,this.crit,this.index))
+				for(let b=0,lb=10;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?10:5),10,this.crit,this.index))
 				}
 			break
 			case 64:
@@ -2083,7 +2083,9 @@ class projectile{
 			case 95: case 97: case 98: case 102: case 104:
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
-				if(this.type!=68){
+				if(this.type==60){
+					this.velocity.y*=0.97
+				}else if(this.type!=68){
 					this.velocity.y*=0.98
 				}
 				if(this.bounceTimer>0){
@@ -2375,7 +2377,7 @@ class projectile{
 			}
 			if(this.active&&this.type!=85){
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82)&&
+				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82)&&!entities.players[b].playerData.name.includes('Medic'))&&
 						!(this.id==-1&&this.timer<10&&entities.players[b].id>0)&&
 						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82)&&this.index==entities.players[b].index)&&
 						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88)&&this.timer<5&&this.id==0)&&
