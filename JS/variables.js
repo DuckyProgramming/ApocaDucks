@@ -3,7 +3,7 @@ classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:
 randomizer:false,classicWeapon:false,peakWeapon:false,
 weapon:[],weaponTick:[]}
 listing=[
-  [0,1,2,3,4,5,6,7,8,9,10,11,12,72,73,74,75],
+  [0,1,2,3,4,5,6,7,8,9,10,11,72,73,74,75],
   [
     12,13,14,15,16,17,18,19,20,21,22,23,76,81,86,91,
     24,25,26,27,28,29,30,31,32,33,34,35,77,82,87,92,
@@ -2981,6 +2981,9 @@ types={
       name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
     },{
+      name:'PlayerGaslighter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:195,
+    },{
       name:'PlayerMinesweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:189,
     },{
@@ -2995,6 +2998,9 @@ types={
     },{
       name:'PlayerDeployerF',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:174,
+    },{
+      name:'PlayerDeployerME',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:192,
     },{
       name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:158,
@@ -3011,29 +3017,26 @@ types={
       name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:171,
     },{
-      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
-    },{
-      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
-    },{
       name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:190,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:191,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerRecoiler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:194,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
     },
     
     {
+      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
+    },{
       name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:99,
     },{
@@ -3049,16 +3052,19 @@ types={
 
     {
       name:'ConstructMachineGun',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:2,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:3,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
       name:'ConstructSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:6,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
     },{
       name:'ConstructFlamethrower',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
+    },{
+      name:'ConstructMedic',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
     },
     
     {
@@ -5843,6 +5849,51 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'Motorizer',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Deployer ME',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Updraft',
+			ammo:5,
+			damage:25,
+			cooldown:30,
+			stop:90,
+			reload:10,
+			speed:1.2,
+      uses:25,
+		},{
+			name:'Recoiler',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Gaslighter',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 	],
 }
@@ -5850,7 +5901,7 @@ stage={scene:'menu'}
 display={wave:0,anim:0,win:0,cycle:0,wait:120}
 graphics={main:[],over:[],pane:[]}
 entities={projectiles:[],players:[],walls:[]}
-deployer={spawn:[],timer:0,speed:0,position:0,interval:0,artillery:[1200,1200]}
+deployer={spawn:[],timer:0,speed:0,position:0,interval:0,artillery:[1200,1200,1200,1200],flip:false}
 run={fore:[],info:[],back:[]}
 inputs={
   mouse:{x:0,y:0},rel:{x:0,y:0},
@@ -6289,13 +6340,13 @@ levels=[
       "#                                                                                                                 #",
       "#                                                                                                                 #",
       "#                                                                                                                 #",
-      "#                                                                #              #                             ### #",
-      "#                #                                                    #                                         # #",
-      "#          #            #           #           #                           #        #             #     #      # #",
-      "#                            #             #                 #                               #                  # #",
-      "#                                                     #                                                         # #",
+      "#                                                               ##             ##                             ### #",
+      "#               ##                                                   ##                                         # #",
+      "#         ##           ##          ##          ##                          ##       ##            #      #      # #",
+      "#                           ##            ##                ##                              #                   # #",
+      "#                                                    ##                                                         # #",
       "#                                                                                                               # #",
-      "#      #                                                                                                        # #",
+      "#     ##                                                                                                        # #",
       "#                                                                                                               # #",
       "#                                                                                                               # #",
       "##                                                                                                              # #",
@@ -6391,7 +6442,7 @@ levels=[
       "###########!!!!!!!!########################################################################################################################################################################",
       "###########################################################################################################################################################################################",
     ],[
-      "dd^                                                                                                                                                                                                                                                       ",
+      "dd^~                                                                                                                                                                                                                                                ABCDEF",
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                                                                                                                                                                          ",
@@ -6441,11 +6492,11 @@ levels=[
       "                                                                                                                                                                                                                                                          ",
       "                                                                                                gggg                                                                                                                                                      ",
       "                                                                                                |  g                                                            gg                                                                                        ",
-      "                                                        gg gggggg  gg                        g  |  |                                                        g   |                  gggggg   gggg     ggg                                                  ",
-      "                           gggg                         |   |   |   g                        gggg  |                                                        |   |   |              |    |    |         g                                  g  ggg|        D",
-      "A                          |       |                    |   |   |   g                        |  |  |       _   _   1 2 3 4 5 6       __                     gg  |  gg              g    |    |    |    g              gg  g               |  |  |        E",
-      "B                          g       |                    ggfgg   |   |              _         |  |  |   <##################################>       _         |   |   |              g    gfggggg   |    g          _   |   |             _ |  |  |        F",
-      "C                          g   | ggg                    |   |   |   |         _   <#> <##########@##@##################################################>    |   |   |   __         |    |    |    |    |        <###> |   |   _     <#####################",
+      "                                                        gg gggggg  gg                        g  |  |                  ggg |                                 g   |                  gggggg   gggg     ggg                                                  ",
+      "                           gggg                         |   |   |   g                        gggg  |                  |   |                                 |   |   |              |    |    |         g                                  g  ggg|         ",
+      "                           |       |                    |   |   |   g                        |  |  |       _   _   1 2|3 4|5 6       __                     gg  |  gg              g    |    |    |    g              gg  g               |  |  |         ",
+      "                           g       |                    ggfgg   |   |              _         |  |  |   <#############@####################>       _         |   |   |              g    gfggggg   |    g          _   |   |             _ |  |  |         ",
+      "     _                     g   | ggg                    |   |   |   |         _   <#> <##########@##@##################################################>    |   |   |   __         |    |    |    |    |        <###> |   |   _     <##################>  ",
       "############>     _        |   |   |                 _  |   |   |   |    <####################################################################################@###@##########>     |    |    |    |    |    <###########@#################################",
       "#########################> |   |   |   _     _   <############@###@###############################################################################################################@####@################@#################################################",
       "##########################@####@####@#####################################################################################################################################################################################################################",

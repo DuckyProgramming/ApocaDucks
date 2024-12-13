@@ -705,6 +705,17 @@ class wall{
                 layer.rect(0,0,this.width+1,this.height+1)
             break
             case 16:
+                if(game.level==16){
+                    layer.noFill()
+                    layer.stroke(200)
+                    layer.strokeWeight(1)
+                    layer.line(-25,-90,0,-5)
+                    layer.line(25,-90,0,-5)
+                    layer.stroke(160)
+                    layer.strokeWeight(5)
+                    layer.arc(0,-80,80,20,-165,-15)
+                    layer.noStroke()
+                }
                 for(let a=0,la=4;a<la;a++){
                     if(cos(a*90+this.time)>0){
                         layer.fill(160+cos(a*90+this.time)*40,1-this.recharge/60)
@@ -1029,7 +1040,7 @@ class wall{
                     this.recharge--
                 }
                 if((this.type==8||this.type==27)&&this.falling>0){
-                    let speed=0.5
+                    let speed=1
                     this.falling-=speed
                     this.position.y+=speed
                     this.bounder.position.y+=speed
@@ -1101,6 +1112,19 @@ class wall{
                 if(this.recharge>0&&game.level==15){
                     this.recharge--
                 }
+                if(this.falling>0){
+                    let speed=1
+                    this.falling-=speed
+                    this.position.y+=speed
+                    this.bounder.position.y+=speed
+                    for(let a=0,la=this.boundary.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                            for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                this.boundary[a][b][c].y+=speed
+                            }
+                        }
+                    }
+                }
             break
         }
         if(this.type!=7){
@@ -1112,17 +1136,24 @@ class wall{
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
                         c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
-                        c.type==91||c.type==92||c.type==93||c.type==96||c.type==95||
-                        c.type==97||c.type==98||c.type==102||c.type==104
+                        c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||
+                        c.type==95||c.type==97||c.type==98||c.type==102||c.type==104||
+                        c.type==106||c.type==107||c.type==108||c.type==110||c.type==111
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
                         let vecBall
+                        if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108)&&d<0){
+                            let e={position:c.position,previous:c.previous,width:0,height:0}
+                            d=collideBoxBox(this,e)
+                        }
                         if(d>=0&&!this.redundant[d]){
                             switch(d){
                                 case 0:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.y<0){
+                                            c.position.y=this.position.y+this.height/2+c.height/2
+                                            c.velocity.y*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1136,8 +1167,10 @@ class wall{
                                     }
                                 break
                                 case 1:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.y>0){
+                                            c.position.y=this.position.y-this.height/2-c.height/2
+                                            c.velocity.y*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1151,8 +1184,10 @@ class wall{
                                     }
                                 break
                                 case 2:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
+                                            c.position.x=this.position.x+this.width/2+c.width/2
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1166,8 +1201,10 @@ class wall{
                                     }
                                 break
                                 case 3:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
+                                            c.position.x=this.position.x-this.width/2-c.width/2
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1181,8 +1218,10 @@ class wall{
                                     }
                                 break
                                 case 4:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1203,8 +1242,10 @@ class wall{
                                     }
                                 break
                                 case 5:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1225,8 +1266,10 @@ class wall{
                                     }
                                 break
                                 case 6:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1249,8 +1292,10 @@ class wall{
                                     }
                                 break
                                 case 7:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
                                             c.bounces++
@@ -1273,7 +1318,7 @@ class wall{
                                     }
                                 break
                                 case 8:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
                                             c.direction+=180
                                             c.hit=[]
@@ -1288,7 +1333,7 @@ class wall{
                                     }
                                 break
                                 case 9:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
                                             c.direction+=180
                                             c.hit=[]
@@ -1303,7 +1348,7 @@ class wall{
                                     }
                                 break
                             }
-                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104)&&c.bounceTimer==0){
+                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
                                 if(c.bounces>=3){
@@ -1338,7 +1383,7 @@ class wall{
                             if(
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
-                                c.type!=100&&c.type!=103
+                                c.type!=100&&c.type!=103&&c.type!=112
                             ){
                                 c.active=false
                                 c.speed=0
@@ -1372,7 +1417,7 @@ class wall{
                             break
                             case 8:
                                 if(game.level==16){
-                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(0,500)]
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
                                     this.position.x+=speed[0]
                                     this.position.y+=speed[1]
                                     this.bounder.position.x+=speed[0]
@@ -1430,7 +1475,25 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
-                                if(game.level==15){
+                                if(game.level==16){
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
+                                    this.position.x+=speed[0]
+                                    this.position.y+=speed[1]
+                                    this.bounder.position.x+=speed[0]
+                                    this.bounder.position.y+=speed[1]
+                                    for(let a=0,la=this.boundary.length;a<la;a++){
+                                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                            for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                                this.boundary[a][b][c].x+=speed[0]
+                                                this.boundary[a][b][c].y+=speed[1]
+                                            }
+                                        }
+                                    }
+                                    this.findFall()
+                                    c.newWeaponSet(this.weapon)
+                                    let chunk=floor(random(0,1.5))
+                                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                                }else if(game.level==15){
                                     c.newWeaponSet(this.weapon)
                                     let chunk=floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
@@ -1443,7 +1506,7 @@ class wall{
                             case 27:
                                 c.newWeapon()
                                 if(game.level==16){
-                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(0,500)]
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
                                     this.position.x+=speed[0]
                                     this.position.y+=speed[1]
                                     this.bounder.position.x+=speed[0]

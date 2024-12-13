@@ -567,7 +567,7 @@ function generateLevel(level,layer){
                 case '^':
                     if(game.level==16){
                         for(let a=0,la=game.players;a<la;a++){
-                            entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-500,0),game.tileset[1]*0.6,game.tileset[1]*0.6,8))
+                            entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,8))
                         }
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+(game.level==7?0.5:0))*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,8))
@@ -625,9 +625,16 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,14))
                 break
                 case '~':
-                    if(game.level==15){
+                    if(game.level==16){
+                        for(let a=0,la=game.players;a<la;a++){
+                            entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                            let cluster=floor(random(1.5))
+                            entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
+                        }
+                    }else if(game.level==15){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                        entities.walls[1][entities.walls[1].length-1].weapon=listing[0][floor(random(listing[0].length))]
+                        let cluster=floor(random(1.5))
+                        entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))
                     }
@@ -663,7 +670,7 @@ function generateLevel(level,layer){
                 case 'd':
                     if(game.level==16){
                         for(let a=0,la=game.players;a<la;a++){
-                            entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-500,0),game.tileset[1]*0.6,game.tileset[1]*0.6,27))
+                            entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                         }
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
@@ -840,7 +847,7 @@ function newWave(level,layer){
             if(types.mission[game.mission].wave[display.cycle][a][1]==1){
                 game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyTank'||types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(game.level==8?1.5:1)*(game.level==16?0.5:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(game.level==7?0.6:1)*(game.level==8?1.5:1)*(game.level==16?0.4:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
                     game.stack.push([floor(random(0,6))+((types.mission[game.mission].wave[display.cycle][a][0]=='Spy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyHealSelf'||types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy'||types.mission[game.mission].wave[display.cycle][a][0]=='SpyTank'||types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy')?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }
@@ -955,27 +962,68 @@ function checkEnd(level,layer){
                 deployer.timer--
             }
         }else if(game.level==16){
+            if(deployer.spawn.length>=3||game.stack.length==0&&deployer.spawn.length>=1){
+                let position=random(40,game.edge[0]-40)
+                let falling=game.edge[1]
+                for(let a=0,la=100;a<la;a++){
+                    let hit=false
+                    for(let b=0,lb=game.gaming;b<lb;b++){
+                        if(position>entities.players[b].position.x-(3500-500*game.gaming)&&position>entities.players[b].position.x+(3500-500*game.gaming)){
+                            hit=true
+                            position=random(40,game.edge[0]-40)
+                            b=lb
+                        }
+                    }
+                    if(!hit){
+                        a=la
+                    }
+                }
+                for(let a=0,la=entities.walls.length;a<la;a++){
+                    for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                        let c=entities.walls[a][b]
+                        if(c.position.x+c.width/2>position-50&&c.position.x-c.width/2<position+50&&c.standard){
+                            falling=min(falling,c.position.y-c.height/2)
+                        }
+                    }
+                }
+                let tick=0
+                while(deployer.spawn.length>0){
+                    if(tick>=3){
+                        break
+                    }
+                    entities.players.push(deployer.spawn[0])
+                    entities.players[entities.players.length-1].position.x=position+random(-40,40)
+                    entities.players[entities.players.length-1].position.y=falling-50
+                    tick++
+                    deployer.spawn.splice(0,1)
+                }
+            }
             if(deployer.timer>0){
                 deployer.timer--
             }else{
-                deployer.timer=floor(random(1800,5400))
+                deployer.timer=floor(random(3600,7200))
             }
             if(deployer.timer==1){
                 if(floor(random(0,2))==0){
                     deployer.position=random(0,game.edge[0]*0.2)
-                    deployer.speed=random(60,120)
+                    deployer.speed=random(100,150)
+                    deployer.flip=true
                 }else{
                     deployer.position=random(game.edge[0]*0.8,game.edge[0])
-                    deployer.speed=-random(60,120)
+                    deployer.speed=-random(100,150)
+                    deployer.flip=true
                 }
                 deployer.interval=3
             }
             if(deployer.position>0&&deployer.position<game.edge[0]&&deployer.interval==0){
-                entities.projectiles.push(new projectile(graphics.main[0],deployer.position,0,60,0,0,100,600,false,"none"))
-                entities.projectiles[entities.projectiles.length-1].velocity.x=random(-3,3)
-                entities.projectiles[entities.projectiles.length-1].velocity.y=0
-                deployer.position+=deployer.speed*random(0.8,1.2)
-                deployer.interval=floor(random(2,5))
+                if(deployer.flip){
+                    entities.projectiles.push(new projectile(graphics.main[0],deployer.position,0,60,0,0,100,600,false,"none"))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x=random(-3,3)
+                    entities.projectiles[entities.projectiles.length-1].velocity.y=0
+                    deployer.position+=deployer.speed*random(0.8,1.2)
+                    deployer.interval=floor(random(2,5))
+                }
+                deployer.flip=floor(random(0,20))?!deployer.flip:deployer.flip
             }
             if(deployer.interval>0){
                 deployer.interval--
@@ -984,23 +1032,45 @@ function checkEnd(level,layer){
                 deployer.artillery[0]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]+50,game.edge[1]-400,60,random(-157.5,-112.5),0,100,600,false,"none"))
-                    let mult=random(1,6)
+                    entities.projectiles.push(new projectile(graphics.main[0],0,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,"none"))
+                    let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
                 }
-                deployer.artillery[0]=floor(random(1200,3600))
+                deployer.artillery[0]=floor(random(3600,7200))
             }
             if(deployer.artillery[1]>0){
                 deployer.artillery[1]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],-50,game.edge[1]-400,60,random(112.5,157.5),0,100,600,false,"none"))
-                    let mult=random(1,6)
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0],game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,"none"))
+                    let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
                 }
-                deployer.artillery[1]=floor(random(1200,3600))
+                deployer.artillery[1]=floor(random(3600,7200))
+            }
+            if(deployer.artillery[2]>0){
+                deployer.artillery[2]--
+            }else{
+                for(let e=0,le=30;e<le;e++){
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,"none"))
+                    let mult=random(1,5)
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
+                }
+                deployer.artillery[2]=floor(random(3600,7200))
+            }
+            if(deployer.artillery[3]>0){
+                deployer.artillery[3]--
+            }else{
+                for(let e=0,le=30;e<le;e++){
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,"none"))
+                    let mult=random(1,5)
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
+                }
+                deployer.artillery[3]=floor(random(3600,7200))
             }
         }
         if(game.stack.length>0&&!game.assault){
@@ -1011,7 +1081,7 @@ function checkEnd(level,layer){
                     for(let a=0,la=level.length;a<la;a++){
                         for(let b=0,lb=level[a].length;b<lb;b++){
                             if(level[a][b]=='123456ABCDEF'[game.stack[0][0]]){
-                                if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8){
+                                if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
                                     deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                     game.index++
                                     game.spawnIndex++
@@ -1033,7 +1103,7 @@ function checkEnd(level,layer){
                         }
                     }
                 }
-                game.sendTime=types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.5:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==15?(game.spawnIndex%6==0?5:0.5):1)*(game.level==16?3:1)
+                game.sendTime=types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.5:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15?(game.spawnIndex%6==0?5:0.5):1)*(game.level==16?5:1)
                 game.stack.splice(0,1)
             }
         }else{
