@@ -421,11 +421,15 @@ class wall{
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
     }
     findFall(){
-        this.falling=game.edge[1]+500
+        this.falling=game.edge[1]-this.position.y
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.position.x+c.width/2>this.position.x-this.width/2&&c.position.x-c.width/2<this.position.x+this.width/2&&c.position.y>this.position.y&&c.standard){
+                if((
+                    c.position.x+c.width/2>this.position.x-this.width/2&&c.position.x-c.width/2<this.position.x+this.width/2||
+                    c.position.x+c.width/2+game.edge[0]>this.position.x-this.width/2&&c.position.x-c.width/2+game.edge[0]<this.position.x+this.width/2||
+                    c.position.x+c.width/2-game.edge[0]>this.position.x-this.width/2&&c.position.x-c.width/2-game.edge[0]<this.position.x+this.width/2
+                )&&c.position.y>this.position.y&&c.standard){
                     this.falling=min(this.falling,c.position.y-this.height/2-c.height/2-10-this.position.y)
                 }
             }
@@ -1138,7 +1142,8 @@ class wall{
                         c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
                         c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||
                         c.type==95||c.type==97||c.type==98||c.type==102||c.type==104||
-                        c.type==106||c.type==107||c.type==108||c.type==110||c.type==111
+                        c.type==106||c.type==107||c.type==108||c.type==110||c.type==111||
+                        c.type==113
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1220,7 +1225,7 @@ class wall{
                                 case 4:
                                     if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
@@ -1230,7 +1235,7 @@ class wall{
                                             }
                                         }
                                     }else{
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
@@ -1244,7 +1249,7 @@ class wall{
                                 case 5:
                                     if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
@@ -1254,7 +1259,7 @@ class wall{
                                             }
                                         }
                                     }else{
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
@@ -1268,7 +1273,7 @@ class wall{
                                 case 6:
                                     if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x<0){
-                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
@@ -1278,7 +1283,7 @@ class wall{
                                             }
                                         }
                                     }else{
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                         c.velocity.y=0
                                         incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
@@ -1294,7 +1299,7 @@ class wall{
                                 case 7:
                                     if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108){
                                         if(c.velocity.x>0){
-                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.x*=-1
                                             c.direction+=180
                                             c.hit=[]
@@ -1304,7 +1309,7 @@ class wall{
                                             }
                                         }
                                     }else{
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                         c.velocity.y=0
                                         incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
@@ -1348,7 +1353,9 @@ class wall{
                                     }
                                 break
                             }
-                            if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
+                            if(c.type==113){
+                                c.stop=true
+                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
                                 if(c.bounces>=3){
@@ -1417,7 +1424,7 @@ class wall{
                             break
                             case 8:
                                 if(game.level==16){
-                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y-random(2000,6000)]
                                     this.position.x+=speed[0]
                                     this.position.y+=speed[1]
                                     this.bounder.position.x+=speed[0]
@@ -1476,7 +1483,7 @@ class wall{
                             break
                             case 16:
                                 if(game.level==16){
-                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y-random(2000,6000)]
                                     this.position.x+=speed[0]
                                     this.position.y+=speed[1]
                                     this.bounder.position.x+=speed[0]
@@ -1506,7 +1513,7 @@ class wall{
                             case 27:
                                 c.newWeapon()
                                 if(game.level==16){
-                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y+random(2000,6000)]
+                                    let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y-random(2000,6000)]
                                     this.position.x+=speed[0]
                                     this.position.y+=speed[1]
                                     this.bounder.position.x+=speed[0]

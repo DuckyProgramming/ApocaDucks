@@ -66,6 +66,7 @@ class player{
         this.inspect=[]
         this.scan=[0,0,0,0,0,0,0,0,0]
         this.firearc=[0,0]
+        this.lastingForce=[0,0]
 
         this.subPlayerAType=0
         this.subPlayerBType=0
@@ -644,9 +645,9 @@ class player{
         }else if(game.classicWeapon||this.id>game.gaming){
             let clump=listing[game.peakWeapon?1:floor(random(1.5))]
             this.type=clump[floor(random(0,clump.length))]
-        }else if(this.id-1<game.weapon.length){
-            this.type=game.weapon[this.id-1][game.weaponTick[this.id-1]%game.weapon[this.id-1].length]
+        }else if(this.id<=game.weapon.length){
             game.weaponTick[this.id-1]++
+            this.type=game.weapon[this.id-1][game.weaponTick[this.id-1]%game.weapon[this.id-1].length]
         }
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
@@ -1402,7 +1403,11 @@ class player{
 			break
             case 194:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(sin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=30*(sin(this.direction.main)<0?1:-1)
+                this.velocity.x+=20*(sin(this.direction.main)<0?1:-1)
+                this.lastingForce[0]+=6*(sin(this.direction.main)<0?1:-1)
+			break
+            case 196:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],113,(sin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
 			break
 
 		}
@@ -2677,7 +2682,7 @@ class player{
             }
             if(this.playerData.name.includes('Tank')||this.weaponType==194){
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(inBoxBox(this,entities.players[a])&&this.id!=entities.players[a].id&&!entities.players[a].dead&&!this.dead){
+                    if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&!entities.players[a].dead&&!this.dead){
                         entities.players[a].takeDamage(this.weaponType==194?200:100)
                         let dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
                         entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
@@ -2737,7 +2742,11 @@ class player{
             this.base.control=0
         }
         if(!this.disable2){
-            this.velocity.x*=this.thrown?0.96:this.playerData.name=='PlayerRecoiler'&&this.weapon.cooldown>60?0.92:0.85
+            this.velocity.x+=this.lastingForce[0]
+            this.velocity.y+=this.lastingForce[1]
+            this.lastingForce[0]*=0.925
+            this.lastingForce[1]*=0.925
+            this.velocity.x*=this.thrown?0.96:0.85
             this.velocity.y+=this.playerData.name=='PistolParajump'||this.playerData.name=='AirstrikeRocketLauncher'||this.playerData.name=='PlayerAirstrikeRocketLauncher'||this.playerData.name=='PlayerAirstrikeGrenadier'?1:1.5
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y

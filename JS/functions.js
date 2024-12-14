@@ -968,7 +968,11 @@ function checkEnd(level,layer){
                 for(let a=0,la=100;a<la;a++){
                     let hit=false
                     for(let b=0,lb=game.gaming;b<lb;b++){
-                        if(position>entities.players[b].position.x-(3500-500*game.gaming)&&position>entities.players[b].position.x+(3500-500*game.gaming)){
+                        if(
+                            position>entities.players[b].position.x-(3500-500*game.gaming)&&position<entities.players[b].position.x+(3500-500*game.gaming)||
+                            position>entities.players[b].position.x+game.edge[0]-(3500-500*game.gaming)&&position<entities.players[b].position.x+game.edge[0]+(3500-500*game.gaming)||
+                            position>entities.players[b].position.x-game.edge[0]-(3500-500*game.gaming)&&position<entities.players[b].position.x-game.edge[0]+(3500-500*game.gaming)
+                        ){
                             hit=true
                             position=random(40,game.edge[0]-40)
                             b=lb
@@ -1103,7 +1107,7 @@ function checkEnd(level,layer){
                         }
                     }
                 }
-                game.sendTime=types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.5:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15?(game.spawnIndex%6==0?5:0.5):1)*(game.level==16?5:1)
+                game.sendTime=types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.5:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?2.75:1)*(game.level==15?(game.spawnIndex%6==0?5:0.5):1)*(game.level==16&&game.spawnIndex>8?5:1)
                 game.stack.splice(0,1)
             }
         }else{

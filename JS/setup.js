@@ -95,7 +95,7 @@ function keyPressed(){
         case 'ArrowLeft': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
         case 'ArrowRight': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
         case 'ArrowUp': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
-        case 'ArrowDown': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+        case 'ArrowDown': case 'Shift': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
         case 'a': case 'A': inputs.keys[1][0]=true;inputs.tap[1][0]=true; break
         case 'd': case 'D': inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
         case 'w': case 'W': inputs.keys[1][2]=true;inputs.tap[1][2]=true; break
@@ -127,7 +127,7 @@ function keyReleased(){
         case 'ArrowLeft': inputs.keys[0][0]=false; break
         case 'ArrowRight': inputs.keys[0][1]=false; break
         case 'ArrowUp': inputs.keys[0][2]=false; break
-        case 'ArrowDown': inputs.keys[0][3]=false; break
+        case 'ArrowDown': case 'Shift': inputs.keys[0][3]=false; break
         case 'a': case 'A': inputs.keys[1][0]=false; break
         case 'd': case 'D': inputs.keys[1][1]=false; break
         case 'w': case 'W': inputs.keys[1][2]=false; break

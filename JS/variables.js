@@ -2840,7 +2840,7 @@ types={
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:156,
     },{
       name:'PlayerAirstrikeGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:166,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:166,
     },
 
     {
@@ -2901,7 +2901,7 @@ types={
       damageBuff:2,reloadBuff:3,crit:0,weapon:148,
     },{
       name:'PlayerNapalmFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:109,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:109,
     },{
       name:'PlayerEngineerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:146,
@@ -3023,11 +3023,11 @@ types={
       name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:191,
     },{
-      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
-    },{
       name:'PlayerRecoiler',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:194,
+    },{
+      name:'PlayerMinelayer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:196,
     },{
       name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:5,reloadBuff:1,crit:0,weapon:5,
@@ -3048,6 +3048,9 @@ types={
     },{
       name:'PlayerImmortal',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:101,
+    },{
+      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
     },
 
     {
@@ -5158,13 +5161,13 @@ types={
       uses:8,
 		},{
 			name:'Booster',
-			ammo:80,
+			ammo:60,
 			damage:75,
 			cooldown:2,
 			stop:45,
 			reload:1,
 			speed:1.05,
-      uses:160,
+      uses:120,
 		},{
 			name:'Flamethrower Dualic',
 			ammo:50,
@@ -5573,7 +5576,7 @@ types={
 		},{
 			name:'Glass Cannon',
 			ammo:3,
-			damage:75,
+			damage:110,
 			cooldown:15,
 			stop:45,
 			reload:10,
@@ -5591,10 +5594,10 @@ types={
 		},{
 			name:'Rocket Battery',
 			ammo:4,
-			damage:500,
-			cooldown:60,
-			stop:360,
-			reload:90,
+			damage:600,
+			cooldown:45,
+			stop:300,
+			reload:60,
 			speed:0.65,
       uses:4,
 		},{
@@ -5626,13 +5629,13 @@ types={
       uses:3,
 		},{
 			name:'Airstrike Grenadier',
-			ammo:5,
-			damage:120,
+			ammo:6,
+			damage:160,
 			cooldown:20,
-			stop:60,
+			stop:150,
 			reload:10,
 			speed:1.05,
-      uses:30,
+      uses:36,
 		},{
 			name:'Panic Shotgun',
 			ammo:8,
@@ -5853,9 +5856,9 @@ types={
 			name:'Motorizer',
 			ammo:1,
 			damage:120,
-			cooldown:480,
-			stop:480,
-			reload:480,
+			cooldown:720,
+			stop:720,
+			reload:720,
 			speed:0.975,
       uses:4,
 		},{
@@ -5894,6 +5897,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'Minelayer',
+			ammo:3,
+			damage:250,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
 		},
 	],
 }
