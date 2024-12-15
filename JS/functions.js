@@ -507,9 +507,6 @@ function generateLevel(level,layer){
         case 8:
             game.edge=[5000,3000]
         break
-        case 14:
-            game.edge=[4320,1200]
-        break
         case 15:
             game.edge=[10000,3200]
         break
@@ -517,7 +514,7 @@ function generateLevel(level,layer){
             game.edge=[16000,2800]
         break
         default:
-            game.edge=[4240,1320]
+            game.edge=[2960,2280]
         break
     }
     game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]

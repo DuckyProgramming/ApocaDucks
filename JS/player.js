@@ -2742,16 +2742,16 @@ class player{
             this.base.control=0
         }
         if(!this.disable2){
-            this.velocity.x+=this.lastingForce[0]
-            this.velocity.y+=this.lastingForce[1]
-            this.lastingForce[0]*=0.925
-            this.lastingForce[1]*=0.925
             this.velocity.x*=this.thrown?0.96:0.85
             this.velocity.y+=this.playerData.name=='PistolParajump'||this.playerData.name=='AirstrikeRocketLauncher'||this.playerData.name=='PlayerAirstrikeRocketLauncher'||this.playerData.name=='PlayerAirstrikeGrenadier'?1:1.5
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
             this.position.x+=this.velocity.x
             this.position.y+=this.velocity.y
+            this.velocity.x+=this.lastingForce[0]
+            this.velocity.y+=this.lastingForce[1]
+            this.lastingForce[0]*=0.925
+            this.lastingForce[1]*=0.925
         }
         if(this.parachute){
             this.velocity.x*=game.pvp?(game.assault?0.8:0.99):0.5
