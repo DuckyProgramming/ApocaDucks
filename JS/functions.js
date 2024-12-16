@@ -950,7 +950,7 @@ function checkEnd(level,layer){
                                 tick++
                                 deployer.spawn.splice(0,1)
                             }
-                            deployer.timer=300
+                            deployer.timer=game.classicRespawn?180:300
                         }
                     }
                 }

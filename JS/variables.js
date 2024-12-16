@@ -2778,14 +2778,14 @@ types={
       name:'PlayerGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:36,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerTrapper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:197,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:202,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDestroyer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:212,
     },
 
     {
@@ -2798,11 +2798,11 @@ types={
       name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:133,
     },{
+      name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:190,
+    },{
       name:'PlayerGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:176,
-    },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },
 
     {
@@ -2846,8 +2846,8 @@ types={
       name:'PlayerMachineGunFirework',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
     },{
-      name:'PlayerPushMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:163,
+      name:'PlayerMachineHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:219,
     },{
       name:'PlayerSprayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
@@ -2897,11 +2897,11 @@ types={
       name:'PlayerBarrageBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:3,crit:0,weapon:65,
     },{
-      name:'PlayerStraightBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:4,crit:0,weapon:94,
-    },{
       name:'PlayerBoulderBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:3,crit:0,weapon:148,
+    },{
+      name:'PlayerFattener',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:218,
     },{
       name:'PlayerBallerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:182,
@@ -3010,54 +3010,54 @@ types={
     },
 
     {
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerMinelayer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:196,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerTrapguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:198,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerFoghorn',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:199,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerIcebox',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:200,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerTrapperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:201,
     },
 
     {
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:191,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerCarrier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:203,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerImpeacher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:204,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerPrimer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:205,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDirectorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:206,
     },
 
     {
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerGriefer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:213,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerFieldcannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:215,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDonut',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:216,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDestroyerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:217,
     },
     
     {
@@ -3070,11 +3070,11 @@ types={
       name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
     },{
+      name:'PlayerRotary',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:208,
+    },{
       name:'PlayerGaslighter',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:195,
-    },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },
     
     {
@@ -3115,34 +3115,34 @@ types={
       name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:171,
     },{
-      name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:190,
-    },{
-      name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:191,
-    },{
       name:'PlayerRecoiler',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:194,
     },{
-      name:'PlayerMinelayer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:196,
+      name:'PlayerCentrist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:207,
+    },{
+      name:'PlayerSuzerain',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:209,
+    },{
+      name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:210,
     },
 
     {
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerKinoko',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:211,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerDial',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:220,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerSunburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:221,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerSoftware',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:222,
     },{
-      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      name:'PlayerHelix',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.5,crit:0,weapon:223,
     },
     
     {
@@ -3166,6 +3166,12 @@ types={
     },{
       name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:5,reloadBuff:1,crit:0,weapon:5,
+    },{
+      name:'PlayerStraightBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:4,crit:0,weapon:94,
+    },{
+      name:'PlayerPushMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:163,
     },
 
     {
@@ -5727,7 +5733,7 @@ types={
 		},{
 			name:'Snowballer',
 			ammo:3,
-			damage:60,
+			damage:90,
 			cooldown:30,
 			stop:120,
 			reload:20,
@@ -5961,7 +5967,7 @@ types={
 		},{
 			name:'Rearguard',
 			ammo:5,
-			damage:120,
+			damage:60,
 			cooldown:15,
 			stop:45,
 			reload:10,
@@ -6021,6 +6027,249 @@ types={
 			reload:10,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Trapper',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Trapguard',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Foghorn',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Icebox',
+			ammo:3,
+			damage:225,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Trapperception',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Director',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Carrier',
+			ammo:3,
+			damage:60,
+			cooldown:10,
+			stop:30,
+			reload:10,
+			speed:0.975,
+      uses:48,
+		},{
+			name:'Impeacher',
+			ammo:1,
+			damage:300,
+			cooldown:900,
+			stop:900,
+			reload:900,
+			speed:0.975,
+      uses:2,
+		},{
+			name:'Primer',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Directorception',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Centrist',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Rotary',
+			ammo:11,
+			damage:80,
+			cooldown:2,
+			stop:30,
+			reload:2,
+			speed:1.2,
+      uses:88,
+		},{
+			name:'Suzerain',
+			ammo:1,
+			damage:180,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.975,
+      uses:9,
+		},{
+			name:'Rocket Masher',
+			ammo:20,
+			damage:150,
+			cooldown:90,
+			stop:90,
+			reload:3,
+			speed:0.8,
+      uses:40,
+		},{
+			name:'Kinoko',
+			ammo:5,
+			damage:80,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Destroyer',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Griefer',
+			ammo:1,
+			damage:800,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Scythe',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Fieldcannon',
+			ammo:10,
+			damage:600,
+			cooldown:10,
+			stop:180,
+			reload:5,
+			speed:1.2,
+      uses:20,
+		},{
+			name:'Donut',
+			ammo:1,
+			damage:400,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Destroyerception',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Fattener',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Machine Hybrid',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Dial',
+			ammo:5,
+			damage:50,
+			cooldown:8,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:48,
+		},{
+			name:'Sunburst',
+			ammo:30,
+			damage:40,
+			cooldown:3,
+			stop:60,
+			reload:2,
+			speed:1.15,
+      uses:90,
+		},{
+			name:'Software',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Helix',
+			ammo:4,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:36,
 		},
 	],
 }

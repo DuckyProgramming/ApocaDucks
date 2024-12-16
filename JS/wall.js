@@ -1143,7 +1143,10 @@ class wall{
                         c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||
                         c.type==95||c.type==97||c.type==98||c.type==102||c.type==104||
                         c.type==106||c.type==107||c.type==108||c.type==110||c.type==111||
-                        c.type==113
+                        c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
+                        c.type==117||c.type==118||c.type==119||c.type==120||c.type==121||
+                        c.type==122||c.type==123||c.type==124||c.type==128||c.type==129||
+                        c.type==131||c.type==132||c.type==134||c.type==135||c.type==136
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1166,7 +1169,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.y<0){
+                                    }else if(c.velocity.y<0||(c.type==135||c.type==136)&&c.position.y<c.previous.position.y){
                                         c.position.y=this.position.y+this.height/2+c.height/2
                                         c.velocity.y*=-1
                                     }
@@ -1183,7 +1186,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.y>0){
+                                    }else if(c.velocity.y>0||(c.type==135||c.type==136)&&c.position.y>c.previous.position.y){
                                         c.position.y=this.position.y-this.height/2-c.height/2
                                         c.velocity.y*=-1
                                     }
@@ -1200,7 +1203,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.x<0){
+                                    }else if(c.velocity.x<0||(c.type==135||c.type==136)&&c.position.x<c.previous.position.x){
                                         c.position.x=this.position.x+this.width/2+c.width/2
                                         c.velocity.x*=-1
                                     }
@@ -1217,7 +1220,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.x>0){
+                                    }else if(c.velocity.x>0||(c.type==135||c.type==136)&&c.position.x>c.previous.position.x){
                                         c.position.x=this.position.x-this.width/2-c.width/2
                                         c.velocity.x*=-1
                                     }
@@ -1353,8 +1356,10 @@ class wall{
                                     }
                                 break
                             }
-                            if(c.type==113){
+                            if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117){
                                 c.stop=true
+                            }else if(c.type==135||c.type==136){
+                                c.bounces++
                             }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
