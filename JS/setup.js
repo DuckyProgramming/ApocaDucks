@@ -17,7 +17,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,3,1][a];b<lb;b++){
+                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:60+a*80+40},width:200,height:60})){
                         if(a==0){
                             menu.players=b+1
@@ -28,7 +28,7 @@ function mouseClicked(){
                         }else if(a==3){
                             menu.weapon=b
                         }else if(a==4){
-                            game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]=!game[['classicRespawn','invis','pvp','randomizer','classicWeapon'][b]]
+                            game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
                         }else{
                             stage.scene='mission'
                         }

@@ -1,1 +1,12 @@
+
+
+sunbeam - split
+at base, it's an smg that fires in 2 streams
+-existing sunbeam
+
+[now being reconsidered]
+
+
+
 done for now!
+

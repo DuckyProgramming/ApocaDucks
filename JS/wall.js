@@ -6,7 +6,7 @@ class wall{
         this.height=height
         this.type=type
         this.collide=[entities.projectiles,entities.players]
-        this.redundant=[false,false,false,false]
+        this.redundant=[false,false,false,false,false],
         this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27
         this.velocity={x:0,y:0}
         this.boundary=[
@@ -17,6 +17,7 @@ class wall{
         ]
         this.exploded=false
         this.time=0
+        this.align=-1
     }
     set(){
         switch(this.type){
@@ -128,6 +129,11 @@ class wall{
                     [],
                     [],
                 ]
+                this.triangle=[
+                    {x:this.position.x-this.width/2,y:this.position.y-this.height/2},
+                    {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
+                    {x:this.position.x+this.width/2,y:this.position.y+this.height/2}
+                ]
             break
             case 18:
                 this.boundary=[
@@ -139,6 +145,11 @@ class wall{
                     [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
                     [],
                     [],
+                ]
+                this.triangle=[
+                    {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
+                    {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
+                    {x:this.position.x+this.width/2,y:this.position.y+this.height/2}
                 ]
             break
             case 20:
@@ -152,6 +163,11 @@ class wall{
                     [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
                     [],
                 ]
+                this.triangle=[
+                    {x:this.position.x-this.width/2,y:this.position.y-this.height/2},
+                    {x:this.position.x-this.width/2,y:this.position.y+this.height/2},
+                    {x:this.position.x+this.width/2,y:this.position.y-this.height/2}
+                ]
             break
             case 21:
                 this.boundary=[
@@ -164,6 +180,12 @@ class wall{
                     [],
                     [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
                 ]
+                this.triangle=[
+                    {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
+                    {x:this.position.x-this.width/2,y:this.position.y-this.height/2},
+                    {x:this.position.x+this.width/2,y:this.position.y+this.height/2}
+                ]
+            break
             break
             default:
                 this.boundary=[
@@ -217,6 +239,9 @@ class wall{
                     if(abs(c.position.x-(this.position.x-this.width/2-c.width/2))<1&&c.position.y-c.height/2<=this.position.y-this.height/2+1&&c.position.y+c.height/2>=this.position.y+this.height/2-1){
                         this.redundant[3]=true
                         this.boundary[3]=[]
+                    }
+                    if(abs(c.position.y-(this.position.y-this.height/2-c.height/2-15))<16&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
+                        this.redundant[4]=true
                     }
                 }
             }
@@ -419,6 +444,17 @@ class wall{
         }
         this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
+        if(this.standard&&game.attacker&&this.boundary[1].length>0&&this.type!=3&&!this.redundant[1]&&!this.redundant[4]){
+            for(let a=0,la=this.boundary[1].length;a<la;a++){
+                let scale=floor(dist(this.boundary[1][a][0].x,this.boundary[1][a][0].y,this.boundary[1][a][1].x,this.boundary[1][a][1].y)/20)
+                for(let b=0,lb=scale;b<lb;b++){
+                    game.spawner.push([
+                        map((b+0.5)/lb,0,1,this.boundary[1][a][0].x,this.boundary[1][a][1].x),
+                        map((b+0.5)/lb,0,1,this.boundary[1][a][0].y,this.boundary[1][a][1].y)
+                    ])
+                }
+            }
+        }
     }
     findFall(){
         this.falling=game.edge[1]-this.position.y
@@ -1063,21 +1099,21 @@ class wall{
                     if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
                         switch(game.level){
                             case 6:
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-100,-80),-1,200,180,false,"none"))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-160,-140),-1,200,180,false,"none"))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(140,160),-1,200,180,false,"none"))
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(80,100),-1,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-100,-80),this.align,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(-160,-140),this.align,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(140,160),this.align,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,65,random(80,100),this.align,200,180,false,"none"))
                             break
                             case 15:
                                 if(this.reload==479||this.reload==459){
-                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,-120+random(-15,15),-1,400,300,false,"none"))
+                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,-120+random(-15,15),this.align,400,300,false,"none"))
                                     let mult=random(1,1.5)
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                 }
                             break
                             default:
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),-1,200,180,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),this.align,200,180,false,"none"))
                             break
                         }
                     }
@@ -1087,28 +1123,28 @@ class wall{
                 if(this.reload>0){
                     this.reload--
                     if(this.reload==479||this.reload==439){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-33,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-39,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-45,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-51,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-57,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-21,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-27,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-33,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-39,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-45,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-51,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-57,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-63,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-69,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-75,this.align,150,180,false,"none"))
                     }else if(this.reload==459){
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-36,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-42,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-48,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-54,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-60,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-66,-1,150,180,false,"none"))
-                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-72,-1,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-18,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-24,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-30,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-36,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-42,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-48,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-54,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-60,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-66,this.align,150,180,false,"none"))
+                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-72,this.align,150,180,false,"none"))
                     }
                 }
             break
@@ -1144,9 +1180,11 @@ class wall{
                         c.type==95||c.type==97||c.type==98||c.type==102||c.type==104||
                         c.type==106||c.type==107||c.type==108||c.type==110||c.type==111||
                         c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
-                        c.type==117||c.type==118||c.type==119||c.type==120||c.type==121||
-                        c.type==122||c.type==123||c.type==124||c.type==128||c.type==129||
-                        c.type==131||c.type==132||c.type==134||c.type==135||c.type==136
+                        c.type==117||c.type==118||c.type==119||c.type==121||c.type==122||
+                        c.type==123||c.type==124||c.type==128||c.type==129||c.type==131||
+                        c.type==132||c.type==134||c.type==135||c.type==136||c.type==137||
+                        c.type==138||c.type==139||c.type==140||c.type==141||c.type==142||
+                        c.type==143||c.type==144||c.type==145||c.type==146
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1356,7 +1394,7 @@ class wall{
                                     }
                                 break
                             }
-                            if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117){
+                            if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||c.type==146){
                                 c.stop=true
                             }else if(c.type==135||c.type==136){
                                 c.bounces++
@@ -1373,25 +1411,7 @@ class wall{
                         this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27
                     ){
                         let d=collideBoxBox(this,c)
-                        if(d>=0&&!this.redundant[d]||c.timer==0&&inBoxBox(this,c)
-                            &&!(this.type==17&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2},
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2}
-                            ]))&&!(this.type==18&&inPointTriangle(c.position,[
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2},
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2},
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2}
-                            ]))&&!(this.type==20&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y-this.height/2-c.height/2},
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2}
-                            ]))&&!(this.type==21&&inPointTriangle(c.position,[
-                                {x:this.position.x+this.width/2+c.width/2,y:this.position.y+this.height/2+c.height/2},
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y+this.height/2+c.height/2},
-                                {x:this.position.x-this.width/2-c.width/2,y:this.position.y-this.height/2-c.height/2}
-                            ]))
-                        ){
+                        if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
                             if(
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
@@ -1411,7 +1431,7 @@ class wall{
                             }
                         }
                     }else if(a==1&&inBoxBox(this.bounder,c)
-                        &&!(this.type==5&&(c.id>0||this.exploded))
+                        &&!(this.type==5&&(c.id>0&&!game.attacker||c.id==0&&game.attacker||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=c.weaponData.uses*game.ammoMult||c.weapon.uses<=0))
                         &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
@@ -1423,7 +1443,7 @@ class wall{
                         switch(this.type){
                             case 5:
                                 this.exploded=true
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,16,0,-1,200,2,false,"none"))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,16,0,this.align,200,2,false,"none"))
                                 entities.projectiles[entities.projectiles.length-1].explode()
                                 entities.projectiles[entities.projectiles.length-1].active=false
                             break
@@ -1463,7 +1483,7 @@ class wall{
                                 c.target.position.x=this.position.x+game.tileset[0]
                             break
                             case 11:
-                                if(c.id>0){
+                                if(c.id>0&&!game.attacker||c.id==0&&game.attacker){
                                     c.defendBuff=15
                                 }else{
                                     c.velocity.x*=0.75
@@ -1545,7 +1565,10 @@ class wall{
                                             c.velocity.y=0
                                             switch(this.type){
                                                 case 15:
-                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                    if(this.reload==0&&(c.id>0||game.attacker)&&c.life>0&&c.attacking){
+                                                        if(game.attacker){
+                                                            this.align=c.id
+                                                        }
                                                         this.reload=480
                                                     }
                                                 break
@@ -1574,12 +1597,15 @@ class wall{
                                                     c.collect.time=max(c.collect.time,150)
                                                 break
                                                 case 4:
-                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                    if(this.reload==0&&(c.id>0||game.attacker)&&c.life>0&&c.attacking){
+                                                        if(game.attacker){
+                                                            this.align=c.id
+                                                        }
                                                         this.reload=480
                                                         switch(game.level){
                                                             case 6:
                                                                 for(let e=0,le=15;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-155,-175),-1,100,240,false,"none"))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-155,-175),this.align,100,240,false,"none"))
                                                                     let mult=random(2,5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -1588,7 +1614,7 @@ class wall{
                                                             case 7:
                                                                 for(let f=0,lf=3;f<lf;f++){
                                                                     for(let e=0,le=4-f%2;e<le;e++){
-                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-180-4+le*4-e*10,-1,100,240,false,"none"))
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-180-4+le*4-e*10,this.align,100,240,false,"none"))
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.x*=(4-f)
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.y*=(4-f)
                                                                     }
@@ -1596,14 +1622,14 @@ class wall{
                                                             break
                                                             case 15:
                                                                 for(let e=0,le=4;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(8+(e%2)*2)*(e>=2?1:-1),-1,e==2?40:100,240,false,"none"))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(8+(e%2)*2)*(e>=2?1:-1),this.align,e==2?40:100,240,false,"none"))
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=2-((e%2)*0.4)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=2-((e%2)*0.4)
                                                                 }
                                                             break
                                                             default:
                                                                 for(let e=0,le=15;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,240,false,"none"))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),this.align,100,240,false,"none"))
                                                                     let mult=random(1.25,2.5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -1618,10 +1644,13 @@ class wall{
                                                     }
                                                 break
                                                 case 23:
-                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                    if(this.reload==0&&(c.id>0||game.attacker)&&c.life>0&&c.attacking){
+                                                        if(game.attacker){
+                                                            this.align=c.id
+                                                        }
                                                         this.reload=480
                                                         for(let e=0,le=15;e<le;e++){
-                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-157.5,-112.5),-1,40,240,false,"none"))
+                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-157.5,-112.5),this.align,40,240,false,"none"))
                                                             let mult=random(1.25,2.5)
                                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult

@@ -4,8 +4,8 @@ function mainloop(layer){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,3,1][a];b<lb;b++){
-                    if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15,16][b]||a==3&&menu.weapon==b||a==4&&game[['classicRespawn','invis','pvp'][b]]){
+                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
+                    if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15,16][b]||a==3&&menu.weapon==b||a==4&&game[['classicRespawn','invis','pvp','attacker'][b]]){
                         fill(100,200,100)
                     }else{
                         fill(100)
@@ -15,9 +15,9 @@ function mainloop(layer){
             }
             fill(0)
             for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,3,1][a];b<lb;b++){
+                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
                     textSize(20)
-                    text([`${b+1} Players`,`${b+1} Gaming`,['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],['Normal Weapons','Special Weapons','Random Weapons','Full Randomizer'][b],['Auto-Respawn','Invisible','PvP'][b],`Proceed`][a],width/2+b*210-lb*105+105,60+a*80+40)
+                    text([`${b+1} Players`,`${b+1} Gaming`,['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],['Normal Weapons','Special Weapons','Random Weapons','Full Randomizer'][b],['Auto-Respawn','Invisible','PvP','Fortress'][b],`Proceed`][a],width/2+b*210-lb*105+105,60+a*80+40)
                 }
             }
         break
@@ -54,7 +54,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                             if(ticker>=40){
                                 ticker-=40
@@ -71,7 +71,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(game.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -84,7 +84,7 @@ function mainloop(layer){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?1.5:1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${num==1?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -281,31 +281,33 @@ function mainloop(layer){
                 }
                 graphics.main[a].fill(255)
                 graphics.main[a].textSize(20)
-                switch(game.level){
-                    case 0: case 1: case 2:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3-40)
-                    break
-                    case 3:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]/2-100,game.edge[1]/3-120)
-                    break
-                    case 4:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3)
-                    break
-                    case 5:
-                        graphics.main[a].text('Weapons\nHere',150,game.edge[1]-320)
-                    break
-                    case 6:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]/2+1300,game.edge[1]-120)
-                    break
-                    case 7:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/2+360)
-                    break
-                    case 8:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]-150,game.edge[1]-520)
-                    break
-                    case 15:
-                        graphics.main[a].text('Weapons\nHere',game.edge[0]-100,800)
-                    break
+                if(!game.attacker){
+                    switch(game.level){
+                        case 0: case 1: case 2:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3-40)
+                        break
+                        case 3:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2-100,game.edge[1]/3-120)
+                        break
+                        case 4:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3)
+                        break
+                        case 5:
+                            graphics.main[a].text('Weapons\nHere',150,game.edge[1]-320)
+                        break
+                        case 6:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2+1300,game.edge[1]-120)
+                        break
+                        case 7:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/2+360)
+                        break
+                        case 8:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]-150,game.edge[1]-520)
+                        break
+                        case 15:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]-100,800)
+                        break
+                    }
                 }
             }
             for(let a=0,la=bs.length;a<la;a++){
