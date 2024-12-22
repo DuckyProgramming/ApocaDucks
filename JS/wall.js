@@ -6,7 +6,7 @@ class wall{
         this.height=height
         this.type=type
         this.collide=[entities.projectiles,entities.players]
-        this.redundant=[false,false,false,false,false],
+        this.redundant=[false,false,false,false,false,false,false,false,false],
         this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27
         this.velocity={x:0,y:0}
         this.boundary=[
@@ -240,8 +240,8 @@ class wall{
                         this.redundant[3]=true
                         this.boundary[3]=[]
                     }
-                    if(abs(c.position.y-(this.position.y-this.height/2-c.height/2-15))<16&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
-                        this.redundant[4]=true
+                    if(abs(c.position.y-(this.position.y-this.height/2-c.height/2-15))<50&&c.position.y!=this.position.y&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
+                        this.redundant[8]=true
                     }
                 }
             }
@@ -444,9 +444,9 @@ class wall{
         }
         this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
-        if(this.standard&&game.attacker&&this.boundary[1].length>0&&this.type!=3&&!this.redundant[1]&&!this.redundant[4]){
+        if(this.standard&&game.attacker&&this.boundary[1].length>0&&this.type!=3&&!this.redundant[1]&&!this.redundant[8]){
             for(let a=0,la=this.boundary[1].length;a<la;a++){
-                let scale=floor(dist(this.boundary[1][a][0].x,this.boundary[1][a][0].y,this.boundary[1][a][1].x,this.boundary[1][a][1].y)/20)
+                let scale=floor(dist(this.boundary[1][a][0].x,this.boundary[1][a][0].y,this.boundary[1][a][1].x,this.boundary[1][a][1].y)/10)
                 for(let b=0,lb=scale;b<lb;b++){
                     game.spawner.push([
                         map((b+0.5)/lb,0,1,this.boundary[1][a][0].x,this.boundary[1][a][1].x),
@@ -643,28 +643,28 @@ class wall{
                     layer.noStroke()
                 }
                 for(let a=0,la=4;a<la;a++){
-                    if(cos(a*90+this.time)>0){
-                        layer.fill(60+cos(a*90+this.time)*40,55+cos(a*90+this.time)*40,50+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
-                        layer.fill(240+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,60+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(60+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.1,this.height*0.4)
-                        layer.rect(this.width/2*sin(a*90+this.time)-this.width*cos(a*90+this.time)*0.12,0,this.width*cos(a*90+this.time)*0.08,this.height*0.4)
-                        layer.rect(this.width/2*sin(a*90+this.time)+this.width*cos(a*90+this.time)*0.12,0,this.width*cos(a*90+this.time)*0.08,this.height*0.4)
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(60+lcos(a*90+this.time)*40,55+lcos(a*90+this.time)*40,50+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(240+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(60+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.1,this.height*0.4)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.12,0,this.width*lcos(a*90+this.time)*0.08,this.height*0.4)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.12,0,this.width*lcos(a*90+this.time)*0.08,this.height*0.4)
                     }
                 }
             break
             case 9:
                 for(let a=0,la=4;a<la;a++){
-                    if(cos(a*90+this.time)>0){
-                        layer.fill(60+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,180+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
-                        layer.fill(160+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(240+cos(a*90+this.time)*40,40+cos(a*90+this.time)*40,40+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.45,this.height*0.15)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.15,this.height*0.45)
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(160+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(240+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.45,this.height*0.15)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.45)
                     }
                 }
             break
@@ -696,14 +696,14 @@ class wall{
             break
             case 12:
                 for(let a=0,la=4;a<la;a++){
-                    if(cos(a*90+this.time)>0){
-                        layer.fill(120+cos(a*90+this.time)*40,160+cos(a*90+this.time)*40,200+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
-                        layer.fill(120+cos(a*90+this.time)*40,240+cos(a*90+this.time)*40,240+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(40+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),-this.height*0.08,this.width*cos(a*90+this.time)*0.1,this.height*0.3)
-                        layer.rect(this.width/2*sin(a*90+this.time),this.height*0.18,this.width*cos(a*90+this.time)*0.1,this.height*0.1)
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(120+lcos(a*90+this.time)*40,160+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(120+lcos(a*90+this.time)*40,240+lcos(a*90+this.time)*40,240+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(40+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),-this.height*0.08,this.width*lcos(a*90+this.time)*0.1,this.height*0.3)
+                        layer.rect(this.width/2*lsin(a*90+this.time),this.height*0.18,this.width*lcos(a*90+this.time)*0.1,this.height*0.1)
                     }
                 }
             break
@@ -757,15 +757,15 @@ class wall{
                     layer.noStroke()
                 }
                 for(let a=0,la=4;a<la;a++){
-                    if(cos(a*90+this.time)>0){
-                        layer.fill(160+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
-                        layer.fill(80+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(220+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),-this.height*0.12,this.width*cos(a*90+this.time)*0.1,this.height*0.1)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.1,this.height*0.1)
-                        layer.rect(this.width/2*sin(a*90+this.time),this.height*0.12,this.width*cos(a*90+this.time)*0.1,this.height*0.1)
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(160+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(220+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),-this.height*0.12,this.width*lcos(a*90+this.time)*0.1,this.height*0.1)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.1,this.height*0.1)
+                        layer.rect(this.width/2*lsin(a*90+this.time),this.height*0.12,this.width*lcos(a*90+this.time)*0.1,this.height*0.1)
                     }
                 }
                 layer.fill(180,1-this.recharge/60)
@@ -896,13 +896,13 @@ class wall{
                     layer.noStroke()
                 }
                 for(let a=0,la=4;a<la;a++){
-                    if(cos(a*90+this.time)>0){
-                        layer.fill(200+cos(a*90+this.time)*40,200+cos(a*90+this.time)*40,80+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*sin(a*90+this.time),0,(this.width+1)*cos(a*90+this.time),this.height+1)
-                        layer.fill(160+cos(a*90+this.time)*40,160+cos(a*90+this.time)*40,120+cos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(40+cos(a*90+this.time)*40,1-this.recharge/60)
-                        regTriangle(layer,this.width/2*sin(a*90+this.time),0,this.width*cos(a*90+this.time)*0.15,this.height*0.15,-30)
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(200+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(160+lcos(a*90+this.time)*40,160+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        regTriangle(layer,this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.15,-30)
                     }
                 }
             break
@@ -1184,7 +1184,10 @@ class wall{
                         c.type==123||c.type==124||c.type==128||c.type==129||c.type==131||
                         c.type==132||c.type==134||c.type==135||c.type==136||c.type==137||
                         c.type==138||c.type==139||c.type==140||c.type==141||c.type==142||
-                        c.type==143||c.type==144||c.type==145||c.type==146
+                        c.type==143||c.type==144||c.type==145||c.type==146||c.type==156||
+                        c.type==157||c.type==158||c.type==159||c.type==160||c.type==161||
+                        c.type==162||c.type==163||c.type==164||c.type==165||c.type==166||
+                        c.type==168||c.type==169||c.type==170||c.type==171||c.type==172
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1207,7 +1210,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.y<0||(c.type==135||c.type==136)&&c.position.y<c.previous.position.y){
+                                    }else if(c.velocity.y<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y<c.previous.position.y){
                                         c.position.y=this.position.y+this.height/2+c.height/2
                                         c.velocity.y*=-1
                                     }
@@ -1224,7 +1227,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.y>0||(c.type==135||c.type==136)&&c.position.y>c.previous.position.y){
+                                    }else if(c.velocity.y>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y>c.previous.position.y){
                                         c.position.y=this.position.y-this.height/2-c.height/2
                                         c.velocity.y*=-1
                                     }
@@ -1241,7 +1244,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.x<0||(c.type==135||c.type==136)&&c.position.x<c.previous.position.x){
+                                    }else if(c.velocity.x<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x<c.previous.position.x){
                                         c.position.x=this.position.x+this.width/2+c.width/2
                                         c.velocity.x*=-1
                                     }
@@ -1258,7 +1261,7 @@ class wall{
                                                 c.active=false
                                             }
                                         }
-                                    }else if(c.velocity.x>0||(c.type==135||c.type==136)&&c.position.x>c.previous.position.x){
+                                    }else if(c.velocity.x>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x>c.previous.position.x){
                                         c.position.x=this.position.x-this.width/2-c.width/2
                                         c.velocity.x*=-1
                                     }
@@ -1275,13 +1278,23 @@ class wall{
                                                 c.active=false
                                             }
                                         }
+                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                        incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }else{
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
                                             c.position.y+=c.velocity.y*0.1
                                         }
@@ -1299,13 +1312,23 @@ class wall{
                                                 c.active=false
                                             }
                                         }
+                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
+                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }else{
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
                                             c.position.y+=c.velocity.y*0.1
                                         }
@@ -1323,6 +1346,18 @@ class wall{
                                                 c.active=false
                                             }
                                         }
+                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                        c.velocity.y=0
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }else{
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
@@ -1330,8 +1365,8 @@ class wall{
                                         incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
                                             c.position.y+=c.velocity.y*0.1
                                         }
@@ -1349,6 +1384,18 @@ class wall{
                                                 c.active=false
                                             }
                                         }
+                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
+                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                        c.velocity.y=0
+                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                            c.position.x+=c.velocity.x*0.1
+                                            c.position.y+=c.velocity.y*0.1
+                                        }
                                     }else{
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
@@ -1356,8 +1403,8 @@ class wall{
                                         incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                         if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
-                                            c.velocity.x=sin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=cos(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
                                             c.position.y+=c.velocity.y*0.1
                                         }
@@ -1394,10 +1441,11 @@ class wall{
                                     }
                                 break
                             }
-                            if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||c.type==146){
+                            if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||c.type==146||c.type==156){
                                 c.stop=true
-                            }else if(c.type==135||c.type==136){
+                            }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
                                 c.bounces++
+                                c.bounceTimer=5
                             }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
@@ -1432,12 +1480,12 @@ class wall{
                         }
                     }else if(a==1&&inBoxBox(this.bounder,c)
                         &&!(this.type==5&&(c.id>0&&!game.attacker||c.id==0&&game.attacker||this.exploded))
-                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=c.weaponData.uses*game.ammoMult||c.weapon.uses<=0))
+                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult||c.weapon.uses<=0)))
                         &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
-                        &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0))
-                        &&!(this.type==27&&(c.id<=0||this.recharge>0))
+                        &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.mafia))
+                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia))
                     ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
@@ -1466,7 +1514,7 @@ class wall{
                                 }else{
                                     this.recharge=1800-(game.gaming-1)*300
                                 }
-                                c.weapon.uses=min(c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
+                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
                                 if(game.level==6){
                                     this.type=[9,12][floor(random(0,2))]
                                 }

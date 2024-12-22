@@ -5,7 +5,7 @@ function mainloop(layer){
         case 'menu':
             for(let a=0,la=6;a<la;a++){
                 for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
-                    if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15,16][b]||a==3&&menu.weapon==b||a==4&&game[['classicRespawn','invis','pvp','attacker'][b]]){
+                    if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15,16][b]||a==3&&menu.weapon==b||a==3&&b>=1&&b<=2&&menu.weapon==4||a==4&&game[['classicRespawn','invis','pvp','attacker'][b]]){
                         fill(100,200,100)
                     }else{
                         fill(100)
@@ -102,18 +102,28 @@ function mainloop(layer){
                 }else{
                     graphics.main[c].background(0)
                 }
-                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||entities.players[c].weaponType==181?2:1)
+                key.push(dev.sight?10:entities.players[c].parachute?4:entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293?(game.level==7?1.5:2):1)
                 key[c]*=0.75
                 if(game.level==6){
                     key[c]*=0.75
                 }
                 bs.push([])
+                let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289
+                let center=entities.players[c]
+                if(entities.players[c].weaponType==275){
+                    for(let a=0,la=entities.projectiles.length;a<la;a++){
+                        if(entities.projectiles[a].type==163&&entities.projectiles[a].id==c+1){
+                            center=entities.projectiles[a]
+                            a=la
+                        }
+                    }
+                }
                 if(game.level==7){
-                    effective.push([entities.players[c].position.x,entities.players[c].position.y])
+                    effective.push([center.position.x,center.position.y])
                 }else if(game.level==16){
-                    effective.push([entities.players[c].position.x,constrain(entities.players[c].position.y+(entities.players[c].weaponType==107||entities.players[c].weaponType==166?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                    effective.push([center.position.x,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }else{
-                    effective.push([constrain(entities.players[c].position.x,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(entities.players[c].position.y+(entities.players[c].weaponType==107||entities.players[c].weaponType==166?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                    effective.push([constrain(center.position.x,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){

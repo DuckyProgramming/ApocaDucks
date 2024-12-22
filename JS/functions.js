@@ -403,20 +403,20 @@ function setupLayer(layer){
     layer.noStroke()
 }
 function regTriangle(layer,x,y,radiusX,radiusY,direction){
-    layer.triangle(x+sin(direction)*radiusX,y+cos(direction)*radiusY,x+sin(direction+120)*radiusX,y+cos(direction+120)*radiusY,x+sin(direction-120)*radiusX,y+cos(direction-120)*radiusY)
+    layer.triangle(x+lsin(direction)*radiusX,y+lcos(direction)*radiusY,x+lsin(direction+120)*radiusX,y+lcos(direction+120)*radiusY,x+lsin(direction-120)*radiusX,y+lcos(direction-120)*radiusY)
 }
 function regPoly(layer,x,y,sides,radiusX,radiusY,direction){
     layer.beginShape()
     for(let a=0,la=sides;a<la;a++){
-        layer.vertex(x+sin(a/la*360+direction)*radiusX,y+cos(a/la*360+direction)*radiusY)
+        layer.vertex(x+lsin(a/la*360+direction)*radiusX,y+lcos(a/la*360+direction)*radiusY)
     }
     layer.endShape(CLOSE)
 }
 function regStar(layer,x,y,points,radiusX,radiusY,innerRadiusX,innerRadiusY,direction){
     layer.beginShape()
     for(let a=0,la=points;a<la;a++){
-        layer.vertex(x+sin(a/la*360+direction)*radiusX,y+cos(a/la*360+direction)*radiusY)
-        layer.vertex(x+sin((a+0.5)/la*360+direction)*innerRadiusX,y+cos((a+0.5)/la*360+direction)*innerRadiusY)
+        layer.vertex(x+lsin(a/la*360+direction)*radiusX,y+lcos(a/la*360+direction)*radiusY)
+        layer.vertex(x+lsin((a+0.5)/la*360+direction)*innerRadiusX,y+lcos((a+0.5)/la*360+direction)*innerRadiusY)
     }
     layer.endShape(CLOSE)
 }
@@ -522,7 +522,7 @@ function generateLevel(level,layer){
         break
         default:
             //game.edge=[3640,2280]
-            game.edge=[1960,1040]
+            game.edge=[levels[13][0].length*40,levels[13].length*40]
         break
     }
     game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
@@ -700,7 +700,14 @@ function generateLevel(level,layer){
         while(temp.length>0){
             let index=floor(random(0,temp.length))
             mixed.push(temp[index])
-            temp.splice(index,1)
+            let value=temp[index]
+            for(let a=0,la=temp.length;a<la;a++){
+                if(temp[a]==value){
+                    temp.splice(a,1)
+                    a--
+                    la--
+                }
+            }
         }
         for(let a=0,la=entities.walls[1].length;a<la;a++){
             if(entities.walls[1][a].type==16){
@@ -722,7 +729,14 @@ function generateLevel(level,layer){
         while(temp.length>0){
             let index=floor(random(0,temp.length))
             mixed.push(temp[index])
-            temp.splice(index,1)
+            let value=temp[index]
+            for(let a=0,la=temp.length;a<la;a++){
+                if(temp[a]==value){
+                    temp.splice(a,1)
+                    a--
+                    la--
+                }
+            }
         }
         for(let a=0,la=entities.walls[1].length;a<la;a++){
             if(entities.walls[1][a].type==16){
@@ -773,22 +787,22 @@ function generateLevel(level,layer){
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
-                let clump=listing[floor(random(1.5))]
+                let clump=listing[game.peakWeapon?1:floor(random(0,1.5))]
                 if(game.attacker&&game.level!=13&&game.level!=14){
                     if(level[a][b]=='Z'){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
                         game.index++
                     }
                 }else{
                     if(int(level[a][b])==c+1&&(!game.pvp||game.level==13||game.level==14)){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
                         game.index++
                         if(game.level==13||game.level==14){
                             entities.players[entities.players.length-1].weaponType=-1
                         }
                     }
                     if(level[a][b]=='qwerty'[c]&&game.pvp){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.classicWeapon||game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
                         game.index++
                         if(game.level==13||game.level==14){ 
                             entities.players[entities.players.length-1].weaponType=-1
@@ -802,6 +816,9 @@ function generateLevel(level,layer){
                 }
             }
         }
+    }
+    for(let c=0,lc=game.players;c<lc;c++){
+        entities.players[c].initialWeapon()
     }
     entities.walls.forEach(set=>set.forEach(item=>item.checkHorizontal()))
     entities.walls[0]=entities.walls[0].filter(item=>!item.remove)
@@ -829,7 +846,7 @@ function generateLevel(level,layer){
         for(let a=0,la=graphics.pane[1].width/25;a<la;a++){
             for(let b=0,lb=graphics.pane[1].height/25-20;b<lb;b++){
                 effectiveA=(a*7+b*3)%la
-                let pos=[effectiveA*25+random(0,25),b*25+500+sin(effectiveA*30+random(-15,15))*100+sin(effectiveA*8.5+random(-10,10))*50]
+                let pos=[effectiveA*25+random(0,25),b*25+500+lsin(effectiveA*30+random(-15,15))*100+lsin(effectiveA*8.5+random(-10,10))*50]
                 let size=random(45,60)
                 let bounce=random(0,1)
                 graphics.pane[1].fill(
@@ -873,6 +890,16 @@ function newWave(level,layer){
             entities.walls[1].forEach(wall=>wall.exploded=false)
         }
         if(game.attacker){
+            for(let a=0,la=entities.projectiles.length;a<la;a++){
+                entities.projectiles.splice(a,1)
+                a--
+                la--
+            }
+            for(let a=game.players,la=entities.players.length;a<la;a++){
+                entities.players.splice(a,1)
+                a--
+                la--
+            }
             for(let a=0,la=game.players;a<la;a++){
                 entities.players[a].respawn()
             }
@@ -1125,14 +1152,18 @@ function checkEnd(level,layer){
                                 if(game.attacker){
                                     let index=floor(random(0,game.spawner.length))
                                     let pos=game.spawner[index]
-                                    while(dist(pos[0],pos[1],entities.players[0].position.x,entities.players[0].position.y)<600){
+                                    let spam=0
+                                    while(dist(pos[0],pos[1],entities.players[0].base.position.x,entities.players[0].base.position.y)<400&&spam<100){
                                         index=floor(random(0,game.spawner.length))
                                         pos=game.spawner[index]
+                                        spam++
                                     }
-                                    entities.players.push(new player(layer,pos[0],pos[1]-60,0,0,[],true,findName(game.stack[0][1],types.player),game.index))
-                                    game.index++
-                                    game.spawnIndex++
-                                    pos.splice(index,1)
+                                    if(spam<100){
+                                        entities.players.push(new player(layer,pos[0],pos[1]-60,0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                                        game.index++
+                                        game.spawnIndex++
+                                        game.spawner.splice(index,1)
+                                    }
                                 }else if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
                                     deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                     game.index++
@@ -1181,6 +1212,7 @@ function checkEnd(level,layer){
 }
 function setupGraphics(){
     setupBase()
+    setupTrig()
 }
 function initialGraphics(){
     if(game.gaming==1){
@@ -1200,4 +1232,26 @@ function initialGraphics(){
         setupLayer(graphics.main[a])
         graphics.main[a].index=a
     }
+}
+function setupTrig(){
+	for(let a=0,la=180;a<la;a++){
+		constants.trig[0].push(sin(a))
+		constants.trig[1].push(cos(a))
+		if(abs(constants.trig[0][a])<0.001){
+			constants.trig[0][a]=0
+		}
+		if(abs(constants.trig[1][a])<0.001){
+			constants.trig[1][a]=0
+		}
+	}
+	for(let a=0,la=180;a<la;a++){
+		constants.trig[0].push(-constants.trig[0][a])
+		constants.trig[1].push(-constants.trig[1][a])
+	}
+}
+function lsin(direction){
+	return constants.trig[0][floor((direction%360+360)%360)]
+}
+function lcos(direction){
+	return constants.trig[1][floor((direction%360+360)%360)]
 }

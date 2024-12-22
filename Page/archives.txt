@@ -1,11 +1,136 @@
 
 
 
+fixs the collisions with helical balls on slope
 
 
 
 
 
+265 - tanuki (drones have homing bullets)
+266 - militia (four special drone types)
+267 - new suzerain
+268 - shooting star
+271 - stratofortress
+272 - guard
+273 - deployer G
+274 - stuxnet
+275 - airtag
+276 - haunted (spawns a banshee)
+277 - softwareception
+278 - gatekeeper (trap shotgun)
+279 - parachutist
+280 - grenadier fuse (keeps bouncing)
+281 - tobacco flamethrower (flamethrower with ballista projectiles)
+282 - dropship (para helix)
+283 - freeze ray
+284 - swarmer
+285 - swarmerception
+286 - helixception
+287 - complex director, 205
+288 - adjunct (sidekick sniper)
+289 - apache (para auto2), 255
+290 - edge (swarming helix)
+291 - deacetylase (destroyer helix)
+292 - tubular (flaming helix)
+293 - dispenser (shootist but with medic bullets)
+294 - tempest (rapidly spinning swarmer)
+295 - glove (strong gun, last shot fires the gun)
+296 - xenon (rocket launcher, bursts forward upon shooting, leaves behind a temp clone that loses health quickly)
+297 - groundwire (assault rifle of inceptioner bullets)
+
+
+157 - tanuki,111
+158 - militia 1 (light destroyer)
+159 - militia 2 (heavy sniper)
+160 - militia 3 (drone hub)
+161 - militia 4 (tri trapper)
+162 - stuxnet
+163 - airtag
+164 - haunted
+165 - softwareception
+166 - grenadier fuse,30
+167 - freeze ray
+168 - light swarmer,119
+169 - light helix
+170 - light helix (other)
+171 - complex director,122
+172 - tempest
+173 - glove,126 (1/4 damage bullets)
+174 - groundwire
+
+
+
+
+
+
+
+261 - bullet hell, 193
+262 - diabolist
+263 - dullahan
+264 - light trapper
+
+156 - bomb
+
+
+
+254 - mafia (sidekick auto2)
+255 - auto2
+256 - subordinate (sidekick trapper)
+257 - quisling (sidekick shotgun)
+258 - dropship,223
+259 - chrome (sidekick dropship)
+260 - splitter
+
+
+
+
+248 - sparkler
+249 - shootist
+250 - atrophy
+251 - cursor
+252 - gunceptionception
+253 - disappointment
+
+154 - sparkler,126
+155 - atrophy,9
+
+
+
+
+
+
+237 - huntress,4
+238 - sunburstception,234
+239 - moonbeam,234
+240 - stealth
+241 - stealthception
+242 - bonker
+243 - iceberg
+244 - fog
+245 - surprise
+246 - border
+247 - thrasher
+
+150 - moonbeam
+151 - freeze bullet
+152 - fog
+153 - loose explosion
+
+
+
+
+
+
+
+
+
+234 - sunburst
+235 - starburst
+236 - sunset
+
+148 - starburst
+149 - sunset
 
 
 

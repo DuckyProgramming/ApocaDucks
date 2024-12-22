@@ -26,7 +26,11 @@ function mouseClicked(){
                         }else if(a==2){
                             menu.level=[6,7,8,15,16][b]
                         }else if(a==3){
-                            menu.weapon=b
+                            if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
+                                menu.weapon=4
+                            }else{
+                                menu.weapon=b
+                            }
                         }else if(a==4){
                             game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
                         }else{
@@ -49,6 +53,10 @@ function mouseClicked(){
                             break
                             case 3:
                                 game.randomizer=true
+                            break
+                            case 4:
+                                game.peakWeapon=true
+                                game.classicWeapon=true
                             break
                         }
                         game.players=menu.players
