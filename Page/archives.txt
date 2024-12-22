@@ -1,8 +1,12 @@
 
 
 
-fixs the collisions with helical balls on slope
 
+298 - division
+299 - freeze sniper
+300 - coadjutor
+
+175 - freeze sniper
 
 
 

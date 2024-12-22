@@ -50,8 +50,7 @@ listing=[
   ],[
     0,1,2,3,4,5,
     6,7,8,9,10,11,
-    12,13,14,15,16,17,
-    18,19,20,21,22,23,
+    12,13,14,
   ],
 ]
 menu={players:1,gaming:1,weapon:0,level:6,list:[]}
@@ -64,9 +63,9 @@ types={
       difficulty:0,
       wave:[
         [
-          ['HeavyTank',10],
-          //['Pistol',6],
-          //['Flamethrower',4],
+          //['HeavyTank',10],
+          ['Pistol',6],
+          ['Flamethrower',4],
         ],[
           ['RocketLauncher',3],
           ['Baller',3],
@@ -2949,8 +2948,8 @@ types={
       name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
     },{
-      name:'PlayerSniperStop',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:145,
+      name:'PlayerFreezeSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
     },{
       name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
@@ -3255,8 +3254,8 @@ types={
       name:'PlayerChrome',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:259,
     },{
-      name:'PlayerAdjunct',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:288,
+      name:'PlayerCoadjutor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:300,
     },{
       name:'PlayerMafia',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:254,
@@ -3375,8 +3374,8 @@ types={
       name:'PlayerGroundwire',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:297,
     },{
-      name:'PlayerSplitter',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:260,
+      name:'PlayerDivision',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:298,
     },
     
     {
@@ -3430,6 +3429,15 @@ types={
     },{
       name:'PlayerNapalmFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:109,
+    },{
+      name:'PlayerSplitter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:260,
+    },{
+      name:'PlayerSniperStop',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:145,
+    },{
+      name:'PlayerAdjunct',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:288,
     },
 
     {
@@ -3473,6 +3481,21 @@ types={
     },{
       name:'SidekickRocketLauncher',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
+    },{
+      name:'SidekickShootist',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:249,
+    },{
+      name:'SidekickMachineSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:92,
+    },{
+      name:'SidekickSharpSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
+    },{
+      name:'SidekickFreezeSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+    },{
+      name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
@@ -5374,7 +5397,7 @@ types={
 			ammo:2,
 			damage:100,
 			cooldown:30,
-			stop:60,
+			stop:90,
 			reload:40,
 			speed:0.85,
       uses:20,
@@ -5386,7 +5409,7 @@ types={
 			stop:180,
 			reload:180,
 			speed:0.85,
-      uses:6,
+      uses:8,
 		},{
 			name:'Straight Baller',
 			ammo:6,
@@ -7199,7 +7222,7 @@ types={
 		},{
 			name:'Glove',
 			ammo:10,
-			damage:45,
+			damage:60,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -7223,6 +7246,33 @@ types={
 			reload:10,
 			speed:1.1,
       uses:27,
+		},{
+			name:'Division',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:0.85,
+      uses:3,
+		},{
+			name:'Freeze Sniper',
+			ammo:1,
+			damage:200,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Coadjutor',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
 		},
 	],
 }

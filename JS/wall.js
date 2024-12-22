@@ -1281,8 +1281,8 @@ class wall{
                                     }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1292,7 +1292,7 @@ class wall{
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                         incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1315,8 +1315,8 @@ class wall{
                                     }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1326,7 +1326,7 @@ class wall{
                                         c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                         incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1348,11 +1348,10 @@ class wall{
                                         }
                                     }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                        c.velocity.y=0
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1360,11 +1359,10 @@ class wall{
                                         }
                                     }else{
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                        c.velocity.y=0
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1386,11 +1384,10 @@ class wall{
                                         }
                                     }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                        c.velocity.y=0
-                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[c.effectiveDirection,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1398,11 +1395,10 @@ class wall{
                                         }
                                     }else{
                                         c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                        c.velocity.y=0
-                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
                                         vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
+                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
                                             c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                             c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                             c.position.x+=c.velocity.x*0.1
@@ -1444,7 +1440,7 @@ class wall{
                             if(c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||c.type==146||c.type==156){
                                 c.stop=true
                             }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
-                                c.bounces++
+                                //c.bounces++
                                 c.bounceTimer=5
                             }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
