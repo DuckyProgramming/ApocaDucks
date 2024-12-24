@@ -1,6 +1,78 @@
 
 
 
+324 - portafortress
+325 - isthmus
+
+
+184 - portafortress minion
+185 - isthmus,125
+
+
+
+
+
+312 - degausser.229
+313 - unfurlshot,309
+314 - macro (machine gun style forward cannons, as well as traps in random directions)
+315 - rho
+
+316 - prism (spreadling, as well as drones on glass cannon shatter)
+317 - crescent
+318 - spreadlingception
+
+319 - dasher
+320 - emplacement
+321 - dasherception
+322 - emplacementception
+
+323 - battlerock
+
+
+
+
+
+181 - block,146
+182 - emplacement
+183 - emplacementception
+
+
+
+
+
+
+
+302 - sovereign - spams medium and small drones in a short burst
+303 - entrapment,204 - impeachment but the pods spawn traps as well
+304 - replacement,204 - impeachment but the pods become smaller pods on death
+305 - embattlement,204 - impeachment but the pods are armored
+
+306 - heron, sniper that propels forward on fire
+307 - pitohui, heron that applies damage over time
+308 - ripple, similar, fires basic pistol as well as drones
+
+309 - spreadling, 07
+
+310 - deployer d
+311 - deployer a
+
+
+
+177 - entrapment,120
+178 - replacement
+179 - embattlement
+180 - replacer
+
+
+
+
+
+
+301 - long pellet baller
+
+176 - long pellet baller,34
+
+
 
 298 - division
 299 - freeze sniper

@@ -1,7 +1,10 @@
 function setup(){
+    listing[0]=[...range(0,33),...range(0,9)]
+    listing[1]=range(33,200)
+    listing[2]=range(0,12)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
-    for(let a=0,la=5;a<la;a++){
+    for(let a=0,la=6;a<la;a++){
         for(let b=0,lb=types.mission.length;b<lb;b++){
             if(types.mission[b].difficulty==a){
                 menu.list.push(b)
@@ -24,7 +27,11 @@ function mouseClicked(){
                         }else if(a==1){
                             menu.gaming=b+1
                         }else if(a==2){
-                            menu.level=[6,7,8,15,16][b]
+                            if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105-50,y:60+a*80+40},width:100,height:60})){
+                                menu.level=[6,7,8,15,16][b]
+                            }else if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105+50,y:60+a*80+40},width:100,height:60})){
+                                menu.level=[6,7,17,18,16][b]
+                            }
                         }else if(a==3){
                             if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
                                 menu.weapon=4
@@ -41,8 +48,9 @@ function mouseClicked(){
             }
         break
         case 'mission':
-            for(let a=0,la=8;a<la;a++){
-                for(let b=0,lb=5;b<lb;b++){
+            let tick=0
+            for(let a=0,la=9;a<la;a++){
+                for(let b=0,lb=[5,5,5,5,5,5,5,5,1][a];b<lb;b++){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:100+a*70},width:200,height:60})){
                         switch(menu.weapon){
                             case 1:
@@ -66,12 +74,13 @@ function mouseClicked(){
                         }else{
                             game.level=13
                         }
-                        game.mission=menu.list[a*5+b]
+                        game.mission=menu.list[tick]
                         entities.players=[]
                         initialGraphics()
                         newLoop()
                         stage.scene='wave'
                     }
+                    tick++
                 }
             }
         break
