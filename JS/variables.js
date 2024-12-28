@@ -2,25 +2,11 @@ game={
   level:6,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,diff:1,ammoMult:2,tileset:[0,0],edge:[0,0],
   index:0,projectileIndex:0,
   emergencyKey:true,newStats:true,spawnIndex:0,spawner:[],
-  classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,reverse:true,
+  classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   randomizer:false,classicWeapon:false,peakWeapon:false,
-  weapon:[],weaponTick:[]
+  weapon:[],weaponTick:[],
 }
-listing=[
-  [
-    0,1,2,3,4,5,6,7,8,
-
-    0,1,2,3,4,5,6,7,8,
-    9,10,11,12,13,14,15,16,17,
-    18,19,20,21,22,23,24,25,26,
-    27,28,29,30,31,32,
-  ],[
-  ],[
-    0,1,2,3,4,5,
-    6,7,8,9,10,11,
-    12,13,14,
-  ],
-]
+listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[]}
 dev={sight:false}
 types={
@@ -31,7 +17,7 @@ types={
       difficulty:0,
       wave:[
         [
-          ['BigMultiHyperMedic',10],
+          //['SmokeRocketLauncher',10],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -2893,6 +2879,486 @@ types={
           ['SpawnerBoss',1],
         ],
       ],
+    },{
+      name:`Duck Rumble`,
+      sendTime:30,
+      difficulty:0,
+      wave:[
+        [
+          ['Flamethrower',3],
+          ['Pistol',6],
+          ['FastPunch',2],
+        ],[
+          ['BigFlamethrower',1],
+          ['Pistol',3],
+          ['Baller',2],
+          ['RocketLauncher',2],
+          ['Punch',2],
+          ['RapidPunch',1],
+        ],[
+          ['TankDefendBuff',1],
+          ['HeavyPunchRegen',2],
+          ['Pistol',2],
+          ['PunchStop',2],
+          ['Spy',1],
+        ],[
+          ['BigBaller',1],
+          ['RapidPunch',2],
+          ['RocketLauncher',3],
+          ['Flamethrower',3],
+          ['MachineGun',2],
+          ['Sniper',1],
+        ],[
+          ['TankDefendBuff',1],
+          ['BigSpreadSniper',1],
+          ['Pistol',2],
+          ['Medic',2],
+          ['DamageOverTimePunch',2],
+          ['LongFlamethrower',2],
+        ],[
+          ['TankDefendBuff',1],
+          ['BigMachineGun',1],
+          ['BigBaller',1],
+          ['BigCritRocketLauncher',1],
+          ['PushPistol',4],
+          ['HeavyPunchRegen',2],
+          ['FastPistol',2],
+        ],
+      ],
+    },{
+      name:`Techducks`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['BigFlamethrower',1],
+          ['FlamethrowerPistol',14],
+          ['GrenadierFuse',6],
+          ['Medic',3],
+          ['RocketLauncherBuff',3],
+          ['Engineer',1],
+          ['Spy',2],
+        ],[
+          ['BigCritBaller',1],
+          ['RapidBaller',9],
+          ['FastHeavyPushPistol',3],
+          ['HyperPistol',8],
+          ['MachineGun',5],
+          ['Medic',2],
+          ['SniperVulnerable',3],
+        ],[
+          ['TankJump',1],
+          ['BigCritFlamethrower',2],
+          ['PistolJump',5],
+          ['GrenadierFuse',9],
+          ['HyperMedic',4],
+          ['Medic',2],
+          ['RocketLauncher',4],
+          ['HeavyRadiusRocketLauncher',4],
+          ['Engineer',1],
+        ],[
+          ['BigSpamBaller',3],
+          ['BigRocketLauncherDefendBuff',3],
+          ['HyperMedic',4],
+          ['MachineGun',8],
+          ['Flamethrower',7],
+          ['Engineer',1],
+          ['HeavyRadiusRocketLauncher',4],
+          ['Spy',2],
+        ],[
+          ['BigPistol',2],
+          ['BigRapidRocketLauncherHealSelf',2],
+          ['BigRapidRocketLauncherCritSelf',2],
+          ['BigShotgun',1],
+          ['RapidRocketLauncher',7],
+          ['MedicShield',3],
+          ['Pistol',5],
+          ['HyperMedic',5],
+          ['Engineer',1],
+        ],[
+          ['BigMachineGunCritSelf',2],
+          ['BigSpamBaller',4],
+          ['Baller',7],
+          ['HeavyCritPushPistol',6],
+          ['HeavyMedic',5],
+          ['FlameSphere',3],
+          ['HyperMedic',3],
+          ['Engineer',1],
+        ],[
+          ['TankJump',5],
+          ['BigDeflectorMachineGun',1],
+          ['BigCritRocketLauncher',2],
+          ['BigRapidRocketLauncherCritSelf',2],
+          ['CritShotgun',10],
+          ['RocketLauncherBuff',6],
+          ['PistolHeal',3],
+          ['CritEngineer',1],
+          ['HeavyRadiusRocketLauncher',2],
+          ['Spy',1],
+        ],
+      ],
+    },{
+      name:`Duck Launch`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['BigRocketLauncher',2],
+          ['BigFastPistol',3],
+          ['BigFlamethrower',2],
+          ['Pistol',7],
+          ['MachineGun',4],
+          ['SpreadSniper',4],
+          ['PushPistol',3],
+          ['HyperMedic',3],
+          ['Spy',1],
+        ],[
+          ['FastPunch',3],
+          ['BigFastPunch',1],
+          ['BigCritRocketLauncher',1],
+          ['Medic',2],
+          ['BigRapidRocketLauncherHealSelf',1],
+          ['HyperCaffeinePistol',7],
+          ['Flamethrower',8],
+          ['MedicAura',2],
+          ['Engineer',1],
+          ['Pistol',3],
+          ['TankBump',1],
+        ],[
+          ['HeavyPunch',6],
+          ['LongFlamethrower',6],
+          ['BigSpamBaller',3],
+          ['HyperMedic',3],
+          ['BigCritApplyMedic',1],
+          ['DamageOverTimeMachineGun',3],
+          ['BigDamageOverTimeMachineGun',1],
+          ['BigFastPistol',1],
+          ['BigRapidRocketLauncher',1],
+          ['DirectRocketLauncher',6],
+        ],[
+          ['RocketLauncher',6],
+          ['RocketLauncherBuff',4],
+          ['Baller',6],
+          ['HyperMedic',2],
+          ['CritRocketLauncherHeal',2],
+          ['Flamethrower',4],
+          ['BigRapidGrenadier',1],
+          ['BigSpamRocketLauncher',1],
+          ['BigShotgunChain',3],
+          ['TankBump',1],
+          ['RemoverSniper',1],
+        ],[
+          ['BigFastPistol',1],
+          ['BigDeflectorMachineGun',1],
+          ['CritPistol',4],
+          ['CritHeavyPunch',3],
+          ['BigCritRapidRocketLauncher',1],
+          ['HyperMedic',4],
+          ['BigMedic',1],
+          ['Baller',4],
+          ['CritHyperPistol',4],
+          ['LongFlamethrower',3],
+          ['BigFlameSphere',3],
+          ['TankBump',1],
+          ['Engineer',1],
+        ],[
+          ['CritPistol',4],
+          ['BigFastPistol',5],
+          ['BigSpamRocketLauncher',3],
+          ['BigMedic',1],
+          ['BigDefendApplyMedic',1],
+          ['BigMedicShield',1],
+          ['BigMedicAura',1],
+          ['Baller',4],
+          ['DeflectorMachineGun',4],
+          ['FlameSphere',3],
+          ['BigCritMachineGun',3],
+          ['TankBump',3],
+        ],
+      ],
+    },{
+      name:`Ducklighting`,
+      sendTime:30,
+      difficulty:3,
+      wave:[
+        [
+          ['BigDeflectorMachineGun',3],
+          ['CritFlamethrower',12],
+          ['HyperMedic',7],
+          ['BombSniper',5],
+          ['TankShield',1],
+          ['BigDamageOverTimeMachineGun',1],
+          ['BigMedic',1],
+          ['BigCritDamageOverTimeMachineGun',2],
+        ],[
+          ['RapidPunch',4],
+          ['TankShield',2],
+          ['HyperMedic',4],
+          ['EngineerWeak',2],
+          ['SpyHeal',2],
+          ['BigCritRocketLauncher',4],
+          ['BigHeavyPunch',2],
+          ['BigCritRapidRocketLauncher',1],
+          ['PhaseRocketLauncher',16],
+        ],[
+          ['BigCritParaRocketLauncher',1],
+          ['VolleyCritRocketLauncher',6],
+          ['CritPushFlamethrower',6],
+          ['TankShield',3],
+          ['BigNapalmFlamethrower',4],
+          ['CritFlameSphere',8],
+          ['ParaMedic',4],
+        ],[
+          ['BigFastPunch',3],
+          ['BigRocketLauncherBuff',4],
+          ['TankShield',4],
+          ['PistolJump',8],
+          ['HeavyPunch',9],
+          ['BigCritDeflectorMachineGun',1],
+          ['HyperMedic',9],
+          ['Engineer',1],
+        ],[
+          ['BigRapidCritBaller',2],
+          ['CritSpreadSniper',7],
+          ['RevolverSpy',1],
+          ['PushShotgun',4],
+          ['Baller',8],
+          ['ParaMedic',7],
+          ['SlowPistol',6],
+          ['TankShield',3],
+          ['BigRocketLauncherDoubleBuff',3],
+        ],
+      ],
+    },{
+      name:`Goofy Ducks`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['Pistol',6],
+          ['BigBaller',1],
+          ['BigPushFlamethrower',4],
+          ['Punch',4],
+          ['CritApplyMedic',1],
+          ['Medic',2],
+          ['DirectRocketLauncher',6],
+          ['SpreadSniper',6],
+        ],[
+          ['BigPunch',2],
+          ['BigSpamRocketLauncher',2],
+          ['Pistol',6],
+          ['LongPunch',8],
+          ['HeftyTank',1],
+          ['BigPushPistol',4],
+          ['HyperMedic',6],
+          ['Spy',1],
+        ],[
+          ['Flamethrower',14],
+          ['HyperMedic',3],
+          ['RocketLauncherHeal',3],
+          ['BigBaller',3],
+          ['BigMachineGun',3],
+          ['BigHyperPistol',3],
+          ['Spy',1],
+        ],[
+          ['CritFastPunch',5],
+          ['FastPunch',5],
+          ['BigShotgun',3],
+          ['RocketLauncher',3],
+          ['Pistol',3],
+          ['MachineGun',2],
+          ['BigDeflectorMachineGun',1],
+          ['BigLongCritFlamethrower',2],
+          ['BigMedic',3],
+        ],[
+          ['BigCritPistolJump',3],
+          ['HeftyTank',1],
+          ['BigRocketLauncherSpeedBuff',2],
+          ['CritHeavyPunch',7],
+          ['RocketLauncherSpeedBuff',4],
+          ['RocketLauncherDefendBuff',2],
+          ['MachineGun',4],
+          ['Pistol',4],
+          ['SpyHealSelf',2],
+          ['Engineer',2],
+        ],[
+          ['Flamethrower',6],
+          ['HeftyTank',2],
+          ['ClusterBoss',1],
+          ['CritMachineGun',6],
+          ['Medic',3],
+          ['HeavyMedic',3],
+          ['HyperMedic',3],
+          ['RapidBaller',2],
+          ['FastPunch',2],
+        ],
+      ],
+    },{
+      name:`Duck Termination`,
+      sendTime:30,
+      difficulty:4,
+      wave:[
+        [
+          ['Pistol',10],
+          ['Baller',12],
+          ['BigRocketLauncherHeal',5],
+          ['HyperMedic',5],
+          ['Flamethrower',4],
+          ['BigHeavyPushPistol',3],
+          ['RocketLauncher',7],
+        ],[
+          ['BigDeflectorMachineGunCritSelf',2],
+          ['HyperMedic',4],
+          ['BigRapidRocketLauncher',2],
+          ['HyperMedic',4],
+          ['Baller',12],
+          ['HeavyPunch',6],
+          ['MachineGun',13],
+          ['Pistol',4],
+          ['BigPistol',3],
+          ['Spy',1],
+        ],[
+          ['CritHyperPistol',8],
+          ['Flamethrower',6],
+          ['MachineGun',6],
+          ['Pistol',6],
+          ['TankSpeedBuff',1],
+          ['BigDeflectorMachineGun',3],
+          ['Baller',8],
+          ['BigRapiderBaller',2],
+          ['RocketLauncherHeal',4],
+          ['BigBarrageCritRocketLauncher',4],
+          ['Sniper',2],
+        ],[
+          ['ShotgunChain',10],
+          ['BigRapiderBaller',4],
+          ['BigLongHyperMedic',1],
+          ['Flamethrower',14],
+          ['DeflectorMachineGun',9],
+          ['Pistol',5],
+          ['BigDeflectorMachineGunCritSelf',1],
+          ['Engineer',4],
+        ],[
+          ['TankSpeedBuff',1],
+          ['BigBarrageCritRocketLauncher',2],
+          ['FastPunch',6],
+          ['BigCritShotgun',6],
+          ['RocketLauncher',5],
+          ['HyperMedic',5],
+          ['BigDeflectorMachineGun',2],
+          ['BigRapiderBaller',2],
+          ['CritRocketLauncherHeal',7],
+          ['BigCritFlamethrower',2],
+          ['Flamethrower',8],
+          ['Engineer',2],
+          ['Spy',2],
+        ],[
+          ['CritFlamethrower',4],
+          ['RocketLauncherDefendBuff',6],
+          ['BigRapidRocketLauncher',2],
+          ['HyperMedic',3],
+          ['RapidShotgun',4],
+          ['Engineer',2],
+          ['BigRapidShotgun',5],
+          ['BigSpamRocketLauncher',3],
+          ['TankSpeedBuff',1],
+          ['CritMachineGun',11],
+          ['BigDeflectorMachineGunCritSelf',1],
+          ['BigLongHyperMedic',4],
+          ['EngineerSpawner',1],
+          ['Sniper',1],
+        ],
+      ],
+    },{
+      name:`Bugging Ducks`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['BigPistol',1],
+          ['BigRocketLauncher',3],
+          ['RocketLauncher',9],
+          ['BigRapidPunch',2],
+          ['FlameRocketLauncher',9],
+          ['ShotgunChain',3],
+        ],[
+          ['HyperPistol',6],
+          ['BigMachineGun',1],
+          ['HeavyPunch',2],
+          ['HyperMedic',2],
+          ['BigBaller',2],
+          ['ShotgunChain',2],
+          ['Baller',2],
+          ['RocketLauncher',4],
+          ['CritPistol',2],
+          ['BigRapidRocketLauncher',2],
+          ['PushMachineGun',4],
+        ],[
+          ['BigRadiusRocketLauncher',2],
+          ['Medic',7],
+          ['DeadlyTank',1],
+          ['MachineGun',12],
+          ['BallerJump',6],
+          ['BigRocketLauncherBuff',1],
+          ['BombSniper',1],
+        ],[
+          ['MachineGunHealSelf',4],
+          ['BigMachineGunHealSelf',1],
+          ['DamageOverTimeSniper',7],
+          ['BigShortPistol',3],
+          ['MedicRegen',6],
+          ['HyperCaffeinePistol',4],
+          ['BigBarrageCritRocketLauncher',1],
+          ['BigLongHyperMedic',1],
+          ['Engineer',2],
+        ],[
+          ['CritPunchStop',10],
+          ['BigRapidSpamRocketLauncher',2],
+          ['BigShotgunJump',2],
+          ['CritDamageOverTimeMachineGun',4],
+          ['RocketLauncherDefendBuff',3],
+          ['BigMachineGunCritSelf',1],
+          ['BigMedic',1],
+          ['DeadlyTank',2],
+          ['Engineer',1],
+          ['BombSniper',2],
+        ],[
+          ['BigMedicAtrophy',1],
+          ['BigKamikaze',1],
+          ['BigRapidSpamRocketLauncher',5],
+          ['BigRapiderBaller',3],
+          ['BigMachineGun',2],
+          ['BigLongHyperMedic',2],
+          ['RadiusRocketLauncher',6],
+          ['Engineer',1],
+          ['BombSniper',2],
+          ['MachineGunCritSelf',2],
+          ['FlameSphere',3],
+        ],
+      ],
+    },{
+      name:`Random Incremental`,
+      sendTime:30,
+      difficulty:5,
+      wave:[
+        [],[],[],[],[],
+      ],
+    },{
+      name:`Survival`,
+      sendTime:30,
+      difficulty:5,
+      wave:[
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+      ],
     },
   ],player:[
     {
@@ -2922,12 +3388,12 @@ types={
     },{
       name:'PlayerMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
+    },{
+      name:'PlayerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:137,
     },
     
     {
-      name:'PlayerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:137,
-    },{
       name:'PlayerAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },{
@@ -2951,15 +3417,15 @@ types={
     },{
       name:'PlayerParachutist',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:279,
-    },
-    
-    {
-      name:'PlayerHelix',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:258,
+    },{
+      name:'PlayerEmplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:320,
     },{
       name:'PlayerDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:202,
-    },{
+    },
+    
+    {
       name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:191,
     },{
@@ -2978,8 +3444,17 @@ types={
       name:'PlayerDasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:319,
     },{
-      name:'PlayerEmplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:320,
+      name:'PlayerHelix',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:258,
+    },{
+      name:'PlayerPelleter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:332,
+    },{
+      name:'PlayerInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:338,
+    },{
+      name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:133,
     },
     
     {
@@ -2992,14 +3467,26 @@ types={
       name:'PlayerInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:153,
     },{
-      name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:133,
-    },{
       name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:190,
     },{
       name:'PlayerBallista',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:231,
+    },{
+      name:'PlayerLaser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:335,
+    },{
+      name:'PlayerFreezer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:364,
+    },{
+      name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:368,
+    },{
+      name:'PlayerClicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:371,
+    },{
+      name:'PlayerButterfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:373,
     },
 
     {
@@ -3029,8 +3516,8 @@ types={
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:53,
     },{
-      name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
+      name:'PlayerPistolHealSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:48,
     },{
       name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
@@ -3043,11 +3530,11 @@ types={
       name:'PlayerMachineGunFirework',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
     },{
-      name:'PlayerMachineHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:219,
-    },{
       name:'PlayerSprayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
+    },{
+      name:'PlayerEmissary',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:363,
     },{
       name:'PlayerMachineGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:179,
@@ -3063,11 +3550,11 @@ types={
       name:'PlayerGarbageLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:3,crit:0,weapon:144,
     },{
-      name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
-    },{
       name:'PlayerRocketBattery',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:162,
+    },{
+      name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
     },
     
     {
@@ -3105,8 +3592,8 @@ types={
     },
     
     {
-      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
+      name:'PlayerFrostthrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:333,
     },{
       name:'PlayerFlamethrowerDual',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:97,
@@ -3148,7 +3635,7 @@ types={
       name:'PlayerDefendApplyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:83,
     },{
-      name:'PlayerAtrophy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicAtrophy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:250,
     },{
       name:'PlayerMedicception',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3176,8 +3663,8 @@ types={
       name:'PlayerStreamlinedRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:149,
     },{
-      name:'PlayerTwinAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:156,
+      name:'PlayerGroundwire',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:297,
     },{
       name:'PlayerAssaultRiflePierce',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1.25,crit:0,weapon:157,
@@ -3194,7 +3681,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:151,
     },{
       name:'PlayerRadiusPushGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:169,
+      damageBuff:2,reloadBuff:2,crit:0,weapon:169,
     },{
       name:'PlayerShrapnelGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:170,
@@ -3227,8 +3714,8 @@ types={
       name:'PlayerSparkler',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:248,
     },{
-      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
+      name:'PlayerSteamroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:337,
     },{
       name:'PlayerFieldcannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:215,
@@ -3264,8 +3751,8 @@ types={
       name:'PlayerGriefer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:213,
     },{
-      name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
+      name:'PlayerMarine',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:367,
     },{
       name:'PlayerSurprise',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:245,
@@ -3309,20 +3796,20 @@ types={
     },
 
     {
-      name:'PlayerHistone',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:223,
+      name:'PlayerImpeachment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:204,
     },{
-      name:'PlayerEdge',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:290,
+      name:'PlayerEntrapment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:303,
     },{
-      name:'PlayerDeacetylase',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:291,
+      name:'PlayerReplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:304,
     },{
-      name:'PlayerTubular',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:292,
+      name:'PlayerEmbattlement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:305,
     },{
-      name:'PlayerHelixception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:286,
+      name:'PlayerEmplacementception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:322,
     },
 
     {
@@ -3366,8 +3853,8 @@ types={
       name:'PlayerSovereign',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:302,
     },{
-      name:'PlayerDial',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:220,
+      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
     },{
       name:'PlayerTempest',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:294,
@@ -3414,8 +3901,8 @@ types={
       name:'PlayerPrism',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:316,
     },{
-      name:'PlayerUnfurler',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:313,
+      name:'PlayerWeaver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:336,
     },{
       name:'PlayerCrescent',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:317,
@@ -3428,37 +3915,88 @@ types={
     },
 
     {
-      name:'PlayerShootingStar',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:268,
-    },{
       name:'PlayerHeron',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:306,
     },{
       name:'PlayerPitohui',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:307,
     },{
+      name:'PlayerHummingbird',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:366,
+    },{
       name:'PlayerRipple',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:308,
     },{
-      name:'PlayerDasherception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:321,
+      name:'PlayerMayfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:376,
     },
 
     {
-      name:'PlayerImpeachment',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:204,
+      name:'PlayerHistone',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:223,
     },{
-      name:'PlayerEntrapment',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:303,
+      name:'PlayerEdge',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:290,
     },{
-      name:'PlayerReplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:304,
+      name:'PlayerDeacetylase',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:291,
     },{
-      name:'PlayerEmbattlement',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:305,
+      name:'PlayerTubular',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:292,
     },{
-      name:'PlayerEmplacementception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:322,
+      name:'PlayerHelixception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:286,
+    },
+
+    {
+      name:'PlayerBulletHell',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:261,
+    },{
+      name:'PlayerAirscrew',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:340,
+    },{
+      name:'PlayerDial',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:355,
+    },{
+      name:'PlayerHourglass',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:342,
+    },{
+      name:'PlayerPelleterception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:343,
+    },
+    
+    {
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:339,
+    },{
+      name:'PlayerInceptionist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:348,
+    },{
+      name:'PlayerTwinterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:349,
+    },{
+      name:'PlayerConqueror',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:350,
+    },{
+      name:'PlayerInterceptorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:351,
+    },
+
+    {
+      name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
+    },{
+      name:'PlayerFreezeZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:344,
+    },{
+      name:'PlayerHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:345,
+    },{
+      name:'PlayerVirus',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:346,
+    },{
+      name:'PlayerDischarge',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:362,
     },
 
     {
@@ -3471,14 +4009,26 @@ types={
       name:'PlayerOpticalInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:154,
     },{
-      name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
-    },{
       name:'PlayerRotary',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:208,
     },{
       name:'PlayerRibbon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:232,
+    },{
+      name:'PlayerFreezeBeam',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:334,
+    },{
+      name:'PlayerParalyzer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:365,
+    },{
+      name:'PlayerMicroscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:369,
+    },{
+      name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:251,
+    },{
+      name:'PlayerMoth',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:374,
     },
     
     {
@@ -3499,68 +4049,114 @@ types={
     },{
       name:'PlayerDeployerG',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:273,
+    },{
+      name:'PlayerDeployerD',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:310,
+    },{
+      name:'PlayerDeployerAU',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:311,
+    },{
+      name:'PlayerDeployerSP',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:327,
+    },{
+      name:'PlayerDeployerA',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:357,
+    },
+    
+    {
+      name:'PlayerDivision',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:298,
+    },{
+      name:'PlayerSquad',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:331,
+    },{
+      name:'PlayerDegausser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:312,
+    },{
+      name:'PlayerRangefinder',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:358,
+    },{
+      name:'PlayerMachineHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:219,
+    },{
+      name:'PlayerDestroyerHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:359,
+    },{
+      name:'PlayerOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
+    },{
+      name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
+    },{
+      name:'PlayerElectrode',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:347,
+    },{
+      name:'PlayerCardioid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:356,
     },
     
     {
       name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:158,
     },{
-      name:'PlayerFreezeRay',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:283,
-    },{
       name:'PlayerBooster',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:114,
-    },{
-      name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:251,
-    },{
-      name:'PlayerBulletHell',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:261,
-    },{
-      name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:315,
     },{
       name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:210,
     },{
-      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
-    },{
-      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
-    },{
       name:'PlayerPizzaria',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:229,
-    },{
-      name:'PlayerDegausser',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:312,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:229,
     },{
       name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
     },{
-      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:295,
-    },{
       name:'PlayerXenon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,  
-    },{
-      name:'PlayerGroundwire',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:297,
-    },{
-      name:'PlayerDivision',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:298,
-    },{
-      name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:314,
-    },{
-      name:'PlayerBattlerock',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:323,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,
     },{
       name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:324,
     },{
-      name:'PlayerIsthmus',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:325,
+      name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:314,
+    },{
+      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
+    },{
+      name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:377,
+    },
+    
+    {
+      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
+    },{
+      name:'PlayerDropkick',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:352,
+    },{
+      name:'PlayerBattlerock',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:323,
+    },{
+      name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:315,
+    },{
+      name:'PlayerElectroblocker',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:361,
+    },{
+      name:'PlayerShootingStar',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:268,
+    },{
+      name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
+    },{
+      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
+    },{
+      name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
+    },{
+      name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:375,
     },
 
     {
@@ -3630,14 +4226,32 @@ types={
       name:'PlayerGlassCannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:160,
     },{
-      name:'PlayerDeployerD',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:310,
-    },{
-      name:'PlayerDeployerA',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:311,
-    },{
       name:'PlayerTrapguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:198,
+    },{
+      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
+    },{
+      name:'PlayerTwinAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:156,
+    },{
+      name:'PlayerUnfurler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:313,
+    },{
+      name:'PlayerClockwork',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:220,
+    },{
+      name:'PlayerDoubleAutoPelleter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:341,
+    },{
+      name:'PlayerOganesson',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:353,
+    },{
+      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
+    },{
+      name:'PlayerDasherception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:321,
     },
 
     {
@@ -3664,6 +4278,12 @@ types={
     },{
       name:'ConstructAuto',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:99,
+    },{
+      name:'ConstructSpreadling',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:309,
+    },{
+      name:'ConstructAssaultRifle',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },
 
     {
@@ -3703,8 +4323,28 @@ types={
       name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
+      name:'SidekickStreamlinedRifle',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:149,
+    },{
+      name:'SidekickGroundwire',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:297,
+    },{
+      name:'SidekickAssaultRiflePierce',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:157,
+    },{
+      name:'SidekickAssaultRifleSplasher',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:168,
+    },{
+      name:'SidekickBonker',sizeBuff:0.8,lifeBuff:2,speedBuff:1.5,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
       name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
+    },
+
+    {
+      name:'Buster',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
     {
@@ -3745,6 +4385,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'BigCritEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:10,
+    },{
+      name:'CritEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:10,
     },{
       name:'Punch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3831,6 +4474,9 @@ types={
       name:'CritSpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
+      name:'SpyHeal',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'PaperTank',sizeBuff:1.5,lifeBuff:4,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -3853,6 +4499,21 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'MegaTank',sizeBuff:1.75,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankDefendBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankSpeedBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankJump',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankBump',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankShield',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Baller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -3902,6 +4563,9 @@ types={
     },{
       name:'RocketLauncherHeal',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'CritRocketLauncherHeal',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
       name:'BigPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
@@ -3955,6 +4619,12 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigMedicAura',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'MedicAura',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'MedicRegen',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigCritRapidRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -4014,7 +4684,7 @@ types={
       name:'BigPushShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
     },{
-      name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
@@ -4056,6 +4726,12 @@ types={
       name:'BigRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:26,
     },{
+      name:'BigRapidRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:26,
+    },{
+      name:'BigRapidRocketLauncherCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:328,
+    },{
       name:'BigCritRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:26,
     },{
@@ -4086,6 +4762,9 @@ types={
       name:'BigRapidRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:27,
     },{
+      name:'HeavyRadiusRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:27,
+    },{
       name:'BigShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
@@ -4109,6 +4788,9 @@ types={
     },{
       name:'BigRapidBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:7,
+    },{
+      name:'BigRapiderBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:3,crit:0,weapon:7,
     },{
       name:'CritPushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:1,weapon:15,
@@ -4201,6 +4883,9 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:41,
     },{
       name:'HeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:6,
+    },{
+      name:'CritHeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:1,weapon:6,
     },{
       name:'MachineGunCritSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4224,6 +4909,9 @@ types={
       name:'BigMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:42,
     },{
+      name:'BigDeflectorMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:330,
+    },{
       name:'MachineGunHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:29,
     },{
@@ -4231,6 +4919,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:29,
     },{
       name:'BigHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
+    },{
+      name:'BigLongHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
       name:'BigSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -4306,6 +4997,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:25,
     },{
       name:'DamageOverTimeMachineGunDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:25,
+    },{
+      name:'CritDamageOverTimeMachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:25,
     },{
       name:'DirectRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4386,16 +5080,16 @@ types={
       name:'BigFastMachineGunStop',sizeBuff:2,lifeBuff:5,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:57,
     },{
-      name:'BigHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'BigFastHeavyPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.5,
+      name:'BigFastHeavyPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.3125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'BigCritHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigCritHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'BigHeavyRocketLauncher',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigHeavyRocketLauncher',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'RapidEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4410,7 +5104,7 @@ types={
       name:'BigRocketLauncherJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
-      name:'TinyHeavyPunch',sizeBuff:0.8,lifeBuff:1,speedBuff:0.6,
+      name:'TinyHeavyPunch',sizeBuff:0.8,lifeBuff:1,speedBuff:0.375,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'RemoverPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4436,6 +5130,9 @@ types={
     },{
       name:'RapidPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:1,
+    },{
+      name:'SlowPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FastEngineer',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
@@ -4509,6 +5206,9 @@ types={
       name:'BigSpamRocketLauncherBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:18,
     },{
+      name:'BigRapidSpamRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:6,crit:0,weapon:18,
+    },{
       name:'BigPistolVulnerable',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
     },{
@@ -4531,10 +5231,16 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:47,
     },{
       name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
-      damageBufff:0.5,reloadBuff:1,crit:0,weapon:15,
-    },{
-      name:'BigHeavyPushPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'FastHeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.5,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'BigHeavyPushPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'HeavyCritPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:0.5,reloadBuff:1,crit:1,weapon:15,
     },{
       name:'RocketLauncherHealSelfBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:26,
@@ -4566,7 +5272,7 @@ types={
       name:'DamageOverTimeSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:120,
     },{
-      name:'BigHeavyDamageOverTimeSpreadSniper',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigHeavyDamageOverTimeSpreadSniper',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:69,
     },{
       name:'HeavyDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
@@ -4608,7 +5314,7 @@ types={
       name:'HeavyPullPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
     },{
-      name:'BigHeavyPullPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigHeavyPullPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
     },{
       name:'RocketLauncherHealSelfDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4692,8 +5398,14 @@ types={
       name:'BigMachineGunFocus',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:103,
     },{
+      name:'PunchStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:104,
+    },{
       name:'HeavyPunchStop',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:104,
+    },{
+      name:'CritPunchStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:104,
     },{
       name:'HeavyPushPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:105,
@@ -4782,7 +5494,7 @@ types={
       name:'PistolConfuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:91,
     },{
-      name:'HeavyPistolConfuse',sizeBuff:1,lifeBuff:2,speedBuff:0.3,
+      name:'HeavyPistolConfuse',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:91,
     },{
       name:'PhasePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4791,7 +5503,7 @@ types={
       name:'CritPhasePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:122,
     },{
-      name:'FastHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.8,
+      name:'FastHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.5,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'SingleBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -4823,6 +5535,84 @@ types={
     },{
       name:'TobaccoFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:281,
+    },{
+      name:'HeavyPunchRegen',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'SniperVulnerable',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:326,
+    },{
+      name:'PistolHeal',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'HeavyMedic',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'BigFlameSphere',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:125,
+    },{
+      name:'FlamethrowerPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:98,
+    },{
+      name:'SlicingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:329,
+    },{
+      name:'BombSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:132,
+    },{
+      name:'VolleyRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:128,
+    },{
+      name:'VolleyCritRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:128,
+    },{
+      name:'CritFlameSphere',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:125,
+    },{
+      name:'ParaMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'BigHeavyPunch',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'RocketLauncherSpeedBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+  },{
+      name:'BigRocketLauncherSpeedBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'HeftyTank',sizeBuff:1.5,lifeBuff:25,speedBuff:0.15,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'ClusterBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:4,crit:1,weapon:88,
+    },{
+      name:'RapidShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:0,
+    },{
+      name:'BigRapidShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:0,
+    },{
+      name:'PushMachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:163,
+    },{
+      name:'DeadlyTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'BallerJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:7,
+    },{
+      name:'BigShortPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:56,
+    },{
+      name:'BigShotgunJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'MedicAtrophy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:250,
+    },{
+      name:'BigMedicAtrophy',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:250,
     },
   ],weapon:[
 		{
@@ -6106,7 +6896,7 @@ types={
 			speed:1.15,
       uses:12,
 		},{
-			name:'Pistol Officer',
+			name:'Officer',
 			ammo:10,
 			damage:45,
 			cooldown:12,
@@ -6288,7 +7078,7 @@ types={
 		},{
 			name:'Rocket Battery',
 			ammo:4,
-			damage:600,
+			damage:750,
 			cooldown:45,
 			stop:240,
 			reload:60,
@@ -6405,7 +7195,7 @@ types={
 		},{
 			name:'Sprayer Machine Gun',
 			ammo:30,
-			damage:20,
+			damage:25,
 			cooldown:4,
 			stop:120,
 			reload:3,
@@ -6742,7 +7532,7 @@ types={
 			cooldown:180,
 			stop:180,
 			reload:180,
-			speed:1.2,
+			speed:0.9,
       uses:5,
 		},{
 			name:'Griefer',
@@ -6751,7 +7541,7 @@ types={
 			cooldown:150,
 			stop:150,
 			reload:150,
-			speed:1.2,
+			speed:0.9,
       uses:5,
 		},{
 			name:'Scythe',
@@ -6760,7 +7550,7 @@ types={
 			cooldown:180,
 			stop:180,
 			reload:180,
-			speed:1.2,
+			speed:0.9,
       uses:5,
 		},{
 			name:'Fieldcannon',
@@ -6769,7 +7559,7 @@ types={
 			cooldown:10,
 			stop:180,
 			reload:5,
-			speed:1.2,
+			speed:0.9,
       uses:20,
 		},{
 			name:'Donut',
@@ -6778,7 +7568,7 @@ types={
 			cooldown:90,
 			stop:90,
 			reload:90,
-			speed:1.2,
+			speed:0.9,
       uses:8,
 		},{
 			name:'Destroyerception',
@@ -6787,7 +7577,7 @@ types={
 			cooldown:180,
 			stop:180,
 			reload:180,
-			speed:1.2,
+			speed:0.9,
       uses:5,
 		},{
 			name:'Fattener',
@@ -6808,7 +7598,7 @@ types={
 			speed:0.9,
       uses:120,
 		},{
-			name:'Dial',
+			name:'Clockwork',
 			ammo:5,
 			damage:50,
 			cooldown:8,
@@ -7066,19 +7856,19 @@ types={
 			cooldown:180,
 			stop:180,
 			reload:180,
-			speed:1.2,
+			speed:0.9,
       uses:5,
 		},{
 			name:'Shootist',
 			ammo:1,
-			damage:150,
-			cooldown:90,
-			stop:90,
-			reload:90,
+			damage:100,
+			cooldown:70,
+			stop:70,
+			reload:70,
 			speed:0.85,
       uses:10,
 		},{
-			name:'Atrophy',
+			name:'Medic Atrophy',
 			ammo:10,
 			damage:15,
 			cooldown:10,
@@ -7178,13 +7968,13 @@ types={
       uses:3,
 		},{
 			name:'Bullet Hell',
-			ammo:6,
-			damage:40,
+			ammo:8,
+			damage:60,
 			cooldown:20,
-			stop:90,
+			stop:60,
 			reload:10,
 			speed:1.2,
-      uses:30,
+      uses:48,
 		},{
 			name:'Diabolist',
 			ammo:2,
@@ -7377,7 +8167,7 @@ types={
 		},{
 			name:'Freeze Ray',
 			ammo:120,
-			damage:10,
+			damage:15,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -7483,9 +8273,9 @@ types={
 			speed:0.975,
       uses:60,
 		},{
-			name:'Glove',
+			name:'Old Glove',
 			ammo:10,
-			damage:60,
+			damage:100,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -7627,7 +8417,7 @@ types={
 			speed:1.1,
       uses:2,
 		},{
-			name:'Deployer A',
+			name:'Deployer AU',
 			ammo:1,
 			damage:0,
 			cooldown:240,
@@ -7638,7 +8428,7 @@ types={
 		},{
 			name:'Degausser',
 			ammo:1,
-			damage:300,
+			damage:200,
 			cooldown:150,
 			stop:150,
 			reload:150,
@@ -7657,9 +8447,9 @@ types={
 			name:'Macro',
 			ammo:20,
 			damage:75,
-			cooldown:10,
+			cooldown:8,
 			stop:105,
-			reload:8,
+			reload:6,
 			speed:0.875,
       uses:80,
 		},{
@@ -7742,7 +8532,7 @@ types={
 			stop:45,
 			reload:10,
 			speed:0.975,
-      uses:12,
+      uses:20,
 		},{
 			name:'Portafortress',
 			ammo:3,
@@ -7759,8 +8549,485 @@ types={
 			cooldown:360,
 			stop:360,
 			reload:360,
-			speed:1.2,
+			speed:1.025,
       uses:3,
+		},{
+			name:'Sniper Vulnerable',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Deployer SP',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Rocket Launcher Crit Self',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Slicer Dualic',
+			ammo:1,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Deflector Machine Gun Crit Self',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Squad',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:1.1,
+      uses:3,
+		},{
+			name:'Pelleter',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Frostthrower',
+			ammo:50,
+			damage:40,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Freeze Beam',
+			ammo:120,
+			damage:15,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Laser',
+			ammo:120,
+			damage:10,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Weaver',
+			ammo:5,
+			damage:40,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Steamroller',
+			ammo:1,
+			damage:800,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Interceptor',
+			ammo:3,
+			damage:120,
+			cooldown:30,
+			stop:90,
+			reload:20,
+			speed:0.975,
+      uses:25,
+		},{
+			name:'Glove',
+			ammo:7,
+			damage:120,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.4,
+      uses:56,
+		},{
+			name:'Airscrew',
+			ammo:8,
+			damage:65,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Double Auto Pelleter',
+			ammo:10,
+			damage:40,
+			cooldown:9,
+			stop:20,
+			reload:3,
+			speed:1.2,
+      uses:60,
+		},{
+			name:'Hourglass',
+			ammo:8,
+			damage:50,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Pelleterception',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Freeze Zone',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Heal Zone',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Virus',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Electrode',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Inceptionist',
+			ammo:5,
+			damage:120,
+			cooldown:30,
+			stop:90,
+			reload:20,
+			speed:0.975,
+      uses:25,
+		},{
+			name:'Twinterceptor',
+			ammo:10,
+			damage:120,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:0.975,
+      uses:50,
+		},{
+			name:'Conqueror',
+			ammo:8,
+			damage:120,
+			cooldown:20,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:40,
+		},{
+			name:'Interceptorception',
+			ammo:5,
+			damage:120,
+			cooldown:30,
+			stop:90,
+			reload:20,
+			speed:0.975,
+      uses:25,
+		},{
+			name:'Dropkick',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Oganesson',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Warpod',
+			ammo:4,
+			damage:90,
+			cooldown:20,
+			stop:60,
+			reload:15,
+			speed:0.975,
+      uses:20,
+		},{
+			name:'Dial',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Cardioid',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:0.925,
+      uses:30,
+		},{
+			name:'Deployer A',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Rangefinder',
+			ammo:8,
+			damage:60,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Destroyer Hybrid',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.9,
+      uses:5,
+		},{
+			name:'Beacon',
+			ammo:120,
+			damage:10,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Electroblocker',
+			ammo:1,
+			damage:200,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Discharge',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Emissary',
+			ammo:25,
+			damage:30,
+			cooldown:4,
+			stop:180,
+			reload:3,
+			speed:0.9,
+      uses:100,
+		},{
+			name:'Freezer',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Paralyzer',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Hummingbird',
+			ammo:1,
+			damage:75,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Marine',
+			ammo:1,
+			damage:60,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Oscilloscope',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Microscope',
+			ammo:1,
+			damage:150,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Cobalt',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.02,
+      uses:1,
+		},{
+			name:'Clicker',
+			ammo:6,
+			damage:45,
+			cooldown:20,
+			stop:90,
+			reload:8,
+			speed:1.3,
+      uses:24,
+		},{
+			name:'Karma',
+			ammo:4,
+			damage:140,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+      name:'Butterfly',
+			ammo:4,
+			damage:80,
+			cooldown:10,
+			stop:60,
+			reload:5,
+			speed:1.25,
+      uses:24,
+    },{
+      name:'Moth',
+			ammo:6,
+			damage:80,
+			cooldown:6,
+			stop:60,
+			reload:5,
+			speed:1.25,
+      uses:36,
+    },{
+			name:'Cherry Bomb',
+			ammo:4,
+			damage:200,
+			cooldown:20,
+			stop:120,
+			reload:15,
+			speed:1.05,
+      uses:36,
+		},{
+			name:'Mayfly',
+			ammo:1,
+			damage:60,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Treatment',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:60,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Nightseeker',
+			ammo:1,
+			damage:180,
+			cooldown:80,
+			stop:80,
+			reload:80,
+			speed:0.9,
+      uses:10,
 		},
 	],
 }
@@ -8561,9 +9828,9 @@ levels=[
       "                                                                                                                  ",
       "                                                                                                                  ",
       "                                                                                                                  ",
-      "                                                                                                                  ",
       "                                                                                                               ABC",
       "                                                                                                               DZE",
+      "                                                                                                                  ",
       "                                                                                                               ###",
       "                                                                                                               |]#",
       "                                                                                                 $             | #",
@@ -8655,5 +9922,149 @@ levels=[
       "##########__________#########%#############################################################################################################################################################",
       "###########!!!!!!!!########################################################################################################################################################################",
       "###########################################################################################################################################################################################",
+    ],[
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                                                                                                                                                        ",
+      "                                                                   1q2                                                            4w5 6                                                                 ",
+      "                                                           ---  <#####>                                                        <#######>  ----                                                          ",
+      "                                                        <##################>                                                <###################>                                                       ",
+      "                                                   <#########################                                             <########################                                                     ",
+      "                                                  <##########################b                                           ##########################b                                                    ",
+      "                                               #################################>                             3         /##################################>                                            ",
+      "                                              /#####################################>                       <###> --- <#######################################                                          ",
+      "                                           <###############################################>   ----  <########################################################b                                         ",
+      "                                         <#######################################################################################################################>  ---                                 ",
+      "                                        <###############################################################################################################################>                               ",
+      "                                   --- <###################################################################################################################################                             ",
+      "                                <##########################################################################################################################################b                            ",
+      "                           <################################################################################################################################################                            ",
+      "                          ##################################################################################################################################################b                           ",
+      "                         /######################################################################################################################################################>                       ",
+      "                       <###########################################################################################################################################################>                    ",
+      "                   <################################################################################################################################################################>                   ",
+      "                 ######################################################################################################################################################################>                ",
+      "                /#########################################################################################################################################################################              ",
+      "                ##########################################################################################################################################################################b             ",
+      "               /###########################################################################################################################################################################             ",
+      "             <#############################################################################################################################################################################b            ",
+      "ABC       <####################################################################################################################################################################################>     DEF",
+      " Z  e   <#########################################################################################################################################################################################> r   ",
+      "########################################################################################################################################################################################################",
+      "########################################################################################################################################################################################################",
+      "########################################################################################################################################################################################################",
+      "########################################################################################################################################################################################################",
+      "########################################################################################################################################################################################################",
+    ],[
+      "###########################################################################",
+      "# #         #                             #                   #         # #",
+      "# # E       #                             #                   #         # #",
+      "# #         #                             #                   #         # #",
+      "# #######   ###   ###############         #              #    #         # #",
+      "#                               #                        #                #",
+      "#                               #                        #                #",
+      "#                               #    r                   #                #",
+      "# #####   ######@############   #   #############   ####@#@#####   ###### #",
+      "# #         #         #         #         #         #         #         # #",
+      "# #         #         #         #         # C       #       B #         # #",
+      "# #         #         #         #         #         #         #         # #",
+      "# #         #         #         #         #######   #   #######         # #",
+      "# #                                                           #         # #",
+      "# #                                                           #         # #",
+      "# # *                                1                      ~ #         # #",
+      "# ######@########   ##########@###@#########   ###@##############@#   ### #",
+      "# #         #         #         #         #         #         #         # #",
+      "# #         #         # D       #         #         #         #         # #",
+      "# #         #         #         #    2    #         #         #         # #",
+      "# #         #         #######   #   ###   #         #         #         # #",
+      "# #                                                 #                   # #",
+      "# #                                                 #                   # #",
+      "# #           ###                    3              #                   # #",
+      "# #######   ######@###############@#####@####@#   ###   ############@   # #",
+      "# #         #         #         #         #         #         #         # #",
+      "# #         #       F #         #         #         #         #         # #",
+      "# #         #         #         #    4    #         #         #         # #",
+      "# #         #   #######         #    #    #         #         #         # #",
+      "# #         #         #              #                        #         # #",
+      "# #         #         #              #                        #         # #",
+      "# #q        #         # d            #                      ^ #        w# #",
+      "# ###   ##@########   ####   #######@#@####   ##@#####@##########   ##@## #",
+      "# #                   #         #         #                   #         # #",
+      "# #                   #         #       A #                   #         # #",
+      "# #                   #         #         #                   #         # #",
+      "# #         #         #         #   #######         #         #         # #",
+      "#           #                                       #                     #",
+      "# Z         #                                       #                     #",
+      "#           #                       5e6             #                     #",
+      "######@####@#@######@######@################@######@#@############@########",
+    ],[
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                                                                                                                                                               ",
+      "                                     q                         *                                                                                                               ",
+      "                               ggggggggggg   ggggggggggggggggggggggggggggg   ggggggggg   ggggggg                                                                               ",
+      "                               g               |               |               g               |                                                                               ",
+      "                               g               |               |               g               |                                                                               ",
+      "                               g  d            |               |               g               |                      w                                                        ",
+      "                               ggggggggggggfgggggg   ggggggggggggggggggggggfggggg   gggfgggggggggggggggg________+________+_                                                    ",
+      "                               g       |               |               |       g       |               |        |        |                                                     ",
+      "                               g       |               |               |       g       |               |        |        |                                                     ",
+      "                               g       |               |               |       g       |               |        |        |                                                     ",
+      "                               ggg   ggggg   ggggggfgggggg   ggggggggggggg   gggggfggggggg   gggg   gggg________+________+_b______+_                                           ",
+      "                               |       g       |               |       g       |               g       |        |        |        |                                            ",
+      "                               |       g       |               |       g       |               g       |        |        |        |                                            ",
+      "                               |       g   e   |               |    ~  g       |               g       |        |  ^     |    r   |                                            ",
+      "                       ggggggggggggfgggggggfgggggg   ggggggfgggggggggggggggfggggg   gggggggfggggggfggggg________+________+________+_b______+_                                  ",
+      "                       |               |               |               |               |               |        |        |        |        |                                   ",
+      "                       |               |               |               |               |               |        |        |        |        |                                   ",
+      "                       |       6       |       1       |       2       |       3       |       4       |      5 |        |        |        |                                   ",
+      "                    <#@############################@##############################@##########################################################@####>                            ",
+      "               <############################################################################################################################################>                  ",
+      "             ##################################################################################################################################################>               ",
+      "            /######################################################################################################################################################>           ",
+      "            ##########################################################################################################################################################>        ",
+      "           /############################################################################################################################################################       ",
+      "         <##############################################################################################################################################################c   DEF",
+      "ABC   <###################################################################################################################################################################>    ",
+      " Z   <#########################################################################################################################################################################",
+      "###############################################################################################################################################################################",
+      "###############################################################################################################################################################################",
     ],
 ]

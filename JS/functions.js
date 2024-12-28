@@ -529,6 +529,15 @@ function generateLevel(level,layer){
         case 17:
             game.edge=[5480,3000]
         break
+        case 19:
+            game.edge=[10500,2500]
+        break
+        case 20:
+            game.edge=[4500,1750]
+        break
+        case 21:
+            game.edge=[9000,2000]
+        break
         default:
             //game.edge=[3640,2280]
             game.edge=[levels[13][0].length*40,levels[13].length*40]
@@ -645,7 +654,7 @@ function generateLevel(level,layer){
                             let cluster=floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         }
-                    }else if(game.level==15||game.level==18){
+                    }else if(game.level==15||game.level==18||game.level==20||game.level==21){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                         let cluster=floor(random(1.5))
                         entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
@@ -676,10 +685,18 @@ function generateLevel(level,layer){
                     }
                 break
                 case 'b':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,25))
+                    if(game.level==19){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
+                    }else{
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,25))
+                    }
                 break
                 case 'c':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,26))
+                    if(game.level==21){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
+                    }else{
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,26))
+                    }
                 break
                 case 'd':
                     if(game.level==16){
@@ -695,6 +712,9 @@ function generateLevel(level,layer){
                 break
                 case 'g':
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
+                break
+                case 'X':
+                    print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
                 break
             }
         }
@@ -922,7 +942,8 @@ function newWave(level,layer){
                 types.mission[game.mission].wave[display.cycle][a][0]=='RapidSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='SpyTank'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy'||
-                types.mission[game.mission].wave[display.cycle][a][0]=='RevolverSpy'
+                types.mission[game.mission].wave[display.cycle][a][0]=='RevolverSpy'||
+                types.mission[game.mission].wave[display.cycle][a][0]=='SpyHeal'
             if(types.mission[game.mission].wave[display.cycle][a][1]==1){
                 game.stack.push([floor(random(0,6))+(spy?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
@@ -1032,7 +1053,7 @@ function checkEnd(level,layer){
                                 tick++
                                 deployer.spawn.splice(0,1)
                             }
-                            deployer.timer=game.classicRespawn?180:300
+                            deployer.timer=game.classicRespawn?150:240
                         }
                     }
                 }
@@ -1297,4 +1318,48 @@ function lsin(direction){
 }
 function lcos(direction){
 	return constants.trig[1][floor((direction%360+360)%360*2)]
+}
+function generateMission(wave){
+    for(let a=0,la=wave.length;a<la;a++){
+        let goal=la==100?8+a*2:15+a*5
+        let divide=[round(random(goal*0.1,goal*0.2)),0]
+        divide[1]=goal-divide[0]
+        let bar=findName('Wait',types.player)+1
+        let mixer=[]
+        while(divide[0]>0){
+            let type=floor(random(bar,types.player.length))
+            while(types.player[type].lifeBuff<=5||types.player[type].name.includes('Damaged')||types.player[type].name.includes('Boss')){
+                type=floor(random(bar,types.player.length))
+            }
+            let num=floor(random(1,min(5,ceil(divide[0]*1.5))))
+            mixer.push([types.player[type].name,num])
+            divide[0]-=num
+        }
+        while(divide[1]>0){
+            let type=floor(random(bar,types.player.length))
+            while(types.player[type].lifeBuff>5||types.player[type].name.includes('Damaged')||types.player[type].name.includes('Boss')){
+                type=floor(random(bar,types.player.length))
+            }
+            let num=floor(random(2,min(11,ceil(divide[1]*1.5))))
+            mixer.push([types.player[type].name,num])
+            divide[1]-=num
+        }
+        if(a%10==9){
+            for(let b=0,lb=floor((a+1)/10);b<lb;b++){
+                let possible=[]
+                for(let c=0,lc=types.player.length;c<lc;c++){
+                    if(types.player[c].name.includes('Boss')){
+                        possible.push(c)
+                    }
+                }
+                type=possible[floor(random(0,possible.length))]
+                mixer.push([types.player[type].name,1])
+            }
+        }
+        while(mixer.length>0){
+            let index=floor(random(0,mixer.length))
+            wave[a].push(mixer[index])
+            mixer.splice(index,1)
+        }
+    }
 }

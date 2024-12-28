@@ -1,7 +1,7 @@
 function setup(){
-    listing[0]=[...range(0,33),...range(0,9)]
-    listing[1]=range(33,200)
-    listing[2]=range(0,12)
+    listing[0]=[...range(0,40),...range(0,10)]
+    listing[1]=range(40,240)
+    listing[2]=range(0,10)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
     for(let a=0,la=6;a<la;a++){
@@ -19,26 +19,29 @@ function mouseClicked(){
     updateMouse(graphics.main[0])
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:60+a*80+40},width:200,height:60})){
+            for(let a=0,la=7;a<la;a++){
+                for(let b=0,lb=[4,4,4,4,4,4,1][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
+                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         if(a==0){
                             menu.players=b+1
                         }else if(a==1){
                             menu.gaming=b+1
                         }else if(a==2){
-                            if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105-50,y:60+a*80+40},width:100,height:60})){
-                                menu.level=[6,7,8,15,16][b]
-                            }else if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105+50,y:60+a*80+40},width:100,height:60})){
-                                menu.level=[6,7,17,18,16][b]
+                            if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                menu.level=[6,7,8,15][b]
+                            }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                menu.level=[6,7,17,18][b]
                             }
                         }else if(a==3){
+                            menu.level=[16,19,20,21][b]
+                        }else if(a==4){
                             if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
                                 menu.weapon=4
                             }else{
                                 menu.weapon=b
                             }
-                        }else if(a==4){
+                        }else if(a==5){
                             game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
                         }else{
                             stage.scene='mission'
@@ -49,9 +52,10 @@ function mouseClicked(){
         break
         case 'mission':
             let tick=0
-            for(let a=0,la=9;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,5,5,5,5,1][a];b<lb;b++){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+b*210-lb*105+105,y:100+a*70},width:200,height:60})){
+            for(let a=0,la=10;a<la;a++){
+                for(let b=0,lb=[5,5,5,5,5,5,5,5,5,5][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(menu.weapon){
                             case 1:
                                 game.peakWeapon=true
@@ -79,6 +83,9 @@ function mouseClicked(){
                         initialGraphics()
                         newLoop()
                         stage.scene='wave'
+                        if(types.mission[game.mission].wave[0].length==0){
+                            generateMission(types.mission[game.mission].wave)
+                        }
                     }
                     tick++
                 }

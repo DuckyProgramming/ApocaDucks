@@ -1,6 +1,113 @@
 
 
 
+
+356 - cardioid (medic bonker)
+357 - deployer a
+358 - rangefinder,255
+359 - destroyer hybrid,219
+360 - beacon,335
+361 - electroblocker,312
+362 - discharge (electrifyer with an vuln autoturret), analogous to iceberg
+363 - emissary (lighter machine gun, but triple and more accurate)
+364 - freezer
+365 - paralyzer (chiller and stop)
+366 - hummingbird,306
+367 - marine,319 (invisible dasher with more bullets)
+368 - oscilloscope,6 (sniper fov and airscrew extension)
+369 - microscope (pierces 3 enemies)
+370 - cobalt,242 (bonker, but with more speed, as well as reistance to all status effects)
+371 - clicker,251
+372 - karma (slicer but more damage and the slices go invisible on their way back, and extra bounces)
+373 - butterfly
+374 - moth
+375 - cherry bomb,262
+376 - mayfly,321
+377 - treatment,197 (trapper and bullet, when used up it spawns a construct medic)
+
+201 - electroblock,181
+202 - paralyzer,151,44
+203 - microscope,4
+204 - karma,91
+205 - cherry bomb,156
+206 - cherry bomb piece
+
+
+
+
+
+353 - oganesson
+354 - warpod
+355 - new dial
+
+200 - warpod,121
+
+
+
+
+
+352 - dropkick
+
+
+
+
+
+
+
+331 - squad (division assault rifle)
+332 - pelleter
+333 - frostthrower
+334 - new freeze beam
+335 - laser
+336 - weaver,316
+337 - steamrolller
+338 - interceptor
+339 - new glove,295
+340 - airscrew
+341 - double auto pelleter
+342 - hourglass
+343 - pelleterception
+344 - freeze zone,165
+345 - heal zone
+346 - virus
+347 - electrode (electrifyer bonker),133
+348 - inceptionist
+349 - twinterceptor
+350 - conqueror
+351 - interceptorception
+
+
+189 - frostthrower
+190 - new freeze beam
+191 - laser
+192 - steamroller,125
+193 - freeze zone
+194 - heal zone
+195 - virus
+196 - inceptionist,173
+197 - twinterceptor
+198 - interceptorception
+199 - glove interceptor
+
+
+
+
+
+
+
+326 - snipervulnerable
+327 - deployer sp
+328 - rocket launcher crit self,26
+329 - slicer dualic
+330 - deflector machine gun crit self,42
+
+186 - sniper vulnerable
+187 - rocket crit self,21-36
+188 - deflector bullet crit self,36
+
+
+
+
 324 - portafortress
 325 - isthmus
 
@@ -54,7 +161,7 @@
 309 - spreadling, 07
 
 310 - deployer d
-311 - deployer a
+311 - deployer au
 
 
 

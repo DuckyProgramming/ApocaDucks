@@ -3,61 +3,65 @@ function mainloop(layer){
     background(150)
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
+            for(let a=0,la=7;a<la;a++){
+                for(let b=0,lb=[4,4,4,4,4,4,1][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3){
                         fill(100)
-                        if(a==2&&menu.level==[6,7,8,15,16][b]){
-                            rect(width/2+b*210-lb*105+105+49,60+a*80+40,100,62,10)
+                        if(a==2&&menu.level==[6,7,8,15,16,][b]){
+                            rect(pos[0]+37,pos[1],76,45,10)
                             fill(100,200,100)
-                            rect(width/2+b*210-lb*105+105-49,60+a*80+40,100,62,10)
-                        }else if(a==2&&menu.level==[6,7,17,18,16][b]){
-                            rect(width/2+b*210-lb*105+105-49,60+a*80+40,100,62,10)
+                            rect(pos[0]-37,pos[1],76,45,10)
+                        }else if(a==2&&menu.level==[6,7,17,18,16,][b]){
+                            rect(pos[0]-37,pos[1],76,45,10)
                             fill(100,200,100)
-                            rect(width/2+b*210-lb*105+105+49,60+a*80+40,100,62,10)
+                            rect(pos[0]+37,pos[1],76,45,10)
                         }else{
-                            rect(width/2+b*210-lb*105+105+49,60+a*80+40,100,62,10)
-                            rect(width/2+b*210-lb*105+105-49,60+a*80+40,100,62,10)
+                            rect(pos[0]+37,pos[1],76,45,10)
+                            rect(pos[0]-37,pos[1],76,45,10)
                         }
                     }else{
-                        if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15,16][b]||a==3&&menu.weapon==b||a==3&&b>=1&&b<=2&&menu.weapon==4||a==4&&game[['classicRespawn','invis','pvp','attacker'][b]]){
+                        if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15][b]||a==3&&menu.level==[16,19,20,21][b]||a==4&&menu.weapon==b||a==4&&b>=1&&b<=2&&menu.weapon==4||a==5&&game[['classicRespawn','invis','pvp','attacker'][b]]){
                             fill(100,200,100)
                         }else{
                             fill(100)
                         }
-                        rect(width/2+b*210-lb*105+105,60+a*80+40,200,60,10)
+                        rect(pos[0],pos[1],150,45,10)
                     }
-                }
-            }
-            fill(0)
-            for(let a=0,la=6;a<la;a++){
-                for(let b=0,lb=[4,4,5,4,4,1][a];b<lb;b++){
-                    textSize(20)
-                    text([`${b+1} Players`,`${b+1} Gaming`,['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],['Normal Weapons','Special Weapons','Random Weapons','Full Randomizer'][b],['Auto-Respawn','Invisible','PvP','Fortress'][b],`Proceed`][a],width/2+b*210-lb*105+105,60+a*80+40)
+                    fill(0)
+                    textSize(15)
+                    text(
+                        [
+                            `${b+1} Players`,
+                            `${b+1} Gaming`,
+                            ['Vietnam','Pacman','Normandy','Isonzo'][b],
+                            ['Stalingrad','DoubleMountain','Prison','Steep'][b],
+                            ['Normal Weapons','Special Weapons','Random Weapons','Full Randomizer'][b],
+                            ['Auto-Respawn','Invisible','PvP','Fortress'][b],
+                            `Proceed`
+                        ][a],pos[0],pos[1]
+                    )
                     if(a==2&&b>=2&&b<=3){
-                        textSize(15)
-                        text(`Standard`,width/2+b*210-lb*105+105-50,60+a*80+40+20)
-                        text(`Reverse`,width/2+b*210-lb*105+105+50,60+a*80+40+20)
+                        textSize(11.25)
+                        text(`Standard`,pos[0]-37,pos[1]+15)
+                        text(`Reverse`,pos[0]+37,pos[1]+15)
                     }
                 }
             }
         break
         case 'mission':
-            for(let a=0,la=9;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,5,5,5,5,1][a];b<lb;b++){
-                    fill(100)
-                    rect(width/2+b*210-lb*105+105,100+a*70,200,60,10)
-                }
-            }
             let tick=0
-            fill(0)
-            for(let a=0,la=9;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,5,5,5,5,1][a];b<lb;b++){
-                    textSize(20)
-                    text(types.mission[menu.list[tick]].name,width/2+b*210-lb*105+105,100+a*70)
+            for(let a=0,la=10;a<la;a++){
+                for(let b=0,lb=[5,5,5,5,5,5,5,5,5,5][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                    fill(100)
+                    rect(pos[0],pos[1],150,45,10)
+                    fill(0)
                     textSize(15)
-                    text(`${['Easy','Medium','Hard','Expert','Unfair','Special'][types.mission[menu.list[tick]].difficulty]}`,width/2+b*210-lb*105+105-40,100+a*70+20)
-                    text(`${types.mission[menu.list[tick]].wave.length} Wave${types.mission[menu.list[tick]].wave.length!=1?`s`:``}`,width/2+b*210-lb*105+105+40,100+a*70+20)
+                    text(types.mission[menu.list[tick]].name,pos[0],pos[1])
+                    textSize(11.25)
+                    text(`${['Easy','Medium','Hard','Expert','Unfair','Special'][types.mission[menu.list[tick]].difficulty]}`,pos[0]-37,pos[1]+15)
+                    text(`${types.mission[menu.list[tick]].wave.length} Wave${types.mission[menu.list[tick]].wave.length!=1?`s`:``}`,pos[0]+37,pos[1]+15)
                     tick++
                 }
             }
@@ -130,13 +134,14 @@ function mainloop(layer){
                     entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                     entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
                     entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293||
-                    entities.players[c].weaponType==298
+                    entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369
                     ?(game.level==7?1.5:2):1)
                 key[c]*=0.75
                 if(game.level==6){
                     key[c]*=0.75
                 }
                 bs.push([])
+                let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
                 let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289
                 let center=entities.players[c]
                 if(entities.players[c].weaponType==275){
@@ -148,11 +153,11 @@ function mainloop(layer){
                     }
                 }
                 if(game.level==7){
-                    effective.push([center.position.x,center.position.y])
+                    effective.push([center.position.x+side,center.position.y])
                 }else if(game.level==16){
-                    effective.push([center.position.x,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                    effective.push([center.position.x+side,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }else{
-                    effective.push([constrain(center.position.x,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                    effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
@@ -181,6 +186,7 @@ function mainloop(layer){
                             run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
                             run.fore[a][b].position.y-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
+                            a==0&&run.fore[a][b].type==190||run.fore[a][b].type==191||
                             game.level==7&&a==2&&
                             run.fore[a][b].internalBounder.position.x+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].internalBounder.position.x-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
@@ -352,6 +358,16 @@ function mainloop(layer){
                         case 18:
                             graphics.main[a].text('Weapons\nHere',100,game.edge[1]-220)
                         break
+                        case 19:
+                            graphics.main[a].text('Weapons\nHere',3600,1050)
+                            graphics.main[a].text('Weapons\nHere',6900,1050)
+                        break
+                        case 20:
+                            graphics.main[a].text('Weapons\nHere',2250,965)
+                        break
+                        case 21:
+                            graphics.main[a].text('Weapons\nHere',3500,1200)
+                        break
                     }
                 }
             }
@@ -408,6 +424,13 @@ function mainloop(layer){
                                 }
                             }
                         }
+                    }
+                }
+            }
+            for(let c=0,lc=game.gaming;c<lc;c++){
+                for(let a=0,la=entities.projectiles.length;a<la;a++){
+                    if(entities.projectiles[a].type==48){
+                        entities.projectiles[a].displayOver(graphics.main[c])
                     }
                 }
             }
