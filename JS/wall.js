@@ -2083,7 +2083,7 @@ class wall{
                                                     c.stuckTime=60
                                                 }
                                             }
-                                            c.velocity.x*=1-this.height/this.width*0.1
+                                            c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
                                         break
                                         case 5:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
@@ -2098,17 +2098,17 @@ class wall{
                                                     c.stuckTime=60
                                                 }
                                             }
-                                            c.velocity.x*=1-this.height/this.width*0.1
+                                            c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
                                         break
                                         case 6:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.y=-c.velocity.x*this.height/this.width
-                                            c.velocity.x*=1-this.height/this.width*0.1
+                                            c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
                                         break
                                         case 7:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.y=c.velocity.x*this.height/this.width
-                                            c.velocity.x*=1-this.height/this.width*0.1
+                                            c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
                                         break
                                         case 8:
                                             c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1

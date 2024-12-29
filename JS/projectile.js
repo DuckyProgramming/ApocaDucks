@@ -364,7 +364,7 @@ class projectile{
 				this.speed=0
 				this.time=time
 				if(lsin(this.direction)>0){
-					this.extent=1200
+					this.extent=2400
 					for(let a=0,la=entities.walls.length;a<la;a++){
 						for(let b=0,lb=entities.walls[a].length;b<lb;b++){
 							let c=entities.walls[a][b]
@@ -409,7 +409,7 @@ class projectile{
 						}
 					}
 				}else if(lsin(this.direction)<0){
-					this.extent=-1200
+					this.extent=-2400
 					for(let a=0,la=entities.walls.length;a<la;a++){
 						for(let b=0,lb=entities.walls[a].length;b<lb;b++){
 							let c=entities.walls[a][b]

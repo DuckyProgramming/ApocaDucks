@@ -8,6 +8,7 @@
 382 - vigilante (sidekick stealth)
 383 - autumn (applies every status effect in a shotgun)
 384 - pursuer
+385 - auger
 
 207 - piercer
 208 - silver,91
