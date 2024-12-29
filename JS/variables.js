@@ -3479,8 +3479,8 @@ types={
       name:'PlayerFreezer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:364,
     },{
-      name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:368,
+      name:'PlayerPiercer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:379,
     },{
       name:'PlayerClicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:371,
@@ -3490,9 +3490,6 @@ types={
     },
 
     {
-      name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:89,
-    },{
       name:'PlayerBallerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:90,
     },{
@@ -3501,6 +3498,9 @@ types={
     },{
       name:'PlayerPanicShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:167,
+    },{
+      name:'PlayerGatekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:278,
     },{
       name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:177,
@@ -3567,8 +3567,8 @@ types={
       name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
     },{
-      name:'PlayerFreezeSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+      name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
     },{
       name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
@@ -3649,8 +3649,8 @@ types={
       name:'PlayerPropellerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:139,
     },{
-      name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
+      name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:381,
     },{
       name:'PlayerSlicerLinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:147,
@@ -3697,14 +3697,14 @@ types={
       name:'PlayerMinelayer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:196,
     },{
-      name:'PlayerGatekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:278,
-    },{
       name:'PlayerAirhorn',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:199,
     },{
       name:'PlayerIcebox',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:200,
+    },{
+      name:'PlayerPursuer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:384,
     },{
       name:'PlayerTrapperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:201,
@@ -3771,8 +3771,8 @@ types={
       name:'PlayerThrasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:247,
     },{
-      name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:253,
+      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
     },{
       name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:243,
@@ -3921,11 +3921,11 @@ types={
       name:'PlayerPitohui',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:307,
     },{
+      name:'PlayerSnowyOwl',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:378,
+    },{
       name:'PlayerHummingbird',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:366,
-    },{
-      name:'PlayerRipple',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:308,
     },{
       name:'PlayerMayfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:376,
@@ -4021,8 +4021,8 @@ types={
       name:'PlayerParalyzer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:365,
     },{
-      name:'PlayerMicroscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:369,
+      name:'PlayerNailgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:380,
     },{
       name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:251,
@@ -4149,14 +4149,14 @@ types={
       name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
     },{
-      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
-    },{
-      name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
-    },{
       name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:375,
+    },{
+      name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:382,
+    },{
+      name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
     },
 
     {
@@ -4252,6 +4252,27 @@ types={
     },{
       name:'PlayerDasherception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:321,
+    },{
+      name:'PlayerRipple',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:308,
+    },{
+      name:'PlayerFreezeSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+    },{
+      name:'PlayerMicroscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:369,
+    },{
+      name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:253,
+    },{
+      name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
+    },{
+      name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
+    },{
+      name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:89,
     },
 
     {
@@ -4317,8 +4338,8 @@ types={
       name:'SidekickSharpSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
     },{
-      name:'SidekickFreezeSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+      name:'SidekickOscilloscope',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
     },{
       name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
@@ -4337,6 +4358,9 @@ types={
     },{
       name:'SidekickBonker',sizeBuff:0.8,lifeBuff:2,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
+      name:'SidekickStealth',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:240,
     },{
       name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
@@ -6374,7 +6398,7 @@ types={
 			speed:1.2,
       uses:30,
 		},{
-			name:'PistolHurtSelf',
+			name:'Pistol Hurt Self',
 			ammo:10,
 			damage:45,
 			cooldown:12,
@@ -7123,7 +7147,7 @@ types={
 		},{
 			name:'Panic Shotgun',
 			ammo:8,
-			damage:25,
+			damage:40,
 			cooldown:20,
 			stop:60,
 			reload:20,
@@ -9020,14 +9044,68 @@ types={
 			speed:1.05,
       uses:18,
 		},{
-			name:'Nightseeker',
+			name:'Snowy Owl',
 			ammo:1,
-			damage:180,
-			cooldown:80,
-			stop:80,
-			reload:80,
-			speed:0.9,
-      uses:10,
+			damage:75,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Piercer',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Nailgun',
+			ammo:16,
+			damage:70,
+			cooldown:6,
+			stop:180,
+			reload:2,
+			speed:1.2,
+      uses:80,
+		},{
+			name:'Silver',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.55,
+      uses:20,
+		},{
+			name:'Vigilante',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Autumn',
+			ammo:2,
+			damage:30,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Pursuer',
+			ammo:12,
+			damage:75,
+			cooldown:4,
+			stop:120,
+			reload:2,
+			speed:1.025,
+      uses:72,
 		},
 	],
 }
@@ -9978,43 +10056,43 @@ levels=[
       "# #         #                             #                   #         # #",
       "# # E       #                             #                   #         # #",
       "# #         #                             #                   #         # #",
-      "# #######   ###   ###############         #              #    #         # #",
+      "# ######## ##### ################         #              #    #         # #",
       "#                               #                        #                #",
       "#                               #                        #                #",
       "#                               #    r                   #                #",
-      "# #####   ######@############   #   #############   ####@#@#####   ###### #",
+      "# ###### #@#####@############# ### ############### ############## ####### #",
       "# #         #         #         #         #         #         #         # #",
       "# #         #         #         #         # C       #       B #         # #",
       "# #         #         #         #         #         #         #         # #",
-      "# #         #         #         #         #######   #   #######         # #",
+      "# #         #         #         #         ######## ### ########         # #",
       "# #                                                           #         # #",
       "# #                                                           #         # #",
       "# # *                                1                      ~ #         # #",
-      "# ######@########   ##########@###@#########   ###@##############@#   ### #",
+      "# ######@######### ###########@###@########## ####@###@##########@## #### #",
       "# #         #         #         #         #         #         #         # #",
       "# #         #         # D       #         #         #         #         # #",
       "# #         #         #         #    2    #         #         #         # #",
-      "# #         #         #######   #   ###   #         #         #         # #",
+      "# #         #         ######## ##  #####  #         #         #         # #",
       "# #                                                 #                   # #",
       "# #                                                 #                   # #",
       "# #           ###                    3              #                   # #",
-      "# #######   ######@###############@#####@####@#   ###   ############@   # #",
+      "# ######## #######@###########@##############@## ##### #############@   # #",
       "# #         #         #         #         #         #         #         # #",
       "# #         #       F #         #         #         #         #         # #",
       "# #         #         #         #    4    #         #         #         # #",
-      "# #         #   #######         #    #    #         #         #         # #",
-      "# #         #         #              #                        #         # #",
-      "# #         #         #              #                        #         # #",
-      "# #q        #         # d            #                      ^ #        w# #",
-      "# ###   ##@########   ####   #######@#@####   ##@#####@##########   ##@## #",
+      "# #         ## ########         #    #    #         #         #         # #",
+      "# #                   #              #                        #         # #",
+      "# #                   #              #                        #         # #",
+      "# #q                  # d            #                      ^ #        w# #",
+      "# #### ###@###@##### ###### ################ ###@#####@########### ###@## #",
       "# #                   #         #         #                   #         # #",
       "# #                   #         #       A #                   #         # #",
       "# #                   #         #         #                   #         # #",
-      "# #         #         #         #   #######         #         #         # #",
+      "# #         #         #         ## ########         #         #         # #",
       "#           #                                       #                     #",
       "# Z         #                                       #                     #",
       "#           #                       5e6             #                     #",
-      "######@####@#@######@######@################@######@#@############@########",
+      "######@#############@######@######@#########@#####################@########",
     ],[
       "                                                                                                                                                                               ",
       "                                                                                                                                                                               ",
@@ -10039,19 +10117,19 @@ levels=[
       "                                                                                                                                                                               ",
       "                                                                                                                                                                               ",
       "                                     q                         *                                                                                                               ",
-      "                               ggggggggggg   ggggggggggggggggggggggggggggg   ggggggggg   ggggggg                                                                               ",
+      "                               gggggggggggg ggggggggggggggggggggggggggggggg ggggggggggg gggggggg                                                                               ",
       "                               g               |               |               g               |                                                                               ",
       "                               g               |               |               g               |                                                                               ",
       "                               g  d            |               |               g               |                      w                                                        ",
-      "                               ggggggggggggfgggggg   ggggggggggggggggggggggfggggg   gggfgggggggggggggggg________+________+_                                                    ",
-      "                               g       |               |               |       g       |               |        |        |                                                     ",
-      "                               g       |               |               |       g       |               |        |        |                                                     ",
-      "                               g       |               |               |       g       |               |        |        |                                                     ",
-      "                               ggg   ggggg   ggggggfgggggg   ggggggggggggg   gggggfggggggg   gggg   gggg________+________+_b______+_                                           ",
+      "                               ggggggggggggfggggggg gggggggggggggggggggggggfgggggg ggggfgggggggggggggggg________+________+_                                                    ",
+      "                               g       |               |               |               |               |        |        |                                                     ",
+      "                               g       |               |               |               |               |        |        |                                                     ",
+      "                               g       |               |               |               |               |        |        |                                                     ",
+      "                               gggg ggggggg gggggggfggggggg ggggggggggggggg ggggggfgggggggg ggggggg gggg________+________+_b______+_                                           ",
       "                               |       g       |               |       g       |               g       |        |        |        |                                            ",
       "                               |       g       |               |       g       |               g       |        |        |        |                                            ",
       "                               |       g   e   |               |    ~  g       |               g       |        |  ^     |    r   |                                            ",
-      "                       ggggggggggggfgggggggfgggggg   ggggggfgggggggggggggggfggggg   gggggggfggggggfggggg________+________+________+_b______+_                                  ",
+      "                       ggggggggggggfgggggggfggggggg gggggggfgggggggggggggggfgggggg ggggggggfgggggggfgggg________+________+________+_b______+_                                  ",
       "                       |               |               |               |               |               |        |        |        |        |                                   ",
       "                       |               |               |               |               |               |        |        |        |        |                                   ",
       "                       |       6       |       1       |       2       |       3       |       4       |      5 |        |        |        |                                   ",

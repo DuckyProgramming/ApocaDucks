@@ -1,6 +1,20 @@
 
 
 
+378 - snowy owl,306,299
+379 - piercer
+380 - nailgun
+381 - silver (cobalt analogue slicer)
+382 - vigilante (sidekick stealth)
+383 - autumn (applies every status effect in a shotgun)
+384 - pursuer
+
+207 - piercer
+208 - silver,91
+209 - tiny trap
+
+
+
 
 356 - cardioid (medic bonker)
 357 - deployer a
@@ -14,10 +28,10 @@
 365 - paralyzer (chiller and stop)
 366 - hummingbird,306
 367 - marine,319 (invisible dasher with more bullets)
-368 - oscilloscope,6 (sniper fov and airscrew extension)
+368 - oscilloscope, 6 (sniper fov and airscrew extension)
 369 - microscope (pierces 3 enemies)
 370 - cobalt,242 (bonker, but with more speed, as well as reistance to all status effects)
-371 - clicker,251
+371 - clicker,2e51
 372 - karma (slicer but more damage and the slices go invisible on their way back, and extra bounces)
 373 - butterfly
 374 - moth
