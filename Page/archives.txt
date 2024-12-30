@@ -20,6 +20,7 @@
 402 - consort, 352 (dropkick, but launches the sidekick upward, it has a parchute and fires downward)
 403 - guardian (guardian sidekick element)
 404 - agronomist
+405 - equanimity
 
 210 - dazzler,120
 211 - skysweeper,119
