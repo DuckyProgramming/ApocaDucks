@@ -381,7 +381,7 @@ function formatTime(frames){
     return `${floor(frames/216000)}:${floor(frames/3600)%60<10?`0`:``}${floor(frames/3600)%60}:${floor(frames/60)%60<10?`0`:``}${floor(frames/60)%60}.${floor(frames%60/6*100)<10?`0`:``}${floor(frames%60/6*100)<100?`0`:``}${floor(frames%60/6*100)}`
 }
 function regNum(value){
-    return value>=1000?floor(value/1000)+'.'+floor(value/100)%10+'K':value
+    return round(value)>=1000?floor(round(value)/1000)+'.'+floor(round(value)/100)%10+'K':round(value)
 }
 function updateMouse(layer){
 	inputs.mouse.x=mouseX

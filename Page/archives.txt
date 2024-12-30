@@ -1,6 +1,38 @@
 
 
 
+386 - dazzler, 296 (xenon, instead of a temp duck it spawns a short emplacement)
+387 - switcheroo, 158 (either a pistol, machine gun, or sniper)
+388 - airdrop (you get a massive jump and one parachute use, after which you become revolver)
+389 - skysweeper, 284 (exploding swarmer)
+390 - circuit, 315 (rho but with shotgun turrets)
+391 - submachine
+392 - eris (submachine that grows and slows enemies)
+393 - amnuhev (rocket launcher, but the rocket, upon exploding, shoots bullets towards all nearby enemies, and also auto guns)
+394 - maximizer, 335 (laser that expands as it spends ammo)
+395 - micro, 314 (macro, but it fires balls instead)
+396 - gasser, 125 (shorter flamesphere, applies gas, which causes targets to burn when hit)
+397 - packer, 197 (trapper that may heal)
+398 - toxin, 242 (damage over time bonker)
+399 - decoy, 382 (sidekick, but the sidekicks are disappointments with shields)
+400 - disappointment guard, 253 (disappointment with a shield)
+401 - aurora, 367 (fires pounder bullets)
+402 - consort, 352 (dropkick, but launches the sidekick upward, it has a parchute and fires downward)
+403 - guardian (guardian sidekick element)
+404 - agronomist
+
+210 - dazzler,120
+211 - skysweeper,119
+212 - eris,1
+213 - amnuhev,2
+214 - maximizer,191
+215 - gasser,85
+216 - packer,114
+
+
+
+
+
 378 - snowy owl,306,299
 379 - piercer
 380 - nailgun

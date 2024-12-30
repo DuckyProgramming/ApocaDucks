@@ -1,6 +1,6 @@
 function setup(){
     listing[0]=[...range(0,40),...range(0,10)]
-    listing[1]=range(40,240)
+    listing[1]=range(40,256)
     listing[2]=range(0,10)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
@@ -119,19 +119,23 @@ function keyPressed(){
         case 'ArrowLeft': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
         case 'ArrowRight': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
         case 'ArrowUp': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
-        case 'ArrowDown': case 'Shift': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+        case 'ArrowDown': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+        case 'Shift': inputs.release[0][0]=true; break
         case 'a': case 'A': inputs.keys[1][0]=true;inputs.tap[1][0]=true; break
         case 'd': case 'D': inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
         case 'w': case 'W': inputs.keys[1][2]=true;inputs.tap[1][2]=true; break
         case 's': case 'S': inputs.keys[1][3]=true;inputs.tap[1][3]=true; break
+        case 'q': case 'Q': inputs.release[1][0]=true; break
         case 'j': case 'J': inputs.keys[2][0]=true;inputs.tap[2][0]=true; break
         case 'l': case 'L': inputs.keys[2][1]=true;inputs.tap[2][1]=true; break
         case 'i': case 'I': inputs.keys[2][2]=true;inputs.tap[2][2]=true; break
         case 'k': case 'K': inputs.keys[2][3]=true;inputs.tap[2][3]=true; break
+        case 'u': case 'U': inputs.release[2][0]=true; break
         case 'f': case 'F': inputs.keys[3][0]=true;inputs.tap[3][0]=true; break
         case 'h': case 'H': inputs.keys[3][1]=true;inputs.tap[3][1]=true; break
         case 't': case 'T': inputs.keys[3][2]=true;inputs.tap[3][2]=true; break
         case 'g': case 'G': inputs.keys[3][3]=true;inputs.tap[3][3]=true; break
+        case 'r': case 'R': inputs.release[3][0]=true; break
     }
     if(game.emergencyKey){
         switch(key){
@@ -139,10 +143,12 @@ function keyPressed(){
             case '|': case '\\': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
             case '=': case '+': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
             case ']': case '}': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+            case '-': case '_': inputs.release[0][0]=true; break
             case 'b': case 'B': inputs.keys[2][0]=true;inputs.tap[2][0]=true; break
             case 'm': case 'M': inputs.keys[2][1]=true;inputs.tap[2][1]=true; break
             case 'h': case 'H': inputs.keys[2][2]=true;inputs.tap[2][2]=true; break
             case 'n': case 'N': inputs.keys[2][3]=true;inputs.tap[2][3]=true; break
+            case 'g': case 'G': inputs.release[2][0]=true; break
         }
     }
 }

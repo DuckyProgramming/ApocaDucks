@@ -17,9 +17,9 @@ types={
       difficulty:0,
       wave:[
         [
-          //['SmokeRocketLauncher',10],
-          ['Pistol',6],
-          ['Flamethrower',4],
+          ['BigRocketLauncher',50],
+          //['Pistol',6],
+          //['Flamethrower',4],
         ],[
           ['RocketLauncher',3],
           ['Baller',3],
@@ -3485,8 +3485,8 @@ types={
       name:'PlayerClicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:371,
     },{
-      name:'PlayerButterfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:373,
+      name:'PlayerSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:391,
     },
 
     {
@@ -3550,8 +3550,8 @@ types={
       name:'PlayerGarbageLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:3,crit:0,weapon:144,
     },{
-      name:'PlayerRocketBattery',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:162,
+      name:'PlayerAmnuhev',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:393,
     },{
       name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
@@ -3649,11 +3649,11 @@ types={
       name:'PlayerPropellerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:139,
     },{
-      name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:381,
-    },{
       name:'PlayerSlicerLinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:147,
+    },{
+      name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
     },{
       name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
@@ -3771,8 +3771,8 @@ types={
       name:'PlayerAuger',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:385,
     },{
-      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
+      name:'PlayerToxin',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:398,
     },{
       name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:243,
@@ -3853,11 +3853,11 @@ types={
       name:'PlayerSovereign',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:302,
     },{
-      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
-    },{
       name:'PlayerTempest',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:294,
+    },{
+      name:'PlayerSkysweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:389,
     },{
       name:'PlayerSwarmerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:285,
@@ -4027,8 +4027,8 @@ types={
       name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:251,
     },{
-      name:'PlayerMoth',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:374,
+      name:'PlayerEris',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:392,
     },
     
     {
@@ -4085,8 +4085,8 @@ types={
       name:'PlayerOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
     },{
-      name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
+      name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
     },{
       name:'PlayerElectrode',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:347,
@@ -4096,67 +4096,119 @@ types={
     },
     
     {
+      name:'PlayerXenon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,
+    },{
+      name:'PlayerDazzler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:386,
+    },{
       name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:158,
+    },{
+      name:'PlayerSwitcheroo',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:387,
     },{
       name:'PlayerBooster',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:114,
     },{
-      name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:210,
+      name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
     },{
       name:'PlayerPizzaria',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:229,
     },{
-      name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
+      name:'PlayerElectroblocker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:361,
     },{
-      name:'PlayerXenon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,
-    },{
-      name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:324,
-    },{
-      name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:314,
-    },{
-      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
-    },{
-      name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:377,
-    },
-    
-    {
       name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:171,
     },{
-      name:'PlayerDropkick',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:352,
-    },{
+      name:'PlayerAirdrop',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:388,
+    },
+
+    {
       name:'PlayerBattlerock',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:323,
+    },{
+      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
     },{
       name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:315,
     },{
-      name:'PlayerElectroblocker',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:361,
-    },{
-      name:'PlayerShootingStar',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:268,
-    },{
-      name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
-    },{
-      name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:375,
+      name:'PlayerCircuit',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:390,
     },{
       name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:382,
     },{
-      name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
+      name:'PlayerDecoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:399,
+    },{
+      name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:324,
+    },{
+      name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:377,
+    },{
+      name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:210,
+    },{
+      name:'PlayerRocketBattery',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:162,
+    },
+    
+    {
+      name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
+    },{
+      name:'PlayerMaximizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:394,
+    },{
+      name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:314,
+    },{
+      name:'PlayerMicro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:395,
+    },{
+      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
+    },{
+      name:'PlayerGasser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:396,
+    },{
+      name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:375,
+    },{
+      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
+    },{
+      name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
+    },{
+      name:'PlayerPacker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:397,
+    },
+
+    {
+      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
+    },{
+      name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:381,
+    },{
+      name:'PlayerAgronomist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:404,
+    },{
+      name:'PlayerMoth',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:374,
+    },{
+      name:'PlayerDropkick',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:352,
+    },{
+      name:'PlayerConsort',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:402,
     },
 
     {
@@ -4247,9 +4299,6 @@ types={
       name:'PlayerOganesson',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:353,
     },{
-      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
-    },{
       name:'PlayerDasherception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:321,
     },{
@@ -4268,14 +4317,20 @@ types={
       name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
     },{
-      name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
-    },{
       name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:89,
     },{
       name:'PlayerThrasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:247,
+    },{
+      name:'PlayerButterfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:373,
+    },{
+      name:'PlayerAurora',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:401,
+    },{
+      name:'PlayerShootingStar',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:268,
     },
 
     {
@@ -4364,6 +4419,12 @@ types={
     },{
       name:'SidekickStealth',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:240,
+    },{
+      name:'SidekickDisappointmentGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:400,
+    },{
+      name:'SidekickGuardian',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:403,
     },{
       name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
@@ -7683,8 +7744,8 @@ types={
 			ammo:4,
 			damage:120,
 			cooldown:60,
-			stop:720,
-			reload:120,
+			stop:600,
+			reload:45,
 			speed:0.975,
       uses:8,
 		},{
@@ -7709,9 +7770,9 @@ types={
 			name:'Pizzaria',
 			ammo:1,
 			damage:200,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:135,
+			stop:135,
+			reload:135,
 			speed:1.05,
       uses:6,
 		},{
@@ -8063,7 +8124,7 @@ types={
 			cooldown:4,
 			stop:120,
 			reload:3,
-			speed:0.9,
+			speed:1.1,
       uses:120,
 		},{
 			name:'',
@@ -8456,9 +8517,9 @@ types={
 			name:'Degausser',
 			ammo:1,
 			damage:200,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:135,
+			stop:135,
+			reload:135,
 			speed:1.05,
       uses:6,
 		},{
@@ -8473,7 +8534,7 @@ types={
 		},{
 			name:'Macro',
 			ammo:20,
-			damage:75,
+			damage:80,
 			cooldown:8,
 			stop:105,
 			reload:6,
@@ -8897,9 +8958,9 @@ types={
 			name:'Electroblocker',
 			ammo:1,
 			damage:200,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:135,
+			stop:135,
+			reload:135,
 			speed:1.05,
       uses:6,
 		},{
@@ -9118,6 +9179,177 @@ types={
 			reload:0,
 			speed:0.425,
       uses:1,
+		},{
+			name:'Dazzler',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:10,
+		},{
+			name:'Switcheroo',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:1,
+      uses:3,
+		},{
+			name:'Airdrop',
+			ammo:1,
+			damage:0,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:1,
+		},{
+			name:'Skysweeper',
+			ammo:2,
+			damage:120,
+			cooldown:20,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:18,
+		},{
+			name:'Circuit',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Submachine',
+			ammo:12,
+			damage:40,
+			cooldown:6,
+			stop:40,
+			reload:3,
+			speed:1.15,
+      uses:48,
+		},{
+			name:'Eris',
+			ammo:12,
+			damage:60,
+			cooldown:6,
+			stop:40,
+			reload:3,
+			speed:1.15,
+      uses:48,
+		},{
+			name:'Amnuhev',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Maximizer',
+			ammo:360,
+			damage:10,
+			cooldown:1,
+			stop:15,
+			reload:1,
+			speed:0.875,
+      uses:720,
+		},{
+			name:'Micro',
+			ammo:20,
+			damage:80,
+			cooldown:8,
+			stop:105,
+			reload:6,
+			speed:0.875,
+      uses:80,
+		},{
+			name:'Gasser',
+			ammo:1,
+			damage:0,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Packer',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Toxin',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Decoy',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Disappointment Guard',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.2,
+      uses:1,
+		},{
+			name:'Aurora',
+			ammo:1,
+			damage:300,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:1.1,
+      uses:5,
+		},{
+			name:'Consort',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Guardian',
+			ammo:8,
+			damage:80,
+			cooldown:10,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:40,
+		},{
+			name:'Agronomist',
+			ammo:1,
+			damage:200,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:1.05,
+      uses:20,
 		},
 	],
 }
@@ -9130,8 +9362,24 @@ run={fore:[],info:[],back:[]}
 constants={trig:[[],[]]}
 inputs={
   mouse:{x:0,y:0},rel:{x:0,y:0},
-  keys:[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]],
-  tap:[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]],
+  keys:[
+    [false,false,false,false],
+    [false,false,false,false],
+    [false,false,false,false],
+    [false,false,false,false]
+  ],
+  tap:[
+    [false,false,false,false],
+    [false,false,false,false],
+    [false,false,false,false],
+    [false,false,false,false]
+  ],
+  release:[
+    [false],
+    [false],
+    [false],
+    [false]
+  ],
 }
 transition={trigger:false,anim:0,scene:stage.scene}
 levels=[
@@ -10034,13 +10282,13 @@ levels=[
       "                                                                                                                                                                                                        ",
       "                                                                                                                                                                                                        ",
       "                                                                                                                                                                                                        ",
-      "                                                                   1q2                                                            4w5 6                                                                 ",
+      "                                                                    q                                                              w                                                                    ",
       "                                                           ---  <#####>                                                        <#######>  ----                                                          ",
       "                                                        <##################>                                                <###################>                                                       ",
       "                                                   <#########################                                             <########################                                                     ",
       "                                                  <##########################b                                           ##########################b                                                    ",
-      "                                               #################################>                             3         /##################################>                                            ",
-      "                                              /#####################################>                       <###> --- <#######################################                                          ",
+      "                                               #################################>                            4 5        /##################################>                                            ",
+      "                                              /#####################################>                  1 2 3<###>6--- <#######################################                                          ",
       "                                           <###############################################>   ----  <########################################################b                                         ",
       "                                         <#######################################################################################################################>  ---                                 ",
       "                                        <###############################################################################################################################>                               ",
@@ -10079,19 +10327,19 @@ levels=[
       "# #         ## ########         #         ##@##### ### ########         # #",
       "# #                                                                     # #",
       "# #                                                                     # #",
-      "# # *                                1                      ~           # #",
+      "# # *                                                       ~           # #",
       "# ######@#####@### ##### #####@###@########## ####@###@##########@## #### #",
       "# #         #         #         #         #         #         #         # #",
+      "# #         #         #         #   123   #         #         #         # #",
       "# #         #         #         #         #         #         #         # #",
-      "# #         #         #         #    2    #         #         #         # #",
       "# #         #         ##@##### ##  #####  #         #         #         # #",
       "# #                                                 #                   # #",
-      "# #                                                 #                   # #",
-      "# #           ###                    3              #                   # #",
+      "# #                                 546             #                   # #",
+      "# #           ###                                   #                   # #",
       "# ######## #######@##### #####@##############@## ##### #############@   # #",
       "# #         #         #         #         #         #         #         # #",
       "# #         #       F #         #         #         #         #         # #",
-      "# #         #         #         #    4    #         #         #         # #",
+      "# #         #         #         #         #         #         #         # #",
       "# #         ## ########         #    #    #         #         #         # #",
       "# #                   #              #                        #         # #",
       "# #                   #              #                        #         # #",
@@ -10103,7 +10351,7 @@ levels=[
       "# #         #         #         ## ########         #         #         # #",
       "#           #                                       #                     #",
       "# Z         #                                       #                     #",
-      "#           #                       5e6             #                     #",
+      "#           #                        e              #                     #",
       "######@#############@######@######@#########@#####################@########",
     ],[
       "                                                                                                                                                                               ",
