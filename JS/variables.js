@@ -4149,8 +4149,8 @@ types={
       name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:324,
     },{
-      name:'PlayerHollowEarther',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:406,
+      name:'PlayerSungazer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:407,
     },{
       name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:210,
@@ -4337,6 +4337,9 @@ types={
     },{
       name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:377,
+    },{
+      name:'PlayerHollowEarther',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:406,
     },
 
     {
@@ -9374,6 +9377,15 @@ types={
 			reload:10,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Sungazer',
+			ammo:18,
+			damage:60,
+			cooldown:20,
+			stop:75,
+			reload:6,
+			speed:1.1,
+      uses:54,
 		},
 	],
 }

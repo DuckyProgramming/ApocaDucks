@@ -22,6 +22,7 @@
 404 - agronomist
 405 - equanimity
 406 - hollow earther, 377
+407 - sungazer, 4
 
 210 - dazzler,120
 211 - skysweeper,119
@@ -30,6 +31,9 @@
 214 - maximizer,191
 215 - gasser,85
 216 - packer,114
+217 - slightly larger bullet
+218 - more slightly larger bullet
+219 - slightly smaller bullet
 
 
 
