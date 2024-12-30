@@ -2588,6 +2588,20 @@ class player{
                     }
                 }
             break
+            case 406:
+                for(let a=0,la=2;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7-a
+                }
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                if(weapon.uses<=0){
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
+                    entities.players[entities.players.length-1].construct=true
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                }
+			break
 		}
         if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
             switch(variant){
@@ -2602,6 +2616,9 @@ class player{
     }
     med(){
         return this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||this.weaponType==356
+    }
+    explodable(){
+        return this.weaponType!=406
     }
     update(){
         let projectilesLength=entities.projectiles.length
@@ -3897,7 +3914,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    if(entities.players[a].stats.bust>=(game.pvp?[1200,1000,900,800][game.players-1]:game.attacker?[2000,1500,1250,1000][game.players-1]:[8000,6000,5000,4000][game.players-1])&&game.bust&&entities.players[a].id>0){
+                    if(entities.players[a].stats.bust>=(game.pvp?[1200,1000,900,800][game.players-1]:game.attacker?[2000,1500,1250,1000][game.players-1]:[8000,6000,5000,4000][game.players-1])*(game.peakWeapon?1.5:1)&&game.bust&&entities.players[a].id>0){
                         entities.players[a].stats.bust=0
                         for(let c=0,lc=game.pvp?4:1;c<lc;c++){
                             if(game.level==7){
@@ -4731,6 +4748,7 @@ class player{
                 
             }
             if(this.playerData.name.includes('Tank')||this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==253||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==400){
+                let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+(this.id>0&&floor(random(0,100))==0?1:0),0,1)
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-(this.position.x/2+this.previous.position.x/2),entities.players[a].position.y+entities.players[a].height/2-(this.position.y/2+this.previous.position.y/2)-this.height/2]
@@ -4738,7 +4756,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage(this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.playerData.name=='DeadlyTank'?200:100)
+                            entities.players[a].takeDamage((this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.playerData.name=='DeadlyTank'?200:100)*(crit?3:1))
                             if(this.playerData.name=='TankBump'){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -4765,7 +4783,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage(this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.playerData.name=='DeadlyTank'?200:100)
+                            entities.players[a].takeDamage((this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.playerData.name=='DeadlyTank'?200:100)*(crit?3:1))
                             if(this.playerData.name=='TankBump'){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -4893,7 +4911,7 @@ class player{
         if(this.shrinkTime>0){
             this.shrinkTime--
             if(this.size>0.4){
-                this.life-=100*(this.playerData.lifeBuff-0.5)*0.005/(this.playerData.sizeBuff*0.5-0.4)
+                this.life-=(this.playerData.lifeBuff-0.5)*0.005/(this.playerData.sizeBuff*0.5-0.4)*this.life/this.playerData.lifeBuff
                 this.size-=0.005
                 this.width=8*this.size*2
                 this.height=24*this.size*2

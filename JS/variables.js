@@ -17,7 +17,7 @@ types={
       difficulty:0,
       wave:[
         [
-          ['BigRocketLauncher',50],
+          ['BigDeflectorMachineGunCritSelf',50],
           //['Pistol',6],
           //['Flamethrower',4],
         ],[
@@ -4149,8 +4149,8 @@ types={
       name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:324,
     },{
-      name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:377,
+      name:'PlayerHollowEarther',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:406,
     },{
       name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:210,
@@ -4334,6 +4334,9 @@ types={
     },{
       name:'PlayerMicro',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:395,
+    },{
+      name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:377,
     },
 
     {
@@ -4434,7 +4437,7 @@ types={
     },
 
     {
-      name:'Buster',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      name:'Buster',sizeBuff:1.1,lifeBuff:8,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
@@ -9239,7 +9242,7 @@ types={
 		},{
 			name:'Eris',
 			ammo:12,
-			damage:60,
+			damage:80,
 			cooldown:6,
 			stop:40,
 			reload:3,
@@ -9362,6 +9365,15 @@ types={
 			reload:9,
 			speed:0.875,
       uses:60,
+		},{
+			name:'Hollow Earther',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:60,
+			reload:10,
+			speed:1.05,
+      uses:18,
 		},
 	],
 }
@@ -9814,32 +9826,32 @@ levels=[
       "#  #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  #",
       "##########################################",
     ],[
-      "##########################################",
-      "#                                        #",
-      "#                                        #",
-      "# 4                                      #",
-      "####                                     #",
-      "#                                        #",
-      "# 3                                      #",
-      "####                                     #",
-      "#                                        #",
-      "# 2                                      #",
-      "####                                     #",
-      "#                                        #",
-      "# 1                                      #",
-      "#### ###### ###### ###### ###### #########",
-      "#  #      #      #      #      #      #  #",
-      "#  #    ? #    ? #    ? #    ? #    ? #  #",
-      "#  ### ###### ###### ###### ###### ####  #",
-      "#  #      #      #      #      #      #  #",
-      "#  #    ? #    ? #    ? #    ? #    ? #  #",
-      "#  # ###### ###### ###### ###### ######  #",
-      "#  #      #      #      #      #      #  #",
-      "#  #    ? #    ? #    ? #    ? #    ? #  #",
-      "#  ### ###### ###### ###### ###### ####  #",
-      "#  #      #      #      #      #      #  #",
-      "#  #    ? #    ? #    ? #    ? #    ? #  #",
-      "##########################################",
+      "###########################################",
+      "#                                         #",
+      "#                                         #",
+      "# 4                                       #",
+      "####                                      #",
+      "#                                         #",
+      "# 3                                       #",
+      "####                                      #",
+      "#                                         #",
+      "# 2                                       #",
+      "####                                      #",
+      "#                                         #",
+      "# 1                                       #",
+      "# ###### ###### ###### ###### ###### ######",
+      "#      #      #      #      #      #      #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #",
+      "### ###### ###### ###### ###### ###### ####",
+      "#      #      #      #      #      #      #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #",
+      "# ###### ###### ###### ###### ###### ######",
+      "#      #      #      #      #      #      #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #",
+      "### ###### ###### ###### ###### ###### ####",
+      "#      #      #      #      #      #      #",
+      "#    ? #    ? #    ? #    ? #    ? #    ? #",
+      "###########################################",
     ],
     /*[
       "###########################################################################################",
