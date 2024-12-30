@@ -4202,7 +4202,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:404,
     },{
       name:'PlayerMoth',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:374,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:374,
     },{
       name:'PlayerDropkick',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:352,
@@ -4473,22 +4473,22 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
       name:'Engineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'EngineerDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'HeavyEngineer',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'BigEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'BigCritEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:1,weapon:10,
     },{
       name:'CritEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:1,weapon:10,
     },{
       name:'Punch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
@@ -4836,7 +4836,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:26,
     },{
       name:'EngineerWeak',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:0.6,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:0.6,crit:0,weapon:10,
     },{
       name:'BigMachineGunStopWeak',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.6,crit:0,weapon:57,
@@ -5076,7 +5076,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:20,
     },{
       name:'EngineerSpawner',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'DeflectorPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:47,
@@ -5151,7 +5151,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:4,
     },{
       name:'LightEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:52,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:52,
     },{
       name:'PistolVulnerable',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
@@ -5193,7 +5193,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'RapidEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:2,crit:0,weapon:10,
     },{
       name:'RapidSpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:12,
@@ -5235,7 +5235,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FastEngineer',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'BallerEngineerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:35,
@@ -5544,10 +5544,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:111,
     },{
       name:'EngineerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
       name:'EngineeringTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
-      damageBuff:1,reloadBuff:0.5,crit:0,weapon:112,
+      damageBuff:0.5,reloadBuff:0.5,crit:0,weapon:112,
     },{
       name:'SegmentationBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.5,
       damageBuff:1,reloadBuff:4,crit:0,weapon:113,
@@ -5565,13 +5565,13 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:116,
     },{
       name:'BallerEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:35,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:35,
     },{
       name:'RocketEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:95,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:95,
     },{
       name:'EngineerNode',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:95,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:95,
     },{
       name:'HyperTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -8549,7 +8549,7 @@ types={
 			damage:80,
 			cooldown:8,
 			stop:105,
-			reload:6,
+			reload:3,
 			speed:0.875,
       uses:80,
 		},{
@@ -9368,8 +9368,8 @@ types={
 			damage:120,
 			cooldown:12,
 			stop:45,
-			reload:9,
-			speed:0.875,
+			reload:4,
+			speed:0.925,
       uses:60,
 		},{
 			name:'Hollow Earther',
@@ -9813,7 +9813,7 @@ levels=[
       "                                           ---<> <##>   <%####[     <###########@>   ## ####### | ######",
       "                                         <#####[ ]##[ <#####[|     <##############> /#[ ]#####[ #@######",
       "                                        <[    |  =##_  |     |  <#####################_  |      ########",
-      "                                ---     |    -+^  `#*  |$---$|<#######################&  |      ########",
+      "                                ---     |    -+^  `#*  |$---$|<#######################&  |      `#######",
       "                             <######>   |  <####@####@#################################@################",
       "                            <########@#?################################################################",
       "                         $<#############################################################################",
@@ -10228,7 +10228,7 @@ levels=[
       "                                                     ---<> <##>   <%####[     <###########@>   ## ####### | ######",
       "                                                   <#####[ ]##[ <#####[|     <##############> /#[ ]#####[ #@######",
       "                                                  <[    |  =##_  |     |  <#####################_  |      ########",
-      "                                          ---     |    -+^  `#*  |$---$|<#######################&  |      ########",
+      "                                          ---     |    -+^  `#*  |$---$|<#######################&  |      `#######",
       "                                       <######>   |  <####@####@#################################@################",
       "                                      <########@#?################################################################",
       "                                   $<#############################################################################",

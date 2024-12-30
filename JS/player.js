@@ -2557,33 +2557,39 @@ class player{
                 }
 			break
             case 405:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4+weapon.uses%2*8,4,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                let minimum405=900
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(
-                            entities.players[a].position.x>this.position.x&&lsin(this.direction.main)<=0||
-                            entities.players[a].position.x<this.position.x&&lsin(this.direction.main)>=0
-                        ){
-                            minimum405=min(minimum405,distance)
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4+weapon.uses%2*8,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                if(weapon.uses%2==0){
+                    let minimum405=[600,600]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum405[0]=min(minimum405[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum405[1]=min(minimum405[1],distance)
+                            }
                         }
                     }
-                }
-                let fired405=false
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired405&&distance==minimum405&&(
-                            entities.players[a].position.x>this.position.x&&lsin(this.direction.main)<=0||
-                            entities.players[a].position.x<this.position.x&&lsin(this.direction.main)>=0
-                        )){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=2;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
+                    let fired405=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired405[0]&&distance==minimum405[0]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=2;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired405[0]=true
                             }
-                            fired405=true
+                            if(!fired405[1]&&distance==minimum405[1]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=2;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired405[1]=true
+                            }
                         }
                     }
                 }

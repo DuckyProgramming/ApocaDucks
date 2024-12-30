@@ -909,6 +909,7 @@ function newWave(level,layer){
         display.wait=999999999999999999999
         game.classicRespawn=false
         game.pvp=true
+        game.bust=false
         for(let a=0,la=game.players;a<la;a++){
             if(entities.players[a].life<=0){
                 entities.players[a].respawn()
