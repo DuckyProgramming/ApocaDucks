@@ -1517,7 +1517,7 @@ class wall{
                         c.type==180||c.type==181||c.type==182||c.type==183||c.type==184||
                         c.type==200||c.type==201||c.type==204||c.type==208||c.type==205||
                         c.type==206||c.type==208||c.type==209||c.type==210||c.type==211||
-                        c.type==216
+                        c.type==216||c.type==220
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1770,7 +1770,7 @@ class wall{
                             if(
                                 c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
-                                c.type==209||c.type==216
+                                c.type==209||c.type==216||c.type==220
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
@@ -1965,7 +1965,7 @@ class wall{
                                             if(
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1

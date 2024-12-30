@@ -551,7 +551,7 @@ class player{
             case 191: case 202: case 203: case 204: case 205: case 206: case 209: case 211: case 219: case 220:
             case 226: case 228: case 230: case 247: case 263: case 265: case 266: case 267: case 284: case 285:
             case 287: case 302: case 303: case 304: case 305: case 320: case 322: case 323: case 324: case 354:
-            case 355: case 359: case 389:
+            case 355: case 359: case 389: case 408:
                 layer.stroke(0,255,0,this.infoAnim.bar[0]*0.5*this.fade)
                 layer.strokeWeight(3)
                 layer.line(
@@ -1141,7 +1141,7 @@ class player{
                 this.assort.gas=5
 				for(let b=0,lb=10;b<lb;b++){
 					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),-1,25,10,false,this.gasser))
-                    let c=entities.projectiles[b]
+                    let c=entities.projectiles[entities.projectiles.length-1]
                     c.position.x+=c.speed*lsin(c.direction)*6*this.size
 				    c.position.y-=c.speed*lcos(c.direction)*6*this.size
 				}
@@ -2626,6 +2626,9 @@ class player{
                     break
                 }
 			break
+            case 408:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,2400,crit,this.index))
+            break
 		}
         if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
             switch(variant){
@@ -2662,7 +2665,7 @@ class player{
             case 191: case 202: case 203: case 204: case 205: case 206: case 209: case 211: case 219: case 220:
             case 226: case 228: case 230: case 247: case 263: case 265: case 266: case 267: case 284: case 285:
             case 287: case 302: case 303: case 304: case 305: case 320: case 322: case 323: case 324: case 354:
-            case 355: case 359: case 389:
+            case 355: case 359: case 389: case 408:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
                 if(!this.sidekick){
                     if(this.time%5==0){
@@ -3773,7 +3776,7 @@ class player{
                     }
                 }
                 this.attacking=inputSet[3]
-                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker')&&this.weapon.uses>0&&inputSetB[3]){
+                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker')&&this.weapon.uses>0&&inputSetB[3]){
                     this.weapon.cooldown=0
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerSwitcheroo'){
@@ -4122,7 +4125,7 @@ class player{
                         }
                     }
                 break
-                case 'PlayerOfficer':
+                case 'PlayerPistolOfficer':
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<150&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
@@ -4233,7 +4236,7 @@ class player{
                 case 'PlayerGrenadierception': case 'PlayerGaslighter': case 'PlayerTrapperception': case 'PlayerDirectorception': case 'PlayerDestroyerception':
                 case 'PlayerMotorizerception': case 'PlayerSunburstception': case 'PlayerStealthception': case 'PlayerIceberg': case 'PlayerGunceptionception':
                 case 'PlayerSoftwareception': case 'PlayerSwarmerception': case 'PlayerDasherception': case 'PlayerEmplacementception': case 'PlayerInterceptorception':
-                case 'PlayerDischarge': case 'PlayerMayfly':
+                case 'PlayerDischarge': case 'PlayerMayfly': case 'PlayerWintermint':
                     if(
                         this.time%40==0&&(this.playerData.name=='PlayerGunception'||this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerStealthception'&&this.fade>0||this.playerData.name=='PlayerGaslighter'||this.playerData.name=='PlayerSoftwareception')||
                         this.time%20==0&&(this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerGunceptionception'||this.playerData.name=='PlayerDasherception')||
@@ -4244,7 +4247,7 @@ class player{
                         this.time%15==0&&this.playerData.name=='PlayerMedicception'||
                         this.time%60==0&&(this.playerData.name=='PlayerSlicerception'||this.playerData.name=='PlayerIceberg'||this.playerData.name=='PlayerDischarge')||
                         (this.time%50==0||this.time%50==5||this.time%50==10)&&this.playerData.name=='PlayerAssaultRifleception'||
-                        this.time%50==0&&this.playerData.name=='PlayerGrenadierception'||
+                        this.time%50==0&&(this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerWintermint')||
                         this.time%180==0&&this.playerData.name=='PlayerDirectorception'||
                         this.time%240==0&&this.playerData.name=='PlayerDestroyerception'||
                         this.time%300==0&&this.playerData.name=='PlayerMotorizerception'||
@@ -4281,9 +4284,10 @@ class player{
                                     this.playerData.name=='PlayerEmplacementception'?183:
                                     this.playerData.name=='PlayerInterceptorception'?198:
                                     this.playerData.name=='PlayerDischarge'?43:
+                                    this.playerData.name=='PlayerWintermint'?220:
                                     1,
-                                    this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerEngineerception'||this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerDirectorception'||this.playerData.name=='PlayerEmplacementception'?(this.position.x>entities.players[a].position.x?-90+(dir+90)*0.2:90+(dir-90)*0.2):
-                                    dir+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerMayfly'?2:1),this.playerData.name=='PlayerSlicerception'?50:this.playerData.name=='PlayerDirectorception'?1200:this.playerData.name=='PlayerSwarmerception'?600:300,crit,this.index
+                                    this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerEngineerception'||this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerDirectorception'||this.playerData.name=='PlayerEmplacementception'||this.playerData.name=='PlayerWintermint'?(this.position.x>entities.players[a].position.x?-90+(dir+90)*0.2:90+(dir-90)*0.2):
+                                    dir+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerMayfly'?2:1)*(this.playerData.name=='PlayerWintermint'?0.5:1),this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerWintermint'?1800:this.playerData.name=='PlayerSlicerception'?50:this.playerData.name=='PlayerDirectorception'?1200:this.playerData.name=='PlayerSwarmerception'?600:300,crit,this.index
                                 ))
                                 this.firearc=[atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),30]
                                 a=la

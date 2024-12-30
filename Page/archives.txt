@@ -1,6 +1,5 @@
 
 
-
 386 - dazzler, 296 (xenon, instead of a temp duck it spawns a short emplacement)
 387 - switcheroo, 158 (either a pistol, machine gun, or sniper)
 388 - airdrop (you get a massive jump and one parachute use, after which you become revolver)
@@ -23,6 +22,7 @@
 405 - equanimity
 406 - hollow earther, 377
 407 - sungazer, 4
+408 - wintermint
 
 210 - dazzler,120
 211 - skysweeper,119
@@ -34,6 +34,7 @@
 217 - slightly larger bullet
 218 - more slightly larger bullet
 219 - slightly smaller bullet
+220 - wintermint, 115
 
 
 

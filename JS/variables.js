@@ -3516,8 +3516,8 @@ types={
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:53,
     },{
-      name:'PlayerPistolHealSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:48,
+      name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
     },{
       name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
@@ -3700,8 +3700,8 @@ types={
       name:'PlayerAirhorn',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:199,
     },{
-      name:'PlayerIcebox',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:200,
+      name:'PlayerHollowEarther',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:406,
     },{
       name:'PlayerPursuer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:384,
@@ -4082,8 +4082,8 @@ types={
       name:'PlayerDestroyerHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:359,
     },{
-      name:'PlayerOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
+      name:'PlayerWintermint',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:408,
     },{
       name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:383,
@@ -4338,8 +4338,11 @@ types={
       name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:377,
     },{
-      name:'PlayerHollowEarther',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:406,
+      name:'PlayerPistolHealSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:48,
+    },{
+      name:'PlayerIcebox',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:200,
     },
 
     {
@@ -6993,7 +6996,7 @@ types={
 			speed:1.15,
       uses:12,
 		},{
-			name:'Officer',
+			name:'Pistol Officer',
 			ammo:10,
 			damage:45,
 			cooldown:12,
@@ -9386,6 +9389,15 @@ types={
 			reload:6,
 			speed:1.1,
       uses:54,
+		},{
+			name:'Wintermint',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.925,
+      uses:6,
 		},
 	],
 }
