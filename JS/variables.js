@@ -3834,7 +3834,7 @@ types={
     },{
       name:'PlayerFracture',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:2,crit:0,weapon:426,
-      desc:'Grenadier that explodes multiple times on hitting walls',dpsBuff:3,
+      desc:'Grenadier that explodes multiple times on hitting walls',dpsBuff:2,
     },{
       name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:188,
@@ -4151,7 +4151,7 @@ types={
 
     {
       name:'PlayerPrism',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:316,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:316,
       desc:'Spreadling, but on taking damage explodes into drones',dpsBuff:7,
     },{
       name:'PlayerWeaver',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4167,7 +4167,7 @@ types={
       desc:'Spreadling with a powerful homing, piercing central bullet',dpsBuff:9,
     },{
       name:'PlayerUnfurler',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:313,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:313,
       desc:'Spreadling that concentrates its lower bullets',dpsBuff:12,
     },{
       name:'PlayerSpreadlingception',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4264,7 +4264,7 @@ types={
     },{
       name:'PlayerTwinterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:349,
-      desc:'Interceptor that fires twice as fast, and its bullets fire twice as fast too',dpsBuff:6,
+      desc:'Interceptor that fires twice as fast, and its bullets fire twice as fast too',dpsBuff:3,
     },{
       name:'PlayerConqueror',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:350,
@@ -4424,7 +4424,7 @@ types={
     },{
       name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:383,
-      desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:1,
+      desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:10,
     },{
       name:'PlayerXenon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,
@@ -9128,7 +9128,7 @@ types={
 			stop:90,
 			reload:20,
 			speed:0.975,
-      uses:25,
+      uses:18,
 		},{
 			name:'Glove',
 			ammo:7,
@@ -9212,40 +9212,40 @@ types={
       uses:3,
 		},{
 			name:'Inceptionist',
-			ammo:5,
+			ammo:3,
 			damage:120,
 			cooldown:30,
 			stop:90,
 			reload:20,
 			speed:0.975,
-      uses:25,
+      uses:18,
 		},{
 			name:'Twinterceptor',
-			ammo:10,
+			ammo:6,
 			damage:120,
 			cooldown:15,
 			stop:90,
 			reload:10,
 			speed:0.975,
-      uses:50,
+      uses:36,
 		},{
 			name:'Conqueror',
-			ammo:8,
+			ammo:6,
 			damage:120,
 			cooldown:20,
 			stop:60,
 			reload:10,
 			speed:0.975,
-      uses:40,
+      uses:36,
 		},{
 			name:'Interceptorception',
-			ammo:5,
+			ammo:3,
 			damage:120,
 			cooldown:30,
 			stop:90,
 			reload:20,
 			speed:0.975,
-      uses:25,
+      uses:18,
 		},{
 			name:'Dropkick',
 			ammo:5,

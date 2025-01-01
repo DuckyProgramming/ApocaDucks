@@ -532,6 +532,10 @@ class player{
             layer.fill(80,120,60,this.fade)
             regStar(layer,0,this.skin.body.level,10,45,45,9,9,0)
         }
+        if(this.DOT.active>0){
+            layer.fill(100,200,120,this.fade)
+            regStar(layer,0,this.skin.body.level,10,45,45,9,9,18)
+        }
         switch(this.weaponType){
             case 6: case 17: case 45: case 75: case 92: case 93: case 132: case 145: case 181: case 237:
             case 249: case 288: case 293: case 299: case 326: case 368: case 369:
@@ -2501,7 +2505,7 @@ class player{
 			break
             case 383:
 				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[4,20,24,44,67][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,67,231,232][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
 				}
 			break
             case 384:

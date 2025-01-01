@@ -29,7 +29,7 @@ class projectile{
 			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
 			case 57: case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90:
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
-			case 202: case 212: case 217: case 218: case 219: case 225:
+			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -3728,6 +3728,32 @@ class projectile{
 				layer.ellipse(0,0,3)
 				layer.triangle(-1,0,1,0,0,-4)
 			break
+			case 231:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,125,0,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.ellipse(0,0,3,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+			break
+			case 232:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,6,3)
+				layer.ellipse(0,0,3,6)
+				layer.fill(100,250,100,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
         }
         layer.pop()
@@ -4312,7 +4338,7 @@ class projectile{
 				case 82: case 84: case 86: case 87: case 88: case 90: case 94: case 99: case 100: case 101:
 				case 105: case 109: case 125: case 127: case 130: case 151: case 152: case 155: case 167: case 175:
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
-				case 217: case 218: case 219: case 222: case 223: case 225:
+				case 217: case 218: case 219: case 222: case 223: case 225: case 231: case 232:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 				break
@@ -5727,16 +5753,21 @@ class projectile{
 										entities.players[d].inspect.push(entities.players[b].index)
 									}
 								}
+							}else if(this.type==231){
+								entities.players[b].stunTime=max(entities.players[b].stunTime,240)
 							}
 							if(this.type==20){
 								entities.players[b].DOT.damage+=this.damage/180
-								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+20)
+								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+30)
 							}else if(this.type==37||this.type==51){
 								entities.players[b].DOT.damage+=this.damage/180
 								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+60)
 							}else if(this.type==50){
 								entities.players[b].DOT.damage+=this.damage/360
 								entities.players[b].DOT.active=min(240,entities.players[b].DOT.active+90)
+							}else if(this.type==232){
+								entities.players[b].DOT.damage+=this.damage/120
+								entities.players[b].DOT.active=min(360,entities.players[b].DOT.active+180)
 							}
 						}
 						if(game.invis){

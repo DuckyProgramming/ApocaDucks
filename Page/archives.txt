@@ -7,6 +7,8 @@
 
 229 - array, 86
 230 - chrysoberyl, 133
+231 - stun pistol +, 44
+232 - dot pistol +,20
 
 
 
