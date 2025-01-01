@@ -1,5 +1,59 @@
 
 
+429 - back flak (rearguard but shotgun auto turret), 190
+430 - array (fires rockets in four rows), 3
+431 - stacker (minigun with a secondary gun), 391
+432 - chrysoberyl (cobalt sunburst, and fires in 3 streams), 234
+
+229 - array, 86
+230 - chrysoberyl, 133
+
+
+
+
+
+415 - anapsid (radar more damaging bonker), 242
+416 - drillbit (radar machine parachutist), 279
+417 - annexer, 391
+418 - cycloid (fires balls in a circle pattern), 223
+419 - toolshed, 342
+420 - abetter (sidekick grenadier), 36
+421 - whirlybird (parachutist bonker that can fastfall by jumping), 242
+422 - deviser (multishot engineer), 146
+423 - pistol inspect
+424 - baller bounce (balls bounce off targets instead of being expended)
+425 - escapement (pods spawn some short-lived drones), 322
+426 - fracture (grenadier with large grenades that explode multiple times and can't hit enemies), 188
+427 - eon (sunburst that also spawns guard twin drones), 238
+428 - foreman (director with machine gun auto turret), 206
+
+224 - deviser,8
+225 - pistol inspect,43
+226 - baller bounce,5
+227 - escapement,182
+228 - fracture,30
+
+
+
+
+413 - gust
+414 - jetstream
+
+222 - gust
+223 - jetstream
+
+
+
+
+409 - historian,153
+410 - softlocker,224
+411 - insulator,391
+412 - relay
+
+221 - relay,201
+
+
+
 386 - dazzler, 296 (xenon, instead of a temp duck it spawns a short emplacement)
 387 - switcheroo, 158 (either a pistol, machine gun, or sniper)
 388 - airdrop (you get a massive jump and one parachute use, after which you become revolver)

@@ -44,6 +44,7 @@ class wall{
             case 8: case 9: case 12: case 16: case 27:
                 this.recharge=0
                 this.falling=0
+                this.infoFade=0
                 this.findFall()
             break
             case 17:
@@ -1339,6 +1340,20 @@ class wall{
                     break
                 }
             break
+            case 16:
+                if(this.infoFade>0){
+                    layer.fill(200,(1-this.recharge/60)*this.infoFade)
+                    layer.rect(0,this.height/2+26,180,42,5)
+                    layer.fill(0,(1-this.recharge/60)*this.infoFade)
+                    layer.textSize(9)
+                    if(types.player[this.weapon].dpsBuff==0){
+                        layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
+                    }else{
+                        layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
+                        layer.text(round(60*types.weapon[types.player[this.weapon].weapon].ammo*types.weapon[types.player[this.weapon].weapon].damage/(types.weapon[types.player[this.weapon].weapon].stop+(types.weapon[types.player[this.weapon].weapon].reload+types.weapon[types.player[this.weapon].weapon].cooldown)*(types.weapon[types.player[this.weapon].weapon].ammo-1))*types.player[this.weapon].damageBuff*types.player[this.weapon].reloadBuff*types.player[this.weapon].dpsBuff)+' DPS',0,this.height/2+26+14,180,14)
+                    }
+                }
+            break
         }
         layer.pop()
         /*layer.stroke(50,50+this.type*100,200)
@@ -1474,6 +1489,13 @@ class wall{
                 }
             break
             case 16:
+                let visible=false
+                for(let a=0,la=game.gaming;a<la;a++){
+                    if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
+                        visible=true
+                    }
+                }
+                this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
                 if(this.recharge>0&&(game.level==15||game.level==18)){
                     this.recharge--
                 }
@@ -1517,7 +1539,8 @@ class wall{
                         c.type==180||c.type==181||c.type==182||c.type==183||c.type==184||
                         c.type==200||c.type==201||c.type==204||c.type==208||c.type==205||
                         c.type==206||c.type==208||c.type==209||c.type==210||c.type==211||
-                        c.type==216||c.type==220
+                        c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
+                        c.type==227||c.type==228
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1770,15 +1793,25 @@ class wall{
                             if(
                                 c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
-                                c.type==209||c.type==216||c.type==220
+                                c.type==209||c.type==216||c.type==220||c.type==221
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
+                                }else if(c.type==221&&!c.stop){
+                                    c.explode()
                                 }
                                 c.stop=true
                             }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
                                 //c.bounces++
                                 c.bounceTimer=5
+                            }else if(c.type==228&&c.bounceTimer==0){
+                                c.bounces++
+                                c.bounceTimer=5
+                                c.explode()
+                                if(c.bounces>=3){
+                                    c.active=false
+                                }
+                                c.explosion=1
                             }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
@@ -1965,7 +1998,7 @@ class wall{
                                             if(
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='PlayerPistolInspect'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1
@@ -2083,7 +2116,15 @@ class wall{
                                         case 4:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.y=c.velocity.x*this.height/this.width
-                                            c.jump.time+=5
+                                            c.jump.time=5
+                                            if(
+                                                (
+                                                    c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
+                                                )&&c.weapon.uses>0){
+                                                c.jump.double=1
+                                            }
                                             if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }
@@ -2098,7 +2139,15 @@ class wall{
                                         case 5:
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.y=-c.velocity.x*this.height/this.width
-                                            c.jump.time+=5
+                                            c.jump.time=5
+                                            if(
+                                                (
+                                                    c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
+                                                )&&c.weapon.uses>0){
+                                                c.jump.double=1
+                                            }
                                             if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }

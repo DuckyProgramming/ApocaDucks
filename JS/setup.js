@@ -1,6 +1,6 @@
 function setup(){
     listing[0]=[...range(0,40),...range(0,10)]
-    listing[1]=range(40,256)
+    listing[1]=range(40,findName('PlayerMinesweeper',types.player))
     listing[2]=range(0,10)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
@@ -119,7 +119,7 @@ function keyPressed(){
         case 'ArrowLeft': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
         case 'ArrowRight': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
         case 'ArrowUp': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
-        case 'ArrowDown': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+        case 'ArrowDown': case 'Shift': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
         case 'Shift': inputs.release[0][0]=true; break
         case 'a': case 'A': inputs.keys[1][0]=true;inputs.tap[1][0]=true; break
         case 'd': case 'D': inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
