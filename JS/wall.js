@@ -2091,6 +2091,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
+                                                c.weapon.cooldown+=120
                                                 if(!game.pvp){
                                                     c.stuckTime=c.playerData.sizeBuff>=1.5?120:60
                                                 }
@@ -2130,6 +2131,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
+                                                c.weapon.cooldown+=120
                                                 if(!game.pvp){
                                                     c.stuckTime=60
                                                 }
@@ -2153,6 +2155,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
+                                                c.weapon.cooldown+=120
                                                 if(!game.pvp){
                                                     c.stuckTime=60
                                                 }

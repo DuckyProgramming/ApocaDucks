@@ -5094,7 +5094,7 @@ class projectile{
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/10,15,this.crit,this.index))
 					}
 				break
-				case 133: case 148: case 149: case 229: case 230:
+				case 133: case 148: case 149: case 230:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					if(a==0){
@@ -5472,21 +5472,12 @@ class projectile{
 					this.position.x+=this.velocity.x/4
 					this.position.y+=this.velocity.y/4
 					this.velocity.y+=0.1
-					if(this.timer%12==0&&this.active&&a==0){
-						let minimum=300
+					if(this.timer%15==0&&this.active&&a==0){
 						for(let a=0,la=entities.players.length;a<la;a++){
-							if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)){
-								minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
-							}
-						}
-						if(minimum<300){
-							for(let a=0,la=entities.players.length;a<la;a++){
-								if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-									entities.projectiles.push(new projectile(this.layer,this.position.x-cos(dir)*2,this.position.y-sin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x+cos(dir)*2,this.position.y+sin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-									a=la
-								}
+							if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300){
+								let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+								entities.projectiles.push(new projectile(this.layer,this.position.x-cos(dir)*2,this.position.y-sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
+								entities.projectiles.push(new projectile(this.layer,this.position.x+cos(dir)*2,this.position.y+sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
 							}
 						}
 					}
@@ -5501,6 +5492,22 @@ class projectile{
 					this.velocity.y+=0.1
 					if(this.explosion>0){
 						this.explosion-=0.1
+					}
+				break
+				case 229:
+					this.position.x+=this.speed*lsin(this.direction)
+				    this.position.y-=this.speed*lcos(this.direction)
+					if(a==0){
+						this.speed+=this.base.speed*0.05
+						if(abs(this.direction+90)<0.1){
+							this.direction=-90
+						}else if(abs(this.direction-90)<0.1){
+							this.direction=90
+						}else if(this.direction>-180&&this.direction<-90||this.direction>0&&this.direction<90){
+							this.direction+=0.1
+						}else if(this.direction>-90&&this.direction<0||this.direction>90&&this.direction<180){
+							this.direction-=0.1
+						}
 					}
 				break
 				

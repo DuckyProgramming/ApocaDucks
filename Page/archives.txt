@@ -4,6 +4,7 @@
 430 - array (fires rockets in four rows), 3
 431 - stacker (minigun with a secondary gun), 391
 432 - chrysoberyl (cobalt sunburst, and fires in 3 streams), 234
+433 - bonker guard
 
 229 - array, 86
 230 - chrysoberyl, 133

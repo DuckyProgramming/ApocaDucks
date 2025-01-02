@@ -3400,7 +3400,7 @@ types={
     },{
       name:'PlayerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:137,
-      desc:'Throws chakrams that can bounce',dpsBuff:1,
+      desc:'Throws chakrams that can bounce',dpsBuff:2,
     },
     
     {
@@ -3730,7 +3730,7 @@ types={
     },{
       name:'PlayerDeviser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:422,
-      desc:'Engineer with balls that fire at multiple nearby targets',dpsBuff:8,
+      desc:'Engineer with balls that fire twin shots at multiple nearby targets',dpsBuff:8,
     },{
       name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:184,
@@ -3766,27 +3766,27 @@ types={
     {
       name:'PlayerRecursiveSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:138,
-      desc:'Slicer with projectiles that bounce toward enemies',dpsBuff:1,
+      desc:'Slicer with projectiles that bounce toward enemies',dpsBuff:2,
     },{
       name:'PlayerPropellerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:139,
-      desc:'Slicer with projectiles that fire bullets backwards',dpsBuff:3,
+      desc:'Slicer with projectiles that fire bullets backwards',dpsBuff:4,
     },{
       name:'PlayerSlicerLinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:147,
-      desc:'Slicer with projectiles that last a long time',dpsBuff:1,
+      desc:'Slicer with projectiles that last a long time',dpsBuff:2,
     },{
       name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:372,
-      desc:'Slicer with projectiles that turn invisible on return',dpsBuff:1,
+      desc:'Slicer with projectiles that turn invisible on return',dpsBuff:2,
     },{
       name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
-      desc:'Slicer that attacks very fast',dpsBuff:1,
+      desc:'Slicer that attacks very fast',dpsBuff:2,
     },{
       name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
-      desc:'Has a slicer auto turret',dpsBuff:1,
+      desc:'Has a slicer auto turret',dpsBuff:2,
     },
     
     {
@@ -4492,7 +4492,7 @@ types={
     },{
       name:'PlayerDecoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:399,
-      desc:'Has sidekicks that can bounce enemies and have shields, but deal no damage',dpsBuff:1,
+      desc:'Has sidekicks that can collide wtih enemies and have shields',dpsBuff:1,
     },{
       name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:360,
@@ -4529,8 +4529,8 @@ types={
       desc:'Bonker that is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:381,
-      desc:'Slicer that is immune to bullet side effects',dpsBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:381,
+      desc:'Slicer that is immune to bullet side effects',dpsBuff:2,
     },{
       name:'PlayerChrysoberyl',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:432,
@@ -4789,6 +4789,9 @@ types={
     },{
       name:'SidekickDisappointmentGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:400,
+    },{
+      name:'SidekickBonkerGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:433,
     },{
       name:'SidekickGuardian',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:403,
@@ -9626,13 +9629,13 @@ types={
       uses:8,
 		},{
 			name:'Maximizer',
-			ammo:360,
-			damage:10,
+			ammo:300,
+			damage:8,
 			cooldown:1,
-			stop:15,
+			stop:150,
 			reload:1,
 			speed:0.875,
-      uses:720,
+      uses:600,
 		},{
 			name:'Micro',
 			ammo:20,
@@ -9975,6 +9978,15 @@ types={
 			reload:4,
 			speed:1.15,
       uses:45,
+		},{
+			name:'Bonker Guard',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.2,
+      uses:1,
 		},
 	],
 }

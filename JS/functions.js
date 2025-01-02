@@ -1240,7 +1240,7 @@ function checkEnd(level,layer){
                                         entities.players[entities.players.length-1].position.y=1000
                                         entities.players[entities.players.length-1].parachute=true
                                     }else if(game.level==17&&a<=5){
-                                        entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[1])][floor(random(0,2))]
+                                        entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[0])][floor(random(0,2))]
                                         entities.players[entities.players.length-1].position.y=1000
                                         entities.players[entities.players.length-1].parachute=true
                                     }
