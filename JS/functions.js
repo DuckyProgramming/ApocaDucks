@@ -1332,7 +1332,7 @@ function generateMission(wave){
             while(types.player[type].lifeBuff<=5||types.player[type].name.includes('Damaged')||types.player[type].name.includes('Boss')){
                 type=floor(random(bar,types.player.length))
             }
-            let num=floor(random(1,min(5,ceil(divide[0]*1.5))))
+            let num=floor(random(game.players==1?1:2,min(5,ceil(divide[0]*1.5))))
             mixer.push([types.player[type].name,num])
             divide[0]-=num
         }

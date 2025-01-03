@@ -23,7 +23,7 @@ class projectile{
 			this.type==98||this.type==101||this.type==104||this.type==110||this.type==113||
 			this.type==117||this.type==121||this.type==146||this.type==156||this.type==166||
 			this.type==171||this.type==178||this.type==187||this.type==200||this.type==205||
-			this.type==206||this.type==211||this.type==213||this.type==229
+			this.type==206||this.type==211||this.type==213||this.type==228||this.type==229
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
@@ -4057,10 +4057,10 @@ class projectile{
 				}
 			break
 			case 97:
-				let turn97=floor(random(0,45))
-				for(let b=0,lb=8;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*45+turn97,this.id,this.base.damage/10,180,this.crit,this.index))
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+(b+0.5)*45+turn97,this.id,this.base.damage/20,180,this.crit,this.index))
+				let turn97=floor(random(0,90))
+				for(let b=0,lb=4;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn97,this.id,this.base.damage/5,180,this.crit,this.index))
+					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+(b+0.5)*90+turn97,this.id,this.base.damage/10,180,this.crit,this.index))
 				}
 			break
 			case 98:
@@ -4227,7 +4227,7 @@ class projectile{
 						}
 					}
 					if((entities.players[b].id!=this.id&&game.pvp||entities.players[b].id==0&&this.id!=0||entities.players[b].id!=0&&this.id==0)&&entities.players[b].explodable()&&entities.players[b].life>0&&dist(entities.players[b].position.x,entities.players[b].position.y,this.position.x,this.position.y)<600){
-				        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3,300,this.crit,this.index))
+				        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3*constrain(1.2-this.timer/this.base.time*6,0.2,1),300,this.crit,this.index))
                     }
 				}
 			break
@@ -5614,7 +5614,7 @@ class projectile{
 						}else if(
 							this.exploder
 						){
-							if(this.type==41||this.type==98||this.type==117||this.type==121||this.type==146){
+							if(this.type==41||this.type==97||this.type==98||this.type==117||this.type==121||this.type==146){
 								entities.players[b].takeDamage(this.damage)
 							}else if(this.type==48){
 								this.speed=0
@@ -5682,8 +5682,8 @@ class projectile{
 								entities.players[b].velocity.y-=lcos(this.direction)*12
 								entities.players[b].lastingForce[0]+=lsin(this.direction)*5
 								entities.players[b].lastingForce[1]-=lcos(this.direction)*5
-								entities.players[b].stunTime=max(entities.players[b].stunTime,150)
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,600)
+								entities.players[b].stunTime=max(entities.players[b].stunTime,240)
+								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,720)
 							}else if(
 								this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||
 								this.type==51

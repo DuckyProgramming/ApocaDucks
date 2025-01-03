@@ -3669,7 +3669,7 @@ types={
       desc:'Baller that fires very fast',dpsBuff:1,
     },{
       name:'PlayerBoulderBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:3,crit:0,weapon:148,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:148,
       desc:'Fires large ballers that explode into many small balls',dpsBuff:2.2,
     },{
       name:'PlayerFattener',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3912,7 +3912,7 @@ types={
     },{
       name:'PlayerEon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:427,
-      desc:'Sunburst that also spawns guard twin drones',dpsBuff:2,
+      desc:'Sunburst that also spawns twin turret drones',dpsBuff:2,
     },{
       name:'PlayerSunburstception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:238,
@@ -4320,7 +4320,7 @@ types={
     },{
       name:'PlayerRotary',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:208,
-      desc:'Has two shields and fires bullets in a spinning cycle',dpsBuff:2,
+      desc:'Has two shields and fires bullets in a spinning cycle',dpsBuff:1,
     },{
       name:'PlayerRibbon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:232,
@@ -4461,8 +4461,8 @@ types={
       desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
     },{
       name:'PlayerInsulator',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:411,
-      desc:'Submachine that fires engineer balls occasionally',dpsBuff:3,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:411,
+      desc:'Submachine that fires engineer balls occasionally',dpsBuff:2,
     },{
       name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:251,
@@ -4701,34 +4701,34 @@ types={
     },
 
     {
-      name:'ConstructMachineGun',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructMachineGun',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
-      name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
-      name:'ConstructSniper',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructSniper',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
     },{
-      name:'ConstructFlamethrower',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructFlamethrower',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
     },{
-      name:'ConstructMedic',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructMedic',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
     },{
-      name:'ConstructGuard',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructGuard',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:272,
     },{
-      name:'ConstructDestroyer',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructDestroyer',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:212,
     },{
-      name:'ConstructAuto',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructAuto',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:99,
     },{
-      name:'ConstructSpreadling',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructSpreadling',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:309,
     },{
-      name:'ConstructAssaultRifle',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructAssaultRifle',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },
 
@@ -4896,7 +4896,7 @@ types={
       name:'FastFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
-      name:'BigFastFlamethrower',sizeBuff:2,lifeBuff:6,speedBuff:0.75,
+      name:'BigFastFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
       name:'BigCritFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -5034,16 +5034,16 @@ types={
       name:'BigPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'BigFastPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.75,
+      name:'BigFastPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'BigFastHyperPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.75,
+      name:'BigFastHyperPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FastPistol',sizeBuff:1,lifeBuff:0.6,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'BigCritFastPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.75,
+      name:'BigCritFastPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
       name:'HeavyRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
@@ -5922,7 +5922,7 @@ types={
       name:'BigPushFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:116,
     },{
-      name:'BigFastPushPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.75,
+      name:'BigFastPushPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:15,
     },{
       name:'CritPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -7416,12 +7416,12 @@ types={
 		},{
 			name:'Boulder Baller',
 			ammo:1,
-			damage:400,
+			damage:200,
 			cooldown:120,
 			stop:120,
 			reload:120,
 			speed:1.05,
-      uses:6,
+      uses:8,
 		},{
 			name:'Streamlined Rifle',
 			ammo:60,
@@ -10238,10 +10238,10 @@ levels=[
       "###@    ###@# #######@@@##         ##  ## ######               ##   ####    ##",
       "####    ##### ###########          ##      #####         ###   ##@# ####@@# ##",
       "####    ##### #########    ####@## ##@###@ #####@###  ########@#### ####### ##",
-      "####    #####  ##          ####### #######     #####  #############         ##",
-      "####    ##              ##@#######         ### #####  #############         ##",
-      "####    ##        ##### ##########         ### ###                  ### ###@##",
-      "####    #  ##@#########     ######@##  ###@### ###      ###########@### ######",
+      "####    #####  ##          ####### #######     #####  ###########           ##",
+      "####    ##              ##@#######         ### #####  #########             ##",
+      "####    ##        ##### ##########         ### ###                #@### ###@##",
+      "####    #  ##@#########     ######@##  ###@### ###      ############### ######",
       "####@      ########             #####   ######          ############### ######",
       "#####                                     ####@#####@@# ##   r   ###### ######",
       "#####   ##          ###@###### ######        ########## ##       ###       ###",
