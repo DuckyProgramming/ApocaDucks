@@ -90,7 +90,7 @@ class wall{
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&this.width<game.tileset[0]*10){
+                    if(c.type==this.type&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&this.width<game.tileset[0]*10&&!c.remove){
                         if(abs(this.height-c.height)<1&&abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&abs(c.position.y-this.position.y)<1&&!c.remove){
                             this.width+=c.width
                             this.position.x+=c.width/2
@@ -106,7 +106,7 @@ class wall{
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&this.height<game.tileset[1]*10){
+                    if(c.type==this.type&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&this.height<game.tileset[1]*10&&!c.remove){
                         if(abs(this.width-c.width)<1&&abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&abs(c.position.x-this.position.x)<1&&!c.remove){
                             this.height+=c.height
                             this.position.y+=c.height/2
@@ -476,6 +476,7 @@ class wall{
         layer.push()
         layer.translate(this.position.x+offsetX,this.position.y+offsetY)
         layer.noStroke()
+        let gradient
         switch(this.type){
             case 1:
                 switch(game.level){
@@ -495,15 +496,21 @@ class wall{
                         }
                     break
                     case 6:
-                        layer.fill(30+this.position.y/game.edge[1]*30,60-this.position.y/game.edge[1]*15,30)
-                        layer.rect(0,0,this.width+1,this.height+1)
+                        gradient=[new p5.LinearGradient(90,this.height)]
+                        gradient[0].colors(
+                            0.0,color(30+((this.position.y-this.height/2)/game.edge[1])*30,60-((this.position.y-this.height/2)/game.edge[1])*15,30),
+                            1.0,color(30+((this.position.y+this.height/2)/game.edge[1])*30,60-((this.position.y+this.height/2)/game.edge[1])*15,30)
+                        )
+                        layer.translate(-this.width/2,-this.height/2)
+                        layer.fillGradient(gradient[0])
+                        layer.rect(this.width/2,this.height/2,this.width+1,this.height+1)
                     break
                     case 8: case 17:
                         layer.fill(100)
                         layer.rect(0,0,this.width+1,this.height+1,2)
                     break
                     case 15: case 18:
-                        let gradient=[new p5.LinearGradient(90,this.height)]
+                        gradient=[new p5.LinearGradient(90,this.height)]
                         gradient[0].colors(
                             0.0,color(180-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*60,150-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*60,240-((this.position.y-this.height/2)/game.edge[1]*1.5-0.5)*120),
                             1.0,color(180-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*60,150-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*60,240-((this.position.y+this.height/2)/game.edge[1]*1.5-0.5)*120)
@@ -1540,19 +1547,21 @@ class wall{
                         c.type==200||c.type==201||c.type==204||c.type==208||c.type==205||
                         c.type==206||c.type==208||c.type==209||c.type==210||c.type==211||
                         c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
-                        c.type==227||c.type==228
+                        c.type==227||c.type==228||c.type==233||c.type==235||c.type==237||
+                        c.type==238||c.type==239||c.type==240||c.type==243||c.type==245||
+                        c.type==246||c.type==247||c.type==248
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
                         let vecBall
-                        if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208)&&d<0){
+                        if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239)&&d<0){
                             let e={position:c.position,previous:c.previous,width:0,height:0}
                             d=collideBoxBox(this,e)
                         }
                         if(d>=0&&!this.redundant[d]){
                             switch(d){
                                 case 0:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.y<0){
                                             c.position.y=this.position.y+this.height/2+c.height/2
                                             c.velocity.y*=-1
@@ -1569,7 +1578,7 @@ class wall{
                                     }
                                 break
                                 case 1:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.y>0){
                                             c.position.y=this.position.y-this.height/2-c.height/2
                                             c.velocity.y*=-1
@@ -1586,7 +1595,7 @@ class wall{
                                     }
                                 break
                                 case 2:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x<0){
                                             c.position.x=this.position.x+this.width/2+c.width/2
                                             c.velocity.x*=-1
@@ -1603,7 +1612,7 @@ class wall{
                                     }
                                 break
                                 case 3:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x>0){
                                             c.position.x=this.position.x-this.width/2-c.width/2
                                             c.velocity.x*=-1
@@ -1620,7 +1629,7 @@ class wall{
                                     }
                                 break
                                 case 4:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x<0){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.x*=-1
@@ -1654,7 +1663,7 @@ class wall{
                                     }
                                 break
                                 case 5:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x>0){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.x*=-1
@@ -1688,7 +1697,7 @@ class wall{
                                     }
                                 break
                                 case 6:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x<0){
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.x*=-1
@@ -1724,7 +1733,7 @@ class wall{
                                     }
                                 break
                                 case 7:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x>0){
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.x*=-1
@@ -1760,7 +1769,7 @@ class wall{
                                     }
                                 break
                                 case 8:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x<0){
                                             c.direction+=180
                                             c.hit=[]
@@ -1775,7 +1784,7 @@ class wall{
                                     }
                                 break
                                 case 9:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208){
+                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239){
                                         if(c.velocity.x>0){
                                             c.direction+=180
                                             c.hit=[]
@@ -1793,7 +1802,8 @@ class wall{
                             if(
                                 c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
-                                c.type==209||c.type==216||c.type==220||c.type==221
+                                c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
+                                c.type==245||c.type==246||c.type==247
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
@@ -1812,9 +1822,14 @@ class wall{
                                     c.active=false
                                 }
                                 c.explosion=1
-                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110)&&c.bounceTimer==0){
+                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
+                                if(c.type==235){
+                                    let mult=random(0.625,1.6)
+                                    c.velocity.x*=mult
+                                    c.velocity.y*=mult
+                                }
                                 if(c.bounces>=3){
                                     c.explode()
                                     c.active=false
@@ -1847,7 +1862,7 @@ class wall{
                         }
                     }else if(a==1&&inBoxBox(this.bounder,c)
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
-                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
+                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
                         &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
@@ -1881,7 +1896,7 @@ class wall{
                                 }else{
                                     this.recharge=1800-(game.gaming-1)*300
                                 }
-                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
+                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2))
                                 c.weapon.cooldown=min(c.weapon.cooldown,30)
                                 if(game.level==6){
                                     this.type=[9,12][floor(random(0,2))]

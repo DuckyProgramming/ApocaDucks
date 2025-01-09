@@ -1,25 +1,49 @@
 
 
-434 - aurichalcite
-435 - 
-436 - 
-437 - 
-438 - 
-439 - 
-440 - 
-441 - 
-442 - 
-443 - 
-444 - 
-445 - 
-446 - 
-447 - 
-448 - 
-449 - 
-450 - 
-451 - 
-452 - 
-453 - 
+434 - aurichalcite - cobalt software, 222
+435 - alternator [replace scythe] - interceptor but auto 2 bullet, 338
+436 - ied, 36
+437 - surgeon - fires destroyer bullets with a shield, 212
+438 - phantasm, 202
+439 - chairman - director builder, 202
+440 - ticker - double pelleter and also fires occasional big bullets, 332
+441 - smoke ring - five directional flamethrower, 8
+442 - maxgun - destroyer that also has an integrated twin gun, 215
+443 - dual slicer (fires two slicers that curve inward), 137
+444 - ultraviolet - ballista but auxiliary fire fires three exploding bullets, 231
+445 - cleaner (fires a bullet forward and a slicer backward that loops around), 176?
+446 - sawtooth - helix, but the bullets move in a growing sawtooth pattern, 94
+447 - userdrive - interceptor with an assault rifle autoturret, 338
+448 - pyramidal - submachine with homing shots, 391
+449 - sunrise - sunburst but each shot has a smaller, slower secondary shot (same damage though), 234
+450 - revolver crit self, 136 (bullet 36)
+451 - mega trapper, 197
+452 - electrauto - electrifyer with auto 2, 133
+453 - oxidizer - interceptor ballista, 231
+454 - AZ gun, 6
+455 - workshop - randomized between heavy airhorn, blocks with turrets, swarm blocks, 312
+456 - vitality - tanuki but with damage over time bullets in a 3 spread, 265
+
+233 - cobalt software, 134
+234 - alternator, 173
+235 - ied, 30
+236 - surgeon, 125
+237 - dual slicer a, 91 goes up in direction by 30
+238 - dual slicer b, 91 goes down in direction by 30
+239 - cleaner, 91
+240 - sawtooth, 68
+241 - pyramidal, 112
+242 - sunrise secondary, 133
+243 - mega trapper, 114
+244 - oxidizer, 147
+245 - workshop heavy airhorn, 181, 117
+246 - workshop engineer, 181
+247 - workshop migrator, 181
+248 - vitality, 157
+249 - revolver crit self, 90+36
+
+replace dpsbuff 0
+
 
 
 
