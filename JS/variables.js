@@ -4042,7 +4042,7 @@ types={
     },{
       name:'PlayerChairman',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:439,
-      desc:'Director that can also place heavy traps',dpsBuff:1,
+      desc:'Director that can also place heavy traps',dpsBuff:2,
     },{
       name:'PlayerDirectorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:206,
@@ -4580,7 +4580,7 @@ types={
     },{
       name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:438,
-      desc:'Spawns moderately sized drones, fires a gun forward, and can become invisible',dpsBuff:1,
+      desc:'Spawns moderately sized drones, fires a gun forward, and can become invisible',dpsBuff:2,
     },{
       name:'PlayerTicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:440,
@@ -4634,7 +4634,7 @@ types={
     },{
       name:'PlayerAZGun',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:454,
-      desc:'A faster-firing sniper that can rotate upward using auxiliarwy key',dpsBuff:1,
+      desc:'A faster-firing sniper that can rotate upward using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:354,
@@ -8256,7 +8256,7 @@ types={
 		},{
 			name:'Ballista',
 			ammo:15,
-			damage:80,
+			damage:100,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -8265,7 +8265,7 @@ types={
 		},{
 			name:'Ribbon',
 			ammo:15,
-			damage:100,
+			damage:125,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -10156,9 +10156,9 @@ types={
 			name:'Maxgun',
 			ammo:12,
 			damage:600,
-			cooldown:10,
+			cooldown:12,
 			stop:120,
-			reload:5,
+			reload:8,
 			speed:0.9,
       uses:24,
 		},{
@@ -10173,7 +10173,7 @@ types={
 		},{
 			name:'Ultraviolet',
 			ammo:15,
-			damage:100,
+			damage:125,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -10254,7 +10254,7 @@ types={
 		},{
 			name:'Oxidizer',
 			ammo:15,
-			damage:80,
+			damage:100,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -10267,7 +10267,7 @@ types={
 			cooldown:90,
 			stop:120,
 			reload:60,
-			speed:0.825,
+			speed:0.775,
       uses:20,
 		},{
 			name:'Workshop',
@@ -11318,19 +11318,19 @@ levels=[
       "                               |               |               |               g               |                                                                               ",
       "                               |               |               |               g               |                                                                               ",
       "                               |  d            |               |               g               |                      w                                                        ",
-      "                               ggggggggggggfggggggg ggggggggggggggg gggggggfgggggg ggggfgggggggggggggggg________+________+_                                                    ",
+      "                               ggggggggggggfggggggg ggggggggggggggg gggggggfgggggg ggggfgggggggggggggggg_ ______+________+_                                                    ",
       "                               g       |               |               |               |               |        |        |                                                     ",
       "                          _+__bg       |               |               |               |               |        |        |                                                     ",
       "                           |   g       |               |               |               |               |        |        |                                                     ",
-      "                           |   gggg ggggggg gggggggfggggggg gggggggfggggggg ggggggfgggggggg ggggggg gggg________+________+_b______+_                                           ",
+      "                           |   gggg ggggggg gggggggfggggggg gggggggfggggggg ggggggfgggggggg ggggggg gggg_b______+________+_b______+_                                           ",
       "                           |   |       g       |               |       g       |               g       |        |        |        |                                            ",
       "                           |   |       g       |               |       g       |               g       |        |        |        |                                            ",
       "                           |   |       g   e   |               |    ~  g       |               g       |        |  ^     |    r   |                                            ",
-      "                       ggfgggggggggfgggggggfggggggg gggggggfgggggggggggggggfgggggg ggggggggfgggggggfgggg_ ______+________+________+_b______+_                                  ",
+      "                       ggfgggggggggfgggggggfggggggg gggggggfgggggggggggggggfgggggg ggggggggfgggggggfgggg________+______ _+________+_b______+_                                  ",
       "                       |               |               |               |               |               |        |        |        |        |                                   ",
       "                       |               |               |               |               |               |        |        |        |        |                                   ",
-      "                       |               |               |               |               |               |        |        |        |        |                                   ",
-      "                    <#@############################@##############################@######################@###################################@####>                            ",
+      "                       |         <####>|               |               |               |               |        | <##>   |        |        |                                   ",
+      "                    <#@############################@##############################@########>     <#####################@#####################@####>                            ",
       "               <############################################################################################################################################>                  ",
       "             ##################################################################################################################################################>               ",
       "            /######################################################################################################################################################>           ",

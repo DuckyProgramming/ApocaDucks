@@ -188,7 +188,7 @@ function mainloop(layer){
                             run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
                             run.fore[a][b].position.y-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
-                            a==0&&run.fore[a][b].type==190||run.fore[a][b].type==191||
+                            a==0&&run.fore[a][b].type==190||run.fore[a][b].type==191||run.fore[a][b].type==214||
                             game.level==7&&a==2&&
                             run.fore[a][b].internalBounder.position.x+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].internalBounder.position.x-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&

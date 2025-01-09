@@ -56,7 +56,7 @@ class projectile{
 			case 233: case 235: case 240: case 243: case 245: case 246: case 247: case 248:
 				this.width=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243?12:4
 				this.height=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243?12:4
-				this.speed=this.type==210?0:this.type==209?random(8,10):this.type==120||this.type==177||this.type==178||this.type==179||this.type==182|this.type==183?1:6
+				this.speed=this.type==210?0:this.type==209?random(8,10):this.type==120||this.type==177||this.type==178||this.type==179||this.type==182|this.type==183|this.type==227?1:6
 				this.bounces=0
 				this.bounceTimer=0
 				this.time=time*(this.id==0?0.6:1)
