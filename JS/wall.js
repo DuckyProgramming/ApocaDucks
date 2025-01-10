@@ -1549,7 +1549,7 @@ class wall{
                         c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
                         c.type==227||c.type==228||c.type==233||c.type==235||c.type==237||
                         c.type==238||c.type==239||c.type==240||c.type==243||c.type==245||
-                        c.type==246||c.type==247||c.type==248
+                        c.type==246||c.type==247||c.type==248||c.type==250
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1803,7 +1803,7 @@ class wall{
                                 c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
                                 c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
-                                c.type==245||c.type==246||c.type==247
+                                c.type==245||c.type==246||c.type==247||c.type==250
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))

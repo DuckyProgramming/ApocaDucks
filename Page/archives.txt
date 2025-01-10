@@ -1,4 +1,16 @@
 
+457 - submachineception, 417
+458 - deployer P, 152
+459 - minesweeperception, 189
+460 - ranger, 6
+461 - bonkception, 243
+462 - defender, 411
+463 - deployer I, 152
+464 - timebomb, 375
+
+250 - timebomb, 206
+
+
 
 434 - aurichalcite - cobalt software, 222
 435 - alternator [replace scythe] - interceptor but auto 2 bullet, 338
