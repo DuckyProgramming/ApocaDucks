@@ -3492,62 +3492,46 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:391,
       desc:'Generalist weapon',dpsBuff:1,
     },{
-      name:'PlayerMinesweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:189,
-      desc:'Has a radar',dpsBuff:1,
+      name:'PlayerLaser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:335,
+      desc:'Fires a lightspeed, accurate beam',dpsBuff:1,
     },
     
     {
-      name:'PlayerGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:176,
-      desc:'Has an auto turret',dpsBuff:1,
+      name:'PlayerInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:153,
+      desc:'Can mark seen ducks and know their location',dpsBuff:1,
     },{
       name:'PlayerRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:136,
       desc:'Fires single bullets for high damage',dpsBuff:1,
     },{
-      name:'PlayerInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:153,
-      desc:'Can mark seen ducks and know their location',dpsBuff:1,
+      name:'PlayerBallista',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:231,
+      desc:'Fires bullets with a slight arc',dpsBuff:1,
+    },{
+      name:'PlayerTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:464,
+      desc:'Fires a bomb that explodes on a set fuse',dpsBuff:1,
     },{
       name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:190,
       desc:'Has a bullet-blocking shield behind',dpsBuff:1,
     },{
-      name:'PlayerBallista',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:231,
-      desc:'Fires bullets with a slight arc',dpsBuff:1,
-    },{
-      name:'PlayerLaser',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:335,
-      desc:'Fires a lightspeed, accurate beam',dpsBuff:1,
-    },{
       name:'PlayerFreezer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:364,
       desc:'Slows down enemies it hits',dpsBuff:1,
-    },{
-      name:'PlayerPiercer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:379,
-      desc:'Bulltes pierce three enemies',dpsBuff:1,
     },{
       name:'PlayerGust',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:413,
       desc:'Pushes enemies back in an arc',dpsBuff:1,
     },{
-      name:'PlayerTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:464,
-      desc:'Fires a bomb that explodes on a set fuse',dpsBuff:1,
+      name:'PlayerGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:176,
+      desc:'Has an auto turret',dpsBuff:1,
     },
 
     {
-      name:'PlayerBallerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:90,
-      desc:'Shotgun that fires balls',dpsBuff:10,
-    },{
-      name:'PlayerDroneShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:224,
-      desc:'Fires drones that target enemies and defend you',dpsBuff:15,
-    },{
       name:'PlayerPanicShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:167,
       desc:'Fires many shots, gradually less accurately',dpsBuff:12,
@@ -3556,9 +3540,21 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:278,
       desc:'Shotgun that fires traps',dpsBuff:15,
     },{
-      name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:89,
-      desc:'Shotgun that fires fast sniper bullets',dpsBuff:10,
+      name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
+      desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:10,
+    },{
+      name:'PlayerTerminal',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:475,
+      desc:'Shotgun with more bullets in a set pattern',dpsBuff:19,
+    },{
+      name:'PlayerSalacia',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:476,
+      desc:'Shotgun that fires over a longer distance and can shrink enemies',dpsBuff:10,
+    },{
+      name:'PlayerGunpowder',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:477,
+      desc:'Shotgun that fires straight-moving engineer bullets',dpsBuff:20,
     },{
       name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:177,
@@ -3575,7 +3571,7 @@ types={
       desc:'Pistol that can jump four times',dpsBuff:1,
     },{
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:53,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:53,
       desc:'Pistol that applies vulnerable to hit enemies',dpsBuff:1,
     },{
       name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3585,6 +3581,10 @@ types={
       name:'PlayerPistolInspect',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:423,
       desc:'Pistol that inspects all enemies that are hit',dpsBuff:1,
+    },{
+      name:'PlayerRegional',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:470,
+      desc:'Pistol that can fire a large bullet using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
@@ -3612,6 +3612,10 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:363,
       desc:'Machine gun that fires three concentrated streams',dpsBuff:3,
     },{
+      name:'PlayerMatulaTree',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:468,
+      desc:'Machine gun that fires variable bullets in a numeric pattern',dpsBuff:1,
+    },{
       name:'PlayerMachineGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:179,
       desc:'Has a machine gun auto turret',dpsBuff:1,
@@ -3637,6 +3641,10 @@ types={
       name:'PlayerRocketBattery',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:162,
       desc:'Very slow rocket launcher with huge rockets',dpsBuff:1,
+    },{
+      name:'PlayerArray',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:2.5,crit:0,weapon:430,
+      desc:'Fires accelerating rockets rapidly in four streams',dpsBuff:1,
     },{
       name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
@@ -3664,6 +3672,10 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
       desc:'Sniper with side medic bullets',dpsBuff:1.8,
     },{
+      name:'PlayerAZGun',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:454,
+      desc:'A faster-firing sniper that can rotate upward using auxiliary key',dpsBuff:1,
+    },{
       name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
       desc:'Has a sniper auto turret',dpsBuff:1,
@@ -3689,6 +3701,10 @@ types={
       name:'PlayerBallerBounce',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:2.5,crit:0,weapon:424,
       desc:'Fires balls that bounce off targets',dpsBuff:1,
+    },{
+      name:'PlayerBallerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:90,
+      desc:'Shotgun that fires balls',dpsBuff:10,
     },{
       name:'PlayerBallerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:182,
@@ -3716,6 +3732,10 @@ types={
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
       desc:'Fires a sphere that passes through enemies',dpsBuff:6,
     },{
+      name:'PlayerSmokeRing',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:441,
+      desc:'Fires flames in five directions',dpsBuff:5,
+    },{
       name:'PlayerFlamethrowerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:183,
       desc:'Has a flamethrower auto turret',dpsBuff:1,
@@ -3741,6 +3761,10 @@ types={
       name:'PlayerDeviser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:422,
       desc:'Engineer with balls that fire twin shots at multiple nearby targets',dpsBuff:8,
+    },{
+      name:'PlayerOxidizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:453,
+      desc:'Ballista with engineer-style bullets',dpsBuff:4,
     },{
       name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:184,
@@ -3768,9 +3792,17 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:356,
       desc:'Bonker with medic',dpsBuff:1,
     },{
+      name:'PlayerPacker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:397,
+      desc:'Trapper that can heal allies who pick up traps',dpsBuff:1,
+    },{
       name:'PlayerMedicception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:185,
       desc:'Has a medic auto turret',dpsBuff:1,
+    },{
+      name:'PlayerWorkshop',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:455,
+      desc:'Fires random types of large traps',dpsBuff:1,
     },
     
     {
@@ -3793,6 +3825,10 @@ types={
       name:'PlayerDualSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:443,
       desc:'Throws two slicers in a wider curve',dpsBuff:2,
+    },{
+      name:'PlayerCleaner',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:445,
+      desc:'Fires a bullet forward and a curving slicer behind',dpsBuff:1,
     },{
       name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
@@ -3820,6 +3856,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:407,
       desc:'Fires an array of bullets in three bursts in a set pattern',dpsBuff:8/3,
     },{
+      name:'PlayerGunnerDual',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:483,
+      desc:'Assault rifle that fires in four fast streams',dpsBuff:4,
+    },{
       name:'PlayerAssaultRifleception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:187,
       desc:'Has an assault rifle auto turret',dpsBuff:2.5,
@@ -3846,6 +3886,10 @@ types={
       damageBuff:2,reloadBuff:2,crit:0,weapon:426,
       desc:'Grenadier that explodes multiple times on hitting walls',dpsBuff:2,
     },{
+      name:'PlayerIED',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:436,
+      desc:'Throws strangely bouncing but very powerful explosives',dpsBuff:1,
+    },{
       name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:188,
       desc:'Has a grenadier auto turret',dpsBuff:1,
@@ -3868,9 +3912,9 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:451,
       desc:'Places very large traps',dpsBuff:1,
     },{
-      name:'PlayerPacker',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:397,
-      desc:'Trapper that can heal allies who pick up traps',dpsBuff:1,
+      name:'PlayerPizzaria',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:229,
+      desc:'Fires large traps that explode into balls',dpsBuff:2,
     },{
       name:'PlayerTrapperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:201,
@@ -3898,6 +3942,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:359,
       desc:'Destroyer that spawns large drones',dpsBuff:1.25,
     },{
+      name:'PlayerSurgeon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:437,
+      desc:'Fires a destroyer bullet that blocks enemy bullets',dpsBuff:1,
+    },{
       name:'PlayerDestroyerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:217,
       desc:'Has a destroyer auto turret',dpsBuff:1,
@@ -3923,6 +3971,10 @@ types={
       name:'PlayerEon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:427,
       desc:'Sunburst that also spawns twin turret drones',dpsBuff:2,
+    },{
+      name:'PlayerMoonburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:239,
+      desc:'Sunburst with bullets that slow down and eventually stop',dpsBuff:1,
     },{
       name:'PlayerSunburstception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:238,
@@ -3950,6 +4002,10 @@ types={
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
       desc:'Flamethrower that can become invisible when not moving and fires in two directions',dpsBuff:1,
     },{
+      name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:438,
+      desc:'Spawns moderately sized drones, fires a gun forward, and can become invisible',dpsBuff:2,
+    },{
       name:'PlayerStealthception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:241,
       desc:'Has a basic auto turret that activates when not invisible',dpsBuff:1,
@@ -3975,6 +4031,10 @@ types={
       name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:253,
       desc:'Bonker that has strong knockback but no damage',dpsBuff:0,
+    },{
+      name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:243,
+      desc:'Bonker with a freezing auto turret',dpsBuff:0,
     },{
       name:'PlayerBonkerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:461,
@@ -4002,6 +4062,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:421,
       desc:'Bonker with a parachute, can divebomb enemies by holding jump',dpsBuff:0,
     },{
+      name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:466,
+      desc:'Has a parachute and fires downward driller bullets randomly',dpsBuff:1,
+    },{
       name:'PlayerApache',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:289,
       desc:'Fires auto turrets on both sides, and has a parachute',dpsBuff:2,
@@ -4027,6 +4091,10 @@ types={
       name:'PlayerEscapement',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:425,
       desc:'Emplacement with pods that spawn extra short-lived drones',dpsBuff:6,
+    },{
+      name:'PlayerEnforcement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:472,
+      desc:'Fires a burst of short-lived emplacement pods',dpsBuff:9,
     },{
       name:'PlayerEmplacementception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:322,
@@ -4054,6 +4122,10 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:439,
       desc:'Director that can also place heavy traps',dpsBuff:2,
     },{
+      name:'PlayerWintermint',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:408,
+      desc:'Director with a freezing trapper auto turret',dpsBuff:1,
+    },{
       name:'PlayerDirectorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:206,
       desc:'Has a director auto turret',dpsBuff:1,
@@ -4079,6 +4151,10 @@ types={
       name:'PlayerVitality',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:456,
       desc:'Motorizer with drones that fire damage over time bullets over a spread',dpsBuff:2,
+    },{
+      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
+      desc:'Spawns exploding motorizer drones',dpsBuff:2,
     },{
       name:'PlayerMotorizerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:228,
@@ -4106,6 +4182,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:323,
       desc:'Spawns exploding swarm drones and has an auto turret',dpsBuff:2,
     },{
+      name:'PlayerDroneShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:224,
+      desc:'Fires drones that target enemies and defend you',dpsBuff:15,
+    },{
       name:'PlayerSwarmerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:285,
       desc:'Has a swarmer auto turret',dpsBuff:1,
@@ -4130,7 +4210,11 @@ types={
     },{
       name:'PlayerAbetter',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:420,
-      desc:'Sidekick with grenades',dpsBuff:1,
+      desc:'Sidekick with grenades',dpsBuff:3,
+    },{
+      name:'PlayerMadman',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:471,
+      desc:'Sidekick that generates tertiary sidekicks',dpsBuff:7,
     },{
       name:'PlayerMafia',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:254,
@@ -4156,7 +4240,11 @@ types={
     },{
       name:'PlayerSoftlocker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:410,
-      desc:'Fires a burst of short-lived software drones',dpsBuff:2,
+      desc:'Fires a burst of short-lived software drones',dpsBuff:6,
+    },{
+      name:'PlayerSimnet',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:473,
+      desc:'Software, but the drone has one large unique turret',dpsBuff:1,
     },{
       name:'PlayerSoftwareception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:277,
@@ -4184,6 +4272,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:313,
       desc:'Spreadling that concentrates its lower bullets',dpsBuff:12,
     },{
+      name:'PlayerSpreadlet',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:484,
+      desc:'Spreadling with additional powerful central bullets',dpsBuff:13,
+    },{
       name:'PlayerSpreadlingception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:318,
       desc:'Has a spreadling auto turret',dpsBuff:7,
@@ -4209,6 +4301,10 @@ types={
       name:'PlayerAgronomist',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:404,
       desc:'Dasher that drops heavy traps as it moves',dpsBuff:1,
+    },{
+      name:'PlayerPenguin',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:474,
+      desc:'Dasher that fires a full machine clip before dashing',dpsBuff:1,
     },{
       name:'PlayerMayfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:376,
@@ -4236,6 +4332,10 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:418,
       desc:'Fires projectiles in a cyclic pattern',dpsBuff:9,
     },{
+      name:'PlayerSawtooth',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:4,crit:0,weapon:446,
+      desc:'Fires balls that move in a sawtooth pattern',dpsBuff:1,
+    },{
       name:'PlayerHelixception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:286,
       desc:'Has a helix auto turret',dpsBuff:2,
@@ -4262,15 +4362,19 @@ types={
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:419,
       desc:'Pelleter that also has an auto turret on each side',dpsBuff:1.75,
     },{
+      name:'PlayerEquanimity',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:405,
+      desc:'Fires large bullets and has pelleter defense for nearby',dpsBuff:7/3,
+    },{
       name:'PlayerPelleterception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:343,
       desc:'Has a pelleter auto turret',dpsBuff:2,
     },
     
     {
-      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:339,
-      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
+      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
+      desc:'Interceptor that fires a destroyer-sized bullet',dpsBuff:2,
     },{
       name:'PlayerInceptionist',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:348,
@@ -4287,6 +4391,10 @@ types={
       name:'PlayerAlternator',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:435,
       desc:'Interceptor that fires bullets with an aiming turret on both sides',dpsBuff:2,
+    },{
+      name:'PlayerUserdrive',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:447,
+      desc:'Interceptor with an assault rifle auto turret',dpsBuff:2,
     },{
       name:'PlayerInterceptorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:351,
@@ -4314,6 +4422,10 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:347,
       desc:'Bonker with electrifyer',dpsBuff:300,
     },{
+      name:'PlayerElectrauto',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:452,
+      desc:'Electrifyer with auto turrets on each side',dpsBuff:700,
+    },{
       name:'PlayerDischarge',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:362,
       desc:'Electrifyer with a vulnerable-applying auto turret',dpsBuff:300,
@@ -4340,77 +4452,77 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:462,
       desc:'Submachine that fires heavy traps occasionally',dpsBuff:7,
     },{
+      name:'PlayerAnnexer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:417,
+      desc:'Submachine with a flamethrower auto turret',dpsBuff:1,
+    },{
       name:'PlayerSubmachineception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:457,
       desc:'Has a submachine auto turret',dpsBuff:1,
     },
-
+    
     {
-      name:'PlayerDegausser',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:312,
-      desc:'Fires large traps, and has a radar',dpsBuff:1,
+      name:'PlayerFreezeBeam',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:334,
+      desc:'Laser that slows down enemies',dpsBuff:1,
     },{
-      name:'PlayerRangefinder',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:358,
-      desc:'Fires four auto turrets, and has a radar',dpsBuff:4,
+      name:'PlayerMaximizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:394,
+      desc:'Laser that gains power as it is continually fired',dpsBuff:2,
     },{
-      name:'PlayerAnapsid',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:415,
-      desc:'Damaging bonker with a radar',dpsBuff:0,
+      name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
+      desc:'Laser that gives nearby allies a defense buff',dpsBuff:1,
     },{
-      name:'PlayerRadio',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:416,
-      desc:'Parachutist with a downward machine gun, and has a radar',dpsBuff:1,
+      name:'PlayerOrion',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:478,
+      desc:'Laser that deals massive damage but is less accurate',dpsBuff:1,
     },{
-      name:'PlayerRanger',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:460,
-      desc:'Piercing sniper with a radar',dpsBuff:1,
+      name:'PlayerPetawatt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:480,
+      desc:'Laser that creates flame bursts on its target',dpsBuff:1,
     },{
-      name:'PlayerMinesweeperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:459,
-      desc:'Has a radar and a heavy auto turret',dpsBuff:1,
+      name:'PlayerShrinkray',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:481,
+      desc:'Laser that shrinks target',dpsBuff:1,
+    },{
+      name:'PlayerLaserception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:479,
+      desc:'Has a laser auto turret',dpsBuff:1,
     },
 
     {
-      name:'PlayerGaslighter',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:195,
-      desc:'Has a homing, piercing auto turret',dpsBuff:1,
-    },{
-      name:'PlayerSingleRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:150,
-      desc:'Revolver that does huge damage a few times',dpsBuff:1,
-    },{
       name:'PlayerHistorian',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:409,
       desc:'Inspector that can see every duck on the map',dpsBuff:1,
     },{
-      name:'PlayerBackFlak',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:429,
-      desc:'Rearguard with a shotgun auto turret',dpsBuff:1,
+      name:'PlayerRevolverCritSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:450,
+      desc:'Revolver that gains crits for five seconds after getting a hit',dpsBuff:1,
     },{
       name:'PlayerRibbon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:232,
       desc:'Ballista that spawns swarm drones',dpsBuff:1,
     },{
-      name:'PlayerFreezeBeam',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:334,
-      desc:'Laser that slows down enemies',dpsBuff:1,
+      name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:375,
+      desc:'Fires a cluster bomb that explodes on a set fuse',dpsBuff:3,
+    },{
+      name:'PlayerBackFlak',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:429,
+      desc:'Rearguard with a shotgun auto turret',dpsBuff:1,
     },{
       name:'PlayerParalyzer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:365,
       desc:'Fires a bullet that freezes and locks the target in place',dpsBuff:1,
     },{
-      name:'PlayerNeedlegun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:380,
-      desc:'Fires piercing bullets quickly',dpsBuff:1,
-    },{
       name:'PlayerJetstream',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:414,
       desc:'Gust that stuns enemies and makes them vulnerable',dpsBuff:1,
     },{
-      name:'PlayerCherryBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:375,
-      desc:'Fires a cluster bomb that explodes on a set fuse',dpsBuff:3,
+      name:'PlayerGaslighter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:195,
+      desc:'Has a homing, piercing auto turret',dpsBuff:1,
     },
     
     {
@@ -4445,7 +4557,9 @@ types={
       name:'PlayerDeployerAU',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:311,
       desc:'Spawns auto units that fire at all nearby enemies',dpsBuff:0,
-    },{
+    },
+    
+    {
       name:'PlayerDeployerSP',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:327,
       desc:'Spawns spreadling units',dpsBuff:0,
@@ -4461,6 +4575,22 @@ types={
       name:'PlayerDeployerI',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:463,
       desc:'Spawns interceptor units',dpsBuff:0,
+    },{
+      name:'PlayerAurichalchite',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:434,
+      desc:'Software that is immune to bullet side effects',dpsBuff:1,
+    },{
+      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
+      desc:'Bonker that is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:381,
+      desc:'Slicer that is immune to bullet side effects',dpsBuff:2,
+    },{
+      name:'PlayerChrysoberyl',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:432,
+      desc:'Sunburst that is immune to bullet side effects',dpsBuff:1,
     },
     
     {
@@ -4480,27 +4610,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:114,
       desc:'Fires flamethrower downward to float',dpsBuff:1,
     },{
-      name:'PlayerPizzaria',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:229,
-      desc:'Fires large traps that explode into balls',dpsBuff:2,
-    },{
-      name:'PlayerUltraviolet',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:444,
-      desc:'Ballista that can use auxiliary key to fire rockets',dpsBuff:1,
-    },{
-      name:'PlayerSwitcheroo',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:387,
-      desc:'Can swap between pistol, machine gun, and sniper using auxiliary key',dpsBuff:0,
-    },{
       name:'PlayerElectroblocker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:361,
       desc:'Fires large traps that create electrifyer zones around them',dpsBuff:3,
-    },
-    
-    {
-      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
-      desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
     },{
       name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:251,
@@ -4510,6 +4622,12 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:210,
       desc:'Rocket launcher that fires light rockets, but can mash to fire faster',dpsBuff:1,
     },{
+      name:'PlayerNeedlegun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:380,
+      desc:'Fires piercing bullets quickly',dpsBuff:1,
+    },
+    
+    {
       name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:315,
       desc:'Has orbiting shields and turrets',dpsBuff:3,
@@ -4518,69 +4636,17 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:390,
       desc:'Has orbiting shotgun turrets',dpsBuff:3.5,
     },{
-      name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:382,
-      desc:'Sidekick that can become invisible when not moving',dpsBuff:3,
-    },{
       name:'PlayerDecoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:399,
-      desc:'Has sidekicks that can collide wtih enemies and have shields',dpsBuff:1,
-    },{
-      name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
-      desc:'Laser that gives nearby allies a defense buff',dpsBuff:1,
-    },
-    
-    {
-      name:'PlayerMaximizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:394,
-      desc:'Laser that gains power as it is continually fired',dpsBuff:2,
+      desc:'Has sidekicks that can collide with enemies and have shields',dpsBuff:1,
     },{
       name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:314,
       desc:'Fires large bullets and randomly lays traps',dpsBuff:1.5,
     },{
-      name:'PlayerEquanimity',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:405,
-      desc:'Fires large bullets and has pelleter defense for nearby',dpsBuff:7/3,
-    },{
       name:'PlayerGasser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:396,
       desc:'Fires a sphere that afflicts enemies with gas, that causes them to burn on hit',dpsBuff:0,
-    },{
-      name:'PlayerArray',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:2.5,crit:0,weapon:430,
-      desc:'Fires accelerating rockets rapidly in four streams',dpsBuff:1,
-    },{
-      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
-      desc:'Fires a bomb that explodes on a fuse and has swarm drones',dpsBuff:2,
-    },{
-      name:'PlayerIED',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:436,
-      desc:'Throws strangely bouncing but very powerful explosives',dpsBuff:1,
-    },{
-      name:'PlayerWorkshop',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:455,
-      desc:'Fires random types of large traps',dpsBuff:1,
-    },
-    
-    {
-      name:'PlayerAurichalchite',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:434,
-      desc:'Software that is immune to bullet side effects',dpsBuff:1,
-    },{
-      name:'PlayerCobalt',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:370,
-      desc:'Bonker that is immune to bullet side effects',dpsBuff:0,
-    },{
-      name:'PlayerSilver',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:381,
-      desc:'Slicer that is immune to bullet side effects',dpsBuff:2,
-    },{
-      name:'PlayerChrysoberyl',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:432,
-      desc:'Sunburst that is immune to bullet side effects',dpsBuff:1,
     },{
       name:'PlayerRelay',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:412,
@@ -4593,84 +4659,12 @@ types={
       name:'PlayerConsort',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:402,
       desc:'Respawning sidekick parachutists that are launched upward',dpsBuff:1,
-    },{
-      name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
-      desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:10,
     },
     
     {
-      name:'PlayerSurgeon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:437,
-      desc:'Fires a destroyer bullet that blocks enemy bullets',dpsBuff:1,
-    },{
-      name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:438,
-      desc:'Spawns moderately sized drones, fires a gun forward, and can become invisible',dpsBuff:2,
-    },{
-      name:'PlayerSmokeRing',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:441,
-      desc:'Fires flames in five directions',dpsBuff:5,
-    },{
       name:'PlayerMaxgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:442,
       desc:'Destroyer that also can fire twin small guns',dpsBuff:0.35,
-    },{
-      name:'PlayerCleaner',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:445,
-      desc:'Fires a bullet forward and a curving slicer behind',dpsBuff:1,
-    },{
-      name:'PlayerSawtooth',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:4,crit:0,weapon:446,
-      desc:'Fires balls that move in a sawtooth pattern',dpsBuff:1,
-    },{
-      name:'PlayerMoonbeam',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:239,
-      desc:'Sunburst with bullets that slow down and eventually stop',dpsBuff:1,
-    },
-    
-    {
-      name:'PlayerRevolverCritSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:450,
-      desc:'Revolver that gains crits for five seconds after getting a hit',dpsBuff:1,
-    },{
-      name:'PlayerElectrauto',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:452,
-      desc:'Electrifyer with auto turrets on each side',dpsBuff:700,
-    },{
-      name:'PlayerOxidizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:453,
-      desc:'Ballista with bullets that have turrets on them',dpsBuff:4,
-    },{
-      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
-      desc:'Spawns exploding motorizer drones',dpsBuff:2,
-    },{
-      name:'PlayerForeman',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:428,
-      desc:'Director with a machine gun autoturret',dpsBuff:1,
-    },{
-      name:'PlayerWintermint',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:408,
-      desc:'Director with a freezing trapper auto turret',dpsBuff:1,
-    },{
-      name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:243,
-      desc:'Bonker with a freezing auto turret',dpsBuff:0,
-    },{
-      name:'PlayerAnnexer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:417,
-      desc:'Submachine with a flamethrower auto turret',dpsBuff:1,
-    },
-    
-    {
-      name:'PlayerUserdrive',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:447,
-      desc:'Interceptor with an assault rifle auto turret',dpsBuff:2,
-    },{
-      name:'PlayerAZGun',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:454,
-      desc:'A faster-firing sniper that can rotate upward using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerDivision',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:298,
@@ -4680,13 +4674,59 @@ types={
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:331,
       desc:'Has four assault rifle sidekicks, but no weapon itself',dpsBuff:0,
     },{
-      name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:466,
-      desc:'Has a parachute and fires downward driller bullets randomly',dpsBuff:1,
+      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
+      desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
+    },{
+      name:'PlayerSwitcheroo',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:387,
+      desc:'Can swap between pistol, machine gun, and sniper using auxiliary key',dpsBuff:0,
+    },{
+      name:'PlayerUltraviolet',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:444,
+      desc:'Ballista that can use auxiliary key to fire rockets',dpsBuff:1,
     },{
       name:'PlayerHopper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:467,
       desc:'Fires four auto turrets, and can use auxiliary key to launch a large jump',dpsBuff:4,
+    },{
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:339,
+      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
+    },
+    
+    {
+      name:'PlayerDegausser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:312,
+      desc:'Fires large traps, and has a radar',dpsBuff:1,
+    },{
+      name:'PlayerRangefinder',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:358,
+      desc:'Fires four auto turrets, and has a radar',dpsBuff:4,
+    },{
+      name:'PlayerAnapsid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:415,
+      desc:'Damaging bonker with a radar',dpsBuff:0,
+    },{
+      name:'PlayerRadio',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:416,
+      desc:'Parachutist with a downward machine gun, and has a radar',dpsBuff:1,
+    },{
+      name:'PlayerRanger',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:460,
+      desc:'Piercing sniper with a radar',dpsBuff:1,
+    },{
+      name:'PlayerVPN',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:469,
+      desc:'Invisible when moving, but not when shooting',dpsBuff:1,
+    },{
+      name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:382,
+      desc:'Sidekick that can become invisible when not moving',dpsBuff:3,
+    },{
+      name:'PlayerAvalanche',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:482,
+      desc:'Ballista that freezes enemies',dpsBuff:1,
     },
 
     {
@@ -4821,10 +4861,6 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:324,
       desc:'Fires traps and spawns drones with a trap launcher and forward guns',
     },{
-      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
-      desc:'Interceptor that fires a destroyer-sized bullet',dpsBuff:2,
-    },{
       name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
       desc:'Slicer that attacks very fast',dpsBuff:2,
@@ -4844,6 +4880,34 @@ types={
       name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
       desc:'Sniper that has extended field of view',dpsBuff:1,
+    },{
+      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
+      desc:'Fires a bomb that explodes on a fuse and has swarm drones',dpsBuff:2,
+    },{
+      name:'PlayerPiercer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:379,
+      desc:'Bullets pierce three enemies',dpsBuff:1,
+    },{
+      name:'PlayerForeman',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:428,
+      desc:'Director with a machine gun autoturret',dpsBuff:1,
+    },{
+      name:'PlayerMinesweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:189,
+      desc:'Has a radar',dpsBuff:1,
+    },{
+      name:'PlayerMinesweeperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:459,
+      desc:'Has a radar and a heavy auto turret',dpsBuff:1,
+    },{
+      name:'PlayerSingleRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:150,
+      desc:'Revolver that does huge damage a few times',dpsBuff:1,
+    },{
+      name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:89,
+      desc:'Shotgun that fires fast sniper bullets',dpsBuff:10,
     },
 
     //mark di
@@ -4955,6 +5019,9 @@ types={
     },{
       name:'SidekickGrenadier',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:36,
+    },{
+      name:'SidekickSubSidekick',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:485,
     },{
       name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
@@ -8387,7 +8454,7 @@ types={
 			speed:1.15,
       uses:30,
 		},{
-			name:'Moonbeam',
+			name:'Moonburst',
 			ammo:10,
 			damage:60,
 			cooldown:9,
@@ -10447,6 +10514,168 @@ types={
 			reload:5,
 			speed:1.2,
       uses:48,
+		},{
+			name:'Matula Tree',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'VPN',
+			ammo:5,
+			damage:100,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Regional',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Madman',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Enforcement',
+			ammo:1,
+			damage:300,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Simnet',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Penguin',
+			ammo:10,
+			damage:25,
+			cooldown:1,
+			stop:30,
+			reload:1,
+			speed:1.1,
+      uses:80,
+		},{
+			name:'Terminal',
+			ammo:2,
+			damage:35,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Salacia',
+			ammo:2,
+			damage:40,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Gunpowder',
+			ammo:2,
+			damage:80,
+			cooldown:36,
+			stop:72,
+			reload:24,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Orion',
+			ammo:120,
+			damage:35,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Laserception',
+			ammo:120,
+			damage:10,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Petawatt',
+			ammo:120,
+			damage:20,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Shrinkray',
+			ammo:120,
+			damage:20,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:480,
+		},{
+			name:'Avalanche',
+			ammo:15,
+			damage:150,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:1.05,
+      uses:60,
+		},{
+			name:'Gunner Dual',
+			ammo:12,
+			damage:25,
+			cooldown:20,
+			stop:60,
+			reload:8,
+			speed:1.1,
+      uses:36,
+		},{
+			name:'Spreadlet',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Sub Sidekick',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 	],
 }
@@ -10859,11 +11088,11 @@ levels=[
       "                                                                                 <#[  |]####> $     <~##",
       "                                                                                      | #######%> <#####",
       "                                                  <>                 --- <###?#>     -+ ######### ######",
-      "                                           ---<> <##>   <%####[     <###########@>   ## ####### | ######",
-      "                                         <#####[ ]##[ <#####[|     <##############> /#[ ]#####[ #@######",
-      "                                        <[    |  =##_  |     |  <#####################_  |      ########",
-      "                                ---     |    -+^  `#*  |$---$|<#######################&  |      `#######",
-      "                             <######>   |  <####@####@#################################@################",
+      "                                           ---<> <##>   <%####[     <###########@>   ## ######[ | ######",
+      "                                         <#####[ ]##[ <#####[|     <##############> /#[ ]####[  | ######",
+      "                                        <[    |  =##_  |     |  <#####################_  |      b@######",
+      "                                ---     |    -+^  `#*  |$---$|<#######################&  |      ########",
+      "                             <######>   |  <####@####@#################################@##>     `#######",
       "                            <########@#?################################################################",
       "                         $<#############################################################################",
       "ABCD                     ###############################################################################",
@@ -11274,11 +11503,11 @@ levels=[
       "                                                                                           <#[  |]####> $     <~##",
       "                                                                                                | #######%> <#####",
       "                                                            <>                 --- <###?#>     -+ ######### ######",
-      "                                                     ---<> <##>   <%####[     <###########@>   ## ####### | ######",
-      "                                                   <#####[ ]##[ <#####[|     <##############> /#[ ]#####[ #@######",
-      "                                                  <[    |  =##_  |     |  <#####################_  |      ########",
-      "                                          ---     |    -+^  `#*  |$---$|<#######################&  |      `#######",
-      "                                       <######>   |  <####@####@#################################@################",
+      "                                                     ---<> <##>   <%####[     <###########@>   ## ######[ | ######",
+      "                                                   <#####[ ]##[ <#####[|     <##############> /#[ ]####[  | ######",
+      "                                                  <[    |  =##_  |     |  <#####################_  |      b@######",
+      "                                          ---     |    -+^  `#*  |$---$|<#######################&  |      ########",
+      "                                       <######>   |  <####@####@#################################@##>     `#######",
       "                                      <########@#?################################################################",
       "                                   $<#############################################################################",
       "123                                ###############################################################################",

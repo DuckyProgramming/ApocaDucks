@@ -189,7 +189,6 @@ function mainloop(layer){
                             run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
                             run.fore[a][b].position.y-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
-                            a==0&&run.fore[a][b].type==190||run.fore[a][b].type==191||run.fore[a][b].type==214||
                             game.level==7&&a==2&&
                             run.fore[a][b].internalBounder.position.x+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
                             run.fore[a][b].internalBounder.position.x-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
@@ -437,6 +436,16 @@ function mainloop(layer){
                     }
                 }
             }
+            for(let a=0,la=run.update.length;a<la;a++){
+                for(let b=0,lb=run.update[a].length;b<lb;b++){
+                    run.update[a][b].update()
+                    if(run.update[a][b].remove){
+                        run.update[a].splice(b,1)
+                        b--
+                        lb--
+                    }
+                }
+            }
             for(let a=0,la=graphics.main.length;a<la;a++){
                 entities.players[a].displayOver(graphics.main[a])
                 graphics.main[a].pop()
@@ -448,16 +457,6 @@ function mainloop(layer){
                 display.win-=0.01
             }
             displayMain(graphics.main)
-            for(let a=0,la=run.update.length;a<la;a++){
-                for(let b=0,lb=run.update[a].length;b<lb;b++){
-                    run.update[a][b].update()
-                    if(run.update[a][b].remove){
-                        run.update[a].splice(b,1)
-                        b--
-                        lb--
-                    }
-                }
-            }
             checkEnd(levels[game.level],graphics.main[0])
             inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
             inputs.release=[[false],[false],[false],[false]]

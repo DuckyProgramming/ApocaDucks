@@ -1,8 +1,38 @@
 
 
 
-468 - 
-469 -
+478 - orion, 360 - inaccurate but high damage laser
+479 - laserception, 360
+480 - petawatt, 360 - laser that creates fire bursts
+481 - shrinkray, 360
+482 - avalanche, 231, freezing ballista
+483 - gunner dual, 187
+484 - spreadlet, 207
+485 - sub sidekick, 382
+
+255 - laserception,191
+256 - petawatt,191
+257 - shrinkray,191
+258 - avalanche,147
+
+
+
+
+
+468 - matulatree, 179
+469 - VPN, 240
+470 - regional, 178
+471 - madman, 382
+472 - enforcement, 410
+473 - simnet, 277 - fires a big bullet propelled by two streams of small bullets
+474 - penguin, 268 - shooting star but only occasional boosts at the end of each clip
+475 - terminal, 19 bullets, 177
+476 - salacia, 177
+477 - gunpowder, 5 bullets, 177
+
+252 - simnet, 165
+253 - simnet sub, 173
+254 - gunpowder, 196
 
 
 

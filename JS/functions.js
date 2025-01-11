@@ -64,6 +64,11 @@ function intersect(p1,q1,p2,q2){
     o3==0&&onSegment(p2,p1,q2)||
     o4==0&&onSegment(p2,q1,q2)
 }
+function intersectKey(p1,q1,p2,q2){
+    let ud=((q2.y-p2.y)*(q1.x-p1.x)-(q2.x-p2.x)*(q1.y-p1.y))
+    let ua=((q2.x-p2.x)*(p1.y-p2.y)-(q2.y-p2.y)*(p1.x-p2.x))/ud
+    return {x:p1.x+ua*(q1.x-p1.x),y:p1.y+ua*(q1.y-p1.y)}
+}
 function collideBoxBox(static,mobile){
     /*if(inBoxBox(static,{position:mobile.previous.position,width:mobile.width-1,height:mobile.height-1})){
         return basicCollideBoxBox(static,mobile)
@@ -685,7 +690,10 @@ function generateLevel(level,layer){
                     }
                 break
                 case 'b':
-                    if(game.level==19){
+                    if(game.level==8||game.level==17){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    }else if(game.level==19){
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                     }else{
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,25))

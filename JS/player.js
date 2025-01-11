@@ -1017,7 +1017,7 @@ class player{
             break
             case 298:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickShootist','SidekickMachineSniper','SidekickSharpSniper','SidekickOscilloscope'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickShootist','SidekickMachineSniper','SidekickSharpSniper','SidekickDriller'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1065,6 +1065,26 @@ class player{
             break
             case 434:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],233,(lsin(this.direction.main)<0?-90:90)+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,3600,crit,this.index))
+            break
+            case 471:
+                for(let a=0,la=2;a<la;a++){
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                    entities.players[entities.players.length-1].sidekick=true
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
+                    entities.players[entities.players.length-1].newWeaponSet(findName('SidekickSubSidekick',types.player))
+                }
+            break
+            case 473:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],252,(lsin(this.direction.main)<0?-90:90)+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,3600,crit,this.index))
+            break
+            case 485:
+                for(let a=0,la=2;a<la;a++){
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+                    entities.players[entities.players.length-1].sidekick=true
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    entities.players[entities.players.length-1].lastingForce[0]+=[0.2,-0.2][a]+this.lastingForce[0]
+                }
             break
         }
     }
@@ -1155,10 +1175,12 @@ class player{
         this.base.control=0
         this.critBuff=0
         this.defendBuff=0
+        this.speedBuff=0
         this.stunTime=0
         this.stuckTime=0
         this.vulnerableTime=0
         this.confuseTime=0
+        this.bounceTime=0
         this.dizzyTime=0
         this.chillTime=0
         this.shrinkTime=0
@@ -1225,13 +1247,14 @@ class player{
         weapon.reload=weaponData.stop
         weapon.ammo--
         weapon.uses--
-		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==297||weaponType==407)&&weapon.ammo%3!=0){
+		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==297||weaponType==407)&&weapon.ammo%3!=0||weaponType==483&&weapon.ammo%2!=0){
 			weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
 		}
         if(weaponType==161){
             weapon.cooldown*=(0.2+0.8*this.weapon.ammo/this.weaponData.ammo)
         }
-        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+(this.id>0&&floor(random(0,100))==0&&this.weaponType!=334&&this.weaponType!=335&&this.weaponType!=360&&this.weaponType!=394?1:0),0,1)
+        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+(this.id>0&&floor(random(0,100))==0&&this.weaponType!=334&&this.weaponType!=335&&this.weaponType!=360&&this.weaponType!=394&&this.weaponType!=478&&this.weaponType!=479&&this.weaponType!=480&&this.weaponType!=481
+            ?1:0),0,1)
         let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
         let bypass=false
 		switch(weaponType){
@@ -1243,7 +1266,8 @@ class player{
 			case 1: case 2: case 4: case 131: case 142: case 149: case 161: case 176: case 178: case 179:
             case 187: case 189: case 190: case 195: case 211: case 222: case 225: case 227: case 233: case 240:
             case 241: case 272: case 274: case 275: case 276: case 277: case 300: case 315: case 352: case 353:
-            case 382: case 390: case 399: case 402: case 429: case 434: case 459:
+            case 382: case 390: case 399: case 402: case 429: case 434: case 459: case 469: case 470: case 471:
+            case 473: case 485:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
 			break
 			case 3: case 180:
@@ -2271,7 +2295,7 @@ class player{
             case 334:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],190,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
             break
-            case 335: case 360:
+            case 335: case 360: case 479:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
             break
             case 336:
@@ -2938,6 +2962,77 @@ class player{
             case 466:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,random(156,204),this.id,weaponData.damage*damageBuff,300,crit,this.index))
 			break
+            case 468:
+                for(let a=0,la=[2,2,3,3,3,1][floor(weapon.ammo/5)%6];a<la;a++){
+				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+3-la*3+a*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                }
+			break
+			case 472:
+				for(let a=0,la=3;a<la;a++){
+                    let mult=random(1,2.5)
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult*4
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+				}
+			break
+            case 474:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                if(weapon.ammo==0){
+                    this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
+                }
+            break
+            case 475:
+				for(let a=0,la=5;a<la;a++){
+                    for(let b=0,lb=[3,4,5,4,3][a];b<lb;b++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-12+a*6,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=7+b-lb*0.5+0.5
+                    }
+				}
+			break
+            case 476:
+				for(let a=0,la=10;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+				}
+			break
+            case 477:
+				for(let a=0,la=5;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],254,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed*=random(0.75,1.25)
+                    entities.projectiles[entities.projectiles.length-1].time*=random(0.75,1.25)
+				}
+			break
+            case 478:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+            break
+            case 480:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],256,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+            break
+            case 481:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],257,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+            break
+            case 482:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],258,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+			break
+            case 483:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]-3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]+3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                for(let a=0,la=4;a<la;a++){
+                    entities.projectiles[entities.projectiles.length-1-a].speed=6.5
+                }
+			break
+            case 484:
+                for(let a=0,la=7;a<la;a++){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],a==3?217:1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff*(a==3?3:1),300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=a==3?7:6
+                }
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                entities.projectiles[entities.projectiles.length-1].speed=7
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                entities.projectiles[entities.projectiles.length-1].speed=7
+            break
             //mark
 		}
         if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
@@ -4171,7 +4266,7 @@ class player{
                     this.thrown=true
                 }
                 this.attacking=inputSet[3]
-                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker'||this.playerData.name=='PlayerPistolInspect')&&this.weapon.uses>0&&inputSetB[3]){
+                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker'||this.playerData.name=='PlayerPistolInspect'||this.playerData.name=='PlayerRegional')&&this.weapon.uses>0&&inputSetB[3]){
                     this.weapon.cooldown=0
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerSwitcheroo'){
@@ -4195,6 +4290,14 @@ class player{
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerAZGun'){
                     this.assort.elevate=1-this.assort.elevate
+                }
+                if(inputSetC[0]&&this.playerData.name=='PlayerRegional'&&this.assort.ultraviolet==0){
+                    let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+(this.id>0&&floor(random(0,100))==0?1:0),0,1)
+                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                    this.assort.ultraviolet=60
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                 }
                 if(inputSet[3]&&this.life>0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'){
                     if(this.playerData.name=='PlayerConglomeration'){
@@ -4347,7 +4450,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    if(entities.players[a].stats.bust>=(game.pvp?[1200,1000,900,800][game.players-1]:game.attacker?[2000,1500,1250,1000][game.players-1]:[8000,6000,5000,4000][game.players-1])*(game.peakWeapon?1.5:1)&&game.bust&&entities.players[a].id>0&&game.players>1){
+                    if(entities.players[a].stats.bust>=(game.pvp?[1600,1400,1200,1000][game.players-1]:game.attacker?[3200,2800,2400,2000][game.players-1]:[8000,7000,6000,5000][game.players-1])*(game.peakWeapon?1.5:1)&&game.bust&&entities.players[a].id>0&&game.players>1){
                         entities.players[a].stats.bust=0
                         for(let c=0,lc=game.pvp?4:1;c<lc;c++){
                             if(game.level==7){
@@ -4474,7 +4577,7 @@ class player{
                 switch(this.variant){
                     case 10:
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                            if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                                 entities.projectiles[a].active=false
                                 if(entities.projectiles[a].exploder){
                                     entities.projectiles[a].explode()
@@ -4516,7 +4619,7 @@ class player{
                 break
                 case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
                                 entities.projectiles[a].explode()
@@ -4667,7 +4770,7 @@ class player{
                 case 'PlayerMotorizerception': case 'PlayerSunburstception': case 'PlayerStealthception': case 'PlayerIceberg': case 'PlayerGunceptionception':
                 case 'PlayerSoftwareception': case 'PlayerSwarmerception': case 'PlayerDasherception': case 'PlayerEmplacementception': case 'PlayerInterceptorception':
                 case 'PlayerDischarge': case 'PlayerMayfly': case 'PlayerWintermint': case 'PlayerForeman': case 'PlayerUserdrive':
-                case 'PlayerSubmachineception': case 'PlayerMinesweeperception':
+                case 'PlayerSubmachineception': case 'PlayerMinesweeperception': case 'PlayerLaserception':
                     if(this.playerData.name=='PlayerMinesweeperception'){
                         if(this.time%150==0){
                             this.scan=[0,0,0,0,0,0,0,0,0]
@@ -4705,7 +4808,8 @@ class player{
                         this.time%30==0&&this.playerData.name=='PlayerSwarmerception'||
                         this.time%480==0&&this.playerData.name=='PlayerEmplacementception'||
                         this.time%75==0&&(this.playerData.name=='PlayerInterceptorception'||this.playerData.name=='PlayerMayfly')||
-                        this.time%8==0&&this.playerData.name=='PlayerSubmachineception'
+                        this.time%8==0&&this.playerData.name=='PlayerSubmachineception'||
+                        this.playerData.name=='PlayerLaserception'&&this.time%360<180
                     ){
                         let minimum=this.playerData.name=='PlayerMayfly'?1200:this.playerData.name=='PlayerSniperception'?900:this.playerData.name=='PlayerSunburstception'?600:this.playerData.name=='PlayerSlicerception'?360:450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -4716,7 +4820,7 @@ class player{
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception')&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)==minimum){
                                 let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,
+                                entities.projectiles.push(new projectile(this.layer,this.playerData.name=='PlayerLaserception'?this.position.x+lsin(dir)*10:this.position.x,this.playerData.name=='PlayerLaserception'?this.position.y-lcos(dir)*10:this.position.y,
                                     this.playerData.name=='PlayerRocketLauncherception'?86:
                                     this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerMayfly'?4:
                                     this.playerData.name=='PlayerBallerception'?106:
@@ -4736,10 +4840,11 @@ class player{
                                     this.playerData.name=='PlayerInterceptorception'?198:
                                     this.playerData.name=='PlayerDischarge'?43:
                                     this.playerData.name=='PlayerWintermint'?220:
+                                    this.playerData.name=='PlayerLaserception'?255:
                                     1,
                                     this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerEngineerception'||this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerDirectorception'||this.playerData.name=='PlayerEmplacementception'||this.playerData.name=='PlayerWintermint'?(this.position.x>entities.players[a].position.x?-90+(dir+90)*0.2:90+(dir-90)*0.2):
                                     dir+(this.playerData.name=='PlayerSubmachineception'?random(-2,2):random(-3,3)),this.id,
-                                    this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerMayfly'?2:1)*(this.playerData.name=='PlayerWintermint'?0.5:1),this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerWintermint'?1800:this.playerData.name=='PlayerSlicerception'?50:this.playerData.name=='PlayerDirectorception'?1200:this.playerData.name=='PlayerSwarmerception'?600:300,crit,this.index
+                                    this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerMayfly'?2:1)*(this.playerData.name=='PlayerWintermint'?0.5:1),this.playerData.name=='PlayerLaserception'?1:this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerWintermint'?1800:this.playerData.name=='PlayerSlicerception'?50:this.playerData.name=='PlayerDirectorception'?1200:this.playerData.name=='PlayerSwarmerception'?600:300,crit,this.index
                                 ))
                                 this.firearc=[atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),30]
                                 a=la
@@ -4785,7 +4890,7 @@ class player{
                 break
                 case 'PlayerRearguard': case 'PlayerBackFlak':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
                                 entities.projectiles[a].explode()
@@ -4834,7 +4939,7 @@ class player{
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&(
                             inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])||
                             inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])
-                        )&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                        )&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
                                 entities.projectiles[a].explode()
@@ -4911,7 +5016,7 @@ class player{
                 break
                 case 'ConstructGuard': case 'SidekickDisappointmentGuard': case 'SidekickBonkerGuard':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
                                 entities.projectiles[a].explode()
@@ -4966,7 +5071,7 @@ class player{
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&(
                             dist(this.position.x+50*lsin(this.time),this.position.y+this.offset.position.y+50*lcos(this.time)-10,entities.projectiles[a].position.x,entities.projectiles[a].position.y)<12+entities.projectiles[a].width*0.25+entities.projectiles[a].height*0.25||
                             dist(this.position.x-50*lsin(this.time),this.position.y+this.offset.position.y-50*lcos(this.time)-10,entities.projectiles[a].position.x,entities.projectiles[a].position.y)<12+entities.projectiles[a].width*0.25+entities.projectiles[a].height*0.25
-                        )&&entities.projectiles[a].active&&entities.projectiles[a].type!=89&&entities.projectiles[a].type!=103&&entities.projectiles[a].type!=193&&entities.projectiles[a].type!=194&&entities.projectiles[a].type!=195){
+                        )&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
                                 entities.projectiles[a].explode()
@@ -5373,11 +5478,11 @@ class player{
                     this.visible=15
                 }
             }
-        }else if(this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'){
+        }else if(this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'){
             if(this.visible>0){
                 this.visible--
             }
-            if(abs(this.velocity.x)+abs(this.velocity.y)>0.4){
+            if(abs(this.velocity.x)+abs(this.velocity.y)>0.4&&this.playerData.name!='PlayerVPN'){
                 this.visible=15
             }
         }
@@ -5453,7 +5558,7 @@ class player{
             if(this.invincible>0){
                 this.invincible--
                 this.fade=smoothAnim(this.fade,game.time%20>=10,0.4,1,5)
-            }else if(game.invis||this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'){
+            }else if(game.invis||this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'){
                 if(this.life<=0){
                     this.fade=smoothAnim(this.fade,!this.dead,0.4,1,5)
                 }else{

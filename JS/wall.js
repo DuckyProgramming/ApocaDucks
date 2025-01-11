@@ -1363,7 +1363,9 @@ class wall{
             break
         }
         layer.pop()
-        /*layer.stroke(50,50+this.type*100,200)
+    }
+    displayBound(layer){
+        layer.stroke(50,50+this.type*100,200)
         layer.strokeWeight(4)
         for(let a=0,la=8;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -1374,7 +1376,7 @@ class wall{
                     this.position.y+this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
                 )
             }
-        }*/
+        }
     }
     update(){
         this.time++
@@ -1549,7 +1551,7 @@ class wall{
                         c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
                         c.type==227||c.type==228||c.type==233||c.type==235||c.type==237||
                         c.type==238||c.type==239||c.type==240||c.type==243||c.type==245||
-                        c.type==246||c.type==247||c.type==248||c.type==250
+                        c.type==246||c.type==247||c.type==248||c.type==250||c.type==252
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -2013,7 +2015,7 @@ class wall{
                                             if(
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='PlayerPistolInspect'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='PlayerPistolInspect'||c.playerData.name=='PlayerRegional'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1
