@@ -9870,9 +9870,9 @@ types={
 			name:'Gasser',
 			ammo:1,
 			damage:0,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:90,
+			stop:90,
+			reload:90,
 			speed:0.975,
       uses:4,
 		},{

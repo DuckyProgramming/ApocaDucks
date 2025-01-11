@@ -1963,7 +1963,7 @@ class wall{
                                     let chunk=floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                     this.recharge=3600-(game.gaming-1)*600
-                                }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?1:4))){
+                                }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?2:4))){
                                     game.weapon[c.id-1].push(this.weapon)
                                     this.recharge=1800
                                 }

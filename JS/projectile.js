@@ -6088,7 +6088,7 @@ class projectile{
 						}else if(this.type==149){
 				        	entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
 						}else if(this.type==215){
-							entities.players[b].gasTime=max(3600,entities.players[b].gasTime+150)
+							entities.players[b].gasTime=max(7200,entities.players[b].gasTime+300)
 							entities.players[b].gasser=this.index
 						}else{
 				        	entities.players[b].takeDamage(this.damage)

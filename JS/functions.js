@@ -1029,7 +1029,7 @@ function checkEnd(level,layer){
     }else if(game.level==14){
         let fail=false
         for(let a=0,la=game.gaming;a<la;a++){
-            if(game.weapon[a].length<4&&!game.peakWeapon||game.weapon[a].length<1){
+            if(game.weapon[a].length<4&&!game.peakWeapon||game.weapon[a].length<2){
                 fail=true
             }
         }
