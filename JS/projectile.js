@@ -31,6 +31,7 @@ class projectile{
 			case 57: case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90:
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
+			case 251:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -3965,6 +3966,16 @@ class projectile{
 					layer.ellipse(0,0,72-this.fade*72)
 				}
 			break
+			case 251:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,8,0.8,16)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,6,0.8,12)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,4,0.8,8)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,2,4)
+			break
 
 			//mark
         }
@@ -4541,7 +4552,7 @@ class projectile{
 				}
 			break
 		}
-        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236)?2:(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203)?6:4;a<la;a++){
+        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236)?2:(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251)?6:4;a<la;a++){
 			switch(this.type){
 				case 1: case 2: case 4: case 6: case 7: case 9: case 10: case 11: case 12: case 13:
 				case 14: case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24:
@@ -4552,7 +4563,7 @@ class projectile{
 				case 82: case 84: case 86: case 87: case 88: case 90: case 94: case 99: case 100: case 101:
 				case 105: case 109: case 125: case 127: case 130: case 151: case 152: case 155: case 167: case 175:
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
-				case 217: case 218: case 219: case 222: case 223: case 225: case 231: case 232: case 249:
+				case 217: case 218: case 219: case 222: case 223: case 225: case 231: case 232: case 249: case 251:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 				break

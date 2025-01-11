@@ -3650,19 +3650,19 @@ types={
     },{
       name:'PlayerMachineSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:92,
-      desc:'Sniper that fires very fast',dpsBuff:1,
+      desc:'Sniper that fires faster',dpsBuff:1,
     },{
       name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
       desc:'Sniper that deals very large damage',dpsBuff:1,
     },{
-      name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
-      desc:'Sniper that has extended field of view',dpsBuff:1,
+      name:'PlayerDriller',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:465,
+      desc:'Sniper that fires very fast but with weak bullets',dpsBuff:1,
     },{
-      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
-      desc:'Fires a bomb that explodes on a fuse and has swarm drones',dpsBuff:2,
+      name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
+      desc:'Sniper with side medic bullets',dpsBuff:1.8,
     },{
       name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
@@ -4246,9 +4246,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:261,
       desc:'Fires auto turrets in every direction',dpsBuff:10,
     },{
-      name:'PlayerAirscrew',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:340,
-      desc:'Pelleter that has extended field of view',dpsBuff:2,
+      name:'PlayerTicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:440,
+      desc:'Double pelleter that occassionally fires large bullets',dpsBuff:4.5,
     },{
       name:'PlayerDial',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:355,
@@ -4358,7 +4358,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:415,
       desc:'Damaging bonker with a radar',dpsBuff:0,
     },{
-      name:'PlayerDrillbit',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerRadio',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:416,
       desc:'Parachutist with a downward machine gun, and has a radar',dpsBuff:1,
     },{
@@ -4552,9 +4552,9 @@ types={
       damageBuff:1,reloadBuff:2.5,crit:0,weapon:430,
       desc:'Fires accelerating rockets rapidly in four streams',dpsBuff:1,
     },{
-      name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
-      desc:'Sniper with side medic bullets',dpsBuff:1.8,
+      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
+      desc:'Fires a bomb that explodes on a fuse and has swarm drones',dpsBuff:2,
     },{
       name:'PlayerIED',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:436,
@@ -4607,10 +4607,6 @@ types={
       name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:438,
       desc:'Spawns moderately sized drones, fires a gun forward, and can become invisible',dpsBuff:2,
-    },{
-      name:'PlayerTicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:440,
-      desc:'Double pelleter that occassionally fires large bullets',dpsBuff:4.5,
     },{
       name:'PlayerSmokeRing',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:441,
@@ -4683,6 +4679,14 @@ types={
       name:'PlayerSquad',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:331,
       desc:'Has four assault rifle sidekicks, but no weapon itself',dpsBuff:0,
+    },{
+      name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:466,
+      desc:'Has a parachute and fires downward driller bullets randomly',dpsBuff:1,
+    },{
+      name:'PlayerHopper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:467,
+      desc:'Fires four auto turrets, and can use auxiliary key to launch a large jump',dpsBuff:4,
     },
 
     {
@@ -4832,7 +4836,17 @@ types={
       name:'PlayerRotary',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:208,
       desc:'Has two shields and fires bullets in a spinning cycle',dpsBuff:1,
+    },{
+      name:'PlayerAirscrew',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:340,
+      desc:'Pelleter that has extended field of view',dpsBuff:2,
+    },{
+      name:'PlayerOscilloscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
+      desc:'Sniper that has extended field of view',dpsBuff:1,
     },
+
+    //mark di
 
     {
       name:'ConstructMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
@@ -4903,8 +4917,8 @@ types={
       name:'SidekickSharpSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
     },{
-      name:'SidekickOscilloscope',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
-      damageBuff:2.5,reloadBuff:2,crit:0,weapon:368,
+      name:'SidekickDriller',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:465,
     },{
       name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
@@ -9966,7 +9980,7 @@ types={
 			speed:0.85,
       uses:1,
 		},{
-			name:'Drillbit',
+			name:'Radio',
 			ammo:12,
 			damage:100,
 			cooldown:6,
@@ -10254,7 +10268,7 @@ types={
 			speed:0.975,
       uses:18,
 		},{
-			name:'Pyrimidal',
+			name:'Pyramidal',
 			ammo:16,
 			damage:60,
 			cooldown:6,
@@ -10406,6 +10420,33 @@ types={
 			reload:15,
 			speed:1.05,
       uses:36,
+		},{
+			name:'Driller',
+			ammo:8,
+			damage:60,
+			cooldown:20,
+			stop:120,
+			reload:25,
+			speed:0.85,
+      uses:48,
+		},{
+			name:'Rain',
+			ammo:24,
+			damage:90,
+			cooldown:3,
+			stop:60,
+			reload:2,
+			speed:0.85,
+      uses:96,
+		},{
+			name:'Hopper',
+			ammo:8,
+			damage:60,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
 		},
 	],
 }
