@@ -445,7 +445,7 @@ class wall{
         }
         this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+20,height:bounds[3]-bounds[2]+20}
-        if(this.standard&&game.attacker&&this.boundary[1].length>0&&this.type!=3&&!this.redundant[1]&&!this.redundant[8]){
+        if(this.standard&&this.boundary[1].length>0&&this.type!=3&&!this.redundant[1]&&!this.redundant[8]){
             for(let a=0,la=this.boundary[1].length;a<la;a++){
                 let scale=floor(dist(this.boundary[1][a][0].x,this.boundary[1][a][0].y,this.boundary[1][a][1].x,this.boundary[1][a][1].y)/10)
                 for(let b=0,lb=scale;b<lb;b++){

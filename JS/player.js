@@ -194,7 +194,7 @@ class player{
                     if(game.level==13){
                         layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?1:4}`,0,-35)
+                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?2:4}`,0,-35)
                     }else{
                         layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name+(this.playerData.name==`PlayerConglomeration`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }
@@ -218,7 +218,7 @@ class player{
                     if(game.level==13){
                         layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?1:4}`,0,-35)
+                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?2:4}`,0,-35)
                     }else{
                         layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name+(this.playerData.name==`PlayerConglomeration`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }
@@ -2322,7 +2322,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
                     if(weapon.ammo==0){
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],199,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
-                        this.assort.glove=480
+                        this.assort.glove=360
                     }
                 }else{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))

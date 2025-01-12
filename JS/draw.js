@@ -457,7 +457,7 @@ function mainloop(layer){
                 display.win-=0.01
             }
             displayMain(graphics.main)
-            checkEnd(levels[game.level],graphics.main[0])
+            checkEnd(levels[game.level],graphics.main[0],key)
             inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
             inputs.release=[[false],[false],[false],[false]]
         break

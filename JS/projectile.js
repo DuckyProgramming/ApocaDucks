@@ -3515,19 +3515,18 @@ class projectile{
 				}
 			break
 			case 214:
-				layer.rotate(-this.direction)
 				layer.stroke(240-this.crit*240,40+this.crit*200,240,this.fade)
 				layer.strokeWeight(4*this.time*0.8)
-				layer.line(0,0,this.extent,0)
+				layer.line(0,0,0,-this.extent)
 				layer.stroke(200-this.crit*200,20+this.crit*220,200+this.crit*40,this.fade)
 				layer.strokeWeight(3*this.time*0.8)
-				layer.line(0,0,this.extent,0)
+				layer.line(0,0,0,-this.extent)
 				layer.stroke(160-this.crit*160,this.crit*240,160+this.crit*80,this.fade)
 				layer.strokeWeight(2*this.time*0.8)
-				layer.line(0,0,this.extent,0)
+				layer.line(0,0,0,-this.extent)
 				layer.stroke(120-this.crit*120,this.crit*240,120+this.crit*120,this.fade)
 				layer.strokeWeight(1*this.time*0.8)
-				layer.line(0,0,this.extent,0)
+				layer.line(0,0,0,-this.extent)
 			break
 			case 215:
 				layer.scale(0.6)
@@ -4673,7 +4672,7 @@ class projectile{
 				case 82: case 84: case 86: case 87: case 88: case 90: case 94: case 99: case 100: case 101:
 				case 105: case 109: case 125: case 127: case 130: case 151: case 152: case 155: case 167: case 175:
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
-				case 217: case 218: case 219: case 222: case 223: case 225: case 231: case 232: case 249: case 251:
+				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 				break
@@ -5851,6 +5850,18 @@ class projectile{
 						}
 					}
 				break
+				case 222: case 223:
+				    this.position.x+=this.speed*lsin(this.direction)
+				    this.position.y-=this.speed*lcos(this.direction)
+					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+							entities.projectiles[b].active=false
+							if(entities.projectiles[b].exploder){
+								entities.projectiles[b].explode()
+							}
+						}
+					}
+				break
 				case 224:
 					if(a==2){
 						this.midpoint.position.x=this.position.x
@@ -6140,14 +6151,14 @@ class projectile{
 							}else if(this.type==222){
 								entities.players[b].velocity.x+=lsin(this.direction)*12
 								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*5
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*5
+								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
+								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
 							}else if(this.type==223){
 								entities.players[b].velocity.x+=lsin(this.direction)*12
 								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*5
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*5
-								entities.players[b].stunTime=max(entities.players[b].stunTime,360)
+								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
+								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
+								entities.players[b].stunTime=max(entities.players[b].stunTime,600)
 								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,1800)
 							}else if(
 								this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||

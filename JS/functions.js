@@ -960,10 +960,10 @@ function newWave(level,layer){
                 types.mission[game.mission].wave[display.cycle][a][0]=='RevolverSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='SpyHeal'
             if(types.mission[game.mission].wave[display.cycle][a][1]==1){
-                game.stack.push([floor(random(0,6))+(spy?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
+                game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
                 for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8||game.level==17?(game.attacker?0.75:1.5):1)*(game.level==16?0.4:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
-                    game.stack.push([floor(random(0,6))+(spy?0:6),types.mission[game.mission].wave[display.cycle][a][0]])
+                    game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }
         }
@@ -997,7 +997,7 @@ function runTransition(layer){
         layer.rect(layer.width*(1-1/4*transition.anim),layer.height/2,layer.width/2*transition.anim,layer.height*(1-transition.anim))
     }
 }
-function checkEnd(level,layer){
+function checkEnd(level,layer,key){
     if(game.past){
         if(!transition.trigger){
             let ids=[]
@@ -1221,45 +1221,61 @@ function checkEnd(level,layer){
                 game.sendTime--
             }else{
                 if(game.stack[0][1]!='Wait'){
-                    for(let a=0,la=level.length;a<la;a++){
-                        for(let b=0,lb=level[a].length;b<lb;b++){
-                            if(level[a][b]=='123456ABCDEF'[game.stack[0][0]]){
-                                if(game.attacker){
-                                    let index=floor(random(0,game.spawner.length))
-                                    let pos=game.spawner[index]
-                                    let spam=0
-                                    while(dist(pos[0],pos[1],entities.players[0].base.position.x,entities.players[0].base.position.y)<400&&spam<100){
-                                        index=floor(random(0,game.spawner.length))
-                                        pos=game.spawner[index]
-                                        spam++
-                                    }
-                                    if(spam<100){
-                                        entities.players.push(new player(layer,pos[0],pos[1]-60,0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                    let temp=[]
+                    for(let a=0,la=game.spawner.length;a<la;a++){
+                        temp.push(game.spawner[a])
+                    }
+                    if(game.stack[0][0]==-1||game.attacker){
+                        let index=floor(random(0,temp.length))
+                        let pos=temp[index]
+                        let spam=0
+                        let fail=true
+                        while(fail&&spam<100){
+                            index=floor(random(0,temp.length))
+                            pos=temp[index]
+                            spam++
+                            fail=false
+                            for(let a=0,la=game.gaming;a<la;a++){
+                                if(
+                                    dist(pos[0],pos[1],entities.players[a].position.x,entities.players[a].position.y)<graphics.main[a].width*0.5*key[a]+50||
+                                    dist(pos[0],pos[1],entities.players[a].base.position.x,entities.players[a].base.position.y)<graphics.main[a].height*0.5*key[a]+50
+                                ){
+                                    fail=true
+                                }
+                            }
+                        }
+                        if(spam<100){
+                            entities.players.push(new player(layer,pos[0],pos[1]-60,0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                            game.index++
+                            game.spawnIndex++
+                            temp.splice(index,1)
+                        }
+                    }else{
+                        for(let a=0,la=level.length;a<la;a++){
+                            for(let b=0,lb=level[a].length;b<lb;b++){
+                                if(level[a][b]=='123456ABCDEF'[game.stack[0][0]]){
+                                    if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
+                                        deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                         game.index++
                                         game.spawnIndex++
-                                        game.spawner.splice(index,1)
+                                    }else{
+                                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                                        if(game.level==6){
+                                            entities.players[entities.players.length-1].position.x=floor(random(0,game.edge[0]))
+                                            entities.players[entities.players.length-1].position.y=0
+                                            entities.players[entities.players.length-1].parachute=true
+                                        }else if(game.level==8){
+                                            entities.players[entities.players.length-1].position.x=[entities.players[floor(random(0,game.players))].position.x+random(-240,240),random(450,entities.players[floor(random(0,game.players))].position.x)][floor(random(0,2))]
+                                            entities.players[entities.players.length-1].position.y=1000
+                                            entities.players[entities.players.length-1].parachute=true
+                                        }else if(game.level==17&&a<=5){
+                                            entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[0])][floor(random(0,2))]
+                                            entities.players[entities.players.length-1].position.y=1000
+                                            entities.players[entities.players.length-1].parachute=true
+                                        }
+                                        game.index++
+                                        game.spawnIndex++
                                     }
-                                }else if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
-                                    deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
-                                    game.index++
-                                    game.spawnIndex++
-                                }else{
-                                    entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1]+random(-20,20),0,0,[],true,findName(game.stack[0][1],types.player),game.index))
-                                    if(game.level==6){
-                                        entities.players[entities.players.length-1].position.x=floor(random(0,game.edge[0]))
-                                        entities.players[entities.players.length-1].position.y=0
-                                        entities.players[entities.players.length-1].parachute=true
-                                    }else if(game.level==8){
-                                        entities.players[entities.players.length-1].position.x=[entities.players[floor(random(0,game.players))].position.x+random(-240,240),random(450,entities.players[floor(random(0,game.players))].position.x)][floor(random(0,2))]
-                                        entities.players[entities.players.length-1].position.y=1000
-                                        entities.players[entities.players.length-1].parachute=true
-                                    }else if(game.level==17&&a<=5){
-                                        entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[0])][floor(random(0,2))]
-                                        entities.players[entities.players.length-1].position.y=1000
-                                        entities.players[entities.players.length-1].parachute=true
-                                    }
-                                    game.index++
-                                    game.spawnIndex++
                                 }
                             }
                         }

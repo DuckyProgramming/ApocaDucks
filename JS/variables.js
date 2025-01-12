@@ -17,9 +17,9 @@ types={
       difficulty:0,
       wave:[
         [
-          //['BigDeflectorMachineGunCritSelf',50],
-          ['Pistol',6],
-          ['Flamethrower',4],
+          ['Spy',100],
+          //['Pistol',6],
+          //['Flamethrower',4],
         ],[
           ['RocketLauncher',3],
           ['Baller',3],
@@ -3563,19 +3563,19 @@ types={
     
     {
       name:'PlayerPushierPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:130,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:130,
       desc:'Pistol that pushes enemies on hit',dpsBuff:1,
     },{
       name:'PlayerPistolQuadrupleJump',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:131,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:131,
       desc:'Pistol that can jump four times',dpsBuff:1,
     },{
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:53,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:53,
       desc:'Pistol that applies vulnerable to hit enemies',dpsBuff:1,
     },{
       name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:142,
       desc:'Pistol that buffs nearby allies with crits',dpsBuff:1,
     },{
       name:'PlayerPistolInspect',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3583,7 +3583,7 @@ types={
       desc:'Pistol that inspects all enemies that are hit',dpsBuff:1,
     },{
       name:'PlayerRegional',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:470,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:470,
       desc:'Pistol that can fire a large bullet using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3764,7 +3764,7 @@ types={
     },{
       name:'PlayerOxidizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:453,
-      desc:'Ballista with engineer-style bullets',dpsBuff:4,
+      desc:'Ballista with engineer-style bullets',dpsBuff:2.5,
     },{
       name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:184,
@@ -4450,7 +4450,7 @@ types={
     },{
       name:'PlayerDefender',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:462,
-      desc:'Submachine that fires heavy traps occasionally',dpsBuff:7,
+      desc:'Submachine that fires heavy traps occasionally',dpsBuff:1.5,
     },{
       name:'PlayerAnnexer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:417,
@@ -4471,7 +4471,7 @@ types={
       desc:'Laser that gains power as it is continually fired',dpsBuff:2,
     },{
       name:'PlayerBeacon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:360,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:360,
       desc:'Laser that gives nearby allies a defense buff',dpsBuff:1,
     },{
       name:'PlayerOrion',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -11646,31 +11646,31 @@ levels=[
       "#                               #                        #                #",
       "#                               #                        #                #",
       "#                               #    r                   #                #",
-      "# ###### #@#####@##########@## ### ######### #################### #@##### #",
+      "# ###### #@#####@### ######@## ### ######### #################### #@##### #",
       "# #         #         #         #         #         #         #         # #",
-      "# #         #       D #         #         #         #       B #         # #",
+      "# #         #         #         #         #         #       B #         # #",
       "# #         #         #         #         #         #         #         # #",
-      "# #         ## ########         #         ##@##### ### ########         # #",
+      "# #         ## #####@##         #         ##@##### ### ########         # #",
       "# #                                                                     # #",
       "# #                                                                     # #",
       "# #q                                                        ~          w# #",
       "# ## ###@#####@### ##### #####@###@########## ####@###@##########@## #### #",
-      "# #         #         #         #         #         #         #         # #",
-      "# #         #         #         #   123   #         #         #         # #",
-      "# #         #         #         #         #         #         #         # #",
-      "# #         #         ##@##### ##  #####  #         #         #         # #",
+      "# #         #         #         #         #     #             #         # #",
+      "# #         #         #         #   123   #     #             #         # #",
+      "# #         #         #         #         #     #             #         # #",
+      "# #         #         ##@##### ##  #####  #     ## ##         #         # #",
       "# #                                                 #                   # #",
       "# #                                 546             #                   # #",
       "# #   *       ###                                   #                   # #",
-      "# ##@##### #######@##### #####@##############@## ##### #############@   # #",
-      "# #         #         #         #         #         #         #         # #",
-      "# #         #       F #         #         #         #         #         # #",
-      "# #         #         #         #    e    #         #         #         # #",
-      "# #         ## ########         #    #    #         #         #         # #",
+      "# ##@##### #######@##### #####@##############@## #@### #############@   # #",
+      "# #         #         #         #         #         #    #         #    # #",
+      "# #         #       F #         #         #         #    #    D    #    # #",
+      "# #         #         #         #    e    #         #    #         #    # #",
+      "# #         ## ########         #    #    #         #    ## ##### ##    # #",
       "# #                   #              #                        #         # #",
       "# #                   #              #                        #         # #",
       "# #                   #              #                      ^ #         # #",
-      "# #### ###@###@##### ###@## ################ ###@#####@########### ###@## #",
+      "# #### ###@###@##### ###@## ################ ###@#####@##########@# ##@## #",
       "# #                   #         #         #                   #         # #",
       "# #                   #         #       A #                   #         # #",
       "# #                   #         #         #                   #         # #",
@@ -11678,7 +11678,7 @@ levels=[
       "#           #                                       #                     #",
       "# Z         #                                       #                     #",
       "#           # d                                     #                     #",
-      "######@#############@######@######@#########@#####################@########",
+      "######@#############@######@######@#########@######################@#######",
     ],[
       "                                                                                                                                                                               ",
       "                                                                                                                                                                               ",
