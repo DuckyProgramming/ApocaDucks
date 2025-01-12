@@ -1,5 +1,11 @@
 
 
+486 - rtx, 279
+
+259 - rtx drone, 165
+
+
+
 
 478 - orion, 360 - inaccurate but high damage laser
 479 - laserception, 360

@@ -1551,7 +1551,8 @@ class wall{
                         c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
                         c.type==227||c.type==228||c.type==233||c.type==235||c.type==237||
                         c.type==238||c.type==239||c.type==240||c.type==243||c.type==245||
-                        c.type==246||c.type==247||c.type==248||c.type==250||c.type==252
+                        c.type==246||c.type==247||c.type==248||c.type==250||c.type==252||
+                        c.type==259
                     )){
                         let d=collideBoxBox(this,c)
                         let incident

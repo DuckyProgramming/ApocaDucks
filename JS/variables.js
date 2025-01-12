@@ -4062,9 +4062,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:421,
       desc:'Bonker with a parachute, can divebomb enemies by holding jump',dpsBuff:0,
     },{
-      name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:466,
-      desc:'Has a parachute and fires downward driller bullets randomly',dpsBuff:1,
+      name:'PlayerRTX',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:486,
+      desc:'Has a parachute and a protectorate with lasers and traps',dpsBuff:1,
     },{
       name:'PlayerApache',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:289,
@@ -4908,6 +4908,10 @@ types={
       name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:89,
       desc:'Shotgun that fires fast sniper bullets',dpsBuff:10,
+    },{
+      name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:466,
+      desc:'Has a parachute and fires downward driller bullets randomly',dpsBuff:1,
     },
 
     //mark di
@@ -10676,6 +10680,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'RTX',
+			ammo:8,
+			damage:80,
+			cooldown:10,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:40,
 		},
 	],
 }
