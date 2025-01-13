@@ -2995,7 +2995,7 @@ class player{
 			break
             case 476:
 				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,30,crit,this.index))
 				}
 			break
             case 477:

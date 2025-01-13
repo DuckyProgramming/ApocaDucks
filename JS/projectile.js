@@ -5271,7 +5271,7 @@ class projectile{
 									}
 								}
 								if(this.time%60==0){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,3600,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
 									entities.projectiles[entities.projectiles.length-1].velocity.x=0
 									entities.projectiles[entities.projectiles.length-1].velocity.y=0
 								}
