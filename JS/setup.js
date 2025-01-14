@@ -1,6 +1,6 @@
 function setup(){
-    listing[0]=[...range(0,42),...range(0,12)]
-    listing[1]=range(42,findName('PlayerTripleAuto',types.player)/*229,239*/)
+    listing[0]=[...range(0,40),...range(0,12)]
+    listing[1]=range(40,findName('PlayerTripleAuto',types.player)/*229,239*/)
     listing[2]=range(0,12)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()

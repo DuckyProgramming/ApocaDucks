@@ -4119,7 +4119,7 @@ types={
       desc:'Gets a drone whenever an enemy dies nearby',dpsBuff:1,
     },{
       name:'PlayerChairman',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:439,
+      damageBuff:1,reloadBuff:2.5,crit:0,weapon:439,
       desc:'Director that can also place heavy traps',dpsBuff:2,
     },{
       name:'PlayerWintermint',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -10031,7 +10031,7 @@ types={
 			stop:15,
 			reload:1,
 			speed:1.05,
-      uses:75,
+      uses:150,
 		},{
 			name:'Jetstream',
 			ammo:15,
@@ -10040,7 +10040,7 @@ types={
 			stop:15,
 			reload:1,
 			speed:1.05,
-      uses:75,
+      uses:150,
 		},{
 			name:'Anapsid',
 			ammo:1,
@@ -10143,7 +10143,7 @@ types={
 		},{
 			name:'Fracture',
 			ammo:2,
-			damage:120,
+			damage:150,
 			cooldown:30,
 			stop:120,
 			reload:20,

@@ -436,6 +436,9 @@ function mainloop(layer){
                     }
                 }
             }
+            for(let a=0,la=graphics.main.length;a<la;a++){
+                entities.players[a].displayOver(graphics.main[a])
+            }
             for(let a=0,la=run.update.length;a<la;a++){
                 for(let b=0,lb=run.update[a].length;b<lb;b++){
                     run.update[a][b].update()
@@ -447,7 +450,6 @@ function mainloop(layer){
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
-                entities.players[a].displayOver(graphics.main[a])
                 graphics.main[a].pop()
             }
             if(display.anim>0){
