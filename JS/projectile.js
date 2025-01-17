@@ -376,6 +376,7 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257:
+				this.time=time
 				this.speed=0
 				this.extent=2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
@@ -4596,7 +4597,7 @@ class projectile{
 			break
 			case 221:
 				for(let a=0,la=entities.projectiles.length;a<la;a++){
-					if(entities.projectiles[a].type==221&&entities.projectiles[a].projectileIndex!=this.projectileIndex&&dist(entities.projectiles[a].position.x,entities.projectiles[a].position.y,this.position.x,this.position.y)<1000){
+					if(entities.projectiles[a].type==221&&entities.projectiles[a].projectileIndex!=this.projectileIndex&&dist(entities.projectiles[a].position.x,entities.projectiles[a].position.y,this.position.x,this.position.y)<1000&&entities.projectiles[a].id==this.id){
 						let valid=true
 						for(let b=0,lb=entities.walls.length;b<lb;b++){
 							for(let c=0,lc=entities.walls[b].length;c<lc;c++){

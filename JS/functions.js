@@ -441,7 +441,39 @@ function tripletColor(color1,color2,color3,key){
     return key>=1?[color2[0]*(2-key)+color3[0]*(key-1),color2[1]*(2-key)+color3[1]*(key-1),color2[2]*(2-key)+color3[2]*(key-1)]:[color1[0]*(1-key)+color2[0]*key,color1[1]*(1-key)+color2[1]*key,color1[2]*(1-key)+color2[2]*key]
 }
 //key
-function displayMain(layer){
+function displayMain(layer,effective,keyStore){
+    if(game.flash){
+        for(let a=0,la=graphics.overlay.length;a<la;a++){
+            graphics.overlay[a].background(0)
+            graphics.overlay[a].erase()
+            graphics.overlay[a].beginShape()
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+graphics.overlay[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2-160
+            )
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,graphics.overlay[a].width*0.5+130,graphics.overlay[a].width),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2-160-100*sin(entities.players[a].direction.main*5/3)
+            )
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,graphics.overlay[a].width*0.5+130,graphics.overlay[a].width),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2+160+100*sin(entities.players[a].direction.main*5/3)
+            )
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+graphics.overlay[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2+160
+            )
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,graphics.overlay[a].width*0.5-130),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2+160-100*sin(entities.players[a].direction.main*5/3)
+            )
+            graphics.overlay[a].vertex(
+                (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,graphics.overlay[a].width*0.5-130),
+                (entities.players[a].position.y-effective[a][1])/keyStore[a]+graphics.overlay[a].height/2-160+100*sin(entities.players[a].direction.main*5/3)
+            )
+            graphics.overlay[a].endShape()
+        }
+    }
     let marker=[-1,-1,-1,-1]
     for(let a=entities.players.length-1,la=0;a>=la;a--){
         if(entities.players[a].id>0&&entities.players[a].id<=4&&marker[entities.players[a].id-1]==-1&&entities.players[a].control==0&&entities.players[a].life>0){
@@ -504,6 +536,46 @@ function displayMain(layer){
             )
         }
     }
+    if(game.flash&&game.level!=13&&game.level!=14){
+        if(game.gaming==1){
+            image(
+                graphics.overlay[0],
+                width/2,height/2,width,height
+            )
+        }else if(game.gaming==2){
+            image(
+                graphics.overlay[0],
+                width*3/4,height/2,width/2,height
+            )
+            image(
+                graphics.overlay[1],
+                width/4,height/2,width/2,height
+            )
+        }else{
+            image(
+                graphics.overlay[0],
+                width*3/4,height/4,width/2,height/2
+            )
+            if(game.gaming>=2){
+                image(
+                    graphics.overlay[1],
+                    width/4,height/4,width/2,height/2
+                )
+            }
+            if(game.gaming>=3){
+                image(
+                    graphics.overlay[2],
+                    width/4,height*3/4,width/2,height/2
+                )
+            }
+            if(game.gaming>=4){
+                image(
+                    graphics.overlay[3],
+                    width*3/4,height*3/4,width/2,height/2
+                )
+            }
+        }
+    }
 }
 function generateLevel(level,layer){
     entities.projectiles=[]
@@ -512,6 +584,9 @@ function generateLevel(level,layer){
     switch(game.level){
         case 1:
             game.edge=[1700,750]
+        break
+        case 2:
+            game.edge=[1200,800]
         break
         case 5:
             game.edge=[3000,1300]
@@ -756,6 +831,9 @@ function generateLevel(level,layer){
             game.weapon.push([])
             game.weaponTick.push(0)
         }
+        if(game.mainline){
+            game.weapon.push([])
+        }
     }else if(game.level==14){
         let ticker=0
         let temp=[]
@@ -833,19 +911,19 @@ function generateLevel(level,layer){
                 let clump=listing[game.peakWeapon?1:floor(random(0,1.5))]
                 if(game.attacker&&game.level!=13&&game.level!=14){
                     if(level[a][b]=='Z'){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][0]),game.index))
                         game.index++
                     }
                 }else{
                     if(int(level[a][b])==c+1&&(!game.pvp||game.level==13||game.level==14)){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][0]),game.index))
                         game.index++
                         if(game.level==13||game.level==14){
                             entities.players[entities.players.length-1].weaponType=-1
                         }
                     }
                     if(level[a][b]=='qwerty'[c]&&game.pvp){
-                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[c][0]),game.index))
+                        entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][0]),game.index))
                         game.index++
                         if(game.level==13||game.level==14){ 
                             entities.players[entities.players.length-1].weaponType=-1
@@ -962,7 +1040,7 @@ function newWave(level,layer){
             if(types.mission[game.mission].wave[display.cycle][a][1]==1){
                 game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8||game.level==17?(game.attacker?0.75:1.5):1)*(game.level==16?0.4:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.75:1.5):1)*(game.level==16?0.4:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
                     game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }
@@ -1029,7 +1107,7 @@ function checkEnd(level,layer,key){
     }else if(game.level==14){
         let fail=false
         for(let a=0,la=game.gaming;a<la;a++){
-            if(game.weapon[a].length<4&&!game.peakWeapon||game.weapon[a].length<2){
+            if(game.weapon[a].length<4&&!game.peakWeapon||game.weapon[a].length<(game.mainline?1:2)){
                 fail=true
             }
         }
@@ -1281,7 +1359,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?2.75:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==19&&game.spawnIndex>10?1.5:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)
+                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?2.75:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*(game.level==19&&game.spawnIndex>10?1.5:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)
                 game.stack.splice(0,1)
             }
         }else{
@@ -1299,7 +1377,9 @@ function checkEnd(level,layer,key){
                 display.wait--
                 if(display.wait<=0){
                     display.wait=240
-                    newWave(level,layer)
+                    if(!game.perpetual){
+                        newWave(level,layer)
+                    }
                 }
             }
         }
@@ -1312,15 +1392,30 @@ function setupGraphics(){
 function initialGraphics(){
     if(game.gaming==1){
         graphics.main.push(createGraphics(width,height))
+        if(game.flash){
+            graphics.overlay.push(createGraphics(width,height))
+        }
     }else if(game.gaming==2){
         graphics.main.push(createGraphics(width/2,height))
         graphics.main.push(createGraphics(width/2,height))
+        if(game.flash){
+            graphics.overlay.push(createGraphics(width/2,height))
+            graphics.overlay.push(createGraphics(width/2,height))
+        }
     }else{
         graphics.main.push(createGraphics(width/2,height/2))
         graphics.main.push(createGraphics(width/2,height/2))
         graphics.main.push(createGraphics(width/2,height/2))
         if(game.gaming==4){
             graphics.main.push(createGraphics(width/2,height/2))
+        }
+        if(game.flash){
+            graphics.overlay.push(createGraphics(width/2,height/2))
+            graphics.overlay.push(createGraphics(width/2,height/2))
+            graphics.overlay.push(createGraphics(width/2,height/2))
+            if(game.gaming==4){
+                graphics.overlay.push(createGraphics(width/2,height/2))
+            }
         }
     }
     for(let a=0,la=graphics.main.length;a<la;a++){

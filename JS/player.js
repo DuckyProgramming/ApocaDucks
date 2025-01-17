@@ -194,7 +194,7 @@ class player{
                     if(game.level==13){
                         layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?2:4}`,0,-35)
+                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
                     }else{
                         layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name+(this.playerData.name==`PlayerConglomeration`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }
@@ -218,7 +218,7 @@ class player{
                     if(game.level==13){
                         layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?2:4}`,0,-35)
+                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
                     }else{
                         layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name+(this.playerData.name==`PlayerConglomeration`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }
@@ -891,7 +891,7 @@ class player{
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             game.weaponTick[this.id-1]++
-            this.type=game.weapon[this.id-1][game.weaponTick[this.id-1]%game.weapon[this.id-1].length]
+            this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.id-1]%game.weapon[game.mainline?game.players:this.id-1].length]
         }
         this.playerData=types.player[this.type]
         this.weaponType=this.playerData.weapon
@@ -3383,7 +3383,7 @@ class player{
                     this.target.position.y=game.edge[1]*0.1
                     this.manage[1]=false
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
+                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<400&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
@@ -4548,7 +4548,7 @@ class player{
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].index==this.die.killer){
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
-                        if(this.id>0&&game.pvp&&entities.players[a].life>0){
+                        if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
                         }
                     }
@@ -5561,7 +5561,7 @@ class player{
             if(this.invincible>0){
                 this.invincible--
                 this.fade=smoothAnim(this.fade,game.time%20>=10,0.4,1,5)
-            }else if(game.invis||this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'){
+            }else if(game.invis&&game.level!=13&&game.level!=14||this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'){
                 if(this.life<=0){
                     this.fade=smoothAnim(this.fade,!this.dead,0.4,1,5)
                 }else{

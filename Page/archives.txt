@@ -1,5 +1,19 @@
 
 
+rotationist - solar system, but the drones have spinning rho turrets
+mace - you hold a spiky ball
+grudge - fires a destroyer bullet with two flails
+longshot - sniper with sniper motorizer drones (from animator)
+shieldweaver - surgeon rocket launcher
+skep - fires a rocket that spams drones around
+electron - sunset rocket that accelerates and explodes
+kinetic - rocket submachine
+machine gun but the bullets are flak bullets
+swiss army knife - randomly uses motorizer, swarmer, engineer, interceptor, sniper, spreadling, sunburst
+
+
+
+
 486 - rtx, 279
 
 259 - rtx drone, 165

@@ -1899,7 +1899,7 @@ class wall{
                                 }else{
                                     this.recharge=1800-(game.gaming-1)*300
                                 }
-                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2))
+                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2*(listing[1].includes(c.playerType)?0.4:1)))
                                 c.weapon.cooldown=min(c.weapon.cooldown,30)
                                 if(game.level==6){
                                     this.type=[9,12][floor(random(0,2))]
@@ -1917,7 +1917,7 @@ class wall{
                                 c.target.position.x=this.position.x+game.tileset[0]
                             break
                             case 11:
-                                if(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)){
+                                if(c.id>0&&!game.attacker||c.id==0&&game.attacker){
                                     c.defendBuff=15
                                 }else{
                                     c.velocity.x*=0.75
@@ -1964,8 +1964,11 @@ class wall{
                                     let chunk=floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                     this.recharge=3600-(game.gaming-1)*600
-                                }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?2:4))){
+                                }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
+                                    if(game.mainline){
+                                        game.weapon[game.players].push(this.weapon)
+                                    }
                                     this.recharge=1800
                                 }
                             break
