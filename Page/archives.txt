@@ -1,15 +1,91 @@
 
 
-rotationist - solar system, but the drones have spinning rho turrets
-mace - you hold a spiky ball
-grudge - fires a destroyer bullet with two flails
-longshot - sniper with sniper motorizer drones (from animator)
-shieldweaver - surgeon rocket launcher
-skep - fires a rocket that spams drones around
-electron - sunset rocket that accelerates and explodes
-kinetic - rocket submachine
-machine gun but the bullets are flak bullets
-swiss army knife - randomly uses motorizer, swarmer, engineer, interceptor, sniper, spreadling, sunburst
+
+
+10 new missions
+using new weapon enemies
+
+perhaps
+
+
+
+
+487 - rotationist, 230 - solar system but the drones have spinning rho turrets
+488 - crowd, 191
+489 - schismist, 202 - drones and 2 rotating turrets
+490 - solar flare, 234 - exploding sunburst
+491 - blastdoor, 212 - destroyer with a pelleter auto
+492 - earthwork, 197 - double trapper with bouncing traps
+493 - novgorod, 36 - fires a big grenade that when it bounces, drops another grenade
+494 - burstphase, 335 - stunning laser
+495 - conductivity, 242 - fast explosion-immune bonker
+496 - vanguard, 4 - double assault rifle with some spread, and can become invisible
+497 - companion, 332 - sidekick pelleter
+498 - shieldweaver, 3 - surgeon rocket launcher
+499 - quarry, 1 - pistol that occassionally fires shotgun shells
+500 - planetarium, 10 - revolutionist engineer
+501 - resplendent, 319 - dasher that fires a ton of bullets backward in a shotgun
+502 - python, 222 - software that freezes
+503 - gunling, 309 - spreadling with 4 central bullets (double fire rate of normal spreadling)
+504 - omastar, 258 - helix with an additional homing bullet
+505 - sickle, 332 - pelleter alternating 3 straight bullets and 3 spread bullets
+506 - zeppole, 338 - interceptor with massive knockback
+507 - rummy, 0 - shotgun with a 25% change for 10x damage
+508 - gun zone, 133 - electrifyer with turrets on the corners
+509 - engulfment, 320 - emplacement but the pods disappear and can't hit enemies
+510 - aircraft, 279 - sniper parachutist
+511 - uzi, 4 - 2 bullet assault rifle, but heavy bullets and the player is fast
+512 - quad spinner - fires in 4 directions, uncontrollably
+513 - channeler, 191 - high-flying drones with lasers
+514 - over medic, 11 - can overheal to 5x
+515 - furnace, 2 - machine gun with light interceptor bullets
+516 - kannon, 212 - destroyer with an extra small bullet, and an upward shield
+517 - aspirant, 391 - submachine with occasional spraed sniper bullets
+518 - pinion, 137 - slicer, but it spins repeatedly on ending its first loop
+519 - lurker, 4 - sniper with spreadling auto
+520 - flame burst, 8 - two accurate small flame streams
+521 - egger, 5 - throws balls that spawn ducks
+522 - oxyphenbutazone, 212 - destroyer with an engineer bullet, but huge recoil
+523 - skep, 3 - fires rockets that explode into drones
+524 - faucet, 251 - cursor with acceleratiing bullets
+525 - guided missile, 2 - fires a rocket that you can control
+526 - troller, 364 - teleports target to a random spot on the map
+
+260 - rotationist, 144
+261 - crowd, 111
+262 - solar flare, 133
+263 - earthwork, 114
+264 - novgorod, 30
+265 - burstphase, 191
+266 - shieldweaver, 2
+267 - planetarium, 8
+268 - python, 134
+269 - zeppole, 173
+270 - gun zone, 89
+271 - engulfment, 182
+272 - channeler, 111
+273 - over medic, 9
+274 - furnace, 173
+275 - pinion, 91
+276 - flame burst, 6
+277 - egger, 5
+278 - oxyphenbutazone, 125
+279 - skep, 66
+280 - guided missile, 180
+281 - troller, 151
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

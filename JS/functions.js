@@ -601,7 +601,7 @@ function generateLevel(level,layer){
             game.edge=[5000,3000]
         break
         case 15: case 18:
-            game.edge=[10000,3200]
+            game.edge=[10000,3300]
         break
         case 16:
             game.edge=[16000,2800]
@@ -791,7 +791,11 @@ function generateLevel(level,layer){
                     }
                 break
                 case 'f':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],29))
+                    if(game.level==15){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,30))
+                    }else{
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],29))
+                    }
                 break
                 case 'g':
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))

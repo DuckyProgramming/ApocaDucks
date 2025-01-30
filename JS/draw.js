@@ -136,7 +136,7 @@ function mainloop(layer){
                     entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293||
                     entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
                     entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
-                    entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||
+                    entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
                     entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
                     ?(game.level==7?1.5:2):1)
                 key[c]*=0.75
@@ -145,11 +145,18 @@ function mainloop(layer){
                 }
                 bs.push([])
                 let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
-                let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486
+                let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510
                 let center=entities.players[c]
                 if(entities.players[c].weaponType==275){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==163&&entities.projectiles[a].id==c+1){
+                            center=entities.projectiles[a]
+                            a=la
+                        }
+                    }s
+                }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'){
+                    for(let a=0,la=entities.projectiles.length;a<la;a++){
+                        if(entities.projectiles[a].type==280&&entities.projectiles[a].id==c+1){
                             center=entities.projectiles[a]
                             a=la
                         }
