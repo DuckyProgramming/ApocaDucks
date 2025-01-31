@@ -1298,7 +1298,7 @@ function checkEnd(level,layer,key){
                 deployer.timer--
             }
         }
-        if(game.stack.length>0&&!game.assault){
+        if(game.stack.length>0&&!game.assault&&!game.nuke){
             if(game.sendTime>0){
                 game.sendTime--
             }else{
@@ -1381,7 +1381,7 @@ function checkEnd(level,layer,key){
                 display.wait--
                 if(display.wait<=0){
                     display.wait=240
-                    if(!game.perpetual){
+                    if(!game.perpetual&&!game.nuke){
                         newWave(level,layer)
                     }
                 }

@@ -1,9 +1,9 @@
 game={
   level:0,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,diff:1,ammoMult:2,tileset:[0,0],edge:[0,0],
   index:0,projectileIndex:0,
-  emergencyKey:true,newStats:true,spawnIndex:0,spawner:[],
+  emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
-  randomizer:false,classicWeapon:false,peakWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,
+  randomizer:false,classicWeapon:false,peakWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   weapon:[],weaponTick:[],
 }
 listing=[[],[],[]]
@@ -3558,7 +3558,7 @@ types={
     },{
       name:'PlayerRummy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:507,
-      desc:'Shotgun with a chance to deal 10x damage',dpsBuff:507,
+      desc:'Shotgun with a chance to deal 10x damage',dpsBuff:32.5,
     },{
       name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:177,
@@ -4338,9 +4338,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:473,
       desc:'Software, but the drone has one large unique turret',dpsBuff:1,
     },{
-      name:'PlayerSoftware',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPython',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:502,
-      desc:'Spawns a single powerful drone with turrets',dpsBuff:1,
+      desc:'Software but all the bullets freeze',dpsBuff:1,
     },{
       name:'PlayerSoftwareception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:277,
@@ -4509,7 +4509,7 @@ types={
       desc:'Interceptor with an assault rifle auto turret',dpsBuff:2,
     },{
       name:'PlayerZeppole',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:506,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:506,
       desc:'Interceptor with large knockback',dpsBuff:2,
     },{
       name:'PlayerInterceptorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4864,7 +4864,7 @@ types={
     },{
       name:'PlayerQuadSpinner',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:512,
-      desc:'Fires in four directions uncontrollably',dpsBuff:1,
+      desc:'Fires in four directions uncontrollably',dpsBuff:4,
     },{
       name:'PlayerKannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:516,
@@ -11082,7 +11082,7 @@ types={
 		},{
 			name:'Quad Spinner',
 			ammo:30,
-			damage:20,
+			damage:50,
 			cooldown:4,
 			stop:120,
 			reload:3,
@@ -11201,7 +11201,7 @@ types={
 			ammo:1,
 			damage:800,
 			cooldown:20,
-			stop:180,
+			stop:360,
 			reload:0,
 			speed:0.8,
       uses:8,
@@ -11875,7 +11875,7 @@ levels=[
       "                                                                                                                    +_____+  |             ##################################################",
       "                                                                                                                    |     |  |             ]#################################################",
       "                                                                                                                    |     |  |  --<#>      =]################################################",
-      "                                                                                                                    |     | r| <######%#>   *################################################",
+      "                                                                                                                    |     |  | <######%#>  w*################################################",
       "                                                                                                                  #@#>   <####@###########@##################################################",
       "                                                                                                                 /#####%#####################################################################",
       "                                                                                                             <###############################################################################",
@@ -11885,7 +11885,7 @@ levels=[
       "                                                                                   *            | | #########################################################################################",
       "                                                             -- ~ --             +___+          | |/#########################################################################################",
       "                                                           +_________+           |   |          |<###########################################################################################",
-      "                                                           |         |           |   |       <#@#############################################################################################",
+      "                                                          r|         |           |   |       <#@#############################################################################################",
       "                                                       +f__+         | ---       |  <#@>   e<################################################################################################",
       "                                                       |   |        <#@####>   <#########%###################################################################################################",
       "                                                       |   |     ############%###############################################################################################################",
@@ -11897,7 +11897,7 @@ levels=[
       "                               ^            <################################################################################################################################################",
       "ABC                         +_____+       <##################################################################################################################################################",
       "DEF                         |     |    --<###################################################################################################################################################",
-      "Zw                          |     |  <#######################################################################################################################################################",
+      "Z                           |     |  <#######################################################################################################################################################",
       "####>                   --<##>   <###########################################################################################################################################################",
       "######>              <#########%#############################################################################################################################################################",
       "##########__________#########################################################################################################################################################################",

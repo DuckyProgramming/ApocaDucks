@@ -2,6 +2,10 @@ function setup(){
     listing[0]=[...range(0,40),...range(0,12)]
     listing[1]=range(40,findName('PlayerTripleAuto',types.player)/*229,239*/)
     listing[2]=range(0,12)
+    //listing[1]=listing[1].filter(item=>types.player[item].weapon>=487)
+    if(game.nuke){
+        listing[1]=[findName('PlayerGuidedMissile',types.player)]
+    }
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
     for(let a=0,la=6;a<la;a++){

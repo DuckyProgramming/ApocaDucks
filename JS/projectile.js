@@ -550,7 +550,8 @@ class projectile{
 				this.time=random(time,time*2)
 			break
 			case 280:
-				this.speed=2
+				this.speed=4
+				this.angularVelocity=0
 				this.time=time
 			break
 		}
@@ -4484,25 +4485,25 @@ class projectile{
 				}
 			break
 			case 280:
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
 				layer.rect(0,6,1,12)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,(6*this.fade-5))
 				layer.rect(0,4.5,1,9)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,(6*this.fade-5))
 				layer.rect(0,3,1,6)
-				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,(6*this.fade-5))
 				layer.ellipse(0,0,9,30)
-				layer.fill(100,100+this.crit*200,100+this.crit*200,this.fade)
+				layer.fill(100,100+this.crit*200,100+this.crit*200,(6*this.fade-5))
 				layer.ellipse(0,0,6,25)
-				layer.fill(25,225,250,this.fade)
+				layer.fill(25,225,250,(6*this.fade-5))
 				layer.ellipse(0,0,5)
-				if(!this.active&&this.fade<1){
-					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,600-this.fade*680)
-					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,400-this.fade*400)
-					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,200-this.fade*200)
+				if(!this.active&&this.fade<1&&6*this.fade-5>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,600-(6*this.fade-5)*600)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,400-(6*this.fade-5)*400)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,200-(6*this.fade-5)*200)
 				}
 			break
 			case 281:
@@ -5079,6 +5080,8 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,90)
 		}else if(this.type==190||this.type===191||this.type===214||this.type===255||this.type===256||this.type===257||this.type===265){
 			this.fade=0
+		}else if(this.type==280){
+			this.fade=smoothAnim(this.fade,this.active,0,1,60)
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}
@@ -5369,17 +5372,17 @@ class projectile{
 						}
 					}else if(this.type==270){
 						if(this.timer%30==0&&this.active&&a==0){
-							let minimum=600
+							let minimum=450
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)){
 									minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
 								}
 							}
-							if(minimum<600){
+							if(minimum<450){
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 										for(let b=0,lb=4;b<lb;b++){
-											entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*60,this.position.y+lcos(this.time+b*90)*60,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*60),(this.position.y+lcos(this.time+b*90)*60)-entities.players[a].position.y),this.id,this.base.damage*60,30,this.crit,this.index))
+											entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*60,this.position.y+lcos(this.time+b*90)*60,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*60),(this.position.y+lcos(this.time+b*90)*60)-entities.players[a].position.y),this.id,this.base.damage*50,30,this.crit,this.index))
 										}
 										a=la
 									}
@@ -6600,16 +6603,21 @@ class projectile{
 					}
 				break
 				case 280:
+					if(!this.active){
+						this.speed*=0.9
+					}
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					if(a==0){
+						this.direction+=this.angularVelocity
 						let inputSet=this.id==0||this.id>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
 						if(inputSet[0]){
-							this.direction-=4.5
+							this.angularVelocity-=0.2
 						}
 						if(inputSet[1]){
-							this.direction+=4.5
+							this.angularVelocity+=0.2
 						}
+						this.angularVelocity*=0.95
 					}
 				break
 
@@ -6669,7 +6677,7 @@ class projectile{
 								this.active=false
 							}
 							let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
-							let vec=sqrt(this.velocity.x**s2+this.velocity.y**2)
+							let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
 							this.velocity.x=sin(dir)*vec
 							this.velocity.y=cos(dir)*vec
 							entities.players[b].velocity.x-=sin(dir)*vec

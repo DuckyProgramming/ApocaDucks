@@ -17,12 +17,6 @@ class player{
         this.fade=0
         this.size=0.5*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)
         this.life=100*this.playerData.lifeBuff
-        if(game.pvp&&this.id>0){
-            this.life*=0.5
-        }
-        if(this.id>=game.gaming+1){
-            this.life*=1.5
-        }
         this.ammoMult=game.ammoMult
         this.dead=false
         this.velocity={x:0,y:0}
@@ -1045,7 +1039,7 @@ class player{
             break
             case 275:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],163,(lsin(this.direction.main)<0?-90:90)+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,5400,crit,this.index))
-                if(this.id<=game.gaming){
+                if(this.id>0&&this.id<=game.gaming){
                     this.disable=true
                 }
             break
@@ -1285,7 +1279,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,360*a/la,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
                 }
             }
-            if(preLife>=this.base.life&&this.life<=0&&this.id>0){
+            if(preLife>=this.base.life&&this.life<=0&&this.id>0&&!game.nuke){
                 this.life=1
             }
             if(this.gasTime>0&&this.assort.gas==0){
@@ -3099,7 +3093,7 @@ class player{
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],260,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
             break
             case 488:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],261,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],261,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
             break
             case 490:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,262,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -3199,7 +3193,7 @@ class player{
 			break
             case 512:
                 for(let a=0,la=4;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,this.time+a*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,this.time*2+a*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 }
 			break
             case 513:
@@ -3249,7 +3243,9 @@ class player{
             break
             case 525:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],280,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-                this.disable=true
+                if(this.id>0&&this.id<=game.gaming){
+                    this.disable=true
+                }
 			break
             case 526:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],281,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4676,7 +4672,7 @@ class player{
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(entities.players[a].index==this.die.killer){
+                if(entities.players[a].index==this.die.killer&&entities.players[a].index!=this.index){
                     entities.players[a].stats.damage+=this.record.life-max(0,this.life)
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)

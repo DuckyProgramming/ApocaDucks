@@ -159,6 +159,7 @@ function mainloop(layer){
                         if(entities.projectiles[a].type==280&&entities.projectiles[a].id==c+1){
                             center=entities.projectiles[a]
                             a=la
+                            key[c]*=(game.level==7?1.5:2)
                         }
                     }
                 }
