@@ -1,15 +1,33 @@
 
 
+527 - gps, 146 - engineer with gun and drones
+528 - revolutionist, 315, rho without shields
+529 - revolutionistception
+530 - bohrer, 465 - revolutionist with a light driller gun
+531 - planetoid - revolutionist with four bonking shields
+532 - ransomware - software but the drone has a flak zone
+533 - gear, 242, 467 - damaging bonker with the hopper jump
+534 - l-sys, 36 - fires a ball and a grenade that triggers on alt-fire
+535 - insecticide - ballista that confuses and damage over times enemy
+
+282 - gps, 8
+283 - randomsomware, 134
+284 - l-sys, 30
+285 - insecticide, 147
 
 
-487 - rotationist, 230 - solar system but the drones have spinning rho turrets
+
+
+
+
+487 - rotationist, 230 - solar system but the drones have spinning rho tursrets
 488 - crowd, 191
 489 - schismist, 202 - drones and 2 rotating turrets
 490 - solar flare, 234 - exploding sunburst
 491 - blastdoor, 212 - destroyer with a pelleter auto
 492 - earthwork, 197 - double trapper with bouncing traps
 493 - novgorod, 36 - fires a big grenade that when it bounces, drops another grenade
-494 - burstphase, 335 - stunning laser
+494 - burstphase, 335 - stunning lasers
 495 - conductivity, 242 - fast explosion-immune bonker
 496 - vanguard, 4 - double assault rifle with some spread, and can become invisible
 497 - companion, 332 - sidekick pelleter

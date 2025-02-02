@@ -3496,6 +3496,12 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:335,
       desc:'Fires a lightspeed, accurate beam',dpsBuff:1,
     },
+
+    {
+      name:'PlayerRevolutionist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:528,
+      desc:'Has orbiting turrets',dpsBuff:3,
+    },
     
     {
       name:'PlayerInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3794,9 +3800,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:453,
       desc:'Ballista with engineer-style bullets',dpsBuff:2.5,
     },{
-      name:'PlayerPlanetarium',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:500,
-      desc:'Engineer, but the balls have additional orbital turrets',dpsBuff:8,
+      name:'PlayerGPS',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:527,
+      desc:'Engineer with balls that fire bullets and drones',dpsBuff:8,
     },{
       name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:184,
@@ -4062,13 +4068,13 @@ types={
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
       desc:'Flamethrower that can become invisible when not moving and fires in two directions',dpsBuff:1,
     },{
-      name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:438,
-      desc:'Spawns moderately sized drones, fires a gun forwarz, and can become invisible',dpsBuff:2,
-    },{
       name:'PlayerVanguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:496,
       desc:'Double, spread assault rifle that can become invisible when not moving',dpsBuff:2.5,
+    },{
+      name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:382,
+      desc:'Sidekick that can become invisible when not moving',dpsBuff:3,
     },{
       name:'PlayerStealthception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:241,
@@ -4092,7 +4098,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:398,
       desc:'Bonker that deals damage over time',dpsBuff:0,
     },{
-      name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:253,
       desc:'Bonker that has strong knockback but no damage',dpsBuff:0,
     },{
@@ -4111,7 +4117,7 @@ types={
 
     {
       name:'PlayerParaRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:3,crit:0,weapon:107,
+      damageBuff:2,reloadBuff:3,crit:0,weapon:107,
       desc:'Rocket launcer that fires downward, and has a parachute',dpsBuff:1,
     },{
       name:'PlayerParaGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4178,9 +4184,9 @@ types={
     },
 
     {
-      name:'PlayerSuzerain',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:267,
-      desc:'Spawns many drones of different types',dpsBuff:1.25,
+      name:'PlayerPhantasm',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:438,
+      desc:'Spawns moderately sized drones, fires a gun forwarz, and can become invisible',dpsBuff:2,
     },{
       name:'PlayerPrimeDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:205,
@@ -4216,16 +4222,16 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:226,
       desc:'Motorizer that spawns four unique slightly improved drones',dpsBuff:3,
     },{
-      name:'PlayerSolarSystem',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:230,
-      desc:'Motorizer with drones that have additional orbital drones',dpsBuff:4,
+      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
+      desc:'Spawns exploding motorizer drones',dpsBuff:2,
     },{
       name:'PlayerTanuki',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:265,
       desc:'Motorizer with drones that fire homing, piercing bullets',dpsBuff:2,
     },{
       name:'PlayerMilitia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:266,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:266,
       desc:'Motorizer that spawns four unique specialized heavier drones',dpsBuff:5,
     },{
       name:'PlayerVitality',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4270,9 +4276,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:224,
       desc:'Fires drones that target enemies and defend you',dpsBuff:15,
     },{
-      name:'PlayerWarpod',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:354,
-      desc:'Spawns exploding motorizer drones',dpsBuff:2,
+      name:'PlayerSuzerain',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:267,
+      desc:'Spawns many drones of different types',dpsBuff:1.25,
     },{
       name:'PlayerSwarmerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:285,
@@ -4322,10 +4328,6 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:274,
       desc:'Software, but the drone spawns many drones',dpsBuff:1,
     },{
-      name:'PlayerAirtag',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:275,
-      desc:'Software, but you transfer control to the drone',dpsBuff:1,
-    },{
       name:'PlayerHaunted',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:276,
       desc:'Software, but your drone has turrets and swarm drones',dpsBuff:1,
@@ -4341,6 +4343,10 @@ types={
       name:'PlayerPython',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:502,
       desc:'Software but all the bullets freeze',dpsBuff:1,
+    },{
+      name:'PlayerRansomware',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:532,
+      desc:'Software, but the drone can block projectiles',dpsBuff:1,
     },{
       name:'PlayerSoftwareception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:277,
@@ -4620,6 +4626,40 @@ types={
     },
 
     {
+      name:'PlayerPlanetarium',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:500,
+      desc:'Engineer, but the balls have additional orbital turrets',dpsBuff:8,
+    },{
+      name:'PlayerSolarSystem',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:230,
+      desc:'Motorizer with drones that have additional orbital drones',dpsBuff:4,
+    },{
+      name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:315,
+      desc:'Has orbiting shields and turrets',dpsBuff:2,
+    },{
+      name:'PlayerCircuit',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:390,
+      desc:'Has orbiting shotgun turrets',dpsBuff:3.5,
+    },{
+      name:'PlayerSchismist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2.5,crit:0,weapon:489,
+      desc:'Director with rotating turrets',dpsBuff:2,
+    },{
+      name:'PlayerBohrer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:530,
+      desc:'Has a fast-firing light sniper and orbiting turrets',dpsBuff:3,
+    },{
+      name:'PlayerPlanetoid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:531,
+      desc:'Has four orbiting shields that can collide with enemies',dpsBuff:1,
+    },{
+      name:'PlayerRevolutionistception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:529,
+      desc:'Has orbiting turrets in two levels and an auto turret',dpsBuff:3,
+    },
+
+    {
       name:'PlayerHistorian',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:409,
       desc:'Inspector that can see every duck on the map',dpsBuff:1,
@@ -4756,18 +4796,6 @@ types={
     },
     
     {
-      name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:315,
-      desc:'Has orbiting shields and turrets',dpsBuff:3,
-    },{
-      name:'PlayerCircuit',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:390,
-      desc:'Has orbiting shotgun turrets',dpsBuff:3.5,
-    },{
-      name:'PlayerSchismist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2.5,crit:0,weapon:489,
-      desc:'Director with rotating turrets',dpsBuff:2,
-    },{
       name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:314,
       desc:'Fires large bullets and randomly lays traps',dpsBuff:1.5,
@@ -4787,6 +4815,18 @@ types={
       name:'PlayerConsort',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:402,
       desc:'Respawning sidekick parachutists that are launched upward',dpsBuff:1,
+    },{
+      name:'PlayerFaucet',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:524,
+      desc:'Can mash to fire faster and fires three accelerating bullets',dpsBuff:3,
+    },{
+      name:'PlayerGuidedMissile',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:525,
+      desc:'Fires rockets that can be manually controlled',dpsBuff:1,
+    },{
+      name:'PlayerTroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:526,
+      desc:'Sends targets to a random spot on the map',dpsBuff:1,
     },
     
     {
@@ -4818,9 +4858,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:467,
       desc:'Fires four auto turrets, and can use auxiliary key to launch a large jump',dpsBuff:4,
     },{
-      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:339,
-      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
+      name:'PlayerGear',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:533,
+      desc:'Damaging bonker, and can use auxiliary key to launch a large jump',dpsBuff:4,
     },
     
     {
@@ -4848,20 +4888,16 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:469,
       desc:'Invisible when moving, but not when shooting',dpsBuff:1,
     },{
-      name:'PlayerVigilante',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:382,
-      desc:'Sidekick that can become invisible when not moving',dpsBuff:3,
-    },{
       name:'PlayerAvalanche',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:482,
       desc:'Ballista that freezes enemies',dpsBuff:1,
-    },
-
-    {
+    },{
       name:'PlayerDecoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:399,
       desc:'Has sidekicks that can collide with enemies and have shields',dpsBuff:1,
-    },{
+    },
+    
+    {
       name:'PlayerQuadSpinner',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:512,
       desc:'Fires in four directions uncontrollably',dpsBuff:4,
@@ -4878,17 +4914,21 @@ types={
       damageBuff:1,reloadBuff:2.5,crit:0,weapon:430,
       desc:'Fires accelerating rockets rapidly in four streams',dpsBuff:1,
     },{
-      name:'PlayerFaucet',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:524,
-      desc:'Can mash to fire faster and fires three accelerating bullets',dpsBuff:3,
+      name:'PlayerAirtag',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:275,
+      desc:'Software, but you transfer control to the drone',dpsBuff:1,
     },{
-      name:'PlayerGuidedMissile',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:525,
-      desc:'Fires rockets that can be manually controlled',dpsBuff:1,
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:339,
+      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
     },{
-      name:'PlayerTroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:526,
-      desc:'Sends targets to a random spot on the map',dpsBuff:1,
+      name:'PlayerL-Sys',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:534,
+      desc:'Fires ticked grenades triggered using auxiliary key',dpsBuff:1,
+    },{
+      name:'PlayerInsecticide',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:535,
+      desc:'Ballista that inflicts confusion and damage over time',dpsBuff:1,
     },
 
     {
@@ -9309,7 +9349,7 @@ types={
 		},{
 			name:'Rho',
 			ammo:5,
-			damage:60,
+			damage:120,
 			cooldown:15,
 			stop:45,
 			reload:10,
@@ -10658,13 +10698,13 @@ types={
       uses:36,
 		},{
 			name:'Driller',
-			ammo:8,
+			ammo:10,
 			damage:60,
 			cooldown:20,
 			stop:120,
 			reload:25,
 			speed:0.85,
-      uses:48,
+      uses:50,
 		},{
 			name:'Rain',
 			ammo:24,
@@ -11064,7 +11104,7 @@ types={
 		},{
 			name:'Aircraft',
 			ammo:8,
-			damage:125,
+			damage:200,
 			cooldown:10,
 			stop:180,
 			reload:10,
@@ -11082,7 +11122,7 @@ types={
 		},{
 			name:'Quad Spinner',
 			ammo:30,
-			damage:50,
+			damage:100,
 			cooldown:4,
 			stop:120,
 			reload:3,
@@ -11214,6 +11254,87 @@ types={
 			reload:6,
 			speed:1.2,
       uses:48,
+		},{
+			name:'GPS',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Revolutionist',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Revolutionistception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Bohrer',
+			ammo:10,
+			damage:90,
+			cooldown:20,
+			stop:120,
+			reload:25,
+			speed:0.85,
+      uses:50,
+		},{
+			name:'Planetoid',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Ransomware',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Gear',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'L-Sys',
+			ammo:4,
+			damage:240,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Insecticide',
+			ammo:15,
+			damage:100,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:1.05,
+      uses:60,
 		},
 	],
 }
