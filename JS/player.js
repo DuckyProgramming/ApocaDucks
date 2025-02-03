@@ -3292,7 +3292,7 @@ class player{
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],282,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
             break
             case 534:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],284,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],284+weapon.uses%2*2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
 			break
             case 535:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],285,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4418,11 +4418,15 @@ class player{
                 }
                 if(this.manage[0]==0&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&this.playerData.name!='Buster'&&this.position.x<this.base.position.x-150)){
                     this.direction.goal=-54
-                    this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    if(!this.thrown&&!this.thrown2){
+                        this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    }
                     this.runAnim(1/30)
                 }else if(this.manage[0]==1&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&this.playerData.name!='Buster'&&this.position.x>this.base.position.x+150)){
                     this.direction.goal=54
-                    this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    if(!this.thrown&&!this.thrown2){
+                        this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    }
                     this.runAnim(1/30)
                 }else if(this.animSet.loop<1&&this.animSet.loop>0){
                     this.runAnim(1/30)
@@ -4599,11 +4603,15 @@ class player{
             }else{
                 if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*effectivePlayerSpeed*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    if(!this.thrown&&!this.thrown2){
+                        this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*effectivePlayerSpeed*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    }
                     this.runAnim(1/30)
                 }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*effectivePlayerSpeed*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    if(!this.thrown&&!this.thrown2){
+                        this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*effectivePlayerSpeed*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)
+                    }
                     this.runAnim(1/30)
                 }else if(this.animSet.loop<1&&this.animSet.loop>0){
                     this.runAnim(1/30)
@@ -5694,7 +5702,7 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         for(let b=0,lb=4;b<lb;b++){
                             if(inBoxBox({position:{x:this.position.x+50*lsin(this.time+b*90),y:this.position.y+50*lcos(this.time+b*90)-10},width:16,height:16},entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&!entities.players[a].dead&&!this.dead){
-                                let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),esntities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
+                                let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),entities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
                                 entities.players[a].takeDamage(100*(crit?3:1))
                                 entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                                 entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y

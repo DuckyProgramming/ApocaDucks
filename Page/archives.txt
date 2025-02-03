@@ -1,5 +1,42 @@
 
 
+
+44 x 9
++ 4 deployers
+
+
+march 1 TODO?
+
+gust branch
+- freeze gust
+- ice gust
+- all old push weapons
+
+[rear]guard branch
+- cluster one - shields on both sies 
+- bonker with a shield
+
+ballista branch
+- hecate - extremely long range ballista
+- bombardmentor - exploding ballista
+- ballistaception
+
+new base classes
+-
+-
+
+new engineer - programmer - balls that avoid enemies
+
+microphone - fires an interceptor bullet, a swarmer bullet, and a backterceptor bullet
+tyrant - spams balls and blocks
+spiny - rearguard but the shield does damage
+
+
+
+
+
+
+
 527 - gps, 146 - engineer with gun and drones
 528 - revolutionist, 315, rho without shields
 529 - revolutionistception
@@ -14,6 +51,7 @@
 283 - randomsomware, 134
 284 - l-sys, 30
 285 - insecticide, 147
+286 - l-sys 2, 30
 
 
 
