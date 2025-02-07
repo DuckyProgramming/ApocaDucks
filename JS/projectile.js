@@ -4862,7 +4862,7 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*constrain(1.2-this.timer/this.base.time*6,0.2,1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
-						entities.players[b].stunTime=max(entities.players[b].stunTime,90)
+						entities.players[b].stunTime=max(entities.players[b].stunTime,60)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -7193,7 +7193,7 @@ class projectile{
 								entities.players[b].position.x=pos[0]
 								entities.players[b].position.y=pos[1]-entities.players[b].height/2
 							}else if(this.type==289){
-								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+1200)
+								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+600)
 								entities.players[b].gasser=this.index
 								entities.players[b].stunTime=240
 							}

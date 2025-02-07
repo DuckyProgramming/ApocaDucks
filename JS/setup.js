@@ -1,6 +1,6 @@
 function setup(){
     listing[0]=[...range(0,44),...range(0,12)]
-    listing[1]=range(40,findName('PlayerTripleAuto',types.player)/*229,239*/)
+    listing[1]=range(44,findName('PlayerTripleAuto',types.player)/*229,239*/)
     listing[2]=range(0,12)
     //listing[1]=listing[1].filter(item=>types.player[item].weapon>=487)
     if(game.nuke){

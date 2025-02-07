@@ -6601,7 +6601,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:98,
     },{
       name:'SlicingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:329,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:329,
     },{
       name:'BombSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:132,
