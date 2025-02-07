@@ -4992,7 +4992,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:557,
       desc:'Laser that spawns large drones',dpsBuff:1.5,
     },{
-      name:'PlayerColoniser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerColonizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:558,
       desc:'Has a gun and passively spawns slow-moving drones',dpsBuff:1,
     },{
@@ -11686,7 +11686,7 @@ types={
 			speed:0.875,
       uses:480,
 		},{
-			name:'Coloniser',
+			name:'Colonizer',
 			ammo:5,
 			damage:120,
 			cooldown:15,

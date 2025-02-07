@@ -1041,7 +1041,7 @@ function newWave(level,layer){
                 types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='RevolverSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='SpyHeal'
-            if(types.mission[game.mission].wave[display.cycle][a][1]==1){
+            if(types.mission[game.mission].wave[display.cycle][a][0].includes('Boss')){
                 game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
                 for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.75:1.5):1)*(game.level==16?0.4:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
