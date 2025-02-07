@@ -140,7 +140,7 @@ function mainloop(){
                     entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
                     entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
                     ?(game.level==7?1.5:2):1)
-                key[c]*=0.75
+                key[c]*=0.75/0.8
                 if(game.level==6){
                     key[c]*=0.75
                 }
