@@ -731,12 +731,12 @@ function generateLevel(level,layer){
                     if(game.level==16){
                         for(let a=0,la=game.players;a<la;a++){
                             entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            let cluster=floor(random(1.5))
+                            let cluster=game.peakWeapon?1:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         }
                     }else if(game.level==15||game.level==18||game.level==20||game.level==21){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                        let cluster=floor(random(1.5))
+                        let cluster=game.peakWeapon?1:floor(random(1.5))
                         entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))

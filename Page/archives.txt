@@ -1,39 +1,53 @@
 
 
+536 - frostwind, 413
+537 - gustception, 413
+538 - fentanyl, 535 - ballista with stun and gas
+539 - bombardmentor, 231 - exploding ballista
+540 - ballistaception, 231
+541 - guillotine, 242 - shield bonker
+542 - shovel, 272 - guard with pushing shields
+543 - watcher, 242 - fast bonker with large fov
+544 - cluster shield, 255 - double auto with 2 shields
+545 - bouncy shield, 272 - can bounce projectiles
+546 - spiny, 272 - shield that harms people
+547 - fleet, 331 - pelleter squad
+548 - pointer, 331 - laser squad
+549 - heister, 1 - pistol, but when you jump, fires a triplet auto turret
+550 - programmer, 527 - engineer but the balls avoid enemies
+551 - grenadiertick, 493 - grenadier that drops time bombs
+552 - delimiter, 338 - interceptor with a bullet that fires 3 shots at once
+553 - guardception, 272 - guard with an additional turret and another shield
+554 - spreadling hybrid, 318, 219
+555 - entomologist, 179 - machine gun, occasionally fires bees
+556 - australia, 491 - fires a destroyer bullet and an engineer bullet, in randomized directions
+557 - laser hybrid, 335
+558 - coloniser, 233 - has a basic gun, passively spawns many very slow drones
+559 - silvally, 406 - switches between gun forward and traps and drones back, or traps and drones forward
+560 - curtana, 462 - submachine that fires airhorn traps backward
+561 - synchroscope, 475 - long range shotgun
+562 - slammer, 255 - double auto with occassionally double destroyer bullets
+563 - rescue, sidekick with a radar
+564 - remote control, 152 - control the deployers
 
-44 x 9
-+ 4 deployers
-
-
-march 1 TODO?
-
-gust branch
-- freeze gust
-- ice gust
-- all old push weapons
-
-[rear]guard branch
-- cluster one - shields on both sies 
-- bonker with a shield
-
-ballista branch
-- hecate - extremely long range ballista
-- bombardmentor - exploding ballista
-- ballistaception
-
-new base classes
--
--
-
-new engineer - programmer - balls that avoid enemies
-
-microphone - fires an interceptor bullet, a swarmer bullet, and a backterceptor bullet
-tyrant - spams balls and blocks
-spiny - rearguard but the shield does damage
+287 - frostwind, 222
+288 - gustception, 222
+289 - fentanyl, 285
+290 - bombardmentor, 147
+291 - ballistaception, 147
+292 - programmer, 282
+293 - grenadiertick, 264
+294 - delimiter, 173
+295 - coloniser, 118
 
 
 
 
+
+
+
+
+ 
 
 
 

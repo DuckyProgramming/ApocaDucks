@@ -1,4 +1,4 @@
-function mainloop(layer){
+function mainloop(){
     clear()
     background(150)
     switch(stage.scene){
@@ -137,7 +137,7 @@ function mainloop(layer){
                     entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
                     entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
                     entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
-                    entities.players[c].weaponType==530||
+                    entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
                     entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
                     ?(game.level==7?1.5:2):1)
                 key[c]*=0.75
@@ -161,6 +161,13 @@ function mainloop(layer){
                             center=entities.projectiles[a]
                             a=la
                             key[c]*=(game.level==7?1.5:2)
+                        }
+                    }
+                }else if(entities.players[c].playerData.name=='PlayerRemoteControl'){
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
+                            center=entities.players[a]
+                            a=la
                         }
                     }
                 }
@@ -446,7 +453,11 @@ function mainloop(layer){
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
-                entities.players[a].displayOver(graphics.main[a])
+                for(let b=0,lb=entities.players.length;b<lb;b++){
+                    if(entities.players[a].index==entities.players[b].index){
+                        entities.players[b].displayOver(graphics.main[a])
+                    }
+                }
             }
             for(let a=0,la=run.update.length;a<la;a++){
                 for(let b=0,lb=run.update[a].length;b<lb;b++){

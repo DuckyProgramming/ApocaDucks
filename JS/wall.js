@@ -1554,7 +1554,8 @@ class wall{
                         c.type==246||c.type==247||c.type==248||c.type==250||c.type==252||
                         c.type==259||c.type==260||c.type==261||c.type==263||c.type==264||
                         c.type==267||c.type==268||c.type==271||c.type==272||c.type==275||
-                        c.type==277||c.type==282||c.type==283||c.type==284||c.type==286
+                        c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
+                        c.type==292||c.type==293||c.type==295
                     )){
                         let d=collideBoxBox(this,c)
                         let incident
@@ -1809,7 +1810,7 @@ class wall{
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
                                 c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                 c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                c.type==286
+                                c.type==286||c.type==293
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
@@ -1870,7 +1871,7 @@ class wall{
                                     c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
                                     c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
-                                    c.type==262||c.type==266||c.type==279||c.type==280
+                                    c.type==262||c.type==266||c.type==279||c.type==280||c.type==290
                                 ){
                                     c.explode()
                                 }
@@ -1970,11 +1971,11 @@ class wall{
                                     }
                                     this.findFall()
                                     c.newWeaponSet(this.weapon)
-                                    let chunk=floor(random(0,1.5))
+                                    let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                 }else if(game.level==15||game.level==18||game.level==20||game.level==21){
                                     c.newWeaponSet(this.weapon)
-                                    let chunk=floor(random(0,1.5))
+                                    let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                     this.recharge=3600-(game.gaming-1)*600
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
@@ -2037,7 +2038,7 @@ class wall{
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
                                                     c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='PlayerPistolInspect'||c.playerData.name=='PlayerRegional'||
-                                                    c.playerData.name=='PlayerQuarry'||
+                                                    c.playerData.name=='PlayerQuarry'||c.playerData.name=='PlayerHeister'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1
