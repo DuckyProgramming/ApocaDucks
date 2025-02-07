@@ -6085,7 +6085,7 @@ class player{
                         }
                     }
                 break
-                case 'PlayerColoniser':
+                case 'PlayerColonizer':
                     if(this.time%90==0){
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,295,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,1200,crit,this.index))
                     }

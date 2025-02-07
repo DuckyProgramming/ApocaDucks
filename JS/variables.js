@@ -4748,7 +4748,7 @@ types={
     },{
       name:'PlayerGuillotine',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:541,
-      desc:'Bonker with a shield',dpsBuff:1,
+      desc:'Bonker with a shield',dpsBuff:0,
     },{
       name:'PlayerShovel',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:542,
@@ -4870,7 +4870,7 @@ types={
     },{
       name:'PlayerRemoteControl',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:564,
-      desc:'Spawns controllable shotgun ducks to play as until pressing auxiliary key',dpsBuff:0,
+      desc:'Spawns controllable submachine ducks to play as until pressing auxiliary key',dpsBuff:0,
     },
     
     {
@@ -5331,28 +5331,28 @@ types={
       damageBuff:2,reloadBuff:1.25,crit:0,weapon:168,
     },{
       name:'SidekickTicker',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:440,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:440,
     },{
       name:'SidekickDial',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:355,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:355,
     },{
       name:'SidekickHourglass',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:342,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:342,
     },{
       name:'SidekickSickle',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:505,
+      damageBuff:0.8,reloadBuff:2,crit:0,weapon:505,
     },{
       name:'SidekickFreezeBeam',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:334,
+      damageBuff:0.6,reloadBuff:1,crit:0,weapon:334,
     },{
       name:'SidekickMaximizer',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:394,
+      damageBuff:0.6,reloadBuff:1,crit:0,weapon:394,
     },{
       name:'SidekickPetawatt',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:480,
+      damageBuff:0.6,reloadBuff:1,crit:0,weapon:480,
     },{
       name:'SidekickShrinkray',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:481,
+      damageBuff:0.6,reloadBuff:1,crit:0,weapon:481,
     },{
       name:'SidekickBonker',sizeBuff:0.8,lifeBuff:2,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
@@ -11571,7 +11571,7 @@ types={
 		},{
 			name:'Bouncy Shield',
 			ammo:5,
-			damage:90,
+			damage:60,
 			cooldown:15,
 			stop:45,
 			reload:10,
