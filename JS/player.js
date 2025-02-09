@@ -700,7 +700,7 @@ class player{
             case 226: case 228: case 230: case 247: case 263: case 265: case 266: case 267: case 274: case 284:
             case 285: case 287: case 302: case 303: case 304: case 305: case 320: case 322: case 323: case 324:
             case 354: case 355: case 359: case 389: case 408: case 425: case 427: case 428: case 438: case 439:
-            case 456: case 487: case 489: case 509: case 513: case 554: case 557:
+            case 456: case 487: case 489: case 509: case 513: case 554: case 557: case 559:
                 layer.stroke(0,255,0,this.infoAnim.bar[0]*0.5*this.fade)
                 layer.strokeWeight(3)
                 layer.line(
@@ -1375,6 +1375,18 @@ class player{
         this.velocity.y=0
         this.weapon.ammo=this.weaponData.ammo
         this.weapon.cooldown=0
+        this.resetKeys()
+        this.width=8*this.playerData.sizeBuff
+        this.height=24*this.playerData.sizeBuff
+        this.size=0.5*this.playerData.sizeBuff
+        this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
+        if((game.level==8||game.level==17)&&this.base.position.y<game.tileset[1]*5){
+            this.position.x=game.edge[0]/2
+            this.position.y=1000
+            this.parachute=true
+        }
+    }
+    resetKeys(){
         this.invincible=60
         this.base.control=0
         this.critBuff=0
@@ -1389,15 +1401,6 @@ class player{
         this.chillTime=0
         this.shrinkTime=0
         this.gasTime=0
-        this.width=8*this.playerData.sizeBuff
-        this.height=24*this.playerData.sizeBuff
-        this.size=0.5*this.playerData.sizeBuff
-        this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
-        if((game.level==8||game.level==17)&&this.base.position.y<game.tileset[1]*5){
-            this.position.x=game.edge[0]/2
-            this.position.y=1000
-            this.parachute=true
-        }
     }
     takeDamage(damage){
         if(this.invincible<=0&&!(
@@ -3595,7 +3598,7 @@ class player{
             case 226: case 228: case 230: case 247: case 263: case 265: case 266: case 267: case 274: case 284:
             case 285: case 287: case 302: case 303: case 304: case 305: case 320: case 322: case 323: case 324:
             case 354: case 355: case 359: case 389: case 408: case 425: case 427: case 428: case 438: case 439:
-            case 456: case 487: case 489: case 509: case 513: case 554: case 557:
+            case 456: case 487: case 489: case 509: case 513: case 554: case 557: case 559:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
                 if(!this.sidekick){
                     if(this.time%5==0){
@@ -5180,6 +5183,7 @@ class player{
                 if(this.fort){
                     this.life=this.base.life
                     this.dead=false
+                    this.resetKeys()
                     for(let a=0,la=entities.walls.length;a<la;a++){
                         for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                             if(entities.walls[a][b].type==31&&dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<200){
@@ -5208,21 +5212,21 @@ class player{
                             }
                         }
                         if(max<game.edge[0]+game.edge[1]){
+                            this.base.position.x=set[0]
+                            this.base.position.y=set[1]-40
                             this.respawn()
-                            this.position.x=set[0]
-                            this.position.y=set[1]-40
                         }else if(game.pvp){
-                            this.respawn()
                             let key='ABCDEF'[floor(random(0,6))]
                             for(let a=0,la=levels[19].length;a<la;a++){
                                 for(let b=0,lb=levels[19][a].length;b<lb;b++){
                                     if(levels[19][a][b]==key){
-                                        this.position.x=game.tileset[0]*(b+0.5)
-                                        this.position.y=game.tileset[1]*(a+0.5)
+                                        this.base.position.x=game.tileset[0]*(b+0.5)
+                                        this.base.position.y=game.tileset[1]*(a+0.5)
                                         game.index++
                                     }
                                 }
                             }
+                            this.respawn()
                         }
                     }else{
                         this.respawn()
@@ -6364,7 +6368,7 @@ class player{
             this.chillTime--
             this.velocity.x*=0.75
         }
-        if(this.shrinkTime>0){
+        if(this.shrinkTime>0&&!this.fort){
             this.shrinkTime--
             if(this.size>0.4){
                 this.life-=(this.playerData.lifeBuff-0.5)*0.005/(this.playerData.sizeBuff*0.5-0.4)*this.life/this.playerData.lifeBuff
@@ -6378,7 +6382,10 @@ class player{
             this.gasTime--
         }
         if(this.id==0&&!game.body||this.construct||this.sidekick){
-            if(game.invis||this.playerData.name=='SidekickStealth'){
+            if(this.invincible>0){
+                this.invincible--
+                this.fade=smoothAnim(this.fade,game.time%20>=10,0.4,1,5)
+            }else if(game.invis||this.playerData.name=='SidekickStealth'){
                 this.fade=smoothAnim(this.fade,this.visible>0&&!this.dead,0,1,10)
             }else{
                 this.fade=smoothAnim(this.fade,!this.dead,0,1,5)

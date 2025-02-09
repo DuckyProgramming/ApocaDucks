@@ -2429,7 +2429,7 @@ class wall{
                                                     c.thrown2=true
                                                 break
                                                 case 32:
-                                                    if(this.reload==0&&!c.fort&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                    if(this.reload==0&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
