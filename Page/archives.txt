@@ -1,5 +1,74 @@
 
 
+
+MARCH UPDATE
+
+
+
+100 weapons
+
+essence - double auto, has a basic auto turret, and also spawns drones when it fires
+
+warduck - has a gun and a four-way auto turret
+
+silo - long range ballista
+
+ion ray - laser that can see far
+
+toolbelt - revolutionist with 4 pods, eaach one unique
+
+toxbot - software but the drone fires long range sniper bullets
+
+more controller weapons
+
+sidekick officer
+
+shreadator - an assault rifle but the bullets grow in strength and fire with less spread
+
+stockroom - has a gun and passively gets 4 fast drones
+
+splitter - sidekick, but your sidekicks respawn when they die from your body
+
+progenitor - throws a slicer that's affected by physics until it hits the ground, then it becomes a normal slicer
+
+nightingale - fires clusters of small sniper bullets, and can become invisible
+
+flail
+ragweed - shrinking flail
+pentaflail - flail with a gun on the flail
+
+big pharma - fires a trap and a poison bullet
+
+recursion - tons of bullets, with different ranges
+
+flame shotgun - fires long range flames in a huge burst
+
+inferno - machine gun with flamethrower and swarm drones
+
+carpenter - fires three very fast bullets
+
+dustbowl - fires a destroyer bullet that spawns drones around itself
+
+dirigible - very maneuverable parachutist with accurate gun
+
+polaroid - twin gun with quad auto
+
+stationer - destroyer with four light auto guns
+
+battery - submachine but the bullets, after hitting one enemy, arc toward another
+
+
+
+convert a lot of sets from 4 to 6
+
+sunburst hybrid
+[hybrid]
+
+6 base classes
+
+
+
+
 536 - frostwind, 413
 537 - gustception, 413
 538 - fentanyl, 535 - ballista with stun and gas

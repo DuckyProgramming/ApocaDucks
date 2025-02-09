@@ -4525,7 +4525,7 @@ types={
       desc:'Interceptor with an assault rifle auto turret',dpsBuff:2,
     },{
       name:'PlayerDelimiter',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:552,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:552,
       desc:'Fires a bullet that shoots spreads of three bullets',dpsBuff:4,
     },{
       name:'PlayerInterceptorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4768,7 +4768,7 @@ types={
     },{
       name:'PlayerGuardception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:553,
-      desc:'Has an auto turret an a more dense shield',dpsBuff:1,
+      desc:'Has an auto turret and a more dense shield',dpsBuff:1,
     },
 
     {
@@ -4794,7 +4794,7 @@ types={
     },{
       name:'PlayerSlammer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:562,
-      desc:'Fire two auto turrets, one on each side, and occasional destroyer bullets',dpsBuff:0,
+      desc:'Fire two auto turrets, one on each side, and occasional destroyer bullets',dpsBuff:4.25,
     },{
       name:'PlayerNeedlegun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:380,
@@ -5331,28 +5331,28 @@ types={
       damageBuff:2,reloadBuff:1.25,crit:0,weapon:168,
     },{
       name:'SidekickTicker',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.8,reloadBuff:1,crit:0,weapon:440,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:440,
     },{
       name:'SidekickDial',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.8,reloadBuff:1,crit:0,weapon:355,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:355,
     },{
       name:'SidekickHourglass',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.8,reloadBuff:1,crit:0,weapon:342,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:342,
     },{
       name:'SidekickSickle',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.8,reloadBuff:2,crit:0,weapon:505,
+      damageBuff:0.75,reloadBuff:2,crit:0,weapon:505,
     },{
       name:'SidekickFreezeBeam',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.6,reloadBuff:1,crit:0,weapon:334,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:334,
     },{
       name:'SidekickMaximizer',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.6,reloadBuff:1,crit:0,weapon:394,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:394,
     },{
       name:'SidekickPetawatt',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.6,reloadBuff:1,crit:0,weapon:480,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:480,
     },{
       name:'SidekickShrinkray',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.6,reloadBuff:1,crit:0,weapon:481,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:481,
     },{
       name:'SidekickBonker',sizeBuff:0.8,lifeBuff:2,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
@@ -9672,7 +9672,7 @@ types={
 		},{
 			name:'Freeze Beam',
 			ammo:120,
-			damage:15,
+			damage:12,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -9681,7 +9681,7 @@ types={
 		},{
 			name:'Laser',
 			ammo:120,
-			damage:10,
+			damage:8,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -10968,7 +10968,7 @@ types={
 		},{
 			name:'Orion',
 			ammo:120,
-			damage:35,
+			damage:28,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -10977,7 +10977,7 @@ types={
 		},{
 			name:'Laserception',
 			ammo:120,
-			damage:10,
+			damage:8,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -10986,7 +10986,7 @@ types={
 		},{
 			name:'Petawatt',
 			ammo:120,
-			damage:20,
+			damage:16,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -10995,7 +10995,7 @@ types={
 		},{
 			name:'Shrinkray',
 			ammo:120,
-			damage:20,
+			damage:16,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -11112,7 +11112,7 @@ types={
 		},{
 			name:'Burstphase',
 			ammo:120,
-			damage:20,
+			damage:16,
 			cooldown:1,
 			stop:150,
 			reload:1,
@@ -11517,7 +11517,7 @@ types={
 		},{
 			name:'Bombardmentor',
 			ammo:15,
-			damage:150,
+			damage:225,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -11671,11 +11671,11 @@ types={
 			name:'Australia',
 			ammo:1,
 			damage:600,
-			cooldown:180,
-			stop:180,
-			reload:180,
+			cooldown:120,
+			stop:120,
+			reload:120,
 			speed:0.9,
-      uses:10,
+      uses:15,
 		},{
 			name:'Laser Hybrid',
 			ammo:120,

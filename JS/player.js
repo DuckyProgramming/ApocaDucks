@@ -4627,17 +4627,56 @@ class player{
                 }
             }
             if(this.disable){
-                this.manage[1]=false
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<400&&entities.players[a].position.x>this.position.x-50&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
-                        this.manage[1]=true
-                        this.direction.goal=entities.players[a].position.x>this.position.x?54:-54
-                        a=la
+                if(this.id==0){
+                    this.manage[1]=false
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<400&&entities.players[a].position.x>this.position.x-50&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
+                            this.manage[1]=true
+                            this.direction.goal=entities.players[a].position.x>this.position.x?54:-54
+                            a=la
+                        }
                     }
-                }
-                this.attacking=this.manage[1]
-                if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading){
-                    this.attack(0)
+                    this.attacking=this.manage[1]
+                    if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading){
+                        this.attack(0)
+                    }
+                }else{
+                    if(this.weaponType==275&&this.id<=game.gaming){
+                        this.disable=false
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].type==163&&entities.projectiles[a].index==this.index){
+                                if(this.life<=0){
+                                    entities.projectiles[a].active=false
+                                }
+                                this.disable=true
+                                a=la
+                            }
+                        }
+                    }else if(this.playerData.name=='PlayerGuidedMissile'&&this.id<=game.gaming){
+                        this.disable=false
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].type==280&&entities.projectiles[a].index==this.index){
+                                if(this.life<=0){
+                                    entities.projectiles[a].active=false
+                                }
+                                this.disable=true
+                                a=la
+                            }
+                        }
+                    }else if(this.playerData.name=='PlayerRemoteControl'&&this.id<=game.gaming){
+                        this.disable=false
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==this.index&&entities.players[a].remote){
+                                if(this.life<=0){
+                                    entities.players[a].remote=false
+                                }
+                                this.disable=true
+                                a=la
+                            }
+                        }
+                    }else{
+                        this.disable=false
+                    }
                 }
             }else{
                 this.manage[0]=this.position.x>this.target.position.x?0:1
@@ -5405,7 +5444,7 @@ class player{
                         }
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception')&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)==minimum){
-                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y+(this.playerData.name=='PlayerBallistaception'?50:0))
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y-(this.playerData.name=='PlayerBallistaception'?100:0))
                                 entities.projectiles.push(new projectile(this.layer,this.playerData.name=='PlayerLaserception'?this.position.x+lsin(dir)*10:this.position.x,this.playerData.name=='PlayerLaserception'?this.position.y-lcos(dir)*10:this.position.y,
                                     this.playerData.name=='PlayerRocketLauncherception'?86:
                                     this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerMayfly'?4:
@@ -5535,7 +5574,7 @@ class player{
                     }
                 break
                 case 'PlayerSplitter': case 'PlayerDivision': case 'PlayerSquad': case 'PlayerFleet': case 'PlayerPointer':
-                    if(this.time%600==0){
+                    if(this.time%900==0){
                         this.newSubWeaponA()
                         this.newSubWeaponB()
                         this.weapon.uses--
@@ -6029,7 +6068,7 @@ class player{
                         }
                     }
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(((entities.players[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:10,height:100},entities.players[a])){
+                        if(((entities.players[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.players[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:10,height:100},entities.players[a])){
                             entities.players[a].velocity.x+=lsin(this.direction.main)*5
                             entities.players[a].lastingForce[0]+=lsin(this.direction.main)
                         }
@@ -6057,8 +6096,8 @@ class player{
                         }
                     }
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(((entities.players[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:20,height:100},entities.players[a])){
-                            entities.players[a].takeDamage(crit==1?25:10)
+                        if(((entities.players[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.players[a].id!=this.id)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:20,height:100},entities.players[a])){
+                            entities.players[a].takeDamage(crit==1?50:20)
                         }
                     }
                 break

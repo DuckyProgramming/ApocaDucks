@@ -365,7 +365,7 @@ class projectile{
 					[this.position.x,this.position.y],
 					[this.position.x,this.position.y]
 				]
-				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)}
+				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)*(this.type==291?-1:1)}
 			break
 			case 150:
 				this.speed=random(8,10)
@@ -7086,8 +7086,8 @@ class projectile{
 							}else if(this.type==287){
 								entities.players[b].velocity.x+=lsin(this.direction)*12
 								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
+								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
+								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
 								if(entities.players[b].chillTime==0){
 									entities.players[b].color.skin.head=[200,250,250]
 									entities.players[b].color.skin.body=[190,240,240]

@@ -1810,7 +1810,7 @@ class wall{
                                 c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
                                 c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                 c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                c.type==286||c.type==293
+                                c.type==286
                             ){
                                 if(c.type==201&&!c.stop){
                                     entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
@@ -1836,7 +1836,7 @@ class wall{
                                 if(c.bounces>=2){
                                     c.stop=true
                                 }
-                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264)&&c.bounceTimer==0){
+                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293)&&c.bounceTimer==0){
                                 c.bounces++
                                 c.bounceTimer=5
                                 if(c.type==235){
