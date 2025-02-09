@@ -5225,11 +5225,13 @@ class player{
                                     if(levels[19][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                    }
-                                    if(floor(random(0,10))==0){
-                                        this.base.position.x=game.edge[0]/2+random(-400,400)
-                                        this.base.position.y=0
-                                        this.parachute=true
+                                        if(floor(random(0,10))==0){
+                                            this.base.position.x=game.edge[0]/2+random(-400,400)
+                                            this.base.position.y=0
+                                            this.parachute=true
+                                        }
+                                        a=la
+                                        b=lb
                                     }
                                 }
                             }
