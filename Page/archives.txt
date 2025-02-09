@@ -1,4 +1,8 @@
 
+DOUBLEFORT DOUBLEMOUNTAIN
+
+artillery:
+
 
 
 MARCH UPDATE
@@ -15,7 +19,7 @@ silo - long range ballista
 
 ion ray - laser that can see far
 
-toolbelt - revolutionist with 4 pods, eaach one unique
+photon - revolutionist but iwth a machine gun auto
 
 toxbot - software but the drone fires long range sniper bullets
 
@@ -57,13 +61,33 @@ stationer - destroyer with four light auto guns
 
 battery - submachine but the bullets, after hitting one enemy, arc toward another
 
+ow - shotgun, can use auxiliary key to fire a burst of homing bullets
+
+automobile - sidekick gunceptions
+
+lightship - swarmer with a sniper auto
+
+maniplator - gunception but the ception bullet explodes into five rockets
+
+base poisoner weapon
+everdeath - pelleter, but your sidekicks are poisoner and trapper
+
+multitool - quad auto but each one is unique
+
+tart - kinoko with a poison auto
+buff kinoko to have an actual gun
+both also spawn drones on normal attack
+
+pyrite - fires blocks that can pierce multiple enemies, and combine with nearby other blocks
+
+
+
 
 
 convert a lot of sets from 4 to 6
 
 sunburst hybrid
 [hybrid]
-
 6 base classes
 
 

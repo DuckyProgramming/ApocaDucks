@@ -140,7 +140,6 @@ function mainloop(){
                     entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
                     entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
                     ?(game.level==7?1.5:2):1)
-                key[c]*=0.75/0.8
                 if(game.level==6){
                     key[c]*=0.75
                 }
@@ -212,8 +211,8 @@ function mainloop(){
                             run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                         ){
                             run.fore[a][b].display(graphics.main[c])
-                            if(a==2){
-                                bs[c].push(b)
+                            if(a==2||a==3){
+                                bs[c].push([a,b])
                             }
                         }else if(game.level==16){
                             let bounce=[
@@ -229,7 +228,7 @@ function mainloop(){
                                 ){
                                     run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
                                     if(a==2){
-                                        bs[c].push(b)
+                                        bs[c].push([a,b])
                                     }
                                     d=ld
                                 }
@@ -260,7 +259,7 @@ function mainloop(){
                                 ){
                                     run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
                                     if(a==2){
-                                        bs[c].push(b)
+                                        bs[c].push([a,b])
                                     }
                                     d=ld
                                 }
@@ -270,10 +269,12 @@ function mainloop(){
                 }
             }
             for(let a=0,la=game.gaming;a<la;a++){
-                graphics.main[a].image(
-                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                    effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                )
+                if(game.level!=15&&game.level!=18&&game.level!=19){
+                    graphics.main[a].image(
+                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                        effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                    )
+                }
                 if(game.level==7){
                     if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
                         graphics.main[a].image(
@@ -376,10 +377,6 @@ function mainloop(){
                         case 18:
                             graphics.main[a].text('Weapons\nHere',100,game.edge[1]-220)
                         break
-                        case 19:
-                            graphics.main[a].text('Weapons\nHere',3600,1050)
-                            graphics.main[a].text('Weapons\nHere',6900,1050)
-                        break
                         case 20:
                             graphics.main[a].text('Weapons\nHere',2250,965)
                         break
@@ -391,7 +388,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    run.fore[2][bs[a][b]].displayOver(graphics.main[a])
+                    run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                 }
             }
             for(let c=0,lc=game.gaming;c<lc;c++){

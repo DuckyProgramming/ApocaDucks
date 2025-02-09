@@ -3549,7 +3549,7 @@ types={
 
     {
       name:'PlayerPanicShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:167,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:167,
       desc:'Fires many shots, gradually less accurately',dpsBuff:12,
     },{
       name:'PlayerGatekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4015,8 +4015,8 @@ types={
       desc:'Destroyer with a pelleter auto turret',dpsBuff:1,
     },{
       name:'PlayerAustralia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:556,
-      desc:'Fires a destroyer bullet and an engineer bullet, in a random pair of directions',dpsBuff:1,
+      damageBuff:1.25,reloadBuff:2,crit:0,weapon:556,
+      desc:'Fires a destroyer bullet and an engineer bullet, in a random pair of directions',dpsBuff:2,
     },{
       name:'PlayerDestroyerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:217,
@@ -4883,7 +4883,7 @@ types={
       desc:'Fires a sphere that afflicts enemies with gas, that causes them to burn on hit',dpsBuff:0,
     },{
       name:'PlayerRelay',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:412,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:412,
       desc:'Fires traps that fire bullets in lines toward nearby other traps',dpsBuff:2,
     },{
       name:'PlayerDropkick',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5279,6 +5279,9 @@ types={
     },{
       name:'ConstructRemote',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:391,
+    },{
+      name:'Fort',sizeBuff:2,lifeBuff:5,speedBuff:0,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:11,
     },
 
     {
@@ -12687,15 +12690,15 @@ levels=[
       "                                                                                                                                                                                                        ",
       "                                                                                                                                                                                                        ",
       "                                                                                                                                                                                                        ",
-      "                                                                                                                                                                                                        ",
-      "                                                                    q                                                              w                                                                    ",
-      "                                                           ---  <#####>                                                        <#######>  ----                                                          ",
-      "                                                        <##################>                                                <###################>                                                       ",
+      "                                                                   V                                                                V                                                                   ",
+      "                                                                  ---                                                             ----                                                                  ",
+      "                                                           ---- <`#Q#~>---                                                     <%#~#Q#`> -----                                                          ",
+      "                                                        <%##?##@#######?##%>                                                <#?#########@##?##%#>                                                       ",
       "                                                   <#########################                                             <########################                                                     ",
       "                                                  <##########################b                                           ##########################b                                                    ",
-      "                                               #################################>                            4 5        /##################################>                                            ",
-      "                                              /#####################################>                  1 2 3<###>6--- <#######################################                                          ",
-      "                                           <###############################################>   ----  <########################################################b                                         ",
+      "                                               #################################>                            4          /##################################>                                            ",
+      "                                              /#####################################>     1           6    3<###> --- <#######################################                                          ",
+      "                                           <###############################################>2  ---- 5<########################################################b                                         ",
       "                                         <#######################################################################################################################>  ---                                 ",
       "                                        <###############################################################################################################################>                               ",
       "                                   --- <###################################################################################################################################                             ",

@@ -626,10 +626,13 @@ function generateLevel(level,layer){
     game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
     for(let a=0,la=graphics.pane.length;a<la;a++){
         delete graphics.pane[a]
+        graphics.pane.splice(a,1)
     }
-    graphics.pane=[]
-    graphics.pane.push(createGraphics(game.edge[0],game.edge[1]))
-    setupLayer(graphics.pane[0])
+    if(game.level!=15&&game.level!=18&&game.level!=19){
+        graphics.pane=[]
+        graphics.pane.push(createGraphics(game.edge[0],game.edge[1]))
+        setupLayer(graphics.pane[0])
+    }
     let reject=[]
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
@@ -800,6 +803,12 @@ function generateLevel(level,layer){
                 case 'g':
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                 break
+                case 'V':
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*10,game.tileset[1]*10,31))
+                break
+                case 'Q':
+                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],32))
+                break
                 case 'X':
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
                 break
@@ -959,10 +968,14 @@ function generateLevel(level,layer){
     entities.walls.forEach(set=>set.forEach(item=>item.set()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkBar()))
     entities.walls.forEach(set=>set.forEach(item=>item.formBounder()))
-    entities.walls[0].forEach(wall=>wall.display(graphics.pane[0]))
-    entities.walls[0].forEach(wall=>wall.displayOver(graphics.pane[0]))
+    if(game.level!=15&&game.level!=18&&game.level!=19){
+        entities.walls[0].forEach(wall=>wall.display(graphics.pane[0]))
+        entities.walls[0].forEach(wall=>wall.displayOver(graphics.pane[0]))
+        run.fore=[entities.projectiles,entities.players,entities.walls[1]]
+    }else{
+        run.fore=[entities.projectiles,entities.players,entities.walls[1],entities.walls[0]]
+    }
     run.back=[entities.players]
-    run.fore=[entities.projectiles,entities.players,entities.walls[1]]
     run.update=[entities.players,entities.walls[0],entities.walls[1],entities.projectiles]
     run.info=[entities.players]
     if(game.level==6){
@@ -1353,6 +1366,10 @@ function checkEnd(level,layer,key){
                                         }else if(game.level==17&&a<=5){
                                             entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[0])][floor(random(0,2))]
                                             entities.players[entities.players.length-1].position.y=1000
+                                            entities.players[entities.players.length-1].parachute=true
+                                        }else  if(game.level==19&&floor(random(0,10))==0){
+                                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-200,200)
+                                            entities.players[entities.players.length-1].position.y=0
                                             entities.players[entities.players.length-1].parachute=true
                                         }
                                         game.index++
