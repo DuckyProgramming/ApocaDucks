@@ -1146,6 +1146,7 @@ function checkEnd(level,layer,key){
                                 entities.walls[1][a].formBoundary()
                                 entities.walls[1][a].checkRedundancy()
                                 entities.walls[1][a].checkOverlay()
+                                entities.walls[1][a].set()
                                 entities.walls[1][a].checkGap()
                                 entities.walls[1][a].checkBar()
                                 entities.walls[1][a].formBounder()
@@ -1367,8 +1368,8 @@ function checkEnd(level,layer,key){
                                             entities.players[entities.players.length-1].position.x=[max(1000,entities.players[floor(random(0,game.players))].position.x+random(-240,240)),random(entities.players[floor(random(0,game.players))].position.x,game.edge[0])][floor(random(0,2))]
                                             entities.players[entities.players.length-1].position.y=1000
                                             entities.players[entities.players.length-1].parachute=true
-                                        }else  if(game.level==19&&floor(random(0,10))==0){
-                                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-200,200)
+                                        }else if(game.level==19&&floor(random(0,10))==0){
+                                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-400,400)
                                             entities.players[entities.players.length-1].position.y=0
                                             entities.players[entities.players.length-1].parachute=true
                                         }
@@ -1380,7 +1381,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?2.75:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*(game.level==19&&game.spawnIndex>10?1.5:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.8:1)
+                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?10:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?2.75:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)
                 game.stack.splice(0,1)
             }
         }else{

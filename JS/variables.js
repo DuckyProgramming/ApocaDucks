@@ -17,7 +17,7 @@ types={
       difficulty:0,
       wave:[
         [
-          //['Spy',100],
+          //['RevolutioningTank',100],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -2187,11 +2187,15 @@ types={
           ['BallingTank',1],
           ['FlamethrowingTank',1],
           ['EngineeringTank',1],
+
+          ['Wait',5],
+
           ['AutoTank',1],
+          ['RevolutioningTank',1],
           ['TankSpawner',1],
           ['HyperTank',1],
           ['SpyTank',1],
-          //9
+          //10
 
           ['Wait',10],
 
@@ -5533,6 +5537,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Tank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'RevolutioningTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankDamaged',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,

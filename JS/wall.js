@@ -2319,14 +2319,14 @@ class wall{
                                                                     if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                         if(entities.walls[0][e].position.x<this.position.x){
-                                                                            for(let e=0,le=10;e<le;e++){
+                                                                            for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(120,150),this.align,100,240,false,"none"))
                                                                                 let mult=random(1.25,2.5)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                             }
                                                                         }else{
-                                                                            for(let e=0,le=10;e<le;e++){
+                                                                            for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-150,-120),this.align,100,240,false,"none"))
                                                                                 let mult=random(1.25,2.5)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
@@ -2384,14 +2384,14 @@ class wall{
                                                                     if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                         if(entities.walls[0][e].position.x<this.position.x){
-                                                                            for(let e=0,le=10;e<le;e++){
+                                                                            for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(120,150),this.align,40,240,false,"none"))
                                                                                 let mult=random(1.25,2.5)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                             }
                                                                         }else{
-                                                                            for(let e=0,le=10;e<le;e++){
+                                                                            for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-150,-120),this.align,40,240,false,"none"))
                                                                                 let mult=random(1.25,2.5)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult

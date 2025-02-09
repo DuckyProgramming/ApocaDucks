@@ -80,6 +80,8 @@ both also spawn drones on normal attack
 
 pyrite - fires blocks that can pierce multiple enemies, and combine with nearby other blocks
 
+assymetrical quintuplet - assault rifle and submachine
+
 
 
 

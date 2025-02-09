@@ -508,7 +508,7 @@ class player{
                 layer.triangle(80,-70,80,50,0,-10)
             }
         }
-        if(this.playerData.name=='PlayerSchismist'||this.playerData.name=='PlayerRevolutionist'||this.playerData.name=='PlayerBohrer'){
+        if(this.playerData.name=='PlayerSchismist'||this.playerData.name=='PlayerRevolutionist'||this.playerData.name=='PlayerBohrer'||this.playerData.name=='RevolutioningTank'){
             layer.stroke(150,this.fade)
             layer.strokeWeight(2)
             layer.noFill()
@@ -976,7 +976,8 @@ class player{
                 }else if(
                     this.playerData.name=='Tank'||this.playerData.name=='BallingTank'||this.playerData.name=='PistolingTank'||this.playerData.name=='EngineeringTank'||this.playerData.name=='TankSpawner'||
                     this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
-                    this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'
+                    this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
+                    this.playerData.name=='RevolutioningTank'
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
@@ -3568,6 +3569,8 @@ class player{
         this.weapon.uses*=100
         if(this.id>0&&!game.pvp){
             this.multLife(4)
+        }else if(game.pvp){
+            this.multLife(2)
         }
     }
     validTarget(target){
@@ -5222,7 +5225,11 @@ class player{
                                     if(levels[19][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        game.index++
+                                    }
+                                    if(floor(random(0,10))==0){
+                                        this.base.position.x=game.edge[0]/2+random(-400,400)
+                                        this.base.position.y=0
+                                        this.parachute=true
                                     }
                                 }
                             }
@@ -5753,7 +5760,7 @@ class player{
                         }
                     }
                 break
-                case 'PlayerRho': case 'PlayerSchismist': case 'PlayerRevolutionist': case 'PlayerRevolutionistception': case 'PlayerBohrer':
+                case 'PlayerRho': case 'PlayerSchismist': case 'PlayerRevolutionist': case 'PlayerRevolutionistception': case 'PlayerBohrer': case 'RevolutioningTank':
                     if(this.playerData.name=='PlayerRho'){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
                             if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id)&&(
@@ -5786,7 +5793,7 @@ class player{
                                 dist(entities.players[a].position.x,entities.players[a].position.y,center[0][0],center[0][1])==minimum[0]&&!fired[0]
                             ){
                                 let dir=atan2(entities.players[a].position.x-center[0][0],center[0][1]-entities.players[a].position.y)
-                                entities.projectiles.push(new projectile(this.layer,center[0][0],center[0][1],1,dir+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerSchismist'?1/3:1)*(this.playerData.name=='PlayerBohrer'?2/3:1),300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,center[0][0],center[0][1],1,dir+random(-3,3),this.id,this.playerData.name=='RevolutioningTank'?60:this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerSchismist'?1/3:1)*(this.playerData.name=='PlayerBohrer'?2/3:1),300,crit,this.index))
                                 fired[0]=true
                             }
                             if(
@@ -5794,7 +5801,7 @@ class player{
                                 dist(entities.players[a].position.x,entities.players[a].position.y,center[1][0],center[1][1])==minimum[1]&&!fired[1]
                             ){
                                 let dir=atan2(entities.players[a].position.x-center[1][0],center[1][1]-entities.players[a].position.y)
-                                entities.projectiles.push(new projectile(this.layer,center[1][0],center[1][1],1,dir+random(-3,3),this.id,this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerSchismist'?1/3:1)*(this.playerData.name=='PlayerBohrer'?2/3:1),300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,center[1][0],center[1][1],1,dir+random(-3,3),this.id,this.playerData.name=='RevolutioningTank'?60:this.weaponData.damage*this.playerData.damageBuff*(this.playerData.name=='PlayerSchismist'?1/3:1)*(this.playerData.name=='PlayerBohrer'?2/3:1),300,crit,this.index))
                                 fired[1]=true
                             }
                         }
