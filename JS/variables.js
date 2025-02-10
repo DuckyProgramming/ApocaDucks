@@ -11482,7 +11482,7 @@ types={
 		},{
 			name:'L-Sys',
 			ammo:4,
-			damage:200,
+			damage:150,
 			cooldown:15,
 			stop:120,
 			reload:10,

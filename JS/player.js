@@ -3567,6 +3567,9 @@ class player{
         this.fort=true
         this.ammoMult*=100
         this.weapon.uses*=100
+        if(game.peakWeapon){
+            this.multLife(2)
+        }
         if(this.id>0&&!game.pvp){
             this.multLife(4)
         }else if(game.pvp){

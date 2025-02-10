@@ -82,6 +82,24 @@ pyrite - fires blocks that can pierce multiple enemies, and combine with nearby 
 
 assymetrical quintuplet - assault rifle and submachine
 
+expenditure - machine gun, but the bullets drop short-lived pursuer traps
+
+tunneler - picker with insane damage, but half fov
+
+juno - skep but with traps
+
+mint - poison trapper
+
+trumpet - helix but the balls explode into fire on hit
+
+constructor - gravityless heavy traps that can pierce multiple enemies
+
+maplayer - steamroller that freezes
+
+ac gun - az gun but the airshots freeze
+
+ammonia - reduces target fov
+
 
 
 
