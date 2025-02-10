@@ -1362,7 +1362,7 @@ class wall{
                         layer.fill(125,15,255)
                     break
                 }
-                layer.rect(0,-140,60,6,2)
+                layer.rect(0,-120,60,6,2)
             break
             
         }
@@ -2266,7 +2266,7 @@ class wall{
                                             c.velocity.y=0
                                             switch(this.type){
                                                 case 15:
-                                                    if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -2297,7 +2297,7 @@ class wall{
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34:
                                                     if(game.level==19&&this.type!=34){
-                                                        if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                        if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                             if(game.attacker||game.level==17||game.level==18){
                                                                 this.align=c.id
                                                             }
@@ -2335,7 +2335,7 @@ class wall{
                                                     c.collect.time=max(c.collect.time,150)
                                                 break
                                                 case 4:
-                                                    if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -2403,7 +2403,7 @@ class wall{
                                                     }
                                                 break
                                                 case 13: case 15:
-                                                    if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
                                                         this.reload=480
                                                         if(game.level==19){
                                                             this.align=c.id
@@ -2424,7 +2424,7 @@ class wall{
                                                     }
                                                 break
                                                 case 23:
-                                                    if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -2481,7 +2481,7 @@ class wall{
                                                     c.thrown2=true
                                                 break
                                                 case 32:
-                                                    if(this.reload==0&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -2534,7 +2534,7 @@ class wall{
                                             c.velocity.x=this.velocity.x
                                             switch(this.type){
                                                 case 13: case 15: case 18:
-                                                    if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&c.id>0&&c.life>0&&c.attacking){
                                                         this.reload=480
                                                     }
                                                 break
