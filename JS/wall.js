@@ -1588,12 +1588,12 @@ class wall{
         switch(this.type){
             case 2:
                 if(game.level==19&&this.reload>0){
-                    this.reload-=(game.level==19?0.4:1)
+                    this.reload-=(game.level==19?1/3:1)
                 }
             break
             case 4: case 23:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.4:1)
+                    this.reload-=(game.level==19?1/3:1)
                 }
             break
             case 6:
@@ -1654,7 +1654,7 @@ class wall{
             break
             case 13:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.4:1)
+                    this.reload-=(game.level==19?1/3:1)
                     if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
                         switch(game.level){
                             case 6:
@@ -1690,7 +1690,7 @@ class wall{
             break
             case 15:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.4:1)
+                    this.reload-=(game.level==19?1/3:1)
                     switch(game.level){
                         case 19:
                             if(this.reload>=399&&this.reload<=479&&this.reload%10==0){
@@ -1760,7 +1760,7 @@ class wall{
             break
             case 32:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==19?1/3:1)
                 }
             break
         }
@@ -2154,7 +2154,7 @@ class wall{
                                 }else{
                                     this.recharge=1800-(game.gaming-1)*300
                                 }
-                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2*(listing[1].includes(c.playerType)?0.4:1)))
+                                c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2*(listing[1].includes(c.playerType)?1/3:1)))
                                 c.weapon.cooldown=min(c.weapon.cooldown,30)
                                 if(game.level==6){
                                     this.type=[9,12][floor(random(0,2))]
