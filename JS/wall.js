@@ -562,7 +562,7 @@ class wall{
                     break
                 }
             break
-            case 2:
+            case 2: case 34:
                 switch(game.level){
                     case 6:
                         layer.fill(60+this.position.y/game.edge[1]*60,120-this.position.y/game.edge[1]*30,60)
@@ -591,15 +591,27 @@ class wall{
                         )
                     break
                     case 19:
-                        layer.fill(90,85,105)
-                        layer.rect(0,0,this.width+1,this.height+1)
-                        layer.fill(120,200-this.reload/8,120)
-                        layer.quad(
-                            -this.width/2,-this.height/2-0.5,
-                            -this.width/2+10,-this.height/2+15,
-                            this.width/2-10,-this.height/2+15,
-                            this.width/2,-this.height/2-0.5
-                        )
+                        if(this.type==34){
+                            layer.fill(90,85,105)
+                            layer.rect(0,0,this.width+1,this.height+1)
+                            layer.fill(120,200,120)
+                            layer.quad(
+                                -this.width/2,-this.height/2-0.5,
+                                -this.width/2+10,-this.height/2+15,
+                                this.width/2-10,-this.height/2+15,
+                                this.width/2,-this.height/2-0.5
+                            )
+                        }else{
+                            layer.fill(90,85,105)
+                            layer.rect(0,0,this.width+1,this.height+1)
+                            layer.fill(120,240-this.reload/6,120)
+                            layer.quad(
+                                -this.width/2,-this.height/2-0.5,
+                                -this.width/2+10,-this.height/2+15,
+                                this.width/2-10,-this.height/2+15,
+                                this.width/2,-this.height/2-0.5
+                            )
+                        }
                     break
                     case 20:
                         layer.fill(100)
@@ -716,7 +728,7 @@ class wall{
             break
             case 7:
                 switch(game.level){
-                    case 15: case 18:
+                    case 15: case 18: case 19:
                         layer.fill(140,80,20)
                         layer.rect(0,0,this.width+1,this.height)
                         layer.fill(120,60,0)
@@ -1147,7 +1159,7 @@ class wall{
             break
             case 24:
                 switch(game.level){
-                    case 15: case 18:
+                    case 15: case 18: case 19:
                         layer.fill(160,100,40)
                         layer.rect(0,0,this.width+1,this.height)
                         layer.fill(140,80,20)
@@ -1282,7 +1294,7 @@ class wall{
             case 31:
                 layer.fill(255)
                 layer.textSize(20)
-                layer.text('Fort',0,-160)
+                layer.text('Fort',0,-140)
                 switch(this.owner){
                     case 0:
                         layer.fill(255,255,0)
@@ -1306,7 +1318,7 @@ class wall{
                         layer.fill(125,15,255)
                     break
                 }
-                layer.rect(0,-140,60,6,2)
+                layer.rect(0,-120,60,6,2)
             break
             case 32:
                 switch(game.level){
@@ -1326,7 +1338,7 @@ class wall{
             case 33:
                 layer.fill(255)
                 layer.textSize(20)
-                layer.text('Turret',0,-160)
+                layer.text('Turret',0,-140)
                 switch(this.owner){
                     case 0:
                         layer.fill(255,255,0)
@@ -1424,7 +1436,7 @@ class wall{
                     break
                 }
             break
-            case 2:
+            case 2: case 34:
                 switch(game.level){
                     case 6:
                         for(let a=0,la=this.balls.length;a<la;a++){
@@ -2283,8 +2295,8 @@ class wall{
                                                 c.jump.quadruple=1
                                             }
                                             switch(this.type){
-                                                case 2: case 25: case 29:
-                                                    if(game.level==19){
+                                                case 2: case 25: case 29: case 34:
+                                                    if(game.level==19&&this.type!=34){
                                                         if(this.reload==0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                             if(game.attacker||game.level==17||game.level==18){
                                                                 this.align=c.id

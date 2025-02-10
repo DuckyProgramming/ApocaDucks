@@ -5200,7 +5200,7 @@ class player{
                 }
             }else if(this.id>0){
                 this.die.timer++
-                if(this.die.timer>(game.assault?60:180)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn){
+                if(this.die.timer>(game.assault?60:360)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn){
                     if(game.level==19){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
@@ -5229,7 +5229,7 @@ class player{
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
                                         if(floor(random(0,10))==0){
-                                            this.base.position.x=game.edge[0]/2+random(-400,400)
+                                            this.base.position.x=game.edge[0]/2+random(-800,800)
                                             this.base.position.y=0
                                             this.parachute=true
                                         }
@@ -5244,7 +5244,7 @@ class player{
                         this.respawn()
                     }
                 }
-                if(this.die.timer>=90&&!game.classicRespawn&&!game.past&&!game.pvp){
+                if(this.die.timer>=60&&!game.past&&!game.pvp){
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(inBoxBox(this,entities.players[a])&&this.id!=entities.players[a].id&&!entities.players[a].dead&&this.id>0&&entities.players[a].id>0){
                             this.stats.bust*=0.5

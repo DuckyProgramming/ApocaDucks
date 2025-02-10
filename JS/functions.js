@@ -638,7 +638,9 @@ function generateLevel(level,layer){
         for(let b=0,lb=level[a].length;b<lb;b++){
             switch(level[a][b]){
 				case '#': case '.':
-                    if(!reject.includes(a*lb+b)){
+                    if(level[a][b]=='.'&&game.level==19){
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],34))
+                    }else if(!reject.includes(a*lb+b)){
                         let extent=0
                         for(let e=1,le=level.length-a;e<le;e++){
                             if(level[a+e][b]=='#'){
@@ -1372,7 +1374,7 @@ function checkEnd(level,layer,key){
                                             entities.players[entities.players.length-1].position.y=1000
                                             entities.players[entities.players.length-1].parachute=true
                                         }else if(game.level==19&&floor(random(0,10))==0){
-                                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-400,400)
+                                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-800,800)
                                             entities.players[entities.players.length-1].position.y=0
                                             entities.players[entities.players.length-1].parachute=true
                                         }
