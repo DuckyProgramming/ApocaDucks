@@ -5285,7 +5285,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:391,
     },{
       name:'Fort',sizeBuff:1.8,lifeBuff:4,speedBuff:0,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:11,
+      damageBuff:0.5,reloadBuff:1.25,crit:0,weapon:11,
     },{
       name:'Turret',sizeBuff:1.8,lifeBuff:4,speedBuff:0,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
@@ -5341,28 +5341,28 @@ types={
       damageBuff:2,reloadBuff:1.25,crit:0,weapon:168,
     },{
       name:'SidekickTicker',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:440,
+      damageBuff:0.7,reloadBuff:1,crit:0,weapon:440,
     },{
       name:'SidekickDial',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:355,
+      damageBuff:0.7,reloadBuff:1,crit:0,weapon:355,
     },{
       name:'SidekickHourglass',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:342,
+      damageBuff:0.7,reloadBuff:1,crit:0,weapon:342,
     },{
       name:'SidekickSickle',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.75,reloadBuff:2,crit:0,weapon:505,
+      damageBuff:0.7,reloadBuff:2,crit:0,weapon:505,
     },{
       name:'SidekickFreezeBeam',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:334,
+      damageBuff:0.4,reloadBuff:1,crit:0,weapon:334,
     },{
       name:'SidekickMaximizer',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:394,
+      damageBuff:0.4,reloadBuff:1,crit:0,weapon:394,
     },{
       name:'SidekickPetawatt',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:480,
+      damageBuff:0.4,reloadBuff:1,crit:0,weapon:480,
     },{
       name:'SidekickShrinkray',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:481,
+      damageBuff:0.4,reloadBuff:1,crit:0,weapon:481,
     },{
       name:'SidekickBonker',sizeBuff:0.8,lifeBuff:2,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
