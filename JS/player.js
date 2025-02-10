@@ -5192,7 +5192,7 @@ class player{
                     this.resetKeys()
                     for(let a=0,la=entities.walls.length;a<la;a++){
                         for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                            if(entities.walls[a][b].type==31&&dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<200){
+                            if((entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<200){
                                 entities.walls[a][b].owner=this.id
                             }
                         }

@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31
+        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -89,6 +89,12 @@ class wall{
             case 31:
                 this.owner=0
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,0,0,[],false,findName('Fort',types.player),game.index))
+                game.index++
+                entities.players[entities.players.length-1].fortify()
+            break
+            case 33:
+                this.owner=0
+                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,0,0,[],false,findName('Turret',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
             break
@@ -1317,6 +1323,35 @@ class wall{
                     break
                 }
             break
+            case 33:
+                layer.fill(255)
+                layer.textSize(20)
+                layer.text('Turret',0,-160)
+                switch(this.owner){
+                    case 0:
+                        layer.fill(255,255,0)
+                    break
+                    case 1:
+                        layer.fill(15,75,255)
+                    break
+                    case 2:
+                        layer.fill(225,15,255)
+                    break
+                    case 3:
+                        layer.fill(55,225,15)
+                    break
+                    case 4:
+                        layer.fill(225,105,15)
+                    break
+                    case 5:
+                        layer.fill(15,235,255)
+                    break
+                    case 6:
+                        layer.fill(125,15,255)
+                    break
+                }
+                layer.rect(0,-140,60,6,2)
+            break
             
         }
         //layer.stroke(255,150,50)
@@ -1541,12 +1576,12 @@ class wall{
         switch(this.type){
             case 2:
                 if(game.level==19&&this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==19?0.4:1)
                 }
             break
-            case 4: case 23: case 32:
+            case 4: case 23:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==19?0.4:1)
                 }
             break
             case 6:
@@ -1607,7 +1642,7 @@ class wall{
             break
             case 13:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==19?0.4:1)
                     if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
                         switch(game.level){
                             case 6:
@@ -1643,7 +1678,7 @@ class wall{
             break
             case 15:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==19?0.4:1)
                     switch(game.level){
                         case 19:
                             if(this.reload>=399&&this.reload<=479&&this.reload%10==0){
@@ -1711,12 +1746,17 @@ class wall{
                     }
                 }
             break
+            case 32:
+                if(this.reload>0){
+                    this.reload-=(game.level==19?0.5:1)
+                }
+            break
         }
         if(this.type!=7){
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
-                    if(a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&(
+                    if(a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&(
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
@@ -2042,7 +2082,7 @@ class wall{
                             }
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
@@ -2066,7 +2106,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=33
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
                         &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))

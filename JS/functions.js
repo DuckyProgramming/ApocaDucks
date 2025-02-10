@@ -610,7 +610,7 @@ function generateLevel(level,layer){
             game.edge=[5480,3000]
         break
         case 19:
-            game.edge=[10500,2500]
+            game.edge=[11000,2500]
         break
         case 20:
             game.edge=[4500,1700]
@@ -808,6 +808,9 @@ function generateLevel(level,layer){
                 break
                 case 'Q':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],32))
+                break
+                case 'N':
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*10,game.tileset[1]*10,33))
                 break
                 case 'X':
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
