@@ -1654,7 +1654,7 @@ class wall{
             break
             case 13:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?1/3:1)
+                    this.reload-=(game.level==19?0.5:1)
                     if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
                         switch(game.level){
                             case 6:
@@ -1690,10 +1690,10 @@ class wall{
             break
             case 15:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?1/3:1)
+                    this.reload-=(game.level==19?0.5:1)
                     switch(game.level){
                         case 19:
-                            if(this.reload>=399&&this.reload<=479&&this.reload%10==0){
+                            if(this.reload>=399&&this.reload<=479&&this.reload%16==15){
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-120+random(-15,15),this.align,120,300,false,"none"))
                                 let mult=random(1,1.5)
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
@@ -2214,7 +2214,7 @@ class wall{
                                     c.newWeaponSet(this.weapon)
                                     let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                }else if(game.level==15||game.level==18||game.level==20||game.level==21){
+                                }else if(game.level==15||game.level==18||game.level==19||game.level==20||game.level==21){
                                     c.newWeaponSet(this.weapon)
                                     let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]

@@ -16,7 +16,7 @@ class player{
         this.height=24*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)
         this.fade=0
         this.size=0.5*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)
-        this.life=100*this.playerData.lifeBuf
+        this.life=100*this.playerData.lifeBuff
         this.ammoMult=game.ammoMult
         this.dead=false
         this.velocity={x:0,y:0}
@@ -3569,11 +3569,11 @@ class player{
         this.weapon.uses*=100
     }
     fortHealth(){
-        this.life=100*this.playerData.lifeBuf
-        this.base.life=100
-        this.collect.life=100
-        if(this.id>0&&!game.pvp){
-            this.multLife(2)
+        this.life=100*this.playerData.lifeBuff
+        this.base.life=100*this.playerData.lifeBuff
+        this.collect.life=100*this.playerData.lifeBuff
+        if(this.id>0){
+            this.multLife(game.pvp?1.5:2.5)
         }
     }
     validTarget(target){
