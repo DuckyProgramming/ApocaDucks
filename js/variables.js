@@ -5288,10 +5288,10 @@ types={
       damageBuff:0.25,reloadBuff:1.25,crit:0,weapon:11,
     },{
       name:'Outpost',sizeBuff:1.8,lifeBuff:6,speedBuff:0,
-      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:58,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:58,
     },{
       name:'Turret',sizeBuff:1.8,lifeBuff:6,speedBuff:0,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
     },
 
     {
@@ -9369,7 +9369,7 @@ types={
 			stop:9999,
 			reload:9999,
 			speed:0.85,
-      uses:3,
+      uses:5,
 		},{
 			name:'Freeze Sniper',
 			ammo:1,
@@ -9666,7 +9666,7 @@ types={
 			stop:9999,
 			reload:9999,
 			speed:1.1,
-      uses:3,
+      uses:5,
 		},{
 			name:'Pelleter',
 			ammo:8,
@@ -11610,7 +11610,7 @@ types={
 			stop:9999,
 			reload:9999,
 			speed:1.2,
-      uses:3,
+      uses:5,
 		},{
 			name:'Pointer',
 			ammo:1,
@@ -11619,7 +11619,7 @@ types={
 			stop:9999,
 			reload:9999,
 			speed:0.875,
-      uses:3,
+      uses:5,
 		},{
 			name:'Heister',
 			ammo:10,
