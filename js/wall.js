@@ -1642,7 +1642,7 @@ class wall{
                 if(this.recharge>0){
                     this.recharge--
                 }
-                if((this.type==8||this.type==27)&&this.falling>0){
+                if((this.type==8||this.type==27)&&this.falling>0&&game.level!=19){
                     let speed=1
                     this.falling-=speed
                     this.position.y+=speed

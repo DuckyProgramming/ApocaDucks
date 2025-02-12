@@ -6380,7 +6380,7 @@ class player{
             this.lastingForce[1]*=0.9
         }
         if(this.parachute){
-            this.velocity.x*=game.pvp?(game.assault?0.8:0.99):0.5
+            this.velocity.x*=game.pvp||game.level==19?(game.assault?0.8:0.99):0.5
             this.velocity.y*=2/3
         }else if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerRain'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'){
             this.velocity.x*=0.9

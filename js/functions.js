@@ -779,8 +779,6 @@ function generateLevel(level,layer){
                     if(game.level==8||game.level==17){
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
-                    }else if(game.level==19){
-                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                     }else{
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,25))
                     }
@@ -799,6 +797,8 @@ function generateLevel(level,layer){
                         for(let a=0,la=game.players;a<la;a++){
                             entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                         }
+                    }else if(game.level==19){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                     }
@@ -949,6 +949,11 @@ function generateLevel(level,layer){
                         game.index++
                         if(game.level==13||game.level==14){
                             entities.players[entities.players.length-1].weaponType=-1
+                        }
+                        if(game.level==19){
+                            entities.players[entities.players.length-1].position.x=game.edge[0]/2+random(-300,300)
+                            entities.players[entities.players.length-1].position.y=0
+                            entities.players[entities.players.length-1].parachute=true
                         }
                     }
                     if(level[a][b]=='qwerty'[c]&&game.pvp){
