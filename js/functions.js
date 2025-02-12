@@ -1248,7 +1248,7 @@ function checkEnd(level,layer,key){
             }
             if(deployer.position>0&&deployer.position<game.edge[0]&&deployer.interval==0){
                 if(deployer.flip){
-                    entities.projectiles.push(new projectile(graphics.main[0],deployer.position,0,60,0,0,100,600,false,"none"))
+                    entities.projectiles.push(new projectile(graphics.main[0],deployer.position,0,60,0,0,100,600,false,-1))
                     entities.projectiles[entities.projectiles.length-1].velocity.x=random(-3,3)
                     entities.projectiles[entities.projectiles.length-1].velocity.y=0
                     deployer.position+=deployer.speed*random(0.8,1.2)
@@ -1263,7 +1263,7 @@ function checkEnd(level,layer,key){
                 deployer.artillery[0]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],0,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,"none"))
+                    entities.projectiles.push(new projectile(graphics.main[0],0,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,-1))
                     let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
@@ -1274,7 +1274,7 @@ function checkEnd(level,layer,key){
                 deployer.artillery[1]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0],game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,"none"))
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0],game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,-1))
                     let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
@@ -1285,7 +1285,7 @@ function checkEnd(level,layer,key){
                 deployer.artillery[2]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,"none"))
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(-157.5,-112.5),0,100,600,false,-1))
                     let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
@@ -1296,7 +1296,7 @@ function checkEnd(level,layer,key){
                 deployer.artillery[3]--
             }else{
                 for(let e=0,le=30;e<le;e++){
-                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,"none"))
+                    entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]/2,game.edge[1]-1250,60,random(112.5,157.5),0,100,600,false,-1))
                     let mult=random(1,5)
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*2
