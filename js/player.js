@@ -980,7 +980,7 @@ class player{
                     this.playerData.name=='Tank'||this.playerData.name=='BallingTank'||this.playerData.name=='PistolingTank'||this.playerData.name=='EngineeringTank'||this.playerData.name=='TankSpawner'||
                     this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
                     this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
-                    this.playerData.name=='RevolutioningTank'
+                    this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
@@ -1412,7 +1412,7 @@ class player{
             (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||game.brutal&&this.variant==14)&&this.active>0
         )){
             let preLife=this.life
-            this.life-=damage*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
+            this.life-=damage*(this.id>game.gaming?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'?0.25:
                 this.playerData.name=='PlayerBonkerception'?0.4:
                 this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
@@ -3791,8 +3791,8 @@ class player{
                 let targets=[]
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(
-                        (this.id==0&&entities.players[a].id!=0||this.id==-1)&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||
-                        (this.id!=0&&entities.players[a].id==0||this.id==-1)&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||
+                        (this.id==0&&entities.players[a].id!=0||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1)&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||
+                        (this.id!=0&&entities.players[a].id==0||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1)&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||
                         game.pvp&&this.id!=entities.players[a].id||
                         this.weaponType==11&&entities.players[a].life<entities.players[a].base.life*2&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&(this.construct||this.fort&&!entities.players[a].construct)
                     ){
@@ -4963,10 +4963,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming?1.5:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming?1.5:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>=game.gaming+1)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -5176,6 +5176,11 @@ class player{
             this.life=0
             if(!this.dead){
                 this.dead=true
+                for(let a=0,la=entities.projectiles.length;a<la;a++){
+                    if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].trap){
+                        entities.projectiles[a].time=min(60,entities.projectiles[a].time)
+                    }
+                }
                 if(this.fort){
                     this.id=-1
                     this.setColor()
@@ -5211,7 +5216,7 @@ class player{
                 }
             }else if(this.id>0){
                 this.die.timer++
-                if(this.die.timer>(game.assault?60:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn){
+                if(this.die.timer>(game.assault?60:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.level==19){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
@@ -6213,6 +6218,9 @@ class player{
                     if(this.time%90==0){
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,295,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,1200,crit,this.index))
                     }
+                break
+                case 'TankRegen':
+                    this.life=min(this.base.life,this.life+this.base.life/1200)
                 break
                 
             }
