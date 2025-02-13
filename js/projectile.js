@@ -28,6 +28,7 @@ class projectile{
 			this.type==284||this.type==286||this.type==290||this.type==293
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270
 		this.trap=false
+		this.travel=0
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
@@ -4935,7 +4936,7 @@ class projectile{
 			case 65:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<200&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)&&!(this.id==-1&&entities.players[b].id>0)){
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<200&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)&&!(this.id==-1&&entities.players[b].id>0)&&!entities.players[b].construct){
 						entities.players[b].takeDamage(this.damage*(1-c/200)*0.8)
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -5372,6 +5373,10 @@ class projectile{
 				case 279: case 281:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>4000){
+						this.active=false
+					}
 				break
 				case 3: case 153:
 					if(this.active){
@@ -6998,7 +7003,7 @@ class projectile{
 							entities.players[b].confuseTime=0
 							entities.players[b].dizzyTime=0
 							entities.players[b].DOT.active=0
-						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
+						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)&&!entities.players[b].fort){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100))*0.2,max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81){
 							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000?3:entities.players[b].life>=500?2:1))
@@ -7044,6 +7049,12 @@ class projectile{
 									entities.players[d].critBuff=max(300,entities.players[d].critBuff)
 								}
 							}
+						}else if(this.type==277){
+							entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+							entities.players[entities.players.length-1].sidekick=true
+							entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
+							entities.players[entities.players.length-1].DOT.damage=0.25
+							entities.players[entities.players.length-1].DOT.active=9999
 						}
 						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&!entities.players[b].fort){
 							if(this.type==12){
@@ -7190,12 +7201,6 @@ class projectile{
 								}
 							}else if(this.type==231){
 								entities.players[b].stunTime=max(entities.players[b].stunTime,240)
-							}else if(this.type==277){
-								entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
-								entities.players[entities.players.length-1].sidekick=true
-								entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
-								entities.players[entities.players.length-1].DOT.damage=0.5
-								entities.players[entities.players.length-1].DOT.active=9999
 							}else if(this.type==281){
 								let pos=game.spawner[floor(random(0,game.spawner.length))]
 								entities.players[b].position.x=pos[0]

@@ -1026,7 +1026,7 @@ class player{
                 this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}}
             break
             case 6:
-                this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
+                this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[115,5,255]}}
             break
             default:
                 let a=[floor(random(50,255)),floor(random(50,255)),floor(random(50,255))]
@@ -1458,7 +1458,9 @@ class player{
 		weapon.cooldown=weaponData.cooldown
         weapon.reload=weaponData.stop
         weapon.ammo--
-        weapon.uses--
+        if(!this.fort){
+            weapon.uses--
+        }
 		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==297||weaponType==407||weaponType==496)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
 			weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
 		}
@@ -5240,7 +5242,7 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else if(game.pvp){
+                        }else if(game.pvp&&this.die.timer>600){
                             let key='ABCDEF'[floor(random(0,6))]
                             for(let a=0,la=levels[19].length;a<la;a++){
                                 for(let b=0,lb=levels[19][a].length;b<lb;b++){
@@ -6372,6 +6374,9 @@ class player{
                     if(!entities.players[a].inspect.includes(this.index)){
                         entities.players[a].inspect.push(this.index)
                     }
+                }
+                if(this.velocity.y<-6){
+                    this.velocity.y=-6
                 }
             }else{
                 this.position.x+=this.velocity.x

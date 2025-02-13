@@ -4249,7 +4249,7 @@ types={
       desc:'Motorizer with drones that fire homing, piercing bullets',dpsBuff:2,
     },{
       name:'PlayerMilitia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:266,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:266,
       desc:'Motorizer that spawns four unique specialized heavier drones',dpsBuff:5,
     },{
       name:'PlayerVitality',sizeBuff:1,lifeBuff:4,speedBuff:1,
