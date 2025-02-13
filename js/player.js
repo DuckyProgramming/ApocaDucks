@@ -5103,7 +5103,7 @@ class player{
                                 if(!game.pvp||this.id>0){
                                     entities.players[b].stats.bust+=this.record.life-max(0,this.life)
                                 }
-                                if(entities.players[b].stats.bust>=(game.pvp?[1600,1400,1200,1000,900,800][game.players-1]:game.attacker?[3200,2800,2400,2000,1800,1600][game.players-1]:[8000,7000,6000,5000,4500,400][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19?2:1q)&&game.bust&&entities.players[b].id>0&&game.players>1&&!entities.players[b].fort){
+                                if(entities.players[b].stats.bust>=(game.pvp?[1600,1400,1200,1000,900,800][game.players-1]:game.attacker?[3200,2800,2400,2000,1800,1600][game.players-1]:[8000,7000,6000,5000,4500,400][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19?2:1)&&game.bust&&entities.players[b].id>0&&game.players>1&&!entities.players[b].fort){
                                     entities.players[b].stats.bust=0
                                     for(let c=0,lc=game.pvp?4:1;c<lc;c++){
                                         if(game.level==7){
