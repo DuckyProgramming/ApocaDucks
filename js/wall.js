@@ -2519,16 +2519,16 @@ class wall{
                                                                     if(entities.walls[0][e].type==36&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                         if(entities.walls[0][e].position.x<this.position.x){
-                                                                            for(let e=0,le=5;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,200,240,false,-1))
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
+                                                                            for(let e=0,le=7;e<le;e++){
+                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,135+(e>=4?-14+(e-4)*14:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,250,240,false,-1))
+                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e>=4?0.3:(e%2)*0.6)*random(0.975,1.025)
+                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e>=4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                             }
                                                                         }else{
-                                                                            for(let e=0,le=5;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,200,240,false,-1))
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
+                                                                            for(let e=0,le=7;e<le;e++){
+                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(e>=4?-14+(e-4)*14:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,250,240,false,-1))
+                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e>=4?0.3:(e%2)*0.6)*random(0.975,1.025)
+                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e>=4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                             }
                                                                         }
                                                                     }

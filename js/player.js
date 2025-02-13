@@ -925,7 +925,7 @@ class player{
     displayOver(layer){
         layer.push()
         layer.translate(this.position.x,this.position.y)
-        if(this.inspect.length>0){
+        if(this.inspect.length>0||game.usurp){
             layer.noStroke()
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index!=this.index){
@@ -5221,7 +5221,7 @@ class player{
                             this.id=entities.players[a].id
                             this.setColor()
                         }
-                        if(game.usurp&&game.usurpIndex==this.index){
+                        if(game.usurp&&game.usurpIndex==this.index&&entities.players[a].id>0){
                             game.usurpIndex=entities.players[a].index
                         }
                     }
@@ -5273,7 +5273,7 @@ class player{
                                     if(levels[19][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,6))==0){
+                                        if(floor(random(0,3))!=0){
                                             this.base.position.x=game.edge[0]/2+random(-800,800)
                                             this.base.position.y=0
                                             this.parachute=true
