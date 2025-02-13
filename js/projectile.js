@@ -475,7 +475,7 @@ class projectile{
 									c.takeDamage(this.damage*(this.crit?2.5:1))
 									c.die.killer=this.index
 									c.collect.time=450
-									if(this.type==190){
+									if(this.type==190&&!c.fort){
 										if(c.chillTime==0){
 											c.color.skin.head=[200,250,250]
 											c.color.skin.body=[190,240,240]
@@ -491,7 +491,7 @@ class projectile{
 										entities.projectiles.push(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
 									}else if(this.type==257){
 										c.shrinkTime=max(c.shrinkTime+4,120)
-									}else if(this.type==265){
+									}else if(this.type==265&&!c.fort){
 										c.stunTime=5
 									}
 								}
@@ -4904,7 +4904,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)){
-						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(this.id==-1&&entities.players[b].id>0&&!entities.players[b].fort?(this.timer<5?0.1:0.5):1))
+						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(this.id==-1&&entities.players[b].id>0&&game.level!=19?(this.timer<5?0.1:0.5):1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){
@@ -6975,7 +6975,7 @@ class projectile{
 						){
 				        	this.active=false
 						}
-						if(this.id==-1&&entities.players[b].id>0&&!entities.players[b].fort&&this.type==6){
+						if(this.id==-1&&entities.players[b].id>0&&!entities.players[b].fort&&!entities.players[b].construct&&this.type==6){
 							this.damage*=0.25
 						}
 						if((this.type==9||this.type==155||this.type==216)&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
@@ -7029,19 +7029,26 @@ class projectile{
 						}else{
 				        	entities.players[b].takeDamage(this.damage)
 						}
+						if(this.type==13||this.type==188){
+							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
+							if(this.type==188){
+								for(let d=0,ld=entities.players.length;d<ld;d++){
+									if(entities.players[d].index==this.index){
+										entities.players[d].critBuff=max(300,entities.players[d].critBuff)
+									}
+								}
+							}
+						}else if(this.type==36||this.type==249){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].critBuff=max(300,entities.players[d].critBuff)
+								}
+							}
+						}
 						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&!entities.players[b].fort){
 							if(this.type==12){
 								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
 								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3
-							}else if(this.type==13||this.type==188){
-								entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
-								if(this.type==188){
-									for(let d=0,ld=entities.players.length;d<ld;d++){
-										if(entities.players[d].index==this.index){
-											entities.players[d].critBuff=max(300,entities.players[d].critBuff)
-										}
-									}
-								}
 							}else if(this.type==40){
 								entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+60,entities.players[b].weapon.cooldown+60)
 							}else if(this.type==14||this.type==46){
@@ -7118,12 +7125,6 @@ class projectile{
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
 										entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
-									}
-								}
-							}else if(this.type==36||this.type==249){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].critBuff=max(300,entities.players[d].critBuff)
 									}
 								}
 							}else if(this.type==43||this.type==186){

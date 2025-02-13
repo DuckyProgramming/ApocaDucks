@@ -1597,7 +1597,7 @@ class wall{
             break
             case 4: case 23: case 32: case 35:
                 if(this.reload>0){
-                    this.reload-=(game.level==19&&this.type!=35?1/3:1)
+                    this.reload-=(game.level==19&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
                 }
             break
             case 6:
@@ -1745,7 +1745,7 @@ class wall{
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&(game.level==15||game.level==18)){
+                if(this.recharge>0&&(game.level==15||game.level==18||game.level==19)){
                     this.recharge--
                 }
                 if(this.falling>0){
@@ -2295,7 +2295,7 @@ class wall{
                                             }
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34:
-                                                    if(game.level==19&&this.type!=34){
+                                                    if(game.level==19&&this.type!=25&&this.type!=34){
                                                         if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                             if(game.attacker||game.level==17||game.level==18){
                                                                 this.align=c.id
@@ -2520,13 +2520,13 @@ class wall{
                                                                         hit=true
                                                                         if(entities.walls[0][e].position.x<this.position.x){
                                                                             for(let e=0,le=5;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,e==2?40:100,240,false,-1))
+                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,200,240,false,-1))
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                             }
                                                                         }else{
                                                                             for(let e=0,le=5;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,e==2?40:100,240,false,-1))
+                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,-135+(e==4?0:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,200,240,false,-1))
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=4.5-(e==4?0.3:(e%2)*0.6)*random(0.975,1.025)
                                                                             }
@@ -2551,7 +2551,7 @@ class wall{
                                             if(c.parachute){
                                                 c.parachute=false
                                                 c.weapon.cooldown+=120
-                                                if(!game.pvp){
+                                                if(!game.pvp&&game.level!=19){
                                                     c.stuckTime=c.playerData.sizeBuff>=1.5?120:60
                                                 }
                                             }
