@@ -46,7 +46,17 @@ function mouseClicked(){
                                 menu.weapon=b
                             }
                         }else if(a==5){
-                            game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
+                            if(b==2){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                    game.pvp=true
+                                    game.usurp=false
+                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                    game.pvp=true
+                                    game.usurp=true
+                                }
+                            }else{
+                                game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
+                            }
                         }else{
                             stage.scene='mission'
                         }
@@ -89,6 +99,9 @@ function mouseClicked(){
                         stage.scene='wave'
                         if(types.mission[game.mission].wave[0].length==0){
                             generateMission(types.mission[game.mission].wave)
+                        }
+                        if(game.usurp){
+                            game.usurpIndex=entities.players[floor(random(0,game.gaming))].index
                         }
                     }
                     tick++

@@ -6918,7 +6918,7 @@ class projectile{
 			if(this.active&&this.type!=85&&this.type!=190&&this.type!=191){
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273)&&!entities.players[b].playerData.name.includes('Medic'))&&
-						!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<10&&entities.players[b].id>0)&&
+						!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
 						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273)&&(this.index==entities.players[b].index||entities.players[b].fort&&(entities.players[b].id==0?1:0)==(this.id==0?1:0)&&entities.players[b].id!=-1))&&
 						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
 						entities.players[b].life>0&&this.active&&

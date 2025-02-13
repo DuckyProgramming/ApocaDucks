@@ -6,13 +6,13 @@ function mainloop(){
             for(let a=0,la=7;a<la;a++){
                 for(let b=0,lb=[4,4,4,4,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
-                    if(a==2&&b>=2&&b<=3){
+                    if(a==2&&b>=2&&b<=3||a==5&&b==2){
                         fill(100)
-                        if(a==2&&menu.level==[6,7,8,15,16,][b]){
+                        if(a==2&&menu.level==[6,7,8,15,16][b]||a==5&&game.pvp&&!game.usurp){
                             rect(pos[0]+37,pos[1],76,45,10)
                             fill(100,200,100)
                             rect(pos[0]-37,pos[1],76,45,10)
-                        }else if(a==2&&menu.level==[6,7,17,18,16,][b]){
+                        }else if(a==2&&menu.level==[6,7,17,18,16][b]||a==5&&game.pvp&&game.usurp){
                             rect(pos[0]-37,pos[1],76,45,10)
                             fill(100,200,100)
                             rect(pos[0]+37,pos[1],76,45,10)
@@ -21,7 +21,7 @@ function mainloop(){
                             rect(pos[0]-37,pos[1],76,45,10)
                         }
                     }else{
-                        if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15][b]||a==3&&menu.level==[16,19,20,21][b]||a==4&&menu.weapon==b||a==4&&b>=1&&b<=2&&menu.weapon==4||a==5&&game[['classicRespawn','invis','pvp','attacker'][b]]){
+                        if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15][b]||a==3&&menu.level==[16,19,20,21][b]||a==4&&menu.weapon==b||a==4&&b>=1&&b<=2&&menu.weapon==4||a==5&&game[['classicRespawn','invis','','attacker'][b]]){
                             fill(100,200,100)
                         }else{
                             fill(100)
@@ -45,6 +45,11 @@ function mainloop(){
                         textSize(11.25)
                         text(`Standard`,pos[0]-37,pos[1]+15)
                         text(`Reverse`,pos[0]+37,pos[1]+15)
+                    }
+                    if(a==5&&b==2){
+                        textSize(11.25)
+                        text(`Standard`,pos[0]-37,pos[1]+15)
+                        text(`Leader`,pos[0]+37,pos[1]+15)
                     }
                 }
             }

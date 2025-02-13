@@ -1094,6 +1094,9 @@ function findName(name,list){
 	}
 	return -1
 }
+function formatTime(frames){
+    return `${floor(frames/3600)%60}:${floor(frames/60)%60<10?`0`:``}${floor(frames/60)%60}`
+}
 function runTransition(layer){
     if(transition.trigger){
         transition.anim+=0.05

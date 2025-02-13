@@ -4,6 +4,7 @@ game={
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   randomizer:false,classicWeapon:false,peakWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
+  usurp:false,usurpIndex:-1,
   weapon:[],weaponTick:[],
 }
 listing=[[],[],[]]
@@ -9965,7 +9966,7 @@ types={
 		},{
 			name:'Freezer',
 			ammo:5,
-			damage:60,
+			damage:90,
 			cooldown:15,
 			stop:45,
 			reload:10,
@@ -11207,7 +11208,7 @@ types={
 		},{
 			name:'Python',
 			ammo:5,
-			damage:60,
+			damage:90,
 			cooldown:15,
 			stop:45,
 			reload:10,
