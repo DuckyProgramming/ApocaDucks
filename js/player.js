@@ -6469,7 +6469,7 @@ class player{
         if(this.gasTime>0){
             this.gasTime--
         }
-        if(game.usurp&&this.index==game.usurpIndex){
+        if(game.usurp&&this.index==game.usurpIndex&&this.life>0){
             this.stats.usurp++
             this.velocity.x*=0.95
         }

@@ -4,7 +4,7 @@ game={
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
-  usurp:false,usurpIndex:-1,randomizer:false,
+  usurp:false,usurpIndex:-1,randomizer:false,pool:true,
   weapon:[],weaponTick:[],
 }
 listing=[[],[],[]]
@@ -11429,7 +11429,7 @@ types={
 			stop:450,
 			reload:0,
 			speed:0.8,
-      uses:8,
+      uses:6,
 		},{
 			name:'Troller',
 			ammo:8,

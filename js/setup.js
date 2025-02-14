@@ -24,7 +24,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[4,4,4,4,4,4,1][a];b<lb;b++){
+                for(let b=0,lb=[4,4,4,4,5,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         if(a==0){
@@ -41,9 +41,9 @@ function mouseClicked(){
                             menu.level=[16,19,20,21][b]
                         }else if(a==4){
                             if(menu.weapon==1&&b==3||menu.weapon==3&&b==1){
-                                menu.weapon=5
+                                menu.weapon=6
                             }else if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
-                                menu.weapon=4
+                                menu.weapon=5
                             }else{
                                 menu.weapon=b
                             }
@@ -92,10 +92,13 @@ function mouseClicked(){
                                 game.selector=true
                             break
                             case 4:
+                                game.mainline=true
+                            break
+                            case 5:
                                 game.peakWeapon=true
                                 game.classicWeapon=true
                             break
-                            case 5:
+                            case 6:
                                 game.peakWeapon=true
                                 game.selector=true
                             break
