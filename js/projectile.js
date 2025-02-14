@@ -4905,7 +4905,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)){
-						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(this.id==-1&&entities.players[b].id>0&&game.level!=19?(this.timer<5?0.1:0.5):1))
+						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(this.id==-1&&entities.players[b].id>0&&game.level!=19?(this.timer<5?0.1:0.5):1)*(entities.players[b].fort?0.5:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){
@@ -6981,7 +6981,7 @@ class projectile{
 				        	this.active=false
 						}
 						if(this.id==-1&&(entities.players[b].id>0||entities.players[b].fort)&&!entities.players[b].construct&&this.type==6){
-							this.damage*=0.25
+							this.damage*=entities.players[b].fort?0.1:0.25
 						}
 						if((this.type==9||this.type==155||this.type==216)&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
@@ -7003,8 +7003,10 @@ class projectile{
 							entities.players[b].confuseTime=0
 							entities.players[b].dizzyTime=0
 							entities.players[b].DOT.active=0
-						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)&&!entities.players[b].fort){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100))*0.2,max(entities.players[b].life,entities.players[b].base.life*2))
+						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
+							if(!entities.players[b].fort){
+								entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100))*0.2,max(entities.players[b].life,entities.players[b].base.life*2))
+							}
 						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81){
 							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000?3:entities.players[b].life>=500?2:1))
 							if(this.type==75){

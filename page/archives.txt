@@ -1,3 +1,7 @@
+565 - selector
+
+
+
 MARCH UPDATE
 
 
@@ -6,7 +10,6 @@ MARCH UPDATE
 
 cp steel
 
-tetris
 
 
 
@@ -23,12 +26,17 @@ photon - revolutionist but iwth a machine gun auto
 toxbot - software but the drone fires long range sniper bullets
 
 more controller weapons
+delta - control an interceptor bullet
+
+infestor - bullets stick to enemies, on aux key they create drones
 
 sidekick officer
 
 shreadator - an assault rifle but the bullets grow in strength and fire with less spread
 
 stockroom - has a gun and passively gets 4 fast drones
+
+
 
 splitter - sidekick, but your sidekicks respawn when they die from your body
 
@@ -50,6 +58,8 @@ dustbowl - fires a destroyer bullet that spawns drones around itself
 
 dirigible - very maneuverable parachutist with accurate gun
 
+
+
 polaroid - twin gun with quad auto
 
 stationer - destroyer with four light auto guns
@@ -68,6 +78,8 @@ base poisoner weapon
 everdeath - pelleter, but your sidekicks are poisoner and trapper
 
 multitool - quad auto but each one is unique
+
+
 
 tart - kinoko with a poison auto
 wondergunner - light triple pelleter, and kinoko
@@ -90,6 +102,8 @@ trumpet - helix but the balls explode into fire on hit
 
 constructor - gravityless heavy traps that can pierce multiple enemies
 
+
+
 maplayer - steamroller that freezes
 
 ac gun - az gun but the airshots freeze
@@ -109,6 +123,8 @@ ladder - fires sets of three engineer bullets with no gravity that slow down
 kinematic - accurate damaging shotgun, and has hopper ability
 
 lucklauncher - rng rocket launcher
+
+
 
 sunglass - double auto sunburst
 
@@ -130,6 +146,8 @@ gunnertype - fires four forward autoaim turrets with varying arcs
 
 radiowave - twin with big bullets (from equanimity) and small sunburst bullets (from sunrise)
 
+
+
 radiance - laser that pushes enemies back heavily
 
 sunray - laser with sunburst
@@ -148,9 +166,52 @@ partisan - sidekick destroyer
 death star - lasyer with a destroyer auto turret
 buff destroyer autos, they're too slow
 
-carpenter - fires three streams that converge at a point ahead of you
+fume - poison push flamethrower
 
 
+
+ratio - minishot with freezing bullets and fire
+
+escutcheon - minishot with immunitiess
+
+thumper - engineer but the balls have shotguns
+
+watchmaker - fires small motorizers from suzerain, as well as bees
+
+rewind - slicer but it pulls enemies back with it
+
+snaker - fires an acceelrating bullet that drops shortlived traps
+
+repositioner - fires block that has a connected motorizer minion that automatically fires
+
+speedbump - push rocket launcher that also applies stun
+
+quadratic - interceptor but the interceptor bullet fires light rocketsw
+
+vomiter - wewak sprayer machine gun with bonker
+
+
+
+muncher - fires a trap and four bullets
+
+adrenaline - quad auto, when you get hit you gain crits for a few seconds
+
+[]
+
+[]
+
+[]
+
+
+
+start working here!
+
+
+
+delete full randomizer
+
+selector weapons - when you spawn choose between two weapons
+otherwise just random weapons
 
 
 

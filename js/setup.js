@@ -40,7 +40,9 @@ function mouseClicked(){
                         }else if(a==3){
                             menu.level=[16,19,20,21][b]
                         }else if(a==4){
-                            if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
+                            if(menu.weapon==1&&b==3||menu.weapon==3&&b==1){
+                                menu.weapon=5
+                            }else if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
                                 menu.weapon=4
                             }else{
                                 menu.weapon=b
@@ -48,11 +50,20 @@ function mouseClicked(){
                         }else if(a==5){
                             if(b==2){
                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
-                                    game.pvp=true
-                                    game.usurp=false
+                                    if(game.pvp&&!game.usurp){
+                                        game.pvp=false
+                                    }else{
+                                        game.pvp=true
+                                        game.usurp=false
+                                    }
                                 }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
-                                    game.pvp=true
-                                    game.usurp=true
+                                    if(game.pvp&&game.usurp){
+                                        game.pvp=false
+                                        game.usurp=false
+                                    }else{
+                                        game.pvp=true
+                                        game.usurp=true
+                                    }
                                 }
                             }else{
                                 game[['classicRespawn','invis','pvp','attacker'][b]]=!game[['classicRespawn','invis','pvp','attacker'][b]]
@@ -78,16 +89,20 @@ function mouseClicked(){
                                 game.classicWeapon=true
                             break
                             case 3:
-                                game.randomizer=true
+                                game.selector=true
                             break
                             case 4:
                                 game.peakWeapon=true
                                 game.classicWeapon=true
                             break
+                            case 5:
+                                game.peakWeapon=true
+                                game.selector=true
+                            break
                         }
                         game.players=menu.players
                         game.gaming=menu.gaming
-                        if(game.classicWeapon||game.randomizer){
+                        if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=menu.level
                         }else{
                             game.level=13

@@ -3,8 +3,8 @@ game={
   index:0,projectileIndex:0,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
-  randomizer:false,classicWeapon:false,peakWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
-  usurp:false,usurpIndex:-1,
+  classicWeapon:false,peakWeapon:false,selector:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
+  usurp:false,usurpIndex:-1,randomizer:false,
   weapon:[],weaponTick:[],
 }
 listing=[[],[],[]]
@@ -2174,6 +2174,9 @@ types={
           ['Wait',10],
 
           ['NapalmFlamethrower',5],
+
+          ['Wait',5],
+
           ['PaperTank',1],
           ['LightTank',1],
           ['Tank',1],
@@ -3379,7 +3382,7 @@ types={
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
       desc:'Can double jump and mash to fire faster',dpsBuff:1,
     },{
-      name:'PlayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'w',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
       desc:'Fires a lot of bullets',dpsBuff:1,
     },{
@@ -3906,7 +3909,7 @@ types={
       desc:'Assault rifle that fires bullets with turrets',dpsBuff:5,
     },{
       name:'PlayerAssaultRiflePierce',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.25,crit:0,weapon:157,
+      damageBuff:2.5,reloadBuff:1.25,crit:0,weapon:157,
       desc:'Assault rifle that pierces the first enemy and can pierce walls afterward',dpsBuff:2.5,
     },{
       name:'PlayerAssaultRifleSplasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5248,6 +5251,12 @@ types={
     },
 
     //mark di
+
+    {
+      name:'PlayerSelector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:565,
+      desc:'Choose a weapon',dpsBuff:0,
+    },
 
     {
       name:'ConstructMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
@@ -11772,6 +11781,15 @@ types={
 			reload:480,
 			speed:1.1,
       uses:2,
+		},{
+			name:'Selector',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:1,
+      uses:3,
 		},
 	],
 }
