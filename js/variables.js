@@ -3,7 +3,7 @@ game={
   index:0,projectileIndex:0,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
-  classicWeapon:false,peakWeapon:false,selector:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
+  classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,
   weapon:[],weaponTick:[],
 }
