@@ -2,9 +2,15 @@ MARCH UPDATE
 
 
 
+can't special pool
+
+
+
 2 new maps?
 
 cp steel
+
+1fort
 
 
 
@@ -28,7 +34,7 @@ infestor - bullets stick to enemies, on aux key they create drones
 
 sidekick officer
 
-[]
+anarchist - revolutionist that can throw orbital spheres as engineer spheres
 
 stockroom - has a gun and passively gets 4 fast drones
 
@@ -38,7 +44,7 @@ splitter - sidekick, but your sidekicks respawn when they die from your body
 
 progenitor - throws a slicer that's affected by physics until it hits the ground, then it becomes a normal slicer
 
-[]
+rotopelleter - pelleter that fires an additional pelleter attack against the nearest enemy
 
 big pharma - fires a trap and a poison bullet
 
@@ -166,7 +172,7 @@ fume - poison push flamethrower
 
 
 
-[]
+munition - sidekick interceptor
 
 escutcheon - minishot with immunities
 
@@ -184,7 +190,7 @@ speedbump - push rocket launcher that also applies stun
 
 quadratic - interceptor but the interceptor bullet fires light rockets
 
-[]
+entrencher - spawns auto trapper drones
 
 
 

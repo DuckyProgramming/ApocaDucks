@@ -929,7 +929,7 @@ class player{
             layer.noStroke()
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index!=this.index){
-                    if(game.usurp&&game.usurpIndex==entities.players[a].index){
+                    if(game.usurp&&game.usurpIndex==entities.players[a].index&&!entities.players[a].sidekick){
                         let dir=atan2(entities.players[a].position.x-this.position.x,entities.players[a].position.y-this.position.y)
                         let extent=dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)/20+100
                         layer.fill(150,200,100)
