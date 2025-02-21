@@ -21,7 +21,17 @@ function mainloop(){
                             rect(pos[0]-37,pos[1],76,45,10)
                         }
                     }else{
-                        if(a==0&&menu.players==b+1||a==1&&menu.gaming==b+1||a==2&&menu.level==[6,7,8,15][b]||a==3&&menu.level==[16,19,20,21][b]||a==4&&menu.weapon==b||a==4&&b>=1&&b<=2&&menu.weapon==5||a==4&&(b==1||b==3)&&menu.weapon==6||a==5&&game[['classicRespawn','invis','','attacker'][b]]){
+                        if(
+                            a==0&&menu.players==b+1||
+                            a==1&&menu.gaming==b+1||
+                            a==2&&menu.level==[6,7,8,15][b]||
+                            a==3&&menu.level==[16,19,20,21][b]||
+                            a==4&&menu.weapon==b||
+                            a==4&&b>=1&&b<=2&&menu.weapon==5||
+                            a==4&&(b==1||b==3)&&menu.weapon==6||
+                            a==4&&(b==1||b==4)&&menu.weapon==7||
+                            a==5&&game[['classicRespawn','invis','','attacker'][b]]
+                        ){
                             fill(100,200,100)
                         }else{
                             fill(100)

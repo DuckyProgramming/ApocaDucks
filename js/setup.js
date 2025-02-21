@@ -40,7 +40,9 @@ function mouseClicked(){
                         }else if(a==3){
                             menu.level=[16,19,20,21][b]
                         }else if(a==4){
-                            if(menu.weapon==1&&b==3||menu.weapon==3&&b==1){
+                            if(menu.weapon==1&&b==4||menu.weapon==4&&b==1){
+                                menu.weapon=7
+                            }else if(menu.weapon==1&&b==3||menu.weapon==3&&b==1){
                                 menu.weapon=6
                             }else if(menu.weapon==1&&b==2||menu.weapon==2&&b==1){
                                 menu.weapon=5
@@ -101,6 +103,10 @@ function mouseClicked(){
                             case 6:
                                 game.peakWeapon=true
                                 game.selector=true
+                            break
+                            case 7:
+                                game.peakWeapon=true
+                                game.mainline=true
                             break
                         }
                         game.players=menu.players

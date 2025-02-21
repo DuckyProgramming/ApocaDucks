@@ -2,10 +2,6 @@ MARCH UPDATE
 
 
 
-can't special pool
-
-
-
 2 new maps?
 
 cp steel
@@ -15,7 +11,9 @@ cp steel
 
 
 
-100 weapons
+[100 weapons]
+
+
 
 warduck - has a gun and a four-way auto turret
 
@@ -198,9 +196,9 @@ muncher - fires a trap and four bullets
 
 adrenaline - quad auto, when you get hit you gain crits for a few seconds
 
-[]
+sunburst hybrid
 
-[]
+[hybrid]
 
 []
 
@@ -212,8 +210,8 @@ start working here!
 
 convert a lot of sets from 4 to 6s
 
-sunburst hybrid
-[hybrid]
+
+
 6 base classes
 
 
