@@ -18,7 +18,7 @@ types={
       difficulty:0,
       wave:[
         [
-          //['RevolutioningTank',100],
+          //['TankWare',10],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -2064,8 +2064,8 @@ types={
       difficulty:4,
       wave:[
         [
-          ['BigHeavyFlamethrower',2],
           ['HeavyTank',1],
+          ['BigHeavyFlamethrower',2],
 
           ['Wait',5],
 
@@ -2076,25 +2076,23 @@ types={
           ['BigRapidRadiusRocketLauncher',2],
           ['EngineerShield',4],
           ['BigMultiHyperMedic',2],
-          ['CritPistol',3],
+          ['CritPistol',2],
           ['Sniper',2],
-          ['Spy',1],
+          ['Spy',2],
 
           ['Wait',5],
 
           ['BigCritRapidRocketLauncher',1],
-          ['HyperMedic',1],
           ['BigRapidCritBaller',1],
-          ['HyperMedic',1],
+          ['HyperMedic',2],
           ['PhasePistol',4],
           //40
 
           ['Wait',10],
 
           ['BigBaller',2],
-          ['HyperMedic',2],
-          ['BigFlamethrower',2],
-          ['HyperMedic',2],
+          ['BigSniper',2],
+          ['HyperMedic',4],
 
           ['Wait',5],
 
@@ -2173,16 +2171,25 @@ types={
 
           ['Wait',10],
 
-          ['NapalmFlamethrower',5],
+          ['MachineGunFirework',5],
 
+          ['Wait',10],
+
+          ['NapalmFlamethrower',5],
+          //10
+          
           ['Wait',5],
+
+          ['MegaTank',1],
+
+          ['Wait',10],
 
           ['PaperTank',1],
           ['LightTank',1],
           ['Tank',1],
           ['HeavyTank',1],
-          ['MegaTank',1],
-          //10
+          ['HeftyTank',1],
+          //5
 
           ['Wait',10],
 
@@ -2191,15 +2198,25 @@ types={
           ['BallingTank',1],
           ['FlamethrowingTank',1],
           ['EngineeringTank',1],
+          //5
 
           ['Wait',10],
 
-          ['TankRegen',1],
-          ['AutoTank',1],
-          ['RevolutioningTank',1],
           ['TankSpawner',1],
+          ['TankBump',1],
+          ['DeadlyTank',1],
+          ['TankRegen',1],
           ['HyperTank',1],
-          //10
+          //5
+
+          ['Wait',10],
+
+          ['SlicingTank',1],
+          ['RevolutioningTank',1],
+          ['SwarmingTank',1],
+          ['DoubleAutoTank',1],
+          ['TankWare',1],
+          //5
 
           ['Wait',5],
 
@@ -3382,7 +3399,7 @@ types={
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
       desc:'Can double jump and mash to fire faster',dpsBuff:1,
     },{
-      name:'w',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
       desc:'Fires a lot of bullets',dpsBuff:1,
     },{
@@ -6559,7 +6576,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:119,
     },{
       name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
-      damageBuff:1,reloadBuff:0.5,crit:0,weapon:99,
+      damageBuff:1,reloadBuff:0.4,crit:0,weapon:99,
     },{
       name:'RadiusGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:121,
@@ -6692,6 +6709,15 @@ types={
     },{
       name:'BigMedicAtrophy',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:250,
+    },{
+      name:'SwarmingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:0.4,crit:0,weapon:566,
+    },{
+      name:'TankWare',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'DoubleAutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:255,
     },
   ],weapon:[
 		{
@@ -11426,7 +11452,7 @@ types={
 			ammo:1,
 			damage:800,
 			cooldown:20,
-			stop:450,
+			stop:360,
 			reload:0,
 			speed:0.8,
       uses:6,
@@ -11790,6 +11816,15 @@ types={
 			reload:9999,
 			speed:1,
       uses:3,
+		},{
+			name:'Swarmer Dualic',
+			ammo:1,
+			damage:60,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:18,
 		},
 	],
 }

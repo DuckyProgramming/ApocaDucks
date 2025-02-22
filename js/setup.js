@@ -24,7 +24,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[4,4,4,4,5,4,1][a];b<lb;b++){
+                for(let b=0,lb=[4,4,5,5,5,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         if(a==0){
@@ -33,12 +33,12 @@ function mouseClicked(){
                             menu.gaming=b+1
                         }else if(a==2){
                             if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
-                                menu.level=[6,7,8,15][b]
+                                menu.level=[6,7,8,15,16][b]
                             }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
-                                menu.level=[6,7,17,18][b]
+                                menu.level=[6,7,17,18,16][b]
                             }
                         }else if(a==3){
-                            menu.level=[16,19,20,21][b]
+                            menu.level=[19,20,21,22,23][b]
                         }else if(a==4){
                             if(menu.weapon==1&&b==4||menu.weapon==4&&b==1){
                                 menu.weapon=7

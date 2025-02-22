@@ -1056,9 +1056,14 @@ function newWave(level,layer){
                 la--
             }
             for(let a=game.players,la=entities.players.length;a<la;a++){
-                entities.players.splice(a,1)
-                a--
-                la--
+                if(entities.players[a].fort){
+                    entities.players[a].life=0
+                    entities.players[a].die.killer=-1
+                }else{
+                    entities.players.splice(a,1)
+                    a--
+                    la--
+                }
             }
             for(let a=0,la=game.players;a<la;a++){
                 entities.players[a].respawn()

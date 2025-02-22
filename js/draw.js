@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[4,4,4,4,5,4,1][a];b<lb;b++){
+                for(let b=0,lb=[4,4,5,5,5,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3||a==5&&b==2){
                         fill(100)
@@ -24,8 +24,8 @@ function mainloop(){
                         if(
                             a==0&&menu.players==b+1||
                             a==1&&menu.gaming==b+1||
-                            a==2&&menu.level==[6,7,8,15][b]||
-                            a==3&&menu.level==[16,19,20,21][b]||
+                            a==2&&menu.level==[6,7,8,15,16][b]||
+                            a==3&&menu.level==[19,20,21,22,23][b]||
                             a==4&&menu.weapon==b||
                             a==4&&b>=1&&b<=2&&menu.weapon==5||
                             a==4&&(b==1||b==3)&&menu.weapon==6||
@@ -44,8 +44,8 @@ function mainloop(){
                         [
                             `${b+1} Players`,
                             `${b+1} Gaming`,
-                            ['Vietnam','Pacman','Normandy','Isonzo'][b],
-                            ['Stalingrad','DoubleMountain','Prison','Steep'][b],
+                            ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
+                            ['DoubleMountain','Prison','Steep','TBD','TBD'][b],
                             ['Normal Weapons','Special Weapons','Random Weapons','Option Weapons','Pool Weapons'][b],
                             ['Auto-Respawn','Invisible','PvP','Fortress'][b],
                             `Proceed`
@@ -144,17 +144,7 @@ function mainloop(){
                 }else{
                     graphics.main[c].background(0)
                 }
-                key.push(dev.sight?10:entities.players[c].parachute?3:
-                    entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
-                    entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
-                    entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
-                    entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293||
-                    entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
-                    entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
-                    entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
-                    entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
-                    entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
-                    ?(game.level==7?1.5:2):1)
+                key.push(1)
                 if(game.level==6){
                     key[c]*=0.75
                 }
@@ -184,6 +174,18 @@ function mainloop(){
                             a=la
                         }
                     }
+                }else{
+                    key[c]*=dev.sight?10:entities.players[c].parachute?3:
+                        entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
+                        entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
+                        entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
+                        entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293||
+                        entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
+                        entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
+                        entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
+                        entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
+                        entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
+                        ?(game.level==7?1.5:2):1
                 }
                 if(game.level==7){
                     effective.push([center.position.x+side,center.position.y])

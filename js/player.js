@@ -1001,7 +1001,7 @@ class player{
                     this.playerData.name=='Tank'||this.playerData.name=='BallingTank'||this.playerData.name=='PistolingTank'||this.playerData.name=='EngineeringTank'||this.playerData.name=='TankSpawner'||
                     this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
                     this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
-                    this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'
+                    this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
@@ -1495,7 +1495,7 @@ class player{
         if(!this.fort){
             weapon.uses--
         }
-		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==297||weaponType==407||weaponType==496)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
+		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
 			weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
 		}
         if(weaponType==161){
@@ -3584,6 +3584,10 @@ class player{
                 entities.players[entities.players.length-1].direction.goal=this.direction.goal
                 this.inspect.push(entities.players[entities.players.length-1].index)
                 this.disable=true
+            break
+            case 566:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
             break
             //mark
 		}
@@ -6274,6 +6278,11 @@ class player{
                 break
                 case 'TankRegen':
                     this.life=min(this.base.life,this.life+this.base.life/1200)
+                break
+                case 'TankWare':
+                    if(this.time==1){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,134,(lsin(this.direction.main)<0?-90:90)+180,this.id,300,5400,0,this.index))
+                    }
                 break
                 
             }

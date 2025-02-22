@@ -200,7 +200,9 @@ sunburst hybrid
 
 [hybrid]
 
-[]
+black hole - electrifyer that absorbs enemies
+
+minimini - tiny machine gun
 
 
 
@@ -219,6 +221,7 @@ convert a lot of sets from 4 to 6s
 
 
 565 - selector
+566 - swarmer dualic
 
 
 

@@ -28,6 +28,7 @@ class projectile{
 			this.type==284||this.type==286||this.type==290||this.type==293
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270
 		this.trap=false
+		this.partisan=false
 		this.travel=0
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
@@ -62,6 +63,7 @@ class projectile{
 			case 233: case 235: case 240: case 243: case 245: case 246: case 247: case 248: case 250: case 252:
 			case 259: case 260: case 261: case 263: case 264: case 267: case 268: case 271: case 272: case 277:
 			case 282: case 283: case 284: case 286: case 292: case 293: case 295:
+				this.partisan=true
 				this.width=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283?12:4
 				this.height=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283?12:4
 				this.speed=this.type==210?0:this.type==209?random(8,10):this.type==120||this.type==177||this.type==178||this.type==179||this.type==182|this.type==183|this.type==227||this.type==271?1:6
@@ -5327,7 +5329,7 @@ class projectile{
 		}else if((game.level==3||game.level==7||game.level==16)&&this.position.x<0){
 			this.position.x=game.edge[0]
 			this.previous.position.x=game.edge[0]
-		}else if(this.position.x<-50||this.position.x>game.edge[0]+50||this.position.y>game.edge[1]+50){
+		}else if((this.position.x<-50||this.position.x>game.edge[0]+50||this.position.y>game.edge[1]+50)&&!this.partisan){
 			this.active=false
 		}
 		this.previous.position.x=this.position.x
@@ -5749,7 +5751,7 @@ class projectile{
 				case 158: case 159: case 160: case 161: case 162: case 164: case 165: case 233: case 248: case 252:
 				case 259: case 260: case 261: case 268: case 272: case 283:
 					if(a==1){
-						if(this.goal>=entities.players.length||this.goal>=0&&entities.players[this.goal].index!=this.index){
+						if(this.goal>=entities.players.length||this.goal>=0&&entities.players[this.goal].index!=this.index||this.goal<0){
 							this.goal=-1
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
