@@ -5,7 +5,7 @@ game={
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,
-  weapon:[],weaponTick:[],
+  weapon:[],weaponTick:[],point:[],
 }
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[]}

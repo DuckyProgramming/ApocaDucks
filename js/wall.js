@@ -1718,36 +1718,36 @@ class wall{
                 }else{
                     texts='Point '+'ABCDE'[this.pos]
                 }
-                graphics.overlay[game.players>=2?1:0].fill(255)
-                graphics.overlay[game.players>=2?1:0].textSize(10)
-                graphics.overlay[game.players>=2?1:0].text(texts,25+this.pos*40,15)
+                graphics.overlay[game.gaming>=2?1:0].fill(255)
+                graphics.overlay[game.gaming>=2?1:0].textSize(10)
+                graphics.overlay[game.gaming>=2?1:0].text(texts,25+this.pos*40,15)
                 switch(this.owner){
                     case -1:
-                        graphics.overlay[game.players>=2?1:0].fill(200)
+                        graphics.overlay[game.gaming>=2?1:0].fill(200)
                     break
                     case 0:
-                        graphics.overlay[game.players>=2?1:0].fill(255,255,0)
+                        graphics.overlay[game.gaming>=2?1:0].fill(255,255,0)
                     break
                     case 1:
-                        graphics.overlay[game.players>=2?1:0].fill(15,75,255)
+                        graphics.overlay[game.gaming>=2?1:0].fill(15,75,255)
                     break
                     case 2:
-                        graphics.overlay[game.players>=2?1:0].fill(225,15,255)
+                        graphics.overlay[game.gaming>=2?1:0].fill(225,15,255)
                     break
                     case 3:
-                        graphics.overlay[game.players>=2?1:0].fill(55,225,15)
+                        graphics.overlay[game.gaming>=2?1:0].fill(55,225,15)
                     break
                     case 4:
-                        graphics.overlay[game.players>=2?1:0].fill(225,105,15)
+                        graphics.overlay[game.gaming>=2?1:0].fill(225,105,15)
                     break
                     case 5:
-                        graphics.overlay[game.players>=2?1:0].fill(15,235,255)
+                        graphics.overlay[game.gaming>=2?1:0].fill(15,235,255)
                     break
                     case 6:
-                        graphics.overlay[game.players>=2?1:0].fill(125,15,255)
+                        graphics.overlay[game.gaming>=2?1:0].fill(125,15,255)
                     break
                 }
-                graphics.overlay[game.players>=2?1:0].rect(25+this.pos*40,25,30,3,1)
+                graphics.overlay[game.gaming>=2?1:0].rect(25+this.pos*40,25,30,3,1)
                 entities.players[this.index]
             break
         }

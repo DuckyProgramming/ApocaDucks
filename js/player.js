@@ -5254,7 +5254,7 @@ class player{
                     }
                 }
                 if(this.fort){
-                    this.id=-1
+                    this.id=game.level==22?0:-1
                     this.setColor()
                 }
                 for(let a=0,la=entities.players.length;a<la;a++){
@@ -5293,6 +5293,9 @@ class player{
                         for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                             if((entities.walls[a][b].type==31||entities.walls[a][b].type==33||entities.walls[a][b].type==36)&&dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<200){
                                 entities.walls[a][b].owner=this.id
+                                if(game.level==22&&this.id==0){
+                                    game.point[entities.walls[a][b].pos]=false
+                                }
                             }
                         }
                     }
@@ -5361,13 +5364,13 @@ class player{
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>360){
                             let key='qwerty'[floor(random(0,6))]
-                            for(let a=0,la=levels[19].length;a<la;a++){
-                                for(let b=0,lb=levels[19][a].length;b<lb;b++){
-                                    if(levels[19][a][b]==key){
+                            for(let a=0,la=levels[23].length;a<la;a++){
+                                for(let b=0,lb=levels[23][a].length;b<lb;b++){
+                                    if(levels[23][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,3))!=0){
-                                            this.base.position.x=game.edge[0]/2+random(-800,800)
+                                        if(floor(random(0,10))==0){
+                                            this.base.position.x=random(500,game.edge[0]-500)
                                             this.base.position.y=0
                                             this.parachute=true
                                         }

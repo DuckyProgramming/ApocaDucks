@@ -880,18 +880,26 @@ function generateLevel(level,layer){
             [112.5,60,-90,3],
             [113.5,60,-90,4],
             [112,61,90,1],
+
             [87,50.5,-90,0],
             [87,51.5,0,2],
             [86,51,90,3],
             [88,51,90,4],
+
             [137,50.5,0,3],
             [137,51.5,180,1],
             [136,51,-90,2],
             [138,51,-90,4],
+
             [122,20,-90,0],
             [124,20,-90,2],
             [123,19.5,90,3],
             [123,20.5,180,4],
+            
+            [25,50.5,0,2],
+            [25,51.5,180,1],
+            [24,51,90,0],
+            [26,51,90,4],
         ]
         for(let a=0,la=set.length;a<la;a++){
             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
@@ -1102,6 +1110,7 @@ function generateLevel(level,layer){
                 ticker++
             }
         }
+        game.point=[true,true,true,true,true]
     }
 }
 function kill(){
