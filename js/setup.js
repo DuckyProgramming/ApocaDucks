@@ -15,6 +15,21 @@ function setup(){
             }
         }
     }
+
+    if(false){
+        game.players=4
+        game.gaming=4
+        game.level=23
+        game.mission=findName('Duck Termination',types.mission)
+        entities.players=[]
+        initialGraphics()
+        game.classicWeapon=true
+        game.classicRespawn=true
+        game.pvp=true
+        newLoop()
+        stage.scene='main'
+        display.cycle=0
+    }
 }
 function windowResized(){
     resizeCanvas(windowWidth-40,windowHeight-40)
@@ -112,7 +127,7 @@ function mouseClicked(){
                         game.players=menu.players
                         game.gaming=menu.gaming
                         if(game.classicWeapon||game.randomizer||game.selector){
-                            game.level=menu.level
+                            game.level=game.pvp&&menu.level==22?23:menu.level
                         }else{
                             game.level=13
                         }

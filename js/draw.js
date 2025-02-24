@@ -45,7 +45,7 @@ function mainloop(){
                             `${b+1} Players`,
                             `${b+1} Gaming`,
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
-                            ['DoubleMountain','Prison','Steep','TBD','TBD'][b],
+                            ['DoubleMountain','Prison','Steep','Steel','TBD'][b],
                             ['Normal Weapons','Special Weapons','Random Weapons','Option Weapons','Pool Weapons'][b],
                             ['Auto-Respawn','Invisible','PvP','Fortress'][b],
                             `Proceed`
@@ -152,18 +152,21 @@ function mainloop(){
                 let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
                 let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510
                 let center=entities.players[c]
+                let special=false
                 if(entities.players[c].weaponType==275){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==163&&entities.projectiles[a].id==c+1){
                             center=entities.projectiles[a]
                             a=la
+                            special=true
                         }
-                    }s
+                    }
                 }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==280&&entities.projectiles[a].id==c+1){
                             center=entities.projectiles[a]
                             a=la
+                            special=true
                             key[c]*=(game.level==7?1.5:2)
                         }
                     }
@@ -172,9 +175,11 @@ function mainloop(){
                         if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
                             center=entities.players[a]
                             a=la
+                            special=true
                         }
                     }
-                }else{
+                }
+                if(!special){
                     key[c]*=dev.sight?10:entities.players[c].parachute?3:
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
@@ -251,6 +256,9 @@ function mainloop(){
                                 }
                             }
                         }
+                        if(a==3&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36)&&c==0){
+                            run.fore[a][b].displayOver(graphics.main[c])
+                        }
                         if(game.level==7){
                             let bounce=[
                                 [-game.edge[0],-game.edge[1]],
@@ -286,7 +294,7 @@ function mainloop(){
                 }
             }
             for(let a=0,la=game.gaming;a<la;a++){
-                if(game.level!=15&&game.level!=18&&game.level!=19){
+                if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23){
                     graphics.main[a].image(
                         graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
                         effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
@@ -350,6 +358,7 @@ function mainloop(){
                         )
                     }
                 }
+                graphics.main[a].noStroke()
                 if(display.anim>0){
                     graphics.main[a].fill(255,display.anim)
                     graphics.main[a].textSize(60)
@@ -405,7 +414,9 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
+                    if(!(bs[a][b][0]==3&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36))){
+                        run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
+                    }
                 }
             }
             for(let c=0,lc=game.gaming;c<lc;c++){

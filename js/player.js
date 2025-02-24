@@ -75,6 +75,7 @@ class player{
         this.lastingForce=[0,0]
         this.pointer={x:0,y:0,fails:0,hit:false}
         this.free=false
+        this.storeWeapon=false
         this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0}
 
         this.subPlayerAType=0
@@ -929,7 +930,7 @@ class player{
             layer.noStroke()
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index!=this.index){
-                    if(game.usurp&&game.usurpIndex==entities.players[a].index&&!entities.players[a].sidekick){
+                    if(game.usurp&&game.usurpIndex==entities.players[a].index&&!entities.players[a].sidekick&&!entities.players[a].fort){
                         let dir=atan2(entities.players[a].position.x-this.position.x,entities.players[a].position.y-this.position.y)
                         let extent=dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)/20+100
                         layer.fill(150,200,100)
@@ -944,7 +945,7 @@ class player{
                         layer.rect((max(0,entities.players[a].collect.life)/entities.players[a].base.life)*15-15+sin(dir)*extent,cos(dir)*extent+30,(max(0,entities.players[a].collect.life)/entities.players[a].base.life)*30,1+min((max(0,entities.players[a].collect.life)/entities.players[a].base.life)*60,3),2)
                         layer.fill(min(255,510-max(0,entities.players[a].life)/entities.players[a].base.life*510)-max(0,5-max(0,entities.players[a].life)/entities.players[a].base.life*30)*25,max(0,entities.players[a].life)/entities.players[a].base.life*510,0)
                         layer.rect((max(0,entities.players[a].life)/entities.players[a].base.life)*15-15+sin(dir)*extent,cos(dir)*extent+30,(max(0,entities.players[a].life)/entities.players[a].base.life)*30,2+min((max(0,entities.players[a].life)/entities.players[a].base.life)*60,3),2)
-                    }else if(this.inspect.includes(entities.players[a].index)){
+                    }else if(this.inspect.includes(entities.players[a].index)&&!entities.players[a].sidekick&&!entities.players[a].fort){
                         let dir=atan2(entities.players[a].position.x-this.position.x,entities.players[a].position.y-this.position.y)
                         let extent=dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)/20+100
                         layer.fill(...entities.players[a].color.skin.body)
@@ -1406,6 +1407,7 @@ class player{
         this.newWeapon()
         this.velocity.x=0
         this.velocity.y=0
+        this.storeWeapon=false
         this.weapon.ammo=this.weaponData.ammo
         this.weapon.cooldown=0
         this.resetKeys()
@@ -1441,10 +1443,26 @@ class player{
         this.gasTime=0
     }
     takeDamage(damage){
-        if(this.invincible<=0&&!(
-            (this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperTank')&&this.active>0&&!(this.playerData.name=='BigMultiHyperMedic'&&this.active<660)||
-            (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||game.brutal&&this.variant==14)&&this.active>0
-        )){
+        let valid=true
+        if(this.fort&&game.pvp){
+            let local=0
+            for(let a=0,la=entities.players.length;a<la;a++){
+                if(entities.players[a].fort&&abs(entities.players[a].pos-this.pos)==1&&entities.players[a].id==this.id&&this.id>0){
+                    local++
+                }
+            }
+            if(local==2){
+                valid=false
+            }
+        }
+        if(
+            this.invincible<=0&&valid
+            &&!(this.fort&&this.id==0&&!game.pvp&&(game.level==22||game.level==23))
+            &&!(
+                (this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperTank')&&this.active>0&&!(this.playerData.name=='BigMultiHyperMedic'&&this.active<660)||
+                (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||game.brutal&&this.variant==14)&&this.active>0
+            )
+        ){
             let preLife=this.life
             this.life-=damage*(this.id>game.gaming?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'?0.25:
@@ -3924,7 +3942,10 @@ class player{
                 }
             }
             this.attacking=this.manage[1]
-            if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading){
+            if(
+                this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
+                !(this.fort&&(this.id==0||this.pos==4)&&(game.level==22||game.level==23))
+            ){
                 this.attack(0)
             }
         }else if(this.id>=game.gaming+1||this.id==0){
@@ -5083,8 +5104,11 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&game.level==20||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&this.id>0&&this.id<=game.gaming&&!game.attacker||
-                this.id>=game.gaming+1||game.attacker&&this.id!=0
+                this.id>=game.gaming+1||game.attacker&&this.id!=0||this.storeWeapon
             )){
+                if(this.storeWeapon){
+                    this.storeWeapon=false
+                }
                 this.newWeapon()
             }
         }
@@ -5275,7 +5299,7 @@ class player{
                 }
             }else if(this.id>0){
                 this.die.timer++
-                if(this.die.timer>(game.assault?60:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault?60:240)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.level==19){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
@@ -5296,8 +5320,47 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else if(game.pvp&&this.die.timer>600){
+                        }else if(game.pvp&&this.die.timer>360){
                             let key='ABCDEF'[floor(random(0,6))]
+                            for(let a=0,la=levels[19].length;a<la;a++){
+                                for(let b=0,lb=levels[19][a].length;b<lb;b++){
+                                    if(levels[19][a][b]==key){
+                                        this.base.position.x=game.tileset[0]*(b+0.5)
+                                        this.base.position.y=game.tileset[1]*(a+0.5)
+                                        if(floor(random(0,3))!=0){
+                                            this.base.position.x=game.edge[0]/2+random(-800,800)
+                                            this.base.position.y=0
+                                            this.parachute=true
+                                        }
+                                        a=la
+                                        b=lb
+                                    }
+                                }
+                            }
+                            this.respawn()
+                        }
+                    }else if(game.level==23){
+                        let max=game.edge[0]+game.edge[1]
+                        let set=[0,0]
+                        for(let a=0,la=entities.walls.length;a<la;a++){
+                            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                if(
+                                    (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                    dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                    (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
+                                ){
+                                    max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                    set[0]=entities.walls[a][b].position.x
+                                    set[1]=entities.walls[a][b].position.y
+                                }
+                            }
+                        }
+                        if(max<game.edge[0]+game.edge[1]){
+                            this.base.position.x=set[0]
+                            this.base.position.y=set[1]-40
+                            this.respawn()
+                        }else if(game.pvp&&this.die.timer>360){
+                            let key='qwerty'[floor(random(0,6))]
                             for(let a=0,la=levels[19].length;a<la;a++){
                                 for(let b=0,lb=levels[19][a].length;b<lb;b++){
                                     if(levels[19][a][b]==key){
@@ -5587,12 +5650,12 @@ class player{
                     ){
                         let minimum=this.playerData.name=='PlayerMayfly'?1200:this.playerData.name=='PlayerSniperception'?900:this.playerData.name=='PlayerSunburstception'?600:this.playerData.name=='PlayerSlicerception'?360:450
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception')&&entities.players[a].life>0&&entities.players[a].id!=this.id){
+                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception'||entities.players[a].id==-1)&&entities.players[a].life>0&&entities.players[a].id!=this.id){
                                 minimum=min(minimum,dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y))
                             }
                         }
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception')&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)==minimum){
+                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception'||entities.players[a].id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)==minimum){
                                 let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y-(this.playerData.name=='PlayerBallistaception'?100:0))
                                 entities.projectiles.push(new projectile(this.layer,this.playerData.name=='PlayerLaserception'?this.position.x+lsin(dir)*10:this.position.x,this.playerData.name=='PlayerLaserception'?this.position.y-lcos(dir)*10:this.position.y,
                                     this.playerData.name=='PlayerRocketLauncherception'?86:
@@ -6427,11 +6490,6 @@ class player{
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
             if(this.fort){
-                for(let a=0,la=game.gaming;a<la;a++){
-                    if(!entities.players[a].inspect.includes(this.index)){
-                        entities.players[a].inspect.push(this.index)
-                    }
-                }
                 if(this.velocity.y<0){
                     this.velocity.y*=0.9
                 }

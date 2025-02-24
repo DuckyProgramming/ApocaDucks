@@ -204,6 +204,14 @@ black hole - electrifyer that absorbs enemies
 
 minimini - tiny machine gun
 
+coldfront - freezer with an ice shield
+
+[]
+
+[]
+
+[]
+
 
 
 start working here!
