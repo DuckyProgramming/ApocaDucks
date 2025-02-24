@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36
+        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -1487,6 +1487,18 @@ class wall{
                 }
                 layer.endShape()
             break
+            case 39:
+                layer.fill(50)
+                layer.ellipse(0,0,this.width,this.width)
+                layer.fill(200)
+                layer.rotate(this.dir)
+                layer.triangle(-this.width*0.4,0,0,-this.width*0.4,this.width*0.4,0)
+                layer.rect(0,this.width*0.1,this.width*0.45,this.width*0.45)
+                layer.rotate(-this.dir)
+                layer.fill(0)
+                layer.textSize(15)
+                layer.text('ABCDE'[this.point],0,1)
+            break
             
         }
         //layer.stroke(255,150,50)
@@ -1937,7 +1949,7 @@ class wall{
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
                     if(
-                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&
+                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -2267,7 +2279,7 @@ class wall{
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
@@ -2291,7 +2303,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39
                         &&!(this.type==37&&(c.velocity.y<0||c.previous.position.y+c.height/2>this.position.y-this.height/2))
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))

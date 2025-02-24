@@ -873,6 +873,32 @@ function generateLevel(level,layer){
             }
         }
     }
+    if(game.level==22||game.level==23){
+        let set=[
+            [110.5,60,-90,0],
+            [111.5,60,-90,2],
+            [112.5,60,-90,3],
+            [113.5,60,-90,4],
+            [112,61,90,1],
+            [87,50.5,-90,0],
+            [87,51.5,0,2],
+            [86,51,90,3],
+            [88,51,90,4],
+            [137,50.5,0,3],
+            [137,51.5,180,1],
+            [136,51,-90,2],
+            [138,51,-90,4],
+            [122,20,-90,0],
+            [124,20,-90,2],
+            [123,19.5,90,3],
+            [123,20.5,180,4],
+        ]
+        for(let a=0,la=set.length;a<la;a++){
+            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
+            entities.walls[0][entities.walls[0].length-1].dir=set[a][2]
+            entities.walls[0][entities.walls[0].length-1].point=set[a][3]
+        }
+    }
     if(game.level==13){
         let ticker=0
         let temp=[]
