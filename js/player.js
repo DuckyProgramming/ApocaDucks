@@ -5193,7 +5193,7 @@ class player{
             if(this.fort){
                 this.collect.time+=0.5
             }
-        }else if((this.life>0||this.fort)&&this.id>0&&(this.size<2.25*0.5||this.fort)&&(!game.pvp||this.fort)&&!this.construct){
+        }else if((this.life>0||this.fort)&&this.id>0&&(this.size<2.25*0.5||this.fort)&&!this.construct){
             this.life=min(max(this.life,this.base.life),this.life+this.base.life/(this.playerData.name=='PlayerImmortal'&&this.weaponData.uses>0?60:this.med()&&!this.fort&&this.weaponData.uses>0?150:300))
         }
         if(this.firearc[1]>0){

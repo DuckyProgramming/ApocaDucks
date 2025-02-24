@@ -622,7 +622,7 @@ function generateLevel(level,layer){
             game.edge=[9000,2000]
         break
         case 22:
-            game.edge=[11250,3000]
+            game.edge=[9000,2400]
         break
         default:
             //game.edge=[3640,2280]
@@ -880,6 +880,11 @@ function generateLevel(level,layer){
             [112.5,60,-90,3],
             [113.5,60,-90,4],
             [112,61,90,1],
+
+            [110.5,69,-90,0],
+            [111.5,69,90,2],
+            [112.5,69,90,3],
+            [113.5,69,90,4],
 
             [87,50.5,-90,0],
             [87,51.5,0,2],

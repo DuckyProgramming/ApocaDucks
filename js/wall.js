@@ -1496,7 +1496,7 @@ class wall{
                 layer.rect(0,this.width*0.1,this.width*0.45,this.width*0.45)
                 layer.rotate(-this.dir)
                 layer.fill(0)
-                layer.textSize(15)
+                layer.textSize(12)
                 layer.text('ABCDE'[this.point],0,1)
             break
             
@@ -1926,7 +1926,7 @@ class wall{
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&(game.level==15||game.level==18||game.level==19)){
+                if(this.recharge>0&&(game.level==15||game.level==18||game.level==19||game.level==22||game.level==23)){
                     this.recharge--
                 }
                 if(this.falling>0){
@@ -2698,6 +2698,7 @@ class wall{
                                                                         entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
                                                                         entities.players[entities.players.length-1].velocity.y=-20
                                                                     }else if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&game.pvp&&entities.walls[0][e].owner!=c.id&&c.id>=0){
+                                                                        hit=true
                                                                         c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerTripleAuto',types.player))))
                                                                         c.weapon.uses-=3
                                                                         c.weapon.cooldown=60
