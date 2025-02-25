@@ -3944,7 +3944,7 @@ class player{
             this.attacking=this.manage[1]
             if(
                 this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
-                !(this.fort&&(this.id==0||this.pos==4)&&(game.level==22||game.level==23))
+                !(this.fort&&this.id==0&&(game.level==22||game.level==23))
             ){
                 this.attack(0)
             }
