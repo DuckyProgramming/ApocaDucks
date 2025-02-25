@@ -1081,9 +1081,6 @@ function generateLevel(level,layer){
             }
         }
     }
-    for(let c=0,lc=game.players;c<lc;c++){
-        entities.players[c].initialWeapon()
-    }
     entities.walls.forEach(set=>set.forEach(item=>item.checkHorizontal()))
     entities.walls[0]=entities.walls[0].filter(item=>!item.remove)
     entities.walls[1]=entities.walls[1].filter(item=>!item.remove)
@@ -1146,15 +1143,8 @@ function generateLevel(level,layer){
         game.point=[true,true,true,true,true]
         game.pointAnim=[0,0,0,0,0]
     }
-    for(let a=0,la=game.players;a<la;a++){
-        entities.players[a].initialWeapon()
-    }
-}
-function kill(){
-    for(let a=0,la=entities.players.length;a<la;a++){
-        if(entities.players[a].id==0){
-            entities.players[a].life=0
-        }
+    for(let c=0,lc=game.players;c<lc;c++){
+        entities.players[c].initialWeapon()
     }
 }
 function newLoop(){
@@ -1548,7 +1538,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?20:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)
+                game.sendTime=game.attacker?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?20:1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)*(game.level==22?1.2:1)
                 game.stack.splice(0,1)
             }
         }else{
@@ -1579,7 +1569,7 @@ function checkEnd(level,layer,key){
 function kill(index){
     entities.players[index].life=0
     entities.players[index].collect.time=1200
-    entities.players[index].die.killer=6
+    entities.players[index].die.killer=-1
 }
 function setupGraphics(){
     setupBase()

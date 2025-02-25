@@ -95,7 +95,7 @@ class wall{
                 entities.players[entities.players.length-1].fortify()
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
-                if(game.level!=19){
+                if(game.level==22){
                     entities.players[entities.players.length-1].multLife(5)
                 }
             break
@@ -106,6 +106,9 @@ class wall{
                 entities.players[entities.players.length-1].fortify()
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
+                if(game.level==22){
+                    entities.players[entities.players.length-1].multLife(2)
+                }
             break
             case 36:
                 this.owner=(game.level==22||game.level==23)&&!game.pvp?floor(random(1,game.players+1)):-1
@@ -114,6 +117,9 @@ class wall{
                 entities.players[entities.players.length-1].fortify()
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
+                if(game.level==22){
+                    entities.players[entities.players.length-1].multLife(2)
+                }
             break
         }
     }

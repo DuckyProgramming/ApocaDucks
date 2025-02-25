@@ -25,7 +25,7 @@ function mainloop(){
                             a==0&&menu.players==b+1||
                             a==1&&menu.gaming==b+1||
                             a==2&&menu.level==[6,7,8,15,16][b]||
-                            a==3&&menu.level==[19,20,21,22,23][b]||
+                            a==3&&menu.level==[19,20,21,22,24][b]||
                             a==4&&menu.weapon==b||
                             a==4&&b>=1&&b<=2&&menu.weapon==5||
                             a==4&&(b==1||b==3)&&menu.weapon==6||
