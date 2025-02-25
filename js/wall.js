@@ -2040,7 +2040,7 @@ class wall{
                             }
                         }
                     }
-                }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[1]&&this.width<game.tileset[0]*6){
+                }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[1]&&this.width<game.tileset[0]*7){
                     this.width+=0.1
                     this.bounder.width+=0.1
                     this.position.x+=0.05
@@ -2055,7 +2055,7 @@ class wall{
                             }
                         }
                     }
-                }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[0]&&this.width>0){
+                }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[0]&&this.width>game.tileset[0]){
                     this.width-=0.1
                     this.bounder.width-=0.1
                     this.position.x-=0.05
