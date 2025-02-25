@@ -2133,300 +2133,302 @@ class wall{
                             c.type==267||c.type==268||c.type==271||c.type==272||c.type==275||
                             c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
                             c.type==292||c.type==293||c.type==295
-                        )&&!c.stop
+                        )
                     ){
-                        let d=collideBoxBox(this,c)
-                        let incident
-                        let vecBall
-                        if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275)&&d<0){
-                            let e={position:c.position,previous:c.previous,width:0,height:0}
-                            d=collideBoxBox(this,e)
-                        }
-                        if(d>=0&&!this.redundant[d]){
-                            switch(d){
-                                case 0:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.y<0){
+                        if(!c.stop){
+                            let d=collideBoxBox(this,c)
+                            let incident
+                            let vecBall
+                            if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275)&&d<0){
+                                let e={position:c.position,previous:c.previous,width:0,height:0}
+                                d=collideBoxBox(this,e)
+                            }
+                            if(d>=0&&!this.redundant[d]){
+                                switch(d){
+                                    case 0:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.y<0){
+                                                c.position.y=this.position.y+this.height/2+c.height/2
+                                                c.velocity.y*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.velocity.y<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y<c.previous.position.y){
                                             c.position.y=this.position.y+this.height/2+c.height/2
                                             c.velocity.y*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
                                         }
-                                    }else if(c.velocity.y<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y<c.previous.position.y){
-                                        c.position.y=this.position.y+this.height/2+c.height/2
-                                        c.velocity.y*=-1
-                                    }
-                                break
-                                case 1:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.y>0){
+                                    break
+                                    case 1:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.y>0){
+                                                c.position.y=this.position.y-this.height/2-c.height/2
+                                                c.velocity.y*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.velocity.y>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y>c.previous.position.y){
                                             c.position.y=this.position.y-this.height/2-c.height/2
                                             c.velocity.y*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
                                         }
-                                    }else if(c.velocity.y>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y>c.previous.position.y){
-                                        c.position.y=this.position.y-this.height/2-c.height/2
-                                        c.velocity.y*=-1
-                                    }
-                                break
-                                case 2:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x<0){
+                                    break
+                                    case 2:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x<0){
+                                                c.position.x=this.position.x+this.width/2+c.width/2
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.velocity.x<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x<c.previous.position.x){
                                             c.position.x=this.position.x+this.width/2+c.width/2
                                             c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
                                         }
-                                    }else if(c.velocity.x<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x<c.previous.position.x){
-                                        c.position.x=this.position.x+this.width/2+c.width/2
-                                        c.velocity.x*=-1
-                                    }
-                                break
-                                case 3:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x>0){
+                                    break
+                                    case 3:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x>0){
+                                                c.position.x=this.position.x-this.width/2-c.width/2
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.velocity.x>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x>c.previous.position.x){
                                             c.position.x=this.position.x-this.width/2-c.width/2
                                             c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
                                         }
-                                    }else if(c.velocity.x>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x>c.previous.position.x){
-                                        c.position.x=this.position.x-this.width/2-c.width/2
-                                        c.velocity.x*=-1
-                                    }
-                                break
-                                case 4:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x<0){
+                                    break
+                                    case 4:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x<0){
+                                                c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                            c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
+                                            incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                            vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
+                                            }
+                                        }else{
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                            vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
                                             }
                                         }
-                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }else{
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }
-                                break
-                                case 5:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x>0){
+                                    break
+                                    case 5:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x>0){
+                                                c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                            c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
+                                            incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                            vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
+                                            }
+                                        }else{
+                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
+                                            vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
                                             }
                                         }
-                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }else{
-                                        c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
-                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }
-                                break
-                                case 6:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x<0){
+                                    break
+                                    case 6:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x<0){
+                                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                            c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                            vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
+                                            }
+                                        }else{
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
+                                            vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
                                             }
                                         }
-                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }else{
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                        incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }
-                                break
-                                case 7:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x>0){
+                                    break
+                                    case 7:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x>0){
+                                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                                c.velocity.x*=-1
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170){
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                            vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
+                                            }
+                                        }else{
+                                            c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
+                                            vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
+                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                                c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
+                                                c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
+                                                c.position.x+=c.velocity.x*0.1
+                                                c.position.y+=c.velocity.y*0.1
+                                            }
+                                        }
+                                    break
+                                    case 8:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x<0){
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
+                                            }
+                                        }else if(c.velocity.x<0){
+                                            c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
                                             c.velocity.x*=-1
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
+                                        }
+                                    break
+                                    case 9:
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                            if(c.velocity.x>0){
+                                                c.direction+=180
+                                                c.hit=[]
+                                                c.bounces++
+                                                if(c.bounces>=3){
+                                                    c.active=false
+                                                }
                                             }
+                                        }else if(c.velocity.x>0){
+                                            c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
+                                            c.velocity.x*=-1
                                         }
-                                    }else if(c.type==135||c.type==136||c.type==169||c.type==170){
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }else{
-                                        c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                        incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
-                                        vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                        if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
-                                            c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
-                                            c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
-                                            c.position.x+=c.velocity.x*0.1
-                                            c.position.y+=c.velocity.y*0.1
-                                        }
-                                    }
-                                break
-                                case 8:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x<0){
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
-                                        }
-                                    }else if(c.velocity.x<0){
-                                        c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
-                                        c.velocity.x*=-1
-                                    }
-                                break
-                                case 9:
-                                    if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
-                                        if(c.velocity.x>0){
-                                            c.direction+=180
-                                            c.hit=[]
-                                            c.bounces++
-                                            if(c.bounces>=3){
-                                                c.active=false
-                                            }
-                                        }
-                                    }else if(c.velocity.x>0){
-                                        c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
-                                        c.velocity.x*=-1
-                                    }
-                                break
-                            }
-                            if(
-                                c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
-                                c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
-                                c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
-                                c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                c.type==286
-                            ){
-                                if(c.type==201&&!c.stop){
-                                    entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
-                                }else if(c.type==221&&!c.stop){
-                                    c.explode()
+                                    break
                                 }
-                                c.stop=true
-                            }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
-                                //c.bounces++
-                                c.bounceTimer=5
-                            }else if(c.type==228&&c.bounceTimer==0){
-                                c.bounces++
-                                c.bounceTimer=5
-                                c.explode()
-                                if(c.bounces>=3){
-                                    c.active=false
-                                }
-                                c.explosion=1
-                            }else if(c.type==263&&c.bounceTimer==0){
-                                c.bounces++
-                                c.bounceTimer=5
-                                c.explode()
-                                if(c.bounces>=2){
+                                if(
+                                    c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
+                                    c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
+                                    c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
+                                    c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
+                                    c.type==286
+                                ){
+                                    if(c.type==201&&!c.stop){
+                                        entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
+                                    }else if(c.type==221&&!c.stop){
+                                        c.explode()
+                                    }
                                     c.stop=true
-                                }
-                            }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293)&&c.bounceTimer==0){
-                                c.bounces++
-                                c.bounceTimer=5
-                                if(c.type==235){
-                                    let mult=random(0.625,1.6)
-                                    c.velocity.x*=mult
-                                    c.velocity.y*=mult
-                                }else if(c.type==264){
-                                    entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,30,atan2(c.velocity.x,-c.velocity.y)+random(-15,15),c.id,c.damage,c.base.time,c.crit,c.index))
-                                }
-                                if(c.bounces>=3){
+                                }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
+                                    //c.bounces++
+                                    c.bounceTimer=5
+                                }else if(c.type==228&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
                                     c.explode()
-                                    c.active=false
+                                    if(c.bounces>=3){
+                                        c.active=false
+                                    }
+                                    c.explosion=1
+                                }else if(c.type==263&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.explode()
+                                    if(c.bounces>=2){
+                                        c.stop=true
+                                    }
+                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293)&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    if(c.type==235){
+                                        let mult=random(0.625,1.6)
+                                        c.velocity.x*=mult
+                                        c.velocity.y*=mult
+                                    }else if(c.type==264){
+                                        entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,30,atan2(c.velocity.x,-c.velocity.y)+random(-15,15),c.id,c.damage,c.base.time,c.crit,c.index))
+                                    }
+                                    if(c.bounces>=3){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }
                             }
                         }
