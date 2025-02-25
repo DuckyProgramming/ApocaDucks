@@ -619,10 +619,10 @@ function generateLevel(level,layer){
             game.edge=[4500,1700]
         break
         case 21:
-            game.edge=[9000,2000]
+            game.edge=[9000,200]
         break
-        case 22:
-            game.edge=[9000,2400]
+        case 22: case 23:
+            game.edge=[9000,2700]
         break
         default:
             //game.edge=[3640,2280]
@@ -870,41 +870,69 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
                 break
+                case 'v':
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],20))
+                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
+                break
             }
         }
     }
     if(game.level==22||game.level==23){
         let set=[
-            [110.5,60,-90,0],
-            [111.5,60,-90,2],
-            [112.5,60,-90,3],
-            [113.5,60,-90,4],
-            [112,61,90,1],
+            [110,60.5,-90,0],
+            [111,60.5,90,1],
+            [112,60.5,-90,2],
+            [113,60.5,-90,3],
+            [114,60.5,-90,4],
 
-            [110.5,69,-90,0],
-            [111.5,69,90,2],
-            [112.5,69,90,3],
-            [113.5,69,90,4],
+            [110.5,69.5,-90,0],
+            [111.5,69.5,90,2],
+            [112.5,69.5,90,3],
+            [113.5,69.5,90,4],
 
-            [87,50.5,-90,0],
-            [87,51.5,0,2],
-            [86,51,90,3],
-            [88,51,90,4],
+            [84.5,50.5,-90,0],
+            [85.5,50.5,90,1],
+            [86.5,50.5,0,2],
+            [87.5,50.5,90,3],
+            [88.5,50.5,90,4],
 
-            [137,50.5,0,3],
-            [137,51.5,180,1],
-            [136,51,-90,2],
-            [138,51,-90,4],
+            [110.5,49.5,-90,0],
+            [111.5,49.5,90,1],
+            [112.5,49.5,-90,2],
+            [113.5,49.5,90,3],
 
-            [122,20,-90,0],
-            [124,20,-90,2],
-            [123,19.5,90,3],
-            [123,20.5,180,4],
-            
-            [25,50.5,0,2],
-            [25,51.5,180,1],
+            [135.5,50.5,-90,0],
+            [136.5,50.5,180,1],
+            [137.5,50.5,0,2],
+            [138.5,50.5,0,3],
+            [139.5,50.5,-90,4],
+
+            [96,30.5,-90,0],
+            [97,30.5,-90,1],
+            [98,30.5,90,2],
+            [99,30.5,90,3],
+            [100,30.5,-90,4],
+
+            [53.5,39.5,-90,1],
+            [54.5,39.5,-90,2],
+            [55.5,39.5,90,3],
+            [56.5,39.5,90,4],
+
+            [168.5,39.5,-90,0],
+            [169.5,39.5,-90,1],
+            [170.5,39.5,90,2],
+            [171.5,39.5,-90,4],
+
             [24,51,90,0],
-            [26,51,90,4],
+            [25,51,180,1],
+            [26,51,0,2],
+            [27,51,90,3],
+            [28,51,90,4],
+
+            [110.5,18.5,-90,0],
+            [111.5,18.5,90,1],
+            [112.5,18.5,90,3],
+            [113.5,18.5,90,4],
         ]
         for(let a=0,la=set.length;a<la;a++){
             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
@@ -1116,6 +1144,10 @@ function generateLevel(level,layer){
             }
         }
         game.point=[true,true,true,true,true]
+        game.pointAnim=[0,0,0,0,0]
+    }
+    for(let a=0,la=game.players;a<la;a++){
+        entities.players[a].initialWeapon()
     }
 }
 function kill(){
@@ -1440,6 +1472,12 @@ function checkEnd(level,layer,key){
             if(deployer.timer>0){
                 deployer.timer--
             }
+        }else if(game.level==22){
+            for(let a=0,la=game.point.length;a<la;a++){
+                if(!game.point[a]&&game.pointAnim[a]<1){
+                    game.pointAnim[a]+=1/300
+                }
+            }
         }
         if(game.stack.length>0&&!game.assault&&!game.nuke){
             if(game.sendTime>0){
@@ -1537,6 +1575,11 @@ function checkEnd(level,layer,key){
             }
         }
     }
+}
+function kill(index){
+    entities.players[index].life=0
+    entities.players[index].collect.time=1200
+    entities.players[index].die.killer=6
 }
 function setupGraphics(){
     setupBase()

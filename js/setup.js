@@ -16,8 +16,8 @@ function setup(){
         }
     }
 
-    if(false){
-        game.players=1
+    if(true){
+        game.players=4
         game.gaming=1
         game.level=23
         game.mission=findName('Duck Termination',types.mission)

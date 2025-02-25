@@ -148,11 +148,13 @@ function mainloop(){
                 if(game.level==6){
                     key[c]*=0.75
                 }
+                //key[c]*=8
                 bs.push([])
                 let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
                 let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510
                 let center=entities.players[c]
                 let special=false
+                //special=true
                 if(entities.players[c].weaponType==275){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==163&&entities.projectiles[a].id==c+1){
@@ -408,6 +410,14 @@ function mainloop(){
                         break
                         case 21:
                             graphics.main[a].text('Weapons\nHere',3500,1200)
+                        break
+                        case 22: case 23:
+                            /*graphics.main[a].noFill()
+                            graphics.main[a].stroke(255)
+                            graphics.main[a].strokeWeight(10)
+                            for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
+                            }*/
                         break
                     }
                 }
