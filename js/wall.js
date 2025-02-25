@@ -1254,6 +1254,17 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
+                    case 22: case 23:
+                        layer.fill(110,105,100)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(max(120,200-min(480,this.reload)/5),120,max(120,200-min(480,this.reload)/5))
+                        layer.quad(
+                            -this.width/2,-this.height/2-0.5,
+                            -this.width/2+15,-this.height/2+15,
+                            this.width/2-15,-this.height/2+15,
+                            this.width/2,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(220-min(480,this.reload)/5,120,220-min(480,this.reload)/5)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -2810,6 +2821,14 @@ class wall{
                                                                 }
                                                                 if(!hit){
                                                                     this.reload=0
+                                                                }
+                                                            break
+                                                            case 22: case 23:
+                                                                for(let e=0,le=20;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(-142.5,-97.5),this.align,40,240,false,-1))
+                                                                    let mult=random(1.5,3)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                 }
                                                             break
                                                             default:
