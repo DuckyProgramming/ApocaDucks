@@ -5645,7 +5645,7 @@ class player{
                     }else if(game.level==22){
                         for(let a=0,la=entities.walls.length;a<la;a++){
                             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                                if(entities.walls[a][b].type==31&&entities.walls[a][b].owner>0){
+                                if(entities.walls[a][b].type==33&&entities.walls[a][b].pos==4&&entities.walls[a][b].owner>0){
                                     this.respawn()
                                 }
                             }
