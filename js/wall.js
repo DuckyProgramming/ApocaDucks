@@ -2122,7 +2122,7 @@ class wall{
                             c.type==267||c.type==268||c.type==271||c.type==272||c.type==275||
                             c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
                             c.type==292||c.type==293||c.type==295
-                        )
+                        )&&!c.stop
                     ){
                         let d=collideBoxBox(this,c)
                         let incident

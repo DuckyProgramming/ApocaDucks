@@ -30,6 +30,7 @@ class projectile{
 		this.trap=false
 		this.partisan=false
 		this.travel=0
+		this.stop=false
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
@@ -144,7 +145,6 @@ class projectile{
 					this.type==284||this.type==286
 				){
 					this.trap=true
-					this.stop=false
 					if(this.type==117||this.type==245||this.type==246||this.type==247){
 						this.ammo=this.type==245?20:10
 					}else if(this.type==221){
@@ -5376,7 +5376,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>4000){
+					if(this.travel>2000){
 						this.active=false
 					}
 				break
@@ -5577,6 +5577,10 @@ class projectile{
 				case 80:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%5==0&&this.active&&a==0){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -5597,6 +5601,10 @@ class projectile{
 				case 85:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.active&&a==0){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/5,10,this.crit,this.index))
 					}
@@ -5648,6 +5656,10 @@ class projectile{
 				case 91: case 92: case 93: case 108: case 204: case 208: case 237: case 238: case 239: case 275:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					this.velocity.x=this.speed*lsin(this.direction)
 				    this.velocity.y=-this.speed*lcos(this.direction)
 					if(this.type==237){
@@ -5721,6 +5733,10 @@ class projectile{
 				case 96:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					this.velocity.x=this.speed*lsin(this.direction)
 				    this.velocity.y=-this.speed*lcos(this.direction)
 					if(this.active){
@@ -6076,6 +6092,10 @@ class projectile{
 				case 112: case 241:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.active&&a==0){
 						let minimum=450
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -6260,13 +6280,13 @@ class projectile{
 					this.position.x+=this.velocity.x/4
 					this.position.y+=this.velocity.y/4
 					if(this.type==122&&this.timer%60==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,3600,this.crit,this.index))
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,1800,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].velocity.x=0
 						entities.projectiles[entities.projectiles.length-1].velocity.y=0
 					}
-					if(this.type==123&&this.timer%6==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage/2,30,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage/2,30,this.crit,this.index))
+					if(this.type==123&&this.timer%10==0&&a==0&&this.active){
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage,20,this.crit,this.index))
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage,20,this.crit,this.index))
 					}
 					if(this.type==128&&this.timer%10==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
@@ -6344,6 +6364,10 @@ class projectile{
 				case 126:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%10==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/10,15,this.crit,this.index))
 					}
@@ -6351,6 +6375,10 @@ class projectile{
 				case 133: case 148: case 149: case 230: case 242: case 262:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(a==0){
 						this.speed+=this.base.speed*0.05
 					}
@@ -6457,6 +6485,10 @@ class projectile{
 				case 150:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(a==0&&this.speed>0){
 						this.speed-=this.base.speed*0.025
 						if(this.speed<0){
@@ -6467,6 +6499,10 @@ class projectile{
 				case 154:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%5==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.direction+this.time*5)*15,this.position.y-lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5,this.id,this.base.damage/5,10,this.crit,this.index))
 						entities.projectiles.push(new projectile(this.layer,this.position.x-lsin(this.direction+this.time*5)*15,this.position.y+lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5+180,this.id,this.base.damage/5,10,this.crit,this.index))
@@ -6475,6 +6511,10 @@ class projectile{
 				case 173:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%30==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
@@ -6482,6 +6522,10 @@ class projectile{
 				case 174:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%20==0&&this.active&&a==0){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -6632,6 +6676,10 @@ class projectile{
 				case 185:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%15==0&&this.active&&a==0){
 						if(this.timer%120==0){
 							for(let a=0,la=3;a<la;a++){
@@ -6657,6 +6705,10 @@ class projectile{
 				case 196:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%30==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}else if(this.timer%30==15&&a==0&&this.active){
@@ -6679,6 +6731,10 @@ class projectile{
 				case 197:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%30==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x-lcos(this.direction)*2,this.position.y-lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 						entities.projectiles.push(new projectile(this.layer,this.position.x+lcos(this.direction)*2,this.position.y+lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
@@ -6687,6 +6743,10 @@ class projectile{
 				case 198:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%40==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
@@ -6694,6 +6754,10 @@ class projectile{
 				case 199:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%10==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
@@ -6701,6 +6765,10 @@ class projectile{
 				case 213:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%15==0&&a==0&&this.active){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -6721,6 +6789,10 @@ class projectile{
 				case 222: case 223: case 287: case 288:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
@@ -6763,6 +6835,10 @@ class projectile{
 				case 229:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(a==0){
 						this.speed+=this.base.speed*0.05
 						if(abs(this.direction+90)<0.1){
@@ -6816,6 +6892,10 @@ class projectile{
 				case 236: case 266:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<22&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
@@ -6828,6 +6908,10 @@ class projectile{
 				case 253:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%10==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction-30,this.id,this.base.damage/2,15,this.crit,this.index))
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+30,this.id,this.base.damage/2,15,this.crit,this.index))
@@ -6836,6 +6920,10 @@ class projectile{
 				case 254:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%15==0&&a==0&&this.active){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -6856,6 +6944,10 @@ class projectile{
 				case 269:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%20==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,12,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
@@ -6863,6 +6955,10 @@ class projectile{
 				case 274:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%45==0&&a==0&&this.active){
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage*0.8,15,this.crit,this.index))
 					}
@@ -6870,6 +6966,10 @@ class projectile{
 				case 278:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%10==0&&a==0&&this.active){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -6893,6 +6993,10 @@ class projectile{
 					}
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(a==0){
 						this.direction+=this.angularVelocity
 						let inputSet=this.id==0||this.id>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
@@ -6908,6 +7012,10 @@ class projectile{
 				case 294:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>2000){
+						this.active=false
+					}
 					if(this.timer%30==0&&a==0&&this.active){
 						for(let a=0,la=3;a<la;a++){
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
