@@ -96,7 +96,7 @@ class wall{
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
                 if(game.level==22){
-                    entities.players[entities.players.length-1].multLife(6)
+                    entities.players[entities.players.length-1].multLife(9)
                 }else if(game.level==24){
                     this.timers=[]
                     for(let a=0,la=game.players;a<la;a++){
@@ -112,7 +112,7 @@ class wall{
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
                 if(game.level==22){
-                    entities.players[entities.players.length-1].multLife(2)
+                    entities.players[entities.players.length-1].multLife(3)
                 }
             break
             case 36:
@@ -123,7 +123,7 @@ class wall{
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
                 if(game.level==22){
-                    entities.players[entities.players.length-1].multLife(2)
+                    entities.players[entities.players.length-1].multLife(3)
                 }
             break
         }
@@ -1879,62 +1879,62 @@ class wall{
                 }else{
                     texts='Point '+'ABCDE'[this.pos]
                 }
-                graphics.overlay[game.gaming>=2?1:0].fill(255)
-                graphics.overlay[game.gaming>=2?1:0].textSize(10)
-                graphics.overlay[game.gaming>=2?1:0].text(texts,25+this.pos*40,15)
+                graphics.overlay[0].fill(255)
+                graphics.overlay[0].textSize(10)
+                graphics.overlay[0].text(texts,25+this.pos*40,15)
                 switch(this.owner){
                     case -1:
-                        graphics.overlay[game.gaming>=2?1:0].fill(200)
+                        graphics.overlay[0].fill(200)
                     break
                     case 0:
-                        graphics.overlay[game.gaming>=2?1:0].fill(255,255,0)
+                        graphics.overlay[0].fill(255,255,0)
                     break
                     case 1:
-                        graphics.overlay[game.gaming>=2?1:0].fill(15,75,255)
+                        graphics.overlay[0].fill(15,75,255)
                     break
                     case 2:
-                        graphics.overlay[game.gaming>=2?1:0].fill(225,15,255)
+                        graphics.overlay[0].fill(225,15,255)
                     break
                     case 3:
-                        graphics.overlay[game.gaming>=2?1:0].fill(55,225,15)
+                        graphics.overlay[0].fill(55,225,15)
                     break
                     case 4:
-                        graphics.overlay[game.gaming>=2?1:0].fill(225,105,15)
+                        graphics.overlay[0].fill(225,105,15)
                     break
                     case 5:
-                        graphics.overlay[game.gaming>=2?1:0].fill(15,235,255)
+                        graphics.overlay[0].fill(15,235,255)
                     break
                     case 6:
-                        graphics.overlay[game.gaming>=2?1:0].fill(125,15,255)
+                        graphics.overlay[0].fill(125,15,255)
                     break
                 }
-                graphics.overlay[game.gaming>=2?1:0].rect(25+this.pos*40,25,30,3,1)
+                graphics.overlay[0].rect(25+this.pos*40,25,30,3,1)
                 if(this.type==31&&game.level==24){
                     for(let a=0,la=this.timers.length;a<la;a++){
-                        graphics.overlay[game.gaming>=2?1:0].fill(255)
-                        graphics.overlay[game.gaming>=2?1:0].textSize(10)
-                        graphics.overlay[game.gaming>=2?1:0].text(formatTime(this.timers[a]),25+this.pos*40,15+(a+1)*25)
+                        graphics.overlay[0].fill(255)
+                        graphics.overlay[0].textSize(10)
+                        graphics.overlay[0].text(formatTime(this.timers[a]),25+this.pos*40,15+(a+1)*25)
                         switch(a+1){
                             case 1:
-                                graphics.overlay[game.gaming>=2?1:0].fill(15,75,255)
+                                graphics.overlay[0].fill(15,75,255)
                             break
                             case 2:
-                                graphics.overlay[game.gaming>=2?1:0].fill(225,15,255)
+                                graphics.overlay[0].fill(225,15,255)
                             break
                             case 3:
-                                graphics.overlay[game.gaming>=2?1:0].fill(55,225,15)
+                                graphics.overlay[0].fill(55,225,15)
                             break
                             case 4:
-                                graphics.overlay[game.gaming>=2?1:0].fill(225,105,15)
+                                graphics.overlay[0].fill(225,105,15)
                             break
                             case 5:
-                                graphics.overlay[game.gaming>=2?1:0].fill(15,235,255)
+                                graphics.overlay[0].fill(15,235,255)
                             break
                             case 6:
-                                graphics.overlay[game.gaming>=2?1:0].fill(125,15,255)
+                                graphics.overlay[0].fill(125,15,255)
                             break
                         }
-                        graphics.overlay[game.gaming>=2?1:0].rect(25+this.pos*40,25+(a+1)*25,30,3,1)
+                        graphics.overlay[0].rect(25+this.pos*40,25+(a+1)*25,30,3,1)
                     }
                 }
             break

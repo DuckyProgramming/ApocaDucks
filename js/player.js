@@ -5711,9 +5711,9 @@ class player{
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>300){
                             let key='ABCDEF'[floor(random(0,6))]
-                            for(let a=0,la=levels[19].length;a<la;a++){
-                                for(let b=0,lb=levels[19][a].length;b<lb;b++){
-                                    if(levels[19][a][b]==key){
+                            for(let a=0,la=levels[24].length;a<la;a++){
+                                for(let b=0,lb=levels[24][a].length;b<lb;b++){
+                                    if(levels[24][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
                                         a=la

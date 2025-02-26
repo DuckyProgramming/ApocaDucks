@@ -536,7 +536,14 @@ function displayMain(layer,effective,keyStore){
             )
         }
     }
-    if(game.flash&&game.level!=13&&game.level!=14||game.level==19||game.level==22||game.level==23||game.level==24){
+    if(game.level==19||game.level==22||game.level==23||game.level==24){
+        image(
+            graphics.overlay[0],
+            width/2,60,width,120
+        )
+        graphics.overlay[0].clear()
+    }
+    if(game.flash&&game.level!=13&&game.level!=14){
         if(game.gaming==1){
             image(
                 graphics.overlay[0],
@@ -575,9 +582,6 @@ function displayMain(layer,effective,keyStore){
                 )
             }
         }
-    }
-    for(let a=0,la=graphics.overlay.length;a<la;a++){
-        graphics.overlay[a].clear()
     }
 }
 function generateLevel(level,layer){
@@ -1614,13 +1618,13 @@ function setupGraphics(){
 function initialGraphics(){
     if(game.gaming==1){
         graphics.main.push(createGraphics(width,height))
-        if(game.flash||game.level==19||game.level==22||game.level==23||game.level==24){
+        if(game.flash){
             graphics.overlay.push(createGraphics(width,height))
         }
     }else if(game.gaming==2){
         graphics.main.push(createGraphics(width/2,height))
         graphics.main.push(createGraphics(width/2,height))
-        if(game.flash||game.level==19||game.level==22||game.level==23||game.level==24){
+        if(game.flash){
             graphics.overlay.push(createGraphics(width/2,height))
             graphics.overlay.push(createGraphics(width/2,height))
         }
@@ -1631,7 +1635,7 @@ function initialGraphics(){
         if(game.gaming==4){
             graphics.main.push(createGraphics(width/2,height/2))
         }
-        if(game.flash||game.level==19||game.level==22||game.level==23||game.level==24){
+        if(game.flash){
             graphics.overlay.push(createGraphics(width/2,height/2))
             graphics.overlay.push(createGraphics(width/2,height/2))
             graphics.overlay.push(createGraphics(width/2,height/2))
@@ -1639,6 +1643,9 @@ function initialGraphics(){
                 graphics.overlay.push(createGraphics(width/2,height/2))
             }
         }
+    }
+    if(menu.level==19||menu.level==22||menu.level==23||menu.level==24){
+        graphics.overlay.push(createGraphics(width,120))
     }
     for(let a=0,la=graphics.main.length;a<la;a++){
         setupLayer(graphics.main[a])
