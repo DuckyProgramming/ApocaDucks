@@ -53,7 +53,7 @@ function mouseClicked(){
                                 menu.level=[6,7,17,18,16][b]
                             }
                         }else if(a==3){
-                            menu.level=[19,20,21,22,23][b]
+                            menu.level=[19,20,21,22,24][b]
                         }else if(a==4){
                             if(menu.weapon==1&&b==4||menu.weapon==4&&b==1){
                                 menu.weapon=7
