@@ -6993,10 +6993,6 @@ class projectile{
 					}
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
-					this.travel+=this.speed
-					if(this.travel>2000){
-						this.active=false
-					}
 					if(a==0){
 						this.direction+=this.angularVelocity
 						let inputSet=this.id==0||this.id>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
@@ -7033,6 +7029,7 @@ class projectile{
 						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
 						entities.players[b].life>0&&this.active&&
 						!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275)&&this.hit.includes(entities.players[b].index))&&
+						!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
 						!(this.type==98&&this.timer<15)&&
 						!(this.type==100&&this.timer<3)&&
 						!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263)&&this.timer<150)&&

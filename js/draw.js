@@ -45,7 +45,7 @@ function mainloop(){
                             `${b+1} Players`,
                             `${b+1} Gaming`,
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
-                            ['DoubleMountain','Prison','Steep','Steel','TBD'][b],
+                            ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Normal Weapons','Special Weapons','Random Weapons','Option Weapons','Pool Weapons'][b],
                             ['Auto-Respawn','Invisible','PvP','Fortress'][b],
                             `Proceed`
@@ -296,7 +296,7 @@ function mainloop(){
                 }
             }
             for(let a=0,la=game.gaming;a<la;a++){
-                if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23){
+                if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
                     graphics.main[a].image(
                         graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
                         effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
