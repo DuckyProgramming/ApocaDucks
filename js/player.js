@@ -35,7 +35,7 @@ class player{
         if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||game.randomizer){
             this.copy=floor(random(0,game.players))
         }
-        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||game.randomizer){
+        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||game.randomizer){
             this.active=0
         }
         this.visible=0
@@ -1460,7 +1460,7 @@ class player{
             &&!(this.fort&&this.id==0&&!game.pvp&&(game.level==22||game.level==23))
             &&!(
                 (this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperTank')&&this.active>0&&!(this.playerData.name=='BigMultiHyperMedic'&&this.active<660)||
-                (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||game.brutal&&this.variant==14)&&this.active>0
+                (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||game.brutal&&this.variant==14)&&this.active>0
             )
         ){
             let preLife=this.life
@@ -3823,7 +3823,7 @@ class player{
                 this.color.skin.legs=mergeColor(this.color.skin.legs,[255,255,255],0.6)
                 this.color.skin.arms=mergeColor(this.color.skin.arms,[255,255,255],0.6)
             }
-        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||game.brutal&&this.variant==14){
+        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||game.brutal&&this.variant==14){
             if(this.active>0){
                 this.active--
                 if(this.active<=0){
@@ -5664,7 +5664,7 @@ class player{
                         for(let a=0,la=entities.walls.length;a<la;a++){
                             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                                 if(
-                                    (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                    (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&entities.walls[a][b].pos!=4&&
                                     dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
                                     (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
                                 ){
