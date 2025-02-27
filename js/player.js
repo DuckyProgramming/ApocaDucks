@@ -4749,7 +4749,7 @@ class player{
                                                 this.target.position.y=1600
                                             break
                                             case 4:
-                                                if(game.level==22&&game.point[3]){
+                                                if(game.level==22&&game.point[3]||game.level==23){
                                                     this.target.position.x=2700
                                                     this.target.position.y=abs(this.position.x-2700)<100?0:1600
                                                 }else{
@@ -4859,7 +4859,7 @@ class player{
                                     case 9:
                                         switch(goalPoint){
                                             case 0:
-                                                if(game.level==22){
+                                                if(game.level==22||game.level==23){
                                                     this.target.position.x=2900
                                                     this.target.position.y=abs(this.position.x-2900)<100?0:1700
                                                 }else{

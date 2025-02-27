@@ -2110,9 +2110,9 @@ class wall{
                 }
             break
             case 13:
-                if(this.reload>0&&game.level!=23){
+                if(this.reload>0){
                     this.reload-=(game.level==19?0.5:1)
-                    if(this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399){
+                    if((this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399)&&game.level!=23){
                         let mult=0
                         switch(game.level){
                             case 6:
