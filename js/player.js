@@ -4949,6 +4949,12 @@ class player{
                             }
                         }
                     }
+                }else if(game.level==24){
+                    if(floor(random(0,20))==0){
+                        this.target.index=random(-900,900)*this.position.y/game.edge[1]
+                    }
+                    this.target.position.x=entities.players[game.players].position.x+random(-120,120)+this.target.index
+                    this.target.position.y=entities.players[game.players].position.y
                 }else{
                     let targets=[]
                     switch(game.level){

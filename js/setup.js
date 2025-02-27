@@ -19,8 +19,8 @@ function setup(){
     if(false){
         game.players=4
         game.gaming=1
-        game.level=23
-        menu.level=23
+        game.level=24
+        menu.level=24
         game.mission=findName('Duck Termination',types.mission)
         entities.players=[]
         initialGraphics()

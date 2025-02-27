@@ -2309,6 +2309,38 @@ class wall{
                                 }
                             }
                         }
+                    }else if(this.base.height==10){
+                        if(!game.point[2]&&this.height<game.tileset[1]){
+                            this.height+=0.1
+                            this.bounder.height+=0.1
+                            this.position.y+=0.05
+                            this.bounder.position.y+=0.05
+                            this.velocity.y=0.05
+                            for(let a=0,la=this.boundary.length;a<la;a++){
+                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                        if(a==0||a==2&&c==1||a==3&&c==1){
+                                            this.boundary[a][b][c].y+=0.1
+                                        }
+                                    }
+                                }
+                            }
+                        }else if(game.point[2]&&this.height>0){
+                            this.height-=1
+                            this.bounder.height-=1
+                            this.position.y-=0.5
+                            this.bounder.position.y-=0.5
+                            this.velocity.y=-0.5
+                            for(let a=0,la=this.boundary.length;a<la;a++){
+                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                        if(a==0||a==2&&c==1||a==3&&c==1){
+                                            this.boundary[a][b][c].y-=1
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }else if(game.level==23){
                     if(game.point[3]>0&&game.point[3]<=game.players&&abs(this.base.position.x-entities.players[game.point[3]-1].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[game.point[3]-1].position.y)<100){
