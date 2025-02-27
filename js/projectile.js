@@ -7115,7 +7115,7 @@ class projectile{
 								entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100))*0.2,max(entities.players[b].life,entities.players[b].base.life*2))
 							}
 						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81){
-							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!entities.players[b].fort?3:entities.players[b].life>=500?2:1))
+							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?3:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:1))
 							if(this.type==75){
 								this.explode()
 							}

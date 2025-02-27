@@ -539,7 +539,7 @@ function displayMain(layer,effective,keyStore){
     if(game.level==19||game.level==22||game.level==23||game.level==24){
         image(
             graphics.overlay[0],
-            width/2,60,width,120
+            width/2,75,width,150
         )
         graphics.overlay[0].clear()
     }
@@ -862,16 +862,16 @@ function generateLevel(level,layer){
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                 break
                 case 'V':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*10,game.tileset[1]*4,31))
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,31))
                 break
                 case 'Q':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],32))
                 break
                 case 'N':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*10,game.tileset[1]*4,33))
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
                 break
                 case 'M':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*10,game.tileset[1]*4,36))
+                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,36))
                 break
                 case 'X':
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
@@ -924,11 +924,11 @@ function generateLevel(level,layer){
             [138.5,50.5,0,3],
             [139.5,50.5,-90,4],
 
-            [96,30.5,-90,0],
-            [97,30.5,-90,1],
-            [98,30.5,90,2],
-            [99,30.5,90,3],
-            [100,30.5,-90,4],
+            [97,30.5,-90,0],
+            [98,30.5,-90,1],
+            [99,30.5,90,2],
+            [100,30.5,90,3],
+            [101,30.5,-90,4],
 
             [53.5,39.5,-90,1],
             [54.5,39.5,-90,2],
@@ -951,11 +951,11 @@ function generateLevel(level,layer){
             [112.5,18.5,90,3],
             [113.5,18.5,90,4],
 
-            [133,30.5,-90,0],
-            [134,30.5,-90,1],
-            [135,30.5,0,2],
-            [136,30.5,90,3],
-            [137,30.5,90,4],
+            [135,30.5,-90,0],
+            [136,30.5,-90,1],
+            [137,30.5,0,2],
+            [138,30.5,90,3],
+            [139,30.5,90,4],
         ]
         for(let a=0,la=set.length;a<la;a++){
             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
@@ -1163,7 +1163,7 @@ function generateLevel(level,layer){
                 ticker++
             }
         }
-        game.point=[true,true,true,true,true]
+        game.point=game.level==23?[-1,-1,-1,-1,-1]:[true,true,true,true,true]
         game.pointAnim=[0,0,0,0,0]
     }else if(game.level==24){
         let ticker=0
@@ -1645,7 +1645,7 @@ function initialGraphics(){
         }
     }
     if(menu.level==19||menu.level==22||menu.level==23||menu.level==24){
-        graphics.overlay.push(createGraphics(width,120))
+        graphics.overlay.push(createGraphics(width,150))
     }
     for(let a=0,la=graphics.main.length;a<la;a++){
         setupLayer(graphics.main[a])

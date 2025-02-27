@@ -3633,7 +3633,7 @@ class player{
         this.base.life=100*this.playerData.lifeBuff
         this.collect.life=100*this.playerData.lifeBuff
         if(this.id>0){
-            this.multLife(2)
+            this.multLife(game.level==23||game.level==24?1.5:2)
         }
         if(game.peakWeapon){
             this.multLife(1.5)
@@ -5595,6 +5595,8 @@ class player{
                                 entities.walls[a][b].owner=this.id
                                 if(game.level==22&&this.id==0){
                                     game.point[entities.walls[a][b].pos]=false
+                                }else if(game.level==23){
+                                    game.point[entities.walls[a][b].pos]=this.id
                                 }
                             }
                         }
@@ -5671,7 +5673,7 @@ class player{
                             this.base.position.y=set[1]-40
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>300){
-                            let key='qwerty'[floor(random(0,6))]
+                            let key='ABCDEF'[floor(random(0,6))]
                             for(let a=0,la=levels[23].length;a<la;a++){
                                 for(let b=0,lb=levels[23][a].length;b<lb;b++){
                                     if(levels[23][a][b]==key){
@@ -6836,7 +6838,7 @@ class player{
             this.previous.position.y=this.position.y
             if(this.fort){
                 if(this.velocity.y<0){
-                    this.velocity.y*=0.9
+                    this.velocity.y*=0.8
                 }
             }else{
                 this.position.x+=this.velocity.x
