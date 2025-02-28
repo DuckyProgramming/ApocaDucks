@@ -141,7 +141,7 @@ function mouseClicked(){
                             generateMission(types.mission[game.mission].wave)
                         }
                         if(game.usurp){
-                            game.usurpIndex=entities.players[floor(random(0,game.gaming))].index
+                            game.usurpIndex=floor(random(0,game.players))
                         }
                     }
                     tick++
