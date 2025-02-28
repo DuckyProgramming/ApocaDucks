@@ -1,3 +1,7 @@
+can't be leader
+
+
+
 MARCH UPDATE
 
 
@@ -206,9 +210,9 @@ minimini - tiny machine gun
 
 coldfront - freezer with an ice shield
 
-[]
+wrecking ball - fires a small and a large fast piercing bullet
 
-[]
+ejection - hopper destroyer
 
 []
 
