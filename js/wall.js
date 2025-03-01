@@ -92,7 +92,7 @@ class wall{
                 }
             break
             case 31:
-                this.owner=(game.level==22||game.level==23)&&!game.pvp?floor(random(1,game.players+1)):-1
+                this.owner=(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Fort',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -108,7 +108,7 @@ class wall{
                 }
             break
             case 33:
-                this.owner=(game.level==22||game.level==23)&&!game.pvp?floor(random(1,game.players+1)):-1
+                this.owner=(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Turret',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -124,7 +124,7 @@ class wall{
                 }
             break
             case 36:
-                this.owner=(game.level==22||game.level==23)&&!game.pvp?floor(random(1,game.players+1)):-1
+                this.owner=(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Outpost',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -1544,9 +1544,9 @@ class wall{
                         break
                     }
                 }else{
-                    texts='Point '+'ABCDE'[this.pos]
+                    texts=this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
                 }
-                layer.text(texts,0,-140)
+                layer.text(texts,0,-120)
                 switch(this.owner){
                     case -1:
                         layer.fill(200)
@@ -1573,7 +1573,7 @@ class wall{
                         layer.fill(125,15,255)
                     break
                 }
-                layer.rect(0,-120,60,6,2)
+                layer.rect(0,-100,60,6,2)
             break
             case 32:
                 switch(game.level){
@@ -1698,6 +1698,12 @@ class wall{
                         break
                         case 4:
                             layer.fill(225,105,15)
+                        break
+                        case 5:
+                            layer.fill(15,235,255)
+                        break
+                        case 6:
+                            layer.fill(125,15,255)
                         break
                     }
                 }
@@ -1915,78 +1921,156 @@ class wall{
                 }
             break
             case 31: case 33: case 36:
-                let texts=''
-                if(game.level==19||game.level==24){
-                    switch(this.type){
-                        case 31:
-                            texts='Fort'
-                        break
-                        case 33:
-                            texts='Turret'
-                        break
-                        case 36:
-                            texts='Outpost'
-                        break
-                    }
-                }else{
-                    texts='Point '+'ABCDE'[this.pos]
-                }
-                graphics.overlay[0].fill(255)
-                graphics.overlay[0].textSize(10)
-                graphics.overlay[0].text(texts,25+this.pos*40,15)
-                switch(this.owner){
-                    case -1:
-                        graphics.overlay[0].fill(200)
-                    break
-                    case 0:
-                        graphics.overlay[0].fill(255,255,0)
-                    break
-                    case 1:
-                        graphics.overlay[0].fill(15,75,255)
-                    break
-                    case 2:
-                        graphics.overlay[0].fill(225,15,255)
-                    break
-                    case 3:
-                        graphics.overlay[0].fill(55,225,15)
-                    break
-                    case 4:
-                        graphics.overlay[0].fill(225,105,15)
-                    break
-                    case 5:
-                        graphics.overlay[0].fill(15,235,255)
-                    break
-                    case 6:
-                        graphics.overlay[0].fill(125,15,255)
-                    break
-                }
-                graphics.overlay[0].rect(25+this.pos*40,25,30,3,1)
-                if(this.type==31&&game.level==24||this.type==33&&game.level==23&&this.pos==4){
-                    for(let a=0,la=this.timers.length;a<la;a++){
-                        graphics.overlay[0].fill(255)
-                        graphics.overlay[0].textSize(10)
-                        graphics.overlay[0].text(formatTime(this.timers[a]),25+this.pos*40,15+(a+1)*25)
-                        switch(a+1){
-                            case 1:
-                                graphics.overlay[0].fill(15,75,255)
+                if(game.level==23){
+                    let place=[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
+                    let texts=''
+                    if(game.level==19||game.level==24){
+                        switch(this.type){
+                            case 31:
+                                texts='Fort'
                             break
-                            case 2:
-                                graphics.overlay[0].fill(225,15,255)
+                            case 33:
+                                texts='Turret'
                             break
-                            case 3:
-                                graphics.overlay[0].fill(55,225,15)
-                            break
-                            case 4:
-                                graphics.overlay[0].fill(225,105,15)
-                            break
-                            case 5:
-                                graphics.overlay[0].fill(15,235,255)
-                            break
-                            case 6:
-                                graphics.overlay[0].fill(125,15,255)
+                            case 36:
+                                texts='Outpost'
                             break
                         }
-                        graphics.overlay[0].rect(25+this.pos*40,25+(a+1)*25,30,3,1)
+                    }else{
+                        texts=this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
+                    }
+                    graphics.overlay[0].fill(255)
+                    graphics.overlay[0].textSize(10)
+                    graphics.overlay[0].text(texts,25+place[0]*40,15+place[1]*25)
+                    switch(this.owner){
+                        case -1:
+                            graphics.overlay[0].fill(200)
+                        break
+                        case 0:
+                            graphics.overlay[0].fill(255,255,0)
+                        break
+                        case 1:
+                            graphics.overlay[0].fill(15,75,255)
+                        break
+                        case 2:
+                            graphics.overlay[0].fill(225,15,255)
+                        break
+                        case 3:
+                            graphics.overlay[0].fill(55,225,15)
+                        break
+                        case 4:
+                            graphics.overlay[0].fill(225,105,15)
+                        break
+                        case 5:
+                            graphics.overlay[0].fill(15,235,255)
+                        break
+                        case 6:
+                            graphics.overlay[0].fill(125,15,255)
+                        break
+                    }
+                    graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
+                    if(this.type==33&&this.pos==4){
+                        for(let a=0,la=this.timers.length;a<la;a++){
+                            graphics.overlay[0].fill(255)
+                            graphics.overlay[0].textSize(10)
+                            graphics.overlay[0].text(formatTime(this.timers[a]),25+(place[0]+2)*40,15+a*25)
+                            switch(a+1){
+                                case 1:
+                                    graphics.overlay[0].fill(15,75,255)
+                                break
+                                case 2:
+                                    graphics.overlay[0].fill(225,15,255)
+                                break
+                                case 3:
+                                    graphics.overlay[0].fill(55,225,15)
+                                break
+                                case 4:
+                                    graphics.overlay[0].fill(225,105,15)
+                                break
+                                case 5:
+                                    graphics.overlay[0].fill(15,235,255)
+                                break
+                                case 6:
+                                    graphics.overlay[0].fill(125,15,255)
+                                break
+                            }
+                            graphics.overlay[0].rect(25+(place[0]+2)*40,25+a*25,30,3,1)
+                        }
+                    }
+                }else{
+                    let texts=''
+                    if(game.level==19||game.level==24){
+                        switch(this.type){
+                            case 31:
+                                texts='Fort'
+                            break
+                            case 33:
+                                texts='Turret'
+                            break
+                            case 36:
+                                texts='Outpost'
+                            break
+                        }
+                    }else{
+                        texts=this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
+                    }
+                    graphics.overlay[0].fill(255)
+                    graphics.overlay[0].textSize(10)
+                    graphics.overlay[0].text(texts,25+this.pos*40,15)
+                    switch(this.owner){
+                        case -1:
+                            graphics.overlay[0].fill(200)
+                        break
+                        case 0:
+                            graphics.overlay[0].fill(255,255,0)
+                        break
+                        case 1:
+                            graphics.overlay[0].fill(15,75,255)
+                        break
+                        case 2:
+                            graphics.overlay[0].fill(225,15,255)
+                        break
+                        case 3:
+                            graphics.overlay[0].fill(55,225,15)
+                        break
+                        case 4:
+                            graphics.overlay[0].fill(225,105,15)
+                        break
+                        case 5:
+                            graphics.overlay[0].fill(15,235,255)
+                        break
+                        case 6:
+                            graphics.overlay[0].fill(125,15,255)
+                        break
+                    }
+                    graphics.overlay[0].rect(25+this.pos*40,25,30,3,1)
+                    if(this.type==31&&game.level==24||this.type==33&&game.level==23&&this.pos==4){
+                        for(let a=0,la=this.timers.length;a<la;a++){
+                            graphics.overlay[0].fill(255)
+                            graphics.overlay[0].textSize(10)
+                            graphics.overlay[0].text(formatTime(this.timers[a]),25+this.pos*40,15+(a+1)*25)
+                            switch(a+1){
+                                case 1:
+                                    graphics.overlay[0].fill(15,75,255)
+                                break
+                                case 2:
+                                    graphics.overlay[0].fill(225,15,255)
+                                break
+                                case 3:
+                                    graphics.overlay[0].fill(55,225,15)
+                                break
+                                case 4:
+                                    graphics.overlay[0].fill(225,105,15)
+                                break
+                                case 5:
+                                    graphics.overlay[0].fill(15,235,255)
+                                break
+                                case 6:
+                                    graphics.overlay[0].fill(125,15,255)
+                                break
+                            }
+                            graphics.overlay[0].rect(25+this.pos*40,25+(a+1)*25,30,3,1)
+                        }
                     }
                 }
             break
@@ -2293,8 +2377,10 @@ class wall{
                     )&&this.height>0){
                         this.height-=0.1
                         this.bounder.height-=0.1
+                        this.internalBounder.height-=0.1
                         this.position.y-=0.05
                         this.bounder.position.y-=0.05
+                        this.internalBounder.position.y-=0.05
                         this.velocity.y=-0.05
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -2309,8 +2395,10 @@ class wall{
                         if(!game.point[2]&&this.height<game.tileset[1]){
                             this.height+=0.1
                             this.bounder.height+=0.1
+                            this.internalBounder.height+=0.1
                             this.position.y+=0.05
                             this.bounder.position.y+=0.05
+                            this.internalBounder.position.y+=0.05
                             this.velocity.y=0.05
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -2324,8 +2412,10 @@ class wall{
                         }else if(game.point[2]&&this.height>0){
                             this.height-=1
                             this.bounder.height-=1
+                            this.internalBounder.height-=1
                             this.position.y-=0.5
                             this.bounder.position.y-=0.5
+                            this.internalBounder.position.y-=0.5
                             this.velocity.y=-0.5
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -2347,16 +2437,18 @@ class wall{
                     }
                     if(game.point[3]>0&&game.point[3]<=game.players&&abs(this.base.position.x-entities.players[game.point[3]-1].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[game.point[3]-1].position.y-75)<150){
                         if(this.height>0){
-                            this.height-=1
-                            this.bounder.height-=1
-                            this.position.y-=0.5
-                            this.bounder.position.y-=0.5
-                            this.velocity.y=-0.5
+                            this.height-=2
+                            this.bounder.height-=2
+                            this.internalBounder.height-=2
+                            this.position.y-=1
+                            this.bounder.position.y-=1
+                            this.internalBounder.position.y-=1
+                            this.velocity.y=-1
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                         if(this.boundary[a][b][c].y>this.position.y){
-                                            this.boundary[a][b][c].y-=1
+                                            this.boundary[a][b][c].y-=2
                                         }
                                     }
                                 }
@@ -2364,16 +2456,18 @@ class wall{
                         }
                     }else{
                         if(this.height<this.base.height){
-                            this.height+=1
-                            this.bounder.height+=1
-                            this.position.y+=0.5
-                            this.bounder.position.y+=0.5
-                            this.velocity.y=0.5
+                            this.height+=2
+                            this.bounder.height+=2
+                            this.internalBounder.height+=2
+                            this.position.y+=1
+                            this.bounder.position.y+=1
+                            this.internalBounder.position.y+=1
+                            this.velocity.y=1
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                         if(a==0||a==2&&c==1||a==3&&c==1){
-                                            this.boundary[a][b][c].y+=1
+                                            this.boundary[a][b][c].y+=2
                                         }
                                     }
                                 }

@@ -170,7 +170,7 @@ class player{
     }
     displayInfo(layer,offsetX=0,offsetY=0){
         layer.push()
-        layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-42.5*this.playerData.sizeBuff+this.offset.position.y+offsetY)
+        layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
         layer.fill(180,this.fade)
         layer.noStroke()
@@ -4659,6 +4659,18 @@ class player{
                                     possible.push(a)
                                 }
                             }
+                            if(possible.length>=3){
+                                possible=[]
+                                let valid=this.position.x<game.edge[0]*0.5?[1,2,4]:[0,2,3]
+                                for(let a=0,la=valid.length;a<la;a++){
+                                    if(game.point[valid[a]]!=0){
+                                        possible.push(valid[a])
+                                    }
+                                }
+                            }
+                            if(possible.length==0){
+                                possible=[0,1,2,3,4]
+                            }
                             this.target.point=possible[floor(random(0,possible.length))]
                         }else{
                             this.target.point=game.pvp?(floor(random(0,2))==0?4:floor(random(0,4))):floor(random(0,5))
@@ -4667,7 +4679,7 @@ class player{
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
-                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.id>game.gaming?1200:300)&&abs(this.position.y-entities.players[a].position.y)<(this.id>game.gaming?200:120)&&entities.players[a].life>0
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.id>game.gaming?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.id>game.gaming?180:120)&&entities.players[a].life>0
                             &&!(game.pvp&&(entities.players[a].position.x<300||entities.players[a].position.x>game.edge[0]-300))
                         ){
                             let b=entities.players[a]
@@ -4786,7 +4798,7 @@ class player{
                                                 this.target.position.y=1600
                                             break
                                             case 1:
-                                                this.target.position.x=900
+                                                this.target.position.x=850
                                                 this.target.position.y=1600
                                             break
                                             case 2: case 3: case 4:
@@ -4883,9 +4895,14 @@ class player{
                                                 this.target.position.y=abs(this.position.x-2900)<100?0:1700
                                             break
                                             case 1:
-                                                if(game.level==22){
-                                                    this.target.position.x=5850
-                                                    this.target.position.y=1700
+                                                if(game.level==22&&game.point[1]||game.level==23){
+                                                    if(this.position.y>1750&&this.position.x<5900){
+                                                        this.target.position.x=5850
+                                                        this.target.position.y=1700
+                                                    }else{
+                                                        this.target.position.x=5450
+                                                        this.target.position.y=1700
+                                                    }
                                                 }else{
                                                     this.target.position.x=2700
                                                     this.target.position.y=1700
@@ -4919,9 +4936,23 @@ class player{
                                                     this.target.position.y=abs(this.position.x-3750)<100?0:2000
                                                 }
                                             break
-                                            case 0: case 2: case 3: case 4:
+                                            case 0: case 2:
                                                 this.target.position.x=3750
                                                 this.target.position.y=abs(this.position.x-3750)<100?0:2000
+                                            break
+                                            case 3: case 4:
+                                                if(game.level==23){
+                                                    if(this.position.y<2000&&this.position.x>5800){
+                                                        this.target.position.x=5650
+                                                        this.target.position.y=0
+                                                    }else{
+                                                        this.target.position.x=5850
+                                                        this.target.position.y=abs(this.position.x-5300)<100?1750:2000
+                                                    }
+                                                }else{
+                                                    this.target.position.x=3750
+                                                    this.target.position.y=abs(this.position.x-3750)<100?0:2000
+                                                }
                                             break
                                         }
                                     break
@@ -4956,6 +4987,10 @@ class player{
                                                 this.target.position.y=1000
                                             break
                                         }
+                                    break
+                                    case 13:
+                                        this.target.position.x=5700
+                                        this.target.position.y=2000
                                     break
                                 }
                                 a=la
@@ -5350,10 +5385,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==23)?0.25:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>=game.gaming&&!game.pvp?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&(!game.pvp||game.gaming==1)?2:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==23)?0.25:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>=game.gaming&&!game.pvp?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&(!game.pvp||game.gaming==1)?2:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -6719,12 +6754,12 @@ class player{
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-(this.position.x/2+this.previous.position.x/2),entities.players[a].position.y+entities.players[a].height/2-(this.position.y/2+this.previous.position.y/2)-this.height/2]
-                        if(this.weaponType==253||this.weaponType==400){
+                        if((this.weaponType==253||this.weaponType==400)&&!entities.players[a].fort){
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
                             entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort?0.05:1))
-                            if(this.playerData.name=='TankBump'){
+                            if(this.playerData.name=='TankBump'&&!entities.players[a].fort){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
                             }
@@ -6735,8 +6770,10 @@ class player{
                                 entities.players[a].stunTime=30
                             }
                         }
-                        entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
-                        entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                        if(!entities.players[a].fort){
+                            entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                            entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                        }
                         entities.players[a].collect.time=450
                         entities.players[a].die.killer=this.index
                         if(this.weaponType==246&&this.assort.detonate==0){
@@ -6748,12 +6785,12 @@ class player{
                         }
                     }else if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
-                        if(this.weaponType==253||this.weaponType==400){
+                        if((this.weaponType==253||this.weaponType==400)&&!entities.players[a].fort){
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
                             entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort?0.05:1))
-                            if(this.playerData.name=='TankBump'){
+                            if(this.playerData.name=='TankBump'&&!entities.players[a].fort){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
                             }
@@ -6764,8 +6801,10 @@ class player{
                                 entities.players[a].stunTime=30
                             }
                         }
-                        entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
-                        entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                        if(!entities.players[a].fort){
+                            entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                            entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                        }
                         entities.players[a].collect.time=450
                         entities.players[a].die.killer=this.index
                         if(this.weaponType==246&&this.assort.detonate==0){

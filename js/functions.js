@@ -527,7 +527,7 @@ function displayMain(layer,effective,keyStore){
     if(game.level==19||game.level==22||game.level==23||game.level==24){
         image(
             graphics.overlay[0],
-            width/2,75,width,150
+            width/2,100,width,200
         )
         graphics.overlay[0].clear()
     }
@@ -677,7 +677,11 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.4)*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,5))
                 break
                 case '|':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    if(a>0&&level[a-1][b]==']'){
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*2,7))
+                    }else{
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    }
                 break
                 case '^':
                     if(game.level==16){
@@ -1123,7 +1127,41 @@ function generateLevel(level,layer){
     entities.walls.forEach(set=>set.forEach(item=>item.checkRedundancy()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkOverlay()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkGap()))
-    entities.walls.forEach(set=>set.forEach(item=>item.set()))
+    if(game.level==23){
+        for(let a=0,la=entities.walls.length;a<la;a++){
+            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                if(entities.walls[a][b].type!=36){
+                    entities.walls[a][b].set()
+                }
+            }
+        }
+        for(let a=0,la=entities.walls.length;a<la;a++){
+            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                if(entities.walls[a][b].type==36){
+                    entities.walls[a][b].set()
+                }
+            }
+        }
+        let ticker=0
+        for(let a=0,la=entities.walls[0].length;a<la;a++){
+            if(entities.walls[0][a].type==31||entities.walls[0][a].type==33){
+                entities.walls[0][a].pos=[2,0,3,4,1,5,6,8,7][ticker]
+                entities.players[entities.walls[0][a].index].pos=[2,0,3,4,1,5,6,8,7][ticker]
+                ticker++
+            }
+        }
+        for(let a=0,la=entities.walls[0].length;a<la;a++){
+            if(entities.walls[0][a].type==36){
+                entities.walls[0][a].pos=[2,0,3,4,1,5,6,8,7][ticker]
+                entities.players[entities.walls[0][a].index].pos=[2,0,3,4,1,5,6,8,7][ticker]
+                ticker++
+            }
+        }
+        game.point=[-1,-1,-1,-1,-1,-1,-1,-1,-1]
+        game.pointAnim=[0,0,0,0,0,0,0,0,0]
+    }else{
+        entities.walls.forEach(set=>set.forEach(item=>item.set()))
+    }
     entities.walls.forEach(set=>set.forEach(item=>item.checkBar()))
     entities.walls.forEach(set=>set.forEach(item=>item.formBounder()))
     if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
@@ -1162,7 +1200,7 @@ function generateLevel(level,layer){
                 ticker++
             }
         }
-    }else if(game.level==22||game.level==23){
+    }else if(game.level==22){
         let ticker=0
         for(let a=0,la=entities.walls[0].length;a<la;a++){
             if(entities.walls[0][a].type==31||entities.walls[0][a].type==33||entities.walls[0][a].type==36){
@@ -1171,7 +1209,7 @@ function generateLevel(level,layer){
                 ticker++
             }
         }
-        game.point=game.level==23?[-1,-1,-1,-1,-1]:[true,true,true,true,true]
+        game.point=[true,true,true,true,true]
         game.pointAnim=[0,0,0,0,0]
     }else if(game.level==24){
         let ticker=0
@@ -1508,8 +1546,6 @@ function checkEnd(level,layer,key){
                     game.pointAnim[a]+=1/300
                 }
             }
-        }else if(game.level==23){
-            deployer.timer++
         }
         if(game.stack.length>0&&!game.assault&&!game.nuke){
             if(game.sendTime>0){
@@ -1604,15 +1640,12 @@ function checkEnd(level,layer,key){
                     }
                 }
             }
-            if(total<(game.attacker?1:4)+(game.level==23?floor(deployer.timer/900)+5+game.players*5:0)&&(subTotal==0||game.level==23)&&!(display.cycle==types.mission[game.mission].wave.length&&total>0)){
+            if(total<(game.level==23?(1+game.players)*(game.peakWeapon?12:8):(game.attacker?1:4))&&(subTotal==0||game.level==23)&&!(display.cycle==types.mission[game.mission].wave.length&&total>0)){
                 display.wait--
                 if(display.wait<=0){
-                    display.wait=240
+                    display.wait=game.level==23?900:240
                     if(!game.perpetual&&!game.nuke){
                         newWave(level,layer)
-                    }
-                    if(game.level==23){
-                        deployer.timer=0
                     }
                 }
             }
@@ -1658,7 +1691,7 @@ function initialGraphics(){
         }
     }
     if(menu.level==19||menu.level==22||menu.level==23||menu.level==24){
-        graphics.overlay.push(createGraphics(width,150))
+        graphics.overlay.push(createGraphics(width,200))
     }
     for(let a=0,la=graphics.main.length;a<la;a++){
         setupLayer(graphics.main[a])

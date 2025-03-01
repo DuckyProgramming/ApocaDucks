@@ -4915,8 +4915,8 @@ class projectile{
 						}
 					}
 				}
-				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?10:5),10,this.crit,this.index))
+				for(let b=0,lb=5;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?10:5)*2,10,this.crit,this.index))
 				}
 			break
 			case 64:

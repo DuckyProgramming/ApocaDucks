@@ -167,7 +167,7 @@ escutcheon - minishot with immunities
 
 thumper - engineer but the balls have shotguns
 
-watchmaker - fires small motorizers from suzerain, as well as bees
+clockshard - fires long-range impeacher drones, as well as bees
 
 rewind - slicer but it pulls enemies back with it
 
@@ -201,7 +201,7 @@ wrecking ball - fires a small and a large fast piercing bullet
 
 ejection - hopper destroyer
 
-[]
+bonkhive - bonker with occasional bee drones
 
 
 
