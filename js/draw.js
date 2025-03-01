@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[4,4,5,5,5,4,1][a];b<lb;b++){
+                for(let b=0,lb=[5,4,5,5,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3||a==5&&b==2){
                         fill(100)
@@ -412,12 +412,14 @@ function mainloop(){
                             graphics.main[a].text('Weapons\nHere',3500,1200)
                         break
                         case 22: case 23:
-                            /*graphics.main[a].noFill()
-                            graphics.main[a].stroke(255)
-                            graphics.main[a].strokeWeight(10)
-                            for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
-                            }*/
+                            if(game.margin){
+                                graphics.main[a].noFill()
+                                graphics.main[a].stroke(255)
+                                graphics.main[a].strokeWeight(10)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
+                                }
+                            }
                         break
                     }
                 }
