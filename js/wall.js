@@ -3005,18 +3005,20 @@ class wall{
                                     }
                                     switch(d){
                                         case 0:
-                                            c.position.y=this.position.y+this.height/2+c.height/2+0.01
-                                            c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01
-                                            c.velocity.y=0
-                                            switch(this.type){
-                                                case 15:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
-                                                        if(game.attacker||game.level==17||game.level==18){
-                                                            this.align=c.id
+                                            if(!(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1])){
+                                                c.position.y=this.position.y+this.height/2+c.height/2+0.01
+                                                c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01
+                                                c.velocity.y=0
+                                                switch(this.type){
+                                                    case 15:
+                                                        if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                            if(game.attacker||game.level==17||game.level==18){
+                                                                this.align=c.id
+                                                            }
+                                                            this.reload=480
                                                         }
-                                                        this.reload=480
-                                                    }
-                                                break
+                                                    break
+                                                }
                                             }
                                         break
                                         case 1:

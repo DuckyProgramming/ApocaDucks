@@ -4651,7 +4651,7 @@ class player{
                     }
                 }else if(game.level==22||game.level==23){
                     this.manage[1]=false
-                    if(this.target.point==-1||floor(random(0,200))==0||this.target.point>=0&&entities.players[game.players+this.target.point].id==this.id){
+                    if(this.target.point==-1||floor(random(0,200))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,5,6,8,7][this.target.point]].id==this.id){
                         if(game.pvp&&this.id==0){
                             let possible=[]
                             for(let a=0,la=game.point.length;a<la;a++){
@@ -4740,7 +4740,7 @@ class player{
                                         switch(goalPoint){
                                             case 0: case 1: case 2:
                                                 this.target.position.x=5800
-                                                this.target.position.y=1100
+                                                this.target.position.y=abs(this.position.x-7300)<100?0:1100
                                             break
                                             case 3: case 4:
                                                 this.target.position.x=7200
@@ -4959,7 +4959,7 @@ class player{
                                     case 11:
                                         switch(goalPoint){
                                             case 0: case 2: case 3: case 4:
-                                                if(game.level==22||this.id==0){
+                                                if(game.level==22&&(this.id==0||!game.point[1])||this.position.x<2000){
                                                     this.target.position.x=900
                                                     this.target.position.y=abs(this.position.x-900)<100?0:2400
                                                 }else{
@@ -5385,10 +5385,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&(!game.pvp||game.gaming==1)?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&!this.construct&&!this.fort&&(!game.pvp||game.gaming==1)?2:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&(!game.pvp||game.gaming==1)?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&game.level==22?0.25:this.fort&&game.level==23?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.id>game.gaming&&!this.construct&&!this.fort&&(!game.pvp||game.gaming==1)?2:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -5852,7 +5852,7 @@ class player{
                     }
                 break
                 case 'EngineerSpawner': case 'TankSpawner':
-                    if(this.time%600==0){
+                    if(this.time%600==0&&!(game.level==23&&(this.position.x<240||this.position.x>game.edge[0]-240))){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
@@ -6288,7 +6288,7 @@ class player{
                     }
                 break
                 case 'SpawnerBoss':
-                    if(this.time%120==0){
+                    if(this.time%120==0&&!(game.level==23&&(this.position.x<240||this.position.x>game.edge[0]-240))){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
