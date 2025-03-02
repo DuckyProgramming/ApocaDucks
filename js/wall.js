@@ -2076,7 +2076,9 @@ class wall{
             break
         }
         layer.pop()
-        //this.displayBound(layer)
+        if(game.bound){
+            this.displayBound(layer)
+        }
     }
     displayBound(layer){
         layer.stroke(50,50+this.type*100,200)
@@ -2480,7 +2482,7 @@ class wall{
         if(this.reload<=0&&this.reload!=-1){
             this.reload=0
         }
-        if(this.type!=7){
+        if(this.type!=7&&this.height>1){
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
