@@ -692,9 +692,9 @@ class wall{
                             abs(this.position.x-game.tileset[0]*72.5)<1
                         ){
                             layer.fill(120,200-game.pointAnim[0]*80,120)
-                        }else if(abs(this.position.x-game.tileset[0]*132.5)<1){
-                            layer.fill(120,200-game.pointAnim[1]*80,120)
                         }else if(abs(this.position.x-game.tileset[0]*131.5)<1){
+                            layer.fill(120,200-game.pointAnim[1]*80,120)
+                        }else if(abs(this.position.x-game.tileset[0]*133.5)<1){
                             layer.fill(120,200-game.pointAnim[2]*80,120)
                         }else{
                             layer.fill(120,200,120)
@@ -2186,7 +2186,11 @@ class wall{
                             abs(entities.players[game.players+1].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+1].position.y-this.position.y)<60&&entities.players[game.players+1].id==game.point[1]||
                             abs(entities.players[game.players+2].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+2].position.y-this.position.y)<60&&entities.players[game.players+2].id==game.point[1]||
                             abs(entities.players[game.players+3].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+3].position.y-this.position.y)<60&&entities.players[game.players+3].id==game.point[1]||
-                            abs(entities.players[game.players+4].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+4].position.y-this.position.y)<60&&entities.players[game.players+4].id==game.point[1]
+                            abs(entities.players[game.players+4].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+4].position.y-this.position.y)<60&&entities.players[game.players+4].id==game.point[1]||
+                            abs(entities.players[game.players+5].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+5].position.y-this.position.y)<60&&entities.players[game.players+5].id==game.point[1]||
+                            abs(entities.players[game.players+6].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+6].position.y-this.position.y)<60&&entities.players[game.players+6].id==game.point[1]||
+                            abs(entities.players[game.players+7].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+7].position.y-this.position.y)<60&&entities.players[game.players+7].id==game.point[1]||
+                            abs(entities.players[game.players+8].position.x-this.position.x)<this.width+80&&abs(entities.players[game.players+8].position.y-this.position.y)<60&&entities.players[game.players+8].id==game.point[1]
                         ),0,this.base.height,1)
                     this.position.y=this.base.position.y+this.base.height/2-this.height/2
                 }
@@ -3005,7 +3009,7 @@ class wall{
                                     }
                                     switch(d){
                                         case 0:
-                                            if(!(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1])){
+                                            if(!(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1]*1.5)){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=0
@@ -3077,8 +3081,8 @@ class wall{
                                                                 abs(this.position.x-game.tileset[0]*66.5)<1||
                                                                 abs(this.position.x-game.tileset[0]*72.5)<1
                                                             )&&game.pointAnim[0]>=1||
-                                                            abs(this.position.x-game.tileset[0]*132.5)<1&&game.pointAnim[1]>=1||
-                                                            abs(this.position.x-game.tileset[0]*131.5)<1&&game.pointAnim[2]>=1
+                                                            abs(this.position.x-game.tileset[0]*131.5)<1&&game.pointAnim[1]>=1||
+                                                            abs(this.position.x-game.tileset[0]*133.5)<1&&game.pointAnim[2]>=1
                                                         )){
                                                             c.bounceTime=15
                                                         }

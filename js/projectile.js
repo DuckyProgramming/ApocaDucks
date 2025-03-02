@@ -145,6 +145,7 @@ class projectile{
 					this.type==284||this.type==286
 				){
 					this.trap=true
+					this.stopAnim=1
 					if(this.type==117||this.type==245||this.type==246||this.type==247){
 						this.ammo=this.type==245?20:10
 					}else if(this.type==221){
@@ -2094,12 +2095,14 @@ class projectile{
 			break
 			case 113:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -2120,12 +2123,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,10)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,250,250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -2136,12 +2141,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,10)
 				}
-				layer.fill(240-this.crit*240,240,240,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(200-this.crit*200,200,200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(160-this.crit*160,160,160,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*240,240,240,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(200-this.crit*200,200,200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(160-this.crit*160,160,160,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(200,250,250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -2152,24 +2159,28 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,7.5)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,4.5)
 				regStar(layer,0,0,3,1.5,1.5,6,6,this.direction+this.position.x)
 			break
 			case 117:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -2506,12 +2517,14 @@ class projectile{
 			break
 			case 146:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -2629,12 +2642,14 @@ class projectile{
 			break
 			case 156:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -2800,9 +2815,9 @@ class projectile{
 				layer.fill(125,this.fade)
 				for(let a=0,la=3;a<la;a++){
 					layer.quad(-4.5,-10,-6,-13,6,-13,4.5,-10)
-					layer.rotate(30)
+					layer.rotate(60)
 					layer.ellipse(0,-11,6)
-					layer.rotate(30)
+					layer.rotate(60)
 				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,22)
@@ -3018,12 +3033,14 @@ class projectile{
 					layer.ellipse(0,0,14)
 				}
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -3389,12 +3406,14 @@ class projectile{
 			break
 			case 205:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,8)
 				regStar(layer,0,0,3,2,2,9,9,this.direction+this.position.x)
@@ -3403,12 +3422,14 @@ class projectile{
 			break
 			case 206:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,6,6,this.direction+this.position.x)
@@ -3460,12 +3481,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,6)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,0.8)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2.4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3.6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,0.8)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,2.4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,3.6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,3.6)
 				regStar(layer,0,0,3,1.2,1.2,4.8,4.8,this.direction+this.position.x)
@@ -3570,12 +3593,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,10)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,250,250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -3619,12 +3644,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,7.5)
 				}
-				layer.fill(240-this.crit*240,240,240,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1.5)
-				layer.fill(200-this.crit*200,200,200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
-				layer.fill(160-this.crit*160,160,160,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*240,240,240,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1.5)
+					layer.fill(200-this.crit*200,200,200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,3)
+					layer.fill(160-this.crit*160,160,160,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,4.5)
+				}
 				layer.fill(200,250,250,this.fade)
 				layer.ellipse(0,0,4.5)
 				regStar(layer,0,0,3,1.5,1.5,6,6,this.direction+this.position.x)
@@ -3635,12 +3662,14 @@ class projectile{
 					layer.ellipse(0,0,14)
 				}
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -3893,12 +3922,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,20)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,8)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,12)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,8)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,12)
+				}
 				layer.fill(250,250,250,this.fade)
 				layer.ellipse(0,0,12)
 				regStar(layer,0,0,3,4,4,16,16,this.direction+this.position.x)
@@ -3916,12 +3947,14 @@ class projectile{
 			break
 			case 245:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -3930,12 +3963,14 @@ class projectile{
 			break
 			case 246:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -3944,12 +3979,14 @@ class projectile{
 			break
 			case 247:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 				regStar(layer,0,0,4,3,3,10,10,this.direction+this.position.x)
@@ -3985,12 +4022,14 @@ class projectile{
 			break
 			case 250:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,40,120+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,80,160+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,120,200+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,1.5,1.5,6.75,6.75,this.direction+this.position.x)
@@ -4203,12 +4242,14 @@ class projectile{
 					layer.fill(50,255,255,this.fade*0.5)
 					layer.ellipse(0,0,10)
 				}
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(150,255,150,this.fade)
 				regStar(layer,0,0,3,6,6,1.5,1.5,this.direction+this.position.x)
 				layer.fill(250,250,250,this.fade)
@@ -4557,12 +4598,14 @@ class projectile{
 			break
 			case 284:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -4592,12 +4635,14 @@ class projectile{
 			break
 			case 286:
 				layer.rotate(-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				if(this.stopAnim>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,6)
 				regStar(layer,0,0,3,2,2,8,8,this.direction+this.position.x)
@@ -6134,7 +6179,11 @@ class projectile{
 				break
 				case 113: case 114: case 115: case 116: case 146: case 156: case 181: case 201: case 205: case 206:
 				case 209: case 216: case 220: case 221: case 243: case 250: case 263: case 284: case 286:
-					if(!this.stop){
+					if(this.stop){
+						if(this.stopAnim>0){
+							this.stopAnim-=0.1
+						}
+					}else{
 						if(a==2){
 							this.midpoint.position.x=this.position.x
 							this.midpoint.position.y=this.position.y

@@ -396,37 +396,21 @@ class player{
             layer.strokeWeight(5)
             layer.arc(0,-80,80,20,-165,-15)
         }
-        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10){
+        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-            }else{
-                layer.line(80,-70,80,50)
-            }
+            layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
             layer.noStroke()
             layer.fill(255,150,150,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
+            layer.triangle(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.playerData.name=='PlayerRearguard'||this.playerData.name=='PlayerBackFlak'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(80,-70,80,50)
-            }else{
-                layer.line(-80,-70,-80,50)
-            }
+            layer.line(-80*lsin(this.direction.main)/lsin(60),-70,-80*lsin(this.direction.main)/lsin(60),50)
             layer.noStroke()
             layer.fill(255,150,150,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(80,-70,80,50,0,-10)
-            }else{
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }
+            layer.triangle(-80*lsin(this.direction.main)/lsin(60),-70,-80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.playerData.name=='PlayerRotary'||this.playerData.name=='PlayerClusterShield'){
             layer.stroke(255,150,150,this.fade)
@@ -497,22 +481,6 @@ class player{
             layer.ellipse(50*lcos(this.time),-50*lsin(this.time)-10,4)
             layer.ellipse(-50*lcos(this.time),50*lsin(this.time)-10,4)
         }
-        if(this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'){
-            layer.stroke(255,150,150,this.fade)
-            layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-            }else{
-                layer.line(80,-70,80,50)
-            }
-            layer.noStroke()
-            layer.fill(255,150,150,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
-        }
         if(this.playerData.name=='PlayerSchismist'||this.playerData.name=='PlayerRevolutionist'||this.playerData.name=='PlayerBohrer'||this.playerData.name=='RevolutioningTank'){
             layer.stroke(150,this.fade)
             layer.strokeWeight(2)
@@ -562,82 +530,42 @@ class player{
         if(this.playerData.name=='PlayerShovel'){
             layer.stroke(255,175,100,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-            }else{
-                layer.line(80,-70,80,50)
-            }
+            layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
             layer.noStroke()
             layer.fill(255,175,100,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
+            layer.triangle(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.playerData.name=='PlayerGuardception'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-                layer.line(-60,-55,-60,35)
-            }else{
-                layer.line(80,-70,80,50)
-                layer.line(60,-55,60,35)
-            }
+            layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
+            layer.line(60*lsin(this.direction.main)/lsin(60),-55,60*lsin(this.direction.main)/lsin(60),35)
             layer.noStroke()
             layer.fill(255,150,150,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
+            layer.triangle(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.playerData.name=='PlayerBouncyShield'){
             layer.stroke(255,200,200,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-            }else{
-                layer.line(80,-70,80,50)
-            }
+            layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
             layer.noStroke()
             layer.fill(255,200,200,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
+            layer.triangle(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.playerData.name=='PlayerSpiny'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
-            if(lsin(this.direction.main)<0){
-                layer.line(-80,-70,-80,50)
-                layer.strokeWeight(2)
-                for(let a=0,la=12;a<la;a++){
-                    layer.line(-80,-70+a*10,-85,-65+a*10)
-                    layer.line(-80,-60+a*10,-85,-65+a*10)
-                    layer.line(-80,-70+a*10,-75,-65+a*10)
-                    layer.line(-80,-60+a*10,-75,-65+a*10)
-                }
-            }else{
-                layer.line(80,-70,80,50)
-                layer.strokeWeight(2)
-                for(let a=0,la=12;a<la;a++){
-                    layer.line(80,-70+a*10,85,-65+a*10)
-                    layer.line(80,-60+a*10,85,-65+a*10)
-                    layer.line(80,-70+a*10,75,-65+a*10)
-                    layer.line(80,-60+a*10,75,-65+a*10)
-                }
+            layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
+            layer.strokeWeight(2)
+            for(let a=0,la=12;a<la;a++){
+                layer.line(80*lsin(this.direction.main)/lsin(60),-70+a*10,85*lsin(this.direction.main)/lsin(60),-65+a*10)
+                layer.line(80*lsin(this.direction.main)/lsin(60),-60+a*10,85*lsin(this.direction.main)/lsin(60),-65+a*10)
+                layer.line(80*lsin(this.direction.main)/lsin(60),-70+a*10,75*lsin(this.direction.main)/lsin(60),-65+a*10)
+                layer.line(80*lsin(this.direction.main)/lsin(60),-60+a*10,75*lsin(this.direction.main)/lsin(60),-65+a*10)
             }
             layer.noStroke()
             layer.fill(255,150,150,this.fade*0.1)
-            if(lsin(this.direction.main)<0){
-                layer.triangle(-80,-70,-80,50,0,-10)
-            }else{
-                layer.triangle(80,-70,80,50,0,-10)
-            }
+            layer.triangle(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50,0,-10)
         }
         if(this.firearc[1]>0){
             layer.stroke(255,50,50,this.fade*this.firearc[1]/15)
@@ -4707,11 +4635,11 @@ class player{
                             }
                         }
                     }
-                    if(game.pvp&&this.position.x<240&&this.position.y>1700&&game.gate[0]&&this.id==0){
-                        this.target.position.x=random(0,240)
+                    if(game.pvp&&this.position.x<200&&this.position.y>1700&&game.gate[0]&&this.id==0){
+                        this.target.position.x=random(0,200)
                         this.target.position.y=game.edge[1]
-                    }else if(game.pvp&&this.position.x>game.edge[0]-240&&this.position.y>1700&&game.gate[1]&&this.id==0){
-                        this.target.position.x=random(game.edge[0]-240,game.edge[0])
+                    }else if(game.pvp&&this.position.x>game.edge[0]-200&&this.position.y>1700&&game.gate[1]&&this.id==0){
+                        this.target.position.x=random(game.edge[0]-200,game.edge[0])
                         this.target.position.y=game.edge[1]
                     }else if(targets.length>0){
                         let target=targets[floor(random(targets.length))]
@@ -4958,13 +4886,17 @@ class player{
                                     break
                                     case 11:
                                         switch(goalPoint){
-                                            case 0: case 2: case 3: case 4:
+                                            case 0:
+                                                this.target.position.x=900
+                                                this.target.position.y=abs(this.position.x-900)<100?0:2400
+                                            break
+                                            case 2: case 3: case 4:
                                                 if(game.level==22&&(this.id==0||!game.point[1])||this.position.x<2000){
                                                     this.target.position.x=900
                                                     this.target.position.y=abs(this.position.x-900)<100?0:2400
                                                 }else{
-                                                    this.target.position.x=5280
-                                                    this.target.position.y=abs(this.position.x-5280)<100?0:2400
+                                                    this.target.position.x=5260
+                                                    this.target.position.y=abs(this.position.x-5260)<100?0:2400
                                                 }
                                             break
                                             case 1:
@@ -5852,7 +5784,7 @@ class player{
                     }
                 break
                 case 'EngineerSpawner': case 'TankSpawner':
-                    if(this.time%600==0&&!(game.level==23&&(this.position.x<240||this.position.x>game.edge[0]-240))){
+                    if(this.time%600==0&&!(game.level==23&&(this.position.x<200||this.position.x>game.edge[0]-200))){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
@@ -6288,7 +6220,7 @@ class player{
                     }
                 break
                 case 'SpawnerBoss':
-                    if(this.time%120==0&&!(game.level==23&&(this.position.x<240||this.position.x>game.edge[0]-240))){
+                    if(this.time%120==0&&!(game.level==23&&(this.position.x<200||this.position.x>game.edge[0]-200))){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true

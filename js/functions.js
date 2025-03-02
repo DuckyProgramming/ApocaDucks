@@ -1655,7 +1655,7 @@ function checkEnd(level,layer,key){
 function kill(index){
     entities.players[index].life=0
     entities.players[index].collect.time=1200
-    entities.players[index].die.killer=0
+    entities.players[index].die.killer=-1
 }
 function setupGraphics(){
     setupBase()
