@@ -3781,7 +3781,7 @@ class player{
                         game.pvp&&this.id!=entities.players[a].id||
                         this.weaponType==11&&entities.players[a].life<entities.players[a].base.life*2&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&(this.construct||this.fort&&!entities.players[a].construct)
                     ){
-                        if((
+                        if(this.fort&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<45||!this.fort&&(
                             abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+40&&this.weaponType!=6&&this.weaponType!=8&&this.weaponType!=11&&this.weaponType!=99||
                             abs(this.position.x-entities.players[a].position.x)<900&&abs(this.position.y-entities.players[a].position.y)<15&&this.weaponType==6||
                             abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<45&&this.weaponType==8||
@@ -3789,16 +3789,35 @@ class player{
                             abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<120&&this.weaponType==99
                         )&&entities.players[a].life>0){
                             let b=entities.players[a]
-                            let bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y*0.5+b.position.y*0.5},width:abs(this.position.x-b.position.x),height:abs(this.position.y-b.position.y)}]
+                            let bar=[]
+                            if(b.position.y<this.position.y){
+                                bar=[
+                                    {position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},
+                                    {position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}
+                                ]
+                            }else{
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y*0.5+b.position.y*0.5},width:abs(this.position.x-b.position.x),height:abs(this.position.y-b.position.y)}]
+                            }
                             let valid=true
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
-                                    for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard){
-                                            valid=false
-                                            c=lc
-                                            d=ld
-                                            e=le
+                                    if(entities.walls[c][d].standard){
+                                        for(let e=0,le=bar.length;e<le;e++){
+                                            if(entities.walls[c][d].type==17||entities.walls[c][d].type==18||entities.walls[c][d].type==20||entities.walls[c][d].type==21){
+                                                if(inTriangleBoxBasic(entities.walls[c][d].triangle,bar[e])){
+                                                    valid=false
+                                                    c=lc
+                                                    d=ld
+                                                    e=le
+                                                }
+                                            }else{
+                                                if(inBoxBox(entities.walls[c][d],bar[e])){
+                                                    valid=false
+                                                    c=lc
+                                                    d=ld
+                                                    e=le
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -6830,7 +6849,7 @@ class player{
                     this.velocity.y*=0.8
                 }
             }else{
-                this.position.x+=this.velocity.x
+                this.position.x+=abs(this.velocity.x>20)?(abs(this.velocity.x)*0.5+10)*sign(this.velocity.x):this.velocity.x
             }
             this.position.y+=this.velocity.y
             this.velocity.x+=this.lastingForce[0]

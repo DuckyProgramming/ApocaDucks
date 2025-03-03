@@ -637,6 +637,130 @@ function generateLevel(level,layer){
     let reject=[]
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
+            if(!reject.includes(a*lb+b)){
+                switch(level[a][b]){
+                    case '>':
+                        if(!reject.includes(a*lb+b)){
+                            let extent=0
+                            for(let e=1,le=min(level.length-a,level[0].length-b);e<le;e++){
+                                if(level[a+e][b+e]=='>'){
+                                    let valid=true
+                                    for(let f=0,lf=e;f<lf;f++){
+                                        if(level[a+e][b+f]!='#'){
+                                            valid=false
+                                        }
+                                    }
+                                    if(valid){
+                                        for(let f=0,lf=e+1;f<lf;f++){
+                                            reject.push((a+e)*lb+(b+f))
+                                        }
+                                        extent++
+                                    }
+                                }else{
+                                    e=le
+                                }
+                            }
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),17))
+                            if(a<la-1&&level[a+1+extent][b+extent]==' '){
+                                entities.walls[0][entities.walls[0].length-1].mutate=true
+                            }
+                        }
+                    break
+                    case '<':
+                        if(!reject.includes(a*lb+b)){
+                            let extent=0
+                            for(let e=1,le=min(level.length-a,b+1);e<le;e++){
+                                if(level[a+e][b-e]=='<'){
+                                    let valid=true
+                                    for(let f=0,lf=e;f<lf;f++){
+                                        if(level[a+e][b-f]!='#'){
+                                            valid=false
+                                        }
+                                    }
+                                    if(valid){
+                                        for(let f=0,lf=e+1;f<lf;f++){
+                                            reject.push((a+e)*lb+(b-f))
+                                        }
+                                        extent++
+                                    }
+                                }else{
+                                    e=le
+                                }
+                            }
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),18))
+                            if(a<la-1&&level[a+1+extent][b-extent]==' '){
+                                entities.walls[0][entities.walls[0].length-1].mutate=true
+                            }
+                        }
+                    break
+                }
+            }
+        }
+    }
+    for(let a=level.length-1,la=0;a>=la;a--){
+        for(let b=0,lb=level[a].length;b<lb;b++){
+            if(!reject.includes(a*lb+b)){
+                switch(level[a][b]){
+                    case '[':
+                        if(!reject.includes(a*lb+b)){
+                            let extent=0
+                            for(let e=1,le=min(a+1,level[0].length-b);e<le;e++){
+                                if(level[a-e][b+e]=='['){
+                                    let valid=true
+                                    for(let f=0,lf=e;f<lf;f++){
+                                        if(level[a-e][b+f]!='#'||reject.includes((a-e)*lb+(b+f))){
+                                            valid=false
+                                        }
+                                    }
+                                    if(valid){
+                                        for(let f=0,lf=e+1;f<lf;f++){
+                                            reject.push((a-e)*lb+(b+f))
+                                        }
+                                        extent++
+                                    }
+                                }else{
+                                    e=le
+                                }
+                            }
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5-extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),20))
+                            if(a>0&&level[a-1][b]==' '){
+                                entities.walls[0][entities.walls[0].length-1].mutate=true
+                            }
+                        }
+                    break
+                    case ']':
+                        if(!reject.includes(a*lb+b)){
+                            let extent=0
+                            for(let e=1,le=min(a+1,b+1);e<le;e++){
+                                if(level[a-e][b-e]==']'){
+                                    let valid=true
+                                    for(let f=0,lf=e;f<lf;f++){
+                                        if(level[a-e][b-f]!='#'||reject.includes((a-e)*lb+(b-f))){
+                                            valid=false
+                                        }
+                                    }
+                                    if(valid){
+                                        for(let f=0,lf=e+1;f<lf;f++){
+                                            reject.push((a-e)*lb+(b-f))
+                                        }
+                                        extent++
+                                    }
+                                }else{
+                                    e=le
+                                }
+                            }
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5-extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),21))
+                            if(a>0&&level[a-1][b]==' '){
+                                entities.walls[0][entities.walls[0].length-1].mutate=true
+                            }
+                        }
+                    break
+                }
+            }
+        }
+    }
+    for(let a=0,la=level.length;a<la;a++){
+        for(let b=0,lb=level[a].length;b<lb;b++){
             switch(level[a][b]){
 				case '#': case '.':
                     if(level[a][b]=='.'&&game.level==19){
@@ -644,7 +768,7 @@ function generateLevel(level,layer){
                     }else if(!reject.includes(a*lb+b)){
                         let extent=0
                         for(let e=1,le=level.length-a;e<le;e++){
-                            if(level[a+e][b]=='#'){
+                            if(level[a+e][b]=='#'&&!reject.includes((a+e)*lb+b)){
                                 reject.push((a+e)*lb+b)
                                 extent++
                             }else{
@@ -793,30 +917,6 @@ function generateLevel(level,layer){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))
                     }
                 break
-                case '>':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],17))
-                    if(a<la-1&&level[a+1][b]==' '){
-                        entities.walls[0][entities.walls[0].length-1].mutate=true
-                    }
-                break
-                case '<':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
-                    if(a<la-1&&level[a+1][b]==' '){
-                        entities.walls[0][entities.walls[0].length-1].mutate=true
-                    }
-                break
-                case '[':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],20))
-                    if(a<la-1&&level[a+1][b]==' '){
-                        entities.walls[0][entities.walls[0].length-1].mutate=true
-                    }
-                break
-                case ']':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],21))
-                    if(a<la-1&&level[a+1][b]==' '){
-                        entities.walls[0][entities.walls[0].length-1].mutate=true
-                    }
-                break
                 case '/':
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,18))
                 break
@@ -843,6 +943,8 @@ function generateLevel(level,layer){
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                     }else if(game.level==19){
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,35))
+                    }else if(game.level==22||game.level==23){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],35))
                     }else{
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,26))
                     }
@@ -908,66 +1010,27 @@ function generateLevel(level,layer){
     }
     if(game.level==22||game.level==23){
         let set=[
-            [110,60.5,-90,0],
-            [111,60.5,90,1],
-            [112,60.5,-90,2],
-            [113,60.5,-90,3],
-            [114,60.5,-90,4],
+            [112,60.5,[-90,90,-90,-90,-90],[0,1,2,3,4]],
 
-            [110.5,69.5,-90,0],
-            [111.5,69.5,90,2],
-            [112.5,69.5,90,3],
-            [113.5,69.5,90,4],
+            [112,69.5,[-90,90,90,90],[0,2,3,4]],
 
-            [84.5,50.5,-90,0],
-            [85.5,50.5,90,1],
-            [86.5,50.5,0,2],
-            [87.5,50.5,90,3],
-            [88.5,50.5,90,4],
+            [86.5,50.5,[-90,90,0,90,90],[0,1,2,3,4]],
 
-            [110.5,49.5,-90,0],
-            [111.5,49.5,90,1],
-            [112.5,49.5,-90,2],
-            [113.5,49.5,90,3],
+            [112,49.5,[-90,90,-90,90],[0,1,2,3]],
 
-            [135.5,50.5,-90,0],
-            [136.5,50.5,180,1],
-            [137.5,50.5,0,2],
-            [138.5,50.5,0,3],
-            [139.5,50.5,-90,4],
+            [137.5,50.5,[-90,180,0,0,-90],[0,1,2,3,4]],
 
-            [97,30.5,-90,0],
-            [98,30.5,-90,1],
-            [99,30.5,90,2],
-            [100,30.5,90,3],
-            [101,30.5,-90,4],
+            [99,30.5,[-90,-90,90,90,-90],[0,1,2,3,4]],
 
-            [53.5,39.5,-90,1],
-            [54.5,39.5,-90,2],
-            [55.5,39.5,90,3],
-            [56.5,39.5,90,4],
+            [55,39.5,[-90,-90,90,90],[1,2,3,4]],
 
-            [168.5,39.5,-90,0],
-            [169.5,39.5,-90,1],
-            [170.5,39.5,90,2],
-            [171.5,39.5,-90,4],
+            [170,39.5,[-90,-90,90,-90],[0,1,2,4]],
 
-            [24,51,90,0],
-            [25,51,180,1],
-            [26,51,0,2],
-            [27,51,90,3],
-            [28,51,90,4],
+            [26,51,[90,180,0,90,90],[0,1,2,3,4]],
 
-            [110.5,18.5,-90,0],
-            [111.5,18.5,180,1],
-            [112.5,18.5,90,3],
-            [113.5,18.5,180,4],
+            [112,18.5,[-90,180,90,180],[0,1,3,4]],
 
-            [135,30.5,-90,0],
-            [136,30.5,-90,1],
-            [137,30.5,0,2],
-            [138,30.5,90,3],
-            [139,30.5,90,4],
+            [137,30.5,[-90,-90,0,90,90],[0,1,2,3,4]],
         ]
         for(let a=0,la=set.length;a<la;a++){
             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
@@ -1130,7 +1193,7 @@ function generateLevel(level,layer){
     if(game.level==23){
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                if(entities.walls[a][b].type!=36){
+                if(entities.walls[a][b].type==31||entities.walls[a][b].type==33){
                     entities.walls[a][b].set()
                 }
             }
@@ -1138,6 +1201,13 @@ function generateLevel(level,layer){
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 if(entities.walls[a][b].type==36){
+                    entities.walls[a][b].set()
+                }
+            }
+        }
+        for(let a=0,la=entities.walls.length;a<la;a++){
+            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                if(entities.walls[a][b].type!=31&&entities.walls[a][b].type!=33&&entities.walls[a][b].type!=36){
                     entities.walls[a][b].set()
                 }
             }
@@ -1722,6 +1792,18 @@ function lsin(direction){
 }
 function lcos(direction){
 	return constants.trig[1][floor((direction%360+360)%360*2)]
+}
+function outWalls(){
+    let totals=[]
+    for(let a=0,la=50;a<la;a++){
+        totals.push(0)
+    }
+    for(let a=0,la=entities.walls.length;a<la;a++){
+        for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+            totals[entities.walls[a][b].type]++
+        }
+    }
+    print(totals)
 }
 function generateMission(wave){
     for(let a=0,la=wave.length;a<la;a++){

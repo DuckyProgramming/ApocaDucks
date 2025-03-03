@@ -202,6 +202,7 @@ function mainloop(){
                     effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }
             }
+
             for(let a=0,la=graphics.main.length;a<la;a++){
                 if(game.level==6){
                     graphics.main[a].image(
@@ -222,6 +223,8 @@ function mainloop(){
             }
             for(let c=0,lc=game.gaming;c<lc;c++){
                 for(let a=0,la=run.fore.length;a<la;a++){
+                    //let startTime=performance.now()
+                    
                     for(let b=0,lb=run.fore[a].length;b<lb;b++){
                         if(
                             run.fore[a][b].position.x+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
@@ -293,8 +296,12 @@ function mainloop(){
                             }
                         }
                     }
+                    
+                    /*let endTime=performance.now()
+                    print(`Main ${a}: ${endTime - startTime} milliseconds`)*/
                 }
             }
+
             for(let a=0,la=game.gaming;a<la;a++){
                 if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
                     graphics.main[a].image(
