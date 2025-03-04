@@ -1,221 +1,113 @@
-MARCH UPDATE
+567 - spiker, 231 - piercing ballista
+568 - sunburst hybrid, 234 (sunburst), 219 (hybrid)
+569 - black hole, 133 - electifyer that pulls enemies
+570 - poisoner, 364
+572 - reinforcements, 227 - respawning sidekicks
+571 - dustbowl, 522 - oxyphenbutazone, but with drones surrounding the big bullet
+573 - big pharma, 406 - trapper with a poison bullet
+574 - ion ray, 335 - long range laser
+575 - radiance, 335 - push laser
+576 - sun ray, 234 (sunburst), 335 (laser) - sunburst + laser (when making stats, remember sunburst is 1.5x damage 1.25x reload)
+577 - toxbot, 222 - software with sniper turrets
+578 - ow, 0 - shotgun with auxiliary key homing shot
+579 - automobile, 176 - sidekick gunceptions
+580 - munition, 338 - sidekick interceptors
+581 - ejector, 212 - faster-firing hopper destroyer
+582 - kinematic, 0 - hopper shotgun with 3 shots in clip
+583 - progenitor, 137 - hopper slicer with slightly more damage
+584 - rewind, 137 - slicer that pulls enemies and stuns them slightly
+585 - coldfront, 364 - freezer with a freezing shield
+586 - icosahedron, 148 - boulder baller but balls explode into drones
+587 - pyrite, 455 - fires blocks that can combine and pierce multiple enemies (and refresh time upon combination)
+588 - shotgun engineer, 95
+589 - cure, 11 - medic that heals self fast
+590 - patrol - bonker squad
+591 - sidekick officer, 227 - sidekick with pistol officer ability
+592 - AC gun, 454 - freeze AZ gun
+593 - freezerception, 364
+594 - poisonerception, 570
+595 - adrenaline, 255 - double auto but you get crits when you get hit
+596 - double auto destroyer, 255
+597 - double auto sunburst, 234
+598 - double auto rocket launcher, 3
+599 - double auto sniper, 255 - has long fov and large range
+600 - double double auto, 255
+    601 - swapper, 387 - conglomeration but swaps all base classes
+    602 - photon, 528 - revolutionist with a sunburst auto
+    603 - anarchist, 528 - revolutionist that can throw engineer spheres
+    604 - arcer, 379 - fires a bullet that after hitting one enemy moves toward another (max 2)
+    605 - battery, 391 - submachine arcer
+    606 - multitool, 467 - quad auto with (destroyer, pelleter, rocket launcher, sniper)
+    607 - frigate, 284 - swarmer with a sniper auto
+    608 - chelyabinsk, 3 - rocket launcher but each rocket splits after a set amount of time
+    609 - speedbump, 3 - stun push rocket launcher
+    610 - quadratic, 338 - interceptor with light rockets
+    611 - flame zone, 133 - electrifyer that gasses
+    612 - trumpet, 258 - exploding helix
+    613 - tunneler, 150 - picker with huge damage but tiny FOV
+    614 - juno, 523 - skep with traps
+    615 - flicker, 520 - flame burst that fires like a shotgun (each "bullet" is five shots currently)
+    616 - lmg, 2 - big firepower but slow
+    617 - deployer sh, 154
+    618 - deployer b, 154
+    619 - deployer gu, 154
+    620 - gunnertype, pelleter with four bullets with slight autoaim
+    621 - repositioner, 361 - throws a block with an attached motorizer drone
+    622 - delta, 525 - guided missile with interceptor bullets
+    623 - silo, 231 - long range ballista
+    624 - assymetrical, 4 - fires three bullets and 2 sometimes with added stats
+    625 - expenditure, 2 - machine gun but eadh hot drops a short-lived trap
+    626 - catapult, 151 - fires a mortar shell that cracks and doesn't bounce, and no splash, but fast fire and stupid damage
+    627 - fowling, 309 - sniper spreadling
+    628 - swallow, 378 - dasher with swarm drones
+    629 - plinth, 320 - emplacement with pods with turrets
+    630 - clockshard, 323 - battlerock with a few light swarm drones but no autos (2.5 dpsbuff opposed to 2)
+    631 - tank, 1 - has 4x health
+    632 - punter, 332 - damaging pelleter that wavers its shots sinusoidally
+    633 - windstorm, 433 - long range gust
+    634 - bonkhive, 242 - bonker with a swarmer auto turret
+    635 - sunburst vulnerable, 234
+    636 - dirigible, 279
+    637 - spread pistol, 1
+    638 - fume, 8 - poison flamethrower
+    639 - carpenter, 6 - push sniper
+    640 - inyoite, 434 (cobalt), 570 (damage over time)
+    641 - cookie, 251 - mash medic (3 buleets)
+    642 - nightingale, 6 - mash sniper
+    643 - rain, 466 (rain), 114 (booster) - bullet booster
+    644 - hybemind, 227 - sidekick hybrid
+    645 - menthal, 200 - poison trapper
+    646 - warduck, 176 - has a quad auto turret
+    647 - contaminant, 570 - poisons and shrinks enemies
+    648 - card, 176 (gun), 507 (rummy), 10x damage chance
+    649 - pomson, 0 - shotgun that instakills hypers
+    650 - scorcher, 80 - flame baller but it bursts out flames for some time
+    651 - jenga, 231 - ballista that fires large and small bullets
+    652 - iocane, 570 - poison that lasts very long
+    653 - telepointer, 189 - minesweeper hopper
+    654 - jammer, 309, spreadling radar
+    655 - autoclicker, 191 - motorizer with drones that fire stacked bullets
+    656 - electromagnet, 2 - machine gun that occasionally fires slicers
+    657 - resistance, 534 - scottish
+    658 - hypnosis, 564 - turns a random enemy into a remote duck
+    659 - drone zone, 508 - gun zone... but drones
+    660 - gun hybrid
+    661 - fake health pack
+
+    296 - spiker, 147
+    297 - black hole, 89
+    298 - poisoner, 20
+    299 - dustbowl, 278
+    300 - radiance, 191
+    301 - toxbot, 134
+    302 - rewind, 91
+    303 - icosahedron, 97
+    304 - pyrite, 181
+    305 - shotgun engineer, 69
 
 
 
-[100 weapons]
 
-
-
-warduck - has a gun and a four-way auto turret
-
-silo - long range ballista
-
-ion ray - laser that can see far
-
-photon - revolutionist but iwth a machine gun auto
-
-toxbot - software but the drone fires long range sniper bullets
-
-more controller weapons
-delta - control an interceptor bullet
-
-infestor - bullets stick to enemies, on aux key they create drones
-
-sidekick officer
-
-anarchist - revolutionist that can throw orbital spheres as engineer spheres
-
-stockroom - has a gun and passively gets 4 fast drones
-
-
-
-splitter - sidekick, but your sidekicks respawn when they die from your body
-
-progenitor - throws a slicer that's affected by physics until it hits the ground, then it becomes a normal slicer
-
-rotopelleter - pelleter that fires an additional pelleter attack against the nearest enemy
-
-big pharma - fires a trap and a poison bullet
-
-recursion - tons of turrets, with different ranges
-
-flame shotgun - fires long range flames in a huge burst
-
-inferno - machine gun with flamethrower and swarm drones
-
-carpenter - fires three very fast bullets
-
-dustbowl - fires a destroyer bullet that spawns drones around itself
-
-dirigible - very maneuverable parachutist with accurate gun
-
-
-
-polaroid - twin gun with quad auto
-
-stationer - destroyer with four light auto guns
-
-battery - submachine but the bullets, after hitting one enemy, arc toward another
-
-ow - shotgun, can use auxiliary key to fire a burst of homing bullets
-
-automobile - sidekick gunceptions
-
-lightship - swarmer with a sniper auto
-
-maniplator - gunception but the ception bullet explodes into five rockets
-
-base poisoner weapon
-everdeath - pelleter, but your sidekicks are poisoner and trapper
-
-multitool - quad auto but each one is unique
-
-
-
-tart - kinoko with a poison auto
-wondergunner - light triple pelleter, and kinoko
-buff kinoko to have an actual gun
-both also spawn drones on normal attack
-
-pyrite - fires blocks that can pierce multiple enemies, and combine with nearby other blocks
-
-assymetrical quintuplet - assault rifle and submachine
-
-expenditure - machine gun, but the bullets drop short-lived pursuer traps
-
-tunneler - picker with insane damage, but half fov
-
-juno - skep but with traps
-
-mint - poison trapper
-
-trumpet - helix but the balls explode into fire on hit
-
-constructor - gravityless heavy traps that can pierce multiple enemies
-
-
-
-maplayer - steamroller that freezes
-
-ac gun - az gun but the airshots freeze
-
-ammonia - reduces target fov
-
-electromagnet - machine gun that occasionally fires slicers
-
-scorcher - fires flame ballers that stay where they land and spam out flame for more time
-
-pomson
-
-8 baller - chance to throw ied-style nuke
-
-ladder - fires sets of three engineer bullets with no gravity that slow down
-
-kinematic - accurate damaging shotgun, and has hopper ability
-
-lucklauncher - rng rocket launcher
-
-
-
-sunglass - double auto sunburst
-
-chelyabinsk - novgorod but with rockets
-
-cauldron - fires a pile of stacked accelerating rockets
-
-double triple auto - a double auto in 3 directions
-
-flicker - flame burst as a shotgun
-
-dodecahedron - throws a baller that splits into 12 swarm shards on hit
-
-infested block - throws a large block that spams out drones and bullets
-
-spiker - ballista with piercing shots
-
-gunnertype - fires four forward autoaim turrets with varying arcs
-
-radiowave - twin with big bullets (from equanimity) and small sunburst bullets (from sunrise)
-
-
-
-radiance - laser that pushes enemies back heavily
-
-sunray - laser with sunburst
-
-[stargazer]
-
-mecha - you become a big duck with a double auto machine gun
-
-minishot
-scaler - minishot with additional bullets in closer angle
-rename coadjutor to helpmeet
-new coadjutor - three minishots
-
-partisan - sidekick destroyer
-
-death star - lasyer with a destroyer auto turret
-buff destroyer autos, they're too slow
-
-fume - poison push flamethrower
-
-
-
-munition - sidekick interceptor
-
-escutcheon - minishot with immunities
-
-thumper - engineer but the balls have shotguns
-
-clockshard - fires long-range impeacher drones, as well as bees
-
-rewind - slicer but it pulls enemies back with it
-
-snaker - fires an acceelrating bullet that drops shortlived traps
-
-repositioner - fires block that has a connected motorizer minion that automatically fires
-
-speedbump - push rocket launcher that also applies stun
-
-quadratic - interceptor but the interceptor bullet fires light rockets
-
-entrencher - spawns auto trapper drones
-
-
-
-muncher - fires a trap and four bullets
-
-adrenaline - quad auto, when you get hit you gain crits for a few seconds
-
-sunburst hybrid
-
-[hybrid]
-
-black hole - electrifyer that absorbs enemies
-
-minimini - tiny machine gun
-
-coldfront - freezer with an ice shield
-
-wrecking ball - fires a small and a large fast piercing bullet
-
-ejection - hopper destroyer
-
-bonkhive - bonker with occasional bee drones
-
-
-
-start working here!
-
-
-
-convert a lot of sets from 4 to 6s
-
-
-
-6 base classes
-
-double auto branch
 
 
 

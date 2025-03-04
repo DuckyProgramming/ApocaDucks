@@ -222,7 +222,7 @@ class wall{
                     [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
                     [],
                     [],
-                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
                     [],
                 ]
                 this.triangle=[
@@ -240,7 +240,7 @@ class wall{
                     [],
                     [],
                     [],
-                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x+this.width/2,y:this.position.y+this.height/2},{x:this.position.x-this.width/2,y:this.position.y-this.height/2}]],
                 ]
                 this.triangle=[
                     {x:this.position.x+this.width/2,y:this.position.y-this.height/2},
@@ -704,7 +704,7 @@ class wall{
                             layer.fill(120,200-game.pointAnim[0]*80,120)
                         }else if(abs(this.position.x-game.tileset[0]*131.5)<1){
                             layer.fill(120,200-game.pointAnim[1]*80,120)
-                        }else if(abs(this.position.x-game.tileset[0]*133.5)<1){
+                        }else if(abs(this.position.x-game.tileset[0]*135.5)<1){
                             layer.fill(120,200-game.pointAnim[2]*80,120)
                         }else{
                             layer.fill(120,200,120)
@@ -1040,7 +1040,7 @@ class wall{
                             this.width/2,-this.height/2
                         )
                     break
-                    case 23:
+                    case 22: case 23:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
@@ -1051,7 +1051,6 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
-                    
                     case 24:
                         layer.fill(120)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -1636,7 +1635,7 @@ class wall{
             break
             case 35:
                 switch(game.level){
-                    case 23:
+                    case 22: case 23:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(220-this.reload/4)
@@ -2268,7 +2267,7 @@ class wall{
                 if(this.reload>0){
                     this.reload-=(game.level==19?0.5:1)
                     switch(game.level){
-                        case 19: case 23: case 24:
+                        case 19: case 22: case 23: case 24:
                             if(this.reload>=399&&this.reload<=479&&this.reload%16==15){
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-120+random(-15,15),this.align,120,300,false,-1))
                                 let mult=random(1,1.5)
@@ -3104,7 +3103,7 @@ class wall{
                                                                 abs(this.position.x-game.tileset[0]*72.5)<1
                                                             )&&game.pointAnim[0]>=1||
                                                             abs(this.position.x-game.tileset[0]*131.5)<1&&game.pointAnim[1]>=1||
-                                                            abs(this.position.x-game.tileset[0]*133.5)<1&&game.pointAnim[2]>=1
+                                                            abs(this.position.x-game.tileset[0]*135.5)<1&&game.pointAnim[2]>=1
                                                         )){
                                                             c.bounceTime=15
                                                         }
@@ -3227,9 +3226,26 @@ class wall{
                                                                 }
                                                             break
                                                             case 23:
-                                                                if(game.point[0]!=c.id){
+                                                                if(this.type==13){
+                                                                    for(let e=0,le=entities.walls[0].length;e<le;e++){
+                                                                        if(entities.walls[0][e].type==33&&dist(this.position.x,this.position.y,entities.walls[0][e].position.x,entities.walls[0][e].position.y)<300&&(entities.walls[0][e].owner==c.id&&c.id>=0||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                            hit=true
+                                                                            entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[0][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
+                                                                            game.index++
+                                                                            entities.players[entities.players.length-1].constructify()
+                                                                            entities.players[entities.players.length-1].thrown=true
+                                                                            entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
+                                                                            entities.players[entities.players.length-1].velocity.y=-20
+                                                                        }
+                                                                    }
+                                                                    if(!hit){
+                                                                        this.reload=0
+                                                                    }
+                                                                }else if(game.point[0]!=c.id){
                                                                     this.reload=0
                                                                 }
+                                                            break
+                                                            case 23:
                                                             break
                                                         }
                                                     }
@@ -3446,8 +3462,8 @@ class wall{
                                                             case 22:
                                                                 for(let e=0,le=15;e<le;e++){
                                                                     entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,258,-255+(e+0.5)/le*150,c.id,50,120,false,-1))
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=1.2
                                                                     entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
                                                                     entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                                                 }
@@ -3456,8 +3472,8 @@ class wall{
                                                                 if(game.point[0]==c.id){
                                                                     for(let e=0,le=15;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,258,-255+(e+0.5)/le*150,c.id,50,120,false,-1))
-                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
-                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.1
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1.1
                                                                         entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
                                                                         entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                                                     }
@@ -3508,7 +3524,7 @@ class wall{
                                             if(
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='ConstructRemote'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1
@@ -3532,7 +3548,7 @@ class wall{
                                             if(
                                                 (
                                                     c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||
+                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='ConstructRemote'||
                                                     c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
                                                 )&&c.weapon.uses>0){
                                                 c.jump.double=1

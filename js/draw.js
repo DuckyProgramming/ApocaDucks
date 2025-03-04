@@ -190,7 +190,7 @@ function mainloop(){
                         entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
                         entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
                         entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
-                        entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||
+                        entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||
                         entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
                         ?(game.level==7?1.5:2):1
                 }
