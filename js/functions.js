@@ -28,7 +28,7 @@ function range(start,end){
     return [...Array(end-start).keys()].map(a=>a+start)
 }
 function safeRange(start,end){
-    return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<types.weapon.length)
+    return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<findName('Arcer',types.weapon))
 }
 //calculatory
 function inPointBox(point,box){
@@ -1007,6 +1007,11 @@ function generateLevel(level,layer){
                 break
                 case ';':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],5+a*game.tileset[1],game.tileset[0]*0.5,10,38))
+                break
+                case 'r':
+                    if(game.level==23){
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                    }
                 break
             }
         }

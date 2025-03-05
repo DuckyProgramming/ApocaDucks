@@ -2542,21 +2542,22 @@ class wall{
                             c.type==259||c.type==260||c.type==261||c.type==263||c.type==264||
                             c.type==267||c.type==268||c.type==271||c.type==272||c.type==275||
                             c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
-                            c.type==292||c.type==293||c.type==295
+                            c.type==292||c.type==293||c.type==295||c.type==301||c.type==392||
+                            c.type==303||c.type==304||c.type==305
                         )
                     ){
                         if(!c.stop){
                             let d=collideBoxBox(this,c)
                             let incident
                             let vecBall
-                            if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275)&&d<0){
+                            if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302)&&d<0){
                                 let e={position:c.position,previous:c.previous,width:0,height:0}
                                 d=collideBoxBox(this,e)
                             }
                             if(d>=0&&!this.redundant[d]){
                                 switch(d){
                                     case 0:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.y<0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2
                                                 c.velocity.y*=-1
@@ -2573,7 +2574,7 @@ class wall{
                                         }
                                     break
                                     case 1:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.y>0){
                                                 c.position.y=this.position.y-this.height/2-c.height/2
                                                 c.velocity.y*=-1
@@ -2590,7 +2591,7 @@ class wall{
                                         }
                                     break
                                     case 2:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x<0){
                                                 c.position.x=this.position.x+this.width/2+c.width/2
                                                 c.velocity.x*=-1
@@ -2607,7 +2608,7 @@ class wall{
                                         }
                                     break
                                     case 3:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x>0){
                                                 c.position.x=this.position.x-this.width/2-c.width/2
                                                 c.velocity.x*=-1
@@ -2624,7 +2625,7 @@ class wall{
                                         }
                                     break
                                     case 4:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x<0){
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -2658,7 +2659,7 @@ class wall{
                                         }
                                     break
                                     case 5:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x>0){
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -2692,7 +2693,7 @@ class wall{
                                         }
                                     break
                                     case 6:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x<0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -2728,7 +2729,7 @@ class wall{
                                         }
                                     break
                                     case 7:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x>0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -2764,7 +2765,7 @@ class wall{
                                         }
                                     break
                                     case 8:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x<0){
                                                 c.direction+=180
                                                 c.hit=[]
@@ -2779,7 +2780,7 @@ class wall{
                                         }
                                     break
                                     case 9:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275){
+                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
                                             if(c.velocity.x>0){
                                                 c.direction+=180
                                                 c.hit=[]
@@ -2799,11 +2800,11 @@ class wall{
                                     c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                    c.type==286
+                                    c.type==286||c.type==304
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,this.id,1,450,c.crit,c.index))
-                                    }else if(c.type==221&&!c.stop){
+                                    }else if((c.type==221||c.type==304)&&!c.stop){
                                         c.explode()
                                     }
                                     c.stop=true
@@ -2852,7 +2853,7 @@ class wall{
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
                                 c.type!=100&&c.type!=103&&c.type!=112&&c.type!=193&&c.type!=194&&
-                                c.type!=195&&c.type!=270
+                                c.type!=195&&c.type!=270&&c.type!=297
                             ){
                                 c.active=false
                                 c.speed=0
@@ -3051,13 +3052,7 @@ class wall{
                                             c.previous.position.y=this.position.y-this.height/2-c.height/2-0.01
                                             c.velocity.y=0
                                             c.jump.time=5
-                                            if(
-                                                (
-                                                    c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='PlayerPistolInspect'||c.playerData.name=='PlayerRegional'||
-                                                    c.playerData.name=='PlayerQuarry'||c.playerData.name=='PlayerHeister'||
-                                                    c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
-                                                )&&c.weapon.uses>0){
+                                            if(c.doubleJump()&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.playerData.name=='PlayerPistolQuadrupleJump'){
@@ -3521,12 +3516,7 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.y=c.velocity.x*this.height/this.width
                                             c.jump.time=5
-                                            if(
-                                                (
-                                                    c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='ConstructRemote'||
-                                                    c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
-                                                )&&c.weapon.uses>0){
+                                            if(c.doubleJump()&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.thrown&&this.type!=26){
@@ -3545,12 +3535,7 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.y=-c.velocity.x*this.height/this.width
                                             c.jump.time=5
-                                            if(
-                                                (
-                                                    c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump'||
-                                                    c.playerData.name=='PlayerPushierPistol'||c.playerData.name=='PlayerPistolOfficer'||c.playerData.name=='PlayerPistolception'||c.playerData.name=='ConstructRemote'||
-                                                    c.playerData.name=='PlayerSwitcheroo'&&c.subPlayerAData.name=='PlayerPistol'
-                                                )&&c.weapon.uses>0){
+                                            if(c.doubleJump()&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.thrown&&this.type!=26){
