@@ -843,11 +843,11 @@ function generateLevel(level,layer){
                         break
                         case 23:
                             if(level[a][b-1]=='['){
-                                entities.walls[0].push(new wall(graphics.main,b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
+                                entities.walls[0].splice(0,0,new wall(graphics.main,b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
                             }else if(level[a][b+1]==']'){
-                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
+                                entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
                             }else{
-                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0],game.tileset[1]*0.3,24))
+                                entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0],game.tileset[1]*0.3,24))
                             }
                         break
                         default:
@@ -1030,14 +1030,6 @@ function generateLevel(level,layer){
         }
     }
     if(game.level==22||game.level==23){
-        for(let a=0,la=entities.walls[0].length;a<la;a++){
-            if(entities.walls[0][0].type==17||entities.walls[0][0].type==18||entities.walls[0][0].type==20||entities.walls[0][0].type==21){
-                entities.walls[0].splice(entities.walls[0].length-1,0,entities.walls[0][0])
-                entities.walls[0].splice(0,1)
-            }else{
-                a=la
-            }
-        }
         let set=[
             [112,65.5,[-90,90,-90,-90,-90],[0,1,2,3,4]],
 
