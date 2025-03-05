@@ -3290,7 +3290,12 @@ class wall{
                                                                 for(let e=0,le=entities.walls[0].length;e<le;e++){
                                                                     if(entities.walls[0][e].type==33&&dist(this.position.x,this.position.y,entities.walls[0][e].position.x,entities.walls[0][e].position.y)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        if(entities.walls[0][e].position.x<this.position.x){
+                                                                        for(let e=0,le=5;e<le;e++){
+                                                                            entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,176+e*2,this.align,400,240,false,-1))
+                                                                            entities.projectiles[entities.projectiles.length-1].velocity.x*=4
+                                                                            entities.projectiles[entities.projectiles.length-1].velocity.y*=4
+                                                                        }
+                                                                        /*if(entities.walls[0][e].position.x<this.position.x){
                                                                             for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(120,150),this.align,40,240,false,-1))
                                                                                 let mult=random(1.25,2.5)
@@ -3304,7 +3309,7 @@ class wall{
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                             }
-                                                                        }
+                                                                        }*/
                                                                     }
                                                                 }
                                                                 if(!hit){
