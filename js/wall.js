@@ -1420,6 +1420,18 @@ class wall{
                             layer.rect(-this.width/2+(a+0.5)/2*game.tileset[0],0,game.tileset[1]/10,this.height)
                         }
                     break
+                    case 23:
+                        layer.fill(60,55,60)
+                        layer.rect(0,-this.height*0.2,this.width,this.height*0.6+1)
+                        for(let a=0,la=this.width/game.tileset[0];a<la;a++){
+                            layer.quad(
+                                -this.width*0.5+(a+0.5)/la*this.width-game.tileset[0]*0.4,this.height*0.1,
+                                -this.width*0.5+(a+0.5)/la*this.width+game.tileset[0]*0.4,this.height*0.1,
+                                -this.width*0.5+(a+0.5)/la*this.width+game.tileset[0]*0.2,this.height*0.5,
+                                -this.width*0.5+(a+0.5)/la*this.width-game.tileset[0]*0.2,this.height*0.5
+                            )
+                        }
+                    break
                     default:
                         layer.fill(60,55,60)
                         layer.rect(0,-this.height*0.25,this.width,this.height*0.5+1)
@@ -2455,7 +2467,7 @@ class wall{
                             }
                         }
                     }
-                }else if(game.level==23){
+                }else if(game.level==23&&(this.position.x<300||this.position.x>game.edge[0]-300)){
                     if(abs(this.position.x-game.tileset[0]*5.5)<1){
                         game.gate[0]=this.height>10
                     }
@@ -3244,7 +3256,7 @@ class wall{
                                                     }
                                                 break
                                                 case 23:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)){
+                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)&&!c.fort){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
