@@ -2218,7 +2218,7 @@ class wall{
             break
             case 13:
                 if(this.reload>0){
-                    this.reload-=(game.level==19?0.5:1)
+                    this.reload-=(game.level==23?0.25:game.level==19?0.5:1)
                     if((this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399)&&game.level!=23){
                         let mult=0
                         switch(game.level){
@@ -3183,7 +3183,7 @@ class wall{
                                                                     hit=true
                                                                     for(let e=0,le=20;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,this.position.x<game.edge[0]*0.5?random(97.5,142.5):random(-142.5,-97.5),this.align,100,240,false,-1))
-                                                                        let mult=random(1,2)
+                                                                        let mult=random(0.75,1.5)
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                     }
@@ -3239,8 +3239,6 @@ class wall{
                                                                 }else if(game.point[0]!=c.id){
                                                                     this.reload=0
                                                                 }
-                                                            break
-                                                            case 23:
                                                             break
                                                         }
                                                     }
