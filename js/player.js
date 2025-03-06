@@ -5389,27 +5389,44 @@ class player{
                                             }
                                         break
                                         case 3:
-                                            switch(goalPoint){
-                                                case 0:
-                                                    this.target.position.x=entities.players[game.players+1].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
-                                                    this.target.position.y=entities.players[game.players+1].position.y
-                                                    if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+1])){
-                                                        this.manage[1]=true
-                                                    }
-                                                break
-                                                case 1: case 2: case 3:
-                                                    this.target.position.x=1300
-                                                    this.target.position.y=1600
-                                                break
-                                                case 4:
-                                                    if(game.level==22&&game.point[3]&&this.position.y>1280){
-                                                        this.target.position.x=2700
-                                                        this.target.position.y=abs(this.position.x-2700)<100?0:1600
-                                                    }else{
+                                            if(this.position.y>1900){
+                                                switch(goalPoint){
+                                                    case 0: 
+                                                        this.target.position.x=this.position.x>2000?2900:1300
+                                                        this.target.position.y=1600
+                                                    break
+                                                    case 1: case 2: case 3:
+                                                        this.target.position.x=1300
+                                                        this.target.position.y=1600
+                                                    break
+                                                    case 4:
                                                         this.target.position.x=2900
                                                         this.target.position.y=1600
-                                                    }
-                                                break
+                                                    break
+                                                }
+                                            }else{
+                                                switch(goalPoint){
+                                                    case 0:
+                                                        this.target.position.x=entities.players[game.players+1].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                        this.target.position.y=entities.players[game.players+1].position.y
+                                                        if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+1])){
+                                                            this.manage[1]=true
+                                                        }
+                                                    break
+                                                    case 1: case 2: case 3:
+                                                        this.target.position.x=1300
+                                                        this.target.position.y=1600
+                                                    break
+                                                    case 4:
+                                                        if(game.level==22&&game.point[3]&&this.position.y>1280){
+                                                            this.target.position.x=2620
+                                                            this.target.position.y=abs(this.position.x-2620)<100?0:1600
+                                                        }else{
+                                                            this.target.position.x=2900
+                                                            this.target.position.y=1600
+                                                        }
+                                                    break
+                                                }
                                             }
                                         break
                                         case 4:
@@ -5431,8 +5448,8 @@ class player{
                                         case 5:
                                             switch(goalPoint){
                                                 case 0:
-                                                    this.target.position.x=1500
-                                                    this.target.position.y=1600
+                                                    this.target.position.x=1600
+                                                    this.target.position.y=abs(this.position.x-1300)<100?0:1600
                                                 break
                                                 case 1:
                                                     this.target.position.x=850
@@ -5477,16 +5494,16 @@ class player{
                                         case 7:
                                             switch(goalPoint){
                                                 case 0:
-                                                    this.target.position.x=3250
+                                                    this.target.position.x=2600
                                                     this.target.position.y=1200
                                                 break
                                                 case 1: case 4:
-                                                    this.target.position.x=4300
+                                                    this.target.position.x=3700
                                                     this.target.position.y=1200
                                                 break
                                                 case 2: case 3:
-                                                    this.target.position.x=3700
-                                                    this.target.position.y=abs(this.position.x-3700)<100?0:1200
+                                                    this.target.position.x=3100
+                                                    this.target.position.y=abs(this.position.x-3100)<100?0:1200
                                                 break
                                             }
                                         break
@@ -5513,15 +5530,15 @@ class player{
                                             switch(goalPoint){
                                                 case 0:
                                                     if(game.level==22){
-                                                        this.target.position.x=2900
-                                                        this.target.position.y=abs(this.position.x-2900)<100?0:1700
+                                                        this.target.position.x=2820
+                                                        this.target.position.y=abs(this.position.x-2820)<100?0:1700
                                                     }else{
-                                                        this.target.position.x=2900
-                                                        this.target.position.y=1700
+                                                        this.target.position.x=this.position.y<1900?2600:2750
+                                                        this.target.position.y=abs(this.position.x-2750)<100?0:1700
                                                     }
                                                 break
                                                 case 1:
-                                                    if(game.level==22&&game.point[1]||game.level==23){
+                                                    if(game.level==22&&game.point[1]){
                                                         if(this.position.y>1930&&this.position.x<5900){
                                                             this.target.position.x=5850
                                                             this.target.position.y=1700

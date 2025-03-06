@@ -2439,7 +2439,7 @@ class wall{
             case 38:
                 if(game.level==22){
                     if((
-                        abs(this.position.x-game.tileset[0]*69.5)<1&&!game.point[3]||
+                        abs(this.position.x-game.tileset[0]*67.5)<1&&!game.point[3]||
                         abs(this.position.x-game.tileset[0]*139.5)<1&&!game.point[2]
                     )&&this.height>0){
                         this.height-=0.1
