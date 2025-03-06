@@ -4925,8 +4925,8 @@ types={
       desc:'Ballista with very long range',dpsBuff:1,
     },{
       name:'PlayerJenga',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:231,
-      desc:'Ballista that fires large and small bullets',dpsBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:651,
+      desc:'Ballista that fires large and small bullets',dpsBuff:1.5,
     },{
       name:'PlayerBallistaception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:540,
@@ -5106,7 +5106,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:460,
       desc:'Piercing sniper with a radar',dpsBuff:1,
     },{
-      name:'PlayerSpreadling',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerJammer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:654,
       desc:'Damaging spreadling with a radaar',dpsBuff:7,
     },{
@@ -5854,6 +5854,9 @@ types={
     },{
       name:'SidekickBonkhive',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:634,
+    },{
+      name:'SidekickGunHybrid',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:660,
     },
 
     {
@@ -12891,7 +12894,7 @@ types={
 		},{
 			name:'Fume',
 			ammo:50,
-			damage:25,
+			damage:30,
 			cooldown:3,
 			stop:75,
 			reload:2,
@@ -12926,13 +12929,13 @@ types={
       uses:24,
 		},{
 			name:'Nightingale',
-			ammo:3,
+			ammo:4,
 			damage:180,
 			cooldown:120,
 			stop:120,
 			reload:120,
 			speed:1.1,
-      uses:21,
+      uses:24,
 		},{
 			name:'Rain',
 			ammo:24,
@@ -13061,22 +13064,22 @@ types={
       uses:120,
 		},{
 			name:'Resistance',
-			ammo:1,
+			ammo:2,
 			damage:600,
-			cooldown:15,
+			cooldown:30,
 			stop:225,
-			reload:10,
+			reload:60,
 			speed:1.05,
       uses:7,
 		},{
 			name:'Hypnosis',
 			ammo:1,
 			damage:0,
-			cooldown:480,
-			stop:480,
-			reload:480,
+			cooldown:300,
+			stop:300,
+			reload:300,
 			speed:1.1,
-      uses:2,
+      uses:3,
 		},{
 			name:'Drone Zone',
 			ammo:1,
@@ -14214,7 +14217,7 @@ levels=[
 "                                                                                                  <###################[===]###>                                                                                                  ",
 "                                                              ---  <###>  ---  <#~~~#>  ---  <########################      ;              <###>  ---                                                                            ",
 "                                                            <######################################################### ##############[===]############>                                                                          ",
-"                                                           <#######################################################3## #############[     ]############>                                                                         ",
+"                                                           <########################################################## #############[     ]############>                                                                         ",
 "                                                          <##[ |           |                        |           |           |              :       | ]##>                                                                        ",
 "                                                         <##[  |           |                        |           |           |              :       |  ]##>                                                                       ",
 "                                                <###>   <##[   |           |                        |           |           |              :       |   ]##>                                                                      ",
@@ -14233,7 +14236,7 @@ levels=[
 "                            |         |              N         |     :     |             |       |                         |               |       |           |           N           |     <##[      |                         ",
 "                            |         |                        |     :     |             |       |                         |               |       |           |                       |    <##[       |                         ",
 "                            |         |        --- <###> ---   |     :     |             |     --b--                       |               | ----- |         --b--   <###########>   --b-- <##[        |                         ",
-"                      ]###[===]@@@[   |      <###################@@@###@@@#z       ]###[===]@@@#####%%%[                   |             ]%%%#####@@@[===]###################################[         |                         ",
+"                      ]###[===]@@@[   |      <###################@@@###@@@#z       ]###[===]@@@#####%%%[                   |             ]%%%########[===]###################################[         |                         ",
 "                       ]#[     ]#[    |     <###############################>       ]#[     ]#########[                    |              ]#########[     ]#################################[          |                         ",
 "                        |       |     |    <#################################>       |       |       |                     |               |       |       |       |       |       |       |           |                         ",
 "                        |       |     |   <###################################>      |       |       |                     |           *   |       |   ^   |       |       |       |       |           |                         ",
@@ -14317,8 +14320,8 @@ levels=[
 "                      ]###[===]@@@[  |       <###############z     ]###[===]@@@#####%%%[     |       |                     |       |     ]%%%########[===]###################################[         |                         ",
 "                       ]#[     ]#[   |      <#################>     ]#[     ]#########[      |       |                     |       |      ]#########[     ]#################################[          |                         ",
 "                        |       |    |     <###################>     |       |       |       |       |                     |       |       |       |       |       |       |       |       |           |                         ",
-"                        |       |    |    <#####################>    |       |       |       |       |                     |       |   *   |       |   ^   |       |       |       |       |           |                         ",
-"y                       |       |    |   <#######################>   |       |       |       |       |                     |       +_______+       +_______+       |       |       |       |           |                        Z",
+"                        |       |    |    <#####################>    |       |       |       |       |                     |       |       |       |   ^   |       |       |       |       |           |                         ",
+"y                       |       |    |   <#######################>   |       |       |       |       |                     |       |       |       +_______+       |       |       |       |           |                        Z",
 "                        |       |   <#############################>  |       |       |       |       |                     |       |       |       |       |       |       |       |       |           |                         ",
 "#####>                  |       |  <###############################> |       |       |       |       |                     |       |       |       |       |       |       |       |       |           |                   <#####",
 "######>                 |       | <#################################>|       |       |       |       |          N          |       |       |       |       |       |       |       |       |           |                  <######",

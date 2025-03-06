@@ -46,7 +46,7 @@ class wall{
                 this.carry=[]
                 this.disable=false
             break
-            case 8: case 9: case 12: case 16: case 27:
+            case 8: case 9: case 12: case 16: case 27: case 41:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -887,7 +887,7 @@ class wall{
                     }
                 }
             break
-            case 9:
+            case 9: case 41:
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
                         layer.fill(60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,1-this.recharge/60)
@@ -2214,7 +2214,7 @@ class wall{
                     this.remove=true
                 }
             break
-            case 8: case 9: case 12: case 27:
+            case 8: case 9: case 12: case 27: case 41:
                 if(this.recharge>0){
                     this.recharge--
                 }
@@ -2584,7 +2584,8 @@ class wall{
                             c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
                             c.type==292||c.type==293||c.type==295||c.type==301||c.type==392||
                             c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
-                            c.type==314||c.type==315||c.type==318
+                            c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
+                            c.type==328||c.type==329
                         )
                     ){
                         if(!c.stop){
@@ -2841,7 +2842,7 @@ class wall{
                                     c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                    c.type==286||c.type==304||c.type==314
+                                    c.type==286||c.type==304||c.type==314||c.type==323||c.type==329
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
@@ -2869,7 +2870,7 @@ class wall{
                                     if(c.bounces>=2){
                                         c.stop=true
                                     }
-                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293)&&c.bounceTimer==0){
+                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293||c.type==324)&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     if(c.type==235){
@@ -2896,7 +2897,7 @@ class wall{
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
                                 c.type!=100&&c.type!=103&&c.type!=112&&c.type!=193&&c.type!=194&&
-                                c.type!=195&&c.type!=270&&c.type!=297&&c.type!=310
+                                c.type!=195&&c.type!=270&&c.type!=297&&c.type!=310&&c.type!=330
                             ){
                                 c.active=false
                                 c.speed=0
@@ -2917,7 +2918,7 @@ class wall{
                         &&!(this.type==37&&(c.velocity.y<0||c.previous.position.y+c.height/2>this.position.y-this.height/2))
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
-                        &&!(this.type==9&&(c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))
+                        &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.mafia))
@@ -3067,6 +3068,11 @@ class wall{
                                 if(game.level!=19&&!c.construct&&!c.sidekick&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
                                     c.newWeapon()
                                 }
+                            break
+                            case 41:
+                                this.recharge=1800-(game.gaming-1)*300
+                                this.remove=true
+                                c.life=0
                             break
                             default:
                                 if(!this.redundant[d]){

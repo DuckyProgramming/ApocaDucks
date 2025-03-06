@@ -1,32 +1,44 @@
 
 
-    635 - sunburst vulnerable, 234
-    636 - dirigible, 279
-    637 - spread pistol, 1
-    638 - fume, 8 - poison flamethrower
-    639 - carpenter, 6 - push sniper
-    640 - inyoite, 434 (cobalt), 570 (damage over time)
-    641 - cookie, 251 - mash medic (3 buleets)
-    642 - nightingale, 6 - mash sniper
-    643 - rain, 466 (rain), 114 (booster) - bullet booster
-    644 - hybemind, 227 - sidekick hybrid
-    645 - menthal, 200 - poison trapper
-    646 - warduck, 176 - has a quad auto turret
-    647 - contaminant, 570 - poisons and shrinks enemies
-    648 - card, 176 (gun), 507 (rummy), 10x damage chance
-    649 - pomson, 0 - shotgun that instakills hypers
-    650 - scorcher, 80 - flame baller but it bursts out flames for some time
-    651 - jenga, 231 - ballista that fires large and small bullets
-    652 - iocane, 570 - poison that lasts very long
-    653 - telepointer, 189 - minesweeper hopper
-    654 - jammer, 309, spreadling radar
-    655 - autoclicker, 191 - motorizer with drones that fire stacked bullets
-    656 - electromagnet, 2 - machine gun that occasionally fires slicers
-    657 - resistance, 534 - scottish
-    658 - hypnosis, 564 - turns a random enemy into a remote duck
-    659 - drone zone, 508 - gun zone... but drones
-    660 - gun hybrid
-    661 - fake health pack
+635 - sunburst vulnerable, 234
+636 - dirigible, 279
+637 - spread pistol, 1
+638 - fume, 8 - poison flamethrower
+639 - carpenter, 6 - push sniper
+640 - inyoite, 434 (cobalt), 570 (damage over time)
+641 - cookie, 251 - mash medic (3 buleets)
+642 - nightingale, 6 - mash sniper
+643 - rain, 466 (rain), 114 (booster) - bullet booster
+644 - hybemind, 227 - sidekick hybrid
+645 - menthal, 200 - poison trapper
+646 - warduck, 176 - has a quad auto turret
+647 - contaminant, 570 - poisons and shrinks enemies
+648 - card, 176 (gun), 507 (rummy), 10x damage chance
+649 - pomson, 0 - shotgun that instakills hypers
+650 - scorcher, 80 - flame baller but it bursts out flames for some time
+651 - jenga, 231 - ballista that fires large and small bullets
+652 - iocane, 570 - poison that lasts very long
+653 - telepointer, 189 - minesweeper hopper
+654 - jammer, 309, spreadling radar
+655 - autoclicker, 191 - motorizer with drones that fire stacked bullets
+656 - electromagnet, 2 - machine gun that occasionally fires slicers
+657 - resistance, 534 - scottish
+658 - hypnosis, 564 - turns a random enemy into a remote duck
+659 - drone zone, 508 - gun zone... but drones
+660 - gun hybrid
+661 - fake health pack
+
+320 - sunburst vulnerable, 133
+321 - fume, 6
+322 - carpenter, 4
+323 - menthal, 115
+324 - contaminant, 151
+325 - pomson, 1
+326 - scorcher, 60
+327 - iocane, 298
+328 - autoclicker, 111
+329 - resistance, 284
+330 - drone zone, 270
 
 
 
