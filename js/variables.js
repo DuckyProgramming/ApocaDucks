@@ -4,7 +4,7 @@ game={
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
-  usurp:false,usurpIndex:-1,randomizer:false,pool:true,
+  usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,
   margin:false,bound:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
   sectors:[],
@@ -5716,7 +5716,7 @@ types={
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:7,
     },{
       name:'ConstructGust',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:413,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:413,
     },{
       name:'ConstructRemote',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
@@ -13124,7 +13124,7 @@ types={
 			damage:60,
 			cooldown:10,
 			stop:30,
-			reload:5,
+			reload:5,w
 			speed:1.2,
       uses:48,
 		},*/
@@ -13132,7 +13132,7 @@ types={
 }
 stage={scene:'menu'}
 display={wave:0,anim:0,win:0,cycle:0,wait:120}
-graphics={main:[],overlay:[],pane:[]}
+graphics={main:[],overlay:[],pane:[],panePoint:[],key:[]}
 entities={projectiles:[],players:[],walls:[]}
 deployer={spawn:[],timer:0,speed:0,position:0,interval:0,artillery:[1200,1200,1200,1200],flip:false}
 run={fore:[],info:[],back:[]}

@@ -134,6 +134,8 @@ function mainloop(){
             }
         break
         case 'main':
+            //let startTime=performance.now()
+            
             let effective=[]
             let key=[]
             let bs=[]
@@ -209,7 +211,7 @@ function mainloop(){
                         entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
                         entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||entities.players[c].weaponType==592||
                         entities.players[c].weaponType==623||entities.players[c].weaponType==636||entities.players[c].weaponType==639||entities.players[c].weaponType==642||
-                        entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
+                        (entities.players[c].weaponType==387||entities.players[c].weaponType==601)&&entities.players[c].subWeaponAType==6
                         ?(game.level==7?1.5:2):
                         entities.players[c].weaponType==613?0.75:
                         1
@@ -222,7 +224,6 @@ function mainloop(){
                     effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                 }
             }
-
             for(let a=0,la=graphics.main.length;a<la;a++){
                 if(game.level==6){
                     graphics.main[a].image(
@@ -243,8 +244,6 @@ function mainloop(){
             }
             for(let c=0,lc=game.gaming;c<lc;c++){
                 for(let a=0,la=run.fore.length;a<la;a++){
-                    //let startTime=performance.now()
-                    
                     for(let b=0,lb=run.fore[a].length;b<lb;b++){
                         if(
                             run.fore[a][b].position.x+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
@@ -281,7 +280,7 @@ function mainloop(){
                                 }
                             }
                         }
-                        if(a==3&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36)&&c==0){
+                        if(a==2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36)&&c==0){
                             run.fore[a][b].displayOver(graphics.main[c])
                         }
                         if(game.level==7){
@@ -316,20 +315,57 @@ function mainloop(){
                             }
                         }
                     }
-                    
-                    /*let endTime=performance.now()
-                    print(`Main ${a}: ${endTime - startTime} milliseconds`)*/
                 }
             }
 
             for(let a=0,la=game.gaming;a<la;a++){
-                if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
+                if(game.pane){
+                    if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key,height:graphics.main[0].height*key},graphics.panePoint[a])||key[a]!=graphics.key[a]){
+                        graphics.pane[a].clear()
+                        graphics.pane[a].push()
+                        graphics.pane[a].translate(graphics.pane[a].width/2,graphics.pane[a].height/2)
+                        graphics.pane[a].scale(1/key[a])
+                        graphics.pane[a].translate(-effective[a][0],-effective[a][1])
+                        let b2s=[]
+                        for(let b=0,lb=entities.walls[0].length;b<lb;b++){
+                            if(
+                                entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
+                                game.level==7&&a==2&&
+                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                            ){
+                                entities.walls[0][b].display(graphics.pane[a])
+                                b2s.push(b)
+                            }
+                        }
+                        for(let b=0,lb=b2s.length;b<lb;b++){
+                            entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
+                        }
+                        graphics.pane[a].pop()
+                        graphics.panePoint[a].position.x=effective[a][0]
+                        graphics.panePoint[a].position.y=effective[a][1]
+                        graphics.panePoint[a].width=graphics.main[0].width*key*2
+                        graphics.panePoint[a].height=graphics.main[0].height*key*2
+                        graphics.key[a]=key[a]
+                    }
+                    graphics.main[a].image(
+                        graphics.pane[a],
+                        graphics.panePoint[a].position.x,
+                        graphics.panePoint[a].position.y,
+                        graphics.panePoint[a].width,
+                        graphics.panePoint[a].height
+                    )
+                }else if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
                     graphics.main[a].image(
                         graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
                         effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                     )
-                }
-                if(game.level==7){
+                }else if(game.level==7){
                     if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
                         graphics.main[a].image(
                             graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
@@ -453,7 +489,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==3&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36))){
+                    if(!(bs[a][b][0]==2&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }
@@ -546,6 +582,9 @@ function mainloop(){
             checkEnd(levels[game.level],graphics.main[0],key)
             inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
             inputs.release=[[false],[false],[false],[false]]
+                    
+            /*let endTime=performance.now()
+            print(`Main: ${endTime - startTime} milliseconds`)*/
         break
     }
     game.time++
