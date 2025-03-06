@@ -26,7 +26,7 @@ function sign(value){
 }
 function range(start,end){
     return [...Array(end-start).keys()].map(a=>a+start)
-}
+}   
 function safeRange(start,end){
     return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<findName('Arcer',types.weapon))
 }
@@ -616,8 +616,43 @@ function generateLevel(level,layer){
         case 21:
             game.edge=[8500,2000]
         break
-        case 22: case 23:
+        case 22:
             game.edge=[9000,2880]
+            game.sectors=[
+                [1200,660,2400,1000],
+                [7450,660,3100,1000],
+                [4150,510,3500,700],
+                [2090,1410,1380,900],
+                [700,1310,1400,300],
+                [700,1610,1400,300],
+                [4340,1010,2480,300],
+                [3800,1335,1100,350],
+                [6500,1335,2200,350],
+                [5890,1510,6220,700],
+                [5700,1980,6600,240],
+                [4500,2160,9600,800],
+                [2900,1010,400,300],
+                [5740,1010,320,300],
+            ]
+        break
+        case 23:
+            game.edge=[9000,2880]
+            game.sectors=[
+                [1200,660,2400,1000],
+                [7450,660,3100,1000],
+                [4150,510,3500,700],
+                [2000,1410,1200,900],
+                [700,1310,1400,300],
+                [700,1610,1400,300],
+                [4340,1010,2480,300],
+                [3150,1335,1100,350],
+                [6500,1335,2200,350],
+                [5800,1510,6400,700],
+                [5700,1980,6600,240],
+                [4500,2160,9600,800],
+                [2900,1010,400,300],
+                [5740,1010,320,300],
+            ]
         break
         case 24:
             game.edge=[level[0].length*50,level.length*40]
@@ -869,7 +904,7 @@ function generateLevel(level,layer){
                         break
                         case 23:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
-                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0],game.tileset[1]*0.3,24))
+                            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0],game.tileset[1]*0.3,24))
                         break
                         case 24:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
@@ -986,7 +1021,11 @@ function generateLevel(level,layer){
                     }
                 break
                 case 'g':
-                    entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
+                    if(game.level==23){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],40))
+                    }else{
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
+                    }
                 break
                 case 'V':
                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,31))

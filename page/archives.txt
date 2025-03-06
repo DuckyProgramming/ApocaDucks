@@ -1,40 +1,5 @@
-HALLWAY OF PAIN
 
 
-
-
-
-    604 - arcer, 379 - fires a bullet that after hitting one enemy moves toward another (max 2)
-    605 - battery, 391 - submachine arcer
-    606 - multitool, 467 - quad auto with (destroyer, pelleter, rocket launcher, sniper)
-    607 - frigate, 284 - swarmer with a sniper auto
-    608 - chelyabinsk, 3 - rocket launcher but each rocket splits after a set amount of time
-    609 - speedbump, 3 - stun push rocket launcher
-    610 - quadratic, 338 - interceptor with light rockets
-    611 - flame zone, 133 - electrifyer that gasses
-    612 - trumpet, 258 - exploding helix
-    613 - tunneler, 150 - picker with huge damage but tiny FOV
-    614 - juno, 523 - skep with traps
-    615 - flicker, 520 - flame burst that fires like a shotgun (each "bullet" is five shots currently)
-    616 - lmg, 2 - big firepower but slow
-    617 - deployer sh, 154
-    618 - deployer b, 154
-    619 - deployer gu, 154
-    620 - gunnertype, pelleter with four bullets with slight autoaim
-    621 - repositioner, 361 - throws a block with an attached motorizer drone
-    622 - delta, 525 - guided missile with interceptor bullets
-    623 - silo, 231 - long range ballista
-    624 - assymetrical, 4 - fires three bullets and 2 sometimes with added stats
-    625 - expenditure, 2 - machine gun but eadh hot drops a short-lived trap
-    626 - catapult, 151 - fires a mortar shell that cracks and doesn't bounce, and no splash, but fast fire and stupid damage
-    627 - fowling, 309 - sniper spreadling
-    628 - swallow, 378 - dasher with swarm drones
-    629 - plinth, 320 - emplacement with pods with turrets
-    630 - clockshard, 323 - battlerock with a few light swarm drones but no autos (2.5 dpsbuff opposed to 2)
-    631 - tank, 1 - has 4x health
-    632 - punter, 332 - damaging pelleter that wavers its shots sinusoidally
-    633 - windstorm, 433 - long range gust
-634 - bonkhive, 242 - bonker with a swarmer auto turret
     635 - sunburst vulnerable, 234
     636 - dirigible, 279
     637 - spread pistol, 1
@@ -62,6 +27,58 @@ HALLWAY OF PAIN
     659 - drone zone, 508 - gun zone... but drones
     660 - gun hybrid
     661 - fake health pack
+
+
+
+
+
+
+
+604 - arcer, 379 - fires a bullet that after hitting one enemy moves toward another (max 2)
+605 - battery, 391 - submachine arcer
+606 - multitool, 467 - quad auto with (destroyer, pelleter, rocket launcher, sniper)
+607 - frigate, 284 - swarmer with a sniper auto
+608 - chelyabinsk, 3 - rocket launcher but each rocket splits after a set amount of time
+609 - speedbump, 3 - stun push rocket launcher
+610 - quadratic, 338 - interceptor with light rockets
+611 - flame zone, 133 - electrifyer that gasses
+612 - trumpet, 258 - exploding helix
+613 - tunneler, 150 - picker with huge damage but tiny FOV
+614 - juno, 523 - skep with traps
+615 - flicker, 520 - flame burst that fires like a shotgun (each "bullet" is five shots currently)
+616 - lmg, 2 - big firepower but slow
+617 - deployer sh, 154
+618 - deployer b, 154
+619 - deployer gu, 154
+620 - gunnertype, pelleter with four bullets with slight autoaim
+621 - repositioner, 361 - throws a block with an attached motorizer drone
+622 - delta, 525 - guided missile with interceptor bullets
+623 - silo, 231 - long range ballista
+624 - assymetrical, 4 - fires three bullets and 2 sometimes with added stats
+625 - expenditure, 2 - machine gun but eadh hot drops a short-lived trap
+626 - catapult, 151 - fires a mortar shell that cracks and doesn't bounce, and no splash, but fast fire and stupid damage
+627 - fowling, 309 - sniper spreadling
+628 - swallow, 378 - dasher with swarm drones
+629 - plinth, 320 - emplacement with pods with turrets
+630 - clockshard, 323 - battlerock with a few light swarm drones but no autos (2.5 dpsbuff opposed to 2)
+631 - tank, 1 - has 4x health
+632 - punter, 332 - damaging pelleter that wavers its shots sinusoidally
+633 - windstorm, 413 - long range gust
+634 - bonkhive, 242 - bonker with a swarmer auto turret
+
+306 - arcer, 207
+307 - chelyabinsk, 2
+308 - speedbump, 2
+309 - quadratic, 173
+310 - flame zone, 89
+311-312 - trumpet, 135-136
+313 - juno, 279
+314 - repositioner block, 201
+315 - repositioner drone, 111, 145
+316 - delta, 280
+317 - expenditure, 1
+318 - plinth, 182
+319 - windstorm, 222
 
 
 

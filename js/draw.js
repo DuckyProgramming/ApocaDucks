@@ -180,6 +180,15 @@ function mainloop(){
                             special=true
                         }
                     }
+                }else if(entities.players[c].playerData.name=='PlayerDelta'){
+                    for(let a=0,la=entities.projectiles.length;a<la;a++){
+                        if(entities.projectiles[a].type==316&&entities.projectiles[a].id==c+1){
+                            center=entities.projectiles[a]
+                            a=la
+                            special=true
+                            key[c]*=(game.level==7?1.5:2)
+                        }
+                    }
                 }
                 if(!special){
                     key[c]*=dev.sight?10:entities.players[c].parachute?3:
@@ -191,8 +200,11 @@ function mainloop(){
                         entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
                         entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
                         entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||entities.players[c].weaponType==592||
+                        entities.players[c].weaponType==623||
                         entities.players[c].weaponType==387&&entities.players[c].subWeaponAType==6
-                        ?(game.level==7?1.5:2):1
+                        ?(game.level==7?1.5:2):
+                        entities.players[c].weaponType==613?0.75:
+                        1
                 }
                 if(game.level==7){
                     effective.push([center.position.x+side,center.position.y])
