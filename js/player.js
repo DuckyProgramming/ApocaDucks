@@ -6456,7 +6456,7 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else if(game.pvp&&this.die.timer>600){
+                        }else if(game.pvp&&this.die.timer>360){
                             let key='yZ'[floor(random(0,2))]
                             for(let a=0,la=levels[23].length;a<la;a++){
                                 for(let b=0,lb=levels[23][a].length;b<lb;b++){
