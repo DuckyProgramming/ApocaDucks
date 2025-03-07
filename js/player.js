@@ -1065,6 +1065,9 @@ class player{
         return (this.id>0&&floor(random(0,100))<chance?1:0)&&this.weaponType!=334&&this.weaponType!=335&&this.weaponType!=360&&this.weaponType!=394&&this.weaponType!=478&&this.weaponType!=479&&this.weaponType!=480&&this.weaponType!=481&&this.weaponType!=557&this.weaponType!=575&this.weaponType!=576&&!this.fort
     }
     initialWeapon(){
+        if(game.pane&&this.id>0&&this.id<=game.gaming){
+            graphics.panePoint[this.id-1]={position:{x:-1000,y:-1000},width:0,height:0}
+        }
         switch(this.playerData.name){
             case 'PlayerConglomeration':
                 this.newSubWeaponA(2)

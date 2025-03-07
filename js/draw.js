@@ -319,7 +319,7 @@ function mainloop(){
             }
             for(let a=0,la=game.gaming;a<la;a++){
                 if(game.pane){
-                    if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key,height:graphics.main[0].height*key},graphics.panePoint[a])||key[a]!=graphics.key[a]){
+                    if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
                         graphics.pane[a].clear()
                         graphics.pane[a].push()
                         graphics.pane[a].translate(graphics.pane[a].width/2,graphics.pane[a].height/2)
@@ -348,8 +348,8 @@ function mainloop(){
                         graphics.pane[a].pop()
                         graphics.panePoint[a].position.x=effective[a][0]
                         graphics.panePoint[a].position.y=effective[a][1]
-                        graphics.panePoint[a].width=graphics.main[0].width*key*2
-                        graphics.panePoint[a].height=graphics.main[0].height*key*2
+                        graphics.panePoint[a].width=graphics.main[0].width*key[a]*2
+                        graphics.panePoint[a].height=graphics.main[0].height*key[a]*2
                         graphics.key[a]=key[a]
                     }
                     graphics.main[a].image(

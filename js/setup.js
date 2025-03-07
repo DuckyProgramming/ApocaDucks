@@ -16,9 +16,9 @@ function setup(){
         }
     }
 
-    if(false){
+    if(true){
         game.players=5
-        game.gaming=1
+        game.gaming=4
         game.level=23
         menu.level=23
         game.mission=findName('Survival',types.mission)
