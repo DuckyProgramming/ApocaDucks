@@ -16,7 +16,7 @@ function setup(){
         }
     }
 
-    if(true){
+    if(false){
         game.players=5
         game.gaming=4
         game.level=23
