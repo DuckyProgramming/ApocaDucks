@@ -644,13 +644,13 @@ function generateLevel(level,layer){
                 [1200,660,2400,1000],
                 [7450,660,3100,1000],
                 [4150,510,3500,700],
-                [2000,1410,1200,900],
+                [2025,1410,1250,900],
                 [700,1310,1400,300],
                 [700,1610,1400,300],
                 [4340,1010,2480,300],
                 [3150,1335,1100,350],
                 [6700,1335,2600,350],
-                [5800,1460,6400,600],
+                [5825,1460,6350,600],
                 [5700,1980,6600,240],
                 [4500,2160,9600,800],
                 [2900,1010,400,300],
@@ -668,6 +668,7 @@ function generateLevel(level,layer){
     game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
     if(game.pane){
         graphics.pane=[]
+        graphics.panePoint=[]
         for(let a=0,la=graphics.main.length;a<la;a++){
             graphics.pane.push(createGraphics(graphics.main[a].width*2,graphics.main[a].height*2))
             setupLayer(graphics.pane[a])
@@ -1034,7 +1035,7 @@ function generateLevel(level,layer){
                 break
                 case 'g':
                     if(game.level==23){
-                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],40))
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],40))
                     }else{
                         entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                     }

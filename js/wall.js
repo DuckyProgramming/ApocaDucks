@@ -2173,7 +2173,7 @@ class wall{
             break
             case 4: case 23: case 32: case 35: case 40:
                 if(this.reload>0){
-                    this.reload-=(game.level==24?0.25:game.level==22||game.level==23?1/2:game.level==19&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
+                    this.reload-=(game.level==24?0.25:game.level==22||game.level==23?0.5:game.level==19&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
                 }
             break
             case 6:
@@ -2258,7 +2258,17 @@ class wall{
             break
             case 13:
                 if(this.reload>0){
-                    this.reload-=(game.level==19||game.level==23?0.5:1)
+                    if(this.reload==479&&game.level==23){
+                        this.reduction=false
+                        for(let e=0,le=entities.walls[1].length;e<le;e++){
+                            if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<300){
+                                if(entities.walls[1][e].pos==4){
+                                    this.reduction=true
+                                }
+                            }
+                        }
+                    }
+                    this.reload-=(game.level==23?(this.reduction?0.5:0.25):game.level==19?0.5:1)
                     if((this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399)&&game.level!=23){
                         let mult=0
                         switch(game.level){
@@ -3087,7 +3097,7 @@ class wall{
                                                 c.velocity.y=0
                                                 switch(this.type){
                                                     case 15:
-                                                        if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                        if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
                                                             if(game.attacker||game.level==17||game.level==18){
                                                                 this.align=c.id
                                                             }
@@ -3113,7 +3123,7 @@ class wall{
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34:
                                                     if(game.level==19&&this.type!=25&&this.type!=34){
-                                                        if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                        if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                             if(game.attacker||game.level==17||game.level==18){
                                                                 this.align=c.id
                                                             }
@@ -3121,8 +3131,8 @@ class wall{
                                                             switch(game.level){
                                                                 default:
                                                                     let hit=false
-                                                                    for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                        if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                    for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                        if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                             hit=true
                                                                         }
                                                                     }
@@ -3160,7 +3170,7 @@ class wall{
                                                     c.collect.time=max(c.collect.time,150)
                                                 break
                                                 case 4:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)){
+                                                    if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -3192,10 +3202,10 @@ class wall{
                                                                 }
                                                             break
                                                             case 19: case 24:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        if(entities.walls[0][e].position.x<this.position.x){
+                                                                        if(entities.walls[1][e].position.x<this.position.x){
                                                                             for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(120,150),this.align,100,240,false,-1))
                                                                                 let mult=random(1.25,2.5)
@@ -3253,7 +3263,7 @@ class wall{
                                                     }
                                                 break
                                                 case 13: case 15:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
                                                         this.reload=480
                                                         if(game.level==19){
                                                             this.align=c.id
@@ -3261,8 +3271,8 @@ class wall{
                                                         let hit=false
                                                         switch(game.level){
                                                             case 19: case 24:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                     }
                                                                 }
@@ -3272,15 +3282,22 @@ class wall{
                                                             break
                                                             case 23:
                                                                 if(this.type==13){
-                                                                    for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                        if(entities.walls[0][e].type==33&&dist(this.position.x,this.position.y,entities.walls[0][e].position.x,entities.walls[0][e].position.y)<300&&(entities.walls[0][e].owner==c.id&&c.id>=0||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
-                                                                            hit=true
-                                                                            entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[0][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
-                                                                            game.index++
-                                                                            entities.players[entities.players.length-1].constructify()
-                                                                            entities.players[entities.players.length-1].thrown=true
-                                                                            entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
-                                                                            entities.players[entities.players.length-1].velocity.y=-20
+                                                                    for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                        if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<300&&(entities.walls[1][e].owner==c.id&&c.id>=0||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                            if(entities.walls[1][e].pos==4){
+                                                                                hit=true
+                                                                                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
+                                                                                game.index++
+                                                                                entities.players[entities.players.length-1].constructify()
+                                                                                entities.players[entities.players.length-1].thrown=true
+                                                                                entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
+                                                                                entities.players[entities.players.length-1].velocity.y=-20
+                                                                            }else{
+                                                                                hit=true
+                                                                                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,findName('FieldArmy',types.player),game.index))
+                                                                                entities.players[entities.players.length-1].auto=true
+                                                                                game.index++
+                                                                            }
                                                                         }
                                                                     }
                                                                     if(!hit){
@@ -3294,7 +3311,7 @@ class wall{
                                                     }
                                                 break
                                                 case 23:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)&&!c.fort){
+                                                    if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)&&!c.fort){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -3302,10 +3319,10 @@ class wall{
                                                         let hit=false
                                                         switch(game.level){
                                                             case 19:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        if(entities.walls[0][e].position.x<this.position.x){
+                                                                        if(entities.walls[1][e].position.x<this.position.x){
                                                                             for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(120,150),this.align,40,240,false,-1))
                                                                                 let mult=random(1.25,2.5)
@@ -3335,10 +3352,10 @@ class wall{
                                                                 }
                                                             break
                                                             case 23:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==33&&dist(this.position.x,this.position.y,entities.walls[0][e].position.x,entities.walls[0][e].position.y)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        if(entities.walls[0][e].position.x<this.position.x){
+                                                                        if(entities.walls[1][e].position.x<this.position.x){
                                                                             for(let e=0,le=6;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(120,150),this.align,40,240,false,-1))
                                                                                 let mult=random(1.25,2.5)
@@ -3384,7 +3401,7 @@ class wall{
                                                     c.thrown2=true
                                                 break
                                                 case 32:
-                                                    if(this.reload<=0&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&!c.auto&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -3392,16 +3409,16 @@ class wall{
                                                         let hit=false
                                                         switch(game.level){
                                                             case 19:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id&&c.id>=0||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id&&c.id>=0||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[0][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
+                                                                        entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
                                                                         game.index++
                                                                         entities.players[entities.players.length-1].constructify()
                                                                         entities.players[entities.players.length-1].thrown=true
                                                                         entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
                                                                         entities.players[entities.players.length-1].velocity.y=-20
-                                                                    }else if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&game.pvp&&entities.walls[0][e].owner!=c.id&&c.id>0){
+                                                                    }else if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&game.pvp&&entities.walls[1][e].owner!=c.id&&c.id>0){
                                                                         hit=true
                                                                         c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerTripleAuto',types.player))))
                                                                         c.weapon.cooldown=600
@@ -3450,8 +3467,8 @@ class wall{
                                                                 }
                                                             break
                                                             case 24:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==31&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                     }
                                                                 }
@@ -3472,7 +3489,7 @@ class wall{
                                                     }
                                                 break
                                                 case 35:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -3480,10 +3497,10 @@ class wall{
                                                         switch(game.level){
                                                             case 19:
                                                                 let hit=false
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==36&&abs(this.position.x-entities.walls[0][e].position.x)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==36&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
-                                                                        if(entities.walls[0][e].position.x<this.position.x){
+                                                                        if(entities.walls[1][e].position.x<this.position.x){
                                                                             for(let e=0,le=7;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,135+(e>=4?-14+(e-4)*14:(6+(e%2)*2)*(e>=2?1:-1))+random(-2,2),this.align,250,240,false,-1))
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=4.5-(e>=4?0.3:(e%2)*0.6)*random(0.975,1.025)
@@ -3528,7 +3545,7 @@ class wall{
                                                     }
                                                 break
                                                 case 40:
-                                                    if(this.reload<=0&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking&&!c.fort){
+                                                    if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking&&!c.fort){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
@@ -3536,8 +3553,8 @@ class wall{
                                                         let hit=false
                                                         switch(game.level){
                                                             case 23:
-                                                                for(let e=0,le=entities.walls[0].length;e<le;e++){
-                                                                    if(entities.walls[0][e].type==33&&dist(this.position.x,this.position.y,entities.walls[0][e].position.x,entities.walls[0][e].position.y)<600&&(entities.walls[0][e].owner==c.id||entities.walls[0][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                    if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
                                                                         for(let e=0,le=5;e<le;e++){
                                                                             entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,176+e*2,this.align,400,240,false,-1))
@@ -3580,7 +3597,7 @@ class wall{
                                             c.velocity.x=this.velocity.x
                                             switch(this.type){
                                                 case 13: case 15: case 18:
-                                                    if(this.reload<=0&&c.id>0&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&!c.auto&&c.id>0&&c.life>0&&c.attacking){
                                                         this.reload=480
                                                     }
                                                 break

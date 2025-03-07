@@ -135,6 +135,7 @@ function mouseClicked(){
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]
+                        game.pane=menu.level!=7&&menu.level!=16
                         initialGraphics()
                         newLoop()
                         stage.scene='wave'

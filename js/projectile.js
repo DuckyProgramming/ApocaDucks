@@ -6309,8 +6309,8 @@ class projectile{
 						for(let b=0,lb=entities.players.length;b<lb;b++){
 							if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[b].id))){
 								let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
-								entities.players[b].velocity.x+=lsin(dir)*0.5
-								entities.players[b].velocity.y+=lcos(dir)*0.5
+								entities.players[b].velocity.x+=lsin(dir)*0.4
+								entities.players[b].velocity.y+=lcos(dir)*0.4
 							}
 						}
 					}
@@ -7837,7 +7837,7 @@ class projectile{
 
 				//mark
 			}
-			if(this.active&&this.type!=85&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&!(this.partisan&&a>0)){
+			if(this.active&&this.type!=85&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&!(this.partisan&&a%2!=0)){
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1||this.id==-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273)&&!entities.players[b].playerData.name.includes('Medic'))&&
 						!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&

@@ -317,7 +317,6 @@ function mainloop(){
                     }
                 }
             }
-
             for(let a=0,la=game.gaming;a<la;a++){
                 if(game.pane){
                     if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key,height:graphics.main[0].height*key},graphics.panePoint[a])||key[a]!=graphics.key[a]){
@@ -365,62 +364,63 @@ function mainloop(){
                         graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
                         effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                     )
-                }else if(game.level==7){
-                    if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
+                    if(game.level==7){
+                        if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
+                            graphics.main[a].image(
+                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                            )
+                            if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }
+                        }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
+                            graphics.main[a].image(
+                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                            )
+                            if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }
+                        }
                         if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
                             graphics.main[a].image(
                                 graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                             )
                         }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
                             graphics.main[a].image(
                                 graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                             )
                         }
-                    }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
-                        if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                    }else if(game.level==16){
+                        if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
                             graphics.main[a].image(
                                 graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                effective[a][0]-(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                             )
-                        }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                        }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
                             graphics.main[a].image(
                                 graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                effective[a][0]+(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                             )
                         }
-                    }
-                    if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
-                    }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
-                    }
-                }else if(game.level==16){
-                    if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]-(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
-                    }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]+(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
                     }
                 }
                 graphics.main[a].noStroke()
