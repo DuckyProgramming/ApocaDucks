@@ -18,7 +18,7 @@ function setup(){
 
     if(false){
         game.players=5
-        game.gaming=4
+        game.gaming=1
         game.level=23
         menu.level=23
         game.mission=findName('Survival',types.mission)
@@ -41,7 +41,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,4,5,5,4,4,1][a];b<lb;b++){
+                for(let b=0,lb=[5,5,5,5,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         if(a==0){
@@ -195,6 +195,11 @@ function keyPressed(){
         case 't': case 'T': inputs.keys[3][2]=true;inputs.tap[3][2]=true; break
         case 'g': case 'G': inputs.keys[3][3]=true;inputs.tap[3][3]=true; break
         case 'r': case 'R': inputs.release[3][0]=true; break
+        case '4': inputs.keys[4][0]=true;inputs.tap[4][0]=true; break
+        case '6': inputs.keys[4][1]=true;inputs.tap[4][1]=true; break
+        case '8': inputs.keys[4][2]=true;inputs.tap[4][2]=true; break
+        case '5': inputs.keys[4][3]=true;inputs.tap[4][3]=true; break
+        case '7': inputs.release[4][0]=true; break
     }
     if(game.emergencyKey){
         switch(key){
@@ -229,6 +234,10 @@ function keyReleased(){
         case 'h': case 'H': inputs.keys[3][1]=false; break
         case 't': case 'T': inputs.keys[3][2]=false; break
         case 'g': case 'G': inputs.keys[3][3]=false; break
+        case '4': inputs.keys[4][0]=false; break
+        case '6': inputs.keys[4][1]=false; break
+        case '8': inputs.keys[4][2]=false; break
+        case '5': inputs.keys[4][3]=false; break
     }
     if(game.emergencyKey){
         switch(key){

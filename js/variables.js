@@ -5821,8 +5821,8 @@ types={
       name:'SidekickDisappointmentGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:400,
     },{
-      name:'SidekickBonkerGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:433,
+      name:'SidekickGuillotine',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:541,
     },{
       name:'SidekickGuardian',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:403,
@@ -13148,15 +13148,18 @@ inputs={
     [false,false,false,false],
     [false,false,false,false],
     [false,false,false,false],
+    [false,false,false,false],
     [false,false,false,false]
   ],
   tap:[
     [false,false,false,false],
     [false,false,false,false],
     [false,false,false,false],
+    [false,false,false,false],
     [false,false,false,false]
   ],
   release:[
+    [false],
     [false],
     [false],
     [false],
@@ -14315,7 +14318,7 @@ levels=[
 "                          ]###[===]###[                      |         ]###[===]######################################################@@@####[     |         ]###########################[   ]###[==<####[                       ",
 "                           ]#[     ]#[                       |          ]#[     ]###########################################################[      |          ]#########################[     ]#[  <####[                        ",
 "                            |       |                        |           |           |   :                :   |   |   :                :   |       |           |                       |       |  <##[ |                         ",
-"                            |       |                        |           |           |   :                : * |   | ! :                :   |       |           |                       |       | <##[  |                         ",
+"                            |       |                        |           |           |   :                : * |   | f :                :   |       |           |                       |       | <##[  |                         ",
 "                            |       |                        |           |           |   ____+____________+____   ____+____________+____   |       |           |                       |       |<##[   |                         ",
 "                            |       |                        |           |           |       |            |           |            |       |       |           |                       |       x##[    |                         ",
 "                            |       |                        |           |           |   ____+_______+___]#[===]#[===]#[___+_______+____   |       |           |                       |      <##[     |                         ",

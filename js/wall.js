@@ -2233,7 +2233,7 @@ class wall{
                 }
             break
             case 11:
-                if(game.level==22&&(abs(this.base.position.y-game.tileset[1]*49.75)<1||abs(this.base.position.y-game.tileset[1]*48.75)<1)&&!game.point[1]&&this.height>0){
+                if(game.level==22&&(abs(this.base.position.y-game.tileset[1]*54.75)<1||abs(this.base.position.y-game.tileset[1]*53.75)<1)&&!game.point[1]&&this.height>0){
                     this.height-=0.1
                     this.bounder.height-=0.1
                     this.position.y+=0.05
@@ -2514,18 +2514,18 @@ class wall{
                     }
                     if(game.point[3]>0&&game.point[3]<=game.players&&abs(this.base.position.x-entities.players[game.point[3]-1].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[game.point[3]-1].position.y-75)<150){
                         if(this.height>0){
-                            this.height-=2
-                            this.bounder.height-=2
-                            this.internalBounder.height-=2
-                            this.position.y-=1
-                            this.bounder.position.y-=1
-                            this.internalBounder.position.y-=1
-                            this.velocity.y=-1
+                            this.height-=0.1
+                            this.bounder.height-=0.1
+                            this.internalBounder.height-=0.1
+                            this.position.y-=0.05
+                            this.bounder.position.y-=0.05
+                            this.internalBounder.position.y-=0.05
+                            this.velocity.y=-0.05
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                         if(this.boundary[a][b][c].y>this.position.y){
-                                            this.boundary[a][b][c].y-=2
+                                            this.boundary[a][b][c].y-=0.1
                                         }
                                     }
                                 }
@@ -2533,18 +2533,18 @@ class wall{
                         }
                     }else{
                         if(this.height<this.base.height){
-                            this.height+=2
-                            this.bounder.height+=2
-                            this.internalBounder.height+=2
-                            this.position.y+=1
-                            this.bounder.position.y+=1
-                            this.internalBounder.position.y+=1
-                            this.velocity.y=1
+                            this.height+=0.1
+                            this.bounder.height+=0.1
+                            this.internalBounder.height+=0.1
+                            this.position.y+=0.05
+                            this.bounder.position.y+=0.05
+                            this.internalBounder.position.y+=0.05
+                            this.velocity.y=0.05
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                         if(a==0||a==2&&c==1||a==3&&c==1){
-                                            this.boundary[a][b][c].y+=2
+                                            this.boundary[a][b][c].y+=0.1
                                         }
                                     }
                                 }
@@ -2931,7 +2931,7 @@ class wall{
                         &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
-                        &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.mafia))
+                        &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
                         &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia))
                     ){
                         let d=collideBoxBox(this,c)
@@ -3070,12 +3070,12 @@ class wall{
                                 }
                             break
                             case 31:
-                                if(!c.construct&&!c.sidekick&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
+                                if(!c.construct&&!c.sidekick&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
                                     c.newWeapon()
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&!c.construct&&!c.sidekick&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
                                     c.newWeapon()
                                 }
                             break

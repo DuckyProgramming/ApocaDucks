@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,4,5,5,4,4,1][a];b<lb;b++){
+                for(let b=0,lb=[5,5,5,5,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3||a==5&&b==2){
                         fill(100)
@@ -580,8 +580,8 @@ function mainloop(){
             }
             displayMain(graphics.main,effective,key)
             checkEnd(levels[game.level],graphics.main[0],key)
-            inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
-            inputs.release=[[false],[false],[false],[false]]
+            inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
+            inputs.release=[[false],[false],[false],[false],[false]]
                     
             /*let endTime=performance.now()
             print(`Main: ${endTime - startTime} milliseconds`)*/

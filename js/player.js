@@ -397,7 +397,7 @@ class player{
             layer.strokeWeight(5)
             layer.arc(0,-80,80,20,-165,-15)
         }
-        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'){
+        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
             layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
@@ -903,7 +903,7 @@ class player{
                         regTriangle(layer,sin(dir)*extent,cos(dir)*extent,6,6,dir)
                         layer.fill(255)
                         layer.textSize(10)
-                        layer.text(entities.players[a].id>0&&!entities.players[a].fort?entities.players[a].weaponData.name:entities.players[a].playerData.name,sin(dir)*extent,cos(dir)*extent+16)
+                        layer.text(entities.players[a].id>0&&!entities.players[a].fort&&!entities.players[a].auto?entities.players[a].weaponData.name:entities.players[a].playerData.name,sin(dir)*extent,cos(dir)*extent+16)
                         layer.fill(150)
                         layer.rect(sin(dir)*extent,cos(dir)*extent+30,30,4,2)
                         layer.fill(240,0,0)
@@ -1469,7 +1469,7 @@ class player{
                 this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
                 this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
                 this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
-                this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'
+                this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='SidekickGuillotine'
                 ?0.5:1)
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
@@ -4552,7 +4552,7 @@ class player{
             this.attacking=this.manage[1]
             if(
                 this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
-                !(this.fort&&this.id==0&&(game.level==22||game.level==23))
+                !(this.fort&&this.id==0&&game.level==22)
             ){
                 this.attack(0)
             }
@@ -5269,7 +5269,7 @@ class player{
                             }
                             if(possible.length>=3){
                                 possible=[]
-                                let valid=this.position.x<game.edge[0]*0.5?[1,2,4]:[0,2,3]
+                                let valid=this.position.x<game.edge[0]*0.5?[0,1,2,4,4,4]:[1,2,3,4,4,4]
                                 for(let a=0,la=valid.length;a<la;a++){
                                     if(game.point[valid[a]]!=0){
                                         possible.push(valid[a])
@@ -6032,7 +6032,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,this.position.x+50*lcos(this.time),this.position.y-50*lsin(this.time)-10,8,(lcos(this.time)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,360,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,this.position.x-50*lcos(this.time),this.position.y+50*lsin(this.time)-10,8,(lcos(this.time)>0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,360,crit,this.index))
                 }
-                if(inputSet[3]&&this.life>0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='PlayerSquad'&&this.playerData.name!='PlayerDivision'&&this.playerData.name!='PlayerPointer'&&this.playerData.name!='PlayerFleet'&&this.playerData.name!='PlayerPatrol'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'){
+                if(inputSet[3]&&this.life>0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='PlayerSquad'&&this.playerData.name!='PlayerDivision'&&this.playerData.name!='PlayerPointer'&&this.playerData.name!='PlayerFleet'&&this.playerData.name!='PlayerPatrol'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'&&this.playerData.name!='SidekickGuillotine'&&this.playerData.name!='SidekickBorder'&&this.playerData.name!='SidekickToxin'&&this.playerData.name!='SidekickIceberg'&&this.playerData.name!='SidekickBonkhive'){
                     if(this.playerData.name=='PlayerConglomeration'){
                         if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0){
                             this.attack(1)
@@ -6459,7 +6459,7 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else if(game.pvp&&this.die.timer>360){
+                        }else if(game.pvp&&this.die.timer>480){
                             let key='yZ'[floor(random(0,2))]
                             for(let a=0,la=levels[23].length;a<la;a++){
                                 for(let b=0,lb=levels[23][a].length;b<lb;b++){
@@ -6987,7 +6987,7 @@ class player{
                         }
                     }
                 break
-                case 'ConstructGuard': case 'SidekickDisappointmentGuard': case 'SidekickBonkerGuard': case 'PlayerGuard': case 'PlayerGuillotine':
+                case 'ConstructGuard': case 'SidekickDisappointmentGuard': case 'SidekickBonkerGuard': case 'PlayerGuard': case 'PlayerGuillotine': case 'SidekickGuillotine':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
