@@ -5564,7 +5564,7 @@ class player{
                                                     }
                                                 break
                                                 case 1:
-                                                    if(game.level==22&&game.point[1]){
+                                                    if((game.level==22&&game.point[1]||game.level==23)&&this.playerData.sizeBuff<=1.5){
                                                         if(this.position.y>1930&&this.position.x<5900){
                                                             this.target.position.x=5850
                                                             this.target.position.y=1700

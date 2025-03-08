@@ -2580,7 +2580,7 @@ class wall{
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
                     if(
-                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42&&
+                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -2917,7 +2917,7 @@ class wall{
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
