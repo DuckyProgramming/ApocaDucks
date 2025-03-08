@@ -5656,6 +5656,10 @@ types={
       name:'PlayerTreatment',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:377,
       desc:'Fires traps and bullets, when spent, spawns a medic unit',dpsBuff:1.5,
+    },{
+      name:'PlayerBeekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:662,
+      desc:'Destroyer that also can fire drones',dpsBuff:0.5,
     },
 
     //mark di
@@ -5731,6 +5735,9 @@ types={
     },{
       name:'Turret',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
+    },{
+      name:'Rogue',sizeBuff:1.8,lifeBuff:5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:662,
     },{
       name:'FieldArmy',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
@@ -13112,6 +13119,15 @@ types={
 			reload:120,
 			speed:1.3,
       uses:2,
+		},{
+			name:'Beekeeper',
+		  ammo:6,
+			damage:600,
+			cooldown:24,
+			stop:120,
+			reload:16,
+			speed:0.9,
+      uses:18,
 		},
 
     /*{
@@ -14319,7 +14335,7 @@ levels=[
 "                           ]#[     ]#[                       |          ]#[     ]###########################################################[      |          ]#########################[     ]#[  <####[                        ",
 "                            |       |                        |           |           |   :                :   |   |   :                :   |       |           |                       |       |  <##[ |                         ",
 "                            |       |                        |           |           |   :                : * |   | f :                :   |       |           |                       |       | <##[  |                         ",
-"                            |       |                        |           |           |   ____+____________+____   ____+____________+____   |       |           |                       |       |<##[   |                         ",
+"                            |       |                        |           |           |   ____+____________+____ R ____+____________+____   |       |           |                       |       |<##[   |                         ",
 "                            |       |                        |           |           |       |            |           |            |       |       |           |                       |       x##[    |                         ",
 "                            |       |                        |           |           |   ____+_______+___]#[===]#[===]#[___+_______+____   |       |           |                       |      <##[     |                         ",
 "                            |       |                N       |           |           |       |       |                     |       |       |       |           |           N           |     <##[      |                         ",

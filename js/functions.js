@@ -1082,6 +1082,9 @@ function generateLevel(level,layer){
                 case 'M':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,36))
                 break
+                case 'R':
+                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,42))
+                break
                 case 'X':
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
                 break
@@ -1309,14 +1312,14 @@ function generateLevel(level,layer){
         }
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                if(entities.walls[a][b].type==36){
+                if(entities.walls[a][b].type==36||entities.walls[a][b].type==42){
                     entities.walls[a][b].set()
                 }
             }
         }
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                if(entities.walls[a][b].type!=31&&entities.walls[a][b].type!=33&&entities.walls[a][b].type!=36){
+                if(entities.walls[a][b].type!=31&&entities.walls[a][b].type!=33&&entities.walls[a][b].type!=36&&entities.walls[a][b].type!=42){
                     entities.walls[a][b].set()
                 }
             }

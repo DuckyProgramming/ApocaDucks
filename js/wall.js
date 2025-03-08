@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39
+        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -137,6 +137,18 @@ class wall{
                 this.owner=(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Outpost',types.player),game.index))
                 game.index++
+                entities.players[entities.players.length-1].fortify()
+                entities.players[entities.players.length-1].fortHealth()
+                this.index=entities.players.length-1
+                if(game.level==22){
+                    entities.players[entities.players.length-1].multLife(3)
+                }
+            break
+            case 42:
+                this.owner=(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Rogue',types.player),game.index))
+                game.index++
+                entities.players[entities.players.length-1].auto=true
                 entities.players[entities.players.length-1].fortify()
                 entities.players[entities.players.length-1].fortHealth()
                 this.index=entities.players.length-1
@@ -1976,9 +1988,9 @@ class wall{
                     break
                 }
             break
-            case 31: case 33: case 36:
+            case 31: case 33: case 36: case 42:
                 if(game.level==23){
-                    let place=[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
+                    let place=this.type==42?[1,3]:[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
                     let texts=''
                     if(game.level==19||game.level==24){
                         switch(this.type){
@@ -1991,9 +2003,12 @@ class wall{
                             case 36:
                                 texts='Outpost'
                             break
+                            case 42:
+                                texts='Rogue'
+                            break
                         }
                     }else{
-                        texts=this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
+                        texts=this.type==42?'Rogue':this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -2066,9 +2081,12 @@ class wall{
                             case 36:
                                 texts='Outpost'
                             break
+                            case 42:
+                                texts='Rogue'
+                            break
                         }
                     }else{
-                        texts=this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
+                        texts=this.type==42?'Rogue':this.pos>=5?'Node':'Point '+'ABCDE'[this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -2562,7 +2580,7 @@ class wall{
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
                     if(
-                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&
+                        a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -2899,7 +2917,7 @@ class wall{
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
@@ -2924,7 +2942,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42
                         &&!(this.type==37&&(c.velocity.y<0||c.previous.position.y+c.height/2>this.position.y-this.height/2))
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
