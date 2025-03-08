@@ -3088,12 +3088,12 @@ class wall{
                                 }
                             break
                             case 31:
-                                if(!c.construct&&!c.sidekick&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
+                                if(!c.construct&&!c.sidekick&&!c.fort&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
                                     c.newWeapon()
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
                                     c.newWeapon()
                                 }
                             break

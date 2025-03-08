@@ -1312,7 +1312,14 @@ function generateLevel(level,layer){
         }
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                if(entities.walls[a][b].type==36||entities.walls[a][b].type==42){
+                if(entities.walls[a][b].type==36){
+                    entities.walls[a][b].set()
+                }
+            }
+        }
+        for(let a=0,la=entities.walls.length;a<la;a++){
+            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                if(entities.walls[a][b].type==42){
                     entities.walls[a][b].set()
                 }
             }

@@ -4230,7 +4230,7 @@ class player{
         }
     }
     validTarget(target){
-        return (this.id==0&&target.id!=0||this.id!=0&&target.id==0||game.pvp&&this.id!=target.id||this.id==-1||target.id==-1)&&target.playerData.name!='PlayerSpy'&&target.fade>0&&!(this.playerData.name=='Buster'&&target.index!=this.target.index)
+        return (this.id==0&&target.id!=0||this.id!=0&&target.id==0||game.pvp&&this.id!=target.id||this.id==-1&&target.id!=-1||target.id==-1&&this.id!=-1)&&target.playerData.name!='PlayerSpy'&&target.fade>0&&!(this.playerData.name=='Buster'&&target.index!=this.target.index)
     }
     med(){
         return this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||this.weaponType==356||this.weaponType==514||this.weaponType==589
@@ -5272,8 +5272,10 @@ class player{
                     }
                 }else if(game.level==22||game.level==23){
                     this.manage[1]=false
-                    if(this.target.point==-1||floor(random(0,200))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,5,6,8,7][this.target.point]].id==this.id){
-                        if(game.pvp&&this.id==0){
+                    if(this.target.point==-1||floor(random(0,(this.life<=0?15:150)))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id){
+                        if(this.fort){
+                            this.target.point=floor(random(0,5))
+                        }else if(game.pvp&&this.id==0){
                             let possible=[]
                             for(let a=0,la=game.point.length;a<la;a++){
                                 if(game.point[a]!=0){
@@ -5343,20 +5345,27 @@ class player{
                     }else{
                         let goalPoint=0
                         goalPoint=game.pvp?this.target.point:this.base.position.x>game.edge[0]*0.8||this.id>=game.gaming&&this.target.point==4?4:game.point[0]?0:game.point[1]?1:game.point[2]?2:game.point[3]?3:4
-                        if(this.position.x>3520&&this.position.x<5480&&this.position.y>1250&&this.position.y<1475){
+                        if(game.pvp&&this.position.x>3520&&this.position.x<5480&&this.position.y>1250&&this.position.y<1475){
                             if(this.position.y<1425){
                                 this.target.position.x=4500
                                 this.target.position.y=2000
-                            }
-                            switch(goalPoint){
-                                case 0: case 2:
-                                    this.target.position.x=3520
-                                    this.target.position.y=2000
-                                break
-                                case 1: case 3: case 4:
-                                    this.target.position.x=5480
-                                    this.target.position.y=2000
-                                break
+                            }else if(this.position.x<4000){
+                                this.target.position.x=3520
+                                this.target.position.y=2000
+                            }else if(this.position.x>500){
+                                this.target.position.x=5480
+                                this.target.position.y=2000
+                            }else{
+                                switch(goalPoint){
+                                    case 0: case 2:
+                                        this.target.position.x=3520
+                                        this.target.position.y=2000
+                                    break
+                                    case 1: case 3: case 4:
+                                        this.target.position.x=5480
+                                        this.target.position.y=2000
+                                    break
+                                }
                             }
                         }else{
                             for(let a=0,la=game.sectors.length;a<la;a++){
@@ -7573,12 +7582,12 @@ class player{
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-(this.position.x/2+this.previous.position.x/2),entities.players[a].position.y+entities.players[a].height/2-(this.position.y/2+this.previous.position.y/2)-this.height/2]
-                        if((this.weaponType==253||this.weaponType==400)&&!entities.players[a].fort){
+                        if((this.weaponType==253||this.weaponType==400)&&(!entities.players[a].fort||entities.players[a].auto)){
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort?0.05:1))
-                            if(this.playerData.name=='TankBump'&&!entities.players[a].fort){
+                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.05:1))
+                            if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
                             }
@@ -7589,7 +7598,7 @@ class player{
                                 entities.players[a].stunTime=30
                             }
                         }
-                        if(!entities.players[a].fort){
+                        if(!entities.players[a].fort||entities.players[a].auto){
                             entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                             entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                         }
@@ -7604,12 +7613,12 @@ class player{
                         }
                     }else if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
-                        if((this.weaponType==253||this.weaponType==400)&&!entities.players[a].fort){
+                        if((this.weaponType==253||this.weaponType==400)&&(!entities.players[a].fort||entities.players[a].auto)){
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort?0.05:1))
-                            if(this.playerData.name=='TankBump'&&!entities.players[a].fort){
+                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.05:1))
+                            if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
                             }
@@ -7620,7 +7629,7 @@ class player{
                                 entities.players[a].stunTime=30
                             }
                         }
-                        if(!entities.players[a].fort){
+                        if(!entities.players[a].fort||entities.players[a].auto){
                             entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                             entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                         }
