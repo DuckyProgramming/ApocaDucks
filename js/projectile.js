@@ -6346,8 +6346,8 @@ class projectile{
 							this.speed*=0.9
 						}
 					}
-					if(this.type==93&&this.timer%4==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage,30,this.crit,this.index))
+					if(this.type==93&&this.timer%5==0&&a==0&&this.active){
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage*0.5,30,this.crit,this.index))
 					}
 					if(this.speed<0&&!this.trigger){
 						this.trigger=true

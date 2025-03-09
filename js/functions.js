@@ -26,7 +26,7 @@ function sign(value){
 }
 function range(start,end){
     return [...Array(end-start).keys()].map(a=>a+start)
-}   
+}
 function safeRange(start,end){
     return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<findName('Arcer',types.weapon))
 }

@@ -5499,8 +5499,8 @@ class player{
                                         case 6:
                                             switch(goalPoint){
                                                 case 0: case 1: case 4:
-                                                    this.target.position.x=abs(this.position.x-3500)<100&&this.position.y>1180?4620:abs(this.position.x-3980)<100&&this.position.y>1180?4100:abs(this.position.x-4460)<100&&this.position.y>1180?4580:abs(this.position.x-4940)<100&&this.position.y>1180?5060:3500
-                                                    this.target.position.y=abs(this.position.x-4620)<100||abs(this.position.x-4100)<100||abs(this.position.x-4580)<100||abs(this.position.x-5060)<100?0:1200
+                                                    this.target.position.x=abs(this.position.x-3620)<100&&this.position.y>1200?3660:abs(this.position.x-4100)<100&&this.position.y>1200?4140:abs(this.position.x-4580)<100&&this.position.y>1200?4620:abs(this.position.x-5060)<100&&this.position.y>1200?5100:3500
+                                                    this.target.position.y=abs(this.position.x-3620)<100||abs(this.position.x-4100)<100||abs(this.position.x-4580)<100||abs(this.position.x-5060)<100?0:1200
                                                 break
                                                 case 2:
                                                     this.target.position.x=5400
@@ -5744,6 +5744,7 @@ class player{
                 if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='ParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'){
                     this.manage[1]=1
                 }
+                this.manage[0]=this.position.x>this.target.position.x?0:1
             }
             if(this.disable){
                 if(this.id==0){
@@ -5820,7 +5821,6 @@ class player{
                     }
                 }
             }else{
-                this.manage[0]=this.position.x>this.target.position.x?0:1
                 let jumpMult=(game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)
                 if(this.jumper()){
                     if(this.manage[2]==0&&(floor(random(0,120*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
