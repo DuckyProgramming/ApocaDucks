@@ -530,6 +530,7 @@ class wall{
             }
         }
         this.base={position:{x:this.position.x,y:this.position.y},width:this.width,height:this.height}
+        this.redundant[8]=false
     }
     findFall(){
         this.falling=game.edge[1]-this.position.y
@@ -710,8 +711,8 @@ class wall{
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         if(
-                            abs(this.position.x-game.tileset[0]*66.5)<1||
-                            abs(this.position.x-game.tileset[0]*72.5)<1
+                            abs(this.position.x-game.tileset[0]*64.5)<1||
+                            abs(this.position.x-game.tileset[0]*70.5)<1
                         ){
                             layer.fill(120,200-game.pointAnim[0]*80,120)
                         }else if(abs(this.position.x-game.tileset[0]*131.5)<1){
@@ -1500,9 +1501,15 @@ class wall{
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
-                        layer.fill(200+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
-                        layer.fill(160+lcos(a*90+this.time)*40,160+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        if(game.level==23){
+                            layer.fill(200+lcos(a*90+this.time)*40,160+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                            layer.fill(160+lcos(a*90+this.time)*40,140+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        }else{
+                            layer.fill(200+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                            layer.fill(160+lcos(a*90+this.time)*40,160+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        }
                         layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
                         layer.fill(40+lcos(a*90+this.time)*40,1-this.recharge/60)
                         regTriangle(layer,this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.15,-30)
@@ -1514,6 +1521,33 @@ class wall{
                     case 21:
                         layer.fill(100,90,80)
                         layer.rect(0,0,this.width+1,this.height+1,2)
+                    break
+                    case 23:
+                        layer.fill(140,100,80,this.fade)
+                        layer.rect(0,0,this.width+game.tileset[0]*0.12,this.height)
+                        layer.fill(120,80,60,this.fade)
+                        for(let a=0,la=round(this.width/game.tileset[0]);a<la;a++){
+                            layer.quad(
+                                -this.width/2+(a+0.5)/la*this.width-game.tileset[0]*0.44,
+                                -this.height*0.4,
+                                -this.width/2+(a+0.5)/la*this.width+game.tileset[0]*0.44,
+                                -this.height*0.4,
+                                -this.width/2+(a+0.5)/la*this.width+game.tileset[0]*0.44,
+                                -this.height*0.2,
+                                -this.width/2+(a+0.5)/la*this.width-game.tileset[0]*0.44,
+                                this.height*0.08
+                            )
+                            layer.quad(
+                                -this.width/2+(a+0.5)/la*this.width+game.tileset[0]*0.44,
+                                this.height*0.4,
+                                -this.width/2+(a+0.5)/la*this.width-game.tileset[0]*0.44,
+                                this.height*0.4,
+                                -this.width/2+(a+0.5)/la*this.width-game.tileset[0]*0.44,
+                                this.height*0.2,
+                                -this.width/2+(a+0.5)/la*this.width+game.tileset[0]*0.44,
+                                -this.height*0.08
+                            )
+                        }
                     break
                     default:
                         layer.fill(60)
@@ -2950,7 +2984,7 @@ class wall{
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
-                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia))
+                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia||game.level==23&&c.weapon.uses>0))
                     ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
@@ -3172,8 +3206,8 @@ class wall{
                                                     }else{
                                                         if(!(
                                                             (
-                                                                abs(this.position.x-game.tileset[0]*66.5)<1||
-                                                                abs(this.position.x-game.tileset[0]*72.5)<1
+                                                                abs(this.position.x-game.tileset[0]*64.5)<1||
+                                                                abs(this.position.x-game.tileset[0]*70.5)<1
                                                             )&&game.pointAnim[0]>=1||
                                                             abs(this.position.x-game.tileset[0]*131.5)<1&&game.pointAnim[1]>=1||
                                                             abs(this.position.x-game.tileset[0]*135.5)<1&&game.pointAnim[2]>=1

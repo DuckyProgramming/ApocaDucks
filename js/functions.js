@@ -28,7 +28,8 @@ function range(start,end){
     return [...Array(end-start).keys()].map(a=>a+start)
 }
 function safeRange(start,end){
-    return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<findName('Arcer',types.weapon))
+    //return [...Array(end-start).keys()].map(a=>a+start).filter(a=>types.player[a].weapon<findName('Arcer',types.weapon))
+    return range(start,end)
 }
 //calculatory
 function inPointBox(point,box){
@@ -47,10 +48,28 @@ function inPointTriangle(point,triangle){
     return abs(triangleArea(triangle)-(triangleArea([point,triangle[0],triangle[1]])+triangleArea([point,triangle[0],triangle[2]])+triangleArea([point,triangle[1],triangle[2]])))<1
 }
 function inTriangleBoxBasic(triangle,box){
-    return inPointTriangle({x:box.position.x-box.width/2,y:box.position.y-box.height/2},triangle)||
+    let corners=[
+        {x:box.position.x-box.width/2,y:box.position.y-box.height/2},
+        {x:box.position.x+box.width/2,y:box.position.y-box.height/2},
+        {x:box.position.x-box.width/2,y:box.position.y+box.height/2},
+        {x:box.position.x+box.width/2,y:box.position.y+box.height/2}
+    ]
+    return intersect(corners[0],corners[1],triangle[0],triangle[1])||
+        intersect(corners[1],corners[2],triangle[0],triangle[1])||
+        intersect(corners[2],corners[3],triangle[0],triangle[1])||
+        intersect(corners[3],corners[0],triangle[0],triangle[1])||
+        intersect(corners[0],corners[1],triangle[1],triangle[2])||
+        intersect(corners[1],corners[2],triangle[1],triangle[2])||
+        intersect(corners[2],corners[3],triangle[1],triangle[2])||
+        intersect(corners[3],corners[0],triangle[1],triangle[2])||
+        intersect(corners[0],corners[1],triangle[2],triangle[0])||
+        intersect(corners[1],corners[2],triangle[2],triangle[0])||
+        intersect(corners[2],corners[3],triangle[2],triangle[0])||
+        intersect(corners[3],corners[0],triangle[2],triangle[0])
+    /*return inPointTriangle({x:box.position.x-box.width/2,y:box.position.y-box.height/2},triangle)||
         inPointTriangle({x:box.position.x+box.width/2,y:box.position.y-box.height/2},triangle)||
         inPointTriangle({x:box.position.x-box.width/2,y:box.position.y+box.height/2},triangle)||
-        inPointTriangle({x:box.position.x+box.width/2,y:box.position.y+box.height/2},triangle)
+        inPointTriangle({x:box.position.x+box.width/2,y:box.position.y+box.height/2},triangle)*/
 }
 function onSegment(p,q,r){ 
     return q.x<=max(p.x,r.x)&&q.x>=min(p.x, r.x)&&q.y<=max(p.y,r.y)&&q.y>=min(p.y, r.y)
@@ -676,14 +695,14 @@ function generateLevel(level,layer){
                 [2025,1410,1250,900],
                 [700,1310,1400,300],
                 [700,1610,1400,300],
-                [4340,1010,2480,300],
+                [4120,1010,2040,300],
                 [3150,1335,1100,350],
                 [6700,1310,2600,400],
                 [5825,1460,6350,600],
                 [5700,1980,6600,240],
                 [4500,2160,9600,800],
                 [2900,1010,400,300],
-                [5740,1010,320,300],
+                [5520,1010,760,300],
             ]
         break
         case 24:
@@ -882,7 +901,7 @@ function generateLevel(level,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.4)*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,5))
                 break
                 case '|':
-                    if(a>0&&level[a-1][b]==']'){
+                    if(a>0&&(level[a-1][b]==']'||level[a-1][b]=='[')){
                         clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*2,7))
                     }else{
                         clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
@@ -920,9 +939,9 @@ function generateLevel(level,layer){
                             }
                         break
                         case 23:
-                            if(level[a][b-1]=='['){
+                            if(level[a][b-1]=='['||level[a][b-1]=='>'){
                                 clumper[0].push(new wall(graphics.main,b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
-                            }else if(level[a][b+1]==']'){
+                            }else if(level[a][b+1]==']'||level[a][b+1]=='<'){
                                 clumper[0].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.3,24))
                             }else{
                                 clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.15)*game.tileset[1],game.tileset[0],game.tileset[1]*0.3,24))
@@ -1019,6 +1038,15 @@ function generateLevel(level,layer){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                     }else{
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],23))
+                    }
+                break
+                case 'a':
+                    if(game.level==23){
+                        if(level[a+1][b]=='a'){
+                            entities.walls[0].push(new wall(graphics.main,-game.tileset[0]*0.06+b*game.tileset[0],game.tileset[1]*0.56+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
+                        }else{
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.44+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
+                        }
                     }
                 break
                 case 'b':
@@ -1122,7 +1150,7 @@ function generateLevel(level,layer){
     }
     if(game.level==22||game.level==23){
         let set=[
-            [112,65.5,[-90,90,-90,-90,-90],[0,1,2,3,4]],
+            [112,65.5,[-90,90,-90,game.level==23?0:-90,-90],[0,1,2,3,4]],
 
             [112,74.5,[-90,90,90,90],[0,2,3,4]],
 
@@ -1142,7 +1170,7 @@ function generateLevel(level,layer){
 
             [112,23.5,[-90,180,90,180],[0,1,3,4]],
 
-            [137,35.5,[-90,-90,0,90,90],[0,1,2,3,4]],
+            [game.level==23?128:137,35.5,[-90,-90,0,90,90],[0,1,2,3,4]],
         ]
         for(let a=0,la=set.length;a<la;a++){
             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+set[a][0]*game.tileset[0],game.tileset[1]/2+set[a][1]*game.tileset[1],game.tileset[1]*0.8,game.tileset[1]*0.8,39))
@@ -1832,8 +1860,8 @@ function checkEnd(level,layer,key){
                     }
                 }
             }
-            if(total<(game.level==23?(1+game.players)*(game.peakWeapon?7.5:5):(game.attacker?1:4))&&(subTotal==0||game.level==23)&&!(display.cycle==types.mission[game.mission].wave.length&&total>0)){
-                if(game.point[4]!=0){
+            if(total<(game.level==23?((1+game.players)*(game.peakWeapon?7.5:5)):(game.attacker?1:4))&&(subTotal==0||game.level==23)&&!(display.cycle==types.mission[game.mission].wave.length&&total>0)){
+                if(!(game.point[4]==0&&game.level==23)){
                     display.wait--
                 }
                 if(display.wait<=0){
