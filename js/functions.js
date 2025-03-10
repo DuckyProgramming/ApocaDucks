@@ -1331,6 +1331,13 @@ function generateLevel(level,layer){
     entities.walls.forEach(set=>set.forEach(item=>item.checkOverlay()))
     entities.walls.forEach(set=>set.forEach(item=>item.checkGap()))
     if(game.level==23){
+        let ticker=0
+        for(let a=0,la=entities.walls[1].length;a<la;a++){
+            if(entities.walls[1][a].type==27){
+                entities.walls[1][a].pos=ticker
+                ticker++
+            }
+        }
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 if(entities.walls[a][b].type==31||entities.walls[a][b].type==33){
@@ -1360,7 +1367,7 @@ function generateLevel(level,layer){
             }
         }
         let placer=1
-        let ticker=0
+        ticker=0
         for(let a=0,la=entities.walls[placer].length;a<la;a++){
             if(entities.walls[placer][a].type==31||entities.walls[placer][a].type==33){
                 entities.walls[placer][a].pos=[2,0,3,4,1,5,6,8,7][ticker]

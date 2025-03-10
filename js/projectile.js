@@ -7972,7 +7972,7 @@ class projectile{
 								this.active=false
 							}
 						}else if(this.type==325){
-							if(entities.players[b].playerData.mname.includes('Hyper')){
+							if(entities.players[b].playerData.name.includes('Hyper')){
 								entities.players[b].life=0
 							}else{
 								entities.players[b].takeDamage(this.damage)

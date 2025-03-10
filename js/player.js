@@ -6509,7 +6509,7 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else if(game.pvp&&this.die.timer>480){
+                        }else if(game.pvp&&this.die.timer>360){
                             let key='yZ'[floor(random(0,2))]
                             for(let a=0,la=levels[23].length;a<la;a++){
                                 for(let b=0,lb=levels[23][a].length;b<lb;b++){
@@ -6527,6 +6527,8 @@ class player{
                                 }
                             }
                             this.respawn()
+                            this.weaponType=-1
+                            this.weaponData.uses=0
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]
