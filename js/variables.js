@@ -5673,7 +5673,11 @@ types={
     {
       name:'PlayerGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
-      desc:'Peasant weapon',dpsBuff:1,
+      desc:'Basic weapon',dpsBuff:1,
+    },{
+      name:'PlayerPeasant',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:663,
+      desc:'Has a chance to have sidekicks',dpsBuff:1,
     },{
       name:'PlayerFakeHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:661,
@@ -13132,6 +13136,15 @@ types={
 			reload:16,
 			speed:0.9,
       uses:18,
+		},{
+			name:'Peasant',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 
     /*{

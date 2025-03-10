@@ -1318,6 +1318,16 @@ class player{
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
                 }
             break
+            case 663:
+                for(let a=0,la=2;a<la;a++){
+                    if(floor(random(0,2))){
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                        entities.players[entities.players.length-1].sidekick=true
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                        entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
+                    }
+                }
+            break
         }
     }
     newSubWeaponA(set){
@@ -4056,8 +4066,8 @@ class player{
 			break
             case 626:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
-                entities.projectiles[entities.projectiles.length-1].velocity.y*=4
+                entities.projectiles[entities.projectiles.length-1].velocity.x*=0.4
+                entities.projectiles[entities.projectiles.length-1].velocity.y-=20
 			break
             case 627:
                 for(let a=0,la=7;a<la;a++){
@@ -6527,7 +6537,7 @@ class player{
                                 }
                             }
                             this.respawn()
-                            this.newWeaponSet(findName('PlayerGun',types.player))
+                            this.newWeaponSet(findName('PlayerPeasant',types.player))
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]

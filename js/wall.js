@@ -3019,7 +3019,7 @@ class wall{
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
-                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia))
+                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia||c.fort))
                     ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
@@ -3144,7 +3144,7 @@ class wall{
                                         let chunk=game.peakWeapon?1:0
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                     }
-                                    this.recharge=3600-(game.gaming-1)*600
+                                    this.recharge=600
                                     c.newWeaponSet(reserve)
                                 }else{
                                     c.newWeapon()
