@@ -879,7 +879,7 @@ function generateLevel(level,layer){
                     }
                 break
                 case '@':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],2))
+                    entities.walls[game.level==23?0:1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],2))
                 break
                 case '!':
                     if(game.level==19||game.level==22||game.level==23||game.level==24){
@@ -1001,12 +1001,22 @@ function generateLevel(level,layer){
                                         e=le
                                     }
                                 }
-                                if(level[a][b-1]=='>'){
-                                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
-                                }else if(level[a][b-1]=='['){
-                                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.25)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1.5+extent),game.tileset[1]*0.4,37))
+                                if(game.level==22){
+                                    if(level[a][b-1]=='>'){
+                                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
+                                    }else if(level[a][b-1]=='['){
+                                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.25)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1.5+extent),game.tileset[1]*0.4,37))
+                                    }else{
+                                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*0.4,37))
+                                    }
                                 }else{
-                                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*0.4,37))
+                                    if(level[a][b-1]=='>'){
+                                        clumper[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
+                                    }else if(level[a][b-1]=='['){
+                                        clumper[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.25)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1.5+extent),game.tileset[1]*0.4,37))
+                                    }else{
+                                        clumper[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*0.4,37))
+                                    }
                                 }
                             }
                         break
@@ -1117,7 +1127,11 @@ function generateLevel(level,layer){
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
                 break
                 case ':':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1],38))
+                    if(a>10&&a<la-10){
+                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1],38))
+                    }else{
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1],38))
+                    }
                 break
                 case 'z':
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
@@ -1962,16 +1976,19 @@ function lcos(direction){
 	return constants.trig[1][floor((direction%360+360)%360*2)]
 }
 function outWalls(){
-    let totals=[]
+    let totals=[[],[]]
     for(let a=0,la=50;a<la;a++){
-        totals.push(0)
+        for(let b=0,lb=totals.length;b<lb;b++){
+            totals[b].push(0)
+        }
     }
     for(let a=0,la=entities.walls.length;a<la;a++){
         for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-            totals[entities.walls[a][b].type]++
+            totals[a][entities.walls[a][b].type]++
         }
     }
-    print(totals)
+    print(totals[0])
+    print(totals[1])
 }
 function generateMission(wave){
     for(let a=0,la=wave.length;a<la;a++){

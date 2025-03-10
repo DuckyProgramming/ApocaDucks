@@ -1550,7 +1550,7 @@ class player{
             case 382: case 390: case 399: case 402: case 429: case 434: case 459: case 469: case 470: case 471:
             case 473: case 485: case 528: case 529: case 531: case 532: case 542: case 545: case 546: case 549:
             case 553: case 558: case 563: case 577: case 579: case 591: case 602: case 603: case 631: case 646:
-            case 653:
+            case 653: case 663:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
 			break
 			case 3: case 180:
@@ -4067,7 +4067,7 @@ class player{
             case 626:
 				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                 entities.projectiles[entities.projectiles.length-1].velocity.x*=0.4
-                entities.projectiles[entities.projectiles.length-1].velocity.y-=20
+                entities.projectiles[entities.projectiles.length-1].velocity.y-=16
 			break
             case 627:
                 for(let a=0,la=7;a<la;a++){
