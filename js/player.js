@@ -6527,8 +6527,7 @@ class player{
                                 }
                             }
                             this.respawn()
-                            this.weaponType=-1
-                            this.weaponData.uses=0
+                            this.newWeaponSet(findName('PlayerGun',types.player))
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]

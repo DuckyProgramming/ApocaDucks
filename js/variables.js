@@ -5671,6 +5671,10 @@ types={
     },
 
     {
+      name:'PlayerGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:233,
+      desc:'Peasant weapon',dpsBuff:1,
+    },{
       name:'PlayerFakeHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:661,
       desc:'Puts down a health pack that kills players who pick it up',dpsBuff:0,
