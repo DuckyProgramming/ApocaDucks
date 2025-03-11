@@ -135,6 +135,9 @@ class wall{
                     for(let a=0,la=game.players;a<la;a++){
                         this.timers.push(0)
                     }
+                    this.raided=false
+                    this.loc=[[],[]]
+                    this.raidTick=0
                 }
             break
             case 36:
@@ -300,22 +303,65 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&this.type!=38&&c.type!=38){
-                    if(abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
-                        this.redundant[0]=true
-                        this.boundary[0]=[]
-                    }
-                    if(abs(c.position.y-(this.position.y-this.height/2-c.height/2))<1&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
-                        this.redundant[1]=true
-                        this.boundary[1]=[]
-                    }
-                    if(abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&c.position.y-c.height/2<=this.position.y-this.height/2+1&&c.position.y+c.height/2>=this.position.y+this.height/2-1){
-                        this.redundant[2]=true
-                        this.boundary[2]=[]
-                    }
-                    if(abs(c.position.x-(this.position.x-this.width/2-c.width/2))<1&&c.position.y-c.height/2<=this.position.y-this.height/2+1&&c.position.y+c.height/2>=this.position.y+this.height/2-1){
-                        this.redundant[3]=true
-                        this.boundary[3]=[]
+                if(c.standard&&this.type!=38&&c.type!=38&&(c.position.x!=this.position.x||c.position.y!=this.position.y)){
+                    if(c.type==17||c.type==18||c.type==20||c.type==21){
+                        if(
+                            inPointTriangle({x:this.position.x-this.width/2,x:this.position.y+this.height/2},c.triangle)&&
+                            inPointTriangle({x:this.position.x+this.width/2,x:this.position.y+this.height/2},c.triangle)
+                        ){
+                            this.redundant[0]=true
+                            this.boundary[0]=[]
+                        }
+                        if(
+                            inPointTriangle({x:this.position.x-this.width/2,x:this.position.y-this.height/2},c.triangle)&&
+                            inPointTriangle({x:this.position.x+this.width/2,x:this.position.y-this.height/2},c.triangle)
+                        ){
+                            this.redundant[1]=true
+                            this.boundary[1]=[]
+                        }
+                        if(
+                            inPointTriangle({x:this.position.x+this.width/2,y:this.position.y-this.height/2},c.triangle)&&
+                            inPointTriangle({x:this.position.x+this.width/2,y:this.position.y+this.height/2},c.triangle)
+                        ){
+                            this.redundant[2]=true
+                            this.boundary[2]=[]
+                        }
+                        if(
+                            inPointTriangle({x:this.position.x-this.width/2,y:this.position.y-this.height/2},c.triangle)&&
+                            inPointTriangle({x:this.position.x-this.width/2,y:this.position.y+this.height/2},c.triangle)
+                        ){
+                            this.redundant[3]=true
+                            this.boundary[3]=[]
+                        }
+                    }else{
+                        if(
+                            this.position.y+this.height/2>c.position.y-c.height/2-1&&this.position.y+this.height/2<c.position.y+c.height/2+1&&
+                            c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1
+                        ){
+                            this.redundant[0]=true
+                            this.boundary[0]=[]
+                        }
+                        if(
+                            this.position.y-this.height/2>c.position.y-c.height/2-1&&this.position.y-this.height/2<c.position.y+c.height/2+1&&
+                            c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1
+                        ){
+                            this.redundant[1]=true
+                            this.boundary[1]=[]
+                        }
+                        if(
+                            this.position.x+this.width/2>c.position.x-c.width/2-1&&this.position.x+this.width/2<c.position.x+c.width/2+1&&
+                            c.position.y-c.height/2<=this.position.y-this.height/2+1&&c.position.y+c.height/2>=this.position.y+this.height/2-1
+                        ){
+                            this.redundant[2]=true
+                            this.boundary[2]=[]
+                        }
+                        if(
+                            this.position.x-this.width/2>c.position.x-c.width/2-1&&this.position.x-this.width/2<c.position.x+c.width/2+1&&
+                            c.position.y-c.height/2<=this.position.y-this.height/2+1&&c.position.y+c.height/2>=this.position.y+this.height/2-1
+                        ){
+                            this.redundant[3]=true
+                            this.boundary[3]=[]
+                        }
                     }
                     if(abs(c.position.y-(this.position.y-this.height/2-c.height/2-15))<50&&c.position.y!=this.position.y&&c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1){
                         this.redundant[8]=true
@@ -2481,6 +2527,27 @@ class wall{
             case 33:
                 if(game.level==23&&this.pos==4&&this.owner>0&&this.owner<=game.players){
                     this.timers[this.owner-1]++
+                    if(this.timers[this.owner-1]>14400&&!this.raided){
+                        this.raided=true
+                        let spawn='yZ'
+                        for(let a=0,la=levels[game.level].length;a<la;a++){
+                            for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
+                                for(let c=0,lc=spawn.length;c<lc;c++){
+                                    if(levels[game.level][a][b]==spawn[c]){
+                                        this.loc[c][0]=game.tileset[0]/2+b*game.tileset[0]
+                                        this.loc[c][1]=game.tileset[1]/2+a*game.tileset[1]
+                                    }
+                                }
+                            }
+                        }
+                        this.raidTick=15
+                    }
+                    if(this.raidTick>0&&this.time%15==0){
+                        this.raidTick--
+                        for(let c=0,lc=this.loc.length;c<lc;c++){
+                            entities.players.push(new player(this.layer,this.loc[c][0]+random(-20,20),this.loc[c][1],0,0,[],true,findName(this.raidTick>=12?'RaiderPelleter':this.raidTick>=7?'RaiderSwarmer':'RaiderTrapper',types.player),game.index))
+                        }
+                    }
                 }
             break
             case 37:
@@ -2650,7 +2717,7 @@ class wall{
                     let c=this.collide[a][b]
                     if(
                         a==0&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&
-                        !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
+                        !(this.type==37&&c.previous.position.y>c.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                             c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
@@ -2985,7 +3052,7 @@ class wall{
                             }
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
-                        !(this.type==37&&(c.previous.position.y>c.position.y||c.previous.position.y+c.height/2>this.position.y-this.height/2))&&
+                        !(this.type==37&&c.previous.position.y>c.position.y)&&
                         this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42
                     ){
                         let d=collideBoxBox(this,c)

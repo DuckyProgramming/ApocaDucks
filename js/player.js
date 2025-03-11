@@ -977,6 +977,8 @@ class player{
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}},
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
                     ][this.copy]
+                }else if(this.playerData.name=='RaiderTrapper'||this.playerData.name=='RaiderSwarmer'||this.playerData.name=='RaiderPelleter'){
+                    this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[185,232,125],body:[175,232,115],legs:[160,232,100],arms:[165,232,105]}}
                 }else if(game.level==6&&this.playerData.sizeBuff>1.25){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,35,25],body:[255,25,15],legs:[255,10,0],arms:[255,15,5]}}
                 }else{
@@ -1388,7 +1390,7 @@ class player{
             }
         }
     }
-    respawn(){
+    respawn(reject){
         let playerLength=entities.players.length
         this.die.killer=-1
         this.stats.bust*=0.25
@@ -1409,7 +1411,9 @@ class player{
         }
         this.previous.position.x=this.position.x
         this.previous.position.y=this.position.y
-        this.newWeapon()
+        if(!reject){
+            this.newWeapon()
+        }
         this.velocity.x=0
         this.velocity.y=0
         this.storeWeapon=false
@@ -4206,6 +4210,12 @@ class player{
 				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                 }
 			break
+            case 664:
+				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+			break
+            case 665:
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90+weapon.uses%2*180,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+            break
 
             //mark
 		}
@@ -5283,7 +5293,9 @@ class player{
                 }else if(game.level==22||game.level==23){
                     this.manage[1]=false
                     if(!game.noPlayer&&(this.target.point==-1||floor(random(0,(this.life<=0?15:150)))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id)){
-                        if(this.fort){
+                        if(this.playerData.name.includes('Raider')&&this.id==0){
+                            this.target.point=4
+                        }else if(this.fort){
                             this.target.point=floor(random(0,5))
                         }else if(game.pvp&&this.id==0){
                             let possible=[]
@@ -5378,6 +5390,17 @@ class player{
                                     break
                                 }
                             }
+                        }else if(game.pvp&&this.position.x>2160&&this.position.x<2520&&this.position.y>1200&&this.position.y<1305){
+                            switch(goalPoint){
+                                case 0: case 1: case 2:
+                                    this.target.position.x=2160
+                                    this.target.position.y=2000
+                                break
+                                case 3: case 4:
+                                    this.target.position.x=5520
+                                    this.target.position.y=2000
+                                break
+                            }
                         }else{
                             for(let a=0,la=game.sectors.length;a<la;a++){
                                 if(inBoxBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]*9/8},width:game.sectors[a][2]-this.width/2,height:game.sectors[a][3]*9/8-this.height/2})){
@@ -5425,7 +5448,7 @@ class player{
                                                         this.target.position.x=5120
                                                         this.target.position.y=abs(this.position.x-5120)<100?0:700
                                                     }else{
-                                                        this.target.position.x=entities.players[game.players].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                        this.target.position.x=entities.players[game.players].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
                                                         this.target.position.y=entities.players[game.players].position.y
                                                         if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players])){
                                                             this.manage[1]=true
@@ -5439,11 +5462,14 @@ class player{
                                             }
                                         break
                                         case 3:
-                                            if(this.position.y>1900){
+                                            if(this.position.x>2240&&this.position.x<2440&&this.position.y<1850&&this.position.y>1625){
+                                                this.target.position.x=2340
+                                                this.target.position.y=0
+                                            }else if(this.position.y>1850){
                                                 switch(goalPoint){
                                                     case 0: 
-                                                        this.target.position.x=this.position.x>2000?2900:1300
-                                                        this.target.position.y=1600
+                                                        this.target.position.x=1300
+                                                        this.target.position.y=abs(this.position.x-2380)<100?0:1600
                                                     break
                                                     case 1: case 2: case 3:
                                                         this.target.position.x=1300
@@ -5457,7 +5483,7 @@ class player{
                                             }else{
                                                 switch(goalPoint){
                                                     case 0:
-                                                        this.target.position.x=entities.players[game.players+1].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                        this.target.position.x=entities.players[game.players+1].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players+1].id==this.id?8:1)
                                                         this.target.position.y=entities.players[game.players+1].position.y
                                                         if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+1])){
                                                             this.manage[1]=true
@@ -5472,8 +5498,8 @@ class player{
                                                             this.target.position.x=2620
                                                             this.target.position.y=abs(this.position.x-2620)<100?0:1600
                                                         }else{
-                                                            this.target.position.x=2900
-                                                            this.target.position.y=1600
+                                                            this.target.position.x=this.position.y<1300?2620:2460
+                                                            this.target.position.y=abs(this.position.x-2460)<100?0:1600
                                                         }
                                                     break
                                                 }
@@ -5569,7 +5595,7 @@ class player{
                                                     this.target.position.y=1000
                                                 break
                                                 case 3:
-                                                    this.target.position.x=entities.players[game.players+2].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                    this.target.position.x=entities.players[game.players+2].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players+2].id==this.id?8:1)
                                                     this.target.position.y=entities.players[game.players+2].position.y
                                                     if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+2])){
                                                         this.manage[1]=true
@@ -5584,8 +5610,8 @@ class player{
                                                         this.target.position.x=2820
                                                         this.target.position.y=abs(this.position.x-2820)<100?0:1700
                                                     }else{
-                                                        this.target.position.x=2650
-                                                        this.target.position.y=abs(this.position.x-2800)<100?0:1700
+                                                        this.target.position.x=this.position.y<1650?2600:2400
+                                                        this.target.position.y=1700
                                                     }
                                                 break
                                                 case 1:
@@ -5598,7 +5624,7 @@ class player{
                                                             this.target.position.y=1700
                                                         }
                                                     }else{
-                                                        this.target.position.x=2700
+                                                        this.target.position.x=this.position.y<1650?2600:2400
                                                         this.target.position.y=1700
                                                     }
                                                 break
@@ -5616,7 +5642,7 @@ class player{
                                                     this.target.position.y=1000
                                                 break
                                                 case 4:
-                                                    this.target.position.x=entities.players[game.players+3].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                    this.target.position.x=entities.players[game.players+3].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players+3].id==this.id?8:1)
                                                     this.target.position.y=entities.players[game.players+3].position.y
                                                     if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+3])){
                                                         this.manage[1]=true
@@ -5665,7 +5691,7 @@ class player{
                                                     this.target.position.y=abs(this.position.x-900)<100?0:2400
                                                 break
                                                 case 1:
-                                                    this.target.position.x=entities.players[game.players+4].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                    this.target.position.x=entities.players[game.players+4].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players+4].id==this.id?8:1)
                                                     this.target.position.y=entities.players[game.players+4].position.y
                                                     if(dist(this.target.position.x,this.target.position.y,this.position.x,this.position.y)<300&&this.validTarget(this,entities.players[game.players+4])){
                                                         this.manage[1]=true
@@ -5689,7 +5715,7 @@ class player{
                                                     this.target.position.y=1000
                                                 break
                                                 case 3: case 4:
-                                                    this.target.position.x=3100
+                                                    this.target.position.x=3200
                                                     this.target.position.y=1000
                                                 break
                                             }
@@ -6526,7 +6552,7 @@ class player{
                                     if(levels[23][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,10))==0){
+                                        if(floor(random(0,20))==0){
                                             this.base.position.x=random(500,game.edge[0]-500)
                                             this.base.position.y=0
                                             this.parachute=true
@@ -6536,8 +6562,8 @@ class player{
                                     }
                                 }
                             }
-                            this.respawn()
-                            this.newWeaponSet(findName('PlayerPeasant',types.player))
+                            this.respawn(true)
+                            this.newWeaponSet(findName('PlayerPistol',types.player))
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]

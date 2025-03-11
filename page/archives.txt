@@ -2,6 +2,9 @@
 
 
 662 - beekeeper, 442
+663 - peasant
+664 - lighter trapper, 264
+665 - swarmer dualic singular
 
 
 
