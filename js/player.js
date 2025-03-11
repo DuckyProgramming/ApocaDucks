@@ -1018,7 +1018,7 @@ class player{
             this.type=findName('PlayerSelector',types.player)
         }else if(game.randomizer){
             this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
-        }else if(game.classicWeapon||this.id>=game.gaming){
+        }else if(game.classicWeapon||this.id>game.gaming){
             let clump=listing[game.peakWeapon?1:floor(random(1.5))]
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
@@ -1476,7 +1476,7 @@ class player{
             &&!this.hyper()
         ){
             let preLife=this.life
-            this.life-=damage*(this.id>=game.gaming?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
+            this.life-=damage*(this.id>game.gaming&&!game.pvp?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank'?0.25:
                 this.playerData.name=='PlayerBonkerception'?0.4:
                 this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
@@ -6477,7 +6477,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
-                if(this.die.timer>(game.assault?60:240)&&game.classicRespawn&&!game.past||this.id>=game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault?60:240)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.level==19){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]

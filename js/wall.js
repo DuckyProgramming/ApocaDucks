@@ -3204,15 +3204,15 @@ class wall{
                             break
                             case 27:
                                 if(game.level==23){
-                                    let reserve=this.weapon
+                                    let reserve=c.type
+                                    c.newWeaponSet(this.weapon)
                                     if(c.weaponType>=0){
-                                        this.weapon=c.type
+                                        this.weapon=reserve
                                     }else{
                                         let chunk=game.peakWeapon?1:0
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                     }
                                     this.recharge=600
-                                    c.newWeaponSet(reserve)
                                 }else{
                                     c.newWeapon()
                                     if(game.level==16){
