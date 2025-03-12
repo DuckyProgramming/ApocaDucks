@@ -692,13 +692,13 @@ function generateLevel(level,layer){
                 [1200,660,2400,1000],
                 [7450,635,3100,950],
                 [4150,510,3500,700],
-                [1985,1410,1170,900],
+                [1925,1410,1050,900],
                 [700,1310,1400,300],
                 [700,1610,1400,300],
                 [4120,1010,2040,300],
                 [3150,1335,1100,350],
                 [6700,1310,2600,400],
-                [5785,1460,6430,600],
+                [5725,1460,6550,600],
                 [5700,1980,6600,240],
                 [4500,2160,9600,800],
                 [2900,1010,400,300],
@@ -1299,6 +1299,9 @@ function generateLevel(level,layer){
     }
     let clump=listing[floor(random(1.5))]
     let weapon=clump[floor(random(0,clump.length))]
+    if(game.level==23){
+        shifter=floor(random(0,4))
+    }
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
@@ -1321,7 +1324,8 @@ function generateLevel(level,layer){
                             entities.players[entities.players.length-1].parachute=true
                         }
                     }
-                    if(level[a][b]=='qwerty'[c]&&game.pvp){
+                    let encode=game.level==23&&c<4?'qwer'[(c+shifter)%4]:'qwerty'[c]
+                    if(level[a][b]==encode&&game.pvp){
                         entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][0]),game.index))
                         game.index++
                         if(game.level==13||game.level==14){ 

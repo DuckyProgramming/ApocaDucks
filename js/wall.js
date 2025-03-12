@@ -3237,13 +3237,21 @@ class wall{
                                 }
                             break
                             case 31:
-                                if(!c.construct&&!c.sidekick&&!c.fort&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
-                                    c.newWeapon()
+                                if(!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>=0&&c.id>=0&&!game.pvp))){
+                                    if(c.auto){
+                                        c.newWeaponSet(c.type)
+                                    }else{
+                                        c.newWeapon()
+                                    }
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&!c.auto&&c.id>0&&c.id<=game.gaming&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
-                                    c.newWeapon()
+                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23)&&!(c.id==this.owner||this.owner>0&&c.id>0&&!game.pvp))){
+                                    if(c.auto){
+                                        c.newWeaponSet(c.type)
+                                    }else{
+                                        c.newWeapon()
+                                    }
                                 }
                             break
                             case 41:

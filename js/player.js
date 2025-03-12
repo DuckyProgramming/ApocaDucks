@@ -1474,6 +1474,26 @@ class player{
                 valid=false
             }
         }
+        if(this.fort&&game.pvp&&game.level==23){
+            let local=0
+            for(let a=0,la=entities.players.length;a<la;a++){
+                if(entities.players[a].fort&&entities.players[a].id==this.id&&this.id>0&&(
+                    this.pos==0&&entities.players[a].pos==5||
+                    this.pos==0&&entities.players[a].pos==7||
+                    this.pos==1&&entities.players[a].pos==7||
+                    this.pos==1&&entities.players[a].pos==8||
+                    this.pos==2&&entities.players[a].pos==5||
+                    this.pos==2&&entities.players[a].pos==6||
+                    this.pos==3&&entities.players[a].pos==6||
+                    this.pos==3&&entities.players[a].pos==8 
+                )){
+                    local++
+                }
+            }
+            if(local==2){
+                valid=false
+            }
+        }
         if(
             this.invincible<=0&&valid
             &&!(this.fort&&this.id==0&&!game.pvp&&(game.level==22||game.level==23))
@@ -1535,7 +1555,7 @@ class player{
                 weapon.uses+=4
             }
         }else if(!this.fort){
-            weapon.uses--
+            weapon.uses-=this.auto?3:1
         }
 		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496||weaponType==624)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
 			weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
@@ -5296,7 +5316,7 @@ class player{
                     }
                 }else if(game.level==22||game.level==23){
                     this.manage[1]=false
-                    if(!game.noPlayer&&(this.target.point==-1||floor(random(0,(this.life<=0?15:150)))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id)){
+                    if(!game.noPlayer&&(this.target.point==-1||floor(random(0,(this.life<=0?15:150)))==0||this.target.point>=0&&(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0))){
                         if(this.playerData.name.includes('Raider')&&this.id==0&&game.point[4]!=0){
                             this.target.point=4
                         }else if(this.fort){
@@ -5321,8 +5341,40 @@ class player{
                                 possible=[0,1,2,3,4]
                             }
                             this.target.point=possible[floor(random(0,possible.length))]
+                        }else if(game.pvp){
+                            if(this.weaponType==-1){
+                                let max=game.edge[0]+game.edge[1]
+                                let set=0
+                                for(let a=0,la=entities.walls.length;a<la;a++){
+                                    for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                        if(
+                                            (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                            dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                            (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
+                                        ){
+                                            max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                            set=entities.walls[a][b].pos
+                                        }
+                                    }
+                                }
+                                if(max<game.edge[0]+game.edge[1]&&set>=0){
+                                    this.target.point=set
+                                }else{
+                                    this.newWeaponSet(findName('PlayerPistol',types.player))
+                                }
+                            }else{
+                                let possible=[]
+                                for(let a=0,la=5;a<la;a++){
+                                    if(game.point[a]!=this.id){
+                                        for(let b=0,lb=1+(a==4?3:0)+(game.point[a]==game.point[4]&&game.point[4]>0?1:0);b<lb;b++){
+                                            possible.push(a)
+                                        }
+                                    }
+                                }
+                                this.target.point=possible[floor(random(0,possible.length))]
+                            }
                         }else{
-                            this.target.point=game.pvp?(floor(random(0,2))==0?4:floor(random(0,4))):floor(random(0,5))
+                            this.target.point=floor(random(0,5))
                         }
                     }
                     let targets=[]
@@ -5331,7 +5383,7 @@ class player{
                             this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.id!=0?180:120)&&entities.players[a].life>0
                             &&!(game.pvp&&(entities.players[a].position.x<300||entities.players[a].position.x>game.edge[0]-300))
                             &&!(!game.pvp&&entities.players[a].id==0&&entities.players[a].fort)
-                            &&!game.noPlayer
+                            &&!game.noPlayer&&!(this.id>0&&this.weaponType==-1)
                         ){
                             let b=entities.players[a]
                             let bar=[]
@@ -5408,8 +5460,8 @@ class player{
                         }else{
                             for(let a=0,la=game.sectors.length;a<la;a++){
                                 if(inBoxBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]*9/8},width:game.sectors[a][2]-this.width/2,height:game.sectors[a][3]*9/8-this.height/2})){
-                                    if(this.id>0){
-                                        //print(a,this.id)
+                                    if(this.id==1&&this.index==0){
+                                        print(a,this.id)
                                     }
                                     switch(a){
                                         case 0:
@@ -5464,15 +5516,29 @@ class player{
                                                         }
                                                     }
                                                 break
-                                                case 3: case 4:
+                                                case 3:
                                                     this.target.position.x=5900
                                                     this.target.position.y=700
+                                                break
+                                                case 4:
+                                                    if(game.level==22||this.size>1){
+                                                        this.target.position.x=5900
+                                                        this.target.position.y=700
+                                                    }else{
+                                                        if(this.position.y<825){
+                                                            this.target.position.x=5260
+                                                            this.target.position.y=2000
+                                                        }else{
+                                                            this.target.position.x=4740
+                                                            this.target.position.y=2000
+                                                        }
+                                                    }
                                                 break
                                             }
                                         break
                                         case 3:
-                                            if(this.position.x>2240&&this.position.x<2440&&this.position.y<1850&&this.position.y>1625){
-                                                this.target.position.x=2340
+                                            if(this.position.x>1840&&this.position.x<2040&&this.position.y<1850&&this.position.y>1625){
+                                                this.target.position.x=1940
                                                 this.target.position.y=0
                                             }else if(this.position.y>1850){
                                                 switch(goalPoint){
@@ -5507,8 +5573,8 @@ class player{
                                                             this.target.position.x=2620
                                                             this.target.position.y=abs(this.position.x-2620)<100?0:1600
                                                         }else{
-                                                            this.target.position.x=this.position.y<1300?2700:2460
-                                                            this.target.position.y=abs(this.position.x-2460)<100?0:1600
+                                                            this.target.position.x=this.position.y<1300?2700:2340
+                                                            this.target.position.y=abs(this.position.x-2340)<100?0:1600
                                                         }
                                                     break
                                                 }
@@ -5588,8 +5654,13 @@ class player{
                                                     this.target.position.y=1200
                                                 break
                                                 case 2: case 3:
-                                                    this.target.position.x=3750
-                                                    this.target.position.y=abs(this.position.x-3750)<100?0:1200
+                                                    if(game.level==23){
+                                                        this.target.position.x=3100
+                                                        this.target.position.y=abs(this.position.x-3100)<100?0:1200
+                                                    }else{
+                                                        this.target.position.x=3750
+                                                        this.target.position.y=abs(this.position.x-3750)<100?0:1200
+                                                    }
                                                 break
                                             }
                                         break
@@ -5667,7 +5738,7 @@ class player{
                                         case 10:
                                             switch(goalPoint){
                                                 case 1:
-                                                    if(game.level==22){
+                                                    if(game.level==22&&game.point[1]||game.level==23){
                                                         this.target.position.x=5250
                                                         this.target.position.y=2400
                                                     }else{
@@ -5724,11 +5795,11 @@ class player{
                                         break
                                         case 12:
                                             switch(goalPoint){
-                                                case 0: case 1: case 2:
+                                                case 0: case 1: case 4:
                                                     this.target.position.x=2500
                                                     this.target.position.y=1000
                                                 break
-                                                case 3: case 4:
+                                                case 2: case 3:
                                                     this.target.position.x=3200
                                                     this.target.position.y=1000
                                                 break
@@ -6277,7 +6348,7 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&game.level==20||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&this.id>0&&this.id<=game.gaming&&!game.attacker||
-                this.id>game.gaming||game.attacker&&this.id!=0||this.storeWeapon
+                this.id>game.gaming&&game.level!=23||game.attacker&&this.id!=0||this.storeWeapon
             )){
                 if(this.storeWeapon){
                     this.storeWeapon=false
