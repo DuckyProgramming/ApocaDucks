@@ -5727,7 +5727,7 @@ types={
       name:'ConstructBaller',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:7,
     },{
-      name:'ConstructGust',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      name:'ConstructGust',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:413,
     },{
       name:'ConstructRemote',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5753,23 +5753,23 @@ types={
 
     {
       name:'RaiderTrapper',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:664,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:664,
     },
     
     {
       name:'RaiderSwarmer',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:665,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:665,
     },{
       name:'RaiderPelleter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:332,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:332,
     },
     
     {
       name:'RaiderInterceptor',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:338,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:338,
     },{
       name:'RaiderBaller',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:2.25,reloadBuff:1,crit:0,weapon:8,
     },
 
     {

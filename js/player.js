@@ -5360,7 +5360,7 @@ class player{
                                 if(max<game.edge[0]+game.edge[1]&&set>=0){
                                     this.target.point=set
                                 }else{
-                                    this.newWeaponSet(findName('PlayerPistol',types.player))
+                                    this.newWeaponSet(listing[0][floor(random(0,listing[0].length))])
                                 }
                             }else{
                                 let possible=[]
@@ -6648,7 +6648,7 @@ class player{
                                 }
                             }
                             this.respawn(true)
-                            this.newWeaponSet(findName('PlayerPistol',types.player))
+                            this.newWeaponSet(listing[0][floor(random(0,listing[0].length))])
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]
