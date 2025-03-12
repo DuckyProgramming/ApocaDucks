@@ -135,7 +135,7 @@ class wall{
                     for(let a=0,la=game.players;a<la;a++){
                         this.timers.push(0)
                     }
-                    this.raided=false
+                    this.raided=0
                     this.loc=[[],[]]
                     this.raidTick=0
                 }
@@ -2527,8 +2527,9 @@ class wall{
             case 33:
                 if(game.level==23&&this.pos==4&&this.owner>0&&this.owner<=game.players){
                     this.timers[this.owner-1]++
-                    if(this.timers[this.owner-1]>14400&&!this.raided){
-                        this.raided=true
+                    if((this.timers[this.owner-1]>10800&&this.raided==0||this.timers[this.owner-1]>14400&&this.raided==1)&&this.raidTick==0){
+                        this.raided++
+                        game.raid++
                         let spawn='yZ'
                         for(let a=0,la=levels[game.level].length;a<la;a++){
                             for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
@@ -2545,7 +2546,7 @@ class wall{
                     if(this.raidTick>0&&this.time%15==0){
                         this.raidTick--
                         for(let c=0,lc=this.loc.length;c<lc;c++){
-                            entities.players.push(new player(this.layer,this.loc[c][0]+random(-20,20),this.loc[c][1],0,0,[],true,findName(this.raidTick>=12?'RaiderPelleter':this.raidTick>=7?'RaiderSwarmer':'RaiderTrapper',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.loc[c][0]+random(-20,20),this.loc[c][1],0,0,[],true,findName(this.raidTick>=12?(this.raided==1?'RaiderPelleter':'RaiderInterceptor'):this.raidTick>=7?(this.raided==1?'RaiderSwarmer':'RaiderBaller'):'RaiderTrapper',types.player),game.index))
                         }
                     }
                 }
@@ -3086,7 +3087,7 @@ class wall{
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
-                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia||c.fort))
+                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia||c.fort||c.auto))
                     ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
@@ -3206,11 +3207,11 @@ class wall{
                                 if(game.level==23){
                                     let reserve=c.type
                                     c.newWeaponSet(this.weapon)
-                                    if(c.weaponType>=0){
+                                    if(c.weaponType>=0&&c.id>0&&!c.sidekick){
                                         this.weapon=reserve
                                     }else{
-                                        let chunk=game.peakWeapon?1:0
-                                        this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                                        let chunk=listing[game.peakWeapon?1:0]
+                                        this.weapon=chunk[floor(random(0,chunk.length))]
                                     }
                                     this.recharge=600
                                 }else{

@@ -977,8 +977,12 @@ class player{
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}},
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
                     ][this.copy]
-                }else if(this.playerData.name=='RaiderTrapper'||this.playerData.name=='RaiderSwarmer'||this.playerData.name=='RaiderPelleter'){
-                    this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[185,232,125],body:[175,232,115],legs:[160,232,100],arms:[165,232,105]}}
+                }else if(this.playerData.name.includes('Raider')){
+                    if(game.raid==1){
+                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[185,232,125],body:[175,232,115],legs:[160,232,100],arms:[165,232,105]}}
+                    }else{
+                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[240,161,199],body:[240,151,189],legs:[240,136,174],arms:[240,141,179]}}
+                    }
                 }else if(game.level==6&&this.playerData.sizeBuff>1.25){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,35,25],body:[255,25,15],legs:[255,10,0],arms:[255,15,5]}}
                 }else{
@@ -1019,7 +1023,7 @@ class player{
         }else if(game.randomizer){
             this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
         }else if(game.classicWeapon||this.id>game.gaming){
-            let clump=listing[game.peakWeapon?1:floor(random(1.5))]
+            let clump=listing[game.peakWeapon?1:floor(random(0,1.5))]
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             game.weaponTick[this.id-1]++
@@ -5293,7 +5297,7 @@ class player{
                 }else if(game.level==22||game.level==23){
                     this.manage[1]=false
                     if(!game.noPlayer&&(this.target.point==-1||floor(random(0,(this.life<=0?15:150)))==0||this.target.point>=0&&entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id)){
-                        if(this.playerData.name.includes('Raider')&&this.id==0){
+                        if(this.playerData.name.includes('Raider')&&this.id==0&&game.point[4]!=0){
                             this.target.point=4
                         }else if(this.fort){
                             this.target.point=floor(random(0,5))
@@ -5306,7 +5310,7 @@ class player{
                             }
                             if(possible.length>=3){
                                 possible=[]
-                                let valid=this.position.x<game.edge[0]*0.5?[0,1,2,4,4,4]:[1,2,3,4,4,4]
+                                let valid=this.base.position.x<game.edge[0]*0.5?[0,1,2,4,4,4]:[1,2,3,4,4,4]
                                 for(let a=0,la=valid.length;a<la;a++){
                                     if(game.point[valid[a]]!=0){
                                         possible.push(valid[a])
@@ -5445,8 +5449,13 @@ class player{
                                                 break
                                                 case 2:
                                                     if(this.position.x>4500&&this.position.y>850){
-                                                        this.target.position.x=5120
-                                                        this.target.position.y=abs(this.position.x-5120)<100?0:700
+                                                        if(this.position.x>540){
+                                                            this.target.position.x=5260
+                                                            this.target.position.y=abs(this.position.x-5260)<100?0:700
+                                                        }else{
+                                                            this.target.position.x=4980
+                                                            this.target.position.y=abs(this.position.x-4980)<100?0:700
+                                                        }
                                                     }else{
                                                         this.target.position.x=entities.players[game.players].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
                                                         this.target.position.y=entities.players[game.players].position.y
@@ -5498,7 +5507,7 @@ class player{
                                                             this.target.position.x=2620
                                                             this.target.position.y=abs(this.position.x-2620)<100?0:1600
                                                         }else{
-                                                            this.target.position.x=this.position.y<1300?2620:2460
+                                                            this.target.position.x=this.position.y<1300?2700:2460
                                                             this.target.position.y=abs(this.position.x-2460)<100?0:1600
                                                         }
                                                     break
@@ -5591,8 +5600,13 @@ class player{
                                                     this.target.position.y=1400
                                                 break
                                                 case 2:
-                                                    this.target.position.x=7950
-                                                    this.target.position.y=1000
+                                                    if(this.playerData.speedBuff<0.5){
+                                                        this.target.position.x=4200
+                                                        this.target.position.y=1400
+                                                    }else{
+                                                        this.target.position.x=7950
+                                                        this.target.position.y=1000
+                                                    }
                                                 break
                                                 case 3:
                                                     this.target.position.x=entities.players[game.players+2].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players+2].id==this.id?8:1)
@@ -5877,19 +5891,19 @@ class player{
             }else{
                 let jumpMult=(game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)
                 if(this.jumper()){
-                    if(this.manage[2]==0&&(floor(random(0,120*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
+                    if(this.manage[2]==0&&(floor(random(0,180*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,30))==0||floor(random(0,15))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0
                     }
                 }else if(this.id==0){
-                    if(this.manage[2]==0&&(floor(random(0,240*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)){
+                    if(this.manage[2]==0&&(floor(random(0,360*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,30))==0||floor(random(0,15))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0
                     }
                 }else{
-                    if(this.manage[2]==0&&(floor(random(0,60*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
+                    if(this.manage[2]==0&&(floor(random(0,90*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,120))==0||floor(random(0,15))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0

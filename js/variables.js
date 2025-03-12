@@ -5,7 +5,7 @@ game={
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,noPlayer:false,
-  margin:false,bound:false,
+  margin:false,bound:false,raid:0,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
   sectors:[],
 }
@@ -5744,22 +5744,32 @@ types={
       name:'Turret',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
     },{
-      name:'Rogue',sizeBuff:1.8,lifeBuff:5,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:662,
+      name:'Rogue',sizeBuff:1.8,lifeBuff:5,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:662,
     },{
-      name:'FieldArmy',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      name:'FieldArmy',sizeBuff:0.8,lifeBuff:2,speedBuff:0.8,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },
 
     {
-      name:'RaiderTrapper',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      name:'RaiderTrapper',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:664,
-    },{
-      name:'RaiderSwarmer',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+    },
+    
+    {
+      name:'RaiderSwarmer',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:2,crit:0,weapon:665,
     },{
-      name:'RaiderPelleter',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      name:'RaiderPelleter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:332,
+    },
+    
+    {
+      name:'RaiderInterceptor',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:338,
+    },{
+      name:'RaiderBaller',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
     },
 
     {
@@ -14282,8 +14292,8 @@ levels=[
 "                                                                                                                                                                                                                                 ",
 "                                                                                                                N                                                                                                                ",
 "                                                                                                                                                                                                                                 ",
-"                                                                                                             <#####>                                                                                                             ",
 "                                                                                                            <#######>                                                                                                            ",
+"                                                                                                           <#########>                                                                                                           ",
 "                                                                                                  <###################[===]###>                                                                                                  ",
 "                                                            ---  <###>  ---  <#~~~#>  ---  <##########################      ;              <###>  ---                                                                            ",
 "                                                          <########################################################### ##############[===]############>                                                                          ",
@@ -14363,10 +14373,10 @@ levels=[
 "                                                                                                                                                                                                                                 ",
 "                                                                                                                N                                                                                                                ",
 "                                                                                                               ---                                                                                                               ",
-"                                                                                                    e   <#[==<##`##>                                                                                                             ",
-"                                                                                 <#~~~#>==]#[   ]#[___]##[  <#######>                                                                                                            ",
-"                                                                                <#######>  |     |      +  <##########[===]###>                                                                                                  ",
-"                                                            ---  <###>  ---  <###########> |     |      + <###########      |         ---  <###>  ---                                                                            ",
+"                                                                                                  e    <#[==<###`###>                                                                                                            ",
+"                                                                               <#~~~#>==]#[   ]#[___]###[  <#########>                                                                                                           ",
+"                                                                              <#######>  |     |      |   <###############[===]###>                                                                                              ",
+"                                                            ---  <###>  ---  <#########> |     |      |  <############  |       |     ---  <###>  ---                                                                            ",
 "                                                          <########################################################### ###[===]#######################>                                                                          ",
 "                                                         <############################################################ ##[     ]#######################>                                                                         ",
 "                                               M        <##[ |           |              |           |           |               :      |        |    ]##>                                                                        ",
