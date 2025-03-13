@@ -31,6 +31,9 @@ function setup(){
         newLoop()
         stage.scene='main'
         display.cycle=0
+        
+        //entities.players[0].position.x=5200
+        //entities.players[0].position.y=2600
     }
 }
 function windowResized(){
