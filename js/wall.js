@@ -3175,12 +3175,12 @@ class wall{
                     }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42
                         &&!(this.type==37&&(c.velocity.y<0||c.previous.position.y+c.height/2>this.position.y-this.height/2))
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
-                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.mafia))
-                        &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.mafia))
+                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weaponType==-1||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0||c.construct||c.sidekick))
+                        &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!(this.type==16&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
-                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.mafia||c.fort||c.auto))
+                        &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
                     ){
                         let d=collideBoxBox(this,c)
                         switch(this.type){
@@ -3815,8 +3815,9 @@ class wall{
                                                                         if(game.point[1]==c.id){
                                                                             let amount=1
                                                                             for(let g=0,lg=amount;g<lg;g++){
-                                                                                entities.players.push(new player(this.layer,this.position.x,this.position.y-50,0,0,[],true,findName('Buster',types.player),game.index))
+                                                                                entities.players.push(new player(this.layer,this.position.x,this.position.y-50,c.id,0,[],true,findName('Buster',types.player),game.index))
                                                                                 entities.players[entities.players.length-1].dizzyTime=g*5
+                                                                                entities.players[entities.players.length-1].auto=true
                                                                             }
                                                                             for(let e=0,le=entities.walls[1].length;e<le;e++){
                                                                                 if(entities.walls[1][e].type==35&&entities.walls[1][e].pos==2){
