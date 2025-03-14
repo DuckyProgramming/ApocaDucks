@@ -3282,7 +3282,7 @@ class wall{
                                         c.newWeaponSet(this.weapon)
                                         let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                        this.recharge=game.level==23?600:3600-(game.gaming-1)*600
+                                        this.recharge=game.level==23?1200:3600-(game.gaming-1)*600
                                     }
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
@@ -3689,7 +3689,6 @@ class wall{
                                                                     }else if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&game.pvp&&entities.walls[1][e].owner!=c.id&&c.id>0){
                                                                         hit=true
                                                                         c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerTripleAuto',types.player))))
-                                                                        c.weapon.cooldown=600
                                                                         c.storeWeapon=true
                                                                         this.reload=600
                                                                         for(let f=0,lf=entities.walls.length;f<lf;f++){

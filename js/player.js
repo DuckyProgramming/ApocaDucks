@@ -1214,7 +1214,7 @@ class player{
             break
             case 399:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickBonkerGuard',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGuillotine',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[1.6,-1.6][a]
@@ -1551,2713 +1551,2729 @@ class player{
         }
     }
 	attack(variant){
-        let weapon=[this.weapon,this.subWeaponA,this.subWeaponB][variant]
-        let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType][variant]
-        let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData][variant]
-        let damageBuff=[this.playerData.damageBuff,this.subPlayerAData.damageBuff,this.subPlayerBData.damageBuff][variant]
-        this.visible=15
-		weapon.cooldown=weaponData.cooldown
-        weapon.reload=weaponData.stop
-        weapon.ammo--
-        if(this.fort&&this.auto){
-            weapon.uses--
-            if(weapon.uses<weaponData.uses-4){
-                weapon.uses+=4
+        let valid=true
+        if(game.level==19&&this.playerData.name.includes('Deployer')){
+            for(let a=0,la=entities.walls.length;a<la;a++){
+                for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                    if(
+                        entities.walls[a][b].type==31&&
+                        dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<300&&
+                        entities.walls[a][b].owner!=this.id
+                    ){
+                        valid=false
+                    }
+                }
             }
-        }else if(!this.fort){
-            weapon.uses-=this.auto?3:1
         }
-		if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496||weaponType==624)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
-			weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
-		}
-        if(weaponType==161){
-            weapon.cooldown*=(0.2+0.8*this.weapon.ammo/this.weaponData.ammo)
-        }
-        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
-        let bypass=false
-		switch(weaponType){
-			case 0: case 177: case 257: case 578: case 582:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-			case 1: case 2: case 4: case 131: case 142: case 149: case 161: case 176: case 178: case 179:
-            case 187: case 189: case 190: case 195: case 211: case 222: case 225: case 227: case 233: case 240:
-            case 241: case 272: case 274: case 275: case 276: case 277: case 300: case 315: case 352: case 353:
-            case 382: case 390: case 399: case 402: case 429: case 434: case 459: case 469: case 470: case 471:
-            case 473: case 485: case 528: case 529: case 531: case 532: case 542: case 545: case 546: case 549:
-            case 553: case 558: case 563: case 577: case 579: case 591: case 602: case 603: case 631: case 646:
-            case 653: case 663:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 3: case 180:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 5:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],3,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 6: case 92: case 93: case 181: case 237: case 288: case 368: case 519: case 642:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 7: case 123: case 182:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 8: case 183:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 9:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],7,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-            case 10: case 184:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 11: case 62: case 127: case 129: case 185: case 356: case 589:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 12:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 13:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],10,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 14: case 66:
-                if(this.active>0&&!(this.active<660&&this.playerData.name=='BigMultiHyperMedic')||this.id>0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],11,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }else{
-                    weapon.ammo++
+        if(valid){
+            let weapon=[this.weapon,this.subWeaponA,this.subWeaponB][variant]
+            let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType][variant]
+            let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData][variant]
+            let damageBuff=[this.playerData.damageBuff,this.subPlayerAData.damageBuff,this.subPlayerBData.damageBuff][variant]
+            this.visible=15
+            weapon.cooldown=weaponData.cooldown
+            weapon.reload=weaponData.stop
+            weapon.ammo--
+            if(this.fort&&this.auto){
+                weapon.uses--
+                if(weapon.uses<weaponData.uses-4){
+                    weapon.uses+=4
                 }
-            break
-            case 15: case 163:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 16:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],13,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 17:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],14,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 18:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 19:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-			case 20:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 21:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],17,(lsin(this.direction.main)<0?-90:90)+random(-30,30),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 22:
-				for(let a=0,la=15;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 23:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],18,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 24:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],19,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 25: case 46:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 26:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],21,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 27:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],22,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 28:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],23,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-            case 29: case 48:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],24,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 30:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],25,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-			case 31:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 32:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],27,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 33:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],28,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 34:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 35:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],29,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 36: case 188: case 420:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],30,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-			case 37:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],31,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 38:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],32,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 39:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],33,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 40:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 41:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],35,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 42:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],36,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 43:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],37,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-            case 44: case 76:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],38,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 45:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 47:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],40,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-			case 49:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],41,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 50:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-			case 51:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 52:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],42,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 53:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 54:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,5,crit,this.index))
-			break
-            case 55:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 56:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-			break
-            case 57: case 68:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],44,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 58:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],45,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 59:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],46,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-			case 60:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],47,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 61:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],48,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 62:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-			break
-            case 63:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-			break
-            case 64:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],49,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 65:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],52,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 67:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],53,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 69:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 70:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],54,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 71:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],51,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-			case 72:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 73:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90)-10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90)+10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 74:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],56,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 75:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],57,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 77:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],58,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 78:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],59,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 79:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 80:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],60,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 81:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],61,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 82:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],62,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 83:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],63,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 84:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.takeDamage(1)
-			break
-            case 85:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 86:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],64,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 87:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(lsin(this.direction.main)<0?-90:90)+random(-22.5,22.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 88:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],66,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 89:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-			case 90:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=random(0.75,1.5)
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=random(0.75,1.5)
-				}
-			break
-            case 91:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],67,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 94:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-            case 95:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],69,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 96:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],70,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 97:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                if(weapon.ammo%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],71,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-                }
-            break
-            case 98:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                if(weapon.ammo%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
-                }
-            break
-            case 99:
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<450){
-				        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,atan2(entities.players[a].position.x-spawn[0],spawn[1]-entities.players[a].position.y),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+            }else if(!this.fort){
+                weapon.uses-=this.auto?3:1
+            }
+            if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496||weaponType==624)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
+                weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
+            }
+            if(weaponType==161){
+                weapon.cooldown*=(0.2+0.8*this.weapon.ammo/this.weaponData.ammo)
+            }
+            let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
+            let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+            let bypass=false
+            switch(weaponType){
+                case 0: case 177: case 257: case 578: case 582:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     }
-                }
-			break
-            case 100:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],72,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 102:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],74,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-            case 103:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 104:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],76,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-            case 105: case 134:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],77,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
-            break
-            case 106:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-			case 107:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)*random(1.1,1.4),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 108:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],78,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 109:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],75,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-			case 110:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 111:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],79,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 112:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-			case 113:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],80,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 114:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,random(-30,30)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                this.velocity.y=-1.6
-            break
-            case 115:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,-90+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,90+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 116:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],81,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-			case 117:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 118:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],82,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-			case 119:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,-85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,-95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 120:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 121:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],83,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 122:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],84,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 124:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.ammo%6==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
-                }
-			break
-			case 125:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],85,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 126:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-			case 128:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)-10,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+10,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-			break
-            case 130:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],87,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 132:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],88,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 133: case 347: case 362:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],89,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 135:
-                for(let a=0,la=16;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,a*22.5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 136: case 150: case 613:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],90,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-			break
-            case 137: case 140: case 186: case 583:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 138:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],92,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,100,crit,this.index))
-			break
-            case 139:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],93,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-			case 141:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 143:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 144:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                for(let a=0,la=3;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.25,300,crit,this.index))
-                }
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.5,180,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.5,10,crit,this.index))
-            break
-            case 145:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],94,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 146:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],95,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 147:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],96,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,500,crit,this.index))
-			break
-            case 148:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],97,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 151:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
-                entities.projectiles[entities.projectiles.length-1].velocity.y*=3
-			break
-            case 152:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMachineGun',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 153: case 154: case 409:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 156:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 157:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],99,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 159:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRocketLauncher',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 160:
-				for(let a=0,la=5;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-			case 162:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],101,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 164:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],102,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 165:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],103,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 166:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],30,random(-3,3),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 167:
-				for(let a=0,la=12;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-6*(9-this.weapon.ammo),6*(9-this.weapon.ammo)),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 168:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,3,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,3,crit,this.index))
-            break
-            case 169:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],65,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 170:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],104,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 171:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],105,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.setColor()
-                this.newWeaponSet(findName('PlayerRevolver',types.player))
-                this.weapon.uses-=12
-            break
-            case 172:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],105,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 173:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSniper',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 174:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructFlamethrower',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 175:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(this.weapon.ammo%2==0){
-    				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 191: case 228:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],111,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 192:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 193:
-                for(let a=0,la=10;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],112,a*36,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 194:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
-                this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
-			break
-            case 196:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],113,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 197: case 201: case 256:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 198:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.8,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?60:-60),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 199:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],117,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 200:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],115,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 202: case 206: case 247: case 263: case 408: case 428: case 489:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 203:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)-45+weapon.uses%3*45,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 204:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],120,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 205:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[122,123][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 207:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],a==3?112:1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff*(a==3?3:1),300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=a==3?8:6
-                }
-            break
-            case 208:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90+this.weapon.ammo*18),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90+this.weapon.ammo*18)+180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 209:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[128,129][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 210:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 212: case 213: case 217: case 491: case 581:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 214:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],126,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 215:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2,1,(lsin(this.direction.main)<0?-88:88),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+2,1,(lsin(this.direction.main)<0?-92:92),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,1,(lsin(this.direction.main)<0?-86:86),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+4,1,(lsin(this.direction.main)<0?-94:94),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
-                if(weapon.uses%10==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                }
-			break
-            case 216:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],127,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 218:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],131,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,240,crit,this.index))
-            break
-            case 219:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%15==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*8,1200,crit,this.index))
-                }
-			break
-            case 220:
-                if(weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15,this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                }else{
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff*0.8,600,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                }
-            break
-            case 221:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90)-6+floor(weapon.ammo/2)%3*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-			case 223:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-			case 224:
-				for(let a=0,la=15;a<la;a++){
-                    let mult=random(5,10)
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-				}
-			break
-            case 226:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[139,140,141,142][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 229:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],146,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 230:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],144,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 231: case 444: case 540:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 232:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?90:-90)+random(-10,10),this.id,weaponData.damage*damageBuff,60,crit,this.index))
-			break
-            case 234: case 238:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 235:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],148,(lsin(this.direction.main)<0?-90:90)-18+weapon.ammo*3%7*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 236:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,149,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 239:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,150,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-            break
-            case 244:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-15,15)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 248:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],154,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 249:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-2+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.5,30,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+2+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.5,30,crit,this.index))
-			break
-            case 250:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],155,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 251:
-                for(let a=0,la=4;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6-a
-                }
-            break
-            case 252:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed*=0.8
-            break
-            case 254: case 255: case 289: case 544: case 595:
-                let minimum=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum[0]=min(minimum[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum[1]=min(minimum[1],distance)
-                        }
+                break
+                case 1: case 2: case 4: case 131: case 142: case 149: case 161: case 176: case 178: case 179:
+                case 187: case 189: case 190: case 195: case 211: case 222: case 225: case 227: case 233: case 240:
+                case 241: case 272: case 274: case 275: case 276: case 277: case 300: case 315: case 352: case 353:
+                case 382: case 390: case 399: case 402: case 429: case 434: case 459: case 469: case 470: case 471:
+                case 473: case 485: case 528: case 529: case 531: case 532: case 542: case 545: case 546: case 549:
+                case 553: case 558: case 563: case 577: case 579: case 591: case 602: case 603: case 631: case 646:
+                case 653: case 663:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 3: case 180:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 5:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],3,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 6: case 92: case 93: case 181: case 237: case 288: case 368: case 519: case 642:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 7: case 123: case 182:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 8: case 183:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 9:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],7,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 10: case 184:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 11: case 62: case 127: case 129: case 185: case 356: case 589:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 12:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 13:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],10,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 14: case 66:
+                    if(this.active>0&&!(this.active<660&&this.playerData.name=='BigMultiHyperMedic')||this.id>0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],11,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }else{
+                        weapon.ammo++
                     }
-                }
-                let fired=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired[0]&&distance==minimum[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired[0]=true
-                        }
-                        if(!fired[1]&&distance==minimum[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired[1]=true
-                        }
-                    }
-                }
-                if(!fired[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-			case 258: case 259: case 286:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-            case 261:
-                let minimum261=[900,900,900,900,900,900,900,900,900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                        for(let b=0,lb=10;b<lb;b++){
-                            if(abs(dir-((b*36+this.time)%360))<60||abs(dir-((b*36+this.time)%360)+360)<60||abs(dir-((b*36+this.time)%360)-360)<60){
-                                minimum261[b]=min(minimum261[b],distance)
-                            }
-                        }
-                    }
-                }
-                let fired261=[false,false,false,false,false,false,false,false,false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        for(let b=0,lb=10;b<lb;b++){
-                            if(!fired261[b]&&distance==minimum261[b]){
-                                entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(b*36+this.time)*4,this.position.y-lcos(b*36+this.time)*4,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                                fired261[b]=true
-                            }
-                        }
-                    }
-                }
-                for(let b=0,lb=10;b<lb;b++){
-                    if(!fired261[b]){
-                        entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(b*36+this.time)*4,this.position.y-lcos(b*36+this.time)*4,1,b*36+this.time,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                    }
-                }
-			break
-            case 262:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],156,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 264:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-			break
-            case 265:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],157,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 266:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[158,159,160,158][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 267:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[118,111,124][weapon.uses%3],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 268:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+165,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-165,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=3*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=0.2*(lsin(this.direction.main)<0?-1:1)
-            break
-            case 271:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,-90,this.id,weaponData.damage*damageBuff,900,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,90,this.id,weaponData.damage*damageBuff,900,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 273:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGuard',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-			case 278:
-				for(let a=0,la=15;a<la;a++){
-                    let mult=random(1.5,2.5)
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-				}
-			break
-            case 279: case 486: case 636:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-135:135)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 280:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],166,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-            case 281:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                if(weapon.uses%2==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-                }
-			break
-            case 282:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-45:45),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-45:45),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-            case 283:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],167,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 284: case 285: case 607:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 287:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[118,171][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 290:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)-36,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)+36,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 291:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                if(weapon.uses%3==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
-                }
-			break
-            case 292:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                for(let a=0,la=5;a<la;a++){
+                break
+                case 15: case 163:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 16:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],13,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 17:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],14,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 18:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 19:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-                }
-			break
-            case 293:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.4,30,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.4,30,crit,this.index))
-			break
-            case 294:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],172,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 295:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.ammo==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
-                }
-            break
-            case 296:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=8*(lsin(this.direction.main)<0?1:-1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?1:-1)
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickRocketLauncher',types.player),this.index))
-                entities.players[entities.players.length-1].sidekick=true
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                entities.players[entities.players.length-1].DOT.damage=1
-                entities.players[entities.players.length-1].DOT.active=9999
-			break
-            case 297:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],174,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 299:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],175,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 301:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],176,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 302:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[119,124][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 303:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],177,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 304:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],178,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 305:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],179,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 306:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 307:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 308:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 309: case 316: case 318: case 654:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6
-                }
-            break
-            case 310:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructDestroyer',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 311:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAuto',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 312:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 313:
-                for(let a=0,la=12;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90-56+a*8-max(0,a-7)*6.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6
-                }
-            break
-            case 314:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%4==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,random(0,360),this.id,weaponData.damage*damageBuff*2,900,crit,this.index))
-                }
-            break
-            case 317:
-                for(let a=0,la=11;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*3,this.id,weaponData.damage*damageBuff*(2-abs(a-5)*0.3),300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8-abs(a-5)*0.6
-                }
-            break
-            case 319: case 321: case 376:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 320: case 322:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 323:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],121,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 324:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?60:-60),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                if(weapon.uses%3==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],184,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,1200,crit,this.index))
-                }
-			break
-            case 325:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],185,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-			break
-            case 326:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],186,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 327:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSpreadling',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-			case 328:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],187,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 329:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,-90,this.id,weaponData.damage*damageBuff,50,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,90,this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 330:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],188,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 332: case 343: case 497:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-			break
-            case 333:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],189,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 334:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],190,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 335: case 360: case 479: case 574:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 336:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6
-                }
-                for(let a=0,la=6;a<la;a++){
-                    if(a!=2&&a!=3){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-12.5+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
+                break
+                case 20:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 21:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],17,(lsin(this.direction.main)<0?-90:90)+random(-30,30),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 22:
+                    for(let a=0,la=15;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     }
-                }
-            break
-            case 337:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],192,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 338: case 351: case 447: case 580:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 339:
-                if(this.assort.glove==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-                    if(weapon.ammo==0){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],199,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
-                        this.assort.glove=360
+                break
+                case 23:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],18,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 24:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],19,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 25: case 46:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 26:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],21,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 27:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],22,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 28:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],23,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 29: case 48:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],24,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 30:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],25,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 31:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 32:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],27,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 33:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],28,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 34:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 35:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],29,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 36: case 188: case 420:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],30,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 37:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],31,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 38:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],32,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 39:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],33,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 40:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 41:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],35,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 42:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],36,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 43:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],37,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 44: case 76:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],38,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 45:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 47:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],40,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 49:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],41,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 50:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 51:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 52:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],42,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 53:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 54:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,5,crit,this.index))
+                break
+                case 55:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 56:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 57: case 68:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],44,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 58:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],45,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 59:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],46,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 60:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],47,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 61:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],48,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 62:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 63:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],20,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 64:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],49,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 65:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],52,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 67:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],53,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 69:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 70:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],54,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 71:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],51,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 72:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 73:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90)-10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],55,(lsin(this.direction.main)<0?-90:90)+10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 74:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],56,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 75:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],57,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 77:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],58,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 78:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],59,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 79:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],39,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 80:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],60,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 81:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],61,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 82:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],62,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 83:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],63,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 84:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.takeDamage(1)
+                break
+                case 85:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 86:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],64,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 87:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],26,(lsin(this.direction.main)<0?-90:90)+random(-22.5,22.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 88:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],66,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 89:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     }
-                }else{
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
-                }
-            break
-            case 340:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90+0.5-a),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-			break
-            case 341:
-                let minimum341=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum341[0]=min(minimum341[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum341[1]=min(minimum341[1],distance)
+                break
+                case 90:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=random(0.75,1.5)
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=random(0.75,1.5)
+                    }
+                break
+                case 91:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],67,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 94:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 95:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],69,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 96:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],70,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 97:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    if(weapon.ammo%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],71,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 98:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    if(weapon.ammo%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                    }
+                break
+                case 99:
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<450){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,atan2(entities.players[a].position.x-spawn[0],spawn[1]-entities.players[a].position.y),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         }
                     }
-                }
-                let fired341=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired341[0]&&distance==minimum341[0]){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=2;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
-                            }
-                            fired341[0]=true
-                        }
-                        if(!fired341[1]&&distance==minimum341[1]){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=2;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
-                            }
-                            fired341[1]=true
-                        }
-                    }
-                }
-                if(!fired341[0]){
-                    for(let a=0,la=2;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,-90+1-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }
-                }
-                if(!fired341[1]){
-                    for(let a=0,la=2;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,90-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }
-                }
-            break
-            case 342:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff*2,720,crit,this.index))
-			break
-            case 344:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],193,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 345:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],194,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 346:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],195,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 348:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],196,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 349:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,197,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 350:
-                if(weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }else{
+                break
+                case 100:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],72,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 102:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],74,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 103:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 104:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],76,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 105: case 134:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],77,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
+                break
+                case 106:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 107:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)*random(1.1,1.4),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 108:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],78,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 109:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],75,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 110:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 111:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],79,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 112:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                }
-            break
-            case 354:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],200,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 355:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-                if(weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,600,crit,this.index))
-                }else{
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                }
-			break
-            case 357:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAssaultRifle',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 358: case 467:
-                let minimum358=[900,900,900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            if(entities.players[a].position.y<this.position.y){
-                                minimum358[0]=min(minimum358[0],distance)
-                            }else{
-                                minimum358[2]=min(minimum358[2],distance)
-                            }
-                        }else if(entities.players[a].position.x>this.position.x){
-                            if(entities.players[a].position.y<this.position.y){
-                                minimum358[1]=min(minimum358[1],distance)
-                            }else{
-                                minimum358[3]=min(minimum358[3],distance)
-                            }
-                        }
+                break
+                case 113:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],80,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 114:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,random(-30,30)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    this.velocity.y=-1.6
+                break
+                case 115:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,-90+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,90+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 116:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],81,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 117:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 118:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],82,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 119:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,-85,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,-95,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 120:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 121:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],83,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 122:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],84,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 124:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.ammo%6==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
                     }
-                }
-                let fired358=[false,false,false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired358[0]&&distance==minimum358[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired358[0]=true
-                        }else if(!fired358[1]&&distance==minimum358[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired358[1]=true
-                        }else if(!fired358[2]&&distance==minimum358[2]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired358[2]=true
-                        }else if(!fired358[3]&&distance==minimum358[3]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired358[3]=true
-                        }
+                break
+                case 125:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],85,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 126:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     }
-                }
-                if(!fired358[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired358[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired358[2]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-135,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired358[3]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,135,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-            case 359:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.25,1200,crit,this.index))
-			break
-            case 361:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],201,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 363:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1)-4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1)+4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 364: case 502: case 585: case 593:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],151,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 365:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],202,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 366:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+150,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+210,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 367:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 369:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 371:
-                for(let a=0,la=2;a<la;a++){
+                break
+                case 128:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)-10,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+10,this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                break
+                case 130:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],87,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 132:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],88,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 133: case 347: case 362:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],89,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 135:
+                    for(let a=0,la=16;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,a*22.5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 136: case 150: case 613:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],90,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 137: case 140: case 186: case 583:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 138:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],92,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,100,crit,this.index))
+                break
+                case 139:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],93,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 141:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 143:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 144:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    for(let a=0,la=3;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.25,300,crit,this.index))
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.5,180,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.5,10,crit,this.index))
+                break
+                case 145:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],94,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 146:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],95,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 147:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],96,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,500,crit,this.index))
+                break
+                case 148:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],97,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 151:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=3
+                break
+                case 152:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMachineGun',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 153: case 154: case 409:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6-a*2
-                }
-            break
-            case 372:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],204,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 373:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(this.velocity.y>-9){
-                    this.velocity.y=-9
-                }
-                this.velocity.y-=6
-			break
-            case 374:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0]-3,spawn[1],1,180,this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0]+3,spawn[1],1,180,this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-                if(this.velocity.y>-9){
-                    this.velocity.y=-9
-                }
-                this.velocity.y-=6
-			break
-            case 375:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],205,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 377:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                if(weapon.uses<=0){
+                break
+                case 156:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 157:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],99,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 159:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRocketLauncher',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 160:
+                    for(let a=0,la=5;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 162:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],101,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 164:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],102,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 165:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],103,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 166:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],30,random(-3,3),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 167:
+                    for(let a=0,la=12;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-6*(9-this.weapon.ammo),6*(9-this.weapon.ammo)),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 168:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,3,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,3,crit,this.index))
+                break
+                case 169:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],65,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 170:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],104,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 171:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],105,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.setColor()
+                    this.newWeaponSet(findName('PlayerRevolver',types.player))
+                    this.weapon.uses-=12
+                break
+                case 172:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],105,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 173:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSniper',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 174:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructFlamethrower',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 175:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(this.weapon.ammo%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 191: case 228:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],111,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 192:
                     entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     this.inspect.push(entities.players[entities.players.length-1].index)
-                }
-			break
-            case 378:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],175,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 379:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],207,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 380:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 381:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],208,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 383:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,67,231,232][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 384:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+[-6,4,-4,6][weapon.uses%4],209,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-			break
-            case 386:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],210,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,150,crit,this.index))
-                this.velocity.x+=8*(lsin(this.direction.main)<0?1:-1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?1:-1)
-			break
-            case 388:
-                this.newWeapon()
-                bypass=true
-            break
-            case 389:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],211,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 391: case 417: case 457:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 392:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 393:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],213,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 394:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],214,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*(3-2*weapon.ammo/weaponData.ammo),(3-2*weapon.ammo/weaponData.ammo),crit,this.index))
-            break
-            case 395:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,random(0,360),this.id,weaponData.damage*damageBuff*2,900,crit,this.index))
-                }
-            break
-			case 396:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],215,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 397:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],216,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 401:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=20*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=4.8*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 403:
-                for(let a=0,la=5;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,180-20+a*10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 404:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
-                this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
-                if(weapon.uses%2==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                }
-			break
-            case 405:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4+weapon.uses%2*8,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%2==0){
-                    let minimum405=[600,600]
+                break
+                case 193:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],112,a*36,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 194:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
+                    this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
+                break
+                case 196:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],113,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 197: case 201: case 256:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 198:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.8,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?60:-60),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 199:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],117,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 200:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],115,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 202: case 206: case 247: case 263: case 408: case 428: case 489:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 203:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)-45+weapon.uses%3*45,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 204:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],120,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 205:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[122,123][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 207:
+                    for(let a=0,la=7;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],a==3?112:1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff*(a==3?3:1),300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=a==3?8:6
+                    }
+                break
+                case 208:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90+this.weapon.ammo*18),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90+this.weapon.ammo*18)+180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 209:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[128,129][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 210:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 212: case 213: case 217: case 491: case 581:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 214:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],126,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 215:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2,1,(lsin(this.direction.main)<0?-88:88),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+2,1,(lsin(this.direction.main)<0?-92:92),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,1,(lsin(this.direction.main)<0?-86:86),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+4,1,(lsin(this.direction.main)<0?-94:94),this.id,weaponData.damage*damageBuff*0.05,300,crit,this.index))
+                    if(weapon.uses%10==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    }
+                break
+                case 216:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],127,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 218:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],131,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                break
+                case 219:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%15==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*8,1200,crit,this.index))
+                    }
+                break
+                case 220:
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15,this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff*0.8,600,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-5,this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                    }
+                break
+                case 221:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90)-6+floor(weapon.ammo/2)%3*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 223:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 224:
+                    for(let a=0,la=15;a<la;a++){
+                        let mult=random(5,10)
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                    }
+                break
+                case 226:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[139,140,141,142][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 229:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],146,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 230:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],144,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 231: case 444: case 540:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 232:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?90:-90)+random(-10,10),this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                break
+                case 234: case 238:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 235:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],148,(lsin(this.direction.main)<0?-90:90)-18+weapon.ammo*3%7*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 236:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,149,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 239:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,150,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                break
+                case 244:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-15,15)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 248:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],154,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 249:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-2+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.5,30,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+2+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.5,30,crit,this.index))
+                break
+                case 250:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],155,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 251:
+                    for(let a=0,la=4;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6-a
+                    }
+                break
+                case 252:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed*=0.8
+                break
+                case 254: case 255: case 289: case 544: case 595:
+                    let minimum=[900,900]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
                             let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
                             if(entities.players[a].position.x<this.position.x){
-                                minimum405[0]=min(minimum405[0],distance)
+                                minimum[0]=min(minimum[0],distance)
                             }else if(entities.players[a].position.x>this.position.x){
-                                minimum405[1]=min(minimum405[1],distance)
+                                minimum[1]=min(minimum[1],distance)
                             }
                         }
                     }
-                    let fired405=[false,false]
+                    let fired=[false,false]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
                             let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                            if(!fired405[0]&&distance==minimum405[0]){
-                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                                for(let a=0,la=2;a<la;a++){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
-                                    entities.projectiles[entities.projectiles.length-1].speed=8
-                                }
-                                fired405[0]=true
+                            if(!fired[0]&&distance==minimum[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired[0]=true
                             }
-                            if(!fired405[1]&&distance==minimum405[1]){
-                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                                for(let a=0,la=2;a<la;a++){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
-                                    entities.projectiles[entities.projectiles.length-1].speed=8
-                                }
-                                fired405[1]=true
+                            if(!fired[1]&&distance==minimum[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired[1]=true
                             }
                         }
                     }
-                }
-            break
-            case 406:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=7-a
-                }
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 407:
-                switch(weapon.ammo%3){
-                    case 0:
-    				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],218,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                    break
-                    case 1:
-    				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)-4,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+4,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                    break
-                    case 2:
-    				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7
-                    break
-                }
-			break
-			case 410:
-				for(let a=0,la=3;a<la;a++){
-                    let mult=random(5,10)
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-				}
-			break
-            case 411:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%12==1){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,240,crit,this.index))
-                }
-			break
-            case 412:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],221,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-			break
-            case 413: case 537:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-            case 414:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],223,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-            case 416:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-135:135)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-			case 418:
-                for(let a=0,la=9;a<la;a++){
-                    let mult=1+lcos(a/la*360)*0.2
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90)+11*lsin(a/la*360),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-                }
-			break
-            case 419:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-                let minimum419=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum419[0]=min(minimum419[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum419[1]=min(minimum419[1],distance)
+                    if(!fired[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 258: case 259: case 286:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 261:
+                    let minimum261=[900,900,900,900,900,900,900,900,900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                            for(let b=0,lb=10;b<lb;b++){
+                                if(abs(dir-((b*36+this.time)%360))<60||abs(dir-((b*36+this.time)%360)+360)<60||abs(dir-((b*36+this.time)%360)-360)<60){
+                                    minimum261[b]=min(minimum261[b],distance)
+                                }
+                            }
                         }
                     }
-                }
-                let fired419=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired419[0]&&distance==minimum419[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired419[0]=true
-                        }
-                        if(!fired419[1]&&distance==minimum419[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired419[1]=true
+                    let fired261=[false,false,false,false,false,false,false,false,false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            for(let b=0,lb=10;b<lb;b++){
+                                if(!fired261[b]&&distance==minimum261[b]){
+                                    entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(b*36+this.time)*4,this.position.y-lcos(b*36+this.time)*4,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                    fired261[b]=true
+                                }
+                            }
                         }
                     }
-                }
-                if(!fired419[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
-                }
-                if(!fired419[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
-                }
-			break
-            case 422:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],224,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 423:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],225,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 424:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],226,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 425:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],227,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 426:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],228,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 427:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.ammo==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],139,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,1500,crit,this.index))
-                }
-            break
-            case 430:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],229,(lsin(this.direction.main)<0?-90:90)+[-6,-3,3,6][weapon.uses%4],this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 431:
-                let dir=random(-2,2)
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=6
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=9
-			break
-            case 432:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%3*5,230,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 435:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],234,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 436:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],235,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 437:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],236,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-			break
-            case 438:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 439:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
-            break
-            case 440:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,-(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-                if(weapon.uses%4==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
-                }
-			break
-            case 441:
-                for(let a=0,la=5;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,this.time+a*72+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                }
-            break
-            case 442:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.2,300,crit,this.index))
-                if(weapon.uses%6==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                }
-			break
-            case 443:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,237,(lsin(this.direction.main)<0?-86:86)-8,this.id,weaponData.damage*damageBuff,50,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,238,(lsin(this.direction.main)<0?-86:86)+8,this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 445:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],239,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,75,crit,this.index))
-			break
-			case 446:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],240,(lsin(this.direction.main)<0?-120:120),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-            case 448:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1+floor(random(0,2))*240,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 449:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,242,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 450:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],249,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-			break
-            case 451:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],243,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 452:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],89,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                let minimum452=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum452[0]=min(minimum452[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum452[1]=min(minimum452[1],distance)
+                    for(let b=0,lb=10;b<lb;b++){
+                        if(!fired261[b]){
+                            entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(b*36+this.time)*4,this.position.y-lcos(b*36+this.time)*4,1,b*36+this.time,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                         }
                     }
-                }
-                let fired452=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired452[0]&&distance==minimum452[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
-                            fired452[0]=true
-                        }
-                        if(!fired452[1]&&distance==minimum452[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
-                            fired452[1]=true
+                break
+                case 262:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],156,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 264:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                break
+                case 265:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],157,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 266:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[158,159,160,158][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 267:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[118,111,124][weapon.uses%3],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 268:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+165,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-165,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=3*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=0.2*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 271:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,-90,this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,90,this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 273:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGuard',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 278:
+                    for(let a=0,la=15;a<la;a++){
+                        let mult=random(1.5,2.5)
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                    }
+                break
+                case 279: case 486: case 636:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-135:135)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 280:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],166,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 281:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                    }
+                break
+                case 282:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-45:45),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-45:45),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 283:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],167,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 284: case 285: case 607:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 287:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[118,171][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 290:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)-36,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90)+36,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 291:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    if(weapon.uses%3==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
+                    }
+                break
+                case 292:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    for(let a=0,la=5;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 293:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.4,30,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.4,30,crit,this.index))
+                break
+                case 294:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],172,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 295:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.ammo==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
+                    }
+                break
+                case 296:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=8*(lsin(this.direction.main)<0?1:-1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?1:-1)
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickRocketLauncher',types.player),this.index))
+                    entities.players[entities.players.length-1].sidekick=true
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    entities.players[entities.players.length-1].DOT.damage=1
+                    entities.players[entities.players.length-1].DOT.active=9999
+                break
+                case 297:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],174,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 299:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],175,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 301:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],176,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 302:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[119,124][weapon.uses%2],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 303:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],177,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 304:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],178,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 305:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],179,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 306:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 307:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],50,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 308:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 309: case 316: case 318: case 654:
+                    for(let a=0,la=7;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6
+                    }
+                break
+                case 310:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructDestroyer',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 311:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAuto',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 312:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 313:
+                    for(let a=0,la=12;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-1:1)*(90-56+a*8-max(0,a-7)*6.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6
+                    }
+                break
+                case 314:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%4==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,random(0,360),this.id,weaponData.damage*damageBuff*2,900,crit,this.index))
+                    }
+                break
+                case 317:
+                    for(let a=0,la=11;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*3,this.id,weaponData.damage*damageBuff*(2-abs(a-5)*0.3),300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8-abs(a-5)*0.6
+                    }
+                break
+                case 319: case 321: case 376:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 320: case 322:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 323:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],121,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 324:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?60:-60),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                    if(weapon.uses%3==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],184,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,1200,crit,this.index))
+                    }
+                break
+                case 325:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],185,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 326:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],186,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 327:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSpreadling',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 328:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],187,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 329:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,-90,this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,90,this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 330:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],188,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 332: case 343: case 497:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                break
+                case 333:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],189,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 334:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],190,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 335: case 360: case 479: case 574:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 336:
+                    for(let a=0,la=7;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6
+                    }
+                    for(let a=0,la=6;a<la;a++){
+                        if(a!=2&&a!=3){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-12.5+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
                         }
                     }
-                }
-                if(!fired452[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
-                }
-                if(!fired452[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
-                }
-			break
-            case 453:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],244,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 454:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 455:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[146,245,246,247][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-            break
-            case 456:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],248,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 458:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructPelleter',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 460:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 462:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%12==1){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6,240,crit,this.index))
-                }
-			break
-            case 463:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructInterceptor',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 464:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 465: case 530:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 466:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,random(156,204),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 468:
-                for(let a=0,la=[2,2,3,3,3,1][floor(weapon.ammo/5)%6];a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+3-la*3+a*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-			case 472:
-				for(let a=0,la=3;a<la;a++){
-                    let mult=random(1,2.5)
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult*4
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-				}
-			break
-            case 474:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.ammo==0){
+                break
+                case 337:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],192,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 338: case 351: case 447: case 580:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 339:
+                    if(this.assort.glove==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                        if(weapon.ammo==0){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],199,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                            this.assort.glove=360
+                        }
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff/2,300,crit,this.index))
+                    }
+                break
+                case 340:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90+0.5-a),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                break
+                case 341:
+                    let minimum341=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum341[0]=min(minimum341[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum341[1]=min(minimum341[1],distance)
+                            }
+                        }
+                    }
+                    let fired341=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired341[0]&&distance==minimum341[0]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=2;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired341[0]=true
+                            }
+                            if(!fired341[1]&&distance==minimum341[1]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=2;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired341[1]=true
+                            }
+                        }
+                    }
+                    if(!fired341[0]){
+                        for(let a=0,la=2;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,-90+1-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }
+                    }
+                    if(!fired341[1]){
+                        for(let a=0,la=2;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,90-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }
+                    }
+                break
+                case 342:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff*2,720,crit,this.index))
+                break
+                case 344:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],193,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 345:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],194,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 346:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],195,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 348:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],196,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 349:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,197,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 350:
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                    }
+                break
+                case 354:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],200,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 355:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,600,crit,this.index))
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    }
+                break
+                case 357:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAssaultRifle',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 358: case 467:
+                    let minimum358=[900,900,900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                if(entities.players[a].position.y<this.position.y){
+                                    minimum358[0]=min(minimum358[0],distance)
+                                }else{
+                                    minimum358[2]=min(minimum358[2],distance)
+                                }
+                            }else if(entities.players[a].position.x>this.position.x){
+                                if(entities.players[a].position.y<this.position.y){
+                                    minimum358[1]=min(minimum358[1],distance)
+                                }else{
+                                    minimum358[3]=min(minimum358[3],distance)
+                                }
+                            }
+                        }
+                    }
+                    let fired358=[false,false,false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired358[0]&&distance==minimum358[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired358[0]=true
+                            }else if(!fired358[1]&&distance==minimum358[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired358[1]=true
+                            }else if(!fired358[2]&&distance==minimum358[2]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired358[2]=true
+                            }else if(!fired358[3]&&distance==minimum358[3]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired358[3]=true
+                            }
+                        }
+                    }
+                    if(!fired358[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired358[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired358[2]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-135,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired358[3]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,135,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 359:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.25,1200,crit,this.index))
+                break
+                case 361:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],201,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 363:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1)-4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1)+4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 364: case 502: case 585: case 593:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],151,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 365:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],202,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 366:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+150,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+210,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
                     this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
-                }
-            break
-            case 475:
-				for(let a=0,la=5;a<la;a++){
-                    for(let b=0,lb=[3,4,5,4,3][a];b<lb;b++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-12+a*6,this.id,weaponData.damage*damageBuff,15,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=7+b-lb*0.5+0.5
+                break
+                case 367:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 369:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 371:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6-a*2
                     }
-				}
-			break
-            case 476:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,30,crit,this.index))
-				}
-			break
-            case 477:
-				for(let a=0,la=5;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],254,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed*=random(0.75,1.25)
-                    entities.projectiles[entities.projectiles.length-1].time*=random(0.75,1.25)
-				}
-			break
-            case 478:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 480:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],256,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 481:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],257,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 482:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],258,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 483:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]-3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]+3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                for(let a=0,la=4;a<la;a++){
-                    entities.projectiles[entities.projectiles.length-1-a].speed=6.5
-                }
-			break
-            case 484:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],a==3?217:1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff*(a==3?3:1),300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=a==3?7:6
-                }
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-            break
-            case 487:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],260,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 488:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],261,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 490:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,262,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 492:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],263,(lsin(this.direction.main)<0?-1:1)*105,this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],263,(lsin(this.direction.main)<0?-1:1)*85,this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 493:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],264,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 494:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],265,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 496:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-4+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+4+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 498:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],266,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 499:
-                if(weapon.uses%5==0){
-                    for(let a=0,la=20;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 372:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],204,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 373:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(this.velocity.y>-9){
+                        this.velocity.y=-9
                     }
-                }else{
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 500:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],267,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 501:
-                for(let a=0,la=8;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-                }
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 503:
-                if(weapon.uses%2==0){
+                    this.velocity.y-=6
+                break
+                case 374:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,120,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0]-3,spawn[1],1,180,this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0]+3,spawn[1],1,180,this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                    if(this.velocity.y>-9){
+                        this.velocity.y=-9
+                    }
+                    this.velocity.y-=6
+                break
+                case 375:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],205,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 377:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                    if(weapon.uses<=0){
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                        this.inspect.push(entities.players[entities.players.length-1].index)
+                    }
+                break
+                case 378:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],175,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 379:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],207,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 380:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 381:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],208,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 383:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,67,231,232][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 384:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+[-6,4,-4,6][weapon.uses%4],209,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                break
+                case 386:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],210,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,150,crit,this.index))
+                    this.velocity.x+=8*(lsin(this.direction.main)<0?1:-1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?1:-1)
+                break
+                case 388:
+                    this.newWeapon()
+                    bypass=true
+                break
+                case 389:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],211,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 391: case 417: case 457:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 392:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 393:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],213,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 394:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],214,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*(3-2*weapon.ammo/weaponData.ammo),(3-2*weapon.ammo/weaponData.ammo),crit,this.index))
+                break
+                case 395:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,random(0,360),this.id,weaponData.damage*damageBuff*2,900,crit,this.index))
+                    }
+                break
+                case 396:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],215,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 397:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],216,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 401:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=20*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=4.8*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 403:
+                    for(let a=0,la=5;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,180-20+a*10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 404:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                    this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                    }
+                break
+                case 405:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4+weapon.uses%2*8,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%2==0){
+                        let minimum405=[600,600]
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                                let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                                if(entities.players[a].position.x<this.position.x){
+                                    minimum405[0]=min(minimum405[0],distance)
+                                }else if(entities.players[a].position.x>this.position.x){
+                                    minimum405[1]=min(minimum405[1],distance)
+                                }
+                            }
+                        }
+                        let fired405=[false,false]
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                                let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                                if(!fired405[0]&&distance==minimum405[0]){
+                                    let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                    for(let a=0,la=2;a<la;a++){
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
+                                        entities.projectiles[entities.projectiles.length-1].speed=8
+                                    }
+                                    fired405[0]=true
+                                }
+                                if(!fired405[1]&&distance==minimum405[1]){
+                                    let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                    for(let a=0,la=2;a<la;a++){
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff/3,300,crit,this.index))
+                                        entities.projectiles[entities.projectiles.length-1].speed=8
+                                    }
+                                    fired405[1]=true
+                                }
+                            }
+                        }
+                    }
+                break
+                case 406:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=7-a
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 407:
+                    switch(weapon.ammo%3){
+                        case 0:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],218,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                        break
+                        case 1:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)-4,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+4,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                        break
+                        case 2:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7
+                        break
+                    }
+                break
+                case 410:
+                    for(let a=0,la=3;a<la;a++){
+                        let mult=random(5,10)
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                    }
+                break
+                case 411:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%12==1){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,240,crit,this.index))
+                    }
+                break
+                case 412:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],221,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                break
+                case 413: case 537:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 414:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],223,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 416:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-135:135)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 418:
+                    for(let a=0,la=9;a<la;a++){
+                        let mult=1+lcos(a/la*360)*0.2
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90)+11*lsin(a/la*360),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                    }
+                break
+                case 419:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                    let minimum419=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum419[0]=min(minimum419[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum419[1]=min(minimum419[1],distance)
+                            }
+                        }
+                    }
+                    let fired419=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired419[0]&&distance==minimum419[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired419[0]=true
+                            }
+                            if(!fired419[1]&&distance==minimum419[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired419[1]=true
+                            }
+                        }
+                    }
+                    if(!fired419[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
+                    }
+                    if(!fired419[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
+                    }
+                break
+                case 422:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],224,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 423:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],225,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 424:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],226,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 425:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],227,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 426:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],228,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 427:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.ammo==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],139,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,1500,crit,this.index))
+                    }
+                break
+                case 430:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],229,(lsin(this.direction.main)<0?-90:90)+[-6,-3,3,6][weapon.uses%4],this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 431:
+                    let dir=random(-2,2)
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=6
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=9
+                break
+                case 432:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%3*5,230,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 435:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],234,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 436:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],235,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 437:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],236,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 438:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 439:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1200,crit,this.index))
+                break
+                case 440:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,-(90-1+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                    if(weapon.uses%4==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],130,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
+                    }
+                break
+                case 441:
+                    for(let a=0,la=5;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,this.time+a*72+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    }
+                break
+                case 442:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+weapon.uses%2*6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.2,300,crit,this.index))
+                    if(weapon.uses%6==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    }
+                break
+                case 443:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,237,(lsin(this.direction.main)<0?-86:86)-8,this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,238,(lsin(this.direction.main)<0?-86:86)+8,this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 445:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],239,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,75,crit,this.index))
+                break
+                case 446:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],240,(lsin(this.direction.main)<0?-120:120),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 448:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1+floor(random(0,2))*240,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 449:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,242,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 450:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],249,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 451:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],243,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 452:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],89,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                    let minimum452=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum452[0]=min(minimum452[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum452[1]=min(minimum452[1],distance)
+                            }
+                        }
+                    }
+                    let fired452=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired452[0]&&distance==minimum452[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
+                                fired452[0]=true
+                            }
+                            if(!fired452[1]&&distance==minimum452[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
+                                fired452[1]=true
+                            }
+                        }
+                    }
+                    if(!fired452[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
+                    }
+                    if(!fired452[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff*200,300,crit,this.index))
+                    }
+                break
+                case 453:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],244,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 454:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?88:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 455:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[146,245,246,247][weapon.uses%4],(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 456:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],248,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 458:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructPelleter',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 460:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 462:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%12==1){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6,240,crit,this.index))
+                    }
+                break
+                case 463:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructInterceptor',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 464:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 465: case 530:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 466:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,random(156,204),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 468:
+                    for(let a=0,la=[2,2,3,3,3,1][floor(weapon.ammo/5)%6];a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+3-la*3+a*6,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 472:
+                    for(let a=0,la=3;a<la;a++){
+                        let mult=random(1,2.5)
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult*4
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                    }
+                break
+                case 474:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.ammo==0){
+                        this.velocity.x+=15*(lsin(this.direction.main)<0?-1:1)
+                        this.lastingForce[0]+=3.6*(lsin(this.direction.main)<0?-1:1)
+                    }
+                break
+                case 475:
+                    for(let a=0,la=5;a<la;a++){
+                        for(let b=0,lb=[3,4,5,4,3][a];b<lb;b++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-12+a*6,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=7+b-lb*0.5+0.5
+                        }
+                    }
+                break
+                case 476:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,30,crit,this.index))
+                    }
+                break
+                case 477:
+                    for(let a=0,la=5;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],254,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed*=random(0.75,1.25)
+                        entities.projectiles[entities.projectiles.length-1].time*=random(0.75,1.25)
+                    }
+                break
+                case 478:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 480:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],256,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 481:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],257,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 482:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],258,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 483:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]-3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(lsin(this.direction.main)<0?-2:2),spawn[1]+3,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+6,219,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    for(let a=0,la=4;a<la;a++){
+                        entities.projectiles[entities.projectiles.length-1-a].speed=6.5
+                    }
+                break
+                case 484:
                     for(let a=0,la=7;a<la;a++){
-                        if(a!=3){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],a==3?217:1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff*(a==3?3:1),300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=a==3?7:6
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+4,217,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                break
+                case 487:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],260,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 488:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],261,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 490:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,262,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 492:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],263,(lsin(this.direction.main)<0?-1:1)*105,this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],263,(lsin(this.direction.main)<0?-1:1)*85,this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 493:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],264,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 494:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],265,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 496:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-4+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+4+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 498:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],266,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 499:
+                    if(weapon.uses%5==0){
+                        for(let a=0,la=20;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        }
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 500:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],267,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 501:
+                    for(let a=0,la=8;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 503:
+                    if(weapon.uses%2==0){
+                        for(let a=0,la=7;a<la;a++){
+                            if(a!=3){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed=6
+                            }
+                        }
+                    }
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+2,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    break
+                case 504:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],241,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 505:
+                    for(let a=0,la=3;a<la;a++){
+                        if(weapon.uses%2==0){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+a*3,1,(lsin(this.direction.main)<0?-1:1)*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }else{
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*2,1,(lsin(this.direction.main)<0?-1:1)*(90-2+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8-abs(1-a)
+                        }
+                    }
+                break
+                case 506:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],269,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 507:
+                    let chance=floor(random(0,4))
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff*(chance==0?10:1),15,crit,this.index))
+                    }
+                break
+                case 508:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],270,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 509:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],271,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 510:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-120:120)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 511:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-4,4),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7.5
+                break
+                case 512:
+                    for(let a=0,la=4;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,this.time*2+a*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 513:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],272,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 514:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],273,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 515:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],274,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 516:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                break
+                case 517:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%6==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
+                    }
+                break
+                case 518:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],275,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,100,crit,this.index))
+                break
+                case 520:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5,276,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+5,276,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 521:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],277,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 522:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],278,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
+                    this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
+                break
+                case 523:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],279,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 524:
+                    for(let a=0,la=3;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],133,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=4.5-a
+                    }
+                break
+                case 525:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],280,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                    if(this.id>0&&this.id<=game.gaming){
+                        this.disable=true
+                    }
+                break
+                case 526:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],281,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 527:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],282,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 534:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],284+weapon.uses%2*2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                break
+                case 535:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],285,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 536:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],287,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                break
+                case 538:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],289,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 539:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],290,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 550:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],292,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 551:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],293,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 552:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],294,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 554:
+                    for(let a=0,la=7;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6
+                    }
+                    if(weapon.uses%5==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,1200,crit,this.index))
+                    }
+                break
+                case 555:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%3==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=10
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=10
+                    }
+                break
+                case 556:
+                    if(floor(random(0,2))==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.2,360,crit,this.index))
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*0.2,360,crit,this.index))
+                    }
+                break
+                case 557:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                    if(weapon.uses%60==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*30,1200,crit,this.index))
+                    }
+                break
+                case 559:
+                    if(this.assort.elevate==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                        if(weapon.uses%6==0){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*2.4,1200,crit,this.index))
+                        }
+                    }else{
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                        if(weapon.uses%3==0){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2.4,1200,crit,this.index))
+                        }
+                    }
+                break
+                case 560:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%12==1){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],117,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*3,240,crit,this.index))
+                    }
+                break
+                case 561:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-4,4),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 562:
+                    let minimum562=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum562[0]=min(minimum562[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum562[1]=min(minimum562[1],distance)
+                            }
+                        }
+                    }
+                    let fired562=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired562[0]&&distance==minimum562[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired562[0]=true
+                            }
+                            if(!fired562[1]&&distance==minimum562[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired562[1]=true
+                            }
+                        }
+                    }
+                    if(!fired562[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired562[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(weapon.ammo%8==1){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,-90,this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,90,this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
+                    }
+                break
+                case 564:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRemote',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].remote=true
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                    this.disable=true
+                break
+                case 566:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
+                case 567:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],296,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 568:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%10==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*12,1200,crit,this.index))
+                    }
+                break
+                case 569:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],297,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 570: case 594: case 640:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],298,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 571:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],299,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
+                    this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
+                break
+                case 573:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],298,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].speed=7
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 575:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],300,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                break
+                case 576:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
+                    if(this.weapon.ammo%7==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*15,300,crit,this.index))
+                    }
+                break
+                case 584:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],302,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
+                break
+                case 586:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],303,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 587:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],304,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 588:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],305,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 592:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 596:
+                    let minimum596=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum596[0]=min(minimum596[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum596[1]=min(minimum596[1],distance)
+                            }
+                        }
+                    }
+                    let fired596=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired596[0]&&distance==minimum596[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired596[0]=true
+                            }
+                            if(!fired596[1]&&distance==minimum596[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired596[1]=true
+                            }
+                        }
+                    }
+                    if(!fired596[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired596[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 597:
+                    let minimum597=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum597[0]=min(minimum597[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum597[1]=min(minimum597[1],distance)
+                            }
+                        }
+                    }
+                    let fired597=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired597[0]&&distance==minimum597[0]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                let b=weapon.uses%2
+                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-5+b*10)*lcos(dir),spawn[1]+(-5+b*10)*lsin(dir),133,dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                fired597[0]=true
+                            }
+                            if(!fired597[1]&&distance==minimum597[1]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                let b=weapon.uses%2
+                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-5+b*10)*lcos(dir),spawn[1]+(-5+b*10)*lsin(dir),133,dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                fired597[1]=true
+                            }
+                        }
+                    }
+                    if(!fired597[0]){
+                        let a=weapon.uses%2
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+a*10,133,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                    if(!fired597[1]){
+                        let a=weapon.uses%2
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+a*10,133,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    }
+                break
+                case 598:
+                    let minimum598=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum598[0]=min(minimum598[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum598[1]=min(minimum598[1],distance)
+                            }
+                        }
+                    }
+                    let fired598=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired598[0]&&distance==minimum598[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired598[0]=true
+                            }
+                            if(!fired598[1]&&distance==minimum598[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired598[1]=true
+                            }
+                        }
+                    }
+                    if(!fired598[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired598[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 599:
+                    let minimum599=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                minimum599[0]=min(minimum599[0],distance)
+                            }else if(entities.players[a].position.x>this.position.x){
+                                minimum599[1]=min(minimum599[1],distance)
+                            }
+                        }
+                    }
+                    let fired599=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired599[0]&&distance==minimum599[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired599[0]=true
+                            }
+                            if(!fired599[1]&&distance==minimum599[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired599[1]=true
+                            }
+                        }
+                    }
+                    if(!fired599[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired599[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 600:
+                    let minimum600=[900,900,900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                if(abs(entities.players[a].position.y-this.position.y)<abs(entities.players[a].position.x-this.position.x)/3){
+                                    minimum600[0]=min(minimum600[0],distance)
+                                    minimum600[2]=min(minimum600[2],distance)
+                                }else if(entities.players[a].position.y<this.position.y){
+                                    minimum600[0]=min(minimum600[0],distance)
+                                }else{
+                                    minimum600[2]=min(minimum600[2],distance)
+                                }
+                            }else if(entities.players[a].position.x>this.position.x){
+                                if(abs(entities.players[a].position.y-this.position.y)<abs(entities.players[a].position.x-this.position.x)/3){
+                                    minimum600[1]=min(minimum600[1],distance)
+                                    minimum600[3]=min(minimum600[3],distance)
+                                }else if(entities.players[a].position.y<this.position.y){
+                                    minimum600[1]=min(minimum600[1],distance)
+                                }else{
+                                    minimum600[3]=min(minimum600[3],distance)
+                                }
+                            }
+                        }
+                    }
+                    let fired600=[false,false,false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired600[0]&&distance==minimum600[0]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired600[0]=true
+                            }else if(!fired600[1]&&distance==minimum600[1]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired600[1]=true
+                            }
+                            if(!fired600[2]&&distance==minimum600[2]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired600[2]=true
+                            }else if(!fired600[3]&&distance==minimum600[3]){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                fired600[3]=true
+                            }
+                        }
+                    }
+                    if(!fired600[0]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,-75,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired600[1]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,75,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired600[2]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,-105,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired600[3]){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,105,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 604:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],306,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 605:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],306,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 606:
+                    let minimum606=[900,900,900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(entities.players[a].position.x<this.position.x){
+                                if(entities.players[a].position.y<this.position.y){
+                                    minimum606[0]=min(minimum606[0],distance)
+                                }else{
+                                    minimum606[2]=min(minimum606[2],distance)
+                                }
+                            }else if(entities.players[a].position.x>this.position.x){
+                                if(entities.players[a].position.y<this.position.y){
+                                    minimum606[1]=min(minimum606[1],distance)
+                                }else{
+                                    minimum606[3]=min(minimum606[3],distance)
+                                }
+                            }
+                        }
+                    }
+                    let fired606=[false,false,false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired606[0]&&distance==minimum606[0]){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=2;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired606[0]=true
+                            }else if(!fired606[1]&&distance==minimum606[1]&&weapon.uses%2==1){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*10,300,crit,this.index))
+                                fired606[1]=true
+                            }else if(!fired606[2]&&distance==minimum606[2]&&weapon.uses%4==0){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
+                                fired606[2]=true
+                            }else if(!fired606[3]&&distance==minimum606[3]&&weapon.uses%2==0){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
+                                fired606[3]=true
+                            }
+                        }
+                    }
+                    if(!fired606[0]){
+                        for(let a=0,la=2;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(-45),spawn[1]+(-2+a*4)*lsin(-45),1,-45+1-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }
+                    }
+                    if(!fired606[1]&&weapon.uses%2==1){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                    if(!fired606[2]&&weapon.uses%4==0){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,-135,this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
+                    }
+                    if(!fired606[3]&&weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,135,this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
+                    }
+                break
+                case 608:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],307,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 609:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],308,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 610:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],309,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 611:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],310,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 612:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],311,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],312,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                break
+                case 614:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],313,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 615:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],276,(lsin(this.direction.main)<0?-90:90)+random(-8,8),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                    }
+                break
+                case 616:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 617:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 618:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructBaller',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 619:
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGust',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 620:
+                    let minimum620=[900,900]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.25){
+                                if(entities.players[a].position.x<this.position.x){
+                                    minimum620[0]=min(minimum620[0],distance)
+                                }else if(entities.players[a].position.x>this.position.x){
+                                    minimum620[1]=min(minimum620[1],distance)
+                                }
+                            }
+                        }
+                    }
+                    let fired620=[false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(!fired620[0]&&distance==minimum620[0]&&lsin(this.direction.main)<0){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=4;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired620[0]=true
+                            }
+                            if(!fired620[1]&&distance==minimum620[1]&&lsin(this.direction.main)>0){
+                                let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+                                for(let a=0,la=4;a<la;a++){
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles[entities.projectiles.length-1].speed=8
+                                }
+                                fired620[1]=true
+                            }
+                        }
+                    }
+                    if(!fired620[0]&&lsin(this.direction.main)<0){
+                        for(let a=0,la=4;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,1,-90+3-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }
+                    }
+                    if(!fired620[1]&&lsin(this.direction.main)>0){
+                        for(let a=0,la=4;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,1,90-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=8
+                        }
+                    }
+                break
+                case 621:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],314,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 622:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],316,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                    if(this.id>0&&this.id<=game.gaming){
+                        this.disable=true
+                    }
+                break
+                case 623:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                break
+                case 624:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%3==0){
+                        for(let a=0,la=2;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-2+a*4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].speed=6
                         }
                     }
-                }
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+2,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+6,1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
                 break
-            case 504:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],241,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 505:
-                for(let a=0,la=3;a<la;a++){
-                    if(weapon.uses%2==0){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3+a*3,1,(lsin(this.direction.main)<0?-1:1)*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }else{
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*2,1,(lsin(this.direction.main)<0?-1:1)*(90-2+a*2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8-abs(1-a)
-                    }
-                }
-			break
-            case 506:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],269,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 507:
-                let chance=floor(random(0,4))
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff*(chance==0?10:1),15,crit,this.index))
-				}
-			break
-            case 508:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],270,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 509:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],271,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 510:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-120:120)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 511:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-4,4),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7.5
-			break
-            case 512:
-                for(let a=0,la=4;a<la;a++){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,this.time*2+a*90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-			break
-            case 513:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],272,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 514:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],273,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 515:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],274,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 516:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-			break
-            case 517:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%6==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)+5,this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
-                }
-			break
-            case 518:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],275,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,100,crit,this.index))
-			break
-            case 520:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5,276,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+5,276,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 521:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],277,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 522:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],278,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
-                this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
-			break
-			case 523:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],279,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 524:
-                for(let a=0,la=3;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],133,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=4.5-a
-                }
-            break
-            case 525:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],280,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-                if(this.id>0&&this.id<=game.gaming){
-                    this.disable=true
-                }
-			break
-            case 526:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],281,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 527:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],282,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 534:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],284+weapon.uses%2*2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-			break
-            case 535:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],285,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 536:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],287,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
-            break
-            case 538:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],289,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 539:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],290,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 550:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],292,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 551:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],293,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 552:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],294,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 554:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6
-                }
-                if(weapon.uses%5==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,1200,crit,this.index))
-                }
-            break
-            case 555:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%3==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].velocity.x*=10
-                    entities.projectiles[entities.projectiles.length-1].velocity.y*=10
-                }
-			break
-            case 556:
-                if(floor(random(0,2))==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.2,360,crit,this.index))
-                }else{
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*0.2,360,crit,this.index))
-                }
-            break
-            case 557:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-                if(weapon.uses%60==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*30,1200,crit,this.index))
-                }
-            break
-            case 559:
-                if(this.assort.elevate==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.4,300,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                    if(weapon.uses%6==0){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*2.4,1200,crit,this.index))
-                    }
-                }else{
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-                    if(weapon.uses%3==0){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2.4,1200,crit,this.index))
-                    }
-                }
-			break
-            case 560:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%12==1){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],117,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*3,240,crit,this.index))
-                }
-            break
-			case 561:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-4,4),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 562:
-                let minimum562=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum562[0]=min(minimum562[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum562[1]=min(minimum562[1],distance)
-                        }
-                    }
-                }
-                let fired562=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired562[0]&&distance==minimum562[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired562[0]=true
-                        }
-                        if(!fired562[1]&&distance==minimum562[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired562[1]=true
-                        }
-                    }
-                }
-                if(!fired562[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired562[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(weapon.ammo%8==1){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,-90,this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,90,this.id,weaponData.damage*damageBuff*10,600,crit,this.index))
-                }
-            break
-            case 564:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRemote',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].remote=true
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-                this.disable=true
-            break
-            case 566:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
-            case 567:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],296,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 568:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%10==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*12,1200,crit,this.index))
-                }
-            break
-            case 569:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],297,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 570: case 594: case 640:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],298,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 571:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],299,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                this.velocity.x+=20*(lsin(this.direction.main)<0?1:-1)
-                this.lastingForce[0]+=6*(lsin(this.direction.main)<0?1:-1)
-			break
-            case 573:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],298,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].speed=7
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 575:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],300,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-            break
-            case 576:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],191,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
-                if(this.weapon.ammo%7==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*15,300,crit,this.index))
-                }
-            break
-            case 584:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],302,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,50,crit,this.index))
-			break
-            case 586:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],303,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 587:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],304,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 588:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],305,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-            break
-            case 592:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)-1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],this.infoAnim.elevate>=15?175:4,(lsin(this.direction.main)<0?-1:1)*(90-this.infoAnim.elevate)+1+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 596:
-                let minimum596=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum596[0]=min(minimum596[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum596[1]=min(minimum596[1],distance)
-                        }
-                    }
-                }
-                let fired596=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired596[0]&&distance==minimum596[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired596[0]=true
-                        }
-                        if(!fired596[1]&&distance==minimum596[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired596[1]=true
-                        }
-                    }
-                }
-                if(!fired596[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired596[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-            case 597:
-                let minimum597=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum597[0]=min(minimum597[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum597[1]=min(minimum597[1],distance)
-                        }
-                    }
-                }
-                let fired597=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired597[0]&&distance==minimum597[0]){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            let b=weapon.uses%2
-                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-5+b*10)*lcos(dir),spawn[1]+(-5+b*10)*lsin(dir),133,dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                            fired597[0]=true
-                        }
-                        if(!fired597[1]&&distance==minimum597[1]){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            let b=weapon.uses%2
-                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-5+b*10)*lcos(dir),spawn[1]+(-5+b*10)*lsin(dir),133,dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                            fired597[1]=true
-                        }
-                    }
-                }
-                if(!fired597[0]){
-                    let a=weapon.uses%2
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+a*10,133,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-                if(!fired597[1]){
-                    let a=weapon.uses%2
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+a*10,133,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                }
-            break
-            case 598:
-                let minimum598=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum598[0]=min(minimum598[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum598[1]=min(minimum598[1],distance)
-                        }
-                    }
-                }
-                let fired598=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired598[0]&&distance==minimum598[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired598[0]=true
-                        }
-                        if(!fired598[1]&&distance==minimum598[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired598[1]=true
-                        }
-                    }
-                }
-                if(!fired598[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired598[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-            case 599:
-                let minimum599=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            minimum599[0]=min(minimum599[0],distance)
-                        }else if(entities.players[a].position.x>this.position.x){
-                            minimum599[1]=min(minimum599[1],distance)
-                        }
-                    }
-                }
-                let fired599=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired599[0]&&distance==minimum599[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired599[0]=true
-                        }
-                        if(!fired599[1]&&distance==minimum599[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired599[1]=true
-                        }
-                    }
-                }
-                if(!fired599[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,-90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired599[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,90,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-            case 600:
-                let minimum600=[900,900,900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            if(abs(entities.players[a].position.y-this.position.y)<abs(entities.players[a].position.x-this.position.x)/3){
-                                minimum600[0]=min(minimum600[0],distance)
-                                minimum600[2]=min(minimum600[2],distance)
-                            }else if(entities.players[a].position.y<this.position.y){
-                                minimum600[0]=min(minimum600[0],distance)
-                            }else{
-                                minimum600[2]=min(minimum600[2],distance)
-                            }
-                        }else if(entities.players[a].position.x>this.position.x){
-                            if(abs(entities.players[a].position.y-this.position.y)<abs(entities.players[a].position.x-this.position.x)/3){
-                                minimum600[1]=min(minimum600[1],distance)
-                                minimum600[3]=min(minimum600[3],distance)
-                            }else if(entities.players[a].position.y<this.position.y){
-                                minimum600[1]=min(minimum600[1],distance)
-                            }else{
-                                minimum600[3]=min(minimum600[3],distance)
-                            }
-                        }
-                    }
-                }
-                let fired600=[false,false,false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired600[0]&&distance==minimum600[0]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired600[0]=true
-                        }else if(!fired600[1]&&distance==minimum600[1]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired600[1]=true
-                        }
-                        if(!fired600[2]&&distance==minimum600[2]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired600[2]=true
-                        }else if(!fired600[3]&&distance==minimum600[3]){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                            fired600[3]=true
-                        }
-                    }
-                }
-                if(!fired600[0]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,-75,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired600[1]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y-3,1,75,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired600[2]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,-105,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired600[3]){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y+3,1,105,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-            break
-            case 604:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],306,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 605:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],306,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 606:
-                let minimum606=[900,900,900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(entities.players[a].position.x<this.position.x){
-                            if(entities.players[a].position.y<this.position.y){
-                                minimum606[0]=min(minimum606[0],distance)
-                            }else{
-                                minimum606[2]=min(minimum606[2],distance)
-                            }
-                        }else if(entities.players[a].position.x>this.position.x){
-                            if(entities.players[a].position.y<this.position.y){
-                                minimum606[1]=min(minimum606[1],distance)
-                            }else{
-                                minimum606[3]=min(minimum606[3],distance)
-                            }
-                        }
-                    }
-                }
-                let fired606=[false,false,false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired606[0]&&distance==minimum606[0]){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=2;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(dir),spawn[1]+(-2+a*4)*lsin(dir),1,dir-1+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
-                            }
-                            fired606[0]=true
-                        }else if(!fired606[1]&&distance==minimum606[1]&&weapon.uses%2==1){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*10,300,crit,this.index))
-                            fired606[1]=true
-                        }else if(!fired606[2]&&distance==minimum606[2]&&weapon.uses%4==0){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
-                            fired606[2]=true
-                        }else if(!fired606[3]&&distance==minimum606[3]&&weapon.uses%2==0){
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
-                            fired606[3]=true
-                        }
-                    }
-                }
-                if(!fired606[0]){
-                    for(let a=0,la=2;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0]+(-2+a*4)*lcos(-45),spawn[1]+(-2+a*4)*lsin(-45),1,-45+1-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }
-                }
-                if(!fired606[1]&&weapon.uses%2==1){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,2,45,this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
-                }
-                if(!fired606[2]&&weapon.uses%4==0){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,-135,this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
-                }
-                if(!fired606[3]&&weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,4,135,this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
-                }
-            break
-            case 608:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],307,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 609:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],308,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 610:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],309,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 611:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],310,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 612:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],311,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],312,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
-			break
-			case 614:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],313,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 615:
-                for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],276,(lsin(this.direction.main)<0?-90:90)+random(-8,8),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                }
-            break
-            case 616:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 617:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 618:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructBaller',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 619:
-                entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGust',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-            break
-            case 620:
-                let minimum620=[900,900]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<900){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.25){
-                            if(entities.players[a].position.x<this.position.x){
-                                minimum620[0]=min(minimum620[0],distance)
-                            }else if(entities.players[a].position.x>this.position.x){
-                                minimum620[1]=min(minimum620[1],distance)
-                            }
-                        }
-                    }
-                }
-                let fired620=[false,false]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
-                        let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
-                        if(!fired620[0]&&distance==minimum620[0]&&lsin(this.direction.main)<0){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=4;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
-                            }
-                            fired620[0]=true
-                        }
-                        if(!fired620[1]&&distance==minimum620[1]&&lsin(this.direction.main)>0){
-                            let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-                            for(let a=0,la=4;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].speed=8
-                            }
-                            fired620[1]=true
-                        }
-                    }
-                }
-                if(!fired620[0]&&lsin(this.direction.main)<0){
-                    for(let a=0,la=4;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,1,-90+3-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }
-                }
-                if(!fired620[1]&&lsin(this.direction.main)>0){
-                    for(let a=0,la=4;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,1,90-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].speed=8
-                    }
-                }
-            break
-            case 621:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],314,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 622:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],316,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
-                if(this.id>0&&this.id<=game.gaming){
-                    this.disable=true
-                }
-			break
-            case 623:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
-                entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
-			break
-            case 624:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+3,1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%3==0){
-                    for(let a=0,la=2;a<la;a++){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-3,1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-2+a*4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                case 625:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],317,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 626:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=0.4
+                    entities.projectiles[entities.projectiles.length-1].velocity.y-=16
+                break
+                case 627:
+                    for(let a=0,la=7;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed=6
                     }
-                }
-			break
-            case 625:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],317,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 626:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=0.4
-                entities.projectiles[entities.projectiles.length-1].velocity.y-=16
-			break
-            case 627:
-                for(let a=0,la=7;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)-15+a*5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6
-                }
-            break
-            case 628:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-                this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
-                this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
-			break
-            case 629:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],318,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-            break
-            case 630:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],121,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                if(weapon.uses%2==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                }
-            break
-            case 632:
-                for(let a=0,la=2;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2)+lsin(this.time*3)*4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=8
-                }
-			break
-            case 633:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],319,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,30,crit,this.index))
-            break
-            case 635:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,320,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-            break
-            case 637:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 638:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],321,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-            break
-            case 639:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],322,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 641:
-                for(let a=0,la=3;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles[entities.projectiles.length-1].speed=6-a
-                }
-            break
-            case 643:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,random(156,204),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                this.velocity.y=-1.6
-			break
-            case 644: case 660:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%10==0){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*5,1200,crit,this.index))
-                }
-			break
-            case 645:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],323,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
-			break
-            case 647:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],324,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 648:
-                let chance648=floor(random(0,4))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance648==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*(chance648==0?10:1),300,crit,this.index))
-			break
-            case 649:
-				for(let a=0,la=10;a<la;a++){
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],325,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
-				}
-			break
-            case 650:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],326,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-			break
-            case 651:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],291,(lsin(this.direction.main)<0?-75:75)+random(-3,3),this.id,weaponData.damage*damageBuff*1.5,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
-                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
-			break
-            case 652:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],327,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-			break
-            case 655:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],328,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
-            break
-            case 656:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                if(weapon.uses%6==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*6,50,crit,this.index))
-                }
-			break
-            case 657:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],329,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-			break
-            case 658:
-                let possible=[]
-                for(let a=0,la=entities.players.length;a<la;a++){
-                    if(entities.players[a].id==0&&!entities.players[a].remote)[
-                        possible.push(a)
-                    ]
-                }
-                if(possible.length>0){
-                    let index=floor(random(0,possible.length))
-                    entities.players[possible[index]].id=this.id
-                    entities.players[possible[index]].builder=this.index
-                    entities.players[possible[index]].remote=true
-                    this.disable=true
-                }
-            break
-            case 659:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],330,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-			break
-            case 661:
-                entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,41))
-                entities.walls[1][entities.walls[1].length-1].formBoundary()
-                entities.walls[1][entities.walls[1].length-1].checkRedundancy()
-                entities.walls[1][entities.walls[1].length-1].checkOverlay()
-                entities.walls[1][entities.walls[1].length-1].set()
-                entities.walls[1][entities.walls[1].length-1].checkGap()
-                entities.walls[1][entities.walls[1].length-1].checkBar()
-                entities.walls[1][entities.walls[1].length-1].formBounder()
-            break
-            case 662:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.25,300,crit,this.index))
-                entities.projectiles[entities.projectiles.length-1].velocity.x*=6
-                entities.projectiles[entities.projectiles.length-1].velocity.y*=6
-                if(weapon.uses%4==0){
-				    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
-                }
-			break
-            case 664:
-				entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
-			break
-            case 665:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90+weapon.uses%2*180,this.id,weaponData.damage*damageBuff,600,crit,this.index))
-            break
+                break
+                case 628:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+135,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+225,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                    this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
+                    this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?-1:1)
+                break
+                case 629:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],318,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 630:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],121,(lsin(this.direction.main)<0?-90:90)+weapon.uses%4*90,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    if(weapon.uses%2==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    }
+                break
+                case 632:
+                    for(let a=0,la=2;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-2+a*4,1,(lsin(this.direction.main)<0?-1:1)*(90-1+a*2)+lsin(this.time*3)*4,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=8
+                    }
+                break
+                case 633:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],319,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,30,crit,this.index))
+                break
+                case 635:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,320,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 637:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)-10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3)+10,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 638:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],321,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                break
+                case 639:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],322,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 641:
+                    for(let a=0,la=3;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=6-a
+                    }
+                break
+                case 643:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],251,random(156,204),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    this.velocity.y=-1.6
+                break
+                case 644: case 660:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%10==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],118,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*5,1200,crit,this.index))
+                    }
+                break
+                case 645:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],323,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                break
+                case 647:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],324,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 648:
+                    let chance648=floor(random(0,4))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance648==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*(chance648==0?10:1),300,crit,this.index))
+                break
+                case 649:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],325,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                break
+                case 650:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],326,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                break
+                case 651:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],291,(lsin(this.direction.main)<0?-75:75)+random(-3,3),this.id,weaponData.damage*damageBuff*1.5,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                break
+                case 652:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],327,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
+                case 655:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],328,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
+                break
+                case 656:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    if(weapon.uses%6==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*6,50,crit,this.index))
+                    }
+                break
+                case 657:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],329,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                break
+                case 658:
+                    let possible=[]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].id==0&&!entities.players[a].remote)[
+                            possible.push(a)
+                        ]
+                    }
+                    if(possible.length>0){
+                        let index=floor(random(0,possible.length))
+                        entities.players[possible[index]].id=this.id
+                        entities.players[possible[index]].builder=this.index
+                        entities.players[possible[index]].remote=true
+                        this.disable=true
+                    }
+                break
+                case 659:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],330,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                break
+                case 661:
+                    entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,41))
+                    entities.walls[1][entities.walls[1].length-1].formBoundary()
+                    entities.walls[1][entities.walls[1].length-1].checkRedundancy()
+                    entities.walls[1][entities.walls[1].length-1].checkOverlay()
+                    entities.walls[1][entities.walls[1].length-1].set()
+                    entities.walls[1][entities.walls[1].length-1].checkGap()
+                    entities.walls[1][entities.walls[1].length-1].checkBar()
+                    entities.walls[1][entities.walls[1].length-1].formBounder()
+                break
+                case 662:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.25,300,crit,this.index))
+                    entities.projectiles[entities.projectiles.length-1].velocity.x*=6
+                    entities.projectiles[entities.projectiles.length-1].velocity.y*=6
+                    if(weapon.uses%4==0){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                    }
+                break
+                case 664:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                break
+                case 665:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,-90+weapon.uses%2*180,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                break
 
-            //mark
-		}
-        if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
-            switch(variant){
-                case 0: this.weaponType=-1
-                case 1: this.subWeaponAType=-1
-                case 2: this.subWeaponBType=-1
+                //mark
+            }
+            if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
+                switch(variant){
+                    case 0: this.weaponType=-1
+                    case 1: this.subWeaponAType=-1
+                    case 2: this.subWeaponBType=-1
+                }
             }
         }
 	}
@@ -5369,7 +5385,7 @@ class player{
                                 for(let a=0,la=entities.walls.length;a<la;a++){
                                     for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                                         if(
-                                            (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                            (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&entities.walls[a][b].pos>=0&&
                                             dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
                                             (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
                                         ){
@@ -5395,6 +5411,9 @@ class player{
                                             possible.push(a)
                                         }
                                     }
+                                }
+                                if(possible.length==0){
+                                    possible=[0,1,2,3,4]
                                 }
                                 this.target.point=possible[floor(random(0,possible.length))]
                             }
@@ -7405,6 +7424,7 @@ class player{
                                 entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,153,0,this.id,game.level==23?600:300,2,false,this.index))
                                 this.life=0
+                                this.collect.time=450
                             }else if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1||game.level==23)&&!entities.players[a].dead&&!this.dead){
                                 let dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -7413,6 +7433,7 @@ class player{
                                 entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,153,0,this.id,game.level==23?600:300,2,false,this.index))
                                 this.life=0
+                                this.collect.time=450
                             }
                         }
                     }
