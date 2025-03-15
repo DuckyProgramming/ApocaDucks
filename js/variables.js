@@ -5769,7 +5769,7 @@ types={
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:338,
     },{
       name:'RaiderBaller',sizeBuff:1.2,lifeBuff:2,speedBuff:0.9,
-      damageBuff:2.25,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:7,
     },
 
     {
@@ -14492,7 +14492,7 @@ levels=[
 "                   #####  |  |    +=========+    #                         ",
 "                       #=====+    |         |    #                         ",
 "                       #     |    |         +====#                         ",
-"ABC   q           e  p        |    |    t    |           r           w   DEF",
+"ABC   q             p        |    |    t    |           r           w   DEF",
 "                             |    |  <###>  |                              ",
 "###########################################################################",
 "###########################################################################",

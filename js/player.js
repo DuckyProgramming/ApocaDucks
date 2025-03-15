@@ -5616,6 +5616,9 @@ class player{
                                                         if(game.level==22&&game.point[3]&&this.position.y>1280){
                                                             this.target.position.x=2620
                                                             this.target.position.y=abs(this.position.x-2620)<100?0:1600
+                                                        }else if(game.level==22){
+                                                            this.target.position.x=2750
+                                                            this.target.position.y=1600
                                                         }else{
                                                             this.target.position.x=this.position.y<1300?2700:2340
                                                             this.target.position.y=abs(this.position.x-2340)<100?0:1600
