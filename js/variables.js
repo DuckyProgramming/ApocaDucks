@@ -5773,6 +5773,40 @@ types={
     },
 
     {
+      //gaea
+      name:'CelestialG',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:666,
+    },{
+      //rune
+      name:'CelestialR',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:596,
+    },{
+      //serafina
+      name:'CelestialS',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:597,
+    },{
+      //kierre
+      name:'CelestialK',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:598,
+    },{
+      //callum
+      name:'CelestialC',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:667,
+    },{
+      //loki
+      name:'CelestialL',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:599,
+    },{
+      //nyx
+      name:'CelestialN',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:341,
+    },{
+      //tartarus
+      name:'CelestialT',sizeBuff:2,lifeBuff:12.5,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:668,
+    },
+
+    {
       name:'SidekickGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
     },{
@@ -13184,6 +13218,33 @@ types={
 			reload:10,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Double Auto Stacker',
+			ammo:8,
+			damage:120,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Double Auto Shotgun',
+			ammo:2,
+			damage:20,
+			cooldown:20,
+			stop:40,
+			reload:10,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Double Auto Submachine',
+			ammo:12,
+			damage:40,
+			cooldown:4,
+			stop:25,
+			reload:2,
+			speed:1.15,
+      uses:60,
 		},
 
     /*{
@@ -13201,7 +13262,7 @@ types={
 			damage:60,
 			cooldown:10,
 			stop:30,
-			reload:5,w
+			reload:5,
 			speed:1.2,
       uses:48,
 		},*/

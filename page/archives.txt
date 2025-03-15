@@ -1,4 +1,3 @@
-woomy-exclusive celestians
 
 CP_SULFUR:
 A is underground in some tunnels
@@ -18,6 +17,10 @@ A lets you control the water level (potentially cutting off access to B and C, o
 B lets you use pink boxes
 
 
+
+666 - double auto stacker, 596
+667 - double auto shotgun
+668 - double auto submachine
 
 
 

@@ -1531,6 +1531,11 @@ function newWave(level,layer){
                 entities.players[a].respawn()
             }
         }
+        if(game.level!=6&&game.level!=7&&game.level!=8&&game.level!=17){
+            for(let a=0,la=80;a<la;a++){
+                game.stack.push([floor(random(0,6))+6,['CelestialG','CelestialR','CelestialS','CelestialK','CelestialC','CelestialL','CelestialN','CelestialT'][a%8]])
+            }
+        }
     }else{
         if(game.level==8||game.level==17){
             entities.walls[1].forEach(wall=>wall.exploded=false)
