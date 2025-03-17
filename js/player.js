@@ -6464,7 +6464,7 @@ class player{
                                 this.target.point=floor(random(0,4))
                             }else if(this.weaponType==-1){
                                 let max=game.edge[0]+game.edge[1]
-                                let set=0
+                                let set=-1
                                 for(let a=0,la=entities.walls.length;a<la;a++){
                                     for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                                         if(
@@ -6488,7 +6488,7 @@ class player{
                                 }else if(this.id==2){
                                     this.target.point=game.point[3]!=2?3:game.point[2]!=2?2:game.point[1]!=2?1:0
                                 }else{
-                                    this.target.point=game.point[0]==1||game.point[1]==1||game.point[2]==1||game.point[3]==1?3:game.point[0]==2||game.point[1]==2||game.point[2]==2||game.point[3]==2?0:game.point[0]==1||game.point[1]==1||game.point[2]==1?2:game.point[1]==2||game.point[2]==2||game.point[3]==2?1:1+floor(random(0,2))
+                                    this.target.point=game.point[0]==1&&game.point[1]==1&&game.point[2]==1&&game.point[3]==1?3:game.point[0]==2&&game.point[1]==2&&game.point[2]==2&&game.point[3]==2?0:game.point[0]==1&&game.point[1]==1&&game.point[2]==1?2:game.point[1]==2&&game.point[2]==2&&game.point[3]==2?1:1+floor(random(0,2))
                                 }
                             }
                         }else{
