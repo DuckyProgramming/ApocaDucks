@@ -1007,7 +1007,7 @@ class wall{
                         }
                     break
                     case 25: case 26:
-                        if(this.position.x>game.tileset[0]*182&&this.position.x<game.tileset[0]*183){
+                        if(this.position.x>game.tileset[0]*183&&this.position.x<game.tileset[0]*184){
                             layer.fill(160,90,20)
                             layer.rect(0,0,this.width*3,this.height+1)
                             layer.fill(180,110,40)
