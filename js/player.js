@@ -1429,7 +1429,6 @@ class player{
         }
     }
     respawn(reject){
-        let playerLength=entities.players.length
         this.die.killer=-1
         this.stats.bust*=0.25
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
@@ -1466,11 +1465,6 @@ class player{
             this.position.x=game.edge[0]/2
             this.position.y=1000
             this.parachute=true
-        }
-        if(entities.players.length>playerLength&&this.parachute){
-            for(let a=playerLength,la=entities.players.length;a<la;a++){
-                entities.players[a].parchute=true
-            }
         }
     }
     resetKeys(){
@@ -6457,7 +6451,7 @@ class player{
                         !game.noPlayer&&(
                             this.target.point==-1||
                             floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?15:150)))==0||!game.pvp&&(
-                                this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[2,0,1,3][this.target.point]].id==this.id||!game.pvp&&(entities.players[game.players+[2,0,1,3][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
+                                this.playerData.name!='Buster'&&this.target.point>=0&&((entities.players[game.players+[2,0,1,3][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||!game.pvp&&(entities.players[game.players+[2,0,1,3][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
                                 this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[2,0,1,3][this.target.point]].unProtected()&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<600||
                                 this.playerData.name=='Buster'&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<100
                             )
@@ -6484,7 +6478,7 @@ class player{
                                 if(max<game.edge[0]+game.edge[1]&&set>=0){
                                     this.target.point=set
                                 }else{
-                                    this.target.point=floor(random(0,4))
+                                    this.target.point=this.id==1?0:this.id==2?3:floor(random(0,4))
                                 }
                             }else{
                                 if(this.id==1){
@@ -6507,7 +6501,7 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
                             this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
-                            this.weaponType>=0
+                            this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
                         ){
                             let b=entities.players[a]
                             let bar=[]
@@ -7375,7 +7369,9 @@ class player{
                             this.base.position.y=set[1]-40
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>300){
+                            let playerLength=entities.players.length
                             let key='ABCDEF'[floor(random(0,6))]
+                            let paraTrigger=false
                             for(let a=0,la=levels[19].length;a<la;a++){
                                 for(let b=0,lb=levels[19][a].length;b<lb;b++){
                                     if(levels[19][a][b]==key){
@@ -7384,13 +7380,7 @@ class player{
                                         if(floor(random(0,3))!=0){
                                             this.base.position.x=game.edge[0]/2+random(-800,800)
                                             this.base.position.y=0
-                                            let playerLength=entities.players.length
-                                            this.parachute=true
-                                            if(entities.players.length>playerLength){
-                                                for(let a=playerLength,la=entities.players.length;a<la;a++){
-                                                    entities.players[a].parachute=true
-                                                }
-                                            }
+                                            paraTrigger=true
                                         }
                                         a=la
                                         b=lb
@@ -7398,6 +7388,14 @@ class player{
                                 }
                             }
                             this.respawn()
+                            if(paraTrigger){
+                                this.parachute=true
+                                if(entities.players.length>playerLength){
+                                    for(let a=playerLength,la=entities.players.length;a<la;a++){
+                                        entities.players[a].parachute=true
+                                    }
+                                }
+                            }
                         }
                     }else if(game.level==22){
                         for(let a=0,la=entities.walls.length;a<la;a++){
@@ -7430,7 +7428,9 @@ class player{
                             this.base.position.y=set[1]-40
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>360){
+                            let playerLength=entities.players.length
                             let key='yZ'[floor(random(0,2))]
+                            let paraTrigger=false
                             for(let a=0,la=levels[23].length;a<la;a++){
                                 for(let b=0,lb=levels[23][a].length;b<lb;b++){
                                     if(levels[23][a][b]==key){
@@ -7439,13 +7439,7 @@ class player{
                                         if(floor(random(0,20))==0){
                                             this.base.position.x=random(500,game.edge[0]-500)
                                             this.base.position.y=0
-                                            let playerLength=entities.players.length
-                                            this.parachute=true
-                                            if(entities.players.length>playerLength){
-                                                for(let a=playerLength,la=entities.players.length;a<la;a++){
-                                                    entities.players[a].parachute=true
-                                                }
-                                            }
+                                            paraTrigger=true
                                         }
                                         a=la
                                         b=lb
@@ -7454,6 +7448,14 @@ class player{
                             }
                             this.respawn(true)
                             this.newWeaponSet(listing[0][floor(random(0,listing[0].length))])
+                            if(paraTrigger){
+                                this.parachute=true
+                                if(entities.players.length>playerLength){
+                                    for(let a=playerLength,la=entities.players.length;a<la;a++){
+                                        entities.players[a].parachute=true
+                                    }
+                                }
+                            }
                         }
                     }else if(game.level==24){
                         let max=game.edge[0]+game.edge[1]
@@ -7520,7 +7522,9 @@ class player{
                             this.base.position.y=set[1]-40
                             this.respawn()
                         }else if(game.pvp&&this.die.timer>360){
+                            let playerLength=entities.players.length
                             let key='yZ'[floor(random(0,1.125))]
+                            let paraTrigger=false
                             for(let a=0,la=levels[26].length;a<la;a++){
                                 for(let b=0,lb=levels[26][a].length;b<lb;b++){
                                     if(levels[26][a][b]==key){
@@ -7529,13 +7533,7 @@ class player{
                                         if(floor(random(0,10))==0){
                                             this.base.position.x=random(500,game.edge[0]-500)
                                             this.base.position.y=0
-                                            let playerLength=entities.players.length
-                                            this.parachute=true
-                                            if(entities.players.length>playerLength){
-                                                for(let a=playerLength,la=entities.players.length;a<la;a++){
-                                                    entities.players[a].parachute=true
-                                                }
-                                            }
+                                            paraTrigger=true
                                         }
                                         a=la
                                         b=lb
@@ -7544,15 +7542,23 @@ class player{
                             }
                             this.respawn(true)
                             this.newWeaponSet(listing[0][floor(random(0,listing[0].length))])
+                            if(paraTrigger){
+                                this.parachute=true
+                                if(entities.players.length>playerLength){
+                                    for(let a=playerLength,la=entities.players.length;a<la;a++){
+                                        entities.players[a].parachute=true
+                                    }
+                                }
+                            }
                         }
                     }else if(game.level==27){
                         if(game.pvp){
                             for(let a=0,la=entities.walls.length;a<la;a++){
                                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                                    if(entities.walls[a][b].type==31&&entities.walls[a][b].owner==this.id||this.id==3&&!(game.point[0]==1&&game.point[1]==1&&game.point[2]==1&&game.point[3]==1)&&!(game.point[0]==2&&game.point[1]==2&&game.point[2]==2&&game.point[3]==2)){
+                                    if(!(this.id==3&&this.die.timer<480)&&entities.walls[a][b].type==31&&(entities.walls[a][b].owner==this.id||this.id==3&&!(game.point[0]==1&&game.point[1]==1&&game.point[2]==1&&game.point[3]==1)&&!(game.point[0]==2&&game.point[1]==2&&game.point[2]==2&&game.point[3]==2))){
+                                        let playerLength=entities.players.length
                                         this.respawn()
                                         if(this.id==3){
-                                            let playerLength=entities.players.length
                                             this.parachute=true
                                             if(entities.players.length>playerLength){
                                                 for(let a=playerLength,la=entities.players.length;a<la;a++){

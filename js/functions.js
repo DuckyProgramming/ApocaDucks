@@ -1026,7 +1026,7 @@ function generateLevel(info,layer){
                 break
                 case '!':
                     switch(game.level){
-                        case 19: case 22: case 23: case 24:
+                        case 19: case 22: case 23: case 24: case 27:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             let cluster=game.peakWeapon?1:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]

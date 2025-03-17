@@ -3232,7 +3232,7 @@ class wall{
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&(game.level==15||game.level==18||game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26)){
+                if(this.recharge>0&&(game.level==15||game.level==18||game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27)){
                     this.recharge--
                 }
                 if(this.falling>0){
@@ -3826,7 +3826,7 @@ class wall{
                         &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
-                        &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming||this.recharge>0||c.construct||c.auto))
+                        &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming&&game.level!=27||this.recharge>0||c.construct||c.auto))
                         &&!(this.type==27&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
                     ){
                         switch(this.type){
@@ -3941,7 +3941,7 @@ class wall{
                                         c.newWeaponSet(this.weapon)
                                         let chunk=game.peakWeapon?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                        this.recharge=game.level==23?1200:3600-(game.gaming-1)*600
+                                        this.recharge=game.level==23||game.level==27?1200:3600-(game.gaming-1)*600
                                     }
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
@@ -3989,7 +3989,7 @@ class wall{
                                 }
                             break
                             case 31:
-                                if(!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&c.id==3||this.owner>=0&&c.id>=0&&!game.pvp))){
+                                if(!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>=0&&c.id>=0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{
@@ -3998,7 +3998,7 @@ class wall{
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&c.id==3||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{
