@@ -721,9 +721,9 @@ class wall{
                     case 27:
                         layer.fill(180)
                         layer.rect(0,0,this.width+1,this.height+1)
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
-                            layer.rect(0,game.tileset[1]*32.5-this.position.y,this.width+1,game.tileset[1]*0.5)
+                            layer.rect(0,game.tileset[1]*52.5-this.position.y,this.width+1,game.tileset[1]*0.5)
                         }
                     break
                     default:
@@ -848,9 +848,9 @@ class wall{
                     case 27:
                         layer.fill(180)
                         layer.rect(0,0,this.width+1,this.height+1)
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
-                            layer.rect(0,gamwe.tileset[1]*32.5-this.position.y,this.width+1,game.tileset[1]*0.5)
+                            layer.rect(0,gamwe.tileset[1]*52.5-this.position.y,this.width+1,game.tileset[1]*0.5)
                         }
                         layer.fill(120,200,120)
                         layer.quad(
@@ -1045,10 +1045,10 @@ class wall{
                         layer.fill(108)
                         layer.rect(-this.width/2,0,this.width/2,this.height+1)
                         layer.rect(this.width/2,0,this.width/2,this.height+1)
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(24,72,96)
-                            layer.rect(-this.width/2,game.tileset[1]*32.5-this.position.y,this.width/2,game.tileset[1]*0.5)
-                            layer.rect(this.width/2,game.tileset[1]*32.5-this.position.y,this.width/2,game.tileset[1]*0.5)
+                            layer.rect(-this.width/2,game.tileset[1]*52.5-this.position.y,this.width/2,game.tileset[1]*0.5)
+                            layer.rect(this.width/2,game.tileset[1]*52.5-this.position.y,this.width/2,game.tileset[1]*0.5)
                         }
                     break
                     default:
@@ -1421,13 +1421,13 @@ class wall{
                             -this.width/2-0.5,this.height/2+0.5,
                             this.width/2+0.5,this.height/2+0.5
                         )
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
                             layer.quad(
-                                -this.width/2-0.5,game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,
-                                -this.width/2-0.5,game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25
+                                -this.width/2-0.5,game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,
+                                -this.width/2-0.5,game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
                     break
@@ -1515,13 +1515,13 @@ class wall{
                             -this.width/2-0.5,this.height/2+0.5,
                             this.width/2+0.5,this.height/2+0.5
                         )
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
                             layer.quad(
-                                this.width/2+0.5,game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,
-                                this.width/2+0.5,game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25
+                                this.width/2+0.5,game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,
+                                this.width/2+0.5,game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,-this.height/2-0.5,this.height/2+0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
                     break
@@ -1609,13 +1609,13 @@ class wall{
                             -this.width/2-0.5,this.height/2+0.5,
                             this.width/2+0.5,-this.height/2-0.5
                         )
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
                             layer.quad(
-                                -this.width/2-0.5,game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,
-                                -this.width/2-0.5,game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25
+                                -this.width/2-0.5,game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,
+                                -this.width/2-0.5,game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,-this.width/2-0.5,this.width/2+0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
                     break
@@ -1703,13 +1703,13 @@ class wall{
                             this.width/2+0.5,-this.height/2-0.5,
                             this.width/2+0.5,this.height/2+0.5
                         )
-                        if(this.position.y-this.height/2<game.tileset[1]*32.5&&this.position.y+this.height/2>game.tileset[1]*32.5){
+                        if(this.position.y-this.height/2<game.tileset[1]*52.5&&this.position.y+this.height/2>game.tileset[1]*52.5){
                             layer.fill(40,120,160)
                             layer.quad(
-                                this.width/2+0.5,game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,
-                                this.width/2+0.5,game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*32.5-this.position.y+game.tileset[1]*0.25,
-                                map(game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*32.5-this.position.y-game.tileset[1]*0.25
+                                this.width/2+0.5,game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,
+                                this.width/2+0.5,game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y+game.tileset[1]*0.25,
+                                map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
                     break

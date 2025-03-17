@@ -1801,7 +1801,7 @@ function generateLevel(info,layer){
                     location.push({x:entities.players[a].position.x,y:entities.players[a].position.y})
                 }
                 let placable=[]
-                if(game.gaming==4){
+                /*if(game.gaming==4){
                     placable=range(4,game.players)
                     let choice=floor(random(0,6))
                     position[0]=[0,1,2].includes(choice)?2:1
@@ -1820,7 +1820,8 @@ function generateLevel(info,layer){
                     position[1]=1
                 }else{
                     placable=range(0,game.players)
-                }
+                }*/
+                placable=range(0,game.players)
                 let assignToEach=floor(placable.length/2)
                 for(let a=0,la=assignToEach;a<la;a++){
                     let index=floor(random(0,placable.length))
@@ -1847,6 +1848,7 @@ function generateLevel(info,layer){
                         case 3:
                             entities.players[a].position.x=location[4].x
                             entities.players[a].position.y=location[4].y
+                            entities.players[a].parachute=true
                         break
                     }
                     entities.players[a].base.position.x=entities.players[a].position.x
