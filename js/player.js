@@ -1048,7 +1048,7 @@ class player{
         }else if(game.randomizer){
             this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
         }else if(game.classicWeapon||this.id>game.gaming){
-            let clump=listing[game.peakWeapon?1:floor(random(0,1.5))]
+            let clump=listing[game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))]
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             if(game.level==27&&game.pvp){
@@ -1120,7 +1120,7 @@ class player{
                 this.newSubWeaponASet(findName('PlayerPistol',types.player))
             break
             case 'PlayerSelector':
-                let tick=game.peakWeapon?1:floor(random(0,1.5))
+                let tick=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
                 this.newSubWeaponA(tick)
                 this.newSubWeaponB(tick)
             break
@@ -6551,10 +6551,6 @@ class player{
                                         this.target.position.y=abs(this.position.x-10820)<100?0:1780
                                     break
                                     case 2:
-                                        this.target.position.x=5500
-                                        this.target.position.y=abs(this.position.x-5500)<100?0:1780
-                                    break
-                                    case 3:
                                         switch(goalPoint){
                                             case 0:
                                                 this.target.position.x=3600
@@ -6566,7 +6562,7 @@ class player{
                                             break
                                         }
                                     break
-                                    case 4:
+                                    case 3:
                                         switch(goalPoint){
                                             case 0: case 1: case 2:
                                                 this.target.position.x=7260
@@ -6578,7 +6574,7 @@ class player{
                                             break
                                         }
                                     break
-                                    case 5:
+                                    case 4:
                                         switch(goalPoint){
                                             case 0:
                                                 this.target.position.x=entities.players[game.players+2].position.x+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)

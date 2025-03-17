@@ -6767,7 +6767,7 @@ class projectile{
 									if(minimum[b]<900){
 										for(let a=0,la=entities.players.length;a<la;a++){
 											if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/5,30,this.crit,this.index))
+												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.15,30,this.crit,this.index))
 												a=la
 											}
 										}

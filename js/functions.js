@@ -742,10 +742,8 @@ function generateLevel(info,layer){
             game.sectors=[
                 [180,1780,280,200],
                 [10820,1780,280,200],
-                [5500,1780,280,200],
                 [3780,1820,280,200],
                 [7220,1820,280,200],
-
                 [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
             ]
         break
@@ -1028,7 +1026,7 @@ function generateLevel(info,layer){
                     switch(game.level){
                         case 19: case 22: case 23: case 24: case 27:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            let cluster=game.peakWeapon?1:floor(random(1.5))
+                            let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
                         case 25: case 26:
@@ -1222,13 +1220,13 @@ function generateLevel(info,layer){
                         case 16:
                             for(let a=0,la=game.players;a<la;a++){
                                 entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                                let cluster=game.peakWeapon?1:floor(random(1.5))
+                                let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                                 entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                             }
                         break
                         case 15: case 18: case 20: case 21: case 25: case 26:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            let cluster=game.peakWeapon?1:floor(random(1.5))
+                            let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
                         default:
@@ -1546,7 +1544,7 @@ function generateLevel(info,layer){
     for(let c=0,lc=game.players;c<lc;c++){
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
-                let clump=listing[game.peakWeapon?1:floor(random(0,1.5))]
+                let clump=listing[game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))]
                 if(game.attacker&&game.level!=13&&game.level!=14){
                     if(level[a][b]=='Z'){
                         entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][0]),game.index))
@@ -1798,7 +1796,15 @@ function generateLevel(info,layer){
                 ticker=[0,0]
                 for(let a=0,la=game.players;a<la;a++){
                     position.push(3)
-                    location.push({x:entities.players[a].position.x,y:entities.players[a].position.y})
+                }
+                for(let c=0,lc=game.players;c<lc;c++){
+                    for(let a=0,la=level.length;a<la;a++){
+                        for(let b=0,lb=level[a].length;b<lb;b++){
+                            if(level[a][b]=='qwerty'[c]){
+                                location.push({x:game.tileset[0]*(b+0.5),y:game.tileset[1]*(a+0.5)})
+                            }
+                        }
+                    }
                 }
                 let placable=[]
                 /*if(game.gaming==4){

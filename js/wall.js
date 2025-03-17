@@ -3456,7 +3456,7 @@ class wall{
                     if(
                         a==0&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&
+                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&
                         !(this.type==37&&c.previous.position.y>c.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -3794,7 +3794,7 @@ class wall{
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         !(this.type==37&&c.previous.position.y>c.position.y)&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42
+                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21)&&inTriangleBoxBasic(this.triangle,c)){
@@ -3934,12 +3934,12 @@ class wall{
                                     }
                                     this.findFall()
                                     c.newWeaponSet(this.weapon)
-                                    let chunk=game.peakWeapon?1:floor(random(0,1.5))
+                                    let chunk=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
                                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                 }else if(game.level>=15){
                                     if(!(game.level==22&&game.pointAnim[2]>=1)&&!((game.level==23||game.level==26)&&this.visible<1)&&!(game.level==25&&!game.point[1])){
                                         c.newWeaponSet(this.weapon)
-                                        let chunk=game.peakWeapon?1:floor(random(0,1.5))
+                                        let chunk=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                         this.recharge=game.level==23||game.level==27?1200:3600-(game.gaming-1)*600
                                     }
