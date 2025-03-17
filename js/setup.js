@@ -19,9 +19,9 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=23
-        menu.level=23
-        game.mission=findName('Survival',types.mission)
+        game.level=27
+        menu.level=27
+        game.mission=findName('Duckocracy',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
@@ -44,7 +44,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,4,4,1][a];b<lb;b++){
+                for(let b=0,lb=[5,5,6,6,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         if(a==0){
@@ -53,12 +53,12 @@ function mouseClicked(){
                             menu.gaming=b+1
                         }else if(a==2){
                             if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
-                                menu.level=[6,7,8,15,16][b]
+                                menu.level=[6,7,8,15,16,19][b]
                             }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
-                                menu.level=[6,7,17,18,16][b]
+                                menu.level=[6,7,17,18,16,19][b]
                             }
                         }else if(a==3){
-                            menu.level=[19,20,21,22,24][b]
+                            menu.level=[20,21,22,24,25,27][b]
                         }else if(a==4){
                             if(menu.weapon==1&&b==4||menu.weapon==4&&b==1){
                                 menu.weapon=7
@@ -132,7 +132,7 @@ function mouseClicked(){
                         game.players=menu.players
                         game.gaming=menu.gaming
                         if(game.classicWeapon||game.randomizer||game.selector){
-                            game.level=game.pvp&&menu.level==22?23:menu.level
+                            game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
                             game.level=13
                         }

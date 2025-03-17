@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,4,4,1][a];b<lb;b++){
+                for(let b=0,lb=[5,5,6,6,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3||a==5&&b==2){
                         fill(100)
@@ -24,8 +24,8 @@ function mainloop(){
                         if(
                             a==0&&menu.players==b+1||
                             a==1&&menu.gaming==b+1||
-                            a==2&&menu.level==[6,7,8,15,16][b]||
-                            a==3&&menu.level==[19,20,21,22,24][b]||
+                            a==2&&menu.level==[6,7,8,15,16,19][b]||
+                            a==3&&menu.level==[20,21,22,24,25,27][b]||
                             a==4&&menu.weapon==b||
                             a==4&&b>=1&&b<=2&&menu.weapon==5||
                             a==4&&(b==1||b==3)&&menu.weapon==6||
@@ -44,8 +44,8 @@ function mainloop(){
                         [
                             `${b+1} Players`,
                             `${b+1} Gaming`,
-                            ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
-                            ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
+                            ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad','DoubleMountain'][b],
+                            ['Prison','Steep','Steel','Constructor','Sulfate','Process'][b],
                             ['Normal Weapons','Special Weapons','Random Weapons','Option Weapons','Pool Weapons'][b],
                             ['Auto-Respawn','Invisible','PvP','Fortress'][b],
                             `Proceed`
@@ -150,7 +150,7 @@ function mainloop(){
                 if(game.level==6){
                     key[c]*=0.75
                 }
-                //key[c]*=6
+                //key[c]*=10
                 bs.push([])
                 let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
                 let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636
@@ -234,7 +234,15 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                graphics.main[a].translate(-effective[a][0],-effective[a][1])
+                if(game.level==25||game.level==26){
+                    graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
+                    for(let b=0,lb=entities.walls[2].length;b<lb;b++){
+                        entities.walls[2][b].display(graphics.main[a])
+                    }
+                    graphics.main[a].translate(-effective[a][0]+round(effective[a][0]),-effective[a][1]+round(effective[a][1]))
+                }else{
+                    graphics.main[a].translate(-effective[a][0],-effective[a][1])
+                }
                 if(display.anim>0){
                     display.anim-=0.01
                 }
@@ -484,6 +492,28 @@ function mainloop(){
                                 for(let b=0,lb=game.sectors.length;b<lb;b++){
                                     graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
                                 }
+                                graphics.main[a].fill(255)
+                                graphics.main[a].noStroke()
+                                graphics.main[a].textSize(100)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1]*9/8)
+                                }
+                            }
+                        break
+                        case 25: case 26: case 27:
+                            if(game.margin){
+                                graphics.main[a].noFill()
+                                graphics.main[a].stroke(255)
+                                graphics.main[a].strokeWeight(10)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
+                                }
+                                graphics.main[a].fill(255)
+                                graphics.main[a].noStroke()
+                                graphics.main[a].textSize(100)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
+                                }
                             }
                         break
                     }
@@ -587,9 +617,10 @@ function mainloop(){
                     
             /*let endTime=performance.now()
             print(`Main: ${endTime - startTime} milliseconds`)*/
+
+            game.time++
         break
     }
-    game.time++
 }
 function draw(){
     mainloop(graphics.main)

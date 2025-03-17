@@ -1,20 +1,7 @@
 
-CP_SULFUR:
-A is underground in some tunnels
-B is to the right of the map in the walled garden
-C is on the bridge to the left
+[gunslinger - shotgun but puts down temporary deployers every few shots]
 
-STANDARD:
-spawn near C (preferably not on it)
-you must defend C to respawn, other points are just turrets
-3/6 ducks land in boats (C), 2/6 swim from the submarine (A) and 1/6 parachute down (B)
 
-PVP:
-koth on C
-you can respawn on all points
-otherwise you randomly spawn in the submarine or parachute down
-A lets you control the water level (potentially cutting off access to B and C, or making combat hard)
-B lets you use pink boxes
 
 
 
