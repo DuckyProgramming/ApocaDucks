@@ -6102,6 +6102,7 @@ class player{
                                 if(max<game.edge[0]+game.edge[1]&&set>=0){
                                     this.target.point=set
                                 }else{
+                                    this.target.point=floor(random(0,6))
                                     if(this.auto){
                                         this.life=0
                                     }else{
@@ -6143,6 +6144,9 @@ class player{
                                         possible.push(valid[a])
                                     }
                                 }
+                            }
+                            if(possible.length==0){
+                                possible=[0,1,2,2,3,4,5]
                             }
                             this.target.point=possible[floor(random(0,possible.length))]
                         }else{
