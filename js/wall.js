@@ -943,6 +943,17 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
+                    case 25: case 26:
+                        layer.fill(60,60,65)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(220-min(480,this.reload)/5,120,120)
+                        layer.quad(
+                            -this.width/2+8,-this.height/2-0.5,
+                            -this.width/2+24,-this.height/2+12,
+                            this.width/2-24,-this.height/2+12,
+                            this.width/2-8,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(220-min(480,this.reload)/5,120,120)
                         if(game.level==6){
@@ -3030,7 +3041,7 @@ class wall{
             break
             case 4: case 23: case 32: case 35: case 40:
                 if(this.reload>0){
-                    this.reload-=(game.level==24?0.25:game.level==22||game.level==23?0.5:game.level==19&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
+                    this.reload-=(game.level==25||game.level==26?0.25:game.level==24?0.25:game.level==22||game.level==23?0.5:game.level==19&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
                 }
             break
             case 6:
@@ -3939,9 +3950,9 @@ class wall{
                                 }else if(game.level>=15){
                                     if(!(game.level==22&&game.pointAnim[2]>=1)&&!((game.level==23||game.level==26)&&this.visible<1)&&!(game.level==25&&!game.point[1])){
                                         c.newWeaponSet(this.weapon)
-                                        let chunk=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                        let chunk=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                        this.recharge=game.level==23||game.level==27?1200:3600-(game.gaming-1)*600
+                                        this.recharge=game.level==27?5400:game.level==23?1200:3600-(game.gaming-1)*600
                                     }
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
@@ -4099,6 +4110,9 @@ class wall{
                                                     }
                                                 break
                                                 case 4:
+                                                    if(game.level==25||game.level==26){
+                                                        c.bounceTime=15
+                                                    }
                                                     if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19)&&c.life>0&&c.attacking&&!(c.construct&&game.level==19)){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
@@ -4178,6 +4192,13 @@ class wall{
                                                                     }
                                                                 }else{
                                                                     this.reload=0
+                                                                }
+                                                            break
+                                                            case 25: case 26:
+                                                                entities.projectiles.push(new projectile(c.layer,this.position.x,this.position.y-this.height/2-5,280,0,c.id,800,1800,0,c.index))
+                                                                if(c.id>0&&c.id<=game.gaming){
+                                                                    c.disable=true
+                                                                    c.assort.missile=true
                                                                 }
                                                             break
                                                             default:

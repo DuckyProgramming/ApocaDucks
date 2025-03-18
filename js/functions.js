@@ -843,7 +843,11 @@ function generateLevel(info,layer){
                                     }
                                 }
                                 reject.push(a*lb+b)
-                                if((game.level==25||game.level==26)&&(level[a][b+1]=='.'||level[a][b+1]=='@'&&level[a][b+2]=='@'&&level[a][b+3]=='@'&&level[a][b+4]=='.')){
+                                if((game.level==25||game.level==26)&&(
+                                    level[a][b+1]=='.'||
+                                    level[a][b+1]=='@'&&level[a][b+2]=='@'&&level[a][b+3]=='@'&&level[a][b+4]=='.'||
+                                    level[a][b+1]=='%'&&level[a][b+2]=='%'&&level[a][b+3]=='%'&&level[a][b+4]=='.'
+                                )){
                                     if(level[a][b-1]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a+e]=level[a+e].substr(0,b-e)+'['+level[a+e].substr(b-e+1)
@@ -1026,7 +1030,7 @@ function generateLevel(info,layer){
                     switch(game.level){
                         case 19: case 22: case 23: case 24: case 27:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
+                            let cluster=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
                         case 25: case 26:

@@ -78,7 +78,7 @@ class player{
         this.pointer={x:0,y:0,fails:0,hit:false}
         this.free=false
         this.storeWeapon=false
-        this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0}
+        this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false}
 
         this.subPlayerAType=0
         this.subPlayerBType=0
@@ -6277,6 +6277,9 @@ class player{
                                                 this.target.position.y=abs(this.position.x-6900)<100?0:1400
                                             break
                                         }
+                                        if(this.position.x>7240&&this.position.x<7440&&this.position.y<1100){
+                                            this.target.position.y=0
+                                        }
                                     break
                                     case 4:
                                         switch(goalPoint){
@@ -6691,7 +6694,20 @@ class player{
                         this.attack(0)
                     }
                 }else{
-                    if(this.weaponType==275&&this.id<=game.gaming){
+                    if(this.assort.missile){
+                        this.disable=false
+                        this.assort.missile=false
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].type==280&&entities.projectiles[a].index==this.index){
+                                if(this.life<=0){
+                                    entities.projectiles[a].active=false
+                                }
+                                this.disable=true
+                                this.assort.missile=true
+                                a=la
+                            }
+                        }
+                    }else if(this.weaponType==275&&this.id<=game.gaming){
                         this.disable=false
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
                             if(entities.projectiles[a].type==163&&entities.projectiles[a].index==this.index){
@@ -6816,7 +6832,20 @@ class player{
             }
         }else if(this.control==0){
             if(this.disable){
-                if(this.weaponType==275&&this.id<=game.gaming){
+                if(this.assort.missile){
+                    this.disable=false
+                    this.assort.missile=false
+                    for(let a=0,la=entities.projectiles.length;a<la;a++){
+                        if(entities.projectiles[a].type==280&&entities.projectiles[a].index==this.index){
+                            if(this.life<=0){
+                                entities.projectiles[a].active=false
+                            }
+                            this.disable=true
+                            this.assort.missile=true
+                            a=la
+                        }
+                    }
+                }else if(this.weaponType==275&&this.id<=game.gaming){
                     this.disable=false
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==163&&entities.projectiles[a].index==this.index){

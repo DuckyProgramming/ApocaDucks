@@ -165,7 +165,7 @@ function mainloop(){
                             special=true
                         }
                     }
-                }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'){
+                }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(entities.projectiles[a].type==280&&entities.projectiles[a].id==c+1){
                             center=entities.projectiles[a]
