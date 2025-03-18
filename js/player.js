@@ -1555,7 +1555,7 @@ class player{
                     local++
                 }
             }
-            if(local>=1){
+            if(local>=1||game.time>10800){
                 valid=false
             }
         }
@@ -1572,7 +1572,7 @@ class player{
             &&!this.hyper()
         ){
             let preLife=this.life
-            this.life-=damage*(game.level==27&&(game.pvp?this.index+1:this.id)>game.gaming&&(!game.pvp||game.gaming==1||game.level==27)?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
+            this.life-=damage*(game.level==27&&(game.pvp?this.index+1:this.id)>game.gaming&&(!game.pvp||game.gaming==1)?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank'?0.25:
                 this.playerData.name=='PlayerBonkerception'?0.4:
                 this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
@@ -4444,6 +4444,19 @@ class player{
                     }
                     if(!fired668[1]){
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90+random(-2,2),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                    }
+                break
+                case 669:
+                    for(let a=0,la=10;a<la;a++){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    }
+                    if(weapon.uses%4==0){
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMini',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                        this.inspect.push(entities.players[entities.players.length-1].index)
                     }
                 break
 

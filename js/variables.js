@@ -5435,9 +5435,9 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:452,
       desc:'Electrifyer with auto turrets on each side',dpsBuff:700,
     },{
-      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
-      desc:'Single-use massive explosion around yourself',dpsBuff:2,
+      name:'PlayerGunslinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:669,
+      desc:'Shotgun that occasionally puts down a mini-construct',dpsBuff:10,
     },{
       name:'PlayerDeployerM',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:152,
@@ -5660,6 +5660,10 @@ types={
       name:'PlayerBeekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:662,
       desc:'Destroyer that also can fire drones',dpsBuff:0.5,
+    },{
+      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
+      desc:'Single-use massive explosion around yourself',dpsBuff:2,
     },
 
     //mark di
@@ -5732,6 +5736,9 @@ types={
     },{
       name:'ConstructRemote',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'ConstructMini',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:233,
     },
     
     {
@@ -13068,7 +13075,7 @@ types={
 		},{
 			name:'Pomson',
 			ammo:2,
-			damage:45,
+			damage:50,
 			cooldown:30,
 			stop:60,
 			reload:20,
@@ -13245,6 +13252,15 @@ types={
 			reload:2,
 			speed:1.15,
       uses:60,
+		},{
+			name:'Gunslinger',
+			ammo:2,
+			damage:45,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
 		},
 
     /*{

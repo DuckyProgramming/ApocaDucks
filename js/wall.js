@@ -2888,7 +2888,7 @@ class wall{
                     }else if(this.pos==0&&game.level==27&&game.pvp){
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
-                        graphics.overlay[0].text(formatTime(game.time),25+(this.pos+1.5)*40,15+25)
+                        graphics.overlay[0].text(formatTime(max(game.time,10800)),25+(this.pos+1.5)*40,15+25)
                     }
                 }
             break
