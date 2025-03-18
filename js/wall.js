@@ -68,6 +68,8 @@ class wall{
                     if(this.type==27){
                         let chunk=game.peakWeapon?1:0
                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                        this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
+                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
                     }else if(this.type==50){
                         this.weapon=listing[1][floor(random(listing[1].length))]
                     }
@@ -2899,7 +2901,7 @@ class wall{
                     }else if(this.pos==0&&game.level==27&&game.pvp){
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
-                        graphics.overlay[0].text(formatTime(max(game.time,10800)),25+(this.pos+1.5)*40,15+25)
+                        graphics.overlay[0].text(formatTime(min(game.time,10800)),25+(this.pos+1.5)*40,15+25)
                     }
                 }
             break
@@ -3952,7 +3954,7 @@ class wall{
                                         c.newWeaponSet(this.weapon)
                                         let chunk=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                        this.recharge=game.level==27?5400:game.level==23?1200:3600-(game.gaming-1)*600
+                                        this.recharge=game.level==27?14400:game.level==23?1200:3600-(game.gaming-1)*600
                                     }
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
@@ -3968,13 +3970,19 @@ class wall{
                             break
                             case 27:
                                 if(game.level==23||game.level==25||game.level==26){
-                                    let reserve=c.type
+                                    let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                     c.newWeaponSet(this.weapon)
                                     if(c.weaponType>=0&&c.id>0&&!c.sidekick){
-                                        this.weapon=reserve
+                                        c.weapon.ammo=this.ammo
+                                        c.weapon.uses=this.uses
+                                        this.weapon=reserve[0]
+                                        this.ammo=reserve[1]
+                                        this.uses=reserve[2]
                                     }else{
                                         let chunk=listing[game.peakWeapon?1:0]
                                         this.weapon=chunk[floor(random(0,chunk.length))]
+                                        this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
+                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
                                     }
                                     this.recharge=600
                                 }else{

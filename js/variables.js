@@ -3430,7 +3430,7 @@ types={
       desc:'Can heal allies with its bullets',dpsBuff:1,
     },{
       name:'PlayerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:137,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:137,
       desc:'Throws chakrams that can bounce',dpsBuff:2,
     },
     
@@ -3947,23 +3947,23 @@ types={
     
     {
       name:'PlayerRecursiveSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:138,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:138,
       desc:'Slicer with projectiles that bounce toward enemies',dpsBuff:2,
     },{
       name:'PlayerPropellerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:139,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:139,
       desc:'Slicer with projectiles that fire bullets backwards',dpsBuff:4,
     },{
       name:'PlayerSlicerLinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:147,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:147,
       desc:'Slicer with projectiles that last a long time',dpsBuff:2,
     },{
       name:'PlayerKarma',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:372,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:372,
       desc:'Slicer with projectiles that turn invisible on return',dpsBuff:2,
     },{
       name:'PlayerDualSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:443,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:443,
       desc:'Throws two slicers in a wider curve',dpsBuff:2,
     },{
       name:'PlayerCleaner',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3971,15 +3971,15 @@ types={
       desc:'Fires a bullet forward and a curving slicer behind',dpsBuff:1,
     },{
       name:'PlayerPinion',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:518,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:518,
       desc:'Slicer with projectiels that cycle at the end of their extent',dpsBuff:2,
     },{
       name:'PlayerRewind',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:584,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:584,
       desc:'Slicer that pulls and stuns enemies',dpsBuff:2,
     },{
       name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:186,
       desc:'Has a slicer auto turret',dpsBuff:2,
     },
     
@@ -14759,7 +14759,7 @@ levels=[
 "#[     ]#[                 ]#[     ]#######[     ]#[                                 <#####>==]#####>==]##########>   <###[     ]#[   | --- |   ]#[     ]###>   <##########[==<#####[==<#####>                                 ]#[     ]#######[     ]#[                 ]#[     ]#",
 "#       #                   |       |     |       |                                 <#######>  ]#####>  ]#[      |     | |       |   <#######>   |       | |     |      ]#[  <#####[  <#######>                                 |       |     |       |                   #       #",
 "# 12345 #        V          |       |     |       |                      ]###[===]###########   ######>  |       |     | |  ---  |  <#########>  |  ---  | |     |       |  <######   ###########[===]###[                      |       |     |       |          V        # ABCDE #",
-"#  q w  # !    -----        |       |     | <###> |                       ]#[     ]#########[===]######> | <###> | --- | |<#############################>| | --- | <###> | <######[===]#########[     ]#[                       | <###> |     |       |        -----    ! #  e r  #",
+"#  q w  # !    -----        |       |     | <###> |                       ]#[     ]#########[===]######> | <###> | --- | |<#############################>| | --- | <###> | <######[===]#########[     ]#[                       | <###> |     |       |        -----      #  e r  #",
 "###@@@##################>   |       |   <###########> ---     <#>          |       |       |     ]###############################################################################[     |       |       |          <#>     --- <###########>   |       |   <##################@@@###",
 "#########################>  |       |  <##################>   <#>   <###>  |  ---  |       |    * ############################################################################### *    |       |  ---  |  <###>   <#>   <##################>  |       |  <#########################",
 "###############################@@@###############################################################################################################################################################################################################@@@###############################",

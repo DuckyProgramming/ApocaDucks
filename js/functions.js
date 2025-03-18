@@ -1030,8 +1030,11 @@ function generateLevel(info,layer){
                     switch(game.level){
                         case 19: case 22: case 23: case 24: case 27:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                            entities.walls[1].push(new wall(graphics.main,game.edge[0]-(game.tileset[0]/2+b*game.tileset[0]),game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             let cluster=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
-                            entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
+                            let weapon=listing[cluster][floor(random(listing[cluster].length))]
+                            entities.walls[1][entities.walls[1].length-2].weapon=weapon
+                            entities.walls[1][entities.walls[1].length-1].weapon=weapon
                         break
                         case 25: case 26:
                             entities.walls[2].push(new wall(graphics.main,b*game.tileset[0],a*game.tileset[1],0,0,3))

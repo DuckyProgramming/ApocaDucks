@@ -1108,6 +1108,11 @@ class player{
                 graphics.panePoint[this.id-1]={position:{x:-1000,y:-1000},width:0,height:0}
             }
         }
+        for(let a=0,la=entities.projectiles.length;a<la;a++){
+            if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].trap){
+                entities.projectiles[a].time=min(60,entities.projectiles[a].time)
+            }
+        }
         switch(this.playerData.name){
             case 'PlayerConglomeration':
                 this.newSubWeaponA(2)
@@ -3273,7 +3278,7 @@ class player{
                 break
                 case 445:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],239,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff,75,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],239,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*0.8,75,crit,this.index))
                 break
                 case 446:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],240,(lsin(this.direction.main)<0?-120:120),this.id,weaponData.damage*damageBuff,720,crit,this.index))
