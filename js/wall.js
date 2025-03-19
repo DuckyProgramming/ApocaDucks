@@ -3265,7 +3265,7 @@ class wall{
                         }
                     }
                 }
-                if(this.type==27&&(game.level==23||game.level==25||game.level==26)){
+                if((this.type==27||this.type==50)&&(game.level==23||game.level==25||game.level==26||game.level==28)){
                     let visible=false
                     for(let a=0,la=game.gaming;a<la;a++){
                         if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
