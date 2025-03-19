@@ -17,11 +17,11 @@ function setup(){
     }
 
     if(false){
-        game.players=5
+        game.players=3
         game.gaming=1
-        game.level=27
-        menu.level=27
-        game.mission=findName('Duckocracy',types.mission)
+        game.level=28
+        menu.level=28
+        game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
@@ -43,6 +43,139 @@ function mouseClicked(){
     updateMouse(graphics.main[0])
     switch(stage.scene){
         case 'menu':
+            for(let a=0,la=7;a<la;a++){
+                for(let b=0,lb=[5,5,2,5,5,5][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)]
+                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                        switch(a){
+                            case 0:
+                                menu.players=b+1
+                            break
+                            case 1:
+                                menu.gaming=b+1
+                            break
+                            case 2:
+                                menu.weapon=b
+                                game.peakWeapon=menu.weapon==1
+                            break
+                            case 3:
+                                stage.scene='mission'
+                                game.classicRespawn=true
+                                switch(b){
+                                    case 0:
+                                        menu.level=6
+                                    break
+                                    case 1:
+                                        menu.level=6
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                    case 2:
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=8
+                                        }else{
+                                            menu.level=17
+                                        }
+                                        game.classicRespawn=false
+                                    break
+                                    case 3:
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=15
+                                        }else{
+                                            menu.level=18
+                                        }
+                                        game.classicRespawn=false
+                                    break
+                                    case 4:
+                                        menu.level=16
+                                        game.classicRespawn=false
+                                    break
+                                }
+                            break
+                            case 4:
+                                stage.scene='mission'
+                                game.classicRespawn=true
+                                switch(b){
+                                    case 0:
+                                        menu.level=19
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }
+                                    break
+                                    case 1:
+                                        menu.level=20
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }else{
+                                            game.classicRespawn=false
+                                        }
+                                    break
+                                    case 2:
+                                        menu.level=21
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }else{
+                                            game.classicRespawn=false
+                                        }
+                                    break
+                                    case 3:
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=22
+                                            game.classicWeapon=true
+                                        }else{
+                                            menu.level=23
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }
+                                    break
+                                    case 4:
+                                        menu.level=24
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                }
+                            break
+                            case 5:
+                                stage.scene='mission'
+                                game.classicRespawn=true
+                                switch(b){
+                                    case 0:
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=25
+                                            game.classicWeapon=true
+                                        }else{
+                                            menu.level=26
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }
+                                    break
+                                    case 1:
+                                        menu.level=27
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                    case 2:
+                                        //[]
+                                    break
+                                    case 3:
+                                        //[]
+                                    break
+                                    case 4:
+                                        menu.level=28
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                }
+                            break
+                        }
+                    }
+                }
+            }
+        break
+        case 'menuLegacy':
             for(let a=0,la=7;a<la;a++){
                 for(let b=0,lb=[5,5,6,6,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
@@ -103,7 +236,7 @@ function mouseClicked(){
                 for(let b=0,lb=[5,5,5,5,5,5,5,5,5,5][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                        switch(menu.weapon){
+                        /*switch(menu.weapon){
                             case 1:
                                 game.peakWeapon=true
                             break
@@ -128,7 +261,7 @@ function mouseClicked(){
                                 game.peakWeapon=true
                                 game.mainline=true
                             break
-                        }
+                        }*/
                         game.players=menu.players
                         game.gaming=menu.gaming
                         if(game.classicWeapon||game.randomizer||game.selector){
@@ -175,6 +308,26 @@ function mouseClicked(){
             }
         break
     }
+}
+function instant(){
+    game.players=menu.players
+    game.gaming=menu.gaming
+    if(game.classicWeapon||game.randomizer||game.selector){
+        game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
+    }else{
+        game.level=13
+    }
+    game.mission=menu.list[tick]
+    entities.players=[]
+    game.pane=menu.level!=7&&menu.level!=16
+    initialGraphics()
+    newLoop()
+    stage.scene='wave'
+    if(types.mission[game.mission].wave[0].length==0){
+        generateMission(types.mission[game.mission].wave)
+    }
+    stage.scene='main'
+    display.cycle=a
 }
 function keyPressed(){
     switch(key){

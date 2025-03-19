@@ -6063,6 +6063,10 @@ class player{
                                             this.target.position.x=game.level==23?5900:5700
                                             this.target.position.y=2000
                                         break
+                                        default:
+                                            this.target.position.x=this.position.x+random(-60,60)
+                                            this.target.position.y=this.position.y
+                                        break
                                     }
                                     a=la
                                     this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
@@ -6459,6 +6463,10 @@ class player{
                                         this.target.position.x=5920
                                         this.target.position.y=1080
                                     break
+                                    default:
+                                        this.target.position.x=this.position.x+random(-60,60)
+                                        this.target.position.y=this.position.y
+                                    break
                                 }
                                 a=la
                                 this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
@@ -6621,6 +6629,48 @@ class player{
                                 this.target.position.y=this.target.position.y
                             }
                         }
+                    }
+                }else if(game.level==28){
+                    this.manage[1]=false
+                    let targets=[]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                            this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
+                        ){
+                            let b=entities.players[a]
+                            let bar=[]
+                            if(b.position.y<=this.position.y){
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }else{
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:b.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }
+                            let valid=true
+                            for(let c=0,lc=entities.walls.length;c<lc;c++){
+                                for(let d=0,ld=entities.walls[c].length;d<ld;d++){
+                                    for(let e=0,le=bar.length;e<le;e++){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                            valid=false
+                                            c=lc
+                                            d=ld
+                                            e=le
+                                        }
+                                    }
+                                }
+                            }
+                            if(valid){
+                                targets.push([entities.players[a].position.x,entities.players[a].position.y])
+                            }
+                        }
+                    }
+                    if(targets.length>0){
+                        let target=targets[floor(random(targets.length))]
+                        this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                        this.target.position.y=target[1]
+                        this.manage[1]=true
+                    }else{
+                        this.target.position.x=game.edge[0]*0.5+random(-60,60)
+                        this.target.position.y=game.edge[1]
                     }
                 }else{
                     let targets=[]
@@ -7334,7 +7384,7 @@ class player{
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].index==this.die.killer){
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
-                        if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27){
+                        if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
                         }
                         if(this.fort&&!(game.level==27&&game.pvp)){
@@ -7624,6 +7674,44 @@ class player{
                                     }
                                 }
                             }
+                        }
+                    }else if(game.level==28){
+                        let max=game.edge[0]+game.edge[1]
+                        let set=[0,0]
+                        for(let a=0,la=entities.walls.length;a<la;a++){
+                            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                if(
+                                    (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                    dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                    (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
+                                ){
+                                    max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                    set[0]=entities.walls[a][b].position.x
+                                    set[1]=entities.walls[a][b].position.y
+                                }
+                            }
+                        }
+                        if(max<game.edge[0]+game.edge[1]){
+                            this.base.position.x=set[0]
+                            this.base.position.y=set[1]-40
+                            this.respawn()
+                        }else{
+                            let key='qwerty'[floor(random(0,6))]
+                            for(let a=0,la=levels[28].length;a<la;a++){
+                                for(let b=0,lb=levels[28][a].length;b<lb;b++){
+                                    if(levels[28][a][b]==key){
+                                        this.base.position.x=game.tileset[0]*(b+0.5)
+                                        this.base.position.y=game.tileset[1]*(a+0.5)
+                                        if(floor(random(0,10))==0){
+                                            this.base.position.x=random(500,game.edge[0]-500)
+                                            this.base.position.y=0
+                                        }
+                                        a=la
+                                        b=lb
+                                    }
+                                }
+                            }
+                            this.respawn()
                         }
                     }else{
                         this.respawn()

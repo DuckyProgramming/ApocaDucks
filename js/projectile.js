@@ -26,7 +26,8 @@ class projectile{
 			this.type==211||this.type==213||this.type==228||this.type==229||this.type==235||
 			this.type==250||this.type==262||this.type==266||this.type==279||this.type==280||
 			this.type==284||this.type==286||this.type==290||this.type==293||this.type==303||
-			this.type==307||this.type==308||this.type==311||this.type==312||this.type==313
+			this.type==307||this.type==308||this.type==311||this.type==312||this.type==313||
+			this.type==329
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==310
 		this.trap=false
 		this.partisan=false

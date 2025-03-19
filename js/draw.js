@@ -4,6 +4,84 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
+                for(let b=0,lb=[5,5,2,5,5,5][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
+                    if(
+                        a==3&&b==2||a==3&&b==3||
+                        a==4&&b==0||a==4&&b==1||a==4&&b==2||a==4&&b==3||
+                        a==5&&b==0
+                    ){
+                        fill(100)
+                        rect(pos[0]+37,pos[1],76,45,10)
+                        rect(pos[0]-37,pos[1],76,45,10)
+                    }else{
+                        if(
+                            a==0&&menu.players==b+1||
+                            a==1&&menu.gaming==b+1||
+                            a==2&&menu.weapon==b
+                        ){
+                            fill(100,200,100)
+                        }else{
+                            fill(100)
+                        }
+                        rect(pos[0],pos[1],150,45,10)
+                    }
+                    fill(0)
+                    textSize(15)
+                    text(
+                        [
+                            `${b+1} Players`,
+                            `${b+1} Gaming`,
+                            ['Normal Weapons','Special Weapons'][b],
+                            ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
+                            ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
+                            ['Sulfate','Process','TBD','TBD','Blueprint'][b]
+                        ][a],pos[0],pos[1]
+                    )
+                    textSize(11.25)
+                    switch(a){
+                        case 3:
+                            switch(b){
+                                case 0: case 4:
+                                    text(`PvE`,pos[0],pos[1]+15)
+                                break
+                                case 1:
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                break
+                                case 2: case 3:
+                                    text(`Standard`,pos[0]-37,pos[1]+15)
+                                    text(`Reverse`,pos[0]+37,pos[1]+15)
+                                break
+                            }
+                        break
+                        case 4:
+                            switch(b){
+                                case 0: case 1: case 2: case 3:
+                                    text(`PvE`,pos[0]-37,pos[1]+15)
+                                    text(`PvP`,pos[0]+37,pos[1]+15)
+                                break
+                                case 4:
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                break
+                            }
+                        break
+                        case 5:
+                            switch(b){
+                                case 0:
+                                    text(`PvE`,pos[0]-37,pos[1]+15)
+                                    text(`PvP`,pos[0]+37,pos[1]+15)
+                                break
+                                case 1: case 4:
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                break
+                            }
+                        break
+                    }
+                }
+            }
+        break
+        case 'menuLegacy':
+            for(let a=0,la=7;a<la;a++){
                 for(let b=0,lb=[5,5,6,6,4,4,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=4?15:0)+(a>=6?15:0)]
                     if(a==2&&b>=2&&b<=3||a==5&&b==2){
