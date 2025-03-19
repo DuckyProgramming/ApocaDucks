@@ -748,7 +748,7 @@ function generateLevel(info,layer){
             ]
         break
         case 28:
-            game.edge=[level[0].length*40,level.length*40]
+            game.edge=[level[0].length*42,level.length*42]
         break
         default:
             //game.edge=[3640,2280]
@@ -1144,6 +1144,20 @@ function generateLevel(info,layer){
                                 entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
                             }
                         break
+                        case 28:
+                            if(!reject.includes(a*lb+b)){
+                                let extent=0
+                                for(let e=1,le=level[0].length-a;e<le;e++){
+                                    if(level[a][b+e]=='_'){
+                                        reject.push(a*lb+b+e)
+                                        extent++
+                                    }else{
+                                        e=le
+                                    }
+                                }
+                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],game.tileset[1]/2+(a+0.3)*game.tileset[1],game.tileset[0]*(0.8+extent),game.tileset[1]*0.4,24))
+                            }
+                        break
                         default:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
                         break
@@ -1198,7 +1212,7 @@ function generateLevel(info,layer){
                         case 24:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
                         break
-                        case 22: case 23: case 25: case 26: case 27:
+                        case 22: case 23: case 25: case 26: case 27: case 28:
                             if(!reject.includes(a*lb+b)){
                                 let extent=0
                                 for(let e=1,le=level[0].length-a;e<le;e++){
@@ -1330,7 +1344,7 @@ function generateLevel(info,layer){
                         case 19: case 22: case 23:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                         break
-                        case 25: case 26:
+                        case 25: case 26: case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.4+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,50))
                         break
                         default:

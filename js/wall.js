@@ -63,7 +63,7 @@ class wall{
                 this.falling=0
                 this.infoFade=0
                 this.findFall()
-                if(game.level==23||game.level==25||game.level==26){
+                if(game.level==23||game.level==25||game.level==26||game.level==28){
                     this.visible=0
                     if(this.type==27){
                         let chunk=game.peakWeapon?1:0
@@ -761,7 +761,7 @@ class wall{
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(206,216,247)
                         for(let a=0,la=this.width/game.tileset[0];a<la;a++){
-                            layer.rect(-this.width/2+(a+0.5)/la*this.width,0,2,this.height+2)
+                            layer.rect(-this.width/2+(a+0.5)/la*this.width,0,2,this.height+1)
                         }
                         for(let a=0,la=this.height/game.tileset[1];a<la;a++){
                             layer.rect(0,-this.height/2+(a+0.5)/la*this.height,this.width+1,2)
@@ -901,6 +901,17 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
+                    case 28:
+                        layer.fill(0,32,130)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(206,216,247)
+                        for(let a=0,la=this.width/game.tileset[0];a<la;a++){
+                            layer.rect(-this.width/2+(a+0.5)/la*this.width,0,2,this.height+1)
+                        }
+                        for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                            layer.rect(0,-this.height/2+(a+0.5)/la*this.height,this.width+1,2)
+                        }
+                    break
                     default:
                         layer.fill(120,200,120)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -994,6 +1005,17 @@ class wall{
                             this.width/2-24,-this.height/2+12,
                             this.width/2-8,-this.height/2-0.5
                         )
+                    break
+                    case 28:
+                        layer.fill(0,32,130)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(206,216,247)
+                        for(let a=0,la=this.width/game.tileset[0];a<la;a++){
+                            layer.rect(-this.width/2+(a+0.5)/la*this.width,0,2,this.height+1)
+                        }
+                        for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                            layer.rect(0,-this.height/2+(a+0.5)/la*this.height,this.width+1,2)
+                        }
                     break
                     default:
                         layer.fill(220-min(480,this.reload)/5,120,120)
@@ -1503,8 +1525,8 @@ class wall{
                             layer.quad(
                                 -this.width/2+0.5,-this.height/2+(a+0.5)/la*this.height-1,
                                 -this.width/2+0.5,-this.height/2+(a+0.5)/la*this.height+1,
-                                map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height+1,
-                                map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height-1
+                                map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height+1,
+                                map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height-1
                             )
                         }
                     break
@@ -1612,18 +1634,18 @@ class wall{
                         layer.fill(206,216,247)
                         for(let a=0,la=this.width/game.tileset[0];a<la;a++){
                             layer.quad(
-                                this.width/2-(a+0.5)/la*this.width+1,this.height/2+0.5,
-                                this.width/2-(a+0.5)/la*this.width-1,this.height/2+0.5,
-                                this.width/2-(a+0.5)/la*this.width-1,map(-this.width/2+(a+0.5)/la*this.width-1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5),
-                                this.width/2-(a+0.5)/la*this.width+1,map(-this.width/2+(a+0.5)/la*this.width+1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5)
+                                -this.width/2+(a+0.5)/la*this.width+1,this.height/2+0.5,
+                                -this.width/2+(a+0.5)/la*this.width-1,this.height/2+0.5,
+                                -this.width/2+(a+0.5)/la*this.width-1,map(-this.width/2+(a+0.5)/la*this.width-1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5),
+                                -this.width/2+(a+0.5)/la*this.width+1,map(-this.width/2+(a+0.5)/la*this.width+1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5)
                             )
                         }
                         for(let a=0,la=this.height/game.tileset[1];a<la;a++){
                             layer.quad(
                                 this.width/2-0.5,-this.height/2+(a+0.5)/la*this.height-1,
                                 this.width/2-0.5,-this.height/2+(a+0.5)/la*this.height+1,
-                                -map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height+1,
-                                -map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height-1
+                                -map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height+1,
+                                -map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),-this.height/2+(a+0.5)/la*this.height-1
                             )
                         }
                     break
@@ -1880,7 +1902,7 @@ class wall{
                             layer.rect(-this.width/2+(a+0.5)/2*game.tileset[0],0,game.tileset[1]/10,this.height)
                         }
                     break
-                    case 16:
+                    case 16: case 28:
                         layer.fill(80)
                         layer.rect(0,5,this.width,this.height+10,5)
                     break
@@ -2630,6 +2652,15 @@ class wall{
                             }
                         }
                     break
+                    case 28:
+                        layer.fill(120,200,120)
+                        layer.quad(
+                            -this.width/2-5,-this.height/2-0.5,
+                            -this.width/2+10,-this.height/2+12,
+                            this.width/2-10,-this.height/2+12,
+                            this.width/2+5,-this.height/2-0.5
+                        )
+                    break
                 }
             break
             case 4: case 13: case 32:
@@ -2682,6 +2713,19 @@ class wall{
                                     -this.width/2+20,-this.height/2+16,
                                     this.width/2-20,-this.height/2+16,
                                     this.width/2,-this.height/2-0.5
+                                )
+                            break
+                        }
+                    break
+                    case 28:
+                        switch(this.type){
+                            case 4:
+                                layer.fill(220-min(480,this.reload)/5,120,120)
+                                layer.quad(
+                                    -this.width/2-5,-this.height/2-0.5,
+                                    -this.width/2+10,-this.height/2+12,
+                                    this.width/2-10,-this.height/2+12,
+                                    this.width/2+5,-this.height/2-0.5
                                 )
                             break
                         }
@@ -4104,7 +4148,7 @@ class wall{
                                         let chunk=listing[game.peakWeapon?1:0]
                                         this.weapon=chunk[floor(random(0,chunk.length))]
                                         this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
-                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
                                     }
                                     this.recharge=600
                                 }else{
@@ -4333,6 +4377,14 @@ class wall{
                                                                             entities.players[e].assort.missile=true
                                                                         }
                                                                     }
+                                                                }
+                                                            break
+                                                            case 28:
+                                                                for(let e=0,le=20;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(112.5,157.5),this.align,100,240,false,-1))
+                                                                    let mult=random(1,2)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                 }
                                                             break
                                                             default:

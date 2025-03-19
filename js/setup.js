@@ -45,7 +45,7 @@ function mouseClicked(){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
                 for(let b=0,lb=[5,5,2,5,5,5][a];b<lb;b++){
-                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)]
+                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
                             case 0:
@@ -156,6 +156,7 @@ function mouseClicked(){
                                         menu.level=27
                                         game.classicWeapon=true
                                         game.pvp=true
+                                        instant()
                                     break
                                     case 2:
                                         //[]
@@ -317,7 +318,7 @@ function instant(){
     }else{
         game.level=13
     }
-    game.mission=menu.list[tick]
+    game.mission=0
     entities.players=[]
     game.pane=menu.level!=7&&menu.level!=16
     initialGraphics()
@@ -327,7 +328,7 @@ function instant(){
         generateMission(types.mission[game.mission].wave)
     }
     stage.scene='main'
-    display.cycle=a
+    display.cycle=0
 }
 function keyPressed(){
     switch(key){

@@ -7243,7 +7243,7 @@ class player{
                     }
                     if(entities.players[a].stats.bust>=(game.pvp?[1600,1400,1200,1000][game.players-1]:game.attacker?[3200,2800,2400,2000][game.players-1]:[8000,7000,6000,5000][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19?5:1)*(game.level==24?2:1)&&game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){
                         entities.players[a].stats.bust=0
-                        for(let c=0,lc=game.pvp?4:1;c<lc;c++){
+                        for(let c=0,lc=game.pvp?(game.level==28?1:4):1;c<lc;c++){
                             if(game.level==7){
                                 let key='ABCDEF'[floor(random(0,6))]
                                 for(let a=0,la=levels[7].length;a<la;a++){
@@ -7271,7 +7271,7 @@ class player{
                                 }
                                 if(entities.players[b].stats.bust>=(game.pvp?[1600,1400,1200,1000,900,800][game.players-1]:game.attacker?[3200,2800,2400,2000,1800,1600][game.players-1]:[8000,7000,6000,5000,4500,400][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19?5:1)*(game.level==24?2:1)&&game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&entities.players[b].id>0&&game.players>1&&!entities.players[b].fort){
                                     entities.players[b].stats.bust=0
-                                    for(let c=0,lc=game.pvp?4:1;c<lc;c++){
+                                    for(let c=0,lc=game.pvp?(game.level==28?1:4):1;c<lc;c++){
                                         if(game.level==7){
                                             let key='ABCDEF'[floor(random(0,6))]
                                             for(let a=0,la=levels[7].length;a<la;a++){
