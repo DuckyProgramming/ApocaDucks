@@ -1046,14 +1046,18 @@ function generateLevel(info,layer){
                     }
                 break
                 case '!':
+                    let cluster=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                     switch(game.level){
-                        case 19: case 22: case 23: case 24: case 27:
+                        case 27:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             entities.walls[1].push(new wall(graphics.main,game.edge[0]-(game.tileset[0]/2+b*game.tileset[0]),game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            let cluster=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                             let weapon=listing[cluster][floor(random(listing[cluster].length))]
                             entities.walls[1][entities.walls[1].length-2].weapon=weapon
                             entities.walls[1][entities.walls[1].length-1].weapon=weapon
+                        break
+                        case 19: case 22: case 23: case 24:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                            entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
                         case 25: case 26:
                             entities.walls[2].push(new wall(graphics.main,b*game.tileset[0],a*game.tileset[1],0,0,3))
@@ -1326,7 +1330,7 @@ function generateLevel(info,layer){
                         case 19:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,35))
                         break
-                        case 22: case 23: case 25: case 26:
+                        case 22: case 23: case 25: case 26: case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],35))
                         break
                         default:
@@ -1837,7 +1841,7 @@ function generateLevel(info,layer){
                 for(let a=0,la=game.players;a<la;a++){
                     position.push(3)
                 }
-                for(let c=0,lc=game.players;c<lc;c++){
+                for(let c=0,lc=5;c<lc;c++){
                     for(let a=0,la=level.length;a<la;a++){
                         for(let b=0,lb=level[a].length;b<lb;b++){
                             if(level[a][b]=='qwerty'[c]){
