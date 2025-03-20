@@ -305,7 +305,7 @@ function mainloop(){
             for(let a=0,la=graphics.main.length;a<la;a++){
                 if(game.level==6){
                     graphics.main[a].image(
-                        graphics.pane[1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
+                        graphics.pane[graphics.pane.length-1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
                         effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                     )
                 }

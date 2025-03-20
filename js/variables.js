@@ -5244,9 +5244,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:564,
       desc:'Spawns controllable pistol ducks to play as until pressing auxiliary key',dpsBuff:0,
     },{
-      name:'PlayerHypnosis',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:658,
-      desc:'Takes control of a random enemy duck if possible',dpsBuff:0,
+      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
+      desc:'Single-use massive explosion around yourself',dpsBuff:2,
     },
 
     {
@@ -5661,9 +5661,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:662,
       desc:'Destroyer that also can fire drones',dpsBuff:0.5,
     },{
-      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
-      desc:'Single-use massive explosion around yourself',dpsBuff:2,
+      name:'PlayerHypnosis',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:658,
+      desc:'Takes control of a random enemy duck if possible',dpsBuff:0,
     },
 
     //mark di
@@ -5898,7 +5898,7 @@ types={
       name:'SidekickDisappointmentGuard',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:400,
     },{
-      name:'SidekickGuillotine',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      name:'SidekickGuillotine',sizeBuff:0.8,lifeBuff:2,speedBuff:1.2/0.85,
       damageBuff:1,reloadBuff:1,crit:0,weapon:541,
     },{
       name:'SidekickGuardian',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
@@ -14569,7 +14569,7 @@ levels=[
 "                   #####  |  |    +=========+    #                         ",
 "                       #=====+    |         |    #                         ",
 "                       #     |    |         +====#                         ",
-"ABC   q             p        |    |    t    |           r           w   DEF",
+"ABC   q             e        |    |    t    |           r           w   DEF",
 "                             |    |  <###>  |                              ",
 "###########################################################################",
 "###########################################################################",
@@ -14788,20 +14788,20 @@ levels=[
 "                                                                                                                             ",
 "                                                                                                                             ",
 "                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"             #==#c#            #####%#==#   #####%#==#                                                                       ",
-"             #    #            #        #   #        #                                                                       ",
-"             #    |            #        #   #        #                                                                       ",
-"             #    |            # d      #   # d      #                                                                    yD ",
-" At          ###==#            ####==####   ####==####                                                                       ",
-"             #    #            #        #   #        #                                                                    ###",
-"###          |    #            #        #   #        #      !!!!!                                                         rE#",
-"#Be          |    #            # *      #   # *      #                                                    g  ggg|           #",
-"#            ######            #######==#   #######==#        N                       gg  g               |  |  |         ###",
-"###          #    #            #        #   #        #                            _   |   |             _ |  |  |         wF#",
-"#Cq          |    |            |        |   |        |    <#######>             <###> |   |   _     <##################>    #",
+"                                                                                              ~                              ",
+"                                                                                            gggg                             ",
+"                                                                                            |       |                        ",
+"             #==#c#            #####%#==#   #####%#==#                                      g       |                        ",
+"             #    #            #        #   #        #                                      g   | ggg                        ",
+"             #    |            #        #   #        #                                      |   |   |                        ",
+"             #    |            # d      #   # d      #                                      |   |   |   _                 yD ",
+" At          ###==#            ####==####   ####==####                                    ]@####@####@###[                   ",
+"             #    #            #        #   #        #                                     ]############[                 ###",
+"###          |    #            #        #   #        #      !!!!!                           |          |                  rE#",
+"#Be          |    #            # *      #   # *      #                                      |          |  g  ggg|           #",
+"#            ######            #######==#   #######==#        N                       gg  g |          |  |  |  |         ###",
+"###          #    #            #        #   #        #                            _   |   | |          |_ |  |  |         wF#",
+"#Cq          |    |            |        |   |        |    <#######>             <###> |   | | _     <##################>    #",
 "#            |    |            |        |   |        |   <##############>   <###########@####################################",
 "#############################################################################################################################",
 "#############################################################################################################################",
@@ -14816,6 +14816,7 @@ Moses - pink crates
 Hayden - twin towers
 Ethan - water above point
 Hayden - missile launcher
+Moses - floating stalingrad
 
 */
       ],

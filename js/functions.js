@@ -1159,7 +1159,7 @@ function generateLevel(info,layer){
                                         e=le
                                     }
                                 }
-                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],game.tileset[1]/2+(a+0.3)*game.tileset[1],game.tileset[0]*(0.8+extent),game.tileset[1]*0.4,24))
+                                clumper[0].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2)*game.tileset[0],game.tileset[1]/2+(a+0.3)*game.tileset[1],game.tileset[0]*(0.8+extent),game.tileset[1]*0.4,24))
                             }
                         break
                         default:
@@ -1268,7 +1268,7 @@ function generateLevel(info,layer){
                                 entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                             }
                         break
-                        case 15: case 18: case 20: case 21: case 25: case 26:
+                        case 15: case 18: case 20: case 21: case 25: case 26: case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
@@ -1746,19 +1746,19 @@ function generateLevel(info,layer){
     switch(game.level){
         case 6:
             graphics.pane.push(createGraphics(game.edge[0],game.edge[1]))
-            setupLayer(graphics.pane[1])
-            for(let a=0,la=graphics.pane[1].width/25;a<la;a++){
-                for(let b=0,lb=graphics.pane[1].height/25-20;b<lb;b++){
+            setupLayer(graphics.pane[graphics.pane.length-1])
+            for(let a=0,la=graphics.pane[graphics.pane.length-1].width/25;a<la;a++){
+                for(let b=0,lb=graphics.pane[graphics.pane.length-1].height/25-20;b<lb;b++){
                     effectiveA=(a*7+b*3)%la
                     let pos=[effectiveA*25+random(0,25),b*25+500+lsin(effectiveA*30+random(-15,15))*100+lsin(effectiveA*8.5+random(-10,10))*50]
                     let size=random(45,60)
                     let bounce=random(0,1)
-                    graphics.pane[1].fill(
-                        10+pos[1]/graphics.pane[1].height*10+bounce*20,
-                        20-pos[1]/graphics.pane[1].height*5+bounce*20,
+                    graphics.pane[graphics.pane.length-1].fill(
+                        10+pos[1]/graphics.pane[graphics.pane.length-1].height*10+bounce*20,
+                        20-pos[1]/graphics.pane[graphics.pane.length-1].height*5+bounce*20,
                         10+bounce*20
                     )
-                    regPoly(graphics.pane[1],pos[0],pos[1],floor(random(4,9)),size/2,size/2,random(0,360))
+                    regPoly(graphics.pane[graphics.pane.length-1],pos[0],pos[1],floor(random(4,9)),size/2,size/2,random(0,360))
                 }
             }
         break

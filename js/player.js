@@ -1579,13 +1579,13 @@ class player{
             let preLife=this.life
             this.life-=damage*(game.level==27&&(game.pvp?this.index+1:this.id)>game.gaming&&(!game.pvp||game.gaming==1)?0.8:1)*(this.vulnerableTime>0?3:1)*(this.defendBuff>0?0.5:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank'?0.25:
-                this.playerData.name=='PlayerBonkerception'?0.4:
+                this.playerData.name=='PlayerBonkerception'?0.5:
                 this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
                 this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
                 this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
                 this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
                 this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='SidekickGuillotine'
-                ?0.5:1)
+                ?0.6:1)
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
                 let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
@@ -7702,10 +7702,6 @@ class player{
                                     if(levels[28][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,10))==0){
-                                            this.base.position.x=random(500,game.edge[0]-500)
-                                            this.base.position.y=0
-                                        }
                                         a=la
                                         b=lb
                                     }

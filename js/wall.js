@@ -1743,6 +1743,14 @@ class wall{
                             )
                         }
                     break
+                    case 28:
+                        layer.fill(0,32,130)
+                        layer.triangle(
+                            -this.width/2-0.5,this.height/2+0.5,
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            this.width/2+0.5,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(120)
                         layer.triangle(
@@ -1836,6 +1844,14 @@ class wall{
                                 map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
+                    break
+                    case 28:
+                        layer.fill(0,32,130)
+                        layer.triangle(
+                            this.width/2+0.5,this.height/2+0.5,
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            this.width/2+0.5,-this.height/2-0.5
+                        )
                     break
                     default:
                         layer.fill(120)
@@ -2637,6 +2653,48 @@ class wall{
                                     this.boundary[list[a]][b][1].y-this.position.y
                                 )
                             }
+                        }
+                    break
+                    case 28:
+                        switch(this.type){
+                            case 20:
+                                layer.fill(206,216,247)
+                                for(let a=0,la=this.width/game.tileset[0];a<la;a++){
+                                    layer.quad(
+                                        this.width/2-(a+0.5)/la*this.width-1,-this.height/2-0.5,
+                                        this.width/2-(a+0.5)/la*this.width+1,-this.height/2-0.5,
+                                        this.width/2-(a+0.5)/la*this.width+1,-map(-this.width/2+(a+0.5)/la*this.width-1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5),
+                                        this.width/2-(a+0.5)/la*this.width-1,-map(-this.width/2+(a+0.5)/la*this.width+1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5)
+                                    )
+                                }
+                                for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                                    layer.quad(
+                                        -this.width/2+0.5,this.height/2-(a+0.5)/la*this.height+1,
+                                        -this.width/2+0.5,this.height/2-(a+0.5)/la*this.height-1,
+                                        map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),this.height/2-(a+0.5)/la*this.height-1,
+                                        map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),this.height/2-(a+0.5)/la*this.height+1
+                                    )
+                                }
+                            break
+                            case 21:
+                                layer.fill(206,216,247)
+                                for(let a=0,la=this.width/game.tileset[0];a<la;a++){
+                                    layer.quad(
+                                        -this.width/2+(a+0.5)/la*this.width+1,-this.height/2-0.5,
+                                        -this.width/2+(a+0.5)/la*this.width-1,-this.height/2-0.5,
+                                        -this.width/2+(a+0.5)/la*this.width-1,-map(-this.width/2+(a+0.5)/la*this.width-1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5),
+                                        -this.width/2+(a+0.5)/la*this.width+1,-map(-this.width/2+(a+0.5)/la*this.width+1,-this.width/2-0.5,this.width/2+0.5,this.height/2+0.5,-this.height/2-0.5)
+                                    )
+                                }
+                                for(let a=0,la=this.height/game.tileset[1];a<la;a++){
+                                    layer.quad(
+                                        this.width/2-0.5,this.height/2-(a+0.5)/la*this.height+1,
+                                        this.width/2-0.5,this.height/2-(a+0.5)/la*this.height-1,
+                                        -map(-this.height/2+(a+0.5)/la*this.height+1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),this.height/2-(a+0.5)/la*this.height-1,
+                                        -map(-this.height/2+(a+0.5)/la*this.height-1,-this.height/2-0.5,this.height/2+0.5,-this.width/2-0.5,this.width/2+0.5),this.height/2-(a+0.5)/la*this.height+1
+                                    )
+                                }
+                            break
                         }
                     break
                 }
@@ -4178,7 +4236,7 @@ class wall{
                                 if(game.level==23||game.level==25||game.level==26){
                                     let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                     c.newWeaponSet(this.weapon)
-                                    if(c.weaponType>=0&&c.id>0&&!c.sidekick){
+                                    if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
                                         c.weapon.ammo=this.ammo
                                         c.weapon.uses=this.uses
                                         this.weapon=reserve[0]
