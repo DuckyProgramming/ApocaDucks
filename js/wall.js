@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42
+        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -927,6 +927,10 @@ class wall{
                         }else if(game.water<this.position.y+this.height){
                             layer.rect(this.width/2,this.height/2-this.position.y/2+game.water/2,this.width,this.position.y+this.height-game.water)
                         }
+                    break
+                    case 28:
+                        layer.fill(120,200,200,this.position.y>game.edge[1]-300?0.5:1)
+                        layer.rect(0,0,this.width+1,this.height+1)
                     break
                     default:
                         layer.fill(120,200,200)
@@ -4108,7 +4112,7 @@ class wall{
                     ){
                         switch(this.type){
                             case 3:
-                                if(game.level==25||game.level==26){
+                                if(game.level==25||game.level==26||game.level==28&&this.position.y>game.edge[1]-300){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     c.jump.time=1

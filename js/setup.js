@@ -19,8 +19,8 @@ function setup(){
     if(false){
         game.players=3
         game.gaming=1
-        game.level=28
-        menu.level=28
+        game.level=27
+        menu.level=27
         game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
@@ -168,6 +168,7 @@ function mouseClicked(){
                                         menu.level=28
                                         game.classicWeapon=true
                                         game.pvp=true
+                                        instant()
                                     break
                                 }
                             break

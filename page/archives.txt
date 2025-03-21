@@ -1,6 +1,12 @@
 
 
 
+shogatsu - player destruction with two branches
+
+gravel headquarters - a large map split into chunks, you always parachute down when you spawn
+
+
+
 
 
 669 - gunslinger, 0

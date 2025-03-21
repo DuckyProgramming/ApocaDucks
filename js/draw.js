@@ -237,7 +237,7 @@ function mainloop(){
                 //special=true
                 if(entities.players[c].weaponType==275){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==163&&entities.projectiles[a].id==c+1){
+                        if(entities.projectiles[a].type==163&&entities.projectiles[a].id==entities.players[c].id){
                             center=entities.projectiles[a]
                             a=la
                             special=true
@@ -245,7 +245,7 @@ function mainloop(){
                     }
                 }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==280&&entities.projectiles[a].id==c+1){
+                        if(entities.projectiles[a].type==280&&entities.projectiles[a].id==entities.players[c].id){
                             center=entities.projectiles[a]
                             a=la
                             special=true
@@ -262,7 +262,7 @@ function mainloop(){
                     }
                 }else if(entities.players[c].playerData.name=='PlayerDelta'){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==316&&entities.projectiles[a].id==c+1){
+                        if(entities.projectiles[a].type==316&&entities.projectiles[a].id==entities.players[c].id){
                             center=entities.projectiles[a]
                             a=la
                             special=true
