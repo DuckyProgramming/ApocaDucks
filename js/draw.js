@@ -1,4 +1,4 @@
-function mainloop(){
+ function mainloop(){
     clear()
     background(150)
     switch(stage.scene){
@@ -35,7 +35,7 @@ function mainloop(){
                             ['Normal Weapons','Special Weapons'][b],
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
-                            ['Sulfate','Process','TBD','TBD','Blueprint'][b]
+                            ['Sulfate','Process','Gray Gravel','Shogatsu','Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
@@ -71,8 +71,11 @@ function mainloop(){
                                     text(`PvE`,pos[0]-37,pos[1]+15)
                                     text(`PvP`,pos[0]+37,pos[1]+15)
                                 break
-                                case 1: case 4:
+                                case 1: case 3: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
+                                break
+                                case 2:
+                                    text(`PvE`,pos[0],pos[1]+15)
                                 break
                             }
                         break
@@ -174,7 +177,7 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.level==29?(types.mission[game.mission].wave.length==1?0.25:0.5):1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                             if(ticker>=40){
                                 ticker-=40
@@ -191,7 +194,7 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.level==29?(types.mission[game.mission].wave.length==1?0.25:0.5):1)*(menu.weapon==1?1.25:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -204,7 +207,7 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19?2.5:1)*(menu.level==29?(types.mission[game.mission].wave.length==1?0.25:0.5):1)*(menu.weapon==1?2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                         }
                     }
@@ -218,7 +221,7 @@ function mainloop(){
             let key=[]
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
-                if(game.level==15||game.level==18){
+                if(game.level==15||game.level==18||game.level==30){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else{
@@ -591,6 +594,30 @@ function mainloop(){
                                 graphics.main[a].textSize(100)
                                 for(let b=0,lb=game.sectors.length;b<lb;b++){
                                     graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
+                                }
+                            }
+                        break
+                        case 30:
+                            if(game.margin){
+                                graphics.main[a].noFill()
+                                graphics.main[a].stroke(255)
+                                graphics.main[a].strokeWeight(10)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
+                                }
+                                graphics.main[a].fill(255)
+                                graphics.main[a].noStroke()
+                                graphics.main[a].textSize(100)
+                                for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
+                                }
+                                graphics.main[a].fill(0,255,0)
+                                for(let b=0,lb=levels[game.level].length;b<lb;b++){
+                                    for(let c=0,lc=levels[game.level][b].length;c<lc;c++){
+                                        if(int(levels[game.level][b][c])>=0){
+                                            graphics.main[a].text(int(levels[game.level][b][c]),(c+0.5)*game.tileset[0],(b+0.5)*game.tileset[1])
+                                        }
+                                    }
                                 }
                             }
                         break

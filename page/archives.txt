@@ -1,9 +1,28 @@
 
 
 
-shogatsu - player destruction with two branches
+GRAY GRAVEL HQ
 
-gravel headquarters - a large map split into chunks, you always parachute down when you spawn
+map is kinda flat but has a lot of of random features on it
+
+all enemies spawn across the ground at the beginning of the wave
+
+all players parachute from random locations but can move to land in better places
+
+the objective is to capture a series of randomly positioned nodes
+
+if you control a node you can get weapons back but enemies will also attack
+
+you win instantly when all nodes are under your control
+
+
+
+PLAYER DESTRUCTION MAP
+
+shogatsu - drop off at each side
+
+
+
 
 
 
@@ -1045,3 +1064,8 @@ for(let a=0,la=types.mission.length;a<la;a++){
         }
     }
 }
+
+
+
+
+
