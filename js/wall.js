@@ -4660,7 +4660,7 @@ class wall{
                     ){
                         switch(this.type){
                             case 3:
-                                if(game.level==25||game.level==26||game.level==28&&this.position.y>game.edge[1]-3005||game.level==30){
+                                if(game.level==25||game.level==26||game.level==28&&this.position.y>game.edge[1]-300||game.level==30){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     c.jump.time=1

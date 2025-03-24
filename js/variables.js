@@ -5503,12 +5503,12 @@ types={
     },
     
     {
+      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
+    },{
       name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:193,
       desc:'Spams homing bullets in all directions',dpsBuff:0,
-    },{
-      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
     },{
       name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:99,
@@ -14826,6 +14826,7 @@ Ethan - sewer
 Alfred - regular turrets
 Aiko - when you take the point you get a gust deployer
 Hayden - updraft box
+[Hayden's Choice]
 
 
 

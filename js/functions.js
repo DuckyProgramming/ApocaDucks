@@ -2571,6 +2571,7 @@ function checkEnd(level,layer,key){
                                 entities.walls[1][a].formBoundary()
                                 entities.walls[1][a].checkRedundancy()
                                 entities.walls[1][a].checkOverlay()
+                                entities.walls[1][a].set()
                                 entities.walls[1][a].checkGap()
                                 entities.walls[1][a].checkBar()
                                 entities.walls[1][a].formBounder()
