@@ -17,21 +17,22 @@ function setup(){
     }
 
     if(false){
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=30
-        menu.level=30
-        //game.mission=findName('Duckocracy',types.mission)
-        game.mission=findName('Survival',types.mission)
+        game.level=29
+        menu.level=29
+        game.mission=findName('Cash Ducks',types.mission)
+        //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
-        game.pvp=true
-        newLoop()
-        stage.scene='main'
+        //game.classicRespawn=true
+        //game.pvp=true
         display.cycle=0
+        newWave()
+        //newLoop()
+        stage.scene='main'
         //dev.sight=true
         //game.margin=true
         
@@ -281,7 +282,11 @@ function mouseClicked(){
                         entities.players=[]
                         game.pane=menu.level!=7&&menu.level!=16
                         initialGraphics()
-                        newLoop()
+                        if(game.level==29){
+                            newWave()
+                        }else{
+                            newLoop()
+                        }
                         stage.scene='wave'
                         if(types.mission[game.mission].wave[0].length==0){
                             generateMission(types.mission[game.mission].wave)

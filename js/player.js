@@ -1593,6 +1593,7 @@ class player{
         if(
             this.invincible<=0&&valid
             &&!(this.fort&&this.id==0&&!game.pvp&&game.level==22)
+            &&!(this.fort&&this.id!=0&&game.level==29)
             &&!this.hyper()
         ){
             let preLife=this.life
@@ -4517,7 +4518,7 @@ class player{
         this.life=100*this.playerData.lifeBuff
         this.base.life=100*this.playerData.lifeBuff
         this.collect.life=100*this.playerData.lifeBuff
-        if(this.id>0){
+        if(this.id>0&&game.level!=29){
             this.multLife(game.level==23||game.level==24||game.level==26?1.5:2)
         }
         if(game.peakWeapon){
@@ -4860,7 +4861,8 @@ class player{
             this.attacking=this.manage[1]
             if(
                 this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
-                !(this.fort&&this.id==0&&game.level==22)
+                !(this.fort&&this.id==0&&game.level==22)&&
+                !(this.fort&&game.level==29)
             ){
                 this.attack(0)
             }
@@ -6707,7 +6709,48 @@ class player{
                         this.target.position.y=game.edge[1]
                     }
                 }else if(game.level==29){
-
+                    this.manage[1]=false
+                    let targets=[]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<180&&entities.players[a].life>0
+                        ){
+                            let b=entities.players[a]
+                            let bar=[]
+                            if(b.position.y<=this.position.y){
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }else{
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:b.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }
+                            let valid=true
+                            for(let c=0,lc=entities.walls.length;c<lc;c++){
+                                for(let d=0,ld=entities.walls[c].length;d<ld;d++){
+                                    for(let e=0,le=bar.length;e<le;e++){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                            valid=false
+                                            c=lc
+                                            d=ld
+                                            e=le
+                                        }
+                                    }
+                                }
+                            }
+                            if(valid){
+                                targets.push([entities.players[a].position.x,entities.players[a].position.y])
+                            }
+                        }
+                    }
+                    if(targets.length>0){
+                        let target=targets[floor(random(targets.length))]
+                        this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                        this.target.position.y=target[1]
+                        this.base.position.x=this.target.position.x
+                        this.base.position.y=this.target.position.y
+                        this.manage[1]=true
+                    }else if(floor(random(0,30))==0||abs(this.target.position.x-this.position.x)<5){
+                        this.target.position.x=this.base.position.x+random(-120,120)
+                        this.target.position.y=this.position.y
+                    }
                 }else if(game.level==30){
                     this.manage[1]=false
                     let targets=[]
@@ -7864,7 +7907,7 @@ class player{
                                     entities.walls[a][b].owner=this.id
                                     if(game.level==22&&this.id==0){
                                         game.point[entities.walls[a][b].pos]=false
-                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27){
+                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27|game.level==29){
                                         game.point[entities.walls[a][b].pos]=this.id
                                     }else if(game.level==25){
                                         game.point[entities.walls[a][b].pos]=this.id>0
@@ -9446,7 +9489,15 @@ class player{
                 this.fade=smoothAnim(this.fade,!this.dead,0,1,5)
             }
             if(this.dead&&this.fade<=0){
-                this.remove=true
+                if(game.level==29){
+                    this.die.timer++
+                    if(this.die.timer>=3600){
+                        this.remove=true
+                        game.stack.push([-2,this.playerData.name,[this.position.x,this.position.y]])
+                    }
+                }else{
+                    this.remove=true
+                }
             }
         }else{
             if(this.invincible>0){
