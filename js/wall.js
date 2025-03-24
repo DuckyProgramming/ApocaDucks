@@ -365,6 +365,18 @@ class wall{
                     {x:this.position.x+this.width/2,y:this.position.y+this.height/2}
                 ]
             break
+            case 56:
+                this.boundary=[
+                    [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                    [],
+                    [],
+                ]
+            break
             default:
                 this.boundary=[
                     [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -413,7 +425,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&this.type!=38&&c.type!=38&&!((c.type==20||c.type==21)&&this.type==24&&game.level==30)&&(c.position.x!=this.position.x||c.position.y!=this.position.y)){
+                if(c.standard&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&game.level==30)&&(c.position.x!=this.position.x||c.position.y!=this.position.y)){
                     if(c.type==17||c.type==18||c.type==20||c.type==21){
                         if(
                             inPointTriangle({x:this.position.x-this.width/2,x:this.position.y+this.height/2},c.triangle)&&
@@ -486,7 +498,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&this.type!=38&&c.type!=38&&!((c.type==20||c.type==21)&&this.type==24&&game.level==30)&&!(this.type==35||c.type==35&&game.level==29)){
+                if(c.standard&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&game.level==30)&&!(this.type==35||c.type==35&&game.level==29)){
                     for(let d=0,ld=this.boundary[0].length;d<ld;d++){
                         if(abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&c.position.x-c.width/2<this.boundary[0][d][0].x+1&&c.position.x+c.width/2>this.boundary[0][d][1].x-1){
                             this.boundary[0].splice(d,1)
@@ -2545,7 +2557,7 @@ class wall{
                     break
                 }
             break
-            case 38:
+            case 38: case 56:
                 switch(game.level){
                     case 22: case 23:
                         layer.fill(90,85,80)
@@ -3340,6 +3352,23 @@ class wall{
                             break
                         }
                         graphics.overlay[0].rect(25+a*40,25,30,3,1)
+                    }
+                    let max=4
+                    let name=''
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].id==0&&entities.players[a].stats.points>max){
+                            max=entities.players[a].stats.points
+                            name=entities.players[a].playerData.name
+                        }
+                    }
+                    if(max>=5){
+                        graphics.overlay[0].fill(255)
+                        graphics.overlay[0].textSize(10)
+                        graphics.overlay[0].text(`${max}`,5+this.timers.length*20,40)
+                        graphics.overlay[0].textSize(8)
+                        graphics.overlay[0].text(`${name}`,5+this.timers.length*20,60)
+                        graphics.overlay[0].fill(255,255,0)
+                        graphics.overlay[0].rect(5+this.timers.length*20,50,30,3,1)
                     }
                 }else if(game.level==23){
                     let place=this.type==42?[1,3]:[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
@@ -4804,7 +4833,7 @@ class wall{
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&game.level!=29&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{

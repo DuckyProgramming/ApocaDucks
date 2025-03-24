@@ -30,7 +30,7 @@ class player{
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
         this.die={timer:0,killer:-1}
-        this.stats={kills:0,deaths:0,damage:0,bust:0,usurp:0,points:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
+        this.stats={kills:0,deaths:0,damage:0,bust:0,usurp:0,points:this.playerData.name=='Buster'?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||game.randomizer){
             this.copy=floor(random(0,game.players))
@@ -1071,11 +1071,11 @@ class player{
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             if(game.level==27&&game.pvp){
-                game.weaponTick[this.index]++
                 this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.index]%game.weapon[game.mainline?game.players:this.index].length]
+                game.weaponTick[this.index]++
             }else{
-                game.weaponTick[this.id-1]++
                 this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.id-1]%game.weapon[game.mainline?game.players:this.id-1].length]
+                game.weaponTick[this.id-1]++
             }
         }
         if(game.pvp&&floor(random(0,200))==0){
