@@ -3614,7 +3614,7 @@ class wall{
                             graphics.overlay[0].fill(255)
                             let escaped=entities.players[a].position.x<500||entities.players[a].position.x>game.edge[0]-500||entities.players[a].position.y<250&&!entities.players[a].parachute&&entities.players[a].velocity.y<2
                             graphics.overlay[0].textSize(escaped?9:10)
-                            graphics.overlay[0].text(escaped?'Escaped':'Inside',25+a*450,40)
+                            graphics.overlay[0].text(escaped?'Escaped':'Inside',25+a*40,40)
                             switch(a+1){
                                 case 1:
                                     graphics.overlay[0].fill(15,75,255)
@@ -3635,7 +3635,7 @@ class wall{
                                     graphics.overlay[0].fill(125,15,255)
                                 break
                             }
-                            graphics.overlay[0].rect(25+a*450,50,30,3,1)
+                            graphics.overlay[0].rect(25+a*40,50,30,3,1)
                         }
                     }
                 }
@@ -3891,7 +3891,7 @@ class wall{
                 }
             break
             case 8: case 9: case 12: case 27: case 41: case 50:
-                if(game.level!=29){
+                if(game.level!=29||this.type==27){
                     if(this.recharge>0){
                         this.recharge--
                     }

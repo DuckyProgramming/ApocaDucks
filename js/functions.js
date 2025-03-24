@@ -652,6 +652,18 @@ function generateLevel(info,layer){
         level.push(info[a].slice())
     }
     entities.projectiles=[]
+    switch(game.level){
+        case 29:
+            game.placer=[[],[],[]]
+        break
+    }
+    if(game.level==29&&display.cycle>0){
+        for(let a=0,la=entities.walls[1].length;a<la;a++){
+            if(entities.walls[1][a].type==27){
+                game.placer[2].push(entities.walls[1][a].weapon)
+            }
+        }
+    }
     entities.walls=[[],[],[]]
     game.spawner=[]
     switch(game.level){
@@ -1048,11 +1060,6 @@ function generateLevel(info,layer){
     }
     //level.forEach(item=>print(item))
     let clumper=[[],[]]
-    switch(game.level){
-        case 29:
-            game.placer=[[],[]]
-        break
-    }
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
             switch(level[a][b]){
@@ -1435,10 +1442,19 @@ function generateLevel(info,layer){
                                 entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                             }
                         break
-                        case 15: case 18: case 20: case 21: case 25: case 26: case 28: case 30:
+                        case 15: case 18: case 20: case 21: case 25: case 26: case 30:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
+                        break
+                        case 28:
+                            if(a<10){
+                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                                entities.walls[1][entities.walls[1].length-1].weapon=findName('PlayerUpdraft',types.player)
+                            }else{
+                                let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
+                                entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
+                            }
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))
@@ -1527,6 +1543,9 @@ function generateLevel(info,layer){
                         break
                         case 25: case 26: case 28: case 30:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.4+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,50))
+                        break
+                        case 29:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
@@ -2198,6 +2217,15 @@ function generateLevel(info,layer){
             for(let a=0,la=amount;a<la;a++){
                 game.point.push(0)
             }
+
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==27){
+                    if(game.placer[2].length>0){
+                        entities.walls[1][a].weapon=game.placer[2][0]
+                        game.placer[2].splice(0,1)
+                    }
+                 }
+            }
         break
         case 30:
             ticker=0
@@ -2294,7 +2322,7 @@ function newWave(){
             if(types.mission[game.mission].wave[display.cycle][a][0].includes('Boss')){
                 game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.75:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19?2.5:1)*(game.level==29?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.75:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19?2.5:1)*(game.level==29?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
                     game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }

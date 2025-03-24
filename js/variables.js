@@ -5503,6 +5503,10 @@ types={
     },
     
     {
+      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
+      desc:'Spams homing bullets in all directions',dpsBuff:0,
+    },{
       name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:155,
     },{
@@ -5517,9 +5521,6 @@ types={
     },{
       name:'PlayerImmortal',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:101,
-    },{
-      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
     },{
       name:'PlayerGunceptionception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:252,
@@ -14775,24 +14776,24 @@ levels=[
 "                                                                                                                             ",
 "                                                                                                                             ",
 "                                                                                                                             ",
+"                                                                ~                                                            ",
+"                                                               ###                                                           ",
+"                                                                                                                             ",
+"                                                        #                                                                    ",
+"                                                                                                                             ",
+"                                                                                                                             ",
+"                                                    #                                                                        ",
 "                                                                                                                             ",
 "                                                                                                                             ",
 "                                                                                                                             ",
+"                                                  #                                                                          ",
+"                                                         #                                                                   ",
 "                                                                                                                             ",
 "                                                                                                                             ",
+"                                                              #                                                              ",
 "                                                                                                                             ",
 "                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                                                             ",
-"                                                                                              ~                              ",
+"                                                       #                                      ~                              ",
 "                                                                                            gggg                             ",
 "                                                                                            |       |                        ",
 "             #==#c#            #####%#==#   #####%#==#                                      g       |                        ",
@@ -14824,12 +14825,9 @@ Moses - floating stalingrad
 Ethan - sewer
 Alfred - regular turrets
 Aiko - when you take the point you get a gust deployer
+Hayden - updraft box
 
 
-
-Hayden Reserve Changes:
-
-Parkour to an OP weapon box
 
 */
 ],[
