@@ -1448,8 +1448,8 @@ function generateLevel(info,layer){
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
                         case 28:
-                            if(a<10){
-                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
+                            if(a<20){
                                 entities.walls[1][entities.walls[1].length-1].weapon=findName('PlayerUpdraft',types.player)
                             }else{
                                 let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))

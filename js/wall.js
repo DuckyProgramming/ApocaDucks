@@ -4076,7 +4076,7 @@ class wall{
                 }
             break
             case 31:
-                if(game.level==19&&this.owner>0&&this.owner<=game.players&&this.owner==game.point[6]){
+                if(game.level==19&&game.pvp&&this.owner>0&&this.owner<=game.players&&this.owner==game.point[6]){
                     this.timers[this.owner-1]++
                 }else if(game.level==24&&this.owner>0&&this.owner<=game.players){
                     this.timers[this.owner-1]++
