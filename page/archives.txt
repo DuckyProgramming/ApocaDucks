@@ -1,5 +1,21 @@
 
 
+NEW MAP 3/29/25
+
+BOUNDED
+
+PAYLOAD
+Ducks have to capture a fort, which will walk forward
+If the players take the fort, it'll start moving back
+
+LOCATIONS
+a grate area above the ground
+end: a waterfall surrounded by buildings (including spawn)
+final map will be drawn later
+
+
+
+
 
 
 

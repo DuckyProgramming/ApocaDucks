@@ -3713,7 +3713,7 @@ class wall{
                         )
                     break
                     case 30:
-                        layer.fill(220-this.reload*4)
+                        layer.fill(220-this.reload*3)
                         layer.quad(
                             -this.width/2,-this.height/2,
                             -this.width/2+15,-this.height/2+10,
@@ -4770,7 +4770,7 @@ class wall{
                                         c.newWeaponSet(this.weapon)
                                         let chunk=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                                        this.recharge=game.level==27?14400:game.level==23?1200:3600-(game.gaming-1)*600
+                                        this.recharge=game.level==27&&game.pvp?14400:game.level==23?1200:3600-(game.gaming-1)*600
                                     }
                                 }else if(!game.weapon[c.id-1].includes(this.weapon)&&(game.level==13&&game.weapon[c.id-1].length<3||game.level==14&&game.weapon[c.id-1].length<(game.peakWeapon?(game.mainline?1:2):4))){
                                     game.weapon[c.id-1].push(this.weapon)
@@ -5407,8 +5407,8 @@ class wall{
                                                                             entities.walls[1][e].timers[c.id-1]++
                                                                         }
                                                                     }
-                                                                    c.stunTime=30
-                                                                    this.reload=30
+                                                                    c.stunTime=45
+                                                                    this.reload=45
                                                                 }else{
                                                                     this.reload=0
                                                                 }

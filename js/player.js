@@ -191,7 +191,11 @@ class player{
                     layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.construct){
-                    layer.text(`Damage: ${regNum(this.stats.damage)}`,0,-38)
+                    if(game.level==30){
+                        layer.text(`Points: ${this.stats.points}`,0,-38)
+                    }else{
+                        layer.text(`Damage: ${regNum(this.stats.damage)}`,0,-38)
+                    }
                 }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'){
                     if(game.level==30){
                         layer.text(`Points: ${entities.players[this.copy].stats.points}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
@@ -227,7 +231,11 @@ class player{
                     layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.construct){
-                    layer.text(`Kills: ${this.stats.kills}`,0,-38)
+                    if(game.level==30){
+                        layer.text(`Points: ${this.stats.points}`,0,-38)
+                    }else{
+                        layer.text(`Kills: ${this.stats.kills}`,0,-38)
+                    }
                 }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'){
                     if(game.level==30){
                         layer.text(`Points: ${entities.players[this.copy].stats.points}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
@@ -6757,8 +6765,8 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
                             this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?(1200-max(15,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
-                            this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)&&
-                            (entities.players[a].stats.points>0||this.stats.points>0)
+                            this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)/*&&
+                            (entities.players[a].stats.points>0||this.stats.points>0)*/
                         ){
                             let b=entities.players[a]
                             let bar=[]
@@ -7854,8 +7862,8 @@ class player{
                         if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
                         }
-                        if(game.level==30){
-                            entities.players[a].stats.points+=this.stats.points
+                        if(game.level==30&&entities.players[a].life>0){
+                            entities.players[a].stats.points+=this.stats.points+(this.id>0&&entities.players[a].id>0?2:0)
                             this.stats.points=0
                         }
                         if(this.fort&&!(game.level==27&&game.pvp)){
