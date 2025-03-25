@@ -6764,7 +6764,7 @@ class player{
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
-                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?(1200-max(15,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?(1200-max(20,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                             this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)/*&&
                             (entities.players[a].stats.points>0||this.stats.points>0)*/
                         ){
@@ -7863,7 +7863,7 @@ class player{
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
                         }
                         if(game.level==30&&entities.players[a].life>0){
-                            entities.players[a].stats.points+=this.stats.points+(this.id>0&&entities.players[a].id>0?2:0)
+                            entities.players[a].stats.points+=(this.id>0?ceil(this.stats.points/2):this.stats.points)+(this.id>0&&entities.players[a].id>0?2:0)
                             this.stats.points=0
                         }
                         if(this.fort&&!(game.level==27&&game.pvp)){

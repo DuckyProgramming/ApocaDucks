@@ -4854,7 +4854,7 @@ class wall{
                                     c.newWeaponSet(this.weapon)
                                     this.weapon=listing[1][floor(random(listing[1].length))]
                                     this.recharge=game.level==23?1200:3600-(game.gaming-1)*600
-                                    c.stunTime=300
+                                    c.stunTime=480
                                 }
                             break
                             default:
