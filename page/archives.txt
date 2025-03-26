@@ -2,7 +2,7 @@
 
 NEW MAP 3/29/25
 
-BOUNDED
+DOWNWARD
 
 PAYLOAD
 Ducks have to capture a fort, which will walk forward
