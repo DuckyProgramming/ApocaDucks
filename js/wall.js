@@ -5322,7 +5322,12 @@ class wall{
                                                             case 19: case 31:
                                                                 let hit=false
                                                                 for(let e=0,le=entities.walls[1].length;e<le;e++){
-                                                                    if(entities.walls[1][e].type==36&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                    if((
+                                                                            entities.walls[1][e].type==36&&game.level==29||
+                                                                            entities.walls[1][e].type==33&&game.level==31
+                                                                        )
+                                                                        &&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)
+                                                                    ){
                                                                         hit=true
                                                                         if(entities.walls[1][e].position.x<this.position.x){
                                                                             for(let e=0,le=7;e<le;e++){
