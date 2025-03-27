@@ -6280,7 +6280,7 @@ class projectile{
 					}
 					if(this.type==103&&a==0){
 						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-							if(inBoxBox(this,entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+							if(inBoxBox(this,entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 								entities.projectiles[b].active=false
 								if(entities.projectiles[b].exploder){
 									entities.projectiles[b].explode()
@@ -6497,7 +6497,7 @@ class projectile{
 							}
 							if(this.type==283&&a==0){
 								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 										entities.projectiles[b].active=false
 										if(entities.projectiles[b].exploder){
 											entities.projectiles[b].explode()
@@ -6777,7 +6777,7 @@ class projectile{
 							}
 							if(this.type==283&&a==0){
 								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 										entities.projectiles[b].active=false
 										if(entities.projectiles[b].exploder){
 											entities.projectiles[b].explode()
@@ -7539,7 +7539,7 @@ class projectile{
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
 							if(entities.projectiles[b].exploder){
 								entities.projectiles[b].explode()
@@ -7642,7 +7642,7 @@ class projectile{
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<22&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<22&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
 							if(entities.projectiles[b].exploder){
 								entities.projectiles[b].explode()

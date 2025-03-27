@@ -3181,10 +3181,10 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],221,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
                 break
                 case 413: case 537:
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                 break
                 case 414:
-                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],223,(lsin(this.direction.main)<0?-90:90)-25+(weapon.uses*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],223,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                 break
                 case 416:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-135:135)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4758,9 +4758,9 @@ class player{
                         this.weaponType==11&&entities.players[a].life<entities.players[a].base.life*2&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&(this.construct||this.fort&&!entities.players[a].construct)
                     ){
                         if(this.fort&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<45||!this.fort&&(
-                            abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+40&&this.weaponType!=6&&this.weaponType!=8&&this.weaponType!=11&&this.weaponType!=99||
+                            abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+40&&this.weaponType!=6&&this.weaponType!=8&&this.weaponType!=11&&this.weaponType!=99&&this.weaponType!=413||
                             abs(this.position.x-entities.players[a].position.x)<900&&abs(this.position.y-entities.players[a].position.y)<15&&this.weaponType==6||
-                            abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<45&&this.weaponType==8||
+                            abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<45&&(this.weaponType==8||this.weaponType==413)||
                             abs(this.position.x-entities.players[a].position.x)<300&&abs(this.position.y-entities.players[a].position.y)<45&&this.weaponType==11||
                             abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<120&&this.weaponType==99
                         )&&entities.players[a].life>0){

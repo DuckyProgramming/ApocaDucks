@@ -187,7 +187,7 @@ class wall{
             break
             case 36:
                 this.owner=(game.level==22||game.level==23||game.level==25||game.level==26)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
-                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Outpost',types.player),game.index))
+                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName(game.level==28?'Guster':'Outpost',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
                 entities.players[entities.players.length-1].fortHealth()
@@ -2369,7 +2369,7 @@ class wall{
                         break
                     }
                 }else{
-                    texts=game.level==29?'Target':game.level==28&&this.pos!=1?'Turret':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                    texts=game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
                 }
                 layer.text(texts,0,-120)
                 if(game.level!=29){
@@ -3381,8 +3381,16 @@ class wall{
                         graphics.overlay[0].fill(255,255,0)
                         graphics.overlay[0].rect(5+this.timers.length*20,50,30,3,1)
                     }
-                }else if(game.level==23){
-                    let place=this.type==42?[1,3]:[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
+                }else if(game.level==23||game.level==28){
+                    let place=[0,0]
+                    switch(game.level){
+                        case 23:
+                            place=this.type==42?[1,3]:[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
+                        break
+                        case 28:
+                            place=[this.pos%4,floor(this.pos/4)]
+                        break
+                    }
                     let texts=''
                     if(game.level==19||game.level==24||game.level==27){
                         switch(this.type){
@@ -3400,7 +3408,7 @@ class wall{
                             break
                         }
                     }else{
-                        texts=game.level==28&&this.pos!=1?'Turret':this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                        texts=game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -3432,11 +3440,15 @@ class wall{
                         break
                     }
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
-                    if(this.type==33&&this.pos==4){
+                    if(this.type==33&&(
+                        game.level==23&&this.pos==4||
+                        game.level==28&&this.pos==1
+                    )){
+                        let nudge=game.level==23?2:3
                         for(let a=0,la=this.timers.length;a<la;a++){
                             graphics.overlay[0].fill(255)
                             graphics.overlay[0].textSize(10)
-                            graphics.overlay[0].text(formatTime(this.timers[a]),25+(place[0]+2)*40,15+a*25)
+                            graphics.overlay[0].text(formatTime(this.timers[a]),25+(place[0]+nudge)*40,15+a*25)
                             switch(a+1){
                                 case 1:
                                     graphics.overlay[0].fill(15,75,255)
@@ -3457,7 +3469,7 @@ class wall{
                                     graphics.overlay[0].fill(125,15,255)
                                 break
                             }
-                            graphics.overlay[0].rect(25+(place[0]+2)*40,25+a*25,30,3,1)
+                            graphics.overlay[0].rect(25+(place[0]+nudge)*40,25+a*25,30,3,1)
                         }
                     }
                 }else if(game.level==25||game.level==26){
@@ -3557,7 +3569,7 @@ class wall{
                             break
                         }
                     }else{
-                        texts=game.level==29?'Target':game.level==28&&this.pos!=1?'Turret':this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                        texts=game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)

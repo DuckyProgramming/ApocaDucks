@@ -2175,8 +2175,8 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
-                    entities.walls[1][a].pos=[2,1,3,0][ticker]
-                    entities.players[entities.walls[1][a].index].pos=[2,1,3,0][ticker]
+                    entities.walls[1][a].pos=[7,4,5,6,2,1,3,0][ticker]
+                    entities.players[entities.walls[1][a].index].pos=[7,4,5,6,2,1,3,0][ticker]
                     ticker++
                 }
             }

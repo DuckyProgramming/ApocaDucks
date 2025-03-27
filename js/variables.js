@@ -5749,6 +5749,9 @@ types={
       name:'Outpost',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
       damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:58,
     },{
+      name:'Guster',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:413,
+    },{
       name:'Turret',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
     },{
@@ -14793,8 +14796,8 @@ levels=[
 "                                                           #                                                                 ",
 "                                                                                                                             ",
 "                                                                                                                             ",
-"                                                       #                                      ~                              ",
-"                                                                                            gggg                             ",
+"                                                       #                   M                  ~                              ",
+"                M                    M            M                                         gggg                             ",
 "                                                                         #c#==#             |       |                        ",
 "             #==#c#            #####%#==#   #####%#==#                   #    #             g       |                        ",
 "             #    #            #        #   #        #                   |    #             g   | ggg                        ",
@@ -14828,6 +14831,7 @@ Aiko - when you take the point you get a gust deployer
 Hayden - updraft box
 Moses - double silo
 Ethan - swap turret
+Aiko - op gust deployers on ecah tower
 
 
 
