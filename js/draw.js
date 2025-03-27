@@ -35,7 +35,7 @@ function mainloop(){
                             ['Normal Weapons','Special Weapons'][b],
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
-                            ['Sulfate','Process','Gray Gravel','Shogatsu','TEST'][b],
+                            ['Sulfate','Process','Gray Gravel','Shogatsu','Downward (WIP)'][b],
                             ['Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )

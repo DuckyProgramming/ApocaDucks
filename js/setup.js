@@ -17,17 +17,17 @@ function setup(){
     }
 
     if(false){
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=29
-        menu.level=29
-        game.mission=findName('Cash Ducks',types.mission)
+        game.level=32
+        menu.level=32
+        game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=true
+        game.classicRespawn=true
         //game.pvp=true
         display.cycle=0
         newWave()

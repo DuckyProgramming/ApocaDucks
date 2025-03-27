@@ -9541,7 +9541,7 @@ class player{
                 this.fade=smoothAnim(this.fade,!this.dead,0,1,5)
             }
             if(this.dead&&this.fade<=0){
-                if(game.level==29){
+                if(game.level==29&&this.id==0){
                     this.die.timer++
                     if(this.die.timer>=3600){
                         this.remove=true
