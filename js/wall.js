@@ -1007,7 +1007,7 @@ class wall{
                         }
                     break
                     case 28:
-                        layer.fill(120,200,200,this.position.y>game.edge[1]-300?0.5:1)
+                        layer.fill(120,200,200,this.position.y>game.edge[1]-600?0.5:1)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
                     case 30: case 32: case 33:
@@ -3957,7 +3957,7 @@ class wall{
                             }
                         }
                     }else{
-                        this.reload-=(game.level==28&&this.type==35?0.25:game.level==25||game.level==26?0.25:game.level==24?0.25:game.level==22||game.level==23?0.5:(game.level==19||game.level==31)&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
+                        this.reload-=(game.level==28&&(this.type==35||this.type==40)?0.25:game.level==25||game.level==26?0.25:game.level==24?0.25:game.level==22||game.level==23?0.5:(game.level==19||game.level==31)&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)
                     }
                 }
             break
@@ -4778,7 +4778,7 @@ class wall{
                     ){
                         switch(this.type){
                             case 3:
-                                if(game.level==25||game.level==26||game.level==28&&this.position.y>game.edge[1]-300||game.level==30||game.level==32||game.level==33){
+                                if(game.level==25||game.level==26||game.level==28&&this.position.y>game.edge[1]-600||game.level==30||game.level==32||game.level==33){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     c.jump.time=1

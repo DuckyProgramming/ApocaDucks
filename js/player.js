@@ -8318,7 +8318,7 @@ class player{
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
                         if(this.position.y>game.edge[1]){
-                            
+                            this.position.y=game.edge[1]
                         }
                         for(let a=0,la=entities.walls.length;a<la;a++){
                             for(let b=0,lb=entities.walls[a].length;b<lb;b++){

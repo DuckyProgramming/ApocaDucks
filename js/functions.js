@@ -1172,7 +1172,7 @@ function generateLevel(info,layer){
                             entities.walls[2].push(new wall(graphics.main,b*game.tileset[0],a*game.tileset[1],0,0,3))
                         break
                         case 28:
-                            if(a>la-5){
+                            if(a>la-10){
                                 entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.5,a*game.tileset[1]*0.5+game.edge[1]*0.5,game.edge[0],game.edge[1]-a*game.tileset[1],3))
                             }else{
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.1)*game.tileset[1],game.tileset[0],game.tileset[1]*0.8,3))
@@ -1488,9 +1488,9 @@ function generateLevel(info,layer){
                         break
                         case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
-                            if(a<20){
+                            if(a<20||a>la-5){
                                 entities.walls[1][entities.walls[1].length-1].weapon=findName('PlayerUpdraft',types.player)
-                            }else if(a>la-5){
+                            }else if(a>la-10){
                                 entities.walls[1][entities.walls[1].length-1].weapon=findName('PlayerGust',types.player)
                             }else{
                                 let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
@@ -2700,7 +2700,7 @@ function checkEnd(level,layer,key){
             }
             game.water=game.tileset[1]*(34.5+game.pointAnim[0]*19)
         }else if(game.level==28){
-            if(game.time%1800==0){
+            if(game.time%900==0){
                 entities.players.push(new player(graphics.main,random(100,game.edge[0]-100),0,-1,0,[],false,findName('ConstructGust',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].constructify()
