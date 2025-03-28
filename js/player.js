@@ -4757,7 +4757,7 @@ class player{
                         game.pvp&&this.id!=entities.players[a].id||
                         this.weaponType==11&&entities.players[a].life<entities.players[a].base.life*2&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&(this.construct||this.fort&&!entities.players[a].construct)
                     ){
-                        if(this.fort&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<45||!this.fort&&(
+                        if(this.fort&&abs(this.position.x-entities.players[a].position.x)<(this.weaponType==413?240:600)&&abs(this.position.y-entities.players[a].position.y)<45||!this.fort&&(
                             abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+40&&this.weaponType!=6&&this.weaponType!=8&&this.weaponType!=11&&this.weaponType!=99&&this.weaponType!=413||
                             abs(this.position.x-entities.players[a].position.x)<900&&abs(this.position.y-entities.players[a].position.y)<15&&this.weaponType==6||
                             abs(this.position.x-entities.players[a].position.x)<120&&abs(this.position.y-entities.players[a].position.y)<45&&(this.weaponType==8||this.weaponType==413)||
@@ -7145,6 +7145,8 @@ class player{
                             }
                         }
                     }
+                }else if(game.level==32||game.level==33){
+                    
                 }else{
                     let targets=[]
                     switch(game.level){
@@ -7825,7 +7827,10 @@ class player{
                 if(game.level==3||game.level==7){
                     this.position.y=0
                     this.previous.position.y=0
-                }else if(game.level==30&&this.position.x<game.tileset[0]*15){
+                }else if(
+                    game.level==30&&this.position.x<game.tileset[0]*15||
+                    (game.level==32||game.level==33)&&(this.position.x>game.tileset[0]*40&&this.position.x<game.tileset[0]*60||this.position.x>game.edge[0]-game.tileset[0]*20)
+                ){
                     this.life=0
                 }else if(true){
                     this.position.y=0
@@ -7916,7 +7921,7 @@ class player{
                                     entities.walls[a][b].owner=this.id
                                     if(game.level==22&&this.id==0){
                                         game.point[entities.walls[a][b].pos]=false
-                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31){
+                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33){
                                         game.point[entities.walls[a][b].pos]=this.id
                                     }else if(game.level==25){
                                         game.point[entities.walls[a][b].pos]=this.id>0
@@ -8181,6 +8186,7 @@ class player{
                             }
                         }
                     }else if(game.level==28){
+                        /*
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
                         for(let a=0,la=entities.walls.length;a<la;a++){
@@ -8214,6 +8220,28 @@ class player{
                             }
                             this.respawn()
                         }
+                        */
+                        let key='qwerty'[floor(random(0,6))]
+                        for(let a=0,la=entities.walls.length;a<la;a++){
+                            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                if(entities.walls[a][b].type==33&&entities.walls[a][b].pos==1&&entities.walls[a][b].owner==this.id){
+                                    key='Z'
+                                    a=la
+                                    b=lb
+                                }
+                            }
+                        }
+                        for(let a=0,la=levels[28].length;a<la;a++){
+                            for(let b=0,lb=levels[28][a].length;b<lb;b++){
+                                if(levels[28][a][b]==key){
+                                    this.base.position.x=game.tileset[0]*(b+0.5)
+                                    this.base.position.y=game.tileset[1]*(a+0.5)
+                                    a=la
+                                    b=lb
+                                }
+                            }
+                        }
+                        this.respawn()
                     }else if(game.level==30){
                         let key='y'
                         let paraTrigger=false

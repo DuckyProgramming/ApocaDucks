@@ -598,7 +598,7 @@ function displayMain(layer,effective,keyStore){
             )
         }
     }
-    if(game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27||game.level==28||menu.level==29||menu.level==30||menu.level==31){
+    if(game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27||game.level==28||menu.level==29||menu.level==30||menu.level==31||menu.level==32||menu.level==33){
         image(
             graphics.overlay[0],
             width/2,100,width,200
@@ -823,6 +823,16 @@ function generateLevel(info,layer){
         case 31:
             game.edge=[level[0].length*160/3,2500]
         break
+        case 32:
+            game.edge=[level[0].length*48,level.length*42]
+            game.sectors=[
+            ]
+        break
+        case 33:
+            game.edge=[level[0].length*48,level.length*42]
+            game.sectors=[
+            ]
+        break
         default:
             //game.edge=[3640,2280]
             game.edge=[level[0].length*40,level.length*40]
@@ -882,7 +892,7 @@ function generateLevel(info,layer){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.7+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(0.6+extent),17))
                                 }else if((game.level==25||game.level==26||game.level==30)&&level[a][b-1]=='m'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),51))
-                                }else if((game.level==25||game.level==26)&&level[a][b-1]=='.'){
+                                }else if((game.level==25||game.level==26||game.level==32||game.level==33)&&level[a][b-1]=='.'){
                                     if(level[a][b+1]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a+e]=level[a+e].substr(0,b+e)+']'+level[a+e].substr(b+e+1)
@@ -931,7 +941,7 @@ function generateLevel(info,layer){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.7+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(0.6+extent),18))
                                 }else if((game.level==25||game.level==26||game.level==30)&&level[a][b+1]=='m'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),52))
-                                }else if((game.level==25||game.level==26)&&(
+                                }else if((game.level==25||game.level==26||game.level==32||game.level==33)&&(
                                     level[a][b+1]=='.'||
                                     level[a][b+1]=='@'&&level[a][b+2]=='@'&&level[a][b+3]=='@'&&level[a][b+4]=='.'||
                                     level[a][b+1]=='%'&&level[a][b+2]=='%'&&level[a][b+3]=='%'&&level[a][b+4]=='.'
@@ -1069,7 +1079,7 @@ function generateLevel(info,layer){
 				case '#': case '.':
                     if(level[a][b]=='.'&&(game.level==19||game.level==31)){
                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],34))
-                    }else if(level[a][b]=='.'&&(game.level==25||game.level==26)&&!reject.includes(a*lb+b)){
+                    }else if(level[a][b]=='.'&&(game.level==25||game.level==26||game.level==32||game.level==33)&&!reject.includes(a*lb+b)){
                         let extent=0
                         for(let e=1,le=level.length-a;e<le;e++){
                             if(level[a+e][b]=='.'&&!reject.includes((a+e)*lb+b)){
@@ -1168,7 +1178,7 @@ function generateLevel(info,layer){
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.1)*game.tileset[1],game.tileset[0],game.tileset[1]*0.8,3))
                             }
                         break
-                        case 30:
+                        case 30: case 32: case 33:
                             clumper[1].push(new wall(graphics.main,b*game.tileset[0],a*game.tileset[1],0,0,3))
                         break
                         default:
@@ -1197,7 +1207,7 @@ function generateLevel(info,layer){
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.125,game.tileset[1],7))
                             }
                         break
-                        case 30:
+                        case 30: case 32: case 33:
                             if(a>0&&level[a-1][b]=='m'||a>1&&level[a-2][b]=='m'){
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],55))
                             }else if(a>0&&(level[a-1][b]==']'||level[a-1][b]=='[')){
@@ -1330,6 +1340,16 @@ function generateLevel(info,layer){
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*0.6,7))
                             }
                         break
+                        case 32: case 33:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
+                            if(level[a+1][b]==':'){
+                                clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*0.6,38))
+                            }else if(level[a+1][b]==';'){
+                                clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*0.6,56))
+                            }else if(level[a+1][b]=='|'){
+                                clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*0.6,7))
+                            }
+                        break
                         default:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,24))
                         break
@@ -1393,10 +1413,13 @@ function generateLevel(info,layer){
                 break
                 case '=':
                     switch(game.level){
+                        case 8: case 17:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,14))
+                        break
                         case 24:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
                         break
-                        case 22: case 23: case 25: case 26: case 27: case 28: case 29: case 30:
+                        default:
                             if(!reject.includes(a*lb+b)){
                                 let extent=0
                                 for(let e=1,le=level[0].length-a;e<le;e++){
@@ -1435,9 +1458,17 @@ function generateLevel(info,layer){
                                     }
                                 }
                             }
-                        break
-                        default:
-                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*2,14))
+                            switch(game.level){
+                                case 32: case 33:
+                                    if(level[a+1][b]==':'){
+                                        clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*0.6,38))
+                                    }else if(level[a+1][b]==';'){
+                                        clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*0.6,56))
+                                    }else if(level[a+1][b]=='|'){
+                                        clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*0.6,7))
+                                    }
+                                break
+                            }
                         break
                     }
                 break
@@ -1450,7 +1481,7 @@ function generateLevel(info,layer){
                                 entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                             }
                         break
-                        case 15: case 18: case 20: case 21: case 25: case 26: case 30:
+                        case 15: case 18: case 20: case 21: case 25: case 26: case 30: case 32: case 33:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             let cluster=game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(1.5))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
@@ -1489,7 +1520,7 @@ function generateLevel(info,layer){
                 break
                 case 'a':
                     switch(game.level){
-                        case 23: case 29: case 30:
+                        case 23: case 29: case 30: case 32: case 33:
                             if(level[a+1][b]=='a'){
                                 entities.walls[0].push(new wall(graphics.main,-game.tileset[0]*0.06+b*game.tileset[0],game.tileset[1]*0.56+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                             }else{
@@ -1567,7 +1598,7 @@ function generateLevel(info,layer){
                         case 15:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,30))
                         break
-                        case 23: case 25: case 26: case 30:
+                        case 23: case 25: case 26: case 30: case 32: case 33:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                         break
                         case 28:
@@ -1619,7 +1650,7 @@ function generateLevel(info,layer){
                 break
                 case ':':
                     switch(game.level){
-                        case 25: case 26: case 30:
+                        case 25: case 26: case 30: case 32: case 33:
                             if(a<la-1&&(level[a+1][b]=='<'||level[a+1][b]=='>')){
                                 clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*2,38))
                             }else{
@@ -1841,7 +1872,7 @@ function generateLevel(info,layer){
                     }
                 }else{
                     let playerLength=entities.players.length
-                    if(int(level[a][b])==(game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14)){
+                    if(int(level[a][b])==(game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14)){
                         entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length]),game.index))
                         if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14){
                             game.weaponTick[c]++
@@ -1861,7 +1892,7 @@ function generateLevel(info,layer){
                         }
                     }
                     let postC=(game.level==27?c%5:c)
-                    let encode=(game.level==23||game.level==26||game.level==28)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC]
+                    let encode=game.level==33?'q':(game.level==23||game.level==26||game.level==28)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC]
                     if(level[a][b]==encode&&game.pvp){
                         entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length]),game.index))
                         if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14){
@@ -2262,6 +2293,42 @@ function generateLevel(info,layer){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
                     entities.walls[1][a].pos=[1,3,2,0][ticker]
                     entities.players[entities.walls[1][a].index].pos=[1,3,2,0][ticker]
+                    ticker++
+                }
+            }
+            game.point=[-1,-1,-1,-1]
+        break
+        case 32:
+            ticker=0
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36||entities.walls[1][a].type==42){
+                    entities.walls[1][a].pos=[3,0,1,2][ticker]
+                    entities.players[entities.walls[1][a].index].pos=[3,0,1,2][ticker]
+                    ticker++
+                }
+            }
+            game.point=[-1,-1,-1,-1]
+        break
+        case 33:
+            ticker=0
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
+                    entities.walls[1][a].pos=[3,2,1,0][ticker]
+                    entities.players[entities.walls[1][a].index].pos=[3,2,1,0][ticker]
+                    ticker++
+                }
+            }
+            
+            ticker=0
+            for(let a=0,la=entities.walls[0].length;a<la;a++){
+                if(entities.walls[0][a].type==3){
+                    entities.walls[0][a].width=[2][ticker]*game.tileset[0]
+                    entities.walls[0][a].height=[8][ticker]*game.tileset[1]
+                    entities.walls[0][a].position.x+=entities.walls[0][a].width/2+game.tileset[0]*0.5
+                    entities.walls[0][a].position.y+=entities.walls[0][a].height/2
+                    if(ticker==0){
+                        entities.walls[0][a].position.x-=game.tileset[0]
+                    }
                     ticker++
                 }
             }
@@ -2873,7 +2940,7 @@ function initialGraphics(){
             }
         }
     }
-    if(menu.level==19||menu.level==22||menu.level==23||menu.level==24||menu.level==25||menu.level==26||menu.level==27||menu.level==28||menu.level==29||menu.level==30||menu.level==31){
+    if(menu.level==19||menu.level==22||menu.level==23||menu.level==24||menu.level==25||menu.level==26||menu.level==27||menu.level==28||menu.level==29||menu.level==30||menu.level==31||menu.level==32||menu.level==33){
         graphics.overlay.push(createGraphics(width,200))
     }
     for(let a=0,la=graphics.main.length;a<la;a++){

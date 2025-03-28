@@ -9,7 +9,7 @@ function mainloop(){
                     if(
                         a==3&&b==2||a==3&&b==3||
                         a==4&&b==0||a==4&&b==1||a==4&&b==2||a==4&&b==3||
-                        a==5&&b==0||a==5&&b==1
+                        a==5&&b==0||a==5&&b==1||a==5&&b==4
                     ){
                         fill(100)
                         rect(pos[0]+37,pos[1],76,45,10)
@@ -68,11 +68,11 @@ function mainloop(){
                         break
                         case 5:
                             switch(b){
-                                case 0: case 1:
+                                case 0: case 1: case 4:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
                                     text(`PvP`,pos[0]+37,pos[1]+15)
                                 break
-                                case 3: case 4:
+                                case 3:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                                 case 2:
