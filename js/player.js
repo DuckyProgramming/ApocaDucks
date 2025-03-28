@@ -8313,6 +8313,53 @@ class player{
                                 }
                             }
                         }
+                    }else if(game.level==32){
+                    }else if(game.level==33){
+                        let max=game.edge[0]+game.edge[1]
+                        let set=[0,0]
+                        if(this.position.y>game.edge[1]){
+                            
+                        }
+                        for(let a=0,la=entities.walls.length;a<la;a++){
+                            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                if(
+                                    dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                    entities.walls[a][b].owner==this.id
+                                ){
+                                    max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                    set[0]=entities.walls[a][b].position.x
+                                    set[1]=entities.walls[a][b].position.y
+                                }
+                            }
+                        }
+                        if(max<game.edge[0]+game.edge[1]){
+                            this.base.position.x=set[0]
+                            this.base.position.y=set[1]-40
+                            this.respawn()
+                        }else if(game.pvp&&this.die.timer>300){
+                            let playerLength=entities.players.length
+                            let key='q'
+                            let paraTrigger=false
+                            for(let a=0,la=levels[33].length;a<la;a++){
+                                for(let b=0,lb=levels[33][a].length;b<lb;b++){
+                                    if(levels[33][a][b]==key){
+                                        this.base.position.x=game.tileset[0]*(b+0.5)
+                                        this.base.position.y=game.tileset[1]*(a+0.5)
+                                        a=la
+                                        b=lb
+                                    }
+                                }
+                            }
+                            this.respawn()
+                            if(paraTrigger){
+                                this.parachute=true
+                                if(entities.players.length>playerLength){
+                                    for(let a=playerLength,la=entities.players.length;a<la;a++){
+                                        entities.players[a].parachute=true
+                                    }
+                                }
+                            }
+                        }
                     }else{
                         this.respawn()
                     }

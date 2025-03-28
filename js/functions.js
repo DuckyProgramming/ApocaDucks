@@ -2699,6 +2699,12 @@ function checkEnd(level,layer,key){
                 game.pointAnim[0]-=1/600
             }
             game.water=game.tileset[1]*(34.5+game.pointAnim[0]*19)
+        }else if(game.level==28){
+            if(game.time%1800==0){
+                entities.players.push(new player(graphics.main,random(100,game.edge[0]-100),0,-1,0,[],false,findName('ConstructGust',types.player),game.index))
+                game.index++
+                entities.players[entities.players.length-1].constructify()
+            }
         }
         let temp=[]
         for(let a=0,la=game.spawner.length;a<la;a++){
@@ -2851,7 +2857,7 @@ function checkEnd(level,layer,key){
                     if(win){
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].id>0&&entities.players[a].id<=game.gaming&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto){
-                                if(!(entities.players[a].position.x<500||entities.players[a].position.x>game.edge[0]-500||entities.players[a].position.y<250&&!entities.players[a].parachute&&entities.players[a].velocity.y<2)){
+                                if(!(entities.players[a].position.x<500||entities.players[a].position.x>game.edge[0]-500||entities.players[a].position.y<250&&!entities.players[a].parachute&&entities.players[a].velocity.y<4)){
                                     win=false
                                 }
                             }
