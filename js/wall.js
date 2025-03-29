@@ -1542,6 +1542,10 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
+                    case 32: case 33:
+                        layer.fill(152,134,112)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    break
                     default:
                         layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -2184,6 +2188,10 @@ class wall{
                                 map(game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25,this.height/2+0.5,-this.height/2-0.5,this.width/2+0.5,-this.width/2-0.5),game.tileset[1]*52.5-this.position.y-game.tileset[1]*0.25
                             )
                         }
+                    break
+                    case 32: case 33:
+                        layer.fill(152,134,112)
+                        layer.rect(0,0,this.width+1,this.height+1)
                     break
                     default:
                         layer.fill(220-min(480,this.reload)/5,120,220-min(480,this.reload)/5)
@@ -3497,6 +3505,15 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
+                    case 32: case 33:
+                        layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
+                        layer.quad(
+                            -this.width/2-10,-this.height/2-0.5,
+                            -this.width/2+5,-this.height/2+12,
+                            this.width/2-5,-this.height/2+12,
+                            this.width/2+10,-this.height/2-0.5
+                        )
+                    break
                 }
             break
             case 16: case 50:
@@ -3544,6 +3561,15 @@ class wall{
                             -this.width/2,-this.height/2+16,
                             this.width/2,-this.height/2+16,
                             this.width/2+20,-this.height/2-0.5
+                        )
+                    break
+                    case 32: case 33:
+                        layer.fill(220-min(480,this.reload)/5,120,220-min(480,this.reload)/5)
+                        layer.quad(
+                            -this.width/2-10,-this.height/2-0.5,
+                            -this.width/2+5,-this.height/2+12,
+                            this.width/2-5,-this.height/2+12,
+                            this.width/2+10,-this.height/2-0.5
                         )
                     break
                 }
@@ -4294,6 +4320,18 @@ class wall{
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,120+random(-15,15),this.align,120,300,false,-1))
                                 mult=random(1,1.5)
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                            }
+                        break
+                        case 32: case 33:
+                            if(this.reload>=431&&this.reload<=479&&this.reload%16==15){
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-120+random(-15,15),this.align,120,300,false,-1))
+                                let mult=random(1.2,1.8)
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,120+random(-15,15),this.align,120,300,false,-1))
+                                mult=random(1.2,1.8)
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                             }
@@ -5365,28 +5403,37 @@ class wall{
                                                                 }
                                                             break
                                                             case 32: case 33:
-                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
-                                                                    if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
-                                                                        hit=true
-                                                                        if(entities.walls[1][e].position.x<this.position.x){
-                                                                            for(let e=0,le=8;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(120,150),this.align,100,240,false,-1))
-                                                                                let mult=random(1.25,2.5)
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-                                                                            }
-                                                                        }else{
-                                                                            for(let e=0,le=8;e<le;e++){
-                                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-150,-120),this.align,100,240,false,-1))
-                                                                                let mult=random(1.25,2.5)
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                if(this.position.y>game.edge[1]-game.tileset[1]*15){
+                                                                    for(let e=0,le=8;e<le;e++){
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(120,150),this.align,100,240,false,-1))
+                                                                        let mult=random(1.25,2.5)
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                    }
+                                                                }else{
+                                                                    for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                        if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                            hit=true
+                                                                            if(entities.walls[1][e].position.x<this.position.x){
+                                                                                for(let e=0,le=8;e<le;e++){
+                                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(120,150),this.align,100,240,false,-1))
+                                                                                    let mult=random(1.25,2.5)
+                                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                                }
+                                                                            }else{
+                                                                                for(let e=0,le=8;e<le;e++){
+                                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-150,-120),this.align,100,240,false,-1))
+                                                                                    let mult=random(1.25,2.5)
+                                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
-                                                                }
-                                                                if(!hit){
-                                                                    this.reload=0
+                                                                    if(!hit){
+                                                                        this.reload=0
+                                                                    }
                                                                 }
                                                             break
                                                             default:
@@ -5446,13 +5493,15 @@ class wall{
                                                                 }
                                                             break
                                                             case 32: case 33:
-                                                                for(let e=0,le=entities.walls[1].length;e<le;e++){
-                                                                    if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
-                                                                        hit=true
+                                                                if(this.type==13){
+                                                                    for(let e=0,le=entities.walls[1].length;e<le;e++){
+                                                                        if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
+                                                                            hit=true
+                                                                        }
                                                                     }
-                                                                }
-                                                                if(!hit){
-                                                                    this.reload=0
+                                                                    if(!hit){
+                                                                        this.reload=0
+                                                                    }
                                                                 }
                                                             break
                                                         }
@@ -5527,6 +5576,14 @@ class wall{
                                                             case 27:
                                                                 for(let e=0,le=15;e<le;e++){
                                                                     entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,this.position.x<game.edge[0]*0.5?random(-157.5,-112.5):random(112.5,157.5),this.align,40,240,false,-1))
+                                                                    let mult=random(1.25,2.5)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                }
+                                                            break
+                                                            case 32: case 33:
+                                                                for(let e=0,le=8;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,73,random(120,150),this.align,100,240,false,-1))
                                                                     let mult=random(1.25,2.5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult

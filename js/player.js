@@ -7301,8 +7301,8 @@ class player{
                                                     }
                                                 break
                                             }
-                                            if(abs(this.position.x-11592)<100){
-                                                this.target.position.y=0
+                                            if(abs(this.position.x-11592)<120){
+                                                this.manage[2]=1
                                             }
                                         break
                                         case 4:
@@ -7381,12 +7381,12 @@ class player{
                                                 break
                                             }
                                             if(
-                                                abs(this.position.x-2088)<100||
-                                                abs(this.position.x-2376)<100||
-                                                abs(this.position.x-11352)<100||
-                                                abs(this.position.x-11640)<100
+                                                abs(this.position.x-2088)<120||
+                                                abs(this.position.x-2376)<120||
+                                                abs(this.position.x-11352)<120||
+                                                abs(this.position.x-11640)<120
                                             ){
-                                                this.target.position.y=0
+                                                this.manage[2]=1
                                             }
                                         break
                                     }
