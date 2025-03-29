@@ -35,7 +35,7 @@ function mainloop(){
                             ['Normal Weapons','Special Weapons'][b],
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
-                            ['Sulfate','Process','Gray Gravel','Shogatsu','Downward (WIP)'][b],
+                            ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
                             ['Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )
@@ -589,7 +589,7 @@ function mainloop(){
                                 }
                             }
                         break
-                        case 25: case 26: case 27:
+                        case 25: case 26: case 27: case 32: case 33:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
