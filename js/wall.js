@@ -2769,7 +2769,7 @@ class wall{
                         layer.fill(135)
                         layer.rect(-this.width*3/8,0,this.width/4,this.height)
                         layer.rect(this.width*3/8,0,this.width/4,this.height)
-                        for(let a=0,la=this.height/game.tileset[1]*2;a<la;a++){
+                        for(let a=0,la=floor(this.height/game.tileset[1]*2);a<la;a++){
                             if(a!=0){
                                 layer.rect(0,-this.height/2+this.height*a/la,this.width-1,2.5)
                             }
@@ -4107,7 +4107,7 @@ class wall{
                     case 30:
                         this.bounder.position.x=this.position.x+this.width/2
                         this.bounder.position.y=this.position.y+this.height/2
-                        this.bounder.width=this.width
+                        this.bounder.width=this.
                         this.bounder.height=this.height
                     break
                 }
@@ -4251,7 +4251,7 @@ class wall{
                             }
                         }
                     }
-                    this.reload-=(game.level==23?(this.reduction?0.5:0.25):game.level==19||game.level==26||game.level==31?0.5:1)
+                    this.reload-=(game.level==23?(this.reduction?0.5:0.25):game.level==19||game.level==26||game.level==31|game.level==33?0.5:1)
                     if((this.reload==479||this.reload==459||this.reload==439||this.reload==419||this.reload==399)&&game.level!=23&&game.level!=26){
                         let mult=0
                         switch(game.level){
@@ -4290,11 +4290,11 @@ class wall{
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                             break
                             case 32: case 33:
-                                if(this.reload==479||this.reload==459){
+                                if(this.reload==479||this.reload==469){
                                     if(this.position.x<game.tileset[0]*180){
-                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,-120+random(-15,15),this.align,400,300,false,-1))
+                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,-120+random(-15,15),this.align,400,600,false,-1))
                                     }else{
-                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,120+random(-15,15),this.align,400,300,false,-1))
+                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,97,120+random(-15,15),this.align,400,600,false,-1))
                                     }
                                     let mult=random(1,1.5)
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult

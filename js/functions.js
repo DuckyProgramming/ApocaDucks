@@ -829,13 +829,15 @@ function generateLevel(info,layer){
                 [1872,2814,960,168],
                 [6216,2520,144,168],
                 [492,2436,984,420],
-                [game.edge[0]*0.5,945,game.edge[0],1890],
+                [game.edge[0]*0.5,525,game.edge[0],1050],
+                [game.edge[0]*0.5,1470,game.edge[0],840],
+
                 [7320,2016,432,252],
-                
                 [11112,1995,336,210],
                 [12072,1995,336,210],
                 [6384,2352,480,168],
                 [8664,1990,480,210],
+
                 [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
             ]
         break
@@ -845,13 +847,15 @@ function generateLevel(info,layer){
                 [1872,2814,960,168],
                 [6216,2520,144,168],
                 [492,2436,984,420],
-                [game.edge[0]*0.5,945,game.edge[0],1890],
+                [game.edge[0]*0.5,525,game.edge[0],1050],
+                [game.edge[0]*0.5,1470,game.edge[0],840],
+
                 [7320,2016,432,252],
-                
                 [11112,1995,336,210],
                 [12072,1995,336,210],
                 [6384,2352,480,168],
                 [0,0,0,0],
+
                 [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
             ]
         break
@@ -1913,7 +1917,7 @@ function generateLevel(info,layer){
                     }
                 }else{
                     let playerLength=entities.players.length
-                    if(int(level[a][b])==(game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14)){
+                    if(int(level[a][b])==(game.level==34?0:game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14)){
                         entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length]),game.index))
                         if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14){
                             game.weaponTick[c]++
@@ -2899,7 +2903,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==33?4:game.level==23?2.5:game.level==19||game.level==26||game.level==30||game.level==31?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32||game.level==33?5/6:1)*(game.level==30&&game.spawnIndex<20?0.4:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?5/6:1)*(game.level==33?1.25:1)*(game.level==30&&game.spawnIndex<20?0.4:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }

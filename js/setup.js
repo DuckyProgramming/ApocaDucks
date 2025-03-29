@@ -33,8 +33,8 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
         
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600
@@ -48,7 +48,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,1][a];b<lb;b++){
+                for(let b=0,lb=[5,5,2,5,5,5,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
@@ -192,6 +192,9 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
+                                        menu.level=34
+                                    break
+                                    case 1:
                                         menu.level=28
                                         game.classicWeapon=true
                                         game.pvp=true
