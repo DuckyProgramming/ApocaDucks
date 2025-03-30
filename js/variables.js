@@ -20,7 +20,7 @@ types={
       difficulty:0,
       wave:[
         [
-          //['Spy',100],
+          ['LightTank',100],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[

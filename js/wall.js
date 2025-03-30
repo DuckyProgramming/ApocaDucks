@@ -4249,7 +4249,7 @@ class wall{
                     case 30:
                         this.bounder.position.x=this.position.x+this.width/2
                         this.bounder.position.y=this.position.y+this.height/2
-                        this.bounder.width=this.
+                        this.bounder.width=this.width
                         this.bounder.height=this.height
                     break
                 }

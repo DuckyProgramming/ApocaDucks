@@ -7164,7 +7164,7 @@ class player{
                         if(this.playerData.name=='Buster'){
                             this.target.point=floor(random(0,3))
                         }else if(game.pvp){
-                            if(this.weaponType==-1){
+                            if(this.weaponType==-1&&this.id!=0){
                                 let max=game.edge[0]+game.edge[1]
                                 let set=0
                                 for(let a=0,la=entities.walls.length;a<la;a++){
@@ -7590,8 +7590,8 @@ class player{
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 3:
-                                    if(this.target.position.x>2310){
-                                        this.target.position.x=this.position.y<1235?2310:this.target.position.x
+                                    if(this.target.position.x>this.position.x||this.target.position.x>2310){
+                                        this.target.position.x=this.position.y<1235?2310:2354
                                         this.target.position.y=abs(this.position.x-2310)<100?0:game.edge[1]
                                     }
                                 break
@@ -7607,7 +7607,7 @@ class player{
                                     }
                                 break
                                 case 6: case 7: case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15:
-                                case 16: case 17:
+                                case 16: case 17: case 18: case 19:
                                     this.manage[2]=1
                                 break
                             }
@@ -10141,6 +10141,10 @@ class player{
                 entities.projectiles[a].previous.position.x=this.position.x
                 entities.projectiles[a].previous.position.y=this.position.y
             }
+        }
+        if(this.position.x!=this.position.x||this.position.y!=this.position.y){
+            print(this.position,this.playerData.name)
+            noLoop()
         }
     }
 }
