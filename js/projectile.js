@@ -39,7 +39,7 @@ class projectile{
 			case 57: case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90:
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
-			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327:
+			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -5320,6 +5320,18 @@ class projectile{
 				layer.ellipse(60*lcos(this.time+10),-60*lsin(this.time+10),8)
 				layer.ellipse(-60*lcos(this.time+10),60*lsin(this.time+10),8)
 			break
+			case 331:
+				layer.fill(240-this.crit*240,240,240,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(200-this.crit*200,200,200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(160-this.crit*160,160,160,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(240,this.fade)
+				layer.ellipse(0,0,4)
+				layer.fill(40,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -6021,7 +6033,7 @@ class projectile{
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
-				case 324: case 325: case 327:
+				case 324: case 325: case 327: case 331:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8179,6 +8191,8 @@ class projectile{
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
 							}else if(this.type==324){
 								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+30,60)
+							}else if(this.type==331){
+								entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
 							}
 							if(this.type==20){
 								entities.players[b].DOT.damage+=this.damage/180

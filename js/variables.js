@@ -4224,9 +4224,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:246,
       desc:'Bonker that explodes on touch',dpsBuff:0,
     },{
-      name:'PlayerToxin',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:398,
-      desc:'Bonker that deals damage over time',dpsBuff:0,
+      name:'PlayerMasonry',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:671,
+      desc:'Bonker that gives nearby allies a defense buff',dpsBuff:0,
     },{
       name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:243,
@@ -5076,9 +5076,9 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:456,
       desc:'Motorizer with drones that fire damage over time bullets over a spread',dpsBuff:2,
     },{
-      name:'PlayerTroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:526,
-      desc:'Sends targets to a random spot on the map',dpsBuff:1,
+      name:'PlayerToxin',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:398,
+      desc:'Bonker that deals damage over time',dpsBuff:0,
     },{
       name:'PlayerPoisonerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:594,
@@ -5500,6 +5500,16 @@ types={
       name:'PlayerDeployerGU',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:619,
       desc:'Spawns gust units',dpsBuff:0,
+    },
+
+    {
+      name:'PlayerTroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:526,
+      desc:'Sends targets to a random spot on the map',dpsBuff:1,
+    },{
+      name:'PlayerDeviant',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:670,
+      desc:'Reverses the horizontal movement of target',dpsBuff:1,
     },
     
     {
@@ -13268,6 +13278,24 @@ types={
 			reload:20,
 			speed:1.15,
       uses:12,
+		},{
+			name:'Deviant',
+			ammo:8,
+			damage:90,
+			cooldown:10,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Masonry',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.95,
+      uses:1,
 		},
 
     /*{
@@ -15249,9 +15277,9 @@ Ethan - updraft in sewer
 "                                     <##########>                  <##############>                      <############################################",
 " A                                  <###########>               <###################>  aa <###>  ---  <###############################################",
 "                               aa  <##############>       --- <#######################################################################################",
-"#####>                       ____<##################[===]#############################################################################################",
-"#######>        <##>          |  ]#################[     #############################################################################################",
-"##########>___<#####     aa   |       ]######[          <#############################################################################################",
+"#####>                       ____<#####[   ]########[===]#############################################################################################",
+"#######>        <##>          |  ]###[    d #######[     #############################################################################################",
+"##########>___<#####     aa   |          ===]#[         <#############################################################################################",
 "###########   <####[   <#####>|                       <###############################################################################################",
 "###########   ]##[    <#############> ---   --- <#####################################################################################################",
 "###########         <#################################################################################################################################",

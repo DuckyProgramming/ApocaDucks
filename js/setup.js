@@ -19,8 +19,8 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=35
-        menu.level=35
+        game.level=34
+        menu.level=34
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -33,8 +33,8 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
         
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600

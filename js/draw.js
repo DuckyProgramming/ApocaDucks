@@ -41,7 +41,7 @@ function mainloop(){
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
-                            ['Arizona','Big Money (WIP)','TBD','TBD','Blueprint'][b]
+                            ['Arizona','Valuation (WIP)','Fulgur (WIP)','TBD','Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
