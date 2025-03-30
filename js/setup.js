@@ -19,8 +19,8 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=32
-        menu.level=32
+        game.level=34
+        menu.level=34
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)

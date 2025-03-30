@@ -235,6 +235,9 @@ function mainloop(){
                 if(game.level==15||game.level==18||game.level==30){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
+                }else if(game.level==34){
+                    graphics.main[c].fill(0)
+                    graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
                     graphics.main[c].background(0)
                 }
@@ -592,7 +595,7 @@ function mainloop(){
                                 }
                             }
                         break
-                        case 25: case 26: case 27: case 32: case 33:
+                        case 25: case 26: case 27: case 32: case 33: case 34:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

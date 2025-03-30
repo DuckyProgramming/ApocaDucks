@@ -1,5 +1,9 @@
 
 
+
+
+
+
 NEW MAP 3/29/25
 
 DOWNWARD
@@ -16,7 +20,10 @@ final map will be drawn later
 
 
 
-NEW MAP 4/5/25
+NEW WEAPONS
+
+deviant - reverses target movement
+nullify - applies stun to a large radius around you like a kamikaze
 
 
 

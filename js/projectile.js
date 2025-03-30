@@ -5964,6 +5964,7 @@ class projectile{
         if(this.fade<=0){
 			this.remove=true
         }
+		let nudge=this.partisan?300:50
 		if((game.level==3||game.level==7)&&this.position.y>game.edge[1]){
 			this.position.y=0
 			this.previous.position.y=0
@@ -5976,7 +5977,7 @@ class projectile{
 		}else if((game.level==3||game.level==7||game.level==16)&&this.position.x<0){
 			this.position.x=game.edge[0]
 			this.previous.position.x=game.edge[0]
-		}else if((this.position.x<-50||this.position.x>game.edge[0]+50||this.position.y>game.edge[1]+50)&&!this.partisan){
+		}else if((this.position.x<-nudge||this.position.x>game.edge[0]+nudge||this.position.y<-nudge-500||this.position.y>game.edge[1]+nudge)){
 			this.active=false
 		}
 		this.previous.position.x=this.position.x
@@ -7832,7 +7833,7 @@ class projectile{
 						this.angularVelocity*=0.95
 					}
 					if(this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/5,60,this.crit,this.index))
+						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/4,60,this.crit,this.index))
 					}
 				break
 
