@@ -5579,13 +5579,13 @@ class player{
                             this.target.position.y=this.position.y
                         }
                     }
-                }else if(game.level==22||game.level==23){
+                }else if(game.level==22||game.level==23||game.level==35){
                     this.manage[1]=false
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
                             floor(random(0,(this.life<=0?15:150)))==0||
-                            this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||
+                            this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id?1:0)==(game.level==35||this.weaponType>=0?1:0)||
                             this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].unProtected()&&dist(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.x,entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.y,this.position.x,this.position.y)<600||
                             this.playerData.name=='Buster'&&dist(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.x,entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.y,this.position.x,this.position.y)<100
                         )
@@ -5597,6 +5597,34 @@ class player{
                         }else if(this.playerData.name=='Buster'){
                             let possible=[0,1,2,3,4]
                             this.target.point=possible[floor(random(0,possible.length))]
+                        }else if(game.level==35){
+                            if(this.id>0){
+                                if(game.point[4]==0){
+                                    this.target.point=4
+                                }else{
+                                    let possible=[0,1,2,3,4,4]
+                                    for(let a=0,la=5;a<la;a++){
+                                        if(game.point[a]==0){
+                                            possible.push(a)
+                                        }
+                                    }
+                                    this.target.point=possible[floor(random(0,possible.length))]
+                                }
+                            }else{
+                                let possible=[]
+                                let valid=[0,1,2,3,4]
+                                for(let a=0,la=valid.length;a<la;a++){
+                                    if(game.point[valid[a]]!=0){
+                                        for(let b=0,lb=[1,1,1,1,2][valid[a]];b<lb;b++){
+                                            possible.push(valid[a])
+                                        }
+                                    }
+                                }
+                                if(possible.length==0){
+                                    possible=[0,1,2,3,4]
+                                }
+                                this.target.point=possible[floor(random(0,possible.length))]
+                            }
                         }else if(game.pvp&&this.id==0){
                             let possible=[]
                             for(let a=0,la=game.point.length;a<la;a++){
@@ -5706,8 +5734,8 @@ class player{
                         this.manage[1]=true
                     }else{
                         let goalPoint=0
-                        goalPoint=game.pvp?this.target.point:this.base.position.x>game.edge[0]*0.8||this.id>0&&this.target.point==4?4:game.point[0]?0:game.point[1]?1:game.point[2]?2:game.point[3]?3:4
-                        if(game.pvp&&this.position.x>3520&&this.position.x<5480&&this.position.y>1250&&this.position.y<1475){
+                        goalPoint=game.pvp||game.level==35?this.target.point:this.base.position.x>game.edge[0]*0.8||this.id>0&&this.target.point==4?4:game.point[0]?0:game.point[1]?1:game.point[2]?2:game.point[3]?3:4
+                        if(game.level!=22&&this.position.x>3520&&this.position.x<5480&&this.position.y>1250&&this.position.y<1475){
                             if(this.position.y<1425){
                                 this.target.position.x=4500
                                 this.target.position.y=2000
@@ -5729,7 +5757,7 @@ class player{
                                     break
                                 }
                             }
-                        }else if(game.pvp&&this.position.x>2160&&this.position.x<2520&&this.position.y>1200&&this.position.y<1305){
+                        }else if(game.level!=22&&this.position.x>2160&&this.position.x<2520&&this.position.y>1200&&this.position.y<1305){
                             switch(goalPoint){
                                 case 0: case 1: case 2:
                                     this.target.position.x=2160
@@ -5820,10 +5848,10 @@ class player{
                                             }
                                         break
                                         case 3:
-                                            if(game.level==23&&this.position.x>1840&&this.position.x<2040&&this.position.y<1850&&this.position.y>1625){
+                                            if(game.level!=22&&this.position.x>1840&&this.position.x<2040&&this.position.y<1850&&this.position.y>1625){
                                                 this.target.position.x=1940
                                                 this.target.position.y=0
-                                            }else if(game.level==23&&this.position.y>1850){
+                                            }else if(game.level!=22&&this.position.y>1850){
                                                 switch(goalPoint){
                                                     case 0: 
                                                         this.target.position.x=1300
@@ -5908,7 +5936,7 @@ class player{
                                             }
                                         break
                                         case 6:
-                                            let upPoint=game.level==23?4980:5400
+                                            let upPoint=game.level!=22?4980:5400
                                             switch(goalPoint){
                                                 case 0: case 1: case 4:
                                                     this.target.position.x=abs(this.position.x-3620)<100&&this.position.y>1200?3660:abs(this.position.x-4100)<100&&this.position.y>1200?4140:abs(this.position.x-4580)<100&&this.position.y>1200?4620:abs(this.position.x-5060)<100&&this.position.y>1200?5100:2700
@@ -5919,7 +5947,7 @@ class player{
                                                     this.target.position.y=abs(this.position.x-upPoint)<100?0:1200
                                                 break
                                                 case 3:
-                                                    if(game.level==22&&game.point[2]||game.level==23){
+                                                    if(game.level==22&&game.point[2]||game.level!=22){
                                                         this.target.position.x=upPoint
                                                         this.target.position.y=abs(this.position.x-upPoint)<100?0:1200
                                                     }else{
@@ -5940,7 +5968,7 @@ class player{
                                                     this.target.position.y=1200
                                                 break
                                                 case 2: case 3:
-                                                    if(game.level==23){
+                                                    if(game.level!=22){
                                                         this.target.position.x=3100
                                                         this.target.position.y=abs(this.position.x-3100)<100?0:1200
                                                     }else{
@@ -5986,7 +6014,7 @@ class player{
                                                     }
                                                 break
                                                 case 1:
-                                                    if((game.level==22&&game.point[1]||game.level==23)&&this.playerData.sizeBuff<=1.5){
+                                                    if((game.level==22&&game.point[1]||game.level!=22)&&this.playerData.sizeBuff<=1.5){
                                                         if(this.position.y>1930&&this.position.x<5900){
                                                             this.target.position.x=5850
                                                             this.target.position.y=1700
@@ -6000,7 +6028,7 @@ class player{
                                                     }
                                                 break
                                                 case 2:
-                                                    if(game.level==23){
+                                                    if(game.level!=22){
                                                         this.target.position.x=2960
                                                         this.target.position.y=abs(this.position.x-2960)<100?0:1700
                                                     }else{
@@ -6024,7 +6052,7 @@ class player{
                                         case 10:
                                             switch(goalPoint){
                                                 case 1:
-                                                    if(game.level==23){
+                                                    if(game.level!=22){
                                                         if(this.position.y>2200){
                                                             this.target.position.x=5250
                                                             this.target.position.y=2400
@@ -6045,7 +6073,7 @@ class player{
                                                     this.target.position.y=abs(this.position.x-3750)<100?0:2000
                                                 break
                                                 case 3:
-                                                    if(game.level==23){
+                                                    if(game.level!=22){
                                                         if(this.position.y>2200){
                                                             this.target.position.x=4700
                                                             this.target.position.y=abs(this.position.x-4700)<100?0:2000
@@ -6100,7 +6128,7 @@ class player{
                                             }
                                         break
                                         case 13:
-                                            this.target.position.x=game.level==23?5900:5700
+                                            this.target.position.x=game.level!=22?5900:5700
                                             this.target.position.y=2000
                                         break
                                         default:
@@ -7213,7 +7241,7 @@ class player{
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
-                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*150:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                             (this.weaponType>=0||this.playerData.name=='Buster')&&entities.players[a].position.x>984&&!(entities.players[a].position.x<3576&&entities.players[a].position.x<this.position.x-150)&&!(this.auto&&this.fort)&&entities.players[a].unProtected()
                         ){
                             let b=entities.players[a]
@@ -7275,7 +7303,7 @@ class player{
                                             this.target.position.y=abs(this.position.x-6216)<100?0:game.edge[1]
                                         break
                                         case 2:
-                                            this.target.position.x=this.position.y<2500?game.edge[0]:936
+                                            this.target.position.x=this.position.y<2450?game.edge[0]:936
                                             this.target.position.y=abs(this.position.x-936)<100?0:game.edge[1]
                                         break
                                         case 3:
@@ -7766,8 +7794,8 @@ class player{
                     }
                 }
             }else{
-                let jumpMult=(game.level==33?0.5:game.level==23&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)
-                let jumpMult2=game.level==23&&this.wet>0?2:1
+                let jumpMult=(game.level==33?0.5:game.level==26&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)
+                let jumpMult2=game.level==26&&this.wet>0?2:1
                 if(this.jumper()){
                     if(this.manage[2]==0&&(floor(random(0,180*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
                         this.manage[2]=1
@@ -8093,10 +8121,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -8185,7 +8213,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    if(game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28){
+                    if(game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35){
                         let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,7000,6000,5000,4000][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19||game.level==31?5:1)*(game.level==24?2:1)*(game.level==32||game.level==33?2.5:1)
                         if(entities.players[a].stats.bust>=threshold&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){
                             entities.players[a].stats.bust=0
@@ -8398,7 +8426,7 @@ class player{
                                     entities.walls[a][b].owner=this.id
                                     if(game.level==22&&this.id==0){
                                         game.point[entities.walls[a][b].pos]=false
-                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33){
+                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33||game.level==35){
                                         game.point[entities.walls[a][b].pos]=this.id
                                     }else if(game.level==25){
                                         game.point[entities.walls[a][b].pos]=this.id>0
@@ -8460,7 +8488,7 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==22){
+                    }else if(game.level==22||game.level==35){
                         for(let a=0,la=entities.walls.length;a<la;a++){
                             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                                 if(entities.walls[a][b].type==33&&entities.walls[a][b].pos==4&&entities.walls[a][b].owner>0){

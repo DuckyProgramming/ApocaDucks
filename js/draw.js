@@ -4,11 +4,16 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,2][a];b<lb;b++){
+                for(let b=0,lb=[5,5,2,5,5,5,5][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
-                    if(
+                    if(a==4&&b==3){
+                        fill(100)
+                        rect(pos[0]+49.5,pos[1],51,45,10)
+                        rect(pos[0],pos[1],51,45,10)
+                        rect(pos[0]-49.5,pos[1],51,45,10)
+                    }else if(
                         a==3&&b==2||a==3&&b==3||
-                        a==4&&b==0||a==4&&b==1||a==4&&b==2||a==4&&b==3||
+                        a==4&&b==0||a==4&&b==1||a==4&&b==2||
                         a==5&&b==0||a==5&&b==1||a==5&&b==4
                     ){
                         fill(100)
@@ -36,7 +41,7 @@ function mainloop(){
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
-                            ['Silverline','Blueprint'][b]
+                            ['Arizona','Big Money (WIP)','TBD','TBD','Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
@@ -57,9 +62,14 @@ function mainloop(){
                         break
                         case 4:
                             switch(b){
-                                case 0: case 1: case 2: case 3:
+                                case 0: case 1: case 2:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
                                     text(`PvP`,pos[0]+37,pos[1]+15)
+                                break
+                                case 3:
+                                    text(`PvE`,pos[0]-50,pos[1]+15)
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                    text(`Chaos`,pos[0]+50,pos[1]+15)
                                 break
                                 case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
@@ -85,7 +95,7 @@ function mainloop(){
                                 case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
-                                case 1:
+                                case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                             }

@@ -149,7 +149,7 @@ class wall{
                 }
             break
             case 31:
-                this.owner=game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                this.owner=game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23||game.level==35)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Fort',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -165,7 +165,7 @@ class wall{
                 }
             break
             case 33:
-                this.owner=game.level==29?0:game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23||game.level==25||game.level==26||game.level==32)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                this.owner=game.level==29?0:game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23||game.level==25||game.level==26||game.level==32||game.level==35)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Turret',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -184,7 +184,7 @@ class wall{
                 }
             break
             case 36:
-                this.owner=(game.level==22||game.level==23||game.level==25||game.level==26)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                this.owner=(game.level==22||game.level==23||game.level==25||game.level==26||game.level==35)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName(game.level==28?'Guster':'Outpost',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -201,7 +201,7 @@ class wall{
                         this.timers.push(0)
                     }
                 }else{
-                    this.owner=game.level==32?0:(game.level==22||game.level==23||game.level==25||game.level==26)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                    this.owner=game.level==32?0:(game.level==22||game.level==23||game.level==25||game.level==26||game.level==35)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                     entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName(game.level==32?'Payload':'Rogue',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].auto=true
@@ -803,7 +803,7 @@ class wall{
                         layer.fill(60,65,70)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
@@ -938,7 +938,7 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         if(
@@ -1070,7 +1070,7 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(max(120,200-game.pointAnim[0]*80-min(480,this.reload)/5),120,120)
@@ -1176,7 +1176,7 @@ class wall{
                             layer.rect(0,-this.height/2+(a+0.5)/2*game.tileset[1],this.width+1,3)
                         }
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(80)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(100)
@@ -1537,7 +1537,7 @@ class wall{
                             this.width/2,-this.height/2
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
@@ -1655,7 +1655,7 @@ class wall{
                             this.width/2+0.5,this.height/2+0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.triangle(
                             -this.width/2-0.5,-this.height/2-0.5,
@@ -1807,7 +1807,7 @@ class wall{
                             this.width/2+0.5,this.height/2+0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.triangle(
                             this.width/2+0.5,-this.height/2-0.5,
@@ -1959,7 +1959,7 @@ class wall{
                             this.width/2+0.5,-this.height/2-0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.triangle(
                             -this.width/2-0.5,-this.height/2-0.5,
@@ -2094,7 +2094,7 @@ class wall{
                             this.width/2+0.5,this.height/2+0.5
                         )
                     break
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.triangle(
                             -this.width/2-0.5,-this.height/2-0.5,
@@ -2211,7 +2211,7 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
-                    case 23:
+                    case 22: case 23: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
@@ -2283,7 +2283,7 @@ class wall{
                         layer.rect(0,-this.height*0.25,this.width,this.height*0.5+1)
                         layer.quad(-this.width*0.5,0,this.width*0.5,0,this.width*0.25,this.height*0.5,-this.width*0.25,this.height*0.5)
                     break
-                    case 23:
+                    case 23: case 35:
                         layer.fill(60,55,60)
                         layer.rect(0,-this.height*0.2,this.width,this.height*0.6+1)
                         for(let a=0,la=this.width/game.tileset[0];a<la;a++){
@@ -2454,7 +2454,7 @@ class wall{
                         layer.fill(100,90,80)
                         layer.rect(0,0,this.width+1,this.height+1,2)
                     break
-                    case 23: case 29: case 30: case 32: case 33:
+                    case 22: case 23: case 29: case 30: case 32: case 33: case 35:
                         layer.fill(140,100,80,this.fade)
                         layer.rect(0,0,this.width+game.tileset[0]*0.12,this.height)
                         layer.fill(120,80,60,this.fade)
@@ -2787,7 +2787,7 @@ class wall{
             break
             case 38: case 56:
                 switch(game.level){
-                    case 22: case 23:
+                    case 22: case 23: case 35:
                         layer.fill(90,85,80)
                         for(let a=0,la=this.height/game.tileset[1];a<la;a++){
                             layer.rect(0,this.height/2-(a+0.5)/la*this.height,this.width,game.tileset[1]*0.1)
@@ -3538,7 +3538,7 @@ class wall{
                             }
                         }
                     break
-                    case 23: case 26:
+                    case 23: case 26: case 35:
                         switch(this.type){
                             case 13:
                                 layer.fill(120,220-min(480,this.reload)/5,170-min(480,this.reload)/10)
@@ -3636,7 +3636,7 @@ class wall{
                             }
                         }
                     break
-                    case 23:
+                    case 23: case 35:
                         layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
                         layer.quad(
                             -this.width/2,-this.height/2-0.5,
@@ -3694,7 +3694,7 @@ class wall{
                             }
                         }
                     break
-                    case 23:
+                    case 23: case 35:
                         layer.fill(max(120,200-min(480,this.reload)/5),120,max(120,200-min(480,this.reload)/5))
                         layer.quad(
                             -this.width/2-20,-this.height/2-0.5,
@@ -3759,10 +3759,10 @@ class wall{
                         graphics.overlay[0].fill(255,255,0)
                         graphics.overlay[0].rect(5+this.timers.length*20,50,30,3,1)
                     }
-                }else if(game.level==23||game.level==28){
+                }else if(game.level==23||game.level==28||game.level==35){
                     let place=[0,0]
                     switch(game.level){
-                        case 23:
+                        case 23: case 35:
                             place=this.type==42?[1,3]:[[0,1],[1,2],[1,0],[2,1],[1,1],[0,0],[2,0],[0,2],[2,2]][this.pos]
                         break
                         case 28:
@@ -4135,7 +4135,7 @@ class wall{
             break
             case 40:
                 switch(game.level){
-                    case 23:
+                    case 23: case 35:
                         layer.fill(220-min(480,this.reload)/5,70+min(480,this.reload)/10,170-min(480,this.reload)/10)
                         layer.quad(
                             -this.width/2-20,-this.height/2-0.5,
@@ -4454,7 +4454,7 @@ class wall{
                 if(this.reload>0){
                     this.reload-=(game.level==19||game.level==31?0.5:1)
                     switch(game.level){
-                        case 19: case 22: case 23: case 24: case 31:
+                        case 19: case 22: case 23: case 24: case 31: case 35:
                             if(this.reload>=399&&this.reload<=479&&this.reload%16==15){
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-120+random(-15,15),this.align,120,300,false,-1))
                                 let mult=random(1,1.5)
@@ -5584,6 +5584,14 @@ class wall{
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                 }
                                                             break
+                                                            case 35:
+                                                                for(let e=0,le=20;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,this.position.x<game.edge[0]*0.5?random(97.5,142.5):random(-142.5,-97.5),this.align,100,240,false,-1))
+                                                                    let mult=random(1.5,3)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult*0.6
+                                                                }
+                                                            break
                                                             default:
                                                                 for(let e=0,le=15;e<le;e++){
                                                                     entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),this.align,100,240,false,-1))
@@ -5696,7 +5704,7 @@ class wall{
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                                                 }
                                                             break
-                                                            case 23:
+                                                            case 23: case 35:
                                                                 for(let e=0,le=entities.walls[1].length;e<le;e++){
                                                                     if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true

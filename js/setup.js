@@ -19,8 +19,8 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=34
-        menu.level=34
+        game.level=35
+        menu.level=35
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -33,8 +33,8 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600
@@ -48,7 +48,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,2][a];b<lb;b++){
+                for(let b=0,lb=[5,5,2,5,5,5,5][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
@@ -126,13 +126,16 @@ function mouseClicked(){
                                         }
                                     break
                                     case 3:
-                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
                                             menu.level=22
                                             game.classicWeapon=true
-                                        }else{
+                                        }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:50,height:45})){
                                             menu.level=23
                                             game.classicWeapon=true
                                             game.pvp=true
+                                        }else{
+                                            menu.level=35
+                                            game.classicWeapon=true
                                         }
                                     break
                                     case 4:
@@ -194,7 +197,7 @@ function mouseClicked(){
                                     case 0:
                                         menu.level=34
                                     break
-                                    case 1:
+                                    case 4:
                                         menu.level=28
                                         game.classicWeapon=true
                                         game.pvp=true
