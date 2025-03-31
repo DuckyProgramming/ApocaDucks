@@ -197,6 +197,13 @@ function mouseClicked(){
                                     case 0:
                                         menu.level=34
                                     break
+                                    case 1:
+                                        menu.level=36
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        game.classicRespawn=false
+                                        instant()
+                                    break
                                     case 4:
                                         menu.level=28
                                         game.classicWeapon=true

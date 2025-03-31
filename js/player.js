@@ -1082,7 +1082,7 @@ class player{
         }else if(game.randomizer){
             this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
         }else if(game.classicWeapon||this.id>game.gaming){
-            let clump=listing[game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))]
+            let clump=listing[game.peakWeapon?1:game.level==36?0:game.level==27&&game.pvp?0:floor(random(0,1.5))]
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             if(game.level==27&&game.pvp){
@@ -8144,10 +8144,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -8219,7 +8219,7 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&game.level==20||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&(this.id>0&&this.id<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33)&&this.id>0)&&!game.attacker||
-                this.id>game.gaming&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33||game.attacker&&this.id!=0||this.storeWeapon
+                this.id>game.gaming&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=36||game.attacker&&this.id!=0||this.storeWeapon
             )){
                 if(this.storeWeapon){
                     this.storeWeapon=false
@@ -8352,7 +8352,8 @@ class player{
                     this.previous.position.y=0
                 }else if(
                     game.level==30&&this.position.x<game.tileset[0]*15||
-                    (game.level==32||game.level==33)&&(this.position.x>game.tileset[0]*40&&this.position.x<game.tileset[0]*60||this.position.x>game.edge[0]-game.tileset[0]*20)
+                    (game.level==32||game.level==33)&&(this.position.x>game.tileset[0]*40&&this.position.x<game.tileset[0]*60||this.position.x>game.edge[0]-game.tileset[0]*20)||
+                    game.level==36
                 ){
                     if(this.fort&&this.auto){
                         this.position.x=this.base.position.x

@@ -41,7 +41,7 @@ function mainloop(){
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
-                            ['Arizona','Valuation (WIP)','Fulgur (WIP)','TBD','Blueprint'][b]
+                            ['Arizona','Aerial','Valuation (WIP)','Tiny Rock (WIP)','Blueprint'][b]
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
@@ -95,7 +95,7 @@ function mainloop(){
                                 case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
-                                case 4:
+                                case 1: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                             }
@@ -242,7 +242,7 @@ function mainloop(){
             let key=[]
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
-                if(game.level==15||game.level==18||game.level==30){
+                if(game.level==15||game.level==18||game.level==30||game.level==36){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(game.level==34){
