@@ -4802,13 +4802,13 @@ class wall{
                         }
                     }
                     if(alive<=1&&game.players>=2){
-                        for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
-                                this.timers[entities.players[a].id-1][0]++
-                            }
-                        }
                         this.endTime++
                         if(this.endTime>120){
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
+                                    this.timers[entities.players[a].id-1][0]++
+                                }
+                            }
                             entities.players=[]
                             newLoop()
                         }
