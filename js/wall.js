@@ -6036,7 +6036,7 @@ class wall{
                                                             break
                                                             case 22:
                                                                 for(let e=0,le=10;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,150,1200,false,-1))
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,200,1200,false,-1))
                                                                     let mult=random(1.25,2.5)
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
@@ -6047,7 +6047,7 @@ class wall{
                                                             case 23:
                                                                 if(game.point[0]==c.id){
                                                                     for(let e=0,le=10;e<le;e++){
-                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,150,1200,false,-1))
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,200,1200,false,-1))
                                                                         let mult=random(1.25,2.5)
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.y*=mult

@@ -7615,34 +7615,34 @@ class player{
                             }
                             switch(a){
                                 case 0:
-                                    this.target.position.x=4158
+                                    this.target.position.x=4378
                                     this.target.position.y=0
                                 break
                                 case 1:
-                                    if(this.target.position.x>this.position.x||this.target.position.x>2398){
-                                        this.target.position.x=2398
-                                        this.target.position.y=abs(this.position.x-2398)<100?0:game.edge[1]
+                                    if(this.target.position.x>this.position.x||this.target.position.x>2618){
+                                        this.target.position.x=2618
+                                        this.target.position.y=abs(this.position.x-2618)<100?0:game.edge[1]
                                     }
                                 break
                                 case 2:
-                                    this.target.position.x=880
+                                    this.target.position.x=1100
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 3:
-                                    if(this.target.position.x>this.position.x||this.target.position.x>2310){
-                                        this.target.position.x=this.position.y<1235?2310:2354
-                                        this.target.position.y=abs(this.position.x-2310)<100?0:game.edge[1]
+                                    if(this.target.position.x>this.position.x||this.target.position.x>2530){
+                                        this.target.position.x=this.position.y<1235?2530:2574
+                                        this.target.position.y=abs(this.position.x-2530)<100?0:game.edge[1]
                                     }
                                 break
                                 case 4:
-                                    this.target.position.x=3080
+                                    this.target.position.x=3300
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 5:
-                                    if(this.target.position.x<5918){
-                                        this.target.position.x=5764
+                                    if(this.target.position.x<6138){
+                                        this.target.position.x=5984
                                     }else{
-                                        this.target.position.x=6072
+                                        this.target.position.x=6292
                                     }
                                 break
                                 case 6: case 7: case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15:
@@ -7650,13 +7650,13 @@ class player{
                                     this.manage[2]=1
                                 break
                                 case 20:
-                                    if(this.target.position.x>4334){
-                                        this.target.position.x=5302
-                                        this.target.position.y=abs(this.position.x-5302)<100?0:game.edge[1]
+                                    if(this.target.position.x>4554){
+                                        this.target.position.x=5522
+                                        this.target.position.y=abs(this.position.x-5522)<100?0:game.edge[1]
                                     }
                                 break
                                 case 21:
-                                    this.target.position.x=1738
+                                    this.target.position.x=1958
                                     this.target.position.y=game.edge[1]
                                 break
                             }
