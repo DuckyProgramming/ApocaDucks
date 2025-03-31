@@ -7618,7 +7618,7 @@ class player{
                                     this.target.position.x=4378
                                     this.target.position.y=0
                                 break
-                                case 1:
+                                case 1: case 22:
                                     if(this.target.position.x>this.position.x||this.target.position.x>2618){
                                         this.target.position.x=2618
                                         this.target.position.y=abs(this.position.x-2618)<100?0:game.edge[1]
@@ -7698,7 +7698,7 @@ class player{
                             this.target.position.y=target[1]
                         }else{
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1500&&entities.players[a].life>0){
+                                if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<600&&entities.players[a].life>0){
                                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                 }
                             }
@@ -7708,7 +7708,7 @@ class player{
                                 this.target.position.y=target[1]
                             }else{
                                 for(let a=0,la=entities.players.length;a<la;a++){
-                                    if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&entities.players[a].life>0){
+                                    if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1500&&entities.players[a].life>0){
                                         targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                     }
                                 }
@@ -7716,6 +7716,17 @@ class player{
                                     let target=targets[floor(random(targets.length))]
                                     this.target.position.x=target[0]+random(-120,120)
                                     this.target.position.y=target[1]
+                                }else{
+                                    for(let a=0,la=entities.players.length;a<la;a++){
+                                        if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&entities.players[a].life>0){
+                                            targets.push([entities.players[a].position.x,entities.players[a].position.y])
+                                        }
+                                    }
+                                    if(targets.length>0){
+                                        let target=targets[floor(random(targets.length))]
+                                        this.target.position.x=target[0]+random(-120,120)
+                                        this.target.position.y=target[1]
+                                    }
                                 }
                             }
                         }
@@ -7738,7 +7749,7 @@ class player{
                         }
                     }
                     this.attacking=this.manage[1]
-                    if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading){
+                    if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&game.level==8){
                         this.attack(0)
                     }
                 }else{
@@ -7875,7 +7886,10 @@ class player{
                     }
                 }
                 this.attacking=this.manage[1]
-                if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading){
+                if(
+                    this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
+                    !(game.level==36&&this.position.y<300)
+                ){
                     this.attack(0)
                 }
             }
@@ -8219,7 +8233,7 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&game.level==20||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&(this.id>0&&this.id<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33)&&this.id>0)&&!game.attacker||
-                this.id>game.gaming&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=36||game.attacker&&this.id!=0||this.storeWeapon
+                this.id>game.gaming&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33||game.attacker&&this.id!=0||this.storeWeapon
             )){
                 if(this.storeWeapon){
                     this.storeWeapon=false

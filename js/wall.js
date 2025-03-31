@@ -860,11 +860,14 @@ class wall{
                     break
                     case 36:
                         if(this.position.y<game.tileset[1]*10){
-                            layer.fill(80)
+                            if(this.time<480||this.time<600&&this.time%30<15){
+                                layer.fill(80)
+                                layer.rect(0,0,this.width+1,this.height+1)
+                            }
                         }else{
                             layer.fill(160,150,130)
+                            layer.rect(0,0,this.width+1,this.height+1)
                         }
-                        layer.rect(0,0,this.width+1,this.height+1)
                     break
                     default:
                         layer.fill(120)
@@ -2714,7 +2717,7 @@ class wall{
             break
             case 35:
                 switch(game.level){
-                    case 22:
+                    case 22: case 35:
                         layer.fill(110,105,100)
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(220-this.reload/3)
@@ -4709,7 +4712,7 @@ class wall{
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&game.level!=13&&game.level!=14){
+                if(this.recharge>0&&game.level!=13&&game.level!=14&&game.level!=35){
                     this.recharge--
                 }
                 if(this.falling>0&&game.level==16){
@@ -5384,6 +5387,7 @@ class wall{
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming&&game.level!=27||this.recharge>0||c.construct||c.auto))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
+                        &&!(this.type==1&&game.level==35&&this.poition.y<game.tileset[1]*10&&this.time>600)
                     ){
                         switch(this.type){
                             case 3:
