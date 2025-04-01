@@ -5290,8 +5290,7 @@ class wall{
                                 }
                             }
                         }
-                    }
-                    if((abs(this.position.x-game.tileset[0]*70.5)<1||abs(this.position.x-game.tileset[0]*126.5)<1)&&this.time%15==0){
+                    }else if((abs(this.position.x-game.tileset[0]*70.5)<1||abs(this.position.x-game.tileset[0]*126.5)<1)&&this.time%15==0){
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].position.y<this.position.y-this.height/2&&abs(entities.players[a].position.x-this.position.x)<0.5*abs(entities.players[a].position.y-(this.position.y-this.height/2))){
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2-4,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-this.height/2-entities.players[a].position.y),-1,100,180,false,-1))
