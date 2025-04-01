@@ -2020,7 +2020,7 @@ function generateLevel(info,layer){
         shifter=floor(random(0,4))
     }
     for(let c=0,lc=game.players;c<lc;c++){
-        let clump=listing[game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))]
+        let clump=listing[game.peakWeapon?1:game.level==27&&game.pvp||game.level==37?0:floor(random(0,1.5))]
         let type=game.level==36?0:game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length])
         for(let a=0,la=level.length;a<la;a++){
             for(let b=0,lb=level[a].length;b<lb;b++){
@@ -2564,7 +2564,7 @@ function generateLevel(info,layer){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
                     entities.walls[1][a].pos=[2,0,1][ticker]
                     entities.players[entities.walls[1][a].index].pos=[2,0,1][ticker]
-                    entities.walls[1][a].left=([2,0,1][ticker]+2)*3600
+                    entities.walls[1][a].left=([2,0,1][ticker]+2)*1800
                     ticker++
                 }
             }
