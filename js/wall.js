@@ -5883,7 +5883,7 @@ class wall{
                                 this.recharge=900
                             break
                             case 58:
-                                if(c.id>0){
+                                if(c.id>0&&!c.sidekick){
                                     for(let e=0,le=entities.walls[1].length;e<le;e++){
                                         if(entities.walls[1][e].type==33&&entities.walls[1][e].pos==0){
                                             entities.walls[1][e].timers[c.id-1]++
