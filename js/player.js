@@ -4515,6 +4515,12 @@ class player{
                 case 670:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],331,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
+                case 672:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    if(weapon.ammo==10){
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*15,360,crit,this.index))
+                    }
+                break
 
                 //mark
             }

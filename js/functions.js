@@ -1223,7 +1223,7 @@ function generateLevel(info,layer){
                             ){
                                 entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2+extent/2)*game.tileset[1],game.tileset[0],game.tileset[1]*(1.6+extent),1))
                             }else{
-                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+extent/2)*game.tileset[1],game.tileset[0],game.tileset[1]*(1+extent),1))
+                                entities.walls[game.level==36&&a<10?1:0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+extent/2)*game.tileset[1],game.tileset[0],game.tileset[1]*(1+extent),1))
                             }
                         }
                     }
@@ -3154,7 +3154,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-            }else{
+            }else if(game.level!=37){
                 let total=0
                 let subTotal=0
                 for(let a=0,la=entities.players.length;a<la;a++){

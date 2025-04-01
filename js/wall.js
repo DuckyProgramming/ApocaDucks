@@ -201,7 +201,7 @@ class wall{
                         }
                         this.endTime=0
                     break
-                    case 30:
+                    case 36:
                         this.timers=[]
                         for(let a=0,la=game.players;a<la;a++){
                             this.timers.push([0,0])
@@ -5271,21 +5271,30 @@ class wall{
                             }
                         }
                     }
-                }else if(game.level==37&&(
-                    game.point[0]!=0&&abs(this.position.x-game.tileset[0]*70.5)<1||
-                    game.point[1]!=0&&abs(this.position.x-game.tileset[0]*126.5)<1||
-                    game.point[2]!=0&&abs(this.position.x-game.tileset[0]*182.5)<1
-                )){
-                    if(this.position.y<this.base.position.y+this.height){
-                        this.position.y++
-                        this.bounder.position.y++
-                        this.internalBounder.position.y++
-                        this.velocity.y=1
-                        for(let a=0,la=this.boundary.length;a<la;a++){
-                            for(let b=0,lb=this.boundary[a].length;b<lb;b++){
-                                for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    this.boundary[a][b][c].y++
+                }else if(game.level==37){
+                    if(
+                        game.point[0]!=0&&abs(this.position.x-game.tileset[0]*70.5)<1||
+                        game.point[1]!=0&&abs(this.position.x-game.tileset[0]*126.5)<1||
+                        game.point[2]!=0&&abs(this.position.x-game.tileset[0]*182.5)<1
+                    ){
+                        if(this.position.y<this.base.position.y+this.height){
+                            this.position.y++
+                            this.bounder.position.y++
+                            this.internalBounder.position.y++
+                            this.velocity.y=1
+                            for(let a=0,la=this.boundary.length;a<la;a++){
+                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                        this.boundary[a][b][c].y++
+                                    }
                                 }
+                            }
+                        }
+                    }
+                    if((abs(this.position.x-game.tileset[0]*70.5)<1||abs(this.position.x-game.tileset[0]*126.5)<1)&&this.time%15==0){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].position.y<this.position.y-this.height/2&&abs(entities.players[a].position.x-this.position.x)<0.5*abs(entities.players[a].position.y-(this.position.y-this.height/2))){
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2-4,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-this.height/2-entities.players[a].position.y),-1,100,180,false,-1))
                             }
                         }
                     }
@@ -5673,7 +5682,7 @@ class wall{
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming&&game.level!=27||this.recharge>0||c.construct||c.auto))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
-                        &&!(this.type==1&&game.level==35&&this.poition.y<game.tileset[1]*10&&this.time>600)
+                        &&!(this.type==1&&game.level==36&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
                         switch(this.type){
                             case 3:
@@ -5879,6 +5888,7 @@ class wall{
                                         if(entities.walls[1][e].type==33&&entities.walls[1][e].pos==0){
                                             entities.walls[1][e].timers[c.id-1]++
                                             this.remove=true
+                                            c.stunTime=300
                                         }
                                     }
                                 }
