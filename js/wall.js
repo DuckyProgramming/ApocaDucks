@@ -2934,14 +2934,14 @@ class wall{
                     break
                     case 37:
                         layer.fill(130,120,112)
-                        layer.rect(0,-this.height/4,this.width,this.height*0.3)
-                        layer.rect(0,this.height/4,this.width,this.height*0.3)
+                        layer.rect(0,-this.height*0.3,this.width,this.height*0.4)
+                        layer.rect(0,this.height*0.3,this.width,this.height*0.4)
                         for(let a=0,la=this.width/game.tileset[0]*2;a<la;a++){
                             layer.quad(
-                                this.width*0.5-this.width*(a+0.75)/la-3,-this.height/3,
-                                this.width*0.5-this.width*(a+0.75)/la+3,-this.height/3,
-                                this.width*0.5-this.width*(a+0.25)/la+3,this.height/3,
-                                this.width*0.5-this.width*(a+0.25)/la-3,this.height/3
+                                this.width*0.5-this.width*(a+0.75)/la-3,-this.height*0.45,
+                                this.width*0.5-this.width*(a+0.75)/la+3,-this.height*0.45,
+                                this.width*0.5-this.width*(a+0.25)/la+3,this.height*0.45,
+                                this.width*0.5-this.width*(a+0.25)/la-3,this.height*0.45
                             )
                         }
                     break
