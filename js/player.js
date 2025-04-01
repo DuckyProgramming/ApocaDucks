@@ -1613,6 +1613,7 @@ class player{
             this.invincible<=0&&valid
             &&!(this.fort&&this.id==0&&!game.pvp&&game.level==22)
             &&!(this.fort&&this.id!=0&&game.level==29)
+            &&!(this.fort&&this.id!=0&&game.level==37)
             &&!this.hyper()
         ){
             let preLife=this.life
@@ -6759,7 +6760,7 @@ class player{
                         this.target.position.x=game.edge[0]*0.5+random(-60,60)
                         this.target.position.y=game.edge[1]
                     }
-                }else if(game.level==29){
+                }else if(game.level==29||game.level==37){
                     this.manage[1]=false
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
@@ -8158,10 +8159,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*((game.level==27&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -8464,7 +8465,7 @@ class player{
                                     entities.walls[a][b].owner=this.id
                                     if(game.level==22&&this.id==0){
                                         game.point[entities.walls[a][b].pos]=false
-                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33||game.level==35){
+                                    }else if(game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33||game.level==35||game.level==37){
                                         game.point[entities.walls[a][b].pos]=this.id
                                     }else if(game.level==25){
                                         game.point[entities.walls[a][b].pos]=this.id>0

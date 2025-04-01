@@ -17,24 +17,24 @@ function setup(){
     }
 
     if(false){
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=34
-        menu.level=34
-        game.mission=findName('Duckocracy',types.mission)
+        game.level=37
+        menu.level=37
+        game.mission=findName('Cash Ducks',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
-        //game.pvp=true
+        //game.classicRespawn=true
+        game.pvp=true
         display.cycle=0
-        //newWave()
-        newLoop()
+        newWave()
+        //newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600
@@ -204,6 +204,12 @@ function mouseClicked(){
                                         game.classicRespawn=false
                                         instant()
                                     break
+                                    case 2:
+                                        menu.level=37
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        game.classicRespawn=false
+                                    break
                                     case 4:
                                         menu.level=28
                                         game.classicWeapon=true
@@ -317,7 +323,7 @@ function mouseClicked(){
                         initialGraphics()
                         if(game.level==29){
                             newWave()
-                        }else{
+                        }else if(game.level!=37){
                             newLoop()
                         }
                         stage.scene='wave'
@@ -339,16 +345,25 @@ function mouseClicked(){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
                         stage.scene='main'
                         display.cycle=a
+                        if(game.level==37){
+                            newWave()
+                        }
                     }
                 }else if(lb>22){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2+floor(a/4)*310},width:200,height:610})){
                         stage.scene='main'
                         display.cycle=a
+                        if(game.level==37){
+                            newWave()
+                        }
                     }
                 }else{
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2-155+floor(a/4)*310},width:200,height:300})){
                         stage.scene='main'
                         display.cycle=a
+                        if(game.level==37){
+                            newWave()
+                        }
                     }
                 }
             }
