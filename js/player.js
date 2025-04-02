@@ -58,6 +58,7 @@ class player{
         this.shrinkTime=0
         this.gasTime=0
         this.enigmaTime=0
+        this.blindTime=0
         this.wet=0
         this.gasser=0
         this.exploded=false
@@ -675,7 +676,7 @@ class player{
         switch(this.weaponType){
             case 6: case 17: case 45: case 75: case 92: case 93: case 132: case 145: case 181: case 237:
             case 249: case 288: case 293: case 299: case 326: case 368: case 369: case 460: case 465: case 519:
-            case 530: case 574: case 639: case 642:
+            case 530: case 574: case 639: case 642: case 673:
                 layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
                 layer.strokeWeight(3)
                 layer.line(
@@ -1523,6 +1524,7 @@ class player{
         this.shrinkTime=0
         this.gasTime=0
         this.enigmaTime=0
+        this.blindTime=0
     }
     hyper(){
         return (
@@ -4518,8 +4520,11 @@ class player{
                 case 672:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     if(weapon.ammo==10){
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*15,360,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*10,360,crit,this.index))
                     }
+                break
+                case 673:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],332,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
 
                 //mark
@@ -4580,7 +4585,7 @@ class player{
             case 6: case 12: case 17: case 45: case 54: case 69: case 75: case 79: case 92: case 93:
             case 132: case 145: case 181: case 237: case 249: case 288: case 293: case 299: case 326: case 368:
             case 369: case 454: case 460: case 465: case 510: case 519: case 530: case 574: case 592: case 639:
-            case 642:
+            case 642: case 673:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
                 if(this.time%10==0){
                     this.pointer.hit=false
@@ -4769,7 +4774,11 @@ class player{
         }
         let effectiveWeaponSpeed=this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subWeaponAData.speed:this.weaponData.speed
         let effectivePlayerSpeed=this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subPlayerAData.speedBuff:this.playerData.speedBuff
-        if(this.construct&&!this.remote||this.fort&&!this.auto){
+        if((this.id==0||this.id>game.gaming)&&this.blindTime>0){
+            if(floor(random(0,30))==0){
+                this.direction.goal=54*(floor(random(0,2))*2-1)
+            }
+        }else if(this.construct&&!this.remote||this.fort&&!this.auto){
             if(this.time%15==0){
                 let targets=[]
                 for(let a=0,la=entities.players.length;a<la;a++){
@@ -9974,7 +9983,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.weaponType==671||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1))
+                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.playerData.name=='DeadlyTank'?200:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.weaponType==671?120:80)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1))
                             if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -10007,7 +10016,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.weaponType==671||this.playerData.name=='DeadlyTank'?150:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1))
+                            entities.players[a].takeDamage((this.weaponType==415?400:this.weaponType==461||this.weaponType==533?300:this.playerData.name=='DeadlyTank'?200:this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==421||this.weaponType==433||this.weaponType==495||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.weaponType==671?120:80)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1))
                             if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -10168,6 +10177,9 @@ class player{
         }
         if(this.enigmaTime>0){
             this.enigmaTime--
+        }
+        if(this.blindTime>0){
+            this.blindTime--
         }
         if(this.wet>0){
             this.wet--

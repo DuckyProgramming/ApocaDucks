@@ -40,6 +40,7 @@ class projectile{
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
 			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
+			case 332:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -5332,6 +5333,18 @@ class projectile{
 				layer.fill(40,this.fade)
 				layer.ellipse(0,0,3)
 			break
+			case 332:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(50,this.fade)
+				layer.quad(0,-2.5,-2.5,0,0,2.5,2.5,0)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
+			break
 
 			//mark
         }
@@ -6020,7 +6033,7 @@ class projectile{
 				}
 			break
 		}
-        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309)?2:(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322)?6:4;a<la;a++){
+        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309)?2:(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332)?6:4;a<la;a++){
 			switch(this.type){
 				case 1: case 2: case 4: case 6: case 7: case 9: case 10: case 11: case 12: case 13:
 				case 14: case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24:
@@ -6033,7 +6046,7 @@ class projectile{
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
-				case 324: case 325: case 327: case 331:
+				case 324: case 325: case 327: case 331: case 332:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -6960,7 +6973,7 @@ class projectile{
 							this.velocity.y*=0.91
 						}else{
 							if(this.timer%5==0&&this.type!=184&&this.type!=200){
-								let range=this.type==137?constrain(this.timer/2,40,80):this.type==295?120:80
+								let range=this.type==137?constrain(this.timer/2,30,60):this.type==295?90:60
 								let minimum=range
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -7971,6 +7984,8 @@ class projectile{
 								this.speed=0
 							}
 							this.explode()
+						}else if(this.type==134&&entities.players[b].id>0){
+							entities.players[b].takeDamage(this.damage*0.2)
 						}else if(this.type==149){
 				        	entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
 						}else if(this.type==215){
@@ -8193,6 +8208,8 @@ class projectile{
 								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+30,60)
 							}else if(this.type==331){
 								entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
+							}else if(this.type==332){
+								entities.players[b].blindTime=max(entities.players[b].blindTime+300,900)
 							}
 							if(this.type==20){
 								entities.players[b].DOT.damage+=this.damage/180
