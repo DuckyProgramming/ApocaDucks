@@ -245,7 +245,7 @@ function mainloop(){
             let key=[]
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
-                if(game.level==15||game.level==18||game.level==30||game.level==36||game.level==37){
+                if(game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(game.level==34){

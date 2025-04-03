@@ -16,22 +16,22 @@ function setup(){
         }
     }
 
-    if(false){
+    if(true){
         game.players=1
         game.gaming=1
-        game.level=37
-        menu.level=37
+        game.level=38
+        menu.level=38
         game.mission=findName('Cash Ducks',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=true
+        game.classicRespawn=true
         game.pvp=true
         display.cycle=0
-        newWave()
-        //newLoop()
+        //newWave()
+        newLoop()
         stage.scene='main'
         //dev.sight=true
         //game.margin=true
@@ -209,6 +209,12 @@ function mouseClicked(){
                                         game.classicWeapon=true
                                         game.pvp=true
                                         game.classicRespawn=false
+                                    break
+                                    case 3:
+                                        menu.level=38
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        instant()
                                     break
                                     case 4:
                                         menu.level=28

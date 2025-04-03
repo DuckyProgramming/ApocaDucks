@@ -7984,7 +7984,7 @@ class projectile{
 								this.speed=0
 							}
 							this.explode()
-						}else if(this.type==134&&entities.players[b].id>0){
+						}else if((this.type==134||this.type==182)&&entities.players[b].id>0){
 							entities.players[b].takeDamage(this.damage*0.2)
 						}else if(this.type==149){
 				        	entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
