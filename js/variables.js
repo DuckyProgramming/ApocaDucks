@@ -4692,9 +4692,9 @@ types={
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:552,
       desc:'Fires a bullet that shoots spreads of three bullets',dpsBuff:4,
     },{
-      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:339,
-      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
+      name:'PlayerInterinterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:674,
+      desc:'Fires a bullet that shoots more bullets that shoot more bullets',dpsBuff:2,
     },{
       name:'PlayerQuadratic',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:610,
@@ -5514,6 +5514,10 @@ types={
       name:'PlayerIrony',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:673,
       desc:'Sniper that reduces vision of targets',dpsBuff:1,
+    },{
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:339,
+      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
     },
     
     {
@@ -13321,6 +13325,15 @@ types={
 			reload:120,
 			speed:0.85,
       uses:8,
+		},{
+			name:'Interinterceptor',
+			ammo:3,
+			damage:120,
+			cooldown:40,
+			stop:100,
+			reload:20,
+			speed:0.975,
+      uses:18,
 		},
 
     /*{
@@ -14868,10 +14881,10 @@ levels=[
 "#Cq     N    |    |            |  :     |   |  :     |    <#[===]#>      |    | <###> |   | | _     <#>|  |  |  <#>         #",
 "#            |    |   <#ff#>   |  :     |   |  :     |   <##     #########> <###########@########  ###>|  |  |  <############",
 "###############  ###############################==##########> Z <################################  #####>_|  |<##############",
-"###############! ]#############################[  ]##########===################################[  ##########################",
-"###############                                                                                    ##########################",
-"###############                                                                                    ##########################",
-"##########################################################> ~ ~ ~ <########>    M    <#######################################",
+"##############[! ]#############################[  ]##########===################################[  ]#########################",
+"##########[                                                                                            ]#####################",
+"##########                                                                                              #####################",
+"##########> d <###########################################> ~ ~ ~ <########>    M    <#############> a <#####################",
 "############################################################################>       <########################################",
 "###############################################                               <##############################################",
 "###############################################>  <##########################################################################",
@@ -14908,8 +14921,7 @@ Alfred - when you cap point drop traps
 Hayden - hyper impostor
 Winston - crater in stalingrad
 Alfred - hurdles
-
-Hayden -
+Hayden - brown crate rooms
 
 
 

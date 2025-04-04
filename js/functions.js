@@ -1302,7 +1302,7 @@ function generateLevel(info,layer){
                         break
                         case 28:
                             if(a>la-12){
-                                entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.5,a*game.tileset[1]*0.5+game.edge[1]*0.5,game.edge[0],game.edge[1]-a*game.tileset[1],3))
+                                entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.5,(a-0.5)*game.tileset[1]*0.5+game.edge[1]*0.5,game.edge[0],game.edge[1]-(a-0.5)*game.tileset[1],3))
                             }else{
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.1)*game.tileset[1],game.tileset[0],game.tileset[1]*0.8,3))
                             }
@@ -1699,6 +1699,9 @@ function generateLevel(info,layer){
                             }else{
                                 entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.44+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                             }
+                        break
+                        case 28:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
                         break
                     }
                 break

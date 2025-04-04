@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=7;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,5][a];b<lb;b++){
+                for(let b=0,lb=[5,5,2,5,5,5,5,3][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==3){
                         fill(100)
@@ -41,7 +41,8 @@ function mainloop(){
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
-                            ['Arizona','Aerial','Valuation','Sierra Leone','Blueprint'][b]
+                            ['Arizona','Aerial','Valuation','Sierra Leone','Fragile (WIP)'][b],
+                            ['Coppice (WIP)','1Fort (WIP)','Blueprint'][b],
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)

@@ -4545,14 +4545,28 @@ class player{
                 case 673:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],332,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
+                case 674:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],333,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                break
 
                 //mark
             }
             if(weapon.uses<=0&&this.id>0&&!game.randomizer&&!bypass){
                 switch(variant){
-                    case 0: this.weaponType=-1
-                    case 1: this.subWeaponAType=-1
-                    case 2: this.subWeaponBType=-1
+                    case 0:
+                        this.weaponType=-1
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].trap){
+                                entities.projectiles[a].time=min(60,entities.projectiles[a].time)
+                            }
+                        }
+                    break
+                    case 1:
+                        this.subWeaponAType=-1
+                    break
+                    case 2:
+                        this.subWeaponBType=-1
+                    break
                 }
             }
         }
