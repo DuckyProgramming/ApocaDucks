@@ -1583,7 +1583,7 @@ class player{
         }
         if(this.fort&&game.level==38){
             valid=dist(this.position.x,this.position.y,entities.players[game.players+2].position.x,entities.players[game.players+2].position.y)<300||dist(this.position.x,this.position.y,entities.players[game.players+3].position.x,entities.players[game.players+3].position.y)<300
-            if(game.time>10800){
+            if(game.time>14400){
                 valid=false
             }
         }
@@ -7714,10 +7714,10 @@ class player{
                     ){
                         this.target.point=[0,0]
                         if(this.auto){
-                            this.target.point=this.base.position.x>game.edge[0]*0.5?[16,0]:[17,1]
+                            this.target.point=this.base.position.x>game.edge[0]*0.5?[16,0]:[17,3]
                         }else{
                             if(this.playerData.name=='Buster'){
-                                this.target.point=floor(random(0,4))
+                                this.target.point=[floor(random(2,18)),-1]
                             }else if(this.weaponType==-1&&!this.sidekick){
                                 let max=game.edge[0]+game.edge[1]
                                 let set=[-1,-1]
@@ -7769,6 +7769,7 @@ class player{
                         if(
                             this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                             this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
+                            &&entities.players[a].unProtected()
                             &&!(this.id==1&&entities.players[a].fort&&entities.players[a].pos==2&&entities.players[a].id==-1)
                             &&!(this.id==2&&entities.players[a].fort&&entities.players[a].pos==1&&entities.players[a].id==-1)
                             &&!(this.id==3&&entities.players[a].fort&&entities.players[a].id==-1)
@@ -8645,7 +8646,7 @@ class player{
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
                     if(game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=36){
-                        let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,7000,6000,5000,4000][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19||game.level==31?5:1)*(game.level==24?2:1)*(game.level==32||game.level==33?2.5:1)
+                        let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,7000,6000,5000,4000][game.players-1])*(game.peakWeapon?1.5:1)*(game.level==19||game.level==31?5:1)*(game.level==24||game.level==38?2:1)*(game.level==32||game.level==33?2.5:1)
                         if(entities.players[a].stats.bust>=threshold&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){
                             entities.players[a].stats.bust=0
                             for(let c=0,lc=game.pvp?(game.level==28||game.level==38?1:4):1;c<lc;c++){
@@ -10046,7 +10047,7 @@ class player{
                 break
                 case 'Buster':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(!(game.level==23&&entities.players[a].index!=this.target.index)){
+                        if(!(game.level==23&&entities.players[a].index!=this.target.index)&&!(entities.players[a].fort&&entities.players[a].auto)){
                             if(inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1||game.level==23)&&!entities.players[a].dead&&!this.dead){
                                 let dir=[entities.players[a].position.x-(this.position.x/2+this.previous.position.x/2),entities.players[a].position.y+entities.players[a].height/2-(this.position.y/2+this.previous.position.y/2)-this.height/2]
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
