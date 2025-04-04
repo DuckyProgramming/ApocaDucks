@@ -4693,10 +4693,12 @@ class wall{
                             }
                             graphics.overlay[0].rect(25+a*40,50,30,3,1)
                         }
-                    }else if(game.level==37&&this.pos==2){
-                        graphics.overlay[0].fill(255)
-                        graphics.overlay[0].textSize(10)
-                        graphics.overlay[0].text(formatTime(this.left),25,35)
+                    }else if(game.level==37){
+                        if(this.pos==2){
+                            graphics.overlay[0].fill(255)
+                            graphics.overlay[0].textSize(10)
+                            graphics.overlay[0].text(formatTime(this.left),25,35)
+                        }
                         if(this.pos==0){
                             for(let a=0,la=game.players;a<la;a++){
                                 graphics.overlay[0].fill(255)
