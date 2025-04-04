@@ -6300,7 +6300,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -6657,7 +6657,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -6771,7 +6771,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -6813,7 +6813,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -6858,7 +6858,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -7301,7 +7301,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -7714,11 +7714,11 @@ class player{
                     ){
                         this.target.point=[0,0]
                         if(this.auto){
-                            this.target.point=this.base.position.x>game.edge[0]*0.5?[0,0]:[1,1]
+                            this.target.point=this.base.position.x>game.edge[0]*0.5?[16,0]:[17,1]
                         }else{
                             if(this.playerData.name=='Buster'){
                                 this.target.point=floor(random(0,4))
-                            }else if(this.weaponType==-1){
+                            }else if(this.weaponType==-1&&!this.sidekick){
                                 let max=game.edge[0]+game.edge[1]
                                 let set=[-1,-1]
                                 for(let a=0,la=entities.walls.length;a<la;a++){
@@ -7741,7 +7741,7 @@ class player{
                                 if(max<game.edge[0]+game.edge[1]&&set>=0){
                                     this.target.point=set
                                 }else{
-                                    this.target.point[0]=this.id==1?0:this.id==2?1:floor(random(0,2))
+                                    this.target.point[0]=this.id==1?16:this.id==2?17:floor(random(0,2))+16
                                     this.target.point[1]=this.id==1?0:this.id==2?3:floor(random(0,2))*3
                                 }
                             }else{
@@ -7784,7 +7784,7 @@ class player{
                             for(let c=0,lc=entities.walls.length;c<lc;c++){
                                 for(let d=0,ld=entities.walls[c].length;d<ld;d++){
                                     for(let e=0,le=bar.length;e<le;e++){
-                                        if(inBoxBox(entities.walls[c][d],bar[e])&&entities.walls[c][d].standard&&entities.walls[c][d].type!=3){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
                                             valid=false
                                             c=lc
                                             d=ld
@@ -7820,16 +7820,16 @@ class player{
                                 }else{
                                     switch(a){
                                         case 0:
-                                            this.target.position.x=game.tileset[0]*34
-                                            this.target.position.y=game.edge[1]
+                                            this.target.position.x=game.tileset[0]*5.5
+                                            this.target.position.y=0
                                         break
                                         case 1:
-                                            this.target.position.x=game.edge[0]-game.tileset[0]*34
-                                            this.target.position.y=game.edge[1]
+                                            this.target.position.x=game.edge[0]-game.tileset[0]*5.5
+                                            this.target.position.y=0
                                         break
                                         case 2:
                                             switch(goalPoint){
-                                                case 0:
+                                                case 0: case 16:
                                                     this.target.position.x=game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7841,7 +7841,7 @@ class player{
                                         break
                                         case 3:
                                             switch(goalPoint){
-                                                case 1:
+                                                case 1: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7853,7 +7853,7 @@ class player{
                                         break
                                         case 4:
                                             switch(goalPoint){
-                                                case 0:
+                                                case 0: case 16:
                                                     this.target.position.x=game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7869,7 +7869,7 @@ class player{
                                         break
                                         case 5:
                                             switch(goalPoint){
-                                                case 1:
+                                                case 1: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7885,7 +7885,7 @@ class player{
                                         break
                                         case 6:
                                             switch(goalPoint){
-                                                case 0: case 4:
+                                                case 0: case 4: case 16:
                                                     this.target.position.x=game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7901,7 +7901,7 @@ class player{
                                         break
                                         case 7:
                                             switch(goalPoint){
-                                                case 1: case 5:
+                                                case 1: case 5: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7917,7 +7917,7 @@ class player{
                                         break
                                         case 8:
                                             switch(goalPoint){
-                                                case 0: case 2: case 4: case 6: case 9: case 12: case 14:
+                                                case 0: case 2: case 4: case 6: case 9: case 12: case 14: case 16:
                                                     this.target.position.x=game.tileset[0]*67.5
                                                     this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                                 break
@@ -7937,7 +7937,7 @@ class player{
                                         break
                                         case 9:
                                             switch(goalPoint){
-                                                case 0: case 2: case 4:
+                                                case 0: case 2: case 4: case 16:
                                                     this.target.position.x=game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7953,7 +7953,7 @@ class player{
                                         break
                                         case 10:
                                             switch(goalPoint){
-                                                case 1: case 3: case 5:
+                                                case 1: case 3: case 5: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -7969,7 +7969,7 @@ class player{
                                         break
                                         case 11:
                                             switch(goalPoint){
-                                                case 0: case 2: case 4: case 6: case 9: case 12: case 14:
+                                                case 0: case 2: case 4: case 6: case 9: case 12: case 14: case 16:
                                                     this.target.position.x=game.tileset[0]*54.5
                                                     this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                                 break
@@ -7989,7 +7989,7 @@ class player{
                                         break
                                         case 12:
                                             switch(goalPoint){
-                                                case 0: case 2: case 4: case 6: case 9:
+                                                case 0: case 2: case 4: case 6: case 9: case 16:
                                                     this.target.position.x=game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -8005,7 +8005,7 @@ class player{
                                         break
                                         case 13:
                                             switch(goalPoint){
-                                                case 1: case 3: case 5: case 7: case 10:
+                                                case 1: case 3: case 5: case 7: case 10: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*34
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -8021,7 +8021,7 @@ class player{
                                         break
                                         case 14:
                                             switch(goalPoint){
-                                                case 0: case 2: case 4: case 6: case 9: case 12:
+                                                case 0: case 2: case 4: case 6: case 9: case 12: case 16:
                                                     this.target.position.x=game.tileset[0]*44.5
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -8033,7 +8033,7 @@ class player{
                                         break
                                         case 15:
                                             switch(goalPoint){
-                                                case 1: case 3: case 5: case 7: case 10: case 13:
+                                                case 1: case 3: case 5: case 7: case 10: case 13: case 17:
                                                     this.target.position.x=game.edge[0]-game.tileset[0]*44.5
                                                     this.target.position.y=game.edge[1]
                                                 break
@@ -8042,6 +8042,14 @@ class player{
                                                     this.target.position.y=game.edge[1]
                                                 break
                                             }
+                                        break
+                                        case 16:
+                                            this.target.position.x=game.tileset[0]*34
+                                            this.target.position.y=game.edge[1]
+                                        break
+                                        case 17:
+                                            this.target.position.x=game.edge[0]-game.tileset[0]*34
+                                            this.target.position.y=game.edge[1]
                                         break
                                     }
                                 }
@@ -8237,13 +8245,13 @@ class player{
                 if(this.manage[0]==inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&this.playerData.name!='Buster'&&this.position.x<this.base.position.x-150)){
                     this.direction.goal=-54
                     if(!this.thrown&&!this.thrown2){
-                        this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)*(this.auto&&game.level==38?0.5:1)
+                        this.velocity.x-=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)*(this.auto&&game.level==38?0.6:1)
                     }
                     this.runAnim(1/30)
                 }else if(this.manage[0]==1-inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&this.playerData.name!='Buster'&&this.position.x>this.base.position.x+150)){
                     this.direction.goal=54
                     if(!this.thrown&&!this.thrown2){
-                        this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)*(this.auto&&game.level==38?0.5:1)
+                        this.velocity.x+=(this.weaponType==-1?1.6:effectiveWeaponSpeed)*(game.level==6&&effectivePlayerSpeed<1?effectivePlayerSpeed*0.8+0.2:effectivePlayerSpeed)*(this.id>0&&game.randomizer?2:1)*(this.speedBuff>0?1.5:1)*(this.auto&&game.level==38?0.6:1)
                     }
                     this.runAnim(1/30)
                 }else if(this.animSet.loop<1&&this.animSet.loop>0){
@@ -8786,7 +8794,7 @@ class player{
                     }
                 }
                 if(this.fort){
-                    this.id=(game.level==27||game.level==38)&&game.pvp?(this.id==-1?(this.base.position.x<game.edge[0]*0.5?1:2):3-this.id):game.level==22?0:-1
+                    this.id=(game.level==27||game.level==38)&&game.pvp?(this.id==-1?-1:3-this.id):game.level==22?0:-1
                     this.attacking=false
                     this.manage[1]=false
                     this.setColor()
@@ -8821,6 +8829,13 @@ class player{
                                 }
                             }
                             this.id=entities.players[a].id
+                            this.setColor()
+                        }else if(game.level==38&&this.id==-1){
+                            if(entities.players[a].id>=1&&entities.players[a].id<=2){
+                                this.id=entities.players[a].id
+                            }else{
+                                this.id=this.base.position.x<game.edge[0]*0.5?2:1
+                            }
                             this.setColor()
                         }
                         if(game.usurp&&game.usurpIndex==this.index&&entities.players[a].id>0){

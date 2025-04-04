@@ -315,15 +315,15 @@ class wall{
         if(game.level==38){
             switch(this.type){
                 case 1: case 17: case 18: case 20: case 21:
-                    let list=[1,4,5]
+                    let list=[1,2,3,4,5]
                     for(let a=0,la=list.length;a<la;a++){
                         for(let b=0,lb=this.boundary[list[a]].length;b<lb;b++){
-                            let len=dist(this.boundary[list[a]][b][0].x,this.boundary[list[a]][b][0].y,this.boundary[list[a]][b][1].x,this.boundary[list[a]][b][1].y)/game.tileset[1]/5+random(-0.5,0.5)
+                            let len=dist(this.boundary[list[a]][b][0].x,this.boundary[list[a]][b][0].y,this.boundary[list[a]][b][1].x,this.boundary[list[a]][b][1].y)/game.tileset[1]/3+random(-0.5,0.5)
                             for(let c=0,lc=round(len);c<lc;c++){
                                 let pos=(random(0,1)+c)/lc
                                 this.balls[1].push([
-                                    map(pos,0,1,this.boundary[list[a]][b][0].x,this.boundary[list[a]][b][1].x)-this.position.x,
-                                    map(pos,0,1,this.boundary[list[a]][b][0].y,this.boundary[list[a]][b][1].y)-this.position.y+random(0,10),
+                                    map(pos,0,1,this.boundary[list[a]][b][0].x,this.boundary[list[a]][b][1].x)-this.position.x+(list[a]==2?random(-10,0):list[a]==3?random(0,10):0),
+                                    map(pos,0,1,this.boundary[list[a]][b][0].y,this.boundary[list[a]][b][1].y)-this.position.y+(list[a]!=2&&list[a]!=3?random(0,10):0),
                                     random(12,20),random(0,1),random(0,360),floor(random(3,6))*2])
                             }
                         }

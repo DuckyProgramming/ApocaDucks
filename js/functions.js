@@ -933,8 +933,8 @@ function generateLevel(info,layer){
             game.edge=[level[0].length*44,level.length*36]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
-                [game.tileset[0]*17,game.edge[1]*0.5,game.tileset[0]*34,game.edge[1]],
-                [game.edge[0]-game.tileset[0]*17,game.edge[1]*0.5,game.tileset[0]*34,game.edge[1]],
+                [game.tileset[0]*4,game.edge[1]-game.tileset[1]*12.5,game.tileset[0]*8,game.tileset[1]*25],
+                [game.edge[0]-game.tileset[0]*4,game.edge[1]-game.tileset[1]*12.5,game.tileset[0]*8,game.tileset[1]*25],
                 [game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*8.5,game.tileset[0]*38.5,game.tileset[1]*17],
                 [game.edge[0]-game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*8.5,game.tileset[0]*38.5,game.tileset[1]*17],
                 [game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*19,game.tileset[0]*38.5,game.tileset[1]*4],
@@ -949,6 +949,8 @@ function generateLevel(info,layer){
                 [game.edge[0]-game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*31,game.tileset[0]*38.5,game.tileset[1]*4],
                 [game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*35,game.tileset[0]*38.5,game.tileset[1]*4],
                 [game.edge[0]-game.tileset[0]*53.25,game.edge[1]-game.tileset[1]*35,game.tileset[0]*38.5,game.tileset[1]*4],
+                [game.tileset[0]*17,game.edge[1]*0.5,game.tileset[0]*34,game.edge[1]],
+                [game.edge[0]-game.tileset[0]*17,game.edge[1]*0.5,game.tileset[0]*34,game.edge[1]],
             ]
         break
         default:
