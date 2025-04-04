@@ -266,6 +266,8 @@ class wall{
                     this.index=entities.players.length-1
                     if(game.level==22){
                         entities.players[entities.players.length-1].multLife(3)
+                    }else if(game.level==38){
+                        entities.players[entities.players.length-1].direction.goal=[0,-54,54,0][this.pos]
                     }
                 }
             break
@@ -1567,6 +1569,15 @@ class wall{
                         layer.fill(139,114,79)
                         layer.rect(0,this.height/4,this.width-game.tileset[0]*0.2-8,this.height/2-3)
                         layer.rect(0,-this.height/4+1,this.width-game.tileset[0]*0.6-8,this.height/2-3)
+                    break
+                    case 38:
+                        layer.fill(80,75,60)
+                        for(let a=0,la=this.width/game.tileset[0]*2;a<la;a++){
+                            regPoly(layer,-this.width/2+(0.5+a)/la*this.width,this.height/4+1,8,this.width/la*0.5,this.height/2*0.5,22.5)
+                        }
+                        for(let a=0,la=this.width/game.tileset[0]*2-1;a<la;a++){
+                            regPoly(layer,-this.width/2+(1+a)/(la+1)*this.width,-this.height/4+1,8,this.width/(la+1)*0.5,this.height/2*0.5,22.5)
+                        }
                     break
                     default:
                         switch(game.level){
@@ -2886,6 +2897,8 @@ class wall{
             case 31: case 33: case 36:
                 if(game.level==29){
                     layer.translate(0,30)
+                }else if(game.level==38){
+                    layer.translate(0,10)
                 }
                 layer.fill(255)
                 layer.textSize(20)
@@ -3396,6 +3409,10 @@ class wall{
                         layer.fill(126,102,70)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
+                    case 38:
+                        layer.fill(55,50,55)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    break
                     default:
                         layer.fill(60,60,65)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -3450,6 +3467,14 @@ class wall{
                     break
                     case 37:
                         layer.fill(126,102,70)
+                        layer.triangle(
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            -this.width/2-0.5,this.height/2+0.5,
+                            this.width/2+0.5,this.height/2+0.5
+                        )
+                    break
+                    case 38:
+                        layer.fill(55,50,55)
                         layer.triangle(
                             -this.width/2-0.5,-this.height/2-0.5,
                             -this.width/2-0.5,this.height/2+0.5,
@@ -3520,6 +3545,14 @@ class wall{
                             this.width/2+0.5,this.height/2+0.5
                         )
                     break
+                    case 38:
+                        layer.fill(55,50,55)
+                        layer.triangle(
+                            this.width/2+0.5,-this.height/2-0.5,
+                            -this.width/2-0.5,this.height/2+0.5,
+                            this.width/2+0.5,this.height/2+0.5
+                        )
+                    break
                     default:
                         layer.fill(60,60,65)
                         layer.triangle(
@@ -3548,6 +3581,14 @@ class wall{
                             this.width/2+0.5,-this.height/2-0.5
                         )
                     break
+                    case 38:
+                        layer.fill(55,50,55)
+                        layer.triangle(
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            -this.width/2-0.5,this.height/2+0.5,
+                            this.width/2+0.5,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(60,60,65)
                         layer.triangle(
@@ -3570,6 +3611,14 @@ class wall{
                     break
                     case 37:
                         layer.fill(126,102,70)
+                        layer.triangle(
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            this.width/2+0.5,-this.height/2-0.5,
+                            this.width/2+0.5,this.height/2+0.5
+                        )
+                    break
+                    case 38:
+                        layer.fill(55,50,55)
                         layer.triangle(
                             -this.width/2-0.5,-this.height/2-0.5,
                             this.width/2+0.5,-this.height/2-0.5,
@@ -4605,7 +4654,7 @@ class wall{
                             }
                             graphics.overlay[0].rect(25+(this.pos-(game.level==19?2:0)-(game.level==31?3:0))*40,25+(a+1)*25,30,3,1)
                         }
-                    }else if(this.pos==0&&game.level==27&&game.pvp){
+                    }else if(this.pos==0&&game.level==27&&game.pvp||this.pos==0&&game.level==38&&game.pvp){
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(formatTime(min(game.time,10800)),25+(this.pos+1.5-(game.level==19?2:0)-(game.level==31?3:0))*40,15+25)
@@ -5895,7 +5944,7 @@ class wall{
                         &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
-                        &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming&&game.level!=27||this.recharge>0||c.construct||c.auto))
+                        &&!((this.type==16||this.type==50)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38||this.recharge>0||c.construct||c.auto))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
                         &&!(this.type==1&&game.level==36&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
@@ -6009,7 +6058,7 @@ class wall{
                                 }else if(game.level>=15){
                                     if(!(game.level==22&&game.pointAnim[2]>=1)&&!((game.level==23||game.level==26)&&this.visible<1)&&!(game.level==25&&!game.point[1])){
                                         c.newWeaponSet(this.weapon)
-                                        let chunk=game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(0,1.5))
+                                        let chunk=game.peakWeapon?1:game.level==38?0:game.level==27&&game.pvp?1:floor(random(0,1.5))
                                         this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                                         this.recharge=game.level==27&&game.pvp?14400:game.level==23?1200:3600-(game.gaming-1)*600
                                     }
@@ -6047,7 +6096,7 @@ class wall{
                                 }
                             break
                             case 31:
-                                if(!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>=0&&c.id>=0&&!game.pvp))){
+                                if(!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33)&&!(c.id==this.owner||(game.level==27||game.level==38)&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>=0&&c.id>=0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{

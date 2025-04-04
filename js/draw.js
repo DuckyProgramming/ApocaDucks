@@ -609,7 +609,7 @@ function mainloop(){
                                 }
                             }
                         break
-                        case 25: case 26: case 27: case 32: case 33: case 34:
+                        case 25: case 26: case 27: case 32: case 33: case 34: case 38:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

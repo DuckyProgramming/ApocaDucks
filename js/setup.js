@@ -16,8 +16,8 @@ function setup(){
         }
     }
 
-    if(true){
-        game.players=1
+    if(false){
+        game.players=5
         game.gaming=1
         game.level=38
         menu.level=38
