@@ -2627,7 +2627,7 @@ function generateLevel(info,layer){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
                     entities.walls[1][a].pos=[2,0,1][ticker]
                     entities.players[entities.walls[1][a].index].pos=[2,0,1][ticker]
-                    entities.walls[1][a].left=([2,0,1][ticker]+1.5)*1800
+                    entities.walls[1][a].left=[900,-1,-1][ticker]
                     ticker++
                 }
             }

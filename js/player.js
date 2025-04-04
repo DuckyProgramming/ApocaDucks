@@ -10638,6 +10638,13 @@ class player{
                     }
                 }else{
                     this.remove=true
+                    if(game.level==38){
+                        for(let a=0,la=entities.walls[1].length;a<la;a++){
+                            if(entities.walls[1][a].type==33&&entities.walls[1][a].pos==2){
+                                entities.walls[1][a].left+=180
+                            }
+                        }
+                    }
                 }
             }
         }else{

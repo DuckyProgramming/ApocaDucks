@@ -3201,8 +3201,15 @@ class wall{
                             layer.rect(0,(a-la*0.5+0.5)*4/9*game.tileset[1],this.width,game.tileset[1]/15)
                         }
                     break
-                    case 29:
-                        layer.fill(180)
+                    case 28: case 29:
+                        switch(game.level){
+                            case 28:
+                                layer.fill(60,105,150)
+                            break
+                            default:
+                                layer.fill(180)
+                            break
+                        }
                         layer.rect(-this.width*3/8,0,this.width/4,this.height)
                         layer.rect(this.width*3/8,0,this.width/4,this.height)
                         for(let a=0,la=this.height/game.tileset[1]*2;a<la;a++){
@@ -4686,10 +4693,10 @@ class wall{
                             }
                             graphics.overlay[0].rect(25+a*40,50,30,3,1)
                         }
-                    }else if(game.level==37){
+                    }else if(game.level==37&&this.pos==2){
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
-                        graphics.overlay[0].text(formatTime(this.left),25+this.pos*40,35)
+                        graphics.overlay[0].text(formatTime(this.left),25,35)
                         if(this.pos==0){
                             for(let a=0,la=game.players;a<la;a++){
                                 graphics.overlay[0].fill(255)
@@ -5312,7 +5319,7 @@ class wall{
                 }else if(game.level==37){
                     if(this.left>0){
                         this.left--
-                    }else if(this.owner==0){
+                    }else if(this.owner==0&&this.pos==2){
                         this.endTime++
                         if(this.endTime>120){
                             game.newWave=true

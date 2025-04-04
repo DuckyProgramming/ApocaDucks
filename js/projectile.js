@@ -6972,17 +6972,24 @@ class projectile{
 							this.velocity.x*=0.91
 							this.velocity.y*=0.91
 						}else{
-							if(this.timer%5==0&&this.type!=184&&this.type!=200){
-								let range=this.type==137?constrain(this.timer/2,30,60):this.type==295?90:60
+							if(this.timer%5==0&&this.type!=184&&this.type!=200&&this.goal>=0){
+								let range=(this.type==137?constrain(this.timer/2,30,60):this.type==295?90:60)*(game.pvp?0.5:1)
 								let minimum=range
 								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1||game.pvp&&this.id!=entities.players[a].id)){
+									if(
+										entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1||game.pvp&&this.id!=entities.players[a].id)
+										&&!(!(this.type==132||this.type==137)&&dist(entities.players[this.goal].pointer.x,entities.players[this.goal].pointer.y,entities.players[a].position.x,entities.players[a].position.y)>25&&game.pvp)
+									){
 										minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
 									}
 								}
 								if(minimum<range){
 									for(let a=0,la=entities.players.length;a<la;a++){
-										if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+										if(
+											entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1&&entities.players[a].id!=-1||entities.players[a].id==-1&&this.id!=-1||game.pvp&&this.id!=entities.players[a].id)
+											&&!(!(this.type==132||this.type==137)&&dist(entities.players[this.goal].pointer.x,entities.players[this.goal].pointer.y,entities.players[a].position.x,entities.players[a].position.y)>25&&game.pvp)
+											&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)
+										){
 											this.aggro=true
 											this.goal=a
 											this.goalIndex=entities.players[this.goal].index
