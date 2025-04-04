@@ -10641,7 +10641,7 @@ class player{
                     if(game.level==37){
                         for(let a=0,la=entities.walls[1].length;a<la;a++){
                             if(entities.walls[1][a].type==33&&entities.walls[1][a].pos==2){
-                                entities.walls[1][a].left+=[360,300,240,210,180][game.players]
+                                entities.walls[1][a].left+=[360,300,240,210,180][game.players-1]
                             }
                         }
                     }
