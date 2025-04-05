@@ -6071,7 +6071,8 @@ class projectile{
 				}
 			break
 		}
-        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309||this.type==333||this.type==334)?2:(this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332)?6:4;a<la;a++){
+		let fast=this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332
+        for(let a=0,la=(this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309||this.type==333||this.type==334)?2:fast?6:4;a<la;a++){
 			switch(this.type){
 				case 1: case 2: case 4: case 6: case 7: case 9: case 10: case 11: case 12: case 13:
 				case 14: case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24:
@@ -6088,7 +6089,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1200){
+					if(this.travel>(fast?2400:1200)){
 						this.active=false
 					}
 				break
@@ -7010,7 +7011,7 @@ class projectile{
 							this.velocity.x*=0.91
 							this.velocity.y*=0.91
 						}else{
-							if(this.timer%5==0&&this.type!=184&&this.type!=200&&this.goal>=0){
+							if(this.timer%5==0&&this.type!=184&&this.type!=200&&this.goal>=0&&this.goal<entities.players.length){
 								let range=(this.type==137?constrain(this.timer/2,30,60):this.type==295?90:60)*(game.pvp?0.5:1)
 								let minimum=range
 								for(let a=0,la=entities.players.length;a<la;a++){

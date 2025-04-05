@@ -19,16 +19,16 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=38
-        menu.level=38
-        game.mission=findName('Cash Ducks',types.mission)
+        game.level=40
+        menu.level=40
+        game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         newLoop()
@@ -222,6 +222,10 @@ function mouseClicked(){
                                 stage.scene='mission'
                                 game.classicRespawn=true
                                 switch(b){
+                                    case 0:
+                                        menu.level=40
+                                        game.classicWeapon=true
+                                    break
                                     case 2:
                                         menu.level=28
                                         game.classicWeapon=true
