@@ -256,7 +256,7 @@ function mainloop(){
             let key=[]
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
-                if(game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40){
+                if(game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(game.level==34){
@@ -320,7 +320,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?8:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?3:
+                    key[c]*=dev.sight?8:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==41?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
