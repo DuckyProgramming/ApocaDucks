@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=8;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,5,3][a];b<lb;b++){
+                for(let b=0,lb=[5,5,2,5,5,5,5,5][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==3){
                         fill(100)
@@ -42,7 +42,7 @@ function mainloop(){
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
                             ['Arizona','Aerial','Valuation','Sierra Leone','Fragile (WIP)'][b],
-                            ['Alloy','','Blueprint'][b],
+                            ['Alloy','Speleo (WIP)','NuclearMountain','','Blueprint'][b],
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
@@ -109,7 +109,7 @@ function mainloop(){
                                 case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
-                                case 2:
+                                case 1: case 2: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                             }
@@ -320,7 +320,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?3.2:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?3:
+                    key[c]*=dev.sight?8:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?3:
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
@@ -620,7 +620,7 @@ function mainloop(){
                                 }
                             }
                         break
-                        case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40:
+                        case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
