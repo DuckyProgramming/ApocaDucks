@@ -1566,6 +1566,7 @@ class player{
         this.gasTime=0
         this.enigmaTime=0
         this.blindTime=0
+        this.storeWeapon=false
     }
     hyper(){
         return (
@@ -1732,7 +1733,7 @@ class player{
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     if(
                         entities.walls[a][b].type==31&&
-                        dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<400&&
+                        dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<(game.level==19?400:300)&&
                         entities.walls[a][b].owner!=this.id
                     ){
                         valid=false
@@ -4612,6 +4613,7 @@ class player{
 	}
     constructify(){
         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
+        this.base.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
         this.construct=true
         this.ammoMult*=4
         this.weapon.uses*=4
@@ -5167,14 +5169,17 @@ class player{
                 }else if(game.level==15||game.level==18||game.level==19||game.level==31||game.level==39||game.level==42){
                     let targets=[]
                     this.target.position.x=this.position.x
-                    this.target.position.y=game.edge[1]*0.1
+                    this.target.position.y=game.edge[1]
                     this.manage[1]=false
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
-                    if(targets.length>0){
+                    if(this.playerData.name.includes('Deployer')){
+                        this.target.position.x=this.position.x+random(-500,500)
+                        this.manage[1]=true
+                    }else if(targets.length>0){
                         let target=targets[floor(random(targets.length))]
                         this.target.position.x=target[0]+random(-60,60)
                         this.target.position.y=target[1]
@@ -9658,7 +9663,7 @@ class player{
                                     if(levels[game.level][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,3))==0&&game.level!=39){
+                                        if(floor(random(0,2))==0&&game.level!=39){
                                             this.base.position.x=game.edge[0]/2+random(-800,800)
                                             this.base.position.y=0
                                             paraTrigger=true

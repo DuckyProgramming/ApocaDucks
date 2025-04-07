@@ -3471,7 +3471,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23?2.5:game.level==42?10/3:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?5/6:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23?2.5:game.level==42?4:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?5/6:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }
@@ -3502,7 +3502,7 @@ function checkEnd(level,layer,key){
             }
             for(let a=0,la=deployer.spawn.length;a<la;a++){
                 entities.players.push(deployer.spawn[a])
-                entities.players[entities.players.length-1].position.x=loc[0]+(loc[1]==0?random(-200,200):0)
+                entities.players[entities.players.length-1].position.x=loc[0]+(loc[1]==0?random(-200,200):random(-50,50))
                 entities.players[entities.players.length-1].position.y=loc[1]+(loc[1]==0?random(-500,0):0)
                 entities.players[entities.players.length-1].stuckTime=random(0,300)
                 if(loc[1]==0){

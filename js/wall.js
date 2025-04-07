@@ -6956,7 +6956,7 @@ class wall{
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&game.level!=29&&game.level!=36&&game.level!=41&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&game.level!=29&&game.level!=36&&game.level!=41&&game.level!=42&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{
@@ -7454,7 +7454,7 @@ class wall{
                                                                         entities.players[entities.players.length-1].thrown=true
                                                                         entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)*(game.level==42?0.6:1)
                                                                         entities.players[entities.players.length-1].velocity.y=-20
-                                                                    }else if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&game.pvp&&entities.walls[1][e].owner!=c.id&&c.id>0){
+                                                                    }else if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&game.pvp&&entities.walls[1][e].owner!=c.id&&c.id>0&&!c.auto&&!c.sidekick){
                                                                         hit=true
                                                                         c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerDeployerGU',types.player)+1)))
                                                                         c.storeWeapon=true

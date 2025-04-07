@@ -5967,7 +5967,7 @@ types={
     },
 
     {
-      name:'Buster',sizeBuff:1.1,lifeBuff:8,speedBuff:0.75,
+      name:'Buster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
