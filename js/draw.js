@@ -3,8 +3,8 @@ function mainloop(){
     background(150)
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=8;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,5,5][a];b<lb;b++){
+            for(let a=0,la=9;a<la;a++){
+                for(let b=0,lb=[5,5,2,5,5,5,5,5,1][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==3){
                         fill(100)
@@ -41,8 +41,9 @@ function mainloop(){
                             ['Vietnam','Pacman','Normandy','Isonzo','Stalingrad'][b],
                             ['DoubleMountain','Prison','Steep','Steel','Constructor'][b],
                             ['Sulfate','Process','Gray Gravel','Shogatsu','Downward'][b],
-                            ['Arizona','Aerial','Valuation','Sierra Leone','Fragile (WIP)'][b],
-                            ['Alloy','Speleo (WIP)','NuclearMountain','','Blueprint'][b],
+                            ['Arizona','Aerial','Valuation','Sierra Leone','Fragile'][b],
+                            ['Alloy','Speleo','NuclearMountain','',''][b],
+                            ['Blueprint'][b],
                         ][a],pos[0],pos[1]
                     )
                     textSize(11.25)
@@ -96,7 +97,7 @@ function mainloop(){
                                 case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
-                                case 1: case 3:
+                                case 1: case 3: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                                 case 2:
@@ -109,7 +110,14 @@ function mainloop(){
                                 case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
-                                case 1: case 2: case 4:
+                                case 1: case 2:
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                break
+                            }
+                        break
+                        case 8:
+                            switch(b){
+                                case 0:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                             }
@@ -320,7 +328,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?8:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==41?2:3):
+                    key[c]*=dev.sight?3:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||

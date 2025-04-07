@@ -1,16 +1,7 @@
 
-NUCLEAR MOUNTAIN
 
-double mountain but better
-better terrain
-outpost is underground
-
-random events:
-yellow ducks
-falling crates
-neutral deployers
-
-
+335 - wind, 222
+336 - hail, 151
 
 
 

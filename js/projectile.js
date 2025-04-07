@@ -40,7 +40,7 @@ class projectile{
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
 			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
-			case 332:
+			case 332: case 336:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -505,17 +505,7 @@ class projectile{
 									c.takeDamage(this.damage*(this.crit?2.5:1))
 									c.die.killer=this.index
 									c.collect.time=450
-									if(this.type==190&&!c.fort){
-										if(c.chillTime==0){
-											c.color.skin.head=[200,250,250]
-											c.color.skin.body=[190,240,240]
-											c.color.skin.legs=[175,225,225]
-											c.color.skin.arms=[180,230,230]
-											c.base.color.skin.head=[200,250,250]
-											c.base.color.skin.body=[190,240,240]
-											c.base.color.skin.legs=[175,225,225]
-											c.base.color.skin.arms=[180,230,230]
-										}
+									if(this.type==190&&!c.fort){x
 										c.chillTime=max(c.chillTime,3600)
 									}else if(this.type==256){
 										entities.projectiles.push(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
@@ -604,6 +594,12 @@ class projectile{
 				this.time=time
 				this.width*=4
 				this.height*=4
+			break
+			case 335:
+				this.speed=random(4,6.5)
+				this.time=999
+				this.width*=24
+				this.height*=24
 			break
 		}
 		this.timer=0
@@ -5383,6 +5379,22 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 			break
+			case 335:
+				layer.fill(200-this.crit*200,240,200+this.crit*40,this.fade*0.25)
+				layer.ellipse(0,0,60)
+				layer.fill(160-this.crit*160,200,160+this.crit*80,this.fade*0.25)
+				layer.ellipse(0,0,30)
+			break
+			case 336:
+				layer.fill(120-this.crit*120,160+this.crit*80,240,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(80-this.crit*80,120+this.crit*80,200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(40-this.crit*40,80+this.crit*80,160,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(50,100,150,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -6085,11 +6097,11 @@ class projectile{
 				case 186: case 187: case 188: case 189: case 192: case 202: case 203: case 207: case 212: case 215:
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
-				case 324: case 325: case 327: case 331: case 332:
+				case 324: case 325: case 327: case 331: case 332: case 335: case 336:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>(fast?2400:1200)){
+					if(this.travel>(fast||this.type==336?2400:1200)&&this.type!=335){
 						this.active=false
 					}
 				break
@@ -8000,7 +8012,7 @@ class projectile{
 						}else if(
 							this.type!=89&&this.type!=103&&this.type!=138&&this.type!=152&&this.type!=155&&
 							this.type!=193&&this.type!=194&&this.type!=195&&this.type!=215&&this.type!=270&&
-							this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330
+							this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330&&this.type!=335
 						){
 				        	this.active=false
 						}
@@ -8156,16 +8168,6 @@ class projectile{
 								entities.players[b].velocity.y-=lcos(this.direction)*12
 								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
 								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
-								if(entities.players[b].chillTime==0){
-									entities.players[b].color.skin.head=[200,250,250]
-									entities.players[b].color.skin.body=[190,240,240]
-									entities.players[b].color.skin.legs=[175,225,225]
-									entities.players[b].color.skin.arms=[180,230,230]
-									entities.players[b].base.color.skin.head=[200,250,250]
-									entities.players[b].base.color.skin.body=[190,240,240]
-									entities.players[b].base.color.skin.legs=[175,225,225]
-									entities.players[b].base.color.skin.arms=[180,230,230]
-								}
 								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
 							}else if(this.type==288){
 								entities.players[b].velocity.x+=lsin(this.direction)*9
@@ -8184,6 +8186,9 @@ class projectile{
 							}else if(this.type==322){
 								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*15
 								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*15
+							}else if(this.type==335){
+								entities.players[b].lastingForce[0]+=lsin(this.direction)*0.1
+								entities.players[b].lastingForce[1]-=lcos(this.direction)*0.1
 							}else if(
 								this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||
 								this.type==51
@@ -8227,16 +8232,6 @@ class projectile{
 								this.type==102||this.type==115||this.type==151||this.type==167||this.type==175||
 								this.type==189||this.type==193||this.type==202||this.type==220||this.type==258
 							){
-								if(entities.players[b].chillTime==0){
-									entities.players[b].color.skin.head=[200,250,250]
-									entities.players[b].color.skin.body=[190,240,240]
-									entities.players[b].color.skin.legs=[175,225,225]
-									entities.players[b].color.skin.arms=[180,230,230]
-									entities.players[b].base.color.skin.head=[200,250,250]
-									entities.players[b].base.color.skin.body=[190,240,240]
-									entities.players[b].base.color.skin.legs=[175,225,225]
-									entities.players[b].base.color.skin.arms=[180,230,230]
-								}
 								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
 								if(this.type==202){
 									entities.players[b].stunTime=max(entities.players[b].stunTime,600)
@@ -8278,6 +8273,8 @@ class projectile{
 								entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
 							}else if(this.type==332){
 								entities.players[b].blindTime=max(entities.players[b].blindTime+300,900)
+							}else if(this.type==336){
+								entities.players[b].chillTime=max(entities.players[b].chillTime,300)
 							}
 							if(this.type==20){
 								entities.players[b].DOT.damage+=this.damage/180
