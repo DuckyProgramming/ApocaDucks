@@ -17,17 +17,17 @@ function setup(){
     }
 
     if(false){
-        game.players=1
+        game.players=3
         game.gaming=1
-        game.level=39
-        menu.level=39
+        game.level=43
+        menu.level=43
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
+        //game.classicRespawn=true
         game.pvp=true
         display.cycle=0
         //newWave()
