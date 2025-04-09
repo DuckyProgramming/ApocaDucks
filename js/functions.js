@@ -3539,6 +3539,23 @@ function checkEnd(level,layer,key){
             if(game.time%6==0&&game.time%3000<1200&&game.time%3000>=900){
                 entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]+50,game.tileset[1]*random(25,35),335,random(-4,4)-90,-1,0.5,2400,false,-1))
             }
+        }else if(game.level==44){
+            if(game.respawners[0]>=game.players/8&&game.point[0]==1){
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(entities.players[a].id==1&&(entities.players[a].die.timer>600||entities.players[a].die.timer>240&&game.point[1]==1||entities.players[a].die.timer>120&&game.point[3]==1)&&entities.players[a].life<=0){
+                        entities.players[a].respawn()
+                    }
+                }
+            }
+            if(game.respawners[1]>=game.players/8&&game.point[4]==2){
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(entities.players[a].id==2&&(entities.players[a].die.timer>600||entities.players[a].die.timer>240&&game.point[3]==2||entities.players[a].die.timer>120&&game.point[1]==2)&&entities.players[a].life<=0){
+                        entities.players[a].respawn()
+                    }
+                }
+            }
+            game.respawners[0]=0
+            game.respawners[1]=0
         }
         let temp=[]
         for(let a=0,la=game.spawner.length;a<la;a++){
@@ -3685,7 +3702,7 @@ function checkEnd(level,layer,key){
         }else if(game.level==42&&deployer.spawn.length>0){
             let loc=[0,0]
             if(floor(random(0,3))==0){
-                loc[0]=game.edge[0]*random(0.25,0.75)
+                loc[0]=game.edge[0]*random(1/3,2/3)
                 loc[1]=0
             }else{
                 let key='qy'[floor(random(0,2))]

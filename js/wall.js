@@ -1574,6 +1574,10 @@ class wall{
                             this.width/2-5,-this.height/2-0.5
                         )
                     break
+                    case 42:
+                        layer.fill(90,85,105)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                    break
                 }
             break
             case 5:
@@ -5184,13 +5188,25 @@ class wall{
                     break
                     case 42:
                         switch(this.type){
+                            case 4:
+                                layer.fill(220-min(480,this.reload)/5,95,95)
+                                layer.quad(
+                                    -this.width/2-10,-this.height/2-0.5,
+                                    -this.width/2+5,-this.height/2+15,
+                                    this.width/2-5,-this.height/2+15,
+                                    this.width/2+10,-this.height/2-0.5
+                                )
+                                layer.stroke(200,240,210)
+                                layer.strokeWeight(6)
+                                layer.line(-this.width/2-15,-this.height/2,this.width/2+15,-this.height/2)
+                            break
                             case 32:
                                 layer.fill(120,220-min(480,this.reload)/5,170-min(480,this.reload)/10)
                                 layer.quad(
-                                    -this.width/2-15,-this.height/2-0.5,
-                                    -this.width/2,-this.height/2+15,
-                                    this.width/2,-this.height/2+15,
-                                    this.width/2+15,-this.height/2-0.5
+                                    -this.width/2-10,-this.height/2-0.5,
+                                    -this.width/2+5,-this.height/2+15,
+                                    this.width/2-5,-this.height/2+15,
+                                    this.width/2+10,-this.height/2-0.5
                                 )
                                 layer.stroke(200,240,210)
                                 layer.strokeWeight(6)
@@ -7456,7 +7472,7 @@ class wall{
                                                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=2-((e%2)*0.4)
                                                                 }
                                                             break
-                                                            case 19: case 24: case 31:
+                                                            case 19: case 24: case 31: case 42:
                                                                 for(let e=0,le=entities.walls[1].length;e<le;e++){
                                                                     if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&(entities.walls[1][e].owner==c.id||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
                                                                         hit=true
