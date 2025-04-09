@@ -3526,7 +3526,7 @@ class wall{
                 layer.fill(255)
                 layer.textSize(20)
                 let texts=''
-                if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==38||game.level==42){
+                if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==38||game.level==39&&!game.pvp||game.level==42){
                     switch(this.type){
                         case 31:
                             texts='Fort'
@@ -5587,7 +5587,7 @@ class wall{
                         }
                     }
                 }else if(game.level==42){
-                    let place=[[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[3,1]][this.pos]
+                    let place=[[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[4,1]][this.pos]
                     let texts=''
                     switch(this.type){
                         case 31:
@@ -5660,7 +5660,7 @@ class wall{
                     }
                 }else{
                     let texts=''
-                    if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==36||game.level==38){
+                    if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==36||game.level==38||game.level==39&&!game.pvp){
                         switch(this.type){
                             case 31:
                                 texts='Fort'
@@ -8104,7 +8104,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31){
+                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=c.playerData.sizeBuff>=1.5?120:60
                                                 }
@@ -8145,7 +8145,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31){
+                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=60
                                                 }
@@ -8168,7 +8168,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31){
+                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=60
                                                 }

@@ -219,7 +219,9 @@ function mouseClicked(){
                                     case 4:
                                         menu.level=39
                                         game.classicWeapon=true
-                                        game.pvp=true
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.pvp=true
+                                        }
                                     break
                                 }
                             break
@@ -240,8 +242,10 @@ function mouseClicked(){
                                     break
                                     case 2:
                                         menu.level=42
-                                        game.classicWeapon=true
-                                        game.pvp=true
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }
                                     break
                                     case 3:
                                         menu.level=43

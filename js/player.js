@@ -1655,11 +1655,11 @@ class player{
         if(this.fort&&game.pvp&&game.level==42){
             let local=0
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(entities.players[a].fort&&abs(entities.players[a].pos-this.pos)==1&&entities.players[a].id==this.id&&this.id>0&&this.pos!=7&&entities.players[a].pos!=7){
+                if(entities.players[a].fort&&abs(entities.players[a].pos-this.pos)==1&&entities.players[a].id==this.id&&this.id>0&&this.pos!=9&&entities.players[a].pos!=9){
                     local++
                 }
             }
-            if(local==2&&this.pos!=3){
+            if(local==2&&this.pos!=4){
                 valid=false
             }
         }
@@ -5193,14 +5193,14 @@ class player{
                     this.target.position.y=game.edge[1]
                     this.manage[1]=false
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
+                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(entities.players[a].fort?1000:500)&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
                     if(this.playerData.name.includes('Deployer')){
                         this.target.position.x=this.position.x+random(-500,500)
                         this.manage[1]=true
-                    }else if(game.level==39&&(this.position.x<game.edge[0]*0.3||this.position.x>game.edge[0]*0.7)){
+                    }else if(game.level==39&&game.pvp&&(this.position.x<game.edge[0]*0.3||this.position.x>game.edge[0]*0.7)){
                         this.target.position.x=game.edge[0]*0.5
                         this.target.position.y=game.edge[1]
                     }else if(targets.length>0){
@@ -5214,11 +5214,11 @@ class player{
                                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
                             }
                         }
-                        if(game.level==42&&inBoxBox(this,{position:{x:game.sectors[0][0],y:game.sectors[0][1]},width:game.sectors[0][2]-this.width/2,height:game.sectors[0][3]-this.height/2})&&(this.target.position.x<game.edge[0]*0.5-600&&this.position.x<game.edge[0]*0.5-600||this.target.position.x>game.edge[0]*0.5+600&&this.position.x>game.edge[0]*0.5+600)){
+                        if(game.level==42&&inBoxBox(this,{position:{x:game.sectors[0][0],y:game.sectors[0][1]},width:game.sectors[0][2]-this.width/2,height:game.sectors[0][3]-this.height/2})&&(this.target.position.x<game.edge[0]*0.5-600&&this.position.x<game.edge[0]*0.5-600||this.target.position.x>game.edge[0]*0.5+600&&this.position.x>game.edge[0]*0.5+600||!game.pvp)){
                             if(this.target.position.x<game.edge[0]){
-                                this.target.position.x=game.tileset[0]*121.5
+                                this.target.position.x=game.tileset[0]*145.5
                             }else{
-                                this.target.position.x=game.tileset[0]*159.5
+                                this.target.position.x=game.tileset[0]*183.5
                             }
                             this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                         }else{
@@ -5337,7 +5337,7 @@ class player{
                             }
                         }
                     }
-                    if(game.level==42&&(abs(this.position.x-game.tileset[0]*115)<100||abs(this.position.x-game.tileset[0]*166)<100)){
+                    if(game.level==42&&(abs(this.position.x-game.tileset[0]*139)<100||abs(this.position.x-game.tileset[0]*190)<100)){
                         this.manage[2]=1
                     }
                 }else if(game.level==16){
@@ -5709,7 +5709,7 @@ class player{
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
-                            floor(random(0,(this.life<=0?15:150)))==0||
+                            floor(random(0,(this.life<=0?5:150)))==0||
                             this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].id==this.id?1:0)==(game.level==35||this.weaponType>=0?1:0)||
                             this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].unProtected()&&dist(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.x,entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.y,this.position.x,this.position.y)<600||
                             this.playerData.name=='Buster'&&dist(entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.x,entities.players[game.players+[1,4,0,2,3,6,5,8,7][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -6279,7 +6279,7 @@ class player{
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
-                            floor(random(0,(this.life<=0?15:150)))==0||
+                            floor(random(0,(this.life<=0?5:150)))==0||
                             this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[5,0,1,2,4,3][this.target.point]].id==this.id||!game.pvp&&this.target.point>=3&&(entities.players[game.players+[5,0,1,2,4,3][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
                             this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[5,0,1,2,4,3][this.target.point]].unProtected()&&dist(entities.players[game.players+[5,0,1,2,4,3][this.target.point]].position.x,entities.players[game.players+[5,0,1,2,4,3][this.target.point]].position.y,this.position.x,this.position.y)<600||
                             this.playerData.name=='Buster'&&dist(entities.players[game.players+[5,0,1,2,4,3][this.target.point]].position.x,entities.players[game.players+[5,0,1,2,4,3][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -6672,7 +6672,7 @@ class player{
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
-                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?15:150)))==0||!game.pvp&&(
+                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?5:150)))==0||!game.pvp&&(
                                 this.playerData.name!='Buster'&&this.target.point>=0&&((entities.players[game.players+[2,0,1,3][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||!game.pvp&&(entities.players[game.players+[2,0,1,3][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
                                 this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[2,0,1,3][this.target.point]].unProtected()&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<600||
                                 this.playerData.name=='Buster'&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -7308,7 +7308,7 @@ class player{
                         !game.noPlayer&&(
                             this.target.point==-1||
                             this.auto&&this.fort||
-                            floor(random(0,(this.life<=0?15:150)))==0||
+                            floor(random(0,(this.life<=0?5:150)))==0||
                             this.playerData.name!='Buster'&&this.target.point>=0&&(entities.players[game.players+[3,2,1,0][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||
                             this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[3,2,1,0][this.target.point]].unProtected()&&dist(entities.players[game.players+[3,2,1,0][this.target.point]].position.x,entities.players[game.players+[3,2,1,0][this.target.point]].position.y,this.position.x,this.position.y)<600||
                             this.playerData.name=='Buster'&&dist(entities.players[game.players+[3,2,1,0][this.target.point]].position.x,entities.players[game.players+[3,2,1,0][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -7784,7 +7784,7 @@ class player{
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
-                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?15:150)))==0||!game.pvp&&(
+                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?5:150)))==0||!game.pvp&&(
                                 this.playerData.name!='Buster'&&this.target.point>=0&&((entities.players[game.players+[2,0,1,3][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||!game.pvp&&(entities.players[game.players+[2,0,1,3][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
                                 this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[2,0,1,3][this.target.point]].unProtected()&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<600||
                                 this.playerData.name=='Buster'&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[2,0,1,3][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -8355,7 +8355,7 @@ class player{
                     if(
                         !game.noPlayer&&(
                             this.target.point==-1||
-                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?15:150)))==0||!game.pvp&&(
+                            floor(random(0,(game.pvp&&this.playerData.name!='Buster'?5:this.life<=0?5:150)))==0||!game.pvp&&(
                                 this.playerData.name!='Buster'&&this.target.point>=0&&((entities.players[game.players+[3,0,2,1,4][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||!game.pvp&&(entities.players[game.players+[3,0,2,1,4][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
                                 this.playerData.name!='Buster'&&this.target.point>=0&!entities.players[game.players+[3,0,2,1,4][this.target.point]].unProtected()&&dist(entities.players[game.players+[2,0,1,3][this.target.point]].position.x,entities.players[game.players+[3,0,2,1,4][this.target.point]].position.y,this.position.x,this.position.y)<600||
                                 this.playerData.name=='Buster'&&dist(entities.players[game.players+[3,0,2,1,4][this.target.point]].position.x,entities.players[game.players+[3,0,2,1,4][this.target.point]].position.y,this.position.x,this.position.y)<100
@@ -9885,7 +9885,7 @@ class player{
                             this.base.position.x=set[0]
                             this.base.position.y=set[1]-40
                             this.respawn()
-                        }else{
+                        }else if(game.pvp){
                             let playerLength=entities.players.length
                             let key='qy'[floor(random(0,2))]
                             let paraTrigger=false
@@ -9952,7 +9952,7 @@ class player{
                                 }
                             }
                         }
-                        if((game.point[0]==this.id||game.point[4]==this.id)&&this.die.timer>(this.id==1&&game.point[3]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[3]==2?480:720)){
+                        if((game.point[0]==this.id||game.point[4]==this.id)&&this.die.timer>(this.id==1&&game.point[3]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[3]==2?480:600)){
                             game.respawners[this.id-1]++
                             if(this.die.timer>960){
                                 this.respawn()
@@ -11148,7 +11148,7 @@ class player{
             this.lastingForce[1]*=0.9
         }
         if(this.parachute){
-            this.velocity.x*=game.pvp||game.level==19||game.level==29||game.level==31?(game.assault?0.8:0.99):0.5
+            this.velocity.x*=game.pvp||game.level==19||game.level==29||game.level==31||game.level==41||game.level==42?(game.assault?0.8:0.99):0.5
             this.velocity.y*=2/3
         }else if(this.playerData.name=='PlayerDirigible'){
             if(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]){
