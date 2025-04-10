@@ -4031,7 +4031,7 @@ types={
       desc:'Grenadier with grenades that explode into bullets',dpsBuff:2,
     },{
       name:'PlayerGrenadierFuse',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:2,crit:0,weapon:280,
+      damageBuff:2.5,reloadBuff:2,crit:0,weapon:280,
       desc:'Grenadier with grenades that keep bouncing for extra time',dpsBuff:1,
     },{
       name:'PlayerFracture',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5316,10 +5316,6 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:402,
       desc:'Respawning sidekick parachutists that are launched upward',dpsBuff:1,
     },{
-      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
-      desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
-    },{
       name:'PlayerVPN',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:469,
       desc:'Invisible when moving, but not when shooting',dpsBuff:1,
@@ -5331,6 +5327,10 @@ types={
       name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:643,
       desc:'Fires bullets downward to float',dpsBuff:1,
+    },{
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:339,
+      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
     },
     
     
@@ -5514,10 +5514,6 @@ types={
       name:'PlayerIrony',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:673,
       desc:'Sniper that reduces vision of targets',dpsBuff:1,
-    },{
-      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:339,
-      desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
     },
     
     {
@@ -5683,6 +5679,10 @@ types={
       name:'PlayerHypnosis',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:658,
       desc:'Takes control of a random enemy duck if possible',dpsBuff:0,
+    },{
+      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
+      desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
     },
 
     //mark di
@@ -12311,7 +12311,7 @@ types={
 		},{
 			name:'Synchroscope',
 			ammo:2,
-			damage:80,
+			damage:65,
 			cooldown:45,
 			stop:90,
 			reload:30,
@@ -15800,17 +15800,17 @@ Hayden - brown crate rooms
 "                              N                      <...>  :                                                            ",
 " t                                                   <...>  :                                                            ",
 "..[===============]...[     ]...[===============]............                                                            ",
-".                   |         |                             :                                                            ",
-".                   |         |                             :                                                            ",
-". q                 |         |                           w : 7                                                          ",
-".......>          ]...[     ]...[               ]............____                                                        ",
-"........>           |         |                   :         .   |                                                        ",
-".........>          |         |         &         :         .   |     0                    N                 ^           ",
-"..........> e       |   ---   |       <...>     r :         .   ________                                  _______        ",
-"....................................................[     ]..   |      |               _________       8  |     |        ",
-".         |         |         |         |         :         .##>>      |     _____     |       |      _____     |        ",
-".         |         |         |         |         :         .#####>    |     |   |     |       |      |   |     |        ",
-". aa  f   |         |       5 |         |         :         .#######>  |  6  |   |     |       |      |   |   9 |        ",
+".                   |         |                             :                                                    :       ",
+".                   |         |                             :                                                    :       ",
+". q                 |         |                           w : 7                                                  :       ",
+".......>          ]...[     ]...[               ]............____                                                :       ",
+"........>           |         |                   :         .   |                                                :       ",
+".........>          |         |         &         :         .   |     0                    N                 ^   :       ",
+"..........> e       |   ---   |       <...>     r :         .   ________                                  _______:       ",
+"....................................................[     ]..   |      |               _________       8  |     |:       ",
+".         |         |         |         |         :         .##>>      |     _____     |       |      _____     |:       ",
+".         |         |         |         |         :         .#####>    |     |   |     |       |      |   |     |:       ",
+". aa  f   |         |       5 |         |         :         .#######>  |  6  |   |     |       |      |   |   9 |:       ",
 "............[     ].......................[     ]............########____________________     ____________________       ",
 ".         |         |                   |         |         .########   |     |         :     :   |     |        |       ",
 ".         |         |                   |         |         .#######[   |     |         :     :   |     |        |       ",

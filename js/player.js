@@ -1213,7 +1213,7 @@ class player{
             this.setColor()
         }
         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
 		switch(this.weaponType){
             case 222:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,5400,crit,this.index))
@@ -1718,14 +1718,14 @@ class player{
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
                 let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
                 for(let a=0,la=20;a<la;a++){
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,a*18,this.id,this.weaponData.damage*this.playerData.damageBuff*2,300,crit,this.index))
                 }
             }else if(this.playerData.name=='PlayerPrism'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
                 let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
                 for(let a=0,la=12;a<la;a++){
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,360*a/la,this.id,this.weaponData.damage*this.playerData.damageBuff*1.5,300,crit,this.index))
                 }
@@ -1785,7 +1785,7 @@ class player{
                 weapon.cooldown*=(0.2+0.8*this.weapon.ammo/this.weaponData.ammo)
             }
             let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-            let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+            let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
             let bypass=false
             switch(weaponType){
                 case 0: case 177: case 257: case 578: case 582:
@@ -8939,7 +8939,7 @@ class player{
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerUltraviolet'&&this.assort.ultraviolet==0){
                     let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
                     this.assort.ultraviolet=240
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2.5,300,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)-4,this.id,this.weaponData.damage*this.playerData.damageBuff*2.5,300,crit,this.index))
@@ -8950,7 +8950,7 @@ class player{
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerRegional'&&this.assort.ultraviolet==0){
                     let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
                     this.assort.ultraviolet=60
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],68,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*4,300,crit,this.index))
                     entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
@@ -8958,7 +8958,7 @@ class player{
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerOw'&&this.assort.ultraviolet==0){
                     let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x*this.size+constrain(lsin(this.direction.main)*3,-1,1)*10*this.size,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
+                    let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
                     this.assort.ultraviolet=120
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],241,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*5,300,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],241,(lsin(this.direction.main)<0?-90:90)-15,this.id,this.weaponData.damage*this.playerData.damageBuff*5,300,crit,this.index))
@@ -9887,14 +9887,14 @@ class player{
                             this.respawn()
                         }else if(game.pvp){
                             let playerLength=entities.players.length
-                            let key='qy'[floor(random(0,2))]
+                            let key=this.position.x<game.edge[0]*0.5?'qy'[floor(random(0,1.5))]:'yq'[floor(random(0,1.5))]
                             let paraTrigger=false
                             for(let a=0,la=levels[game.level].length;a<la;a++){
                                 for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
                                     if(levels[game.level][a][b]==key){
                                         this.base.position.x=game.tileset[0]*(b+0.5)
                                         this.base.position.y=game.tileset[1]*(a+0.5)
-                                        if(floor(random(0,2))==0&&game.level!=39){
+                                        if(floor(random(0,5))<=1&&game.level!=39){
                                             this.base.position.x=game.edge[0]/2+random(-800,800)
                                             this.base.position.y=0
                                             paraTrigger=true

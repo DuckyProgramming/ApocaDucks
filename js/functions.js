@@ -3130,7 +3130,7 @@ function newWave(){
             if(types.mission[game.mission].wave[display.cycle][a][0].includes('Boss')){
                 game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==37?game.players*0.1+0.25:game.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.75:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19||game.level==31||game.level==42?2.5:1)*(game.level==29||game.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.level==32||game.level==33?1.2:1)*(game.level==42?0.75:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==37?game.players*0.1+0.25:game.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.5:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19||game.level==31||game.level==42&&!game.pvp?2.5:1)*(game.level==29||game.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.level==32||game.level==33?1.2:1)*(game.level==42?0.5:1)*(game.peakWeapon?2:1)*game.diff);b<lb;b++){
                     game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }
@@ -3282,7 +3282,7 @@ function checkEnd(level,layer,key){
                             for(let c=0,lc=game.players;c<lc;c++){
                                 if(levels[game.level][a][b]==['67890','12345','ABCDE'][display.cycle][(c+shifter)%5]){
                                     entities.players[c].base.position.x=(b+0.5)*game.tileset[0]
-                                    entities.players[c].base.position.y=(a+0.5)*game.tileset[0]
+                                    entities.players[c].base.position.y=(a+0.25)*game.tileset[0]
                                     entities.players[c].respawn()
                                 }
                             }
@@ -3337,7 +3337,7 @@ function checkEnd(level,layer,key){
                             }
                             deployer.timer=game.classicRespawn?150:240
                         }
-                    }
+                    }4
                 }
             }
             if(deployer.timer>0){
@@ -3542,14 +3542,14 @@ function checkEnd(level,layer,key){
         }else if(game.level==44){
             if(game.respawners[0]>=game.players/8&&game.point[0]==1){
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(entities.players[a].id==1&&(entities.players[a].die.timer>360||entities.players[a].die.timer>240&&game.point[1]==1||entities.players[a].die.timer>120&&game.point[3]==1)&&entities.players[a].life<=0){
+                    if(entities.players[a].id==1&&(entities.players[a].die.timer>480||entities.players[a].die.timer>240&&game.point[1]==1||entities.players[a].die.timer>120&&game.point[3]==1)&&entities.players[a].life<=0){
                         entities.players[a].respawn()
                     }
                 }
             }
             if(game.respawners[1]>=game.players/8&&game.point[4]==2){
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(entities.players[a].id==2&&(entities.players[a].die.timer>360||entities.players[a].die.timer>240&&game.point[3]==2||entities.players[a].die.timer>120&&game.point[1]==2)&&entities.players[a].life<=0){
+                    if(entities.players[a].id==2&&(entities.players[a].die.timer>480||entities.players[a].die.timer>240&&game.point[3]==2||entities.players[a].die.timer>120&&game.point[1]==2)&&entities.players[a].life<=0){
                         entities.players[a].respawn()
                     }
                 }
@@ -3688,7 +3688,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23?2.5:game.level==42?4:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?5/6:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,game.players*0.5+0.5)*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==42?5:20):1)*(game.peakWeapon?0.5:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?5/6:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }
@@ -3710,7 +3710,7 @@ function checkEnd(level,layer,key){
                     for(let b=0,lb=levels[42][a].length;b<lb;b++){
                         if(levels[42][a][b]==key){
                             loc[0]=game.tileset[0]*(b+0.5)
-                            loc[1]=game.tileset[1]*(a+0.5)
+                            loc[1]=game.tileset[1]*a
                             a=la
                             b=lb
                         }

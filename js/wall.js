@@ -5201,7 +5201,7 @@ class wall{
                                 layer.line(-this.width/2-15,-this.height/2,this.width/2+15,-this.height/2)
                             break
                             case 32:
-                                layer.fill(120,220-min(480,this.reload)/5,170-min(480,this.reload)/10)
+                                layer.fill(120,220-constrain(this.reload,0,480)/5,170-constrain(this.reload,0,480)/10)
                                 layer.quad(
                                     -this.width/2-10,-this.height/2-0.5,
                                     -this.width/2+5,-this.height/2+15,
@@ -5630,7 +5630,7 @@ class wall{
                         break
                     }
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
-                    if(this.type==31&&this.pos==1){
+                    if(this.type==31&&this.pos==2){
                         for(let a=0,la=this.timers.length;a<la;a++){
                             graphics.overlay[0].fill(255)
                             graphics.overlay[0].textSize(10)
@@ -6082,6 +6082,9 @@ class wall{
                     }else{
                         this.reload-=(game.level==28&&(this.type==35||this.type==40)?0.25:game.level==25||game.level==26?0.25:game.level==24?0.25:game.level==22||game.level==23||game.level==33||game.level==40?0.5:(game.level==19||game.level==31)&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:1)*(this.type==35&&game.level==42?1/6:1)
                     }
+                }else if(game.level==42&&this.type==32){
+                    this.reload--
+                    //pls fix
                 }
             break
             case 6:
@@ -6332,7 +6335,7 @@ class wall{
                 }
             break
             case 31:
-                if(game.level==19&&game.pvp&&this.owner>0&&this.owner<=game.players&&this.owner==game.point[6]){
+                if((game.level==19||game.level==42)&&game.pvp&&this.owner>0&&this.owner<=game.players&&this.owner==game.point[6]){
                     this.timers[this.owner-1]++
                 }else if((game.level==24||game.level==39)&&this.owner>0&&this.owner<=game.players){
                     this.timers[this.owner-1]++
@@ -6342,8 +6345,6 @@ class wall{
                             this.timers[entities.walls[1][a].owner-1]++
                         }
                     }
-                }else if(game.level==42&&this.pos==1&&game.pvp&&this.owner>0&&this.owner<=game.players&&this.owner==game.point[5]){
-                    this.timers[this.owner-1]++
                 }
             break
             case 33:
@@ -6732,7 +6733,7 @@ class wall{
                 }
             break
         }
-        if(this.reload<=0&&this.reload!=-1){
+        if(this.reload<=0&&this.reload!=-1&&!(game.level==42&&this.type==32)){
             this.reload=0
         }
         if(this.type!=7&&this.type!=55&&this.height>1){
@@ -7781,7 +7782,7 @@ class wall{
                                                     c.thrown2=true
                                                 break
                                                 case 32:
-                                                    if(this.reload<=0&&!c.auto&&(!c.fort||c.id==0)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19||game.level==31)&&c.life>0&&c.attacking){
+                                                    if(this.reload<=0&&!c.auto&&(!c.fort||c.id==0||game.level==42)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19||game.level==31)&&c.life>0&&(c.attacking&&!(game.level==42&&c.fort)||game.level==42&&c.id>game.gaming&&c.fort&&this.reload<=-1200)){
                                                         if(game.attacker||game.level==17||game.level==18){
                                                             this.align=c.id
                                                         }
