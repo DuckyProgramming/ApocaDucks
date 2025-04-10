@@ -1,6 +1,6 @@
 function setup(){
     listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
-    listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*229,239*/)
+    listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
     listing[2]=safeRange(0,10)
     //listing[1]=listing[1].filter(item=>types.player[item].weapon>=536)
     if(game.nuke){
@@ -47,8 +47,8 @@ function mouseClicked(){
     updateMouse(graphics.main[0])
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=9;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,5,5,1][a];b<lb;b++){
+            for(let a=0,la=game.deprecate?10:9;a<la;a++){
+                for(let b=0,lb=[5,5,2,5,5,5,5,5,1,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
@@ -67,14 +67,17 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
-                                        menu.level=6
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=6
+                                        }else{
+                                            menu.level=45
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                            game.classicRespawn=false
+                                            instant()
+                                        }
                                     break
                                     case 1:
-                                        menu.level=7
-                                        game.classicWeapon=true
-                                        game.pvp=true
-                                    break
-                                    case 2:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                             menu.level=8
                                         }else{
@@ -82,7 +85,7 @@ function mouseClicked(){
                                         }
                                         game.classicRespawn=false
                                     break
-                                    case 3:
+                                    case 2:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                             menu.level=15
                                         }else{
@@ -90,9 +93,16 @@ function mouseClicked(){
                                         }
                                         game.classicRespawn=false
                                     break
-                                    case 4:
+                                    case 3:
                                         menu.level=16
                                         game.classicRespawn=false
+                                    break
+                                    case 4:
+                                        menu.level=19
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                        }
                                     break
                                 }
                             break
@@ -101,22 +111,16 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
-                                        menu.level=19
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
-                                            game.classicWeapon=true
-                                            game.pvp=true
-                                        }
-                                    break
-                                    case 1:
-                                        menu.level=20
-                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=20
                                             game.classicWeapon=true
                                             game.pvp=true
                                         }else{
+                                            menu.level=46
                                             game.classicRespawn=false
                                         }
                                     break
-                                    case 2:
+                                    case 1:
                                         menu.level=21
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
                                             game.classicWeapon=true
@@ -125,7 +129,7 @@ function mouseClicked(){
                                             game.classicRespawn=false
                                         }
                                     break
-                                    case 3:
+                                    case 2:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
                                             menu.level=22
                                             game.classicWeapon=true
@@ -138,18 +142,7 @@ function mouseClicked(){
                                             game.classicWeapon=true
                                         }
                                     break
-                                    case 4:
-                                        menu.level=24
-                                        game.classicWeapon=true
-                                        game.pvp=true
-                                    break
-                                }
-                            break
-                            case 5:
-                                stage.scene='mission'
-                                game.classicRespawn=true
-                                switch(b){
-                                    case 0:
+                                    case 3:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                             menu.level=25
                                             game.classicWeapon=true
@@ -159,7 +152,7 @@ function mouseClicked(){
                                             game.pvp=true
                                         }
                                     break
-                                    case 1:
+                                    case 4:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                             menu.level=27
                                         }else{
@@ -169,16 +162,22 @@ function mouseClicked(){
                                             instant()
                                         }
                                     break
-                                    case 2:
+                                }
+                            break
+                            case 5:
+                                stage.scene='mission'
+                                game.classicRespawn=true
+                                switch(b){
+                                    case 0:
                                         menu.level=29
                                         game.classicRespawn=false
                                     break
-                                    case 3:
+                                    case 1:
                                         menu.level=30
                                         game.classicWeapon=true
                                         game.pvp=true
                                     break
-                                    case 4:
+                                    case 2:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                             menu.level=32
                                             game.classicWeapon=true
@@ -188,6 +187,16 @@ function mouseClicked(){
                                             game.pvp=true
                                         }
                                     break
+                                    case 3:
+                                        menu.level=34
+                                    break
+                                    case 4:
+                                        menu.level=36
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        game.classicRespawn=false
+                                        instant()
+                                    break
                                 }
                             break
                             case 6:
@@ -195,33 +204,34 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
-                                        menu.level=34
-                                    break
-                                    case 1:
-                                        menu.level=36
-                                        game.classicWeapon=true
-                                        game.pvp=true
-                                        game.classicRespawn=false
-                                        instant()
-                                    break
-                                    case 2:
                                         menu.level=37
                                         game.classicWeapon=true
                                         game.pvp=true
                                         game.classicRespawn=false
                                     break
-                                    case 3:
+                                    case 1:
                                         menu.level=38
                                         game.classicWeapon=true
                                         game.pvp=true
                                         instant()
                                     break
-                                    case 4:
+                                    case 2:
                                         menu.level=39
                                         game.classicWeapon=true
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
                                             game.pvp=true
                                         }
+                                    break
+                                    case 3:
+                                        menu.level=40
+                                        game.classicWeapon=true
+                                    break
+                                    case 4:
+                                        menu.level=41
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        game.classicRespawn=false
+                                        instant()
                                     break
                                 }
                             break
@@ -230,30 +240,19 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
-                                        menu.level=40
-                                        game.classicWeapon=true
-                                    break
-                                    case 1:
-                                        menu.level=41
-                                        game.classicWeapon=true
-                                        game.pvp=true
-                                        game.classicRespawn=false
-                                        instant()
-                                    break
-                                    case 2:
                                         menu.level=42
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
                                             game.classicWeapon=true
                                             game.pvp=true
                                         }
                                     break
-                                    case 3:
+                                    case 1:
                                         menu.level=43
                                         game.classicWeapon=true
                                         game.pvp=true
                                         instant()
                                     break
-                                    case 4:
+                                    case 2:
                                         menu.level=44
                                         game.classicWeapon=true
                                         game.pvp=true
@@ -271,6 +270,22 @@ function mouseClicked(){
                                         game.classicWeapon=true
                                         game.pvp=true
                                         instant()
+                                    break
+                                }
+                            break
+                            case 9:
+                                stage.scene='mission'
+                                game.classicRespawn=true
+                                switch(b){
+                                    case 0:
+                                        menu.level=7
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                    case 1:
+                                        menu.level=24
+                                        game.classicWeapon=true
+                                        game.pvp=true
                                     break
                                 }
                             break

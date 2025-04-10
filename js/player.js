@@ -1030,7 +1030,7 @@ class player{
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
-                    this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[220,225,230],body:[210,215,220],legs:[200,205,210],arms:[185,190,195]}}
+                    this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[220,225,230],body:[210,215,220],legs:[200,205,210],arms:[205,210,215]}}
                 }else if(this.playerData.name=='HeavyTank'){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[200,205,210],body:[190,195,200],legs:[180,185,190],arms:[185,190,195]}}
                 }else if(this.playerData.name=='LightTank'){
@@ -1114,7 +1114,7 @@ class player{
         }else if(game.randomizer){
             this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
         }else if(game.classicWeapon||this.id>game.gaming){
-            let clump=listing[game.peakWeapon?1:game.level==36?0:(game.level==27||game.level==38||game.level==44)&&game.pvp?0:floor(random(0,1.5))]
+            let clump=listing[game.peakWeapon?1:game.level==36||game.level==41||game.level==45?0:(game.level==27||game.level==38)&&game.pvp?0:floor(random(0,1.5))]
             this.type=clump[floor(random(0,clump.length))]
         }else if(this.id<=game.weapon.length){
             if((game.level==27||game.level==38||game.level==44)&&game.pvp){
@@ -1223,7 +1223,7 @@ class player{
             break
             case 227: case 572: case 591:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1231,7 +1231,7 @@ class player{
             break
             case 254:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickDoubleAuto',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickDoubleAuto',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1239,7 +1239,7 @@ class player{
             break
             case 256:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickTrapper',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickTrapper',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1247,7 +1247,7 @@ class player{
             break
             case 257:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickShotgun',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickShotgun',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1255,7 +1255,7 @@ class player{
             break
             case 259:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickHelix',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickHelix',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1263,7 +1263,7 @@ class player{
             break
             case 260:
                 for(let a=0,la=10;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=0.9-a*0.2
@@ -1286,7 +1286,7 @@ class player{
             break
             case 288:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickSniper',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickSniper',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1294,7 +1294,7 @@ class player{
             break
             case 298:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickShootist','SidekickMachineSniper','SidekickSharpSniper','SidekickDriller'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName(['SidekickShootist','SidekickMachineSniper','SidekickSharpSniper','SidekickDriller'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1302,7 +1302,7 @@ class player{
             break
             case 300:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickMachineGun',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickMachineGun',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1310,7 +1310,7 @@ class player{
             break
             case 331:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickStreamlinedRifle','SidekickGroundwire','SidekickAssaultRiflePierce','SidekickAssaultRifleSplasher'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName(['SidekickStreamlinedRifle','SidekickGroundwire','SidekickAssaultRiflePierce','SidekickAssaultRifleSplasher'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1318,7 +1318,7 @@ class player{
             break
             case 382:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickStealth',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickStealth',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1326,7 +1326,7 @@ class player{
             break
             case 399:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGuillotine',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGuillotine',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[1.6,-1.6][a]
@@ -1334,7 +1334,7 @@ class player{
             break
             case 420:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGrenadier',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGrenadier',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1345,7 +1345,7 @@ class player{
             break
             case 471:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1357,7 +1357,7 @@ class player{
             break
             case 485:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.2,-0.2][a]+this.lastingForce[0]
@@ -1368,7 +1368,7 @@ class player{
             break
             case 497:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickPelleter',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickPelleter',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1382,7 +1382,7 @@ class player{
             break
             case 547:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickTicker','SidekickDial','SidekickHourglass','SidekickSickle'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName(['SidekickTicker','SidekickDial','SidekickHourglass','SidekickSickle'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1390,7 +1390,7 @@ class player{
             break
             case 548:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickFreezeBeam','SidekickMaximizer','SidekickPetawatt','SidekickShrinkray'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName(['SidekickFreezeBeam','SidekickMaximizer','SidekickPetawatt','SidekickShrinkray'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1398,7 +1398,7 @@ class player{
             break
             case 563:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickMinesweeper',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickMinesweeper',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1409,7 +1409,7 @@ class player{
             break
             case 579:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGunception',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGunception',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1417,7 +1417,7 @@ class player{
             break
             case 580:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickInterceptor',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickInterceptor',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1425,7 +1425,7 @@ class player{
             break
             case 590:
                 for(let a=0,la=4;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName(['SidekickBorder','SidekickToxin','SidekickIceberg','SidekickBonkhive'][a],types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName(['SidekickBorder','SidekickToxin','SidekickIceberg','SidekickBonkhive'][a],types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.5,0.25,-0.25,-0.5][a]
@@ -1433,7 +1433,7 @@ class player{
             break
             case 644:
                 for(let a=0,la=2;a<la;a++){
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGunHybrid',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGunHybrid',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -1442,7 +1442,7 @@ class player{
             case 663:
                 for(let a=0,la=2;a<la;a++){
                     if(floor(random(0,2))){
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
                         entities.players[entities.players.length-1].sidekick=true
                         entities.players[entities.players.length-1].direction.goal=this.direction.goal
                         entities.players[entities.players.length-1].lastingForce[0]+=[0.4,-0.4][a]
@@ -2260,7 +2260,7 @@ class player{
                     entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                 break
                 case 152:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMachineGun',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructMachineGun',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2278,7 +2278,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],99,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
                 case 159:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRocketLauncher',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructRocketLauncher',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2328,7 +2328,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],105,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
                 case 173:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSniper',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructSniper',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2336,7 +2336,7 @@ class player{
                     this.inspect.push(entities.players[entities.players.length-1].index)
                 break
                 case 174:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructFlamethrower',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructFlamethrower',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2353,7 +2353,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],111,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
                 break
                 case 192:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2619,7 +2619,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],119,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                 break
                 case 273:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGuard',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructGuard',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2697,7 +2697,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     this.velocity.x+=8*(lsin(this.direction.main)<0?1:-1)
                     this.lastingForce[0]+=2.4*(lsin(this.direction.main)<0?1:-1)
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickRocketLauncher',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickRocketLauncher',types.player),this.index))
                     entities.players[entities.players.length-1].sidekick=true
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].DOT.damage=1
@@ -2747,7 +2747,7 @@ class player{
                     }
                 break
                 case 310:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructDestroyer',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructDestroyer',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2755,7 +2755,7 @@ class player{
                     this.inspect.push(entities.players[entities.players.length-1].index)
                 break
                 case 311:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAuto',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructAuto',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2807,7 +2807,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],186,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
                 case 327:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructSpreadling',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructSpreadling',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -2966,7 +2966,7 @@ class player{
                     }
                 break
                 case 357:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructAssaultRifle',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructAssaultRifle',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -3099,7 +3099,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
                     if(weapon.uses<=0){
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructMedic',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
                         entities.players[entities.players.length-1].builder=this.index
@@ -3474,7 +3474,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],248,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1500,crit,this.index))
                 break
                 case 458:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructPelleter',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructPelleter',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -3491,7 +3491,7 @@ class player{
                     }
                 break
                 case 463:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructInterceptor',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructInterceptor',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -3861,7 +3861,7 @@ class player{
                     }
                 break
                 case 564:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructRemote',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructRemote',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -4215,7 +4215,7 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
                 case 617:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -4223,7 +4223,7 @@ class player{
                     this.inspect.push(entities.players[entities.players.length-1].index)
                 break
                 case 618:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructBaller',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructBaller',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -4231,7 +4231,7 @@ class player{
                     this.inspect.push(entities.players[entities.players.length-1].index)
                 break
                 case 619:
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructGust',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructGust',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
@@ -4585,7 +4585,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-20,20),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     }
                     if(weapon.uses%4==0){
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('ConstructMini',types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('ConstructMini',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
                         entities.players[entities.players.length-1].builder=this.index
@@ -5497,7 +5497,7 @@ class player{
                             }
                         }
                     }
-                }else if(game.level==20||game.level==21){
+                }else if(game.level==20||game.level==21||game.level==46){
                     let targets=[]
                     this.target.position.x=this.position.x
                     this.target.position.y=game.edge[1]*0.1
@@ -8365,7 +8365,7 @@ class player{
                         if(game.pvp){
                             if(this.playerData.name=='Buster'){
                                 this.target.point=floor(random(0,5))
-                            }else if(this.weaponType==-1){
+                            }else if(this.weaponType==-1&&!this.sidekick){
                                 let max=game.edge[0]+game.edge[1]
                                 let set=-1
                                 for(let a=0,la=entities.walls.length;a<la;a++){
@@ -8727,13 +8727,13 @@ class player{
                         this.manage[2]=0
                     }
                 }else if(this.id==0){
-                    if(this.manage[2]==0&&(floor(random(0,360*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>0)){
+                    if(this.manage[2]==0&&(floor(random(0,360*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0))){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,30*jumpMult2))==0||floor(random(0,15*jumpMult2))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0
                     }
                 }else{
-                    if(this.manage[2]==0&&(floor(random(0,90*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>0)){
+                    if(this.manage[2]==0&&(floor(random(0,90*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0))){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,120*jumpMult2))==0||floor(random(0,15*jumpMult2))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0
@@ -8780,7 +8780,7 @@ class player{
                 this.attacking=this.manage[1]
                 if(
                     this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&
-                    !(game.level==36&&this.position.y<300)
+                    !((game.level==36||game.level==41||game.level==45)&&this.position.y<300)
                 ){
                     this.attack(0)
                 }
@@ -9050,10 +9050,10 @@ class player{
                 this.weapon.reloading=true
             }
             if(this.weapon.cooldown>0){
-                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37||game.level==38)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==28||game.level==33||game.level==40||game.level==43||game.level==44)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
+                this.weapon.cooldown-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37||game.level==38||game.level==41||game.level==45)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==28||game.level==33||game.level==40||game.level==43||game.level==44)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
             }
             if(this.weapon.reload>0){
-                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37||game.level==38)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==28||game.level==33||game.level==40||game.level==43||game.level==44)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
+                this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==32||game.level==35||game.level==36||game.level==37||game.level==38||game.level==41||game.level==45)?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==28||game.level==33||game.level==40||game.level==43||game.level==44)?0.5:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
             }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
@@ -9122,7 +9122,7 @@ class player{
                     dist(this.position.x,this.position.y,game.edge[0]-100,800)<80&&game.level==15||
                     dist(this.position.x,this.position.y,150,game.edge[1]-120)<80&&game.level==17||
                     dist(this.position.x,this.position.y,100,game.edge[1]-220)<80&&game.level==18||
-                    dist(this.position.x,this.position.y,2250,965)<80&&game.level==20||
+                    dist(this.position.x,this.position.y,2250,965)<80&&(game.level==20||game.level==46)||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&(this.id>0&&this.id<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33)&&this.id>0)&&!game.attacker||
                 this.id>game.gaming&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44||game.attacker&&this.id!=0||this.storeWeapon
@@ -9309,7 +9309,7 @@ class player{
                         }
                         if(this.fort&&!((game.level==27||game.level==38||game.level==44)&&game.pvp)){
                             if(entities.players[a].id!=this.id&&(game.level==26&&this.pos==2||game.level==28&&this.pos==1)){
-                                entities.players.push(new player(this.layer,this.position.x,this.position.y,entities.players[a].id,0,[],false,findName('ConstructGust',types.player),game.index))
+                                entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,entities.players[a].id,0,[],false,findName('ConstructGust',types.player),game.index))
                                 game.index++
                                 entities.players[entities.players.length-1].constructify()
                                 entities.players[entities.players.length-1].thrown=true
@@ -10033,7 +10033,7 @@ class player{
                 break
                 case 'EngineerSpawner': case 'TankSpawner':
                     if(this.time%600==0&&!(game.level==23&&(this.position.x<220||this.position.x>game.edge[0]-220))){
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                     }
@@ -10472,7 +10472,7 @@ class player{
                 break
                 case 'SpawnerBoss':
                     if(this.time%120==0&&!(game.level==23&&(this.position.x<220||this.position.x>game.edge[0]-220))){
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                     }
@@ -10699,7 +10699,7 @@ class player{
                             }
                         }
                         if(!exists){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickBonker',types.player),this.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickBonker',types.player),this.index))
                             entities.players[entities.players.length-1].sidekick=true
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].velocity.x=sign(lsin(this.direction.goal))*24
@@ -10785,7 +10785,7 @@ class player{
                             }
                         }
                         if(!exists){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGuardian',types.player),this.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGuardian',types.player),this.index))
                             entities.players[entities.players.length-1].sidekick=true
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].velocity.y=-30
@@ -10962,7 +10962,7 @@ class player{
                             }
                         }
                         if(exists[0]+exists[1]<2){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-this.height/4/this.size,this.id,0,[],false,findName('SidekickGun',types.player),this.index))
                             entities.players[entities.players.length-1].sidekick=true
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].lastingForce[0]+=exists[0]>0?0.4:exists[1]>0?-0.4:0.4*(floor(random(0,2))*2-1)
