@@ -1,4 +1,22 @@
 
+675 - scout
+676 - soldier
+677 - pyro
+678 - demoman
+679 - heavyweapons
+680 - engineerC
+681 - medicC
+682 - sniperC
+683 - spyC
+
+684 - light picker, 150
+685 - deployer mini, 152
+686 - light gasser, 396
+687 - light resistance, 657
+688 - light heal zone, 345
+689 - light gunnertype, 620
+
+
 
 
 335 - wind, 222

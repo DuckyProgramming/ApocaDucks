@@ -3,7 +3,7 @@ game={
   index:0,projectileIndex:0,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:false,invis:false,pvp:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
-  classicWeapon:false,peakWeapon:false,selector:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
+  classicWeapon:false,peakWeapon:false,selector:false,classWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,noPlayer:false,
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
@@ -3395,7 +3395,7 @@ types={
   ],player:[
     {
       name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:0,
       desc:'Fires a burst of 10 bullets',dpsBuff:10,
     },{
       name:'PlayerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3614,31 +3614,31 @@ types={
       desc:'Shotgun that fires traps',dpsBuff:15,
     },{
       name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:383,
       desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:10,
     },{
       name:'PlayerTerminal',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:475,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:475,
       desc:'Shotgun with more bullets in a set pattern',dpsBuff:19,
     },{
       name:'PlayerSalacia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:476,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:476,
       desc:'Shotgun that fires over a longer distance and can shrink enemies',dpsBuff:10,
     },{
       name:'PlayerGunpowder',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:477,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:477,
       desc:'Shotgun that fires straight-moving engineer bullets',dpsBuff:20,
     },{
       name:'PlayerOw',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:578,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:578,
       desc:'Shotgun that can use auxiliary key to fire several homing bullets',dpsBuff:10,
     },{
       name:'PlayerPomson',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:649,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:649,
       desc:'Damaging shotgun that instantly kills hyper enemies',dpsBuff:10,
     },{
       name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:177,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:177,
       desc:'Has a shotgun auto turret',dpsBuff:10,
     },
     
@@ -5365,7 +5365,7 @@ types={
       desc:'Fires ticked grenades triggered using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerResistance',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:657,
+      damageBuff:2,reloadBuff:2,crit:0,weapon:657,
       desc:'Fires very long-lasting heavy grenades triggered using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerAZGun',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
@@ -5695,6 +5695,44 @@ types={
     },
 
     {
+      name:'PlayerScout',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:675,
+      desc:'Very fast, armed with a pistol and shotgun',dpsBuff:0,
+    },{
+      name:'PlayerSoldier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:676,
+      desc:'Has a rocket launcher and a shotgun and can jump to collie with enemies',dpsBuff:0,
+    },{
+      name:'PlayerPyro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:677,
+      desc:'Has a flamethrower and can fire gas balls, and is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerDemoman',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:678,
+      desc:'Has grenades and stickybombs triggered on weapon swap',dpsBuff:0,
+    },{
+      name:'PlayerHeavyWeapons',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:679,
+      desc:'Has a large machine gun, shotgun, and damage resistance',dpsBuff:0,
+    },{
+      name:'PlayerEngineerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:680,
+      desc:'Has a shotgun and can place down a single rapid auto unit',dpsBuff:0,
+    },{
+      name:'PlayerMedicC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:681,
+      desc:'Can heal allies and place heal areas',dpsBuff:0,
+    },{
+      name:'PlayerSniperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:682,
+      desc:'Has a sniper rifle and a submachine gun, and can see far',dpsBuff:0,
+    },{
+      name:'PlayerSpyC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:683,
+      desc:'Has a revolver and a knife and can become invisible',dpsBuff:0,
+    },
+
+    {
       name:'PlayerGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
       desc:'Basic weapon',dpsBuff:1,
@@ -5703,6 +5741,32 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:663,
       desc:'Has a chance to have sidekicks',dpsBuff:1,
     },{
+      name:'PlayerLightPicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:684,
+    },{
+      name:'PlayerDeployerMini',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+    },{
+      name:'PlayerLightGasser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:686,
+    },{
+      name:'PlayerLightResistance',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:687,
+    },{
+      name:'PlayerLightHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:688,
+    },{
+      name:'PlayerHeavyShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'PlayerHeavyRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
+    },{
+      name:'PlayerHeavySniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:3,reloadBuff:2,crit:0,weapon:6,
+    },
+    
+    {
       name:'PlayerFakeHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:661,
       desc:'Puts down a health pack that kills players who pick it up',dpsBuff:0,
@@ -5759,6 +5823,9 @@ types={
     },{
       name:'ConstructMini',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
+    },{
+      name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:689,
     },
     
     {
@@ -7255,7 +7322,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'DoubleAutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
-      damageBuff:1,reloadBuff:0.5,crit:0,weapon:255,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:255
     },
   ],weapon:[
 		{
@@ -7365,7 +7432,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},
     
     {
@@ -7385,7 +7452,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Hyper Medic',
 			ammo:10,
@@ -7394,7 +7461,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Push Pistol',
 			ammo:10,
@@ -7592,7 +7659,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Slow Rocket Launcher',
 			ammo:1,
@@ -7664,7 +7731,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Sniper Heal Self',
 			ammo:1,
@@ -7826,7 +7893,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Short Damage Over Time Pistol',
 			ammo:10,
@@ -7862,7 +7929,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Barrage Rocket Launcher Heal Self',
 			ammo:10,
@@ -7952,7 +8019,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Barrage Radius Rocket Launcher',
 			ammo:10,
@@ -8015,7 +8082,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Pistol Hurt Self',
 			ammo:10,
@@ -8168,7 +8235,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Immortal',
 			ammo:1,
@@ -8330,7 +8397,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Rocket Launcher Quadral',
 			ammo:1,
@@ -8357,7 +8424,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Phase Pistol',
 			ammo:10,
@@ -8411,7 +8478,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Volley Rocket Launcher',
 			ammo:1,
@@ -8429,7 +8496,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Pushier Pistol',
 			ammo:10,
@@ -8600,7 +8667,7 @@ types={
 			stop:120,
 			reload:120,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Streamlined Rifle',
 			ammo:60,
@@ -8789,7 +8856,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Shrapnel Grenadier',
 			ammo:2,
@@ -8798,7 +8865,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Spy',
 			ammo:10,
@@ -8933,7 +9000,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Slicerception',
 			ammo:4,
@@ -8960,7 +9027,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Minesweeper',
 			ammo:5,
@@ -9518,7 +9585,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Cursor',
 			ammo:6,
@@ -9788,7 +9855,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Tobacco Flamethrower',
 			ammo:50,
@@ -11030,7 +11097,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:12,
+      uses:16,
 		},{
 			name:'Toolshed',
 			ammo:8,
@@ -11048,7 +11115,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Whirlybird',
 			ammo:1,
@@ -11102,7 +11169,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Eon',
 			ammo:10,
@@ -11327,7 +11394,7 @@ types={
 			stop:95,
 			reload:95,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Electrauto',
 			ammo:1,
@@ -11894,7 +11961,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Furnace',
 			ammo:15,
@@ -12227,7 +12294,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Delimiter',
 			ammo:3,
@@ -12542,7 +12609,7 @@ types={
 			stop:120,
 			reload:120,
 			speed:1.05,
-      uses:8,
+      uses:16,
 		},{
 			name:'Pyrite',
 			ammo:1,
@@ -12569,7 +12636,7 @@ types={
 			stop:30,
 			reload:8,
 			speed:1.2,
-      uses:30,
+      uses:50,
 		},{
 			name:'Patrol',
 			ammo:1,
@@ -12806,8 +12873,8 @@ types={
       uses:40,
 		},{
 			name:'LMG',
-			ammo:24,
-			damage:90,
+			ammo:32,
+			damage:80,
 			cooldown:5,
 			stop:180,
 			reload:2,
@@ -13335,6 +13402,141 @@ types={
 			reload:20,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Scout',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Soldier',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Pyro',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:1.075,
+      uses:100,
+		},{
+			name:'Demoman',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Heavy Weapons',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.8,
+      uses:120,
+		},{
+			name:'Engineer C',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Medic C',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Sniper C',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.0625,
+      uses:8,
+		},{
+			name:'Spy C',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.35,
+      uses:12,
+		},{
+			name:'Knife',
+			ammo:1,
+			damage:600,
+			cooldown:90,
+			stop:300,
+			reload:120,
+			speed:1.35,
+      uses:10,
+		},{
+			name:'Mini Sentry',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.1,
+      uses:3,
+		},{
+			name:'Gas Ball',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.075,
+      uses:3,
+		},{
+			name:'Stickybomb Launcher',
+			ammo:4,
+			damage:90,
+			cooldown:15,
+			stop:120,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Heal Area',
+			ammo:1,
+			damage:0.25,
+			cooldown:360,
+			stop:360,
+			reload:300,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Mini Auto',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
 		},
 
     /*{
@@ -16044,6 +16246,26 @@ Hayden - brown crate rooms
 "#################################################################################################################################################",
 "#################################################################################################################################################",
 "#################################################################################################################################################",
+],[
+"###################################################################",
+"#                                                                 #",
+"# 5                                                               #",
+"####                                                              #",
+"#                                                                 #",
+"# 4                                                               #",
+"####                                                              #",
+"#                                                                 #",
+"# 3                                                               #",
+"####                                                              #",
+"#                                                                 #",
+"# 2                                                               #",
+"####                                                              #",
+"#                                                                 #",
+"# 1                                                               #",
+"#### ###### ###### ###### ###### ###### ###### ###### ###### ######",
+"#  #      #      #      #      #      #      #      #      #      #",
+"#  #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #  ? ? #",
+"###################################################################",
 ],[
 ],
 ]

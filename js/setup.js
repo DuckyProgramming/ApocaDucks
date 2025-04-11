@@ -2,6 +2,7 @@ function setup(){
     listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
     listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
     listing[2]=safeRange(0,10)
+    listing[3]=safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player))
     //listing[1]=listing[1].filter(item=>types.player[item].weapon>=536)
     if(game.nuke){
         listing[1]=[findName('PlayerGuidedMissile',types.player)]
@@ -33,8 +34,11 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
+        game.classWeapon=true
         //dev.sight=true
         //game.margin=true
+
+        entities.players[0].newWeaponSelect(680)
         
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600
@@ -48,7 +52,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=game.deprecate?10:9;a<la;a++){
-                for(let b=0,lb=[5,5,2,5,5,5,5,5,1,2][a];b<lb;b++){
+                for(let b=0,lb=[5,5,3,5,5,5,5,5,1,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
@@ -61,6 +65,7 @@ function mouseClicked(){
                             case 2:
                                 menu.weapon=b
                                 game.peakWeapon=menu.weapon==1
+                                game.classWeapon=menu.weapon==2
                             break
                             case 3:
                                 stage.scene='mission'
@@ -389,7 +394,7 @@ function mouseClicked(){
                         if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
-                            game.level=13
+                            game.level=game.classWeapon?48:13
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]

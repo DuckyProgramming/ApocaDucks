@@ -5429,7 +5429,7 @@ class projectile{
 					}
 				}
 			break
-			case 3: case 329:
+			case 3:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)){
@@ -5788,20 +5788,7 @@ class projectile{
 					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn146,this.id,this.base.damage/2,240,this.crit,this.index))
 				}
 			break
-			case 153:
-				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)){
-						entities.players[b].takeDamage(this.damage*(1-c/180))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-					}
-				}
-			break
-			case 156:
+			case 153: case 156: case 329:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp)){
@@ -6942,7 +6929,7 @@ class projectile{
 						this.explode()
 					}
 					if((this.type==284||this.type==286||this.type==329)&&this.timer>=60&&this.active){
-						let inputSet=this.id==0||this.id>game.gaming?[true]:inputs.release[game.gaming==1?1:this.id-1]
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming?[floor(random(0,30))==0]:inputs.release[game.gaming==1?1:this.id-1]
 						if(inputSet[0]){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].index==this.index){
@@ -7382,7 +7369,7 @@ class projectile{
 								}
 							}
 						}
-						let inputSet=this.id==0||this.id>game.gaming?[
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming?[
 							this.position.x>entities.players[this.goal].position.x+25,
 							this.position.x<entities.players[this.goal].position.x-25,
 							this.position.y>entities.players[this.goal].position.y+25,
@@ -7824,7 +7811,7 @@ class projectile{
 				    this.position.y-=this.speed*lcos(this.direction)
 					if(a==0){
 						this.direction+=this.angularVelocity
-						let inputSet=this.id==0||this.id>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
 						if(inputSet[0]){
 							this.angularVelocity-=0.2
 						}
@@ -7906,7 +7893,7 @@ class projectile{
 				    this.position.y-=this.speed*lcos(this.direction)*0.5
 					if(a==0){
 						this.direction+=this.angularVelocity
-						let inputSet=this.id==0||this.id>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
 						if(inputSet[0]){
 							this.angularVelocity-=0.2
 						}
@@ -8111,7 +8098,7 @@ class projectile{
 							entities.players[entities.players.length-1].DOT.damage=0.25
 							entities.players[entities.players.length-1].DOT.active=9999
 						}
-						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&entities.players[b].weaponType!=640&&!entities.players[b].fort){
+						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&entities.players[b].weaponType!=640&&entities.players[b].weaponType!=677&&!entities.players[b].fort){
 							if(this.type==12){
 								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
 								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3
