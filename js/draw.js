@@ -44,7 +44,7 @@ function mainloop(){
                             ['Prison','Steep','Steel','Sulfate','Process'][b],
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
-                            ['NuclearMountain','Razorpoint','Entropy','Big Data (WIP)','Rusted (WIP)'][b],
+                            ['NuclearMountain','Razorpoint','Entropy','Big Data',''][b],
                             ['Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
@@ -348,7 +348,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?11:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43?2:3):
+                    key[c]*=dev.sight?6:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
@@ -648,7 +648,7 @@ function mainloop(){
                                 }
                             }
                         break
-                        case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
+                        case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44: case 47:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

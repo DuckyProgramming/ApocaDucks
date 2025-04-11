@@ -6548,7 +6548,7 @@ class projectile{
 							}
 						break
 						case 134: case 283:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=[450,450,450,450]
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6669,7 +6669,7 @@ class projectile{
 							}
 						break
 						case 164:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=[450,450,450,450,450,450]
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6695,7 +6695,7 @@ class projectile{
 							}
 						break
 						case 165:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=[450,450,450,450,450]
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6721,7 +6721,7 @@ class projectile{
 							}
 						break
 						case 233:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=450
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6746,7 +6746,7 @@ class projectile{
 							}
 						break
 						case 252:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=450
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6777,7 +6777,7 @@ class projectile{
 										}
 									}
 								}
-								if(this.time%60==0){
+								if(this.time%120==0){
 									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
 									entities.projectiles[entities.projectiles.length-1].velocity.x=0
 									entities.projectiles[entities.projectiles.length-1].velocity.y=0
@@ -6796,7 +6796,7 @@ class projectile{
 							}
 						break
 						case 268:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=[450,450,450,450]
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
@@ -6828,7 +6828,7 @@ class projectile{
 							}
 						break
 						case 301:
-							if(this.timer%20==0&&this.active&&a==0){
+							if(this.timer%25==0&&this.active&&a==0){
 								let minimum=[900,900,900,900]
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
