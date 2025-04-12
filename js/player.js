@@ -3240,7 +3240,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,random(0,360),this.id,weaponData.damage*damageBuff*2,900,crit,this.index))
                     }
                 break
-                case 396: case 686:
+                case 396:
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],215,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
                 case 397:
@@ -4708,6 +4708,9 @@ class player{
                     entities.players[entities.players.length-1].builder=this.index
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     this.inspect.push(entities.players[entities.players.length-1].index)
+                break
+                case 686:
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],337,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                 break
 
                 //mark
@@ -11606,10 +11609,10 @@ class player{
             this.velocity.x*=0.8
         }
         if(this.chillTime>0){
-            this.chillTime--
+            this.chillTime-=(this.id>0?2:1)
         }
         if(this.shrinkTime>0&&!this.fort){
-            this.shrinkTime--
+            this.shrinkTime-=(this.id>0?2:1)
             if(this.size>0.4){
                 this.life-=(this.playerData.lifeBuff-0.5)*0.005/(this.playerData.sizeBuff*0.5-0.4)*this.life/this.playerData.lifeBuff
                 this.size-=0.005
@@ -11619,13 +11622,13 @@ class player{
             }
         }
         if(this.gasTime>0){
-            this.gasTime--
+            this.gasTime-=(this.id>0?2:1)
         }
         if(this.enigmaTime>0){
-            this.enigmaTime--
+            this.enigmaTime-=(this.id>0?2:1)
         }
         if(this.blindTime>0){
-            this.blindTime--
+            this.blindTime-=(this.id>0?2:1)
         }
         if(this.wet>0){
             this.wet--

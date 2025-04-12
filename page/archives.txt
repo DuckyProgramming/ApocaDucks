@@ -16,6 +16,10 @@
 688 - light heal zone, 345
 689 - light gunnertype, 620
 
+337 - light gasser, 215
+
+
+
 
 
 
