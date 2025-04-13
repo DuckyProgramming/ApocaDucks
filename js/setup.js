@@ -20,8 +20,8 @@ function setup(){
     if(false){
         game.players=5
         game.gaming=1
-        game.level=47
-        menu.level=47
+        game.level=49
+        menu.level=49
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -34,12 +34,9 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        game.classWeapon=true
-        //dev.sight=true
+        dev.sight=true
         //game.margin=true
 
-        entities.players[0].newWeaponSelect(680)
-        
         //entities.players[0].position.x=5200
         //entities.players[0].position.y=2600
     }
@@ -266,6 +263,10 @@ function mouseClicked(){
                                     break
                                     case 3:
                                         menu.level=47
+                                    break
+                                    case 4:
+                                        menu.level=49
+                                        game.classicWeapon=true
                                     break
                                 }
                             break
