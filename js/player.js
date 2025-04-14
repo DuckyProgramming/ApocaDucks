@@ -11138,7 +11138,7 @@ class player{
                     }
                 break
                 case 'PlayerTripleAuto': case 'PlayerWarduck':
-                    if(this.time%20==0){
+                    if(this.time%(20*(game.pvp?2:1))==0){
                         let hit=false
                         let minimum=[600,600,600]
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11247,26 +11247,26 @@ class player{
                         }
                     }
                     if(
-                        this.time%40==0&&(this.playerData.name=='PlayerGunception'||this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerStealthception'&&this.fade>0||this.playerData.name=='PlayerGaslighter'||this.playerData.name=='PlayerSoftwareception'||this.playerData.name=='PlayerGuardception'||this.playerData.name=='PlayerAutomobile'||this.playerData.name=='SidekickGunception')||
-                        this.time%20==0&&(this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerGunceptionception'||this.playerData.name=='PlayerDasherception'||this.playerData.name=='PlayerMinesweeperception')||
-                        this.time%3==0&&(this.playerData.name=='PlayerMachineGunception'||this.playerData.name=='PlayerForeman')&&this.time%360<180||
-                        this.time%120==0&&this.playerData.name=='PlayerRocketLauncherception'||
-                        this.time%100==0&&(this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerFrigate')||
-                        this.time%300==0&&this.playerData.name=='PlayerEngineerception'||
-                        this.time%15==0&&this.playerData.name=='PlayerMedicception'||
-                        this.time%60==0&&(this.playerData.name=='PlayerSlicerception'||this.playerData.name=='PlayerIceberg'||this.playerData.name=='PlayerDischarge'||this.playerData.name=='PlayerFreezerception'||this.playerData.name=='PlayerPoisonerception'||this.playerData.name=='SidekickIceberg')||
-                        (this.time%50==0||this.time%50==5||this.time%50==10)&&(this.playerData.name=='PlayerAssaultRifleception'||this.playerData.name=='PlayerUserdrive')||
-                        this.time%50==0&&(this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerWintermint')||
-                        this.time%180==0&&this.playerData.name=='PlayerDirectorception'||
-                        this.time%240==0&&this.playerData.name=='PlayerDestroyerception'||
-                        this.time%300==0&&this.playerData.name=='PlayerMotorizerception'||
-                        this.time%12==0&&this.playerData.name=='PlayerSunburstception'||
-                        this.time%30==0&&(this.playerData.name=='PlayerSwarmerception'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive')||
-                        this.time%480==0&&this.playerData.name=='PlayerEmplacementception'||
-                        this.time%75==0&&(this.playerData.name=='PlayerInterceptorception'||this.playerData.name=='PlayerMayfly')||
-                        this.time%8==0&&this.playerData.name=='PlayerSubmachineception'||
+                        this.time%(40*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerGunception'||this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerStealthception'&&this.fade>0||this.playerData.name=='PlayerGaslighter'||this.playerData.name=='PlayerSoftwareception'||this.playerData.name=='PlayerGuardception'||this.playerData.name=='PlayerAutomobile'||this.playerData.name=='SidekickGunception')||
+                        this.time%(20*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerGunceptionception'||this.playerData.name=='PlayerDasherception'||this.playerData.name=='PlayerMinesweeperception')||
+                        this.time%(3*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerMachineGunception'||this.playerData.name=='PlayerForeman')&&this.time%360<180||
+                        this.time%(120*(game.pvp?2:1))==0&&this.playerData.name=='PlayerRocketLauncherception'||
+                        this.time%(100*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerFrigate')||
+                        this.time%(300*(game.pvp?2:1))==0&&this.playerData.name=='PlayerEngineerception'||
+                        this.time%(15*(game.pvp?2:1))==0&&this.playerData.name=='PlayerMedicception'||
+                        this.time%(60*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerSlicerception'||this.playerData.name=='PlayerIceberg'||this.playerData.name=='PlayerDischarge'||this.playerData.name=='PlayerFreezerception'||this.playerData.name=='PlayerPoisonerception'||this.playerData.name=='SidekickIceberg')||
+                        (this.time%(50*(game.pvp?2:1))==0||this.time%(50*(game.pvp?2:1))==5||this.time%(50*(game.pvp?2:1))==10)&&(this.playerData.name=='PlayerAssaultRifleception'||this.playerData.name=='PlayerUserdrive')||
+                        this.time%(50*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerGrenadierception'||this.playerData.name=='PlayerWintermint')||
+                        this.time%(180*(game.pvp?2:1))==0&&this.playerData.name=='PlayerDirectorception'||
+                        this.time%(240*(game.pvp?2:1))==0&&this.playerData.name=='PlayerDestroyerception'||
+                        this.time%(300*(game.pvp?2:1))==0&&this.playerData.name=='PlayerMotorizerception'||
+                        this.time%(12*(game.pvp?2:1))==0&&this.playerData.name=='PlayerSunburstception'||
+                        this.time%(30*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerSwarmerception'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive')||
+                        this.time%(480*(game.pvp?2:1))==0&&this.playerData.name=='PlayerEmplacementception'||
+                        this.time%(75*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerInterceptorception'||this.playerData.name=='PlayerMayfly')||
+                        this.time%(8*(game.pvp?2:1))==0&&this.playerData.name=='PlayerSubmachineception'||
                         this.playerData.name=='PlayerLaserception'&&this.time%360<180||
-                        this.time%15==0&&this.playerData.name=='PlayerBallistaception'
+                        this.time%(15*(game.pvp?2:1))==0&&this.playerData.name=='PlayerBallistaception'
                     ){
                         let minimum=this.playerData.name=='PlayerMayfly'?1200:this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerFrigate'?900:this.playerData.name=='PlayerSunburstception'?600:this.playerData.name=='PlayerSlicerception'?360:450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11312,7 +11312,7 @@ class player{
                     }
                 break
                 case 'PlayerShotgunception':
-                    if(this.time%45==0){
+                    if(this.time%(45*(game.pvp?2:1))==0){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
@@ -11331,7 +11331,7 @@ class player{
                     }
                 break
                 case 'PlayerFlamethrowerception': case 'PlayerAnnexer': case 'PlayerGustception':
-                    if(this.time%5==0&&this.time%360<240){
+                    if(this.time%(5*(game.pvp?2:1))==0&&this.time%360<240){
                         let minimum=300
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
@@ -11356,7 +11356,7 @@ class player{
                             }
                         }
                     }
-                    if(this.playerData.name=='PlayerBackFlak'&&this.time%45==0){
+                    if(this.playerData.name=='PlayerBackFlak'&&this.time%(45*(game.pvp?2:1))==0){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0){
@@ -11483,7 +11483,7 @@ class player{
                 break
                 case 'PlayerHelixception':
                     if(
-                        this.time%40==0
+                        this.time%(40*(game.pvp?2:1))==0
                     ){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11537,7 +11537,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%40==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
+                    if(this.time%(40*(game.pvp?2:1))==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
                         let minimum=[450,450]
                         let center=[
                             [this.position.x+50*lcos(this.time),this.position.y-50*lsin(this.time)+this.offset.position.y-10],
@@ -11569,7 +11569,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%40==20&&this.playerData.name=='PlayerRevolutionistception'){
+                    if(this.time%(40*(game.pvp?2:1))==(20*(game.pvp?2:1))&&this.playerData.name=='PlayerRevolutionistception'){
                         let minimum=[450,360,450]
                         let center=[
                             [this.position.x+35*lcos(-this.time),this.position.y-35*lsin(-this.time)+this.offset.position.y-10],
@@ -11611,7 +11611,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%12==0&&this.playerData.name=='PlayerPhoton'){
+                    if(this.time%(12*(game.pvp?2:1))==0&&this.playerData.name=='PlayerPhoton'){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||this.playerData.name=='PlayerMedicception'||entities.players[a].id==-1)&&entities.players[a].life>0&&entities.players[a].id!=this.id){
@@ -11630,7 +11630,7 @@ class player{
                 break
                 case 'PlayerSpreadlingception': case 'PlayerLurker':
                     if(
-                        this.time%50==0
+                        this.time%(50*(game.pvp?2:1))==0
                     ){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11653,7 +11653,7 @@ class player{
                 break
                 case 'PlayerBattlerock':
                     if(
-                        this.time%60==0
+                        this.time%(60*(game.pvp?2:1))==0
                     ){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11707,7 +11707,7 @@ class player{
                 break
                 case 'PlayerPelleterception': case 'PlayerBlastdoor':
                     if(
-                        this.time%25==0
+                        this.time%(25*(game.pvp?2:1))==0
                     ){
                         let minimum=450
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -11729,7 +11729,7 @@ class player{
                     }
                 break
                 case 'PlayerDropkick':
-                    if(this.time%10==0){
+                    if(this.time%(10*(game.pvp?2:1))==0){
                         let exists=false
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].sidekick&&entities.players[a].playerData.name=='SidekickBonker'&&entities.players[a].id==this.id){
@@ -11748,7 +11748,7 @@ class player{
                 break
                 case 'PlayerOganesson':
                     let mapping=[2,8,18,32,32,18,8]
-                    if(this.time%60==0){
+                    if(this.time%(60*(game.pvp?2:1))==0){
                         let minimum=[]
                         let center=[]
                         let fired=[]
@@ -11831,7 +11831,7 @@ class player{
                     }
                 break
                 case 'PlayerCircuit':
-                    if(this.time%80==0){
+                    if(this.time%(80*(game.pvp?2:1))==0){
                         let minimum=[450,450]
                         let center=[
                             [this.position.x+50*lcos(this.time),this.position.y-50*lsin(this.time)+this.offset.position.y-10],
@@ -11979,7 +11979,7 @@ class player{
                     }
                 break
                 case 'PlayerColonizer':
-                    if(this.time%90==0){
+                    if(this.time%(90*(game.pvp?2:1))==0){
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,295,(lsin(this.direction.main)<0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,1200,crit,this.index))
                     }
                 break

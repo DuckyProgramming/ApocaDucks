@@ -7986,7 +7986,8 @@ class wall{
                                     this.recharge=3600-(game.gaming-1)*600
                                 }else{
                                     c.newWeaponSet(this.weapon)
-                                    this.weapon=listing[1][floor(random(listing[1].length))]
+                                    let clump=game.classWeapon?3:1
+                                    this.weapon=listing[clump][floor(random(listing[clump].length))]
                                     this.recharge=game.level==23?1200:3600-(game.gaming-1)*600
                                     c.stunTime=480
                                 }
@@ -8023,7 +8024,8 @@ class wall{
                             break
                             case 61:
                                 c.newWeaponSet(this.weapon)
-                                this.weapon=listing[1][floor(random(listing[1].length))]
+                                let clump=game.classWeapon?3:1
+                                this.weapon=listing[clump][floor(random(listing[clump].length))]
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.life*=0.25
                                 c.collect.time=max(c.collect.time,450)

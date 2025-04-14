@@ -3665,7 +3665,7 @@ function checkEnd(level,layer,key){
                             for(let c=0,lc=game.players;c<lc;c++){
                                 if(levels[game.level][a][b]==['67890','12345','ABCDE'][display.cycle][(c+shifter)%5]){
                                     entities.players[c].base.position.x=(b+0.5)*game.tileset[0]
-                                    entities.players[c].base.position.y=a*game.tileset[0]
+                                    entities.players[c].base.position.y=(a+0.25)*game.tileset[1]
                                     entities.players[c].respawn()
                                 }
                             }
