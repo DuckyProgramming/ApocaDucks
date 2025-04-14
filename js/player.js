@@ -1846,7 +1846,7 @@ class player{
             let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType][variant]
             let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData][variant]
             let damageBuff=[this.playerData.damageBuff,this.subPlayerAData.damageBuff,this.subPlayerBData.damageBuff][variant]
-            this.visible=this.playerData.name=='PlayerSpyC'?150:15
+            this.visible=this.playerData.name=='PlayerSpyC'?240:15
             weapon.cooldown=weaponData.cooldown
             weapon.reload=weaponData.stop
             weapon.ammo--
@@ -9084,15 +9084,15 @@ class player{
                                         break
                                         case 9:
                                             switch(goalPoint){
-                                                case 0: case 4:
-                                                    this.target.position.x=game.tileset[0]*74.5
-                                                    this.target.position.y=game.edge[1]
-                                                break
-                                                case 1: case 2: case 3:
+                                                case 0: case 2: case 3:
                                                     this.target.position.x=game.tileset[0]*79.5
                                                     this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                                 break
-                                            }
+                                                case 1: case 4:
+                                                    this.target.position.x=game.tileset[0]*74.5
+                                                    this.target.position.y=game.edge[1]
+                                                break
+                                             }
                                         break
                                         case 10:
                                             switch(goalPoint){

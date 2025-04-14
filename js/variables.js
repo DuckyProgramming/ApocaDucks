@@ -13488,7 +13488,7 @@ types={
 			ammo:1,
 			damage:1000,
 			cooldown:90,
-			stop:300,
+			stop:480,
 			reload:120,
 			speed:1.35,
       uses:10,
