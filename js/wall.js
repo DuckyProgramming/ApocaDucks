@@ -2285,6 +2285,17 @@ class wall{
                         layer.fill(152,134,112)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
+                    case 49:
+                        layer.fill(48,45,40)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(max(120,220-min(480,this.reload)/5-game.pointAnim[0]*100),max(120,170-min(480,this.reload)/10-game.pointAnim[0]*50),120)
+                        layer.quad(
+                            -this.width/2+5,-this.height/2-0.5,
+                            -this.width/2+25,-this.height/2+16,
+                            this.width/2-25,-this.height/2+16,
+                            this.width/2-5,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(220-min(480,this.reload)/5,170-min(480,this.reload)/10,120)
                         layer.rect(0,0,this.width+1,this.height+1)
@@ -6844,6 +6855,14 @@ class wall{
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                             }
                         break
+                        case 49:
+                            if(this.reload>=399&&this.reload<=479&&this.reload%16==15){
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,5,-110+random(-15,15),this.align,120,300,false,-1))
+                                let mult=random(1,1.5)
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                            }
+                        break
                         default:
                             if(this.reload==479||this.reload==439){
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-4,this.position.y-this.height/2-4,4,-15,this.align,150,180,false,-1))
@@ -7354,15 +7373,15 @@ class wall{
                             this.height-=0.1
                             this.bounder.height-=0.1
                             this.internalBounder.height-=0.1
-                            this.position.y+=0.05
-                            this.bounder.position.y+=0.05
-                            this.internalBounder.position.y+=0.05
-                            this.velocity.y=0.05
+                            this.position.y-=0.05
+                            this.bounder.position.y-=0.05
+                            this.internalBounder.position.y-=0.05
+                            this.velocity.y=-0.05
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                        if(this.boundary[a][b][c].y<this.position.y){
-                                            this.boundary[a][b][c].y+=0.1
+                                        if(a==0||a==2&&c==1||a==3&&c==1){
+                                            this.boundary[a][b][c].y-=0.1
                                         }
                                     }
                                 }
@@ -8334,6 +8353,11 @@ class wall{
                                                                     }
                                                                 }
                                                             break
+                                                            case 49:
+                                                                if(!(game.pointAnim[0]<1||this.type==13)){
+                                                                    this.reload=0
+                                                                }
+                                                            break
                                                         }
                                                     }
                                                 break
@@ -8718,8 +8742,8 @@ class wall{
                                                                 if(game.pointAnim[0]<1){
                                                                     for(let e=0,le=15;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,258,-255+(e+0.5)/le*150,c.id,50,120,false,-1))
-                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
-                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1.2
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.9
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.9
                                                                         entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
                                                                         entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                                                     }
