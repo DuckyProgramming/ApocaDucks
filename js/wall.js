@@ -2208,6 +2208,17 @@ class wall{
                         layer.fill(152,134,112)
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
+                    case 49:
+                        layer.fill(48,45,40)
+                        layer.rect(0,0,this.width+1,this.height+1)
+                        layer.fill(220-min(480,this.reload)/5,220-min(480,this.reload)/5,120)
+                        layer.quad(
+                            -this.width/2+5,-this.height/2-0.5,
+                            -this.width/2+25,-this.height/2+16,
+                            this.width/2-25,-this.height/2+16,
+                            this.width/2-5,-this.height/2-0.5
+                        )
+                    break
                     default:
                         layer.fill(220-min(480,this.reload)/5,220-min(480,this.reload)/5,120)
                         if(game.level==6){
@@ -6794,6 +6805,9 @@ class wall{
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                 }
+                            break
+                            case 49:
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x+this.width/2-25,this.position.y,65,random(97.5,112.5),this.align,200,180,false,-1))
                             break
                             default:
                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x-this.width/2-10,this.position.y,65,random(-92,-88),this.align,200,180,false,-1))

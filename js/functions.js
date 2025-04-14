@@ -1280,7 +1280,8 @@ function generateLevel(info,layer){
                                 }else if((game.level==25||game.level==26||game.level==37||game.level==38||game.level==40||game.level==41||game.level==42||game.level==43||game.level==47||game.level==49)&&(
                                     level[a][b-1]=='.'||
                                     level[a][b-1]=='c'||
-                                    level[a][b-1]=='%'&&level[a][b-2]=='%'&&level[a][b-3]=='%'&&(game.level==40||game.level==49)
+                                    level[a][b-1]=='%'&&level[a][b-2]=='%'&&level[a][b-3]=='%'&&(game.level==40||game.level==49)||
+                                    level[a][b-1]=='`'&&level[a][b-2]=='`'&&level[a][b-3]=='`'&&game.level==49
                                 )){
                                     if(level[a][b+1]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
