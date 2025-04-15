@@ -8988,6 +8988,7 @@ class player{
                             this.target.position.y=game.edge[1]
                         }else{
                             let goalPoint=this.target.point
+                            let hit=false
                             for(let a=0,la=game.sectors.length;a<la;a++){
                                 if(inPointBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]},width:game.sectors[a][2],height:game.sectors[a][3]})){
                                     if(this.id==1&&this.index==0&&!game.pvp){
@@ -9513,9 +9514,14 @@ class player{
                                         break
                                     }
                                     a=la
+                                    hit=true
                                     this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id!=0?0.5:1)
                                     this.target.position.y=this.target.position.y
                                 }
+                            }
+                            if(!hit){
+                                this.target.position.x=this.position.x+random(-60,60)
+                                this.target.position.y=this.position.y
                             }
                         }
                     }
