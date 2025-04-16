@@ -4354,29 +4354,23 @@ class wall{
                         layer.rect(this.width*5/12,0,this.width/6,this.height)
                     break
                     case 37:
-                        if(this.position.x>game.tileset[0]*169&&this.position.x<game.tileset[0]*173){
-                            layer.fill(39,38,49)
-                            layer.rect(-this.width/3,0,this.width/3,this.height)
-                            layer.rect(this.width/3,0,this.width/3,this.height)
-                        }else{
-                            layer.fill(67,67,75)
-                            for(let a=0,la=floor(this.height/game.tileset[1]*2);a<la;a++){
-                                layer.quad(
-                                    this.width/3+1,-this.height/2+this.height*(a+1)/la-4,
-                                    this.width/3+1,-this.height/2+this.height*(a+1)/la-6,
-                                    -this.width/3-1,-this.height/2+this.height*a/la+4,
-                                    -this.width/3-1,-this.height/2+this.height*a/la+6
-                                )
-                                layer.quad(
-                                    -this.width/3-1,-this.height/2+this.height*(a+1)/la-4,
-                                    -this.width/3-1,-this.height/2+this.height*(a+1)/la-6,
-                                    this.width/3+1,-this.height/2+this.height*a/la+4,
-                                    this.width/3+1,-this.height/2+this.height*a/la+6
-                                )
-                            }
-                            layer.rect(-this.width*3/8,0,this.width/4,this.height)
-                            layer.rect(this.width*3/8,0,this.width/4,this.height)
+                        layer.fill(67,67,75)
+                        for(let a=0,la=floor(this.height/game.tileset[1]*2);a<la;a++){
+                            layer.quad(
+                                this.width/3+1,-this.height/2+this.height*(a+1)/la-4,
+                                this.width/3+1,-this.height/2+this.height*(a+1)/la-6,
+                                -this.width/3-1,-this.height/2+this.height*a/la+4,
+                                -this.width/3-1,-this.height/2+this.height*a/la+6
+                            )
+                            layer.quad(
+                                -this.width/3-1,-this.height/2+this.height*(a+1)/la-4,
+                                -this.width/3-1,-this.height/2+this.height*(a+1)/la-6,
+                                this.width/3+1,-this.height/2+this.height*a/la+4,
+                                this.width/3+1,-this.height/2+this.height*a/la+6
+                            )
                         }
+                        layer.rect(-this.width*3/8,0,this.width/4,this.height)
+                        layer.rect(this.width*3/8,0,this.width/4,this.height)
                     break
                     case 38:
                         layer.fill(57,65,70)
@@ -6558,14 +6552,23 @@ class wall{
                 }
             break
             case 62:
-                layer.fill(20,21,23)
-                layer.rect(-this.width/3,0,this.width/3,this.height)
-                layer.rect(this.width/3,0,this.width/3,this.height)
-                layer.fill(225,207,183,0.1)
-                layer.rect(0,this.height/2,this.width*2.5+8,this.height*0.4+8,8)
-                layer.rect(0,this.height/2,this.width*2.5+4,this.height*0.4+4,6)
-                layer.fill(225,207,183)
-                layer.rect(0,this.height/2,this.width*2.5,this.height*0.4,4)
+                switch(game.level){
+                    case 37:
+                        layer.fill(39,38,49)
+                        layer.rect(-this.width/3,0,this.width/3,this.height)
+                        layer.rect(this.width/3,0,this.width/3,this.height)
+                    break
+                    default:
+                        layer.fill(20,21,23)
+                        layer.rect(-this.width/3,0,this.width/3,this.height)
+                        layer.rect(this.width/3,0,this.width/3,this.height)
+                        layer.fill(225,207,183,0.1)
+                        layer.rect(0,this.height/2,this.width*2.5+8,this.height*0.4+8,8)
+                        layer.rect(0,this.height/2,this.width*2.5+4,this.height*0.4+4,6)
+                        layer.fill(225,207,183)
+                        layer.rect(0,this.height/2,this.width*2.5,this.height*0.4,4)
+                    break
+                }
             break
         }
         layer.pop()

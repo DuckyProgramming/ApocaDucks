@@ -1788,6 +1788,8 @@ class player{
                 this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
                 this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'
                 ?0.8:
+                this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
+                ?2:
                 1)
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
@@ -10170,7 +10172,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    let bust=game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=36&&game.level!=41
+                    let bust=game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=36&&game.level!=41&&game.level!=45
                     let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,7000,6000,5000,4000][game.players-1])*(game.classWeapon?1.25:1)*(game.peakWeapon?2:1)*(game.level==19||game.level==31||game.level==42?5:1)*(game.level==24||game.level==38?2:1)*(game.level==32||game.level==33?2.5:1)
                     if(bust){
                         if(entities.players[a].stats.bust>=threshold&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){
@@ -10948,7 +10950,7 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==43){
+                    }else if(game.level==43&&display.cycle>=4){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
                         for(let a=0,la=entities.walls.length;a<la;a++){
@@ -11255,7 +11257,7 @@ class player{
                     if(
                         this.time%(40*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerGunception'||this.playerData.name=='PlayerBallerception'||this.playerData.name=='PlayerTrapperception'||this.playerData.name=='PlayerStealthception'&&this.fade>0||this.playerData.name=='PlayerGaslighter'||this.playerData.name=='PlayerSoftwareception'||this.playerData.name=='PlayerGuardception'||this.playerData.name=='PlayerAutomobile'||this.playerData.name=='SidekickGunception')||
                         this.time%(20*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerGunceptionception'||this.playerData.name=='PlayerDasherception'||this.playerData.name=='PlayerMinesweeperception')||
-                        this.time%(3*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerMachineGunception'||this.playerData.name=='PlayerForeman')&&this.time%360<180||
+                        this.time%(3*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerMachineGunception'||this.playerData.name=='PlayerForeman')&&this.time%360<120||
                         this.time%(120*(game.pvp?2:1))==0&&this.playerData.name=='PlayerRocketLauncherception'||
                         this.time%(100*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerFrigate')||
                         this.time%(300*(game.pvp?2:1))==0&&this.playerData.name=='PlayerEngineerception'||
@@ -11271,7 +11273,7 @@ class player{
                         this.time%(480*(game.pvp?2:1))==0&&this.playerData.name=='PlayerEmplacementception'||
                         this.time%(75*(game.pvp?2:1))==0&&(this.playerData.name=='PlayerInterceptorception'||this.playerData.name=='PlayerMayfly')||
                         this.time%(8*(game.pvp?2:1))==0&&this.playerData.name=='PlayerSubmachineception'||
-                        this.playerData.name=='PlayerLaserception'&&this.time%360<180||
+                        this.playerData.name=='PlayerLaserception'&&this.time%360<120||
                         this.time%(15*(game.pvp?2:1))==0&&this.playerData.name=='PlayerBallistaception'
                     ){
                         let minimum=this.playerData.name=='PlayerMayfly'?1200:this.playerData.name=='PlayerSniperception'||this.playerData.name=='PlayerFrigate'?900:this.playerData.name=='PlayerSunburstception'?600:this.playerData.name=='PlayerSlicerception'?360:450
