@@ -1247,8 +1247,8 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerShotgun',types.player))
             break
             case 'PlayerPyro':
-                this.newSubWeaponASet(findName('PlayerFlamethrower',types.player))
-                this.newSubWeaponBSet(findName('PlayerLightGasser',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyFlamethrower',types.player))
+                this.newSubWeaponBSet(findName('PlayerGust',types.player))
             break
             case 'PlayerDemoman':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
