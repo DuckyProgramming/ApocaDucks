@@ -4,7 +4,7 @@ function mainloop(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=game.deprecate?10:9;a<la;a++){
-                for(let b=0,lb=[5,5,3,5,5,5,5,5,1,2][a];b<lb;b++){
+                for(let b=0,lb=[5,5,3,5,5,5,5,5,5,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==2){
                         fill(100)
@@ -45,7 +45,7 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['Blueprint'][b],
+                            ['','','','','Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
                     )
@@ -130,7 +130,7 @@ function mainloop(){
                         break
                         case 8:
                             switch(b){
-                                case 0:
+                                case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                             }
@@ -361,7 +361,7 @@ function mainloop(){
                         entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
                         entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||entities.players[c].weaponType==592||
                         entities.players[c].weaponType==623||entities.players[c].weaponType==626||entities.players[c].weaponType==636||entities.players[c].weaponType==639||entities.players[c].weaponType==642||
-                        entities.players[c].weaponType==673||entities.players[c].weaponType==682||
+                        entities.players[c].weaponType==673||entities.players[c].weaponType==682||entities.players[c].weaponType==697||
                         (entities.players[c].weaponType==387||entities.players[c].weaponType==601)&&entities.players[c].subWeaponAType==6
                         ?(game.level==7?1.5:2):
                         entities.players[c].weaponType==613?0.75:

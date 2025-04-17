@@ -1,4 +1,44 @@
 
+
+giantic - payload with 2 pts
+
+tailwater - small two point with both sides being weak (weak players and less yellow ducks)
+designed for NOT duckocracy
+
+infiltration - yellow ducks ctf us
+
+basin - aerial-style, with two cliffs opposing one another and a pit imbetween and crystal
+
+
+
+
+
+
+690 - scout2
+691 - soldier2
+692 - pyro2
+693 - demoman2
+694 - heavyweapons2
+695 - engineerC2
+696 - medicC2
+697 - sniperC2
+698 - spyC2
+
+699 - cola
+700 - burst rocket launcher, 31
+701 - flare gun
+702 - sword, 137
+703 - health pack (real), 661
+704 - repair gun
+705 - light flak zone, 165
+706 - bow, 648
+
+
+338 - flare gun, 1
+339 - repair gun, 1
+
+
+
 675 - scout
 676 - soldier
 677 - pyro

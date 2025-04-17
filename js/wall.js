@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&this.type!=59&&this.type!=60&&this.type!=61
+        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&this.type!=59&&this.type!=60&&this.type!=61&&this.type!=63
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -104,7 +104,7 @@ class wall{
                     }
                 }
             break
-            case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61:
+            case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -1923,7 +1923,7 @@ class wall{
                     }
                 }
             break
-            case 9: case 41:
+            case 9: case 41: case 63:
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
                         layer.fill(60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,1-this.recharge/60)
@@ -6705,7 +6705,7 @@ class wall{
                     this.remove=true
                 }
             break
-            case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61:
+            case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63:
                 if(game.level!=29&&game.level!=37||this.type==57){
                     if(this.recharge>0){
                         this.recharge--
@@ -7404,7 +7404,7 @@ class wall{
                     if(
                         a==0&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&
+                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=63&&
                         !(this.type==37&&c.position.y<c.previous.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -7741,7 +7741,7 @@ class wall{
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&
+                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=63&&
                         !(this.type==37&&c.position.y<c.previous.position.y)
                     ){
                         let d=collideBoxBox(this,c)
@@ -7768,13 +7768,13 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weaponType==-1
                             ||!game.classWeapon&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
                             ||game.classWeapon&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
                             ||c.construct||c.sidekick))
-                        &&!((this.type==9||this.type==41)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==9||this.type==41||this.type==63)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!((this.type==16||this.type==50||this.type==61)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto))
@@ -8032,6 +8032,11 @@ class wall{
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.life*=0.25
                                 c.collect.time=max(c.collect.time,450)
+                            break
+                            case 63:
+                                this.recharge=1800-(game.gaming-1)*300
+                                this.remove=true
+                                c.life=min(c.base.life,c.life+c.base.life/2)
                             break
                             default:
                                 let d=collideBoxBox(this,c)
