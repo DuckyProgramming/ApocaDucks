@@ -769,11 +769,13 @@ function mainloop(){
             }
             for(let a=0,la=run.update.length;a<la;a++){
                 for(let b=0,lb=run.update[a].length;b<lb;b++){
-                    run.update[a][b].update()
-                    if(run.update[a][b].remove){
-                        run.update[a].splice(b,1)
-                        b--
-                        lb--
+                    if(b<run.update[a].length){
+                        run.update[a][b].update()
+                        if(run.update[a][b].remove){
+                            run.update[a].splice(b,1)
+                            b--
+                            lb--
+                        }
                     }
                 }
             }
