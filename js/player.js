@@ -1825,6 +1825,8 @@ class player{
                 ?2:
                 this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)
                 ?0.5:
+                this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'
+                ?1.25:
                 1)
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
