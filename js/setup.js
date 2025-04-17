@@ -17,7 +17,7 @@ function setup(){
         }
     }
 
-    if(false){
+    if(true){
         game.classWeapon=true
 
         game.players=1
@@ -36,10 +36,10 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        dev.sight=true
+        //dev.sight=true
         //game.margin=true
 
-        //entities.players[0].newWeaponSelect(698)
+        entities.players[0].newWeaponSelect(696)
         //entities.players[1].newWeaponSelect(680)
     }
 }

@@ -2431,7 +2431,7 @@ class player{
                     case 164:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],102,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                     break
-                    case 165: case 705:
+                    case 165:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],103,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                     break
                     case 166:
@@ -4795,6 +4795,9 @@ class player{
                     break
                     case 704:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],339,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 705:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],103,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,240,crit,this.index))
                     break
                     case 706:
                         let chance706=floor(random(0,4))

@@ -30,7 +30,7 @@ basin - aerial-style, with two cliffs opposing one another and a pit imbetween a
 702 - sword, 137
 703 - health pack (real), 661
 704 - repair gun
-705 - light flak zone, 165
+705 - w, 165
 706 - bow, 648
 
 

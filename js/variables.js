@@ -5823,7 +5823,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:704,
     },{
       name:'PlayerLightFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:705,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:705,
     },{
       name:'PlayerBow',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:706,
@@ -13739,11 +13739,11 @@ types={
 			name:'Shield Zone',
 			ammo:1,
 			damage:0.01,
-			cooldown:480,
-			stop:480,
-			reload:480,
+			cooldown:600,
+			stop:600,
+			reload:600,
 			speed:0.875,
-      uses:2,
+      uses:1.5,
 		},{
 			name:'Bow',
 			ammo:3,
