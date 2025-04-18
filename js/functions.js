@@ -670,7 +670,7 @@ function generateLevel(info,layer){
     }
     entities.projectiles=[]
     switch(game.level){
-        case 29: case 36: case 37: case 41: case 43: case 45: case 46:
+        case 29: case 36: case 37: case 41: case 43: case 45: case 46: case 50: case 51:
             game.placer=[[],[],[],[]]
         break
     }
@@ -681,7 +681,7 @@ function generateLevel(info,layer){
             }
         }
     }
-    if((game.level==36||game.level==41||game.level==45)&&entities.walls.length>0){
+    if((game.level==36||game.level==41||game.level==45||game.level==50||game.level==51)&&entities.walls.length>0){
         for(let a=0,la=entities.walls[1].length;a<la;a++){
             if(entities.walls[1][a].type==33){
                 game.placer[2].push(entities.walls[1][a].timers)
@@ -3166,7 +3166,7 @@ function generateLevel(info,layer){
                 1.0,color(7,19,22)
             )
         break
-        case 36:
+        case 36: case 50: case 51:
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
