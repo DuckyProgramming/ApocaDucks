@@ -1,14 +1,11 @@
 
 
-giantic - payload with 2 pts
+giantic - duck destruction, ducks spawn at right and move left, drop off points at left
 
 tailwater - small two point with both sides being weak (weak players and less yellow ducks)
 designed for NOT duckocracy
 
-infiltration - yellow ducks ctf us
-
-basin - aerial-style, with two cliffs opposing one another and a pit imbetween and crystal
-
+chasm - aerial-style
 
 
 

@@ -14,7 +14,7 @@ function mainloop(){
                     }else if(
                         a==3&&b==0||a==3&&b==1||a==3&&b==2||a==3&&b==4||
                         a==4&&b==0||a==4&&b==1||a==4&&b==3||a==4&&b==4||
-                        a==5&&b==2||
+                        a==5&&b==2||a==5&&b==3||
                         a==6&&b==2||
                         a==7&&b==0
                     ){
@@ -45,7 +45,7 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['','','','','Blueprint'][b],
+                            ['Chasm (WIP)','Basalt (WIP)','Tailwater (WIP)','','Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
                     )
@@ -85,13 +85,13 @@ function mainloop(){
                         break
                         case 5:
                             switch(b){
-                                case 0: case 3:
+                                case 0:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
                                 case 1: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
-                                case 2:
+                                case 2: case 3:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
                                     text(`PvP`,pos[0]+37,pos[1]+15)
                                 break
@@ -130,8 +130,11 @@ function mainloop(){
                         break
                         case 8:
                             switch(b){
-                                case 4:
+                                case 0: case 1: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
+                                break
+                                case 2:
+                                    text(`PvE`,pos[0],pos[1]+15)
                                 break
                             }
                         break
@@ -290,7 +293,7 @@ function mainloop(){
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34){
+                }else if(game.level==34||game.level==50){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{

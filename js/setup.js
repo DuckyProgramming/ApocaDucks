@@ -22,8 +22,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=37
-        menu.level=37
+        game.level=51
+        menu.level=51
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -192,7 +192,15 @@ function mouseClicked(){
                                         }
                                     break
                                     case 3:
-                                        menu.level=34
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=34
+                                        }else{
+                                            menu.level=50
+                                            game.classicWeapon=true
+                                            game.pvp=true
+                                            game.classicRespawn=false
+                                            instant()
+                                        }
                                     break
                                     case 4:
                                         menu.level=36
@@ -258,9 +266,13 @@ function mouseClicked(){
                                     break
                                     case 2:
                                         menu.level=44
-                                        game.classicWeapon=true
                                         game.pvp=true
                                         menu.players*=4
+                                        if(menu.players==20&&game.classWeapon){
+                                            menu.players=18
+                                        }else{
+                                            game.classicWeapon=true
+                                        }
                                         instant()
                                     break
                                     case 3:
@@ -458,7 +470,7 @@ function instant(){
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=13
+        game.level=game.classWeapon?48:13
     }
     game.mission=0
     entities.players=[]
