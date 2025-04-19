@@ -14,8 +14,8 @@ function mainloop(){
                     }else if(
                         a==3&&b==0||a==3&&b==1||a==3&&b==2||a==3&&b==4||
                         a==4&&b==0||a==4&&b==1||a==4&&b==3||a==4&&b==4||
-                        a==5&&b==2||a==5&&b==3||
-                        a==6&&b==2||
+                        a==5&&b==0||a==5&&b==2||a==5&&b==3||
+                        a==6&&b==2||a==6&&b==3||
                         a==7&&b==0
                     ){
                         fill(100)
@@ -45,7 +45,7 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['Chasm (WIP)','Basalt (WIP)','Tailwater (WIP)','','Blueprint'][b],
+                            ['Chasm','Basalt (WIP)','Tailwater (WIP)','','Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
                     )
@@ -55,7 +55,7 @@ function mainloop(){
                             switch(b){
                                 case 0:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
-                                    text(`PvP`,pos[0]+37,pos[1]+15)
+                                    text(`DM`,pos[0]+37,pos[1]+15)
                                 break
                                 case 1: case 2:
                                     text(`Standard`,pos[0]-37,pos[1]+15)
@@ -85,15 +85,19 @@ function mainloop(){
                         break
                         case 5:
                             switch(b){
-                                case 0:
-                                    text(`PvE`,pos[0],pos[1]+15)
+                                case 0: case 3:
+                                    text(`PvE`,pos[0]-37,pos[1]+15)
+                                    text(`DM`,pos[0]+37,pos[1]+15)
                                 break
-                                case 1: case 4:
+                                case 1:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
-                                case 2: case 3:
+                                case 2:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
                                     text(`PvP`,pos[0]+37,pos[1]+15)
+                                break
+                                case 4:
+                                    text(`DM`,pos[0],pos[1]+15)
                                 break
                             }
                         break
@@ -102,7 +106,7 @@ function mainloop(){
                                 case 0:
                                     text(`PvP/PvE`,pos[0],pos[1]+15)
                                 break
-                                case 1: case 4:
+                                case 1:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                                 case 2:
@@ -110,7 +114,11 @@ function mainloop(){
                                     text(`PvP`,pos[0]+37,pos[1]+15)
                                 break
                                 case 3:
-                                    text(`PvE`,pos[0],pos[1]+15)
+                                    text(`PvE`,pos[0]-37,pos[1]+15)
+                                    text(`DM`,pos[0]+37,pos[1]+15)
+                                break
+                                case 4:
+                                    text(`DM`,pos[0],pos[1]+15)
                                 break
                             }
                         break
@@ -130,7 +138,10 @@ function mainloop(){
                         break
                         case 8:
                             switch(b){
-                                case 0: case 1: case 4:
+                                case 0:
+                                    text(`DM`,pos[0],pos[1]+15)
+                                break
+                                case 1: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                                 case 2:
@@ -289,7 +300,7 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49
+                    game.level==49||game.level==51||game.level==52
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -354,7 +365,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?8:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43?2:3):
+                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||

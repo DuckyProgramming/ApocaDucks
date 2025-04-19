@@ -22,15 +22,15 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=51
-        menu.level=51
+        game.level=53
+        menu.level=53
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
+        //game.classicRespawn=true
         game.pvp=true
         display.cycle=0
         //newWave()
@@ -173,8 +173,15 @@ function mouseClicked(){
                                 game.classicRespawn=true
                                 switch(b){
                                     case 0:
-                                        menu.level=29
                                         game.classicRespawn=false
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=29
+                                        }else{
+                                            menu.level=53
+                                            game.pvp=true
+                                            game.classicWeapon=true
+                                            instant()
+                                        }
                                     break
                                     case 1:
                                         menu.level=30
@@ -235,8 +242,15 @@ function mouseClicked(){
                                         }
                                     break
                                     case 3:
-                                        menu.level=40
                                         game.classicWeapon=true
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=40
+                                        }else{
+                                            menu.level=52
+                                            game.pvp=true
+                                            game.classicRespawn=false
+                                            instant()
+                                        }
                                     break
                                     case 4:
                                         menu.level=41
@@ -288,6 +302,13 @@ function mouseClicked(){
                                 stage.scene='mission'
                                 game.classicRespawn=true
                                 switch(b){
+                                    case 0:
+                                        menu.level=51
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                        game.classicRespawn=false
+                                        instant()
+                                    break
                                     case 4:
                                         menu.level=28
                                         game.classicWeapon=true

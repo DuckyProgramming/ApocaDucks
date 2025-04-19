@@ -6964,7 +6964,8 @@ class projectile{
 						this.explode()
 					}
 					if((this.type==284||this.type==286||this.type==329)&&this.timer>=60&&this.active){
-						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)>game.gaming?[floor(random(0,30))==0]:inputs.release[game.gaming==1?1:this.id-1]
+						let id=((game.level==27||game.level==38||game.level==44)&&game.pvp?this.index+1:this.id)
+						let inputSet=this.id==0||id>game.gaming?[floor(random(0,30))==0]:inputs.release[game.gaming==1?1:id-1]
 						if(inputSet[0]){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].index==this.index){
