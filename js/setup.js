@@ -20,17 +20,17 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=53
-        menu.level=53
-        game.mission=findName('Duckocracy',types.mission)
-        //game.mission=findName('Survival',types.mission)
+        game.level=54
+        menu.level=54
+        //game.mission=findName('Duckocracy',types.mission)
+        game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=true
+        game.classicRespawn=true
         game.pvp=true
         display.cycle=0
         //newWave()
@@ -39,8 +39,7 @@ function setup(){
         //dev.sight=true
         //game.margin=true
 
-        entities.players[0].newWeaponSelect(696)
-        //entities.players[1].newWeaponSelect(680)
+        //entities.players[0].newWeaponSet(findName('PlayerScout',types.player))
     }
 }
 function windowResized(){
@@ -282,9 +281,7 @@ function mouseClicked(){
                                         menu.level=44
                                         game.pvp=true
                                         menu.players*=4
-                                        if(menu.players==20&&game.classWeapon){
-                                            menu.players=18
-                                        }else{
+                                        if(!game.classWeapon){
                                             game.classicWeapon=true
                                         }
                                         instant()
@@ -308,6 +305,15 @@ function mouseClicked(){
                                         game.pvp=true
                                         game.classicRespawn=false
                                         instant()
+                                    break
+                                    case 1:
+                                        menu.level=54
+                                        game.classicWeapon=true
+                                        game.pvp=true
+                                    break
+                                    case 2:
+                                        menu.level=55
+                                        game.classicWeapon=true
                                     break
                                     case 4:
                                         menu.level=28

@@ -2,11 +2,17 @@
 
 giantic - duck destruction, ducks spawn at right and move left, drop off points at left
 
-tailwater - small two point with both sides being weak (weak players and less yellow ducks)
-designed for NOT duckocracy
 
-chasm - aerial-style
 
+
+707 - droner
+708 - droner2
+
+709 - marker
+710 - scaattergun
+
+340 - repair gun
+341 - scattergun
 
 
 

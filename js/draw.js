@@ -45,7 +45,7 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['Chasm','Basalt (WIP)','Tailwater (WIP)','','Blueprint'][b],
+                            ['Chasm','Basalt','Tailwater','Abandoned (WIP)','Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
                     )
@@ -300,11 +300,11 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52
+                    game.level==49||game.level==51||game.level==52||game.level==55
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50){
+                }else if(game.level==34||game.level==50||game.level==54){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -331,7 +331,7 @@ function mainloop(){
                     }
                 }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==280&&entities.projectiles[a].id==entities.players[c].id){
+                        if((entities.projectiles[a].type==280||entities.projectiles[a].type==316)&&entities.projectiles[a].id==entities.players[c].id){
                             center=entities.projectiles[a]
                             a=la
                             special=true
@@ -390,16 +390,18 @@ function mainloop(){
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
-                if(game.level==6||game.level==45){
-                    graphics.main[a].image(
-                        graphics.pane[graphics.pane.length-1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
-                        effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                    )
+                switch(game.level){
+                    case 6: case 45:
+                        graphics.main[a].image(
+                            graphics.pane[graphics.pane.length-1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
+                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                        )
+                    break
                 }
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26){
+                if(game.level==25||game.level==26||game.level==54||game.level==55){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -454,7 +456,7 @@ function mainloop(){
                                     }
                                 }
                             }
-                            if(a==2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==(game.level==54||game.level==55?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -666,7 +668,7 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49:
+                        case 47: case 49: case 54: case 55:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
@@ -711,7 +713,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==2&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                    if(!(bs[a][b][0]==(game.level==54||game.level==55?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }
