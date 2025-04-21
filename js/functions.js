@@ -2185,7 +2185,7 @@ function generateLevel(info,layer){
                             game.placer[1].push([game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5)])
                         break
                         case 55:
-                            let type=[8,9,12,16,27,50,61,66][floor(random(0,8))]
+                            let type=[8,8,9,9,12,12,16,16,27,27,50,61,66,66,68][floor(random(0,15))]
                             if(type==16){
                                 let cluster=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,type))
@@ -3850,7 +3850,7 @@ function generateLevel(info,layer){
             }
             ticker=1
             for(let a=0,la=entities.walls[1].length;a<la;a++){
-                if(entities.walls[1][a].type==8||entities.walls[1][a].type==9||entities.walls[1][a].type==12||entities.walls[1][a].type==16||entities.walls[1][a].type==27||entities.walls[1][a].type==50||entities.walls[1][a].type==61||entities.walls[1][a].type==66){
+                if(entities.walls[1][a].type==8||entities.walls[1][a].type==9||entities.walls[1][a].type==12||entities.walls[1][a].type==16||entities.walls[1][a].type==27||entities.walls[1][a].type==50||entities.walls[1][a].type==61||entities.walls[1][a].type==66||entities.walls[1][a].type==68){
                     entities.walls[1][a].pos=ticker
                     ticker++
                 }

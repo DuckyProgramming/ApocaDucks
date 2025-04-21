@@ -20,10 +20,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=54
-        menu.level=54
+        game.level=55
+        menu.level=55
         //game.mission=findName('Duckocracy',types.mission)
         game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -31,7 +31,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         newLoop()

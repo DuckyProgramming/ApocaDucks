@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67
+        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -129,7 +129,7 @@ class wall{
                 }
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
-            case 65: case 66:
+            case 65: case 66: case 68:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -5031,6 +5031,19 @@ class wall{
                     break
                 }
             break
+            case 68:
+                for(let a=0,la=4;a<la;a++){
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(180+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,220+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.fill(120+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(40+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.45,this.height*0.15)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.45)
+                    }
+                }
+            break
             //mark
             
         }
@@ -6640,7 +6653,7 @@ class wall{
                 }
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
-            case 66:
+            case 66: case 68:
                 if(game.level!=29&&game.level!=37||this.type==57){
                     if(this.recharge>0){
                         this.recharge--
@@ -6996,7 +7009,7 @@ class wall{
                     }
                 }else if(dm()){
                     if(this.owner>0){
-                        this.timers[this.owner-1][1]++
+                        this.timers[this.owner-1][1]+=1.25
                         if(this.timers[this.owner-1][1]>=3600){
                             this.endTime++
                             if(this.endTime>30){
@@ -7422,7 +7435,7 @@ class wall{
                         a==0&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
-                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&
+                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&
                         !(this.type==37&&c.position.y<c.previous.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -7760,7 +7773,7 @@ class wall{
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
-                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&
+                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&
                         !(this.type==37&&c.position.y<c.previous.position.y)
                     ){
                         let d=collideBoxBox(this,c)
@@ -7798,6 +7811,7 @@ class wall{
                         &&!(this.type==12&&(c.id<=0||this.recharge>0))
                         &&!((this.type==16||this.type==50||this.type==61)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
+                        &&!(this.type==68&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
                         switch(this.type){
@@ -7864,7 +7878,7 @@ class wall{
                             break
                             case 9:
                                 this.recharge=1800-(game.gaming-1)*300
-                                c.life=min(c.base.life,c.life+c.base.life/2)
+                                c.life=min(max(c.life,c.base.life),c.life+c.base.life/2)
                                 if(game.level==6){
                                     this.type=[8,12][floor(random(0,2))]
                                 }
@@ -8078,6 +8092,10 @@ class wall{
                                 c.DOT.active+=300
                                 c.DOT.damage++
                                 this.remove=true
+                            break
+                            case 68:
+                                this.recharge=1800-(game.gaming-1)*300
+                                c.life=min(max(c.life,c.base.life*2),c.life+c.base.life/4)
                             break
                             default:
                                 let d=collideBoxBox(this,c)
@@ -8859,7 +8877,7 @@ class wall{
                                                                                 if(entities.walls[1][e].type!=33&&entities.walls[1][e].type!=35){
                                                                                     if(entities.walls[1][e].pos==1||entities.walls[1][e].pos==2||entities.walls[1][e].pos==3||entities.walls[1][e].pos==4){
                                                                                         if(entities.walls[1][e].pos==4){
-                                                                                            let type=[8,9,12,16,27,50,61,66][floor(random(0,8))]
+                                                                                            let type=[8,8,9,9,12,12,16,16,27,27,50,61,66,66,68][floor(random(0,15))]
                                                                                             if(type==16){
                                                                                                 let cluster=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                                                                                                 entities.walls[1].push(new wall(graphics.main,entities.walls[1][e].position.x+game.tileset[0]*4,entities.walls[1][e].position.y,game.tileset[1]*0.6,game.tileset[1]*0.6,type))
@@ -8896,7 +8914,7 @@ class wall{
                                                                                 if(entities.walls[1][e].type!=33&&entities.walls[1][e].type!=35){
                                                                                     if(entities.walls[1][e].pos==2||entities.walls[1][e].pos==3||entities.walls[1][e].pos==4){
                                                                                         if(entities.walls[1][e].pos==4){
-                                                                                            let type=[8,9,12,16,27,50,61,66][floor(random(0,8))]
+                                                                                            let type=[8,8,9,9,12,12,16,16,27,27,50,61,66,66,68][floor(random(0,15))]
                                                                                             if(type==16){
                                                                                                 let cluster=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                                                                                                 entities.walls[1].push(new wall(graphics.main,entities.walls[1][e].position.x+game.tileset[0]*4,entities.walls[1][e].position.y,game.tileset[1]*0.6,game.tileset[1]*0.6,type))
@@ -8933,7 +8951,7 @@ class wall{
                                                                                 if(entities.walls[1][e].type!=33&&entities.walls[1][e].type!=35){
                                                                                     if(entities.walls[1][e].pos==2||entities.walls[1][e].pos==3||entities.walls[1][e].pos==4){
                                                                                         if(entities.walls[1][e].pos==4){
-                                                                                            let type=[8,9,12,16,27,50,61,66][floor(random(0,8))]
+                                                                                            let type=[8,8,9,9,12,12,16,16,27,27,50,61,66,66,68][floor(random(0,15))]
                                                                                             if(type==16){
                                                                                                 let cluster=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                                                                                                 entities.walls[1].push(new wall(graphics.main,entities.walls[1][e].position.x+game.tileset[0]*4,entities.walls[1][e].position.y,game.tileset[1]*0.6,game.tileset[1]*0.6,type))
