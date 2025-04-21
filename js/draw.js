@@ -335,7 +335,7 @@ function mainloop(){
                             center=entities.projectiles[a]
                             a=la
                             special=true
-                            key[c]*=(game.level==7?1.5:2)
+                            key[c]*=(game.level==7?1.5:game.players>=3?3:2)
                         }
                     }
                 }else if(entities.players[c].playerData.name=='PlayerRemoteControl'){
@@ -352,7 +352,7 @@ function mainloop(){
                             center=entities.projectiles[a]
                             a=la
                             special=true
-                            key[c]*=(game.level==7?1.5:2)
+                            key[c]*=(game.level==7?1.5:game.players>=3?3:2)
                         }
                     }
                 }else if(entities.players[c].playerData.name=='PlayerHypnosis'){

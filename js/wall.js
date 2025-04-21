@@ -8506,7 +8506,7 @@ class wall{
                                                                 }
                                                             break
                                                             case 55:
-                                                                entities.projectiles.push(new projectile(c.layer,this.position.x,this.position.y-this.height/2-5-game.tileset[1]*4,316,0,c.id,600,1800,0,c.index))
+                                                                entities.projectiles.push(new projectile(c.layer,this.position.x,this.position.y-this.height/2-5-game.tileset[1]*4,316,0,c.id,800,1800,0,c.index))
                                                                 if(c.id>0&&c.id<=game.gaming){
                                                                     for(let e=0,le=entities.players.length;e<le;e++){
                                                                         if(entities.players[e].id==c.id){
