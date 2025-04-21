@@ -11129,7 +11129,7 @@ class player{
                                     }
                                 }else{
                                     entities.players[a].stats.points+=(this.id>0?ceil(this.stats.points/2):this.stats.points)+(this.id>0&&entities.players[a].id>0?2:0)
-                                
+                                }
                                 this.stats.points=0
                             }
                         }
