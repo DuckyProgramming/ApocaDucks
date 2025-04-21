@@ -3056,6 +3056,14 @@ class wall{
                             this.width/2+0.5,-this.height/2-0.5
                         )
                     break
+                    default:
+                        layer.fill(...game.tilecolor[0])
+                        layer.triangle(
+                            -this.width/2-0.5,-this.height/2-0.5,
+                            this.width/2+0.5,-this.height/2-0.5,
+                            -this.width/2-0.5,this.height/2+0.5
+                        )
+                    break
                 }
             break
             case 21:
