@@ -777,11 +777,7 @@ function mainloop(){
                 }
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
-                for(let b=0,lb=entities.players.length;b<lb;b++){
-                    if(entities.players[a].index==entities.players[b].index){
-                        entities.players[b].displayOver(graphics.main[a])
-                    }
-                }
+                entities.players[a].displayOver(graphics.main[a])
             }
             for(let a=0,la=run.update.length;a<la;a++){
                 for(let b=0,lb=run.update[a].length;b<lb;b++){

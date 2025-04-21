@@ -9752,7 +9752,9 @@ class player{
                             this.target.position.y=game.edge[1]
                         }else{
                             if(this.id==0){
-                                this.target.point=0
+                                if(this.target.point<0){
+                                    this.target.point=0
+                                }
                             }else{
                                 if(this.target.point<0){
                                     this.target.point=floor(random(0.5,2))
@@ -11115,11 +11117,19 @@ class player{
                                     for(let b=0,lb=entities.players.length;b<lb;b++){
                                         if(entities.players[b].index==entities.players[a].builder){
                                             entities.players[b].stats.points+=(this.id>0?ceil(this.stats.points/2):this.stats.points)+(this.id>0&&entities.players[b].id>0?2:0)
+                                            b=lb
+                                        }
+                                    }
+                                }else if(entities.players[a].sidekick){
+                                    for(let b=0,lb=entities.players.length;b<lb;b++){
+                                        if(entities.players[b].id==entities.players[a].id){
+                                            entities.players[b].stats.points+=(this.id>0?ceil(this.stats.points/2):this.stats.points)+(this.id>0&&entities.players[b].id>0?2:0)
+                                            b=lb
                                         }
                                     }
                                 }else{
                                     entities.players[a].stats.points+=(this.id>0?ceil(this.stats.points/2):this.stats.points)+(this.id>0&&entities.players[a].id>0?2:0)
-                                }
+                                
                                 this.stats.points=0
                             }
                         }
