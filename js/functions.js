@@ -493,7 +493,7 @@ function tripletColor(color1,color2,color3,key){
     return key>=1?[color2[0]*(2-key)+color3[0]*(key-1),color2[1]*(2-key)+color3[1]*(key-1),color2[2]*(2-key)+color3[2]*(key-1)]:[color1[0]*(1-key)+color2[0]*key,color1[1]*(1-key)+color2[1]*key,color1[2]*(1-key)+color2[2]*key]
 }
 //key
-function displayMain(layer,effective,keyStore){
+function sendtimeMain(layer,effective,keyStore){
     if(game.flash){
         for(let a=0,la=graphics.overlay.length;a<la;a++){
             graphics.overlay[a].background(0)
@@ -4577,7 +4577,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.125+0.375:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.125:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.125+0.375:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.075:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }

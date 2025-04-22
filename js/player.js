@@ -12447,7 +12447,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%(40*(game.pvp||this.playerData.name=='RevolutioningTank'?2:1))==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
+                    if(this.time%(60*(game.pvp||this.pl3yerData.name=='RevolutioningTank'?2:1))==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
                         let minimum=[450,450]
                         let center=[
                             [this.position.x+50*lcos(this.time),this.position.y-50*lsin(this.time)+this.offset.position.y-10],
@@ -12479,7 +12479,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%(40*(game.pvp?2:1))==(20*(game.pvp?2:1))&&this.playerData.name=='PlayerRevolutionistception'){
+                    if(this.time%(60*(game.pvp?2:1))==(30*(game.pvp?2:1))&&this.playerData.name=='PlayerRevolutionistception'){
                         let minimum=[450,360,450]
                         let center=[
                             [this.position.x+35*lcos(-this.time),this.position.y-35*lsin(-this.time)+this.offset.position.y-10],
