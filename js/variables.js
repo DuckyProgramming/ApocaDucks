@@ -5697,7 +5697,7 @@ types={
     {
       name:'PlayerScout',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:675,
-      desc:'Very fast, armed with a pistol and shotgun',dpsBuff:0,
+      desc:'Very fast, armed with a scattergun and pitsol',dpsBuff:0,
     },{
       name:'PlayerSoldier',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:676,
@@ -5737,7 +5737,7 @@ types={
     },{
       name:'PlayerScout2',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:690,
-      desc:'Very fast with a shotgun, and can give crits and vulnerability to self',dpsBuff:0,
+      desc:'Very fast with a scattergun, and can give crits and vulnerability to self',dpsBuff:0,
     },{
       name:'PlayerSoldier2',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:691,
@@ -5801,7 +5801,7 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:688,
     },{
       name:'PlayerHeavyShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'PlayerHeavyRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
@@ -17162,6 +17162,21 @@ less falling guster and hyperimpostor
 "                                                                                                                                                                     ",
 "                                                                                                                                                                     ",
 "                                                                                                                                                                     ",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
+"                                                                                                                                #####################################",
 "#####################################################################################################################################################################",
 "#####################################################################################################################################################################",
 "#####################################################################################################################################################################",

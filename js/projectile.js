@@ -7057,7 +7057,7 @@ class projectile{
 										this.active=false
 									}else{
 										entities.projectiles[b].active=false
-										this.damage-=entities.projectiles[b].damage*2.5
+										this.damage-=entities.projectiles[b].damage*(entities.projectiles[b].partisan?1:4)
 										if(this.damage<=0){
 											this.active=false
 										}
@@ -7692,7 +7692,7 @@ class projectile{
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15+entities.projectiles[b].width*0.5+entities.projectiles[b].height*0.5&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
 							if(entities.projectiles[b].exploder){
-								entities.projectiles[b].damage*=0.5
+								entities.projectiles[b].damage*=0.25
 								entities.projectiles[b].explode()
 							}
 						}

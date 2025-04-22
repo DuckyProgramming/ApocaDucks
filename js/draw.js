@@ -144,7 +144,7 @@ function mainloop(){
                                 case 1: case 4:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
-                                case 2:
+                                case 2: case 3:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
                             }

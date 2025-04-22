@@ -144,6 +144,9 @@ class wall{
                 }else if(this.type==50||this.type==61||this.type==69){
                     let chunk=game.classWeapon?3:1
                     this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                }else if(this.type==70){
+                    let chunk=game.classWeapon?3:1
+                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
                     this.rainbow=floor(random(0,2))==0
                 }else if(this.type==71){
                     let chunk=game.classWeapon?3:game.peakWeapon?1:floor(random(1.5))
@@ -6496,7 +6499,7 @@ class wall{
                         )
                     break
                     case 55:
-                        layer.fill(220-this.reload)
+                        layer.fill(220-this.reload*4/3)
                         layer.quad(
                             -this.width/2-10,-this.height/2-0.5,
                             -this.width/2+5,-this.height/2+16,
@@ -6790,37 +6793,37 @@ class wall{
                 }
                 if(game.level==55&&this.pos>=0){
                     if(this.position.x>(127.5+4*this.pos)*game.tileset[0]){
-                        this.position.x-=2.25
-                        this.bounder.position.x-=2.25
-                        this.velocity.x=-2.25
+                        this.position.x-=3
+                        this.bounder.position.x-=3
+                        this.velocity.x=-3
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    this.boundary[a][b][c].x-=2.25
+                                    this.boundary[a][b][c].x-=3
                                 }
                             }
                         }
                     }
                     if(this.position.y>this.base.position.y-game.tileset[1]*3&&(this.pos==6||this.pos==8)){
-                        this.position.y-=1.5
-                        this.bounder.position.y-=1.5
-                        this.velocity.y=-1.5
+                        this.position.y-=2
+                        this.bounder.position.y-=2
+                        this.velocity.y=-2
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    this.boundary[a][b][c].y-=1.5
+                                    this.boundary[a][b][c].y-=2
                                 }
                             }
                         }
                     }else if(this.pos==7){
                         if(this.position.y<this.base.position.y+game.tileset[1]*3){
-                            this.position.y+=1.5
-                            this.bounder.position.y+=1.5
-                            this.velocity.y=1.5
+                            this.position.y+=2
+                            this.bounder.position.y+=2
+                            this.velocity.y=2
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                        this.boundary[a][b][c].y+=1.5
+                                        this.boundary[a][b][c].y+=2
                                     }
                                 }
                             }
@@ -7024,37 +7027,37 @@ class wall{
                 }
                 if(game.level==55&&this.pos>=0){
                     if(this.position.x>(127.5+4*this.pos)*game.tileset[0]){
-                        this.position.x-=2.25
-                        this.bounder.position.x-=2.25
-                        this.velocity.x=-2.25
+                        this.position.x-=3
+                        this.bounder.position.x-=3
+                        this.velocity.x=-3
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    this.boundary[a][b][c].x-=2.25
+                                    this.boundary[a][b][c].x-=3
                                 }
                             }
                         }
                     }
                     if(this.position.y>this.base.position.y-game.tileset[1]*3&&(this.pos==6||this.pos==8)){
-                        this.position.y-=1.5
-                        this.bounder.position.y-=1.5
-                        this.velocity.y=-1.5
+                        this.position.y-=2
+                        this.bounder.position.y-=2
+                        this.velocity.y=-2
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    this.boundary[a][b][c].y-=1.5
+                                    this.boundary[a][b][c].y-=2
                                 }
                             }
                         }
                     }else if(this.pos==7){
                         if(this.position.y<this.base.position.y+game.tileset[1]*3){
-                            this.position.y+=1.5
-                            this.bounder.position.y+=1.5
-                            this.velocity.y=1.5
+                            this.position.y+=2
+                            this.bounder.position.y+=2
+                            this.velocity.y=2
                             for(let a=0,la=this.boundary.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                     for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                        this.boundary[a][b][c].y+=1.5
+                                        this.boundary[a][b][c].y+=2
                                     }
                                 }
                             }
@@ -8021,7 +8024,7 @@ class wall{
                             break
                             case 12:
                                 this.recharge=1800-(game.gaming-1)*300
-                                c.critBuff=game.level==55?480:240
+                                c.critBuff=game.level==55?600:240
                                 if(game.level==6){
                                     this.type=[8,9][floor(random(0,2))]
                                 }
@@ -8222,7 +8225,7 @@ class wall{
                             break
                             case 70:
                                 this.recharge=1800-(game.gaming-1)*300
-                                c.defendBuff=960
+                                c.defendBuff=1200
                                 if(game.level==55){
                                     this.remove=true
                                 }
@@ -9016,10 +9019,10 @@ class wall{
                                                                 }
                                                             break
                                                             case 55:
-                                                                this.reload=120
+                                                                this.reload=90
                                                                 for(let e=0,le=entities.walls[1].length;e<le;e++){
                                                                     if(entities.walls[1][e].type==35){
-                                                                        entities.walls[1][e].reload=120
+                                                                        entities.walls[1][e].reload=90
                                                                     }
                                                                 }
                                                                 let valid=true
