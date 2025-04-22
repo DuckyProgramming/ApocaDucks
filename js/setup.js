@@ -24,8 +24,8 @@ function setup(){
         game.gaming=1
         game.level=55
         menu.level=55
-        //game.mission=findName('Duckocracy',types.mission)
-        game.mission=findName('Survival',types.mission)
+        game.mission=findName('Duckocracy',types.mission)
+        //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
         entities.players=[]
         initialGraphics()
@@ -36,8 +36,8 @@ function setup(){
         //newWave()
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player))
     }

@@ -338,7 +338,7 @@ function mainloop(){
                             key[c]*=(game.level==7?1.5:game.players>=3?3:2)
                         }
                     }
-                }else if(entities.players[c].playerData.name=='PlayerRemoteControl'){
+                }else if(entities.players[c].playerData.name=='PlayerRemoteControl'||entities.players[c].assort.remote){
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
                             center=entities.players[a]

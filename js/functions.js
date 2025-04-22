@@ -1114,7 +1114,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*19.5,game.tileset[1]*24.5,game.tileset[0]*31,game.tileset[1]*23],
                 [game.tileset[0]*45,game.tileset[1]*34,game.tileset[0]*20,game.tileset[1]*4],
                 [game.tileset[0]*39.5,game.tileset[1]*30,game.tileset[0]*9,game.tileset[1]*4],
-                [game.tileset[0]*47,game.tileset[1]*26,game.tileset[0]*8,game.tileset[1]*4],
+                [game.tileset[0]*47.5,game.tileset[1]*26,game.tileset[0]*9,game.tileset[1]*4],
                 [game.tileset[0]*39.5,game.tileset[1]*22,game.tileset[0]*9,game.tileset[1]*4],
 
                 [game.tileset[0]*55.5,game.tileset[1]*18,game.tileset[0]*25,game.tileset[1]*4],
@@ -1150,10 +1150,19 @@ function generateLevel(info,layer){
             game.edge=[level[0].length*45,level.length*40]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
-                [game.tileset[0]*103,game.tileset[1]*15,game.tileset[0]*64,game.tileset[1]*30],
-                [game.tileset[0]*68.5,game.tileset[1]*18,game.tileset[0]*5,game.tileset[1]*36],
-                [game.tileset[0]*76,game.tileset[1]*35.5,game.tileset[0]*10,game.tileset[1]*3],
-                [game.tileset[0]*36,game.tileset[1]*43,game.tileset[0]*18,game.tileset[1]*4],
+                [game.tileset[0]*142,game.tileset[1]*17.5,game.tileset[0]*16,game.tileset[1]*35],
+                [game.tileset[0]*102,game.tileset[1]*18.5,game.tileset[0]*64,game.tileset[1]*37],
+                [game.tileset[0]*69,game.tileset[1]*21,game.tileset[0]*2,game.tileset[1]*42],
+                [game.tileset[0]*80.5,game.tileset[1]*42.5,game.tileset[0]*11,game.tileset[1]*3],
+                [game.tileset[0]*79.5,game.tileset[1]*51.5,game.tileset[0]*13,game.tileset[1]*3],
+
+                [game.tileset[0]*73.5,game.tileset[1]*49,game.tileset[0]*7,game.tileset[1]*2],
+                [game.tileset[0]*36.5,game.tileset[1]*50,game.tileset[0]*19,game.tileset[1]*4],
+                [game.tileset[0]*31.5,game.tileset[1]*44,game.tileset[0]*3,game.tileset[1]*4],
+                [game.tileset[0]*14.5,game.tileset[1]*21.5,game.tileset[0]*29,game.tileset[1]*43],
+                [game.tileset[0]*75.5,game.tileset[1]*45.5,game.tileset[0],game.tileset[1]*3],
+
+                [game.tileset[0]*70,game.tileset[1]*46,game.tileset[0]*2,game.tileset[1]*2],
             ]
         break
         default:
@@ -1531,8 +1540,8 @@ function generateLevel(info,layer){
     }
     //level.forEach(item=>print(item))
     if(game.level==55&&game.players==1){
-        reject.push((level.length-15)*level[0].length+118)
-        reject.push((level.length-14)*level[0].length+118)
+        reject.push((level.length-18)*level[0].length+129)
+        reject.push((level.length-17)*level[0].length+129)
     }
     for(let a=0,la=level.length;a<la;a++){
         for(let b=0,lb=level[a].length;b<lb;b++){
@@ -1660,7 +1669,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 55:
-                            entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.5,(a-0.5)*game.tileset[1]*0.5+game.edge[1]*0.5,game.edge[0],game.edge[1]-(a-0.5)*game.tileset[1],3))
+                            entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.2,(a-0.5)*game.tileset[1]*0.5+game.edge[1]*0.5,game.edge[0]*0.4,game.edge[1]-(a-1)*game.tileset[1],3))
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.1)*game.tileset[1],game.tileset[0],game.tileset[1]*0.8,3))
@@ -2166,9 +2175,9 @@ function generateLevel(info,layer){
                         break
                         case 55:
                             if(b<5){
-                                entities.walls[2].push(new wall(graphics.main,(b+5.25)*game.tileset[0],(a*0.5+la*0.5)*game.tileset[1],10.5*game.tileset[0],(la-a)*game.tileset[1],62))
+                                entities.walls[2].push(new wall(graphics.main,(b+3.75)*game.tileset[0],(a*0.5+la*0.5)*game.tileset[1],9.5*game.tileset[0],(la-a)*game.tileset[1],62))
                             }else{
-                                entities.walls[2].push(new wall(graphics.main,(b*0.5+lb*0.5+0.25)*game.tileset[0],(a*0.5+la*0.5-6)*game.tileset[1],(lb-b-0.5)*game.tileset[0],(la-a)*game.tileset[1],62))
+                                entities.walls[2].push(new wall(graphics.main,(b*0.5+lb*0.5+0.25-1)*game.tileset[0],(a*0.5+la*0.5-6)*game.tileset[1],(lb-b-0.5+2)*game.tileset[0],(la-a)*game.tileset[1],62))
                             }
                         break
                         default:
@@ -2185,7 +2194,7 @@ function generateLevel(info,layer){
                             game.placer[1].push([game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5)])
                         break
                         case 55:
-                            let type=[8,8,9,9,12,12,16,16,27,27,50,61,66,66,68,69][floor(random(0,16))]
+                            let type=[8,9,9,12,16,16,27,27,50,61,66,68,69,70,70,71][floor(random(0,16))]
                             if(type==16){
                                 let cluster=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?1:floor(random(1.5))
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,type))
@@ -2465,6 +2474,10 @@ function generateLevel(info,layer){
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.75+a*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.5,43))
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],game.tileset[1]*0.75+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,44))
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],game.tileset[1]*0.75+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,45))
+                        break
+                        case 55:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.6+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0]*1.2,game.tileset[1],46))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.4+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0]*1.2,game.tileset[1],45))
                         break
                     }
                 break
@@ -3850,7 +3863,7 @@ function generateLevel(info,layer){
             }
             ticker=1
             for(let a=0,la=entities.walls[1].length;a<la;a++){
-                if(entities.walls[1][a].type==8||entities.walls[1][a].type==9||entities.walls[1][a].type==12||entities.walls[1][a].type==16||entities.walls[1][a].type==27||entities.walls[1][a].type==50||entities.walls[1][a].type==61||entities.walls[1][a].type==66||entities.walls[1][a].type==68||entities.walls[1][a].type==69){
+                if(entities.walls[1][a].type==8||entities.walls[1][a].type==9||entities.walls[1][a].type==12||entities.walls[1][a].type==16||entities.walls[1][a].type==27||entities.walls[1][a].type==50||entities.walls[1][a].type==61||entities.walls[1][a].type==66||entities.walls[1][a].type==68||entities.walls[1][a].type==69||entities.walls[1][a].type==70||entities.walls[1][a].type==71){
                     entities.walls[1][a].pos=ticker
                     ticker++
                 }
@@ -4512,7 +4525,7 @@ function checkEnd(level,layer,key){
                     }else{
                         for(let a=0,la=level.length;a<la;a++){
                             for(let b=0,lb=level[a].length;b<lb;b++){
-                                if(level[a][b]==(game.level==34||game.level==54||game.level==55?'A':'123456ABCDEF'[game.stack[0][0]])){
+                                if(level[a][b]==(game.level==55?'AB'[floor(random(0,1.25))]:game.level==34||game.level==54?'A':'123456ABCDEF'[game.stack[0][0]])){
                                     if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
                                         deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1],0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                         game.index++
@@ -4564,7 +4577,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.125+0.375:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.05:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.125+0.375:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==49?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.125:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }

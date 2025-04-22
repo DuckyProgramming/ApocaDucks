@@ -7050,6 +7050,25 @@ class projectile{
 				case 118: case 119: case 121: case 122: case 123: case 124: case 128: case 129: case 132: case 137:
 				case 168: case 171: case 184: case 200: case 211: case 295:
 					if(a==1){
+						if(this.damage<300&&game.pvp&&this.active){
+							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<(this.type==118?8:4)+entities.projectiles[b].width*0.5+entities.projectiles[b].height*0.5&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+									if(entities.projectiles[b].damage>this.damage){
+										this.active=false
+									}else{
+										entities.projectiles[b].active=false
+										this.damage-=entities.projectiles[b].damage*2.5
+										if(this.damage<=0){
+											this.active=false
+										}
+										if(entities.projectiles[b].exploder){
+											entities.projectiles[b].damage*=0.5
+											entities.projectiles[b].explode()
+										}
+									}
+								}
+							}
+						}
 						if(this.aggro){
 							if(this.goal==-1||this.goal>=entities.players.length||entities.players[this.goal].index!=this.goalIndex||entities.players[this.goal].life<=0){
 								this.goal=-1
@@ -7670,9 +7689,10 @@ class projectile{
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
+						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15+entities.projectiles[b].width*0.5+entities.projectiles[b].height*0.5&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
 							if(entities.projectiles[b].exploder){
+								entities.projectiles[b].damage*=0.5
 								entities.projectiles[b].explode()
 							}
 						}

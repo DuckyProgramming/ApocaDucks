@@ -82,7 +82,7 @@ class player{
         this.free=false
         this.storeWeapon=false
         this.peace=false
-        this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false}
+        this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false}
         this.sidekicks=[]
 
         this.subPlayerAType=0
@@ -4912,7 +4912,7 @@ class player{
         this.base.life=100*this.playerData.lifeBuff
         this.collect.life=100*this.playerData.lifeBuff
         if(this.id>0&&game.level!=29&&game.level!=38&&game.level!=44){
-            this.multLife(game.level==23||game.level==24||game.level==26?1.5:game.level==40||game.level==49?3:2)
+            this.multLife(game.level==23||game.level==24||game.level==26?1.5:game.level==40||game.level==49||game.level==55?3:2)
         }
         if(game.level==44){
             this.multLife(game.players/10)
@@ -10247,21 +10247,40 @@ class player{
                                 print(a,this.id)
                             }
                             switch(a){
-                                case 0:
-                                    this.target.position.x=game.tileset[0]*64.5
-                                    this.target.position.y=abs(this.position.x-game.tileset[0]*114.5)<150?0:game.edge[1]
+                                case 0: case 2:
+                                    this.target.position.x=game.tileset[0]*67.5
+                                    this.target.position.y=game.edge[1]
                                 break
                                 case 1:
-                                    this.target.position.x=game.tileset[0]*64.5
-                                    this.target.position.y=game.edge[1]
-                                break
-                                case 2:
-                                    this.target.position.x=game.tileset[0]*82.5
-                                    this.target.position.y=game.edge[1]
+                                    this.target.position.x=game.tileset[0]*67.5
+                                    this.target.position.y=abs(this.position.x-game.tileset[0]*129.5)<200?0:game.edge[1]
                                 break
                                 case 3:
-                                    this.target.position.x=game.tileset[0]*42.5
+                                    this.target.position.x=game.tileset[0]*88.5
+                                    this.target.position.y=game.edge[1]
+                                break
+                                case 4:
+                                    this.target.position.x=game.tileset[0]*83.5
                                     this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                break
+                                case 5:
+                                    this.target.position.x=game.tileset[0]*75.5
+                                    this.target.position.y=game.edge[1]
+                                    if(abs(this.position.x-game.tileset[0]*71.5)<40){
+                                        this.manage[2]=1
+                                    }
+                                break
+                                case 6:
+                                    this.target.position.x=game.tileset[0]*43.5
+                                    this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                break
+                                case 7: case 9: case 10:
+                                    this.manage[2]=1
+                                break
+                                case 8:
+                                    if(abs(this.position.x-game.tileset[0]*16.5)<50||abs(this.position.x-game.tileset[0]*20.5)<100||abs(this.position.x-game.tileset[0]*24.5)<50){
+                                        this.manage[2]=1
+                                    }
                                 break
                             }
                             a=la
@@ -10271,7 +10290,7 @@ class player{
                     if(abs(this.position.x-game.tileset[0]*32.5)<100){
                         this.target.position.y=0
                     }
-                    if(abs(this.position.x-game.tileset[0]*54)<100||abs(this.position.x-game.tileset[0]*71.5)<40){
+                    if(abs(this.position.x-game.tileset[0]*55)<100){
                         this.manage[2]=1
                     }
                 }else{
@@ -10372,6 +10391,19 @@ class player{
                                 }
                                 this.disable=true
                                 this.assort.missile=true
+                                a=la
+                            }
+                        }
+                    }else if(this.assort.remote){
+                        this.disable=false
+                        this.assort.remote=false
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==this.index&&entities.players[a].remote){
+                                if(this.life<=0){
+                                    entities.players[a].remote=false
+                                }
+                                this.disable=true
+                                this.assort.remote=true
                                 a=la
                             }
                         }
@@ -10580,6 +10612,19 @@ class player{
                             }
                             this.disable=true
                             this.assort.missile=true
+                            a=la
+                        }
+                    }
+                }else if(this.assort.remote){
+                    this.disable=false
+                    this.assort.remote=false
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==this.index&&entities.players[a].remote){
+                            if(this.life<=0){
+                                entities.players[a].remote=false
+                            }
+                            this.disable=true
+                            this.assort.remote=true
                             a=la
                         }
                     }
