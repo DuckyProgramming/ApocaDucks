@@ -493,7 +493,7 @@ function tripletColor(color1,color2,color3,key){
     return key>=1?[color2[0]*(2-key)+color3[0]*(key-1),color2[1]*(2-key)+color3[1]*(key-1),color2[2]*(2-key)+color3[2]*(key-1)]:[color1[0]*(1-key)+color2[0]*key,color1[1]*(1-key)+color2[1]*key,color1[2]*(1-key)+color2[2]*key]
 }
 //key
-function sendtimeMain(layer,effective,keyStore){
+function displayMain(layer,effective,keyStore){
     if(game.flash){
         for(let a=0,la=graphics.overlay.length;a<la;a++){
             graphics.overlay[a].background(0)
