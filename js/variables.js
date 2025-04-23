@@ -4319,7 +4319,7 @@ types={
     },{
       name:'PlayerFowling',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:627,
-      desc:'Spreadling with sniepr bullets',dpsBuff:7,
+      desc:'Spreadling with sniper bullets',dpsBuff:7,
     },{
       name:'PlayerSpreadlingception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:318,
@@ -5805,11 +5805,11 @@ types={
     },{
       name:'PlayerSniperC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:718,
-      desc:'Has a sniper rifle and can scope in',dpsBuff:0,
+      desc:'Has a sniper rifle and can slightly freeze targets',dpsBuff:0,
     },{
       name:'PlayerSpyC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:719,
-      desc:'Has a tagger and a knife and can become invisible',dpsBuff:0,
+      desc:'Has a knife, can become invisible, and can recharge knife by hitting a shot',dpsBuff:0,
     },{
       name:'PlayerDroner3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:720,
@@ -5854,6 +5854,9 @@ types={
     },{
       name:'PlayerCola',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:699,
+    },{
+      name:'PlayerChocolate',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:733,
     },{
       name:'PlayerBazooka',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:2.5,reloadBuff:2,crit:0,weapon:700,
@@ -5908,6 +5911,12 @@ types={
     },{
       name:'PlayerTagger',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:729,
+    },{
+      name:'PlayerChiller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:734,
+    },{
+      name:'PlayerSwitcher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:735,
     },
     
     {
@@ -13943,7 +13952,7 @@ types={
 			speed:1.2,
       uses:50,
 		},{
-			name:'Scope Sniper',
+			name:'Chill Sniper',
 			ammo:1,
 			damage:100,
 			cooldown:120,
@@ -13952,7 +13961,7 @@ types={
 			speed:1.0625,
       uses:8,
 		},{
-			name:'Intel Spy',
+			name:'Switch Spy',
 			ammo:3,
 			damage:175,
 			cooldown:30,
@@ -14053,7 +14062,7 @@ types={
 		},{
 			name:'Level 1 Auto',
 			ammo:8,
-			damage:60,
+			damage:80,
 			cooldown:18,
 			stop:36,
 			reload:6,
@@ -14062,7 +14071,7 @@ types={
 		},{
 			name:'Level 2 Auto',
 			ammo:16,
-			damage:60,
+			damage:80,
 			cooldown:9,
 			stop:18,
 			reload:3,
@@ -14071,12 +14080,39 @@ types={
 		},{
 			name:'Level 3 Auto',
 			ammo:16,
-			damage:60,
+			damage:0,
 			cooldown:9,
 			stop:18,
 			reload:3,
 			speed:1.2,
       uses:96,
+		},{
+			name:'Chocolate',
+			ammo:1,
+			damage:0,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:1.3,
+      uses:2,
+		},{
+			name:'Chiller',
+			ammo:5,
+			damage:90,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Switcher',
+			ammo:2,
+			damage:100,
+			cooldown:15,
+			stop:30,
+			reload:20,
+			speed:1.35,
+      uses:10,
 		},
 
     /*{

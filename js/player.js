@@ -1371,10 +1371,10 @@ class player{
             break
             case 'PlayerSniperC3':
                 this.newSubWeaponASet(findName('PlayerHeavySniper',types.player))
-                this.newSubWeaponBSet(findName('PlayerScope',types.player))
+                this.newSubWeaponBSet(findName('PlayerChiller',types.player))
             break
             case 'PlayerSpyC3':
-                this.newSubWeaponASet(findName('PlayerTagger',types.player))
+                this.newSubWeaponASet(findName('PlayerSwitcher',types.player))
                 this.newSubWeaponBSet(findName('PlayerLightPicker',types.player))
             break
             case 'PlayerDroner3':
@@ -1715,7 +1715,9 @@ class player{
         }
     }
     respawn(reject){
-        this.inspect=[]
+        if(game.pvp){
+            this.inspect=[]
+        }
         this.die.killer=-1
         this.stats.bust*=0.25
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
@@ -5029,6 +5031,17 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,90,this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
                             }
                         }
+                    break
+                    case 733:
+                        this.life=min(this.life+this.base.life*0.25,max(this.base.life*2,this.life))
+                        this.defendBuff=360
+                        this.stunTime=60
+                    break
+                    case 734:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],346,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 735:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],347,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     break
 
                     //mark

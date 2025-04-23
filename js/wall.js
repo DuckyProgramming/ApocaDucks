@@ -8595,7 +8595,7 @@ class wall{
                                                                 entities.players[entities.players.length-1].remote=true
                                                                 entities.players[entities.players.length-1].direction.goal=c.direction.goal
                                                                 entities.players[entities.players.length-1].DOT.active+=1000
-                                                                entities.players[entities.players.length-1].DOT.damage=0.4
+                                                                entities.players[entities.players.length-1].DOT.damage=0.5
                                                                 if(c.id>0&&c.id<=game.gaming){
                                                                     for(let e=0,le=entities.players.length;e<le;e++){
                                                                         if(entities.players[e].id==c.id){
