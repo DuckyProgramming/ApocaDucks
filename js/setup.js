@@ -17,7 +17,7 @@ function setup(){
         }
     }
 
-    if(true){
+    if(false){
         game.classWeapon=true
 
         game.players=1
