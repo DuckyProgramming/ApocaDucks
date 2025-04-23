@@ -13094,7 +13094,7 @@ class player{
                 break
                 case 'PlayerScout': case 'PlayerSoldier': case 'PlayerPyro': case 'PlayerDemoman': case 'PlayerHeavyWeapons': case 'PlayerEngineerC': case 'PlayerMedicC': case 'PlayerSniperC': case 'PlayerSpyC': case 'PlayerDroner':
                 case 'PlayerScout2': case 'PlayerSoldier2': case 'PlayerPyro2': case 'PlayerDemoman2': case 'PlayerHeavyWeapons2': case 'PlayerEngineerC2': case 'PlayerMedicC2': case 'PlayerSniperC2': case 'PlayerSpyC2': case 'PlayerDroner2':
-                case 'PlayerScout3': case 'PlayerSoldier3': case 'PlayerPyro3': case 'PlayerDemoman3': case 'PlayerHeavyWeapons2': case 'PlayerEngineerC3': case 'PlayerMedicC3': case 'PlayerSniperC3': case 'PlayerSpyC3': case 'PlayerDroner3':
+                case 'PlayerScout3': case 'PlayerSoldier3': case 'PlayerPyro3': case 'PlayerDemoman3': case 'PlayerHeavyWeapons3': case 'PlayerEngineerC3': case 'PlayerMedicC3': case 'PlayerSniperC3': case 'PlayerSpyC3': case 'PlayerDroner3':
                     if(this.subWeaponA.uses<=0){
                         this.weaponType=-1
                         this.weapon.uses=0

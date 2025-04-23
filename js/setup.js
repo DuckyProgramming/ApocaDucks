@@ -17,7 +17,7 @@ function setup(){
         }
     }
 
-    if(false){
+    if(true){
         game.classWeapon=true
 
         game.players=1
@@ -39,7 +39,7 @@ function setup(){
         //dev.sight=true
         //game.margin=true
 
-        entities.players[0].newWeaponSet(findName('PlayerDroner3',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerHeavyWeapons3',types.player))
     }
 }
 function windowResized(){
