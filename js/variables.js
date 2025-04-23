@@ -3530,7 +3530,7 @@ types={
     },{
       name:'PlayerRevolutionist',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:528,
-      desc:'Has orbiting turrets',dpsBuff:3,
+      desc:'Has orbiting turrets',dpsBuff:2,
     },{
       name:'PlayerGust',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:413,
@@ -3656,7 +3656,7 @@ types={
       desc:'Pistol that buffs nearby allies with crits',dpsBuff:1,
     },{
       name:'PlayerPistolInspect',sizeBuff:1,lifeBuff:4,speedBuff:1.05,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:423,
+      damageBuff:2.5,reloadBuff:1,crit:0,weapon:423,
       desc:'Pistol that inspects all enemies that are hit',dpsBuff:1,
     },{
       name:'PlayerRegional',sizeBuff:1,lifeBuff:4,speedBuff:1.05,
@@ -4843,7 +4843,7 @@ types={
     },{
       name:'PlayerBohrer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:530,
-      desc:'Has a fast-firing light sniper and orbiting turrets',dpsBuff:3,
+      desc:'Has a fast-firing light sniper and orbiting turrets',dpsBuff:2,
     },{
       name:'PlayerPlanetoid',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:531,
@@ -4851,11 +4851,11 @@ types={
     },{
       name:'PlayerPhoton',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:602,
-      desc:'Revolutionist with a sunburst autoturret',dpsBuff:3,
+      desc:'Revolutionist with a sunburst autoturret',dpsBuff:2,
     },{
       name:'PlayerRevolutionistception',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:529,
-      desc:'Has orbiting turrets in two levels and an auto turret',dpsBuff:3,
+      desc:'Has orbiting turrets in two levels and an auto turret',dpsBuff:2,
     },
 
     {
@@ -5774,6 +5774,46 @@ types={
       name:'PlayerDroner2',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:708,
       desc:'Manipulates drones and can mark targets with a gun',dpsBuff:0,
+    },{
+      name:'PlayerScout3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:711,
+      desc:'Very fast with a pushing scattergun, and can give crits and vulnerability to self',dpsBuff:0,
+    },{
+      name:'PlayerSoldier3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:712,
+      desc:'Can fire a rocket launcher to attack, rocket jump, and collide with enemies',dpsBuff:0,
+    },{
+      name:'PlayerPyro3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:713,
+      desc:'Has a flame stream and gust, and is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerDemoman3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:714,
+      desc:'Has shells and stickybombs triggered on weapon swap',dpsBuff:0,
+    },{
+      name:'PlayerHeavyWeapons3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:715,
+      desc:'Has a minigun, shotgun, and damage resistance',dpsBuff:0,
+    },{
+      name:'PlayerEngineerC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:716,
+      desc:'Has a shotgun and can combine sentries to improve them',dpsBuff:0,
+    },{
+      name:'PlayerMedicC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:717,
+      desc:'Can crit buff and heal allies and place heal areas',dpsBuff:0,
+    },{
+      name:'PlayerSniperC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:718,
+      desc:'Has a sniper rifle and can scope in',dpsBuff:0,
+    },{
+      name:'PlayerSpyC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:719,
+      desc:'Has a tagger and a knife and can become invisible',dpsBuff:0,
+    },{
+      name:'PlayerDroner3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:720,
+      desc:'Manipulates swarm drones and has an assault rifle',dpsBuff:0,
     },
 
     {
@@ -5841,6 +5881,33 @@ types={
     },{
       name:'PlayerScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.125,reloadBuff:1,crit:0,weapon:710,
+    },{
+      name:'PlayerPushScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:721,
+    },{
+      name:'PlayerRocketJump',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:2,reloadBuff:2.5,crit:0,weapon:722,
+    },{
+      name:'PlayerFlameStream',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:723,
+    },{
+      name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:724,
+    },{
+      name:'PlayerMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:725,
+    },{
+      name:'PlayerDeployerLevel',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:726,
+    },{
+      name:'PlayerBuffMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:727,
+    },{
+      name:'PlayerScope',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:728,
+    },{
+      name:'PlayerTagger',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:729,
     },
     
     {
@@ -5903,6 +5970,15 @@ types={
     },{
       name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:689,
+    },{
+      name:'ConstructLevel1',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:730,
+    },{
+      name:'ConstructLevel2',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:731,
+    },{
+      name:'ConstructLevel3',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },
     
     {
@@ -8784,7 +8860,7 @@ types={
 		},{
 			name:'Inspector',
 			ammo:4,
-			damage:70,
+			damage:90,
 			cooldown:15,
 			stop:60,
 			reload:15,
@@ -8793,7 +8869,7 @@ types={
 		},{
 			name:'Optical Inspector',
 			ammo:4,
-			damage:120,
+			damage:150,
 			cooldown:15,
 			stop:60,
 			reload:15,
@@ -11088,7 +11164,7 @@ types={
 		},{
 			name:'Historian',
 			ammo:4,
-			damage:140,
+			damage:180,
 			cooldown:15,
 			stop:60,
 			reload:15,
@@ -12951,7 +13027,7 @@ types={
 		},{
 			name:'LMG',
 			ammo:32,
-			damage:80,
+			damage:75,
 			cooldown:5,
 			stop:180,
 			reload:2,
@@ -13615,7 +13691,7 @@ types={
 			speed:1.2,
       uses:48,
 		},{
-			name:'Scout Variant',
+			name:'Cola Scout',
 			ammo:10,
 			damage:45,
 			cooldown:12,
@@ -13624,7 +13700,7 @@ types={
 			speed:1.47,
       uses:40,
 		},{
-			name:'Soldier Variant',
+			name:'Bazooka Soldier',
 			ammo:2,
 			damage:20,
 			cooldown:30,
@@ -13633,7 +13709,7 @@ types={
 			speed:1.05,
       uses:16,
 		},{
-			name:'Pyro Variant',
+			name:'Flare Pyro',
 			ammo:50,
 			damage:25,
 			cooldown:3,
@@ -13642,7 +13718,7 @@ types={
 			speed:1.075,
       uses:100,
 		},{
-			name:'Demoman Variant',
+			name:'Demoknight',
 			ammo:2,
 			damage:120,
 			cooldown:30,
@@ -13651,7 +13727,7 @@ types={
 			speed:1.05,
       uses:16,
 		},{
-			name:'Heavy Weapons Variant',
+			name:'Sandwich Heavy',
 			ammo:30,
 			damage:20,
 			cooldown:4,
@@ -13660,7 +13736,7 @@ types={
 			speed:0.8,
       uses:120,
 		},{
-			name:'Engineer Variant C',
+			name:'Repair Engineer',
 			ammo:2,
 			damage:20,
 			cooldown:30,
@@ -13669,7 +13745,7 @@ types={
 			speed:1.15,
       uses:12,
 		},{
-			name:'Medic Variant C',
+			name:'Shield Medic',
 			ammo:10,
 			damage:30,
 			cooldown:10,
@@ -13678,7 +13754,7 @@ types={
 			speed:1.2,
       uses:50,
 		},{
-			name:'Sniper Variant C',
+			name:'Huntsman',
 			ammo:1,
 			damage:100,
 			cooldown:120,
@@ -13687,7 +13763,7 @@ types={
 			speed:1.0625,
       uses:8,
 		},{
-			name:'Spy Variant C',
+			name:'Dead Ringer',
 			ammo:3,
 			damage:175,
 			cooldown:30,
@@ -13777,7 +13853,7 @@ types={
 			speed:0.975,
       uses:6,
 		},{
-			name:'Droner Variant',
+			name:'Marker Droner',
 			ammo:1,
 			damage:180,
 			cooldown:240,
@@ -13803,6 +13879,204 @@ types={
 			reload:20,
 			speed:1.15,
       uses:12,
+		},{
+			name:'Push Scout',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.47,
+      uses:40,
+		},{
+			name:'Jump Soldier',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Stream Pyro',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:1.075,
+      uses:100,
+		},{
+			name:'Shell Demoman',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Heavier Weapons',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.8,
+      uses:120,
+		},{
+			name:'Levelled Engineer',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Buff Medic',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Scope Sniper',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.0625,
+      uses:8,
+		},{
+			name:'Intel Spy',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.3,
+      uses:12,
+		},{
+			name:'Swarm Droner',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Push Scattergun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:80,
+			reload:10,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Rocket Jump',
+			ammo:1,
+			damage:75,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Flame Stream',
+			ammo:80,
+			damage:20,
+			cooldown:2,
+			stop:45,
+			reload:1,
+			speed:0.95,
+      uses:160,
+		},{
+			name:'Sheller',
+			ammo:3,
+			damage:225,
+			cooldown:15,
+			stop:150,
+			reload:10,
+			speed:1.05,
+      uses:24,
+		},{
+			name:'Minigun',
+			ammo:40,
+			damage:100,
+			cooldown:5,
+			stop:180,
+			reload:2,
+			speed:0.75,
+      uses:120,
+		},{
+			name:'Levelled Sentry',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.1,
+      uses:3,
+		},{
+			name:'Buff Medic',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Scope',
+			ammo:0,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.2,
+      uses:1,
+		},{
+			name:'Tagger',
+			ammo:5,
+			damage:100,
+			cooldown:15,
+			stop:30,
+			reload:20,
+			speed:1.35,
+      uses:20,
+		},{
+			name:'Level 1 Auto',
+			ammo:8,
+			damage:60,
+			cooldown:18,
+			stop:36,
+			reload:6,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Level 2 Auto',
+			ammo:16,
+			damage:60,
+			cooldown:9,
+			stop:18,
+			reload:3,
+			speed:1.2,
+      uses:96,
+		},{
+			name:'Level 3 Auto',
+			ammo:16,
+			damage:60,
+			cooldown:9,
+			stop:18,
+			reload:3,
+			speed:1.2,
+      uses:96,
 		},
 
     /*{
@@ -16706,6 +16980,9 @@ less falling guster and hyperimpostor
 "#  #        #        #        #        #        #        #        #        #        #        #",
 "#  #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #    ? ? #",
 "#  ### ######## ######## ######## ######## ######## ######## ######## ######## ######## ######",
+"#  #        #        #        #        #        #        #        #        #        #        #",
+"#  #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
+"#  # ######## ######## ######## ######## ######## ######## ######## ######## ######## ########",
 "#  #        #        #        #        #        #        #        #        #        #        #",
 "#  #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
 "##############################################################################################",

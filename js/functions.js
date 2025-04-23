@@ -2619,7 +2619,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,11,12,13,14,15,16,17,18,19][ticker]]
+                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29][ticker]]
                     ticker++
                 }
             }
@@ -4523,15 +4523,16 @@ function checkEnd(level,layer,key){
                             temp.splice(index,1)
                         }
                     }else{
+                        let key=game.level==55?'AB'[floor(random(0,1.25))]:game.level==34||game.level==54?'A':'123456ABCDEF'[game.stack[0][0]]
                         for(let a=0,la=level.length;a<la;a++){
                             for(let b=0,lb=level[a].length;b<lb;b++){
-                                if(level[a][b]==(game.level==55?'AB'[floor(random(0,1.25))]:game.level==34||game.level==54?'A':'123456ABCDEF'[game.stack[0][0]])){
+                                if(level[a][b]==key){
                                     if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&game.level==8||game.level==16){
                                         deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1],0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                         game.index++
                                         game.spawnIndex++
                                     }else{
-                                        entities.players.push(new player(layer,(game.level==55?0:game.tileset[0]/2)+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1],0,0,[],true,findName(game.stack[0][1],types.player),game.index))
+                                        entities.players.push(new player(layer,(game.level==55?0:game.tileset[0]/2+random(-20,20))+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                         if(game.level==6||game.level==24||game.level==39&&game.pvp){
                                             entities.players[entities.players.length-1].position.x=floor(random(0,game.edge[0]))
                                             entities.players[entities.players.length-1].position.y=0

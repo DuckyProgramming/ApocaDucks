@@ -316,7 +316,7 @@ function mainloop(){
                 }
                 //key[c]*=10
                 bs.push([])
-                let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
+                let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==718&&entities.players[c].subWeaponAType==728?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.3*key[c]:0
                 let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636
                 let center=entities.players[c]
                 let special=false
