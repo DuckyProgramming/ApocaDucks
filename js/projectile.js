@@ -40,7 +40,7 @@ class projectile{
 			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
 			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
-			case 332: case 336: case 338: case 339: case 340: case 341:
+			case 332: case 336: case 338: case 339: case 340: case 341: case 342:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -5453,6 +5453,16 @@ class projectile{
 				layer.ellipse(0,0,3)
 				layer.ellipse(-1.5,0,1.5)
 			break
+			case 342:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1.25,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1.25,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1.25,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3.5)
+			break
 			
 			//mark
         }
@@ -6143,7 +6153,7 @@ class projectile{
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
-				case 340: case 341:
+				case 340: case 341: case 342:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8162,6 +8172,8 @@ class projectile{
 							entities.players[b].gasser=this.index
 						}else if(this.type==341){
 				        	entities.players[b].takeDamage(this.damage*max(1,1.25-this.timer*0.025))
+						}else if(this.type==342){
+				        	entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
 						}else{
 				        	entities.players[b].takeDamage(this.damage)
 						}

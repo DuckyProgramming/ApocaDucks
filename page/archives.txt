@@ -1,6 +1,6 @@
 
 
-giantic - duck destruction, ducks spawn at right and move left, drop off points at left
+respawn on razorpoint
 
 
 
@@ -13,6 +13,7 @@ giantic - duck destruction, ducks spawn at right and move left, drop off points 
 
 340 - repair gun
 341 - scattergun
+342 - lmg, 217
 
 
 

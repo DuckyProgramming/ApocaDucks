@@ -1212,12 +1212,14 @@ class player{
     getSpeed(){
         let effectiveWeaponSpeed=this.weaponType==-1?1:this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subWeaponAData.speed:this.weaponData.speed
         let effectivePlayerSpeed=this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subPlayerAData.speedBuff:this.playerData.speedBuff
-         return (this.weaponType==-1&&this.id!=0&&!this.fort?(this.remote?effectivePlayerSpeed:1.6):effectiveWeaponSpeed*effectivePlayerSpeed)*
+        return (this.weaponType==-1&&this.id!=0&&!this.fort?(this.remote?effectivePlayerSpeed:1.6):effectiveWeaponSpeed*effectivePlayerSpeed)*
             (this.id>0&&game.randomizer?5/3:1)*
             (this.id!=1&&game.assault?0.45:1)*
             (this.speedBuff>0?1.5:1)*
             (this.auto&&game.level==38?0.6:1)*
-            (this.chillTime>0?0.45:1)
+            (this.chillTime>0?0.45:1)*
+            (this.weaponType==616&&this.weapon.cooldown>0&&this.weapon.uses>0?0.25:1)*
+            (this.class()&&this.subWeaponAType==616&&this.subWeaponA.cooldown>0&&this.subWeaponA.uses>0?0.25:1)
     }
     critCheck(){
         if(this.id<=0||game.pvp){
@@ -4406,7 +4408,7 @@ class player{
                         }
                     break
                     case 616:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 617:
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
@@ -11797,26 +11799,28 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==43&&display.cycle>=4){
-                        let max=game.edge[0]+game.edge[1]
-                        let set=[0,0]
-                        for(let a=0,la=entities.walls.length;a<la;a++){
-                            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                                if(
-                                    entities.walls[a][b].type==33&&
-                                    dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
-                                    (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
-                                ){
-                                    max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
-                                    set[0]=entities.walls[a][b].position.x
-                                    set[1]=entities.walls[a][b].position.y
+                    }else if(game.level==43){
+                        if(display.cycle>=4){
+                            let max=game.edge[0]+game.edge[1]
+                            let set=[0,0]
+                            for(let a=0,la=entities.walls.length;a<la;a++){
+                                for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                                    if(
+                                        entities.walls[a][b].type==33&&
+                                        dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                        (entities.walls[a][b].owner==this.id||entities.walls[a][b].owner>0&&this.id>0&&!game.pvp)
+                                    ){
+                                        max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                        set[0]=entities.walls[a][b].position.x
+                                        set[1]=entities.walls[a][b].position.y
+                                    }
                                 }
                             }
-                        }
-                        if(max<game.edge[0]+game.edge[1]){
-                            this.base.position.x=set[0]
-                            this.base.position.y=set[1]-40
-                            this.respawn()
+                            if(max<game.edge[0]+game.edge[1]){
+                                this.base.position.x=set[0]
+                                this.base.position.y=set[1]-40
+                                this.respawn()
+                            }
                         }
                     }else if(game.level==44){
                         let key=''
@@ -12447,7 +12451,7 @@ class player{
                             }
                         }
                     }
-                    if(this.time%(60*(game.pvp||this.pl3yerData.name=='RevolutioningTank'?2:1))==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
+                    if(this.time%(60*(game.pvp||this.playerData.name=='RevolutioningTank'?2:1))==0&&!(this.playerData.name=='PlayerAnarchist'&&this.assort.ultraviolet>0)){
                         let minimum=[450,450]
                         let center=[
                             [this.position.x+50*lcos(this.time),this.position.y-50*lsin(this.time)+this.offset.position.y-10],
@@ -12962,7 +12966,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?160:80)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
                             if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -12995,7 +12999,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?160:80)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
                             if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                 entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
