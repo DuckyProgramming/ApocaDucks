@@ -18,6 +18,7 @@
 749 - speed knife, 684
 750 - not pelleter, 332
 751 - justice shotgun
+752 - instant level 3
 
 348 - speed knife, 90
 

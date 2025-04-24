@@ -5821,7 +5821,7 @@ types={
     },{
       name:'PlayerSoldier4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:737,
-      desc:'Has a rocket launcher and a shotgun and can collide with enemies',dpsBuff:0,
+      desc:'Has a rocket launcher and a parachutist gun and can collide with enemies',dpsBuff:0,
     },{
       name:'PlayerPyro4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:738,
@@ -5829,7 +5829,7 @@ types={
     },{
       name:'PlayerDemoman4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:739,
-      desc:'Has grenades and lay many time bombs',dpsBuff:0,
+      desc:'Has grenades and can lay time bombs',dpsBuff:0,
     },{
       name:'PlayerHeavyWeapons4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:740,
@@ -5849,7 +5849,7 @@ types={
     },{
       name:'PlayerSpyC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:744,
-      desc:'Spy that can get a speed buff on kill',dpsBuff:0,
+      desc:'Spy that can get a speed buff and instant invsibility on knife hit, but has less health',dpsBuff:0,
     },{
       name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:745,
@@ -5975,6 +5975,12 @@ types={
     },{
       name:'PlayerJusticeShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.125,reloadBuff:1,crit:0,weapon:751,
+    },{
+      name:'PlayerHeavyTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:464,
+    },{
+      name:'PlayerCarrySentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:752,
     },
     
     {
@@ -6041,10 +6047,10 @@ types={
       name:'ConstructLevel1',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:730,
     },{
-      name:'ConstructLevel2',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      name:'ConstructLevel2',sizeBuff:1,lifeBuff:4.8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:731,
     },{
-      name:'ConstructLevel3',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      name:'ConstructLevel3',sizeBuff:1,lifeBuff:5.76,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },{
       name:'ConstructControl',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
@@ -14069,9 +14075,9 @@ types={
 		},{
 			name:'Sheller',
 			ammo:3,
-			damage:225,
-			cooldown:15,
-			stop:150,
+			damage:250,
+			cooldown:45,
+			stop:180,
 			reload:10,
 			speed:1.05,
       uses:24,
@@ -14123,7 +14129,7 @@ types={
 		},{
 			name:'Level 1 Auto',
 			ammo:8,
-			damage:60,
+			damage:80,
 			cooldown:15,
 			stop:30,
 			reload:5,
@@ -14132,7 +14138,7 @@ types={
 		},{
 			name:'Level 2 Auto',
 			ammo:16,
-			damage:60,
+			damage:80,
 			cooldown:9,
 			stop:18,
 			reload:3,
@@ -14141,7 +14147,7 @@ types={
 		},{
 			name:'Level 3 Auto',
 			ammo:16,
-			damage:60,
+			damage:80,
 			cooldown:9,
 			stop:18,
 			reload:3,
@@ -14168,10 +14174,10 @@ types={
 		},{
 			name:'Switcher',
 			ammo:2,
-			damage:100,
-			cooldown:15,
-			stop:30,
-			reload:20,
+			damage:80,
+			cooldown:20,
+			stop:40,
+			reload:30,
 			speed:1.35,
       uses:10,
 		},{
@@ -14220,7 +14226,7 @@ types={
 			speed:0.975,
       uses:120,
 		},{
-			name:'Control Engineer',
+			name:'Justice Engineer',
 			ammo:2,
 			damage:20,
 			cooldown:30,
@@ -14283,14 +14289,14 @@ types={
 			speed:1.05,
       uses:120,
 		},{
-			name:'Light Parachutist',
-			ammo:8,
+			name:'Parachute',
+			ammo:10,
 			damage:80,
 			cooldown:10,
 			stop:30,
 			reload:6,
 			speed:1.2,
-      uses:40,
+      uses:50,
 		},{
 			name:'Speed Knife',
 			ammo:1,
@@ -14318,6 +14324,15 @@ types={
 			reload:20,
 			speed:1.15,
       uses:10,
+		},{
+			name:'Carrying Sentry',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:0.95,
+      uses:1,
 		},
 
     /*{
