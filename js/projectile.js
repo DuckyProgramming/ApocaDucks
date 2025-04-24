@@ -41,7 +41,7 @@ class projectile{
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
 			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
 			case 332: case 336: case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346:
-			case 347:
+			case 347: case 348:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -5538,6 +5538,18 @@ class projectile{
 				layer.fill(150,250,150,this.fade)
 				layer.ellipse(0,0,3)
 			break
+			case 348:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,0.5,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,0.5,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,0.5,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(250,150,255,this.fade)
+				layer.ellipse(0,0,3,1.5)
+			break
 			
 			//mark
         }
@@ -6228,7 +6240,7 @@ class projectile{
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
-				case 340: case 341: case 342: case 343: case 345: case 346: case 347:
+				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8297,8 +8309,15 @@ class projectile{
 									}
 								}
 							}
+						}else if(this.type==348){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
+									entities.players[d].visible=0
+								}
+							}
 						}
-						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&entities.players[b].weaponType!=640&&entities.players[b].weaponType!=677&&entities.players[b].weaponType!=692&&entities.players[b].weaponType!=713&&!entities.players[b].fort){
+						if(entities.players[b].weaponType!=370&&entities.players[b].weaponType!=381&&entities.players[b].weaponType!=432&&entities.players[b].weaponType!=434&&entities.players[b].weaponType!=640&&entities.players[b].weaponType!=677&&entities.players[b].weaponType!=692&&entities.players[b].weaponType!=713&&entities.players[b].weaponType!=738&&!entities.players[b].fort){
 							if(this.type==12){
 								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
 								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3

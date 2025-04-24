@@ -8281,6 +8281,10 @@ class wall{
                                                 c.jump.triple=1
                                                 c.jump.quadruple=1
                                             }
+                                            if(c.playerData.name=='PlayerScout4'){
+                                                c.jump.double=1
+                                                c.jump.triple=1
+                                            }
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34: case 48:
                                                     if((game.level==19||game.level==31)&&this.type!=25&&this.type!=34){

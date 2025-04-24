@@ -1,4 +1,32 @@
 
+
+
+736 - scout4
+737 - soldier4
+738 - pyro4
+739 - demoman4
+740 - heavyweapons4
+741 - engineerC4
+742 - medicC4
+743 - sniperC4
+744 - spyC4
+745 - droner4
+
+746 - mobile sentry
+747 - light booster, 114
+748 - light parachutist, 279
+749 - speed knife, 684
+750 - not pelleter, 332
+751 - justice shotgun
+
+348 - speed knife, 90
+
+
+
+
+
+
+
 733 - chocolate
 734 - chiller, 364
 735 - switcher

@@ -39,7 +39,7 @@ function setup(){
         //dev.sight=true
         //game.margin=true
 
-        entities.players[0].newWeaponSet(findName('PlayerSpyC3',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
     }
 }
 function windowResized(){
