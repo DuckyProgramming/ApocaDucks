@@ -82,7 +82,7 @@ class player{
         this.free=false
         this.storeWeapon=false
         this.peace=false
-        this.assort={detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false}
+        this.assort={firing:0,firingTick:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false}
         this.sidekicks=[]
 
         this.subPlayerAType=0
@@ -2073,7 +2073,8 @@ class player{
             }else{
                 this.visible=this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'?240:15
             }
-            if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4')&&this.fade<1&&(weaponType==684||weaponType==749))){
+            this.assort.firing=30
+            if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4')&&this.fade<1&&(weaponType==684||weaponType==749))&&!(weaponType==725&&this.assort.firingTick<1)){
                 weapon.cooldown=weaponData.cooldown
                 weapon.reload=weaponData.stop
                 weapon.ammo--
@@ -4526,7 +4527,7 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],276,(lsin(this.direction.main)<0?-90:90)+random(-8,8),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         }
                     break
-                    case 616:
+                    case 616: case 725:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 617:
@@ -5012,11 +5013,6 @@ class player{
                     break
                     case 724:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],344,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                    break
-                    case 725:
-                        if(weapon.ammo<=32){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        }
                     break
                     case 726:
                         let build=true
@@ -13373,6 +13369,10 @@ class player{
         if(this.assort.ultraviolet>0){
             this.assort.ultraviolet--
         }
+        if(this.assort.firing>0){
+            this.assort.firing--
+        }
+        this.assort.firingTick=smoothAnim(this.assort.firingTick,this.assort.firing>0,0,1,30)
         if(this.DOT.active>0){
             this.DOT.active--
             this.life-=this.DOT.damage

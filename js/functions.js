@@ -1322,9 +1322,10 @@ function generateLevel(info,layer){
                                 }else if((game.level==25||game.level==26||game.level==32||game.level==33||game.level==37||game.level==38||game.level==40||game.level==41||game.level==42||game.level==43||game.level==47||game.level==49||game.level==52||game.level==54||game.level==55)&&(
                                     level[a][b-1]=='.'||
                                     level[a][b-1]=='@'&&level[a][b-2]=='@'&&level[a][b-3]=='@'&&(game.level==40||game.level==52)||
-                                    level[a][b-1]=='c'&&level[a][b-2]=='c'&&level[a][b-3]=='c'&&(game.level==40||game.level==42||game.level==52||game.level==54)
+                                    level[a][b-1]=='c'&&level[a][b-2]=='c'&&level[a][b-3]=='c'&&(game.level==40||game.level==42||game.level==52||game.level==54)||
+                                    level[a][b-1]=='<'&&game.level==42
                                 )){
-                                    if(level[a][b+1]=='#'){
+                                    if(level[a][b+1]=='#'||game.level==42&&level[a+1][b]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a+e]=level[a+e].substr(0,b+e)+']'+level[a+e].substr(b+e+1)
                                             if(reject.includes((a+e)*lb+(b+e))){
@@ -1385,9 +1386,10 @@ function generateLevel(info,layer){
                                     level[a][b+1]=='%'&&level[a][b+2]=='%'&&level[a][b+3]=='%'&&level[a][b+4]=='.'||
                                     level[a][b+1]=='@'&&level[a][b+2]=='@'&&level[a][b+3]=='@'&&(game.level==40||game.level==52)||
                                     level[a][b+1]=='c'&&level[a][b+2]=='c'&&level[a][b+3]=='c'&&(game.level==40||game.level==42||game.level==52||game.level==54)||
-                                    level[a+1][b]=='.'&&game.level==49
+                                    level[a+1][b]=='.'&&game.level==49||
+                                    level[a][b+1]=='>'&&game.level==42
                                 )){
-                                    if(level[a][b-1]=='#'){
+                                    if(level[a][b-1]=='#'||game.level==42&&level[a+1][b]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a+e]=level[a+e].substr(0,b-e)+'['+level[a+e].substr(b-e+1)
                                             if(reject.includes((a+e)*lb+(b-e))){
@@ -2468,6 +2470,15 @@ function generateLevel(info,layer){
                             }else{
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],5+a*game.tileset[1],game.tileset[0]*0.5,10,38))
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1],7))
+                            }
+                        break
+                        case 42:
+                            if(a>la/2){
+                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],47))
+                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],17))
+                            }else{
+                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],46))
+                                entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],18))
                             }
                         break
                         case 54:

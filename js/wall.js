@@ -6536,10 +6536,10 @@ class wall{
             case 43: case 44: case 45: case 46: case 47:
                 switch(game.level){
                     case 42:
-                        if((this.position.y-this.height/2)<game.edge[1]-game.tileset[1]*19){
+                        if((this.position.y-this.height/2)<game.edge[1]-game.tileset[1]*15){
                             layer.stroke(200,240,210)
                             layer.strokeWeight(6)
-                            list=[1]
+                            list=[1,4,5]
                             for(let a=0,la=list.length;a<la;a++){
                                 for(let b=0,lb=this.boundary[list[a]].length;b<lb;b++){
                                     layer.line(

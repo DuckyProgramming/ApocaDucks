@@ -8297,7 +8297,7 @@ class projectile{
 									entities.projectiles[c].goalIndex=entities.players[b].index
 								}
 							}
-						}else if(this.type==347){
+						}else if(this.type==347&&!entitiers.players[b].fort){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
 									if(entities.players[d].subWeaponAType==684){
