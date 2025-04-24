@@ -2473,7 +2473,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 42:
-                            if(a>la/2){
+                            if(b<lb/2){
                                 entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],47))
                                 entities.walls[0].push(new wall(graphics.main,game.tileset[0]*0.5+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[0],game.tileset[1],17))
                             }else{
