@@ -7620,7 +7620,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7637,7 +7637,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7654,7 +7654,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7671,7 +7671,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7688,7 +7688,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7722,7 +7722,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7756,7 +7756,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7792,7 +7792,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7826,7 +7826,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7841,7 +7841,7 @@ class wall{
                                                 c.direction+=180
                                                 c.hit=[]
                                                 c.bounces++
-                                                if(c.bounces>=3){
+                                                if(c.bounces>=4){
                                                     c.active=false
                                                 }
                                             }
@@ -7873,7 +7873,7 @@ class wall{
                                     c.bounces++
                                     c.bounceTimer=5
                                     c.explode()
-                                    if(c.bounces>=3){
+                                    if(c.bounces>=4){
                                         c.active=false
                                     }
                                     c.explosion=1
@@ -7899,7 +7899,7 @@ class wall{
                                     }else if(c.type==264){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,30,atan2(c.velocity.x,-c.velocity.y)+random(-15,15),c.id,c.damage,c.base.time,c.crit,c.index))
                                     }
-                                    if(c.bounces>=3){
+                                    if(c.bounces>=4){
                                         c.explode()
                                         c.active=false
                                     }
@@ -7909,8 +7909,9 @@ class wall{
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
-                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&
-                        !(this.type==37&&c.position.y<c.previous.position.y)
+                        this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71
+                        &&!(this.type==37&&c.position.y<c.previous.position.y)
+                        &&!(this.type==65&&this.recharge>0)
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54)&&inTriangleBoxBasic(this.triangle,c)){
@@ -7947,6 +7948,7 @@ class wall{
                         &&!((this.type==12||this.type==70)&&(c.id<=0||this.recharge>0||c.construct))
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto))
+                        &&!(this.type==65&&this.recharge>0)
                         &&!(this.type==68&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
@@ -8220,10 +8222,15 @@ class wall{
                                 c.life=min(c.base.life,c.life+c.base.life/2)
                             break
                             case 65:
-                                c.weaponType=-1
-                                c.weapon.ammo=0
-                                c.weapon.uses=0
-                                this.recharge=900
+                                if(c.sidekick){
+                                    c.life=0
+                                    this.recharge=300
+                                }else if(c.weaponType>=0){
+                                    c.weaponType=-1
+                                    c.weapon.ammo=0
+                                    c.weapon.uses=0
+                                    this.recharge=900
+                                }
                             break
                             case 66:
                                 c.DOT.active+=300

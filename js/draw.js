@@ -3,8 +3,8 @@ function mainloop(){
     background(150)
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=game.deprecate?10:9;a<la;a++){
-                for(let b=0,lb=[5,5,3,5,5,5,5,5,5,2][a];b<lb;b++){
+            for(let a=0,la=game.deprecate?11:10;a<la;a++){
+                for(let b=0,lb=[5,5,3,5,5,5,5,5,5,1,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==2){
                         fill(100)
@@ -45,7 +45,8 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['Chasm','Basalt','Tailwater','Abandoned (WIP)','Blueprint'][b],
+                            ['Chasm','Basalt','Tailwater','Abandoned (WIP)','Dryer (WIP)'][b],
+                            ['Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
                     )
@@ -142,7 +143,7 @@ function mainloop(){
                                 case 0:
                                     text(`DM`,pos[0],pos[1]+15)
                                 break
-                                case 1: case 4:
+                                case 1:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
                                 case 2: case 3:
@@ -151,6 +152,13 @@ function mainloop(){
                             }
                         break
                         case 9:
+                            switch(b){
+                                case 0:
+                                    text(`PvP`,pos[0],pos[1]+15)
+                                break
+                            }
+                        break
+                        case 10:
                             switch(b){
                                 case 0: case 1:
                                     text(`PvP`,pos[0],pos[1]+15)

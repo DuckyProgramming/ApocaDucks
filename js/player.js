@@ -12165,7 +12165,7 @@ class player{
                                 this.respawn()
                                 if(!this.peace){
                                     for(let c=0,lc=entities.players.length;c<lc;c++){
-                                        if(entities.players[c].index==(this.index+1)%game.players&&entities.players[c].peace){
+                                        if(entities.players[c].id==(this.id%game.players)+1&&(entities.players[c].peace||entities.players[c].sidekick)){
                                             this.peace=true
                                             entities.players[c].peace=false
                                             key='1'
