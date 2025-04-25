@@ -8224,8 +8224,8 @@ class projectile{
 							entities.players[b].life=min(entities.players[b].life+this.damage*2,max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].defendBuff=max(entities.players[b].defendBuff,120)
 						}else if(this.type==345&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*1.75))
-							entities.players[b].critBuff=max(240,entities.players[b].critBuff)
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(4,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*1.5))
+							entities.players[b].critBuff=max(150,entities.players[b].critBuff)
 						}else if(
 							this.exploder
 						){
