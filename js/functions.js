@@ -1,6 +1,6 @@
 //basic
 function dm(){
-    return game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53
+    return game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53||game.level==56
 }
 function stanh(value){
     return (2**value-1)/(2**value+1)*0.5+0.5
@@ -127,80 +127,81 @@ function collideBoxBox(static,mobile){
     /*if(inBoxBox(static,{position:mobile.previous.position,width:mobile.width-1,height:mobile.height-1})){
         return basicCollideBoxBox(static,mobile)
     }*/
-    for(let a=0,la=static.boundary.length;a<la;a++){
-        for(let b=0,lb=static.boundary[a].length;b<lb;b++){
-            if(a<=3){
+    let set=mobile.position.y<mobile.previous.position.y?[0,4,5,1,6,7,2,3]:[1,6,7,0,4,5,2,3]
+    for(let a=0,la=set.length;a<la;a++){
+        for(let b=0,lb=static.boundary[set[a]].length;b<lb;b++){
+            if(set[a]<=3){
                 if(intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x+mobile.width/2*(a==2?1:-1),y:static.boundary[a][b][0].y+mobile.height/2*(a==0?1:-1)-(a==0?0.02:0)},
-                    {x:static.boundary[a][b][1].x+mobile.width/2*(a!=3?1:-1),y:static.boundary[a][b][1].y+mobile.height/2*(a!=1?1:-1)-(a==0?0.02:0)})
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2*(set[a]==2?1:-1),y:static.boundary[set[a]][b][0].y+mobile.height/2*(set[a]==0?1:-1)-(set[a]==0?0.02:0)},
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2*(set[a]!=3?1:-1),y:static.boundary[set[a]][b][1].y+mobile.height/2*(set[a]!=1?1:-1)-(set[a]==0?0.02:0)})
                 ){
-                    return a
+                    return set[a]
                 }
-            }else if(a==4){
+            }else if(set[a]==4){
                 if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2})
                 ){
-                    return a
+                    return set[a]
                 }else if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2})
                 ){
                     return 8
                 }
-            }else if(a==5){
+            }else if(set[a]==5){
                 if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})||
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y-mobile.height/2})
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y-mobile.height/2})
                 ){
-                    return a
+                    return set[a]
                 }else if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2})
                 ){
                     return 9
                 }
-            }else if(a==6){
+            }else if(set[a]==6){
                 if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2})
                 ){
-                    return a
+                    return set[a]
                 }else if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x-mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x-mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2})
                 ){
                     return 10
                 }
-            }else if(a==7){
+            }else if(set[a]==7){
                 if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2})||
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2})||
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][0].x+mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2},
-                    {x:static.boundary[a][b][0].x-mobile.width/2,y:static.boundary[a][b][0].y+mobile.height/2})
+                    {x:static.boundary[set[a]][b][0].x+mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][0].x-mobile.width/2,y:static.boundary[set[a]][b][0].y+mobile.height/2})
                 ){
-                    return a
+                    return set[a]
                 }else if(
                     intersect(mobile.position,{x:mobile.previous.position.x+static.velocity.x,y:mobile.previous.position.y+static.velocity.y},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y+mobile.height/2},
-                    {x:static.boundary[a][b][1].x+mobile.width/2,y:static.boundary[a][b][1].y-mobile.height/2})
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y+mobile.height/2},
+                    {x:static.boundary[set[a]][b][1].x+mobile.width/2,y:static.boundary[set[a]][b][1].y-mobile.height/2})
                 ){
                     return 11
                 }
@@ -621,7 +622,7 @@ function displayMain(layer,effective,keyStore){
         game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27||game.level==28||menu.level==29||menu.level==30||
         menu.level==31||menu.level==32||menu.level==33||menu.level==34||menu.level==35||menu.level==36||menu.level==37||menu.level==38||menu.level==39||menu.level==40||
         menu.level==41||menu.level==42||menu.level==43||menu.level==44||menu.level==45||menu.level==47||menu.level==49||menu.level==50||menu.level==51||menu.level==52||
-        menu.level==53||menu.level==54||menu.level==55
+        menu.level==53||menu.level==54||menu.level==55||menu.level==56||menu.level==57
     ){
         image(
             graphics.overlay[0],
@@ -678,7 +679,7 @@ function generateLevel(info,layer){
     entities.projectiles=[]
     switch(game.level){
         case 29: case 36: case 37: case 41: case 43: case 45: case 46: case 50: case 51: case 52:
-        case 53:
+        case 53: case 56:
             game.placer=[[],[],[],[]]
         break
     }
@@ -1165,6 +1166,9 @@ function generateLevel(info,layer){
                 [game.tileset[0]*70,game.tileset[1]*46,game.tileset[0]*2,game.tileset[1]*2],
             ]
         break
+        case 56:
+            game.edge=[level[0].length*45,level.length*40]
+        break
         default:
             //game.edge=[3640,2280]
             game.edge=[level[0].length*40,level.length*40]
@@ -1190,7 +1194,7 @@ function generateLevel(info,layer){
         case 29: case 53:
             game.tilecolor[0]=[125,130,125]
         break
-        case 30:
+        case 30: case 56:
             game.tilecolor[0]=[115,105,120]
         break
         case 32: case 33:
@@ -1317,7 +1321,7 @@ function generateLevel(info,layer){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.55+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(0.9+extent),17))
                                 }else if(game.level==30&&level[a][b-1]=='_'&&level[a][b+1]=='_'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.7+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(0.6+extent),17))
-                                }else if((game.level==25||game.level==26||game.level==30||game.level==36)&&level[a][b-1]=='m'){
+                                }else if((game.level==25||game.level==26||game.level==30||game.level==36||game.level==56)&&level[a][b-1]=='m'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),51))
                                 }else if((game.level==25||game.level==26||game.level==32||game.level==33||game.level==37||game.level==38||game.level==40||game.level==41||game.level==42||game.level==43||game.level==47||game.level==49||game.level==52||game.level==54||game.level==55)&&(
                                     level[a][b-1]=='.'||
@@ -1378,7 +1382,7 @@ function generateLevel(info,layer){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.2+extent*0.5)+a*game.tileset[1]+1,game.tileset[0]*(1+extent),game.tileset[1]*(0.4+extent),1))
                                 }else if(game.level==30&&level[a][b-1]=='_'&&level[a][b+1]=='_'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.7+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(0.6+extent),18))
-                                }else if((game.level==25||game.level==26||game.level==30||game.level==36)&&level[a][b+1]=='m'){
+                                }else if((game.level==25||game.level==26||game.level==30||game.level==36||game.level==56)&&level[a][b+1]=='m'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5-extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5+extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),52))
                                 }else if((game.level==25||game.level==26||game.level==32||game.level==33||game.level==37||game.level==38||game.level==40||game.level==41||game.level==42||game.level==43||game.level==47||game.level==49||game.level==52||game.level==54||game.level==55)&&(
                                     level[a][b+1]=='.'||
@@ -1447,7 +1451,7 @@ function generateLevel(info,layer){
                                     }
                                 }
                                 reject.push(a*lb+b)
-                                if((game.level==25||game.level==26||game.level==30||game.level==36)&&level[a][b-1]=='m'){
+                                if((game.level==25||game.level==26||game.level==30||game.level==36||game.level==56)&&level[a][b-1]=='m'){
                                     entities.walls[0].push(new wall(graphics.main,game.tileset[0]*(0.5+extent*0.5)+b*game.tileset[0],game.tileset[1]*(0.5-extent*0.5)+a*game.tileset[1],game.tileset[0]*(1+extent),game.tileset[1]*(1+extent),53))
                                 }else if((game.level==25||game.level==26||game.level==37||game.level==38||game.level==40||game.level==41||game.level==42||game.level==43||game.level==47||game.level==49||game.level==52||game.level==54||game.level==55)&&(
                                     level[a][b-1]=='.'||
@@ -1498,7 +1502,7 @@ function generateLevel(info,layer){
                                     }
                                 }
                                 reject.push(a*lb+b)
-                                if((game.level==25||game.level==26||game.level==30||game.level==36)&&level[a][b+1]=='m'){
+                                if((game.level==25||game.level==26||game.level==30||game.level==36||game.level==56)&&level[a][b+1]=='m'){
                                     if(level[a][b-1]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a-e]=level[a-e].substr(0,b-e)+'>'+level[a-e].substr(b-e+1)
@@ -1593,7 +1597,7 @@ function generateLevel(info,layer){
                                 }
                             }
                             if(
-                                game.level==30&&(
+                                (game.level==30||game.level==56)&&a>0&&(
                                     (level[a-1][b]=='_'||level[a-1][b]=='c')&&
                                     !(level[a-1][b+1]=='<'&&level[a-1][b+2]!='#')&&
                                     !(level[a-1][b+2]=='<'&&level[a-1][b+3]!='#')&&
@@ -1644,7 +1648,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 19: case 22: case 23: case 24: case 31: case 35: case 36: case 49: case 50: case 51:
-                        case 52: case 53: case 54:
+                        case 52: case 53: case 54: case 56:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
@@ -1719,6 +1723,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 30: case 32: case 33: case 36: case 37: case 38: case 40: case 42: case 52: case 55:
+                        case 56:
                             if(a<la-1&&level[a+1][b]=='/'&&(game.level==40||game.level==52)){
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.75)*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*1.5,7))
                             }else if(a<la-1&&(level[a+1][b]=='>'&&level[a+2][b]=='>'||level[a+1][b]=='<'&&level[a+2][b]=='<')){
@@ -1849,7 +1854,7 @@ function generateLevel(info,layer){
                                 clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.7+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*0.6,7))
                             }
                         break
-                        case 30:
+                        case 30: case 56:
                             if(level[a][b-1]=='['){
                                 entities.walls[0].splice(0,0,new wall(graphics.main,b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.4,24))
                                 entities.walls[0][0].corner=[false,false]
@@ -2092,8 +2097,6 @@ function generateLevel(info,layer){
                                 }else{
                                     if(level[a][b-1]=='>'&&game.level==22){
                                         entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
-                                    }else if(level[a][b-1]=='>'&&game.level==30){
-                                        entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
                                     }else if(level[a][b-1]=='>'){
                                         clumper[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
                                     }else if(level[a][b-1]=='['){
@@ -2145,6 +2148,9 @@ function generateLevel(info,layer){
                         break
                         case 52:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
+                        break
+                        case 56:
+                            clumper[1].push(new wall(graphics.main,b*game.tileset[0],a*game.tileset[1],0,0,3))
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))
@@ -2214,6 +2220,7 @@ function generateLevel(info,layer){
                     switch(game.level){
                         case 23: case 29: case 30: case 32: case 33: case 34: case 35: case 39: case 40: case 41:
                         case 43: case 44: case 47: case 49: case 50: case 51: case 52: case 53: case 54: case 55:
+                        case 56:
                             if(level[a+1][b]=='a'){
                                 entities.walls[0].push(new wall(graphics.main,-game.tileset[0]*0.06+b*game.tileset[0],game.tileset[1]*0.56+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                             }else{
@@ -2261,7 +2268,7 @@ function generateLevel(info,layer){
                         case 21:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                         break
-                        case 19: case 30: case 31:
+                        case 19: case 30: case 31: case 56:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,35))
                         break
                         case 22: case 23: case 25: case 26: case 28: case 32: case 33: case 35: case 40: case 42:
@@ -2291,7 +2298,7 @@ function generateLevel(info,layer){
                         case 19: case 22: case 23: case 31: case 35:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                         break
-                        case 25: case 26: case 28: case 30: case 49: case 54:
+                        case 25: case 26: case 28: case 30: case 49: case 54: case 56:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.4+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,50))
                         break
                         case 29:
@@ -2312,7 +2319,7 @@ function generateLevel(info,layer){
                         break
                         case 23: case 25: case 26: case 30: case 32: case 33: case 34: case 35: case 38: case 39:
                         case 40: case 41: case 42: case 43: case 47: case 49: case 50: case 51: case 52: case 54:
-                        case 55:
+                        case 55: case 56:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
                         break
                         case 28:
@@ -2382,7 +2389,7 @@ function generateLevel(info,layer){
                 break
                 case ':':
                     switch(game.level){
-                        case 25: case 26: case 30: case 32: case 34: case 50: case 55:
+                        case 25: case 26: case 30: case 32: case 34: case 50: case 55: case 56:
                             if(a<la-1&&(level[a+1][b]=='<'||level[a+1][b]=='>')){
                                 clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*2,38))
                             }else{
@@ -2450,7 +2457,7 @@ function generateLevel(info,layer){
                         case 22: case 23: case 49:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],5+a*game.tileset[1],game.tileset[0]*0.5,10,38))
                         break
-                        case 30:
+                        case 30: case 56:
                             if(a<la-1&&(level[a+1][b]=='<'||level[a+1][b]=='>')){
                                 clumper[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]+a*game.tileset[1],game.tileset[0]*0.25,game.tileset[1]*2,56))
                             }else{
@@ -2768,7 +2775,7 @@ function generateLevel(info,layer){
                 }
             }
         break
-        case 30:
+        case 30: case 56:
             graphics.gradient=[new p5.LinearGradient(85,graphics.main[0].height)]
             graphics.gradient[0].colors(
                 0.0,color(-75,-100,-25),
@@ -3887,6 +3894,39 @@ function generateLevel(info,layer){
             game.point=[-1,-1]
             game.pointAnim=[0,0]
         break
+        case 56:
+            ticker=0
+            for(let a=0,la=entities.walls[0].length;a<la;a++){
+                if(entities.walls[0][a].type==3){
+                    entities.walls[0][a].width=[16][ticker]*game.tileset[0]
+                    entities.walls[0][a].height=[1.6][ticker]*game.tileset[1]
+                    entities.walls[0][a].position.x+=entities.walls[0][a].width/2
+                    entities.walls[0][a].position.y+=entities.walls[0][a].height/2+game.tileset[1]*0.4
+                    if(ticker==0){
+                        entities.walls[0][a].position.x-=game.tileset[0]
+                    }
+                    ticker++
+                }
+            }
+            ticker=0
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36){
+                    entities.walls[1][a].pos=[0][ticker]
+                    entities.players[entities.walls[1][a].index].pos=[0][ticker]
+                    ticker++
+                }
+            }
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==33){
+                    if(game.placer[2].length>0){
+                        for(let b=0,lb=game.placer[2][0].length;b<lb;b++){
+                            entities.walls[1][a].timers[b][0]=game.placer[2][0][b][0]
+                        }
+                        game.placer[2].splice(0,1)
+                    }
+                 }
+            }
+        break
     }
     for(let c=0,lc=game.players;c<lc;c++){
         let playerLength=entities.players.length
@@ -4741,7 +4781,7 @@ function initialGraphics(){
         menu.level==19||menu.level==22||menu.level==23||menu.level==24||menu.level==25||menu.level==26||menu.level==27||menu.level==28||menu.level==29||menu.level==30||
         menu.level==31||menu.level==32||menu.level==33||menu.level==34||menu.level==35||menu.level==36||menu.level==37||menu.level==38||menu.level==39||menu.level==40||
         menu.level==41||menu.level==42||menu.level==43||menu.level==44||menu.level==45||menu.level==47||menu.level==49||menu.level==50||menu.level==51||menu.level==52||
-        menu.level==53||menu.level==54||menu.level==55
+        menu.level==53||menu.level==54||menu.level==55||menu.level==56||menu.level==57
     ){
         graphics.overlay.push(createGraphics(width,200))
     }

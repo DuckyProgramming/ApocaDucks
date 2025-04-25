@@ -22,8 +22,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=55
-        menu.level=55
+        game.level=57
+        menu.level=57
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -39,7 +39,7 @@ function setup(){
         //dev.sight=true
         //game.margin=true
 
-        entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
+        //entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
     }
 }
 function windowResized(){
@@ -183,9 +183,15 @@ function mouseClicked(){
                                         }
                                     break
                                     case 1:
-                                        menu.level=30
                                         game.classicWeapon=true
                                         game.pvp=true
+                                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                            menu.level=30
+                                        }else{
+                                            menu.level=56
+                                            game.classicRespawn=false
+                                            instant()
+                                        }
                                     break
                                     case 2:
                                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){

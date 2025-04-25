@@ -14,7 +14,7 @@ function mainloop(){
                     }else if(
                         a==3&&b==0||a==3&&b==1||a==3&&b==2||a==3&&b==4||
                         a==4&&b==0||a==4&&b==1||a==4&&b==3||a==4&&b==4||
-                        a==5&&b==0||a==5&&b==2||a==5&&b==3||
+                        a==5&&b==0||a==5&&b==1||a==5&&b==2||a==5&&b==3||
                         a==6&&b==2||a==6&&b==3||
                         a==7&&b==0
                     ){
@@ -90,7 +90,8 @@ function mainloop(){
                                     text(`DM`,pos[0]+37,pos[1]+15)
                                 break
                                 case 1:
-                                    text(`PvP`,pos[0],pos[1]+15)
+                                    text(`PvP`,pos[0]-37,pos[1]+15)
+                                    text(`DM`,pos[0]+37,pos[1]+15)
                                 break
                                 case 2:
                                     text(`PvE`,pos[0]-37,pos[1]+15)
@@ -300,7 +301,7 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -517,6 +518,20 @@ function mainloop(){
                             ){
                                 entities.walls[0][b].display(graphics.pane[a])
                                 b2s.push(b)
+                            }
+                        }
+                        if(game.level==30||game.level==56){
+                            for(let b=0,lb=entities.walls[0].length;b<lb;b++){
+                                if(
+                                    entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                    entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)&&
+                                    (entities.walls[0][b].type==37)
+                                ){
+                                    entities.walls[0][b].display(graphics.pane[a])
+                                    b2s.push(b)
+                                }
                             }
                         }
                         for(let b=0,lb=b2s.length;b<lb;b++){

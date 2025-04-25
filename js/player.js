@@ -1249,7 +1249,7 @@ class player{
             (this.auto&&game.level==38?0.6:1)*
             (this.chillTime>0?0.45:1)*
             ((this.weaponType==616||this.weaponType==725)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.25:1)*
-            (this.class()&&(this.subWeaponAType==616||this.subWeaponAType==725)&&this.subWeaponA.cooldown>0&&this.subWeaponA.uses>0?0.25:1)*
+            (this.class()&&(this.subWeaponAType==616||this.subWeaponAType==725)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.25:1)*
             (this.class()&&this.subWeaponAType==728&&this.subWeaponA.uses>0?0.25:1)
     }
     critCheck(){
@@ -5021,6 +5021,7 @@ class player{
                                 entities.players[a].life=0
                                 this.assort.lastWeapon=this.type
                                 this.newWeaponSet(findName('PlayerCarrySentry',types.player))
+                                this.weapon.cooldown=180
                                 build=false
                             }
                         }
@@ -7889,7 +7890,7 @@ class player{
                                     }
                                     a=la
                                     this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
-                                    this.target.position.y=this.target.pxosition.y
+                                    this.target.position.y=this.target.position.y
                                 }
                             }
                         }
