@@ -20,7 +20,10 @@
 751 - justice shotgun
 752 - instant level 3
 
+753 - class wars
+
 348 - speed knife, 90
+349 - stickybomb, 329
 
 
 
@@ -97,7 +100,7 @@
 702 - sword, 137
 703 - health pack (real), 661
 704 - repair gun
-705 - w, 165
+705 - shield zone, 165
 706 - bow, 648
 
 

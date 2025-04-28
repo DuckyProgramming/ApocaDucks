@@ -20,10 +20,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5  
         game.gaming=1
-        game.level=57
-        menu.level=57
+        game.level=58
+        menu.level=58
         game.mission=findName('Duckocracy',types.mission)
         //game.mission=findName('Survival',types.mission)
         generateMission(types.mission[game.mission].wave)
@@ -34,10 +34,12 @@ function setup(){
         //game.pvp=true
         display.cycle=0
         //newWave()
+        //game.weapon=[[findName('PlayerClassWars',types.player)]]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
+        //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
     }
@@ -51,7 +53,7 @@ function mouseClicked(){
         case 'menu':
             for(let a=0,la=game.deprecate?11:10;a<la;a++){
                 for(let b=0,lb=[5,5,3,5,5,5,5,5,5,1,2][a];b<lb;b++){
-                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
+                    let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)]
                     if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                         switch(a){
                             case 0:
@@ -322,8 +324,11 @@ function mouseClicked(){
                                         game.classicWeapon=true
                                     break
                                     case 3:
+                                        menu.level=58
                                     break
                                     case 4:
+                                        menu.level=59
+                                        game.classicWeapon=true
                                     break
                                 }
                             break
@@ -452,7 +457,7 @@ function mouseClicked(){
                         if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
-                            game.level=game.classWeapon?48:13
+                            game.level=game.classWeapon?(menu.level==44?57:48):13
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]
@@ -513,7 +518,7 @@ function instant(){
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=game.classWeapon?48:13
+        game.level=game.classWeapon?(menu.level==44?57:48):13
     }
     game.mission=0
     entities.players=[]

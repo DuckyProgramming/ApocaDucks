@@ -5,7 +5,7 @@ function mainloop(){
         case 'menu':
             for(let a=0,la=game.deprecate?11:10;a<la;a++){
                 for(let b=0,lb=[5,5,3,5,5,5,5,5,5,1,2][a];b<lb;b++){
-                    let pos=[width/2+b*170-lb*85+85,60+a*55+40+(a>=2?15:0)+(a>=3?15:0)]
+                    let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)]
                     if(a==4&&b==2){
                         fill(100)
                         rect(pos[0]+49.5,pos[1],51,45,10)
@@ -45,7 +45,7 @@ function mainloop(){
                             ['Gray Gravel','Shogatsu','Downward','Arizona','Aerial'][b],
                             ['Valuation','Sierra Leone','Fragile','Alloy','Speleo'][b],
                             ['NuclearMountain','Razorpoint','Entropy','Big Data','Rusted'][b],
-                            ['Chasm','Basalt','Tailwater','Abandoned (WIP)','Dryer (WIP)'][b],
+                            ['Chasm','Basalt','Tailwater','Abandoned','Identify'][b],
                             ['Blueprint'][b],
                             ['Pacman','Constructor'][b],
                         ][a],pos[0],pos[1]
@@ -146,7 +146,7 @@ function mainloop(){
                                 case 1:
                                     text(`PvP`,pos[0],pos[1]+15)
                                 break
-                                case 2: case 3:
+                                case 2: case 3: case 4:
                                     text(`PvE`,pos[0],pos[1]+15)
                                 break
                             }
@@ -309,11 +309,11 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -374,7 +374,7 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width:entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
+                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
@@ -691,7 +691,7 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55:
+                        case 47: case 49: case 54: case 55: case 58: case 59:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
