@@ -11716,7 +11716,7 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&(game.level==20||game.level==46)||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&(this.id>0&&this.id<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33)&&this.id>0)&&!game.attacker||
-                this.id>game.gaming&&game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48||game.attacker&&this.id!=0||this.storeWeapon
+                this.id>game.gaming&&game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&game.level!=57||game.attacker&&this.id!=0||this.storeWeapon
             )){
                 if(this.storeWeapon){
                     this.storeWeapon=false
