@@ -3678,12 +3678,14 @@ types={
           ['BigMachineGun',1],
           ['FastShotgun',4],
           ['Flamethrower',8],
+          ['Wait',5],
+
           ['TinyPistol',24],
           ['BigHeavyPunch',1],
           ['Gust',3],
           ['BigHeavyPunch',1],
           ['Gust',3],
-          ['Wait',5],
+          ['Wait',10],
           
           ['RocketLauncher',9],
           ['PushPistol',4],
@@ -3710,7 +3712,7 @@ types={
           ['PushShotgun',6],
           ['Medic',6],
           ['RocketLauncherHealSelf',7],
-          ['Wait',5],
+          ['Wait',10],
 
           ['BigDeflectorMachineGun',1],
           ['LongHyperMedic',7],
@@ -3738,7 +3740,7 @@ types={
           ['DamageOverTimeMachineGun',2],
           ['EngineerSpeedBuff',1],
           ['HyperSpy',3],
-          ['Wait',5],
+          ['Wait',10],
 
           ['LongCritFlamethrower',6],
           ['FlameRocketLauncher',10],
