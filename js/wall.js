@@ -1355,7 +1355,7 @@ class wall{
                             regPoly(layer,this.balls[a][0],this.balls[a][1],this.balls[a][5],this.balls[a][2]*0.5,this.balls[a][2]*0.5,this.balls[a][4])
                         }
                     break
-                    case 56:
+                    case 56: case 60:
                         if(this.position.y<game.tileset[1]*10){
                             if(this.time<480||this.time<600&&this.time%30<15){
                                 layer.fill(80)
@@ -8214,7 +8214,7 @@ class wall{
                         let clump
                         switch(this.type){
                             case 3:
-                                if(game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59){
+                                if(game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59||game.level==60){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     c.jump.time=1
@@ -8415,7 +8415,7 @@ class wall{
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&game.level!=29&&game.level!=36&&game.level!=41&&game.level!=42&&game.level!=50&&game.level!=51&&game.level!=52&&game.level!=53&&game.level!=55&&game.level!=56&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33||game.level==44||game.level==58)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&game.level!=29&&game.level!=36&&game.level!=41&&game.level!=42&&game.level!=50&&game.level!=51&&game.level!=52&&game.level!=53&&game.level!=55&&game.level!=56&&game.level!=60&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33||game.level==44||game.level==58)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{
@@ -8507,7 +8507,7 @@ class wall{
                             break
                             case 68:
                                 this.recharge=1800-(game.gaming-1)*300
-                                c.life=min(max(c.life,c.base.life*2),c.life+c.base.life/4)
+                                c.life=min(max(c.life,c.base.life*2),c.life+c.base.life/2)
                                 if(game.level==55){
                                     this.remove=true
                                 }

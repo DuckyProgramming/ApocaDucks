@@ -12,7 +12,7 @@ function setup(){
         game.level=60
         menu.level=60
         if(true){
-            game.mission=findName('TBD',types.mission)
+            game.mission=findName('Duck Disaster',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -31,7 +31,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        //entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerHeavyWeapons3',types.player))
     }
 }
 function windowResized(){
@@ -48,7 +48,7 @@ function mouseClicked(){
                 ],[
                     'DoubleMountain','Steel','Steel','Sulfate','Process',
                     'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Tailwater','Abandoned','Identify',
+                    'Big Data','Rusted','Abandoned','Identify',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
                     'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
@@ -57,7 +57,7 @@ function mouseClicked(){
                     'Alloy','Speleo','Chasm','','',
                     'Pacman','Prison','Steep',
                 ],[
-                    'Shogatsu','Valuation','Sierra Leone','Basalt',
+                    'Shogatsu','Valuation','Sierra Leone','Basalt','Tailwater',
                 ],
             ]
             for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
@@ -201,6 +201,10 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                             break
+                                            case 4:
+                                                menu.level=55
+                                                game.classicWeapon=true
+                                            break
                                         }
                                     break
                                 }
@@ -296,6 +300,7 @@ function mouseClicked(){
                                                 menu.level=51
                                             break
                                             case 3:
+                                                menu.level=60
                                             break
                                             case 4:
                                             break
@@ -321,13 +326,9 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                             break
                                             case 2:
-                                                menu.level=55
-                                                game.classicWeapon=true
-                                            break
-                                            case 3:
                                                 menu.level=58
                                             break
-                                            case 4:
+                                            case 3:
                                                 menu.level=59
                                                 game.classicWeapon=true
                                             break

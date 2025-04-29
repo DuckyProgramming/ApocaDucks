@@ -10,16 +10,16 @@ function mainloop(){
                 ],[
                     'DoubleMountain','Steel','Steel','Sulfate','Process',
                     'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Tailwater','Abandoned','Identify',
+                    'Big Data','Rusted','Abandoned','Identify',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
                     'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
-                    'Alloy','Speleo','Chasm','','',
+                    'Alloy','Speleo','Chasm','Identify','',
                     'Pacman','Prison','Steep',
                 ],[
-                    'Shogatsu','Valuation','Sierra Leone','Basalt',
+                    'Shogatsu','Valuation','Sierra Leone','Basalt','Tailwater',
                 ],
             ]
             for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
@@ -426,7 +426,7 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)

@@ -1167,7 +1167,7 @@ class player{
                     this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
                     this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
                     this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'||
-                    this.playerData.name=='InvisTank'
+                    this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
@@ -14011,7 +14011,7 @@ class player{
         if(this.assort.firing>0){
             this.assort.firing--
         }
-        this.assort.firingTick=smoothAnim(this.assort.firingTick,this.assort.firing>0,0,1,30)
+        this.assort.firingTick=smoothAnim(this.assort.firingTick,this.assort.firing>0,0,1,45)
         if(this.DOT.active>0){
             this.DOT.active--
             this.life-=this.DOT.damage
