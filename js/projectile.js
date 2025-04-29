@@ -436,7 +436,7 @@ class projectile{
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-						if(entities.walls[a][b].standard){
+						if(entities.walls[a][b].standard||entities.walls[a][b].type==59||entities.walls[a][b].type==60){
 							let c=entities.walls[a][b]
 							for(let d=0,ld=c.boundary.length;d<ld;d++){
 								for(let e=0,le=c.boundary[d].length;e<le;e++){

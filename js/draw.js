@@ -3,6 +3,122 @@ function mainloop(){
     background(150)
     switch(stage.scene){
         case 'menu':
+            let set=[
+                [],[
+                    'Vietnam','Normandy','Normandy','Isonzo','Isonzo',
+                    'Stalingrad','Prison','Steep','Gray Gravel',
+                ],[
+                    'DoubleMountain','Steel','Steel','Sulfate','Process',
+                    'Downward','Arizona','Fragile','Alloy','NuclearMountain',
+                    'Big Data','Rusted','Tailwater','Abandoned','Identify',
+                ],[
+                    'DoubleMountain','Steel','Sulfate','Process','Downward',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy',
+                ],[
+                    'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
+                    'Alloy','Speleo','Chasm',
+                ],[
+                    'Shogatsu','Valuation','Sierra Leone','Basalt',
+                ],
+            ]
+            for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
+                for(let b=0,lb=[5,5,3,5,constrain(set[menu.mode].length,0,5),constrain(set[menu.mode].length-5,0,5),constrain(set[menu.mode].length-10,0,5)][a];b<lb;b++){
+                    let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    if(
+                        a==0&&menu.players==b+1||
+                        a==1&&menu.gaming==b+1||
+                        a==2&&menu.weapon==b||
+                        a==3&&menu.mode==b+1
+                    ){
+                        fill(100,200,100)
+                    }else{
+                        fill(100)
+                    }
+                    rect(pos[0],pos[1],150,45,10)
+                    fill(0)
+                    textSize(15)
+                    text(
+                        [
+                            `${b+1} Players`,
+                            `${b+1} Gaming`,
+                            ['Normal Weapons','Special Weapons','Class Weapons'][b],
+                            ['Survival','Invasion','Conquest','Arena','Specialty'][b],
+                            set[menu.mode][b],
+                            set[menu.mode][5+b],
+                            set[menu.mode][10+b],
+                        ][a],pos[0],pos[1]
+                    )
+                    textSize(11.25)
+                    if(a==3){
+                        switch(b){
+                            case 0: case 1:
+                                text(`PvE`,pos[0],pos[1]+15)
+                            break
+                            case 2: case 3:
+                                text(`PvP`,pos[0],pos[1]+15)
+                            break
+                            case 4:
+                                text(`PvP/PvE`,pos[0],pos[1]+15)
+                            break
+                        }
+                    }
+                    switch(menu.mode){
+                        case 1:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 2: case 4:
+                                            text(`Reverse`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 2:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 2:
+                                            text(`Chaos`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                    }
+                }
+            }
+        break
+        case 'mission':
+            for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
+                for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){
+                    if(a==0){
+                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
+                        if(menu.mode==b+1){
+                            fill(100,200,100)
+                        }else{
+                            fill(100)
+                        }
+                        rect(pos[0],pos[1],120,45,10)
+                        fill(0)
+                        textSize(15)
+                        text(['Easy','Medium','Hard','Expert','Unfair','Special'][b],pos[0],pos[1])
+                    }else{
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        let unit=menu.list[menu.mode-1][a*5+b-5]
+                        fill(100)
+                        rect(pos[0],pos[1],150,45,10)
+                        fill(0)
+                        textSize(15)
+                        text(types.mission[unit].name,pos[0],pos[1])
+                        textSize(11.25)
+                        text(`${['Easy','Medium','Hard','Expert','Unfair','Special'][types.mission[unit].difficulty]}`,pos[0]-37,pos[1]+15)
+                        text(`${types.mission[unit].wave.length} Wave${types.mission[unit].wave.length!=1?`s`:``}`,pos[0]+37,pos[1]+15)
+                    }
+                }
+            }
+        break
+        case 'menuFull':
             for(let a=0,la=game.deprecate?11:10;a<la;a++){
                 for(let b=0,lb=[5,5,3,5,5,5,5,5,5,1,2][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)]
@@ -231,10 +347,10 @@ function mainloop(){
                 }
             }
         break
-        case 'mission':
+        case 'missionFull':
             let tick=0
-            for(let a=0,la=10;a<la;a++){
-                for(let b=0,lb=[5,5,5,5,5,5,5,5,5,5][a];b<lb;b++){
+            for(let a=0,la=11;a<la;a++){
+                for(let b=0,lb=[5,5,5,5,5,5,5,5,5,5,3][a];b<lb;b++){
                     let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                     fill(100)
                     rect(pos[0],pos[1],150,45,10)

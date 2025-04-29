@@ -6846,9 +6846,14 @@ class wall{
                 }
             break
             case 57:
+                layer.push()
+                if(game.level==57){
+                    layer.scale(1-game.pointAnim[1])
+                }
                 layer.fill(180,1-this.recharge/60-this.hide)
                 layer.textSize(9)
                 layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                layer.pop()
                 if(this.infoFade>0){
                     if(game.level==22){
                         layer.scale(1-game.pointAnim[2])

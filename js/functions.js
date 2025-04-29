@@ -1173,8 +1173,8 @@ function generateLevel(info,layer){
             game.edge=[level[0].length*46,level.length*40]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
-                [game.tileset[0]*87.5,game.tileset[1]*59.5,game.tileset[0]*53,game.tileset[1]*7],
-                [game.tileset[0]*93,game.tileset[1]*51.5,game.tileset[0]*42,game.tileset[1]*9],
+                [game.tileset[0]*88,game.tileset[1]*59.5,game.tileset[0]*54,game.tileset[1]*7],
+                [game.tileset[0]*93.5,game.tileset[1]*51.5,game.tileset[0]*43,game.tileset[1]*9],
                 [game.tileset[0]*78.5,game.tileset[1]*42,game.tileset[0]*13,game.tileset[1]*6],
                 [game.tileset[0]*138,game.tileset[1]*40,game.tileset[0]*6,game.tileset[1]*4],
                 [game.tileset[0]*131.5,game.tileset[1]*36.5,game.tileset[0]*21,game.tileset[1]*3],
@@ -1838,6 +1838,9 @@ function generateLevel(info,layer){
                         break
                         case 55:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],23))
+                        break
+                        case 58:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,68))
                         break
                         case 59:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,69))
@@ -4323,7 +4326,8 @@ function newWave(){
                 types.mission[game.mission].wave[display.cycle][a][0]=='CritSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='RevolverSpy'||
                 types.mission[game.mission].wave[display.cycle][a][0]=='SpyHeal'||
-                types.mission[game.mission].wave[display.cycle][a][0]=='HyperSpy'
+                types.mission[game.mission].wave[display.cycle][a][0]=='HyperSpy'||
+                types.mission[game.mission].wave[display.cycle][a][0]=='SlightlyFastSpy'
             if(types.mission[game.mission].wave[display.cycle][a][0].includes('Boss')){
                 game.stack.push([spy?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
             }else{
@@ -5155,5 +5159,20 @@ function generateMission(wave){
             wave[a].push(mixer[index])
             mixer.splice(index,1)
         }
+    }
+}
+function setupLists(){
+    listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
+    listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
+    listing[2]=safeRange(0,10)
+    listing[3]=[...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player)),...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player))]
+    //listing[1]=listing[1].filter(item=>types.player[item].weapon>=536)
+    if(game.nuke){
+        listing[1]=[findName('PlayerGuidedMissile',types.player)]
+    }
+
+    menu.list=[[],[],[],[],[],[]]
+    for(let a=0,la=types.mission.length;a<la;a++){
+        menu.list[types.mission[a].difficulty].push(a)
     }
 }
