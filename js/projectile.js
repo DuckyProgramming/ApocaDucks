@@ -42,7 +42,7 @@ class projectile{
 			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
 			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
 			case 332: case 336: case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346:
-			case 347: case 348:
+			case 347: case 348: case 350:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -5581,6 +5581,18 @@ class projectile{
 					layer.ellipse(0,0,(80-this.fade*80)*(this.fail?0.25:1))
 				}
 			break
+			case 350:
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,120+this.crit*200,240+this.crit*40,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,200,250,this.fade)
+				layer.quad(-4,0,0,-1,1,0,0,4)
+				layer.fill(200,250,200,this.fade)
+				layer.ellipse(0,0,3)
+			break
 			
 			//mark
         }
@@ -6284,7 +6296,7 @@ class projectile{
 				case 217: case 218: case 219: case 225: case 231: case 232: case 249: case 251: case 273: case 276:
 				case 279: case 281: case 298: case 299: case 306: case 308: case 313: case 317: case 321: case 322:
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
-				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
+				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348: case 350:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8184,9 +8196,9 @@ class projectile{
 			}
 			if(this.active&&this.type!=85&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&!(this.partisan&&a%2!=0)){
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
+				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
 						!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp||game.level==29||entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
+						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp||game.level==29||entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
 						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
 						entities.players[b].life>0&&this.active&&
 						!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
@@ -8272,7 +8284,7 @@ class projectile{
 							entities.players[b].critBuff=max(480,entities.players[b].critBuff)
 						}else if(this.type==63&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].defendBuff=max(240,entities.players[b].defendBuff)
+							entities.players[b].defendBuff=max(480,entities.players[b].defendBuff)
 						}else if(this.type==82&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].stunTime=0
@@ -8303,6 +8315,9 @@ class projectile{
 						}else if(this.type==345&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*1.5))
 							entities.players[b].critBuff=max(90,entities.players[b].critBuff)
+						}else if(this.type==350&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].speedBuff=max(480,entities.players[b].defendBuff)
 						}else if(
 							this.exploder
 						){

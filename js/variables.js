@@ -2135,6 +2135,133 @@ types={
           ['BigLongHyperMedic',4],
           ['EngineerSpawner',1],
           ['Sniper',1],
+          ['GlitchedTank',1],
+        ],
+      ],
+    },{
+      name:`Duck Void`,
+      sendTime:30,
+      difficulty:4,
+      wave:[
+        [
+          ['BigSpamRocketLauncher',1],
+          ['BigMachineGun',1],
+          ['BigCritApplyMedic',1],
+
+          ['RandomFastHeavyPunch',8],
+
+          ['BigSpamRocketLauncher',1],
+          ['BigMachineGun',1],
+          ['BigDefendApplyMedic',1],
+          
+          ['RandomFastHeavyPunch',8],
+
+          ['BigSpamRocketLauncher',1],
+          ['BigMachineGun',1],
+          ['BigSpeedApplyMedic',1],
+
+          ['InvisTank',2],
+          ['TinyFastPunch',5],
+          ['PlusMedic',3],
+          ['FlameRocketLauncher',5],
+          ['CritSniper',7],
+          ['BigCritSniper',1],
+        ],[
+          ['BigFastPistolHealSelf',4],
+          ['RocketLauncherHealSelf',4],
+          ['PlusMedic',4],
+
+          ['BigStraightBaller',1],
+          ['HyperMedicRegen',4],
+          ['BigStraightBaller',1],
+          ['HyperMedicRegen',4],
+          ['BigStraightBaller',1],
+          ['HyperMedicRegen',4],
+
+          ['Shotgun',7],
+          ['BigPushShotgun',1],
+
+          ['Wait',5],
+          ['SlightlyFastBonker',10],
+          ['Wait',5],
+
+          ['BigRapidBaller',1],
+          ['BigCritApplyMedic',1],
+          ['Spy',3],
+          ['BigSniper',1],
+        ],[
+          ['Submachine',7],
+          ['BigFastPistol',2],
+          ['Wait',4],
+
+          ['BigFastPistolTier',2],
+          ['Wait',4],
+
+          ['BigFastPistol',2],
+          ['Wait',4],
+
+          ['BigFastPistolTier',2],
+          ['BigDamageOverTimeSniper',1],
+          ['BigSpreadSniper',1],
+          ['BigRemoverSniper',1],
+          
+          ['Grenadier',4],
+          ['LongFlamethrower',2],
+          ['HyperMedic',4],
+          ['Grenadier',4],
+          ['LongFlamethrower',2],
+          ['HyperMedic',4],
+          ['Submachine',7],
+
+          ['BigDeflectorMachineGun',1],
+          ['BigMultiHyperMedic',1],
+          ['Swarmer',3],
+        ],[
+          ['MiniSentry',3],
+          ['Engineer',3],
+          ['EngineerShield',3],
+          ['EngineerSpeedBuff',3],
+          ['RocketEngineer',3],
+          ['EngineeringTank',1],
+
+          ['BigCritPunch',1],
+          ['BigHyperMedic',1],
+          ['BigMachineGunCritSelf',1],
+          ['BigCritPunch',1],
+          ['BigHyperMedic',1],
+          ['BigMachineGunCritSelf',1],
+
+          ['CritEngineer',5],
+          ['HyperMedic',5],
+          ['InvisTank',1],
+
+          ['MachineGunStop',4],
+          ['MachineGunFirework',4],
+          ['MachineGunFocus',4],
+
+          ['CritSpreadSniper',2],
+          ['EngineerHeal',1],
+          ['BigHeavyMachineGun',1],
+        ],[
+          ['BigPhaseCritRocketLauncher',4],
+          ['HyperPistol',5],
+          ['HyperMedic',5],
+          ['InvisTank',2],
+
+          ['MachineGunFocus',4],
+          ['MedicShield',4],
+          ['MachineGunFirework',4],
+          ['MedicAura',4],
+
+          ['BigCritPistol',4],
+          ['BigCritPushPistol',2],
+          ['CritEngineerShield',1],
+          ['PushRocketLauncher',5],
+
+          ['HyperTank',1],
+          ['RevolutioningTank',1],
+          ['SlicingTank',1],
+          ['MedicBoss',1],
         ],
       ],
     },{
@@ -3376,6 +3503,29 @@ types={
         [],[],[],[],[],
       ],
     },{
+      name:`Patchwork`,
+      sendTime:40,
+      difficulty:5,
+      wave:[
+        [],[],[],[],[],[],[],[],[],[],
+      ],
+    },{
+      name:`Survival Lite`,
+      sendTime:600,
+      difficulty:5,
+      wave:[
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+        [],[],[],[],[],[],[],[],[],[],
+      ],
+    },{
       name:`Survival`,
       sendTime:600,
       difficulty:5,
@@ -3605,33 +3755,6 @@ types={
           ['Sniper',2],
           ['RapidEngineer',1],
           ['PistolVulnerable',9],
-          
-        ],
-      ],
-    },{
-      name:`TBD`,
-      sendTime:30,
-      difficulty:4,
-      wave:[
-        [
-          
-        ],
-      ],
-    },{
-      name:`TBD`,
-      sendTime:30,
-      difficulty:5,
-      wave:[
-        [
-          
-        ],
-      ],
-    },{
-      name:`TBD`,
-      sendTime:30,
-      difficulty:5,
-      wave:[
-        [
           
         ],
       ],
@@ -6679,6 +6802,9 @@ types={
       name:'MegaTank',sizeBuff:1.75,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'GlitchedTank',sizeBuff:1.75,lifeBuff:50,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'TankDefendBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -7483,6 +7609,9 @@ types={
       name:'PushierRocketLauncherBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:73,
     },{
+      name:'BigCritPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:1,
+    },{
       name:'BigCritPistolJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
@@ -7837,7 +7966,7 @@ types={
       name:'ColdTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'StraightBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'StraightBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:94,
     },{
       name:'PunchSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
@@ -7930,7 +8059,7 @@ types={
       name:'EngineerSpeedBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
     },{
-      name:'Bonker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'Bonker',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
       name:'LongHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -7944,7 +8073,57 @@ types={
     },{
       name:'BigPushSpamRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:51,
-    }
+    },{
+      name:'RandomFastHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.5,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'BigSpeedApplyMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:756,
+    },{
+      name:'InvisTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'BigCritSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:6,
+    },{
+      name:'BigFastPistolHealSelf',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:48,
+    },{
+      name:'BigStraightBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:94,
+    },{
+      name:'HyperMedicRegen',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:66,
+    },{
+      name:'SlightlyFastBonker',sizeBuff:1,lifeBuff:3,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
+      name:'BigFastPistolTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'BigDamageOverTimeSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:120,
+    },{
+      name:'BigRemoverSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:17,
+    },{
+      name:'Swarmer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:284,
+    },{
+      name:'BigHeavyMachineGun',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:2,
+    },{
+      name:'BigPhaseCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:38,
+    },{
+      name:'CritEngineerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.5,reloadBuff:1,crit:1,weapon:10,
+    },{
+      name:'MedicBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.45,
+      damageBuff:2,reloadBuff:2,crit:1,weapon:11,
+    },
+
+    //mark p
   ],weapon:[
 		{
 			name:'Shotgun',
@@ -14752,6 +14931,15 @@ types={
 			reload:2,
 			speed:0.95,
       uses:200,
+		},{
+			name:'Speed Apply Medic',
+			ammo:10,
+			damage:25,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
 		},
 
     /*{
@@ -14773,6 +14961,8 @@ types={
 			speed:1.2,
       uses:48,
 		},*/
+
+    //mark w
 	],
 }
 stage={scene:'menu'}
@@ -18339,5 +18529,66 @@ Hayden - brown crate nook
 "################################################################################################################################################################",
 "################################################################################################################################################################",
 "################################################################################################################################################################",
-]
+],[
+"                                         #                   #                                         ",
+"                                         #                   #                                         ",
+"                                         #t  q   w   e   r   #                                         ",
+"                                         ## ### ### ### ### ##                                         ",
+"                                                                                                       ",
+"                                           !   !   !   !   !                                           ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                                                                                       ",
+"                                         f                          ---              g                 ",
+"                                       ]...[            <..[_______]...[           ]...[               ",
+"                                       ]...[            <..[  |    ]...[           ]...[               ",
+"                                        | |      N      ... f |     | |             | |                ",
+"                                        | |         --- ...____     | |       ____  | |    aa          ",
+"                                     aa | |  /.............aa |     | |       |  |  | |   aaa          ",
+"                           ]...[===]...........................[   ]...[===]./|  |  |/.........[       ",
+"                           ]...[   ]...........................[   ]...[   ]...................[       ",
+"                            | |     | |     | |     | |     | |     | |     | |     | |     | |        ",
+"                            | |     | |~ :~ | |     |&|     | |     | |     | |     | |     | |        ",
+"                            | |     | _______ |     ___     | |     | |     | |     | |     | |        ",
+"                            |:|     | |     | |     | |     | | --- |:|     | |     | |     | | ---    ",
+"                           ]....@@@../| --- |/.........[===]............@@@....[===]...[   ]...........",
+"                           ]...........................[   ]...................[   ]...[   ]...........",
+"                            | |     | |     | |     | |     | |     | |     | |     ...     | |     ...",
+"                            | |     | |     | |     | |     | |     | |     | |     ...     | |^ :* ...",
+"!                           | |     | |     | |     | |     | |     | |   <<#..[===]...     | ______...",
+"   <<<<<<<<#####>>>>>>      | |     | |     | |     | <<<###>>>>    | | <####..[   ]...     | |     ...",
+"###########################>>>>     |<<<######>>   <<#############>>| <######..     | |  <.../| --- ...",
+"#############################################################################..     | |  <.............",
+"#############################################################################..........................",
+"#############################################################################].........................",
+"#######################################################################################################",
+"#######################################################################################################",
+"#######################################################################################################",
+"#######################################################################################################",
+"#######################################################################################################",
+],
 ]

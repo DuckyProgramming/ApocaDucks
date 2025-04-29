@@ -13,10 +13,11 @@ function mainloop(){
                     'Big Data','Rusted','Tailwater','Abandoned','Identify',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
-                    'Alloy','Speleo','Chasm',
+                    'Alloy','Speleo','Chasm','','',
+                    'Pacman','Prison','Steep',
                 ],[
                     'Shogatsu','Valuation','Sierra Leone','Basalt',
                 ],

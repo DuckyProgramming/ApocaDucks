@@ -7,25 +7,28 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5  
+        game.players=1  
         game.gaming=1
-        game.level=58
-        menu.level=58
-        game.mission=findName('Duckocracy',types.mission)
-        //game.mission=findName('Survival',types.mission)
-        generateMission(types.mission[game.mission].wave)
+        game.level=60
+        menu.level=60
+        if(true){
+            game.mission=findName('TBD',types.mission)
+        }else{
+            game.mission=findName('Survival',types.mission)
+            generateMission(types.mission[game.mission].wave)
+        }
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         display.cycle=0
         //newWave()
         //game.weapon=[[findName('PlayerClassWars',types.player)]]
         newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerEngineerC4',types.player))
@@ -48,10 +51,11 @@ function mouseClicked(){
                     'Big Data','Rusted','Tailwater','Abandoned','Identify',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
                 ],[
                     'Gray Gravel','Shogatsu','Aerial','Arizona','Alloy',
-                    'Speleo','Chasm',
+                    'Alloy','Speleo','Chasm','','',
+                    'Pacman','Prison','Steep',
                 ],[
                     'Shogatsu','Valuation','Sierra Leone','Basalt',
                 ],
@@ -272,6 +276,12 @@ function mouseClicked(){
                                                 }
                                                 instant()
                                             break
+                                            case 4:
+                                                menu.level=28
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                instant()
+                                            break
                                         }
                                     break
                                     case 4:
@@ -284,6 +294,10 @@ function mouseClicked(){
                                             break
                                             case 2:
                                                 menu.level=51
+                                            break
+                                            case 3:
+                                            break
+                                            case 4:
                                             break
                                         }
                                         game.pvp=true
@@ -316,6 +330,25 @@ function mouseClicked(){
                                             case 4:
                                                 menu.level=59
                                                 game.classicWeapon=true
+                                            break
+                                        }
+                                    break
+                                    case 4:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=7
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 1:
+                                                menu.level=20
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 2:
+                                                menu.level=21
+                                                game.classicWeapon=true
+                                                game.pvp=true
                                             break
                                         }
                                     break
@@ -357,7 +390,11 @@ function mouseClicked(){
                             }
                             stage.scene='wave'
                             if(types.mission[game.mission].wave[0].length==0){
-                                generateMission(types.mission[game.mission].wave)
+                                if(types.mission[game.mission].name=='Patchwork'){
+                                    compileMission(types.mission[game.mission].wave)
+                                }else{
+                                    generateMission(types.mission[game.mission].wave,types.mission[game.mission].name=='Survival Lite')
+                                }
                             }
                             if(game.usurp){
                                 game.usurpIndex=floor(random(0,game.players))

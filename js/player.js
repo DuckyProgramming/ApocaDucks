@@ -178,21 +178,44 @@ class player{
         }
     }
     getColor(){
-        if(this.hyper()){
-            this.color.skin.head=mergeColor(this.base.color.skin.head,[255,255,255],0.6)
-            this.color.skin.body=mergeColor(this.base.color.skin.body,[255,255,255],0.6)
-            this.color.skin.legs=mergeColor(this.base.color.skin.legs,[255,255,255],0.6)
-            this.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
-        }else if(this.chillTime>0){
-            this.color.skin.head=[200,250,250]
-            this.color.skin.body=[190,240,240]
-            this.color.skin.legs=[175,225,225]
-            this.color.skin.arms=[180,230,230]
+        if(this.playerData.name=='GlitchedTank'){
+            if(this.hyper()){
+                this.color.skin.head=mergeColor(this.base.color.skin.head,[255,255,255],0.6)
+                this.color.skin.body=mergeColor(this.base.color.skin.body,[255,255,255],0.6)
+                this.color.skin.legs[0]=mergeColor(this.base.color.skin.legs[0],[255,255,255],0.6)
+                this.color.skin.legs[1]=mergeColor(this.base.color.skin.legs[1],[255,255,255],0.6)
+                this.color.skin.arms[0]=mergeColor(this.base.color.skin.arms[0],[255,255,255],0.6)
+                this.color.skin.arms[1]=mergeColor(this.base.color.skin.arms[1],[255,255,255],0.6)
+            }else if(this.chillTime>0){
+                this.color.skin.head=[200,250,250]
+                this.color.skin.body=[190,240,240]
+                this.color.skin.legs=[[175,225,225],[175,225,225]]
+                this.color.skin.arms=[[180,230,230],[180,230,230]]
+            }else{
+                this.color.skin.head=this.base.color.skin.head
+                this.color.skin.body=this.base.color.skin.body
+                this.color.skin.legs[0]=this.base.color.skin.legs[0]
+                this.color.skin.legs[1]=this.base.color.skin.legs[1]
+                this.color.skin.arms[0]=this.base.color.skin.arms[0]
+                this.color.skin.arms[1]=this.base.color.skin.arms[1]
+            }
         }else{
-            this.color.skin.head=this.base.color.skin.head
-            this.color.skin.body=this.base.color.skin.body
-            this.color.skin.legs=this.base.color.skin.legs
-            this.color.skin.arms=this.base.color.skin.arms
+            if(this.hyper()){
+                this.color.skin.head=mergeColor(this.base.color.skin.head,[255,255,255],0.6)
+                this.color.skin.body=mergeColor(this.base.color.skin.body,[255,255,255],0.6)
+                this.color.skin.legs=mergeColor(this.base.color.skin.legs,[255,255,255],0.6)
+                this.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
+            }else if(this.chillTime>0){
+                this.color.skin.head=[200,250,250]
+                this.color.skin.body=[190,240,240]
+                this.color.skin.legs=[175,225,225]
+                this.color.skin.arms=[180,230,230]
+            }else{
+                this.color.skin.head=this.base.color.skin.head
+                this.color.skin.body=this.base.color.skin.body
+                this.color.skin.legs=this.base.color.skin.legs
+                this.color.skin.arms=this.base.color.skin.arms
+            }
         }
     }
     displayBack(){
@@ -465,12 +488,12 @@ class player{
             }
         }
         if(this.collect.life>=this.life){
-            layer.fill(240,0,0,this.fade*this.infoAnim.life*this.infoAnim.life)
+            layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
             layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,1+min((max(0,this.collect.life)/this.base.life)*60,3),2)
             layer.fill(min(255,510-max(0,this.life)/this.base.life*510)-max(0,5-max(0,this.life)/this.base.life*30)*25,max(0,this.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
             layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,3),2)
         }else if(this.collect.life<this.life){
-            layer.fill(240,0,0,this.fade*this.infoAnim.life*this.infoAnim.life)
+            layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
             layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,1+min((max(0,this.life)/this.base.life)*60,3),2)
             layer.fill(min(255,510-max(0,this.collect.life)/this.base.life*510)-max(0,5-max(0,this.collect.life)/this.base.life*30)*25,max(0,this.collect.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
             layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,3),2)
@@ -491,7 +514,7 @@ class player{
             layer.strokeWeight(5)
             layer.arc(0,-80,80,20,-165,-15)
         }
-        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'||this.playerData.name=='FlamethrowerShield'||this.playerData.name=='RocketLauncherShield'){
+        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'||this.playerData.name=='FlamethrowerShield'||this.playerData.name=='RocketLauncherShield'||this.playerData.name=='CritEngineerShield'){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
             layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
@@ -881,18 +904,35 @@ class player{
                 layer.rect(this.skin.arms[a].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*4,this.skin.arms[a].points.final.end.y+1,8,1)
             }
         }*/
-        for(let a=0,la=2;a<la;a++){
-            if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)<=0){
-                layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
-                layer.noStroke()
-                layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+        if(this.playerData.name=='GlitchedTank'){
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)<=0){
+                    layer.fill(this.color.skin.arms[a][0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[a][1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[a][2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                }
             }
-        }
-        for(let a=0,la=2;a<la;a++){
-            if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)<=0){
-                layer.fill(this.color.skin.legs[0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
-                layer.noStroke()
-                layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)<=0){
+                    layer.fill(this.color.skin.legs[a][0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[a][1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[a][2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+                }
+            }
+        }else{
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)<=0){
+                    layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                }
+            }
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)<=0){
+                    layer.fill(this.color.skin.legs[0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+                }
             }
         }
         if(this.skin.body.display){
@@ -904,11 +944,21 @@ class player{
 				layer.ellipse(0,this.skin.body.level,5)
             }
         }
-        for(let a=0,la=2;a<la;a++){
-            if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)>0){
-                layer.fill(this.color.skin.legs[0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
-                layer.noStroke()
-                layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+        if(this.playerData.name=='GlitchedTank'){
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)>0){
+                    layer.fill(this.color.skin.legs[a][0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[a][1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[a][2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+                }
+            }
+        }else{
+            for(let a=0,la=2;a<la;a++){
+                if(this.skin.legs[a].display&&lcos(this.direction.main+this.skin.legs[a].anim.theta)>0){
+                    layer.fill(this.color.skin.legs[0]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[1]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.color.skin.legs[2]+lcos(this.skin.legs[a].anim.theta+this.direction.main)*20,this.fade*this.skin.legs[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.legs[a].points.final.end.x,this.skin.legs[a].points.final.end.y,12,12)
+                }
             }
         }
         if(this.face.beak.main.display){
@@ -953,10 +1003,18 @@ class player{
             }
         }
         for(let a=0,la=2;a<la;a++){
-            if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)>0){
-                layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
-                layer.noStroke()
-                layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+            if(this.playerData.name=='GlitchedTank'){
+                if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)>0){
+                    layer.fill(this.color.skin.arms[a][0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[a][1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[a][2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                }
+            }else{
+                if(this.skin.arms[a].display&&lcos(this.direction.main+this.skin.arms[a].anim.phi)>0){
+                    layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.fade*this.skin.arms[a].fade)
+                    layer.noStroke()
+                    layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                }
             }
             if(this.face.eye[a].display){
                 if(this.control==0){
@@ -1083,6 +1141,9 @@ class player{
         if(this.playerData.name=='TankDamaged'){
             this.takeDamage(450)
         }
+        if(this.playerData.name=='RandomFastHeavyPunch'){
+            this.takeDamage(random(0,this.base.life*0.6))
+        }
         switch(this.id){
             case -1:
                 this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
@@ -1105,7 +1166,8 @@ class player{
                     this.playerData.name=='Tank'||this.playerData.name=='BallingTank'||this.playerData.name=='PistolingTank'||this.playerData.name=='EngineeringTank'||this.playerData.name=='TankSpawner'||
                     this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
                     this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
-                    this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'
+                    this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'||
+                    this.playerData.name=='InvisTank'
                 ){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='MegaTank'){
@@ -1124,6 +1186,9 @@ class player{
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                 }else if(this.playerData.name=='SpeedyTank'){
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,190],body:[150,155,180],legs:[140,145,170],arms:[145,150,175]}}
+                }else if(this.playerData.name=='GlitchedTank'){
+                    this.colorChances=[[200,0,255],[0,175,175],[0,150,255],[255,150,50],[255,75,255],[50,255,50],[125,255,125],[255,255,100],[180,180,180],[255,100,100]]
+                    this.color={eye:{back:[255,255,255]},beak:{main:this.colorChances[floor(random(0,this.colorChances.length))],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:this.colorChances[floor(random(0,this.colorChances.length))],body:this.colorChances[floor(random(0,this.colorChances.length))],legs:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]],arms:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]]}}
                 }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'){
                     this.color=[
                         {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
@@ -2049,6 +2114,9 @@ class player{
                 }else{
                     this.visible2=30
                 }
+            }
+            if(this.playerData.name=='InvisTank'){
+                this.visible=max(60,this.visible)
             }
             if(preLife>=this.base.life&&this.life<=0&&this.id>0&&!game.nuke&&!game.pvp){
                 this.life=1
@@ -5199,6 +5267,9 @@ class player{
                     case 754:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,-90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],173,90,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 756:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],350,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
 
                     //mark
@@ -12792,7 +12863,7 @@ class player{
                         }
                     }
                 break
-                case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield':
+                case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield': case 'CritEngineerShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
@@ -12816,7 +12887,7 @@ class player{
                         }
                     }
                 break
-                case 'PunchRegen': case 'HeavyPunchRegen': case 'MedicRegen':
+                case 'PunchRegen': case 'HeavyPunchRegen': case 'MedicRegen': case 'HyperMedicRegen':
                     this.life=min(this.base.life,this.life+this.base.life/600)
                 break
                 case 'BigMedicAura': case 'MedicAura': case 'HyperMedicAura':
@@ -13777,6 +13848,20 @@ class player{
                         this.infoAnim.usesB[a]=smoothAnim(this.infoAnim.usesB[a],this.subWeaponB.uses>a,0,1,5)
                     }
                 break
+                case 'GlitchedTank':
+                    if(this.time%10==0){
+                        let part=floor(random(0,7))
+                        switch(part){
+                            case 0: this.color.skin.head=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 1: this.color.skin.body=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 2: this.color.skin.arms[0]=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 3: this.color.skin.arms[1]=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 4: this.color.skin.legs[0]=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 5: this.color.skin.legs[1]=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                            case 6: this.color.beak.main=this.colorChances[floor(random(0,this.colorChances.length))]; break
+                        }
+                    }
+                break
                 
             }
             if(this.playerData.name.includes('Tank')&&this.playerData.name!='PlayerTank'||game.brutal&&this.variant==13||this.weaponType==194||this.weaponType==242||this.weaponType==243||this.weaponType==245||this.weaponType==246||this.weaponType==247||this.weaponType==253||this.weaponType==347||this.weaponType==356||this.weaponType==370||this.weaponType==385||this.weaponType==398||this.weaponType==400||this.weaponType==415||this.weaponType==421||this.weaponType==433||this.weaponType==461||this.weaponType==495||this.weaponType==533||this.weaponType==541||this.weaponType==543||this.weaponType==634||this.weaponType==671||this.weaponType==676&&this.jump.time<=0||this.weaponType==691&&this.jump.time<=0||this.weaponType==712&&this.jump.time<=0){
@@ -13820,6 +13905,8 @@ class player{
                         }
                         if(this.playerData.name=='PlayerSurprise'){
                             this.visible=60
+                        }else if(this.playerData.name=='InvisTank'){
+                            this.visible=300
                         }
                     }else if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&!entities.players[a].dead&&!this.dead){
                         let dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
@@ -13859,6 +13946,8 @@ class player{
                         }
                         if(this.playerData.name=='PlayerSurprise'){
                             this.visible=60
+                        }else if(this.playerData.name=='InvisTank'){
+                            this.visible=300
                         }
                     }
                 }
@@ -13937,14 +14026,14 @@ class player{
                     this.visible=15
                 }
             }
-        }else if(this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'||this.playerData.name=='PlayerVanguard'||this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'){
+        }else if(this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'||this.playerData.name=='PlayerVanguard'||this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='InvisTank'){
             if(this.visible>0){
                 this.visible--
             }
             if(this.visible2>0){
                 this.visible2--
             }
-            if(abs(this.velocity.x)+abs(this.velocity.y)>0.4&&this.playerData.name!='PlayerVPN'&&this.playerData.name!='PlayerSpyC'&&this.playerData.name!='PlayerSpyC2'&&this.playerData.name!='PlayerSpyC3'&&this.playerData.name!='PlayerSpyC4'){
+            if(abs(this.velocity.x)+abs(this.velocity.y)>0.4&&this.playerData.name!='PlayerVPN'&&this.playerData.name!='PlayerSpyC'&&this.playerData.name!='PlayerSpyC2'&&this.playerData.name!='PlayerSpyC3'&&this.playerData.name!='PlayerSpyC4'&&this.playerData.name!='InvisTank'){
                 this.visible=15
             }
         }
@@ -14040,7 +14129,7 @@ class player{
             if(this.invincible>0){
                 this.invincible--
                 this.fade=smoothAnim(this.fade,game.time%20>=10,0.4,1,5)
-            }else if(game.invis||this.playerData.name=='SidekickStealth'){
+            }else if(game.invis||this.playerData.name=='SidekickStealth'||this.playerData.name=='InvisTank'){
                 this.fade=smoothAnim(this.fade,this.visible>0&&!this.dead,0,1,10)
             }else{
                 this.fade=smoothAnim(this.fade,!this.dead,0,1,5)
