@@ -3670,7 +3670,7 @@ types={
       ],
     },{
       name:`Duck Coalition`,
-      sendTime:30,
+      sendTime:35,
       difficulty:4,
       wave:[
         [
