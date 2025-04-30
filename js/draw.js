@@ -10,13 +10,13 @@ function mainloop(){
                 ],[
                     'DoubleMountain','Steel','Steel','Sulfate','Process',
                     'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Abandoned','Identify','',
+                    'Big Data','Rusted','Abandoned','Identify','idk',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy','',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','Corridor (WIP)',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
-                    'Alloy','Speleo','Chasm','Identify','',
+                    'Alloy','Speleo','Chasm','Identify','Hard Hat (WIP)',
                 ],[
                     'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[
@@ -431,7 +431,7 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -532,7 +532,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26||game.level==54||game.level==55){
+                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
