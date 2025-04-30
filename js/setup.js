@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1  
+        game.players=1
         game.gaming=1
-        game.level=60
-        menu.level=60
+        game.level=54
+        menu.level=54
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -21,13 +21,13 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         //game.weapon=[[findName('PlayerClassWars',types.player)]]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
+        dev.sight=true
         //game.margin=true
         //game.noPlayer=true
 
@@ -44,26 +44,27 @@ function mouseClicked(){
             let set=[
                 [],[
                     'Vietnam','Normandy','Normandy','Isonzo','Isonzo',
-                    'Stalingrad','Prison','Steep','Gray Gravel',
+                    'Stalingrad','Prison','Steep','Gray Gravel','Basalt',
                 ],[
                     'DoubleMountain','Steel','Steel','Sulfate','Process',
                     'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Abandoned','Identify',
+                    'Big Data','Rusted','Abandoned','Identify','',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','',
                 ],[
                     'Gray Gravel','Shogatsu','Aerial','Arizona','Alloy',
-                    'Alloy','Speleo','Chasm','','',
-                    'Pacman','Prison','Steep',
+                    'Alloy','Speleo','Chasm','Identify','',
+                ],[
+                    'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[
                     'Shogatsu','Valuation','Sierra Leone','Basalt','Tailwater',
                 ],
             ]
             for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
-                for(let b=0,lb=[5,5,3,5,constrain(set[menu.mode].length,0,5),constrain(set[menu.mode].length-5,0,5),constrain(set[menu.mode].length-10,0,5)][a];b<lb;b++){
-                    let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
-                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                for(let b=0,lb=[5,5,3,6,constrain(set[menu.mode].length,0,5),constrain(set[menu.mode].length-5,0,5),constrain(set[menu.mode].length-10,0,5)][a];b<lb;b++){
+                    let pos=[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:a==3?120:150,height:45})){
                         switch(a){
                             case 0:
                                 menu.players=b+1
@@ -180,6 +181,36 @@ function mouseClicked(){
                                     case 5:
                                         switch(b){
                                             case 0:
+                                                menu.level=7
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 1:
+                                                menu.level=16
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 2:
+                                                menu.level=20
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 3:
+                                                menu.level=21
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 4:
+                                                menu.level=28
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                instant()
+                                            break
+                                        }
+                                    break
+                                    case 6:
+                                        switch(b){
+                                            case 0:
                                                 menu.level=30
                                                 game.classicWeapon=true
                                                 game.pvp=true
@@ -227,6 +258,10 @@ function mouseClicked(){
                                             break
                                             case 3:
                                                 menu.level=29
+                                            break
+                                            case 4:
+                                                menu.level=54
+                                                game.classicWeapon=true
                                             break
                                         }
                                     break
@@ -281,10 +316,6 @@ function mouseClicked(){
                                                 instant()
                                             break
                                             case 4:
-                                                menu.level=28
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                                instant()
                                             break
                                         }
                                     break
@@ -334,25 +365,6 @@ function mouseClicked(){
                                             break
                                         }
                                     break
-                                    case 4:
-                                        switch(b){
-                                            case 0:
-                                                menu.level=7
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                            break
-                                            case 1:
-                                                menu.level=20
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                            break
-                                            case 2:
-                                                menu.level=21
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                            break
-                                        }
-                                    break
                                 }
                                 menu.mode=0
                             break
@@ -364,6 +376,7 @@ function mouseClicked(){
         case 'mission':
             for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
                 for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){
+                    game.smile=floor(random(0,100))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){

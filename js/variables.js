@@ -8,7 +8,7 @@ game={
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
   sectors:[],respawners:[0,0],
-  deprecate:false,
+  deprecate:false,smile:false,
 }
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[],mode:0}
@@ -3777,7 +3777,7 @@ types={
       desc:'Can double jump and mash to fire faster',dpsBuff:1,
     },{
       name:'PlayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:2,
       desc:'Fires very fast',dpsBuff:1,
     },{
       name:'PlayerRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
@@ -3895,7 +3895,7 @@ types={
     
     {
       name:'PlayerSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:391,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:391,
       desc:'Generalist weapon',dpsBuff:1,
     },{
       name:'PlayerLaser',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4056,15 +4056,15 @@ types={
     
     {
       name:'PlayerSaturationMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:161,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:161,
       desc:'Machine gun that fires faster the more it fires',dpsBuff:1.5,
     },{
       name:'PlayerMachineGunFirework',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:124,
       desc:'Machine gun that also fires light rockets',dpsBuff:5/3,
     },{
       name:'PlayerSprayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:175,
       desc:'Machine gun with an extra embedded gun',dpsBuff:1,
     },{
       name:'PlayerEmissary',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4072,7 +4072,7 @@ types={
       desc:'Machine gun that fires three concentrated streams',dpsBuff:3,
     },{
       name:'PlayerMatulaTree',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:468,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:468,
       desc:'Machine gun that fires variable bullets in a numeric pattern',dpsBuff:1,
     },{
       name:'PlayerFurnace',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4084,11 +4084,11 @@ types={
       desc:'Machine gun that also fires rapid drones',dpsBuff:1,
     },{
       name:'PlayerExpenditure',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:625,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:625,
       desc:'Machine gun, but each shot drops a short-lived trap',dpsBuff:1,
     },{
       name:'PlayerMachineGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:179,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:179,
       desc:'Has a machine gun auto turret',dpsBuff:1,
     },
     
@@ -4904,7 +4904,7 @@ types={
       desc:'Sidekick with helices',dpsBuff:6,
     },{
       name:'PlayerCoadjutor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:300,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:300,
       desc:'Sidekick with machine guns',dpsBuff:3,
     },{
       name:'PlayerAbetter',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5120,39 +5120,39 @@ types={
 
     {
       name:'PlayerEris',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:392,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:392,
       desc:'Submachine that shrinks enemies to a reduced size',dpsBuff:1,
     },{
       name:'PlayerPyramidal',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:448,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:448,
       desc:'Submachine with some homing bullets',dpsBuff:1,
     },{
       name:'PlayerStacker',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:431,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:431,
       desc:'Submachine that fires two layers of bullets',dpsBuff:1,
     },{
       name:'PlayerInsulator',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:411,
+      damageBuff:1.65,reloadBuff:1,crit:0,weapon:411,
       desc:'Submachine that fires engineer balls occasionally',dpsBuff:2,
     },{
       name:'PlayerDefender',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:462,
+      damageBuff:1.65,reloadBuff:1,crit:0,weapon:462,
       desc:'Submachine that fires heavy traps occasionally',dpsBuff:1.5,
     },{
       name:'PlayerAnnexer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:417,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:417,
       desc:'Submachine with a flamethrower auto turret',dpsBuff:1,
     },{
       name:'PlayerAspirant',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:517,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:517,
       desc:'Submachine that occasionally fires spread sniper bullets',dpsBuff:1,
     },{
       name:'PlayerCurtana',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:560,
+      damageBuff:1.65,reloadBuff:1,crit:0,weapon:560,
       desc:'Submachine that fires traps with guns backward occasionally',dpsBuff:1.5,
     },{
       name:'PlayerSubmachineception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:457,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:457,
       desc:'Has a submachine auto turret',dpsBuff:1,
     },
     
@@ -5570,7 +5570,7 @@ types={
       desc:'Spreadling that spawns large drones',dpsBuff:9,
     },{
       name:'PlayerMachineHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:219,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:219,
       desc:'Machine gun that spawns large drones',dpsBuff:1.5,
     },{
       name:'PlayerLaserHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5789,7 +5789,7 @@ types={
       desc:'Has a quad auto turret',dpsBuff:1,
     },{
       name:'PlayerElectromagnet',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:656,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:656,
       desc:'Machine gun that occassionally fires slicer projectiles',dpsBuff:1,
     },
 
@@ -5900,13 +5900,13 @@ types={
       desc:'Spams homing bullets in all directions',dpsBuff:0,
     },{
       name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:99,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:99,
     },{
       name:'PlayerDoublePushPunchArmored',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:134,
     },{
       name:'PlayerHexadecimalPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:135,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:135,
     },{
       name:'PlayerImmortal',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:101,
@@ -5924,7 +5924,7 @@ types={
       damageBuff:2,reloadBuff:4,crit:0,weapon:94,
     },{
       name:'PlayerPushMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:163,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:163,
     },{
       name:'PlayerShotgunChain',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:22,
@@ -5969,7 +5969,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
     },{
       name:'PlayerMicroscope',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:369,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:369,
     },{
       name:'PlayerButterfly',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:373,
@@ -6369,7 +6369,7 @@ types={
 
     {
       name:'ConstructMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
@@ -6446,7 +6446,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:672,
     },{
       name:'Turret',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:175,
     },{
       name:'Rogue',sizeBuff:1.8,lifeBuff:5,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:662,
@@ -6551,7 +6551,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:465,
     },{
       name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'SidekickStreamlinedRifle',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:149,
@@ -6984,31 +6984,31 @@ types={
       damageBuff:1,reloadBuff:3,crit:1,weapon:21,
     },{
       name:'Shotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunWeak',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:0.6,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:0.6,crit:0,weapon:0,
     },{
       name:'PushShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:126,
     },{
       name:'BigPushShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:126,
     },{
       name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:22,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:22,
     },{
       name:'CritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:1,weapon:0,
     },{
       name:'ShotgunJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'BigFlipPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:23,
@@ -7053,7 +7053,7 @@ types={
       damageBuff:1,reloadBuff:0.6,crit:0,weapon:57,
     },{
       name:'BigShotgunChain',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:22,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:22,
     },{
       name:'RadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:27,
@@ -7077,13 +7077,13 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:27,
     },{
       name:'BigShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'BigCritShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:1,weapon:0,
     },{
       name:'BigFastShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'FastPunchHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:28,
@@ -7842,10 +7842,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:125,
     },{
       name:'HyperShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'FastShotgun',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'SpawnerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:18,
@@ -7911,10 +7911,10 @@ types={
       damageBuff:1,reloadBuff:4,crit:1,weapon:88,
     },{
       name:'RapidShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:2,crit:0,weapon:0,
     },{
       name:'BigRapidShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:2,crit:0,weapon:0,
     },{
       name:'PushMachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:163,
@@ -7929,7 +7929,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:56,
     },{
       name:'BigShotgunJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'MedicAtrophy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:250,
@@ -7986,7 +7986,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
       name:'BigHeavyPushShotgun',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:126,
+      damageBuff:0.375,reloadBuff:1,crit:0,weapon:126,
     },{
       name:'FlamethrowerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
@@ -8001,7 +8001,7 @@ types={
       damageBuff:1.5,reloadBuff:1.5,crit:1,weapon:137,
     },{
       name:'TinyShotgun',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'BigLongPushFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:102,
@@ -8019,7 +8019,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:57,
     },{
       name:'ShotgunSpeedBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'BigHeavyDeflectorMachineGun',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:16,
@@ -8055,10 +8055,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:19,
     },{
       name:'Submachine',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:391,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:391,
     },{
       name:'HeavySubmachine',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:391,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:391,
     },{
       name:'EngineerHeal',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:10,
@@ -14801,7 +14801,7 @@ types={
 			cooldown:4,
 			stop:120,
 			reload:3,
-			speed:0.975,
+			speed:0.9,
       uses:120,
 		},{
 			name:'Justice Engineer',
@@ -18219,7 +18219,7 @@ Hayden - brown crate nook
 "###.................................................>#####################<.............[  =========  ].............................>##################                                                                                                                  ",
 "###.$      | ]...........[ |       |       |       ].>###################<.[       |       |       |       |       |       |       ].>################[                                                                                                                  ",
 "###.       |  ].........[  |       |       |       |].>#################<.[|       |       |       |       |       |       |       |].>##############[                                                                                                                   ",
-"###.       |    ].....[    |       |       |       | ].>###############<.[ |       |       |   e   |       |       |       |       | ].>#############$                                                                                                                   ",
+"###.       |    ].....[    |       |       |       | ].>###############<.[ |       |       | 12345 |   e   |       |       |       | ].>#############$                                                                                                                   ",
 "###.       |    ].....[    |       |       |       |  ].................[  |  <.........>  =========  <.....................       |  ].............[                                                                                                                    ",
 "###.       |    ].....[    |       |       |       |       |       |       | <.[#######].> |       | <.[############<.[    |       |       |      /|                                                                                                                     ",
 "###.       |     ]...[     |       |       |       |       |       |       |<.[#########].>|       |<.[############<.[     |       |       |       |                                                                                                                     ",
@@ -18520,7 +18520,7 @@ Hayden - brown crate nook
 "                             | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |                ",
 "                             | |     | |~ :~ | |     |&|     | |     | |     | |     | |     | |     | |     | |     | |     | |~ :~ | |     | |                ",
 "                             | |     | _______ |     ___     | |     | |     | |     | |     | |     | |     | |     | |     | _______ |     | |                ",
-"                             |:|     | |     | |     | |     | | --- |:|     | |     | |     | | --- | |     | |     |:|     | |     | |     | |      :         ",
+"                             | |     | |     | |     | |     | | --- |:|     | |     | |     | | --- | |     | |     |:|     | |     | |     | |      :         ",
 "                            ]....@@@../| --- |/.........[===]............@@@....[===]...[   ]...........[===]....@@@....[   ]./| --- |/.[===]...[===]...[       ",
 "                            ]...........................[   ]...................[   ]...[   ]...........[   ]...........[   ]...........[   ]...[   ]...[       ",
 "                             | |     | |     | |     | |     | |     | |     | |     ...     | |     | |     | |     | |     | |     | |     ...     | |        ",

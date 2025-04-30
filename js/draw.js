@@ -6,25 +6,26 @@ function mainloop(){
             let set=[
                 [],[
                     'Vietnam','Normandy','Normandy','Isonzo','Isonzo',
-                    'Stalingrad','Prison','Steep','Gray Gravel',
+                    'Stalingrad','Prison','Steep','Gray Gravel','Basalt',
                 ],[
                     'DoubleMountain','Steel','Steel','Sulfate','Process',
                     'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Abandoned','Identify',
+                    'Big Data','Rusted','Abandoned','Identify','',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy','Blueprint',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
                     'Alloy','Speleo','Chasm','Identify','',
-                    'Pacman','Prison','Steep',
+                ],[
+                    'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[
                     'Shogatsu','Valuation','Sierra Leone','Basalt','Tailwater',
                 ],
             ]
             for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
-                for(let b=0,lb=[5,5,3,5,constrain(set[menu.mode].length,0,5),constrain(set[menu.mode].length-5,0,5),constrain(set[menu.mode].length-10,0,5)][a];b<lb;b++){
-                    let pos=[width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                for(let b=0,lb=[5,5,3,6,constrain(set[menu.mode].length,0,5),constrain(set[menu.mode].length-5,0,5),constrain(set[menu.mode].length-10,0,5)][a];b<lb;b++){
+                    let pos=[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     if(
                         a==0&&menu.players==b+1||
                         a==1&&menu.gaming==b+1||
@@ -35,7 +36,11 @@ function mainloop(){
                     }else{
                         fill(100)
                     }
-                    rect(pos[0],pos[1],150,45,10)
+                    if(a==3){
+                        rect(pos[0],pos[1],120,45,10)
+                    }else{
+                        rect(pos[0],pos[1],150,45,10)
+                    }
                     fill(0)
                     textSize(15)
                     text(
@@ -43,7 +48,7 @@ function mainloop(){
                             `${b+1} Players`,
                             `${b+1} Gaming`,
                             ['Normal Weapons','Special Weapons','Class Weapons'][b],
-                            ['Survival','Invasion','Conquest','Arena','Specialty'][b],
+                            ['Survival','Invasion','Conquest','Arena','Aimless','Specialty'][b],
                             set[menu.mode][b],
                             set[menu.mode][5+b],
                             set[menu.mode][10+b],
@@ -55,10 +60,10 @@ function mainloop(){
                             case 0: case 1:
                                 text(`PvE`,pos[0],pos[1]+15)
                             break
-                            case 2: case 3:
+                            case 2: case 3: case 4:
                                 text(`PvP`,pos[0],pos[1]+15)
                             break
-                            case 4:
+                            case 5:
                                 text(`PvP/PvE`,pos[0],pos[1]+15)
                             break
                         }

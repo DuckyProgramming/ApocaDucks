@@ -1138,7 +1138,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*95.5,game.tileset[1]*12,game.tileset[0]*9,game.tileset[1]*8],
                 [game.tileset[0]*95.5,game.tileset[1]*18,game.tileset[0]*9,game.tileset[1]*4],
                 [game.tileset[0]*107.5,game.tileset[1]*16,game.tileset[0]*15,game.tileset[1]*8],
-                [game.tileset[0]*96,game.tileset[1]*22,game.tileset[0]*8,game.tileset[1]*4],
+                [game.tileset[0]*97,game.tileset[1]*22,game.tileset[0]*10,game.tileset[1]*4],
                 [game.tileset[0]*119.5,game.tileset[1]*14,game.tileset[0]*9,game.tileset[1]*4],
 
                 [game.tileset[0]*140,game.tileset[1]*18,game.tileset[0]*50,game.tileset[1]*4],
@@ -2604,7 +2604,9 @@ function generateLevel(info,layer){
                     entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,36))
                 break
                 case 'R':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,42))
+                    if(!(game.level==54&&!game.pvp)){
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,42))
+                    }
                 break
                 case 'X':
                     print(game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1])
@@ -5154,10 +5156,10 @@ function setupTrig(){
 	}
 }
 function lsin(direction){
-	return constants.trig[0][floor((direction%360+360)%360*2)]
+	return constants.trig[0][floor(((direction+0.5)%360+360)%360*2)]
 }
 function lcos(direction){
-	return constants.trig[1][floor((direction%360+360)%360*2)]
+	return constants.trig[1][floor(((direction+0.5)%360+360)%360*2)]
 }
 function outWalls(){
     let totals=[[],[]]
