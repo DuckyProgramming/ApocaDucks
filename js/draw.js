@@ -16,7 +16,7 @@ function mainloop(){
                     'Fragile','NuclearMountain','Razorpoint','Entropy','Corridor (WIP)',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
-                    'Alloy','Speleo','Chasm','Identify','Hard Hat (WIP)',
+                    'Alloy','Speleo','Chasm','Identify','Hard Hat',
                 ],[
                     'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[

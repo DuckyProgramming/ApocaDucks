@@ -54,7 +54,7 @@ function mouseClicked(){
                     'Fragile','NuclearMountain','Razorpoint','Entropy','',
                 ],[
                     'Gray Gravel','Shogatsu','Aerial','Arizona','Alloy',
-                    'Alloy','Speleo','Chasm','Identify','',
+                    'Alloy','Speleo','Chasm','Identify','Hard Hat',
                 ],[
                     'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[
@@ -334,6 +334,7 @@ function mouseClicked(){
                                                 menu.level=60
                                             break
                                             case 4:
+                                                menu.level=61
                                             break
                                         }
                                         game.pvp=true
