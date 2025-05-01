@@ -1,26 +1,131 @@
 function mainloop(){
     clear()
     background(150)
+    let set=[]
     switch(stage.scene){
         case 'menu':
-            let set=[
+            set=[
                 [],[
-                    'Vietnam','Normandy','Normandy','Isonzo','Isonzo',
-                    'Stalingrad','Prison','Steep','Gray Gravel','Basalt',
+                    ['Vietnam','Normandy','Isonzo','Stalingrad'],
+                    ['Prison','Steep','Basalt','Nowhere (WIP)'],
                 ],[
-                    'DoubleMountain','Steel','Steel','Sulfate','Process',
-                    'Downward','Arizona','Fragile','Alloy','NuclearMountain',
-                    'Big Data','Rusted','Abandoned','Identify','idk',
+                    ['DoubleMountain','Steel','Sulfate','Process'],
+                    ['Gray Gravel','Downward','Arizona','Fragile'],
+                    ['Alloy','NuclearMountain','Big Data','Rusted'],
+                    ['Tailwater','Abandoned','Identify',''],
+                ],[
+                    ['DoubleMountain','Steel','Sulfate','Process'],
+                    ['Downward','Fragile','NuclearMountain','Razorpoint'],
+                    ['Entropy','Abandoned (WIP)','Tailwater','Blueprint'],
+                ],[
+                    ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
+                    ['Aerial','Alloy','Speleo','Chasm'],
+                    ['Identify','Hard Hat','Granary (WIP)','Rocksalt (WIP)'],
+                ],[
+                    ['Pacman','Stalingrad','Prison','Steep'],
+                ],[
+                    ['Shogatsu','Valuation','Sierra Leone','Basalt'],
+                ],
+            ]
+            for(let a=0,la=4+set[menu.mode].length;a<la;a++){
+                for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
+                    let pos=[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    if(
+                        a==0&&menu.players==b+1||
+                        a==1&&menu.gaming==b+1||
+                        a==2&&menu.weapon==b||
+                        a==3&&menu.mode==b+1
+                    ){
+                        fill(100,200,100)
+                    }else{
+                        fill(100)
+                    }
+                    if(
+                        menu.mode==1&&a==4&&b==1||
+                        menu.mode==1&&a==4&&b==2||
+                        menu.mode==2&&a==4&&b==1
+                    ){
+                        rect(pos[0]+37,pos[1],76,45,10)
+                        rect(pos[0]-37,pos[1],76,45,10)
+                    }else{
+                        if(a==3){
+                            rect(pos[0],pos[1],120,45,10)
+                        }else{
+                            rect(pos[0],pos[1],150,45,10)
+                        }
+                    }
+                    fill(0)
+                    textSize(15)
+                    text(
+                        a>=4?set[menu.mode][a-4][b]:[
+                            `${b+1} Players`,
+                            `${b+1} Gaming`,
+                            ['Normal Weapons','Special Weapons','Class Weapons'][b],
+                            ['Survival','Invasion','Conquest','Arena','Aimless','Specialty'][b]
+                        ][a],pos[0],pos[1]
+                    )
+                    textSize(11.25)
+                    if(a==3){
+                        switch(b){
+                            case 0: case 1:
+                                text(`PvE`,pos[0],pos[1]+15)
+                            break
+                            case 2: case 3: case 4:
+                                text(`PvP`,pos[0],pos[1]+15)
+                            break
+                            case 5:
+                                text(`PvP/PvE`,pos[0],pos[1]+15)
+                            break
+                        }
+                    }
+                    switch(menu.mode){
+                        case 1:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 1: case 2:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Reverse`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 2:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Chaos`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                    }
+                }
+            }
+        break
+        case 'menu2':
+            set=[
+                [],[
+                    'Vietnam','Normandy','Isonzo','Stalingrad','Prison',
+                    'Steep','Gray Gravel','Basalt','Nowhere (WIP)','',
                 ],[
                     'DoubleMountain','Steel','Sulfate','Process','Downward',
-                    'Fragile','NuclearMountain','Razorpoint','Entropy','Corridor (WIP)',
+                    'Arizona','Fragile','Alloy','NuclearMountain','Big Data',
+                    'Rusted','Tailwater','Abandoned','Identify','',
+                ],[
+                    'DoubleMountain','Steel','Sulfate','Process','Downward',
+                    'Fragile','NuclearMountain','Razorpoint','Entropy','',
                 ],[
                     'Vietnam','Gray Gravel','Shogatsu','Arizona','Aerial',
                     'Alloy','Speleo','Chasm','Identify','Hard Hat',
                 ],[
                     'Pacman','Stalingrad','Prison','Steep','Blueprint',
                 ],[
-                    'Shogatsu','Valuation','Sierra Leone','Basalt','Tailwater',
+                    'Shogatsu','Valuation','Sierra Leone','Basalt','Granary (WIP)',
                 ],
             ]
             for(let a=0,la=4+ceil(set[menu.mode].length/5);a<la;a++){
@@ -36,10 +141,19 @@ function mainloop(){
                     }else{
                         fill(100)
                     }
-                    if(a==3){
-                        rect(pos[0],pos[1],120,45,10)
+                    if(
+                        menu.mode==1&&a==4&&b==1||
+                        menu.mode==1&&a==4&&b==2||
+                        menu.mode==2&&a==4&&b==1
+                    ){
+                        rect(pos[0]+37,pos[1],76,45,10)
+                        rect(pos[0]-37,pos[1],76,45,10)
                     }else{
-                        rect(pos[0],pos[1],150,45,10)
+                        if(a==3){
+                            rect(pos[0],pos[1],120,45,10)
+                        }else{
+                            rect(pos[0],pos[1],150,45,10)
+                        }
                     }
                     fill(0)
                     textSize(15)
@@ -73,8 +187,9 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 2: case 4:
-                                            text(`Reverse`,pos[0],pos[1]+15)
+                                        case 1: case 2:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Reverse`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -84,8 +199,9 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 2:
-                                            text(`Chaos`,pos[0],pos[1]+15)
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Chaos`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -431,7 +547,7 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==65
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -532,7 +648,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61){
+                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -564,7 +680,7 @@ function mainloop(){
                                 run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                             ){
                                 run.fore[a][b].display(graphics.main[c])
-                                if(a==2||a==3){
+                                if(a==(game.level==54||game.level==55||game.level==65?3:2)){
                                     bs[c].push([a,b])
                                 }
                             }else if(game.level==16){
@@ -580,14 +696,14 @@ function mainloop(){
                                         run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                                     ){
                                         run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==2){
+                                        if(a==(game.level==54||game.level==55||game.level==65?3:2)){
                                             bs[c].push([a,b])
                                         }
                                         d=ld
                                     }
                                 }
                             }
-                            if(a==(game.level==54||game.level==55?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==(game.level==54||game.level==55||game.level==65?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -813,7 +929,7 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55: case 58: case 59:
+                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
@@ -858,7 +974,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==(game.level==54||game.level==55?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                    if(!(bs[a][b][0]==(game.level==54||game.level==55||game.level==65?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }
