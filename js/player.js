@@ -5294,7 +5294,7 @@ class player{
                                 }
                             }
                         break
-                        case 1:d
+                        case 1:
                             this.subWeaponAType=-1
                         break
                         case 2:
