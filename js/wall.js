@@ -6655,10 +6655,18 @@ class wall{
                             }
                             graphics.overlay[0].rect(25+(this.pos-(game.level==19?2:0)-(game.level==31?3:0))*40,25+(a+1)*25,30,3,1)
                         }
-                    }else if(this.pos==0&&game.level==27&&game.pvp||this.pos==0&&game.level==38&&game.pvp){
+                    }else if(this.pos==0&&(game.level==27)&&game.pvp){
+                        graphics.overlay[0].fill(255)
+                        graphics.overlay[0].textSize(10)
+                        graphics.overlay[0].text(formatTime(min(game.time,10800)),25+(this.pos+1.5-(game.level==19?2:0)-(game.level==31?3:0))*40,15+25)
+                    }else if(this.pos==0&&(game.level==38)&&game.pvp){
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(formatTime(min(game.time,14400)),25+(this.pos+1.5-(game.level==19?2:0)-(game.level==31?3:0))*40,15+25)
+                    }else if(this.pos==0&&(game.level==44||game.level==65)&&game.pvp){
+                        graphics.overlay[0].fill(255)
+                        graphics.overlay[0].textSize(10)
+                        graphics.overlay[0].text(formatTime(min(game.time,18000)),25+(this.pos+2-(game.level==19?2:0)-(game.level==31?3:0))*40,15+25)
                     }else if(game.level==29&&this.pos==0){
                         for(let a=0,la=game.players;a<la;a++){
                             graphics.overlay[0].fill(255)

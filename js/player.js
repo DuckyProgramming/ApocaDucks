@@ -2051,7 +2051,7 @@ class player{
                     local++
                 }
             }
-            if(local>=1){
+            if(local>=1||game.time>18000){
                 valid=false
             }
         }
