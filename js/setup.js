@@ -9,8 +9,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=62
-        menu.level=62
+        game.level=64
+        menu.level=64
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{

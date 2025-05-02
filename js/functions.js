@@ -1967,6 +1967,9 @@ function generateLevel(info,layer){
                         case 61:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,70))
                         break
+                        case 64:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,70))
+                        break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a+0.4)*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,5))
                         break
@@ -2115,7 +2118,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 29: case 34: case 36: case 37: case 38: case 39: case 49: case 50: case 51: case 53: case 54:
-                        case 55: case 58: case 59: case 60: case 61: case 63: case 65:
+                        case 55: case 58: case 59: case 60: case 61: case 62: case 63: case 64: case 65:
                             if(level[a][b-1]=='['||level[a][b-1]=='>'){
                                 entities.walls[0].splice(0,0,new wall(graphics.main,b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*2,game.tileset[1]*0.4,24))
                             }else if(level[a][b+1]==']'||level[a][b+1]=='<'){
@@ -2600,7 +2603,7 @@ function generateLevel(info,layer){
                         case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
                         break
-                        case 62:
+                        case 62: case 64:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                         break
                         case 63:
@@ -2701,7 +2704,7 @@ function generateLevel(info,layer){
                         break
                         case 23: case 25: case 26: case 30: case 32: case 33: case 34: case 35: case 38: case 39:
                         case 40: case 41: case 42: case 43: case 47: case 49: case 50: case 51: case 52: case 54:
-                        case 55: case 56: case 58: case 59: case 60: case 61: case 63:
+                        case 55: case 56: case 58: case 59: case 60: case 61: case 63: case 64:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
                         break
                         case 28:
