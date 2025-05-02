@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=1
         game.gaming=1
-        game.level=65
-        menu.level=65
+        game.level=62
+        menu.level=62
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -52,7 +52,7 @@ function mouseClicked(){
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Fragile','NuclearMountain','Razorpoint'],
-                    ['Entropy','Abandoned (WIP)','Tailwater','Blueprint'],
+                    ['Entropy','Tailwater','Abandoned','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -352,8 +352,6 @@ function mouseClicked(){
                                                 instant()
                                             break
                                             case 1:
-                                            break
-                                            case 2:
                                                 menu.level=65
                                                 game.pvp=true
                                                 menu.players*=4
@@ -361,6 +359,11 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
+                                            break
+                                            case 2:
+                                                menu.level=63
+                                                game.classicWeapon=true
+                                                game.pvp=true
                                             break
                                             case 3:
                                                 menu.level=28

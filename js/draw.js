@@ -16,7 +16,7 @@ function mainloop(){
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Fragile','NuclearMountain','Razorpoint'],
-                    ['Entropy','Abandoned (WIP)','Tailwater','Blueprint'],
+                    ['Entropy','Tailwater','Abandoned','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -551,7 +551,7 @@ function mainloop(){
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
