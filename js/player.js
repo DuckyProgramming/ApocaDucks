@@ -1817,7 +1817,7 @@ class player{
         this.weaponData=types.weapon[this.weaponType]
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult)}
         this.weapon.cooldown=60
-        if(game.randomizer){
+        if(game.randomizer||this.playerData.name=='PlayerVIP'){
             this.width=8*this.playerData.sizeBuff
             this.height=24*this.playerData.sizeBuff
             this.fade=0
@@ -14694,7 +14694,7 @@ class player{
             }
         }
         if(this.position.x!=this.position.x||this.position.y!=this.position.y){
-            print(this.position,this.playerData.name,'Fail, player.js: 14695')
+            print(this.position,this.playerData.name,'Fail, player.js: 14695',this)
             this.respawn()
         }
     }

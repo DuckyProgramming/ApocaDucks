@@ -319,6 +319,7 @@ class wall{
                         this.endTime=0
                     break
                     case 36: case 41: case 45: case 50: case 51: case 52: case 53: case 56: case 60: case 61:
+                    case 62: case 64:
                         this.timers=[]
                         for(let a=0,la=game.players;a<la;a++){
                             this.timers.push([0,0])
@@ -1386,6 +1387,23 @@ class wall{
                                 29+this.balls[0][a][3]*30
                             )
                             regPoly(layer,this.balls[0][a][0],this.balls[0][a][1],this.balls[0][a][5],this.balls[0][a][2]*0.5,this.balls[0][a][2]*0.5,this.balls[0][a][4])
+                        }
+                    break
+                    case 62:
+                        if(this.position.y<game.tileset[1]*10){
+                            if(this.time<480||this.time<600&&this.time%30<15){
+                                layer.fill(80)
+                                layer.rect(0,0,this.width+1,this.height+1)
+                            }
+                        }else{
+                            layer.fill(62,63,65)
+                            for(let a=0,la=round(this.height/game.tileset[1])*2;a<la;a++){
+                                if(a%2==0){
+                                    for(let b=0,lb=round(this.width/game.tileset[0])*2;b<lb;b++){
+                                        layer.rect(this.width*(-0.5+(b+0.5)/lb),this.height*(-0.5+(a+0.5)/la))
+                                    }
+                                }
+                            }
                         }
                     break
                     default:

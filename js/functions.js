@@ -1274,6 +1274,9 @@ function generateLevel(info,layer){
         case 61:
             game.edge=[level[0].length*44,level.length*36]
         break
+        case 62:
+            game.edge=[level[0].length*48,level.length*36]
+        break
         case 63:
             game.edge=[level[0].length*46,level.length*40]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
@@ -1288,6 +1291,9 @@ function generateLevel(info,layer){
                 [game.tileset[0]*132,game.tileset[1]*30.5,game.tileset[0]*22,game.tileset[1]*3],
                 [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
             ]
+        break
+        case 64:
+            game.edge=[level[0].length*45,level.length*40]
         break
         case 65:
             game.edge=[level[0].length*45,level.length*40]
@@ -1389,6 +1395,9 @@ function generateLevel(info,layer){
         break
         case 61:
             game.tilecolor[0]=[151,83,57]
+        break
+        case 64:
+            game.tilecolor[0]=[170,124,98]
         break
         default:
             game.tilecolor[0]=[120,120,120]
@@ -1884,7 +1893,7 @@ function generateLevel(info,layer){
                             }
                         break
                         case 19: case 22: case 23: case 24: case 31: case 35: case 36: case 49: case 50: case 51:
-                        case 52: case 53: case 54: case 56: case 61:
+                        case 52: case 53: case 54: case 56: case 61: case 62: case 64:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             entities.walls[1][entities.walls[1].length-1].weapon=listing[cluster][floor(random(listing[cluster].length))]
                         break
@@ -2590,6 +2599,9 @@ function generateLevel(info,layer){
                         break
                         case 28:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
+                        break
+                        case 62:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],28))
                         break
                         case 63:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,69))

@@ -15,8 +15,9 @@ function mainloop(){
                     ['Tailwater','Abandoned','Identify',''],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
-                    ['Downward','Fragile','NuclearMountain','Razorpoint'],
-                    ['Entropy','Tailwater','Abandoned','Blueprint'],
+                    ['Downward','Sierra Leone','Fragile','NuclearMountain'],
+                    ['Razorpoint','Entropy','Tailwater','Abandoned'],
+                    ['','','','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -24,7 +25,7 @@ function mainloop(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Sierra Leone','Basalt'],
+                    ['Shogatsu','Valuation','Basalt',''],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){

@@ -8287,19 +8287,19 @@ class projectile{
 							this.damage*=entities.players[b].fort?0.1:0.25
 						}
 						if((this.type==9||this.type==155||this.type==216)&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.type==10&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*3*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*3*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.type==11&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
 							entities.players[b].life=entities.players[b].base.life
 						}else if(this.type==38&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].critBuff=max(480,entities.players[b].critBuff)
 						}else if(this.type==63&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].defendBuff=max(480,entities.players[b].defendBuff)
 						}else if(this.type==82&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].stunTime=0
 							entities.players[b].stuckTime=0
 							entities.players[b].vulnerableTime=0
@@ -8308,7 +8308,7 @@ class projectile{
 							entities.players[b].DOT.active=0
 						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
 							if(!entities.players[b].fort){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100))*0.5*(this.index==entities.players[b].index?0.1:1),max(entities.players[b].life,entities.players[b].base.life*2))
+								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.5*(this.index==entities.players[b].index?0.1:1),max(entities.players[b].life,entities.players[b].base.life*2))
 							}
 						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81){
 							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?3:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:1))
@@ -8321,15 +8321,15 @@ class projectile{
 						}else if(this.type==131){
 							entities.players[b].takeDamage(this.damage*(1+8*this.timer/this.base.time))
 						}else if(this.type==273&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*5))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*5))
 						}else if(this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id){
 							entities.players[b].life=min(entities.players[b].life+this.damage,max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].defendBuff=max(entities.players[b].defendBuff,120)
 						}else if(this.type==345&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*1.5))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.8,max(entities.players[b].life,entities.players[b].base.life*1.5))
 							entities.players[b].critBuff=max(90,entities.players[b].critBuff)
 						}else if(this.type==350&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2.5,entities.players[b].base.life/100)),max(entities.players[b].life,entities.players[b].base.life*2))
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 							entities.players[b].speedBuff=max(480,entities.players[b].defendBuff)
 						}else if(
 							this.exploder
