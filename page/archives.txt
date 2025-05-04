@@ -1,3 +1,9 @@
+brick bug
+frozen glitched beak
+vip abandoned
+
+
+
 
 vip mode map
 move sierra leone to make space
@@ -8,6 +14,10 @@ blastforge?
 
 
 
+
+757 - instant level 1
+758 - instant level 2
+759 - pickup sentry
 
 
 756 - speed apply medic, 44

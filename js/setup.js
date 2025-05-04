@@ -24,7 +24,7 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerPyro',types.player)]]
+        game.weapon=[[findName('PlayerSpyC2',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
@@ -57,11 +57,11 @@ function mouseClicked(){
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
-                    ['Identify','Hard Hat','Granary (WIP)','Rocksalt (WIP)'],
+                    ['Identify','Hard Hat','Granary','Rocksalt'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt',''],
+                    ['Shogatsu','Valuation','Basalt','Abandoned (WIP)'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -380,10 +380,10 @@ function mouseClicked(){
                                                 menu.level=61
                                             break
                                             case 2:
-                                                ////granary
+                                                menu.level=62
                                             break
                                             case 3:
-                                                ////rocksalt
+                                                menu.level=64
                                             break
                                         }
                                         game.pvp=true

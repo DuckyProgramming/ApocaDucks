@@ -21,11 +21,11 @@ function mainloop(){
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
-                    ['Identify','Hard Hat','Granary (WIP)','Rocksalt (WIP)'],
+                    ['Identify','Hard Hat','Granary','Rocksalt'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt',''],
+                    ['Shogatsu','Valuation','Basalt','Abandoned (WIP)'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -99,6 +99,23 @@ function mainloop(){
                                         case 1:
                                             text(`Standard`,pos[0]-37,pos[1]+15)
                                             text(`Chaos`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 6:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 0: case 2:
+                                            text(`Duck Destruction`,pos[0],pos[1]+15)
+                                        break
+                                        case 1:
+                                            text(`Heist`,pos[0],pos[1]+15)
+                                        break
+                                        case 3:
+                                            text(`VIP`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break
@@ -548,11 +565,12 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==65
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||
+                    game.level==65
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
