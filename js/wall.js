@@ -337,7 +337,7 @@ class wall{
                         this.loc=[[],[]]
                         this.raidTick=0
                     break
-                    case 26: case 28: case 33: case 63:
+                    case 26: case 28: case 33: case 49: case 63:
                         this.timers=[]
                         for(let a=0,la=game.players;a<la;a++){
                             this.timers.push(0)
@@ -841,7 +841,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if((c.standard||(c.type==59||c.type==60)&&(game.level==58||game.level==63||game.level==66))&&(this.type!=37||game.level==41)&&c.type!=37&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=47)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))){
+                if((c.standard||(c.type==59||c.type==60)&&(game.level==58||game.level==63||game.level==66))&&(this.type!=37||game.level==41)&&c.type!=37&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))){
                     if(this.type==17&&c.type==47){
                         if(
                             inFullBoxBoxOpen(this,entities.walls[a][b])||
@@ -957,7 +957,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&this.type!=37&&c.type!=37&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&!(this.type==35||c.type==35&&game.level==29)){
+                if(c.standard&&this.type!=37&&c.type!=37&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&!(this.type==35||c.type==35&&game.level==29)){
                     for(let d=0,ld=this.boundary[0].length;d<ld;d++){
                         if(abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&c.position.x-c.width/2<this.boundary[0][d][0].x+1&&c.position.x+c.width/2>this.boundary[0][d][1].x-1){
                             this.boundary[0].splice(d,1)
@@ -5410,16 +5410,34 @@ class wall{
                 }
             break
             case 57:
-                if(game.level==49){
+                if(game.level==49&&!game.pvp){
                     layer.scale(1-game.pointAnim[1])
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
-                        layer.fill(100+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
-                        layer.fill(140+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,100+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
-                        layer.fill(40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        if(game.level==49&&game.pvp){
+                            layer.fill(
+                                (100+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                (80+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                (60+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                1-this.recharge/60)
+                            layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                            layer.fill(
+                                (140+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                (120+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                (100+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                1-this.recharge/60)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                            layer.fill(
+                                (40+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
+                                1-this.recharge/60)
+                        }else{
+                            layer.fill(100+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                            layer.fill(140+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,100+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                            layer.fill(40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        }
                         regTriangle(layer,this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.15,-30)
                     }
                 }
@@ -7011,11 +7029,11 @@ class wall{
                         break
                     }
                     graphics.overlay[0].rect(25+this.pos*40,25,30,3,1)
-                    if(this.type==31&&game.level==19&&game.pvp&&this.pos==2||this.type==31&&game.level==24||this.type==33&&game.level==23&&this.pos==4||game.level==28&&this.pos==1||this.type==31&&game.level==31&&game.pvp&&this.pos==3||game.level==33&&this.pos==0||game.level==39||game.level==63&&this.pos==0){
+                    if(this.type==31&&game.level==19&&game.pvp&&this.pos==2||this.type==31&&game.level==24||this.type==33&&game.level==23&&this.pos==4||game.level==28&&this.pos==1||this.type==31&&game.level==31&&game.pvp&&this.pos==3||game.level==33&&this.pos==0||game.level==39||game.level==49&&this.pos==3||game.level==63&&this.pos==0){
                         for(let a=0,la=this.timers.length;a<la;a++){
                             graphics.overlay[0].fill(255)
                             graphics.overlay[0].textSize(10)
-                            graphics.overlay[0].text(formatTime(this.timers[a]),25+(this.pos-(game.level==19?2:0)-(game.level==31?3:0))*40,15+(a+1)*25)
+                            graphics.overlay[0].text(formatTime(this.timers[a]),25+(this.pos-(game.level==19?2:0)-(game.level==31||game.level==49?3:0))*40,15+(a+1)*25)
                             switch(a+1){
                                 case 1:
                                     graphics.overlay[0].fill(15,75,255)
@@ -7036,7 +7054,7 @@ class wall{
                                     graphics.overlay[0].fill(125,15,255)
                                 break
                             }
-                            graphics.overlay[0].rect(25+(this.pos-(game.level==19?2:0)-(game.level==31?3:0))*40,25+(a+1)*25,30,3,1)
+                            graphics.overlay[0].rect(25+(this.pos-(game.level==19?2:0)-(game.level==31||game.level==49?3:0))*40,25+(a+1)*25,30,3,1)
                         }
                     }else if(this.pos==0&&(game.level==27)&&game.pvp){
                         graphics.overlay[0].fill(255)
@@ -7344,7 +7362,9 @@ class wall{
             break
             case 57:
                 layer.push()
-                if(game.level==57){
+                if(game.level==22){
+                    layer.scale(1-game.pointAnim[2])
+                }else if(game.level==49&&!game.pvp||game.level==57){
                     layer.scale(1-game.pointAnim[1])
                 }
                 layer.fill(game.level==64?250:180,1-this.recharge/60-this.hide)
@@ -7352,11 +7372,6 @@ class wall{
                 layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                 layer.pop()
                 if(this.infoFade>0){
-                    if(game.level==22){
-                        layer.scale(1-game.pointAnim[2])
-                    }else if(game.level==49){
-                        layer.scale(1-game.pointAnim[1])
-                    }
                     layer.fill(200,(1-this.recharge/60)*this.infoFade)
                     layer.rect(0,this.height/2+26,180,42,5)
                     layer.fill(0,(1-this.recharge/60)*this.infoFade)
@@ -7586,6 +7601,9 @@ class wall{
                             }
                         }
                         this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
+                        if(game.level==49&&game.pvp){
+                            this.visible=smoothAnim(this.visible,game.point[1]>0&&game.point[1]<=game.players&&(abs(entities.players[game.point[1]-1].position.x-this.position.x)<300&&abs(entities.players[game.point[1]-1].position.y-this.position.y)<120),0,1,10)
+                        }
                     }
                 }
                 if(game.level==55&&this.pos>=0){
@@ -7944,7 +7962,7 @@ class wall{
                             this.timers[game.point[a]-1]++
                         }
                     }
-                }else if(game.level==28&&this.owner>0&&this.owner<=game.players){
+                }else if((game.level==28||game.level==49)&&this.owner>0&&this.owner<=game.players){
                     this.timers[this.owner-1]++
                 }else if((game.level==33||game.level==63)&&game.pvp){
                     for(let a=0,la=entities.walls[1].length;a<la;a++){
@@ -8388,40 +8406,82 @@ class wall{
                             }
                         }
                     }
-                }else if(game.level==49&&this.base.height<=10){
-                    if(game.point[2]==0){
-                        if(this.height<game.tileset[1]*3){
-                            this.height+=0.1
-                            this.bounder.height+=0.1
-                            this.internalBounder.height+=0.1
-                            this.position.y+=0.05
-                            this.bounder.position.y+=0.05
-                            this.internalBounder.position.y+=0.05
-                            this.velocity.y=0.05
-                            for(let a=0,la=this.boundary.length;a<la;a++){
-                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
-                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                        if(a==0||a==2&&c==1||a==3&&c==1){
-                                            this.boundary[a][b][c].y+=0.1
+                }else if(game.level==49){
+                    if(this.base.height<=10&&!game.pvp){
+                        if(game.point[2]==0){
+                            if(this.height<game.tileset[1]*3){
+                                this.height+=0.1
+                                this.bounder.height+=0.1
+                                this.internalBounder.height+=0.1
+                                this.position.y+=0.05
+                                this.bounder.position.y+=0.05
+                                this.internalBounder.position.y+=0.05
+                                this.velocity.y=0.05
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(a==0||a==2&&c==1||a==3&&c==1){
+                                                this.boundary[a][b][c].y+=0.1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(this.height>10){
+                                this.height-=0.1
+                                this.bounder.height-=0.1
+                                this.internalBounder.height-=0.1
+                                this.position.y-=0.05
+                                this.bounder.position.y-=0.05
+                                this.internalBounder.position.y-=0.05
+                                this.velocity.y=-0.05
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(a==0||a==2&&c==1||a==3&&c==1){
+                                                this.boundary[a][b][c].y-=0.1
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }else{
-                        if(this.height>10){
-                            this.height-=0.1
-                            this.bounder.height-=0.1
-                            this.internalBounder.height-=0.1
-                            this.position.y-=0.05
-                            this.bounder.position.y-=0.05
-                            this.internalBounder.position.y-=0.05
-                            this.velocity.y=-0.05
-                            for(let a=0,la=this.boundary.length;a<la;a++){
-                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
-                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                        if(a==0||a==2&&c==1||a==3&&c==1){
-                                            this.boundary[a][b][c].y-=0.1
+                    }else if(game.pvp){
+                        if(game.point[2]>0&&game.point[2]<=game.players&&abs(this.base.position.x-entities.players[game.point[2]-1].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[game.point[2]-1].position.y)<75&&this.position.y>game.tileset[1]*30){
+                            if(this.height>0){
+                                this.height-=1
+                                this.bounder.height-=1
+                                this.internalBounder.height-=1
+                                this.position.y-=0.5
+                                this.bounder.position.y-=0.5
+                                this.internalBounder.position.y-=0.5
+                                this.velocity.y=-0.5
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(this.boundary[a][b][c].y>this.position.y){
+                                                this.boundary[a][b][c].y-=1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(this.height<this.base.height){
+                                this.height+=1
+                                this.bounder.height+=1
+                                this.internalBounder.height+=1
+                                this.position.y+=0.5
+                                this.bounder.position.y+=0.5
+                                this.internalBounder.position.y+=0.5
+                                this.velocity.y=0.5
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(a==0||a==2&&c==1||a==3&&c==1){
+                                                this.boundary[a][b][c].y+=1
+                                            }
                                         }
                                     }
                                 }
@@ -9098,7 +9158,7 @@ class wall{
                                 }
                             break
                             case 57:
-                                if(!(game.level==49&&game.pointAnim[1]>=1)){
+                                if(!(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&!(game.level==49&&game.pvp&&this.visible<1)){
                                     let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                     c.newWeaponSet(this.weapon)
                                     if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
@@ -9460,7 +9520,7 @@ class wall{
                                                                 }
                                                             break
                                                             case 49:
-                                                                if(game.pointAnim[0]<1){
+                                                                if(game.pointAnim[0]<1&&!game.pvp||game.point[0]==c.id&&game.pvp){
                                                                     for(let e=0,le=20;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-132.5,-112.5),this.align,100,240,false,-1))
                                                                         let mult=random(2.5,4)
@@ -9559,7 +9619,7 @@ class wall{
                                                                 }
                                                             break
                                                             case 49:
-                                                                if(!(game.pointAnim[0]<1||this.type==13)){
+                                                                if(!(game.pointAnim[0]<1&&!game.pvp||game.point[0]==c.id&&game.pvp||this.type==13)){
                                                                     this.reload=0
                                                                 }
                                                             break
@@ -9824,7 +9884,7 @@ class wall{
                                                                 }
                                                             break
                                                             case 49:
-                                                                if(game.pointAnim[0]<1){
+                                                                if(game.pointAnim[0]<1&&!game.pvp||game.point[0]==c.id&&game.pvp){
                                                                     for(let e=0,le=10;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,150,1200,false,-1))
                                                                         let mult=random(1.5,3)
@@ -9973,7 +10033,7 @@ class wall{
                                                                 }
                                                             break
                                                             case 49:
-                                                                if(game.pointAnim[0]<1){
+                                                                if(game.pointAnim[0]<1&&!game.pvp||game.point[0]==c.id&&game.pvp){
                                                                     for(let e=0,le=15;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,258,-255+(e+0.5)/le*150,c.id,50,120,false,-1))
                                                                         entities.projectiles[entities.projectiles.length-1].velocity.x*=0.9

@@ -12,12 +12,12 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify',''],
+                    ['Tailwater','Abandoned','Identify','Blastforge (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
-                    ['Razorpoint','Entropy','Tailwater','Abandoned'],
-                    ['','','','Blueprint'],
+                    ['Razorpoint','Entropy','Rusted','Tailwater'],
+                    ['Abandoned','Blastforge (WIP)','(5CP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],

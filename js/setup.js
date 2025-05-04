@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=66
-        menu.level=66
+        game.level=49
+        menu.level=49
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerSpyC2',types.player)]]
@@ -48,12 +48,12 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify',''],
+                    ['Tailwater','Abandoned','Identify','Blastforge (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
-                    ['Razorpoint','Entropy','Tailwater','Abandoned'],
-                    ['','','','Blueprint'],
+                    ['Razorpoint','Entropy','Rusted','Tailwater'],
+                    ['Abandoned','Blastforge (WIP)','(5CP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -358,6 +358,11 @@ function mouseClicked(){
                                                 instant()
                                             break
                                             case 2:
+                                                menu.level=49
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                            break
+                                            case 3:
                                                 menu.level=65
                                                 game.pvp=true
                                                 menu.players*=4
@@ -365,11 +370,6 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
-                                            break
-                                            case 3:
-                                                menu.level=63
-                                                game.classicWeapon=true
-                                                game.pvp=true
                                             break
                                         }
                                     break
@@ -416,7 +416,9 @@ function mouseClicked(){
                                     case 3:
                                         switch(b){
                                             case 0:
-                                                ////
+                                                menu.level=63
+                                                game.classicWeapon=true
+                                                game.pvp=true
                                             break
                                             case 1:
                                                 ////
