@@ -944,7 +944,7 @@ function generateLevel(info,layer){
                 [7220,1820,280,210],
                 [3180,1960,200,210],
                 [7820,1960,200,210],
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
             ]
         break
         case 28:
@@ -1004,7 +1004,7 @@ function generateLevel(info,layer){
                 [6384,2352,480,168],
                 [8664,1990,480,210],
 
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
             ]
         break
         case 33:
@@ -1022,7 +1022,7 @@ function generateLevel(info,layer){
                 [6384,2352,480,168],
                 [0,0,0,0],
 
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
             ]
         break
         case 34: case 50:
@@ -1296,7 +1296,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*132,game.tileset[1]*33.5,game.tileset[0]*22,game.tileset[1]*3],
                 [game.tileset[0]*132,game.tileset[1]*30.5,game.tileset[0]*22,game.tileset[1]*3],
                 [game.tileset[0]*159.5,game.tileset[1]*28,game.tileset[0]*7,game.tileset[1]*4],
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
             ]
         break
         case 59:
@@ -1358,7 +1358,7 @@ function generateLevel(info,layer){
 
                 [game.tileset[0]*132,game.tileset[1]*33.5,game.tileset[0]*22,game.tileset[1]*3],
                 [game.tileset[0]*132,game.tileset[1]*30.5,game.tileset[0]*22,game.tileset[1]*3],
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
             ]
         break
         case 64:
@@ -1399,7 +1399,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*2,game.tileset[1]*45.5,game.tileset[0]*4,game.tileset[1]*3],
 
                 [game.tileset[0]*261,game.tileset[1]*45.5,game.tileset[0]*4,game.tileset[1]*3],
-                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0],game.edge[1]],
+                [game.edge[0]*0.5,game.edge[1]*0.5,game.edge[0]+1,game.edge[1]+1],
 
             ]
         break

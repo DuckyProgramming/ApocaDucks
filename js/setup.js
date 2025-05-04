@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=49
-        menu.level=49
+        game.level=67
+        menu.level=67
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -20,8 +20,8 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
-        game.pvp=true
+        game.classicRespawn=false
+        //game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerSpyC2',types.player)]]
@@ -53,7 +53,7 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Blastforge (WIP)','(5CP)','Blueprint'],
+                    ['Abandoned','Blastforge (WIP)','Demolition (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
