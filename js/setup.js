@@ -9,8 +9,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=64
-        menu.level=64
+        game.level=66
+        menu.level=66
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerSpyC2',types.player)]]
@@ -61,7 +61,7 @@ function mouseClicked(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Abandoned (WIP)'],
+                    ['Shogatsu','Valuation','Basalt','Abandoned'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -221,7 +221,9 @@ function mouseClicked(){
                                                 game.pvp=true
                                             break
                                             case 3:
-                                                ////
+                                                menu.level=66
+                                                game.classicWeapon=true
+                                                game.classicRespawn=false
                                             break
                                         }
                                     break

@@ -25,7 +25,7 @@ function mainloop(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Abandoned (WIP)'],
+                    ['Shogatsu','Valuation','Basalt','Abandoned'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -570,7 +570,7 @@ function mainloop(){
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{

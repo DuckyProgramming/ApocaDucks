@@ -191,11 +191,13 @@ class player{
                 this.color.skin.legs[1]=mergeColor(this.base.color.skin.legs[1],[255,255,255],0.6)
                 this.color.skin.arms[0]=mergeColor(this.base.color.skin.arms[0],[255,255,255],0.6)
                 this.color.skin.arms[1]=mergeColor(this.base.color.skin.arms[1],[255,255,255],0.6)
+                this.color.beak.main=mergeColor(this.base.color.beak.main,[255,255,255],0.6)
             }else if(this.chillTime>0){
                 this.color.skin.head=[200,250,250]
                 this.color.skin.body=[190,240,240]
                 this.color.skin.legs=[[175,225,225],[175,225,225]]
                 this.color.skin.arms=[[180,230,230],[180,230,230]]
+                this.color.beak.main=[160,200,200]
             }else{
                 this.color.skin.head=this.base.color.skin.head
                 this.color.skin.body=this.base.color.skin.body
@@ -203,6 +205,7 @@ class player{
                 this.color.skin.legs[1]=this.base.color.skin.legs[1]
                 this.color.skin.arms[0]=this.base.color.skin.arms[0]
                 this.color.skin.arms[1]=this.base.color.skin.arms[1]
+                this.color.beak.main=this.base.color.beak.main
             }
         }else{
             if(this.hyper()){
@@ -210,16 +213,19 @@ class player{
                 this.color.skin.body=mergeColor(this.base.color.skin.body,[255,255,255],0.6)
                 this.color.skin.legs=mergeColor(this.base.color.skin.legs,[255,255,255],0.6)
                 this.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
+                this.color.beak.main=mergeColor(this.base.color.beak.main,[255,255,255],0.6)
             }else if(this.chillTime>0){
                 this.color.skin.head=[200,250,250]
                 this.color.skin.body=[190,240,240]
                 this.color.skin.legs=[175,225,225]
                 this.color.skin.arms=[180,230,230]
+                this.color.beak.main=[160,200,200]
             }else{
                 this.color.skin.head=this.base.color.skin.head
                 this.color.skin.body=this.base.color.skin.body
                 this.color.skin.legs=this.base.color.skin.legs
                 this.color.skin.arms=this.base.color.skin.arms
+                this.color.beak.main=this.base.color.beak.main
             }
         }
     }
@@ -1540,6 +1546,10 @@ class player{
                 this.newSubWeaponASet(findName('PlayerMotorizer',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifle',types.player))
             break
+            case 'PlayerVIP':
+                this.newSubWeaponASet(findName('PlayerLightUzi',types.player))
+                this.newSubWeaponBSet(findName('PlayerOverhealPack',types.player))
+            break
         }
         if(this.playerData.name!='PlayerSpy'){
             this.setColor()
@@ -1839,8 +1849,10 @@ class player{
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult)}
         this.weapon.cooldown=60
         if(game.randomizer||this.playerData.name=='PlayerVIP'){
+            this.position.y+=this.height/2
             this.width=8*this.playerData.sizeBuff
             this.height=24*this.playerData.sizeBuff
+            this.position.y-=this.height/2
             this.fade=0
             this.size=0.5*this.playerData.sizeBuff
             this.base.life=100*this.playerData.lifeBuff
@@ -2126,7 +2138,7 @@ class player{
             &&!this.hyper()
         ){
             let preLife=this.life
-            this.life-=damage*((game.pvp?this.index+1:this.id)>game.gaming&&!game.pvp?0.8:1)*(this.vulnerableTime>0?2:1)*(this.defendBuff>0?0.5:1)*(
+            this.life-=damage*((game.pvp?this.index+1:this.id)>game.gaming&&!game.pvp?0.8:1)*(this.vulnerableTime>0?2:1)*(this.defendBuff>0?0.5:1)*(this.disable&&!this.assort.remote&&!this.assort.missile?0.25:1)*(
                 this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank'
                 ?1/3:
                 this.playerData.name=='PlayerBonkerception'||this.playerData.name=='PlayerMasonry'
@@ -2239,7 +2251,7 @@ class player{
                     if(weapon.uses<weaponData.uses-4){
                         weapon.uses+=4
                     }
-                }else if(!this.fort){
+                }else if(!this.fort&&this.playerData.name!='PlayerVIP'){
                     weapon.uses-=((game.level==27||game.level==38||game.level==44||game.level==65)&&game.pvp?this.index+1:this.id)>game.gaming?0.5:this.auto?3:1
                 }
                 if(this.playerData.name=='PlayerSniperC4'){
@@ -5403,6 +5415,16 @@ class player{
                             }
                         }
                     break
+                    case 761:
+                        entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,73))
+                        entities.walls[1][entities.walls[1].length-1].formBoundary()
+                        entities.walls[1][entities.walls[1].length-1].checkRedundancy()
+                        entities.walls[1][entities.walls[1].length-1].checkOverlay()
+                        entities.walls[1][entities.walls[1].length-1].set()
+                        entities.walls[1][entities.walls[1].length-1].checkGap()
+                        entities.walls[1][entities.walls[1].length-1].checkBar()
+                        entities.walls[1][entities.walls[1].length-1].formBounder()
+                    break
 
                     //mark
                 }
@@ -5481,7 +5503,8 @@ class player{
         return this.playerData.name==`PlayerScout`||this.playerData.name==`PlayerSoldier`||this.playerData.name==`PlayerPyro`||this.playerData.name==`PlayerDemoman`||this.playerData.name==`PlayerHeavyWeapons`||this.playerData.name==`PlayerEngineerC`||this.playerData.name==`PlayerMedicC`||this.playerData.name==`PlayerSniperC`||this.playerData.name==`PlayerSpyC`||this.playerData.name==`PlayerDroner`||
             this.playerData.name==`PlayerScout2`||this.playerData.name==`PlayerSoldier2`||this.playerData.name==`PlayerPyro2`||this.playerData.name==`PlayerDemoman2`||this.playerData.name==`PlayerHeavyWeapons2`||this.playerData.name==`PlayerEngineerC2`||this.playerData.name==`PlayerMedicC2`||this.playerData.name==`PlayerSniperC2`||this.playerData.name==`PlayerSpyC2`||this.playerData.name==`PlayerDroner2`||
             this.playerData.name==`PlayerScout3`||this.playerData.name==`PlayerSoldier3`||this.playerData.name==`PlayerPyro3`||this.playerData.name==`PlayerDemoman3`||this.playerData.name==`PlayerHeavyWeapons3`||this.playerData.name==`PlayerEngineerC3`||this.playerData.name==`PlayerMedicC3`||this.playerData.name==`PlayerSniperC3`||this.playerData.name==`PlayerSpyC3`||this.playerData.name==`PlayerDroner3`||
-            this.playerData.name==`PlayerScout4`||this.playerData.name==`PlayerSoldier4`||this.playerData.name==`PlayerPyro4`||this.playerData.name==`PlayerDemoman4`||this.playerData.name==`PlayerHeavyWeapons4`||this.playerData.name==`PlayerEngineerC4`||this.playerData.name==`PlayerMedicC4`||this.playerData.name==`PlayerSniperC4`||this.playerData.name==`PlayerSpyC4`||this.playerData.name==`PlayerDroner4`
+            this.playerData.name==`PlayerScout4`||this.playerData.name==`PlayerSoldier4`||this.playerData.name==`PlayerPyro4`||this.playerData.name==`PlayerDemoman4`||this.playerData.name==`PlayerHeavyWeapons4`||this.playerData.name==`PlayerEngineerC4`||this.playerData.name==`PlayerMedicC4`||this.playerData.name==`PlayerSniperC4`||this.playerData.name==`PlayerSpyC4`||this.playerData.name==`PlayerDroner4`||
+            this.playerData.name=='PlayerVIP'
     }
     explodable(){
         return this.weaponType!=406&&this.weaponType!=495
@@ -11824,6 +11847,215 @@ class player{
                             }
                         }
                     }
+                }else if(game.level==66){
+                    this.manage[1]=false
+                    let targets=[]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                            entities.players[a].unProtected()
+                        ){
+                            let b=entities.players[a]
+                            let bar=[]
+                            if(b.position.y<=this.position.y){
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }else{
+                                bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:b.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                            }
+                            let valid=true
+                            for(let c=0,lc=entities.walls.length;c<lc;c++){
+                                for(let d=0,ld=entities.walls[c].length;d<ld;d++){
+                                    for(let e=0,le=bar.length;e<le;e++){
+                                        if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38||entities.walls[c][d].type==59||entities.walls[c][d].type==60)){
+                                            valid=false
+                                            c=lc
+                                            d=ld
+                                            e=le
+                                        }
+                                    }
+                                }
+                            }
+                            if(valid){
+                                targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                            }
+                        }
+                    }
+                    if(targets.length>0){
+                        let target=targets[floor(random(targets.length))]
+                        this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                        this.target.position.y=target[1]
+                        this.manage[1]=true
+                    }else{
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
+                                targets.push([entities.players[a].position.x,entities.players[a].position.y])
+                            }
+                        }
+                        if(targets.length>0){
+                            let target=targets[floor(random(targets.length))]
+                            this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                            this.target.position.y=target[1]
+                        }else{
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<160&&entities.players[a].life>0){
+                                    targets.push([entities.players[a].position.x,entities.players[a].position.y])
+                                }
+                            }
+                            if(targets.length>0){
+                                let target=targets[floor(random(targets.length))]
+                                this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                                this.target.position.y=target[1]
+                            }else{
+                                let goalPoint=4
+                                for(let a=0,la=entities.players.length;a<la;a++){
+                                    if(entities.players[a].playerData.name=='PlayerVIP'){
+                                        let dists=[
+                                            dist(entities.players[a].position.x,entities.players[a].position.y,game.tileset[0]*35.5,game.tileset[1]*60),
+                                            dist(entities.players[a].position.x,entities.players[a].position.y,game.tileset[0]*86.5,game.tileset[1]*61),
+                                            dist(entities.players[a].position.x,entities.players[a].position.y,game.tileset[0]*78.5,game.tileset[1]*49),
+                                            dist(entities.players[a].position.x,entities.players[a].position.y,game.tileset[0]*131.5,game.tileset[1]*42),
+                                            dist(entities.players[a].position.x,entities.players[a].position.y,game.tileset[0]*149.5,game.tileset[1]*26)
+                                        ]
+                                        let final=min(dists[0],min(dists[1],min(dists[2],min(dists[3],dists[4]))))
+                                        goalPoint=dists[0]==final?0:dists[1]==final?1:dists[2]==final?2:dists[3]==final?3:4
+                                    }
+                                }
+                                let hit=false
+                                for(let a=0,la=game.sectors.length;a<la;a++){
+                                    if(inPointBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]},width:game.sectors[a][2],height:game.sectors[a][3]})){
+                                        if(this.id==1&&this.index==0&&!game.pvp){
+                                            print(a,this.id)
+                                        }
+                                        switch(a){
+                                            case 0:
+                                                switch(goalPoint){
+                                                    case 0:
+                                                        this.target.position.x=game.tileset[0]*60
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 1:
+                                                        this.target.position.x=game.tileset[0]*86.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 2: case 3: case 4:
+                                                        this.target.position.x=game.tileset[0]*104.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 1:
+                                                switch(goalPoint){
+                                                    case 0:
+                                                        this.target.position.x=game.tileset[0]*11.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 1:
+                                                        this.target.position.x=this.position.x<game.tileset[0]*78.5?game.tileset[0]*11.5:game.tileset[0]*110.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 2:
+                                                        this.target.position.x=game.tileset[0]*78.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 3: case 4:
+                                                        this.target.position.x=game.tileset[0]*86.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 2:
+                                                switch(goalPoint){
+                                                    case 0:
+                                                        this.target.position.x=game.tileset[0]*11.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 1: case 2:
+                                                        if(this.position.x<game.tileset[0]*78.5){
+                                                            this.target.position.x=game.tileset[0]*11.5
+                                                        }else{
+                                                            this.target.position.x=game.tileset[0]*148.5
+                                                        }
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 3: case 4:
+                                                        this.target.position.x=game.tileset[0]*148.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 3:
+                                                switch(goalPoint){
+                                                    case 0: case 1: case 2: case 3:
+                                                        this.target.position.x=game.tileset[0]*11.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 4:
+                                                        this.target.position.x=game.tileset[0]*137.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 4: case 5:
+                                                switch(goalPoint){
+                                                    case 0: case 1: case 2: case 3:
+                                                        this.target.position.x=game.tileset[0]*11.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 4:
+                                                        this.target.position.x=game.tileset[0]*125.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 6:
+                                                switch(goalPoint){
+                                                    case 0: case 1: case 2: case 3:
+                                                        this.target.position.x=game.tileset[0]*11.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 4:
+                                                        this.target.position.x=game.tileset[0]*131.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                            case 7:
+                                                switch(goalPoint){
+                                                    case 0:
+                                                        this.target.position.x=game.tileset[0]*35.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                        this.target.position.y=abs(this.position.x-game.tileset[0]*35.5)?0:game.edge[1]
+                                                    break
+                                                    case 1:
+                                                        this.target.position.x=game.tileset[0]*86.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 2:
+                                                        this.target.position.x=game.tileset[0]*78.5
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 3:
+                                                        this.target.position.x=game.tileset[0]*131.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                    case 4:
+                                                        this.target.position.x=game.tileset[0]*148.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                        this.target.position.y=game.edge[1]
+                                                    break
+                                                }
+                                            break
+                                        }
+                                        a=la
+                                        hit=true
+                                        this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id!=0?0.5:1)
+                                    }
+                                }
+                                if(!hit){
+                                    this.target.position.x=this.position.x+random(-60,60)
+                                    this.target.position.y=this.position.y
+                                }
+                            }
+                        }
+                    }
                 }else{
                     let targets=[]
                     switch(game.level){
@@ -12654,6 +12886,11 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                        }
+                    break
+                    case 'PlayerVIP':
+                        for(let a=0,la=game.players;a<la;a++){
+                            entities.players[a].life=0
                         }
                     break
                 }
@@ -14498,6 +14735,7 @@ class player{
                 case 'PlayerScout2': case 'PlayerSoldier2': case 'PlayerPyro2': case 'PlayerDemoman2': case 'PlayerHeavyWeapons2': case 'PlayerEngineerC2': case 'PlayerMedicC2': case 'PlayerSniperC2': case 'PlayerSpyC2': case 'PlayerDroner2':
                 case 'PlayerScout3': case 'PlayerSoldier3': case 'PlayerPyro3': case 'PlayerDemoman3': case 'PlayerHeavyWeapons3': case 'PlayerEngineerC3': case 'PlayerMedicC3': case 'PlayerSniperC3': case 'PlayerSpyC3': case 'PlayerDroner3':
                 case 'PlayerScout4': case 'PlayerSoldier4': case 'PlayerPyro4': case 'PlayerDemoman4': case 'PlayerHeavyWeapons4': case 'PlayerEngineerC4': case 'PlayerMedicC4': case 'PlayerSniperC4': case 'PlayerSpyC4': case 'PlayerDroner4':
+                case 'PlayerVIP':
                     if(this.subWeaponA.uses<=0){
                         this.weaponType=-1
                         this.weapon.uses=0
@@ -14514,6 +14752,13 @@ class player{
                     }
                     for(let a=0,la=this.infoAnim.usesB.length;a<la;a++){
                         this.infoAnim.usesB[a]=smoothAnim(this.infoAnim.usesB[a],this.subWeaponB.uses>a,0,1,5)
+                    }
+                    if(this.playerData.name=='PlayerVIP'){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<120&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&entities.players[a].weaponType==-1){
+                                entities.players[a].newWeapon()
+                            }
+                        }
                     }
                 break
                 case 'GlitchedTank':

@@ -427,7 +427,7 @@ p5.prototype.pattern = function(_func)
         const r = this.triangle(...args);
 
         //Calculates the drawing area of the pattern with the center of gravity.
-        const cx = (arguments[0] + arguments[2] + arguments[4]) / 3;
+        const cx = arguments[0]==arguments[2]?(arguments[0]+arguments[4])/2:(arguments[0]+arguments[2])/2;
         const cy = (arguments[1] + arguments[3] + arguments[5]) / 3;
         const w = this.max([Math.abs(cx - arguments[0]), Math.abs(cx - arguments[2]), Math.abs(cx - arguments[4])]) * 2;
         const h = this.max([Math.abs(cy - arguments[1]), Math.abs(cy - arguments[3]), Math.abs(cy - arguments[5])]) * 2;
