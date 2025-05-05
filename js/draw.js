@@ -7,17 +7,17 @@ function mainloop(){
             set=[
                 [],[
                     ['Vietnam','Normandy','Isonzo','Stalingrad'],
-                    ['Prison','Steep','Basalt','Nowhere (WIP)'],
+                    ['Prison','Steep','Basalt','Abandoned'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Blastforge (WIP)'],
+                    ['Tailwater','Abandoned','Identify','Bluefort (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Blastforge (WIP)','Demolition (WIP)','Blueprint'],
+                    ['Abandoned','Bluefort (WIP)','Demolition (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -25,7 +25,7 @@ function mainloop(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Abandoned'],
+                    ['Shogatsu','Valuation','Basalt','Bluefort (WIP)'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -116,6 +116,9 @@ function mainloop(){
                                         break
                                         case 3:
                                             text(`VIP`,pos[0],pos[1]+15)
+                                        break
+                                        case 4:
+                                            text(`(WIP)`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break

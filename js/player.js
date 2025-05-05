@@ -11481,11 +11481,11 @@ class player{
                             if(game.point[4]==this.id){
                                 this.target.point=[3,2][floor(random(0,1.5))]
                             }else if(game.point[3]==this.id){
-                                this.target.point=[4,2][floor(random(0,1.25))]
+                                this.target.point=game.point[4]<=0?4:[4,2][floor(random(0,1.25))]
                             }else if(game.point[2]==this.id){
-                                this.target.point=[3,1][floor(random(0,1.25))]
+                                this.target.point=game.point[3]<=0?3:[3,1][floor(random(0,1.25))]
                             }else if(game.point[1]==this.id){
-                                this.target.point=[2,0][floor(random(0,1.25))]
+                                this.target.point=game.point[2]<=0?2:[2,0][floor(random(0,1.25))]
                             }else if(game.point[0]==this.id){
                                 this.target.point=1
                             }else{
@@ -11497,8 +11497,9 @@ class player{
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
-                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:90)&&entities.players[a].life>0&&
-                            entities.players[a].unProtected()
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                            entities.players[a].unProtected()&&
+                            !(entities.players[a].id>0&&!game.point.includes(entities.players[a].id)&&(this.id==0||!game.point.includes(this.id)))
                         ){
                             let b=entities.players[a]
                             let bar=[]
@@ -11614,7 +11615,7 @@ class player{
                                                 break
                                             }
                                         break
-                                        case 4: case 5:
+                                        case 4: case 5: case 6:
                                             switch(goalPoint){
                                                 case 0: case 1: case 2: case 3:
                                                     this.target.position.x=game.tileset[0]*11.5
@@ -11626,7 +11627,7 @@ class player{
                                                 break
                                             }
                                         break
-                                        case 6:
+                                        case 7:
                                             switch(goalPoint){
                                                 case 0: case 1: case 2: case 3:
                                                     this.target.position.x=game.tileset[0]*11.5
@@ -11638,7 +11639,19 @@ class player{
                                                 break
                                             }
                                         break
-                                        case 7:
+                                        case 8:
+                                            switch(goalPoint){
+                                                case 0: case 1: case 2: case 3:
+                                                    this.target.position.x=game.tileset[0]*11.5
+                                                    this.target.position.y=game.edge[1]
+                                                break
+                                                case 4:
+                                                    this.target.position.x=game.tileset[0]*148.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                    this.target.position.y=game.edge[1]
+                                                break
+                                            }
+                                        break
+                                        case 9:
                                             switch(goalPoint){
                                                 case 0:
                                                     this.target.position.x=game.tileset[0]*35.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
@@ -13061,7 +13074,7 @@ class player{
                                     }else if(
                                         game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33||game.level==35||game.level==37||
                                         game.level==38||game.level==40||game.level==42||game.level==43||game.level==44||game.level==47||game.level==49||game.level==55||game.level==58||game.level==59||
-                                        game.level==65
+                                        game.level==63||game.level==65
                                     ){
                                         game.point[entities.walls[a][b].pos]=this.id
                                     }else if(game.level==25){

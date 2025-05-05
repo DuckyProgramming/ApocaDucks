@@ -9,8 +9,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=67
-        menu.level=67
+        game.level=68
+        menu.level=68
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -43,17 +43,17 @@ function mouseClicked(){
             set=[
                 [],[
                     ['Vietnam','Normandy','Isonzo','Stalingrad'],
-                    ['Prison','Steep','Basalt','Nowhere (WIP)'],
+                    ['Prison','Steep','Basalt','Abandoned'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Blastforge (WIP)'],
+                    ['Tailwater','Abandoned','Identify','Bluefort (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Blastforge (WIP)','Demolition (WIP)','Blueprint'],
+                    ['Abandoned','Bluefort (WIP)','Demolition (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -61,7 +61,7 @@ function mouseClicked(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Abandoned'],
+                    ['Shogatsu','Valuation','Basalt','Bluefort (WIP)'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -221,9 +221,7 @@ function mouseClicked(){
                                                 game.pvp=true
                                             break
                                             case 3:
-                                                menu.level=66
-                                                game.classicWeapon=true
-                                                game.classicRespawn=false
+                                                ////
                                             break
                                         }
                                     break
@@ -247,7 +245,8 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                             break
                                             case 3:
-                                                ////nowhere
+                                                menu.level=66
+                                                game.classicWeapon=true
                                             break
                                         }
                                     break
