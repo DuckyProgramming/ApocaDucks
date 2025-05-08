@@ -7,11 +7,11 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=68
-        menu.level=68
-        if(true){
+        game.level=69
+        menu.level=69
+        if(false){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
@@ -20,8 +20,8 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=false
-        //game.pvp=true
+        game.classicRespawn=true
+        game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerSpyC2',types.player)]]
@@ -53,7 +53,7 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Bluefort (WIP)','Demolition (WIP)','Blueprint'],
+                    ['Abandoned','Cooked','Divider (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -420,7 +420,9 @@ function mouseClicked(){
                                                 game.pvp=true
                                             break
                                             case 1:
-                                                ////
+                                                menu.level=69
+                                                game.classicWeapon=true
+                                                game.pvp=true
                                             break
                                             case 2:
                                                 ////
@@ -780,7 +782,7 @@ function mouseClicked(){
         case 'mission':
             for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
                 for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){
-                    game.smile=floor(random(0,100))==0
+                    game.smile=floor(random(0,25))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){

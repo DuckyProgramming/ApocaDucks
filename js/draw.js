@@ -17,7 +17,7 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Bluefort (WIP)','Demolition (WIP)','Blueprint'],
+                    ['Abandoned','Cooked','Divider (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -90,6 +90,13 @@ function mainloop(){
                                         break
                                     }
                                 break
+                                case 5:
+                                    switch(b){
+                                        case 3:
+                                            text(`VIP`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
                             }
                         break
                         case 2:
@@ -115,10 +122,7 @@ function mainloop(){
                                             text(`Heist`,pos[0],pos[1]+15)
                                         break
                                         case 3:
-                                            text(`VIP`,pos[0],pos[1]+15)
-                                        break
-                                        case 4:
-                                            text(`(WIP)`,pos[0],pos[1]+15)
+                                            text(`CTF`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break
@@ -569,7 +573,7 @@ function mainloop(){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||
-                    game.level==65
+                    game.level==65||game.level==68||game.level==69
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -670,7 +674,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65){
+                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==69){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -702,7 +706,7 @@ function mainloop(){
                                 run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                             ){
                                 run.fore[a][b].display(graphics.main[c])
-                                if(a==(game.level==54||game.level==55||game.level==65?3:2)){
+                                if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)){
                                     bs[c].push([a,b])
                                 }
                             }else if(game.level==16){
@@ -718,14 +722,14 @@ function mainloop(){
                                         run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                                     ){
                                         run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==(game.level==54||game.level==55||game.level==65?3:2)){
+                                        if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)){
                                             bs[c].push([a,b])
                                         }
                                         d=ld
                                     }
                                 }
                             }
-                            if(a==(game.level==54||game.level==55||game.level==65?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -951,7 +955,7 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65:
+                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 69:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
@@ -996,7 +1000,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==(game.level==54||game.level==55||game.level==65?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                    if(!(bs[a][b][0]==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }
