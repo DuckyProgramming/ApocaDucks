@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=69
-        menu.level=69
+        game.level=68
+        menu.level=68
         if(false){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerSpyC2',types.player)]]

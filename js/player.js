@@ -237,7 +237,7 @@ class player{
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
-        layer.fill(game.level==61||game.level==64?250:180,this.fade)
+        layer.fill(game.level==61||game.level==64||game.level==68?250:180,this.fade)
         layer.noStroke()
         layer.textSize(10)
         if(!this.sidekick&&!this.fort||this.auto){

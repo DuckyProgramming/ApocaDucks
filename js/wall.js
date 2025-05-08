@@ -315,7 +315,7 @@ class wall{
                 }
             break
             case 33:
-                this.owner=game.level==44||game.level==65&&game.pvp?[1,1,-1,2,2][this.pos]:game.level==43?game.point[this.pos]:game.level==38&&game.pvp?[1,-1,-1,2][this.pos]:game.level==29||game.level==37?0:game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23||game.level==25||game.level==26||game.level==32||game.level==35||game.level==40||game.level==47||game.level==49||game.level==55||game.level==58||game.level==59)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
+                this.owner=game.level==44||game.level==65&&game.pvp?[1,1,-1,2,2][this.pos]:game.level==43?game.point[this.pos]:game.level==38&&game.pvp?[1,-1,-1,2][this.pos]:game.level==29||game.level==37?0:game.level==27&&game.pvp?[1,1,2,2][this.pos]:(game.level==22||game.level==23||game.level==25||game.level==26||game.level==32||game.level==35||game.level==40||game.level==47||game.level==49||game.level==55||game.level==58||game.level==59||game.level==68)&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):-1
                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Turret',types.player),game.index))
                 game.index++
                 entities.players[entities.players.length-1].fortify()
@@ -1667,7 +1667,7 @@ class wall{
                             this.width/2,-this.height/2-0.5
                         )
                     break
-                    case 59: case 60: case 68: case 69:
+                    case 59: case 60: case 69:
                         layer.fill(...game.tilecolor[1])
                         layer.rect(0,0,this.width+1,this.height+1)
                         layer.fill(120,200,120)
@@ -1677,6 +1677,10 @@ class wall{
                             this.width/2-20,-this.height/2+15,
                             this.width/2-5,-this.height/2-0.5
                         )
+                    break
+                    case 68:
+                        layer.fill(...game.tilecolor[1])
+                        layer.rect(0,0,this.width+1,this.height+1)
                     break
                     default:
                         layer.fill(120,200,120)
@@ -1712,6 +1716,10 @@ class wall{
                     break
                     case 59: case 60:
                         layer.fill(51,58,66,0.5)
+                        layer.rect(this.width/2,this.height/2,this.width,this.height)
+                    break
+                    case 68:
+                        layer.fill(65,72,38,0.5)
                         layer.rect(this.width/2,this.height/2,this.width,this.height)
                     break
                     case 69:
@@ -2234,6 +2242,8 @@ class wall{
                             layer.ellipse(0,-this.height*0.5+game.tileset[1]*1.2+this.width*0.8,this.width*0.6,this.width*0.6)
                             layer.ellipse(0,this.height*0.5-game.tileset[1]*1.2-this.width*0.8,this.width*0.6,this.width*0.6)
                         }
+                    break
+                    case 68:
                     break
                     case 69:
                         layer.fill(68,58,57)
@@ -6462,6 +6472,15 @@ class wall{
                             this.width/2+10,-this.height/2-0.5
                         )
                     break
+                    case 68:
+                        layer.fill(120,200,120)
+                        layer.quad(
+                            -this.width/2-15,-this.height/2-0.5,
+                            -this.width/2,-this.height/2+15,
+                            this.width/2,-this.height/2+15,
+                            this.width/2+15,-this.height/2-0.5
+                        )
+                    break
                 }
             break
             case 4: case 13: case 32:
@@ -6679,7 +6698,7 @@ class wall{
                     }
                 }
                 if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
-                    layer.fill(game.level==61||game.level==64?250:180,1-this.recharge/60-this.hide)
+                    layer.fill(game.level==61||game.level==64||game.level==68?250:180,1-this.recharge/60-this.hide)
                     layer.textSize(9)
                     layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                 }
@@ -7453,7 +7472,7 @@ class wall{
                 }else if(game.level==49&&!game.pvp||game.level==57){
                     layer.scale(1-game.pointAnim[1])
                 }
-                layer.fill(game.level==64?250:180,1-this.recharge/60-this.hide)
+                layer.fill(game.level==64||game.level==68?250:180,1-this.recharge/60-this.hide)
                 layer.textSize(9)
                 layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                 layer.pop()
@@ -7535,7 +7554,7 @@ class wall{
                             this.bounder.height=0
                         }
                     break
-                    case 30: case 56: case 59: case 60:
+                    case 30: case 56: case 59: case 60: case 68:
                         this.bounder.position.x=this.position.x+this.width/2
                         this.bounder.position.y=this.position.y+this.height/2
                         this.bounder.width=this.width
@@ -9019,7 +9038,7 @@ class wall{
                             case 3:
                                 if(
                                     game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59||game.level==60||game.level==65||
-                                    game.level==69
+                                    game.level==68||game.level==69
                                 ){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
@@ -10003,7 +10022,7 @@ class wall{
                                                                 c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerDeployerGU',types.player)+1)))
                                                                 c.weapon.uses=1
                                                                 c.storeWeapon=true
-                                                                c.weapon.cooldown=60
+                                                                c.weapon.cooldown=random(90,120)
                                                             break
                                                         }
                                                     }
