@@ -7,11 +7,11 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
         game.level=68
         menu.level=68
-        if(false){
+        if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
@@ -48,7 +48,7 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Bluefort (WIP)'],
+                    ['Tailwater','Abandoned','Identify','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -400,6 +400,10 @@ function mouseClicked(){
                                 switch(menu.mode){
                                     case 2:
                                         switch(b){
+                                            case 0:
+                                                menu.level=55
+                                                game.classicWeapon=true
+                                            break
                                             case 1:
                                                 menu.level=58
                                             break
@@ -408,7 +412,8 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                             break
                                             case 3:
-                                                ////
+                                                menu.level=68
+                                                game.classicWeapon=true
                                             break
                                         }
                                     break

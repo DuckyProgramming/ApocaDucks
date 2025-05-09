@@ -12,7 +12,7 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Gray Gravel','Downward','Arizona','Fragile'],
                     ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Bluefort (WIP)'],
+                    ['Tailwater','Abandoned','Identify','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -674,7 +674,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==69){
+                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==68||game.level==69){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -706,7 +706,7 @@ function mainloop(){
                                 run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                             ){
                                 run.fore[a][b].display(graphics.main[c])
-                                if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)){
+                                if(a==(game.level==54||game.level==55||game.level==65||game.level==68||game.level==69?3:2)){
                                     bs[c].push([a,b])
                                 }
                             }else if(game.level==16){
@@ -722,14 +722,14 @@ function mainloop(){
                                         run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                                     ){
                                         run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)){
+                                        if(a==(game.level==54||game.level==55||game.level==65||game.level==68||game.level==69?3:2)){
                                             bs[c].push([a,b])
                                         }
                                         d=ld
                                     }
                                 }
                             }
-                            if(a==(game.level==54||game.level==55||game.level==65||game.level==69?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==(game.level==54||game.level==55||game.level==65||game.level==68||game.level==69?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -955,7 +955,7 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 69:
+                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 68: case 69:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
