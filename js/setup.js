@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=20
         game.gaming=1
-        game.level=68
-        menu.level=68
+        game.level=67
+        menu.level=67
         if(true){
             game.mission=findName('Duck Disaster',types.mission)
         }else{
@@ -21,10 +21,10 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerSpyC2',types.player)]]
+        game.weapon=[[findName('PlayerEngineerC3',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
@@ -61,7 +61,7 @@ function mouseClicked(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Bluefort (WIP)'],
+                    ['Shogatsu','Valuation','Basalt','Bluefort'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -221,7 +221,13 @@ function mouseClicked(){
                                                 game.pvp=true
                                             break
                                             case 3:
-                                                ////
+                                                menu.level=67
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
                                             break
                                         }
                                     break
@@ -802,7 +808,7 @@ function mouseClicked(){
                             if(game.classicWeapon||game.randomizer||game.selector){
                                 game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                             }else{
-                                game.level=game.classWeapon?(menu.level==44||menu.level==65?57:48):13
+                                game.level=game.classWeapon?(menu.level==44||menu.level==65||menu.level==67?57:48):13
                             }
                             game.mission=unit
                             entities.players=[]
@@ -1236,7 +1242,7 @@ function mouseClicked(){
                         if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
-                            game.level=game.classWeapon?(menu.level==44||menu.level==65?57:48):13
+                            game.level=game.classWeapon?(menu.level==44||menu.level==65||menu.level==67?57:48):13
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]
@@ -1297,7 +1303,7 @@ function instant(){
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=game.classWeapon?(menu.level==44||menu.level==65?57:48):13
+        game.level=game.classWeapon?(menu.level==44||menu.level==65||menu.level==67?57:48):13
     }
     game.mission=0
     entities.players=[]
