@@ -2281,6 +2281,7 @@ class wall{
                 }
             break
             case 8:
+                //mark 8
                 if(game.level==16){
                     layer.noFill()
                     layer.stroke(200)
@@ -4293,7 +4294,7 @@ class wall{
                 }else if(game.level==38||game.level==59){
                     layer.translate(0,10)
                 }
-                layer.fill(255)
+                layer.fill(250)
                 layer.textSize(20)
                 let texts=''
                 if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==38||game.level==39&&!game.pvp||game.level==42){
@@ -4313,32 +4314,7 @@ class wall{
                 }
                 layer.text(texts,0,-120)
                 if(game.level!=29){
-                    switch(this.owner){
-                        case -1:
-                            layer.fill(200)
-                        break
-                        case 0:
-                            layer.fill(255,255,0)
-                        break
-                        case 1:
-                            layer.fill(15,75,255)
-                        break
-                        case 2:
-                            layer.fill(225,15,255)
-                        break
-                        case 3:
-                            layer.fill(55,225,15)
-                        break
-                        case 4:
-                            layer.fill(225,105,15)
-                        break
-                        case 5:
-                            layer.fill(15,235,255)
-                        break
-                        case 6:
-                            layer.fill(125,15,255)
-                        break
-                    }
+                    layer.fill(...playerColor(this.owner))
                     layer.rect(0,-100,60,6,2)
                 }
             break
@@ -5959,22 +5935,31 @@ class wall{
             case 75:
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
+                        let flip=a%2*2-1
                         layer.fill(60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height+1)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-(this.width*0.25+0.1)*lcos(a*90+this.time)*flip,-this.height*0.25-0.1,(this.width*0.5+0.2)*lcos(a*90+this.time),this.height*0.5+0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+(this.width*0.25+0.1)*lcos(a*90+this.time)*flip,this.height*0.25+0.1,(this.width*0.5+0.2)*lcos(a*90+this.time),this.height*0.5+0.2)
+                        layer.fill(60+lcos(a*90+this.time)*40,55+lcos(a*90+this.time)*40,50+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-(this.width*0.25+0.1)*lcos(a*90+this.time)*flip,this.height*0.25+0.1,(this.width*0.5+0.2)*lcos(a*90+this.time),this.height*0.5+0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+(this.width*0.25+0.1)*lcos(a*90+this.time)*flip,-this.height*0.25-0.1,(this.width*0.5+0.2)*lcos(a*90+this.time),this.height*0.5+0.2)
                         layer.fill(160+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
-                        layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
-                        layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
-                        layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip,-this.height*0.25,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip,this.height*0.25,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
+                        layer.fill(240+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip,-this.height*0.25,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip,this.height*0.25,this.width*lcos(a*90+this.time)*0.32,this.height*0.32)
                         layer.fill(240+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
-                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
-                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
-                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
-                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
-                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
-                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,-this.height*0.225,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
-                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
-                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.225,this.height*0.225,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip,-this.height*0.25,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip,-this.height*0.25,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip,this.height*0.25,this.width*lcos(a*90+this.time)*0.24,this.height*0.08)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip,this.height*0.25,this.width*lcos(a*90+this.time)*0.08,this.height*0.24)
+                        layer.fill(60+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip,-this.height*0.25,this.width*lcos(a*90+this.time)*0.05,this.height*0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip-this.width*lcos(a*90+this.time)*0.06,-this.height*0.25,this.width*lcos(a*90+this.time)*0.04,this.height*0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.25*flip+this.width*lcos(a*90+this.time)*0.06,-this.height*0.25,this.width*lcos(a*90+this.time)*0.04,this.height*0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip,this.height*0.25,this.width*lcos(a*90+this.time)*0.05,this.height*0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip-this.width*lcos(a*90+this.time)*0.06,this.height*0.25,this.width*lcos(a*90+this.time)*0.04,this.height*0.2)
+                        layer.rect(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.25*flip+this.width*lcos(a*90+this.time)*0.06,this.height*0.25,this.width*lcos(a*90+this.time)*0.04,this.height*0.2)
                     }
                 }
             break
@@ -6910,26 +6895,7 @@ class wall{
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(`${this.timers[a]} (${entities.players[a].stats.points})`,25+a*40,15)
-                        switch(a+1){
-                            case 1:
-                                graphics.overlay[0].fill(15,75,255)
-                            break
-                            case 2:
-                                graphics.overlay[0].fill(225,15,255)
-                            break
-                            case 3:
-                                graphics.overlay[0].fill(55,225,15)
-                            break
-                            case 4:
-                                graphics.overlay[0].fill(225,105,15)
-                            break
-                            case 5:
-                                graphics.overlay[0].fill(15,235,255)
-                            break
-                            case 6:
-                                graphics.overlay[0].fill(125,15,255)
-                            break
-                        }
+                        graphics.overlay[0].fill(...playerColor(a+1))
                         graphics.overlay[0].rect(25+a*40,25,30,3,1)
                     }
                     let max=4
@@ -6954,14 +6920,7 @@ class wall{
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(`${this.timers[a]}`,25+a*40,15)
-                        switch(a+1){
-                            case 1:
-                                graphics.overlay[0].fill(15,75,255)
-                            break
-                            case 2:
-                                graphics.overlay[0].fill(225,15,255)
-                            break
-                        }
+                        graphics.overlay[0].fill(...playerColor(a+1))
                         graphics.overlay[0].rect(25+a*40,25,30,3,1)
                     }
                 }else if(dm()){
@@ -6970,26 +6929,7 @@ class wall{
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(`${this.timers[a][0]}`,25+a*40,15)
                         graphics.overlay[0].text(`${formatTime(this.timers[a][1])}`,25+a*40,35)
-                        switch(a+1){
-                            case 1:
-                                graphics.overlay[0].fill(15,75,255)
-                            break
-                            case 2:
-                                graphics.overlay[0].fill(225,15,255)
-                            break
-                            case 3:
-                                graphics.overlay[0].fill(55,225,15)
-                            break
-                            case 4:
-                                graphics.overlay[0].fill(225,105,15)
-                            break
-                            case 5:
-                                graphics.overlay[0].fill(15,235,255)
-                            break
-                            case 6:
-                                graphics.overlay[0].fill(125,15,255)
-                            break
-                        }
+                        graphics.overlay[0].fill(...playerColor(a+1))
                         graphics.overlay[0].rect(25+a*40,25,30,3,1)
                     }
                     let max=4
@@ -7041,32 +6981,7 @@ class wall{
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
                     graphics.overlay[0].text(texts,25+place[0]*40,15+place[1]*25)
-                    switch(this.owner){
-                        case -1:
-                            graphics.overlay[0].fill(200)
-                        break
-                        case 0:
-                            graphics.overlay[0].fill(255,255,0)
-                        break
-                        case 1:
-                            graphics.overlay[0].fill(15,75,255)
-                        break
-                        case 2:
-                            graphics.overlay[0].fill(225,15,255)
-                        break
-                        case 3:
-                            graphics.overlay[0].fill(55,225,15)
-                        break
-                        case 4:
-                            graphics.overlay[0].fill(225,105,15)
-                        break
-                        case 5:
-                            graphics.overlay[0].fill(15,235,255)
-                        break
-                        case 6:
-                            graphics.overlay[0].fill(125,15,255)
-                        break
-                    }
+                    graphics.overlay[0].fill(...playerColor(this.owner))
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
                     if((this.type==33||this.type==63)&&(
                         game.level==23&&this.pos==4||
@@ -7124,32 +7039,7 @@ class wall{
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
                     graphics.overlay[0].text(texts,25+place[0]*40,15+place[1]*25)
-                    switch(this.owner){
-                        case -1:
-                            graphics.overlay[0].fill(200)
-                        break
-                        case 0:
-                            graphics.overlay[0].fill(255,255,0)
-                        break
-                        case 1:
-                            graphics.overlay[0].fill(15,75,255)
-                        break
-                        case 2:
-                            graphics.overlay[0].fill(225,15,255)
-                        break
-                        case 3:
-                            graphics.overlay[0].fill(55,225,15)
-                        break
-                        case 4:
-                            graphics.overlay[0].fill(225,105,15)
-                        break
-                        case 5:
-                            graphics.overlay[0].fill(15,235,255)
-                        break
-                        case 6:
-                            graphics.overlay[0].fill(125,15,255)
-                        break
-                    }
+                    graphics.overlay[0].fill(...playerColor(this.owner))
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
                     if(this.type==33&&this.pos==2&&game.pvp&&game.level==26){
                         for(let a=0,la=this.timers.length;a<la;a++){
@@ -7196,32 +7086,7 @@ class wall{
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
                     graphics.overlay[0].text(texts,25+place[0]*40,15+place[1]*25)
-                    switch(this.owner){
-                        case -1:
-                            graphics.overlay[0].fill(200)
-                        break
-                        case 0:
-                            graphics.overlay[0].fill(255,255,0)
-                        break
-                        case 1:
-                            graphics.overlay[0].fill(15,75,255)
-                        break
-                        case 2:
-                            graphics.overlay[0].fill(225,15,255)
-                        break
-                        case 3:
-                            graphics.overlay[0].fill(55,225,15)
-                        break
-                        case 4:
-                            graphics.overlay[0].fill(225,105,15)
-                        break
-                        case 5:
-                            graphics.overlay[0].fill(15,235,255)
-                        break
-                        case 6:
-                            graphics.overlay[0].fill(125,15,255)
-                        break
-                    }
+                    graphics.overlay[0].fill(...playerColor(this.owner))
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
                     if(this.type==31&&this.pos==2){
                         for(let a=0,la=this.timers.length;a<la;a++){
@@ -7274,32 +7139,7 @@ class wall{
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
                     graphics.overlay[0].text(texts,25+this.pos*40,15)
-                    switch(this.owner){
-                        case -1:
-                            graphics.overlay[0].fill(200)
-                        break
-                        case 0:
-                            graphics.overlay[0].fill(255,255,0)
-                        break
-                        case 1:
-                            graphics.overlay[0].fill(15,75,255)
-                        break
-                        case 2:
-                            graphics.overlay[0].fill(225,15,255)
-                        break
-                        case 3:
-                            graphics.overlay[0].fill(55,225,15)
-                        break
-                        case 4:
-                            graphics.overlay[0].fill(225,105,15)
-                        break
-                        case 5:
-                            graphics.overlay[0].fill(15,235,255)
-                        break
-                        case 6:
-                            graphics.overlay[0].fill(125,15,255)
-                        break
-                    }
+                    graphics.overlay[0].fill(...playerColor(this.owner))
                     graphics.overlay[0].rect(25+this.pos*40,25,30,3,1)
                     if(this.type==31&&game.level==19&&game.pvp&&this.pos==2||this.type==31&&game.level==24||this.type==33&&game.level==23&&this.pos==4||game.level==28&&this.pos==1||this.type==31&&game.level==31&&game.pvp&&this.pos==3||game.level==33&&this.pos==0||game.level==39||game.level==49&&this.pos==3||game.level==63&&this.pos==0||game.level==69&&this.pos==2){
                         for(let a=0,la=this.timers.length;a<la;a++){
@@ -7447,12 +7287,12 @@ class wall{
                         )
                         switch(this.pos){
                             case 1:
-                                layer.fill(255)
+                                layer.fill(250)
                                 layer.textSize(10)
                                 layer.text('Deploy',0,-this.height/2+8)
                             break
                             case 2:
-                                layer.fill(255)
+                                layer.fill(250)
                                 layer.textSize(10)
                                 layer.text('Target',0,-this.height/2+8)
                             break
@@ -9249,13 +9089,14 @@ class wall{
                             ||!game.classWeapon&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
                             ||game.classWeapon&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
                             ||c.construct||c.sidekick))
-                        &&!((this.type==9||this.type==41||this.type==63||this.type==75)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==9||this.type==41||this.type==63)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!((this.type==12||this.type==70||this.type==76)&&(c.id<=0||this.recharge>0||c.construct))
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerVIP'))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerVIP'))
                         &&!(this.type==65&&this.recharge>0)
                         &&!((this.type==68||this.type==73)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
+                        &&!(this.type==75&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
                         let clump
@@ -9619,6 +9460,9 @@ class wall{
                             case 75:
                                 this.recharge=120
                                 c.life=max(c.life,c.base.life)
+                                if(c.weaponType==-1||game.pvp){
+                                    c.newWeapon()
+                                }
                             break
                             case 76:
                                 if(c.id==1&&this.position.x>game.edge[0]/2||c.id==2&&this.position.x<game.edge[0]/2){

@@ -10,9 +10,9 @@ function mainloop(){
                     ['Prison','Steep','Basalt','Abandoned'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
-                    ['Gray Gravel','Downward','Arizona','Fragile'],
-                    ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Bluefort'],
+                    ['Downward','Arizona','Fragile','Alloy'],
+                    ['NuclearMountain','Big Data','Rusted','Tailwater'],
+                    ['Abandoned','Identify','Rocksalt (WIP)','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -22,10 +22,12 @@ function mainloop(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
+                    ['Globus (WIP)','Cranberry (WIP)'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Bluefort'],
+                    ['Gray Gravel','Shogatsu','Valuation','Basalt'],
+                    ['Bluefort',''],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -115,13 +117,20 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 0: case 2:
+                                        case 0:
+                                            text(`Search and Destroy`,pos[0],pos[1]+15)
+                                        break
+                                        case 1: case 3:
                                             text(`Duck Destruction`,pos[0],pos[1]+15)
                                         break
-                                        case 1:
+                                        case 2:
                                             text(`Heist`,pos[0],pos[1]+15)
                                         break
-                                        case 3:
+                                    }
+                                break
+                                case 5:
+                                    switch(b){
+                                        case 0:
                                             text(`CTF`,pos[0],pos[1]+15)
                                         break
                                     }
@@ -955,8 +964,8 @@ function mainloop(){
                             }
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 67: case 68:
-                        case 69:
+                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
+                        case 68: case 69:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

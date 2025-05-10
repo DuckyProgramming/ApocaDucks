@@ -24,11 +24,11 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerEngineerC3',types.player)]]
+        game.weapon=[[findName('PlayerScout5',types.player)]]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
         //game.noPlayer=true
     }
 }
@@ -46,9 +46,9 @@ function mouseClicked(){
                     ['Prison','Steep','Basalt','Abandoned'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
-                    ['Gray Gravel','Downward','Arizona','Fragile'],
-                    ['Alloy','NuclearMountain','Big Data','Rusted'],
-                    ['Tailwater','Abandoned','Identify','Bluefort'],
+                    ['Downward','Arizona','Fragile','Alloy'],
+                    ['NuclearMountain','Big Data','Rusted','Tailwater'],
+                    ['Abandoned','Identify','Rocksalt (WIP)','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -58,10 +58,12 @@ function mouseClicked(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
+                    ['Globus (WIP)','Cranberry (WIP)'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Valuation','Basalt','Bluefort'],
+                    ['Gray Gravel','Shogatsu','Valuation','Basalt'],
+                    ['Bluefort',''],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -91,6 +93,7 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=6
+                                                //vietnam
                                             break
                                             case 1:
                                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
@@ -98,6 +101,7 @@ function mouseClicked(){
                                                 }else{
                                                     menu.level=17
                                                 }
+                                                //normandy
                                             break
                                             case 2:
                                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
@@ -105,9 +109,11 @@ function mouseClicked(){
                                                 }else{
                                                     menu.level=18
                                                 }
+                                                //isonzo
                                             break
                                             case 3:
                                                 menu.level=16
+                                                //stalingrad
                                             break
                                         }
                                     break
@@ -115,6 +121,7 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=19
+                                                //doublemountain
                                             break
                                             case 1:
                                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
@@ -123,13 +130,16 @@ function mouseClicked(){
                                                     menu.level=35
                                                 }
                                                 game.classicWeapon=true
+                                                //steel
                                             break
                                             case 2:
                                                 menu.level=25
                                                 game.classicWeapon=true
+                                                //sulfate
                                             break
                                             case 3:
                                                 menu.level=27
+                                                //process
                                             break
                                         }
                                     break
@@ -139,22 +149,26 @@ function mouseClicked(){
                                                 menu.level=19
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //doublemountain
                                             break
                                             case 1:
                                                 menu.level=23
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //steel
                                             break
                                             case 2:
                                                 menu.level=26
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //sulfate
                                             break
                                             case 3:
                                                 menu.level=27
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 instant()
+                                                //process
                                             break
                                         }
                                     break
@@ -162,15 +176,19 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=45
+                                                //vietnam
                                             break
                                             case 1:
                                                 menu.level=53
+                                                //gray gravel
                                             break
                                             case 2:
                                                 menu.level=56
+                                                //shogatsu
                                             break
                                             case 3:
                                                 menu.level=50
+                                                //arizona
                                             break
                                         }
                                         game.pvp=true
@@ -184,50 +202,53 @@ function mouseClicked(){
                                                 menu.level=7
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //pacman
                                             break
                                             case 1:
                                                 menu.level=16
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //stalingrad
                                             break
                                             case 2:
                                                 menu.level=20
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //prison
                                             break
                                             case 3:
                                                 menu.level=21
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //steep
                                             break
                                         }
                                     break
                                     case 6:
                                         switch(b){
                                             case 0:
+                                                menu.level=29
+                                                game.classicRespawn=false
+                                                //gray gravel
+                                            break
+                                            case 1:
                                                 menu.level=30
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //shogatsu
                                             break
-                                            case 1:
+                                            case 2:
                                                 menu.level=37
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 game.classicRespawn=false
+                                                //prison
                                             break
-                                            case 2:
+                                            case 3:
                                                 menu.level=54
                                                 game.classicWeapon=true
                                                 game.pvp=true
-                                            break
-                                            case 3:
-                                                menu.level=67
-                                                game.pvp=true
-                                                menu.players*=4
-                                                if(!game.classWeapon){
-                                                    game.classicWeapon=true
-                                                }
-                                                instant()
+                                                //steep
                                             break
                                         }
                                     break
@@ -242,37 +263,45 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=46
+                                                //prison
                                             break
                                             case 1:
                                                 menu.level=21
+                                                //steep
                                             break
                                             case 2:
                                                 menu.level=54
                                                 game.classicWeapon=true
+                                                //basalt
                                             break
                                             case 3:
                                                 menu.level=66
                                                 game.classicWeapon=true
+                                                //abandoned
                                             break
                                         }
                                     break
                                     case 2:
                                         switch(b){
                                             case 0:
-                                                menu.level=29
-                                                game.classicRespawn=false
-                                            break
-                                            case 1:
                                                 menu.level=32
                                                 game.classicWeapon=true
+                                                //downward
+                                            break
+                                            case 1:
+                                                menu.level=34
+                                                //arizona
                                             break
                                             case 2:
-                                                menu.level=34
-                                            break
-                                            case 3:
                                                 menu.level=39
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //fragile
+                                            break
+                                            case 3:
+                                                menu.level=40
+                                                game.classicWeapon=true
+                                                //alloy
                                             break
                                         }
                                     break
@@ -282,22 +311,26 @@ function mouseClicked(){
                                                 menu.level=33
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //downward
                                             break
                                             case 1:
                                                 menu.level=38
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 instant()
+                                                //sierra leone
                                             break
                                             case 2:
                                                 menu.level=39
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //fragile
                                             break
                                             case 3:
                                                 menu.level=42
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //nuclearmountain
                                             break
                                         }
                                     break
@@ -305,21 +338,42 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=36
+                                                //aerial
                                             break
                                             case 1:
                                                 menu.level=52
+                                                //alloy
                                             break
                                             case 2:
-                                                menu.level=40
+                                                menu.level=41
+                                                //speleo
                                             break
                                             case 3:
                                                 menu.level=51
+                                                //chasm
                                             break
                                         }
                                         game.pvp=true
                                         game.classicWeapon=true
                                         game.classicRespawn=false
                                         instant()
+                                    break
+                                    case 6:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=67
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //bluefort
+                                            break
+                                            case 1:
+                                                ////?
+                                            break
+                                        }
                                     break
                                 }
                                 menu.mode=0
@@ -330,18 +384,22 @@ function mouseClicked(){
                                     case 2:
                                         switch(b){
                                             case 0:
-                                                menu.level=40
-                                                game.classicWeapon=true
+                                                menu.level=42
+                                                //nuclearmountain
                                             break
                                             case 1:
-                                                menu.level=42
+                                                menu.level=47
+                                                //big ata
                                             break
                                             case 2:
-                                                menu.level=47
-                                            break
-                                            case 3:
                                                 menu.level=49
                                                 game.classicWeapon=true
+                                                //rusted
+                                            break
+                                            case 3:
+                                                menu.level=55
+                                                game.classicWeapon=true
+                                                //tailwater
                                             break
                                         }
                                     break
@@ -352,6 +410,7 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 instant()
+                                                //razorpoint
                                             break
                                             case 1:
                                                 menu.level=44
@@ -361,11 +420,13 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
+                                                //entropy
                                             break
                                             case 2:
                                                 menu.level=49
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //rusted
                                             break
                                             case 3:
                                                 menu.level=65
@@ -375,6 +436,7 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
+                                                //tailwater
                                             break
                                         }
                                     break
@@ -382,15 +444,19 @@ function mouseClicked(){
                                         switch(b){
                                             case 0:
                                                 menu.level=60
+                                                //identify
                                             break
                                             case 1:
                                                 menu.level=61
+                                                //hard hat
                                             break
                                             case 2:
                                                 menu.level=62
+                                                //granary
                                             break
                                             case 3:
                                                 menu.level=64
+                                                //rocksalt
                                             break
                                         }
                                         game.pvp=true
@@ -407,19 +473,21 @@ function mouseClicked(){
                                     case 2:
                                         switch(b){
                                             case 0:
-                                                menu.level=55
-                                                game.classicWeapon=true
+                                                menu.level=58
+                                                //abandoned
                                             break
                                             case 1:
-                                                menu.level=58
-                                            break
-                                            case 2:
                                                 menu.level=59
                                                 game.classicWeapon=true
+                                                //identify
+                                            break
+                                            case 2:
+                                                ////rocksalt
                                             break
                                             case 3:
                                                 menu.level=68
                                                 game.classicWeapon=true
+                                                //bluefort
                                             break
                                         }
                                     break
@@ -429,22 +497,39 @@ function mouseClicked(){
                                                 menu.level=63
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //abandoned
                                             break
                                             case 1:
                                                 menu.level=69
                                                 game.classicWeapon=true
                                                 game.pvp=true
+                                                //cooked
                                             break
                                             case 2:
-                                                ////
+                                                ////divider
                                             break
                                             case 3:
                                                 menu.level=28
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 instant()
+                                                //blueprint
                                             break
                                         }
+                                    break
+                                    case 4:
+                                        switch(b){
+                                            case 0:
+                                                ////globus
+                                            break
+                                            case 1:
+                                                ////cranberry
+                                            break
+                                        }
+                                        game.pvp=true
+                                        game.classicWeapon=true
+                                        game.classicRespawn=false
+                                        instant()
                                     break
                                 }
                                 menu.mode=0
