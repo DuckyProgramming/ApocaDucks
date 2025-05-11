@@ -24,11 +24,11 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerScout5',types.player)]]
+        game.weapon=[[findName('PlayerDroner5',types.player)]]
         newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         //game.noPlayer=true
     }
 }
@@ -63,7 +63,7 @@ function mouseClicked(){
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort',''],
+                    ['Bluefort','Rocketyard (WIP)'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){

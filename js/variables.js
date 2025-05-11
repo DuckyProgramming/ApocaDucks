@@ -3784,7 +3784,7 @@ types={
       desc:'Fires a burst of 12 bullets',dpsBuff:10,
     },{
       name:'PlayerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1,
       desc:'Can double jump and mash to fire faster',dpsBuff:1,
     },{
       name:'PlayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3985,7 +3985,7 @@ types={
     },{
       name:'PlayerTank',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:631,
-      desc:'Takes 75% less damage',dpsBuff:1,
+      desc:'Takes 3x less damage',dpsBuff:1,
     },
     
 
@@ -4029,19 +4029,19 @@ types={
     
     {
       name:'PlayerPistolQuadrupleJump',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:131,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:131,
       desc:'Pistol that can jump four times',dpsBuff:1,
     },{
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:53,
+      damageBuff:2.5,reloadBuff:1,crit:0,weapon:53,
       desc:'Pistol that applies vulnerable to hit enemies',dpsBuff:1,
     },{
       name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:142,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:142,
       desc:'Pistol that buffs nearby allies with crits',dpsBuff:1,
     },{
       name:'PlayerPistolInspect',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:1,crit:0,weapon:423,
+      damageBuff:3.25,reloadBuff:1,crit:0,weapon:423,
       desc:'Pistol that inspects all enemies that are hit',dpsBuff:1,
     },{
       name:'PlayerRegional',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4049,19 +4049,19 @@ types={
       desc:'Pistol that can fire a large bullet using auxiliary key',dpsBuff:1,
     },{
       name:'PlayerQuarry',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:499,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:499,
       desc:'Pistol that occasionally fires heavy shotgun shells',dpsBuff:2,
     },{
       name:'PlayerHeister',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:549,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:549,
       desc:'Pistol that fires an auto turret whenever it jumps',dpsBuff:1,
     },{
       name:'PlayerSpreadPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:637,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:637,
       desc:'Pistol that fire three bullets in a spread',dpsBuff:1,
     },{
       name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:178,
       desc:'Has a pistol auto turret',dpsBuff:1,
     },
     
@@ -6247,6 +6247,46 @@ types={
       name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:745,
       desc:'Manipulates motorizer drones and has an assault rifle',dpsBuff:0,
+    },{
+      name:'PlayerScout5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:762,
+      desc:'Fast, can double jump, armed with a peppergun and pistol',dpsBuff:0,
+    },{
+      name:'PlayerSoldier5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:763,
+      desc:'Has a blast launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
+    },{
+      name:'PlayerPyro5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:764,
+      desc:'Has a flamethrower and detonator, and is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerDemoman5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:765,
+      desc:'Has a caber and stickybombs triggered on weapon swap',dpsBuff:0,
+    },{
+      name:'PlayerHeavyWeapons5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:766,
+      desc:'Has a shotgun, can put down a health pack, and has damage resistance',dpsBuff:0,
+    },{
+      name:'PlayerEngineerC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:767,
+      desc:'Has a projectile-destroying cannon and can place down a single rapid auto unit',dpsBuff:0,
+    },{
+      name:'PlayerMedicC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:768,
+      desc:'Can heal allies and fire healing bolts',dpsBuff:0,
+    },{
+      name:'PlayerSniperC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:769,
+      desc:'Has a borer and a submachine gun, and can see far',dpsBuff:0,
+    },{
+      name:'PlayerSpyC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:770,
+        desc:'Has an enforcer and a knife and can become invisible',dpsBuff:0,
+    },{
+      name:'PlayerDroner5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:771,
+        desc:'Manipulates drones and can fire bullets to pull enemies',dpsBuff:0,
     },
 
     {
@@ -6392,7 +6432,39 @@ types={
     },{
       name:'PlayerHeavyMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.75,reloadBuff:1.5,crit:0,weapon:2,
+    },{
+      name:'PlayerPeppergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:772,
+    },{
+      name:'PlayerBlastLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:2.5,reloadBuff:1.5,crit:0,weapon:773,
+    },{
+      name:'PlayerDetonator',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:774,
+    },{
+      name:'PlayerCaber',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:775,
+    },{
+      name:'PlayerSecurer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:776,
+    },{
+      name:'PlayerHealBolt',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:777,
+    },{
+      name:'PlayerBorer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:778,
+    },{
+      name:'PlayerEnforcer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:779,
+    },{
+      name:'PlayerPuller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:780,
+    },{
+      name:'PlayerPumpShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:781,
     },
+
+    //mark c
     
     {
       name:'PlayerFakeHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -8177,7 +8249,7 @@ types={
 		},{
 			name:'Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8305,7 +8377,7 @@ types={
 		},{
 			name:'Push Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8377,7 +8449,7 @@ types={
 		},{
 			name:'Flip Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8386,7 +8458,7 @@ types={
 		},{
 			name:'Pull Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8584,7 +8656,7 @@ types={
 		},{
 			name:'Damage Over Time Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8602,7 +8674,7 @@ types={
 		},{
 			name:'Pistol Heal Self',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8647,7 +8719,7 @@ types={
 		},{
 			name:'Pistol Vulnerable',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8674,7 +8746,7 @@ types={
 		},{
 			name:'Short Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8737,7 +8809,7 @@ types={
 		},{
 			name:'Short Damage Over Time Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8782,7 +8854,7 @@ types={
 		},{
 			name:'Pistol Stop',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8872,7 +8944,7 @@ types={
 		},{
 			name:'Pistol Stop Vulnerable',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8926,7 +8998,7 @@ types={
 		},{
 			name:'Pistol Hurt Self',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -8989,7 +9061,7 @@ types={
 		},{
 			name:'Pistol Confuse',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9061,7 +9133,7 @@ types={
 		},{
 			name:'Auto Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9124,7 +9196,7 @@ types={
 		},{
 			name:'Pistol Quadral',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9268,7 +9340,7 @@ types={
 		},{
 			name:'Phase Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9340,7 +9412,7 @@ types={
 		},{
 			name:'Pushier Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9349,7 +9421,7 @@ types={
 		},{
 			name:'Pistol Quadruple Jump',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9385,7 +9457,7 @@ types={
 		},{
 			name:'Hexadecimal Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9403,7 +9475,7 @@ types={
 		},{
 			name:'Slicer',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -9412,7 +9484,7 @@ types={
 		},{
 			name:'Recursive Slicer',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -9421,7 +9493,7 @@ types={
 		},{
 			name:'Propeller Slicer',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -9430,7 +9502,7 @@ types={
 		},{
 			name:'Assault Slicer',
 			ammo:10,
-			damage:80,
+			damage:65,
 			cooldown:20,
 			stop:90,
 			reload:10,
@@ -9448,7 +9520,7 @@ types={
 		},{
 			name:'Pistol Officer',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9493,7 +9565,7 @@ types={
 		},{
 			name:'Slicer Linger',
 			ammo:4,
-			damage:80,
+			damage:75,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -9718,7 +9790,7 @@ types={
 		},{
 			name:'Pistol Heal Self Over',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9772,7 +9844,7 @@ types={
 		},{
 			name:'Pistolception',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -9844,7 +9916,7 @@ types={
 		},{
 			name:'Slicerception',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -10591,7 +10663,7 @@ types={
 		},{
 			name:'',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -10600,7 +10672,7 @@ types={
 		},{
 			name:'',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -11131,7 +11203,7 @@ types={
 		},{
 			name:'Slicer Dualic',
 			ammo:1,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -11518,7 +11590,7 @@ types={
 		},{
 			name:'Karma',
 			ammo:4,
-			damage:150,
+			damage:130,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -11977,7 +12049,7 @@ types={
 		},{
 			name:'Pistol Inspect',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -12157,7 +12229,7 @@ types={
 		},{
 			name:'Dual Slicer',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -12175,7 +12247,7 @@ types={
 		},{
 			name:'Cleaner',
 			ammo:4,
-			damage:120,
+			damage:100,
 			cooldown:20,
 			stop:40,
 			reload:30,
@@ -12400,7 +12472,7 @@ types={
 		},{
 			name:'Regional',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -12661,7 +12733,7 @@ types={
 		},{
 			name:'Quarry',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -12832,7 +12904,7 @@ types={
 		},{
 			name:'Pinion',
 			ammo:4,
-			damage:80,
+			damage:65,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -12941,7 +13013,7 @@ types={
 			name:'Bohrer',
 			ammo:10,
 			damage:90,
-			cooldown:20,
+			cooldown:15,
 			stop:120,
 			reload:25,
 			speed:0.85,
@@ -13111,7 +13183,7 @@ types={
 		},{
 			name:'Heister',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -13426,7 +13498,7 @@ types={
 		},{
 			name:'Rewind',
 			ammo:4,
-			damage:160,
+			damage:130,
 			cooldown:30,
 			stop:90,
 			reload:45,
@@ -13903,7 +13975,7 @@ types={
 		},{
 			name:'Spread Pistol',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -14245,7 +14317,7 @@ types={
 		},{
 			name:'Scout',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -14380,7 +14452,7 @@ types={
 		},{
 			name:'Cola Scout',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -14488,12 +14560,12 @@ types={
 		},{
 			name:'Sword',
 			ammo:3,
-			damage:160,
+			damage:150,
 			cooldown:45,
 			stop:105,
 			reload:60,
 			speed:1.4,
-      uses:20,
+      uses:15,
 		},{
 			name:'Health Pack',
 			ammo:1,
@@ -14565,11 +14637,11 @@ types={
 			stop:60,
 			reload:20,
 			speed:1.15,
-      uses:12,
+      uses:16,
 		},{
 			name:'Push Scout',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -14664,7 +14736,7 @@ types={
 			stop:80,
 			reload:10,
 			speed:1.15,
-      uses:12,
+      uses:16,
 		},{
 			name:'Rocket Jump',
 			ammo:1,
@@ -14794,7 +14866,7 @@ types={
 		},{
 			name:'Jump Scout',
 			ammo:10,
-			damage:45,
+			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
@@ -15025,6 +15097,186 @@ types={
 			reload:720,
 			speed:1.3,
       uses:20,
+		},{
+			name:'Focus Scout',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Blast Soldier',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Detonator Pyro',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:1.075,
+      uses:100,
+		},{
+			name:'Caber Demoman',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Shotgun Heavy',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.85,
+      uses:120,
+		},{
+			name:'Security Engineer',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Bolt Medic',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Borer Sniper',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.0625,
+      uses:8,
+		},{
+			name:'Enforcer Spy',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.3,
+      uses:12,
+		},{
+			name:'Pull Droner',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Peppergun',
+			ammo:3,
+			damage:35,
+			cooldown:25,
+			stop:75,
+			reload:10,
+			speed:1.15,
+      uses:24,
+		},{
+			name:'Blast Launcher',
+			ammo:2,
+			damage:110,
+			cooldown:20,
+			stop:135,
+			reload:40,
+			speed:0.8,
+      uses:14,
+		},{
+			name:'Detonator',
+			ammo:1,
+			damage:125,
+			cooldown:60,
+			stop:60,
+			reload:60,
+			speed:0.85,
+      uses:10,
+		},{
+			name:'Caber',
+			ammo:1,
+			damage:500,
+			cooldown:210,
+			stop:210,
+			reload:210,
+			speed:1.05,
+      uses:2,
+		},{
+			name:'Securer',
+			ammo:3,
+			damage:150,
+			cooldown:45,
+			stop:125,
+			reload:25,
+			speed:0.975,
+      uses:18,
+		},{
+			name:'Heal Bolt',
+			ammo:1,
+			damage:200,
+			cooldown:55,
+			stop:55,
+			reload:55,
+			speed:1.15,
+      uses:6,
+		},{
+			name:'Borer',
+			ammo:10,
+			damage:90,
+			cooldown:15,
+			stop:120,
+			reload:25,
+			speed:0.85,
+      uses:50,
+		},{
+			name:'Enforcer',
+			ammo:1,
+			damage:250,
+			cooldown:65,
+			stop:65,
+			reload:65,
+			speed:1.35,
+      uses:6,
+		},{
+			name:'Puller',
+			ammo:6,
+			damage:70,
+			cooldown:10,
+			stop:40,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Pump Shotgun',
+			ammo:3,
+			damage:25,
+			cooldown:25,
+			stop:60,
+			reload:12,
+			speed:1.15,
+      uses:21,
 		},
 
     /*{
@@ -18481,6 +18733,9 @@ Hayden - brown crate nook
 "#   ### ######## ######## ######## ######## ######## ######## ######## ######## ######## ######",
 "#   #        #        #        #        #        #        #        #        #        #        #",
 "#   #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
+"#   # ######## ######## ######## ######## ######## ######## ######## ######## ######## ########",
+"#   #        #        #        #        #        #        #        #        #        #        #",
+"#   #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
 "###############################################################################################",
 ],[
 "                                                                                                                                                                     ",
@@ -19078,15 +19333,15 @@ Hayden - brown crate nook
 "###.   |   |   |   |   .   |   ].> |   |   |   |   |   |   |   |   |   |  ].>####.                                                   .####<.[  |   |   |   |   |   |   |   |   |   | <.[   |   .   |   |   |   |   .###",
 "###.   |   |   | b |   .   |   |].>|---| / |---| / |---|   |   |   |   |   ].>###.                                                   .###<.[   |   |   |   |   |---| / |---| / |---|<.[|   |   .   | b |   |   |   .###",
 "###.   |   |   =====   .....>  | ]...................... ; .   |   |   |  *|..>##.                                                   .##<..|*  |   |   |   . ; ......................[ |  <.....   =====   |   |   .###",
-"#...[  |   |   |   |   |   ].> |   |   |   |   |   |   |   |   |   |   |  ........[                                                 ]........  |   |   |   |   |   |   |   |   |   |   | <.[   |   |   |   |   |  ]...#",
-"#.     |   |   |   |   |  ~|..>|   |   |   |   |   |   |   |   |   |<.>|   |   |        ===                                 ===        |   |   |<.>|   |   |   |   |   |   |   |   |   |<..|~  |   |   |   |   |     .#",
+"#...[  |   |   |   |   |   ].> |   |   |   |   |   |   |   |   |   |<.>|  ........[                                                 ]........  |<.>|   |   |   |   |   |   |   |   |   | <.[   |   |   |   |   |  ]...#",
+"#.     |   |   |   |   |  ~|..>|   |   |   |   |   |   |   |   |   <...>   |   |        ===                                 ===        |   |   <...>   |   |   |   |   |   |   |   |   |<..|~  |   |   |   |   |     .#",
 "#.     |---|   |   |   |  .....>   |   |---|  <.....> <.....> <..@......>  |   |        | |                                 | |        |   |  <......@..> <.....> <.....>  |---|   |   <.....  |   |   |   |---|     .#",
 "#.af  <.........>  |   |   |  ]..... ; ........[   ]...[   ]...[ _ |   ..> |   |        | |   ---                     ---   | |        |   | <..   | _ ]...[   ]...[   ]........ ; .....[  |   |   |  <.........> f a.#",
-"#......[#######].> |   |   |   |   |   |   |   | ^ |   |   |   |   |   .].>|---|<.===================    <<#>>    ===================.>|---|<.[.   |   |   |   |   | ^ |   |   |   |   |   |   |   | <.[#######]......#",
-"################].>|   |   |   |   |   |   |   =====   |   |   |   |   .#]........ |   |   |   |   |   <#######>   |   |   |   |   | ........[#.   |   |   |   |   =====   |   |   |   |   |   |   |<.[################",
-"#################]...... ; .....>  |   |   |   |   |   |   |   | .>|   .#########. |   |   |   |   | <###########> |   |   |   |   | .#########.   |<. |   |   |   |   |   |   |   |  <..... ; ......[#################",
-"##################].   |   |   ].> |   |---| / |   | / |   | / |a..> e .#########. |   |   |   |   | <###########> |   |   |   |   | .#########. r <..a| / |   | / |   | / |---|   | <.[   |   |   .[##################",
-"###################.   |   |   |]....@...................c..............#########. |   |   |   |   <###############>   |   |   |   | .#########..............c...................@....[|   |   |   .###################",
+"#......[#######].> |   |   |   |   |   |   |   | ^ |   |   |   |   |   .].>|---|<.===================             ===================.>|---|<.[.   |   |   |   |   | ^ |   |   |   |   |   |   |   | <.[#######]......#",
+"################].>|   |   |   |   |   |   |   =====   |   |   |   |   .#]........ |   |   |   |   |    <<###>>    |   |   |   |   | ........[#.   |   |   |   |   =====   |   |   |   |   |   |   |<.[################",
+"#################]...... ; .....>  |   |   |   |   |   |   |   | .>|   .#########. |   |   |   |   |  <#########>  |   |   |   |   | .#########.   |<. |   |   |   |   |   |   |   |  <..... ; ......[#################",
+"##################].   |   |   ].> |   |---| / |   | / |   | / |a..> e .#########. |   |   |   |   |  <#########>  |   |   |   |   | .#########. r <..a| / |   | / |   | / |---|   | <.[   |   |   .[##################",
+"###################.   |   |   |]....@...................c..............#########. |   |   |   |   |<#############>|   |   |   |   | .#########..............c...................@....[|   |   |   .###################",
 "###################.   |   |   | . |   |   | . |   |   | . |   |   | .#####<...>#. |   |   |   |  <#################>  |   |   |   | .#<...>#####. |   |   | . |   |   | . |   |   | . |   |   |   .###################",
 "###################. f |   |   | . . ; . ; . . . ; . ; . . . ; . ; . .......[g]... |   |   |   | <###################> |   |   |   | ...[g]....... . ; . ; . . . ; . ; . . . ; . ; . . |   |   | f .###################",
 "###################.aaa|   |---|   |   .!  |   |   .   |   |   .   |   |   |   |   |   |   |   <#######################>!  |   |   |   |   |   |   |   .   |   |   .   |   |   .   |   |---|   |aaa.###################",
@@ -19139,8 +19394,8 @@ Hayden - brown crate nook
 "                             .####<.[  |   |   |   |   |   |   |   |   |   | <.[   |   .   |   |   |   |   .###",
 "                             .###<.[   |   |   |   |   |---| / |---| / |---|<.[|   |   .   | b |   |   |   .###",
 "                             .##<..|*  |   |   |   . ; ......................[ |  <.....   =====   |   |   .###",
-"                            ]........  |   |   |   |   |   |   |   |   |   |   | <.[   |   |   |   |   |  ]...#",
-"A                   ===        |   |   |<.>|   |   |   |   |   |   |   |   |   |<..|~  |   |   |   |   |     .#",
+"                            ]........  |<.>|   |   |   |   |   |   |   |   |   | <.[   |   |   |   |   |  ]...#",
+"A                   ===        |   |   <...>   |   |   |   |   |   |   |   |   |<..|~  |   |   |   |   |     .#",
 "                    | |        |   |  <......@..> <.....> <.....>  |---|   |   <.....  |   |   |   |---|     .#",
 "###>>         ---   | |        |   | <..   | _ ]...[   ]...[   ]........ ; .....[  |   |   |  <.........> f a.#",
 "######>   ===================.>|---|<.[.   |   |   |   |   | ^ |   |   |   |   |   |   |   | <.[#######]......#",

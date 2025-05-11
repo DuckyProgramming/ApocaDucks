@@ -8654,7 +8654,11 @@ class wall{
             case 74:
                 let visible74=false
                 for(let a=0,la=game.players;a<la;a++){
-                    if(abs(entities.players[a].position.x-this.base.position.x)<300&&abs(entities.players[a].position.y-(this.base.position.y+this.base.height/2))<100&&entities.players[a].id>0&&!(game.level==67&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))){
+                    if(
+                        abs(entities.players[a].position.x-this.base.position.x)<250&&abs(entities.players[a].position.y-(this.base.position.y+this.base.height/2))<100&&
+                        entities.players[a].id>0&&entities.players[a].life>0&&
+                        !(game.level==67&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))
+                    ){
                         visible74=true
                     }
                 }
@@ -8744,7 +8748,7 @@ class wall{
                             c.type==292||c.type==293||c.type==295||c.type==301||c.type==392||
                             c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
-                            c.type==328||c.type==329||c.type==344||c.type==349
+                            c.type==328||c.type==329||c.type==344||c.type==349||c.type==353
                         )
                     ){
                         if(!c.stop){
@@ -9030,7 +9034,7 @@ class wall{
                                     if(c.bounces>=2){
                                         c.stop=true
                                     }
-                                }else if(c.type==344&&c.active){
+                                }else if((c.type==344||c.type==353)&&c.active){
                                     c.explode()
                                     c.active=false
                                     c.velocity.x=0
@@ -9052,7 +9056,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
+                     }else if(a==0&&((inBoxBox(this.bounder,c)||this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54))&&c.active&&
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                         this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76
@@ -9060,7 +9064,12 @@ class wall{
                         &&!(this.type==65&&this.recharge>0)
                     ){
                         let d=collideBoxBox(this,c)
-                        if(d>=0&&!this.redundant[d]&&c.timer>=2||c.timer==1&&inBoxBox(this,c)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||c.timer==0&&(this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54)&&inTriangleBoxBasic(this.triangle,c)){
+                        let proxyC={position:c.position,width:c.width*min(c.timer/10+0.2,1),height:c.height*min(c.timer/10+0.2,1)}
+                        if(
+                            d>=0&&!this.redundant[d]&&c.timer>8||
+                            inBoxBox(this,proxyC)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||
+                            (this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54)&&inTriangleBoxBasic(this.triangle,proxyC)
+                        ){
                             if(
                                 c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
@@ -9077,7 +9086,7 @@ class wall{
                                     c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
                                     c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
-                                    c.type==307||c.type==308||c.type==313||c.type==336
+                                    c.type==307||c.type==308||c.type==313||c.type==336||c.type==351
                                 ){
                                     c.explode()
                                 }
@@ -9089,14 +9098,14 @@ class wall{
                             ||!game.classWeapon&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
                             ||game.classWeapon&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
                             ||c.construct||c.sidekick))
-                        &&!((this.type==9||this.type==41||this.type==63)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==9||this.type==41||this.type==63)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!((this.type==12||this.type==70||this.type==76)&&(c.id<=0||this.recharge>0||c.construct))
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerVIP'))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerVIP'))
                         &&!(this.type==65&&this.recharge>0)
-                        &&!((this.type==68||this.type==73)&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
-                        &&!(this.type==75&&(this.time<60||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==68||this.type==73)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
+                        &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
                         let clump

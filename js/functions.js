@@ -158,7 +158,8 @@ function inTriangleBoxBasic(triangle,box){
         intersect(corners[0],corners[1],triangle[2],triangle[0])||
         intersect(corners[1],corners[2],triangle[2],triangle[0])||
         intersect(corners[2],corners[3],triangle[2],triangle[0])||
-        intersect(corners[3],corners[0],triangle[2],triangle[0])
+        intersect(corners[3],corners[0],triangle[2],triangle[0])||
+        inPointTriangle({x:box.position.x,y:box.position.y},triangle)
     /*return inPointTriangle({x:box.position.x-box.width/2,y:box.position.y-box.height/2},triangle)||
         inPointTriangle({x:box.position.x+box.width/2,y:box.position.y-box.height/2},triangle)||
         inPointTriangle({x:box.position.x-box.width/2,y:box.position.y+box.height/2},triangle)||
@@ -1940,7 +1941,7 @@ function generateLevel(info,layer){
                                     level[a][b-1]=='%'&&level[a][b-2]=='%'&&level[a][b-3]=='%'&&(game.level==40||game.level==49||game.level==59)||
                                     level[a][b-1]=='`'&&level[a][b-2]=='`'&&level[a][b-3]=='`'&&game.level==49
                                 )){
-                                    if(level[a][b+1]=='#'){
+                                    if(level[a][b+1]=='#'||(game.level==67||game.level==68)&&level[a+1][b]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a-e]=level[a-e].substr(0,b+e)+'<'+level[a-e].substr(b+e+1)
                                             if(reject.includes((a-e)*lb+(b+e))){
@@ -2002,7 +2003,7 @@ function generateLevel(info,layer){
                                     level[a][b+1]=='%'&&level[a][b+2]=='%'&&level[a][b+3]=='%'&&(game.level==40||game.level==49||game.level==59)||
                                     level[a][b+1]=='`'&&level[a][b+2]=='`'&&level[a][b+3]=='`'&&game.level==49
                                 )){
-                                    if(level[a][b-1]=='#'){
+                                    if(level[a][b-1]=='#'||game.level==67&&level[a+1][b]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a-e]=level[a-e].substr(0,b-e)+'>'+level[a-e].substr(b-e+1)
                                             if(reject.includes((a-e)*lb+(b-e))){
@@ -3543,7 +3544,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39][ticker-1]]
+                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,50)][ticker-1]]
                     ticker++
                 }
             }
@@ -4738,7 +4739,7 @@ function generateLevel(info,layer){
                 entities.players[a].position.y=loc[team][1]
                 if(game.classWeapon){
                     if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
-                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+[0,0,0,1,2,3][floor(random(0,6))]*10)
+                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+[0,0,0,1,2,3,4][floor(random(0,6))]*10)
                     }else if(a<game.gaming){
                         entities.players[a].newWeaponSet(game.weapon[a][0])
                         if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){

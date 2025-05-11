@@ -1,5 +1,36 @@
 
 
+762 - scout5, focus scout
+763 - soldier5, blast soldier
+764 - pyro5, detonator pyro
+765 - demoman5, caber demo
+766 - heavyweapons5, shotgun heavy
+767 - engineerC5, security engineer
+768 - medicC5, bolt medic
+769 - sniperC5, borer sniper
+770 - spyC5, enforcer spy
+771 - droner5, pull droner
+
+772 - peppergun, 0 (less spread, more clip, less damage) (fires 8 pellets)
+773 - blast launcher, 20 (push rockets, 2-shot clip, less damage, less radius)
+774 - detonator, 701
+775 - caber, 36
+776 - securer, 437
+777 - heal bolt, 11
+778 - borer, 530
+779 - enforcer, 136
+780 - puller, 24
+781 - pump shotgun
+
+351 - blast launcher, 16, 86 (195/240)
+352 - detonator, 338
+353 - caber, 30
+354 - securer, 236, 173
+355 - enforcer (pierces all defenses), 90
+
+
+
+
 760 - vip
 761 - overheal pack, 703
 
