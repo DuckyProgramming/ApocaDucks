@@ -6397,7 +6397,7 @@ class projectile{
 			case 353:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<225&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||this.index==entities.players[b].index||game.level!=44&&game.level!=65&&game.level!=67))){
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<225&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||game.level!=44&&game.level!=65&&game.level!=67)||this.index==entities.players[b].index)){
 						entities.players[b].takeDamage(this.damage*(1-c/225)*(this.id==entities.players[b].id&&this.id>0?0.4:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -8856,8 +8856,8 @@ class projectile{
 								entities.players[b].DOT.damage+=this.damage/60
 								entities.players[b].DOT.active=max(720,entities.players[b].DOT.active+240)
 							}else if(this.type==355){
-								entities.players[b].DOT.damage+=this.damage/240
-								entities.players[b].DOT.active=min(60,entities.players[b].DOT.active+30)
+								entities.players[b].DOT.damage+=this.damage/480
+								entities.players[b].DOT.active=max(240,entities.players[b].DOT.active+30)
 							}
 						}
 						if(game.invis){

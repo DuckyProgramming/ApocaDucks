@@ -12,7 +12,7 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
-                    ['Abandoned','Identify','Rocksalt (WIP)','Bluefort'],
+                    ['Abandoned','Identify','Rocksalt','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -589,7 +589,7 @@ function mainloop(){
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -822,6 +822,11 @@ function mainloop(){
                         for(let b=0,lb=b2s.length;b<lb;b++){
                             entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
                         }
+                        if(game.level==64||game.level==70){
+                            for(let b=0,lb=b2s.length;b<lb;b++){
+                                entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
+                            }
+                        }
                         graphics.pane[a].pop()
                         graphics.panePoint[a].position.x=effective[a][0]
                         graphics.panePoint[a].position.y=effective[a][1]
@@ -969,7 +974,7 @@ function mainloop(){
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
-                        case 68: case 69:
+                        case 68: case 69: case 70:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

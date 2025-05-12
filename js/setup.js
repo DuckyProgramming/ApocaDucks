@@ -7,12 +7,12 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=5
         game.gaming=1
-        game.level=67
-        menu.level=67
+        game.level=70
+        menu.level=70
         if(true){
-            game.mission=findName('Duck Disaster',types.mission)
+            game.mission=findName('Duckocracy',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerDroner5',types.player)]]
@@ -48,7 +48,7 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
-                    ['Abandoned','Identify','Rocksalt (WIP)','Bluefort'],
+                    ['Abandoned','Identify','Rocksalt','Bluefort'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -482,7 +482,9 @@ function mouseClicked(){
                                                 //identify
                                             break
                                             case 2:
-                                                ////rocksalt
+                                                menu.level=70
+                                                game.classicWeapon=true
+                                                //rocksalt
                                             break
                                             case 3:
                                                 menu.level=68
