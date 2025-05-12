@@ -238,7 +238,7 @@ class player{
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
-        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70?250:180,this.fade)
+        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70?250:game.level==71?150:180,this.fade)
         layer.noStroke()
         layer.textSize(10)
         if(!this.sidekick&&!this.fort||this.auto){
@@ -13737,6 +13737,16 @@ class player{
                                 this.target.position.x=this.position.x+random(-60,60)
                                 this.target.position.y=this.position.y
                             }
+                        }
+                    }
+                }else if(game.level==72&&this.fort&&this.auto){
+                    if(abs(this.position.x-this.target.position.x)<5){
+                        if(abs(this.target.position.x-game.edge[0]/2)<1){
+                            this.target.position.x=game.edge[0]/2+game.tileset[0]*40*(floor(random(0,2))*2-1)
+                        }else if(this.target.position.x>game.edge[0]/2){
+                            this.target.position.x=game.edge[0]/2-game.tileset[0]*40
+                        }else{
+                            this.target.position.x=game.edge[0]/2+game.tileset[0]*40
                         }
                     }
                 }else{

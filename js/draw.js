@@ -22,7 +22,7 @@ function mainloop(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus (WIP)','Cranberry (WIP)'],
+                    ['Globus','Cranberry'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -585,7 +585,7 @@ function mainloop(){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||
-                    game.level==65||game.level==67||game.level==68||game.level==69
+                    game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||game.level==72
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -687,7 +687,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==67||game.level==68||game.level==69){
+                if(backed()){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -719,7 +719,7 @@ function mainloop(){
                                 run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                             ){
                                 run.fore[a][b].display(graphics.main[c])
-                                if(a==(game.level==54||game.level==55||game.level==65||game.level==67||game.level==68||game.level==69?3:2)){
+                                if(a==(backed()?3:2)){
                                     bs[c].push([a,b])
                                 }
                             }else if(game.level==16){
@@ -735,14 +735,14 @@ function mainloop(){
                                         run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                                     ){
                                         run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==(game.level==54||game.level==55||game.level==65||game.level==67||game.level==68||game.level==69?3:2)){
+                                        if(a==(backed()?3:2)){
                                             bs[c].push([a,b])
                                         }
                                         d=ld
                                     }
                                 }
                             }
-                            if(a==(game.level==54||game.level==55||game.level==65||game.level==67||game.level==68||game.level==69?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==(backed()?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){

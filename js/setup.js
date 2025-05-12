@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=70
-        menu.level=70
+        game.level=72
+        menu.level=72
         if(true){
             game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerDroner5',types.player)]]
@@ -58,7 +58,7 @@ function mouseClicked(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus (WIP)','Cranberry (WIP)'],
+                    ['Globusw','Cranberry'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -522,10 +522,12 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                ////globus
+                                                menu.level=71
+                                                //globus
                                             break
                                             case 1:
-                                                ////cranberry
+                                                menu.level=72
+                                                //cranberry
                                             break
                                         }
                                         game.pvp=true
