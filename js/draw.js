@@ -22,12 +22,12 @@ function mainloop(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus','Cranberry'],
+                    ['Globus','Cranberry','Mill','Rocketyard (WIP)'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort','Rocketyard (WIP)'],
+                    ['Bluefort','Aerial'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -134,7 +134,7 @@ function mainloop(){
                                             text(`CTF`,pos[0],pos[1]+15)
                                         break
                                         case 1:
-                                            text(`Versus Big Duck`,pos[0],pos[1]+15)
+                                            text(`Rise of the Duck`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break
@@ -585,7 +585,7 @@ function mainloop(){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||
-                    game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||game.level==72
+                    game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)

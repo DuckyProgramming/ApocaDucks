@@ -9,8 +9,8 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=72
-        menu.level=72
+        game.level=75
+        menu.level=75
         if(true){
             game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -20,7 +20,7 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
+        game.classicRespawn=false
         game.pvp=true
         display.cycle=0
         //newWave()
@@ -58,12 +58,12 @@ function mouseClicked(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globusw','Cranberry'],
+                    ['Globus','Cranberry','Mill','Rocketyard (WIP)'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort','Rocketyard (WIP)'],
+                    ['Bluefort','Aerial'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -371,7 +371,11 @@ function mouseClicked(){
                                                 //bluefort
                                             break
                                             case 1:
-                                                ////?
+                                                menu.level=73
+                                                game.pvp=true
+                                                game.classicWeapon=true
+                                                game.classicRespawn=false
+                                                instant()
                                             break
                                         }
                                     break
@@ -528,6 +532,14 @@ function mouseClicked(){
                                             case 1:
                                                 menu.level=72
                                                 //cranberry
+                                            break
+                                            case 2:
+                                                menu.level=74
+                                                //mill
+                                            break
+                                            case 3:
+                                                menu.level=75
+                                                //rocketyard
                                             break
                                         }
                                         game.pvp=true
@@ -1411,7 +1423,7 @@ function keyPressed(){
         case 'ArrowLeft': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
         case 'ArrowRight': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
         case 'ArrowUp': inputs.keys[0][2]=true;inputs.tap[0][2]=true; break
-        case 'ArrowDown': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
+        case 'ArrowDown': case '/': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
         case 'Shift': inputs.release[0][0]=true; break
         case 'a': case 'A': inputs.keys[1][0]=true;inputs.tap[1][0]=true; break
         case 'd': case 'D': inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
@@ -1454,7 +1466,7 @@ function keyReleased(){
         case 'ArrowLeft': inputs.keys[0][0]=false; break
         case 'ArrowRight': inputs.keys[0][1]=false; break
         case 'ArrowUp': inputs.keys[0][2]=false; break
-        case 'ArrowDown': inputs.keys[0][3]=false; break
+        case 'ArrowDown': case '/': inputs.keys[0][3]=false; break
         case 'a': case 'A': inputs.keys[1][0]=false; break
         case 'd': case 'D': inputs.keys[1][1]=false; break
         case 'w': case 'W': inputs.keys[1][2]=false; break

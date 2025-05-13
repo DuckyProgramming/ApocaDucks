@@ -3,6 +3,11 @@
 
 
 
+
+782 - tiny
+
+
+
 762 - scout5, focus scout
 763 - soldier5, blast soldier
 764 - pyro5, detonator pyro

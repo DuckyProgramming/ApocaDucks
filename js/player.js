@@ -238,7 +238,7 @@ class player{
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
-        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70?250:game.level==71?150:180,this.fade)
+        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74?250:game.level==71?150:180,this.fade)
         layer.noStroke()
         layer.textSize(10)
         if(!this.sidekick&&!this.fort||this.auto){
@@ -1917,19 +1917,9 @@ class player{
         this.weaponData=types.weapon[this.weaponType]
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult)}
         this.weapon.cooldown=60
-        if(game.randomizer||this.playerData.name=='PlayerVIP'){
-            this.position.y+=this.height/2
-            this.width=8*this.playerData.sizeBuff
-            this.height=24*this.playerData.sizeBuff
-            this.position.y-=this.height/2
-            this.fade=0
-            this.size=0.5*this.playerData.sizeBuff
-            this.base.life=100*this.playerData.lifeBuff
-            this.life=this.base.life
-            this.collect.life=this.life
-            this.record.life=this.base.life
-            this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
-            if(this.id>0){
+        if(game.randomizer||this.playerData.name=='PlayerVIP'||this.playerData.name=='PlayerTiny'){
+            this.resetValues()
+            if(this.id>0&&game.randomizer){
                 this.multLife(2)
             }
             this.setColor()
@@ -2009,6 +1999,19 @@ class player{
             this.subWeaponA.time=0
             this.subWeaponB.time=0
         }
+    }
+    resetValues(){
+        this.position.y+=this.height/2
+        this.width=8*this.playerData.sizeBuff
+        this.height=24*this.playerData.sizeBuff
+        this.position.y-=this.height/2
+        this.fade=0
+        this.size=0.5*this.playerData.sizeBuff
+        this.base.life=100*this.playerData.lifeBuff
+        this.life=this.base.life
+        this.collect.life=this.life
+        this.record.life=this.base.life
+        this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
     }
     respawn(reject){
         if(game.pvp){
@@ -2369,7 +2372,7 @@ class player{
                     case 3: case 180:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
-                    case 4: case 149: case 187:
+                    case 4: case 149: case 187: case 782:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 5:
@@ -5610,7 +5613,7 @@ class player{
             this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerMedicDoubleJump'||
             this.playerData.name=='PlayerPushierPistol'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerPistolInspect'||this.playerData.name=='PlayerRegional'||
             this.playerData.name=='PlayerQuarry'||this.playerData.name=='PlayerHeister'||this.playerData.name=='PlayerSpreadPistol'||this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||
-            this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout5'||
+            this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerTiny'||
             (this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper')&&this.subPlayerAData.name=='PlayerPistol'
         )
     }
@@ -14159,7 +14162,7 @@ class player{
                     this.thrown=true
                 }
                 this.attacking=inputSet[3]
-                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPushierPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker'||this.playerData.name=='PlayerPistolInspect'||this.playerData.name=='PlayerRegional'||this.playerData.name=='PlayerQuarry'||this.playerData.name=='PlayerFaucet'||this.playerData.name=='PlayerHeister'||this.playerData.name=='PlayerSpreadPistol'||this.playerData.name=='PlayerCookie'||this.playerData.name=='PlayerNightingale')&&this.weapon.uses>0&&inputSetB[3]){
+                if((this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPushierPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerPistolOfficer'||this.playerData.name=='PlayerPistolQuadrupleJump'||this.playerData.name=='PlayerPistolception'||this.playerData.name=='PlayerRocketMasher'||this.playerData.name=='PlayerCursor'||this.playerData.name=='PlayerClicker'||this.playerData.name=='PlayerPistolInspect'||this.playerData.name=='PlayerRegional'||this.playerData.name=='PlayerQuarry'||this.playerData.name=='PlayerFaucet'||this.playerData.name=='PlayerHeister'||this.playerData.name=='PlayerSpreadPistol'||this.playerData.name=='PlayerCookie'||this.playerData.name=='PlayerNightingale'||this.playerData.name=='PlayerTiny')&&this.weapon.uses>0&&inputSetB[3]){
                     this.weapon.cooldown=0
                 }
                 if(inputSetC[0]&&this.playerData.name=='PlayerSwitcheroo'){
@@ -14528,7 +14531,7 @@ class player{
                 }else if(
                     (game.level==30||game.level==56)&&this.position.x<game.tileset[0]*15||
                     (game.level==32||game.level==33)&&(this.position.x>game.tileset[0]*40&&this.position.x<game.tileset[0]*60||this.position.x>game.edge[0]-game.tileset[0]*20)||
-                    game.level==36||game.level==51||game.level==69
+                    game.level==36||game.level==51||game.level==69||game.level==73
                 ){
                     if(this.fort&&this.auto){
                         this.position.x=this.base.position.x
