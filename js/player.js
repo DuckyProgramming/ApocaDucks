@@ -14116,9 +14116,10 @@ class player{
                     this.disable=false
                 }
             }else{
-                let inputSet=inputs.keys[game.gaming==1?1:(game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index:this.id-1]
-                let inputSetB=inputs.tap[game.gaming==1?1:(game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index:this.id-1]
-                let inputSetC=inputs.release[game.gaming==1?1:(game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index:this.id-1]
+                let core=(game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index:this.id-1
+                let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&core==0?2:core]
+                let inputSetB=inputs.tap[game.gaming==1?1:game.gaming==2&&core==0?2:core]
+                let inputSetC=inputs.release[game.gaming==1?1:game.gaming==2&&core==0?2:core]
                 if(this.life>0&&game.past){
                     this.inputs.push([inputSet[0],inputSet[1],inputSet[2],inputSet[3]])
                 }
@@ -15449,12 +15450,17 @@ class player{
                             }
                         }
                     }else if(game.level==67){
-                        if(this.die.timer>720){
+                        if(this.die.timer>360){
                             let key=''
                             if(this.id==1){
                                 key='qe'[floor(random(0,1.5))]
                             }else{
                                 key='wr'[floor(random(0,1.5))]
+                            }
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(entities.players[a].life<=0&&entities.players[a].id==this.id){
+                                    entities.players[a].die.timer-=180
+                                }
                             }
                             for(let a=0,la=levels[game.level].length;a<la;a++){
                                 for(let b=0,lb=levels[game.level][a].length;b<lb;b++){

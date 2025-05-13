@@ -7850,7 +7850,7 @@ class projectile{
 							this.position.x<entities.players[this.goal].position.x-25,
 							this.position.y>entities.players[this.goal].position.y+25,
 							this.position.y<entities.players[this.goal].position.y-25
-						]:inputs.keys[game.gaming==1?1:this.id-1]
+						]:inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
 						if(inputSet[0]){
 							this.velocity.x-=0.8
 						}
@@ -8288,7 +8288,7 @@ class projectile{
 				    this.position.y-=this.speed*lcos(this.direction)
 					if(a==0){
 						this.direction+=this.angularVelocity
-						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
 						if(inputSet[0]){
 							this.angularVelocity-=0.2
 						}
@@ -8370,7 +8370,7 @@ class projectile{
 				    this.position.y-=this.speed*lcos(this.direction)*0.5
 					if(a==0){
 						this.direction+=this.angularVelocity
-						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:this.id-1]
+						let inputSet=this.id==0||((game.level==27||game.level==38||game.level==44||game.level==65||game.level==67)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
 						if(inputSet[0]){
 							this.angularVelocity-=0.2
 						}

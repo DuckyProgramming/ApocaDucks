@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=20
         game.gaming=1
-        game.level=75
-        menu.level=75
+        game.level=76
+        menu.level=76
         if(true){
             game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -24,7 +24,7 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerDroner5',types.player)]]
+        game.weapon=[[findName('PlayerEngineer5',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
@@ -58,7 +58,7 @@ function mouseClicked(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus','Cranberry','Mill','Rocketyard (WIP)'],
+                    ['Globus','Cranberry','Mill','Rocketyard'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[

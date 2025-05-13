@@ -22,7 +22,7 @@ function mainloop(){
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus','Cranberry','Mill','Rocketyard (WIP)'],
+                    ['Globus','Cranberry','Mill','Rocketyard'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
