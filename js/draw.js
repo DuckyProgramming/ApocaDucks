@@ -17,7 +17,7 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Cooked','Divider (WIP)','Blueprint'],
+                    ['Abandoned','Cooked','Divider','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -584,12 +584,12 @@ function mainloop(){
             for(let c=0,lc=game.gaming;c<lc;c++){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||
-                    game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75
+                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
+                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -974,7 +974,7 @@ function mainloop(){
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
-                        case 68: case 69: case 70:
+                        case 68: case 69: case 70: case 76:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
