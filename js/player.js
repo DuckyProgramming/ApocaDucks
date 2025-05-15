@@ -14481,7 +14481,7 @@ class player{
                 }
             }
         }else{
-            if(!this.construct&&!this.sidekick&&!this.auto&&game.level!=13&&game.level!=14&&(
+            if(!this.construct&&!this.sidekick&&!this.auto&&game.level!=13&&game.level!=14&&this.playerData.name!='Buster'&&(
                 (
                     dist(this.position.x,this.position.y,game.edge[0]/2,game.edge[1]/3)<50&&(game.level==0||game.level==1||game.level==2)||
                     dist(this.position.x,this.position.y,game.edge[0]/2-100,game.edge[1]/3-120)<50&&game.level==3||

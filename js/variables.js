@@ -14743,7 +14743,7 @@ types={
 		},{
 			name:'Rocket Jump',
 			ammo:1,
-			damage:50,
+			damage:45,
 			cooldown:20,
 			stop:180,
 			reload:0,
