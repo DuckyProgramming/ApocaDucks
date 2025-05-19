@@ -8789,7 +8789,17 @@ class wall{
                                 if(this.timers[this.owner-1][1]>=3600){
                                     this.endTime++
                                     if(this.endTime>30){
-                                        entities.players=[]
+                                        if(game.past){
+                                            for(let a=0,la=entities.players.length;a<la;a++){
+                                                if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                                    entities.players.splice(a,1)
+                                                    a--
+                                                    la--
+                                                }
+                                            }
+                                        }else{
+                                            entities.players=[]
+                                        }
                                         newLoop()
                                     }
                                 }
@@ -8799,24 +8809,35 @@ class wall{
                                     this.endTime++
                                     if(this.endTime>30){
                                         this.timers[this.owner-1][0]++
-                                        entities.players=[]
+                                        if(game.past){
+                                            for(let a=0,la=entities.players.length;a<la;a++){
+                                                if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                                    entities.players.splice(a,1)
+                                                    a--
+                                                    la--
+                                                }
+                                            }
+                                        }else{
+                                            entities.players=[]
+                                        }
                                         newLoop()
                                     }
                                 }
                             }
                         }
-                        let alive=0
+                        let alive=[]
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
-                                alive++
+                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0&&entities.players[a].control==0&&!alive.includes(entities.players[a].id)){
+                                alive.push(entities.players[a].id)
                             }
                         }
-                        if(alive<=1&&game.players>=2||entities.players[game.selected].life<=0){
+                        if(alive.length<=1&&game.players>=2||entities.players[game.selected].life<=0){
                             this.endTime++
                             if(this.endTime>120){
                                 for(let a=0,la=entities.players.length;a<la;a++){
                                     if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0&&entities.players[a].id-1==game.selected){
                                         this.timers[entities.players[a].id-1][0]++
+                                        a=la
                                     }
                                 }
                                 entities.players=[]
@@ -8830,26 +8851,47 @@ class wall{
                                 this.endTime++
                                 if(this.endTime>30){
                                     this.timers[this.owner-1][0]++
-                                    entities.players=[]
+                                    if(game.past){
+                                        for(let a=0,la=entities.players.length;a<la;a++){
+                                            if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                                entities.players.splice(a,1)
+                                                a--
+                                                la--
+                                            }
+                                        }
+                                    }else{
+                                        entities.players=[]
+                                    }
                                     newLoop()
                                 }
                             }
                         }
-                        let alive=0
+                        let alive=[]
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
-                                alive++
+                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0&&entities.players[a].control==0&&!alive.includes(entities.players[a].id)){
+                                alive.push(entities.players[a].id)
                             }
                         }
-                        if(alive<=1&&game.players>=2){
+                        if(alive.length<=1&&game.players>=2){
                             this.endTime++
                             if(this.endTime>120){
                                 for(let a=0,la=entities.players.length;a<la;a++){
                                     if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
                                         this.timers[entities.players[a].id-1][0]++
+                                        a=la
                                     }
                                 }
-                                entities.players=[]
+                                if(game.past){
+                                    for(let a=0,la=entities.players.length;a<la;a++){
+                                        if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                            entities.players.splice(a,1)
+                                            a--
+                                            la--
+                                        }
+                                    }
+                                }else{
+                                    entities.players=[]
+                                }
                                 newLoop()
                             }
                         }
@@ -8876,18 +8918,19 @@ class wall{
                                 game.newWave=true
                             }
                         }
-                        let alive=0
+                        let alive=[]
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
-                                alive++
+                            if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0&&entities.players[a].control==0&&!alive.includes(entities.players[a].id)){
+                                alive.push(entities.players[a].id)
                             }
                         }
-                        if(alive<=0){
+                        if(alive.length<=0){
                             this.endTime++
                             if(this.endTime>120){
                                 for(let a=0,la=entities.players.length;a<la;a++){
                                     if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
                                         this.timers[entities.players[a].id-1][0]++
+                                        a=la
                                     }
                                 }
                                 game.newWave=true
@@ -9352,26 +9395,47 @@ class wall{
                             this.endTime++
                             if(this.endTime>30){
                                 this.timers[this.owner-1][0]++
-                                entities.players=[]
+                                if(game.past){
+                                    for(let a=0,la=entities.players.length;a<la;a++){
+                                        if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                            entities.players.splice(a,1)
+                                            a--
+                                            la--
+                                        }
+                                    }
+                                }else{
+                                    entities.players=[]
+                                }
                                 newLoop()
                             }
                         }
                     }
-                    let alive=0
+                    let alive=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
-                            alive++
+                        if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0&&entities.players[a].control==0&&!alive.includes(entities.players[a].id)){
+                            alive.push(entities.players[a].id)
                         }
                     }
-                    if(alive<=1&&game.players>=2){
+                    if(alive.length<=1&&game.players>=2){
                         this.endTime++
                         if(this.endTime>120){
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if(entities.players[a].id>0&&!entities.players[a].construct&&!entities.players[a].sidekick&&!entities.players[a].fort&&!entities.players[a].auto&&entities.players[a].life>0){
                                     this.timers[entities.players[a].id-1][0]++
+                                    a=la
                                 }
                             }
-                            entities.players=[]
+                            if(game.past){
+                                for(let a=0,la=entities.players.length;a<la;a++){
+                                    if(entities.players[a].fort||entities.players[a].construct||entities.players[a].sidekick){
+                                        entities.players.splice(a,1)
+                                        a--
+                                        la--
+                                    }
+                                }
+                            }else{
+                                entities.players=[]
+                            }
                             newLoop()
                         }
                     }
@@ -9859,7 +9923,7 @@ class wall{
                         &&!((this.type==9||this.type==41||this.type==63)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!((this.type==12||this.type==70||this.type==76)&&(c.id<=0||this.recharge>0||c.construct))
-                        &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerVIP'))
+                        &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=67&&!dm()||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerVIP'||c.control==1))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerVIP'||c.playerData.name=='PlayerTiny'))
                         &&!(this.type==65&&this.recharge>0)
                         &&!((this.type==68||this.type==73)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))

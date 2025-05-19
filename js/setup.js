@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=5
         game.gaming=1
-        game.level=76
-        menu.level=76
+        game.level=59
+        menu.level=59
         if(true){
             //game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerEngineerC',types.player)]]
@@ -83,6 +83,7 @@ function mouseClicked(){
                                 game.classWeapon=menu.weapon==2
                             break
                             case 3:
+                                game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})
                                 menu.mode=b+1
                             break
                             case 4:

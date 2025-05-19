@@ -245,7 +245,7 @@ class player{
             if(game.newStats){
                 if(this.playerData.name=='PlayerSpy'){
                     layer.text('Pistol',0,-17.5)
-                }else if(this.id>0&&game.past){
+                }else if(this.id>0&&game.past&&false){
                     layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.construct){
@@ -287,7 +287,7 @@ class player{
             }else{
                 if(this.playerData.name=='PlayerSpy'){
                     layer.text('Pistol',0,-17.5)
-                }else if(this.id>0&&game.past){
+                }else if(this.id>0&&game.past&&false){
                     layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.construct){
@@ -1268,7 +1268,7 @@ class player{
                 break
                 case 2:
                     if(teamMode()){
-                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[245,0,25],body:[235,5,15],legs:[230,15,20],arms:[225,10,5]}}
+                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[245,30,55],body:[235,35,45],legs:[230,45,50],arms:[225,40,35]}}
                     }else{
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,25,255],body:[225,15,255],legs:[210,0,255],arms:[215,5,255]}}
                     }
@@ -2060,7 +2060,6 @@ class player{
     }
     resetKeys(){
         this.invincible=60
-        this.base.control=0
         this.DOT.active=0
         this.critBuff=0
         this.defendBuff=0
@@ -11554,6 +11553,18 @@ class player{
                                             this.target.position.x=game.edge[0]
                                             this.target.position.y=game.edge[1]
                                         break
+                                        case 26:
+                                            switch(goalPoint){
+                                                case 0: case 1: case 3:
+                                                    this.target.position.x=game.tileset[0]*98.5
+                                                    this.target.position.y=game.edge[1]
+                                                break
+                                                case 2:
+                                                    this.target.position.x=game.tileset[0]*114.5
+                                                    this.target.position.y=game.edge[1]
+                                                break
+                                            }
+                                        break
                                     }
                                     a=la
                                     hit=true
@@ -13882,7 +13893,7 @@ class player{
                         this.target.position.y=target[1]
                     }else{
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&entities.players[a].life>0){
+                            if(this.validTarget(entities.players[a])&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&entities.players[a].life>0){
                                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
                             }
                         }
@@ -13892,7 +13903,7 @@ class player{
                             this.target.position.y=target[1]
                         }else{
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<600&&entities.players[a].life>0){
+                                if(this.validTarget(entities.players[a])&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<600&&entities.players[a].life>0){
                                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                 }
                             }
@@ -13902,7 +13913,7 @@ class player{
                                 this.target.position.y=target[1]
                             }else{
                                 for(let a=0,la=entities.players.length;a<la;a++){
-                                    if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1500&&entities.players[a].life>0){
+                                    if(this.validTarget(entities.players[a])&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<1500&&entities.players[a].life>0){
                                         targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                     }
                                 }
@@ -13912,7 +13923,7 @@ class player{
                                     this.target.position.y=target[1]
                                 }else{
                                     for(let a=0,la=entities.players.length;a<la;a++){
-                                        if((this.id==0&&entities.players[a].id!=0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index))||this.id!=0&&entities.players[a].id==0&&(entities.players[a].playerData.name!='PlayerSpy'&&entities.players[a].fade>0&&!(this.playerData.name=='Buster'&&entities.players[a].index!=this.target.index)))&&entities.players[a].life>0){
+                                        if(this.validTarget(entities.players[a])&&entities.players[a].life>0){
                                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                                         }
                                     }
@@ -13926,6 +13937,9 @@ class player{
                         }
                     }
                     this.manage[1]=dist(this.position.x,this.position.y,this.target.position.x,this.target.position.y)<500?1:0
+                    if(this.life<this.base.life*0.4&&dm()&&abs(this.position.x-this.target.position.x)<600){
+                        this.target.position.x=this.position.x*2-this.target.position.x
+                    }
                 }
                 if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='ParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'){
                     this.manage[1]=1
@@ -14496,7 +14510,7 @@ class player{
                     dist(this.position.x,this.position.y,2250,965)<80&&(game.level==20||game.level==46)||
                     dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
                 )&&(this.effectiveId()>0&&this.effectiveId()<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33)&&this.effectiveId())&&!game.attacker||
-                this.effectiveId()>game.gaming&&game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&!(game.level==49&&game.pvp)&&game.level!=57&&game.level!=65&&!dm()&&game.level!=76||
+                this.effectiveId()>game.gaming&&game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&!(game.level==49&&game.pvp)&&game.level!=57&&game.level!=65&&game.level!=76||
                 game.attacker&&this.effectiveId()!=0||
                 this.storeWeapon
             )){
@@ -16890,16 +16904,16 @@ class player{
             }
         }
         if(this.base.control==0&&this.control==1){
-            this.color.skin.head=mergeColor(this.color.skin.head,[100,100,100],0.6)
-            this.color.skin.body=mergeColor(this.color.skin.body,[100,100,100],0.6)
-            this.color.skin.legs=mergeColor(this.color.skin.legs,[100,100,100],0.6)
-            this.color.skin.arms=mergeColor(this.color.skin.arms,[100,100,100],0.6)
+            this.base.color.skin.head=mergeColor(this.base.color.skin.head,[100,100,100],0.6)
+            this.base.color.skin.body=mergeColor(this.base.color.skin.body,[100,100,100],0.6)
+            this.base.color.skin.legs=mergeColor(this.base.color.skin.legs,[100,100,100],0.6)
+            this.base.color.skin.arms=mergeColor(this.base.color.skin.arms,[100,100,100],0.6)
             this.base.control=1
         }else if(this.base.control==1&&this.control==0){
-            this.color.skin.head=mergeColor(this.color.skin.head,[255,255,255],0.6)
-            this.color.skin.body=mergeColor(this.color.skin.body,[255,255,255],0.6)
-            this.color.skin.legs=mergeColor(this.color.skin.legs,[255,255,255],0.6)
-            this.color.skin.arms=mergeColor(this.color.skin.arms,[255,255,255],0.6)
+            this.base.color.skin.head=mergeColor(this.base.color.skin.head,[255,255,255],0.6)
+            this.base.color.skin.body=mergeColor(this.base.color.skin.body,[255,255,255],0.6)
+            this.base.color.skin.legs=mergeColor(this.base.color.skin.legs,[255,255,255],0.6)
+            this.base.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
             this.base.control=0
         }
         if(!this.disable2){
@@ -17010,7 +17024,7 @@ class player{
                 this.fade=smoothAnim(this.fade,game.time%20>=10,0.4,1,5)
             }else if(game.invis&&game.level!=13&&game.level!=14||this.playerData.name=='PlayerGriefer'||this.playerData.name=='PlayerHuntress'||this.playerData.name=='PlayerStealth'||this.playerData.name=='PlayerStealthception'||this.playerData.name=='PlayerFog'||this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerMarine'||this.playerData.name=='PlayerVigilante'||this.playerData.name=='SidekickStealth'||this.playerData.name=='PlayerPhantasm'||this.playerData.name=='PlayerVPN'||this.playerData.name=='PlayerVanguard'||this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'){
                 if(this.life<=0){
-                    this.fade=smoothAnim(this.fade,!this.dead,0.4,1,5)
+                    this.fade=smoothAnim(this.fade,!this.dead,game.past?0:0.4,1,5)
                 }else if(this.playerData.name=='PlayerSpyC2'){
                     this.fade=smoothAnim(this.fade,this.visible==0||this.visible2>0||this.assort.intel,0,this.visible==0||this.assort.intel?1:0.4,this.visible>595?5:60)
                 }else{

@@ -17,7 +17,7 @@ function playerColor(owner){
         case 1:
             return [15,75,255]
         case 2:
-            return teamMode()?[235,5,15]:[225,15,255]
+            return teamMode()?[235,35,45]:[225,15,255]
         case 3:
             return [55,225,15]
         case 4:
@@ -1341,7 +1341,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*44,game.tileset[1]*35,game.tileset[0]*32,game.tileset[1]*10],
                 [game.tileset[0]*78.5,game.tileset[1]*32,game.tileset[0]*37,game.tileset[1]*4],
                 [game.tileset[0]*78.5,game.tileset[1]*37,game.tileset[0]*37,game.tileset[1]*6],
-                [game.tileset[0]*104.5,game.tileset[1]*35,game.tileset[0]*9,game.tileset[1]*10],
+                [game.tileset[0]*104.5,game.tileset[1]*37,game.tileset[0]*9,game.tileset[1]*6],
                 [game.tileset[0]*121,game.tileset[1]*35,game.tileset[0]*24,game.tileset[1]*10],
 
                 [game.tileset[0]*139,game.tileset[1]*37,game.tileset[0]*12,game.tileset[1]*6],
@@ -1363,6 +1363,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*96.5,game.tileset[1]*48,game.tileset[0]*4,game.tileset[1]*2],
 
                 [game.tileset[0]*100.5,game.tileset[1]*48,game.tileset[0]*4,game.tileset[1]*2],
+                [game.tileset[0]*104.5,game.tileset[1]*32,game.tileset[0]*9,game.tileset[1]*4],
 
             ]
         break
@@ -4133,7 +4134,7 @@ function generateLevel(info,layer){
     }
     for(let c=0,lc=game.players;c<lc;c++){
         let clump=listing[game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp||game.level==37||game.level==38?0:floor(random(0,1.5))]
-        let type=game.classWeapon&&(teamMode())||dm()?0:game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(game.past?weapon:clump[floor(random(0,clump.length))]):(game.level==13||game.level==14||game.level==48|game.level==57?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length])
+        let type=game.classWeapon&&(teamMode())||dm()?0:game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(clump[floor(random(0,clump.length))]):(game.level==13||game.level==14||game.level==48|game.level==57?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length])
         let postC=(game.level==27?c%5:c)
         let encode=teamMode()?'q':game.level==43||game.level==49?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC]
         for(let a=0,la=level.length;a<la;a++){
@@ -4188,6 +4189,12 @@ function generateLevel(info,layer){
                     }
                 }
             }
+        }
+    }
+    if(game.past){
+        for(let c=0,lc=game.players;c<lc;c++){
+            entities.players.splice(0,0,entities.players[entities.players.length-1])
+            entities.players.splice(entities.players.length-1,1)
         }
     }
     switch(game.level){
@@ -5418,7 +5425,7 @@ function newLoop(){
         for(let a=0,la=entities.players.length;a<la;a++){
             entities.players[a].selector=0
             entities.players[a].control=1
-            entities.players[a].respawn()
+            entities.players[a].respawn(true)
         }
     }
     switch(game.level){

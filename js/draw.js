@@ -43,7 +43,24 @@ function mainloop(){
                     }else{
                         fill(100)
                     }
-                    if(
+                    if(a==3&&b==3){
+                        if(menu.mode==b+1){
+                            if(game.past){
+                                fill(100)
+                                rect(pos[0]-29.5,pos[1],61,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]+29.5,pos[1],61,45,10)
+                            }else{
+                                fill(100)
+                                rect(pos[0]+29.5,pos[1],61,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]-29.5,pos[1],61,45,10)
+                            }
+                        }else{
+                            rect(pos[0]+29.5,pos[1],61,45,10)
+                            rect(pos[0]-29.5,pos[1],61,45,10)
+                        }
+                    }else if(
                         menu.mode==1&&a==4&&b==1||
                         menu.mode==1&&a==4&&b==2||
                         menu.mode==2&&a==4&&b==1
@@ -73,8 +90,12 @@ function mainloop(){
                             case 0: case 1:
                                 text(`PvE`,pos[0],pos[1]+15)
                             break
-                            case 2: case 3: case 4:
+                            case 2: case 4:
                                 text(`PvP`,pos[0],pos[1]+15)
+                            break
+                            case 3:
+                                text(`PvP`,pos[0]-30,pos[1]+15)
+                                text(`Past`,pos[0]+30,pos[1]+15)
                             break
                             case 5:
                                 text(`PvP/PvE`,pos[0],pos[1]+15)
