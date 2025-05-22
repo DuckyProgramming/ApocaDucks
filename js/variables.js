@@ -3804,7 +3804,7 @@ types={
       desc:'Throws bouncing balls',dpsBuff:1,
     },{
       name:'PlayerFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:8,
       desc:'Fires flames in a field ahead',dpsBuff:1,
     },{
       name:'PlayerEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4206,7 +4206,7 @@ types={
     },{
       name:'PlayerIcosahedron',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:586,
-      desc:'Fires large ballers that explode into many swarm drones',dpsBuff:2,
+      desc:'Fires large balls that explode into many swarm drones',dpsBuff:2,
     },{
       name:'PlayerCatapult',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:626,
@@ -4219,39 +4219,39 @@ types={
     
     {
       name:'PlayerFrostthrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:333,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:333,
       desc:'Flamethrower that slows down enemies',dpsBuff:1,
     },{
       name:'PlayerFlamethrowerDual',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:97,
+      damageBuff:2.125,reloadBuff:1,crit:0,weapon:97,
       desc:'Flamethrower with a secondary extended flame stream',dpsBuff:1.5,
     },{
       name:'PlayerFlamethrowerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:98,
+      damageBuff:2.125,reloadBuff:1,crit:0,weapon:98,
       desc:'Flamethrower with an attached pistol',dpsBuff:2,
     },{
       name:'PlayerTobaccoFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:281,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:281,
       desc:'Flamethrower with an attached ballista',dpsBuff:2.5,
     },{
       name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:125,
       desc:'Fires a sphere that passes through enemies',dpsBuff:6,
     },{
       name:'PlayerSmokeRing',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:441,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:441,
       desc:'Fires flames in five directions',dpsBuff:5,
     },{
       name:'PlayerFlameBurst',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:520,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:520,
       desc:'Fires accurate flames in two ranged forward streams',dpsBuff:1,
     },{
       name:'PlayerFlicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:615,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:615,
       desc:'Fires an accurate shotgun-style flame blast',dpsBuff:5,
     },{
       name:'PlayerFlamethrowerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:183,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:183,
       desc:'Has a flamethrower auto turret',dpsBuff:1,
     },
     
@@ -4577,7 +4577,7 @@ types={
       desc:'Bonker that can become invisible when not moving',dpsBuff:0,
     },{
       name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:244,
       desc:'Flamethrower that can become invisible when not moving and fires in two directions',dpsBuff:1,
     },{
       name:'PlayerVanguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5439,7 +5439,7 @@ types={
       desc:'Fires a trap and a poison bullet',dpsBuff:2,
     },{
       name:'PlayerFume',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:638,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:638,
       desc:'Flamethrower that deals damage over time',dpsBuff:1,
     },{
       name:'PlayerMenthal',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -6285,11 +6285,51 @@ types={
     },{
       name:'PlayerSpyC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:770,
-        desc:'Has an enforcer and a knife and can become invisible',dpsBuff:0,
+      desc:'Has an enforcer and a knife and can become invisible',dpsBuff:0,
     },{
       name:'PlayerDroner5',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:771,
-        desc:'Manipulates drones and can fire bullets to pull enemies',dpsBuff:0,
+      desc:'Manipulates drones and can fire bullets to pull enemies',dpsBuff:0,
+    },{
+      name:'PlayerScout6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:783,
+      desc:'Fast, can double jump, armed with a scattergun and a baseball',dpsBuff:0,
+    },{
+      name:'PlayerSoldier6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:784,
+      desc:'Has a rocket launcher and a reserve shotgun and can jump to collide with enemies',dpsBuff:0,
+    },{
+      name:'PlayerPyro6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:785,
+      desc:'Fast, has a flamethrower and defroster, and is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerDemoman6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:786,
+      desc:'Has a warning launcher and stickybombs triggered on weapon swap',dpsBuff:0,
+    },{
+      name:'PlayerHeavyWeapons6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:787,
+      desc:'Has a firework LMG, shotgun, and damage resistance',dpsBuff:0,
+    },{
+      name:'PlayerEngineerC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:788,
+      desc:'Has a shotgun and can place down a single rapid auto medical unit',dpsBuff:0,
+    },{
+      name:'PlayerMedicC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:789,
+      desc:'Can heal allies quickly but with less overheal and place heal areas',dpsBuff:0,
+    },{
+      name:'PlayerSniperC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:790,
+      desc:'Has a classic sniper rifle and a submachine gun, and can see far',dpsBuff:0,
+    },{
+      name:'PlayerSpyC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:791,
+      desc:`Fast and can't be hit while invisible, but fragile`,dpsBuff:0,
+    },{
+      name:'PlayerDroner6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:792,
+      desc:'Manipulates drones and has a magnifying glass',dpsBuff:0,
     },
 
     {
@@ -6323,10 +6363,10 @@ types={
       damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
       name:'PlayerHeavySniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:3,reloadBuff:2,crit:0,weapon:6,
+      damageBuff:3,reloadBuff:1.5,crit:0,weapon:6,
     },{
       name:'PlayerHeavyFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.75,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:1.8,reloadBuff:1,crit:0,weapon:8,
     },{
       name:'PlayerCola',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:699,
@@ -6368,7 +6408,7 @@ types={
       damageBuff:2,reloadBuff:2.5,crit:0,weapon:722,
     },{
       name:'PlayerFlameStream',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:723,
+      damageBuff:1.4,reloadBuff:1,crit:0,weapon:723,
     },{
       name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:724,
@@ -6465,6 +6505,33 @@ types={
     },{
       name:'PlayerPumpShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:781,
+    },{
+      name:'PlayerBaseball',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:793,
+    },{
+      name:'PlayerReserveShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:794,
+    },{
+      name:'PlayerDefroster',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:795,
+    },{
+      name:'PlayerWarningLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:796,
+    },{
+      name:'PlayerFireworkLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:797,
+    },{
+      name:'PlayerMiniDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:798,
+    },{
+      name:'PlayerQuickfix',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:800,
+    },{
+      name:'PlayerClassicSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:801,
+    },{
+      name:'PlayerMagnifyingGlass',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:802,
     },
 
     //mark c
@@ -6541,6 +6608,9 @@ types={
     },{
       name:'ConstructControl',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:750,
+    },{
+      name:'ConstructMiniMedicAuto',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:799,
     },
     
     {
@@ -8320,7 +8390,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Punch',
 			ammo:1,
@@ -8421,7 +8491,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Push Rocket Launcher',
 			ammo:1,
@@ -8601,7 +8671,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Pellet Baller',
 			ammo:5,
@@ -9123,7 +9193,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Flamethrower Pistol',
 			ammo:50,
@@ -9132,7 +9202,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Auto Pistol',
 			ammo:10,
@@ -9168,7 +9238,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Machine Gun Focus',
 			ammo:30,
@@ -9231,7 +9301,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Spread Rocket Launcher',
 			ammo:1,
@@ -9249,7 +9319,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Engineer Dualic',
 			ammo:1,
@@ -9285,7 +9355,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Flamethrower Push',
 			ammo:50,
@@ -9294,7 +9364,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Rocket Machine Gun',
 			ammo:30,
@@ -9897,7 +9967,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Engineerception',
 			ammo:1,
@@ -10446,7 +10516,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Surprise',
 			ammo:1,
@@ -10779,7 +10849,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Dropship',
 			ammo:6,
@@ -11247,7 +11317,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Freeze Beam',
 			ammo:120,
@@ -11517,7 +11587,7 @@ types={
 			stop:180,
 			reload:3,
 			speed:0.9,
-      uses:100,
+      uses:125,
 		},{
 			name:'Freezer',
 			ammo:5,
@@ -12219,7 +12289,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Maxgun',
 			ammo:12,
@@ -13788,13 +13858,13 @@ types={
       uses:40,
 		},{
 			name:'LMG',
-			ammo:32,
+			ammo:30,
 			damage:75,
 			cooldown:5,
 			stop:180,
 			reload:2,
 			speed:0.8,
-      uses:96,
+      uses:90,
 		},{
 			name:'Deployer SH',
 			ammo:1,
@@ -13992,7 +14062,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:100,
+      uses:125,
 		},{
 			name:'Carpenter',
 			ammo:1,
@@ -14343,7 +14413,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:1.075,
-      uses:100,
+      uses:125,
 		},{
 			name:'Demoman',
 			ammo:2,
@@ -14478,7 +14548,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:1.075,
-      uses:100,
+      uses:125,
 		},{
 			name:'Demoknight',
 			ammo:2,
@@ -14667,7 +14737,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:1.075,
-      uses:100,
+      uses:125,
 		},{
 			name:'Shell Demoman',
 			ammo:2,
@@ -14769,13 +14839,13 @@ types={
       uses:15,
 		},{
 			name:'Minigun',
-			ammo:32,
+			ammo:30,
 			damage:100,
 			cooldown:5,
 			stop:180,
 			reload:2,
 			speed:0.75,
-      uses:96,
+      uses:90,
 		},{
 			name:'Levelled Sentry',
 			ammo:1,
@@ -14892,7 +14962,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:1.075,
-      uses:100,
+      uses:125,
 		},{
 			name:'Time Bomb Demoman',
 			ammo:2,
@@ -15126,7 +15196,7 @@ types={
 			stop:75,
 			reload:2,
 			speed:1.075,
-      uses:100,
+      uses:125,
 		},{
 			name:'Caber Demoman',
 			ammo:2,
@@ -15289,6 +15359,186 @@ types={
 			reload:8,
 			speed:1.6,
       uses:120,
+		},{
+			name:'Baseball Scout',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Reserve Soldier',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Defroster Pyro',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:1.225,
+      uses:125,
+		},{
+			name:'Warning Demoman',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Firework Heavy',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Dispenser Engineer',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Quickfix Medic',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Classic Sniper C',
+			ammo:1,
+			damage:100,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.0625,
+      uses:8,
+		},{
+			name:'Ghost Spy',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.4,
+      uses:12,
+		},{
+			name:'Magnifying Droner',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Baseball',
+			ammo:1,
+			damage:180,
+			cooldown:75,
+			stop:75,
+			reload:75,
+			speed:1.05,
+      uses:12,
+		},{
+			name:'Reserve Shotgun',
+			ammo:4,
+			damage:20,
+			cooldown:25,
+			stop:90,
+			reload:10,
+			speed:1.15,
+      uses:20,
+		},{
+			name:'Defroster',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:135,
+			reload:3,
+			speed:1.05,
+      uses:7,
+		},{
+			name:'Warning Launcher',
+			ammo:1,
+			damage:270,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:1.05,
+      uses:10,
+		},{
+			name:'Firework LMG',
+			ammo:20,
+			damage:75,
+			cooldown:7,
+			stop:210,
+			reload:3,
+			speed:0.8,
+      uses:60,
+		},{
+			name:'Mini Dispenser',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.1,
+      uses:3,
+		},{
+			name:'Mini Medic Auto',
+			ammo:8,
+			damage:15,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Quickfix',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Classic Sniper',
+			ammo:1,
+			damage:360,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Magnifying Glass',
+			ammo:15,
+			damage:35,
+			cooldown:2,
+			stop:75,
+			reload:4,
+			speed:1.15,
+      uses:60,
 		},
 
     /*{
@@ -18207,6 +18457,9 @@ Hayden - brown crate nook
 "#  # ######## ######## ######## ######## ######## ######## ######## ######## ######## ########",
 "#  #        #        #        #        #        #        #        #        #        #        #",
 "#  #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
+"#  ### ######## ######## ######## ######## ######## ######## ######## ######## ######## ######",
+"#  #        #        #        #        #        #        #        #        #        #        #",
+"#  #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
 "##############################################################################################",
 ],[
 "                                                                                                                                                                                                        ",
@@ -18749,6 +19002,9 @@ Hayden - brown crate nook
 "#   #        #        #        #        #        #        #        #        #        #        #",
 "#   #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
 "#   # ######## ######## ######## ######## ######## ######## ######## ######## ######## ########",
+"#   #        #        #        #        #        #        #        #        #        #        #",
+"#   #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
+"#   ### ######## ######## ######## ######## ######## ######## ######## ######## ######## ######",
 "#   #        #        #        #        #        #        #        #        #        #        #",
 "#   #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #      ? #",
 "###############################################################################################",

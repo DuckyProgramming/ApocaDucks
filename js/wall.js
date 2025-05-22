@@ -9569,7 +9569,8 @@ class wall{
                             c.type==292||c.type==293||c.type==295||c.type==301||c.type==392||
                             c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
-                            c.type==328||c.type==329||c.type==344||c.type==349||c.type==353
+                            c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
+                            c.type==356
                         )
                     ){
                         if(!c.stop){
@@ -9860,6 +9861,15 @@ class wall{
                                     c.active=false
                                     c.velocity.x=0
                                     c.velocity.y=0
+                                }else if(c.type==356&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.velocity.x*=0.6
+                                    c.velocity.y*=0.6
+                                    if(c.bounces>=7){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293||c.type==324||c.type==326)&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5

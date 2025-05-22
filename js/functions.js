@@ -3639,7 +3639,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,50)][ticker]]
+                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,60)][ticker]]
                     ticker++
                 }
             }
@@ -3679,7 +3679,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,50)][ticker-1]]
+                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,60)][ticker-1]]
                     ticker++
                 }
             }
@@ -5322,6 +5322,32 @@ function generateLevel(info,layer){
                 1.0,color(184,184,208)
             )
         break
+        case 63:
+            ticker=0
+            for(let a=0,la=entities.walls[1].length;a<la;a++){
+                if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36||entities.walls[1][a].type==42){
+                    entities.walls[1][a].pos=[4,3,2,0,1][ticker]
+                    entities.players[entities.walls[1][a].index].pos=[4,3,2,0,1][ticker]
+                    ticker++
+                }
+            }
+            game.point=[-1,-1,-1]
+            graphics.gradient=[new p5.LinearGradient(75,game.edge[1]*1.5)]
+            colorset=[]
+            for(let a=0,la=20;a<=la;a++){
+                let nudge=a%2*0.4+random(0,0.2)+0.2
+                colorset.push(
+                    a/la,
+                    color(111+nudge*49,117+nudge*53,81+nudge*36)
+                )
+            }
+            graphics.gradient[0].colors(...colorset)
+            graphics.gradient.push(new p5.LinearGradient(85,graphics.main[0].height))
+            graphics.gradient[1].colors(
+                0.0,color(149,187,210),
+                1.0,color(65,97,136)
+            )
+        break
         case 68:
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
@@ -6410,7 +6436,12 @@ function setupLists(){
     listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
     listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
     listing[2]=safeRange(0,10)
-    listing[3]=[...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player)),...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player))]
+    listing[3]=[
+        ...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player)),
+        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),
+        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),
+        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player))
+    ]
     //listing[1]=listing[1].filter(item=>types.player[item].weapon>=536)
     if(game.nuke){
         listing[1]=[findName('PlayerGuidedMissile',types.player)]

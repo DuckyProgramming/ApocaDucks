@@ -1,6 +1,36 @@
 
 
 
+783 - scout6: baseball - throws a 150 damage ball in a long arc
+784 - soldier6: reserve shotgun - 4 shots, -33% damage, last shot in clip is always a crit
+785 - pyro6: defroster - faster, but with lower flamethrower damage and gust that fires in a single burst
+786 - demoman6: warning launcher - fires a single grenade that slows down when it lands, deals wide knockback
+787 - heavyweapons6: firework heavy - fires rockets
+788 - engineerC6: dispenser engineer - sentry has slightly less sentry damage but can fire medic bullets
+789 - medicC6: quickfix - heals faster and pierces already fully healed targets, but can't overheal more than 25%
+790 - sniperC6: classic - slows you down while reloading sniper weapon but has hitscan attack
+791 - spyC6: ghost spy - faster and invincible to bullets while cloaked, but less health
+792 - droner6: sunburst droner - replaces secondary weapon with sunburst that fires a ton of bullets in a small clip
+
+793 - baseball, 33
+794 - reserve shotgun *0.75, 0
+795 - defroster (single blast gust), 413 (8 shots)
+796 - warning launcher, 30
+797 - firework LMG, 616
+798 - dispenser, 685
+799 - mini medic auto, 689
+800 - quickfix, 11
+801 - classic sniper
+802 - magnifying glass
+
+356 - warning, 30
+357 - quickfix, 9
+358 - classic, 4, 191
+
+
+
+
+
 782 - tiny
 
 

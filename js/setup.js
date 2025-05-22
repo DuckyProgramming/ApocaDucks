@@ -7,10 +7,10 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=12
         game.gaming=1
-        game.level=59
-        menu.level=59
+        game.level=67
+        menu.level=67
         if(true){
             //game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -21,15 +21,17 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerEngineerC',types.player)]]
+        game.weapon=[[findName('PlayerHeavyWeapons6',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
         //game.margin=true
         //game.noPlayer=true
+
+        //entities.players[0].newWeaponSet(findName('PlayerScout6',types.player))
     }
 }
 function windowResized(){
