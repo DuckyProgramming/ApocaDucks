@@ -5903,7 +5903,7 @@ class player{
                 }
             }
         }
-        if((this.id==0||this.id>game.gaming)&&this.blindTime>0){
+        if((this.id==0||this.effectiveId()>game.gaming)&&this.blindTime>0){
             if(floor(random(0,30))==0){
                 this.direction.goal=54*(floor(random(0,2))*2-1)
             }
@@ -14512,7 +14512,7 @@ class player{
             }
             if(this.weapon.reload>0){
                 this.weapon.reload-=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(this.fort&&(game.level==22||game.level==25||game.level==28||game.level==32||game.level==35||game.level==37||game.level==38||game.level==63||dm())?0.25:this.fort&&(game.level==23||game.level==26||game.level==27||game.level==33||game.level==40||game.level==43||game.level==44||game.level==47||game.level==49&&game.pvp||game.level==55||game.level==58||game.level==59||game.level==65||game.level==68||game.level==70)?0.5:(game.level==42)?2/3:1)*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
-            }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.id>game.gaming)){
+            }else if(this.weapon.ammo<this.weaponData.ammo&&(this.weapon.ammo<this.weapon.uses||game.randomizer||this.id==0||this.effectiveId()>game.gaming)){
                 this.weapon.ammo++
                 this.weapon.reload=this.weaponData.reload
                 if(this.weapon.ammo==this.weaponData.ammo||this.weapon.ammo==this.weapon.uses){
@@ -14528,7 +14528,7 @@ class player{
                 }
                 if(this.subWeaponA.reload>0){
                     this.subWeaponA.reload-=this.subPlayerAData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
-                }else if(this.subWeaponA.ammo<this.subWeaponAData.ammo&&(this.subWeaponA.ammo<this.subWeaponA.uses||game.randomizer||this.id==0||this.id>game.gaming)){
+                }else if(this.subWeaponA.ammo<this.subWeaponAData.ammo&&(this.subWeaponA.ammo<this.subWeaponA.uses||game.randomizer||this.id==0||this.effectiveId()>game.gaming)){
                     this.subWeaponA.ammo++
                     this.subWeaponA.reload=this.subWeaponAData.reload
                     if(this.subWeaponA.ammo==this.subWeaponAData.ammo||this.subWeaponA.ammo==this.subWeaponA.uses){
@@ -14543,7 +14543,7 @@ class player{
                 }
                 if(this.subWeaponB.reload>0){
                     this.subWeaponB.reload-=this.subPlayerBData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
-                }else if(this.subWeaponB.ammo<this.subWeaponBData.ammo&&(this.subWeaponB.ammo<this.subWeaponB.uses||game.randomizer||this.id==0||this.id>game.gaming)){
+                }else if(this.subWeaponB.ammo<this.subWeaponBData.ammo&&(this.subWeaponB.ammo<this.subWeaponB.uses||game.randomizer||this.id==0||this.effectiveId()>game.gaming)){
                     this.subWeaponB.ammo++
                     this.subWeaponB.reload=this.subWeaponBData.reload
                     if(this.subWeaponB.ammo==this.subWeaponBData.ammo||this.subWeaponB.ammo==this.subWeaponB.uses){
@@ -14558,7 +14558,7 @@ class player{
                 }
                 if(this.subWeaponC.reload>0){
                     this.subWeaponC.reload-=this.subPlayerCData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
-                }else if(this.subWeaponC.ammo<this.subWeaponCData.ammo&&(this.subWeaponC.ammo<this.subWeaponC.uses||game.randomizer||this.id==0||this.id>game.gaming)){
+                }else if(this.subWeaponC.ammo<this.subWeaponCData.ammo&&(this.subWeaponC.ammo<this.subWeaponC.uses||game.randomizer||this.id==0||this.effectiveId()>game.gaming)){
                     this.subWeaponC.ammo++
                     this.subWeaponC.reload=this.subWeaponCData.reload
                     if(this.subWeaponC.ammo==this.subWeaponCData.ammo||this.subWeaponC.ammo==this.subWeaponC.uses){
@@ -14574,7 +14574,7 @@ class player{
                 }
                 if(this.subWeaponA.reload>0){
                     this.subWeaponA.reload-=this.subPlayerAData.reloadBuff*(this.confuseTime>0||this.dizzyTime>0?1/3:1)
-                }else if(this.subWeaponA.ammo<this.subWeaponAData.ammo&&(this.subWeaponA.ammo<this.subWeaponA.uses||game.randomizer||this.id==0||this.id>game.gaming)){
+                }else if(this.subWeaponA.ammo<this.subWeaponAData.ammo&&(this.subWeaponA.ammo<this.subWeaponA.uses||game.randomizer||this.id==0||this.effectiveId()>game.gaming)){
                     this.subWeaponA.ammo++
                     this.subWeaponA.reload=this.subWeaponAData.reload
                     if(this.subWeaponA.ammo==this.subWeaponAData.ammo||this.subWeaponA.ammo==this.subWeaponA.uses){
@@ -16821,7 +16821,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming||game.classWeapon&&game.pvp&&entities.players[a].id>0?0.8:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
@@ -16864,7 +16864,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].id>game.gaming?0.75:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming||game.classWeapon&&game.pvp&&entities.players[a].id>0?0.8:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4

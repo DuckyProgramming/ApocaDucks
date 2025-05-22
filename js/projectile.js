@@ -8684,7 +8684,7 @@ class projectile{
 							entities.players[b].gasser=this.index
 						}else if(this.type==341||this.type==343){
 				        	entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
-						}else if(this.type==342){
+						}else if(fast||this.type==342){
 				        	entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
 						}else if(this.type==355){
 				        	entities.players[b].takeDamage(this.damage,1)

@@ -2289,7 +2289,9 @@ function generateLevel(info,layer){
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,70))
                         break
                         case 67:
-                            if(!game.classWeapon){
+                            if(game.classWeapon){
+                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
+                            }else{
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,69))
                             }
                         break
@@ -2669,7 +2671,18 @@ function generateLevel(info,layer){
                     }
                 break
                 case '`':
-                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],13))
+                    switch(game.level){
+                        case 67:
+                            if(game.classWeapon){
+                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,65))
+                            }else{  
+                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,57))
+                            }
+                        break
+                        default:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],13))
+                        break
+                    }
                 break
                 case '=':
                     switch(game.level){
@@ -4955,7 +4968,7 @@ function generateLevel(info,layer){
                 entities.players[a].position.y=loc[team][1]
                 if(game.classWeapon){
                     if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
-                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+[0,0,0,1,2,3,4][floor(random(0,6))]*10)
+                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+[0,0,0,1,2,3,4,5][floor(random(0,8))]*10)
                     }else if(a<game.gaming){
                         entities.players[a].newWeaponSet(game.weapon[a][0])
                         if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
