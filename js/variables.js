@@ -14503,7 +14503,7 @@ types={
 			stop:120,
 			reload:45,
 			speed:1.05,
-      uses:16,
+      uses:20,
 		},{
 			name:'Heal Area',
 			ammo:1,
@@ -15484,7 +15484,7 @@ types={
 			stop:90,
 			reload:90,
 			speed:1.05,
-      uses:10,
+      uses:9,
 		},{
 			name:'Firework LMG',
 			ammo:20,
@@ -15524,10 +15524,10 @@ types={
 		},{
 			name:'Classic Sniper',
 			ammo:1,
-			damage:360,
-			cooldown:180,
-			stop:180,
-			reload:180,
+			damage:300,
+			cooldown:150,
+			stop:150,
+			reload:150,
 			speed:0.85,
       uses:8,
 		},{

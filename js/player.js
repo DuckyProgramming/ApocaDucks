@@ -2276,7 +2276,7 @@ class player{
                     this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
                     ?2:
                     this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
-                    ?0.5:
+                    ?0.625:
                     this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC5'
                     ?1.25:
                     this.playerData.name=='PlayerSpyC4'
@@ -12961,9 +12961,15 @@ class player{
                                                     }
                                                 break
                                                 case 2:
-                                                    if(this.id==2&&!this.assort.intel&&game.point[1]==0){
-                                                        this.target.position.x=game.tileset[0]*49.5
-                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    if(this.id==2&&!this.assort.intel){
+                                                        if(game.point[1]==0){
+                                                            this.target.position.x=game.tileset[0]*49.5
+                                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                        }else{
+                                                            this.target.point=floor(random(0,3))
+                                                            this.target.position.x=game.tileset[0]*37.5
+                                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                        }
                                                     }else{
                                                         if(this.assort.intel){
                                                             this.target.position.x=game.tileset[0]*57.5
@@ -12990,9 +12996,15 @@ class player{
                                                     }
                                                 break
                                                 case 5:
-                                                    if(this.id==1&&!this.assort.intel&&game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*165.5
-                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    if(this.id==1&&!this.assort.intel){
+                                                        if(game.point[0]==0){
+                                                            this.target.position.x=game.tileset[0]*165.5
+                                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                        }else{
+                                                            this.target.point=floor(random(0,3))+3
+                                                            this.target.position.x=game.tileset[0]*177.5
+                                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                        }
                                                     }else{
                                                         if(this.assort.intel){
                                                             this.target.position.x=game.tileset[0]*157.5
