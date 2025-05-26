@@ -9570,7 +9570,7 @@ class wall{
                             c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
-                            c.type==356
+                            c.type==356||c.type==359||c.type==360
                         )
                     ){
                         if(!c.stop){
@@ -9828,7 +9828,7 @@ class wall{
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
                                     c.type==286||c.type==304||c.type==314||c.type==323||c.type==329||
-                                    c.type==349
+                                    c.type==349||c.type==360
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
@@ -9870,7 +9870,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
-                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293||c.type==324||c.type==326)&&c.bounceTimer==0){
+                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293||c.type==324||c.type==326||c.type==359)&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     if(c.type==235){
@@ -9918,7 +9918,8 @@ class wall{
                                     c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
                                     c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
-                                    c.type==307||c.type==308||c.type==313||c.type==336||c.type==351
+                                    c.type==307||c.type==308||c.type==313||c.type==336||c.type==351||
+                                    c.type==362
                                 ){
                                     c.explode()
                                 }

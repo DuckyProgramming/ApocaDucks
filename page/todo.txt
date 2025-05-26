@@ -1,2 +1,0 @@
-new mission enemies:
-pistol splitter - slightly larger duck, when killed drops 2 pistols

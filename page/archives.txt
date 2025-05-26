@@ -1,6 +1,38 @@
 
 
 
+803 - scout7: minibomb - throws a grenade in an arc that bounces, knockbacks, and deals extra damage to sentries
+804 - soldier7: legal launcher - low damage rocket that halts enemy attacking, slightly faster movement speed
+805 - pyro7: shotgun pyro
+806 - demoman7: airburst rifle - fires alternate a large sticky and a gun
+807 - heavyweapons7: pistol whip - pushes people at close range and otherwise fires a bullet (but can't mash)
+808 - engineerC7: pistol engineer (replaces shotgun) - pistol with slightly slower reload, can mash, slightly faster, and 4x reserve ammo
+809 - medicC7: transmission medic - heals faster and damages slower, always stuns target
+810 - sniperC7: scatter sniper - can panic scattergun as the second bullet of sniper
+811 - spyC7: harden spy - dead ringer, but instead of cloaking, you gain 3 seconds of defense and speed buff
+812 - droner7: destroyer
+
+813 - pistol C
+814 - minibomb, 724, 793
+815 - airburst rifle, 687
+816 - legal launcher, 3
+817 - pistol whip, 1
+818 - transmission, 11
+819 - scatter sniper
+
+359 - minibomb, 28, 344
+360 - airburst sticky, 349
+361 - airburst bullet, 4
+362 - legal launcher, 2
+363 - pistol whip hitbox, 190
+364 - transmission, 9
+
+
+
+
+
+
+
 783 - scout6: baseball - throws a 150 damage ball in a long arc
 784 - soldier6: reserve shotgun - 4 shots, -33% damage, last shot in clip is always a crit
 785 - pyro6: defroster - faster, but with lower flamethrower damage and gust that fires in a single burst

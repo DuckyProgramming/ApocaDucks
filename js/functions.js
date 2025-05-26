@@ -3662,7 +3662,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,60)][ticker]]
+                    entities.walls[1][a].weapon=listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,70)][ticker]]
                     ticker++
                 }
             }
@@ -3702,7 +3702,7 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,60)][ticker-1]]
+                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,...range(10,70)][ticker-1]]
                     ticker++
                 }
             }
@@ -4088,6 +4088,17 @@ function generateLevel(info,layer){
             entities.walls[2].splice(0,0,new wall(graphics.main,game.tileset[0]*156.5,game.tileset[1]*32,game.tileset[0]*7,game.tileset[1]*2,62))
             entities.walls[2].splice(0,0,new wall(graphics.main,game.tileset[0]*157,game.tileset[1]*31,game.tileset[0]*6,game.tileset[1]*2,62))
             entities.walls[2].splice(0,0,new wall(graphics.main,game.tileset[0]*157.5,game.tileset[1]*30,game.tileset[0]*5,game.tileset[1]*2,62))
+
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*78,game.tileset[1]*36,game.tileset[0]*6,game.tileset[1]*4,1))
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*78.5,game.tileset[1]*39,game.tileset[0]*5,game.tileset[1]*4,1))
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*137,game.tileset[1]*36,game.tileset[0]*6,game.tileset[1]*4,1))
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*136.5,game.tileset[1]*39,game.tileset[0]*5,game.tileset[1]*4,1))
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*76.5,game.tileset[1]*49,game.tileset[0]*9,game.tileset[1]*4,1))
+            entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*138.5,game.tileset[1]*49,game.tileset[0]*9,game.tileset[1]*4,1))
+
+            for(let a=0,la=6;a<la;a++){
+                entities.walls[0][a].boundary=[[],[],[],[],[],[],[],[]]
+            }
         break
         case 68:
             entities.walls[2].splice(0,0,new wall(graphics.main,game.tileset[0]*69.5,game.tileset[1]*45.5,game.tileset[0]*81,game.tileset[1]*17,62))
@@ -4965,7 +4976,9 @@ function generateLevel(info,layer){
                     }
                 }
             }
+            let num=8
             let classPick=[floor(random(0,10)),floor(random(0,10))]
+            let options=[[0,...range(0,num-1),[0,...range(0,num-1)][floor(random(0,num))],[0,...range(0,num-1)][floor(random(0,num))]],[0,...range(0,num-1),[0,...range(0,num-1)][floor(random(0,num))],[0,...range(0,num-1)][floor(random(0,num))]]]
             for(let a=0,la=game.players;a<la;a++){
                 let team=split.includes(a)?1:0
                 entities.players[a].id=team+1
@@ -4976,7 +4989,9 @@ function generateLevel(info,layer){
                 entities.players[a].position.y=loc[team][1]
                 if(game.classWeapon){
                     if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
-                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+[0,0,0,1,2,3,4,5][floor(random(0,8))]*10)
+                        let index=floor(random(0,options[team].length))
+                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                        options[team].splice(index,1)
                     }else if(a<game.gaming){
                         entities.players[a].newWeaponSet(game.weapon[a][0])
                         if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
@@ -4984,7 +4999,7 @@ function generateLevel(info,layer){
                         }
                     }else{
                         let index=floor(random(0,typeList[team].length))
-                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,4/3))*10)
+                        entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+[0,...range(0,num-1)][floor(random(0,num))]*10)
                         typeList[team].splice(index,1)
                     }
                 }
@@ -6277,6 +6292,7 @@ function killFree(index){
 }
 function setupGraphics(){
     setupBase()
+    setupMinor()
     setupTrig()
 }
 function initialGraphics(){
@@ -6333,6 +6349,27 @@ function initialGraphics(){
     }
     for(let a=0,la=graphics.overlay.length;a<la;a++){
         setupLayer(graphics.overlay[a])
+    }
+}
+function setupMinor(){
+    graphics.minor=[
+        createGraphics(10,20),
+        createGraphics(10,20)
+    ]
+    for(let a=0,la=graphics.minor.length;a<la;a++){
+        setupLayer(graphics.minor[a])
+        graphics.minor[a].translate(graphics.minor[a].width*0.5,graphics.minor[a].height*0.5)
+    }
+    for(let a=0,la=2;a<la;a++){
+        let layer=graphics.minor[a]
+        layer.fill(240-a*200,240,40+a*200)
+        layer.rect(0,4,1,8)
+        layer.fill(240-a*200,160,40+a*200)
+        layer.rect(0,3,1,6)
+        layer.fill(240-a*200,80,40+a*200)
+        layer.rect(0,2,1,4)
+        layer.fill(250)
+        layer.ellipse(0,0,3)
     }
 }
 function setupTrig(){
@@ -6459,7 +6496,6 @@ function setupLists(){
     listing[2]=safeRange(0,10)
     listing[3]=[
         ...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player)),
-        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),
         ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),
         ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player))
     ]

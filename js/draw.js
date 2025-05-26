@@ -682,7 +682,7 @@ function mainloop(){
                         entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||entities.players[c].weaponType==592||
                         entities.players[c].weaponType==623||entities.players[c].weaponType==626||entities.players[c].weaponType==636||entities.players[c].weaponType==639||entities.players[c].weaponType==642||
                         entities.players[c].weaponType==673||entities.players[c].weaponType==682||entities.players[c].weaponType==697||entities.players[c].weaponType==718||entities.players[c].weaponType==743&&entities.players[c].subWeaponAType==6||
-                        entities.players[c].weaponType==769||entities.players[c].weaponType==790||
+                        entities.players[c].weaponType==769||entities.players[c].weaponType==790||entities.players[c].weaponType==810||
                         (entities.players[c].weaponType==387||entities.players[c].weaponType==601)&&entities.players[c].subWeaponAType==6
                         ?(game.level==7?1.5:1.75):
                         entities.players[c].weaponType==613?0.75:
@@ -1040,7 +1040,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==(game.level==54||game.level==55||game.level==65||game.level==67||game.level==68||game.level==69?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                    if(!(bs[a][b][0]==(backed()?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }

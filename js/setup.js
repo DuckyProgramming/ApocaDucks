@@ -24,10 +24,10 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerHeavyWeapons6',types.player)]]
+        game.weapon=[[findName('PlayerSniperC7',types.player)]]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
+        dev.sight=true
         //game.margin=true
         //game.noPlayer=true
 
