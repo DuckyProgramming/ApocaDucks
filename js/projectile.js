@@ -444,7 +444,7 @@ class projectile{
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
 				this.time=time
 				this.speed=0
-				this.extent=this.type==363?60:2400
+				this.extent=this.type==363?75:2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){
@@ -8685,452 +8685,467 @@ class projectile{
 
 				//mark
 			}
-			if(this.active&&this.type!=85&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&this.type!=156&&this.type!=205&&this.type!=206&&this.type!=221&&this.type!=228&&this.type!=250&&this.type!=271&&this.type!=284&&this.type!=286&&this.type!=329&&this.type!=349&&this.type!=360&&!(this.partisan&&a%2!=0)){
-				for(let b=0,lb=entities.players.length;b<lb;b++){
-				    if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
-						!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[a].fade<=0.4)&&
-						!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-						!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp||game.level==29||entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
-						!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
-						entities.players[b].life>0&&this.active&&
-						!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
-						!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
-						!(this.type==98&&this.timer<15)&&
-						!(this.type==100&&this.timer<3)&&
-						!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
+        }
+		if(this.active&&this.type!=85&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&this.type!=156&&this.type!=205&&this.type!=206&&this.type!=221&&this.type!=228&&this.type!=250&&this.type!=271&&this.type!=284&&this.type!=286&&this.type!=329&&this.type!=349&&this.type!=360){
+			for(let b=0,lb=entities.players.length;b<lb;b++){
+				//if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
+				if((
+					intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
+						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5}
+					)||intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5},
+						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
+					)||intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
+						{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
+					)||intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
+						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
+					)
+				)&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
+					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.4)&&
+					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
+					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp||game.level==29||entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
+					!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
+					entities.players[b].life>0&&this.active&&
+					!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
+					!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
+					!(this.type==98&&this.timer<15)&&
+					!(this.type==100&&this.timer<3)&&
+					!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
+				){
+					if(this.drone&&entities.players[b].id>0&&game.pvp&&this.type!=138){
+						this.damage*=0.6
+					}
+					if(this.travel>750&&!fast&&this.type!=336){
+						this.damage*=constrain(1.8-this.travel/750*0.8,0.2,1)
+					}
+					if(
+						this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||
+						this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||
+						this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||
+						this.type==302||this.type==306
 					){
-						if(this.drone&&entities.players[b].id>0&&game.pvp&&this.type!=138){
-							this.damage*=0.6
-						}
-						if(this.travel>750&&!fast&&this.type!=336){
-							this.damage*=constrain(1.8-this.travel/750*0.8,0.2,1)
+						this.hit.push(entities.players[b].index)
+						if(this.type==92||this.type==306){
+							let minimum=300
+							for(let c=0,lc=entities.players.length;c<lc;c++){
+								if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&!this.hit.includes(entities.players[c].index)){
+									minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y))
+								}
+							}
+							if(minimum<300){
+								for(let c=0,lc=entities.players.length;c<lc;c++){
+									if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&minimum==dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y)&&!this.hit.includes(entities.players[c].index)){
+										this.direction=atan2(entities.players[c].position.x-this.position.x,this.position.y-entities.players[c].position.y)
+										a=la
+									}
+								}
+							}
+							this.speed=this.base.speed
 						}
 						if(
-							this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||
-							this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||
-							this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||
-							this.type==302||this.type==306
+							(this.type==192||this.type==203||this.type==207)&&this.hit.length>=3||
+							this.type==306&&this.hit.length>=2
 						){
-							this.hit.push(entities.players[b].index)
-							if(this.type==92||this.type==306){
-								let minimum=300
-								for(let c=0,lc=entities.players.length;c<lc;c++){
-									if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&!this.hit.includes(entities.players[c].index)){
-										minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y))
-									}
-								}
-								if(minimum<300){
-									for(let c=0,lc=entities.players.length;c<lc;c++){
-										if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&minimum==dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y)&&!this.hit.includes(entities.players[c].index)){
-											this.direction=atan2(entities.players[c].position.x-this.position.x,this.position.y-entities.players[c].position.y)
-											a=la
-										}
-									}
-								}
-								this.speed=this.base.speed
-							}
-							if(
-								(this.type==192||this.type==203||this.type==207)&&this.hit.length>=3||
-								this.type==306&&this.hit.length>=2
-							){
-								this.active=false
-							}
-						}else if(this.type==179){
-							this.time-=180
-							if(this.time<=0){
-								this.active=false
-							}
-							let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
-							this.velocity.x=sin(dir)*6
-							this.velocity.y=cos(dir)*6
-							entities.players[b].velocity.x-=sin(dir)*6
-							entities.players[b].velocity.y-=cos(dir)*6
-						}else if(this.type==226){
-							this.time-=60
-							if(this.time<=0){
-								this.active=false
-							}
-							let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
-							let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-							this.velocity.x=sin(dir)*vec
-							this.velocity.y=cos(dir)*vec
-							entities.players[b].velocity.x-=sin(dir)*vec
-							entities.players[b].velocity.y-=cos(dir)*vec
-						}else if(
-							this.type!=89&&this.type!=103&&this.type!=138&&this.type!=152&&this.type!=155&&
-							this.type!=193&&this.type!=194&&this.type!=195&&this.type!=215&&this.type!=270&&
-							this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330&&this.type!=335&&
-							this.type!=337
-						){
-				        	this.active=false
+							this.active=false
 						}
-						if(this.id==-1&&(entities.players[b].id>0||entities.players[b].fort)&&!entities.players[b].construct&&this.type==6){
-							this.damage*=entities.players[b].fort?0.1:0.25
+					}else if(this.type==179){
+						this.time-=180
+						if(this.time<=0){
+							this.active=false
 						}
-						let base=entities.players[b].life
-						if((this.type==9||this.type==155||this.type==216)&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-						}else if(this.type==10&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*3*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-						}else if(this.type==11&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
-							entities.players[b].life=entities.players[b].base.life
-						}else if(this.type==38&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].critBuff=max(480,entities.players[b].critBuff)
-						}else if(this.type==63&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].defendBuff=max(480,entities.players[b].defendBuff)
-						}else if(this.type==82&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].stunTime=0
-							entities.players[b].stuckTime=0
-							entities.players[b].vulnerableTime=0
-							entities.players[b].confuseTime=0
-							entities.players[b].dizzyTime=0
-							entities.players[b].DOT.active=0
-						}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
-							if(!entities.players[b].fort){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.5*(this.index==entities.players[b].index?0.1:1),max(entities.players[b].life,entities.players[b].base.life*2))
-							}
-						}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81||this.type==276){
-							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?3:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:1))
-							if(this.type==75){
-								this.explode()
-							}
-						}else if(this.type==72&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].jump.double=1
-						}else if(this.type==131){
-							entities.players[b].takeDamage(this.damage*(1+8*this.timer/this.base.time))
-						}else if(this.type==273&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*5))
-						}else if(this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id){
-							entities.players[b].life=min(entities.players[b].life+this.damage,max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].defendBuff=max(entities.players[b].defendBuff,120)
-						}else if(this.type==345&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.8,max(entities.players[b].life,entities.players[b].base.life*1.5))
-							entities.players[b].critBuff=max(entities.players[b].critBuff,120)
-						}else if(this.type==350&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-							entities.players[b].speedBuff=max(entities.players[b].defendBuff,480)
-						}else if(this.type==357&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*1.4,max(entities.players[b].life,entities.players[b].base.life*1.5))
-						}else if(this.type==364&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.9,max(entities.players[b].life,entities.players[b].base.life*1.75))
-							entities.players[b].weapon.cooldown=max(entities.players[b].weapon.cooldown-60,0)
-							entities.players[b].subWeaponA.cooldown=max(entities.players[b].subWeaponA.cooldown-60,0)
-							entities.players[b].weapon.reload=max(entities.players[b].weapon.reload-60,0)
-							entities.players[b].subWeaponA.reload=max(entities.players[b].subWeaponA.reload-60,0)
-						}else if(
-							this.exploder
-						){
-							if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353){
-								entities.players[b].takeDamage(this.damage)
-							}else if(this.type==48){
-								this.speed=0
-							}else if(this.type==344){
-								entities.players[b].takeDamage(this.damage*0.5)
-							}
+						let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+						this.velocity.x=sin(dir)*6
+						this.velocity.y=cos(dir)*6
+						entities.players[b].velocity.x-=sin(dir)*6
+						entities.players[b].velocity.y-=cos(dir)*6
+					}else if(this.type==226){
+						this.time-=60
+						if(this.time<=0){
+							this.active=false
+						}
+						let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+						let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
+						this.velocity.x=sin(dir)*vec
+						this.velocity.y=cos(dir)*vec
+						entities.players[b].velocity.x-=sin(dir)*vec
+						entities.players[b].velocity.y-=cos(dir)*vec
+					}else if(
+						this.type!=89&&this.type!=103&&this.type!=138&&this.type!=152&&this.type!=155&&
+						this.type!=193&&this.type!=194&&this.type!=195&&this.type!=215&&this.type!=270&&
+						this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330&&this.type!=335&&
+						this.type!=337
+					){
+						this.active=false
+					}
+					if(this.id==-1&&(entities.players[b].id>0||entities.players[b].fort)&&!entities.players[b].construct&&this.type==6){
+						this.damage*=entities.players[b].fort?0.1:0.25
+					}
+					let base=entities.players[b].life
+					if((this.type==9||this.type==155||this.type==216)&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+					}else if(this.type==10&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*3*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+					}else if(this.type==11&&(this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
+						entities.players[b].life=entities.players[b].base.life
+					}else if(this.type==38&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].critBuff=max(480,entities.players[b].critBuff)
+					}else if(this.type==63&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].defendBuff=max(480,entities.players[b].defendBuff)
+					}else if(this.type==82&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].stunTime=0
+						entities.players[b].stuckTime=0
+						entities.players[b].vulnerableTime=0
+						entities.players[b].confuseTime=0
+						entities.players[b].dizzyTime=0
+						entities.players[b].DOT.active=0
+					}else if(this.type==194&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
+						if(!entities.players[b].fort){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.5*(this.index==entities.players[b].index?0.1:1),max(entities.players[b].life,entities.players[b].base.life*2))
+						}
+					}else if(this.type==6||this.type==15||this.type==33||this.type==74||this.type==75||this.type==81||this.type==276){
+						entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?3:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:1))
+						if(this.type==75){
 							this.explode()
-						}else if((this.type==111||this.type==134||this.type==182)&&entities.players[b].id>0){
-							entities.players[b].takeDamage(this.damage*0.2)
-						}else if(this.type==149){
-				        	entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
-						}else if(this.type==215){
-							entities.players[b].gasTime=max(7200,entities.players[b].gasTime+300)
-							entities.players[b].gasser=this.index
-						}else if((this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==270||this.type==297||this.type==310||this.type==330)&&entities.players[b].fort&&!entities.players[b].auto){
-				        	entities.players[b].takeDamage(this.damage*0.2)
-						}else if(this.type==304){
-							let saveLife=entities.players[b].life
+						}
+					}else if(this.type==72&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].jump.double=1
+					}else if(this.type==131){
+						entities.players[b].takeDamage(this.damage*(1+8*this.timer/this.base.time))
+					}else if(this.type==273&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*5))
+					}else if(this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id){
+						entities.players[b].life=min(entities.players[b].life+this.damage,max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].defendBuff=max(entities.players[b].defendBuff,120)
+					}else if(this.type==345&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.8,max(entities.players[b].life,entities.players[b].base.life*1.5))
+						entities.players[b].critBuff=max(entities.players[b].critBuff,120)
+					}else if(this.type==350&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						entities.players[b].speedBuff=max(entities.players[b].defendBuff,480)
+					}else if(this.type==357&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*1.4,max(entities.players[b].life,entities.players[b].base.life*1.5))
+					}else if(this.type==364&&((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
+						entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.9,max(entities.players[b].life,entities.players[b].base.life*1.75))
+						entities.players[b].weapon.cooldown=max(entities.players[b].weapon.cooldown-60,0)
+						entities.players[b].subWeaponA.cooldown=max(entities.players[b].subWeaponA.cooldown-60,0)
+						entities.players[b].weapon.reload=max(entities.players[b].weapon.reload-60,0)
+						entities.players[b].subWeaponA.reload=max(entities.players[b].subWeaponA.reload-60,0)
+					}else if(
+						this.exploder
+					){
+						if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353){
 							entities.players[b].takeDamage(this.damage)
-							this.damage-=saveLife
-							if(this.damage<=0){
-								this.active=false
-							}
-						}else if(this.type==325){
-							if(entities.players[b].playerData.name.includes('Hyper')){
-								entities.players[b].life=0
-							}else{
-								entities.players[b].takeDamage(this.damage)
-							}
-						}else if(this.type==337){
-							entities.players[b].gasTime=max(1200,entities.players[b].gasTime+120)
-							entities.players[b].gasser=this.index
-						}else if(this.type==341||this.type==343){
-				        	entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
-						}else if(fast||this.type==342){
-				        	entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
-						}else if(this.type==355){
-				        	entities.players[b].takeDamage(this.damage,1)
+						}else if(this.type==48){
+							this.speed=0
+						}else if(this.type==344){
+							entities.players[b].takeDamage(this.damage*0.5)
+						}
+						this.explode()
+					}else if((this.type==111||this.type==134||this.type==182)&&entities.players[b].id>0){
+						entities.players[b].takeDamage(this.damage*0.2)
+					}else if(this.type==149){
+						entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
+					}else if(this.type==215){
+						entities.players[b].gasTime=max(7200,entities.players[b].gasTime+300)
+						entities.players[b].gasser=this.index
+					}else if((this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==270||this.type==297||this.type==310||this.type==330)&&entities.players[b].fort&&!entities.players[b].auto){
+						entities.players[b].takeDamage(this.damage*0.2)
+					}else if(this.type==304){
+						let saveLife=entities.players[b].life
+						entities.players[b].takeDamage(this.damage)
+						this.damage-=saveLife
+						if(this.damage<=0){
+							this.active=false
+						}
+					}else if(this.type==325){
+						if(entities.players[b].playerData.name.includes('Hyper')){
+							entities.players[b].life=0
 						}else{
-				        	entities.players[b].takeDamage(this.damage)
+							entities.players[b].takeDamage(this.damage)
 						}
-						if(entities.players[b].life>base){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].stats.damage+=(entities.players[b].life-base)*0.2
-								}
+					}else if(this.type==337){
+						entities.players[b].gasTime=max(1200,entities.players[b].gasTime+120)
+						entities.players[b].gasser=this.index
+					}else if(this.type==341||this.type==343){
+						entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
+					}else if(fast||this.type==342){
+						entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
+					}else if(this.type==355){
+						entities.players[b].takeDamage(this.damage,1)
+					}else{
+						entities.players[b].takeDamage(this.damage)
+					}
+					if(entities.players[b].life>base){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								entities.players[d].stats.damage+=(entities.players[b].life-base)*0.2
 							}
 						}
-						if(this.type==13||this.type==188){
-							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
-							entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+15,entities.players[b].subWeaponA.cooldown+15)
-							if(this.type==188){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].critBuff=max(300,entities.players[d].critBuff)
-									}
-								}
-							}
-						}else if(this.type==36||this.type==249){
+					}
+					if(this.type==13||this.type==188){
+						entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
+						entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+15,entities.players[b].subWeaponA.cooldown+15)
+						if(this.type==188){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
 									entities.players[d].critBuff=max(300,entities.players[d].critBuff)
 								}
 							}
-						}else if(this.type==277){
-							entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
-							entities.players[entities.players.length-1].sidekick=true
-							entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
-							entities.players[entities.players.length-1].DOT.damage=0.25
-							entities.players[entities.players.length-1].DOT.active=9999
-						}else if(this.type==340){
-							for(let c=0,lc=entities.projectiles.length;c<lc;c++){
-								if(entities.projectiles[c].index==this.index&&entities.projectiles[c].type==118){
-									entities.projectiles[c].aggro=true
-									entities.projectiles[c].goalIndex=entities.players[b].index
+						}
+					}else if(this.type==36||this.type==249){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								entities.players[d].critBuff=max(300,entities.players[d].critBuff)
+							}
+						}
+					}else if(this.type==277){
+						entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+						entities.players[entities.players.length-1].sidekick=true
+						entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
+						entities.players[entities.players.length-1].DOT.damage=0.25
+						entities.players[entities.players.length-1].DOT.active=9999
+					}else if(this.type==340){
+						for(let c=0,lc=entities.projectiles.length;c<lc;c++){
+							if(entities.projectiles[c].index==this.index&&entities.projectiles[c].type==118){
+								entities.projectiles[c].aggro=true
+								entities.projectiles[c].goalIndex=entities.players[b].index
+							}
+						}
+					}else if(this.type==347&&!entities.players[b].fort){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								if(entities.players[d].subWeaponAType==684){
+									entities.players[d].subWeaponA.cooldown=0
+									entities.players[d].subWeaponA.reload=0
+								}else{
+									entities.players[d].subWeaponB.cooldown=0
+									entities.players[d].subWeaponB.reload=0
 								}
 							}
-						}else if(this.type==347&&!entities.players[b].fort){
+						}
+					}else if(this.type==348){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
+								entities.players[d].visible=0
+							}
+						}
+					}
+					if(!entities.players[b].immune()){
+						if(this.type==12){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3
+						}else if(this.type==40){
+							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+60,entities.players[b].weapon.cooldown+60)
+							entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+60,entities.players[b].subWeaponA.cooldown+60)
+						}else if(this.type==14||this.type==46){
+							entities.players[b].weaponType=-1
+						}else if(this.type==16){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3.6
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3.6
+						}else if(this.type==18){
+							entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*3)
+						}else if(this.type==19){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*-3
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*-3
+						}else if(this.type==55){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*6
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*6
+						}else if(this.type==56){
+							entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*2)
+						}else if(this.type==74||this.type==81){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*1.8
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*1.8
+						}else if(this.type==77){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*24
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*24
+						}else if(this.type==87){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*7.5
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*7.5
+						}else if(this.type==127){
+							entities.players[b].velocity.x+=lsin(this.direction)*20
+							entities.players[b].velocity.y-=lcos(this.direction)*20
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*12
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*12
+						}else if(this.type==222){
+							entities.players[b].velocity.x+=lsin(this.direction)*12
+							entities.players[b].velocity.y-=lcos(this.direction)*12
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*6
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*6
+						}else if(this.type==223){
+							entities.players[b].velocity.x+=lsin(this.direction)*12
+							entities.players[b].velocity.y-=lcos(this.direction)*12
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*6
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*6
+							entities.players[b].stunTime=max(entities.players[b].stunTime,600)
+							entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,1800)
+						}else if(this.type==269){
+							entities.players[b].velocity.x+=lsin(this.direction)*15
+							entities.players[b].velocity.y-=lcos(this.direction)*15
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*9
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*9
+						}else if(this.type==287){
+							entities.players[b].velocity.x+=lsin(this.direction)*12
+							entities.players[b].velocity.y-=lcos(this.direction)*12
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*12
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*12
+							entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
+						}else if(this.type==288){
+							entities.players[b].velocity.x+=lsin(this.direction)*9
+							entities.players[b].velocity.y-=lcos(this.direction)*9
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*4.5
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*4.5
+						}else if(this.type==302){
+							entities.players[b].velocity.x+=abs(this.speed)*lsin(this.direction)*-3
+							entities.players[b].velocity.y-=abs(this.speed)*lcos(this.direction)*-3
+							entities.players[b].stunTime=max(entities.players[b].stunTime,60)
+						}else if(this.type==319){
+							entities.players[b].velocity.x+=lsin(this.direction)*18
+							entities.players[b].velocity.y-=lcos(this.direction)*18
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*9
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*9
+						}else if(this.type==322){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*15
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*15
+						}else if(this.type==335){
+							entities.players[b].lastingForce[0]+=lsin(this.direction)*0.1
+							entities.players[b].lastingForce[1]-=lcos(this.direction)*0.1
+						}else if(this.type==343){
+							entities.players[b].velocity.x+=this.speed*lsin(this.direction)*0.9
+							entities.players[b].velocity.y-=this.speed*lcos(this.direction)*0.9
+						}else if(
+							this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||
+							this.type==51
+						){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
-									if(entities.players[d].subWeaponAType==684){
-										entities.players[d].subWeaponA.cooldown=0
-										entities.players[d].subWeaponA.reload=0
-									}else{
-										entities.players[d].subWeaponB.cooldown=0
-										entities.players[d].subWeaponB.reload=0
-									}
+									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
 								}
 							}
-						}else if(this.type==348){
+						}else if(this.type==43||this.type==186||this.type==320){
+							entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
+						}else if(this.type==44){
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+						}else if(this.type==49){
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
-									entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
-									entities.players[d].visible=0
+									entities.players[d].life=entities.players[d].base.life
 								}
 							}
-						}
-						if(!entities.players[b].immune()){
-							if(this.type==12){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3
-							}else if(this.type==40){
-								entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+60,entities.players[b].weapon.cooldown+60)
-								entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+60,entities.players[b].subWeaponA.cooldown+60)
-							}else if(this.type==14||this.type==46){
-								entities.players[b].weaponType=-1
-							}else if(this.type==16){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3.6
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3.6
-							}else if(this.type==18){
-								entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*3)
-							}else if(this.type==19){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*-3
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*-3
-							}else if(this.type==55){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*6
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*6
-							}else if(this.type==56){
-								entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*2)
-							}else if(this.type==74||this.type==81){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*1.8
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*1.8
-							}else if(this.type==77){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*24
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*24
-							}else if(this.type==87){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*7.5
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*7.5
-							}else if(this.type==127){
-								entities.players[b].velocity.x+=lsin(this.direction)*20
-								entities.players[b].velocity.y-=lcos(this.direction)*20
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
-							}else if(this.type==222){
-								entities.players[b].velocity.x+=lsin(this.direction)*12
-								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
-							}else if(this.type==223){
-								entities.players[b].velocity.x+=lsin(this.direction)*12
-								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
+						}else if(this.type==57){
+							entities.players[b].newWeapon()
+						}else if(this.type==59){
+							entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+						}else if(this.type==61){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
+								}
+							}
+							entities.players[b].stunTime=max(entities.players[b].stunTime,60)
+						}else if(this.type==67||this.type==285){
+							entities.players[b].confuseTime=max(entities.players[b].confuseTime,360)
+						}else if(this.type==76){
+							entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+						}else if(this.type==94){
+							entities.players[b].stunTime=max(entities.players[b].stunTime,600)
+						}else if(this.type==99){
+							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+						}else if(
+							this.type==102||this.type==115||this.type==151||this.type==167||this.type==175||
+							this.type==189||this.type==193||this.type==202||this.type==220||this.type==258
+						){
+							entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
+							if(this.type==202){
 								entities.players[b].stunTime=max(entities.players[b].stunTime,600)
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,1800)
-							}else if(this.type==269){
-								entities.players[b].velocity.x+=lsin(this.direction)*15
-								entities.players[b].velocity.y-=lcos(this.direction)*15
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*9
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*9
-							}else if(this.type==287){
-								entities.players[b].velocity.x+=lsin(this.direction)*12
-								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
-								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
-							}else if(this.type==288){
-								entities.players[b].velocity.x+=lsin(this.direction)*9
-								entities.players[b].velocity.y-=lcos(this.direction)*9
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*4.5
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*4.5
-							}else if(this.type==302){
-								entities.players[b].velocity.x+=abs(this.speed)*lsin(this.direction)*-3
-								entities.players[b].velocity.y-=abs(this.speed)*lcos(this.direction)*-3
-								entities.players[b].stunTime=max(entities.players[b].stunTime,60)
-							}else if(this.type==319){
-								entities.players[b].velocity.x+=lsin(this.direction)*18
-								entities.players[b].velocity.y-=lcos(this.direction)*18
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*9
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*9
-							}else if(this.type==322){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*15
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*15
-							}else if(this.type==335){
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*0.1
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*0.1
-							}else if(this.type==343){
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*0.9
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*0.9
-							}else if(
-								this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||
-								this.type==51
-							){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
-									}
-								}
-							}else if(this.type==43||this.type==186||this.type==320){
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
-							}else if(this.type==44){
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
-							}else if(this.type==49){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=entities.players[d].base.life
-									}
-								}
-							}else if(this.type==57){
-								entities.players[b].newWeapon()
-							}else if(this.type==59){
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
-							}else if(this.type==61){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
-									}
-								}
-								entities.players[b].stunTime=max(entities.players[b].stunTime,60)
-							}else if(this.type==67||this.type==285){
-								entities.players[b].confuseTime=max(entities.players[b].confuseTime,360)
-							}else if(this.type==76){
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
-							}else if(this.type==94){
-								entities.players[b].stunTime=max(entities.players[b].stunTime,600)
-							}else if(this.type==99){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
-							}else if(
-								this.type==102||this.type==115||this.type==151||this.type==167||this.type==175||
-								this.type==189||this.type==193||this.type==202||this.type==220||this.type==258
-							){
-								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
-								if(this.type==202){
-									entities.players[b].stunTime=max(entities.players[b].stunTime,600)
-								}
-							}else if(this.type==105){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life*2)
-									}
-								}
-							}else if(this.type==195&&entities.players[b].life<=0){
-								entities.projectiles.push(new projectile(this.layer,entities.players[b].position.x,entities.players[b].position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
-							}else if(this.type==212){
-								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+15,30)
-							}else if(this.type==225){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].id>0&&!entities.players[d].inspect.includes(entities.players[b].index)){
-										entities.players[d].inspect.push(entities.players[b].index)
-									}
-								}
-							}else if(this.type==231){
-								entities.players[b].stunTime=max(entities.players[b].stunTime,240)
-							}else if(this.type==281){
-								let pos=game.spawner[floor(random(0,game.spawner.length))]
-								entities.players[b].position.x=pos[0]
-								entities.players[b].position.y=pos[1]-entities.players[b].height/2
-							}else if(this.type==289){
-								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+600)
-								entities.players[b].gasser=this.index
-								entities.players[b].stunTime=240
-							}else if(this.type==310){
-								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+3)
-								entities.players[b].gasser=this.index
-							}else if(this.type==317){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
-							}else if(this.type==324){
-								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+30,60)
-							}else if(this.type==331){
-								entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
-							}else if(this.type==332){
-								entities.players[b].blindTime=max(entities.players[b].blindTime+300,900)
-							}else if(this.type==336){
-								entities.players[b].chillTime=max(entities.players[b].chillTime,300)
-							}else if(this.type==338){
-								entities.players[b].gasTime=max(900,entities.players[b].gasTime+600)
-								entities.players[b].gasser=this.index
-							}else if(this.type==346){
-								entities.players[b].chillTime=max(entities.players[b].chillTime,240)
 							}
-							if(this.type==20){
-								entities.players[b].DOT.damage+=this.damage/180
-								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+30)
-							}else if(this.type==37||this.type==51){
-								entities.players[b].DOT.damage+=this.damage/180
-								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+60)
-							}else if(this.type==50){
-								entities.players[b].DOT.damage+=this.damage/360
-								entities.players[b].DOT.active=min(240,entities.players[b].DOT.active+90)
-							}else if(this.type==232||this.type==321){
-								entities.players[b].DOT.damage+=this.damage/120
-								entities.players[b].DOT.active=min(360,entities.players[b].DOT.active+180)
-							}else if(this.type==285||this.type==323){
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=min(600,entities.players[b].DOT.active+300)
-							}else if(this.type==298||this.type==324){
-								entities.players[b].DOT.damage+=this.damage/120
-								entities.players[b].DOT.active=max(240,entities.players[b].DOT.active+120)
-							}else if(this.type==327){
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=max(720,entities.players[b].DOT.active+240)
-							}else if(this.type==355){
-								entities.players[b].DOT.damage+=this.damage/600
-								entities.players[b].DOT.active=max(300,entities.players[b].DOT.active+60)
+						}else if(this.type==105){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life*2)
+								}
 							}
+						}else if(this.type==195&&entities.players[b].life<=0){
+							entities.projectiles.push(new projectile(this.layer,entities.players[b].position.x,entities.players[b].position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+						}else if(this.type==212){
+							entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+15,30)
+						}else if(this.type==225){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].id>0&&!entities.players[d].inspect.includes(entities.players[b].index)){
+									entities.players[d].inspect.push(entities.players[b].index)
+								}
+							}
+						}else if(this.type==231){
+							entities.players[b].stunTime=max(entities.players[b].stunTime,240)
+						}else if(this.type==281){
+							let pos=game.spawner[floor(random(0,game.spawner.length))]
+							entities.players[b].position.x=pos[0]
+							entities.players[b].position.y=pos[1]-entities.players[b].height/2
+						}else if(this.type==289){
+							entities.players[b].gasTime=max(7200,entities.players[b].gasTime+600)
+							entities.players[b].gasser=this.index
+							entities.players[b].stunTime=240
+						}else if(this.type==310){
+							entities.players[b].gasTime=max(7200,entities.players[b].gasTime+3)
+							entities.players[b].gasser=this.index
+						}else if(this.type==317){
+							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+						}else if(this.type==324){
+							entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+30,60)
+						}else if(this.type==331){
+							entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
+						}else if(this.type==332){
+							entities.players[b].blindTime=max(entities.players[b].blindTime+300,900)
+						}else if(this.type==336){
+							entities.players[b].chillTime=max(entities.players[b].chillTime,300)
+						}else if(this.type==338){
+							entities.players[b].gasTime=max(900,entities.players[b].gasTime+600)
+							entities.players[b].gasser=this.index
+						}else if(this.type==346){
+							entities.players[b].chillTime=max(entities.players[b].chillTime,240)
 						}
-						if(game.invis){
-							entities.players[b].visible=15
+						if(this.type==20){
+							entities.players[b].DOT.damage+=this.damage/180
+							entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+30)
+						}else if(this.type==37||this.type==51){
+							entities.players[b].DOT.damage+=this.damage/180
+							entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+60)
+						}else if(this.type==50){
+							entities.players[b].DOT.damage+=this.damage/360
+							entities.players[b].DOT.active=min(240,entities.players[b].DOT.active+90)
+						}else if(this.type==232||this.type==321){
+							entities.players[b].DOT.damage+=this.damage/120
+							entities.players[b].DOT.active=min(360,entities.players[b].DOT.active+180)
+						}else if(this.type==285||this.type==323){
+							entities.players[b].DOT.damage+=this.damage/60
+							entities.players[b].DOT.active=min(600,entities.players[b].DOT.active+300)
+						}else if(this.type==298||this.type==324){
+							entities.players[b].DOT.damage+=this.damage/120
+							entities.players[b].DOT.active=max(240,entities.players[b].DOT.active+120)
+						}else if(this.type==327){
+							entities.players[b].DOT.damage+=this.damage/60
+							entities.players[b].DOT.active=max(720,entities.players[b].DOT.active+240)
+						}else if(this.type==355){
+							entities.players[b].DOT.damage+=this.damage/600
+							entities.players[b].DOT.active=max(300,entities.players[b].DOT.active+60)
 						}
-				        entities.players[b].die.killer=this.index
-				        entities.players[b].collect.time=450
-				    }
+					}
+					if(game.invis){
+						entities.players[b].visible=15
+					}
+					entities.players[b].die.killer=this.index
+					entities.players[b].collect.time=450
 				}
 			}
-        }
+		}
 		if(this.drone&&this.timer%15==0){
 			if(
 				this.check.length>=4&&

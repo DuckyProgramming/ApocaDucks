@@ -5703,7 +5703,23 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],363,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
                                 if(!entities.projectiles[entities.projectiles.length-1].remove){
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],363,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                                    if(!entities.projectiles[entities.projectiles.length-1].remove){
+                                        entities.projectiles.splice(entities.projectiles.length-1,1)
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],363,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                                        if(!entities.projectiles[entities.projectiles.length-1].remove){
+                                            entities.projectiles.splice(entities.projectiles.length-1,1)
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                        }else{
+                                            entities.projectiles.splice(entities.projectiles.length-1,1)
+                                            weapon.ammo++
+                                            weapon.uses++
+                                        }
+                                    }else{
+                                        entities.projectiles.splice(entities.projectiles.length-1,1)
+                                        weapon.ammo++
+                                        weapon.uses++
+                                    }
                                 }else{
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
                                     weapon.ammo++
