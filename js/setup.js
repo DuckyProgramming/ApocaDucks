@@ -9,8 +9,8 @@ function setup(){
 
         game.players=12
         game.gaming=1
-        game.level=77
-        menu.level=77
+        game.level=78
+        menu.level=game.level
         if(true){
             //game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -66,7 +66,7 @@ function mouseClicked(){
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort','Aerial'],
+                    ['Bluefort','Bluefort Mini','Aerial'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -375,6 +375,16 @@ function mouseClicked(){
                                                 //bluefort
                                             break
                                             case 1:
+                                                menu.level=78
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //bluefort
+                                            break
+                                            case 2:
                                                 menu.level=73
                                                 game.pvp=true
                                                 game.classicWeapon=true
