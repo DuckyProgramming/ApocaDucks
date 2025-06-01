@@ -351,7 +351,8 @@ class wall{
                 }
             break
             case 33:
-                this.owner=game.level==44||game.level==65&&game.pvp?[1,1,-1,2,2][this.pos]:
+                this.owner=game.level==77?[1,1,1,-1,2,2,2][this.pos]:
+                    game.level==44||game.level==65&&game.pvp?[1,1,-1,2,2][this.pos]:
                     game.level==43?game.point[this.pos]:
                     game.level==38&&game.pvp?[1,-1,-1,2][this.pos]:
                     game.level==29||game.level==37?0:
@@ -1093,7 +1094,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&this.type!=37&&(c.type!=37||game.level==67||game.level==68||game.level==70)&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&!(this.type==35||c.type==35&&game.level==29)&&this.type!=74&&c.type!=74){
+                if(c.standard&&this.type!=37&&(c.type!=37||game.level==67||game.level==68||game.level==70||game.level==77)&&!(c.type==24&&(game.level==59||game.level==60))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&!(this.type==35||c.type==35&&game.level==29)&&this.type!=74&&c.type!=74){
                     for(let d=0,ld=this.boundary[0].length;d<ld;d++){
                         if(abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&c.position.x-c.width/2<this.boundary[0][d][0].x+1&&c.position.x+c.width/2>this.boundary[0][d][1].x-1){
                             this.boundary[0].splice(d,1)
@@ -1826,7 +1827,7 @@ class wall{
                             this.width/2-5,-this.height/2-0.5
                         )
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(...game.tilecolor[1])
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
@@ -1866,7 +1867,7 @@ class wall{
                         layer.fill(51,58,66,0.5)
                         layer.rect(this.width/2,this.height/2,this.width,this.height)
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(65,72,38,0.5)
                         layer.rect(this.width/2,this.height/2,this.width,this.height)
                     break
@@ -2396,7 +2397,7 @@ class wall{
                             layer.ellipse(0,this.height*0.5-game.tileset[1]*1.2-this.width*0.8,this.width*0.6,this.width*0.6)
                         }
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(131,145,136)
                         layer.rect(0,0,this.width,this.height)
                         layer.quad(-this.width*1.25,-this.height*0.5,this.width*1.25,-this.height*0.5,this.width*0.75,-this.height*0.5+this.width,-this.width*0.75,-this.height*0.5+this.width)
@@ -2775,7 +2776,7 @@ class wall{
                             )
                         }
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(144,150,141)
                         layer.rect(0,this.height*0.1,this.width,this.height*0.8)
                         layer.fill(97,103,103)
@@ -4591,7 +4592,7 @@ class wall{
                         }
                         layer.fill(211,155,78)
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(189,165,141)
                         layer.rect(0,0,this.width+game.tileset[0]*0.12,this.height)
                         layer.fill(187,144,101)
@@ -4704,7 +4705,7 @@ class wall{
                         break
                     }
                 }else{
-                    texts=game.level==37?'Gate':game.level==39||dm()?'Point':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                    texts=game.level==37?'Gate':game.level==39||dm()?'Point':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5&&game.level!=77?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
                 }
                 layer.text(texts,0,-120)
                 if(game.level!=29){
@@ -4865,7 +4866,7 @@ class wall{
                             this.width/2-5,-this.height/2-0.5
                         )
                     break
-                    case 54: case 55: case 65: case 67:
+                    case 54: case 55: case 65: case 67: case 77:
                         layer.fill(...game.tilecolor[1])
                         layer.rect(0,0,this.width+1,this.height+1)
                     break
@@ -5188,7 +5189,7 @@ class wall{
                             layer.line(this.width*(-0.5+(a+0.5)/la),-this.height*0.225+0.225,this.width*(-0.5+(a+0.5)/la),this.height*0.225-0.225)
                         }
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(133,128,128)
                         layer.rect(0,-this.height*0.35,this.width,this.height*0.3)
                         layer.rect(0,this.height*0.35,this.width,this.height*0.3)
@@ -5450,7 +5451,7 @@ class wall{
                             layer.line(this.width*0.4,this.height*(-0.5+(a+0.7375)/la)+1.5,-this.width*0.4,this.height*(-0.5+(a+0.2625)/la)-1.5)
                         }
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(135,80,46)
                         for(let a=0,la=this.height/game.tileset[1]*3;a<la;a++){
                             layer.quad(
@@ -5613,7 +5614,7 @@ class wall{
                     layer.pop()
                     layer.fill(0)
                     layer.textSize(12)
-                    layer.text('ABCDE'[this.point[a]],a*40-la*20+20,1)
+                    layer.text('ABCDEFG'[this.point[a]],a*40-la*20+20,1)
                 }
             break
             case 40:
@@ -6258,7 +6259,7 @@ class wall{
                         layer.fill(128,99,83)
                         layer.rect(0,0,this.width,this.height)
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(119,110,115)
                         layer.rect(0,0,this.width-20,this.height-20)
                     break
@@ -7232,7 +7233,7 @@ class wall{
                             this.width/2+10,-this.height/2-0.5
                         )
                     break
-                    case 67: case 68:
+                    case 67: case 68: case 77:
                         layer.fill(120,200,120)
                         layer.quad(
                             -this.width/2-15,-this.height/2-0.5,
@@ -7458,7 +7459,7 @@ class wall{
                     }
                 }
                 if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
-                    layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74?250:game.level==71?150:180,1-this.recharge/60-this.hide)
+                    layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==77?250:game.level==71?150:180,1-this.recharge/60-this.hide)
                     layer.textSize(9)
                     layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                 }
@@ -7605,7 +7606,7 @@ class wall{
                             break
                         }
                     }else{
-                        texts=game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                        texts=game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -7663,7 +7664,7 @@ class wall{
                             break
                         }
                     }else{
-                        texts=this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                        texts=this.type==42?'Rogue':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -7763,7 +7764,7 @@ class wall{
                             break
                         }
                     }else{
-                        texts=game.level==39?'Point':game.level==37?'Gate':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Payload':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5?'Node':'Point '+'ABCDE'[game.level==28?0:this.pos]
+                        texts=game.level==39?'Point':game.level==37?'Gate':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.type==42?'Payload':this.pos>=3&&(game.level==25||game.level==26)||this.pos>=5&&game.level!=77?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
                     }
                     graphics.overlay[0].fill(255)
                     graphics.overlay[0].textSize(10)
@@ -7809,6 +7810,10 @@ class wall{
                         graphics.overlay[0].fill(255)
                         graphics.overlay[0].textSize(10)
                         graphics.overlay[0].text(formatTime(min(game.time,18000)),25+(this.pos+2-(game.level==19||game.level==69?2:0)-(game.level==31?3:0))*40,15+25)
+                    }else if(this.pos==0&&game.level==77&&game.pvp){
+                        graphics.overlay[0].fill(255)
+                        graphics.overlay[0].textSize(10)
+                        graphics.overlay[0].text(formatTime(min(game.time,36000)),25+(this.pos+3-(game.level==19||game.level==69?2:0)-(game.level==31?3:0))*40,15+25)
                     }else if(game.level==29&&this.pos==0){
                         for(let a=0,la=game.players;a<la;a++){
                             graphics.overlay[0].fill(255)
@@ -8006,7 +8011,7 @@ class wall{
                         layer.fill(120)
                         regTriangle(layer,0,-this.height/2+7+this.pos*2,6,6,this.pos*60)
                     break
-                    case 67:
+                    case 67: case 77:
                         layer.fill(220-this.reload*6)
                         layer.quad(
                             -this.width/2-15,-this.height/2-0.5,
@@ -8136,7 +8141,7 @@ class wall{
                 }else if(game.level==49&&!game.pvp||game.level==57){
                     layer.scale(1-game.pointAnim[1])
                 }
-                layer.fill(game.level==64||game.level==67||game.level==68||game.level==70||game.level==71||game.level==74?250:180,1-this.recharge/60-this.hide)
+                layer.fill(game.level==64||game.level==67||game.level==68||game.level==70||game.level==71||game.level==74||game.level==77?250:180,1-this.recharge/60-this.hide)
                 layer.textSize(9)
                 layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                 layer.pop()
@@ -8240,7 +8245,7 @@ class wall{
                             this.bounder.height=0
                         }
                     break
-                    case 30: case 56: case 59: case 60: case 67: case 68:
+                    case 30: case 56: case 59: case 60: case 67: case 68: case 77:
                         this.bounder.position.x=this.position.x+this.width/2
                         this.bounder.position.y=this.position.y+this.height/2
                         this.bounder.width=this.width
@@ -9478,7 +9483,7 @@ class wall{
                     if(
                         abs(entities.players[a].position.x-this.base.position.x)<250&&abs(entities.players[a].position.y-(this.base.position.y+this.base.height/2))<100&&
                         entities.players[a].id>0&&entities.players[a].life>0&&
-                        !(game.level==67&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))
+                        !((game.level==67||game.level==77)&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))
                     ){
                         visible74=true
                     }
@@ -9928,8 +9933,8 @@ class wall{
                     }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weaponType==-1
-                            ||!game.classWeapon&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
-                            ||game.classWeapon&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
+                            ||(!game.classWeapon||c.playerData.name.includes('CarrySentry'))&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
+                            ||game.classWeapon&&!c.playerData.name.includes('CarrySentry')&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
                             ||c.construct||c.sidekick))
                         &&!((this.type==9||this.type==41||this.type==63)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
@@ -9946,7 +9951,7 @@ class wall{
                             case 3:
                                 if(
                                     game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59||game.level==60||game.level==65||
-                                    game.level==67||game.level==68||game.level==69||game.level==71
+                                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==77
                                 ){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
@@ -10158,7 +10163,7 @@ class wall{
                                 }
                             break
                             case 33:
-                                if(game.level!=19&&game.level!=29&&game.level!=42&&game.level!=55&&!dm()&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33||game.level==44||game.level==58||game.level==63||game.level==65||game.level==70)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
+                                if(game.level!=19&&game.level!=29&&game.level!=42&&game.level!=55&&!dm()&&!c.construct&&!c.sidekick&&!c.fort&&c.id>0&&!game.attacker&&c.weapon.uses<=0&&!((game.level==22||game.level==23||game.level==25||game.level==26||game.level==27||game.level==32||game.level==33||game.level==44||game.level==58||game.level==63||game.level==65||game.level==70||game.level==77)&&!(c.id==this.owner||game.level==27&&game.pvp&&(c.id==1&&this.pos==0||c.id==2&&this.pos==3||c.id==3)||this.owner>0&&c.id>0&&!game.pvp))){
                                     if(c.auto){
                                         c.newWeaponSet(c.type)
                                     }else{

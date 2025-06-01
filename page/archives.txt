@@ -1,6 +1,12 @@
 
 
 
+wrangler engineer - you fire a weak, thin laser that also aims your sentry targetting
+
+
+
+
+
 803 - scout7: minibomb - throws a grenade in an arc that bounces, knockbacks, and deals extra damage to sentries
 804 - soldier7: legal launcher - low damage rocket that halts enemy attacking, slightly faster movement speed
 805 - pyro7: shotgun pyro

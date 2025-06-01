@@ -9,8 +9,8 @@ function setup(){
 
         game.players=12
         game.gaming=1
-        game.level=67
-        menu.level=67
+        game.level=77
+        menu.level=77
         if(true){
             //game.mission=findName('Duckocracy',types.mission)
         }else{
@@ -24,10 +24,10 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerSniperC7',types.player)]]
+        game.weapon=[[findName('PlayerEngineerC3',types.player)]]
         newLoop()
         stage.scene='main'
-        dev.sight=true
+        //dev.sight=true
         //game.margin=true
         //game.noPlayer=true
 
@@ -55,7 +55,8 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Razorpoint','Entropy','Rusted','Tailwater'],
-                    ['Abandoned','Cooked','Divider','Blueprint'],
+                    ['Abandoned','Cooked','Divider','Bluefort'],
+                    ['Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -525,11 +526,14 @@ function mouseClicked(){
                                                 //divider
                                             break
                                             case 3:
-                                                menu.level=28
-                                                game.classicWeapon=true
+                                                menu.level=77
                                                 game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
                                                 instant()
-                                                //blueprint
+                                                //bluefort
                                             break
                                         }
                                     break
@@ -556,6 +560,23 @@ function mouseClicked(){
                                         game.classicWeapon=true
                                         game.classicRespawn=false
                                         instant()
+                                    break
+                                }
+                                menu.mode=0
+                            break
+                            case 8:
+                                stage.scene='mission'
+                                switch(menu.mode){
+                                    case 3:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=28
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                instant()
+                                                //blueprint
+                                            break
+                                        }
                                     break
                                 }
                                 menu.mode=0

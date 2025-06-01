@@ -8702,6 +8702,12 @@ class projectile{
 					)||intersect(this.position,this.previous.position,
 						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
 						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
+					)||intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y},
+						{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y}
+					)||intersect(this.position,this.previous.position,
+						{x:entities.players[b].position.x,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
+						{x:entities.players[b].position.x,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
 					)
 				)&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.4)&&
@@ -8739,7 +8745,7 @@ class projectile{
 								for(let c=0,lc=entities.players.length;c<lc;c++){
 									if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&minimum==dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y)&&!this.hit.includes(entities.players[c].index)){
 										this.direction=atan2(entities.players[c].position.x-this.position.x,this.position.y-entities.players[c].position.y)
-										a=la
+										c=lc
 									}
 								}
 							}
