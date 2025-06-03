@@ -3780,7 +3780,7 @@ types={
   ],player:[
     {
       name:'PlayerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
       desc:'Fires a burst of 12 bullets',dpsBuff:10,
     },{
       name:'PlayerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3991,7 +3991,7 @@ types={
 
     {
       name:'PlayerPanicShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:167,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:167,
       desc:'Fires many shots, gradually less accurately',dpsBuff:12,
     },{
       name:'PlayerGatekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -3999,31 +3999,31 @@ types={
       desc:'Shotgun that fires traps',dpsBuff:15,
     },{
       name:'PlayerAutumn',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:383,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:383,
       desc:'Shotgun that applies many random effects varying by bullet',dpsBuff:10,
     },{
       name:'PlayerTerminal',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:475,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:475,
       desc:'Shotgun with more bullets in a set pattern',dpsBuff:19,
     },{
       name:'PlayerSalacia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:476,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:476,
       desc:'Shotgun that fires over a longer distance and can shrink enemies',dpsBuff:10,
     },{
       name:'PlayerGunpowder',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:477,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:477,
       desc:'Shotgun that fires straight-moving engineer bullets',dpsBuff:20,
     },{
       name:'PlayerOw',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:578,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:578,
       desc:'Shotgun that can use auxiliary key to fire several homing bullets',dpsBuff:10,
     },{
       name:'PlayerPomson',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:649,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:649,
       desc:'Damaging shotgun that instantly kills hyper enemies',dpsBuff:10,
     },{
       name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:177,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:177,
       desc:'Has a shotgun auto turret',dpsBuff:10,
     },
     
@@ -6086,6 +6086,30 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:760,
       desc:'Heavier duck with an uzi',dpsBuff:1.8,
     },{
+      name:'PlayerNightwatchShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:820,
+      desc:'Has a watch shotgun and a flashlight',dpsBuff:0,
+    },{
+      name:'PlayerDeluxeNightwatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:1,crit:0,weapon:820,
+      desc:'Has a deluxe watch shotgun and a flashlight',dpsBuff:0,
+    },{
+      name:'PlayerNightwatchEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:821,
+      desc:'Can place down temporary turrets',dpsBuff:0,
+    },{
+      name:'PlayerNightwatchSoldier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:822,
+      desc:'Can fire a blast rocket',dpsBuff:0,
+    },{
+      name:'PlayerNightwatchHeavy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:823,
+      desc:'Has extra health',dpsBuff:0,
+    },{
+      name:'PlayerNightwatchPyro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:827,
+      desc:'Can fire flares',dpsBuff:0,
+    },{
       name:'PlayerTiny',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:782,
     },
@@ -6397,7 +6421,7 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:688,
     },{
       name:'PlayerHeavyShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:0,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'PlayerHeavyRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
@@ -6419,6 +6443,9 @@ types={
     },{
       name:'PlayerFlareGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:701,
+    },{
+      name:'PlayerLightFlareGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:0.75,reloadBuff:0.8,crit:0,weapon:701,
     },{
       name:'PlayerSword',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:702,
@@ -6490,7 +6517,7 @@ types={
       damageBuff:0.6,reloadBuff:1.5,crit:0,weapon:133,
     },{
       name:'PlayerJusticeShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1,crit:0,weapon:751,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:751,
     },{
       name:'PlayerHeavyTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:464,
@@ -6593,6 +6620,15 @@ types={
     },{
       name:'PlayerScatterSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:819,
+    },{
+      name:'PlayerHeavyPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PlayerTempSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:824,
+    },{
+      name:'PlayerBlastRocket',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:1,crit:0,weapon:825,
     },
 
     //mark c
@@ -6657,6 +6693,9 @@ types={
     },{
       name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:689,
+    },{
+      name:'ConstructTemp',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:826,
     },{
       name:'ConstructLevel1',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:730,
@@ -15753,6 +15792,78 @@ types={
 			reload:5,
 			speed:0.85,
       uses:11,
+		},{
+			name:'Watch Shotgun',
+			ammo:6,
+			damage:16,
+			cooldown:25,
+			stop:60,
+			reload:15,
+			speed:1,
+      uses:30,
+		},{
+			name:'Engineer W',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1,
+      uses:12,
+		},{
+			name:'Soldier W',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:0.925,
+      uses:16,
+		},{
+			name:'Heavy Weapons W',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.75,
+      uses:120,
+		},{
+			name:'Temp Sentry',
+			ammo:1,
+			damage:0,
+			cooldown:300,
+			stop:300,
+			reload:300,
+			speed:1.1,
+      uses:4,
+		},{
+			name:'Blast Rocket',
+			ammo:1,
+			damage:110,
+			cooldown:20,
+			stop:135,
+			reload:40,
+			speed:0.8,
+      uses:9,
+		},{
+			name:'Temp Auto',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Pyro W',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:125,
 		},
 
     /*{
@@ -20408,5 +20519,86 @@ Hayden - brown crate nook
 "#######################################################################################################################################################################",
 "#######################################################################################################################################################################",
 "#######################################################################################################################################################################",
+],[
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                                                               ",
+"                                                                                                                                              :                                ",
+"                                          ?                          ---              ?                                             ]...[===]...[                              ",
+"                                        ]...[            <..[_______]...[           ]...[                ___]..>                    ]...[   ]...[                              ",
+"                                        ]...[            <..[  |    ]...[           ]...[                |  ]..>              N      ...     | |                               ",
+"                                         | |      N      ... ? |     | |             | |                 | ? ...                     ...     | |                               ",
+"                                         | |         --- ...____     | |       ____  | |    aa           ____...            /.../    ...     | |          ~                    ",
+"                                      aa | |  /.............aa |     | |       |  |  | |   aaa           |   ...     --- /......./ aa...     | |          aaa                  ",
+"                            ]%%%[===]...........................[   ]...[===]./|  |  |/.........[   ]./  |~ a...[===]....................@@@....[===]./  aaaa /.[              ",
+"                            ]...[   ]...........................[   ]...[   ]...................[   ]...........[   ]...........................[   ]...........[              ",
+"                             | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |     | |               ",
+"                             | |     | |~ :~ | |     |?|     | |     | |     | |     | |     | |     | |     | |     | |     | |~ :~ | |     | |     | |     | |               ",
+"                             | |     | _______ |     ___     | |     | |     | |     | |     |1|2 3 4|5|     | |     | |     | _______ |     | |     | |     | |               ",
+"                             | |     | |     | |     | |     | | --- |:|     | |     | |     | | --- | |     | |     |:|     | |     | |     | |     | |     |:|               ",
+"                            ]....@@@../| --- |/.........[===]............@@@....[===]...[   ]...........[===]....@@@....[   ]./| --- |/.[===]....@@@....[===]...[              ",
+"                            ]...........................[   ]...................[   ]...[   ]...........[   ]...........[   ]...........[   ]...........[   ]...[              ",
+"                             | |     | |     | |     | |     | |     | |     | |     ...     | |     | |     | |     | |     | |     | |     ...     | |     | |       ____    ",
+"                             | |     | |     | |     | |     | |     | |     | |     ...     | |~ :~ | |     | |     | |     | |     | |     ... ?   | |     | |       |  |   B",
+"A!                           | |     | |     | |     | |     | |     | |  <#....[===]...     | _______ |     | |     | |     | |     | |  aa ...____ | |     | |       |  |    ",
+"    <<<<<<<<#####>>>>>>      | |     | |     | |     | <<<###>>>>    | | <##....[   ]...     | |     | |     | |     | | --- | |  N  |<.........   | | |     | |      /........",
+"############################>>>>     |<<<######>>   <<#############>>| <####..;      | |  <.../| --- |/..@@@../|     |/......./|     |<.........a~ |/....@@@...................",
+"############################################################################..~      | |  <..................../ --- /.........................................................",
+"############################################################################...................................................................................................",
+"############################################################################]..................................................................................................",
+"###############################################################################################################################################################################",
+"###############################################################################################################################################################################",
+"###############################################################################################################################################################################",
+"###############################################################################################################################################################################",
+"###############################################################################################################################################################################",
+],[
+"################################",
+"#                              #",
+"# 5                          6 #",
+"####                           #",
+"#                              #",
+"# 4                            #",
+"####                           #",
+"#                              #",
+"# 3                            #",
+"####                           #",
+"#                              #",
+"# 2                            #",
+"####                           #",
+"#                              #",
+"# 1                            #",
+"#### ###### ###### ###### ######",
+"#  #      #      #      #      #",
+"#  #  ? ? #  ? ? #  ? ? #  ? ? #",
+"################################",
 ],
 ]

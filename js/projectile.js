@@ -442,9 +442,10 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
+			case 365:
 				this.time=time
 				this.speed=0
-				this.extent=this.type==363?75:2400
+				this.extent=this.type==363?75:this.type==365?300:2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){
@@ -546,6 +547,8 @@ class projectile{
 										c.lastingForce[1]-=lcos(this.direction)*3
 										c.stuckTime=max(c.stuckTime,15)
 										this.remove=true
+									}else if(this.type==365&&!c.fort){
+										c.dizzyTime=25
 									}
 								}
 							}
@@ -5874,6 +5877,7 @@ class projectile{
 				layer.strokeWeight(1)
 				layer.quad(-2,0,0,-2,2,0,0,2)
 			break
+			//365
 			
 			//mark
         }
@@ -6661,7 +6665,7 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,10)
 		}else if(this.type==48||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==270||this.type==310||this.type==330){
 			this.fade=smoothAnim(this.fade,this.active,0,1,90)
-		}else if(this.type==190||this.type==191||this.type==214||this.type==255||this.type==256||this.type==257||this.type==265||this.type==300){
+		}else if(this.type==190||this.type==191||this.type==214||this.type==255||this.type==256||this.type==257||this.type==265||this.type==300||this.type==365){
 			this.fade=0
 		}else if(this.type==280||this.type==316||this.type==326){
 			this.fade=smoothAnim(this.fade,this.active,0,1,60)

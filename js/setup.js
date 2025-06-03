@@ -7,12 +7,12 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=12
+        game.players=5
         game.gaming=1
-        game.level=78
+        game.level=79
         menu.level=game.level
         if(true){
-            //game.mission=findName('Duckocracy',types.mission)
+            game.mission=findName('Duckocracy',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -21,10 +21,10 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerEngineerC3',types.player)]]
+        game.weapon=[[findName('PlayerNightwatchPyro',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
@@ -66,7 +66,7 @@ function mouseClicked(){
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort','Bluefort Mini','Aerial'],
+                    ['Bluefort','Bluefort Mini','Aerial','Identify'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -382,7 +382,7 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
-                                                //bluefort
+                                                //bluefort mini
                                             break
                                             case 2:
                                                 menu.level=73
@@ -390,6 +390,15 @@ function mouseClicked(){
                                                 game.classicWeapon=true
                                                 game.classicRespawn=false
                                                 instant()
+                                                //aerial
+                                            break
+                                            case 3:
+                                                menu.level=79
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                game.classicRespawn=false
+                                                //aerial
                                             break
                                         }
                                     break
@@ -950,7 +959,7 @@ function mouseClicked(){
                             if(game.classicWeapon||game.randomizer||game.selector){
                                 game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                             }else{
-                                game.level=game.classWeapon?(teamMode()?57:48):13
+                                game.level=menu.level==79?80:game.classWeapon?(teamMode()?57:48):13
                             }
                             game.mission=unit
                             entities.players=[]
@@ -1445,7 +1454,7 @@ function instant(){
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=game.classWeapon?(teamMode()?57:48):13
+        game.level=menu.level==79?80:game.classWeapon?(teamMode()?57:48):13
     }
     game.mission=0
     entities.players=[]

@@ -2,6 +2,19 @@
 
 
 
+820 - watch shotgun
+821 - nightwatch engineer
+822 - nightwatch soldier
+823 - nightwatch heavy
+824 - temp sentry, 685
+825 - blast rocket, 773
+826 - temp mini auto, 689
+827 - nightwatch pyro
+
+365 - instant hitscan stun, 265
+
+
+
 
 
 

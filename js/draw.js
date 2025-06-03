@@ -28,7 +28,7 @@ function mainloop(){
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Gray Gravel','Shogatsu','Valuation','Basalt'],
-                    ['Bluefort','Bluefort Mini','Aerial'],
+                    ['Bluefort','Bluefort Mini','Aerial','Identify'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -157,6 +157,9 @@ function mainloop(){
                                         break
                                         case 2:
                                             text(`Rise of the Duck`,pos[0],pos[1]+15)
+                                        break
+                                        case 3:
+                                            text(`The Nightwatch`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break
@@ -607,7 +610,8 @@ function mainloop(){
                 if(
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
-                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78
+                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
+                    game.level==79
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -996,7 +1000,7 @@ function mainloop(){
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
-                        case 68: case 69: case 70: case 76: case 77: case 78:
+                        case 68: case 69: case 70: case 76: case 77: case 78: case 79:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
