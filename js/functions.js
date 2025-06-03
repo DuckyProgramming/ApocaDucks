@@ -612,51 +612,51 @@ function displayMain(layer,effective,keyStore){
                 graphics.overlay[a+1].fill(0,0.0025*(b+1)*(1-min(1,entities.players[a].infoAnim.wet)*0.9))
                 graphics.overlay[a+1].beginShape()
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+20*sin(entities.players[a].direction.main*5/3),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+20*sin(entities.players[a].direction.main*5/3),
                     -100
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,30,graphics.overlay[a+1].width*0.2/sizing),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,30,graphics.overlay[a+1].width*0.2/sizing),
                     -(100-b/lb*75/4)-(10-b/lb*75/4)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,75,graphics.overlay[a+1].width*0.45/sizing),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,75,graphics.overlay[a+1].width*0.45/sizing),
                     -(100-b/lb*75)-(40-b/lb*75)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,90,graphics.overlay[a+1].width*0.5/sizing),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,90,graphics.overlay[a+1].width*0.5/sizing),
                     0
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,75,graphics.overlay[a+1].width*0.45/sizing),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,75,graphics.overlay[a+1].width*0.45/sizing),
                     (100-b/lb*75)+(40-b/lb*75)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,30,graphics.overlay[a+1].width*0.2/sizing),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,30,graphics.overlay[a+1].width*0.2/sizing),
                     (100-b/lb*75/4)+(10-b/lb*75/4)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+20*sin(entities.players[a].direction.main*5/3),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+20*sin(entities.players[a].direction.main*5/3),
                     100
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.2/sizing,-30),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.2/sizing,-30),
                     (100-b/lb*75/4)-(10-b/lb*75/4)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.45/sizing,-75),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.45/sizing,-75),
                     (100-b/lb*75)-(40-b/lb*75)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.5/sizing,-90),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.5/sizing,-90),
                     0
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.45/sizing,-75),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.45/sizing,-75),
                     -(100-b/lb*75)+(40-b/lb*75)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].vertex(
-                    (entities.players[a].previous.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.2/sizing,-30),
+                    (entities.players[a].truePrevious.position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,-graphics.overlay[a+1].width*0.2/sizing,-30),
                     -(100-b/lb*75/4)+(10-b/lb*75/4)*sin(entities.players[a].direction.main*5/3)
                 )
                 graphics.overlay[a+1].endShape()
@@ -5770,7 +5770,7 @@ function generateLevel(info,layer){
                 0.0,color(-32,-34,-21),
                 1.0,color(57,74,92)
             )
-            set=[9,9,27,27]
+            set=[9,9,12,27,27,70]
             for(let a=0,la=set.length;a<la;a++){
                 let index=floor(random(0,game.placer[1].length))
                 if(set[a]==16){
@@ -6566,7 +6566,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.175+0.325:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==findName('Survival Lite',types.mission)||game.mission==findName('Survival',types.mission)?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47||game.level==70?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.125:1)*(game.level==58||game.level==63||game.level==66?1.175:1)*(game.level==59?1.2:1)*(game.level==68?1.35:1)*(game.level==79?1.8:1)
+                game.sendTime=game.attacker||game.level==29&&game.initial||game.level==37?0:types.mission[game.mission].sendTime*2.75/max(1,(game.level==55?game.players*0.175+0.325:game.players*0.5+0.5))*(game.classicRespawn?0.8:1)*(game.pvp?(game.level==23||game.level==54?2.5:game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69?5:game.level==4?6:20):1)*(game.peakWeapon?0.5:1)*(game.classWeapon?0.875:1)/game.diff*(game.level==7?3:1)*(game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*(game.mission==findName('Survival Lite',types.mission)||game.mission==findName('Survival',types.mission)?1/(6+display.cycle*2):1)*(game.level==16&&game.spawnIndex>10?4:1)*(game.level==17?2:1)*((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*(game.level==19||game.level==42&&!game.pvp?0.625:1)*(game.level==22?constrain(0.75+0.025*total,1,1.5):1)*(game.level==25?constrain(0.4+0.02*total,0.8,1):1)*(game.level==27?0.9:1)*(game.level==32?0.875:1)*(game.level==33?1.25:1)*(game.level==34?0.925:1)*(game.level==30&&game.spawnIndex<20?0.4:1)*(game.level==40?0.875:1)*(game.level==47||game.level==70?1.15:1)*(game.level==49?1.3:1)*(game.level==55?1.125:1)*(game.level==58||game.level==63||game.level==66?1.175:1)*(game.level==59?1.2:1)*(game.level==68?1.35:1)*(game.level==79?1.95:1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }

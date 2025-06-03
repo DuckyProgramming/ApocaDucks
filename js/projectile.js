@@ -445,7 +445,7 @@ class projectile{
 			case 365:
 				this.time=time
 				this.speed=0
-				this.extent=this.type==363?75:this.type==365?300:2400
+				this.extent=this.type==363?80:this.type==365?400:2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){

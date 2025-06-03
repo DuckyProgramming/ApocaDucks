@@ -6628,7 +6628,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:824,
     },{
       name:'PlayerBlastRocket',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:1,crit:0,weapon:825,
+      damageBuff:2.5,reloadBuff:1.25,crit:0,weapon:825,
     },
 
     //mark c
@@ -15845,7 +15845,7 @@ types={
 			stop:135,
 			reload:40,
 			speed:0.8,
-      uses:9,
+      uses:10,
 		},{
 			name:'Temp Auto',
 			ammo:8,
@@ -20553,8 +20553,8 @@ Hayden - brown crate nook
 "                                                                                                                                                                               ",
 "                                                                                                                                                                               ",
 "                                                                                                                                              :                                ",
-"                                          ?                          ---              ?                                             ]...[===]...[                              ",
-"                                        ]...[            <..[_______]...[           ]...[                ___]..>                    ]...[   ]...[                              ",
+"                                          ?                          ---              ?                                              <..[===]...[                              ",
+"                                        ]...[            <..[_______]...[           ]...[                ___]..>                     <..[   ]...[                              ",
 "                                        ]...[            <..[  |    ]...[           ]...[                |  ]..>              N      ...     | |                               ",
 "                                         | |      N      ... ? |     | |             | |                 | ? ...                     ...     | |                               ",
 "                                         | |         --- ...____     | |       ____  | |    aa           ____...            /.../    ...     | |          ~                    ",

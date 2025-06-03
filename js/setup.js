@@ -397,8 +397,7 @@ function mouseClicked(){
                                                 if(!game.classWeapon){
                                                     game.classicWeapon=true
                                                 }
-                                                game.classicRespawn=false
-                                                //aerial
+                                                //identify
                                             break
                                         }
                                     break

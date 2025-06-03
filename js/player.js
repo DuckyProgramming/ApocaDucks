@@ -23,6 +23,7 @@ class player{
         this.velocity={x:0,y:0}
         this.offset={position:{x:0,y:12*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)}}
         this.previous={position:{x:this.position.x,y:this.position.y}}
+        this.truePrevious={position:{x:this.position.x,y:this.position.y}}
         this.infoAnim={life:1,ammo:[0,0,0,0],uses:[0,0,0,0],ammoA:[0,0,0,0],usesA:[0,0,0,0],ammoB:[0,0,0,0],usesB:[0,0,0,0]}
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
         this.base={life:this.life,position:{x:this.position.x,y:this.position.y},control:0}
@@ -11549,12 +11550,15 @@ class player{
                             this.target.point=floor(random(0,3))
                         }
                     }else if(game.level==79){
-                        if(this.target.point==-1||floor(random(0,300))==0||this.life<=0||this.id==0&&this.target.point>=0&&entities.players[game.players+[1,2,0][this.target.point]].id==0||dist(this.position.x,this.position.y,entities.players[game.players+[1,2,0][this.target.point]].position.x,entities.players[game.players+[1,2,0][this.target.point]].position.y)<300){
+                        if(this.target.point==-1||floor(random(0,300))==0||this.life<=0||this.id==0&&this.target.point>=0&&entities.players[game.players+[1,2,0][this.target.point]].id==0||this.target.point>=0&&dist(this.position.x,this.position.y,entities.players[game.players+[1,2,0][this.target.point]].position.x,entities.players[game.players+[1,2,0][this.target.point]].position.y)<300){
                             let possible=[]
                             for(let a=0,la=game.point.length;a<la;a++){
                                 if(game.point[a]!=0||this.id>0){
                                     possible.push(a)
                                 }
+                            }
+                            if(possible.length==0){
+                                possible=[0,1,2]
                             }
                             this.target.point=possible[floor(random(0,possible.length))]
                         }
@@ -16587,7 +16591,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
-                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77?60:game.level==55?150:game.level==67||game.level==78?this.assort.threshold:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77?60:game.level==55?150:game.level==67||game.level==78?this.assort.threshold:game.level==79?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.level==19||game.level==34){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
@@ -18678,6 +18682,8 @@ class player{
             this.velocity.y+=this.playerData.name=='PlayerDirigible'?0:this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
+            this.truePrevious.position.x=this.position.x
+            this.truePrevious.position.y=this.position.y
             if(this.fort&&!this.auto){
                 if(this.velocity.y<0){
                     this.velocity.y*=0.8
