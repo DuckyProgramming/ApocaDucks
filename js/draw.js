@@ -11,13 +11,15 @@ function mainloop(){
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Arizona','Fragile','Alloy'],
-                    ['NuclearMountain','Big Data','Rusted','Abandoned'],
-                    ['Identify','Rocksalt','Bluefort','Confines (WIP)'],
+                    ['NuclearMountain','Big Data','Rusted','Tailwater'],
+                    ['Abandoned','Identify','Rocksalt','Bluefort'],
+                    ['Railing','','','Confines (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
-                    ['Cooked','Divider','Bluefort','Confines (WIP)'],
+                    ['Cooked','Divider','Rocksalt','Bluefort'],
+                    ['Railing','','Confines (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -27,8 +29,7 @@ function mainloop(){
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
                     ['Shogatsu','Basalt','Bluefort','Gray Gravel'],
-                    ['Razorpoint','Tailwater','Valuation','Aerial'],
-                    ['Identify','Railing','Cranberry','Blueprint'],
+                    ['Razorpoint','Valuation','Aerial','Cranberry'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -65,6 +66,8 @@ function mainloop(){
                         menu.mode==1&&a==4&&b==1||
                         menu.mode==1&&a==4&&b==2||
                         menu.mode==2&&a==4&&b==1||
+                        menu.mode==2&&a==7&&b==1||
+                        menu.mode==2&&a==8&&b==0||
                         menu.mode==6&&a==4&&b==2
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
@@ -134,6 +137,22 @@ function mainloop(){
                                         break
                                     }
                                 break
+                                case 7:
+                                    switch(b){
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Nightwatch`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 8:
+                                    switch(b){
+                                        case 0:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Nightwatch`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
                             }
                         break
                         case 6:
@@ -158,26 +177,13 @@ function mainloop(){
                                             text(`Quadrants`,pos[0],pos[1]+15)
                                         break
                                         case 1:
-                                            text(`Suppliers`,pos[0],pos[1]+15)
-                                        break
-                                        case 2:
                                             text(`Heist`,pos[0],pos[1]+15)
                                         break
-                                        case 3:
+                                        case 2:
                                             text(`Rise of the Duck`,pos[0],pos[1]+15)
                                         break
-                                    }
-                                break
-                                case 6:
-                                    switch(b){
-                                        case 0: case 1:
-                                            text(`Nightwatch`,pos[0],pos[1]+15)
-                                        break
-                                        case 2:
-                                            text(`Team Arena`,pos[0],pos[1]+15)
-                                        break
                                         case 3:
-                                            text(`Composition`,pos[0],pos[1]+15)
+                                            text(`Team Arena`,pos[0],pos[1]+15)
                                         break
                                     }
                                 break
@@ -629,11 +635,11 @@ function mainloop(){
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
-                    game.level==79||game.level==81||game.level==82
+                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76){
+                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -1018,7 +1024,8 @@ function mainloop(){
                         break
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
-                        case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82:
+                        case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
+                        case 85:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
@@ -1151,7 +1158,14 @@ function mainloop(){
                 display.win-=0.01
             }
             displayMain(graphics.main,effective,key)
-            checkEnd(levels[game.level],graphics.main[0],key)
+            switch(game.level){
+                case 83:
+                    checkEnd(levels[82],graphics.main[0],key)
+                break
+                default:
+                    checkEnd(levels[game.level],graphics.main[0],key)
+                break
+            }
             inputs.tap=[[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]]
             inputs.release=[[false],[false],[false],[false],[false]]
                     
