@@ -8723,7 +8723,8 @@ class projectile{
 					!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
 					!(this.type==98&&this.timer<15)&&
 					!(this.type==100&&this.timer<3)&&
-					!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
+					!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)&&
+					!(this.type==258&&entities.players[b].fort&&this.index==-1)
 				){
 					if(this.drone&&entities.players[b].id>0&&game.pvp&&this.type!=138){
 						this.damage*=0.6
