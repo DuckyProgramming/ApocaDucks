@@ -7,12 +7,12 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=20
         game.gaming=1
-        game.level=85
+        game.level=88
         menu.level=game.level
         if(true){
-            game.mission=findName('Duck Void',types.mission)
+            game.mission=findName('Duck Termination',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -24,7 +24,7 @@ function setup(){
         game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerEngineerC',types.player)]]
+        game.weapon=[[findName('PlayerScout',types.player)]]
         newLoop()
         stage.scene='main'
         //dev.sight=true
@@ -50,14 +50,14 @@ function mouseClicked(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
-                    ['Abandoned','Identify','Rocksalt','Bluefort'],
-                    ['Railing','','','Confines (WIP)'],
+                    ['Abandoned','Identify','Divider','Rocksalt'],
+                    ['Bluefort','Railing','Burnt','Confines (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
-                    ['Railing','','Confines (WIP)','Blueprint'],
+                    ['Railing','Sulfite','Confines (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -518,14 +518,14 @@ function mouseClicked(){
                                                 //identify
                                             break
                                             case 2:
+                                                menu.level=86
+                                                game.classicWeapon=true
+                                                //divider
+                                            break
+                                            case 3:
                                                 menu.level=70
                                                 game.classicWeapon=true
                                                 //rocksalt
-                                            break
-                                            case 3:
-                                                menu.level=68
-                                                game.classicWeapon=true
-                                                //bluefort
                                             break
                                         }
                                     break
@@ -598,6 +598,11 @@ function mouseClicked(){
                                     case 2:
                                         switch(b){
                                             case 0:
+                                                menu.level=68
+                                                game.classicWeapon=true
+                                                //bluefort
+                                            break
+                                            case 1:
                                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=83
                                                     game.classicWeapon=true
@@ -609,14 +614,13 @@ function mouseClicked(){
                                                 }
                                                 //railing
                                             break
-                                            case 1:
-                                                ////
-                                            break
                                             case 2:
-                                                ////
+                                                menu.level=87
+                                                game.classicWeapon=true
+                                                ////burnt
                                             break
                                             case 3:
-                                                ////
+                                                ////confines
                                             break
                                         }
                                     break
@@ -629,10 +633,17 @@ function mouseClicked(){
                                                 //railing
                                             break
                                             case 1:
-                                                ////
+                                                menu.level=88
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //sulfite
                                             break
                                             case 2:
-                                                ////
+                                                ////confines
                                             break
                                             case 3:
                                                 menu.level=28
@@ -644,6 +655,7 @@ function mouseClicked(){
                                         }
                                     break
                                 }
+                                menu.mode=0
                             break
                         }
                         a=la

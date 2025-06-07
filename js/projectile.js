@@ -7601,7 +7601,7 @@ class projectile{
 									this.fail=true
 								}
 							}
-						}else if(this.type==360&&game.pvp&&this.active){
+						}else if(this.type==360&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<80&&entities.projectiles[b].type==361){
 									this.active=false

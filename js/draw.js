@@ -12,14 +12,14 @@ function mainloop(){
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
-                    ['Abandoned','Identify','Rocksalt','Bluefort'],
-                    ['Railing','','','Confines (WIP)'],
+                    ['Abandoned','Identify','Divider','Rocksalt'],
+                    ['Bluefort','Railing','Burnt','Confines (WIP)'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
-                    ['Railing','','Confines (WIP)','Blueprint'],
+                    ['Railing','Sulfite','Confines (WIP)','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -67,7 +67,7 @@ function mainloop(){
                         menu.mode==1&&a==4&&b==2||
                         menu.mode==2&&a==4&&b==1||
                         menu.mode==2&&a==7&&b==1||
-                        menu.mode==2&&a==8&&b==0||
+                        menu.mode==2&&a==8&&b==1||
                         menu.mode==6&&a==4&&b==2
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
@@ -147,7 +147,7 @@ function mainloop(){
                                 break
                                 case 8:
                                     switch(b){
-                                        case 0:
+                                        case 1:
                                             text(`Standard`,pos[0]-37,pos[1]+15)
                                             text(`Nightwatch`,pos[0]+37,pos[1]+15)
                                         break
@@ -639,7 +639,10 @@ function mainloop(){
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84){
+                }else if(
+                    game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
+                    game.level==86||game.level==87||game.level==88
+                ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -872,7 +875,7 @@ function mainloop(){
                         for(let b=0,lb=b2s.length;b<lb;b++){
                             entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
                         }
-                        if(game.level==64||game.level==70){
+                        if(game.level==64||game.level==70||game.level==84||game.level==87){
                             for(let b=0,lb=b2s.length;b<lb;b++){
                                 entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
                             }
@@ -1025,7 +1028,7 @@ function mainloop(){
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
-                        case 85:
+                        case 85: case 86: case 88: case 89: case 90:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
