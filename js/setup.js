@@ -7,24 +7,25 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=5
         game.gaming=1
-        game.level=88
+        game.level=89
         menu.level=game.level
         if(true){
-            game.mission=findName('Duck Termination',types.mission)
+            game.mission=findName('Duck Void',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
         }
         entities.players=[]
         initialGraphics()
-        game.classicWeapon=true
+        game.classicWeapon=false
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerScout',types.player)]]
+        game.weapon=[[findName('PlayerEngineerC',types.player)]]
+        game.weaponTick=[0]
         newLoop()
         stage.scene='main'
         //dev.sight=true
