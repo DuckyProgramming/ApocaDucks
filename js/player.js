@@ -240,7 +240,7 @@ class player{
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
-        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||game.level==86||game.level==89?250:game.level==71?150:180,this.fade)
+        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||game.level==86||game.level==89||game.level==90?250:game.level==71?150:180,this.fade)
         layer.noStroke()
         layer.textSize(10)
         if(!this.sidekick&&!this.fort||this.auto){
@@ -19106,11 +19106,11 @@ class player{
                         }
                     }else if(game.level==89){
                         if(game.pvp){
-                            if(this.die.timer>(game.point[this.id-1]==this.id?360:720)){
+                            if(this.die.timer>(game.point[this.id-1]==this.id?360:900)){
                                 let key=this.id==1?'q':this.id==2?'w':'e'
                                 for(let a=0,la=entities.players.length;a<la;a++){
                                     if(entities.players[a].life<=0&&entities.players[a].id==this.id){
-                                        entities.players[a].die.timer-=(game.point[this.id-1]==this.id?60:240)
+                                        entities.players[a].die.timer-=(game.point[this.id-1]==this.id?60:300)
                                     }
                                 }
                                 for(let a=0,la=levels[game.level].length;a<la;a++){

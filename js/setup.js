@@ -7,9 +7,9 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=89
+        game.level=90
         menu.level=game.level
         if(true){
             game.mission=findName('Duck Void',types.mission)
@@ -19,9 +19,9 @@ function setup(){
         }
         entities.players=[]
         initialGraphics()
-        game.classicWeapon=false
-        game.classicRespawn=true
-        //game.pvp=true
+        game.classicWeapon=true
+        game.classicRespawn=false
+        game.pvp=true
         display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerEngineerC',types.player)]]
@@ -52,18 +52,19 @@ function mouseClicked(){
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
                     ['Abandoned','Identify','Divider','Rocksalt'],
-                    ['Bluefort','Railing','Burnt','Confines (WIP)'],
+                    ['Bluefort','Railing','Burnt','Confines'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
-                    ['Railing','Sulfite','Confines (WIP)','Blueprint'],
+                    ['Railing','Sulfite','Confines','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
                     ['Globus','Cranberry','Mill','Rocketyard'],
+                    ['Confines'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -618,10 +619,11 @@ function mouseClicked(){
                                             case 2:
                                                 menu.level=87
                                                 game.classicWeapon=true
-                                                ////burnt
+                                                //burnt
                                             break
                                             case 3:
-                                                ////confines
+                                                menu.level=89
+                                                //confines
                                             break
                                         }
                                     break
@@ -644,7 +646,14 @@ function mouseClicked(){
                                                 //sulfite
                                             break
                                             case 2:
-                                                ////confines
+                                                menu.level=89
+                                                game.pvp=true
+                                                menu.players*=3
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //confines
                                             break
                                             case 3:
                                                 menu.level=28
@@ -654,6 +663,18 @@ function mouseClicked(){
                                                 //blueprint
                                             break
                                         }
+                                    break
+                                    case 4:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=90
+                                                //confines
+                                            break
+                                        }
+                                        game.pvp=true
+                                        game.classicWeapon=true
+                                        game.classicRespawn=false
+                                        instant()
                                     break
                                 }
                                 menu.mode=0

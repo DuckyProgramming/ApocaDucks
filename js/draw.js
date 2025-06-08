@@ -13,18 +13,19 @@ function mainloop(){
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
                     ['Abandoned','Identify','Divider','Rocksalt'],
-                    ['Bluefort','Railing','Burnt','Confines (WIP)'],
+                    ['Bluefort','Railing','Burnt','Confines'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
-                    ['Railing','Sulfite','Confines (WIP)','Blueprint'],
+                    ['Railing','Sulfite','Confines','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
                     ['Globus','Cranberry','Mill','Rocketyard'],
+                    ['Confines'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -641,7 +642,7 @@ function mainloop(){
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(
                     game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
-                    game.level==86||game.level==87||game.level==88||game.level==89
+                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
@@ -875,7 +876,7 @@ function mainloop(){
                         for(let b=0,lb=b2s.length;b<lb;b++){
                             entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
                         }
-                        if(game.level==64||game.level==70||game.level==84||game.level==87||game.level==89){
+                        if(game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90){
                             for(let b=0,lb=b2s.length;b<lb;b++){
                                 entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
                             }
