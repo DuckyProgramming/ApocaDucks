@@ -9,7 +9,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=90
+        game.level=91
         menu.level=game.level
         if(true){
             game.mission=findName('Duck Void',types.mission)
@@ -64,7 +64,7 @@ function mouseClicked(){
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
                     ['Globus','Cranberry','Mill','Rocketyard'],
-                    ['Confines'],
+                    ['Sulfite','Confines'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -667,6 +667,10 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
+                                                menu.level=91
+                                                //sulfite
+                                            break
+                                            case 1:
                                                 menu.level=90
                                                 //confines
                                             break

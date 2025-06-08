@@ -16644,8 +16644,8 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
                             (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.med()&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                            abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
-                            abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
+                            abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:150)*(this.playerData.name.includes('SniperC')?2:1)&&
+                            abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?180:90)*(this.playerData.name.includes('SniperC')?2:1)&&
                             entities.players[a].life>0&&
                             this.weaponType>=0&&entities.players[a].unProtected()
                         ){
@@ -16745,7 +16745,7 @@ class player{
                                                 this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                             break
                                             case 3:
-                                                this.target.position.x=game.edge[0]*0.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                                this.target.position.x=game.edge[0]*0.5+random(-60,60)
                                                 this.target.position.y=game.edge[1]
                                             break
                                         }
@@ -20427,7 +20427,9 @@ class player{
             this.base.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
             this.base.control=0
         }
-        if(!this.disable2){
+        if((game.level==13||game.level==14||game.level==48||game.level==57||game.level==80)&&this.id>game.gaming){
+            this.position.x=game.edge[0]+500
+        }else if(!this.disable2){
             this.velocity.x*=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
             this.velocity.y+=this.playerData.name=='PlayerDirigible'?0:this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
             this.previous.position.x=this.position.x

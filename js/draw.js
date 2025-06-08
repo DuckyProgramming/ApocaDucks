@@ -25,7 +25,7 @@ function mainloop(){
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Identify','Hard Hat','Granary','Rocksalt'],
                     ['Globus','Cranberry','Mill','Rocketyard'],
-                    ['Confines'],
+                    ['Sulfite','Confines'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -642,7 +642,7 @@ function mainloop(){
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(
                     game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
-                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90
+                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
