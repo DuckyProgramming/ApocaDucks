@@ -64,7 +64,7 @@ function mouseClicked(){
                     ['Aerial','Alloy','Speleo','Chasm'],
                     ['Tailwater','Identify','Hard Hat','Granary'],
                     ['Rocksalt','Globus','Cranberry','Mill'],
-                    ['Rocketyard','Sulfite','Confines','54tress'],
+                    ['Rocketyard','Sulfite','Confines','Zone 54'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -680,7 +680,7 @@ function mouseClicked(){
                                             break
                                             case 3:
                                                 menu.level=93
-                                                //54tress
+                                                //zone 54
                                             break
                                         }
                                         game.pvp=true
