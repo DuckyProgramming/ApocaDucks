@@ -23,9 +23,9 @@ function mainloop(){
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
-                    ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus','Cranberry','Mill','Rocketyard'],
-                    ['Sulfite','Confines'],
+                    ['Tailwater','Identify','Hard Hat','Granary'],
+                    ['Rocksalt','Globus','Cranberry','Mill'],
+                    ['Rocketyard','Sulfite','Confines','54tress'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -636,7 +636,7 @@ function mainloop(){
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
-                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85
+                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)

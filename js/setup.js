@@ -9,7 +9,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=91
+        game.level=93
         menu.level=game.level
         if(true){
             game.mission=findName('Duck Void',types.mission)
@@ -62,9 +62,9 @@ function mouseClicked(){
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
-                    ['Identify','Hard Hat','Granary','Rocksalt'],
-                    ['Globus','Cranberry','Mill','Rocketyard'],
-                    ['Sulfite','Confines'],
+                    ['Tailwater','Identify','Hard Hat','Granary'],
+                    ['Rocksalt','Globus','Cranberry','Mill'],
+                    ['Rocketyard','Sulfite','Confines','54tress'],
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
@@ -474,20 +474,20 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
+                                                menu.level=92
+                                                //tailwater
+                                            break
+                                            case 1:
                                                 menu.level=60
                                                 //identify
                                             break
-                                            case 1:
+                                            case 2:
                                                 menu.level=61
                                                 //hard hat
                                             break
-                                            case 2:
+                                            case 3:
                                                 menu.level=62
                                                 //granary
-                                            break
-                                            case 3:
-                                                menu.level=64
-                                                //rocksalt
                                             break
                                         }
                                         game.pvp=true
@@ -570,20 +570,20 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
+                                                menu.level=64
+                                                //rocksalt
+                                            break
+                                            case 1:
                                                 menu.level=71
                                                 //globus
                                             break
-                                            case 1:
+                                            case 2:
                                                 menu.level=72
                                                 //cranberry
                                             break
-                                            case 2:
+                                            case 3:
                                                 menu.level=74
                                                 //mill
-                                            break
-                                            case 3:
-                                                menu.level=75
-                                                //rocketyard
                                             break
                                         }
                                         game.pvp=true
@@ -667,12 +667,20 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
+                                                menu.level=75
+                                                //rocketyard
+                                            break
+                                            case 1:
                                                 menu.level=91
                                                 //sulfite
                                             break
-                                            case 1:
+                                            case 2:
                                                 menu.level=90
                                                 //confines
+                                            break
+                                            case 3:
+                                                menu.level=93
+                                                //54tress
                                             break
                                         }
                                         game.pvp=true

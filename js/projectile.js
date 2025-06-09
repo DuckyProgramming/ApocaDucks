@@ -6572,8 +6572,8 @@ class projectile{
 			case 353:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<225&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode())||this.index==entities.players[b].index)){
-						entities.players[b].takeDamage(this.damage*(1-c/225)*(this.id==entities.players[b].id&&this.id>0?0.4:1))
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode())||this.index==entities.players[b].index)){
+						entities.players[b].takeDamage(this.damage*(1-c/240)*(this.id==entities.players[b].id&&this.id>0?0.4:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){

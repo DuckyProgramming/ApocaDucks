@@ -16843,10 +16843,14 @@ class player{
                             }
                         }else{
                             let possible=[]
-                            for(let a=0,la=game.point.length;a<la;a++){
-                                if(game.point[a]!=this.id&&game.pvp||game.point[a]!=0&&this.id==0||game.point[a]==0&&this.id>0){
-                                    for(let b=0,lb=(a<3?2:1);b<lb;b++){
-                                        possible.push(a)
+                            for(let c=0,lc=3;c<lc;c++){
+                                if(possible.length==0){
+                                    for(let a=0,la=game.point.length;a<la;a++){
+                                        if((game.point[a]!=this.id&&game.pvp||game.point[a]!=0&&this.id==0||game.point[a]==0&&this.id>0)&&dist(entities.players[game.players+[3,0,5,1,2,4][a]].position.x,entities.players[game.players+[3,0,5,1,2,4][a]].position.y*2-this.position.y,this.position.x,this.position.y)<[1200,6000,12000][c]){
+                                            for(let b=0,lb=(a<3?2:1);b<lb;b++){
+                                                possible.push(a)
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -17053,7 +17057,7 @@ class player{
                                             break
                                         }
                                     break
-                                    case 12: case 14:
+                                    case 12: case 14: case 26:
                                         switch(goalPoint){
                                             case 0: case 1: case 3:
                                                 this.target.position.x=game.tileset[0]*186.5
@@ -17125,7 +17129,7 @@ class player{
                                         this.target.position.x=game.tileset[0]*159.5
                                         this.target.position.y=game.edge[1]
                                     break
-                                    case 19: case 20: case 25:
+                                    case 19: case 20: case 25: case 27:
                                         switch(goalPoint){
                                             case 0: case 1: case 3:
                                                 this.target.position.x=game.tileset[0]*147.5
@@ -17137,7 +17141,7 @@ class player{
                                             break
                                         }
                                     break
-                                    case 21: case 22:
+                                    case 21: case 22: case 28:
                                         this.target.position.x=game.tileset[0]*172.5
                                         this.target.position.y=game.edge[1]
                                     break
