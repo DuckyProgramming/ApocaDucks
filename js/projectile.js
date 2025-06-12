@@ -6603,7 +6603,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
-						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].construct?5:1))
+						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].construct?5:1)*(entities.players[b].fort?2.5:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){
@@ -7620,9 +7620,9 @@ class projectile{
 					}
 					if((
 						this.type==156&&this.timer==240||
-						this.type==205&&this.timer==180||
+						this.type==205&&this.timer==120||
 						this.type==206&&this.timer==20||
-						this.type==250&&this.timer==100
+						this.type==250&&this.timer==80
 					)&&this.active){
 						this.active=false
 						this.explode()
@@ -8889,7 +8889,7 @@ class projectile{
 					}else if(fast||this.type==342){
 						entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
 					}else if(this.type==355){
-						entities.players[b].takeDamage(this.damage,1)
+						entities.players[b].takeDamage(this.damage*(entities.players[b].playerData.name.includes('Tank')?2:1),1)
 					}else{
 						entities.players[b].takeDamage(this.damage)
 					}
@@ -9146,7 +9146,7 @@ class projectile{
 							entities.players[b].DOT.active=max(720,entities.players[b].DOT.active+240)
 						}else if(this.type==355){
 							entities.players[b].DOT.damage+=this.damage/600
-							entities.players[b].DOT.active=max(300,entities.players[b].DOT.active+60)
+							entities.players[b].DOT.active=max(450,entities.players[b].DOT.active+150)
 						}
 					}
 					if(game.invis){

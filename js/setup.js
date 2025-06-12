@@ -7,9 +7,9 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=93
+        game.level=94
         menu.level=game.level
         if(true){
             game.mission=findName('Duck Void',types.mission)
@@ -20,11 +20,11 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=false
-        game.pvp=true
-        display.cycle=0
+        game.classicRespawn=true
+        //game.pvp=true
+        //display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerEngineerC',types.player)]]
+        game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
@@ -622,7 +622,11 @@ function mouseClicked(){
                                                 //burnt
                                             break
                                             case 3:
-                                                menu.level=89
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=89
+                                                }else{
+                                                    menu.level=94
+                                                }
                                                 //confines
                                             break
                                         }
@@ -646,7 +650,11 @@ function mouseClicked(){
                                                 //sulfite
                                             break
                                             case 2:
-                                                menu.level=89
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=89
+                                                }else{
+                                                    menu.level=94
+                                                }
                                                 game.pvp=true
                                                 menu.players*=3
                                                 if(!game.classWeapon){
