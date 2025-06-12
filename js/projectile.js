@@ -6543,7 +6543,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
-						entities.players[b].gasTime=max(entities.players[b].gasTime,15)
+						entities.players[b].gasTime=max(entities.players[b].gasTime,10)
 						entities.players[b].gasser=this.index
 						entities.players[b].takeDamage(this.damage*(1-c/120))
 						entities.players[b].die.killer=this.index

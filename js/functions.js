@@ -1947,7 +1947,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*186.5,game.tileset[1]*38.5,game.tileset[0]*5,game.tileset[1]],
                 [game.tileset[0]*179.5,game.tileset[1]*38,game.tileset[0],game.tileset[1]*2],
                 [game.tileset[0]*179.5,game.tileset[1]*36,game.tileset[0],game.tileset[1]*2],
-
+                [game.tileset[0]*165.5,game.tileset[1]*28,game.tileset[0]*3,game.tileset[1]*4],
 
             ]
         break

@@ -16843,14 +16843,10 @@ class player{
                             }
                         }else{
                             let possible=[]
-                            for(let c=0,lc=3;c<lc;c++){
-                                if(possible.length==0){
-                                    for(let a=0,la=game.point.length;a<la;a++){
-                                        if((game.point[a]!=this.id&&game.pvp||game.point[a]!=0&&this.id==0||game.point[a]==0&&this.id>0)&&dist(entities.players[game.players+[3,0,5,1,2,4][a]].position.x,entities.players[game.players+[3,0,5,1,2,4][a]].position.y*2-this.position.y,this.position.x,this.position.y)<[1200,6000,12000][c]){
-                                            for(let b=0,lb=(a<3?2:1);b<lb;b++){
-                                                possible.push(a)
-                                            }
-                                        }
+                            for(let a=0,la=game.point.length;a<la;a++){
+                                if(game.point[a]!=this.id&&game.pvp||game.point[a]!=0&&this.id==0||game.point[a]==0&&this.id>0){
+                                    for(let b=0,lb=(a<3?2:1)*(game.point[[3,1,4,2,5,0][a]]==this.id||game.point[[5,0,3,1,4,2][a]]==this.id?3:1);b<lb;b++){
+                                        possible.push(a)
                                     }
                                 }
                             }
@@ -17125,7 +17121,7 @@ class player{
                                             break
                                         }
                                     break
-                                    case 18:
+                                    case 18: case 29:
                                         this.target.position.x=game.tileset[0]*159.5
                                         this.target.position.y=game.edge[1]
                                     break
