@@ -7,7 +7,10 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77
+        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
+            this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
+            this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
+            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -84,7 +87,7 @@ class wall{
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
             case 65: case 66: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 76:
-            case 77: case 84:
+            case 77: case 79:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -1038,6 +1041,18 @@ class wall{
                     [],
                     [],
                     [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
+                ]
+            break
+            case 74:
+                this.boundary=[
+                    [],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y-this.height/2}]],
+                    [[{x:this.position.x+this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
+                    [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]],
+                    [],
+                    [],
                     [],
                     [],
                 ]
@@ -7162,7 +7177,7 @@ class wall{
                     case 89: case 90: case 94:
                         layer.fill(80,76,89)
                         if(
-                            (game.level==89||game.level==94)&&(abs(this.position.x-game.tileset[0]*77)<1||abs(this.position.x-game.tileset[0]*179)<1)||
+                            (game.level==89||game.level==94)&&(abs(this.position.x-game.tileset[0]*87)<1||abs(this.position.x-game.tileset[0]*189)<1)||
                             game.level==90&&abs(this.position.x-game.tileset[0]*92)<1
                         ){
                             layer.quad(
@@ -7316,7 +7331,7 @@ class wall{
                     }
                 }
             break
-            case 70:
+            case 70: case 79:
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
                         layer.fill(200+lcos(a*90+this.time)*40,140+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
@@ -9486,7 +9501,7 @@ class wall{
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
             case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 77:
-            case 78:
+            case 78: case 79:
                 if(this.rainbow&&this.time%15==0){
                     switch(this.type){
                         case 61: this.type=70; break
@@ -9898,9 +9913,9 @@ class wall{
                     this.timers[this.owner-1]++
                 }else if(game.level==94&&game.pvp&&this.pos==0){
                     let set=[0,1,2,6]
-                    for(let a=0,la=set.length;a<la;a++){
-                        if(game.point[set[a]]>0){
-                            this.timers[game.point[set[a]]-1]++
+                    for(let a=0,la=game.point.length;a<la;a++){
+                        if(game.point[a]>0){
+                            this.timers[game.point[a]-1]+=(set.includes(a)?1:0.5)
                         }
                     }
                 }else if(dm()||game.level==81){
@@ -10674,7 +10689,7 @@ class wall{
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                         this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                        this.type!=76&&this.type!=77&&
+                        this.type!=76&&this.type!=77&&this.type!=79&&
                         !((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -10708,7 +10723,8 @@ class wall{
                             c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
-                            c.type==356||c.type==359||c.type==360
+                            c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
+                            c.type==372||c.type==373
                         )
                     ){
                         if(!c.stop){
@@ -10966,7 +10982,7 @@ class wall{
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
                                     c.type==286||c.type==304||c.type==314||c.type==323||c.type==329||
-                                    c.type==349||c.type==360
+                                    c.type==349||c.type==360||c.type==368||c.type==372
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
@@ -11022,6 +11038,13 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
+                                }else if(c.type==366&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.explode()
+                                    if(c.bounces>=2){
+                                        c.active=false
+                                    }
                                 }
                             }
                         }
@@ -11029,7 +11052,7 @@ class wall{
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                         this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
-                        this.type!=77
+                        this.type!=77&&this.type!=79
                         &&!((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)
                         &&!(this.type==65&&this.recharge>0)
                     ){
@@ -11057,7 +11080,7 @@ class wall{
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
                                     c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
                                     c.type==307||c.type==308||c.type==313||c.type==336||c.type==351||
-                                    c.type==362
+                                    c.type==362||c.type==370
                                 ){
                                     c.explode()
                                 }
@@ -11075,7 +11098,7 @@ class wall{
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=67&&!dm()||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerMobster'||c.control==1))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerMobster'||c.playerData.name=='PlayerTiny'))
                         &&!(this.type==65&&this.recharge>0)
-                        &&!((this.type==68||this.type==73)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==68||this.type==73||this.type==79)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
@@ -11576,6 +11599,10 @@ class wall{
                                 if(game.level==55){
                                     this.remove=true
                                 }
+                            break
+                            case 79:
+                                c.defendBuff=max(c.defendBuff,game.level==55?1200:480)
+                                this.remove=true
                             break
                             default:
                                 let d=collideBoxBox(this,c)

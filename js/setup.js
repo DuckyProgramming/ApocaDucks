@@ -7,7 +7,7 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=5
+        game.players=9
         game.gaming=1
         game.level=94
         menu.level=game.level
@@ -21,10 +21,10 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         //display.cycle=0
         //newWave()
-        game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
+        game.weapon=[[/*floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))*/findName('PlayerDroner9',types.player)]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
@@ -32,7 +32,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        //entities.players[0].newWeaponSet(findName('PlayerScout6',types.player))
+        //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
     }
 }
 function windowResized(){

@@ -1,6 +1,64 @@
 
 
 
+828 - scout8: stargrazer - throws a baseball with low gravity, applies vulnerable, but destroyed on hit with a wall
+829 - soldier8: musket soldier - fires a very fast projectile
+830 - pyro8: flicker pyro - uses the current flicker weapon but balanced
+831 - demoman8: sticky jumper - stickies can launch yourself, but do less damage
+832 - heavyweapons8: ice cream - heals you to full and overheals instantly, but freezes you for a few seconds
+833 - engineerC8: blowtorch - very close range flamethrower that can heal buildings
+834 - medicC8: machine medic - has an lmg with less damage that can heal, slower than regular medic
+835 - sniperC8: recoil sniper - +50% increased damage, worse fire rate, knocks yourself back
+836 - spyC8: derringer - revolver with fires 2 shots with slight defined spread
+837 - droner8: software - can create a temporary software drone with primary weapon
+
+838 - scout9: popper scout - whenever you fire scattergun, you boost forward
+839 - soldier9: pocket rocket - can fire a single light rocket, that arcs, with your secondary
+840 - pyro9: steamblast pyro - gust replaced by a defroster that vulnerablizes targets
+841 - demoman9: sweeper demoman - fires more powerful stickies, but they don't explode at once and instead explode one at a time
+842 - heavyweapons9: defense reserve - can put down defense packs
+843 - engineerC9: more gun engineer - can build two sentries
+844 - medicC9: chroma - fires fast-moving helix bullets
+845 - sniperC9: trench sniper - has sniper and trench smg, but no large fov
+846 - spyC9: viewer spy - revolver scopes in and is more accurate and longer range, but -20% damage
+847 - droner9: crowd droner - has the crowd spawner, but the drones only fire when you fire assault rifle
+
+
+848 - stargrazer, 793
+849 - musket, 94
+850 - flicker C, 615
+851 - sticky jumper, 687
+852 - ice cream
+853 - blowtorch, 8
+854 - machine medic, 616
+855 - recoil sniper, 6
+856 - derringer, 136
+857 - software c, 410
+
+858 - popper scattergun, 710
+859 - pocket rocket, 3
+860 - steamblast, 795
+861 - sweeper, 687
+862 - defense pack, 703
+863 - more gun sentry, 685
+864 - chroma, 258
+865 - trench smg, 391
+866 - viewer revolver, 136
+867 - crowd c, 488
+
+366 - stargrazer, 28
+367 - musket ball (pellet straight baller), 34, 68
+368 - sticky jumper, 349
+369 - blowtorch, 6
+370 - pocket rocket, 86
+371 - steamblast, 222
+372 - sweeper, 349
+373 - crowd c, 261
+
+
+
+
+
 
 820 - watch shotgun
 821 - nightwatch engineer
@@ -215,7 +273,7 @@
 709 - marker
 710 - scaattergun
 
-340 - repair gun
+340 - marker
 341 - scattergun
 342 - lmg, 217
 
