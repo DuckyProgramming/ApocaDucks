@@ -18627,7 +18627,7 @@ class player{
                             if(!entities.projectiles[a].trap){
                                 entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                             }
-                            if(entities.projectiles[a].type==349||entities.projectiles[a].type==360||entities.projectiles[a].type==368){
+                            if(entities.projectiles[a].type==349||entities.projectiles[a].type==360||entities.projectiles[a].type==368||entities.projectiles[a].type==372){
                                 entities.projectiles[a].active=false
                                 entities.projectiles[a].fail=true
                             }
