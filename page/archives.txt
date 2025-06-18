@@ -1,5 +1,10 @@
 
 
+868 - random class
+
+
+
+
 
 828 - scout8: stargrazer - throws a baseball with low gravity, applies vulnerable, but destroyed on hit with a wall
 829 - soldier8: musket soldier - fires a very fast projectile

@@ -6775,15 +6775,14 @@ class projectile{
 					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180){
 						if((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode())){
 							entities.players[b].takeDamage(this.damage*(1-c/180)*min(1,0.2+this.time/150))
+							entities.players[b].collect.time=450
 						}else{
-							entities.players[b].takeDamage(this.damage*(1-c/180)*min(1,0.2+this.time/150)*0.1)
 							entities.players[b].velocity.x+=12*(1.25-c/180)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
 							entities.players[b].velocity.y-=4*(1.25-c/180)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 							entities.players[b].lastingForce[0]+=18*(1.25-c/180)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
 							entities.players[b].lastingForce[1]-=6*(1.25-c/180)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}
 						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
 						if(game.invis){
 							entities.players[b].visible=15
 						}

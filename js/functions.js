@@ -3621,7 +3621,7 @@ function generateLevel(info,layer){
                         break
                         case 91:
                             entities.walls[1].push(new wall(graphics.main,game.edge[0]*0.3,(a+0.4)*game.tileset[1],game.edge[0]*0.4,game.edge[1]-(a+1.3)*game.tileset[1],3))
-                        
+                        break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],23))
                         break
@@ -4019,7 +4019,7 @@ function generateLevel(info,layer){
                             }else{
                                 entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1],38))
                             }
-                        breakx
+                        break
                     }
                 break
                 case 'z':
@@ -4407,15 +4407,23 @@ function generateLevel(info,layer){
         break
         case 57:
             ticker=0
+            let ticker2=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=ticker==0?findName('PlayerClassWars',types.player):listing[3][[
-                        0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,
-                        10,20,11,21,12,22,13,23,14,24,15,25,16,26,17,27,18,28,19,29,
-                        30,40,31,41,32,42,33,43,34,44,35,45,36,46,37,47,38,48,39,49,
-                        50,60,51,61,52,62,53,63,54,64,55,65,56,66,57,67,58,68,59,69,
-                        70,80,71,81,72,82,73,83,74,84,75,85,76,86,77,87,78,88,79,89,
-                    ][ticker-1]]
+                    if(ticker==0){
+                        entities.walls[1][a].weapon=findName('PlayerClassWars',types.player)
+                    }else if(ticker%21==0){
+                        entities.walls[1][a].weapon=findName('PlayerRandomClass',types.player)
+                    }else{
+                        entities.walls[1][a].weapon=listing[3][[
+                            0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,
+                            10,20,11,21,12,22,13,23,14,24,15,25,16,26,17,27,18,28,19,29,
+                            30,40,31,41,32,42,33,43,34,44,35,45,36,46,37,47,38,48,39,49,
+                            50,60,51,61,52,62,53,63,54,64,55,65,56,66,57,67,58,68,59,69,
+                            70,80,71,81,72,82,73,83,74,84,75,85,76,86,77,87,78,88,79,89,
+                        ][ticker2]]
+                        ticker2++
+                    }
                     ticker++
                 }
             }
@@ -6079,6 +6087,9 @@ function generateLevel(info,layer){
                             entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
                             options[team].splice(index,1)
                         }else if(a<game.gaming){
+                            if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
+                                game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
+                            }
                             entities.players[a].newWeaponSet(game.weapon[a][0])
                             if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
                                 typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScout',types.player))%10),1)
@@ -6862,6 +6873,9 @@ function generateLevel(info,layer){
                             entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
                             options[team].splice(index,1)
                         }else if(a<game.gaming){
+                            if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
+                                game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
+                            }
                             entities.players[a].newWeaponSet(game.weapon[a][0])
                             if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
                                 typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScout',types.player))%10),1)
