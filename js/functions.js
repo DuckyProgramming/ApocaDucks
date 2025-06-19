@@ -4265,6 +4265,7 @@ function generateLevel(info,layer){
         }
     }
     let ticker=0
+    let ticker2=0
     let temp=[]
     let mixed=[]
     let set=[]
@@ -4361,15 +4362,17 @@ function generateLevel(info,layer){
         break
         case 48:
             ticker=0
+            ticker2=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=listing[3][[
-                        0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,
-                        10,20,11,21,12,22,13,23,14,24,15,25,16,26,17,27,18,28,19,29,
-                        30,40,31,41,32,42,33,43,34,44,35,45,36,46,37,47,38,48,39,49,
-                        50,60,51,61,52,62,53,63,54,64,55,65,56,66,57,67,58,68,59,69,
-                        70,80,71,81,72,82,73,83,74,84,75,85,76,86,77,87,78,88,79,89,
-                    ][ticker]]
+                    if(ticker%21==0){
+                        entities.walls[1][a].weapon=findName('PlayerRandomClass',types.player)
+                    }else if(ticker<21){
+                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-1)/2)
+                    }else{
+                        entities.walls[1][a].weapon=listing[3][floor(ticker2/2)+floor(ticker2/20)*10+ticker2%2*10]
+                        ticker2++
+                    }
                     ticker++
                 }
             }
@@ -4407,21 +4410,17 @@ function generateLevel(info,layer){
         break
         case 57:
             ticker=0
-            let ticker2=0
+            ticker2=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
                     if(ticker==0){
                         entities.walls[1][a].weapon=findName('PlayerClassWars',types.player)
                     }else if(ticker%21==0){
                         entities.walls[1][a].weapon=findName('PlayerRandomClass',types.player)
+                    }else if(ticker<21){
+                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-1)/2)
                     }else{
-                        entities.walls[1][a].weapon=listing[3][[
-                            0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,
-                            10,20,11,21,12,22,13,23,14,24,15,25,16,26,17,27,18,28,19,29,
-                            30,40,31,41,32,42,33,43,34,44,35,45,36,46,37,47,38,48,39,49,
-                            50,60,51,61,52,62,53,63,54,64,55,65,56,66,57,67,58,68,59,69,
-                            70,80,71,81,72,82,73,83,74,84,75,85,76,86,77,87,78,88,79,89,
-                        ][ticker2]]
+                        entities.walls[1][a].weapon=listing[3][floor(ticker2/2)+floor(ticker2/20)*10+ticker2%2*10]
                         ticker2++
                     }
                     ticker++
@@ -6071,8 +6070,14 @@ function generateLevel(info,layer){
                     }
                 }
                 let num=10
-                let classPick=[floor(random(0,10)),floor(random(0,10))]
-                let options=[[0,...range(0,num-1)],[0,...range(0,num-1)]]
+                let options=range(0,10)
+                let classPick=[]
+                for(let a=0,la=2;a<la;a++){
+                    let index=floor(random(0,options.length))
+                    classPick.push(options[index])
+                    options.splice(index,1)
+                }
+                options=[range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
                     let team=split.includes(a)?1:0
                     entities.players[a].id=team+1
@@ -6089,6 +6094,8 @@ function generateLevel(info,layer){
                         }else if(a<game.gaming){
                             if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
                                 game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
+                            }else if(game.weapon[a][0]>=findName('PlayerRandomScout',types.player)&&game.weapon[a][0]<findName('PlayerRandomScout',types.player)+10){
+                                game.weapon[a][0]=listing[3][game.weapon[a][0]-findName('PlayerRandomScout',types.player)+floor(random(0,num))*10]
                             }
                             entities.players[a].newWeaponSet(game.weapon[a][0])
                             if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
@@ -6096,7 +6103,7 @@ function generateLevel(info,layer){
                             }
                         }else{
                             let index=floor(random(0,typeList[team].length))
-                            entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+[0,...range(0,num-1)][floor(random(0,num))]*10)
+                            entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             typeList[team].splice(index,1)
                         }
                     }
@@ -6853,12 +6860,14 @@ function generateLevel(info,layer){
                     }
                 }
                 let num=10
-                let classPick=[floor(random(0,10)),floor(random(0,10)),floor(random(0,10))]
-                let options=[
-                    [0,...range(0,num-1)],
-                    [0,...range(0,num-1)],
-                    [0,...range(0,num-1)]
-                ]
+                let options=range(0,10)
+                let classPick=[]
+                for(let a=0,la=3;a<la;a++){
+                    let index=floor(random(0,options.length))
+                    classPick.push(options[index])
+                    options.splice(index,1)
+                }
+                options=[range(0,num),range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
                     let team=split[1].includes(a)?2:split[0].includes(a)?1:0
                     entities.players[a].id=team+1
@@ -6875,6 +6884,8 @@ function generateLevel(info,layer){
                         }else if(a<game.gaming){
                             if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
                                 game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
+                            }else if(game.weapon[a][0]>=findName('PlayerRandomScout',types.player)&&game.weapon[a][0]<findName('PlayerRandomScout',types.player)+10){
+                                game.weapon[a][0]=listing[3][game.weapon[a][0]-findName('PlayerRandomScout',types.player)+floor(random(0,num))*10]
                             }
                             entities.players[a].newWeaponSet(game.weapon[a][0])
                             if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
@@ -6882,7 +6893,7 @@ function generateLevel(info,layer){
                             }
                         }else{
                             let index=floor(random(0,typeList[team].length))
-                            entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+[0,...range(0,num-1)][floor(random(0,num))]*10)
+                            entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             typeList[team].splice(index,1)
                         }
                     }
@@ -8016,11 +8027,7 @@ function setupLists(){
     listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
     listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
     listing[2]=safeRange(0,10)
-    listing[3]=[
-        ...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player)),
-        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player)),
-        ...safeRange(findName('PlayerScout',types.player),findName('PlayerScout2',types.player))
-    ]
+    listing[3]=[...safeRange(findName('PlayerScout',types.player),findName('PlayerGun',types.player))]
     //listing[1]=listing[1].filter(item=>types.player[item].weapon>=536)
     if(game.nuke){
         listing[1]=[findName('PlayerGuidedMissile',types.player)]

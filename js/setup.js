@@ -24,7 +24,7 @@ function setup(){
         game.pvp=true
         //display.cycle=0
         //newWave()
-        game.weapon=[[/*floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))*/findName('PlayerDroner9',types.player)]]
+        game.weapon=[[/*floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))*/findName('PlayerDroner10',types.player)]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'

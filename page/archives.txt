@@ -1,5 +1,38 @@
 
 
+869 - scout10: rust scout - hold down attack to load 3 scattergun shells, when released fires them all quickly
+870 - soldier10: garbage soldier - fires inaccurate rocket and a small ball
+871 - pyro10: reflect pyro - defroster but it can reflect projectiles to your side
+872 - demoman10: caller demoman - stickybomb launcher fires a single long-range sticky but buffs nearby teammates with speed
+873 - heavyweapons10: battery heavy - fires bullets with more accuracy, but you can't move at all when firing
+874 - engineerC10: destructor engineer - sentry explodes on contact
+875 - medicC10: rejuvenator medic - fires heal rockets
+876 - sniperC10: carpenter sniper - can fire a secondary carpenter push bullet that deals low damage
+877 - spyC10: cluster bomb spy - fires a cluster bomb but takes a while to reload
+878 - dronerC10: interceptor droner - has interceptor as a primary weapon
+
+879 - rust gun, 710
+880 - garbage launcher c, 144
+881 - reflector, 795
+882 - caller launcher, 687
+883 - battery lmg, 616
+884 - destructor sentry, 685
+885 - cluster bomb, 375
+886 - destructor auto, 689
+887 - rejuvenator
+888 - light carpenter, 639
+
+889 - 898: random scout - random droner
+
+374 - reflect gust, 222
+375 - cluster bomb, 205
+376 - bomblet
+377 - small loose explosion, 153
+378 - rejuvenator
+
+
+
+
 868 - random class
 
 

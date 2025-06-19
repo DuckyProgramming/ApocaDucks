@@ -10724,7 +10724,7 @@ class wall{
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
                             c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
-                            c.type==372||c.type==373
+                            c.type==372||c.type==373||c.type==375||c.type==376
                         )
                     ){
                         if(!c.stop){
@@ -10982,7 +10982,7 @@ class wall{
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
                                     c.type==286||c.type==304||c.type==314||c.type==323||c.type==329||
-                                    c.type==349||c.type==360||c.type==368||c.type==372
+                                    c.type==349||c.type==360||c.type==368||c.type==372||c.type==375
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
@@ -11021,6 +11021,13 @@ class wall{
                                     c.velocity.x*=0.6
                                     c.velocity.y*=0.6
                                     if(c.bounces>=7){
+                                        c.explode()
+                                        c.active=false
+                                    }
+                                }else if(c.type==376&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    if(c.bounces>=c.threshold){
                                         c.explode()
                                         c.active=false
                                     }
@@ -11080,7 +11087,7 @@ class wall{
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
                                     c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
                                     c.type==307||c.type==308||c.type==313||c.type==336||c.type==351||
-                                    c.type==362||c.type==370
+                                    c.type==362||c.type==370||c.type==378
                                 ){
                                     c.explode()
                                 }
@@ -11302,6 +11309,12 @@ class wall{
                                     }else{
                                         newLoop()
                                     }
+                                }else if(types.player[this.weapon].name=='PlayerRandomClass'&&!game.pvp){
+                                    game.weapon[c.id-1].push(listing[3][floor(random(0,listing[3].length))])
+                                    this.recharge=1800
+                                }else if(this.weapon>=findName('PlayerRandomScout',types.player)&&this.weapon<findName('PlayerRandomScout',types.player)+10&&!game.pvp){
+                                    game.weapon[c.id-1].push(listing[3][this.weapon-findName('PlayerRandomScout',types.player)+floor(random(0,10))*10])
+                                    this.recharge=1800
                                 }else if(game.level==16){
                                     let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y-random(2000,6000)]
                                     this.position.x+=speed[0]
