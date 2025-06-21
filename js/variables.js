@@ -6553,7 +6553,7 @@ types={
     },{
       name:'PlayerSpyC10',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:877,
-      desc:'Has a viewer revolver and a cluster bomb and can become invisible',dpsBuff:0,
+      desc:'Has a revolver and a cluster bomb and can become invisible',dpsBuff:0,
     },{
       name:'PlayerDroner10',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:878,

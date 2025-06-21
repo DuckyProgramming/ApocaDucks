@@ -6077,7 +6077,7 @@ class player{
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=2
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==entities.players[a].id||!game.pvp&&this.id>0&&entities.players[a].id>0)&&!entities.players[a].fort){
+                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<360&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==entities.players[a].id||!game.pvp&&this.id>0&&entities.players[a].id>0)&&!entities.players[a].fort){
                                 entities.players[a].speedBuff=max(entities.players[a].speedBuff,150)
                             }
                         }
@@ -17504,10 +17504,11 @@ class player{
                                 this.target.point=floor(random(0,3))
                             }
                         }else{
+                            let most=!game.hasOwnProperty('timers')?-1:game.timers[2]>game.timers[0]&&game.timers[2]>game.timers[1]?3:game.timers[1]>game.timers[0]?2:1
                             let possible=[]
                             for(let a=0,la=game.point.length;a<la;a++){
                                 if(game.point[a]!=this.id&&game.pvp||game.point[a]!=0&&this.id==0||game.point[a]==0&&this.id>0){
-                                    for(let b=0,lb=(a<3||a==6?2:1)*(a==6||game.point[[3,1,4,2,5,0][a]]==this.id||game.point[[5,0,3,1,4,2][a]]==this.id?3:1);b<lb;b++){
+                                    for(let b=0,lb=(a<3||a==6?2:1)*(game.point[a]==most?2:1)*(a==6||game.point[[3,4,5,1,2,0][a]]==this.id||game.point[[5,3,4,0,1,2][a]]==this.id||a==this.id-1?3:1);b<lb;b++){
                                         possible.push(a)
                                     }
                                 }
@@ -19847,11 +19848,11 @@ class player{
                         }
                     }else if(game.level==89||game.level==94){
                         if(game.pvp){
-                            if(this.die.timer>(game.point[this.id-1]==this.id?360:900)){
+                            if(this.die.timer>(game.point[this.id-1]==this.id?360:720)){
                                 let key=this.id==1?'q':this.id==2?'w':'e'
                                 for(let a=0,la=entities.players.length;a<la;a++){
                                     if(entities.players[a].life<=0&&entities.players[a].id==this.id){
-                                        entities.players[a].die.timer-=(game.point[this.id-1]==this.id?60:300)
+                                        entities.players[a].die.timer-=(game.point[this.id-1]==this.id?60:240)
                                     }
                                 }
                                 for(let a=0,la=levels[game.level].length;a<la;a++){

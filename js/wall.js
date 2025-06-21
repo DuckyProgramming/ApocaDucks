@@ -9918,6 +9918,7 @@ class wall{
                             this.timers[game.point[a]-1]+=(set.includes(a)?1:0.5)
                         }
                     }
+                    game.timers=this.timers
                 }else if(dm()||game.level==81){
                     if(game.level==73){
                         if(this.owner>0){
