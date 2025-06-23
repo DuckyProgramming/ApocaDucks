@@ -6214,6 +6214,15 @@ class wall{
                             layer.rect(0,this.height*(-0.5+(a+0.65)/la),this.width,2)
                         }
                     break
+                    case 88:
+                        layer.fill(146,110,92)
+                        layer.rect(0,0,this.width+1,this.height)
+                        layer.triangle(-this.width/2-0.5,this.height/2,this.width/2+0.5,this.height/2,0,this.height/2+15)
+                        layer.fill(96,75,64)
+                        for(let a=0,la=ceil(this.height/game.tileset[1]*2.25);a<la;a++){
+                            layer.rect(0,this.height*0.5-(a+0.5)*4/9*game.tileset[1],this.width,game.tileset[1]/15)
+                        }
+                    break
                     default:
                         switch(game.level){
                             case 49:
@@ -10537,6 +10546,57 @@ class wall{
                             }
                         }
                     }
+                }else if(game.level==88){
+                    let visible38=false
+                    for(let a=0,la=game.players;a<la;a++){
+                        if(
+                            abs(entities.players[a].position.x-this.base.position.x)<250&&abs(entities.players[a].position.y-(this.base.position.y+this.base.height/2))<100&&
+                            entities.players[a].id>0&&entities.players[a].life>0&&
+                            !(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2)
+                        ){
+                            visible38=true
+                        }
+                    }
+                    let mult=2
+                    if(visible38){
+                        if(this.height>0){
+                            this.height-=2*mult
+                            this.bounder.height-=2*mult
+                            this.internalBounder.height-=2*mult
+                            this.position.y-=mult
+                            this.bounder.position.y-=mult
+                            this.internalBounder.position.y-=mult
+                            this.velocity.y=-mult
+                            for(let a=0,la=this.boundary.length;a<la;a++){
+                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                        if(this.boundary[a][b][c].y>this.position.y){
+                                            this.boundary[a][b][c].y-=2*mult
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(this.height<this.base.height){
+                            this.height+=2*mult
+                            this.bounder.height+=2*mult
+                            this.internalBounder.height+=2*mult
+                            this.position.y+=mult
+                            this.bounder.position.y+=mult
+                            this.internalBounder.position.y+=mult
+                            this.velocity.y=mult
+                            for(let a=0,la=this.boundary.length;a<la;a++){
+                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                        if(a==0||a==2&&c==1||a==3&&c==1){
+                                            this.boundary[a][b][c].y+=2*mult
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             break
             case 42:
@@ -12619,11 +12679,13 @@ class wall{
                                                             break
                                                             case 88: case 91:
                                                                 for(let e=0,le=12;e<le;e++){
-                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,34,-240+(e+0.5)/le*120,c.id,160,240,false,c.index))
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=2
-                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=2
-                                                                    entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
-                                                                    entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
+                                                                    if(e<4||e>=8){
+                                                                        entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,34,-240+(e+0.5)/le*120,c.id,120,240,false,c.index))
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.x*=2
+                                                                        entities.projectiles[entities.projectiles.length-1].velocity.y*=2
+                                                                        entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
+                                                                        entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
+                                                                    }
                                                                 }
                                                             break
                                                             case 92:

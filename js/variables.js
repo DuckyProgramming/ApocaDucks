@@ -3896,7 +3896,7 @@ types={
       desc:'Fires two bullets with slight spread',dpsBuff:2,
     },{
       name:'PlayerInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:338,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:338,
       desc:'Fires a bullet that shoots more bullets',dpsBuff:2,
     },{
       name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
@@ -4087,7 +4087,7 @@ types={
       desc:'Machine gun that fires variable bullets in a numeric pattern',dpsBuff:1,
     },{
       name:'PlayerFurnace',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.75,crit:0,weapon:515,
+      damageBuff:1.25,reloadBuff:2,crit:0,weapon:515,
       desc:'Machine gun with light interceptor bullets',dpsBuff:1,
     },{
       name:'PlayerEntomologist',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4927,7 +4927,7 @@ types={
       desc:'Sidekick with pelleters',dpsBuff:6,
     },{
       name:'PlayerMunition',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:580,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:580,
       desc:'Sidekick with interceptors',dpsBuff:6,
     },{
       name:'PlayerMafia',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5055,39 +5055,39 @@ types={
     
     {
       name:'PlayerInceptionist',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:348,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:348,
       desc:'Interceptor, but the bullet also has an aiming turret',dpsBuff:4,
     },{
       name:'PlayerTwinterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:349,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:349,
       desc:'Interceptor that fires twice as fast, and its bullets fire twice as fast too',dpsBuff:3,
     },{
       name:'PlayerConqueror',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:350,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:350,
       desc:'Interceptor that alternates engineer balls',dpsBuff:3,
     },{
       name:'PlayerAlternator',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:435,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:435,
       desc:'Interceptor that fires bullets with an aiming turret on both sides',dpsBuff:2,
     },{
       name:'PlayerUserdrive',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:447,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:447,
       desc:'Interceptor with an assault rifle auto turret',dpsBuff:2,
     },{
       name:'PlayerDelimiter',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:552,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:552,
       desc:'Fires a bullet that shoots spreads of three bullets',dpsBuff:4,
     },{
       name:'PlayerInterinterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:674,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:674,
       desc:'Fires a bullet that shoots more bullets that shoot more bullets',dpsBuff:2,
     },{
       name:'PlayerQuadratic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:610,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:610,
       desc:'Fires a bullet that shoots light rockets',dpsBuff:2,
     },{
       name:'PlayerInterceptorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:351,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:351,
       desc:'Has an interceptor auto turret',dpsBuff:2,
     },
 
@@ -5261,7 +5261,7 @@ types={
       desc:'Destroyer that has very large knockback',dpsBuff:1,
     },{
       name:'PlayerZeppole',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:506,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:506,
       desc:'Interceptor with large knockback',dpsBuff:2,
     },{
       name:'PlayerRadiance',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5715,7 +5715,7 @@ types={
       desc:'Fires bullets downward to float',dpsBuff:1,
     },{
       name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:339,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:339,
       desc:'Has two guns, but can fire one gun out as an interceptor bullet',dpsBuff:1,
     },
     
@@ -6928,7 +6928,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:332,
     },{
       name:'ConstructInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:338,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:338,
     },{
       name:'ConstructShotgun',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
@@ -6975,13 +6975,13 @@ types={
       damageBuff:0.25,reloadBuff:1.25,crit:0,weapon:11,
     },{
       name:'Outpost',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:58,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:58,
     },{
       name:'Guster',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:672,
     },{
       name:'Turret',sizeBuff:1.8,lifeBuff:5,speedBuff:0,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:175,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:175,
     },{
       name:'Rogue',sizeBuff:1.8,lifeBuff:5,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:662,
@@ -7158,7 +7158,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
     },{
       name:'SidekickInterceptor',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:338,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:338,
     },{
       name:'SidekickBorder',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:246,
@@ -14856,7 +14856,7 @@ types={
 			name:'Stickybomb Launcher',
 			ammo:4,
 			damage:120,
-			cooldown:25,
+			cooldown:40,
 			stop:120,
 			reload:45,
 			speed:1.05,
@@ -15189,11 +15189,11 @@ types={
 			name:'Sheller',
 			ammo:3,
 			damage:240,
-			cooldown:45,
+			cooldown:65,
 			stop:135,
-			reload:10,
+			reload:25,
 			speed:1.05,
-      uses:15,
+      uses:13.5,
 		},{
 			name:'Minigun',
 			ammo:30,
@@ -16422,7 +16422,7 @@ types={
 			name:'Stickybomb Sweeper',
 			ammo:5,
 			damage:120,
-			cooldown:20,
+			cooldown:30,
 			stop:120,
 			reload:45,
 			speed:1.05,
@@ -21854,14 +21854,14 @@ Hayden - brown crate nook
 "                 f        _________                                                                       _________        f                 ",
 "                           |     |                                                                         |     |                           ",
 "                 m         |     |                                                                         |     |         m                 ",
-"                           | <<####>>>                                N                                <<<####>> |                           ",
+"                           | <<####>>>                                                                 <<<####>> |                           ",
 "                         <<<########[[                                                                 ]]########>>>                         ",
-"                   <<<<###########[                              /=========/                              ]###########>>>>                   ",
-"             <<###################      ---                                                       ---      ###################>>             ",
-"     $     <###################<.[   ]........>         <.                         .>         <........[   ].>###################>     $     ",
-"    ___===_####################.[      |   | ]...[===]...[                         ]...[===]...[ |   |      ].####################_===___    ",
-"     |     ####################.       |   |   |       |                             |       |   |   |       .####################     |     ",
-"     |  q g####################.>      |   |   |       |                             |       |   |   |      <.####################g w  |     ",
+"                   <<<<###########[                              /=== ; ===/                              ]###########>>>>                   ",
+"             <<###################      ---                           |                           ---      ###################>>             ",
+"     $     <###################<.[   ]........>         <.            |            .>         <........[   ].>###################>     $     ",
+"    ___===_####################.[      |   | ]...[===]...[            |            ]...[===]...[ |   |      ].####################_===___    ",
+"     :     ####################.       |   |   |       |              |              |       |   |   |       .####################     :     ",
+"     :  q g####################.>      |   |   |       |              |              |       |   |   |      <.####################g w  :     ",
 "   <<<<########################].>*  <.......> |       | <...>        !        <...> |       | <.......>  *<.[########################>>>>   ",
 "################################].....[#####]........................ccc........................[#####].....[################################",
 "#############################################################################################################################################",
@@ -22030,14 +22030,14 @@ Hayden - brown crate nook
 "                 f        _________                                                               _________        f                 ",
 "                           |     |                                                                 |     |                           ",
 "                 m         |     |                                                                 |     |         m                 ",
-"                           | <<####>>>                            N                            <<<####>> |                           ",
+"                           | <<####>>>                                                         <<<####>> |                           ",
 "                         <<<########[[                                                         ]]########>>>                         ",
-"                   <<<<###########[                          /=========/                          ]###########>>>>                   ",
-"             <<###################      ---                                               ---      ###################>>             ",
-"           <###################<.[   ]........>     <.                         .>     <........[   ].>###################>           ",
-"    ___===_####################.[      |   | ].......[                         ].......[ |   |      ].####################_===___    ",
-"     |     ####################.       |   |   |   |                             |   |   |   |       .####################     |     ",
-"     |  * g####################.>      |   |   |   |                             |   |   |   |      <.####################g *  |     ",
+"                   <<<<###########[                          /=== ; ===/                          ]###########>>>>                   ",
+"             <<###################      ---                       |                       ---      ###################>>             ",
+"           <###################<.[   ]........>     <.            |            .>     <........[   ].>###################>           ",
+"    ___===_####################.[      |   | ].......[            |            ].......[ |   |      ].####################_===___    ",
+"     |     ####################.       |   |   |   |              |              |   |   |   |       .####################     |     ",
+"     |  * g####################.>      |   |   |   |              |              |   |   |   |      <.####################g *  |     ",
 "   <<<<########################].>   <.......> |   | <...>        ?        <...> |   | <.......>   <.[########################>>>>   ",
 "################################].....[#####]....................ccc....................[#####].....[################################",
 "#####################################################################################################################################",
