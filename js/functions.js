@@ -520,7 +520,7 @@ function setupBase(){
     noStroke()
 }
 function setupLayer(layer){
-        layer.colorMode(RGB,255,255,255,1)
+    layer.colorMode(RGB,255,255,255,1)
     layer.angleMode(DEGREES)
     layer.rectMode(CENTER)
     layer.imageMode(CENTER)
@@ -4979,8 +4979,8 @@ function generateLevel(info,layer){
             graphics.gradient[0].colors(...colorset)
             graphics.gradient.push(new p5.LinearGradient(87,graphics.main[0].height))
             graphics.gradient[1].colors(
-                0.0,color(255,245,225),
-                1.0,color(245,209,164)
+                0.0,color(165,155,135),
+                1.0,color(155,119,74)
             )
             game.index=0
         break

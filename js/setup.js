@@ -431,7 +431,9 @@ function mouseClicked(){
                                                 //rusted
                                             break
                                             case 3:
-                                                //here
+                                                menu.level=55
+                                                game.classicWeapon=true
+                                                //tailwater
                                             break
                                         }
                                     break
