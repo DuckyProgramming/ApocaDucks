@@ -5707,7 +5707,7 @@ types={
       desc:'Invisible when moving, but not when shooting',dpsBuff:1,
     },{
       name:'PlayerBooster',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:114,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:105,
       desc:'Fires flamethrower downward to float',dpsBuff:1,
     },{
       name:'PlayerRain',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
@@ -6069,6 +6069,9 @@ types={
       name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:171,
       desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
+    },{
+      name:'PlayerStickyMan',sizeBuff:1,lifeBuff:4,speedBuff:1.1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
     },
 
     //mark di
@@ -6578,8 +6581,8 @@ types={
       name:'PlayerLightGasser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:686,
     },{
-      name:'PlayerLightResistance',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:687,
+      name:'PlayerStickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
     },{
       name:'PlayerLightHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:688,
@@ -6804,7 +6807,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:850,
     },{
       name:'PlayerStickyJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:851,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:851,
     },{
       name:'PlayerIceCream',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:852,
@@ -6834,7 +6837,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:860,
     },{
       name:'PlayerStickySweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:861,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:861,
     },{
       name:'PlayerDefensePack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:862,
@@ -6864,7 +6867,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:881,
     },{
       name:'PlayerCallerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:882,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:882,
     },{
       name:'PlayerBatteryLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:883,
@@ -14856,11 +14859,11 @@ types={
 			name:'Stickybomb Launcher',
 			ammo:4,
 			damage:120,
-			cooldown:40,
-			stop:120,
-			reload:45,
+			cooldown:45,
+			stop:105,
+			reload:54,
 			speed:1.05,
-      uses:20,
+      uses:18,
 		},{
 			name:'Heal Area',
 			ammo:1,
@@ -15674,10 +15677,10 @@ types={
 		},{
 			name:'Borer',
 			ammo:10,
-			damage:110,
+			damage:115,
 			cooldown:15,
 			stop:120,
-			reload:25,
+			reload:18,
 			speed:0.85,
       uses:50,
 		},{
@@ -16007,7 +16010,7 @@ types={
 		},{
 			name:'Airburst Rifle',
 			ammo:2,
-			damage:440,
+			damage:400,
 			cooldown:15,
 			stop:105,
 			reload:5,
@@ -16332,9 +16335,9 @@ types={
 			name:'Stickybomb Jumper',
 			ammo:3,
 			damage:105,
-			cooldown:25,
-			stop:120,
-			reload:45,
+			cooldown:45,
+			stop:105,
+			reload:54,
 			speed:1.05,
       uses:15,
 		},{
@@ -16422,11 +16425,11 @@ types={
 			name:'Stickybomb Sweeper',
 			ammo:5,
 			damage:120,
-			cooldown:30,
-			stop:120,
-			reload:45,
+			cooldown:36,
+			stop:105,
+			reload:54,
 			speed:1.05,
-      uses:25,
+      uses:22.5,
 		},{
 			name:'Defense Pack',
 			ammo:1,
@@ -16610,12 +16613,12 @@ types={
 		},{
 			name:'Caller Launcher',
 			ammo:1,
-			damage:160,
-			cooldown:25,
-			stop:120,
+			damage:150,
+			cooldown:45,
+			stop:105,
 			reload:45,
 			speed:1.05,
-      uses:10,
+      uses:9,
 		},{
 			name:'Battery LMG',
 			ammo:30,

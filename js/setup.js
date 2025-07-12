@@ -309,7 +309,6 @@ function mouseClicked(){
                                             case 2:
                                                 menu.level=39
                                                 game.classicWeapon=true
-                                                game.pvp=true
                                                 //fragile
                                             break
                                             case 3:

@@ -5872,11 +5872,11 @@ class projectile{
 				layer.ellipse(0,0,3)
 				if(!this.active&&this.fade<1){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,(360-this.fade*360)*(this.fail?0.25:1))
+					layer.ellipse(0,0,(330-this.fade*330)*(this.fail?0.25:1))
 					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,(240-this.fade*240)*(this.fail?0.25:1))
+					layer.ellipse(0,0,(220-this.fade*220)*(this.fail?0.25:1))
 					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,(120-this.fade*120)*(this.fail?0.25:1))
+					layer.ellipse(0,0,(110-this.fade*110)*(this.fail?0.25:1))
 				}
 			break
 			case 361:
@@ -6823,8 +6823,8 @@ class projectile{
 			case 360:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<270&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
-						entities.players[b].takeDamage(this.damage*(1-c/270)*min(1,0.2+this.time/60))
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
+						entities.players[b].takeDamage(this.damage*(1-c/240)*min(1,0.2+this.time/60))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){

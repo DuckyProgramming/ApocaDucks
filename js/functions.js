@@ -8058,3 +8058,6 @@ function setupLists(){
         menu.list[types.mission[a].difficulty].push(a)
     }
 }
+function qa(name){
+    entities.players[0].newWeaponSet(findName(name,types.player))
+}
