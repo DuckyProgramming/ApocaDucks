@@ -7929,7 +7929,7 @@ class projectile{
 						this.active=false
 						this.explode()
 					}
-					if((this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372)&&this.timer>=(this.type==349||this.type==368||this.type==372?45:90)&&this.active&&!(this.type==372&&this.delay>0)){
+					if((this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372)&&this.timer>=(this.type==349||this.type==368||this.type==372?36:72)&&this.active&&!(this.type==372&&this.delay>0)){
 						let id=((game.level==27||game.level==38||teamMode())&&game.pvp?this.index+1:this.id)
 						let inputSet=this.id==0||id>game.gaming?[game.det[id]==0]:inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1]
 						if(inputSet[0]){
