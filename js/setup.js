@@ -4,10 +4,10 @@ function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
 
-    if(true){
+    if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=12
         game.gaming=1
         game.level=95
         menu.level=game.level
@@ -24,12 +24,12 @@ function setup(){
         game.pvp=true
         //display.cycle=0
         //newWave()
-        game.weapon=[[/*floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))*/findName('PlayerDroner10',types.player)]]
+        game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
@@ -68,8 +68,9 @@ function mouseClicked(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Basalt','Bluefort','Gray Gravel'],
-                    ['Razorpoint','Valuation','Aerial','Cranberry'],
+                    ['Bluefort','Bluefort Mini','Bluefort Tiny','Gray Gravel'],
+                    ['Shogatsu','Basalt','Razorpoint','Valuation'],
+                    ['Aerial','Cranberry'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -234,23 +235,7 @@ function mouseClicked(){
                                     case 6:
                                         switch(b){
                                             case 0:
-                                                menu.level=30
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                                //shogatsu
-                                            break
-                                            case 1:
-                                                menu.level=54
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                                //basalt
-                                            break
-                                            case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
-                                                    menu.level=67
-                                                }else{
-                                                    menu.level=78
-                                                }
+                                                menu.level=67
                                                 game.pvp=true
                                                 menu.players*=4
                                                 if(!game.classWeapon){
@@ -258,6 +243,26 @@ function mouseClicked(){
                                                 }
                                                 instant()
                                                 //bluefort
+                                            break
+                                            case 1:
+                                                menu.level=78
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //bluefort mini
+                                            break
+                                            case 2:
+                                                menu.level=95
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //bluefort tiny
                                             break
                                             case 3:
                                                 menu.level=29
@@ -374,37 +379,30 @@ function mouseClicked(){
                                     case 6:
                                         switch(b){
                                             case 0:
+                                                menu.level=30
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                //shogatsu
+                                            break
+                                            case 1:
+                                                menu.level=54
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                //basalt
+                                            break
+                                            case 2:
                                                 menu.level=43
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 instant()
                                                 //razorpoint
                                             break
-                                            case 1:
+                                            case 3:
                                                 menu.level=37
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 game.classicRespawn=false
                                                 //valuation
-                                            break
-                                            case 2:
-                                                menu.level=73
-                                                game.pvp=true
-                                                game.classicWeapon=true
-                                                game.classicRespawn=false
-                                                instant()
-                                                //aerial
-                                            break
-                                            case 3:
-                                                menu.level=81
-                                                game.pvp=true
-                                                menu.players*=4
-                                                if(!game.classWeapon){
-                                                    game.classicWeapon=true
-                                                }
-                                                game.classicRespawn=false
-                                                instant()
-                                                //cranberry
                                             break
                                         }
                                     break
@@ -496,6 +494,30 @@ function mouseClicked(){
                                         game.classicRespawn=false
                                         instant()
                                     break
+                                    case 6:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=73
+                                                game.pvp=true
+                                                game.classicWeapon=true
+                                                game.classicRespawn=false
+                                                instant()
+                                                //aerial
+                                            break
+                                            case 1:
+                                                menu.level=81
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                game.classicRespawn=false
+                                                instant()
+                                                //cranberry
+                                            break
+                                        }
+                                    break
+                                
                                 }
                                 menu.mode=0
                             break

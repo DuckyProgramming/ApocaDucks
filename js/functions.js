@@ -1,9 +1,9 @@
-//basic
+dwd//basic
 function dm(){
     return game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53||game.level==56||game.level==60||game.level==61||game.level==62||game.level==64||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==90||game.level==91||game.level==92||game.level==93
 }
 function teamMode(){
-    return menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==81||menu.level==88||menu.level==89&&game.pvp||menu.level==94&&game.pvp||game.level==95
+    return menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==81||menu.level==88||menu.level==89&&game.pvp||menu.level==94&&game.pvp||menu.level==95
 }
 function backed(){
     return game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||game.level==77||game.level==78||game.level==88||game.level==89||game.level==90||game.level==91||game.level==92||game.level==94||game.level==95
@@ -2007,7 +2007,7 @@ function generateLevel(info,layer){
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
                 [game.tileset[0]*50,game.tileset[1]*50,game.tileset[0]*20,game.tileset[1]*10],
-                [game.tileset[0]*50,game.tileset[1]*43,game.tileset[0]*30,game.tileset[1]*4],
+                [game.tileset[0]*50,game.tileset[1]*43.5,game.tileset[0]*30,game.tileset[1]*5],
                 [game.tileset[0]*41.5,game.tileset[1]*37,game.tileset[0],game.tileset[1]*8],
                 [game.tileset[0]*58.5,game.tileset[1]*37,game.tileset[0],game.tileset[1]*8],
                 [game.tileset[0]*26.5,game.tileset[1]*52,game.tileset[0]*11,game.tileset[1]*2],
@@ -8026,7 +8026,7 @@ function initialGraphics(){
         menu.level==53||menu.level==54||menu.level==55||menu.level==56||menu.level==58||menu.level==59||menu.level==60||menu.level==61||menu.level==62||menu.level==63||
         menu.level==64||menu.level==65||menu.level==67||menu.level==68||menu.level==69||menu.level==70||menu.level==71||menu.level==72||menu.level==73||menu.level==74||
         menu.level==75||menu.level==76||menu.level==77||menu.level==78||menu.level==79||menu.level==81||menu.level==82||menu.level==83||menu.level==84||menu.level==85||
-        menu.level==86||menu.level==87||menu.level==88||menu.level==89||menu.level==90||menu.level==91||menu.level==92||menu.level==93||menu.level==94||game.level==95
+        menu.level==86||menu.level==87||menu.level==88||menu.level==89||menu.level==90||menu.level==91||menu.level==92||menu.level==93||menu.level==94||menu.level==95
     ){
         graphics.overlay.push(createGraphics(width,200))
     }

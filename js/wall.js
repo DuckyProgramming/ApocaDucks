@@ -1118,7 +1118,7 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if((c.standard||(c.type==59||c.type==60)&&(game.level==58||game.level==63||game.level==66||game.level==74||game.level==89||game.level==90||game.level==93||game.level==94))&&(this.type!=37||game.level==41||game.level==76||game.level==86||game.level==89||game.level==90||game.level==94)&&(c.type!=37||game.level==69)&&!(c.type==24&&(game.level==59||game.level==60||game.level==79))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49&&game.level!=88)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&this.type!=74&&c.type!=74){
+                if(c.standard&&(this.type!=37||game.level==41||game.level==76||game.level==86||game.level==89||game.level==90||game.level==94)&&(c.type!=37||game.level==69)&&!(c.type==24&&(game.level==59||game.level==60||game.level==79))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49&&game.level!=88)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56))&&this.type!=74&&c.type!=74){
                     if(this.type==17&&c.type==47){
                         if(
                             inFullBoxBoxOpen(this,entities.walls[a][b])||
@@ -1309,6 +1309,25 @@ class wall{
                         for(let e=0,le=this.boundary[3].length;e<le;e++){
                             if(abs(c.position.x-(this.position.x-this.width/2-c.width/2))<1&&c.position.y-c.height/2<=this.boundary[3][e][d].y+1&&c.position.y+c.height/2>=this.boundary[3][e][d].y-1){
                                 this.boundary[3][e][d].y=c.position.y+c.height/2*(1-d*2)
+                            }
+                        }
+                    }
+                }else if((c.type==59||c.type==60)&&(game.level==58||game.level==63||game.level==66||game.level==74||game.level==89||game.level==90||game.level==93||game.level==94||game.level==95)){
+                    for(let d=0,ld=this.boundary[2].length;d<ld;d++){
+                        if(abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&c.position.y-c.height/2<this.boundary[2][d][0].y+1&&c.position.y+c.height/2>this.boundary[2][d][1].y-1){
+                            if(abs(this.boundary[2][d][0].y-(this.position.y-this.height/2))<1){
+                                this.boundary[2][d][0].y+=5
+                            }else if(abs(this.boundary[2][d][1].y-(this.position.y-this.height/2))<1){
+                                this.boundary[2][d][1].y+=5
+                            }
+                        }
+                    }
+                    for(let d=0,ld=this.boundary[3].length;d<ld;d++){
+                        if(abs(c.position.x-(this.position.x-this.width/2-c.width/2))<1&&c.position.y-c.height/2<this.boundary[3][d][0].y+1&&c.position.y+c.height/2>this.boundary[3][d][1].y-1){
+                            if(abs(this.boundary[3][d][0].y-(this.position.y-this.height/2))<1){
+                                this.boundary[3][d][0].y+=5
+                            }else if(abs(this.boundary[3][d][1].y-(this.position.y-this.height/2))<1){
+                                this.boundary[3][d][1].y+=5
                             }
                         }
                     }

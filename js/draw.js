@@ -29,8 +29,9 @@ function mainloop(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Shogatsu','Basalt','Bluefort','Gray Gravel'],
-                    ['Razorpoint','Valuation','Aerial','Cranberry'],
+                    ['Bluefort','Bluefort Mini','Bluefort Tiny','Gray Gravel'],
+                    ['Shogatsu','Basalt','Razorpoint','Valuation'],
+                    ['Aerial','Cranberry'],
                 ],
             ]
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
@@ -70,8 +71,7 @@ function mainloop(){
                         menu.mode==2&&a==7&&b==1||
                         menu.mode==2&&a==8&&b==1||
                         menu.mode==2&&a==8&&b==3||
-                        menu.mode==3&&a==8&&b==2||
-                        menu.mode==6&&a==4&&b==2
+                        menu.mode==3&&a==8&&b==2
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -178,12 +178,8 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 0: case 1:
-                                            text(`Duck Destruction`,pos[0],pos[1]+15)
-                                        break
-                                        case 2:
-                                            text(`CTF`,pos[0]-37,pos[1]+15)
-                                            text(`CTF Mini`,pos[0]+37,pos[1]+15)
+                                        case 0: case 1: case 2:
+                                            text(`CTF`,pos[0],pos[1]+15)
                                         break
                                         case 3:
                                             text(`Search and Destroy`,pos[0],pos[1]+15)
@@ -192,12 +188,19 @@ function mainloop(){
                                 break
                                 case 5:
                                     switch(b){
-                                        case 0:
+                                        case 0: case 1:
+                                            text(`Duck Destruction`,pos[0],pos[1]+15)
+                                        break
+                                        case 2:
                                             text(`Quadrants`,pos[0],pos[1]+15)
                                         break
-                                        case 1:
+                                        case 3:
                                             text(`Heist`,pos[0],pos[1]+15)
                                         break
+                                    }
+                                break
+                                case 6:
+                                    switch(b){
                                         case 2:
                                             text(`Rise of the Duck`,pos[0],pos[1]+15)
                                         break
