@@ -40,13 +40,13 @@ class projectile{
         this.remove=false
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
-			case 20: case 24: case 36: case 37: case 38: case 39: case 43: case 44: case 49: case 50:
-			case 57: case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90:
-			case 94: case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188:
-			case 202: case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249:
-			case 251: case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331:
-			case 332: case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347:
-			case 348: case 350: case 355: case 357: case 361: case 364:
+			case 20: case 24: case 36: case 38: case 39: case 43: case 44: case 49: case 50: case 57:
+			case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90: case 94:
+			case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188: case 202:
+			case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249: case 251:
+			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
+			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
+			case 350: case 355: case 357: case 361: case 364:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -205,7 +205,7 @@ class projectile{
 				this.speed=random(3,5)
 				this.time=random(time,time*2)
 			break
-			case 7: case 23: case 40: case 46: case 76: case 77:
+			case 7: case 23: case 37: case 40: case 46: case 76: case 77:
 				this.width*=5
 				this.height*=5
 				this.speed=time/4

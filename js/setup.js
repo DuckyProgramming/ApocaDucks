@@ -4,12 +4,12 @@ function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
 
-    if(false){
+    if(true){
         game.classWeapon=true
 
-        game.players=9
+        game.players=20
         game.gaming=1
-        game.level=94
+        game.level=95
         menu.level=game.level
         if(true){
             game.mission=findName('Duck Void',types.mission)
@@ -28,8 +28,8 @@ function setup(){
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
