@@ -1,4 +1,4 @@
-dwd//basic
+//basic
 function dm(){
     return game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53||game.level==56||game.level==60||game.level==61||game.level==62||game.level==64||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==90||game.level==91||game.level==92||game.level==93
 }
@@ -3660,7 +3660,7 @@ function generateLevel(info,layer){
                         break
                         case 89: case 90: case 94:
                             entities.walls[1].push(new wall(graphics.main,(b-4)*game.tileset[0],(a+2)*game.tileset[1],game.tileset[0]*10,game.tileset[1]*4,60))
-                        break
+                    break
                         case 93:
                             if(b>lb/2){
                                 entities.walls[1].push(new wall(graphics.main,(b+3)*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[0]*6,game.tileset[1]*3,59))
@@ -5364,7 +5364,7 @@ function generateLevel(info,layer){
                         let playerLength=entities.players.length
                         if(
                             (game.level==89||game.level==94)&&!game.pvp&&level[a][b]==encode||
-                            game.level!=89&&game.level!=94&&int(level[a][b])==((game.level==48||game.level==57||game.level==80)&&c>=game.gaming&&lc>10?5:game.level==34?0:game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57)
+                            game.level!=89&&game.level!=94&&int(level[a][b])==((game.level==48||game.level==57||game.level==80)&&c>=game.gaming&&lc>5?5:game.level==34?0:game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57)
                         ){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
                             if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48){
