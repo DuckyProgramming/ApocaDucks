@@ -13,13 +13,15 @@ function mainloop(){
                     ['Downward','Arizona','Fragile','Alloy'],
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
                     ['Abandoned','Identify','Divider','Rocksalt'],
-                    ['Bluefort','Railing','Burnt','Confines'],
+                    ['Bluefort','Bluefort Mini','Bluefort Micro','Railing'],
+                    ['Burnt','Confines'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
-                    ['Railing','Sulfite','Confines','Blueprint'],
+                    ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
+                    ['Confines','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -29,7 +31,7 @@ function mainloop(){
                 ],[
                     ['Pacman','Stalingrad','Prison','Steep'],
                 ],[
-                    ['Bluefort','Bluefort Mini','Bluefort Tiny','Gray Gravel'],
+                    ['Bluefort','Bluefort Mini','Bluefort Micro','Gray Gravel'],
                     ['Shogatsu','Basalt','Razorpoint','Valuation'],
                     ['Aerial','Cranberry'],
                 ],
@@ -69,9 +71,9 @@ function mainloop(){
                         menu.mode==1&&a==4&&b==2||
                         menu.mode==2&&a==4&&b==1||
                         menu.mode==2&&a==7&&b==1||
-                        menu.mode==2&&a==8&&b==1||
                         menu.mode==2&&a==8&&b==3||
-                        menu.mode==3&&a==8&&b==2
+                        menu.mode==2&&a==9&&b==1||
+                        menu.mode==3&&a==9&&b==0
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -150,11 +152,15 @@ function mainloop(){
                                 break
                                 case 8:
                                     switch(b){
-                                        case 1:
+                                        case 3:
                                             text(`Standard`,pos[0]-37,pos[1]+15)
                                             text(`Nightwatch`,pos[0]+37,pos[1]+15)
                                         break
-                                        case 3:
+                                    }
+                                break
+                                case 9:
+                                    switch(b){
+                                        case 1:
                                             text(`Loop`,pos[0]-37,pos[1]+15)
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
                                         break
@@ -164,9 +170,9 @@ function mainloop(){
                         break
                         case 3:
                             switch(a){
-                                case 8:
+                                case 9:
                                     switch(b){
-                                        case 2:
+                                        case 0:
                                             text(`Loop`,pos[0]-37,pos[1]+15)
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
                                         break
@@ -657,7 +663,8 @@ function mainloop(){
                     game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
-                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95
+                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
+                    game.level==98||game.level==99
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -725,7 +732,8 @@ function mainloop(){
                     }
                 }
                 if(!special){
-                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
+                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):min(
+                        game.edge[0]/graphics.main[0].width,entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
                         entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
                         entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
                         entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
@@ -743,6 +751,7 @@ function mainloop(){
                         entities.players[c].weaponType==846?1.2:
                         entities.players[c].weaponType==613?0.75:
                         1
+                    )
                 }
                 if(game.level==7){
                     effective.push([center.position.x+side,center.position.y])
@@ -1052,7 +1061,7 @@ function mainloop(){
                         case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
-                        case 85: case 86: case 88: case 89: case 94: case 95:
+                        case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
