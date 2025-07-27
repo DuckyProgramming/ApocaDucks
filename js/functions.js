@@ -2003,7 +2003,7 @@ function generateLevel(info,layer){
 
             ]
         break
-        case 95: case 99:
+        case 95:
             game.edge=[level[0].length*48,level.length*36]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
@@ -2216,6 +2216,76 @@ function generateLevel(info,layer){
                 [game.tileset[0]*113,game.tileset[1]*41.5,game.tileset[0]*4,game.tileset[1]*3],
                 [game.tileset[0]*62,game.tileset[1]*39.5,game.tileset[0]*2,game.tileset[1]*3],
                 [game.tileset[0]*105,game.tileset[1]*39.5,game.tileset[0]*2,game.tileset[1]*3],
+            ]
+        break
+        case 99:
+            game.edge=[level[0].length*48,level.length*36]
+            game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
+            game.sectors=[
+                [game.tileset[0]*50,game.tileset[1]*50,game.tileset[0]*20,game.tileset[1]*10],
+                [game.tileset[0]*50,game.tileset[1]*43.5,game.tileset[0]*30,game.tileset[1]*5],
+                [game.tileset[0]*41.5,game.tileset[1]*37,game.tileset[0],game.tileset[1]*8],
+                [game.tileset[0]*58.5,game.tileset[1]*37,game.tileset[0],game.tileset[1]*8],
+                [game.tileset[0]*26.5,game.tileset[1]*52,game.tileset[0]*11,game.tileset[1]*2],
+                [game.tileset[0]*73.5,game.tileset[1]*52,game.tileset[0]*11,game.tileset[1]*2],
+                [game.tileset[0]*26.5,game.tileset[1]*50,game.tileset[0]*27,game.tileset[1]*2],
+                [game.tileset[0]*73.5,game.tileset[1]*50,game.tileset[0]*27,game.tileset[1]*2],
+                [game.tileset[0]*8,game.tileset[1]*48.5,game.tileset[0]*10,game.tileset[1]*5],
+                [game.tileset[0]*92,game.tileset[1]*48.5,game.tileset[0]*10,game.tileset[1]*5],
+
+                [game.tileset[0]*37,game.tileset[1]*39.5,game.tileset[0]*2,game.tileset[1]*3],
+                [game.tileset[0]*63,game.tileset[1]*39.5,game.tileset[0]*2,game.tileset[1]*3],
+                [game.tileset[0]*31.5,game.tileset[1]*35,game.tileset[0]*13,game.tileset[1]*4],
+                [game.tileset[0]*68.5,game.tileset[1]*35,game.tileset[0]*13,game.tileset[1]*4],
+                [game.tileset[0]*23,game.tileset[1]*35,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*77,game.tileset[1]*35,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*30.5,game.tileset[1]*31,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*69.5,game.tileset[1]*31,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*39,game.tileset[1]*31,game.tileset[0]*6,game.tileset[1]*4],
+                [game.tileset[0]*61,game.tileset[1]*31,game.tileset[0]*6,game.tileset[1]*4],
+
+                [game.tileset[0]*18.5,game.tileset[1]*34.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*81.5,game.tileset[1]*34.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*16.5,game.tileset[1]*31,game.tileset[0]*9,game.tileset[1]*4],
+                [game.tileset[0]*83.5,game.tileset[1]*31,game.tileset[0]*9,game.tileset[1]*4],
+                [game.tileset[0]*8.5,game.tileset[1]*35,game.tileset[0]*9,game.tileset[1]*4],
+                [game.tileset[0]*91.5,game.tileset[1]*35,game.tileset[0]*9,game.tileset[1]*4],
+                [game.tileset[0]*2,game.tileset[1]*33.5,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*98,game.tileset[1]*33.5,game.tileset[0]*4,game.tileset[1]*4],
+                [game.tileset[0]*4,game.tileset[1]*38.5,game.tileset[0]*2,game.tileset[1]*3],
+                [game.tileset[0]*96,game.tileset[1]*38.5,game.tileset[0]*2,game.tileset[1]*3],
+
+                [game.tileset[0]*7.5,game.tileset[1]*38.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*92.5,game.tileset[1]*38.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*11.5,game.tileset[1]*38.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*88.5,game.tileset[1]*38.5,game.tileset[0]*3,game.tileset[1]*3],
+                [game.tileset[0]*7,game.tileset[1]*41.5,game.tileset[0]*8,game.tileset[1]*3],
+                [game.tileset[0]*93,game.tileset[1]*41.5,game.tileset[0]*8,game.tileset[1]*3],
+                [game.tileset[0]*8,game.tileset[1]*44.5,game.tileset[0]*10,game.tileset[1]*3],
+                [game.tileset[0]*92,game.tileset[1]*44.5,game.tileset[0]*10,game.tileset[1]*3],
+                [game.tileset[0]*21.75,game.tileset[1]*46.5,game.tileset[0]*17.5,game.tileset[1]*5],
+                [game.tileset[0]*78.25,game.tileset[1]*46.5,game.tileset[0]*17.5,game.tileset[1]*5],
+                
+                [game.tileset[0]*33.25,game.tileset[1]*46.5,game.tileset[0]*5.5,game.tileset[1]*5],
+                [game.tileset[0]*66.75,game.tileset[1]*46.5,game.tileset[0]*5.5,game.tileset[1]*5],
+                [game.tileset[0]*14.5,game.tileset[1]*37,game.tileset[0]*3,game.tileset[1]*6],
+                [game.tileset[0]*85.5,game.tileset[1]*37,game.tileset[0]*3,game.tileset[1]*6],
+                [game.tileset[0]*14.5,game.tileset[1]*41,game.tileset[0]*3,game.tileset[1]*2],
+                [game.tileset[0]*85.5,game.tileset[1]*41,game.tileset[0]*3,game.tileset[1]*2],
+                [game.tileset[0]*22.5,game.tileset[1]*38.5,game.tileset[0]*13,game.tileset[1]*3],
+                [game.tileset[0]*77.5,game.tileset[1]*38.5,game.tileset[0]*13,game.tileset[1]*3],
+                [game.tileset[0]*12,game.tileset[1]*41.5,game.tileset[0]*2,game.tileset[1]*3],
+                [game.tileset[0]*88,game.tileset[1]*41.5,game.tileset[0]*2,game.tileset[1]*3],
+
+                [game.tileset[0]*14.5,game.tileset[1]*42.5,game.tileset[0]*3,game.tileset[1]],
+                [game.tileset[0]*85.5,game.tileset[1]*42.5,game.tileset[0]*3,game.tileset[1]],
+                [game.tileset[0]*25.5,game.tileset[1]*42,game.tileset[0]*19,game.tileset[1]*4],
+                [game.tileset[0]*74.5,game.tileset[1]*42,game.tileset[0]*19,game.tileset[1]*4],
+                [game.tileset[0]*25.5,game.tileset[1]*31,game.tileset[0]*3,game.tileset[1]*4],
+                [game.tileset[0]*74.5,game.tileset[1]*31,game.tileset[0]*3,game.tileset[1]*4],
+                [game.tileset[0]*34.5,game.tileset[1]*52,game.tileset[0]*3,game.tileset[1]*2],
+                [game.tileset[0]*65.5,game.tileset[1]*52,game.tileset[0]*3,game.tileset[1]*2],
+
             ]
         break
         default:
@@ -8010,7 +8080,7 @@ function checkEnd(level,layer,key){
                     entities.projectiles[entities.projectiles.length-1].speed*=0.6
                 }
             }
-        }else if(game.level==77||game.level==98||game.level==99){
+        }else if(game.level==77||game.level==98){
             if(game.respawners[0]>=game.players/12&&game.point[0]==1){
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==1&&entities.players[a].life<=0){
@@ -8029,6 +8099,31 @@ function checkEnd(level,layer,key){
                             entities.players[a].respawn()
                         }else{
                             entities.players[a].die.timer-=game.point[5]==2?180:270
+                        }
+                    }
+                }
+            }
+            game.respawners[0]=0
+            game.respawners[1]=0
+        }else if(game.level==99){
+            if(game.respawners[0]>=game.players/12&&game.point[0]==1){
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(entities.players[a].id==1&&entities.players[a].life<=0){
+                        if(entities.players[a].die.timer>(game.point[5]==1?270:game.point[1]==1?405:720)){
+                            entities.players[a].respawn()
+                        }else{
+                            entities.players[a].die.timer-=game.point[5]==1?270:game.point[1]==1?180:270
+                        }
+                    }
+                }
+            }
+            if(game.respawners[1]>=game.players/12&&game.point[6]==2){
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(entities.players[a].id==2&&entities.players[a].life<=0){
+                        if(entities.players[a].die.timer>(game.point[1]==2?270:game.point[5]==2?405:720)){
+                            entities.players[a].respawn()
+                        }else{
+                            entities.players[a].die.timer-=game.point[1]==2?270:game.point[5]==2?180:270
                         }
                     }
                 }

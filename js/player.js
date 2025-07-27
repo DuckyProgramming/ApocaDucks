@@ -34,7 +34,9 @@ class player{
         this.die={timer:0,killer:-1}
         this.stats={kills:0,deaths:0,damage:0,bust:0,usurp:0,points:this.playerData.name=='Buster'?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
+        this.spy=false
         if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||game.randomizer){
+            this.spy=true
             this.copy=floor(random(0,game.players))
         }
         if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||game.randomizer){
@@ -12887,7 +12889,7 @@ class player{
                     }
                 }else if(game.level==67){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(this.playerData.name=='Buster'){
@@ -14519,7 +14521,7 @@ class player{
                     }
                 }else if(game.level==77){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(
@@ -15213,7 +15215,7 @@ class player{
                     }
                 }else if(game.level==78){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(this.playerData.name=='Buster'){
@@ -17927,7 +17929,7 @@ class player{
                     }
                 }else if(game.level==95){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(this.playerData.name=='Buster'){
@@ -19310,7 +19312,7 @@ class player{
                     }
                 }else if(game.level==98){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(
@@ -19881,11 +19883,11 @@ class player{
                                         case 40:
                                             switch(goalPoint){
                                                 case 0:
-                                                    this.target.position.x=game.tileset[0]*13.5
+                                                    this.target.position.x=game.tileset[0]*6
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 1:
-                                                    this.target.position.x=game.tileset[0]*6
+                                                    this.target.position.x=game.tileset[0]*13.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 2: case 3: case 4: case 5: case 6:
@@ -20010,7 +20012,7 @@ class player{
                     }
                 }else if(game.level==99){
                     this.manage[1]=false
-                    if(floor(random(0,600))==0){
+                    if(floor(random(0,100))==0){
                         this.assort.swivel=floor(random(0,100))
                     }
                     if(
@@ -20641,6 +20643,14 @@ class player{
                                                     this.target.position.y=game.edge[1]
                                                 break
                                             }
+                                        break
+                                        case 56:
+                                            this.target.position.x=game.tileset[0]*34.5
+                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                        break
+                                        case 57:
+                                            this.target.position.x=game.tileset[0]*65.5
+                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                         break
                                     }
                                     a=la
@@ -21599,7 +21609,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
-                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77?60:game.level==55?150:game.level==67||game.level==78||game.level==95?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99?60:game.level==55?150:game.level==67||game.level==78||game.level==95?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.level==19||game.level==34){
                         let max=game.edge[0]+game.edge[1]
                         let set=[0,0]
@@ -22606,9 +22616,9 @@ class player{
                     }else if(game.level==99){
                         let key=''
                         if(this.id==1){
-                            key=game.point[3]==1?'q':'e'
+                            key=game.point[4]==1?'t':game.point[3]==1?'q':'e'
                         }else{
-                            key=game.point[3]==2?'w':'r'
+                            key=game.point[2]==2?'y':game.point[3]==2?'w':'r'
                         }
                         for(let a=0,la=levels[game.level].length;a<la;a++){
                             for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
@@ -22620,7 +22630,7 @@ class player{
                                 }
                             }
                         }
-                        if((game.point[0]==this.id||game.point[6]==this.id)&&this.die.timer>(this.id==1&&game.point[5]==1||this.id==2&&game.point[1]==2?240:this.id==1&&game.point[1]==1||this.id==2&&game.point[5]==2?360:720)){
+                        if((game.point[0]==this.id||game.point[6]==this.id)&&this.die.timer>(this.id==1&&game.point[5]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[5]==2?540:720)){
                             game.respawners[this.id-1]++
                             if(this.die.timer>960){
                                 this.respawn()
