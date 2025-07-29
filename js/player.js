@@ -22630,7 +22630,7 @@ class player{
                                 }
                             }
                         }
-                        if((game.point[0]==this.id||game.point[6]==this.id)&&this.die.timer>(this.id==1&&game.point[5]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[5]==2?540:720)){
+                        if((game.point[0]==this.id||game.point[6]==this.id)&&this.die.timer>(this.id==1&&game.point[5]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[5]==2?540:690)){
                             game.respawners[this.id-1]++
                             if(this.die.timer>960){
                                 this.respawn()

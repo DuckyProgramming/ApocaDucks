@@ -11729,7 +11729,7 @@ class wall{
                             case 75:
                                 this.recharge=120
                                 c.life=max(c.life,c.base.life)
-                                if(c.weaponType==-1||game.pvp){
+                                if(c.weaponType==-1||game.pvp&&!game.royale){
                                     c.newWeapon()
                                 }
                             break

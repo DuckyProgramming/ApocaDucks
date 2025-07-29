@@ -8109,7 +8109,7 @@ function checkEnd(level,layer,key){
             if(game.respawners[0]>=game.players/12&&game.point[0]==1){
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==1&&entities.players[a].life<=0){
-                        if(entities.players[a].die.timer>(game.point[5]==1?270:game.point[1]==1?405:720)){
+                        if(entities.players[a].die.timer>(game.point[5]==1?270:game.point[1]==1?405:540)){
                             entities.players[a].respawn()
                         }else{
                             entities.players[a].die.timer-=game.point[5]==1?270:game.point[1]==1?180:270
@@ -8120,10 +8120,10 @@ function checkEnd(level,layer,key){
             if(game.respawners[1]>=game.players/12&&game.point[6]==2){
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==2&&entities.players[a].life<=0){
-                        if(entities.players[a].die.timer>(game.point[1]==2?270:game.point[5]==2?405:720)){
+                        if(entities.players[a].die.timer>(game.point[1]==2?270:game.point[5]==2?405:540)){
                             entities.players[a].respawn()
                         }else{
-                            entities.players[a].die.timer-=game.point[1]==2?270:game.point[5]==2?180:270
+                            entities.players[a].die.timer-=game.point[1]==2?120:game.point[5]==2?180:270
                         }
                     }
                 }
