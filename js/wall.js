@@ -8771,6 +8771,9 @@ class wall{
                                 case 6:
                                     graphics.overlay[0].fill(125,15,255)
                                 break
+                                default:
+                                    graphics.overlay[0].fill(...playerColor(a+1))
+                                break
                             }
                             graphics.overlay[0].rect(25+(place[0]+nudge)*40,25+a*25,30,3,1)
                         }
@@ -8841,6 +8844,9 @@ class wall{
                                 case 6:
                                     graphics.overlay[0].fill(125,15,255)
                                 break
+                                default:
+                                    graphics.overlay[0].fill(...playerColor(a+1))
+                                break
                             }
                             graphics.overlay[0].rect(25+(place[0]+3)*40,25+a*25,30,3,1)
                         }
@@ -8887,6 +8893,9 @@ class wall{
                                 break
                                 case 6:
                                     graphics.overlay[0].fill(125,15,255)
+                                break
+                                default:
+                                    graphics.overlay[0].fill(...playerColor(a+1))
                                 break
                             }
                             graphics.overlay[0].rect(25+a*40,75,30,3,1)
@@ -8941,6 +8950,9 @@ class wall{
                                 case 6:
                                     graphics.overlay[0].fill(125,15,255)
                                 break
+                                default:
+                                    graphics.overlay[0].fill(...playerColor(a+1))
+                                break
                             }
                             graphics.overlay[0].rect(25+(this.pos-(game.level==19||game.level==69?2:0)-(game.level==31||game.level==49?3:0))*40,25+(a+1)*25,30,3,1)
                         }
@@ -8985,6 +8997,9 @@ class wall{
                                 case 6:
                                     graphics.overlay[0].fill(125,15,255)
                                 break
+                                default:
+                                    graphics.overlay[0].fill(...playerColor(a+1))
+                                break
                             }
                             graphics.overlay[0].rect(25+a*40,50,30,3,1)
                         }
@@ -9017,6 +9032,9 @@ class wall{
                                     break
                                     case 6:
                                         graphics.overlay[0].fill(125,15,255)
+                                    break
+                                    default:
+                                        graphics.overlay[0].fill(...playerColor(a+1))
                                     break
                                 }
                                 graphics.overlay[0].rect(25+a*40,60,30,3,1)

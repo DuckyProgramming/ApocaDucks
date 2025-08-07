@@ -26,6 +26,8 @@ function playerColor(owner){
             return [15,235,255]
         case 6:
             return [125,15,255]
+        default:
+            return entities.players[owner-1].color.skin.body
     }
 }
 function stanh(value){
@@ -878,7 +880,7 @@ function displayMain(layer,effective,keyStore){
     ){
         image(
             graphics.overlay[0],
-            width/2,100,width,200
+            width/2,graphics.overlay[0].height*0.5,width,graphics.overlay[0].height
         )
         graphics.overlay[0].clear()
     }
@@ -5717,7 +5719,7 @@ function generateLevel(info,layer){
             let clump=listing[game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp||game.level==37||game.level==38?0:floor(random(0,1.5))]
             let type=game.classWeapon&&(teamMode())||dm()?0:game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(clump[floor(random(0,clump.length))]):(game.level==13||game.level==14||game.level==48||game.level==57||game.level==80?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length])
             let postC=(game.level==27?c%5:c)
-            let encode=teamMode()?'q':game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC]
+            let encode=teamMode()?'q':game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC%6]
             for(let a=0,la=level.length;a<la;a++){
                 for(let b=0,lb=level[a].length;b<lb;b++){
                     if(game.attacker&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=57){
@@ -8439,7 +8441,7 @@ function initialGraphics(){
         menu.level==86||menu.level==87||menu.level==88||menu.level==89||menu.level==90||menu.level==91||menu.level==92||menu.level==93||menu.level==94||menu.level==95||
         menu.level==96||menu.level==97||menu.level==98||menu.level==99
     ){
-        graphics.overlay.push(createGraphics(width,200))
+        graphics.overlay.push(createGraphics(width,menu.players>5&&!teamMode()?400:200))
     }
     if(game.gaming==1){
         graphics.main.push(createGraphics(width,height))
@@ -8505,6 +8507,19 @@ function setupMinor(){
         layer.rect(0,2,1,4)
         layer.fill(250)
         layer.ellipse(0,0,3)
+    }
+    game.colorset=[]
+    for(let a=0,la=20;a<la;a++){
+        let set=[floor(random(50,255)),floor(random(50,255)),floor(random(50,255))]
+        if(set[0]<200&&set[1]<200&&set[2]<200){
+            set[0]+=50
+            set[1]+=50
+            set[2]+=50
+        }
+        if(set[0]>200&&set[1]>200&&set[2]>200){
+            set[floor(random(0,3))]-=100
+        }
+        game.colorset.push(set)
     }
 }
 function setupTrig(){

@@ -1301,7 +1301,7 @@ class player{
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[115,5,255]}}
                 break
                 default:
-                    let a=[floor(random(50,255)),floor(random(50,255)),floor(random(50,255))]
+                    let a=game.colorset[this.id-7]
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[a[0],a[1],a[2]],body:[a[0]-10,a[1]-10,a[2]-10],legs:[a[0]-25,a[1]-25,a[2]-25],arms:[a[0]-20,a[1]-20,a[2]-20]}}
                 break
             }
