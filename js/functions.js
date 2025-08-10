@@ -1247,8 +1247,8 @@ function generateLevel(info,layer){
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
                 [game.tileset[0]*101.5,game.tileset[1]*26.5,game.tileset[0]*17,game.tileset[1]*3],
-                [game.tileset[0]*104,game.tileset[1]*30,game.tileset[0]*36,game.tileset[1]*4],
-                [game.tileset[0]*73.5,game.tileset[1]*31.5,game.tileset[0]*25,game.tileset[1]*1],
+                [game.tileset[0]*104.75,game.tileset[1]*30,game.tileset[0]*34.5,game.tileset[1]*4],
+                [game.tileset[0]*74.25,game.tileset[1]*31.5,game.tileset[0]*26.5,game.tileset[1]*1],
                 [game.tileset[0]*83.5,game.tileset[1]*35.5,game.tileset[0]*29,game.tileset[1]*1],
                 [game.tileset[0]*71.5,game.tileset[1]*38.5,game.tileset[0]*11,game.tileset[1]*3],
 
