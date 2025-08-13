@@ -14,7 +14,7 @@ function mainloop(){
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
                     ['Abandoned','Identify','Divider','Rocksalt'],
                     ['Bluefort','Bluefort Mini','Bluefort Micro','Railing'],
-                    ['Burnt','Confines'],
+                    ['Burnt','Confines','Ferrum'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -877,6 +877,7 @@ function mainloop(){
                         let b2s=[]
                         for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                             if(
+                                !(game.level==100&&entities.walls[0][b].type==37)&&
                                 entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
                                 entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
                                 entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
@@ -1062,6 +1063,7 @@ function mainloop(){
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                         case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
+                        case 100:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)

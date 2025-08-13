@@ -7,9 +7,9 @@ function setup(){
     if(false){
         game.classWeapon=true
 
-        game.players=20
+        game.players=5
         game.gaming=1
-        game.level=99
+        game.level=100
         menu.level=game.level
         if(true){
             game.mission=findName('Duckocracy',types.mission)
@@ -21,15 +21,15 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
-        //game.margin=true
+        dev.sight=true
+        game.margin=true
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
@@ -53,7 +53,7 @@ function mouseClicked(){
                     ['NuclearMountain','Big Data','Rusted','Tailwater'],
                     ['Abandoned','Identify','Divider','Rocksalt'],
                     ['Bluefort','Bluefort Mini','Bluefort Micro','Railing'],
-                    ['Burnt','Confines'],
+                    ['Burnt','Confines','Ferrum'],
                 ],[
                     ['DoubleMountain','Steel','Sulfate','Process'],
                     ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -737,6 +737,11 @@ function mouseClicked(){
                                                     menu.level=94
                                                 }
                                                 //confines
+                                            break
+                                            case 2:
+                                                menu.level=100
+                                                game.classicWeapon=true
+                                                //ferrum
                                             break
                                         }
                                     break
