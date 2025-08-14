@@ -3826,7 +3826,7 @@ types={
       desc:'Fires in bursts of three bullets',dpsBuff:2.5,
     },{
       name:'PlayerGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:36,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:36,
       desc:'Throws bouncing grenades',dpsBuff:1,
     },{
       name:'PlayerTrapper',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -4409,39 +4409,39 @@ types={
     
     {
       name:'PlayerMortar',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.875,crit:0,weapon:151,
+      damageBuff:1,reloadBuff:1.75,crit:0,weapon:151,
       desc:'Fires heavy shells in an arc, has a large field of view',dpsBuff:2,
     },{
       name:'PlayerShrapnelGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:170,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:170,
       desc:'Grenadier with grenades that explode into bullets',dpsBuff:2,
     },{
       name:'PlayerGrenadierFuse',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:3,reloadBuff:1.875,crit:0,weapon:280,
+      damageBuff:3,reloadBuff:1.75,crit:0,weapon:280,
       desc:'Grenadier with grenades that keep bouncing for extra time',dpsBuff:1,
     },{
       name:'PlayerFracture',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.875,crit:0,weapon:426,
+      damageBuff:2,reloadBuff:1.75,crit:0,weapon:426,
       desc:'Grenadier that explodes multiple times on hitting walls',dpsBuff:2,
     },{
       name:'PlayerIED',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.875,crit:0,weapon:436,
+      damageBuff:1,reloadBuff:1.75,crit:0,weapon:436,
       desc:'Throws strangely bouncing but very powerful explosives',dpsBuff:1,
     },{
       name:'PlayerNovgorod',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:493,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:493,
       desc:'Throws grenades that split into additional grenades',dpsBuff:1,
     },{
       name:'PlayerGrenadierTick',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:1.875,crit:0,weapon:551,
+      damageBuff:2.5,reloadBuff:1.75,crit:0,weapon:551,
       desc:'Throws grenades that drop off a time bomb on hit',dpsBuff:1,
     },{
       name:'PlayerScorcher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:650,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:650,
       desc:'Grenadier with grenades that fire flames for some time on explosion',dpsBuff:1,
     },{
       name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:188,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:188,
       desc:'Has a grenadier auto turret',dpsBuff:1,
     },
 
@@ -5253,7 +5253,7 @@ types={
       desc:'Pistol that pushes enemies on hit',dpsBuff:1,
     },{
       name:'PlayerShockGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.875,crit:0,weapon:169,
+      damageBuff:2,reloadBuff:1.75,crit:0,weapon:169,
       desc:'Grenadier with grenades that push enemies in a large radius',dpsBuff:1,
     },{
       name:'PlayerDonut',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -6645,7 +6645,7 @@ name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.4,reloadBuff:1,crit:0,weapon:723,
     },{
       name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:724,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:724,
     },{
       name:'PlayerMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:725,
@@ -7146,7 +7146,7 @@ name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:202,
     },{
       name:'SidekickGrenadier',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.875,crit:0,weapon:36,
+      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:36,
     },{
       name:'SidekickPelleter',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:332,
@@ -22566,9 +22566,9 @@ Hayden - brown crate nook
 "                 * -----         <##[    |               |       |       | <###> | ----- |       |       | ----- |    ]##>               ^                 ",
 "               ]###########[===]###[   ]###[===]###[===]###[     |   <#####################[===]###################[   ]###[===]###[   <###[               ",
 "A               ]#########[     ]#[     ]#[     ]#[     ]#[      |  <#####################[     ]#################[     ]#[     ]#[   <###[               B",
-"                 |       |       |   N   |       :       |       | <##[  |       :       |       |       |       |   N   |       |   <##[|                 ",
-"###>             |       |       |       |       :       |       |<##[   |       :       |       |       |       |       |       |  <##[ |             <###",
-"#######>   <###> |       |       | <###> | ----- :       |       <##[    | 12345 :       |       |       |       | <###> |       | <##[  | <###>   <#######",
+"                 |       |       |   N   |       :       |       | <##[  |       :       ;       |       |       |   N   |       |   <##[|                 ",
+"###>             |       |       |       |       :       |       |<##[   |       :               |       |       |       |       |  <##[ |             <###",
+"#######>   <###> |       |       | <###> | ----- :       |       <##[    | 12345 :               |       |       | <###> |       | <##[  | <###>   <#######",
 "##################[===]####################################[===]###[   ]########%%%[   ]###########>   ]###[===]#####################[   <#################",
 "#################[     ]##################################[     ]#[     ]#########[     ]###########>   ]#[     ]###################[   <##################",
 "################[        |       |       |       ]#######[       |       |       |       |       ]###>   |       |       |       |     <###################",

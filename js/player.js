@@ -89,6 +89,7 @@ class player{
         this.peace=false
         this.assort={firing:0,firingTick:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,intel:false,swivel:floor(random(0,100)),threshold:360}
         this.sidekicks=[]
+        this.bump=[false,false]
 
         this.subPlayerAType=0
         this.subPlayerBType=0
@@ -3985,10 +3986,10 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],211,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                     break
                     case 391: case 417: case 457:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                     break
                     case 392:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                     break
                     case 393:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],213,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4108,7 +4109,7 @@ class player{
                         }
                     break
                     case 411:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                         if(round(weapon.uses)%12==1){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,240,crit,this.index))
                         }
@@ -4196,7 +4197,7 @@ class player{
                     break
                     case 431:
                         let dir=random(-2,2)
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff,60,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed=6
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+dir,this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed=9
@@ -4255,7 +4256,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],240,(lsin(this.direction.main)<0?-120:120),this.id,weaponData.damage*damageBuff,720,crit,this.index))
                     break
                     case 448:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1+floor(random(0,2))*240,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1+floor(random(0,2))*240,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                     break
                     case 449:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4327,7 +4328,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 462:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                         if(round(weapon.uses)%12==1){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],181,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6,240,crit,this.index))
                         }
@@ -4541,7 +4542,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
                     break
                     case 517:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                         if(round(weapon.uses)%6==0){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1)-5,this.id,weaponData.damage*damageBuff*4,300,crit,this.index))
@@ -4655,7 +4656,7 @@ class player{
                         }
                     break
                     case 560:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                         if(round(weapon.uses)%12==1){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],117,(lsin(this.direction.main)<0?90:-90),this.id,weaponData.damage*damageBuff*3,900,crit,this.index))
                         }
@@ -6078,7 +6079,7 @@ class player{
                     case 880:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.25,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.5,150,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff/3,150,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=2
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
                     break
@@ -6194,9 +6195,6 @@ class player{
         }
         if(game.level==84){
             this.multLife(0.75)
-        }
-        if(game.level==100){
-            this.multLife(this.id==0?2:4)
         }
     }
     validTarget(target){
@@ -6431,7 +6429,7 @@ class player{
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(
                         this.validTarget(entities.players[a])&&entities.players[a].fade>=0.5||
-                        (this.weaponType==11||this.weaponType==799)&&entities.players[a].life<entities.players[a].base.life*1.5&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&(this.construct||this.fort&&!entities.players[a].construct)
+                        (this.weaponType==11||this.weaponType==799)&&entities.players[a].life<entities.players[a].base.life*1.5&&this.index!=entities.players[a].index&&!entities.players[a].playerData.name.includes('Medic')&&!entities.players[a].fort&&(this.construct||this.fort&&!entities.players[a].construct)
                     ){
                         if(this.fort&&abs(this.position.x-entities.players[a].position.x)<(this.weaponType==413?240:this.weaponType==58?720:600)&&abs(this.position.y-entities.players[a].position.y)<45||!this.fort&&(
                             abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+40&&this.weaponType!=6&&this.weaponType!=8&&this.weaponType!=11&&this.weaponType!=99&&this.weaponType!=413&&this.weaponType!=689&&this.weaponType!=730&&this.weaponType!=731&&this.weaponType!=732&&this.weaponType!=799&&this.weaponType!=826&&this.weaponType!=886||
@@ -20693,7 +20691,7 @@ class player{
                     let targets=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(
-                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0
+                            this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name=='Buster'?1500:this.id!=0?900:450)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)&&entities.players[a].life>0
                         ){
                             let b=entities.players[a]
                             let bar=[]
@@ -20827,22 +20825,32 @@ class player{
                                     case 7:
                                         switch(goalPoint){
                                             case 0: case 2: case 3: case 4: case 5:
-                                                this.target.position.x=game.tileset[0]*93.5
-                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                if(!game.point[1]){
+                                                    this.target.position.x=game.tileset[0]*85.5
+                                                    this.target.position.y=game.edge[1]
+                                                }else{
+                                                    this.target.position.x=game.tileset[0]*93.5
+                                                    this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                }
                                             break
                                             case 1:
                                                 this.target.position.x=game.tileset[0]*85.5
                                                 this.target.position.y=game.edge[1]
                                             break
                                             case 6:
-                                                this.target.position.x=game.tileset[0]*105.5
-                                                this.target.position.y=game.edge[1]
+                                                if(!game.point[1]){
+                                                    this.target.position.x=game.tileset[0]*85.5
+                                                    this.target.position.y=game.edge[1]
+                                                }else{
+                                                    this.target.position.x=game.tileset[0]*105.5
+                                                    this.target.position.y=game.edge[1]
+                                                }
                                             break
                                         }
                                     break
                                     case 8:
                                         switch(goalPoint){
-                                            case 0: case 1: case 4: case 5:
+                                            case 0: case 1: case 4:
                                                 this.target.position.x=game.tileset[0]*97.5
                                                 this.target.position.y=game.edge[1]
                                             break
@@ -20853,6 +20861,15 @@ class player{
                                             case 3:
                                                 this.target.position.x=game.tileset[0]*117.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
                                                 this.target.position.y=game.edge[1]
+                                            break
+                                            case 5:
+                                                if(!game.point[0]){
+                                                    this.target.position.x=game.tileset[0]*125.5
+                                                    this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                }else{
+                                                    this.target.position.x=game.tileset[0]*97.5
+                                                    this.target.position.y=game.edge[1]
+                                                }
                                             break
                                             case 6:
                                                 this.target.position.x=this.position.x<game.tileset[0]*129.5?game.tileset[0]*97.5:game.tileset[0]*145.5
@@ -21003,8 +21020,13 @@ class player{
                                             break
                                             case 5:
                                                 if(!game.point[0]){
-                                                    this.target.position.x=game.tileset[0]*101.5
-                                                    this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    if(!game.point[0]){
+                                                        this.target.position.x=game.tileset[0]*117.5
+                                                        this.target.position.y=game.edge[1]
+                                                    }else{
+                                                        this.target.position.x=game.tileset[0]*101.5
+                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                                    }
                                                 }else{
                                                     this.target.position.x=game.tileset[0]*65.5
                                                     this.target.position.y=game.edge[1]
@@ -21068,6 +21090,54 @@ class player{
                                         }else{
                                             this.target.position.x=game.tileset[0]*93.5
                                             this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                        }
+                                    break
+                                    case 26:
+                                        switch(goalPoint){
+                                            case 0: case 2: case 5:
+                                                this.target.position.x=game.tileset[0]*37.5
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                            case 1:
+                                                this.target.position.x=game.tileset[0]*77.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                            case 3: case 4: case 6:
+                                                this.target.position.x=game.tileset[0]*92
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            break
+                                        }
+                                    break
+                                    case 27:
+                                        switch(goalPoint){
+                                            case 0: case 1: case 5:
+                                                this.target.position.x=game.tileset[0]*41.5
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                            case 2:
+                                                this.target.position.x=game.tileset[0]*77.5+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0||game.pvp&&entities.players[game.players].id==this.id?8:1)
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                            case 3: case 4: case 6:
+                                                this.target.position.x=game.tileset[0]*113.5
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                        }
+                                    break
+                                    case 28:
+                                        switch(goalPoint){
+                                            case 0: case 2: case 3: case 4: case 5:
+                                                this.target.position.x=game.tileset[0]*93.5
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            break
+                                            case 1:
+                                                this.target.position.x=game.tileset[0]*85.5
+                                                this.target.position.y=game.edge[1]
+                                            break
+                                            case 6:
+                                                this.target.position.x=game.tileset[0]*105.5
+                                                this.target.position.y=game.edge[1]
+                                            break
                                         }
                                     break
                                     default:

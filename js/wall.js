@@ -6875,7 +6875,7 @@ class wall{
                 if(game.level==49&&!game.pvp){
                     layer.scale(1-game.pointAnim[1])
                 }else if(game.level==22||game.level==100){
-                    layer.scale(1-game.pointAnim[4])
+                    layer.scale(1-game.pointAnim[2])
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
@@ -9635,6 +9635,9 @@ class wall{
                                 visible=true
                             }
                         }
+                        if((game.level==22||game.level==100)&&!game.point[2]){
+                            visible=false
+                        }
                         this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
                         if(game.level==49&&game.pvp){
                             this.visible=smoothAnim(this.visible,game.point[1]>0&&game.point[1]<=game.players&&(abs(entities.players[game.point[1]-1].position.x-this.position.x)<300&&abs(entities.players[game.point[1]-1].position.y-this.position.y)<120),0,1,10)
@@ -10316,61 +10319,61 @@ class wall{
                     }
                 }else if(game.level==100){
                     if(abs(this.base.position.x-game.tileset[0]*91.5)<1&&!game.point[1]&&this.width<game.tileset[0]*5){
-                        this.width+=0.1
-                        this.bounder.width+=0.1
-                        this.position.x+=0.05
-                        this.bounder.position.x+=0.05
-                        this.velocity.x=0.05
+                        this.width+=1
+                        this.bounder.width+=1
+                        this.position.x+=0.5
+                        this.bounder.position.x+=0.5
+                        this.velocity.x=0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].x>this.position.x){
-                                        this.boundary[a][b][c].x+=0.1
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x+=1
                                     }
                                 }
                             }
                         }
                     }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&(!game.point[1]||game.point[0])&&this.width<game.tileset[0]*5){
-                        this.width+=0.1
-                        this.bounder.width+=0.1
-                        this.position.x+=0.05
-                        this.bounder.position.x+=0.05
-                        this.velocity.x=0.05
+                        this.width+=1
+                        this.bounder.width+=1
+                        this.position.x+=0.5
+                        this.bounder.position.x+=0.5
+                        this.velocity.x=0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].x>this.position.x){
-                                        this.boundary[a][b][c].x+=0.1
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x+=1
                                     }
                                 }
                             }
                         }
-                    }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[0]&&game.point[1]&&this.width>game.tileset[0]){
-                        this.width-=0.1
-                        this.bounder.width-=0.1
-                        this.position.x-=0.05
-                        this.bounder.position.x-=0.05
-                        this.velocity.x=-0.05
+                    }else if(abs(this.base.position.x-game.tileset[0]*20.5)<1&&!game.point[0]&&game.point[1]&&this.width>0){
+                        this.width-=1
+                        this.bounder.width-=1
+                        this.position.x-=0.5
+                        this.bounder.position.x-=0.5
+                        this.velocity.x=-0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].x>this.position.x){
-                                        this.boundary[a][b][c].x-=0.1
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x-=1
                                     }
                                 }
                             }
                         }
-                    }else if(abs(this.base.position.x-game.tileset[0]*91.5)<1&&game.point[1]&&this.width>game.tileset[0]){
-                        this.width-=0.1
+                    }else if(abs(this.base.position.x-game.tileset[0]*91.5)<1&&game.point[1]&&this.width>0){
+                        this.width-=1
                         this.bounder.width-=0.1
-                        this.position.x-=0.05
-                        this.bounder.position.x-=0.05
-                        this.velocity.x=-0.05
+                        this.position.x-=0.5
+                        this.bounder.position.x-=0.5
+                        this.velocity.x=-0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].x>this.position.x){
-                                        this.boundary[a][b][c].x-=0.1
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x-=1
                                     }
                                 }
                             }
@@ -10771,35 +10774,71 @@ class wall{
                     if(this.base.height==10){
                         if(abs(this.position.x-game.tileset[0]*49.5)<1){
                             if(!game.point[0]&&this.height<game.tileset[1]*3){
-                                this.height+=0.1
-                                this.bounder.height+=0.1
-                                this.internalBounder.height+=0.1
-                                this.position.y+=0.05
-                                this.bounder.position.y+=0.05
-                                this.internalBounder.position.y+=0.05
-                                this.velocity.y=0.1
+                                this.height+=1
+                                this.bounder.height+=1
+                                this.internalBounder.height+=1
+                                this.position.y+=0.5
+                                this.bounder.position.y+=0.5
+                                this.internalBounder.position.y+=0.5
+                                this.velocity.y=1
                                 for(let a=0,la=this.boundary.length;a<la;a++){
                                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                             if(a==0||a==2&&c==1||a==3&&c==1){
-                                                this.boundary[a][b][c].y+=0.1
+                                                this.boundary[a][b][c].y+=1
                                             }
                                         }
                                     }
                                 }
-                            }else if(game.point[0]&&this.height>10){
-                                this.height-=0.1
-                                this.bounder.height-=0.1
-                                this.internalBounder.height-=0.1
-                                this.position.y-=0.05
-                                this.bounder.position.y-=0.05
-                                this.internalBounder.position.y-=0.05
-                                this.velocity.y=-0.1
+                            }else if(game.point[0]&&this.height>0){
+                                this.height-=1
+                                this.bounder.height-=1
+                                this.internalBounder.height-=1
+                                this.position.y-=0.5
+                                this.bounder.position.y-=0.5
+                                this.internalBounder.position.y-=0.5
+                                this.velocity.y=-1
                                 for(let a=0,la=this.boundary.length;a<la;a++){
                                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                             if(a==0||a==2&&c==1||a==3&&c==1){
-                                                this.boundary[a][b][c].y-=0.1
+                                                this.boundary[a][b][c].y-=1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else if(this.position.y>game.edge[1]-game.tileset[1]*25){
+                            if(!game.point[1]&&this.height<game.tileset[1]*3){
+                                this.height+=1
+                                this.bounder.height+=1
+                                this.internalBounder.height+=1
+                                this.position.y+=0.5
+                                this.bounder.position.y+=0.5
+                                this.internalBounder.position.y+=0.5
+                                this.velocity.y=1
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(a==0||a==2&&c==1||a==3&&c==1){
+                                                this.boundary[a][b][c].y+=1
+                                            }
+                                        }
+                                    }
+                                }
+                            }else if(game.point[1]&&this.height>0){
+                                this.height-=1
+                                this.bounder.height-=1
+                                this.internalBounder.height-=1
+                                this.position.y-=0.5
+                                this.bounder.position.y-=0.5
+                                this.internalBounder.position.y-=0.5
+                                this.velocity.y=-1
+                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                            if(a==0||a==2&&c==1||a==3&&c==1){
+                                                this.boundary[a][b][c].y-=1
                                             }
                                         }
                                     }
@@ -10807,35 +10846,35 @@ class wall{
                             }
                         }else{
                             if(!game.point[2]&&this.height<game.tileset[1]*3){
-                                this.height+=0.1
-                                this.bounder.height+=0.1
-                                this.internalBounder.height+=0.1
-                                this.position.y+=0.05
-                                this.bounder.position.y+=0.05
-                                this.internalBounder.position.y+=0.05
-                                this.velocity.y=0.1
+                                this.height+=1
+                                this.bounder.height+=1
+                                this.internalBounder.height+=1
+                                this.position.y+=0.5
+                                this.bounder.position.y+=0.5
+                                this.internalBounder.position.y+=0.5
+                                this.velocity.y=1
                                 for(let a=0,la=this.boundary.length;a<la;a++){
                                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                             if(a==0||a==2&&c==1||a==3&&c==1){
-                                                this.boundary[a][b][c].y+=0.1
+                                                this.boundary[a][b][c].y+=1
                                             }
                                         }
                                     }
                                 }
-                            }else if(game.point[2]&&this.height>10){
-                                this.height-=0.1
-                                this.bounder.height-=0.1
-                                this.internalBounder.height-=0.1
-                                this.position.y-=0.05
-                                this.bounder.position.y-=0.05
-                                this.internalBounder.position.y-=0.05
-                                this.velocity.y=-0.1
+                            }else if(game.point[2]&&this.height>0){
+                                this.height-=1
+                                this.bounder.height-=1
+                                this.internalBounder.height-=1
+                                this.position.y-=0.5
+                                this.bounder.position.y-=0.5
+                                this.internalBounder.position.y-=0.5
+                                this.velocity.y=-1
                                 for(let a=0,la=this.boundary.length;a<la;a++){
                                     for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                         for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
                                             if(a==0||a==2&&c==1||a==3&&c==1){
-                                                this.boundary[a][b][c].y-=0.1
+                                                this.boundary[a][b][c].y-=1
                                             }
                                         }
                                     }
@@ -10846,19 +10885,19 @@ class wall{
                         abs(this.position.x-game.tileset[0]*49.5)<1&&!game.point[3]||
                         abs(this.position.x-game.tileset[0]*57.5)<1&&!game.point[3]||
                         abs(this.position.x-game.tileset[0]*105.5)<1&&!game.point[2]
-                    )&&this.height>10){
-                        this.height-=0.1
-                        this.bounder.height-=0.1
-                        this.internalBounder.height-=0.1
-                        this.position.y-=0.05
-                        this.bounder.position.y-=0.05
-                        this.internalBounder.position.y-=0.05
-                        this.velocity.y=-0.05
+                    )&&this.height>0){
+                        this.height-=1
+                        this.bounder.height-=1
+                        this.internalBounder.height-=1
+                        this.position.y-=0.5
+                        this.bounder.position.y-=0.5
+                        this.internalBounder.position.y-=0.5
+                        this.velocity.y=-0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].y>this.position.y){
-                                        this.boundary[a][b][c].y-=0.1
+                                    if(a==0||a==2&&c==1||a==3&&c==1){
+                                        this.boundary[a][b][c].y-=1
                                     }
                                 }
                             }
@@ -10868,18 +10907,18 @@ class wall{
                         abs(this.position.x-game.tileset[0]*57.5)<1&&!game.point[3]||
                         abs(this.position.x-game.tileset[0]*105.5)<1&&!game.point[2]
                     )&&this.height<this.base.height){
-                        this.height+=0.1
-                        this.bounder.height+=0.1
-                        this.internalBounder.height+=0.1
-                        this.position.y+=0.05
-                        this.bounder.position.y+=0.05
-                        this.internalBounder.position.y+=0.05
-                        this.velocity.y=0.05
+                        this.height+=1
+                        this.bounder.height+=1
+                        this.internalBounder.height+=1
+                        this.position.y+=0.5
+                        this.bounder.position.y+=0.5
+                        this.internalBounder.position.y+=0.5
+                        this.velocity.y=0.5
                         for(let a=0,la=this.boundary.length;a<la;a++){
                             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                                 for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                    if(this.boundary[a][b][c].y>this.position.y){
-                                        this.boundary[a][b][c].y+=0.1
+                                    if(a==0||a==2&&c==1||a==3&&c==1){
+                                        this.boundary[a][b][c].y+=1
                                     }
                                 }
                             }
@@ -11810,7 +11849,7 @@ class wall{
                                 }
                             break
                             case 57:
-                                if(!(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&!(game.level==49&&game.pvp&&this.visible<1)){
+                                if(!(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&!(game.level==49&&game.pvp&&this.visible<1)&&!(game.level==100&&!game.pvp&&game.pointAnim[2]>=1)){
                                     let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                     c.newWeaponSet(this.weapon)
                                     if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
@@ -11978,7 +12017,10 @@ class wall{
                                     }
                                     switch(d){
                                         case 0:
-                                            if(!(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1]*1.5)){
+                                            if(
+                                                !(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1]*1.5)&&
+                                                !(this.type==38&&this.base.height==10&&game.level==100&&this.height<game.tileset[1]*3&&this.height>game.tileset[1]*1.5)
+                                            ){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=max(c.velocity.y,0)
                                                 switch(this.type){

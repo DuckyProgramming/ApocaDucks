@@ -2297,12 +2297,12 @@ function generateLevel(info,layer){
                 [game.tileset[0]*24.75,game.tileset[1]*39.5,game.tileset[0]*49.5,game.tileset[1]*5],
                 [game.tileset[0]*29.5,game.tileset[1]*45,game.tileset[0]*27,game.tileset[1]*6],
                 [game.tileset[0]*46.5,game.tileset[1]*44.5,game.tileset[0]*7,game.tileset[1]*5],
-                [game.tileset[0]*70.5,game.tileset[1]*51,game.tileset[0]*55,game.tileset[1]*8],
+                [game.tileset[0]*85.5,game.tileset[1]*51,game.tileset[0]*25,game.tileset[1]*8],
                 [game.tileset[0]*77.5,game.tileset[1]*44.5,game.tileset[0]*41,game.tileset[1]*5],
 
                 [game.tileset[0]*59.75,game.tileset[1]*39.5,game.tileset[0]*20.5,game.tileset[1]*5],
                 [game.tileset[0]*75.75,game.tileset[1]*39.5,game.tileset[0]*11.5,game.tileset[1]*5],
-                [game.tileset[0]*91.25,game.tileset[1]*39.5,game.tileset[0]*19.5,game.tileset[1]*5],
+                [game.tileset[0]*85.5,game.tileset[1]*39.5,game.tileset[0]*8,game.tileset[1]*5],
                 [game.tileset[0]*118.5,game.tileset[1]*39.5,game.tileset[0]*35,game.tileset[1]*5],
                 [game.tileset[0]*145.5,game.tileset[1]*39.5,game.tileset[0]*19,game.tileset[1]*5],
 
@@ -2313,7 +2313,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*64.75,game.tileset[1]*29.5,game.tileset[0]*14.5,game.tileset[1]*5],
 
                 [game.tileset[0]*41,game.tileset[1]*29.5,game.tileset[0]*10,game.tileset[1]*5],
-                [game.tileset[0]*77.5,game.tileset[1]*24.5,game.tileset[0]*67,game.tileset[1]*5],
+                [game.tileset[0]*67.5,game.tileset[1]*24.5,game.tileset[0]*47,game.tileset[1]*5],
                 [game.tileset[0]*87.25,game.tileset[1]*29.5,game.tileset[0]*4.5,game.tileset[1]*5],
                 [game.tileset[0]*92.5,game.tileset[1]*34.5,game.tileset[0]*47,game.tileset[1]*5],
                 [game.tileset[0]*107.25,game.tileset[1]*29.5,game.tileset[0]*3.5,game.tileset[1]*5],
@@ -2325,7 +2325,9 @@ function generateLevel(info,layer){
                 [game.tileset[0]*93.5,game.tileset[1]*29.5,game.tileset[0]*8,game.tileset[1]*5],
                 
                 [game.tileset[0]*101.5,game.tileset[1]*29.5,game.tileset[0]*8,game.tileset[1]*5],
-
+                [game.tileset[0]*58,game.tileset[1]*51,game.tileset[0]*30,game.tileset[1]*8],
+                [game.tileset[0]*101,game.tileset[1]*24.5,game.tileset[0]*20,game.tileset[1]*5],
+                [game.tileset[0]*95.25,game.tileset[1]*39.5,game.tileset[0]*11.5,game.tileset[1]*5],
 
             ]
         break
@@ -8391,7 +8393,7 @@ function checkEnd(level,layer,key){
                     (game.level==17?2:1)*
                     ((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*
                     (game.level==19||game.level==42&&!game.pvp?0.625:1)*
-                    (game.level==22||game.level==100?constrain(0.75+0.025*total,1,1.5):1)*
+                    (game.level==22?constrain(0.75+0.025*total,1,1.5):1)*
                     (game.level==25?constrain(0.4+0.02*total,0.8,1):1)*
                     (game.level==27?0.9:1)*
                     (game.level==32?0.875:1)*
@@ -8407,7 +8409,8 @@ function checkEnd(level,layer,key){
                     (game.level==68?1.35:1)*
                     (game.level==79||game.level==82?2:1)*
                     (game.level==96?1.4:1)*
-                    (game.level==97?1.5:1)
+                    (game.level==97?1.5:1)*
+                    (game.level==100?constrain(0.7+0.025*total,1,1.5):1)
                 if(dispose){
                     game.stack.splice(0,1)
                 }
