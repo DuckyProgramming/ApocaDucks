@@ -9,7 +9,7 @@ function setup(){
 
         game.players=5
         game.gaming=1
-        game.level=100
+        game.level=101
         menu.level=game.level
         if(true){
             game.mission=findName('Duckocracy',types.mission)
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        //game.pvp=true
+        game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
