@@ -21,7 +21,7 @@ function mainloop(){
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
                     ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
-                    ['Confines','Blueprint'],
+                    ['Confines','Ferrum','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],

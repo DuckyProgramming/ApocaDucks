@@ -2339,7 +2339,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*29.5,game.tileset[1]*45,game.tileset[0]*27,game.tileset[1]*6],
                 [game.tileset[0]*46.5,game.tileset[1]*44.5,game.tileset[0]*7,game.tileset[1]*5],
                 [game.tileset[0]*87.5,game.tileset[1]*51,game.tileset[0]*29,game.tileset[1]*8],
-                [game.tileset[0]*77.5,game.tileset[1]*45,game.tileset[0]*41,game.tileset[1]*4],
+                [game.tileset[0]*81.75,game.tileset[1]*45,game.tileset[0]*32.5,game.tileset[1]*4],
 
                 [game.tileset[0]*58.75,game.tileset[1]*39.5,game.tileset[0]*18.5,game.tileset[1]*5],
                 [game.tileset[0]*77,game.tileset[1]*40,game.tileset[0]*14,game.tileset[1]*6],
@@ -2356,7 +2356,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*38,game.tileset[1]*29.5,game.tileset[0]*10,game.tileset[1]*5],
                 [game.tileset[0]*66,game.tileset[1]*24.5,game.tileset[0]*50,game.tileset[1]*5],
                 [game.tileset[0]*87.25,game.tileset[1]*29.5,game.tileset[0]*4.5,game.tileset[1]*5],
-                [game.tileset[0]*92.5,game.tileset[1]*34.5,game.tileset[0]*47,game.tileset[1]*5],
+                [game.tileset[0]*102.75,game.tileset[1]*34.5,game.tileset[0]*26.5,game.tileset[1]*5],
                 [game.tileset[0]*108.75,game.tileset[1]*30,game.tileset[0]*6.5,game.tileset[1]*4],
 
                 [game.tileset[0]*117,game.tileset[1]*29.5,game.tileset[0]*10,game.tileset[1]*5],
@@ -2369,16 +2369,16 @@ function generateLevel(info,layer){
                 [game.tileset[0]*58,game.tileset[1]*51,game.tileset[0]*30,game.tileset[1]*8],
                 [game.tileset[0]*102.5,game.tileset[1]*24.5,game.tileset[0]*23,game.tileset[1]*5],
                 [game.tileset[0]*95.25,game.tileset[1]*39.5,game.tileset[0]*11.5,game.tileset[1]*5],
-
                 [game.tileset[0]*50.25,game.tileset[1]*27.5,game.tileset[0]*14.5,game.tileset[1]],
-                
+
                 [game.tileset[0]*108.75,game.tileset[1]*27.5,game.tileset[0]*6.5,game.tileset[1]],
                 [game.tileset[0]*69,game.tileset[1]*38.5,game.tileset[0]*2,game.tileset[1]*3],
                 [game.tileset[0]*69,game.tileset[1]*41.5,game.tileset[0]*2,game.tileset[1]*3],
                 [game.tileset[0]*5,game.tileset[1]*34.5,game.tileset[0]*10,game.tileset[1]*5],
-
                 [game.tileset[0]*150,game.tileset[1]*34.5,game.tileset[0]*10,game.tileset[1]*5],
-                //6 is fundamentally different
+
+                [game.tileset[0]*61.25,game.tileset[1]*44.5,game.tileset[0]*8.5,game.tileset[1]*5],
+                [game.tileset[0]*78.75,game.tileset[1]*34.5,game.tileset[0]*21.5,game.tileset[1]*5],
             ]
         break
         default:
@@ -4752,6 +4752,10 @@ function generateLevel(info,layer){
                             entities.walls[0].push(new wall(graphics.main,(b-1)*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[0],game.tileset[1],54))
                             entities.walls[0].push(new wall(graphics.main,(b+2)*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[0],game.tileset[1],53))
                             clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*3+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*2,55))
+                        break
+                        case 101:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],21))
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
                         break
                         default:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],49))
@@ -8449,7 +8453,7 @@ function checkEnd(level,layer,key){
                     constrain(0.25+0.25*total,0.25,1)*
                     (game.classicRespawn?0.8:1)*
                     (
-                        game.pvp?(game.level==23||game.level==54?2.5:
+                        game.pvp?(game.level==23||game.level==54||game.level==101?2.5:
                             game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69?5:
                             game.level==4?6:20):
                             1

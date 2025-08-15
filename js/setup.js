@@ -28,8 +28,8 @@ function setup(){
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
-        dev.sight=true
-        game.margin=true
+        //dev.sight=true
+        //game.margin=true
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
@@ -60,7 +60,7 @@ function mouseClicked(){
                     ['Entropy','Rusted','Tailwater','Abandoned'],
                     ['Cooked','Divider','Rocksalt','Bluefort'],
                     ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
-                    ['Confines','Blueprint'],
+                    ['Confines','Ferrum','Blueprint'],
                 ],[
                     ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
                     ['Aerial','Alloy','Speleo','Chasm'],
@@ -762,6 +762,12 @@ function mouseClicked(){
                                                 //confines
                                             break
                                             case 1:
+                                                menu.level=101
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                //ferrum
+                                            break
+                                            case 2:
                                                 menu.level=28
                                                 game.classicWeapon=true
                                                 game.pvp=true
