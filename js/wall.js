@@ -11076,7 +11076,7 @@ class wall{
                     }else{
                         let active=false
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if((entities.players[a].fort||entities.players[a].id==0||game.point[0]==entities.players[a].id||game.point[1]==entities.players[a].id||game.point[2]==entities.players[a].id||game.point[3]==entities.players[a].id)&&abs(this.base.position.x-entities.players[a].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[a].position.y-50)<100)(
+                            if((entities.players[a].fort||entities.players[a].id==0||game.point[0]==entities.players[a].id&&!entities.players[a].construct||game.point[1]==entities.players[a].id&&!entities.players[a].construct||game.point[2]==entities.players[a].id&&!entities.players[a].construct||game.point[3]==entities.players[a].id&&!entities.players[a].construct)&&abs(this.base.position.x-entities.players[a].position.x)<200&&abs(this.base.position.y+this.base.height/2-entities.players[a].position.y-50)<100)(
                                 active=true
                             )
                         }
