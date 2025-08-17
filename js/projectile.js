@@ -28,8 +28,8 @@ class projectile{
 			this.type==284||this.type==286||this.type==290||this.type==293||this.type==303||
 			this.type==307||this.type==308||this.type==311||this.type==312||this.type==313||
 			this.type==329||this.type==336||this.type==344||this.type==349||this.type==351||
-			this.type==353||this.type==356||this.type==359||this.type==362||this.type==370||
-			this.type==375||this.type==376||this.type==378
+			this.type==353||this.type==356||this.type==359||this.type==360||this.type==362||
+			this.type==370||this.type==375||this.type==376||this.type==378
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337
 		this.bullet=false
 		this.trap=false
