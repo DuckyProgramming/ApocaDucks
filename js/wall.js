@@ -867,11 +867,11 @@ class wall{
         }
     }
     checkHorizontal(){
-        if(!this.remove){
+        if(!this.remove&&!this.vv){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&!c.exempt&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove&&!(game.level==54&&abs(this.position.x+this.width/2-game.tileset[0]*149)<1&&this.position.y>game.edge[1]*0.9)){
+                    if(c.type==this.type&&!c.exempt&&!c.vv&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove&&!(game.level==54&&abs(this.position.x+this.width/2-game.tileset[0]*149)<1&&this.position.y>game.edge[1]*0.9)){
                         if(abs(this.height-c.height)<1&&abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&abs(c.position.y-this.position.y)<1&&!c.remove){
                             this.width+=c.width
                             this.position.x+=c.width/2
@@ -889,11 +889,11 @@ class wall{
         }
     }
     checkVertical(){
-        if(!this.remove&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93))){
+        if(!this.remove&&!this.vv&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93))){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&!c.exempt&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove){
+                    if(c.type==this.type&&!c.exempt&&!c.vv&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove){
                         if(abs(this.width-c.width)<1&&abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&abs(c.position.x-this.position.x)<1&&!c.remove){
                             this.height+=c.height
                             this.position.y+=c.height/2
@@ -1198,7 +1198,8 @@ class wall{
                         }else{
                             if(
                                 this.position.y+this.height/2>c.position.y-c.height/2-1&&this.position.y+this.height/2<c.position.y+c.height/2+1&&
-                                c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1
+                                c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1&&
+                                !this.vv&&!c.vv
                             ){
                                 this.redundant[0]=true
                                 this.boundary[0]=[]
@@ -1209,7 +1210,8 @@ class wall{
                             if(
                                 this.position.y-this.height/2>c.position.y-c.height/2-1&&this.position.y-this.height/2<c.position.y+c.height/2+1&&
                                 c.position.x-c.width/2<=this.position.x-this.width/2+1&&c.position.x+c.width/2>=this.position.x+this.width/2-1&&
-                                c.gapper.length==0
+                                c.gapper.length==0&&
+                                !this.vv&&!c.vv
                             ){
                                 this.redundant[1]=true
                                 this.boundary[1]=[]
@@ -1368,7 +1370,7 @@ class wall{
                                 }
                             }
                         }
-                        if(abs((this.position.y-this.height/2)-(c.position.y-c.height/2))<1&&!this.redundant[1]&&!c.redundant[1]){
+                        if(abs((this.position.y-this.height/2)-(c.position.y-c.height/2))<1&&!this.redundant[1]&&!c.redundant[1]&&!this.vv&&!c.vv){
                             for(let e=0,le=this.boundary[1].length;e<le;e++){
                                 for(let f=0,lf=c.boundary[1].length;f<lf;f++){
                                     if(abs(this.boundary[1][e][d].x-c.boundary[1][f][1-d].x)<1){
@@ -10480,6 +10482,36 @@ class wall{
                                 }
                             }
                         }
+                    }else if(abs(this.base.position.x-game.tileset[0]*48.5)<1&&(!game.point[2]||game.point[1])&&this.width<game.tileset[0]*5){
+                        this.width+=1
+                        this.bounder.width+=1
+                        this.position.x+=0.5
+                        this.bounder.position.x+=0.5
+                        this.velocity.x=0.5
+                        for(let a=0,la=this.boundary.length;a<la;a++){
+                            for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x+=1
+                                    }
+                                }
+                            }
+                        }
+                    }else if(abs(this.base.position.x-game.tileset[0]*48.5)<1&&!game.point[1]&&game.point[2]&&this.width>0){
+                        this.width-=1
+                        this.bounder.width-=1
+                        this.position.x-=0.5
+                        this.bounder.position.x-=0.5
+                        this.velocity.x=-0.5
+                        for(let a=0,la=this.boundary.length;a<la;a++){
+                            for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                    if(a==2||(a==0||a==1)&&c==1){
+                                        this.boundary[a][b][c].x-=1
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             break
@@ -11260,6 +11292,36 @@ class wall{
                     }
                 }
             break
+        }
+        if(game.level==100&&this.vv){
+            let speed=1
+            if(game.point[1]||!game.point[2]){
+                if(this.position.x>this.base.position.x){
+                    this.position.x-=speed
+                    this.bounder.position.x-=speed
+                    this.velocity.x=-speed
+                    for(let a=0,la=this.boundary.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                            for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                this.boundary[a][b][c].x-=speed
+                            }
+                        }
+                    }
+                }
+            }else{
+                if(this.position.x<this.base.position.x+game.tileset[0]*3){
+                    this.position.x+=speed
+                    this.bounder.position.x+=speed
+                    this.velocity.x=speed
+                    for(let a=0,la=this.boundary.length;a<la;a++){
+                        for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                            for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                this.boundary[a][b][c].x+=speed
+                            }
+                        }
+                    }
+                }
+            }
         }
         if(this.reload<=0&&this.reload!=-1&&!(game.level==42&&this.type==32)){
             this.reload=0
@@ -12560,6 +12622,7 @@ class wall{
                                                                                 entities.players[entities.players.length-1].auto=true
                                                                                 game.index++
                                                                             }
+                                                                            e=le
                                                                         }
                                                                     }
                                                                     if(!hit){

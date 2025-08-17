@@ -20727,7 +20727,7 @@ class player{
                         this.manage[1]=true
                     }else{
                         let goalPoint=0
-                        goalPoint=this.base.position.x>game.edge[0]*0.8?4:this.id>0&&this.target.point>=4?this.target.point:game.point[0]?0:game.point[1]?1:game.point[2]?2:game.point[3]?3:4
+                        goalPoint=this.base.position.x>game.edge[0]*0.8?4:this.id>0&&this.target.point>=4?this.target.point:!game.point[3]?4:game.point[0]?0:game.point[1]?1:game.point[2]?2:game.point[3]?3:4
                         for(let a=0,la=game.sectors.length;a<la;a++){
                             if(inBoxBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]},width:game.sectors[a][2]-this.width/2,height:game.sectors[a][3]-this.height/2})){
                                 if(this.id==1&&this.index==0){
@@ -21249,7 +21249,8 @@ class player{
                             abs(this.position.y-entities.players[a].position.y)<(this.playerData.name=='Buster'?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                             entities.players[a].life>0&&
                             this.weaponType>=0&&entities.players[a].unProtected()&&
-                            !game.noPlayer&&!(this.id>0&&this.weaponType==-1&&this.playerData.name!='Buster')
+                            !game.noPlayer&&!(this.id>0&&this.weaponType==-1&&this.playerData.name!='Buster')&&
+                            !(this.id>0&&entities.players[a].id>0&&!game.point.includes(this.id)&&!game.point.includes(entities.players[a].id))
                         ){
                             this.target.heal=!this.validTarget(entities.players[a])
                             let b=entities.players[a]
@@ -21339,7 +21340,7 @@ class player{
                                     case 1: case 2:
                                         switch(goalPoint){
                                             case 0: case 2: case 3: case 4: case 5: case 6:
-                                                this.target.position.x=game.tileset[0]*22
+                                                this.target.position.x=game.tileset[0]*21.5
                                                 this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                             break
                                             case 1:
@@ -21359,7 +21360,7 @@ class player{
                                                 this.target.position.y=game.edge[1]
                                             break
                                             case 2: case 3: case 4: case 6:
-                                                this.target.position.x=game.tileset[0]*92
+                                                this.target.position.x=game.tileset[0]*92.5
                                                 this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                             break
                                         }
@@ -21411,7 +21412,7 @@ class player{
                                                 this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                             break
                                             case 1:
-                                                this.target.position.x=game.tileset[0]*85.5
+                                                this.target.position.x=game.tileset[0]*69.5
                                                 this.target.position.y=game.edge[1]
                                             break
                                             case 6:
@@ -21663,7 +21664,7 @@ class player{
                                                 this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                             break
                                             case 1:
-                                                this.target.position.x=game.tileset[0]*85.5
+                                                this.target.position.x=game.tileset[0]*69.5
                                                 this.target.position.y=game.edge[1]
                                             break
                                             case 6:
