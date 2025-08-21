@@ -2506,11 +2506,9 @@ class player{
                     ?2:
                     this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
                     ?0.625:
-                    this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC7'||
-                    this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'
+                    this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||
+                    this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'
                     ?1.25:
-                    this.playerData.name=='PlayerSpyC4'
-                    ?10/7:
                     this.playerData.name=='PlayerSpyC6'
                     ?5/3:
                     1
@@ -5462,7 +5460,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],333,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 684:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],90,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],207,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 685:
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -21872,13 +21870,13 @@ class player{
                         this.manage[2]=0
                     }
                 }else if(this.id==0){
-                    if(this.manage[2]==0&&(floor(random(0,360*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0))){
+                    if(this.manage[2]==0&&(floor(random(0,360*jumpMult))==0||floor(random(0,60*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0)&&game.level!=101)){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,30*jumpMult2))==0||floor(random(0,15*jumpMult2))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0
                     }
                 }else{
-                    if(this.manage[2]==0&&(floor(random(0,90*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0))){
+                    if(this.manage[2]==0&&(floor(random(0,90*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)&&!(this.fort&&this.target.position.y>(game.level==23?200:0)&&game.level!=101)){
                         this.manage[2]=1
                     }else if(this.manage[2]==1&&(floor(random(0,120*jumpMult2))==0||floor(random(0,15*jumpMult2))==0&&this.position.y<this.target.position.y+25)){
                         this.manage[2]=0

@@ -3616,7 +3616,7 @@ function generateLevel(info,layer){
                                     if(level[a][b+e]=='<'){
                                         extent++
                                     }else if(level[a][b+e]==']'){
-                                        extent+=0.5
+                                        extent+=game.level==101?1:0.5
                                     }else if(level[a][b+e]=='='){
                                         reject.push(a*lb+b+e)
                                         extent++
@@ -3753,7 +3753,7 @@ function generateLevel(info,layer){
                                         }
                                     break
                                     default:
-                                        if(level[a][b-1]=='>'&&(game.level==22||game.level==100)){
+                                        if(level[a][b-1]=='>'&&(game.level==22||game.level==100||game.level==101)){
                                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))
                                         }else if(level[a][b-1]=='>'){
                                             clumper[1].push(new wall(graphics.main,game.tileset[0]/2+(b+extent/2-0.5)*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*(2+extent),game.tileset[1]*0.4,37))

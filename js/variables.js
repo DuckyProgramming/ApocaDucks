@@ -6316,7 +6316,7 @@ types={
     },{
       name:'PlayerSpyC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:744,
-      desc:'Spy that can get a speed buff and instant invsibility on knife hit, but has less health',dpsBuff:0,
+      desc:'Spy that can get a speed buff and instant invisibility on knife hit',dpsBuff:0,
     },{
       name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:745,
@@ -16642,7 +16642,7 @@ name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
 			ammo:1,
 			damage:180,
 			cooldown:20,
-			stop:450,
+			stop:420,
 			reload:15,
 			speed:1.05,
       uses:4,
