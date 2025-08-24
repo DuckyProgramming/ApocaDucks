@@ -243,7 +243,7 @@ class player{
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
         layer.noStroke()
-        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99?250:game.level==71?150:180,this.fade)
+        layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102?250:game.level==71?150:180,this.fade)
         layer.noStroke()
         layer.textSize(10)
         if(!this.sidekick&&!this.fort||this.auto){
@@ -23704,6 +23704,17 @@ class player{
                                         entities.players[a].parachute=true
                                     }
                                 }
+                            }
+                        }
+                    }else if(game.level==102){
+                        let playerLength=entities.players.length
+                        this.base.position.x=random(500,game.edge[0]-500)
+                        this.base.position.y=0
+                        this.respawn()
+                        this.parachute=true
+                        if(entities.players.length>playerLength){
+                            for(let a=playerLength,la=entities.players.length;a<la;a++){
+                                entities.players[a].parachute=true
                             }
                         }
                     }else{

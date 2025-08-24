@@ -3,6 +3,197 @@ function mainloop(){
     background(150)
     let set=[]
     switch(stage.scene){
+        case 'menumix':
+            set=game.mapset
+            let ticker=0
+            for(let a=0,la=4+set[menu.mode].length;a<la;a++){
+                for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
+                    let pos=a>=4?[width/2-340+ticker%5*170,355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    if(a>=4){
+                        ticker++
+                    }
+                    if(
+                        a==0&&menu.players==b+1||
+                        a==1&&menu.gaming==b+1||
+                        a==2&&menu.weapon==b||
+                        a==3&&menu.mode==b+1
+                    ){
+                        fill(100,200,100)
+                    }else{
+                        fill(100)
+                    }
+                    if(a==3&&b==3){
+                        if(menu.mode==b+1){
+                            if(game.past){
+                                fill(100)
+                                rect(pos[0]-29.5,pos[1],61,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]+29.5,pos[1],61,45,10)
+                            }else{
+                                fill(100)
+                                rect(pos[0]+29.5,pos[1],61,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]-29.5,pos[1],61,45,10)
+                            }
+                        }else{
+                            rect(pos[0]+29.5,pos[1],61,45,10)
+                            rect(pos[0]-29.5,pos[1],61,45,10)
+                        }
+                    }else if(
+                        menu.mode==1&&a==4&&b==1||
+                        menu.mode==1&&a==4&&b==2||
+                        menu.mode==2&&a==4&&b==1||
+                        menu.mode==2&&a==7&&b==1||
+                        menu.mode==2&&a==8&&b==3||
+                        menu.mode==2&&a==9&&b==1||
+                        menu.mode==3&&a==9&&b==0
+                    ){
+                        rect(pos[0]+37,pos[1],76,45,10)
+                        rect(pos[0]-37,pos[1],76,45,10)
+                    }else{
+                        if(a==3){
+                            rect(pos[0],pos[1],120,45,10)
+                        }else{
+                            rect(pos[0],pos[1],150,45,10)
+                        }
+                    }
+                    fill(0)
+                    textSize(15)
+                    text(
+                        a>=4?set[menu.mode][a-4][b]:[
+                            `${b+1} Players`,
+                            `${b+1} Gaming`,
+                            ['Normal Weapons','Special Weapons','Class Weapons'][b],
+                            ['Survival','Invasion','Conquest','Arena','Aimless','Specialty'][b]
+                        ][a],pos[0],pos[1]
+                    )
+                    textSize(11.25)
+                    if(a==3){
+                        switch(b){
+                            case 0: case 1:
+                                text(`PvE`,pos[0],pos[1]+15)
+                            break
+                            case 2: case 4:
+                                text(`PvP`,pos[0],pos[1]+15)
+                            break
+                            case 3:
+                                text(`PvP`,pos[0]-30,pos[1]+15)
+                                text(`Past`,pos[0]+30,pos[1]+15)
+                            break
+                            case 5:
+                                text(`PvP/PvE`,pos[0],pos[1]+15)
+                            break
+                        }
+                    }
+                    switch(menu.mode){
+                        case 1:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 1: case 2:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Reverse`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 5:
+                                    switch(b){
+                                        case 3:
+                                            text(`Mobster`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 2:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Chaos`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 7:
+                                    switch(b){
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Nightwatch`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 8:
+                                    switch(b){
+                                        case 3:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Nightwatch`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 9:
+                                    switch(b){
+                                        case 1:
+                                            text(`Loop`,pos[0]-37,pos[1]+15)
+                                            text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 3:
+                            switch(a){
+                                case 9:
+                                    switch(b){
+                                        case 0:
+                                            text(`Loop`,pos[0]-37,pos[1]+15)
+                                            text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 6:
+                            switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 0: case 1: case 2:
+                                            text(`CTF`,pos[0],pos[1]+15)
+                                        break
+                                        case 3:
+                                            text(`Search and Destroy`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 5:
+                                    switch(b){
+                                        case 0: case 1:
+                                            text(`Duck Destruction`,pos[0],pos[1]+15)
+                                        break
+                                        case 2:
+                                            text(`Quadrants`,pos[0],pos[1]+15)
+                                        break
+                                        case 3:
+                                            text(`Heist`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 6:
+                                    switch(b){
+                                        case 2:
+                                            text(`Rise of the Duck`,pos[0],pos[1]+15)
+                                        break
+                                        case 3:
+                                            text(`Team Arena`,pos[0],pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                    }
+                }
+            }
+        break
         case 'menu':
             set=[
                 [],[
@@ -664,7 +855,7 @@ function mainloop(){
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
                     game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
-                    game.level==98||game.level==99
+                    game.level==98||game.level==99||game.level==102
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
