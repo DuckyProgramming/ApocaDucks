@@ -8653,6 +8653,10 @@ class projectile{
 								entities.projectiles[b].direction+=180
 								entities.projectiles[b].id=this.id
 								entities.projectiles[b].index=this.index
+								if(entities.projectiles[b].crit!=1){
+									entities.projectiles[b].crit=1
+									entities.projectiles[b].damage*=2.5
+								}
 							}else{
 								entities.projectiles[b].active=false
 								if(entities.projectiles[b].exploder){

@@ -46,6 +46,7 @@ function mainloop(){
                         menu.mode==2&&a==7&&b==1||
                         menu.mode==2&&a==8&&b==3||
                         menu.mode==2&&a==9&&b==1||
+                        menu.mode==2&&a==9&&b==2||
                         menu.mode==3&&a==9&&b==0
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
@@ -136,6 +137,10 @@ function mainloop(){
                                         case 1:
                                             text(`Loop`,pos[0]-37,pos[1]+15)
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                        break
+                                        case 2:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Chaos`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -1254,7 +1259,7 @@ function mainloop(){
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                         case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
-                        case 100: case 101:
+                        case 100: case 101: case 103:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
