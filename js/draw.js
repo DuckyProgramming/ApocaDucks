@@ -866,7 +866,7 @@ function mainloop(){
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(
                     game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
-                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94
+                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94||game.level==104||game.level==105
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
@@ -1259,7 +1259,7 @@ function mainloop(){
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                         case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
-                        case 100: case 101: case 103:
+                        case 100: case 101: case 103: case 104: case 105:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
