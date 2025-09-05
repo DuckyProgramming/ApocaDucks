@@ -9392,7 +9392,7 @@ class projectile{
 							entities.players[b].velocity.y-=lcos(this.direction)*12
 							entities.players[b].lastingForce[0]+=lsin(this.direction)*6
 							entities.players[b].lastingForce[1]-=lcos(this.direction)*6
-							entities.players[b].gasTime=max(360,entities.players[b].gasTime+120)
+							entities.players[b].gasTime=max(360,entities.players[b].gasTime+90)
 							entities.players[b].gasser=this.index
 						}else if(
 							this.type==23||this.type==24||this.type==33||this.type==35||this.type==39||

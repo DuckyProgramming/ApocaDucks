@@ -9,10 +9,10 @@ function setup(){
 
         game.players=5
         game.gaming=1
-        game.level=105
+        game.level=100
         menu.level=game.level
         if(true){
-            game.mission=findName('Duckocracy',types.mission)
+            game.mission=findName('Trial of the 30',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -21,7 +21,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         game.classicRespawn=true
-        game.pvp=true
+        //game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]

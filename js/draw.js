@@ -185,10 +185,10 @@ function mainloop(){
                                 break
                                 case 6:
                                     switch(b){
-                                        case 2:
+                                        case 0:
                                             text(`Rise of the Duck`,pos[0],pos[1]+15)
                                         break
-                                        case 3:
+                                        case 1:
                                             text(`Team Arena`,pos[0],pos[1]+15)
                                         break
                                     }

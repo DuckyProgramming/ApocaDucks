@@ -1,3 +1,10 @@
+899 - pistolbonker
+900 - mini sentry infinite
+901 - flame machine gun
+902 - grenadier dualic
+903 - machinegunbonker
+
+
 
 
 869 - scout10: rust scout - hold down attack to load 3 scattergun shells, when released fires them all quickly
