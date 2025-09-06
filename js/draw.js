@@ -97,9 +97,9 @@ function mainloop(){
                                         break
                                     }
                                 break
-                                case 5:
+                                case 6:
                                     switch(b){
-                                        case 3:
+                                        case 0:
                                             text(`Mobster`,pos[0],pos[1]+15)
                                         break
                                     }
@@ -801,7 +801,20 @@ function mainloop(){
                 let ticker=0
                 let lb=types.mission[game.mission].wave[a].length
                 fill(100)
-                if(lb>44){
+                if(la>20){
+                    rect(width/2+(a%5)*210-420,height/2-260+floor(a/5)*130,200,120,10)
+                    fill(0)
+                    textSize(25)
+                    text(`Wave ${a+1}`,width/2+(a%5)*210-420,height/2-295+floor(a/5)*130)
+                    textSize(8)
+                    for(let b=0;b<lb;b++){
+                        if(types.mission[game.mission].wave[a][b][0]!='Wait'){
+                            let num=types.mission[game.mission].wave[a][b][1]
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2*(menu.level==42?0.5:1):1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%5)*210-420,height/2-275+ticker*10+floor(a/5)*130)
+                            ticker++
+                        }
+                    }
+                }else if(lb>44){
                     let ticker2=0
                     rect(width/2+(a%4)*210-210,height/2+floor(a/4)*310,410,610,10)
                     fill(0)
@@ -860,7 +873,7 @@ function mainloop(){
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
                     game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
-                    game.level==98||game.level==99||game.level==102
+                    game.level==98||game.level==99||game.level==102||game.level==106
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -1298,6 +1311,9 @@ function mainloop(){
                                     }
                                 }
                             }
+                        break
+                        case 106:
+                            graphics.main[a].text('Weapons\nHere',game.edge[0]*0.5,game.edge[1]-game.tileset[1]*6.5)
                         break
                     }
                 }

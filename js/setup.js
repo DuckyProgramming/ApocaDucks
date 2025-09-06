@@ -9,10 +9,10 @@ function setup(){
 
         game.players=5
         game.gaming=1
-        game.level=100
+        game.level=106
         menu.level=game.level
         if(true){
-            game.mission=findName('Trial of the 30',types.mission)
+            game.mission=findName('Return of the 25',types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -269,9 +269,8 @@ function mouseClicked(){
                                                 //basalt
                                             break
                                             case 3:
-                                                menu.level=66
-                                                game.classicWeapon=true
-                                                //abandoned
+                                                menu.level=106
+                                                //zone 54
                                             break
                                         }
                                     break
@@ -397,6 +396,16 @@ function mouseClicked(){
                             case 6:
                                 stage.scene='mission'
                                 switch(menu.mode){
+                                    case 1:
+                                        game.classicRespawn=false
+                                        switch(b){
+                                            case 0:
+                                                menu.level=66
+                                                game.classicWeapon=true
+                                                //abandoned
+                                            break
+                                        }
+                                    break
                                     case 2:
                                         switch(b){
                                             case 0:
@@ -2347,7 +2356,15 @@ function mouseClicked(){
         case 'wave':
             for(let a=0,la=types.mission[game.mission].wave.length;a<la;a++){
                 let lb=types.mission[game.mission].wave[a].length
-                if(lb>44){
+                if(la>20){
+                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%5)*210-420,y:height/2-260+floor(a/5)*130},width:200,height:120})){
+                        stage.scene='main'
+                        display.cycle=a
+                        if(game.level==37){
+                            newWave()
+                        }
+                    }
+                }else if(lb>44){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
                         stage.scene='main'
                         display.cycle=a

@@ -1,6 +1,7 @@
-2 survival
 
-zone 54
+
+
+1 survival
 
 silence - small confines but cold
 enemies spawn from several directions
@@ -11,19 +12,10 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1858986178&searchtext=
 
 1 invasion
 
-https://steamcommunity.com/sharedfiles/filedetails/?id=3556756892&searchtext=
+bluestone
 
 1 conquest
 
 bluestone
 
 
-
-
-
-make some new missions bro
-
-some more unfair missions
-
-trial of the 25 -> unfair
-the second trial of the 25

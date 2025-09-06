@@ -23163,7 +23163,8 @@ class player{
                     dist(this.position.x,this.position.y,150,game.edge[1]-120)<80&&game.level==17||
                     dist(this.position.x,this.position.y,100,game.edge[1]-220)<80&&game.level==18||
                     dist(this.position.x,this.position.y,2250,965)<80&&(game.level==20||game.level==46)||
-                    dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21
+                    dist(this.position.x,this.position.y,3500,1200)<80&&game.level==21||
+                    dist(this.position.x,this.position.y,game.edge[0]*0.5,game.edge[1]-game.tileset[1]*6.5)<80&&game.level==106
                 )&&(this.effectiveId()>0&&this.effectiveId()<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33||game.level==101||game.level==105)&&this.effectiveId())&&!game.attacker||
                 this.effectiveId()>game.gaming&&game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&!(game.level==49&&game.pvp)&&game.level!=57&&game.level!=65&&game.level!=76&&game.level!=77&&game.level!=80&&game.level!=85&&!(game.level==89&&game.pvp)&&!(game.level==94&&game.pvp)&&game.level!=101||
                 game.attacker&&this.effectiveId()!=0||
