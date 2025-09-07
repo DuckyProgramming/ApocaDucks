@@ -6,13 +6,14 @@ function setup(){
 
     if(false){
         game.classWeapon=true
+        game.pane=false
 
         game.players=5
         game.gaming=1
-        game.level=106
+        game.level=109
         menu.level=game.level
         if(true){
-            game.mission=findName('Return of the 25',types.mission)
+            game.mission=findName(`Return of the 25`,types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -20,8 +21,8 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        game.classicRespawn=true
-        //game.pvp=true
+        //game.classicRespawn=false
+        game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -400,6 +401,10 @@ function mouseClicked(){
                                         game.classicRespawn=false
                                         switch(b){
                                             case 0:
+                                                menu.level=107
+                                                //ascent
+                                            break
+                                            case 1:
                                                 menu.level=66
                                                 game.classicWeapon=true
                                                 //abandoned
@@ -775,6 +780,30 @@ function mouseClicked(){
                                                 //cysteine
                                             break
                                             case 3:
+                                                menu.level=109
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                //cooked
+                                            break
+                                        }
+                                    break
+                                }
+                                menu.mode=0
+                            break
+                            case 10:
+                                stage.scene='mission'
+                                switch(menu.mode){
+                                    case 2:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=108
+                                                //bluestone
+                                            break
+                                        }
+                                    break
+                                    case 3:
+                                        switch(b){
+                                            case 0:
                                                 menu.level=28
                                                 game.classicWeapon=true
                                                 game.pvp=true
@@ -1897,7 +1926,7 @@ function mouseClicked(){
                             }
                             game.mission=unit
                             entities.players=[]
-                            game.pane=menu.level!=7&&menu.level!=16
+                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
                             initialGraphics()
                             if(game.level==29){
                                 newWave()
@@ -2334,7 +2363,7 @@ function mouseClicked(){
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]
-                        game.pane=menu.level!=7&&menu.level!=16
+                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
                         initialGraphics()
                         if(game.level==29){
                             newWave()
@@ -2403,7 +2432,7 @@ function instant(){
     }
     game.mission=0
     entities.players=[]
-    game.pane=menu.level!=7&&menu.level!=16
+    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
     initialGraphics()
     newLoop()
     stage.scene='wave'

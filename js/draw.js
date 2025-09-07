@@ -99,7 +99,7 @@ function mainloop(){
                                 break
                                 case 6:
                                     switch(b){
-                                        case 0:
+                                        case 1:
                                             text(`Mobster`,pos[0],pos[1]+15)
                                         break
                                     }
@@ -879,7 +879,8 @@ function mainloop(){
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
                 }else if(
                     game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
-                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94||game.level==104||game.level==105
+                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94||game.level==104||game.level==105||game.level==107||
+                    game.level==108||game.level==109
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
@@ -1138,10 +1139,17 @@ function mainloop(){
                         graphics.panePoint[a].height
                     )
                 }else if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
-                    graphics.main[a].image(
-                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                        effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                    )
+                    if(dev.sight){
+                        let h=graphics.pane[0].height*key[a]*graphics.main[a].width/graphics.pane[0].width
+                        graphics.main[a].image(
+                            graphics.pane[0],graphics.main[a].width*0.5*key[a],h*0.5,graphics.main[a].width*key[a],h
+                        )
+                    }else{
+                        graphics.main[a].image(
+                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                        )
+                    }
                     if(game.level==7){
                         if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
                             graphics.main[a].image(
@@ -1272,7 +1280,7 @@ function mainloop(){
                         case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                         case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                         case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
-                        case 100: case 101: case 103: case 104: case 105:
+                        case 100: case 101: case 103: case 104: case 105: case 108: case 109:
                             if(game.margin){
                                 graphics.main[a].noFill()
                                 graphics.main[a].stroke(255)
@@ -1314,6 +1322,9 @@ function mainloop(){
                         break
                         case 106:
                             graphics.main[a].text('Weapons\nHere',game.edge[0]*0.5,game.edge[1]-game.tileset[1]*6.5)
+                        break
+                        case 107:
+                            graphics.main[a].text('Weapons\nHere',game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21)
                         break
                     }
                 }
