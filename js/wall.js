@@ -5384,7 +5384,7 @@ class wall{
                     break
                     case 22: case 23: case 29: case 30: case 32: case 33: case 34: case 35: case 39: case 40:
                     case 41: case 43: case 44: case 49: case 50: case 52: case 53: case 56: case 61: case 71:
-                    case 74: case 75: case 82: case 83: case 85: case 87: case 100: case 101: case 102: case 103:x
+                    case 74: case 75: case 82: case 83: case 85: case 87: case 100: case 101: case 102: case 103:
                         switch(game.level){
                             case 34: case 50:
                                 layer.fill(171,137,102)
@@ -6793,14 +6793,14 @@ class wall{
                     break
                     case 108: case 109:
                         layer.noFill()
-                        layer.stroke(62,50,65)
+                        layer.stroke(92,80,95)
                         layer.strokeWeight(1.5)
                         for(let a=0,la=this.height/game.tileset[1]*2;a<la;a++){
                             layer.arc(-this.width*0.3,this.height*0.5-(a+1.25)*game.tileset[1]*0.5,this.width*1.4,game.tileset[1],0,90)
                             layer.arc(this.width*0.3,this.height*0.5-(a+1.25)*game.tileset[1]*0.5,this.width*1.4,game.tileset[1],90,180)
                         }
                         layer.noStroke()
-                        layer.fill(66,66,73)
+                        layer.fill(96,96,103)
                         layer.rect(-this.width*0.4,0,this.width*0.2,this.height)
                         layer.rect(this.width*0.4,0,this.width*0.2,this.height)
                     break

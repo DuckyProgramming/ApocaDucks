@@ -22808,11 +22808,7 @@ class player{
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 2:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*47.5
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*71.5
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*71.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                             }
@@ -22823,11 +22819,7 @@ class player{
                                         case 2:
                                             switch(goalPoint){
                                                 case 0: case 1: case 3:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*71.5
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*47.5
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*47.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 2:
@@ -22839,13 +22831,8 @@ class player{
                                         case 3:
                                             switch(goalPoint){
                                                 case 0: case 3:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*71.5
-                                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*47.5
-                                                        this.target.position.y=game.edge[1]
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*47.5
+                                                    this.target.position.y=game.edge[1]
                                                 break
                                                 case 1:
                                                     this.target.position.x=game.tileset[0]*71.5
@@ -22860,11 +22847,7 @@ class player{
                                         case 4:
                                             switch(goalPoint){
                                                 case 0: case 3:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*12.5
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*74.5
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*74.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 1:
@@ -22880,11 +22863,7 @@ class player{
                                         case 5:
                                             switch(goalPoint){
                                                 case 0: case 3:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*12.5
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*68.5
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*68.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 1:
@@ -22900,11 +22879,7 @@ class player{
                                         case 6:
                                             switch(goalPoint){
                                                 case 0: case 3:
-                                                    if(game.point[0]==0){
-                                                        this.target.position.x=game.tileset[0]*12.5
-                                                    }else{
-                                                        this.target.position.x=game.tileset[0]*71.5
-                                                    }
+                                                    this.target.position.x=game.tileset[0]*71.5
                                                     this.target.position.y=game.edge[1]
                                                 break
                                                 case 1:
@@ -22932,7 +22907,7 @@ class player{
                                                     this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                                 break
                                                 case 2:
-                                                    if(game.point[0]==0||this.position.x<game.tileset[0]*25){
+                                                    if(this.playerData.sizeBuff>=1.5||this.position.x<game.tileset[0]*25){
                                                         this.target.position.x=game.tileset[0]*15.5
                                                     }else{
                                                         this.target.position.x=game.tileset[0]*50.5
@@ -23634,7 +23609,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    let bust=game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=54&&!(game.level==55&&this.peace)&&game.level!=69&&game.level!=101&&!dm()
+                    let bust=game.bust&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=54&&!(game.level==55&&this.peace)&&game.level!=69&&game.level!=101&&game.level!=108&&game.level!=109&&!dm()
                     let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,7000,6000,5000,4000][game.players-1])*(game.classWeapon?1.25:1)*(game.peakWeapon?2:1)*(game.level==19||game.level==31||game.level==42?5:1)*(game.level==24||game.level==38||game.level==49&&game.pvp?2:1)*(game.level==32||game.level==33||game.level==58||game.level==63||game.level==70?2.5:1)
                     if(bust){
                         if(entities.players[a].stats.bust>=threshold*(entities.players[a].construct?0.5:1)&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){

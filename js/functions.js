@@ -8868,7 +8868,7 @@ function checkEnd(level,layer,key){
                     (game.classicRespawn?0.8:1)*
                     (
                         game.pvp?(game.level==23||game.level==54||game.level==101||game.level==103?2.5:
-                            game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69?5:
+                            game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69||game.level==109?5:
                             game.level==4?6:20):
                             1
                     )*
