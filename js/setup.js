@@ -6,11 +6,11 @@ function setup(){
 
     if(false){
         game.classWeapon=true
-        game.pane=false
+        //game.pane=false
 
-        game.players=5
-        game.gaming=1
-        game.level=109
+        game.players=2
+        game.gaming=2
+        game.level=111
         menu.level=game.level
         if(true){
             game.mission=findName(`Return of the 25`,types.mission)
@@ -21,7 +21,7 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=false
+        game.classicRespawn=false
         game.pvp=true
         //display.cycle=0
         //newWave()
@@ -786,6 +786,26 @@ function mouseClicked(){
                                                 //cooked
                                             break
                                         }
+                                    break
+                                    case 4:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=110
+                                                //cysteine
+                                            break
+                                            case 1:
+                                                menu.level=111
+                                                //ascent
+                                            break
+                                            case 2:
+                                                menu.level=112
+                                                //bluestone
+                                            break
+                                        }
+                                        game.pvp=true
+                                        game.classicWeapon=true
+                                        game.classicRespawn=false
+                                        instant()
                                     break
                                 }
                                 menu.mode=0
@@ -1926,7 +1946,7 @@ function mouseClicked(){
                             }
                             game.mission=unit
                             entities.players=[]
-                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
+                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
                             initialGraphics()
                             if(game.level==29){
                                 newWave()
@@ -1938,7 +1958,7 @@ function mouseClicked(){
                                 if(types.mission[game.mission].name=='Patchwork'){
                                     compileMission(types.mission[game.mission].wave)
                                 }else{
-                                    generateMission(types.mission[game.mission].wave,types.mission[game.mission].name=='Survival Lite')
+                                    generateMission(types.mission[game.mission].wave,types.mission[game.mission].name)
                                 }
                             }
                             if(game.usurp){
@@ -2363,7 +2383,7 @@ function mouseClicked(){
                         }
                         game.mission=menu.list[tick]
                         entities.players=[]
-                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
+                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
                         initialGraphics()
                         if(game.level==29){
                             newWave()
@@ -2432,7 +2452,7 @@ function instant(){
     }
     game.mission=0
     entities.players=[]
-    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109
+    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
     initialGraphics()
     newLoop()
     stage.scene='wave'

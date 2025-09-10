@@ -28,7 +28,7 @@ class player{
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
         this.base={life:this.life,position:{x:this.position.x,y:this.position.y},control:0}
         this.collect={life:this.life,time:0}
-        this.record={life:this.life}
+        this.record={life:this.life,support:false}
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
         this.die={timer:0,killer:-1}
@@ -272,9 +272,9 @@ class player{
                     if(game.level==13){
                         layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon||game.classWeapon?(game.mainline?1:2):4}`,0,-35)
+                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
                     }else if(game.level==48||game.level==57||game.level==80){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/1`,0,-35)
+                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
                     }else if(game.usurp){
                         layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.class()?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }else if(game.level==30||game.level==54&&game.pvp){
@@ -314,9 +314,9 @@ class player{
                     if(game.level==13){
                         layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                     }else if(game.level==14){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.peakWeapon||game.classWeapon?(game.mainline?1:2):4}`,0,-35)
+                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
                     }else if(game.level==48||game.level==57||game.level==80){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/1`,0,-35)
+                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
                     }else if(game.usurp){
                         layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.class()?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                     }else if(game.level==30||game.level==54&&game.pvp){
@@ -907,7 +907,7 @@ class player{
                 )
             break
             case 707: case 708: case 720: case 745: case 771: case 792:
-                if(this.subPlayerAData.name=='PlayerDirector'||this.subPlayerAData.name=='PlayerSwarmer'||this.subPlayerAData.name=='PlayerMotorizer'){
+                if(this.subPlayerAData.name=='PlayerDirector'||this.subPlayerAData.name=='PlayerSwarmer'||this.subPlayerAData.name=='PlayerMotorizer'||this.subPlayerAData.name=='PlayerHeavyDirector'||this.subPlayerAData.name=='PlayerHeavySwarmer'){
                     layer.stroke(0,255,0,this.infoAnim.bar[0]*0.5*this.fade)
                     layer.strokeWeight(3)
                     layer.line(
@@ -1222,7 +1222,8 @@ class player{
                         this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
                         this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
                         this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'||
-                        this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'||this.playerData.name=='TankSplitterPunch'||this.playerData.name=='TankSplitterFlamethrower'||this.playerData.name=='TankBuff'
+                        this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'||this.playerData.name=='TankSplitterPunch'||this.playerData.name=='TankSplitterFlamethrower'||this.playerData.name=='TankBuff'||
+                        this.playerData.name=='GrenadingTank'
                     ){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                     }else if(this.playerData.name=='MegaTank'){
@@ -1480,7 +1481,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerLightPicker',types.player))
             break
             case 'PlayerDroner':
-                this.newSubWeaponASet(findName('PlayerDirector',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyDirector',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifle',types.player))
             break
             case 'PlayerScout2':
@@ -1516,7 +1517,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerSubmachine',types.player))
             break
             case 'PlayerDroner2':
-                this.newSubWeaponASet(findName('PlayerDirector',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyDirector',types.player))
                 this.newSubWeaponBSet(findName('PlayerMarker',types.player))
             break
             case 'PlayerScout3':
@@ -1557,7 +1558,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerLightPicker',types.player))
             break
             case 'PlayerDroner3':
-                this.newSubWeaponASet(findName('PlayerSwarmer',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavySwarmer',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifle',types.player))
             break
             case 'PlayerSoldier4':
@@ -1637,7 +1638,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerLightPicker',types.player))
             break
             case 'PlayerDroner5':
-                this.newSubWeaponASet(findName('PlayerDirector',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyDirector',types.player))
                 this.newSubWeaponBSet(findName('PlayerPuller',types.player))
             break
             case 'PlayerScout6':
@@ -1673,7 +1674,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerSubmachine',types.player))
             break
             case 'PlayerDroner6':
-                this.newSubWeaponASet(findName('PlayerDirector',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyDirector',types.player))
                 this.newSubWeaponBSet(findName('PlayerMagnifyingGlass',types.player))
             break
             case 'PlayerScout7':
@@ -2269,7 +2270,7 @@ class player{
         }
         this.previous.position.x=this.position.x
         this.previous.position.y=this.position.y
-        if(!reject){
+        if(!reject&&this.id!=0){
             this.newWeapon()
         }
         this.velocity.x=0
@@ -6278,7 +6279,7 @@ class player{
             case 629: case 630: case 644: case 655: case 660: case 707: case 708: case 720: case 745: case 771:
             case 792:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
-                if(!this.sidekick&&!((this.weaponType==707||this.weaponType==708||this.weaponType==720||this.weaponType==745||this.weaponType==771||this.weaponType==792)&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer')){
+                if(!this.sidekick&&!((this.weaponType==707||this.weaponType==708||this.weaponType==720||this.weaponType==745||this.weaponType==771||this.weaponType==792)&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer')){
                     if(this.time%5==0){
                         let hit=false
                         if(![191,226,228,230,265,266].includes(this.weaponType)){
@@ -23208,7 +23209,7 @@ class player{
                             this.attack(0)
                         }
                     }else if(this.playerData.name=='PlayerDroner'||this.playerData.name=='PlayerDroner2'||this.playerData.name=='PlayerDroner3'||this.playerData.name=='PlayerDroner4'||this.playerData.name=='PlayerDroner5'||this.playerData.name=='PlayerDroner6'){
-                        if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&floor(random(0,15))==0){
+                        if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&floor(random(0,15))==0){
                             this.swapSubWeapons()
                         }
                         if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
@@ -23493,7 +23494,7 @@ class player{
                 )?0.25:this.fort&&(
                     game.level==23||game.level==26||game.level==27||game.level==33||game.level==40||game.level==43||game.level==44||game.level==47||game.level==49&&game.pvp||game.level==55||
                     game.level==58||game.level==59||game.level==65||game.level==68||game.level==70||game.level==77||game.level==83||game.level==84||game.level==85||game.level==89||
-                    game.level==94||game.level==96||game.level==97||game.level==98||game.level==99||game.level==101||game.level==103||game.level==105||game.level==108
+                    game.level==94||game.level==96||game.level==97||game.level==98||game.level==99||game.level==101||game.level==103||game.level==105||game.level==108||game.level==109
                 )?0.5:this.fort&&(game.level==79||game.level==82)
                 ?0.1:this.fort&&game.level==42?2/3:1
             )*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
@@ -25139,6 +25140,7 @@ class player{
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             entities.projectiles[a].active=false
                             if(entities.projectiles[a].exploder){
+                                entities.projectiles[a].damage*=0.5
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -25161,7 +25163,7 @@ class player{
                 case 'PunchRegen': case 'HeavyPunchRegen': case 'MedicRegen': case 'HyperMedicRegen':
                     this.life=min(this.base.life,this.life+this.base.life/600)
                 break
-                case 'BigMedicAura': case 'MedicAura': case 'HyperMedicAura':
+                case 'BigMedicAura': case 'MedicAura': case 'HyperMedicAura': case 'PlusMedicAura':
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<360&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!entities.players[a].playerData.name.includes('Tank')){
                             entities.players[a].life=min(max(entities.players[a].base.life,entities.players[a].life),entities.players[a].life+sqrt(entities.players[a].base.life)/120)

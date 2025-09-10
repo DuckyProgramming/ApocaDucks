@@ -1,13 +1,11 @@
-git push this
++2 maps (arena)
+Burnt
+-something actually new
 
-gtcs
 
-check email
 
-bio work
+eurosim controlpanel - lets me remotely add or subtract troops from people without actually seeing numbers
+check if value is higher or lower
 
-reread some stat stuff
-
-physics ap classroom work
-
-check if econ packet good+reread quantity controls chapter
+automatically paste to locked/data
+https://stackoverflow.com/questions/34870711/download-a-file-at-different-location-using-html5
