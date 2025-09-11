@@ -10,7 +10,7 @@ function setup(){
 
         game.players=2
         game.gaming=2
-        game.level=111
+        game.level=114
         menu.level=game.level
         if(true){
             game.mission=findName(`Return of the 25`,types.mission)
@@ -701,12 +701,12 @@ function mouseClicked(){
                                                 //sulfite
                                             break
                                             case 2:
-                                                menu.level=90
-                                                //confines
+                                                menu.level=113
+                                                //burnt
                                             break
                                             case 3:
-                                                menu.level=93
-                                                //zone 54
+                                                menu.level=90
+                                                //confines
                                             break
                                         }
                                         game.pvp=true
@@ -790,14 +790,18 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
+                                                menu.level=90
+                                                //confines
+                                            break
+                                            case 1:
                                                 menu.level=110
                                                 //cysteine
                                             break
-                                            case 1:
+                                            case 2:
                                                 menu.level=111
                                                 //ascent
                                             break
-                                            case 2:
+                                            case 3:
                                                 menu.level=112
                                                 //bluestone
                                             break
