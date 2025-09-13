@@ -8,8 +8,8 @@ function setup(){
         game.classWeapon=true
         //game.pane=false
 
-        game.players=2
-        game.gaming=2
+        game.players=1
+        game.gaming=1
         game.level=114
         menu.level=game.level
         if(true){
@@ -783,7 +783,7 @@ function mouseClicked(){
                                                 menu.level=109
                                                 game.classicWeapon=true
                                                 game.pvp=true
-                                                //cooked
+                                                //bluestone
                                             break
                                         }
                                     break
@@ -835,6 +835,18 @@ function mouseClicked(){
                                                 //blueprint
                                             break
                                         }
+                                    break
+                                    case 4:
+                                        switch(b){
+                                            case 0:
+                                                menu.level=114
+                                                //agar
+                                            break
+                                        }
+                                        game.pvp=true
+                                        game.classicWeapon=true
+                                        game.classicRespawn=false
+                                        instant()
                                     break
                                 }
                                 menu.mode=0

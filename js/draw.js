@@ -873,7 +873,7 @@ function mainloop(){
                     game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
                     game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
                     game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
-                    game.level==98||game.level==99||game.level==102||game.level==106
+                    game.level==98||game.level==99||game.level==102||game.level==106||game.level==114
                 ){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
@@ -1119,7 +1119,7 @@ function mainloop(){
                         for(let b=0,lb=b2s.length;b<lb;b++){
                             entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
                         }
-                        if(game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90||game.level==94){
+                        if(game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90||game.level==94||game.level==114){
                             for(let b=0,lb=b2s.length;b<lb;b++){
                                 entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
                             }

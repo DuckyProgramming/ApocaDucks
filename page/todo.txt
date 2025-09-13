@@ -1,2 +1,6 @@
 +1 maps (arena)
 -agar - floating blocks in water
+-also agar blocks on the ground not moving 
+-water treatment plant like entropy
+-has 2 layers, a sewer and a base
+point's in the sewers but crates are in the upper

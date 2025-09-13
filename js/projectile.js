@@ -29,7 +29,8 @@ class projectile{
 			this.type==307||this.type==308||this.type==311||this.type==312||this.type==313||
 			this.type==329||this.type==336||this.type==344||this.type==349||this.type==351||
 			this.type==353||this.type==356||this.type==359||this.type==360||this.type==362||
-			this.type==370||this.type==375||this.type==376||this.type==378||this.type==379
+			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
+			this.type==378||this.type==379
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337
 		this.bullet=false
 		this.trap=false
@@ -6875,13 +6876,13 @@ class projectile{
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*(1-c/140)*min(1,0.2+this.time/150))
 							entities.players[b].collect.time=450
+							entities.players[b].die.killer=this.index
 						}else{
-							entities.players[b].velocity.x+=15*(1-c/180)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=5*(1-c/180)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=22.5*(1-c/180)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=7.5*(1-c/180)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=15*(1-c/140)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=5*(1-c/140)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=22.5*(1-c/140)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=7.5*(1-c/140)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}
-						entities.players[b].die.killer=this.index
 						if(game.invis){
 							entities.players[b].visible=15
 						}
