@@ -10,7 +10,7 @@ class wall{
         this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
             this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
             this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
-            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79
+            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -93,7 +93,7 @@ class wall{
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
             case 65: case 66: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 76:
-            case 77: case 79:
+            case 77: case 79: case 80:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -8475,7 +8475,7 @@ class wall{
                     }
                 }
             break
-            case 77:
+            case 77: case 80:
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
                         layer.fill(200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,1-this.recharge/60)
@@ -9368,7 +9368,7 @@ class wall{
                         if(this.position.y>=game.tileset[1]*10){
                             switch(this.type){
                                 case 1:
-                                    layer.rect(0,0,this.width,this.height)
+                                    layer.rect(0,0,this.width+1,this.height+1)
                                 break
                                 case 17:
                                     layer.triangle(
@@ -10803,7 +10803,7 @@ class wall{
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
             case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 77:
-            case 78: case 79: 
+            case 78: case 79: case 80:
                 if(this.rainbow&&this.time%15==0){
                     switch(this.type){
                         case 61: this.type=70; break
@@ -12515,7 +12515,7 @@ class wall{
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                         this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                        this.type!=76&&this.type!=77&&this.type!=79&&
+                        this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&
                         !((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)&&
                         (
                             c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
@@ -12550,7 +12550,7 @@ class wall{
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
                             c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
-                            c.type==372||c.type==373||c.type==375||c.type==376
+                            c.type==372||c.type==373||c.type==375||c.type==376||c.type==383
                         )
                     ){
                         if(!c.stop){
@@ -12892,7 +12892,7 @@ class wall{
                         this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                         this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                         this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
-                        this.type!=77&&this.type!=79
+                        this.type!=77&&this.type!=79&&this.type!=80
                         &&!((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)
                         &&!(this.type==65&&this.recharge>0)
                     ){
@@ -12920,7 +12920,8 @@ class wall{
                                     c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
                                     c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
                                     c.type==307||c.type==308||c.type==313||c.type==336||c.type==351||
-                                    c.type==362||c.type==370||c.type==378||c.type==379
+                                    c.type==362||c.type==370||c.type==378||c.type==379||c.type==384||
+                                    c.type==385
                                 ){
                                     c.explode()
                                 }
@@ -12934,11 +12935,11 @@ class wall{
                             ||c.construct||c.sidekick))
                         &&!((this.type==9||this.type==41||this.type==63)&&(this.time<45||c.id<=0||this.recharge>0||c.life<=0||c.life>=c.base.life||c.construct||c.sidekick||c.auto))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
-                        &&!((this.type==12||this.type==70||this.type==76||this.type==77)&&(c.id<=0||this.recharge>0||c.construct||c.life<=0))
+                        &&!((this.type==12||this.type==70||this.type==76||this.type==77||this.type==80)&&(c.id<=0||this.recharge>0||c.construct||c.life<=0))
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=67&&!dm()||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerMobster'||c.control==1))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerMobster'||c.playerData.name=='PlayerTiny'))
                         &&!(this.type==65&&this.recharge>0)
-                        &&!((this.type==68||this.type==73||this.type==79)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==68||this.type==73||this.type==79||this.type==80)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&dm()&&this.position.y<game.tileset[1]*10&&this.time>600)
                     ){
@@ -13147,7 +13148,7 @@ class wall{
                                     }else{
                                         newLoop()
                                     }
-                                }else if(types.player[this.weapon].name=='PlayerRandomClass'&&!game.pvp){
+                                }else if(types.player[this.weapon].name=='PlayerRandomClass'&&!game.pvp&&game.weapon[c.id-1].length<(game.pvp?1:2)){
                                     game.weapon[c.id-1].push(listing[3][floor(random(0,listing[3].length))])
                                     this.recharge=1800
                                 }else if(this.weapon>=findName('PlayerRandomScout',types.player)&&this.weapon<findName('PlayerRandomScout',types.player)+10&&!game.pvp&&game.weapon[c.id-1].length<(game.pvp?1:2)){
@@ -13457,6 +13458,10 @@ class wall{
                             break
                             case 79:
                                 c.defendBuff=max(c.defendBuff,game.level==55?1200:480)
+                                this.remove=true
+                            break
+                            case 80:
+                                c.speedBuff=max(c.speedBuff,game.level==55?600:240)
                                 this.remove=true
                             break
                             default:
