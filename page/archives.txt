@@ -1,87 +1,8 @@
-
-
-905 - deflector scattergun, 710
-906 - quadscatter, 710
-907 - crescent scattergun, 710
-908 - wing pistol, 1
-909 - surge pistol, 1
-910 - anthrax, 793 (should apply damage over time equal to base damage *8)
-911 - rocket revolver, 3
-912 - moonshot luncher, 3
-913 - aftershock launcher, 3
-914 - semirifle, 6
-915 - kerosene, 8
-916 - degreaser, 8
-917 - bubble blaster, 8
-918 - sunthrower, 8
-919 - donker, 36
-920 - roller launcher, 36
-921 - combo grenadier, 36
-922 - stickwheel, 687
-923 - starburst launcher, 687
-924 - anticannon, 616
-925 - infinigun, 616
-926 - speed pack, 703
-927 - chainsaw, 725
-928 - tapper, 0
-929 - sentry speed buff, 685
-930 - shotgun sentry, 685
-931 - medic sniper, 6
-932 - leech medic, 11
-933 - healburst, 775
-934 - heal orb, 688
-935 - pin sniper, 6
-936 - pierce sniper, 6
-937 - bushwack, 817
-938 - glint, 335
-939 - shredder, 7
-940 - crit knife, 749
-941 - splasher, 168
-942 - discord, 202
-943 - autumn C, 383
-944 - mini auto shotgun, 689
-
-380 - deflector scattergun, 341
-381 - crescent scattergun central bullet, 341
-382 - surge pistol, 1
-383 - anthrax, 28
-384 - moonshot, 2
-385 - aftershock, 2
-386 - kerosene, 5
-387 - degreaser, 5
-388 - bubble, 5
-
-389 - donker, 30
-390 - roller, 30
-391 - combo grenadier #2, 30
-392 - stickwheel, 349
-393 - starburst, 349
-394 - infinigun, 342
-395 - medic sniper, 4
-396 - leech medic, 9
-397 - healburst, 353
-398 - heal orb, 194
-399 - pin sniper, 4
-400 - bushwack, 363
-401 - glint, 191
-402 - shredder, 5
-403 - crit knife, 348
-404 - discord, 118
-
-
-
-
-
-
-
-
-
 899 - pistolbonker
 900 - mini sentry infinite
 901 - flame machine gun
 902 - grenadier dualic
 903 - machinegunbonker
-904 - recoil destroyer (w), 212
 
 379 - rocket jump, 16
 

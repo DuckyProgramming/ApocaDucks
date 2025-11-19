@@ -9113,7 +9113,7 @@ function checkEnd(level,layer,key){
                 let total=0
                 let subTotal=0
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(!entities.players[a].fort&&!entities.players[a].record.support&&entities.players[a].playerData.name!='Buster'&&!entities.players[a].construct){
+                    if(!entities.players[a].fort&&!entities.players[a].record.support&&entities.players[a].playerData.name!='Buster'){
                         if(entities.players[a].id==0&&entities.players[a].life>0){
                             total++
                         }

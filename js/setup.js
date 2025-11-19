@@ -8,12 +8,12 @@ function setup(){
         game.classWeapon=true
         //game.pane=false
 
-        game.players=5
+        game.players=1
         game.gaming=1
-        game.level=100
+        game.level=114
         menu.level=game.level
         if(true){
-            game.mission=findName(`Duck Time`,types.mission)
+            game.mission=findName(`Return of the 25`,types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -21,8 +21,8 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=false
-        //game.pvp=true
+        game.classicRespawn=false
+        game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -33,7 +33,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        //entities.players[0].newWeaponSet(findName('PlayerPyrite',types.player))
+        //entities.players[0].newWeaponSet(findName('PlayerHealZone',types.player))
     }
 }
 function windowResized(){
