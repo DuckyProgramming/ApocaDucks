@@ -957,8 +957,14 @@ function mainloop(){
                         entities.players[c].weaponType==769||entities.players[c].weaponType==790||entities.players[c].weaponType==810||entities.players[c].weaponType==835||entities.players[c].weaponType==876||
                         (entities.players[c].weaponType==387||entities.players[c].weaponType==601)&&entities.players[c].subWeaponAType==6
                         ?(game.level==7?1.5:1.75):
-                        entities.players[c].weaponType==845?1.3:
-                        entities.players[c].weaponType==846?1.2:
+                        entities.players[c].weaponType==845||
+                        game.classWeapon&&(
+                            entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912
+                        )?1.3:
+                        entities.players[c].weaponType==846||
+                        game.classWeapon&&(
+                            entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866
+                        )?1.2:
                         entities.players[c].weaponType==613?0.75:
                         1
                     )
