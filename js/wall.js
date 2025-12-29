@@ -12550,7 +12550,8 @@ class wall{
                             c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
                             c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
-                            c.type==372||c.type==373||c.type==375||c.type==376||c.type==383
+                            c.type==372||c.type==373||c.type==375||c.type==376||c.type==383||
+                            c.type==389||c.type==390||c.type==391
                         )
                     ){
                         if(!c.stop){
@@ -12818,7 +12819,7 @@ class wall{
                                         c.explode()
                                     }
                                     c.stop=true
-                                }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170)&&c.bounceTimer==0){
+                                }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170||c.type==389)&&c.bounceTimer==0){
                                     //c.bounces++
                                     c.bounceTimer=5
                                 }else if(c.type==228&&c.bounceTimer==0){
@@ -12829,7 +12830,7 @@ class wall{
                                         c.active=false
                                     }
                                     c.explosion=1
-                                }else if(c.type==263&&c.bounceTimer==0){
+                                }else if((c.type==263||c.type==391)&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     c.explode()
@@ -12878,6 +12879,15 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
+                                }else if(c.type==390&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.velocity.x*=0.8
+                                    c.velocity.y*=0.6
+                                    if(c.bounces>=9){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }else if(c.type==366&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
@@ -12908,7 +12918,7 @@ class wall{
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
                                 c.type!=100&&c.type!=103&&c.type!=112&&c.type!=193&&c.type!=194&&
                                 c.type!=195&&c.type!=270&&c.type!=297&&c.type!=310&&c.type!=330&&
-                                c.type!=335
+                                c.type!=335&&c.type!=405
                             ){
                                 c.active=false
                                 c.speed=0

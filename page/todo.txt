@@ -1,7 +1,5 @@
 loadout system
 
-brown crates not saving ammo on class weapons
-
 scout:
 
 primary:

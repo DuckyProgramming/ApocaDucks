@@ -4,13 +4,13 @@ function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
 
-    if(false){
+    if(true){
         game.classWeapon=true
         //game.pane=false
 
         game.players=5
         game.gaming=1
-        game.level=100
+        game.level=47
         menu.level=game.level
         if(true){
             game.mission=findName(`Duck Time`,types.mission)
@@ -790,8 +790,8 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                menu.level=90
-                                                //confines
+                                                menu.level=93
+                                                //zone 54
                                             break
                                             case 1:
                                                 menu.level=110
@@ -858,6 +858,7 @@ function mouseClicked(){
                 }
             }
         break
+        /*
         case 'menu':
             set=[
                 [],[
@@ -1936,6 +1937,7 @@ function mouseClicked(){
                 }
             }
         break
+        */
         case 'mission':
             for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
                 for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){

@@ -30,7 +30,8 @@ class projectile{
 			this.type==329||this.type==336||this.type==344||this.type==349||this.type==351||
 			this.type==353||this.type==356||this.type==359||this.type==360||this.type==362||
 			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
-			this.type==378||this.type==379||this.type==384||this.type==385
+			this.type==378||this.type==379||this.type==384||this.type==385||this.type==389||
+			this.type==390||this.type==391
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337
 		this.bullet=false
 		this.trap=false
@@ -78,6 +79,7 @@ class projectile{
 			case 282: case 283: case 284: case 286: case 292: case 293: case 295: case 301: case 303: case 304:
 			case 305: case 311: case 312: case 314: case 315: case 318: case 323: case 326: case 328: case 329:
 			case 344: case 349: case 353: case 356: case 360: case 368: case 372: case 373: case 375: case 376:
+			case 389: case 390: case 391:
 				this.partisan=true
 				this.width=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283||this.type==301||this.type==303?12:
 					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373?8:
@@ -713,6 +715,11 @@ class projectile{
 				this.speed=5
 				this.time=time
 				this.secondary=false
+			break
+			case 405:
+				this.time=999
+				this.width*=12.5
+				this.height*=12.5
 			break
 			
 		}
@@ -6231,6 +6238,14 @@ class projectile{
 				layer.fill(250-this.crit*100,250-this.crit*100,250,this.fade*this.time/this.base.time)
 				layer.ellipse(0,0,45*(1-this.time/this.base.time))
 			break
+			case 405:
+				layer.fill(255,this.fade)
+				layer.ellipse(0,4,26,18)
+				layer.rect(0,-4,8,10,2)
+				layer.fill(100,210,0,this.fade)
+				layer.ellipse(0,4,24,16)
+				layer.rect(0,-4,6,8,2)
+			break
 			
 			//mark
         }
@@ -7130,7 +7145,8 @@ class projectile{
 			this.type==308||this.type==313||this.type==336||this.type==344||this.type==349||
 			this.type==351||this.type==353||this.type==356||this.type==360||this.type==362||
 			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
-			this.type==377||this.type==378||this.type==379||this.type==384
+			this.type==377||this.type==378||this.type==379||this.type==384||this.type==389||
+			this.type==390||this.type==391
 		){
 			this.fade=smoothAnim(this.fade,this.active,0,1,10)
 		}else if(
@@ -7235,7 +7251,8 @@ class projectile{
 				case 65: case 68: case 73: case 83: case 97: case 98: case 102: case 104: case 106: case 110: case 131:
 				case 135: case 136: case 147: case 166: case 169: case 170: case 176: case 226: case 235: case 240: case 258:
 				case 264: case 277: case 285: case 289: case 290: case 291: case 293: case 296: case 303: case 311: case 312:
-				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383:
+				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
+				case 391:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -9232,6 +9249,17 @@ class projectile{
 						this.explode()
 					}
 				break
+				case 405:
+					if(this.timer>900&&this.active&&this.id==0){
+						this.active=false
+						for(let a=0,la=entities.players.length;a<la;a++){
+							if(entities.players[a].id!=this.id&&!entities.players[a].fort){
+								entities.players[a].DOT.damage=max(1,entities.players[a].DOT.damage)
+								entities.players[a].DOT.active=max(300,entities.players[a].DOT.active+30)
+							}
+						}
+					}
+				break
 
 				//mark
 			}
@@ -9517,7 +9545,7 @@ class projectile{
 					}else if(this.type==348){
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
-								entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
+								entities.players[d].speedBuff=max(entities.players[d].speedBuff,360)
 								entities.players[d].visible=0
 							}
 						}

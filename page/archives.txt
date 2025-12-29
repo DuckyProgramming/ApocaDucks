@@ -67,6 +67,7 @@
 402 - shredder, 5
 403 - crit knife, 348
 404 - discord, 118
+405 - poison bottle
 
 
 

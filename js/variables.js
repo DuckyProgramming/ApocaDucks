@@ -9,6 +9,7 @@ game={
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
   sectors:[],respawners:[0,0],det:[],firstGen:true,
   deprecate:false,smile:false,yellow:false,
+  deathlink:false,sentryCarry:false,ender:false,poison:false,chess:false,//options
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
@@ -3750,6 +3751,7 @@ types={
           ['SmokeRocketLauncher',10],
           ['ShotgunMartyr',10],
           ['RapidCritApplyMedic',5],
+          ['TankShieldBuff',2],
         ],
       ],
     },{
@@ -4346,7 +4348,8 @@ types={
           ['BigPhaseCritRocketLauncher',6],
           ['BigFastPunch',6],
           ['HyperMedic',6],
-          ['ParaRocketLauncher',6],
+          ['Planetoid',3],
+          ['EnderPistol',3],
           ['GrenadierSpy',6],
         ],[
           ['CritShotgun',6],
@@ -4366,14 +4369,14 @@ types={
           ['BigBarrageCritRocketLauncher',6],
           ['TinyCritPunch',6],
           ['BigCritPistolHeal',6],
-          ['BigPistolVulnerable',6],
           ['RevolutioningTank',6],
           ['BigRapidEngineer',6],
+          ['PushShotgun',6],
         ],[
+          ['TankSplitterRandom',6],
           ['BigBarrageFlameRocketLauncher',6],
           ['BallerHealSelf',6],
           ['HyperShotgun',6],
-          ['PushShotgun',6],
           ['BigCritFastPistol',6],
           ['LongBallerShield',6],
         ],[
@@ -4397,10 +4400,12 @@ types={
           ['BigLongBaller',6],
           ['RocketLauncherStopBuff',6],
           ['BigCritSpreadSniper',6],
-          ['Spy',6],
           ['CritShotgunChain',6],
+          ['BigPistolVulnerable',6],
         ],[
-          ['FairyBaller',6],
+          ['TankShieldBuff',1],
+          ['CritFairyBaller',3],
+          ['FairyBaller',3],
           ['BigProgrammer',6],
           ['BigMultiHyperMedic',6],
           ['SpyTank',3],
@@ -7967,6 +7972,15 @@ types={
     {
       name:'Buster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'SneakBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'SpyBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'ReusableBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
     {
@@ -8160,6 +8174,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankShieldBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankDefendBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
@@ -9086,8 +9103,11 @@ types={
       name:'FairyBallerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:3,crit:1,weapon:81,
     },{
-      name:'FairyBaller',sizeBuff:1,lifeBuff:2,speedBuff:1.2,
+      name:'CritFairyBaller',sizeBuff:1,lifeBuff:2,speedBuff:1.2,
       damageBuff:1,reloadBuff:1.5,crit:1,weapon:81,
+    },{
+      name:'FairyBaller',sizeBuff:1,lifeBuff:2,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:81,
     },{
       name:'BarragePelletBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:82,
@@ -9201,7 +9221,7 @@ types={
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:95,
     },{
       name:'EngineerNode',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:95,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:96,
     },{
       name:'HyperTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -9596,6 +9616,9 @@ types={
       name:'TankSplitterPunch',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'TankSplitterRandom',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'HeavyGust',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
       damageBuff:1.5,reloadBuff:0.25,crit:0,weapon:413,
     },{
@@ -9685,6 +9708,12 @@ types={
     },{
       name:'GrenadierSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+    },{
+      name:'Planetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:531,
+    },{
+      name:'EnderPistol',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },
 
     //mark p
@@ -14536,7 +14565,7 @@ types={
 		},{
 			name:'Fentanyl',
 			ammo:15,
-			damage:100,
+			damage:60,
 			cooldown:10,
 			stop:60,
 			reload:10,
@@ -21062,22 +21091,22 @@ Hayden - brown crate nook
 "                                     <<#####################################################.    |       |    .#####.    |       |       |    .##",
 "                                 <##########################################################. ~  |       |  ~ .#####.    |       |       |    .##",
 "                                <###########################################################.=====       =====.#####.    |       |       |    .##",
-"                              <#############################################################.    |       |    .#####.    |       |       |    .##",
-"                              <#############################.................................    |       |    .......    |       |   N   |    .##",
-"                              ##############################.  : |       |       |     : |       | 12345 |       |       |       |       |    .##",
-"                              ............................... ...............=....... ...............................=====       =========    .##",
+"                              <############.....############################################.    |       |    .#####.    |       |       |    .##",
+"                              <############.   .############.................................    |       |    .......    |       |   N   |    .##",
+"                              #############. d .############.  : |       |       |     : |       | 12345 |       |       |       |       |    .##",
+"                              .............. ==.............. ...............=....... ...............................=====       =========    .##",
 "                                 |       |       |       |    .#############. .#####. .#####.    |       |       |       |       |       |    .##",
 "                                 |       |       |       |    .#####......... ....... .......    |       |       |       |       |       |    .##",
 "                                 |  ---  |       |       |    .#####.  : |               |       |       |   &   |       |       |       |  d .##",
 "                             <...............=====       |    ....... .......................=====       =========       |       =============.##",
 "                           <################.    |       |       .       |       |       |       |       |       |       |       |       |    .##",
 "ABCDEF                  <<##################.    |       |       .       |       |       |       |   N   |       |       |       |       |    .##",
-"                    <#######################.    |       |     c . f  aa | a     |       |       |       |       |  ---  | <...> |  ---  |  * .##",
-"######>>>       <<##################.........=====       =====...............    |    ....===    =========    .................................##",
-"####################################.    |       |   N   |       |       |       |    .##.       |       |    .##################################",
-"####################################.    |       |       |       |       |       |    .##.       |       |    .##################################",
-"####################################.aa f|aaa    | <...> |       |       |  ---  |    .##. g     |  ---  |    .##################################",
-"####################################...........................> | <...................##......................##################################",
+"                    <#######################.    |       |     c . f  aa | a     |       |       |       |       |  ---  | <...> |       |    .##",
+"######>>>       <<##################.........=====       =====...............    |    ....===    =========    ===......................> |  * .##",
+"####################################.    |       |   N   |       |       |       |    .##.       |       |       .####################]........##",
+"####################################.    |       |       |       |       |       |    .##.       |       |       .###############################",
+"####################################.aa f|aaa    | <...> |       |       |  ---  |    .##. g     |  ---  | <...> .###############################",
+"####################################...........................> | <...................##.........................###############################",
 "##############################################################].....[############################################################################",
 "#################################################################################################################################################",
 "#################################################################################################################################################",

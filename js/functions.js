@@ -25,7 +25,8 @@ function spy(name){
         name=='SlightlyFastSpy'||
         name=='ShotgunSpy'||
         name=='HeavySpy'||
-        name=='GrenadierSpy'
+        name=='GrenadierSpy'||
+        name=='SpyBuster'
 }
 function playerColor(owner){
     switch(owner){
@@ -1291,7 +1292,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*61,game.tileset[1]*36.5,game.tileset[0]*8,game.tileset[1]*7],
                 [game.tileset[0]*47.5,game.tileset[1]*38,game.tileset[0]*5,game.tileset[1]*4],
                 
-                [game.tileset[0]*100,game.tileset[1]*42,game.tileset[0]*20,game.tileset[1]*4],
+                [game.tileset[0]*101.5,game.tileset[1]*42,game.tileset[0]*23,game.tileset[1]*4],
                 [game.tileset[0]*72.5,game.tileset[1]*41,game.tileset[0]*145,game.tileset[1]*8],
                 [game.tileset[0]*72.5,game.tileset[1]*35,game.tileset[0]*145,game.tileset[1]*4],
                 [game.tileset[0]*72.5,game.tileset[1]*23 ,game.tileset[0]*145,game.tileset[1]*20],
@@ -4972,7 +4973,7 @@ function generateLevel(info,layer){
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],game.tileset[1]*0.25+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,47))
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],game.tileset[1]*0.25+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.5,46))
                             clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.75+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*0.5,7))
-                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],-game.tileset[1]*0.5+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,36))
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],-game.tileset[1]*0.5+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
                         break
                         case 93:
                             entities.walls[0].splice(0,0,new wall(graphics.main,(b+0.5)*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],62))
@@ -8320,6 +8321,8 @@ function findName(name,list){
 			return a
 		}
 	}
+    //print('FindName Fail: '+name)
+    //throw new Error('Ow')
 	return -1
 }
 function formatTime(frames){
