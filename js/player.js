@@ -376,7 +376,7 @@ class player{
                             layer.fill(150,this.fade)
                             layer.rect(5,-14,20,4,2)
                             layer.fill(200,this.fade)
-                            layer.rect(-5+10*constrain(this.assort.firingTime/240,0,1),-14,20*constrain(this.assort.firingTime/240,0,1),4,2)
+                            layer.rect(-5+10*constrain(this.assort.firingTime/180,0,1),-14,20*constrain(this.assort.firingTime/180,0,1),4,2)
                         }
                     }else{
                         if(this.weaponData.ammo>4){
@@ -2210,7 +2210,7 @@ class player{
                 }
             break
             case 964:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,60,7200,crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,75,7200,crit,this.index))
             break
         }
     }

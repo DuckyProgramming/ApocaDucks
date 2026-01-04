@@ -5084,7 +5084,9 @@ function generateLevel(info,layer){
     let temp=[]
     let mixed=[]
     let set=[]
+    let sets=[]
     let colorset=[]
+    let rc=[]
     switch(game.level){
         case 13:
             ticker=0
@@ -5178,14 +5180,22 @@ function generateLevel(info,layer){
         case 48:
             ticker=0
             ticker2=0
+            rc=[]
+            sets=[]
+            for(let a=0,la=10;a<la;a++){
+                sets.push(range(0,12))
+            }
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
                     if(ticker%21==0){
                         entities.walls[1][a].weapon=findName('PlayerRandomClass',types.player)
-                    }else if(ticker<21){
-                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-1)/2)
+                    }else if(ticker>=21){
+                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-22)/2)
                     }else{
-                        entities.walls[1][a].weapon=listing[3][floor(ticker2/2)+floor(ticker2/20)*10+ticker2%2*10]
+                        let set=floor(ticker2/2)
+                        let index=floor(random(0,sets[set].length))
+                        entities.walls[1][a].weapon=findName('PlayerScout',types.player)+set+sets[set][index]*10
+                        sets[set].splice(index,1)
                         ticker2++
                     }
                     ticker++
@@ -5226,21 +5236,29 @@ function generateLevel(info,layer){
         case 57:
             ticker=0
             ticker2=0
+            rc=[]
+            sets=[]
+            for(let a=0,la=10;a<la;a++){
+                sets.push(range(0,12))
+            }
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    if(ticker==0){
-                        entities.walls[1][a].weapon=findName('PlayerClassWars',types.player)
-                    }else if(ticker%21==0){
+                    if(ticker%21==0){
                         entities.walls[1][a].weapon=findName('PlayerRandomClass',types.player)
-                    }else if(ticker<21){
-                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-1)/2)
+                        rc.push(entities.walls[1][a])
+                    }else if(ticker>=21){
+                        entities.walls[1][a].weapon=findName('PlayerRandomScout',types.player)+floor((ticker-22)/2)
                     }else{
-                        entities.walls[1][a].weapon=listing[3][floor(ticker2/2)+floor(ticker2/20)*10+ticker2%2*10]
+                        let set=floor(ticker2/2)
+                        let index=floor(random(0,sets[set].length))
+                        entities.walls[1][a].weapon=findName('PlayerScout',types.player)+set+sets[set][index]*10
+                        sets[set].splice(index,1)
                         ticker2++
                     }
                     ticker++
                 }
             }
+            rc[rc.length-1].weapon=findName('PlayerClassWars',types.player)
             for(let a=0,la=game.players;a<la;a++){
                 game.weapon.push([])
                 game.weaponTick.push(0)
