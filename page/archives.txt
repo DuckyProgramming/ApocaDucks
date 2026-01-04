@@ -1,5 +1,31 @@
 
 
+
+945 - scout11
+946 - soldier11
+947 - pyro11
+948 - demoman11
+949 - heavy11
+950 - engineer11
+951 - medic11
+952 - sniper11
+953 - spy11
+954 - droner11
+955 - scout12
+956 - soldier12
+957 - pyro12
+958 - demoman12
+959 - heavy12
+960 - engineer2
+961 - medic12
+962 - sniper12
+963 - spy12
+964 - droner12
+
+
+
+
+
 905 - deflector scattergun, 710
 906 - quadscatter, 710
 907 - crescent scattergun, 710
@@ -50,24 +76,24 @@
 386 - kerosene, 5
 387 - degreaser, 5
 388 - bubble, 5
-
 389 - donker, 30
-390 - roller, 30
-391 - combo grenadier #2, 30
+    390 - roller, 30
+    391 - combo grenadier #2, 30
 392 - stickwheel, 349
-393 - starburst, 349
-394 - infinigun, 342
-395 - medic sniper, 4
+    393 - starburst, 349
+    394 - infinigun, 342
+    395 - medic sniper, 4
 396 - leech medic, 9
-397 - healburst, 353
+    397 - healburst, 353
 398 - heal orb, 194
-399 - pin sniper, 4
+    399 - pin sniper, 4
 400 - bushwack, 363
-401 - glint, 191
+    401 - glint, 191
 402 - shredder, 5
 403 - crit knife, 348
-404 - discord, 118
+404 - discord, 134
 405 - poison bottle
+406 - anticannon
 
 
 

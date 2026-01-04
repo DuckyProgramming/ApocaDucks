@@ -11079,7 +11079,7 @@ class wall{
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&game.level!=13&&game.level!=29&&game.level!=14&&game.level!=35&&game.level!=37){
+                if(this.recharge>0&&game.level!=13&&game.level!=29&&game.level!=14&&game.level!=35&&game.level!=37&&game.level!=48){
                     this.recharge--
                 }
                 if(this.falling>0&&game.level==16){
@@ -12551,7 +12551,8 @@ class wall{
                             c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
                             c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
                             c.type==372||c.type==373||c.type==375||c.type==376||c.type==383||
-                            c.type==389||c.type==390||c.type==391
+                            c.type==389||c.type==390||c.type==391||c.type==392||c.type==402||
+                            c.type==404
                         )
                     ){
                         if(!c.stop){
@@ -12809,7 +12810,8 @@ class wall{
                                     c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
                                     c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
                                     c.type==286||c.type==304||c.type==314||c.type==323||c.type==329||
-                                    c.type==349||c.type==360||c.type==368||c.type==372||c.type==375
+                                    c.type==349||c.type==360||c.type==368||c.type==372||c.type==375||
+                                    c.type==392
                                 ){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
@@ -12895,6 +12897,8 @@ class wall{
                                     if(c.bounces>=2){
                                         c.active=false
                                     }
+                                }else if(c.type==404){
+                                    c.attack=0
                                 }
                             }
                         }
@@ -12918,7 +12922,7 @@ class wall{
                                 c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
                                 c.type!=100&&c.type!=103&&c.type!=112&&c.type!=193&&c.type!=194&&
                                 c.type!=195&&c.type!=270&&c.type!=297&&c.type!=310&&c.type!=330&&
-                                c.type!=335&&c.type!=405
+                                c.type!=335&&c.type!=335&&c.type!=405
                             ){
                                 c.active=false
                                 c.speed=0
