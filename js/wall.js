@@ -12897,7 +12897,7 @@ class wall{
                                     if(c.bounces>=2){
                                         c.active=false
                                     }
-                                }else if(c.type==404){
+                                }else if(c.type==404&&d>=2){
                                     c.attack=0
                                 }
                             }
@@ -13162,6 +13162,7 @@ class wall{
                                     }else{
                                         newLoop()
                                     }
+                                    return true
                                 }else if(types.player[this.weapon].name=='PlayerRandomClass'&&!game.pvp&&game.weapon[c.id-1].length<(game.pvp?1:2)){
                                     game.weapon[c.id-1].push(listing[3][floor(random(0,listing[3].length))])
                                     this.recharge=1800

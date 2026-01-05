@@ -18288,9 +18288,9 @@ types={
 			name:'Discord',
 			ammo:1,
 			damage:0,
-			cooldown:120,
-			stop:120,
-			reload:120,
+			cooldown:90,
+			stop:90,
+			reload:90,
 			speed:1,
       uses:6.5,
 		},{

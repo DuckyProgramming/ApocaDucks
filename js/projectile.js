@@ -584,7 +584,7 @@ class projectile{
 										c.vulnerableTime=max(c.vulnerableTime,240)
 										this.remove=true
 									}else if(this.type==365&&!c.fort){
-										c.dizzyTime=25
+										entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,25)
 									}
 								}
 							}
@@ -7973,8 +7973,8 @@ class projectile{
 								this.type==404?
 								(this.attack==-1?-90:this.attack==1?90:atan2(entities.players[this.goal].position.x+lsin((this.time+this.offset)*12)*15-this.position.x,entities.players[this.goal].position.y+lcos((this.time+this.offset)*12)*15-5-this.position.y)):
 								atan2(entities.players[this.goal].position.x+lsin(entities.players[this.goal].direction.main)*100+lsin((this.time+this.offset)*6)*25-this.position.x,entities.players[this.goal].position.y+lcos((this.time+this.offset)*6)*25-60-this.position.y)
-							this.velocity.x+=lsin(dir)*(this.type==138?1:this.type==144?0.3:0.6)
-							this.velocity.y+=lcos(dir)*(this.type==138?1:this.type==144?0.3:0.6)
+							this.velocity.x+=lsin(dir)*(this.type==138?1:this.type==144?0.3:0.6)*(this.type==404&&this.attack!=0?1.5:1)
+							this.velocity.y+=lcos(dir)*(this.type==138?1:this.type==144?0.3:0.6)*(this.type==404&&this.attack!=0?1.5:1)
 						}
 						this.velocity.x*=(this.type==138?0.92:0.95)
 						this.velocity.y*=(this.type==138?0.92:0.95)
@@ -9808,6 +9808,7 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*0.4)
 					}else if(this.type==404&&this.attack!=0){
 						entities.players[b].takeDamage(this.damage*6)
+						entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,300)
 						this.attack=0
 					}else{
 						entities.players[b].takeDamage(this.damage)

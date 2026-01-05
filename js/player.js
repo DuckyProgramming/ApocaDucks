@@ -28,7 +28,7 @@ class player{
         this.offset={position:{x:0,y:12*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)}}
         this.previous={position:{x:this.position.x,y:this.position.y}}
         this.truePrevious={position:{x:this.position.x,y:this.position.y}}
-        this.infoAnim={life:1,ammo:[0,0,0,0],uses:[0,0,0,0],ammoA:[0,0,0,0],usesA:[0,0,0,0],ammoB:[0,0,0,0],usesB:[0,0,0,0]}
+        this.infoAnim={life:1,ammo:[0,0,0,0,0,0],uses:[0,0,0,0,0,0],ammoA:[0,0,0,0,0,0],usesA:[0,0,0,0,0,0],ammoB:[0,0,0,0,0,0],usesB:[0,0,0,0,0,0]}
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
         this.base={life:this.life,position:{x:this.position.x,y:this.position.y},control:0}
         this.collect={life:this.life,time:0}
@@ -340,33 +340,8 @@ class player{
             if(!game.randomizer){
                 if(this.weaponType>=0){
                     if(this.class()){
-                        if(this.subWeaponAData.ammo>4){
-                            layer.rect(0,-14,30,4,2)
-                            layer.fill(200,this.fade*this.infoAnim.life)
-                            layer.rect(-15+15*this.subWeaponA.ammo/this.subWeaponAData.ammo,-14,30*this.subWeaponA.ammo/this.subWeaponAData.ammo,4,2)
-                        }else{
-                            for(let a=0,la=this.subWeaponA.ammo;a<la;a++){
-                                layer.fill(150,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-12+a*8,-14,6)
-                                layer.fill(200,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-12+a*8,-14,4)
-                            }
-                        }
-                        layer.fill(150,this.fade*this.infoAnim.life)
-                        if((this.subWeaponAData.uses*this.ammoMult)>4){
-                            layer.rect(0,-7,30,4,2)
-                            layer.fill(0,150,255,this.fade*this.infoAnim.life)
-                            if(this.subWeaponA.uses>0){
-                                layer.rect(-15+15*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),-7,30*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),4,2)
-                            }
-                        }else{
-                            for(let a=0,la=this.subWeaponA.uses;a<la;a++){
-                                layer.fill(0,100,200,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-12+a*8,-7,6)
-                                layer.fill(0,150,255,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-12+a*8,-7,4)
-                            }
-                        }
+                        this.displayWeapon(layer,0,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
+                        this.displayWeapon(layer,0,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
                         if(this.subWeaponAType==728){
                             layer.fill(150,this.fade)
                             layer.rect(5,-14,20,4,2)
@@ -379,138 +354,22 @@ class player{
                             layer.rect(-5+10*constrain(this.assort.firingTime/180,0,1),-14,20*constrain(this.assort.firingTime/180,0,1),4,2)
                         }
                     }else{
-                        if(this.weaponData.ammo>4){
-                            layer.rect(0,-14,30,4,2)
-                            layer.fill(200,this.fade*this.infoAnim.life)
-                            layer.rect(-15+15*this.weapon.ammo/this.weaponData.ammo,-14,30*this.weapon.ammo/this.weaponData.ammo,4,2)
-                        }else{
-                            for(let a=0,la=this.weapon.ammo;a<la;a++){
-                                layer.fill(150,this.fade*this.infoAnim.ammo[a])
-                                layer.ellipse(-12+a*8,-14,6)
-                                layer.fill(200,this.fade*this.infoAnim.ammo[a])
-                                layer.ellipse(-12+a*8,-14,4)
-                            }
-                        }
-                        layer.fill(150,this.fade*this.infoAnim.life)
-                        if((this.weaponData.uses*this.ammoMult)>4){
-                            layer.rect(0,-7,30,4,2)
-                            layer.fill(0,150,255,this.fade*this.infoAnim.life)
-                            if(this.weapon.uses>0){
-                                layer.rect(-15+15*this.weapon.uses/(this.weaponData.uses*this.ammoMult),-7,30*this.weapon.uses/(this.weaponData.uses*this.ammoMult),4,2)
-                            }
-                        }else{
-                            for(let a=0,la=this.weapon.uses;a<la;a++){
-                                layer.fill(0,100,200,this.fade*this.infoAnim.uses[a])
-                                layer.ellipse(-12+a*8,-7,6)
-                                layer.fill(0,150,255,this.fade*this.infoAnim.uses[a])
-                                layer.ellipse(-12+a*8,-7,4)
-                            }
-                        }
+                        this.displayWeapon(layer,0,-14,0,this.weapon.ammo,this.weaponData.ammo,this.infoAnim.ammo)
+                        this.displayWeapon(layer,0,-7,1,this.weapon.uses,this.weaponData.uses*this.ammoMult,this.infoAnim.uses)
                     }
                     if(this.playerData.name=='PlayerConglomeration'){
-                        if(this.subWeaponAData.ammo>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(-32,-14,30,4,2)
-                            layer.fill(200,this.fade*this.infoAnim.life)
-                            layer.rect(-47+15*this.subWeaponA.ammo/this.subWeaponAData.ammo,-14,30*this.subWeaponA.ammo/this.subWeaponAData.ammo,4,2)
-                        }else{
-                            for(let a=0,la=this.subWeaponA.ammo;a<la;a++){
-                                layer.fill(150,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-44+a*8,-14,6)
-                                layer.fill(200,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-44+a*8,-14,4)
-                            }
-                        }
-                        if(this.subWeaponBData.ammo>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(32,-14,30,4,2)
-                            layer.fill(200,this.fade*this.infoAnim.life)
-                            layer.rect(17+15*this.subWeaponB.ammo/this.subWeaponBData.ammo,-14,30*this.subWeaponB.ammo/this.subWeaponBData.ammo,4,2)
-                        }else{
-                            for(let a=0,la=this.subWeaponB.ammo;a<la;a++){
-                                layer.fill(150,this.fade*this.infoAnim.ammoB[a])
-                                layer.ellipse(20+a*8,-14,6)
-                                layer.fill(200,this.fade*this.infoAnim.ammoB[a])
-                                layer.ellipse(20+a*8,-14,4)
-                            }
-                        }
-                        layer.fill(150,this.fade*this.infoAnim.life)
-                        if((this.subWeaponAData.uses*this.ammoMult)>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(-32,-7,30,4,2)
-                            layer.fill(0,150,255,this.fade*this.infoAnim.life)
-                            if(this.subWeaponA.uses>0){
-                                layer.rect(-47+15*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),-7,30*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),4,2)
-                            }
-                        }else{
-                            for(let a=0,la=this.subWeaponA.uses;a<la;a++){
-                                layer.fill(0,100,200,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-44+a*8,-7,6)
-                                layer.fill(0,150,255,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-44+a*8,-7,4)
-                            }
-                        }
-                        if((this.subWeaponBData.uses*this.ammoMult)>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(32,-7,30,4,2)
-                            layer.fill(0,150,255,this.fade*this.infoAnim.life)
-                            if(this.subWeaponB.uses>0){
-                                layer.rect(17+15*this.subWeaponB.uses/(this.subWeaponBData.uses*this.ammoMult),-7,30*this.subWeaponB.uses/(this.subWeaponBData.uses*this.ammoMult),4,2)
-                            }
-                        }else{
-                            for(let a=0,la=this.subWeaponB.uses;a<la;a++){
-                                layer.fill(0,100,200,this.fade*this.infoAnim.usesB[a])
-                                layer.ellipse(20+a*8,-7,6)
-                                layer.fill(0,150,255,this.fade*this.infoAnim.usesB[a])
-                                layer.ellipse(20+a*8,-7,4)
-                            }
-                        }
+                        this.displayWeapon(layer,-32,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
+                        this.displayWeapon(layer,-32,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
+                        this.displayWeapon(layer,32,-14,0,this.subWeaponB.ammo,this.subWeaponBData.ammo,this.infoAnim.ammoB)
+                        this.displayWeapon(layer,32,-7,1,this.subWeaponB.uses,this.subWeaponBData.uses*this.ammoMult,this.infoAnim.usesB)
                     }else if(this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'){
-                        if(this.subWeaponAData.ammo>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(-32,-14,30,4,2)
-                            layer.fill(200,this.fade*this.infoAnim.life)
-                            layer.rect(-47+15*this.subWeaponA.ammo/this.subWeaponAData.ammo,-14,30*this.subWeaponA.ammo/this.subWeaponAData.ammo,4,2)
-                        }else{
-                            for(let a=0,la=this.subWeaponA.ammo;a<la;a++){
-                                layer.fill(150,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-44+a*8,-14,6)
-                                layer.fill(200,this.fade*this.infoAnim.ammoA[a])
-                                layer.ellipse(-44+a*8,-14,4)
-                            }
-                        }
-                        layer.fill(150,this.fade*this.infoAnim.life)
-                        if((this.subWeaponAData.uses*this.ammoMult)>4){
-                            layer.fill(150,this.fade*this.infoAnim.life)
-                            layer.rect(-32,-7,30,4,2)
-                            layer.fill(0,150,255,this.fade*this.infoAnim.life)
-                            if(this.subWeaponA.uses>0){
-                                layer.rect(-47+15*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),-7,30*this.subWeaponA.uses/(this.subWeaponAData.uses*this.ammoMult),4,2)
-                            }
-                        }else{
-                            for(let a=0,la=this.subWeaponA.uses;a<la;a++){
-                                layer.fill(0,100,200,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-44+a*8,-7,6)
-                                layer.fill(0,150,255,this.fade*this.infoAnim.usesA[a])
-                                layer.ellipse(-44+a*8,-7,4)
-                            }
-                        }
+                        this.displayWeapon(layer,-32,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
+                        this.displayWeapon(layer,-32,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
                     }
                 }
             }else{        
                 if(this.weaponType>=0){
-                    if(this.weaponData.ammo>4){
-                        layer.rect(0,-7,30,4,2)
-                        layer.fill(200,this.fade*this.infoAnim.life)
-                        layer.rect(-15+15*this.weapon.ammo/this.weaponData.ammo,-7,30*this.weapon.ammo/this.weaponData.ammo,4,2)
-                    }else{
-                        for(let a=0,la=this.weapon.ammo;a<la;a++){
-                            layer.fill(150,this.fade*this.infoAnim.ammo[a])
-                            layer.ellipse(-12+a*8,-7,6)
-                            layer.fill(200,this.fade*this.infoAnim.ammo[a])
-                            layer.ellipse(-12+a*8,-7,4)
-                        }
-                    }
+                    this.displayWeapon(layer,0,-7,0,this.weapon.ammo,this.weaponData.ammo,this.infoAnim.ammo)
                 }
             }
         }
@@ -526,6 +385,63 @@ class player{
             layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,3),2)
         }
         layer.pop()
+    }
+    displayWeapon(layer,x,y,type,ammo,base,anim){
+        if(base>6){
+            layer.fill(150,this.fade*this.infoAnim.life)
+            layer.rect(x,y,30,4,2)
+            if(type==0){
+                layer.fill(200,this.fade*this.infoAnim.life)
+            }else{
+                layer.fill(0,150,255,this.fade*this.infoAnim.life)
+            }
+            layer.rect(x-15+15*ammo/base,y,30*ammo/base,4,2)
+        }else if(base==6){
+            for(let a=0,la=base;a<la;a++){
+                if(type==0){
+                    layer.fill(150,this.fade*anim[a])
+                }else{
+                    layer.fill(0,100,200,this.fade*anim[a])
+                }
+                layer.ellipse(x-13.125+a*5.25,y,4.5)
+                if(type==0){
+                    layer.fill(200,this.fade*anim[a])
+                }else{
+                    layer.fill(0,150,255,this.fade*anim[a])
+                }
+                layer.ellipse(x-13.125+a*5.25,y,3)
+            }
+        }else if(base==5){
+            for(let a=0,la=base;a<la;a++){
+                if(type==0){
+                    layer.fill(150,this.fade*anim[a])
+                }else{
+                    layer.fill(0,100,200,this.fade*anim[a])
+                }
+                layer.ellipse(x-12.5+a*6.25,y,5.25)
+                if(type==0){
+                    layer.fill(200,this.fade*anim[a])
+                }else{
+                    layer.fill(0,150,255,this.fade*anim[a])
+                }
+                layer.ellipse(x-12.5+a*6.25,y,3.5)
+            }
+        }else{
+            for(let a=0,la=base;a<la;a++){
+                if(type==0){
+                    layer.fill(150,this.fade*anim[a])
+                }else{
+                    layer.fill(0,100,200,this.fade*anim[a])
+                }
+                layer.ellipse(x-12+a*8,y,6)
+                if(type==0){
+                    layer.fill(200,this.fade*anim[a])
+                }else{
+                    layer.fill(0,150,255,this.fade*anim[a])
+                }
+                layer.ellipse(x-12+a*8,y,4)
+            }
+        }
     }
     display(layer,offsetX=0,offsetY=0){
         this.calculateParts()

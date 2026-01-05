@@ -1404,10 +1404,14 @@ function mainloop(){
             for(let a=0,la=graphics.main.length;a<la;a++){
                 entities.players[a].displayOver(graphics.main[a])
             }
+            outer:
             for(let a=0,la=run.update.length;a<la;a++){
                 for(let b=0,lb=run.update[a].length;b<lb;b++){
                     if(b<run.update[a].length){
-                        run.update[a][b].update()
+                        if(run.update[a][b].update()){
+                            a=la
+                            break outer
+                        }
                         if(run.update[a][b].remove){
                             run.update[a].splice(b,1)
                             b--

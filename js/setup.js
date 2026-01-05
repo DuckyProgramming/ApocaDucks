@@ -8,7 +8,7 @@ function setup(){
         game.classWeapon=true
         //game.pane=false
 
-        game.players=5
+        game.players=1
         game.gaming=1
         game.level=47
         menu.level=game.level
@@ -33,7 +33,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        entities.players[0].newWeaponSet(findName('PlayerDemoman11',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerDroner12',types.player))
     }
 }
 function windowResized(){
