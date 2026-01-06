@@ -6268,7 +6268,7 @@ class player{
                         entities.walls[1][entities.walls[1].length-1].formBounder()
                     break
                     case 928:
-                        for(let a=0,la=14;a<la;a++){
+                        for(let a=0,la=16;a<la;a++){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-13.5,13.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break

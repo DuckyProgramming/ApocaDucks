@@ -17135,7 +17135,7 @@ types={
 		},{
 			name:'Minibomb',
 			ammo:1,
-			damage:200,
+			damage:180,
 			cooldown:75,
 			stop:75,
 			reload:75,
