@@ -552,7 +552,11 @@ class projectile{
 							if(intersect(this.position,extend,bound[b][0],bound[b][1])){
 								let point=intersectKey(this.position,extend,bound[b][0],bound[b][1])
 								if(dist(this.position.x,this.position.y,point.x,point.y)==this.extent){
-									c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
+									if(this.type==406){
+										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.75-this.extent/400,1,1.5))
+									}else{
+										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
+									}
 									c.die.killer=this.index
 									c.collect.time=450
 									if(this.type==190&&!c.fort){

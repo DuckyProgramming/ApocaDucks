@@ -41,7 +41,18 @@ class player{
         this.spy=false
         if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||game.randomizer){
             this.spy=true
-            this.copy=floor(random(0,game.players==1?5:game.players))
+            this.copyset=range(0,game.players)
+            for(let a=0,la=entities.players.length;a<la;a++){
+                if(entities.players[a].spy){
+                    if(this.copyset.includes(entities.players[a].copy)){
+                        this.copyset.splice(this.copyset.indexOf(entities.players[a].copy),1)
+                        if(this.copyset.length==0){
+                            this.copyset=range(0,game.players)
+                        }
+                    }
+                }
+            }
+            this.copy=this.copyset[floor(random(0,this.copyset.length))]
         }
         if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||game.randomizer){
             this.active=0
@@ -337,39 +348,40 @@ class player{
         layer.fill(150,this.fade*this.infoAnim.life)
         layer.rect(0,0,30,4,2)
         if((this.id>0&&this.playerData.name!='PlayerSpy'||this.spy)&&!this.fort&&this.playerData.name!='FieldArmy'){
+            let obj=this.spy?entities.players[this.copy]:this
             if(!game.randomizer){
-                if(this.weaponType>=0){
-                    if(this.class()){
-                        this.displayWeapon(layer,0,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
-                        this.displayWeapon(layer,0,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
-                        if(this.subWeaponAType==728){
-                            layer.fill(150,this.fade)
+                if(obj.weaponType>=0){
+                    if(obj.class()){
+                        obj.displayWeapon(layer,0,-14,0,obj.subWeaponA.ammo,obj.subWeaponAData.ammo,obj.infoAnim.ammoA)
+                        obj.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
+                        if(obj.subWeaponAType==728){
+                            layer.fill(150,obj.fade)
                             layer.rect(5,-14,20,4,2)
-                            layer.fill(200,this.fade)
-                            layer.rect(-5+10*constrain(this.subWeaponA.time/90-0.4,0,4)/4,-14,20*constrain(this.subWeaponA.time/90-0.4,0,4)/4,4,2)
-                        }else if(this.subWeaponAType==919){
-                            layer.fill(150,this.fade)
+                            layer.fill(200,obj.fade)
+                            layer.rect(-5+10*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,-14,20*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,4,2)
+                        }else if(obj.subWeaponAType==919){
+                            layer.fill(150,obj.fade)
                             layer.rect(5,-14,20,4,2)
-                            layer.fill(200,this.fade)
-                            layer.rect(-5+10*constrain(this.assort.firingTime/180,0,1),-14,20*constrain(this.assort.firingTime/180,0,1),4,2)
+                            layer.fill(200,obj.fade)
+                            layer.rect(-5+10*constrain(obj.assort.firingTime/180,0,1),-14,20*constrain(obj.assort.firingTime/180,0,1),4,2)
                         }
                     }else{
-                        this.displayWeapon(layer,0,-14,0,this.weapon.ammo,this.weaponData.ammo,this.infoAnim.ammo)
-                        this.displayWeapon(layer,0,-7,1,this.weapon.uses,this.weaponData.uses*this.ammoMult,this.infoAnim.uses)
+                        obj.displayWeapon(layer,0,-14,0,obj.weapon.ammo,obj.weaponData.ammo,obj.infoAnim.ammo)
+                        obj.displayWeapon(layer,0,-7,1,obj.weapon.uses,obj.weaponData.uses*obj.ammoMult,obj.infoAnim.uses)
                     }
-                    if(this.playerData.name=='PlayerConglomeration'){
-                        this.displayWeapon(layer,-32,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
-                        this.displayWeapon(layer,-32,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
-                        this.displayWeapon(layer,32,-14,0,this.subWeaponB.ammo,this.subWeaponBData.ammo,this.infoAnim.ammoB)
-                        this.displayWeapon(layer,32,-7,1,this.subWeaponB.uses,this.subWeaponBData.uses*this.ammoMult,this.infoAnim.usesB)
-                    }else if(this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'){
-                        this.displayWeapon(layer,-32,-14,0,this.subWeaponA.ammo,this.subWeaponAData.ammo,this.infoAnim.ammoA)
-                        this.displayWeapon(layer,-32,-7,1,this.subWeaponA.uses,this.subWeaponAData.uses*this.ammoMult,this.infoAnim.usesA)
+                    if(obj.playerData.name=='PlayerConglomeration'){
+                        obj.displayWeapon(layer,-32,-14,0,obj.subWeaponA.ammo,obj.subWeaponAData.ammo,obj.infoAnim.ammoA)
+                        obj.displayWeapon(layer,-32,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
+                        obj.displayWeapon(layer,32,-14,0,obj.subWeaponB.ammo,obj.subWeaponBData.ammo,obj.infoAnim.ammoB)
+                        obj.displayWeapon(layer,32,-7,1,obj.subWeaponB.uses,obj.subWeaponBData.uses*obj.ammoMult,obj.infoAnim.usesB)
+                    }else if(obj.playerData.name=='PlayerSwitcheroo'||obj.playerData.name=='PlayerSwapper'){
+                        obj.displayWeapon(layer,-32,-14,0,obj.subWeaponA.ammo,obj.subWeaponAData.ammo,obj.infoAnim.ammoA)
+                        obj.displayWeapon(layer,-32,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
                     }
                 }
             }else{        
-                if(this.weaponType>=0){
-                    this.displayWeapon(layer,0,-7,0,this.weapon.ammo,this.weaponData.ammo,this.infoAnim.ammo)
+                if(obj.weaponType>=0){
+                    obj.displayWeapon(layer,0,-7,0,obj.weapon.ammo,obj.weaponData.ammo,obj.infoAnim.ammo)
                 }
             }
         }
@@ -1311,10 +1323,11 @@ class player{
     effectiveId(){
         return ((game.level==27||game.level==38||teamMode())&&game.pvp?this.index+1:this.id)
     }
-    getSpeed(){
+    getSpeed(first=true){
         let effectiveWeaponSpeed=this.weaponType==-1?1:this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subWeaponAData.speed:this.weaponData.speed
         let effectivePlayerSpeed=this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subPlayerAData.speedBuff:this.playerData.speedBuff
-        return (this.weaponType==-1&&this.id!=0&&!this.fort?(this.remote?effectivePlayerSpeed:1.6):effectiveWeaponSpeed*effectivePlayerSpeed)*
+        return this.spy&&first?min(this.getSpeed(false),entities.players[this.copy].getSpeed(false)):
+            (this.weaponType==-1&&this.id!=0&&!this.fort?(this.remote?effectivePlayerSpeed:1.6):effectiveWeaponSpeed*effectivePlayerSpeed)*
             (this.id>0&&game.randomizer?5/3:1)*
             (this.id!=1&&game.assault?0.45:1)*
             (this.speedBuff>0?1.5:1)*
@@ -1322,8 +1335,8 @@ class player{
             (this.chillTime>0?0.45:1)*
             (this.assort.intel?0.75:1)*
             (game.level==29&&this.id==0?1.125:1)*
-            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.25:1)*
-            (this.class()&&(this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==801||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.25:1)*
+            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928)&&this.weapon.cooldown>0&&this.weapon.uses>0?1/3:1)*
+            (this.class()&&(this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==801||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?1/3:1)*
             ((this.weaponType==883)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.1:1)*
             (this.class()&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.class()&&this.subWeaponAType==728&&this.subWeaponA.uses>0?1/3:1)*
@@ -5637,7 +5650,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],345,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 728:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*constrain(this.subWeaponA.time/90+0.6,1,5),300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*constrain(this.subWeaponA.time/60+0.6,1,5),300,crit,this.index))
                         this.subWeaponA.time=0
                     break
                     case 729:
@@ -5830,6 +5843,8 @@ class player{
                     break
                     case 775:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],353,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)
+                        this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)
                     break
                     case 776:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],354,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
@@ -6045,8 +6060,8 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],370,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 860:
-                        for(let a=0,la=8;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],371,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        for(let a=0,la=6;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],371,(lsin(this.direction.main)<0?-90:90)-25+a*10,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
                         }
                     break
@@ -6412,14 +6427,14 @@ class player{
                                 if(!fired944[0]&&distance==minimum944[0]&&lsin(this.direction.main)<0){
                                     let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
                                     for(let b=0,lb=8;b<lb;b++){
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,dir+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,dir+random(-9.375,9.375),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     }
                                     fired944[0]=true
                                 }
                                 if(!fired944[1]&&distance==minimum944[1]&&lsin(this.direction.main)>0){
                                     let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
                                     for(let b=0,lb=8;b<lb;b++){
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,dir+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,dir+random(-9.375,9.375),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     }
                                     fired944[1]=true
                                 }
@@ -6427,12 +6442,12 @@ class player{
                         }
                         if(!fired944[0]&&lsin(this.direction.main)<0){
                             for(let b=0,lb=8;b<lb;b++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,-90+random(-9.375,9.375),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             }
                         }
                         if(!fired944[1]&&lsin(this.direction.main)>0){
                             for(let b=0,lb=8;b<lb;b++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,90+random(-9.375,9.375),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             }
                         }
                     break
@@ -24134,6 +24149,13 @@ class player{
                     break
                     case 'MiniSentryCarrier':
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    break
+                    case 'Level3SentryCarrier':
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructLevel3',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
                         entities.players[entities.players.length-1].builder=this.index
