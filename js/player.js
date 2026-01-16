@@ -1426,7 +1426,7 @@ class player{
             break
             case 'PlayerDroner':
                 this.newSubWeaponASet(findName('PlayerHeavyDirector',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout2':
                 this.newSubWeaponASet(findName('PlayerScattergun',types.player))
@@ -1503,7 +1503,7 @@ class player{
             break
             case 'PlayerDroner3':
                 this.newSubWeaponASet(findName('PlayerHeavySwarmer',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerSoldier4':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
@@ -1539,7 +1539,7 @@ class player{
             break
             case 'PlayerDroner4':
                 this.newSubWeaponASet(findName('PlayerMotorizer',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerMobster':
                 this.newSubWeaponASet(findName('PlayerLightUzi',types.player))
@@ -1655,7 +1655,7 @@ class player{
             break
             case 'PlayerDroner7':
                 this.newSubWeaponASet(findName('PlayerDestroyerW',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout8':
                 this.newSubWeaponASet(findName('PlayerScattergun',types.player))
@@ -1695,7 +1695,7 @@ class player{
             break
             case 'PlayerDroner8':
                 this.newSubWeaponASet(findName('PlayerSoftwareC',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout9':
                 this.newSubWeaponASet(findName('PlayerPopperScattergun',types.player))
@@ -1735,7 +1735,7 @@ class player{
             break
             case 'PlayerDroner9':
                 this.newSubWeaponASet(findName('PlayerCrowdC',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout10':
                 this.newSubWeaponASet(findName('PlayerRustGun',types.player))
@@ -1775,7 +1775,7 @@ class player{
             break
             case 'PlayerDroner10':
                 this.newSubWeaponASet(findName('PlayerInterceptor',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerNightwatchEngineer':
                 this.newSubWeaponASet(findName('PlayerNightwatchShotgun',types.player))
@@ -1831,7 +1831,7 @@ class player{
             break
             case 'PlayerDroner11':
                 this.newSubWeaponASet(findName('PlayerLightSkysweeper',types.player))
-                this.newSubWeaponBSet(findName('PlayerHeavyAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout12':
                 this.newSubWeaponASet(findName('PlayerScattergun',types.player))
@@ -1871,7 +1871,7 @@ class player{
             break
             case 'PlayerDroner12':
                 this.newSubWeaponASet(findName('PlayerDiscord',types.player))
-                this.newSubWeaponBSet(findName('PlayerAssaultRifle',types.player))
+                this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
         }
         if(this.playerData.name!='PlayerSpy'){
@@ -2636,7 +2636,7 @@ class player{
                 this.visible=this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||this.playerData.name=='PlayerSpyC12'?180:this.playerData.name=='PlayerSpyC6'?120:15
             }
             this.assort.firing=30
-            if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||this.playerData.name=='PlayerSpyC12')&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940))&&!(this.playerData.name=='PlayerSpyC2'&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<0.5)){
+            if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||this.playerData.name=='PlayerSpyC12')&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940))&&!(this.playerData.name=='PlayerSpyC2'&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)){
                 weapon.cooldown=weaponData.cooldown
                 weapon.reload=weaponData.stop
                 weapon.ammo--
@@ -2654,7 +2654,7 @@ class player{
                     this.subWeaponB.ammo--
                     this.subWeaponB.uses--
                 }
-                if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496||weaponType==624||weaponType==941)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
+                if((weaponType==4||weaponType==149||weaponType==156||weaponType==157||weaponType==168||weaponType==187||weaponType==297||weaponType==407||weaponType==496||weaponType==624||weaponType==941||weaponType==965)&&weapon.ammo%3!=0||(weaponType==483||weaponType==511)&&weapon.ammo%2!=0){
                     weapon.cooldown*=(weaponType==297||weaponType==407?0.2:0.1)
                 }
                 if(weaponType==161){
@@ -2683,7 +2683,7 @@ class player{
                     case 3: case 180:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
-                    case 4: case 149: case 187: case 782:
+                    case 4: case 149: case 187: case 782: case 965:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 5:
@@ -5527,7 +5527,7 @@ class player{
                     case 699:
                         this.critBuff=360
                         this.vulnerableTime=360
-                        this.stunTime=45
+                        this.stunTime=30
                     break
                     case 700:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -24147,7 +24147,7 @@ class player{
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
                         }
                     break
-                    case 'MiniSentryCarrier':
+                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier':
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
@@ -26628,7 +26628,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?60:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
@@ -26673,7 +26673,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?60:100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4

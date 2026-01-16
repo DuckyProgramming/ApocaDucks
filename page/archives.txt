@@ -22,6 +22,8 @@
 963 - spy12
 964 - droner12
 
+965 - assault rifle 67 C, 4
+
 
 
 

@@ -3716,7 +3716,7 @@ types={
           ['PistolWeak',5],
           ['Level3SentryCarrier',1],
           ['PistolWeak',5],
-          ['Level3SentryCarrier',1],
+          ['FastMiniSentryCarrier',1],
           ['PistolWeak',5],
           ['BigGrenadierTier',3],
           ['HyperTank',2],
@@ -6730,6 +6730,9 @@ types={
     },{
       name:'PlayerStickyMan',sizeBuff:1,lifeBuff:4,speedBuff:1.1,
       damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
+    },{
+      name:'PlayerAssaultRifleC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:965,
     },
 
     //mark di
@@ -6906,7 +6909,7 @@ types={
     },{
       name:'PlayerSoldier3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:712,
-      desc:'Can fire a rocket launcher to attack, rocket jump, and collide with enemies',dpsBuff:0,
+      desc:'Can fire a rocket launcher to attack, rocket jump, and collide hardly with enemies',dpsBuff:0,
     },{
       name:'PlayerPyro3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:713,
@@ -7323,7 +7326,7 @@ types={
       damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
     },{
       name:'PlayerLightHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:1.5,crit:0,weapon:688,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:688,
     },{
       name:'PlayerHeavyShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.1,reloadBuff:1,crit:0,weapon:0,
@@ -7725,7 +7728,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:933,
     },{
       name:'PlayerHealOrb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:934,
+      damageBuff:1.125,reloadBuff:1,crit:0,weapon:934,
     },{
       name:'PlayerSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:935,
@@ -9717,10 +9720,13 @@ types={
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:151,
     },{
-      name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'Level3SentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'FastMiniSentryCarrier',sizeBuff:2,lifeBuff:1,speedBuff:0.8,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'Level3SentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TinyPistolShield',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
@@ -15970,7 +15976,7 @@ types={
 			ammo:1,
 			damage:1500,
 			cooldown:90,
-			stop:270,
+			stop:240,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -16179,7 +16185,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Marker Droner',
@@ -16188,7 +16194,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Marker',
@@ -16296,7 +16302,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Push Scattergun',
@@ -16328,7 +16334,7 @@ types={
 		},{
 			name:'Sheller',
 			ammo:2,
-			damage:225,
+			damage:200,
 			cooldown:65,
 			stop:155,
 			reload:25,
@@ -16521,7 +16527,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Mobile Sentry',
@@ -16555,7 +16561,7 @@ types={
 			ammo:1,
 			damage:1500,
 			cooldown:90,
-			stop:270,
+			stop:240,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -16755,7 +16761,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Peppergun',
@@ -16798,7 +16804,7 @@ types={
 			ammo:3,
 			damage:150,
 			cooldown:50,
-			stop:125,
+			stop:105,
 			reload:25,
 			speed:0.975,
       uses:15,
@@ -16816,7 +16822,7 @@ types={
 			ammo:10,
 			damage:115,
 			cooldown:15,
-			stop:120,
+			stop:105,
 			reload:18,
 			speed:0.85,
       uses:50,
@@ -16944,7 +16950,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Baseball',
@@ -17349,7 +17355,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Popper Scout',
@@ -17439,7 +17445,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Stargrazer',
@@ -17596,13 +17602,13 @@ types={
       uses:12,
 		},{
 			name:'Trench Submachine',
-			ammo:20,
+			ammo:16,
 			damage:56,
 			cooldown:5,
-			stop:55,
+			stop:65,
 			reload:2,
 			speed:1.15,
-      uses:90,
+      uses:80,
 		},{
 			name:'Viewer Revolver',
 			ammo:3,
@@ -18157,7 +18163,7 @@ types={
 			ammo:180,
 			damage:90,
 			cooldown:4,
-			stop:120,
+			stop:60,
 			reload:2,
 			speed:0.75,
       uses:90,
@@ -18274,7 +18280,7 @@ types={
 			ammo:1,
 			damage:1500,
 			cooldown:90,
-			stop:270,
+			stop:240,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -18366,7 +18372,7 @@ types={
 			cooldown:30,
 			stop:60,
 			reload:20,
-			speed:1.05,
+			speed:1.1,
       uses:12,
 		},{
 			name:'Leech Medic',
@@ -18402,7 +18408,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
 		},{
 			name:'Anthrax Scout',
@@ -18492,8 +18498,17 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1.025,
       uses:6,
+		},{
+			name:'Assault Rifle C',
+			ammo:21,
+			damage:45,
+			cooldown:15,
+			stop:72,
+			reload:4,
+			speed:1.1,
+      uses:63,
 		},
 
     /*{
