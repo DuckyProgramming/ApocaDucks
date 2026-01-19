@@ -8949,6 +8949,13 @@ function checkEnd(level,layer,key){
                                         fail=true
                                     }
                                 }
+                                for(let a=game.gaming,la=entities.players.length;a<la;a++){
+                                    if(
+                                        entities.players[a].team==0&&dist(pos[0],pos[1],entities.players[a].position.x,entities.players[a].position.y)<graphics.main[a].width*0.5*key[a]+50&&spam<10
+                                    ){
+                                        fail=true
+                                    }
+                                }
                             }
                         }
                         if(spam<100){

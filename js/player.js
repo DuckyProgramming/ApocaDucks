@@ -1388,9 +1388,9 @@ class player{
             case 'PlayerSwapper':
                 this.newSubWeaponA(2)
             break
-            case 'PlayerScout': case 'PlayerScout4':
+            case 'PlayerScout':
                 this.newSubWeaponASet(findName('PlayerScattergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
@@ -1466,7 +1466,7 @@ class player{
             break
             case 'PlayerScout3':
                 this.newSubWeaponASet(findName('PlayerPushScattergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier3':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
@@ -1505,6 +1505,10 @@ class player{
                 this.newSubWeaponASet(findName('PlayerHeavySwarmer',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
+            case 'PlayerScout4':
+                this.newSubWeaponASet(findName('PlayerScattergun',types.player))
+                this.newSubWeaponBSet(findName('PlayerWingPistol',types.player))
+            break
             case 'PlayerSoldier4':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
                 this.newSubWeaponBSet(findName('PlayerLightParachutist',types.player))
@@ -1538,7 +1542,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerSpeedKnife',types.player))
             break
             case 'PlayerDroner4':
-                this.newSubWeaponASet(findName('PlayerMotorizer',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMotorizer',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerMobster':
@@ -1547,7 +1551,7 @@ class player{
             break
             case 'PlayerScout5':
                 this.newSubWeaponASet(findName('PlayerPeppergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier5':
                 this.newSubWeaponASet(findName('PlayerBlastLauncher',types.player))
@@ -1699,7 +1703,7 @@ class player{
             break
             case 'PlayerScout9':
                 this.newSubWeaponASet(findName('PlayerPopperScattergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier9':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
@@ -1739,7 +1743,7 @@ class player{
             break
             case 'PlayerScout10':
                 this.newSubWeaponASet(findName('PlayerRustGun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier10':
                 this.newSubWeaponASet(findName('PlayerGarbageLauncherC',types.player))
@@ -1795,7 +1799,7 @@ class player{
             break
             case 'PlayerScout11':
                 this.newSubWeaponASet(findName('PlayerDeflectorScattergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistol',types.player))
+                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
             break
             case 'PlayerSoldier11':
                 this.newSubWeaponASet(findName('PlayerAftershockLauncher',types.player))
@@ -2538,7 +2542,7 @@ class player{
                     this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
                     ?2:
                     this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
-                    ?0.625:
+                    ?0.6:
                     this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||
                     this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||
                     this.playerData.name=='PlayerSpyC12'
@@ -2571,7 +2575,7 @@ class player{
                 this.visible2=30
             }else if(this.playerData.name=='PlayerSpyC6'){
                 this.visible2=15
-            }else if(this.playerData.name=='PlayerSpyC2'&&this.life<this.base.life*0.9){
+            }else if(this.playerData.name=='PlayerSpyC2'&&this.life<this.base.life*0.9&&this.assort.firing<=0){
                 if(this.visible==0||this.visible>595){
                     this.visible=600
                 }else{
@@ -2669,7 +2673,7 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
-                    case 1: case 131: case 142: case 178: case 470: case 549: case 813: case 899:
+                    case 1: case 131: case 142: case 178: case 470: case 549: case 813: case 899: case 966: case 967:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 2: case 161: case 176: case 179: case 189: case 190: case 195: case 211: case 222: case 225:
@@ -26606,7 +26610,7 @@ class player{
                 break
                 case 'TankShieldBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id){
+                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<180&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id){
                             entities.players[a].shieldBuff=max(entities.players[a].shieldBuff,15)
                         }
                     }

@@ -7723,7 +7723,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%5==0&&this.active&&a==0){
@@ -7747,7 +7747,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.active&&a==0){
@@ -7818,7 +7818,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					this.velocity.x=this.speed*lsin(this.direction)
@@ -7895,7 +7895,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					this.velocity.x=this.speed*lsin(this.direction)
@@ -8330,7 +8330,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.active&&a==0){
@@ -8696,7 +8696,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
@@ -8707,7 +8707,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(a==0){
@@ -8833,7 +8833,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(a==0&&this.speed>0){
@@ -8847,7 +8847,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%5==0&&a==0&&this.active){
@@ -8859,7 +8859,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
@@ -8870,7 +8870,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%20==0&&this.active&&a==0){
@@ -9024,7 +9024,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%15==0&&this.active&&a==0){
@@ -9053,7 +9053,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
@@ -9079,7 +9079,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
@@ -9091,7 +9091,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%40==0&&a==0&&this.active){
@@ -9102,7 +9102,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
@@ -9113,7 +9113,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%15==0&&a==0&&this.active){
@@ -9137,7 +9137,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9198,7 +9198,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(a==0){
@@ -9255,7 +9255,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9271,7 +9271,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
@@ -9283,7 +9283,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%15==0&&a==0&&this.active){
@@ -9307,7 +9307,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%20==0&&a==0&&this.active){
@@ -9318,7 +9318,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%45==0&&a==0&&this.active){
@@ -9329,7 +9329,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
@@ -9371,7 +9371,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
@@ -9411,7 +9411,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.active&&a==0&&(this.timer==10||this.timer==30||this.timer==50)){
@@ -9424,7 +9424,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
@@ -9456,7 +9456,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%45==0&&a==0&&this.active){
@@ -9467,7 +9467,7 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					if(this.timer%45==15&&a==0&&this.active){
@@ -9494,7 +9494,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9520,7 +9520,7 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>1500){
+					if(this.travel>(this.id==0?750:1500)){
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9605,7 +9605,7 @@ class projectile{
 					)&&
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.4)&&
 					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp||game.level==29||entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
+					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396)&&(this.index==entities.players[b].index||entities.players[b].fort&&!game.pvp&&entities.players[b].id>0&&this.id>0)&&entities.players[b].id!=-1)&&
 					!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
 					entities.players[b].life>0&&this.active&&
 					!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
@@ -10102,8 +10102,8 @@ class projectile{
 							entities.players[b].DOT.damage+=this.damage/600
 							entities.players[b].DOT.active=max(450,entities.players[b].DOT.active+150)
 						}else if(this.type==383){
-							entities.players[b].DOT.damage+=this.damage/75
-							entities.players[b].DOT.active=max(900,entities.players[b].DOT.active+600)
+							entities.players[b].DOT.damage+=this.damage/60
+							entities.players[b].DOT.active=max(900,entities.players[b].DOT.active+540)
 						}
 					}
 					if(game.invis){

@@ -3641,7 +3641,6 @@ types={
       difficulty:4,
       wave:[
         [
-          ['HyperSpy',10],
           ['BigFlameMachineGun',4],
           ['TankRegen',2],
           ['MachineGunFirework',4],
@@ -3752,7 +3751,8 @@ types={
 
           ['Support',0],
 
-          ['ShotgunSpy',10],
+          ['ShotgunSpy',5],
+          ['HyperSpy',5],
           ['MiniSentry',5],
           ['SmokeRocketLauncher',10],
           ['ShotgunMartyr',10],
@@ -7623,16 +7623,19 @@ types={
       damageBuff:0.25,reloadBuff:1,crit:0,weapon:383,
     },{
       name:'PlayerLightCarpenter',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:888,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:888,
     },{
       name:'PlayerRejuvenator',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:887,
     },{
       name:'PlayerHeavyDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:2,crit:0,weapon:202,
+      damageBuff:4/3,reloadBuff:2,crit:0,weapon:202,
+    },{
+      name:'PlayerHeavyMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.125,reloadBuff:2,crit:0,weapon:191,
     },{
       name:'PlayerHeavySwarmer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.75,crit:0,weapon:284,
+      damageBuff:4/3,reloadBuff:1.75,crit:0,weapon:284,
     },{
       name:'PlayerDestroyerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:904,
@@ -7649,7 +7652,7 @@ types={
       name:'PlayerCrescentScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:907,
     },{
-      name:'PlayerWingPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerWingedPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:908,
     },{
       name:'PlayerSurgePistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -7759,6 +7762,12 @@ types={
     },{
       name:'PlayerLightSkysweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:0.75,reloadBuff:1.25,crit:0,weapon:389,
+    },{
+      name:'PlayerWingPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:966,
+    },{
+      name:'PlayerPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1,
     },
 
     //mark c
@@ -9678,7 +9687,7 @@ types={
       name:'Swarmer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:284,
     },{
-      name:'BigHeavyMachineGun',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      name:'BigHeavyMachineGun',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:2,
     },{
       name:'BigPhaseCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -9723,7 +9732,7 @@ types={
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'FastMiniSentryCarrier',sizeBuff:2,lifeBuff:1,speedBuff:0.8,
+      name:'FastMiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.8,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Level3SentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
@@ -15569,7 +15578,7 @@ types={
 		},{
 			name:'Carpenter',
 			ammo:1,
-			damage:220,
+			damage:200,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -16440,13 +16449,13 @@ types={
 			speed:1.35,
       uses:10,
 		},{
-			name:'Jump Scout',
+			name:'Wing Scout',
 			ammo:10,
 			damage:40,
 			cooldown:12,
 			stop:30,
 			reload:10,
-			speed:1.3,
+			speed:1.4,
       uses:40,
 		},{
 			name:'Parachute Soldier',
@@ -16549,13 +16558,13 @@ types={
       uses:105,
 		},{
 			name:'Parachute',
-			ammo:10,
+			ammo:12,
 			damage:105,
-			cooldown:9,
+			cooldown:8,
 			stop:30,
 			reload:6,
 			speed:1.2,
-      uses:50,
+      uses:60,
 		},{
 			name:'Speed Knife',
 			ammo:1,
@@ -16803,7 +16812,7 @@ types={
 			name:'Securer',
 			ammo:3,
 			damage:150,
-			cooldown:50,
+			cooldown:45,
 			stop:105,
 			reload:25,
 			speed:0.975,
@@ -17138,7 +17147,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:45,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:100,
 		},{
@@ -17173,8 +17182,8 @@ types={
 			ammo:10,
 			damage:40,
 			cooldown:12,
-			stop:60,
-			reload:10,
+			stop:90,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17785,7 +17794,7 @@ types={
 			ammo:1,
 			damage:180,
 			cooldown:20,
-			stop:360,
+			stop:300,
 			reload:15,
 			speed:1.05,
       uses:4,
@@ -17988,14 +17997,14 @@ types={
 			speed:1.15,
       uses:16,
 		},{
-			name:'Wing Pistol',
+			name:'Winged Pistol',
 			ammo:4,
 			damage:105,
 			cooldown:12,
 			stop:36,
 			reload:15,
 			speed:1.4,
-      uses:20,
+      uses:16,
 		},{
 			name:'Surge Pistol',
 			ammo:8,
@@ -18161,7 +18170,7 @@ types={
 		},{
 			name:'Chainsaw',
 			ammo:180,
-			damage:90,
+			damage:125,
 			cooldown:4,
 			stop:60,
 			reload:2,
@@ -18269,7 +18278,7 @@ types={
 		},{
 			name:'Shredder',
 			ammo:2,
-			damage:9,
+			damage:12,
 			cooldown:30,
 			stop:100,
 			reload:20,
@@ -18509,6 +18518,24 @@ types={
 			reload:4,
 			speed:1.1,
       uses:63,
+		},{
+			name:'Wing Pistol',
+			ammo:4,
+			damage:105,
+			cooldown:12,
+			stop:30,
+			reload:6,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Pistol W',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:30,
+			reload:6,
+			speed:1.4,
+      uses:30,
 		},
 
     /*{
