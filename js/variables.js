@@ -3694,7 +3694,8 @@ types={
           ['BigFastSubmachine',2],
           ['Wait',5],
 
-          ['PistolBonker',5],
+          ['PistolBonker',3],
+          ['CritFastBonker',3],
           ['BigCritShotgun',3],
           ['ParaPistol',2],
           ['Wait',10],
@@ -3702,21 +3703,18 @@ types={
           ['RapidGrenadier',10],
           ['AssaultRifle',15],
           ['HyperMedicShield',3],
-          ['FastLongFlamethrower',2],
-          ['Wait',2],
-
+          ['FastLongFlamethrower',4],
           ['BigHeavyMachineGun',3],
-          ['FastLongFlamethrower',2],
-          ['Wait',10],
+          ['Wait',12],
 
           ['ShotgunChainJump',9],
           ['HyperMedicShield',3],
           ['BigCritStraightBaller',3],
-          ['PistolWeak',5],
           ['Level3SentryCarrier',1],
-          ['PistolWeak',5],
+          ['Wait',3],
+
+          ['PistolWeak',15],
           ['FastMiniSentryCarrier',1],
-          ['PistolWeak',5],
           ['BigGrenadierTier',3],
           ['HyperTank',2],
           ['BigGust',2],
@@ -3751,13 +3749,15 @@ types={
 
           ['Support',0],
 
-          ['ShotgunSpy',5],
-          ['HyperSpy',5],
+          ['ShotgunSpy',3],
+          ['HyperSpy',3],
+          ['FlamethrowerSpy',3],
           ['MiniSentry',5],
           ['SmokeRocketLauncher',10],
           ['ShotgunMartyr',10],
           ['RapidCritApplyMedic',5],
-          ['TankShieldBuff',2],
+          ['TankShieldBuff',1],
+          ['EnigmaTank',1],
         ],
       ],
     },{
@@ -4484,7 +4484,7 @@ types={
       desc:'Fires in bursts of three bullets',dpsBuff:2.5,
     },{
       name:'PlayerGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:36,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:36,
       desc:'Throws bouncing grenades',dpsBuff:1,
     },{
       name:'PlayerTrapper',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5067,39 +5067,39 @@ types={
     
     {
       name:'PlayerMortar',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.75,crit:0,weapon:151,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:151,
       desc:'Fires heavy shells in an arc, has a large field of view',dpsBuff:2,
     },{
       name:'PlayerShrapnelGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:170,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:170,
       desc:'Grenadier with grenades that explode into bullets',dpsBuff:2,
     },{
       name:'PlayerGrenadierFuse',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:3,reloadBuff:1.75,crit:0,weapon:280,
+      damageBuff:3,reloadBuff:1.6,crit:0,weapon:280,
       desc:'Grenadier with grenades that keep bouncing for extra time',dpsBuff:1,
     },{
       name:'PlayerFracture',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.75,crit:0,weapon:426,
+      damageBuff:2,reloadBuff:1.6,crit:0,weapon:426,
       desc:'Grenadier that explodes multiple times on hitting walls',dpsBuff:2,
     },{
       name:'PlayerIED',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.75,crit:0,weapon:436,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:436,
       desc:'Throws strangely bouncing but very powerful explosives',dpsBuff:1,
     },{
       name:'PlayerNovgorod',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:493,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:493,
       desc:'Throws grenades that split into additional grenades',dpsBuff:1,
     },{
       name:'PlayerGrenadierTick',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:1.75,crit:0,weapon:551,
+      damageBuff:2.5,reloadBuff:1.6,crit:0,weapon:551,
       desc:'Throws grenades that drop off a time bomb on hit',dpsBuff:1,
     },{
       name:'PlayerScorcher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:650,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:650,
       desc:'Grenadier with grenades that fire flames for some time on explosion',dpsBuff:1,
     },{
       name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:188,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:188,
       desc:'Has a grenadier auto turret',dpsBuff:1,
     },
 
@@ -5911,7 +5911,7 @@ types={
       desc:'Pistol that pushes enemies on hit',dpsBuff:1,
     },{
       name:'PlayerShockGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.75,crit:0,weapon:169,
+      damageBuff:2,reloadBuff:1.6,crit:0,weapon:169,
       desc:'Grenadier with grenades that push enemies in a large radius',dpsBuff:1,
     },{
       name:'PlayerDonut',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -7335,10 +7335,13 @@ types={
       damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
       name:'PlayerHeavySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:3.25,reloadBuff:1.5,crit:0,weapon:6,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:968,
     },{
       name:'PlayerHeavyFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.8,reloadBuff:1,crit:0,weapon:8,
+    },{
+      name:'PlayerHeavyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:11,
     },{
       name:'PlayerCola',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:699,
@@ -7368,7 +7371,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:705,
     },{
       name:'PlayerBow',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:706,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:706,
     },{
       name:'PlayerMarker',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:709,
@@ -7386,7 +7389,7 @@ types={
       damageBuff:1.4,reloadBuff:1,crit:0,weapon:723,
     },{
       name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:724,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:724,
     },{
       name:'PlayerMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:725,
@@ -7395,7 +7398,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:726,
     },{
       name:'PlayerBuffMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.25,crit:0,weapon:727,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:727,
     },{
       name:'PlayerScope',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:3.25,reloadBuff:1.5,crit:0,weapon:728,
@@ -7470,7 +7473,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:777,
     },{
       name:'PlayerBorer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:778,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:778,
     },{
       name:'PlayerEnforcer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:779,
@@ -7500,7 +7503,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:798,
     },{
       name:'PlayerQuickfix',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.25,crit:0,weapon:800,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:800,
     },{
       name:'PlayerClassicSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:801,
@@ -7524,10 +7527,10 @@ types={
       damageBuff:2,reloadBuff:1,crit:0,weapon:817,
     },{
       name:'PlayerTransmission',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.25,crit:0,weapon:818,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:818,
     },{
       name:'PlayerScatterSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:819,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:819,
     },{
       name:'PlayerHeavyPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:1,
@@ -7560,7 +7563,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:854,
     },{
       name:'PlayerRecoilSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:855,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:969,
     },{
       name:'PlayerDerringer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.125,crit:0,weapon:856,
@@ -8034,7 +8037,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:202,
     },{
       name:'SidekickGrenadier',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.75,crit:0,weapon:36,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:36,
     },{
       name:'SidekickPelleter',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:332,
@@ -8219,6 +8222,9 @@ types={
     },{
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'FlamethrowerSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
       name:'HeavySpy',sizeBuff:1,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
@@ -8701,13 +8707,13 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:45,
     },{
       name:'BigGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
       name:'RapidGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:36,
     },{
       name:'BigRapidGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:36,
     },{
       name:'BigMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:42,
@@ -8848,16 +8854,16 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
       name:'AssaultRifle',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:4,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:4,
     },{
       name:'CritAssaultRifle',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:4,
+      damageBuff:0.75,reloadBuff:1,crit:1,weapon:4,
     },{
       name:'BigAssaultRifle',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:4,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:4,
     },{
       name:'BigCritAssaultRifle',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:4,
+      damageBuff:0.75,reloadBuff:1,crit:1,weapon:4,
     },{
       name:'LightEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:0.75,crit:0,weapon:52,
@@ -8968,16 +8974,16 @@ types={
       damageBuff:1,reloadBuff:1.5,crit:1,weapon:35,
     },{
       name:'Grenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
       name:'CritGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:1,weapon:36,
     },{
       name:'GrenadierFuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:280,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:280,
     },{
       name:'BigGrenadierFuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:280,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:280,
     },{
       name:'RapidSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:1,
@@ -9331,13 +9337,13 @@ types={
       damageBuff:1,reloadBuff:0.4,crit:0,weapon:99,
     },{
       name:'RadiusGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:121,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:121,
     },{
       name:'BigRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:121,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:121,
     },{
       name:'BigRapidRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:121,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:121,
     },{
       name:'PistolConfuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:91,
@@ -9516,6 +9522,9 @@ types={
       name:'GasTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'EnigmaTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'StraightBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:94,
     },{
@@ -9577,7 +9586,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:16,
     },{
       name:'ShrapnelGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:170,
+      damageBuff:0.5,reloadBuff:0.75,crit:0,weapon:170,
     },{
       name:'PistolBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
@@ -9630,13 +9639,13 @@ types={
       name:'EngineerSpeedBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:0.75,crit:0,weapon:10,
     },{
-      name:'Bonker',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'Bonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
-      name:'FastBonker',sizeBuff:1,lifeBuff:3,speedBuff:1.2,
+      name:'FastBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
-      name:'TinyBonker',sizeBuff:0.8,lifeBuff:1.8,speedBuff:0.9,
+      name:'TinyBonker',sizeBuff:0.8,lifeBuff:0.9,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
       name:'LongHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -9672,7 +9681,7 @@ types={
       name:'HyperMedicRegen',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:66,
     },{
-      name:'SlightlyFastBonker',sizeBuff:1,lifeBuff:3,speedBuff:0.9,
+      name:'SlightlyFastBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
       name:'BigFastPistolTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.9,
@@ -9702,7 +9711,7 @@ types={
       name:'ShotgunShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
-      name:'PistolBonker',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'PistolBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:899,
     },{
       name:'BallerSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
@@ -9721,7 +9730,7 @@ types={
       damageBuff:1.5,reloadBuff:0.25,crit:0,weapon:413,
     },{
       name:'RejuvenatorMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:0.8,crit:0,weapon:887,
+      damageBuff:1,reloadBuff:0.9,crit:0,weapon:887,
     },{
       name:'Mortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:151,
@@ -9766,7 +9775,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:94,
     },{
       name:'BigGrenadierTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.45,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
       name:'TankSplitterFlamethrower',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -9777,10 +9786,13 @@ types={
       name:'BigCritPistolHeal',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'BigFastBonker',sizeBuff:2,lifeBuff:15,speedBuff:0.6,
+      name:'BigFastBonker',sizeBuff:2,lifeBuff:7.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
-      name:'CritBonker',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'CritBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:242,
+    },{
+      name:'CritFastBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:1,weapon:242,
     },{
       name:'FlareGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -9798,20 +9810,20 @@ types={
       name:'CritGust',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.25,crit:1,weapon:413,
     },{
-      name:'BigBonker',sizeBuff:2,lifeBuff:15,speedBuff:0.3,
+      name:'BigBonker',sizeBuff:2,lifeBuff:7.5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
       name:'GrenadierSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
-      name:'MachineGunBonker',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'MachineGunBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:903,
     },{
       name:'FlamethrowerMartyr',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
       name:'GrenadierSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
       name:'Planetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:531,
@@ -11053,7 +11065,7 @@ types={
 			ammo:3,
 			damage:175,
 			cooldown:30,
-			stop:60,
+			stop:50,
 			reload:20,
 			speed:1.35,
       uses:12,
@@ -13543,22 +13555,22 @@ types={
       uses:10,
 		},{
 			name:'Gust',
-			ammo:15,
+			ammo:10,
 			damage:20,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Jetstream',
-			ammo:15,
+			ammo:10,
 			damage:20,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Anapsid',
 			ammo:1,
@@ -13879,7 +13891,7 @@ types={
 			ammo:4,
 			damage:175,
 			cooldown:30,
-			stop:60,
+			stop:50,
 			reload:20,
 			speed:1.35,
       uses:16,
@@ -14650,22 +14662,22 @@ types={
       uses:45,
 		},{
 			name:'Frostwind',
-			ammo:15,
+			ammo:10,
 			damage:40,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Gustception',
-			ammo:15,
+			ammo:10,
 			damage:20,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Fentanyl',
 			ammo:15,
@@ -15523,13 +15535,13 @@ types={
       uses:96,
 		},{
 			name:'Windstorm',
-			ammo:15,
+			ammo:10,
 			damage:20,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Bonkhive',
 			ammo:1,
@@ -15874,13 +15886,13 @@ types={
       uses:1,
 		},{
 			name:'Gust Engineer',
-			ammo:15,
+			ammo:10,
 			damage:20,
 			cooldown:1,
-			stop:90,
+			stop:60,
 			reload:3,
 			speed:1.05,
-      uses:105,
+      uses:80,
 		},{
 			name:'Irony',
 			ammo:1,
@@ -16344,8 +16356,8 @@ types={
 			name:'Sheller',
 			ammo:2,
 			damage:200,
-			cooldown:65,
-			stop:155,
+			cooldown:60,
+			stop:150,
 			reload:25,
 			speed:1.05,
       uses:10,
@@ -17037,11 +17049,11 @@ types={
 			name:'Classic Sniper',
 			ammo:1,
 			damage:320,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:135,
+			stop:135,
+			reload:135,
 			speed:0.85,
-      uses:8,
+      uses:9,
 		},{
 			name:'Magnifying Glass',
 			ammo:15,
@@ -17200,10 +17212,10 @@ types={
 			ammo:2,
 			damage:320,
 			cooldown:15,
-			stop:165,
+			stop:150,
 			reload:5,
 			speed:0.85,
-      uses:11,
+      uses:12,
 		},{
 			name:'Watch Shotgun',
 			ammo:6,
@@ -17353,7 +17365,7 @@ types={
 			ammo:3,
 			damage:175,
 			cooldown:30,
-			stop:60,
+			stop:50,
 			reload:20,
 			speed:1.3,
       uses:12,
@@ -17623,7 +17635,7 @@ types={
 			ammo:3,
 			damage:140,
 			cooldown:30,
-			stop:50,
+			stop:45,
 			reload:20,
 			speed:1.35,
       uses:12,
@@ -18028,7 +18040,7 @@ types={
 			ammo:6,
 			damage:200,
 			cooldown:25,
-			stop:60,
+			stop:50,
 			reload:45,
 			speed:0.8,
       uses:36,
@@ -18037,7 +18049,7 @@ types={
 			ammo:1,
 			damage:375,
 			cooldown:8,
-			stop:72,
+			stop:90,
 			reload:0,
 			speed:0.8,
       uses:8,
@@ -18251,7 +18263,7 @@ types={
 		},{
 			name:'Pierce Sniper',
 			ammo:1,
-			damage:160,
+			damage:200,
 			cooldown:80,
 			stop:80,
 			reload:80,
@@ -18306,9 +18318,9 @@ types={
 			name:'Discord',
 			ammo:1,
 			damage:0,
-			cooldown:90,
-			stop:90,
-			reload:90,
+			cooldown:75,
+			stop:75,
+			reload:75,
 			speed:1,
       uses:6.5,
 		},{
@@ -18536,6 +18548,24 @@ types={
 			reload:6,
 			speed:1.4,
       uses:30,
+		},{
+			name:'Sniper W',
+			ammo:1,
+			damage:320,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Recoil Sniper W',
+			ammo:1,
+			damage:500,
+			cooldown:225,
+			stop:225,
+			reload:225,
+			speed:0.85,
+      uses:5,
 		},
 
     /*{

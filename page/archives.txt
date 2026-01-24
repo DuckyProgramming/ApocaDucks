@@ -26,6 +26,11 @@
 966 - wing pistol
 967 - pistol h
 
+968 - sniper w, 6
+969 - recoil sniper w, 855
+
+407 - sniper w, 4
+
 
 
 

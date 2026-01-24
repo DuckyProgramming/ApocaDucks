@@ -39,7 +39,7 @@ class player{
         this.stats={kills:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
-        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||game.randomizer){
+        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||game.randomizer){
             this.spy=true
             this.copyset=range(0,game.players)
             for(let a=0,la=entities.players.length;a<la;a++){
@@ -845,7 +845,7 @@ class player{
                 )
             break
             case 707: case 708: case 720: case 745: case 771: case 792: case 954: case 964:
-                if(this.subPlayerAData.name=='PlayerDirector'||this.subPlayerAData.name=='PlayerSwarmer'||this.subPlayerAData.name=='PlayerMotorizer'||this.subPlayerAData.name=='PlayerHeavyDirector'||this.subPlayerAData.name=='PlayerHeavySwarmer'||this.subPlayerAData.name=='PlayerLightSkysweeper'){
+                if(this.subPlayerAData.name=='PlayerDirector'||this.subPlayerAData.name=='PlayerSwarmer'||this.subPlayerAData.name=='PlayerMotorizer'||this.subPlayerAData.name=='PlayerHeavyDirector'||this.subPlayerAData.name=='PlayerHeavySwarmer'||this.subPlayerAData.name=='PlayerLightSkysweeper'||this.subPlayerAData.name=='PlayerHeavyMotorizer'){
                     layer.stroke(0,255,0,this.infoAnim.bar[0]*0.5*this.fade)
                     layer.strokeWeight(3)
                     layer.line(
@@ -1161,7 +1161,7 @@ class player{
                         this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
                         this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'||
                         this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'||this.playerData.name=='TankSplitterPunch'||this.playerData.name=='TankSplitterFlamethrower'||this.playerData.name=='TankBuff'||
-                        this.playerData.name=='GrenadingTank'||this.playerData.name=='TankShieldBuff'||this.playerData.name=='TankSplitterRandom'
+                        this.playerData.name=='GrenadingTank'||this.playerData.name=='TankShieldBuff'||this.playerData.name=='TankSplitterRandom'||this.playerData.name==`EnigmaTank`
                     ){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                     }else if(this.playerData.name=='MegaTank'){
@@ -1413,7 +1413,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerDeployerMini',types.player))
             break
             case 'PlayerMedicC':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerLightHealZone',types.player))
             break
             case 'PlayerSniperC':
@@ -1453,7 +1453,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerDeployerMini',types.player))
             break
             case 'PlayerMedicC2':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerLightFlakZone',types.player))
             break
             case 'PlayerSniperC2':
@@ -1530,7 +1530,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerDeployerMini',types.player))
             break
             case 'PlayerMedicC4':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerLightElectrifyer',types.player))
             break
             case 'PlayerSniperC4':
@@ -1574,7 +1574,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerDeployerMini',types.player))
             break
             case 'PlayerMedicC5':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerHealBolt',types.player))
             break
             case 'PlayerSniperC5':
@@ -1726,7 +1726,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerMoreGunSentry',types.player))
             break
             case 'PlayerMedicC9':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerChroma',types.player))
             break
             case 'PlayerSniperC9':
@@ -1862,7 +1862,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerMiniShotgun',types.player))
             break
             case 'PlayerMedicC12':
-                this.newSubWeaponASet(findName('PlayerMedic',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyMedic',types.player))
                 this.newSubWeaponBSet(findName('PlayerHealOrb',types.player))
             break
             case 'PlayerSniperC12':
@@ -2143,7 +2143,7 @@ class player{
                 }
             break
             case 964:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,75,7200,crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,80,7200,crit,this.index))
             break
         }
     }
@@ -2508,49 +2508,50 @@ class player{
                     this.speedBuff=max(this.speedBuff,120)
                 }
             }
-            this.life-=damage*
+            let charMult=
+                (this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank')&&spec==0
+                ?1/3:
+                (this.playerData.name=='PlayerBonkerception'||this.playerData.name=='PlayerMasonry')&&spec==0
+                ?0.5:
+                (
+                    this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
+                    this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
+                    this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
+                    this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
+                    this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='PlayerGasser'||
+                    this.playerData.name=='SidekickGuillotine'||this.playerData.name=='PlayerIrony'||this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||
+                    this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||
+                    this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'
+                )&&spec==0
+                ?2/3:
+                (
+                    this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerTelepointer'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||
+                    this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
+                    this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
+                    this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
+                    this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'
+                )&&spec==0
+                ?0.8:
+                this.playerData.name=='PlayerStickyMan'&&spec==0
+                ?0.9:
+                this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
+                ?2:
+                this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
+                ?0.6:
+                this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||
+                this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||
+                this.playerData.name=='PlayerSpyC12'
+                ?1.25:
+                this.playerData.name=='PlayerSpyC6'
+                ?5/3:
+                1
+            let value=damage*
                 ((game.pvp?this.index+1:this.id)>game.gaming&&!game.pvp?0.8:1)*
                 (this.vulnerableTime>0?2:1)*
                 (this.defendBuff>0&&spec==0?0.5:1)*
                 (this.disable&&!this.assort.remote&&!this.assort.missile?0.25:1)*
-                (
-                    (this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank')&&spec==0
-                    ?1/3:
-                    (this.playerData.name=='PlayerBonkerception'||this.playerData.name=='PlayerMasonry')&&spec==0
-                    ?0.5:
-                    (
-                        this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
-                        this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
-                        this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
-                        this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
-                        this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='PlayerGasser'||
-                        this.playerData.name=='SidekickGuillotine'||this.playerData.name=='PlayerIrony'||this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||
-                        this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||
-                        this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'
-                    )&&spec==0
-                    ?2/3:
-                    (
-                        this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerTelepointer'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||
-                        this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
-                        this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
-                        this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
-                        this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'
-                    )&&spec==0
-                    ?0.8:
-                    this.playerData.name=='PlayerStickyMan'&&spec==0
-                    ?0.9:
-                    this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
-                    ?2:
-                    this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
-                    ?0.6:
-                    this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||
-                    this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||
-                    this.playerData.name=='PlayerSpyC12'
-                    ?1.25:
-                    this.playerData.name=='PlayerSpyC6'
-                    ?5/3:
-                    1
-                )
+                charMult
+            this.life-=value
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
                 this.weapon.cooldown=300
                 let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
@@ -5654,7 +5655,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],345,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 728:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*constrain(this.subWeaponA.time/60+0.6,1,5),300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*constrain(this.subWeaponA.time/60+0.6,1,5),300,crit,this.index))
                         this.subWeaponA.time=0
                     break
                     case 729:
@@ -5980,10 +5981,10 @@ class player{
                     case 819:
                         if(weapon.ammo==0){
                             for(let a=0,la=10;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff/15,15,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff/12,15,crit,this.index))
                             }
                         }else{
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         }
                     break
                     case 820:
@@ -6455,6 +6456,14 @@ class player{
                             }
                         }
                     break
+                    case 968:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 969:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)
+                        this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)
+                    break
 
                     //mark
                 }
@@ -6593,7 +6602,7 @@ class player{
             case 629: case 630: case 644: case 655: case 660: case 707: case 708: case 720: case 745: case 771:
             case 792: case 954: case 964:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
-                if(!this.sidekick&&!((this.weaponType==707||this.weaponType==708||this.weaponType==720||this.weaponType==745||this.weaponType==771||this.weaponType==792||this.weaponType==954||this.weaponType==964)&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper')){
+                if(!this.sidekick&&!((this.weaponType==707||this.weaponType==708||this.weaponType==720||this.weaponType==745||this.weaponType==771||this.weaponType==792||this.weaponType==954||this.weaponType==964)&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer')){
                     if(this.time%5==0){
                         let hit=false
                         if(![191,226,228,230,265,266].includes(this.weaponType)){
@@ -23551,7 +23560,7 @@ class player{
                             this.attack(0)
                         }
                     }else if(this.playerData.name=='PlayerDroner'||this.playerData.name=='PlayerDroner2'||this.playerData.name=='PlayerDroner3'||this.playerData.name=='PlayerDroner4'||this.playerData.name=='PlayerDroner5'||this.playerData.name=='PlayerDroner6'||this.playerData.name=='PlayerDroner7'||this.playerData.name=='PlayerDroner8'||this.playerData.name=='PlayerDroner9'||this.playerData.name=='PlayerDroner10'||this.playerData.name=='PlayerDroner11'||this.playerData.name=='PlayerDroner12'){
-                        if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerSkysweeper'&&floor(random(0,15))==0){
+                        if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&floor(random(0,15))==0){
                             this.swapSubWeapons()
                         }
                         if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
@@ -26632,7 +26641,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)?0.6:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
@@ -26646,6 +26655,8 @@ class player{
                                 entities.players[a].chillTime=max(entities.players[a].chillTime,300)
                             }else if(this.playerData.name=='GasTank'&&!entities.players[a].fort){
                                 entities.players[a].gasTime=max(entities.players[a].gasTime,60)
+                            }else if(this.playerData.name=='EnigmaTank'&&!entities.players[a].fort){
+                                entities.players[a].enigmaTime=max(entities.players[a].enigmaTime,60)
                             }
                             if(!entities.players[a].fort){
                                 if(this.weaponType==398){
@@ -26677,7 +26688,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming?0.8:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)?0.6:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
@@ -26691,6 +26702,8 @@ class player{
                                 entities.players[a].chillTime=max(entities.players[a].chillTime,300)
                             }else if(this.playerData.name=='GasTank'&&!entities.players[a].fort){
                                 entities.players[a].gasTime=max(entities.players[a].gasTime,60)
+                            }else if(this.playerData.name=='EnigmaTank'&&!entities.players[a].fort){
+                                entities.players[a].enigmaTime=max(entities.players[a].enigmaTime,60)
                             }
                             if(!entities.players[a].fort){
                                 if(this.weaponType==398){

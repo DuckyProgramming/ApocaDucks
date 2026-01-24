@@ -50,6 +50,7 @@ class projectile{
 			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
 			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
+			case 407:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -6465,6 +6466,17 @@ class projectile{
 				layer.fill(240-this.crit*200,40,120+this.crit*120,this.fade)
 				layer.ellipse(0,-this.extent,(50-this.fade*50))
 			break
+			case 407:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,12,1,24)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,9,1,18)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3,4)
+				layer.triangle(-0.5,-1,0.5,-1,0,-2.5)
+			break
 			
 			//mark
         }
@@ -7479,7 +7491,7 @@ class projectile{
 			break
 		}
 		let slow=this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309||this.type==333||this.type==334
-		let fast=this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332||this.type==361
+		let fast=this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332||this.type==361||this.type==407
         for(let a=0,la=slow?2:fast?6:4;a<la;a++){
 			switch(this.type){
 				case 1: case 2: case 4: case 6: case 7: case 9: case 10: case 11: case 12: case 13:
@@ -7496,7 +7508,7 @@ class projectile{
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
 				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348: case 350: case 351:
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
-				case 384: case 386: case 387: case 388: case 396: case 403:
+				case 384: case 386: case 387: case 388: case 396: case 403: case 407:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8426,7 +8438,7 @@ class projectile{
 						this.active=false
 						this.explode()
 					}
-					if((this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392)&&this.timer>=(this.type==349||this.type==368||this.type==372||this.type==392?24:60)&&this.active&&!(this.type==372&&this.delay>0)){
+					if((this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392)&&this.timer>=(this.type==349||this.type==368||this.type==372||this.type==392?18:60)&&this.active&&!(this.type==372&&this.delay>0)){
 						let id=((game.level==27||game.level==38||teamMode())&&game.pvp?this.index+1:this.id)
 						let inputSet=this.id==0||id>game.gaming?[game.det[id]==0]:inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1]
 						if(inputSet[0]){
@@ -9606,7 +9618,7 @@ class projectile{
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.4)&&
 					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
 					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396)&&(this.index==entities.players[b].index||entities.players[b].fort&&!game.pvp&&entities.players[b].id>0&&this.id>0)&&entities.players[b].id!=-1)&&
-					!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186)&&this.timer<5&&this.id==0)&&
+					!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==407)&&this.timer<5&&this.id==0)&&
 					entities.players[b].life>0&&this.active&&
 					!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
 					//!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
@@ -9746,6 +9758,9 @@ class projectile{
 						entities.players[b].subWeaponA.cooldown=max(entities.players[b].subWeaponA.cooldown-60,0)
 						entities.players[b].weapon.reload=max(entities.players[b].weapon.reload-60,0)
 						entities.players[b].subWeaponA.reload=max(entities.players[b].subWeaponA.reload-60,0)
+					}else if(this.type==364){
+						entities.players[b].takeDamage(this.damage)
+						entities.players[b].confuseTime=max(entities.players[b].confuseTime,60)
 					}else if(this.type==369&&entities.players[b].construct&&entities.players[b].id==this.id){
 						entities.players[b].life=min(entities.players[b].life+this.damage*0.2,max(entities.players[b].life,entities.players[b].base.life*2))
 					}else if(this.type==388){
@@ -9791,7 +9806,8 @@ class projectile{
 					}else if(this.type==341||this.type==343||this.type==354){
 						entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
 					}else if(fast||this.type==342){
-						entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.1))
+						entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.125))
+						//snipers do less at close range lol
 					}else if(this.type==355){
 						entities.players[b].takeDamage(this.damage*(entities.players[b].playerData.name.includes('Tank')?2:1),1)
 					}else if(this.type==366){
@@ -9890,6 +9906,18 @@ class projectile{
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
 								entities.players[d].critBuff=max(entities.players[d].critBuff,180)
+							}
+						}
+					}else if(this.type==407){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
+							if(b!=d&&entities.players[d].explodable()&&entities.players[d].life>0&&e<50&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!teamMode()))){
+								entities.players[d].takeDamage(this.damage*(1-e/50)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
+								entities.players[d].die.killer=this.index
+								entities.players[d].collect.time=450
+								if(game.invis){
+									entities.players[d].visible=15
+								}
 							}
 						}
 					}
