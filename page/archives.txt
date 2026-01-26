@@ -28,8 +28,11 @@
 
 968 - sniper w, 6
 969 - recoil sniper w, 855
+970 - speed revolver
+971 - time bomb c, 464
 
 407 - sniper w, 4
+408 - speed revolver, 90, 348
 
 
 

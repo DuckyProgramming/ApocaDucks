@@ -1538,8 +1538,8 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerScope',types.player))
             break
             case 'PlayerSpyC4':
-                this.newSubWeaponASet(findName('PlayerRevolver',types.player))
-                this.newSubWeaponBSet(findName('PlayerSpeedKnife',types.player))
+                this.newSubWeaponASet(findName('PlayerSpeedRevolver',types.player))
+                this.newSubWeaponBSet(findName('PlayerLightPicker',types.player))
             break
             case 'PlayerDroner4':
                 this.newSubWeaponASet(findName('PlayerHeavyMotorizer',types.player))
@@ -1778,7 +1778,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerClusterBomb',types.player))
             break
             case 'PlayerDroner10':
-                this.newSubWeaponASet(findName('PlayerInterceptor',types.player))
+                this.newSubWeaponASet(findName('PlayerHeavyInterceptor',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerNightwatchEngineer':
@@ -6200,7 +6200,7 @@ class player{
                     break
                     case 905:
                         for(let a=0,la=10;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],380,(lsin(this.direction.main)<0?-90:90)+random(-13.5,13.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],380,(lsin(this.direction.main)<0?-90:90)+random(-10.5,10.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 906:
@@ -6463,6 +6463,13 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)
                         this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)
+                    break
+                    case 970:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],408,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,20,crit,this.index))
+                    break
+                    case 971:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
                     break
 
                     //mark
@@ -26641,7 +26648,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)?0.6:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
@@ -26688,7 +26695,7 @@ class player{
                             entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
                             entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
                         }else{
-                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)?0.6:1))
+                            entities.players[a].takeDamage((this.weaponType==415||this.weaponType==533?400:this.playerData.name=='DeadlyTank'||this.weaponType==461?200:game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712?100:60):100)*(crit?3:1)*(entities.players[a].fort&&!entities.players[a].auto?0.025:1)*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1))
                             if(dir[0]!=0||dir[1]!=0){
                                 if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4

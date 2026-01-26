@@ -6733,6 +6733,9 @@ types={
     },{
       name:'PlayerAssaultRifleC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:965,
+    },{
+      name:'PlayerHeavyInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:338,
     },
 
     //mark di
@@ -6977,7 +6980,7 @@ types={
     },{
       name:'PlayerSpyC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:744,
-      desc:'Spy that can get a speed buff and rapid invisibility on knife hit',dpsBuff:0,
+      desc:'Spy with a getaway revolver that gives speed buff and instant invisibility',dpsBuff:0,
     },{
       name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:745,
@@ -7424,6 +7427,9 @@ types={
       name:'PlayerSpeedKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:749,
     },{
+      name:'PlayerSpeedRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:970,
+    },{
       name:'PlayerLightElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:0.875,reloadBuff:1.5,crit:0,weapon:133,
     },{
@@ -7431,7 +7437,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:751,
     },{
       name:'PlayerHeavyTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1,crit:0,weapon:464,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:971,
     },{
       name:'PlayerCarrySentry1',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:757,
@@ -7467,7 +7473,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:775,
     },{
       name:'PlayerSecurer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.25,crit:0,weapon:776,
+      damageBuff:1,reloadBuff:1.375,crit:0,weapon:776,
     },{
       name:'PlayerHealBolt',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:777,
@@ -7641,7 +7647,7 @@ types={
       damageBuff:4/3,reloadBuff:1.75,crit:0,weapon:284,
     },{
       name:'PlayerDestroyerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:904,
+      damageBuff:1,reloadBuff:1.125,crit:0,weapon:904,
     },{
       name:'PlayerHeavyAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1, 
       damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:4,
@@ -10865,7 +10871,7 @@ types={
 		},{
 			name:'Booster',
 			ammo:60,
-			damage:75,
+			damage:80,
 			cooldown:2,
 			stop:45,
 			reload:1,
@@ -16221,11 +16227,11 @@ types={
 			name:'Marker',
 			ammo:1,
 			damage:150,
-			cooldown:60,
-			stop:60,
-			reload:60,
+			cooldown:50,
+			stop:50,
+			reload:50,
 			speed:0.85,
-      uses:12,
+      uses:14,
 		},{
 			name:'Scattergun',
 			ammo:2,
@@ -17049,9 +17055,9 @@ types={
 			name:'Classic Sniper',
 			ammo:1,
 			damage:320,
-			cooldown:135,
-			stop:135,
-			reload:135,
+			cooldown:120,
+			stop:120,
+			reload:120,
 			speed:0.85,
       uses:9,
 		},{
@@ -18335,9 +18341,9 @@ types={
 		},{
 			name:'Mini Auto Shotgun',
 			ammo:3,
-			damage:30,
-			cooldown:30,
-			stop:40,
+			damage:32,
+			cooldown:24,
+			stop:45,
 			reload:15,
 			speed:1,
       uses:18,
@@ -18566,6 +18572,24 @@ types={
 			reload:225,
 			speed:0.85,
       uses:5,
+		},{
+			name:'Getaway Revolver',
+			ammo:1,
+			damage:175,
+			cooldown:30,
+			stop:50,
+			reload:20,
+			speed:1.35,
+      uses:6,
+		},{
+			name:'Time Bomb C',
+			ammo:4,
+			damage:144,
+			cooldown:45,
+			stop:105,
+			reload:54,
+			speed:1.05,
+      uses:18,
 		},
 
     /*{
