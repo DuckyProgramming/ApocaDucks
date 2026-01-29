@@ -1,17 +1,50 @@
 //basic
-function dm(){
-    return game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53||game.level==56||game.level==60||game.level==61||
+function updateRules(){
+    rules.dm=game.level==36||game.level==41||game.level==45||game.level==50||game.level==51||game.level==52||game.level==53||game.level==56||game.level==60||game.level==61||
         game.level==62||game.level==64||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==90||game.level==91||game.level==92||game.level==93||
         game.level==110||game.level==111||game.level==112||game.level==113||game.level==114
-}
-function teamMode(){
-    return menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==44||menu.level==65||menu.level==67||menu.level==76||
+    rules.teamMode=menu.level==44||menu.level==65||menu.level==67||menu.level==76||menu.level==77||menu.level==78||menu.level==44||menu.level==65||menu.level==67||menu.level==76||
         menu.level==77||menu.level==78||menu.level==81||menu.level==88||menu.level==89&&game.pvp||menu.level==94&&game.pvp||menu.level==95||menu.level==98||menu.level==99
-}
-function backed(){
-    return game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||
+    rules.backed=game.level==25||game.level==26||game.level==54||game.level==55||game.level==61||game.level==65||game.level==67||game.level==68||game.level==69||game.level==71||
         game.level==77||game.level==78||game.level==88||game.level==89||game.level==90||game.level==91||game.level==92||game.level==94||game.level==95||game.level==96||game.level==97||
         game.level==98||game.level==99||game.level==102||game.level==104||game.level==105||game.level==110
+    rules.safeWater=game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59||game.level==60||game.level==65||
+        game.level==67||game.level==68||game.level==69||game.level==71||game.level==77||game.level==78||game.level==79||game.level==88||game.level==89||game.level==91||
+        game.level==92||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==104||game.level==105||game.level==110||
+        game.level==114
+    rules.grad=game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
+        game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
+        game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
+        game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
+        game.level==98||game.level==99||game.level==102||game.level==106||game.level==114
+        ?1:
+        game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
+        game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94||game.level==104||game.level==105||game.level==107||
+        game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113
+        ?2:0
+    rules.quickPoint=game.level==19||game.level==23||game.level==26||game.level==27||game.level==29||game.level==31||game.level==32||game.level==33||game.level==35||game.level==37||
+        game.level==38||game.level==40||game.level==42||game.level==43||game.level==44||game.level==47||game.level==49||game.level==55||game.level==58||game.level==59||
+        game.level==63||game.level==65||game.level==68||game.level==69||game.level==70||game.level==76||game.level==77||game.level==79||game.level==82||game.level==83||
+        game.level==84||game.level==85||game.level==86||game.level==87||game.level==88||game.level==89||game.level==94||game.level==96||game.level==97||game.level==98||
+        game.level==99||game.level==101||game.level==103||game.level==104||game.level==105||game.level==108||game.level==109
+    rules.overlay=game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27||game.level==28||game.level==29||game.level==30||
+        game.level==31||game.level==32||game.level==33||game.level==34||game.level==35||game.level==36||game.level==37||game.level==38||game.level==39||game.level==40||
+        game.level==41||game.level==42||game.level==43||game.level==44||game.level==45||game.level==47||game.level==49||game.level==50||game.level==51||game.level==52||
+        game.level==53||game.level==54||game.level==55||game.level==56||game.level==58||game.level==59||game.level==60||game.level==61||game.level==62||game.level==63||
+        game.level==64||game.level==65||game.level==67||game.level==68||game.level==69||game.level==70||game.level==71||game.level==72||game.level==73||game.level==74||
+        game.level==75||game.level==76||game.level==77||game.level==78||game.level==79||game.level==81||game.level==82||game.level==83||game.level==84||game.level==85||
+        game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==92||game.level==93||game.level==94||game.level==95||
+        game.level==96||game.level==97||game.level==98||game.level==99||game.level==100||game.level==101||game.level==103||game.level==104||game.level==105||game.level==106||
+        game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113||game.level==114
+}
+function dm(){
+    return rules.dm
+}
+function teamMode(){
+    return rules.teamMode
+}
+function backed(){
+    return rules.backed
 }
 function spy(name){
     return name=='Spy'||
@@ -901,17 +934,7 @@ function displayMain(layer,effective,keyStore){
             }
         }
     }
-    if(
-        game.level==19||game.level==22||game.level==23||game.level==24||game.level==25||game.level==26||game.level==27||game.level==28||game.level==29||game.level==30||
-        game.level==31||game.level==32||game.level==33||game.level==34||game.level==35||game.level==36||game.level==37||game.level==38||game.level==39||game.level==40||
-        game.level==41||game.level==42||game.level==43||game.level==44||game.level==45||game.level==47||game.level==49||game.level==50||game.level==51||game.level==52||
-        game.level==53||game.level==54||game.level==55||game.level==56||game.level==58||game.level==59||game.level==60||game.level==61||game.level==62||game.level==63||
-        game.level==64||game.level==65||game.level==67||game.level==68||game.level==69||game.level==70||game.level==71||game.level==72||game.level==73||game.level==74||
-        game.level==75||game.level==76||game.level==77||game.level==78||game.level==79||game.level==81||game.level==82||game.level==83||game.level==84||game.level==85||
-        game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==92||game.level==93||game.level==94||game.level==95||
-        game.level==96||game.level==97||game.level==98||game.level==99||game.level==100||game.level==101||game.level==103||game.level==104||game.level==105||game.level==106||
-        game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113||game.level==114
-    ){
+    if(rules.overlay){
         image(
             graphics.overlay[0],
             width/2,graphics.overlay[0].height*0.5,width,graphics.overlay[0].height
@@ -8397,6 +8420,7 @@ function checkEnd(level,layer,key){
         }
         if(!fail||game.peakWeapon){
             game.level=14
+            updateRules()
             entities.players=[]
             newLoop()
         }
@@ -8409,6 +8433,7 @@ function checkEnd(level,layer,key){
         }
         if(!fail){
             game.level=menu.level
+            updateRules()
             entities.players=[]
             if(game.level==29){
                 newWave()
@@ -8513,6 +8538,7 @@ function checkEnd(level,layer,key){
         }
         if(!fail){
             game.level=menu.level
+            updateRules()
             entities.players=[]
             if(game.level==29){
                 newWave()

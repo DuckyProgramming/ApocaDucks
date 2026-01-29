@@ -11,6 +11,7 @@ function setup(){
         game.players=1
         game.gaming=1
         game.level=47
+        updateRules()
         menu.level=game.level
         if(true){
             game.mission=findName(`Duck Time`,types.mission)
@@ -33,7 +34,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        entities.players[0].newWeaponSet(findName('PlayerDemoman4',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerSoldier11',types.player))
     }
 }
 function windowResized(){
@@ -857,6 +858,7 @@ function mouseClicked(){
                     }
                 }
             }
+            updateRules()
         break
         /*
         case 'menu':
@@ -1962,6 +1964,7 @@ function mouseClicked(){
                             }else{
                                 game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?57:48):13
                             }
+                            updateRules()
                             game.mission=unit
                             entities.players=[]
                             game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
@@ -2399,6 +2402,7 @@ function mouseClicked(){
                         }else{
                             game.level=game.classWeapon?(teamMode()?57:48):13
                         }
+                        updateRules()
                         game.mission=menu.list[tick]
                         entities.players=[]
                         game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
@@ -2468,6 +2472,7 @@ function instant(){
     }else{
         game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?57:48):13
     }
+    updateRules()
     game.mission=0
     entities.players=[]
     game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112

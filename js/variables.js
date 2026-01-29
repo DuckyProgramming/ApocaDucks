@@ -49,6 +49,7 @@ game={
       ],
   ]
 }
+rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[],mode:0}
 dev={sight:false}
@@ -7917,7 +7918,7 @@ types={
     {
       //gaea
       name:'CelestialG',sizeBuff:2,lifeBuff:25,speedBuff:0.75,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:666,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:666,
     },{
       //rune
       name:'CelestialR',sizeBuff:2,lifeBuff:25,speedBuff:0.75,
@@ -9532,7 +9533,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'StraightBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:94,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:94,
     },{
       name:'PunchSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
@@ -9682,7 +9683,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:48,
     },{
       name:'BigStraightBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:94,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:94,
     },{
       name:'HyperMedicRegen',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:66,
@@ -9778,7 +9779,7 @@ types={
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:22,
     },{
       name:'BigCritStraightBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:1,weapon:94,
+      damageBuff:1,reloadBuff:0.75,crit:1,weapon:94,
     },{
       name:'BigGrenadierTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.45,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
@@ -16001,7 +16002,7 @@ types={
 		},{
 			name:'Knife',
 			ammo:1,
-			damage:1500,
+			damage:2000,
 			cooldown:90,
 			stop:240,
 			reload:120,
@@ -16030,7 +16031,7 @@ types={
 			ammo:4,
 			damage:120,
 			cooldown:45,
-			stop:105,
+			stop:90,
 			reload:54,
 			speed:1.05,
       uses:18,
@@ -16380,9 +16381,9 @@ types={
 			name:'Levelled Sentry',
 			ammo:1,
 			damage:0,
-			cooldown:480,
-			stop:480,
-			reload:480,
+			cooldown:360,
+			stop:360,
+			reload:360,
 			speed:1.1,
       uses:3,
 		},{
@@ -16586,7 +16587,7 @@ types={
 		},{
 			name:'Speed Knife',
 			ammo:1,
-			damage:1500,
+			damage:2000,
 			cooldown:90,
 			stop:240,
 			reload:120,
@@ -16847,7 +16848,7 @@ types={
 		},{
 			name:'Borer',
 			ammo:10,
-			damage:115,
+			damage:125,
 			cooldown:15,
 			stop:105,
 			reload:18,
@@ -16857,9 +16858,9 @@ types={
 			name:'Enforcer',
 			ammo:1,
 			damage:150,
-			cooldown:95,
-			stop:95,
-			reload:95,
+			cooldown:90,
+			stop:90,
+			reload:90,
 			speed:1.35,
       uses:6,
 		},{
@@ -17182,7 +17183,7 @@ types={
 			ammo:2,
 			damage:400,
 			cooldown:15,
-			stop:110,
+			stop:105,
 			reload:5,
 			speed:1.05,
       uses:15,
@@ -17506,7 +17507,7 @@ types={
 			ammo:3,
 			damage:105,
 			cooldown:45,
-			stop:105,
+			stop:90,
 			reload:54,
 			speed:1.05,
       uses:18,
@@ -17514,11 +17515,11 @@ types={
 			name:'Ice Cream',
 			ammo:1,
 			damage:0,
-			cooldown:720,
-			stop:720,
-			reload:720,
+			cooldown:900,
+			stop:900,
+			reload:900,
 			speed:1.3,
-      uses:2,
+      uses:1.5,
 		},{
 			name:'Blowtorch',
 			ammo:32,
@@ -17596,7 +17597,7 @@ types={
 			ammo:5,
 			damage:120,
 			cooldown:36,
-			stop:105,
+			stop:90,
 			reload:54,
 			speed:1.05,
       uses:22.5,
@@ -17785,7 +17786,7 @@ types={
 			ammo:1,
 			damage:150,
 			cooldown:45,
-			stop:105,
+			stop:90,
 			reload:45,
 			speed:1.05,
       uses:9,
@@ -17812,7 +17813,7 @@ types={
 			ammo:1,
 			damage:180,
 			cooldown:20,
-			stop:300,
+			stop:270,
 			reload:15,
 			speed:1.05,
       uses:4,
@@ -17828,7 +17829,7 @@ types={
 		},{
 			name:'Rejuvenator',
 			ammo:5,
-			damage:150,
+			damage:170,
 			cooldown:40,
 			stop:90,
 			reload:24,
@@ -18145,7 +18146,7 @@ types={
 			ammo:3,
 			damage:105,
 			cooldown:45,
-			stop:105,
+			stop:90,
 			reload:36,
 			speed:1.05,
       uses:15,
@@ -18296,7 +18297,7 @@ types={
 		},{
 			name:'Shredder',
 			ammo:2,
-			damage:12,
+			damage:15,
 			cooldown:30,
 			stop:100,
 			reload:20,
@@ -18305,7 +18306,7 @@ types={
 		},{
 			name:'Crit Knife',
 			ammo:1,
-			damage:1500,
+			damage:2000,
 			cooldown:90,
 			stop:240,
 			reload:120,

@@ -5,12 +5,9 @@ class wall{
         this.width=width
         this.height=height
         this.type=type
+        this.setRules()
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false,false],
-        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
-            this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
-            this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
-            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80
         this.velocity={x:0,y:0}
         this.boundary=[
             [[{x:this.position.x-this.width/2,y:this.position.y+this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
@@ -29,6 +26,28 @@ class wall{
         this.align=-1
         this.base={}
         this.gapper=[]
+    }
+    setRules(){
+        this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
+            this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
+            this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
+            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80
+
+        this.rules={
+            collide:[
+                this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
+                this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
+                this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
+                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80,
+
+                this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
+                this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
+                this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
+                this.type!=77&&this.type!=79&&this.type!=80,
+
+                this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67,
+            ]
+        }
     }
     set(){
         this.reload=-1
@@ -10814,6 +10833,7 @@ class wall{
                         case 69: this.type=50; break
                         case 50: this.type=61; break
                     }
+                    this.setRules()
                 }
                 if(game.level!=29&&game.level!=37||this.type==57){
                     if(this.recharge>0){
@@ -12511,49 +12531,9 @@ class wall{
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
                     if(
-                        a==0&&
-                        this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
-                        this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                        this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&
+                        a==0&&this.rules.collide[0]&&
                         !((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)&&
-                        (
-                            c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
-                            c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
-                            c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
-                            c.type==68||c.type==69||c.type==70||c.type==73||c.type==83||
-                            c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||
-                            c.type==95||c.type==97||c.type==98||c.type==102||c.type==104||
-                            c.type==106||c.type==107||c.type==108||c.type==110||c.type==111||
-                            c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
-                            c.type==117||c.type==118||c.type==119||c.type==120||c.type==121||
-                            c.type==122||c.type==123||c.type==124||c.type==128||c.type==129||
-                            c.type==131||c.type==132||c.type==134||c.type==135||c.type==136||
-                            c.type==137||c.type==138||c.type==139||c.type==140||c.type==141||
-                            c.type==142||c.type==143||c.type==144||c.type==145||c.type==146||
-                            c.type==156||c.type==157||c.type==158||c.type==159||c.type==160||
-                            c.type==161||c.type==162||c.type==163||c.type==164||c.type==165||
-                            c.type==166||c.type==168||c.type==169||c.type==170||c.type==171||
-                            c.type==172||c.type==176||c.type==177||c.type==178||c.type==179||
-                            c.type==180||c.type==181||c.type==182||c.type==183||c.type==184||
-                            c.type==200||c.type==201||c.type==204||c.type==208||c.type==205||
-                            c.type==206||c.type==208||c.type==209||c.type==210||c.type==211||
-                            c.type==216||c.type==220||c.type==221||c.type==224||c.type==226||
-                            c.type==227||c.type==228||c.type==233||c.type==235||c.type==237||
-                            c.type==238||c.type==239||c.type==240||c.type==243||c.type==245||
-                            c.type==246||c.type==247||c.type==248||c.type==250||c.type==252||
-                            c.type==259||c.type==260||c.type==261||c.type==263||c.type==264||
-                            c.type==267||c.type==268||c.type==271||c.type==272||c.type==275||
-                            c.type==277||c.type==282||c.type==283||c.type==284||c.type==286||
-                            c.type==292||c.type==293||c.type==295||c.type==301||c.type==392||
-                            c.type==303||c.type==304||c.type==305||c.type==311||c.type==312||
-                            c.type==314||c.type==315||c.type==318||c.type==323||c.type==326||
-                            c.type==328||c.type==329||c.type==344||c.type==349||c.type==353||
-                            c.type==356||c.type==359||c.type==360||c.type==366||c.type==368||
-                            c.type==372||c.type==373||c.type==375||c.type==376||c.type==383||
-                            c.type==389||c.type==390||c.type==391||c.type==392||c.type==402||
-                            c.type==404
-                        )
+                        c.bouncer
                     ){
                         if(!c.stop){
                             let d=collideBoxBox(this,c)
@@ -12804,15 +12784,7 @@ class wall{
                                         }
                                     break
                                 }
-                                if(
-                                    c.type==113||c.type==114||c.type==115||c.type==116||c.type==117||
-                                    c.type==146||c.type==156||c.type==181||c.type==201||c.type==205||
-                                    c.type==209||c.type==216||c.type==220||c.type==221||c.type==243||
-                                    c.type==245||c.type==246||c.type==247||c.type==250||c.type==284||
-                                    c.type==286||c.type==304||c.type==314||c.type==323||c.type==329||
-                                    c.type==349||c.type==360||c.type==368||c.type==372||c.type==375||
-                                    c.type==392
-                                ){
+                                if(c.rules.trap){
                                     if(c.type==201&&!c.stop){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
                                     }else if(c.type==314&&!c.stop){
@@ -12903,10 +12875,7 @@ class wall{
                             }
                         }
                      }else if(a==0&&((inBoxBox(this.bounder,c)||this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54))&&c.active&&
-                        this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
-                        this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
-                        this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
-                        this.type!=77&&this.type!=79&&this.type!=80
+                        this.rules.collide[1]
                         &&!((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)
                         &&!(this.type==65&&this.recharge>0)
                     ){
@@ -12917,31 +12886,15 @@ class wall{
                             inBoxBox(this,proxyC)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||
                             (this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54)&&inTriangleBoxBasic(this.triangle,proxyC)
                         ){
-                            if(
-                                c.type!=7&&c.type!=23&&c.type!=25&&c.type!=32&&c.type!=37&&
-                                c.type!=40&&c.type!=46&&c.type!=79&&c.type!=84&&c.type!=89&&
-                                c.type!=100&&c.type!=103&&c.type!=112&&c.type!=193&&c.type!=194&&
-                                c.type!=195&&c.type!=270&&c.type!=297&&c.type!=310&&c.type!=330&&
-                                c.type!=335&&c.type!=335&&c.type!=405
-                            ){
+                            if(c.rules.stopper){
                                 c.active=false
                                 c.speed=0
-                                if(
-                                    c.type==2||c.type==3||c.type==16||c.type==21||c.type==22||
-                                    c.type==26||c.type==27||c.type==41||c.type==45||c.type==47||
-                                    c.type==48||c.type==53||c.type==54||c.type==55||c.type==56||
-                                    c.type==58||c.type==64||c.type==66||c.type==78||c.type==80||
-                                    c.type==86||c.type==101||c.type==187||c.type==213||c.type==229||
-                                    c.type==262||c.type==266||c.type==279||c.type==280||c.type==290||
-                                    c.type==307||c.type==308||c.type==313||c.type==336||c.type==351||
-                                    c.type==362||c.type==370||c.type==378||c.type==379||c.type==384||
-                                    c.type==385
-                                ){
+                                if(c.rocket){
                                     c.explode()
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.rules.collide[2]
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weaponType==-1
                             ||(!game.classWeapon||c.playerData.name.includes('CarrySentry'))&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
@@ -12960,12 +12913,7 @@ class wall{
                         let clump
                         switch(this.type){
                             case 3:
-                                if(
-                                    game.level==25||game.level==26||game.level==30||game.level==32||game.level==33||game.level==55||game.level==56||game.level==59||game.level==60||game.level==65||
-                                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==77||game.level==78||game.level==79||game.level==88||game.level==89||game.level==91||
-                                    game.level==92||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==104||game.level==105||game.level==110||
-                                    game.level==114
-                                ){
+                                if(rules.safeWater){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     if(c.jump.active<=0){
@@ -13029,6 +12977,7 @@ class wall{
                                     switch(game.level){
                                         case 6:
                                             this.type=[9,12][floor(random(0,2))]
+                                            this.setRules()
                                         break
                                         case 55: case 92:
                                             this.remove=true
@@ -13063,6 +13012,7 @@ class wall{
                                 switch(game.level){
                                     case 6:
                                         this.type=[8,12][floor(random(0,2))]
+                                        this.setRules()
                                     break
                                     case 55: case 92:
                                         this.remove=true
@@ -13120,6 +13070,7 @@ class wall{
                                 switch(game.level){
                                     case 6:
                                         this.type=[8,9][floor(random(0,2))]
+                                        this.setRules()
                                     break
                                     case 55: case 92:
                                         this.remove=true
@@ -13155,6 +13106,7 @@ class wall{
                             case 16:
                                 if(types.player[this.weapon].name=='PlayerClassWars'){
                                     game.level=menu.level
+                                    updateRules()
                                     entities.players=[]
                                     game.weapon=[[this.weapon]]
                                     if(game.level==29){
@@ -13249,6 +13201,7 @@ class wall{
                                 switch(game.level){
                                     case 6:
                                         this.type=[8,12][floor(random(0,2))]
+                                        this.setRules()
                                     break
                                     case 55: case 92:
                                         this.remove=true
@@ -13366,6 +13319,7 @@ class wall{
                                     this.recharge=300
                                 }else if(c.weaponType>=0){
                                     c.weaponType=-1
+                                    c.updateWeaponRules()
                                     c.weapon.ammo=0
                                     c.weapon.uses=0
                                     this.recharge=900
@@ -13514,7 +13468,7 @@ class wall{
                                                 c.velocity.y=min(c.velocity.y,0)
                                             }
                                             c.jump.time=5
-                                            if(c.doubleJump()&&c.weapon.uses>0){
+                                            if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.playerData.name=='PlayerPistolQuadrupleJump'){
@@ -14734,7 +14688,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42&&game.level!=52&&game.level!=53&&game.level!=56&&game.level!=75){
+                                                if(!game.pvp&&c.id==0){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=c.playerData.sizeBuff>=1.5?120:60
                                                 }
@@ -14779,7 +14733,7 @@ class wall{
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             }
                                             c.jump.time=5
-                                            if(c.doubleJump()&&c.weapon.uses>0){
+                                            if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.thrown&&this.type!=26){
@@ -14803,7 +14757,7 @@ class wall{
                                                 c.velocity.y=-c.velocity.x*this.height/this.width
                                             }
                                             c.jump.time=5
-                                            if(c.doubleJump()&&c.weapon.uses>0){
+                                            if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.thrown&&this.type!=26){

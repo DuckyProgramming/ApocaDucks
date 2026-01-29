@@ -868,20 +868,10 @@ function mainloop(){
             let key=[]
             let bs=[]
             for(let c=0,lc=game.gaming;c<lc;c++){
-                if(
-                    game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
-                    game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
-                    game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||
-                    game.level==79||game.level==81||game.level==82||game.level==83||game.level==85||game.level==92||game.level==93||game.level==95||game.level==96||game.level==97||
-                    game.level==98||game.level==99||game.level==102||game.level==106||game.level==114
-                ){
+                if(rules.grad==1){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(
-                    game.level==34||game.level==50||game.level==54||game.level==58||game.level==63||game.level==64||game.level==66||game.level==70||game.level==76||game.level==84||
-                    game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==94||game.level==104||game.level==105||game.level==107||
-                    game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113
-                ){
+                }else if(rules.grad==2){
                     graphics.main[c].fill(0)
                     graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
                 }else{
@@ -944,19 +934,7 @@ function mainloop(){
                 if(!special){
                     key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):min(
                         game.edge[0]/graphics.main[0].width,entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
-                        entities.players[c].weaponType==6||entities.players[c].weaponType==12||entities.players[c].weaponType==92||entities.players[c].weaponType==93||entities.players[c].weaponType==107||
-                        entities.players[c].weaponType==132||entities.players[c].weaponType==145||entities.players[c].weaponType==151||entities.players[c].weaponType==154||entities.players[c].weaponType==166||
-                        entities.players[c].weaponType==181||entities.players[c].weaponType==236||entities.players[c].weaponType==237||entities.players[c].weaponType==249||entities.players[c].weaponType==271||
-                        entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==288||entities.players[c].weaponType==289||entities.players[c].weaponType==293||
-                        entities.players[c].weaponType==298||entities.players[c].weaponType==352||entities.players[c].weaponType==368||entities.players[c].weaponType==369||entities.players[c].weaponType==388||
-                        entities.players[c].weaponType==402||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==454||entities.players[c].weaponType==460||
-                        entities.players[c].weaponType==465||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==519||
-                        entities.players[c].weaponType==530||entities.players[c].weaponType==543||entities.players[c].weaponType==561||entities.players[c].weaponType==574||entities.players[c].weaponType==592||
-                        entities.players[c].weaponType==623||entities.players[c].weaponType==626||entities.players[c].weaponType==636||entities.players[c].weaponType==639||entities.players[c].weaponType==642||
-                        entities.players[c].weaponType==673||entities.players[c].weaponType==682||entities.players[c].weaponType==697||entities.players[c].weaponType==718||entities.players[c].weaponType==743&&entities.players[c].subWeaponAType==6||
-                        entities.players[c].weaponType==769||entities.players[c].weaponType==790||entities.players[c].weaponType==810||entities.players[c].weaponType==835||entities.players[c].weaponType==876||
-                        entities.players[c].weaponType==952||entities.players[c].weaponType==962||
-                        (entities.players[c].weaponType==387||entities.players[c].weaponType==601)&&entities.players[c].subWeaponAType==6
+                        entities.players[c].weaponRules.seeFar
                         ?(game.level==7?1.5:1.75):
                         entities.players[c].weaponType==845||
                         game.classWeapon&&(
@@ -1045,7 +1023,7 @@ function mainloop(){
                                     }
                                 }
                             }
-                            if(a==(backed()?3:2)&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==backed()?3:2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -1406,6 +1384,9 @@ function mainloop(){
             }
             outer:
             for(let a=0,la=run.update.length;a<la;a++){
+                /*if(a==0){
+                    startTime=performance.now()
+                }*/
                 for(let b=0,lb=run.update[a].length;b<lb;b++){
                     if(b<run.update[a].length){
                         if(run.update[a][b].update()){
@@ -1419,6 +1400,10 @@ function mainloop(){
                         }
                     }
                 }
+                /*if(a==0){
+                    endTime=performance.now()
+                    print(`TIME WALLS[0]: ${endTime - startTime} milliseconds`)
+                }*/
             }
             for(let a=0,la=graphics.main.length;a<la;a++){
                 graphics.main[a].pop()
