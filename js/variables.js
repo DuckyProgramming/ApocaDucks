@@ -4493,7 +4493,7 @@ types={
       desc:'Places traps that stay still',dpsBuff:1,
     },{
       name:'PlayerDestroyer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:212,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:212,
       desc:'Fires a very large bullet',dpsBuff:1,
     },{
       name:'PlayerSunburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -5144,39 +5144,39 @@ types={
 
     {
       name:'PlayerSparkler',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:248,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:248,
       desc:'Destroyer with a bullet that fires circling streams of bullets',dpsBuff:2,
     },{
       name:'PlayerSteamroller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:337,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:337,
       desc:'Destroyer that pierces three enemies',dpsBuff:1,
     },{
       name:'PlayerFieldcannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:215,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:215,
       desc:'Destroyer that also can fire side guns',dpsBuff:0.25,
     },{
       name:'PlayerMaxgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:442,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:442,
       desc:'Destroyer that also can fire twin small guns',dpsBuff:0.35,
     },{
       name:'PlayerBlastdoor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:491,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:491,
       desc:'Destroyer with a pelleter auto turret',dpsBuff:1,
     },{
       name:'PlayerAustralia',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:2,crit:0,weapon:556,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:556,
       desc:'Fires a destroyer bullet and an engineer bullet, in a random pair of directions',dpsBuff:2,
     },{
       name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:214,
       desc:'Interceptor that fires a destroyer-sized bullet',dpsBuff:2,
     },{
       name:'PlayerKannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:516,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:516,
       desc:'Fires a destroyer bullet and side bullets, and has an upward shield',dpsBuff:1,
     },{
       name:'PlayerDestroyerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:217,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:217,
       desc:'Has a destroyer auto turret',dpsBuff:1,
     },
 
@@ -6232,7 +6232,7 @@ types={
       desc:'Poisoner that is immune to bullet side effects',dpsBuff:1,
     },{
       name:'PlayerDestroyerHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:359,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:359,
       desc:'Destroyer that spawns large drones',dpsBuff:1.25,
     },{
       name:'PlayerSpreadlingHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -7576,7 +7576,7 @@ types={
       damageBuff:1,reloadBuff:1.125,crit:0,weapon:856,
     },{
       name:'PlayerSoftwareC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:857,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:857,
     },{
       name:'PlayerPopperScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:858,
@@ -7648,7 +7648,7 @@ types={
       damageBuff:4/3,reloadBuff:1.75,crit:0,weapon:284,
     },{
       name:'PlayerDestroyerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.125,crit:0,weapon:904,
+      damageBuff:1.25,reloadBuff:1.125,crit:0,weapon:904,
     },{
       name:'PlayerHeavyAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1, 
       damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:4,

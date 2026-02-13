@@ -80,7 +80,7 @@ class projectile{
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337||this.type==398
 		this.rules={
 			slow:this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309||this.type==333||this.type==334,
-			fast:this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332||this.type==361||this.type==407,
+			fast:this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332||this.type==361||this.type==407||this.type==409,
 			hitter:this.type!=85&&this.type!=156&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&this.type!=205&&this.type!=206&&this.type!=221&&this.type!=228&&this.type!=250&&this.type!=271&&this.type!=284&&this.type!=286&&this.type!=329&&this.type!=349&&this.type!=360&&this.type!=368&&this.type!=372&&this.type!=375&&this.type!=392,
 			destroyAfter:this.type!=89&&this.type!=103&&this.type!=138&&this.type!=152&&this.type!=155&&this.type!=193&&this.type!=194&&this.type!=195&&this.type!=215&&this.type!=270&&this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330&&this.type!=335&&this.type!=337&&this.type!=398,
 			multiHit:this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306,
@@ -103,7 +103,7 @@ class projectile{
 			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
 			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
-			case 407: case 408:
+			case 407: case 408: case 409:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -6549,6 +6549,16 @@ class projectile{
 				layer.ellipse(0,0,3,4)
 				layer.triangle(-0.5,-1,0.5,-1,0,-2.5)
 			break
+			case 409:
+				layer.fill(40,240,40+this.crit*200,this.fade)
+				layer.rect(0,8,1,16)
+				layer.fill(40,160,40+this.crit*200,this.fade)
+				layer.rect(0,6,1,12)
+				layer.fill(40,80,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(150,250,150,this.fade)
+				layer.ellipse(0,0,3)
+			break
 			
 			//mark
         }
@@ -7618,7 +7628,7 @@ class projectile{
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
 				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348: case 350: case 351:
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
-				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408:
+				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8442,7 +8452,7 @@ class projectile{
 							}
 						break
 						case 373:
-							if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&entities.players[this.goal].subWeaponAType==4){
+							if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==965)){
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/3,30,this.crit,this.index))
 							}
 						break
@@ -9717,18 +9727,18 @@ class projectile{
 							(this.id==0?1:0)!=(entities.players[b].id==0?1:0)||
 							entities.players[b].id==-1&&this.id!=-1||
 							this.id==-1&&entities.players[b].id!=-1||
-							game.pvp&&this.id!=entities.players[b].id)||
-							(
-								this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||
-								this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||
-								this.type==273||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||
-								this.type==364||this.type==378||this.type==396||this.type==398
-							)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0
-						)
+							game.pvp&&this.id!=entities.players[b].id
+						)||(
+							this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||
+							this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||
+							this.type==273||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||
+							this.type==364||this.type==378||this.type==396||this.type==398||this.type==409
+						)&&
+						(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0)
 					)&&
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.5)&&
 					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396)&&(this.index==entities.players[b].index||entities.players[b].fort&&!game.pvp&&entities.players[b].id>0&&this.id>0)&&entities.players[b].id!=-1)&&
+					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396||this.type==409)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp&&entities.players[b].id>0&&this.id>0||game.pvp&&entities.players[b].id>0&&entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
 					entities.players[b].life>0&&this.active&&
 					!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306)&&this.hit.includes(entities.players[b].index))&&
 					!(this.type==258&&entities.players[b].fort&&this.index==-1)
@@ -9904,7 +9914,7 @@ class projectile{
 						entities.players[b].gasser=this.index
 					}else if(this.type==341||this.type==343||this.type==354){
 						entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
-					}else if(this.rules.fast||this.type==342){
+					}else if(this.rules.fast&&this.type!=409||this.type==342){
 						entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.125))
 						//snipers do less at close range lol
 					}else if(this.type==355){
@@ -9929,6 +9939,12 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*6)
 						entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,300)
 						this.attack=0
+					}else if(this.type==409){
+						if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
+							entities.players[b].life=min(entities.players[b].life+this.damage*this.travel/400*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						}else{
+							entities.players[b].takeDamage(this.damage*this.travel/400)
+						}
 					}else{
 						entities.players[b].takeDamage(this.damage)
 					}

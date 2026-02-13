@@ -34,7 +34,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        entities.players[0].newWeaponSet(findName('PlayerSoldier11',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerMedicC5',types.player))
     }
 }
 function windowResized(){
@@ -2493,7 +2493,7 @@ function keyPressed(){
         case 'ArrowDown': case '/': inputs.keys[0][3]=true;inputs.tap[0][3]=true; break
         case 'Shift': inputs.release[0][0]=true; break
         case 'a': case 'A': inputs.keys[1][0]=true;inputs.tap[1][0]=true; break
-        case 'd': case 'D': inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
+        case 'd': case 'D': case `e`: case `E`: inputs.keys[1][1]=true;inputs.tap[1][1]=true; break
         case 'w': case 'W': inputs.keys[1][2]=true;inputs.tap[1][2]=true; break
         case 's': case 'S': inputs.keys[1][3]=true;inputs.tap[1][3]=true; break
         case 'q': case 'Q': inputs.release[1][0]=true; break
@@ -2535,7 +2535,7 @@ function keyReleased(){
         case 'ArrowUp': inputs.keys[0][2]=false; break
         case 'ArrowDown': case '/': inputs.keys[0][3]=false;inputs.release[0][1]=true; break
         case 'a': case 'A': inputs.keys[1][0]=false; break
-        case 'd': case 'D': inputs.keys[1][1]=false; break
+        case 'd': case 'D': case `e`: case `E`: inputs.keys[1][1]=false; break
         case 'w': case 'W': inputs.keys[1][2]=false; break
         case 's': case 'S': inputs.keys[1][3]=false;inputs.release[1][1]=true; break
         case 'j': case 'J': inputs.keys[2][0]=false; break

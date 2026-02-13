@@ -354,8 +354,8 @@ class player{
             if(!game.randomizer){
                 if(obj.weaponType>=0){
                     if(obj.rules.class){
-                        obj.displayWeapon(layer,0,-14,0,obj.subWeaponA.ammo,obj.subWeaponAData.ammo,obj.infoAnim.ammoA)
-                        obj.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
+                        this.displayWeapon(layer,0,-14,0,obj.subWeaponA.ammo,obj.subWeaponAData.ammo,obj.infoAnim.ammoA)
+                        this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
                         if(obj.subWeaponAType==728){
                             layer.fill(150,obj.fade)
                             layer.rect(5,-14,20,4,2)
@@ -2147,7 +2147,7 @@ class player{
                 }
             break
             case 964:
-                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,80,7200,crit,this.index))
+                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,100,7200,crit,this.index))
             break
         }
     }
@@ -2547,7 +2547,7 @@ class player{
                 this.playerData.name=='PlayerPicker'||this.playerData.name=='PlayerTunneler'
                 ?2:
                 this.playerData.name=='PlayerSpyC2'&&(this.visible==0||this.visible>595)&&spec==0
-                ?0.6:
+                ?0.5:
                 this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||
                 this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||
                 this.playerData.name=='PlayerSpyC12'
@@ -2586,8 +2586,8 @@ class player{
                 this.visible2=30
             }else if(this.playerData.name=='PlayerSpyC6'){
                 this.visible2=15
-            }else if(this.playerData.name=='PlayerSpyC2'&&this.life<this.base.life*0.9&&this.assort.firing<=0){
-                if(this.visible==0||this.visible>595){
+            }else if(this.playerData.name=='PlayerSpyC2'&&this.visible<585){
+                if(this.visible==0&&this.life<this.base.life*0.9&&this.assort.firing<=15){
                     this.visible=600
                 }else{
                     this.visible2=30
@@ -5865,7 +5865,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],354,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                     break
                     case 777:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],409,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed=9
                     break
                     case 779:
@@ -24116,7 +24116,7 @@ class player{
                             if(!entities.projectiles[a].trap){
                                 entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                             }
-                            if(entities.projectiles[a].stickybomb){
+                            if(entities.projectiles[a].stickybomb&&entities.projectiles[a].active){
                                 entities.projectiles[a].active=false
                                 entities.projectiles[a].fail=true
                             }
@@ -26629,7 +26629,7 @@ class player{
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))
                                 entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                                 entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,377,0,this.id,250,2,false,this.index))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,377,0,this.id,300,2,false,this.index))
                                 this.life=0
                                 this.collect.time=450
                             }else if(inBoxBox(this,entities.players[a])&&(entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&!entities.players[a].dead&&!this.dead){
@@ -26638,7 +26638,7 @@ class player{
                                 entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))
                                 entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                                 entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
-                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,377,0,this.id,250,2,false,this.index))
+                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,377,0,this.id,300,2,false,this.index))
                                 this.life=0
                                 this.collect.time=450
                             }

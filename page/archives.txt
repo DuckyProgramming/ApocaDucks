@@ -33,6 +33,7 @@
 
 407 - sniper w, 4
 408 - speed revolver, 90, 348
+409 - heal bolt, 9
 
 
 
