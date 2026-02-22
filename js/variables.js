@@ -8,7 +8,7 @@ game={
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
   sectors:[],respawners:[0,0],det:[],firstGen:true,
-  deprecate:false,smile:false,yellow:false,
+  deprecate:false,smile:false,yellow:false,nostat:false,
   deathlink:false,sentryCarry:false,ender:false,poison:false,chess:false,//options
   mapset:[
       [],[
@@ -17505,7 +17505,7 @@ types={
 		},{
 			name:'Stickybomb Jumper',
 			ammo:3,
-			damage:105,
+			damage:108,
 			cooldown:45,
 			stop:90,
 			reload:54,
@@ -18122,7 +18122,7 @@ types={
 			stop:45,
 			reload:20,
 			speed:1.05,
-      uses:15,
+      uses:12,
 		},{
 			name:'Roller Launcher',
 			ammo:2,
@@ -18167,7 +18167,7 @@ types={
 			stop:144,
 			reload:10,
 			speed:0.8,
-      uses:27,
+      uses:24,
 		},{
 			name:'Infinigun',
 			ammo:24,

@@ -287,18 +287,20 @@ class player{
                     layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}`,0,-38)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.id>0&&!this.auto){
-                    if(game.level==13){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
-                    }else if(game.level==14){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
-                    }else if(game.level==48||game.level==57||game.level==80){
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
-                    }else if(game.usurp){
-                        layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
-                    }else if(game.level==30||game.level==54&&game.pvp){
-                        layer.text(`Points: ${this.stats.points}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
-                    }else{
-                        layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                    if(!game.nostat){
+                        if(game.level==13){
+                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
+                        }else if(game.level==14){
+                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
+                        }else if(game.level==48||game.level==57||game.level==80){
+                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
+                        }else if(game.usurp){
+                            layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }else if(game.level==30||game.level==54&&game.pvp){
+                            layer.text(`Points: ${this.stats.points}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }else{
+                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }
                     }
                 }else{
                     if(game.level==30||game.level==54&&game.pvp){
@@ -329,18 +331,20 @@ class player{
                     layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.id>0&&!this.auto){
-                    if(game.level==13){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
-                    }else if(game.level==14){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
-                    }else if(game.level==48||game.level==57||game.level==80){
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
-                    }else if(game.usurp){
-                        layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
-                    }else if(game.level==30||game.level==54&&game.pvp){
-                        layer.text(`Points: ${this.stats.points}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
-                    }else{
-                        layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                    if(!game.nostat){
+                        if(game.level==13){
+                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
+                        }else if(game.level==14){
+                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
+                        }else if(game.level==48||game.level==57||game.level==80){
+                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
+                        }else if(game.usurp){
+                            layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }else if(game.level==30||game.level==54&&game.pvp){
+                            layer.text(`Points: ${this.stats.points}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }else{
+                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                        }
                     }
                 }else{
                     layer.text(this.playerData.name,0,-17.5)
@@ -6516,7 +6520,7 @@ class player{
         this.construct=true
         this.ammoMult*=4
         this.weapon.uses*=4
-        this.weapon.cooldown+=120
+        this.weapon.cooldown+=90
         if(this.id==0){
             this.multLife(0.5)
         }
@@ -23578,7 +23582,7 @@ class player{
                         }else if(this.playerData.name=='PlayerSwapper'||this.rules.class){
                             if(
                                 (
-                                    (this.playerData.name=='PlayerEngineerC'||this.playerData.name=='PlayerEngineerC2'||this.playerData.name=='PlayerEngineerC3'||this.playerData.name=='PlayerEngineerC4'||this.playerData.name=='PlayerEngineerC5'||this.playerData.name=='PlayerEngineerC6'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerEngineerC8'||this.playerData.name=='PlayerEngineerC9'||this.playerData.name=='PlayerEngineerC10'||this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerEngineerC11'||this.playerData.name=='PlayerEngineerC12')&&this.subPlayerBData.name.includes('Sentry')&&this.subWeaponB.ammo==1||
+                                    (this.playerData.name=='PlayerEngineerC'||this.playerData.name=='PlayerEngineerC2'||this.playerData.name=='PlayerEngineerC3'||this.playerData.name=='PlayerEngineerC4'||this.playerData.name=='PlayerEngineerC5'||this.playerData.name=='PlayerEngineerC6'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerEngineerC8'||this.playerData.name=='PlayerEngineerC9'||this.playerData.name=='PlayerEngineerC10'||this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerEngineerC11'||this.playerData.name=='PlayerEngineerC12')&&this.subWeaponBData.name.includes('Sentry')&&this.subWeaponB.ammo>0||
                                     (this.playerData.name=='PlayerMedicC'||this.playerData.name=='PlayerMedicC2'||this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC4'||this.playerData.name=='PlayerMedicC5'||this.playerData.name=='PlayerMedicC6'||this.playerData.name=='PlayerMedicC7'||this.playerData.name=='PlayerMedicC8'||this.playerData.name=='PlayerMedicC9'||this.playerData.name=='PlayerMedicC10'||this.playerData.name=='PlayerMedicC11'||this.playerData.name=='PlayerMedicC12')&&(this.jump.time<=0&&this.jump.active<=8||this.target.heal)&&(this.subWeaponAType==133||this.subWeaponAType==688||this.subWeaponAType==705)
                                 )&&floor(random(0,15))==0
                             ){
@@ -23593,7 +23597,7 @@ class player{
                         }else if(this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.weaponType>=0&&!this.weapon.reloading){
                             this.attack(0)
                         }
-                    }else if(this.playerData.name=='PlayerDroner'||this.playerData.name=='PlayerDroner2'||this.playerData.name=='PlayerDroner3'||this.playerData.name=='PlayerDroner4'||this.playerData.name=='PlayerDroner5'||this.playerData.name=='PlayerDroner6'||this.playerData.name=='PlayerDroner7'||this.playerData.name=='PlayerDroner8'||this.playerData.name=='PlayerDroner9'||this.playerData.name=='PlayerDroner10'||this.playerData.name=='PlayerDroner11'||this.playerData.name=='PlayerDroner12'){
+                    }else if(this.playerData.name=='PlayerDroner'||this.playerData.name=='PlayerDroner2'||this.playerData.name=='PlayerDroner3'||this.playerData.name=='PlayerDroner4'||this.playerData.name=='PlayerDroner5'||this.playerData.name=='PlayerDroner6'||this.playerData.name=='PlayerDroner8'||this.playerData.name=='PlayerDroner9'||this.playerData.name=='PlayerDroner11'||this.playerData.name=='PlayerDroner12'){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&floor(random(0,15))==0){
                             this.swapSubWeapons()
                         }

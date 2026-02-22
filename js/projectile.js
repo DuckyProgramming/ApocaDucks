@@ -607,7 +607,7 @@ class projectile{
 								let point=intersectKey(this.position,extend,bound[b][0],bound[b][1])
 								if(dist(this.position.x,this.position.y,point.x,point.y)==this.extent){
 									if(this.type==406){
-										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.75-this.extent/400,1,1.5))
+										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.75-this.extent/400,1,1.5)*constrain(2-this.extent/1000,0.4,1))
 									}else{
 										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
 									}
@@ -638,8 +638,10 @@ class projectile{
 										c.velocity.y-=lcos(this.direction)*10
 										c.lastingForce[0]+=lsin(this.direction)*2
 										c.lastingForce[1]-=lcos(this.direction)*2
-										c.stuckTime=max(c.stuckTime,10)
-										c.vulnerableTime=max(c.vulnerableTime,240)
+										if(!c.immune()){
+											c.stuckTime=max(c.stuckTime,10)
+											c.vulnerableTime=max(c.vulnerableTime,240)
+										}
 										this.remove=true
 									}else if(this.type==365&&!c.fort){
 										entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,25)
@@ -9867,7 +9869,9 @@ class projectile{
 						entities.players[b].subWeaponA.reload=max(entities.players[b].subWeaponA.reload-60,0)
 					}else if(this.type==364){
 						entities.players[b].takeDamage(this.damage)
-						entities.players[b].confuseTime=max(entities.players[b].confuseTime,60)
+						if(!entities.players[b].fort){
+							entities.players[b].confuseTime=max(entities.players[b].confuseTime,60)
+						}
 					}else if(this.type==369&&entities.players[b].construct&&entities.players[b].id==this.id){
 						entities.players[b].life=min(entities.players[b].life+this.damage*0.25,max(entities.players[b].life,entities.players[b].base.life*2))
 					}else if(this.type==369){

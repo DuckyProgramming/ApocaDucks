@@ -7299,6 +7299,9 @@ function generateLevel(info,layer){
                     classPick.push(options[index])
                     options.splice(index,1)
                 }
+
+                classPick=[9,10]
+
                 options=[range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
                     let team=split.includes(a)?1:0
@@ -7312,7 +7315,11 @@ function generateLevel(info,layer){
                         //DO NOT change the 10s here! they represent 10 classes, not 10 variants!
                         if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
                             let index=floor(random(0,options[team].length))
-                            entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                            if(classPick[team]==10){
+                                entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+options[team][index])
+                            }else{
+                                entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                            }
                             options[team].splice(index,1)
                         }else if(a<game.gaming){
                             if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
@@ -8782,14 +8789,14 @@ function checkEnd(level,layer,key){
                 entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]+50,game.tileset[1]*random(25,35),335,random(-4,4)-90,-1,0.5,2400,false,-1))
             }
         }else if(game.level==44||game.level==65){
-            if(game.respawners[0]>=game.players/8&&game.point[0]==1){
+            if(game.respawners[0]>=game.players/8+0.125&&game.point[0]==1){
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==1&&(entities.players[a].die.timer>480||entities.players[a].die.timer>240&&game.point[1]==1||entities.players[a].die.timer>120&&game.point[3]==1)&&entities.players[a].life<=0){
                         entities.players[a].respawn()
                     }
                 }
             }
-            if(game.respawners[1]>=game.players/8&&game.point[4]==2){
+            if(game.respawners[1]>=game.players/8+0.125&&game.point[4]==2){
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].id==2&&(entities.players[a].die.timer>480||entities.players[a].die.timer>240&&game.point[3]==2||entities.players[a].die.timer>120&&game.point[1]==2)&&entities.players[a].life<=0){
                         entities.players[a].respawn()

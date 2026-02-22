@@ -1,0 +1,125 @@
++++ - very fast decisive victory
+++ - decisive victory
++ - indecisive victory
+
+scout:
+    soldier: =
+    pyro: ---
+    demoman: +++
+    heavy: -
+    engineer: =
+    medic: --
+    sniper: =
+    spy: +++
+    droner: =
+
+soldier:
+    scout: =
+    pyro: +
+    demoman: ++
+    heavy: =
+    engineer: +++
+    medic: +++
+    sniper: +++
+    spy: +++
+    droner: --
+
+pyro:
+    scout: +++
+    soldier: -
+    demoman: ++
+    heavy: =
+    engineer: --
+    medic: ++
+    sniper: +++
+    spy: +++
+    droner: ++
+
+demoman:
+    scout: ---
+    soldier: --
+    pyro: --
+    heavy: --
+    engineer: +++
+    medic: +++
+    sniper: =
+    spy: +++
+    droner: --
+
+heavy:
+    scout: +
+    soldier: =
+    pyro: =
+    demoman: ++
+    engineer: +
+    medic: +
+    sniper: ++
+    spy: +++
+    droner: +
+
+engineer:
+    scout: =
+    soldier: ---
+    pyro: ++
+    demoman: ---
+    heavy: -
+    medic: ++
+    sniper: +++
+    spy: +++
+    droner: +
+
+medic:
+    scout: ++
+    soldier: ---
+    pyro: --
+    demoman: ---
+    heavy: -
+    engineer: --
+    sniper: +++
+    spy: ---
+    droner: =
+
+sniper:
+    scout: =
+    soldier: ---
+    pyro: ---
+    demoman: =
+    heavy: --
+    engineer: ---
+    medic: ---
+    spy: +++
+    droner: ---
+
+spy:
+    scout: ---
+    soldier: ---
+    pyro: ---
+    demoman: ---
+    heavy: ---
+    engineer: ---
+    medic: +++
+    sniper: ---
+    droner: ---
+
+droner:
+    scout: =
+    soldier: ++
+    pyro: --
+    demoman: ++
+    heavy: -
+    engineer: -
+    medic: =
+    sniper: +++
+    spy: +++
+
+regular team:
+    scout: =
+    soldier: -
+    pyro: +
+    demoman: ++
+    heavy: ---
+    engineer: -
+    medic: +++
+    sniper: ++
+    spy: +++
+    droner: -
