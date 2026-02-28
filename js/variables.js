@@ -3753,12 +3753,33 @@ types={
           ['ShotgunSpy',3],
           ['HyperSpy',3],
           ['FlamethrowerSpy',3],
+          ['EnderSpy',3],
           ['MiniSentry',5],
           ['SmokeRocketLauncher',10],
           ['ShotgunMartyr',10],
           ['RapidCritApplyMedic',5],
+          ['HyperBonker',4],
           ['TankShieldBuff',1],
           ['EnigmaTank',1],
+          ['BombPod',2],
+        ],
+      ],
+    },{
+      name:`Duck Yourself`,
+      sendTime:45,
+      difficulty:4,
+      wave:[
+        [
+          //['PistolSplitterSplitterSplitter',1],
+          //['PistolSplitterSplitter',5],
+          //['HyperPistolSplitter',5],
+          //['CritBonkerSplitter',5],
+          //['ShotgunChainShield',5],
+          //['RapidRapidCritShotgun',5],
+
+          ['Support',0],
+
+          //['TinyLevel3SentryCarrier',3],
         ],
       ],
     },{
@@ -6837,7 +6858,7 @@ types={
     },{
       name:'PlayerPyro',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:677,
-      desc:'Has a flamethrower and gust, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:678,
@@ -6917,7 +6938,7 @@ types={
     },{
       name:'PlayerPyro3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:713,
-      desc:'Has a flame stream and gust, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a flame stream and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman3',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:714,
@@ -7117,7 +7138,7 @@ types={
     },{
       name:'PlayerPyro8',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:830,
-      desc:'Has a flicker and gust, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a flicker and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman8',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:831,
@@ -7197,7 +7218,7 @@ types={
     },{
       name:'PlayerPyro10',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:871,
-      desc:'Has a flamethrower and reflect blast, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a flamethrower and , and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman10',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:872,
@@ -7237,7 +7258,7 @@ types={
     },{
       name:'PlayerPyro11',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:947,
-      desc:'Has a bubble blaster and gust, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a bubble blaster and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman11',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:948,
@@ -7277,7 +7298,7 @@ types={
     },{
       name:'PlayerPyro12',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:957,
-      desc:'Has a kerosene flamethrower and gust, and is immune to bullet side effects',dpsBuff:0,
+      desc:'Has a kerosene flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
       name:'PlayerDemoman12',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:958,
@@ -7778,6 +7799,9 @@ types={
     },{
       name:'PlayerPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PlayerAirshot',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:972,
     },
 
     //mark c
@@ -8230,6 +8254,9 @@ types={
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'EnderSpy',sizeBuff:1,lifeBuff:3,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'FlamethrowerSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
@@ -8494,11 +8521,20 @@ types={
       name:'ShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:22,
     },{
+      name:'ShotgunChainShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:22,
+    },{
       name:'CritShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:1,weapon:22,
     },{
       name:'CritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:1,weapon:0,
+    },{
+      name:'RapidCritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:2,crit:1,weapon:0,
+    },{
+      name:'RapidRapidCritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:4,crit:1,weapon:0,
     },{
       name:'ShotgunJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
@@ -9493,6 +9529,15 @@ types={
       name:'PistolSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'PistolSplitterSplitter',sizeBuff:1.4,lifeBuff:2.5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PistolSplitterSplitterSplitter',sizeBuff:1.6,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'HyperPistolSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'HyperMedicSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
@@ -9649,6 +9694,9 @@ types={
       name:'Bonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
+      name:'HyperBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
       name:'FastBonker',sizeBuff:1,lifeBuff:1.5,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
@@ -9724,6 +9772,9 @@ types={
       name:'BallerSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:7,
     },{
+      name:'CritBonkerSplitter',sizeBuff:1.2,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:242,
+    },{
       name:'ShotgunMartyr',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
@@ -9748,10 +9799,16 @@ types={
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'BombPod',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'FastMiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.8,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Level3SentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TinyLevel3SentryCarrier',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TinyPistolShield',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
@@ -16370,13 +16427,13 @@ types={
       uses:10,
 		},{
 			name:'Minigun',
-			ammo:30,
+			ammo:36,
 			damage:100,
 			cooldown:5,
 			stop:180,
 			reload:2,
 			speed:0.75,
-      uses:90,
+      uses:108,
 		},{
 			name:'Levelled Sentry',
 			ammo:1,
@@ -17003,10 +17060,10 @@ types={
 			ammo:1,
 			damage:20,
 			cooldown:1,
-			stop:120,
+			stop:100,
 			reload:3,
 			speed:1.05,
-      uses:7,
+      uses:8,
 		},{
 			name:'Warning Launcher',
 			ammo:1,
@@ -17588,10 +17645,10 @@ types={
 			ammo:1,
 			damage:20,
 			cooldown:1,
-			stop:120,
+			stop:100,
 			reload:3,
 			speed:1.05,
-      uses:7,
+      uses:8,
 		},{
 			name:'Stickybomb Sweeper',
 			ammo:5,
@@ -17777,10 +17834,10 @@ types={
 			ammo:1,
 			damage:20,
 			cooldown:1,
-			stop:120,
+			stop:100,
 			reload:3,
 			speed:1.05,
-      uses:7,
+      uses:8,
 		},{
 			name:'Caller Launcher',
 			ammo:1,
@@ -18117,9 +18174,9 @@ types={
 		},{
 			name:'Donker',
 			ammo:1,
-			damage:125,
+			damage:120,
 			cooldown:30,
-			stop:45,
+			stop:60,
 			reload:20,
 			speed:1.05,
       uses:12,
@@ -18165,7 +18222,7 @@ types={
 			damage:225,
 			cooldown:24,
 			stop:144,
-			reload:10,
+			reload:36,
 			speed:0.8,
       uses:24,
 		},{
@@ -18188,10 +18245,10 @@ types={
       uses:2,
 		},{
 			name:'Chainsaw',
-			ammo:180,
+			ammo:45,
 			damage:125,
 			cooldown:4,
-			stop:60,
+			stop:90,
 			reload:2,
 			speed:0.75,
       uses:90,
@@ -18591,6 +18648,15 @@ types={
 			reload:54,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Airshot',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:100,
+			reload:3,
+			speed:1.05,
+      uses:8,
 		},
 
     /*{

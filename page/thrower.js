@@ -1,1 +1,1 @@
-setter=[`thrower`,`not thrower`,`not thrower`];me=()=>{print(setter.splice(floor(random(0,setter.length)),1))}
+setter=[`thrower`,`not thrower`,`not thrower`,`not thrower`];me=()=>{print(setter.splice(floor(random(0,setter.length)),1))}

@@ -7,11 +7,11 @@ function setup(){
     if(false){
         game.classWeapon=true
         //game.pane=false
-        game.noPlayer=true
+        //game.noPlayer=true
 
-        game.players=24
+        game.players=1
         game.gaming=1
-        game.level=65
+        game.level=47
         menu.level=game.level
         updateRules()
         if(true){
@@ -24,7 +24,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         //game.classicRespawn=false
-        game.pvp=true
+            //game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerClassWars',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -35,7 +35,7 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        //entities.players[0].newWeaponSet(findName('PlayerMedicC5',types.player))
+        entities.players[0].newWeaponSet(findName('PlayerHeavyWeapons',types.player))
     }
 }
 function windowResized(){

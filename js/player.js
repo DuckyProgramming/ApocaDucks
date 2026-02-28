@@ -41,7 +41,7 @@ class player{
         this.stats={kills:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
-        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||game.randomizer){
+        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||this.playerData.name=='EnderSpy'||game.randomizer){
             this.spy=true
             this.copyset=range(0,game.players)
             for(let a=0,la=entities.players.length;a<la;a++){
@@ -56,7 +56,7 @@ class player{
             }
             this.copy=this.copyset[floor(random(0,this.copyset.length))]
         }
-        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||game.randomizer){
+        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='BigHyperMultiMedic'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||game.randomizer){
             this.active=0
         }
         this.visible=0
@@ -287,7 +287,9 @@ class player{
                     layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}`,0,-38)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.id>0&&!this.auto){
-                    if(!game.nostat){
+                    if(game.nostat){
+                        layer.text(`Weapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-25)
+                    }else{
                         if(game.level==13){
                             layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                         }else if(game.level==14){
@@ -475,7 +477,7 @@ class player{
             layer.strokeWeight(5)
             layer.arc(0,-80,80,20,-165,-15)
         }
-        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'||this.playerData.name=='FlamethrowerShield'||this.playerData.name=='RocketLauncherShield'||this.playerData.name=='CritEngineerShield'||this.playerData.name=='ShotgunShield'||this.playerData.name=='TinyPistolShield'||this.playerData.name=='BigPistolShield'||this.playerData.name=='PistolShield'||this.playerData.name=='BigBarrageRocketLauncherShield'||this.playerData.name=='LongBallerShield'||this.shieldBuff>0){
+        if(this.playerData.name=='MedicShield'||this.playerData.name=='HyperMedicShield'||this.playerData.name=='CritApplyMedicShield'||this.playerData.name=='BigFastRapidMedicShield'||this.playerData.name=='EngineerShield'||this.playerData.name=='BigMedicShield'||this.playerData.name=='TankShield'||game.brutal&&this.variant==10||this.playerData.name=='ConstructGuard'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='SidekickBonkerGuard'||this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'||this.playerData.name=='FlamethrowerShield'||this.playerData.name=='RocketLauncherShield'||this.playerData.name=='CritEngineerShield'||this.playerData.name=='ShotgunShield'||this.playerData.name=='TinyPistolShield'||this.playerData.name=='BigPistolShield'||this.playerData.name=='PistolShield'||this.playerData.name=='BigBarrageRocketLauncherShield'||this.playerData.name=='LongBallerShield'||this.playerData.name=='ShotgunChainShield'||this.shieldBuff>0){
             layer.stroke(255,150,150,this.fade)
             layer.strokeWeight(4)
             layer.line(80*lsin(this.direction.main)/lsin(60),-70,80*lsin(this.direction.main)/lsin(60),50)
@@ -1343,8 +1345,10 @@ class player{
             (this.chillTime>0?0.45:1)*
             (this.assort.intel?0.75:1)*
             (game.level==29&&this.id==0?1.125:1)*
-            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928)&&this.weapon.cooldown>0&&this.weapon.uses>0?1/3:1)*
-            (this.rules.class&&(this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==801||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?1/3:1)*
+            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0?1/3:1)*
+            (this.rules.class&&(this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==801||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928)&&(this.subWeaponA.reload>this.subWeaponAData.stop*0.8)&&this.subWeaponA.uses>0&&this.weapon.uses>0?1/3:1)*
+            (this.weaponType==924&&this.weapon.reload>this.weaponData.stop*0.5&&this.weapon.uses>0?1/3:1)*
+            (this.rules.class&&this.subWeaponAType==924&&(this.subWeaponA.reload>this.subWeaponAData.stop*0.5)&&this.subWeaponA.uses>0&&this.weapon.uses>0?1/3:1)*
             ((this.weaponType==883)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.1:1)*
             (this.rules.class&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0?1/3:1)*
@@ -1406,7 +1410,7 @@ class player{
             break
             case 'PlayerPyro':
                 this.newSubWeaponASet(findName('PlayerHeavyFlamethrower',types.player))
-                this.newSubWeaponBSet(findName('PlayerGust',types.player))
+                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
@@ -1482,7 +1486,7 @@ class player{
             break
             case 'PlayerPyro3':
                 this.newSubWeaponASet(findName('PlayerFlameStream',types.player))
-                this.newSubWeaponBSet(findName('PlayerGust',types.player))
+                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman3':
                 this.newSubWeaponASet(findName('PlayerSheller',types.player))
@@ -1679,7 +1683,7 @@ class player{
             break
             case 'PlayerPyro8':
                 this.newSubWeaponASet(findName('PlayerFlickerC',types.player))
-                this.newSubWeaponBSet(findName('PlayerGust',types.player))
+                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman8':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
@@ -1759,7 +1763,7 @@ class player{
             break
             case 'PlayerPyro10':
                 this.newSubWeaponASet(findName('PlayerHeavyFlamethrower',types.player))
-                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
+                this.newSubWeaponBSet(findName('PlayerAirshot',types.player))
             break
             case 'PlayerDemoman10':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
@@ -1815,7 +1819,7 @@ class player{
             break
             case 'PlayerPyro11':
                 this.newSubWeaponASet(findName('PlayerBubbleBlaster',types.player))
-                this.newSubWeaponBSet(findName('PlayerGust',types.player))
+                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman11':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
@@ -1855,7 +1859,7 @@ class player{
             break
             case 'PlayerPyro12':
                 this.newSubWeaponASet(findName('PlayerKerosene',types.player))
-                this.newSubWeaponBSet(findName('PlayerGust',types.player))
+                this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman12':
                 this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
@@ -2360,7 +2364,7 @@ class player{
     hyper(){
         return (
             (this.weaponType==14||this.weaponType==66||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperTank')&&this.active>0&&!(this.playerData.name=='BigMultiHyperMedic'&&this.active<660)||
-            (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||game.brutal&&this.variant==14)&&this.active>0
+            (this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||game.brutal&&this.variant==14)&&this.active>0
         )
     }
     unProtected(){
@@ -2685,7 +2689,7 @@ class player{
                 switch(weaponType){
                     case 0: case 177: case 257: case 578: case 582: case 751:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 1: case 131: case 142: case 178: case 470: case 549: case 813: case 899: case 966: case 967:
@@ -2715,7 +2719,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                     break
                     case 8: case 183: case 755:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 9:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],7,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x)),crit,this.index))
@@ -2754,7 +2758,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 19:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     break
                     case 20:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],16,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -2764,7 +2768,7 @@ class player{
                     break
                     case 22:
                         for(let a=0,la=15;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 23:
@@ -2816,7 +2820,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],32,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 39:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],33,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],33,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 40:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
@@ -2859,7 +2863,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,5,crit,this.index))
                     break
                     case 55:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                     break
                     case 56:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,10,crit,this.index))
@@ -2947,8 +2951,8 @@ class player{
                         this.takeDamage(1)
                     break
                     case 85:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 86:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],64,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -2961,12 +2965,12 @@ class player{
                     break
                     case 89:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 90:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=random(0.75,1.5)
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=random(0.75,1.5)
                         }
@@ -2984,13 +2988,13 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],70,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                     break
                     case 97:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         if(weapon.ammo%2==0){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],71,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],71,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 98:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         if(weapon.ammo%2==0){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
                         }
@@ -3006,7 +3010,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],72,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 102:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],74,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],74,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     break
                     case 103:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -3030,7 +3034,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],78,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 109:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],75,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],75,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     break
                     case 110:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -3038,7 +3042,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+5,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 111:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],79,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],79,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 112:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],8,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
@@ -3052,11 +3056,11 @@ class player{
                         this.velocity.y=-1.6
                     break
                     case 115:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,-90+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,90+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,-90+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,90+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 116:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],81,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],81,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 117:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -3090,7 +3094,7 @@ class player{
                     break
                     case 126:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 128:
@@ -3128,7 +3132,7 @@ class player{
                     break
                     case 141:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],43,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 143:
@@ -3212,8 +3216,8 @@ class player{
                     break
                     case 168:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,3,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,3,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,3,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,3,crit,this.index))
                     break
                     case 169:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],65,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
@@ -3366,7 +3370,7 @@ class player{
                     case 224:
                         for(let a=0,la=15;a<la;a++){
                             let mult=random(5,10)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],132,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                         }
@@ -3400,8 +3404,8 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,150,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
                     break
                     case 244:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],152,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25)+180,this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 248:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],154,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
@@ -3532,7 +3536,7 @@ class player{
                     case 278:
                         for(let a=0,la=15;a<la;a++){
                             let mult=random(1.5,2.5)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,900,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],114,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,900,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                         }
@@ -3544,7 +3548,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],166,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
                     break
                     case 281:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         if(round(weapon.uses)%2==0){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*3,300,crit,this.index))
                         }
@@ -3579,7 +3583,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],135,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],136,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
                         for(let a=0,la=5;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],15,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 293:
@@ -3734,7 +3738,7 @@ class player{
                         }
                     break
                     case 333:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],189,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],189,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 334:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],190,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
@@ -4026,7 +4030,7 @@ class player{
                     break
                     case 383:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,67,231,232][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,67,231,232][floor(random(0,5))],(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 384:
@@ -4163,7 +4167,7 @@ class player{
                     case 410:
                         for(let a=0,la=3;a<la;a++){
                             let mult=random(5,10)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                         }
@@ -4295,7 +4299,7 @@ class player{
                     break
                     case 441:
                         for(let a=0,la=5;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,this.time+a*72+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,this.time+a*72+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         }
                     break
                     case 442:
@@ -4418,7 +4422,7 @@ class player{
                     case 472:
                         for(let a=0,la=3;a<la;a++){
                             let mult=random(1,2.5)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],182,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=mult*4
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                         }
@@ -4440,12 +4444,12 @@ class player{
                     break
                     case 476:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,30,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],212,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,30,crit,this.index))
                         }
                     break
                     case 477:
                         for(let a=0,la=5;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],254,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,60,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],254,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,60,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].speed*=random(0.75,1.25)
                             entities.projectiles[entities.projectiles.length-1].time*=random(0.75,1.25)
                         }
@@ -4510,7 +4514,7 @@ class player{
                     case 499:
                         if(round(weapon.uses)%5==0){
                             for(let a=0,la=24;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             }
                         }else{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -4521,7 +4525,7 @@ class player{
                     break
                     case 501:
                         for(let a=0,la=8;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+180+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
@@ -4567,7 +4571,7 @@ class player{
                     case 507:
                         let chance=floor(random(0,4))
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff*(chance==0?10:1),15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],chance==0?218:1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff*(chance==0?10:1),15,crit,this.index))
                         }
                     break
                     case 508:
@@ -5114,8 +5118,10 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],276,(lsin(this.direction.main)<0?-90:90)+random(-8,8),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         }
                     break
-                    case 616: case 725:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    case 616:
+                        //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        print(max(6-this.assort.firingTime/7.2,1))
                     break
                     case 617:
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
@@ -5270,7 +5276,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1)+8,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 638:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],321,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],321,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 639: case 888:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],322,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -5303,7 +5309,7 @@ class player{
                     break
                     case 649:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],325,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],325,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 650:
@@ -5435,13 +5441,13 @@ class player{
                                 let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
                                 if(!fired667[0]&&distance==minimum667[0]){
                                     for(let b=0,lb=10;b<lb;b++){
-                                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-11.25,11.25),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                                     }
                                     fired667[0]=true
                                 }
                                 if(!fired667[1]&&distance==minimum667[1]){
                                     for(let b=0,lb=10;b<lb;b++){
-                                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-11.25,11.25),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                                     }
                                     fired667[1]=true
                                 }
@@ -5449,12 +5455,12 @@ class player{
                         }
                         if(!fired667[0]){
                             for(let a=0,la=12;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,-90+random(-11.25,11.25),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                             }
                         }
                         if(!fired667[1]){
                             for(let a=0,la=12;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,90+random(-11.25,11.25),this.id,this.weaponData.damage*this.playerData.damageBuff,300,crit,this.index))
                             }
                         }
                     break
@@ -5493,7 +5499,7 @@ class player{
                     break
                     case 669:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                         if(round(weapon.uses)%4==0){
                             entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMini',types.player),game.index))
@@ -5584,12 +5590,12 @@ class player{
                     break
                     case 710:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 721:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],343,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],343,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 722:
@@ -5604,6 +5610,11 @@ class player{
                     break
                     case 724:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],344,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    break
+                    case 725:
+                        //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-(this.assort.firingTime-45)/7.2,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        print(max(6-(this.assort.firingTime-45)/7.2,1))
                     break
                     case 726:
                         let build=true
@@ -5890,7 +5901,7 @@ class player{
                     break
                     case 794:
                         for(let a=0,la=9;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit||weapon.ammo==0,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit||weapon.ammo==0,this.index))
                         }
                     break
                     case 795:
@@ -5917,10 +5928,12 @@ class player{
                         this.inspect.push(entities.players[entities.players.length-1].index)
                     break
                     case 797:
+                        //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(weapon.ammo%4==0){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,(lsin(this.direction.main)<0?-90:90)+random(-2,2)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
                         }
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 800:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],357,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -5995,7 +6008,7 @@ class player{
                     case 819:
                         if(weapon.ammo==0){
                             for(let a=0,la=10;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff/12,15,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff/12,15,crit,this.index))
                             }
                         }else{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],407,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -6046,7 +6059,7 @@ class player{
                         this.stunTime=max(this.stunTime,30)
                     break
                     case 853:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],369,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,8,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],369,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,8,crit,this.index))
                     break
                     case 854:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],9,(lsin(this.direction.main)<0?-90:90)+random(-2,2),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -6063,13 +6076,13 @@ class player{
                         entities.projectiles[entities.projectiles.length-1].speed=7
                     break
                     case 857:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,360,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=3
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                     break
                     case 858:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                         this.velocity.x+=10*(lsin(this.direction.main)<0?-1:1)
                         this.lastingForce[0]+=2*(lsin(this.direction.main)<0?-1:1)
@@ -6165,9 +6178,11 @@ class player{
                         }
                     break
                     case 883:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-1.25,1.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-1.25,1.25),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(round(weapon.uses)%4==0){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],219,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
                         }
                     break
                     case 884:
@@ -6225,7 +6240,7 @@ class player{
                     break
                     case 907:
                         for(let a=0,la=8;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],381,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3,15,crit,this.index))
                     break
@@ -6251,16 +6266,16 @@ class player{
                         entities.projectiles[entities.projectiles.length-1].speed--
                     break
                     case 915:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],386,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit||weapon.ammo>40,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],386,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit||weapon.ammo>40,this.index))
                     break
                     case 916:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],387,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],387,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 917:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],388,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],388,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                     break
                     case 918:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
                         if(this.weapon.ammo%4==0){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%8*2.5,133,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*2,300,crit,this.index))
                         }
@@ -6408,7 +6423,7 @@ class player{
                     break
                     case 941:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,5,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,5,crit,this.index))
                     break
                     case 942:
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
@@ -6423,7 +6438,7 @@ class player{
                     break
                     case 943:
                         for(let a=0,la=12;a<la;a++){
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,232][floor(random(0,3))],(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],[12,24,232][floor(random(0,3))],(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
                     case 944:
@@ -6485,6 +6500,19 @@ class player{
                     case 971:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                    break
+                    case 972:
+                        for(let a=0,la=8;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
+                        }
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*12.5,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.9
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.75
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*15,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
                     break
 
                     //mark
@@ -6790,7 +6818,7 @@ class player{
             }else if(this.active==0&&this.record.injure>=5){
                 this.active=this.playerData.name=='BigLongHyperMedic'?600:this.playerData.name=='LongHyperMedic'?400:this.playerData.name=='BigMultiHyperMedic'?900:this.playerData.name=='BigHyperMedic'?360:this.playerData.name=='ShortHyperMedic'?120:240
             }
-        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||game.brutal&&this.variant==14){
+        }else if(this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||game.brutal&&this.variant==14){
             if(this.active>0){
                 this.active--
                 if(this.active<=0){
@@ -23884,16 +23912,16 @@ class player{
                 this.weapon.reloading=true
             }
             let rate=this.playerData.reloadBuff*(game.brutal&&this.variant==11?3:1)*(this.confuseTime>0||this.dizzyTime>0?1/3:1)*(
-                this.fort&&(
+                this.fort&&dm()
+                ?0.2:this.fort&&(
                     game.level==22||game.level==25||game.level==28||game.level==32||game.level==35||game.level==37||game.level==38||game.level==63||game.level==81||game.level==100||
-                    game.level==104||dm()
+                    game.level==104
                 )?0.25:this.fort&&(
                     game.level==23||game.level==26||game.level==27||game.level==33||game.level==40||game.level==43||game.level==44||game.level==47||game.level==49&&game.pvp||game.level==55||
                     game.level==58||game.level==59||game.level==65||game.level==68||game.level==70||game.level==77||game.level==83||game.level==84||game.level==85||game.level==89||
                     game.level==94||game.level==96||game.level==97||game.level==98||game.level==99||game.level==101||game.level==103||game.level==105||game.level==108||game.level==109
                 )?0.5:this.fort&&(game.level==79||game.level==82)
                 ?0.1:this.fort&&game.level==42?2/3:
-                this.construct&&this.id==0?0.8:
                 1
             )*(!game.peakWeapon&&this.fort?0.5:1)*((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*(this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*(this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
             if(this.weapon.cooldown>0){
@@ -24146,6 +24174,7 @@ class player{
                 if(this.id==0&&game.poison&&!this.fort){
                     entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,405,0,this.id,0,2,false,this.index))
                 }
+                let crit
                 switch(this.playerData.name){
                     case 'PistolSplitter':
                         for(let a=0,la=2;a<la;a++){
@@ -24188,7 +24217,7 @@ class player{
                         }
                     break
                     case 'ShotgunMartyr': case 'FlamethrowerMartyr':
-                        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
+                        crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,-90,this.id,100,180,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,90,this.id,100,180,crit,this.index))
                     break
@@ -24207,7 +24236,7 @@ class player{
                         entities.players[entities.players.length-1].builder=this.index
                         entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     break
-                    case 'Level3SentryCarrier':
+                    case 'Level3SentryCarrier': case `TinyLevel3SentryCarrier`:
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructLevel3',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
@@ -24230,10 +24259,47 @@ class player{
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
                         }
                     break
+                    case 'HyperPistolSplitter':
+                        for(let a=0,la=2;a<la;a++){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,0,0,[],true,findName('HyperPistol',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].free=true
+                            entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                        }
+                    break
+                    case 'CritBonkerSplitter':
+                        for(let a=0,la=2;a<la;a++){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,0,0,[],true,findName('CritBonker',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].free=true
+                            entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                        }
+                    break
+                    case 'PistolSplitterSplitter':
+                        for(let a=0,la=2;a<la;a++){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-15,0,0,[],true,findName('PistolSplitter',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].free=true
+                            entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                        }
+                    break
+                    case 'PistolSplitterSplitterSplitter':
+                        for(let a=0,la=2;a<la;a++){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18,0,0,[],true,findName('PistolSplitterSplitter',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].free=true
+                            entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                        }
+                    break
                     case 'PlayerMobster':
                         for(let a=0,la=game.players;a<la;a++){
                             entities.players[a].life=0
                         }
+                    break
+                    case 'BombPod':
+                        crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,-90,this.id,180,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,90,this.id,180,300,crit,this.index))
                     break
                 }
                 if(this.fort){
@@ -25588,7 +25654,7 @@ class player{
                         }
                     }
                 break
-                case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield': case 'CritEngineerShield': case 'ShotgunShield': case 'TinyPistolShield': case 'BigPistolShield': case 'PistolShield': case 'BigBarrageRocketLauncherShield': case 'LongBallerShield':
+                case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield': case 'CritEngineerShield': case 'ShotgunShield': case 'TinyPistolShield': case 'BigPistolShield': case 'PistolShield': case 'BigBarrageRocketLauncherShield': case 'LongBallerShield': case 'ShotgunChainShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
                             if(entities.projectiles[a].exploder){
@@ -25876,7 +25942,7 @@ class player{
                         }
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0||entities.players[a].id==-1||this.id==-1)&&entities.players[a].life>0&&entities.players[a].fade>0&&dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)==minimum){
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,this.playerData.name=='PlayerGustception'?288:109,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-12.5,12.5),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,this.playerData.name=='PlayerGustception'?288:109,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-11.25,11.25),this.id,this.weaponData.damage*this.playerData.damageBuff,10,crit,this.index))
                                 this.firearc=[atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),30]
                                 a=la
                             }

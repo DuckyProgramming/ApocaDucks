@@ -30,10 +30,12 @@
 969 - recoil sniper w, 855
 970 - speed revolver
 971 - time bomb c, 464
+972 - airshot
 
 407 - sniper w, 4
 408 - speed revolver, 90, 348
 409 - heal bolt, 9
+410 - midball, 147,291
 
 
 

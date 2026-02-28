@@ -60,7 +60,8 @@ function spy(name){
         name=='HeavySpy'||
         name=='GrenadierSpy'||
         name=='SpyBuster'||
-        name=='FlamethrowerSpy'
+        name=='FlamethrowerSpy'||
+        name=='EnderSpy'
 }
 function playerColor(owner){
     switch(owner){
@@ -7300,7 +7301,7 @@ function generateLevel(info,layer){
                     options.splice(index,1)
                 }
 
-                classPick=[9,10]
+                //classPick=[3,4]
 
                 options=[range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
