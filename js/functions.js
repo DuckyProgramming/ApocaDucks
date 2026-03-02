@@ -61,7 +61,8 @@ function spy(name){
         name=='GrenadierSpy'||
         name=='SpyBuster'||
         name=='FlamethrowerSpy'||
-        name=='EnderSpy'
+        name=='EnderSpy'||
+        name=='MiniSentrySpy'
 }
 function playerColor(owner){
     switch(owner){

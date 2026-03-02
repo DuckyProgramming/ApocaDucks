@@ -1,5 +1,22 @@
 
 
+973 - slug scattergun, 710
+974 - molotov, 793
+975 - degreaser, 8 (x1.8)
+976 - roller launcher, 36
+977 - launch sentry, 685
+978 - push pistol w
+
+411 - scatterslug, 341
+412 - molotov, 28
+413 - roller, 30
+
+
+
+
+
+
+
 
 945 - scout11
 946 - soldier11

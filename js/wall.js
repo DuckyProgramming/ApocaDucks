@@ -12871,6 +12871,15 @@ class wall{
                                     }
                                 }else if(c.type==404&&d>=2){
                                     c.attack=0
+                                }else if(c.type==413&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.velocity.x*=0.4
+                                    c.velocity.y*=0.4
+                                    if(c.bounces>=6){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }
                             }
                         }

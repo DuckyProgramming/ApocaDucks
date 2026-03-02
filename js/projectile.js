@@ -31,7 +31,7 @@ class projectile{
 			this.type==353||this.type==356||this.type==359||this.type==360||this.type==362||
 			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
 			this.type==378||this.type==379||this.type==384||this.type==385||this.type==389||
-			this.type==390||this.type==391||this.type==392
+			this.type==390||this.type==391||this.type==392||this.type==412||this.type==413
 		this.rocket=this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
 			this.type==26||this.type==27||this.type==41||this.type==45||this.type==47||
 			this.type==48||this.type==53||this.type==54||this.type==55||this.type==56||
@@ -40,7 +40,7 @@ class projectile{
 			this.type==262||this.type==266||this.type==279||this.type==280||this.type==290||
 			this.type==307||this.type==308||this.type==313||this.type==336||this.type==351||
 			this.type==362||this.type==370||this.type==378||this.type==379||this.type==384||
-			this.type==385
+			this.type==385||this.type==412
 		this.bouncer=this.type==5||this.type==8||this.type==17||this.type==28||this.type==29||
 			this.type==30||this.type==34||this.type==35||this.type==42||this.type==51||
 			this.type==52||this.type==60||this.type==61||this.type==62||this.type==65||
@@ -75,7 +75,7 @@ class projectile{
 			this.type==356||this.type==359||this.type==360||this.type==366||this.type==368||
 			this.type==372||this.type==373||this.type==375||this.type==376||this.type==383||
 			this.type==389||this.type==390||this.type==391||this.type==392||this.type==402||
-			this.type==404
+			this.type==404||this.type==413
 		this.stickybomb=this.type==349||this.type==360||this.type==368||this.type==372||this.type==392
 		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337||this.type==398
 		this.rules={
@@ -86,6 +86,25 @@ class projectile{
 			multiHit:this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306,
 			trap:this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==156||this.type==181||this.type==201||this.type==205||this.type==209||this.type==216||this.type==220||this.type==221||this.type==243||this.type==245||this.type==246||this.type==247||this.type==250||this.type==284||this.type==286||this.type==304||this.type==314||this.type==323||this.type==329||this.type==349||this.type==360||this.type==368||this.type==372||this.type==375||this.type==392,
 			stopper:this.type!=7&&this.type!=23&&this.type!=25&&this.type!=32&&this.type!=37&&this.type!=40&&this.type!=46&&this.type!=79&&this.type!=84&&this.type!=89&&this.type!=100&&this.type!=103&&this.type!=112&&this.type!=193&&this.type!=194&&this.type!=195&&this.type!=270&&this.type!=297&&this.type!=310&&this.type!=330&&this.type!=335&&this.type!=335&&this.type!=405,
+			fader1:this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
+				this.type==26||this.type==27||this.type==30||this.type==31||this.type==32||
+				this.type==41||this.type==45||this.type==47||this.type==53||this.type==54||
+				this.type==55||this.type==56||this.type==58||this.type==64||this.type==65||
+				this.type==66||this.type==78||this.type==80||this.type==83||this.type==86||
+				this.type==88||this.type==98||this.type==101||this.type==104||this.type==110||
+				this.type==113||this.type==153||this.type==156||this.type==166||this.type==187||
+				this.type==206||this.type==211||this.type==213||this.type==228||this.type==229||
+				this.type==235||this.type==264||this.type==266||this.type==279||this.type==307||
+				this.type==308||this.type==313||this.type==336||this.type==344||this.type==349||
+				this.type==351||this.type==353||this.type==356||this.type==360||this.type==362||
+				this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
+				this.type==377||this.type==378||this.type==379||this.type==384||this.type==389||
+				this.type==390||this.type==391||this.type==392||this.type==412||this.type==413,
+			fader2:this.type==48||this.type==89||this.type==103||this.type==193||this.type==194||
+				this.type==195||this.type==270||this.type==310||this.type==330||this.type==385||
+				this.type==398,
+			fader3:this.type==190||this.type==191||this.type==214||this.type==255||this.type==256||
+				this.type==257||this.type==265||this.type==300||this.type==365
 		}
 		this.bullet=false
 		this.trap=false
@@ -134,7 +153,7 @@ class projectile{
 			case 282: case 283: case 284: case 286: case 292: case 293: case 295: case 301: case 303: case 304:
 			case 305: case 311: case 312: case 314: case 315: case 318: case 323: case 326: case 328: case 329:
 			case 344: case 349: case 353: case 356: case 360: case 368: case 372: case 373: case 375: case 376:
-			case 389: case 390: case 391: case 392: case 402: case 404:
+			case 389: case 390: case 391: case 392: case 402: case 404: case 413:
 				this.partisan=true
 				this.width=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283||this.type==301||this.type==303?12:
 					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373||this.type==402?8:
@@ -325,7 +344,7 @@ class projectile{
 				this.speed=3
 				this.time=time
 			break
-			case 28: case 359: case 366: case 383:
+			case 28: case 359: case 366: case 383: case 412:
 				this.width=4
 				this.height=4
 				this.speed=this.type==366?12:10
@@ -817,6 +836,13 @@ class projectile{
 				this.time=999
 				this.width*=12.5
 				this.height*=12.5
+			break
+			case 411:
+				this.speed=8
+				this.time=time*2
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
 			break
 			
 		}
@@ -6570,7 +6596,56 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,4.375)
 			break
-			
+			case 411:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1.5,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1.5,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,5,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,4)
+				layer.ellipse(-2,0,2)
+			break
+			case 412:
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(200,this.fade*0.5)
+				regPoly(layer,0,0,16,5,5,0)
+				layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,6*(0.8+0.2*lsin(this.time*12)))
+				layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				layer.ellipse(0,0,3*(0.8+0.2*lsin(this.time*12)))
+			break
+			case 413:
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.rect(0,0,4)
+				layer.fill(100,this.fade)
+				layer.quad(0,-2,-2,0,0,2,2,0)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,222.5-this.fade*222.5)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,150-this.fade*150)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,75-this.fade*75)
+				}
+			break
+
 			//mark
         }
         layer.pop()
@@ -7531,38 +7606,34 @@ class projectile{
 					}
 				}
 			break
+			case 412:
+				for(let b=0,lb=10;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb)+b/lb*360,this.id,this.base.damage/3,10,this.crit,this.index))
+				}
+			break
+			case 413:
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<87.5&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
+						entities.players[b].takeDamage(this.damage*(1-c/87.5)*0.8)
+						entities.players[b].die.killer=this.index
+						entities.players[b].collect.time=450
+						if(game.invis){
+							entities.players[b].visible=15
+						}
+					}
+				}
+			break
 		}
 		//mark
 	}
     update(){
 		this.timer++
-		if(
-			this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
-			this.type==26||this.type==27||this.type==30||this.type==31||this.type==32||
-			this.type==41||this.type==45||this.type==47||this.type==53||this.type==54||
-			this.type==55||this.type==56||this.type==58||this.type==64||this.type==65||
-			this.type==66||this.type==78||this.type==80||this.type==83||this.type==86||
-			this.type==88||this.type==98||this.type==101||this.type==104||this.type==110||
-			this.type==113||this.type==153||this.type==156||this.type==166||this.type==187||
-			this.type==206||this.type==211||this.type==213||this.type==228||this.type==229||
-			this.type==235||this.type==264||this.type==266||this.type==279||this.type==307||
-			this.type==308||this.type==313||this.type==336||this.type==344||this.type==349||
-			this.type==351||this.type==353||this.type==356||this.type==360||this.type==362||
-			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
-			this.type==377||this.type==378||this.type==379||this.type==384||this.type==389||
-			this.type==390||this.type==391||this.type==392
-		){
+		if(this.rules.fader1){
 			this.fade=smoothAnim(this.fade,this.active,0,1,10)
-		}else if(
-			this.type==48||this.type==89||this.type==103||this.type==193||this.type==194||
-			this.type==195||this.type==270||this.type==310||this.type==330||this.type==385||
-			this.type==398
-		){
+		}else if(this.rules.fader2){
 			this.fade=smoothAnim(this.fade,this.active,0,1,90)
-		}else if(
-			this.type==190||this.type==191||this.type==214||this.type==255||this.type==256||
-			this.type==257||this.type==265||this.type==300||this.type==365
-		){
+		}else if(this.rules.fader3){
 			this.fade=0
 		}else if(this.type==280||this.type==316||this.type==326){
 			this.fade=smoothAnim(this.fade,this.active,0,1,60)
@@ -7611,7 +7682,7 @@ class projectile{
 			case 296: case 301: case 303: case 304: case 305: case 311: case 312: case 314: case 315: case 318:
 			case 323: case 326: case 328: case 329: case 344: case 349: case 353: case 356: case 359: case 360:
 			case 366: case 367: case 368: case 372: case 373: case 375: case 376: case 383: case 389: case 392:
-			case 402: case 404: case 410:
+			case 402: case 404: case 410: case 412: case 413:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -7639,7 +7710,7 @@ class projectile{
 				case 324: case 325: case 327: case 331: case 332: case 335: case 336: case 337: case 338: case 339:
 				case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348: case 350: case 351:
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
-				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409:
+				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -7658,7 +7729,7 @@ class projectile{
 				case 135: case 136: case 147: case 166: case 169: case 170: case 176: case 226: case 235: case 240: case 258:
 				case 264: case 277: case 285: case 289: case 290: case 291: case 293: case 296: case 303: case 311: case 312:
 				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
-				case 391: case 402: case 410:
+				case 391: case 402: case 410: case 412: case 413:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -9890,7 +9961,7 @@ class projectile{
 					}else if(
 						this.exploder&&this.type!=389
 					){
-						if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353){
+						if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353||this.type==412){
 							entities.players[b].takeDamage(this.damage)
 						}else if(this.type==48){
 							this.speed=0
@@ -9958,6 +10029,8 @@ class projectile{
 						}else{
 							entities.players[b].takeDamage(this.damage*this.travel/400)
 						}
+					}else if(this.type==411){
+						entities.players[b].takeDamage(this.damage*max(1,1.25-this.timer*0.03125))
 					}else{
 						entities.players[b].takeDamage(this.damage)
 					}
@@ -10303,6 +10376,10 @@ class projectile{
 							break
 							case 346:
 								entities.players[b].chillTime=max(entities.players[b].chillTime,240)
+							break
+							case 412:
+								entities.players[b].gasTime=max(5,entities.players[b].gasTime+3)
+								entities.players[b].gasser=this.index
 							break
 						}
 						switch(this.type){

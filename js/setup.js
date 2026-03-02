@@ -11,7 +11,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=47
+        game.level=40
         menu.level=game.level
         updateRules()
         if(true){
@@ -35,7 +35,8 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-        entities.players[0].newWeaponSet(findName('PlayerHeavyWeapons',types.player))
+
+        entities.players[0].newWeaponSet(findName('PlayerScout',types.player))
     }
 }
 function windowResized(){

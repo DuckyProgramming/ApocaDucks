@@ -8,6 +8,8 @@ hyperbonker
 tinylevel3sentrycarrier
 rapidrapidcritshotgun
 shotgunchainshield
+minisentry spy
 
+^ done
 
 

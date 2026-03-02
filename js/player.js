@@ -41,7 +41,7 @@ class player{
         this.stats={kills:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
-        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||this.playerData.name=='EnderSpy'||game.randomizer){
+        if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||this.playerData.name=='EnderSpy'||this.playerData.name=='MiniSentrySpy'||game.randomizer){
             this.spy=true
             this.copyset=range(0,game.players)
             for(let a=0,la=entities.players.length;a<la;a++){
@@ -1402,7 +1402,8 @@ class player{
             break
             case 'PlayerScout':
                 this.newSubWeaponASet(findName('PlayerScattergun',types.player))
-                this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
+                //this.newSubWeaponBSet(findName('PlayerPistolW',types.player))
+                this.newSubWeaponBSet(findName('PlayerPushPistolW',types.player))
             break
             case 'PlayerSoldier':
                 this.newSubWeaponASet(findName('PlayerHeavyRocketLauncher',types.player))
@@ -2745,7 +2746,7 @@ class player{
                             weapon.ammo++
                         }
                     break
-                    case 15: case 163:
+                    case 15: case 163: case 978:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],12,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 16:
@@ -5121,7 +5122,6 @@ class player{
                     case 616:
                         //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
-                        print(max(6-this.assort.firingTime/7.2,1))
                     break
                     case 617:
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructShotgun',types.player),game.index))
@@ -6513,6 +6513,47 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*15,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
+                    break
+                    case 973:
+                        for(let a=0,la=6;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        }
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],411,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*4.8,15,crit,this.index))
+                    break
+                    case 974:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],412,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
+                    break
+                    case 975:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,10,crit,this.index))
+                        print(weapon.ammo)
+                        if(weapon.ammo==0){
+                            this.swapSubWeapons()
+                        }
+                    break
+                    case 976:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.4
+                    break
+                    case 977:
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].playerData.name=='ConstructMiniC'&&entities.players[a].builder==this.index){
+                                entities.players[a].life=0
+                                entities.players[a].die.killer=-1
+                            }
+                        }
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                        entities.players[entities.players.length-1].velocity.x=9*(lsin(this.direction.main)<0?-1:1)
+                        entities.players[entities.players.length-1].velocity.y=-6
+                        entities.players[entities.players.length-1].lastingForce[0]=3*(lsin(this.direction.main)<0?-1:1)
+                        entities.players[entities.players.length-1].lastingForce[1]=-2
+                        entities.players[entities.players.length-1].weapon.cooldown-=60
+                        this.inspect.push(entities.players[entities.players.length-1].index)
                     break
 
                     //mark
