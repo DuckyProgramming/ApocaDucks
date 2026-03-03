@@ -1,5 +1,57 @@
 
 
+992 - orbital drone, 294
+993 - splasher, 168
+994 - push assault rifle
+
+423 - push less bullet, 12
+
+
+
+
+
+987 - hunt sniper, 968
+988 - scoped smg, 391
+989 - outback, 391
+990 - heal knife, 749
+991 - teleport knife, 684
+
+419 - heal knife, 348
+420 - teleport knife, 207
+421 - hunt sniper, 407
+422 - outback fume 2, 321
+
+
+
+
+
+
+983 - tickybomb launcher, 687
+984 - spiral lmg, 616
+985 - ammo pack, 703
+986 - over medic, 11
+
+417 - tickybomb, 349
+418 - over medic, 9
+
+walltype 81 - ammo pack, 63
+
+
+
+
+
+979 - penalty scattergun, 710
+980 - pain train, 937
+981 - scorch shot, 849
+982 - charge
+
+414 - penalty scattergun, 341
+415 - pain train, 400
+416 - scorch shot, 367
+
+
+
+
 973 - slug scattergun, 710
 974 - molotov, 793
 975 - degreaser, 8 (x1.8)
@@ -11,7 +63,7 @@
 412 - molotov, 28
 413 - roller, 30
 
-
+[]
 
 
 

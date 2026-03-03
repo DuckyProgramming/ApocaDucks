@@ -2793,7 +2793,7 @@ name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:663,
       desc:'Has a chance to have sidekicks',dpsBuff:1,
     },{
-      name:'PlayerLightPicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:684,
     },{
       name:'PlayerDeployerMini',sizeBuff:1,lifeBuff:4,speedBuff:1,

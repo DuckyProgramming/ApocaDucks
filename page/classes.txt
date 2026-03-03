@@ -1,4 +1,7 @@
 loadout system
+[sniper mechanics]
+[speed changing weapons]
+[fov changing weapons]
 
 scout:
 
@@ -9,8 +12,8 @@ peppergun
 popper
 rustgun
 deflector scattergun
-slug scattergun - fires less shots, but also has a large central bullet with slightly more range
-[]
+slug scattergun
+penalty scattergun
 
 secondary:
 pistol
@@ -41,8 +44,8 @@ parachute
 reserve shotgun
 musket
 pocket rocket
-[]
-[]
+pistol
+pain train
 
 pyro:
 
@@ -53,8 +56,8 @@ flicker
 kerosene
 bubble blaster
 degreaser
-[]
-[]
+molotov
+scorch shot
 
 secondary:
 reflector
@@ -76,7 +79,7 @@ caber
 warning launcher
 donker
 roller launcher
-[]
+charge
 
 secondary:
 stickybomb launcher
@@ -86,7 +89,7 @@ sticky jumper
 stickybomb sweeper
 caller launcher
 stickwheel
-[]
+tickybomb launcher
 
 heavy:
 
@@ -98,7 +101,7 @@ pump shotgun
 firework lmg
 battery lmg
 anticannon
-[]
+spiral lmg
 
 secondary:
 shotgun
@@ -107,8 +110,8 @@ pistol whip
 ice cream
 defense pack
 chainsaw
-[]
-[]
+reserve shotgun
+ammo pack
 
 engineer:
 
@@ -142,7 +145,7 @@ transmission medic
 machine medic
 rejuvenator
 leech medic
-[]
+overmedic
 
 secondary:
 heal arena
@@ -152,7 +155,7 @@ medic bolt
 chroma
 heal orb
 health pack
-[]
+chiller
 
 sniper:
 
@@ -164,7 +167,7 @@ classic sniper
 recoil sniper
 scatter sniper
 pierce sniper
-[]
+hunt sniper
 
 secondary:
 submachine
@@ -173,8 +176,8 @@ scope
 trench submachine
 carpenter
 bushwhack
-[]
-[]
+scoped smg
+outback
 
 spy:
 
@@ -191,8 +194,8 @@ knife
 speed knife
 cluster bomb
 crit knife
-[]
-[]
+heal knife
+teleport knife
 
 pda:
 invis watch
@@ -211,13 +214,12 @@ software
 interceptor
 skysweeper
 discord
+crowd
+orbital drones
 
 secondary:
 assault rifle
 puller
 magnifying glass
-[]
-[]
-freezer
-[]
-[]
+pistol
+assault rifle push

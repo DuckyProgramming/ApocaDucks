@@ -31,7 +31,7 @@ class wall{
         this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
             this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
             this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
-            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80
+            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81
 
         this.rules={
             collide:[
@@ -112,7 +112,7 @@ class wall{
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
             case 65: case 66: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 76:
-            case 77: case 79: case 80:
+            case 77: case 79: case 80: case 81:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -3166,7 +3166,7 @@ class wall{
                     break
                 }
             break
-            case 8:
+            case 8: case 81:
                 //mark 8
                 if(game.level==16){
                     layer.noFill()
@@ -10822,7 +10822,7 @@ class wall{
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
             case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 77:
-            case 78: case 79: case 80:
+            case 78: case 79: case 80: case 81:
                 if(this.rainbow&&this.time%15==0){
                     switch(this.type){
                         case 61: this.type=70; break
@@ -12880,6 +12880,8 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
+                                }else if(c.type==416){
+                                    c.active=false
                                 }
                             }
                         }
@@ -12900,12 +12902,18 @@ class wall{
                                 c.speed=0
                                 if(c.rocket){
                                     c.explode()
+                                }else if(c.type==414){
+                                    for(let e=0,le=entities.players.length;e<le;e++){
+                                        if(entities.players[e].index==c.index){
+                                            entities.players[e].life=max(entities.players[e].life-c.damage*0.25)
+                                        }
+                                    }
                                 }
                             }
                         }
                     }else if(a==1&&inBoxBox(this.bounder,c)&&this.rules.collide[2]
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
-                        &&!(this.type==8&&(c.id<=0||this.recharge>0||c.weaponType==-1
+                        &&!((this.type==8||this.type==81)&&(this.time<45||c.id<=0||this.recharge>0||c.weaponType==-1
                             ||(!game.classWeapon||c.playerData.name.includes('CarrySentry'))&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
                             ||game.classWeapon&&!c.playerData.name.includes('CarrySentry')&&(c.subWeaponA.uses>=(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult)||c.subWeaponA.uses<=0)
                             ||c.construct||c.sidekick))
@@ -12956,7 +12964,7 @@ class wall{
                                 entities.projectiles[entities.projectiles.length-1].explode()
                                 entities.projectiles[entities.projectiles.length-1].active=false
                             break
-                            case 8:
+                            case 8: case 81:
                                 if(!((game.level==22||game.level==100)&&game.pointAnim[4]>=1)){
                                     if(game.level==16){
                                         let speed=[random(100,game.edge[0]-100)-this.position.x,-this.position.y-random(2000,6000)]
@@ -12977,41 +12985,47 @@ class wall{
                                         this.recharge=1800-(game.gaming-1)*300
                                     }
                                     if(game.classWeapon){
-                                        c.subWeaponA.uses=min(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult,c.subWeaponA.uses+ceil(c.subWeaponAData.uses*c.ammoMult/2))
+                                        c.subWeaponA.uses=c.subWeaponAData.name==`Ammo Pack`?min(c.subWeaponA.uses+1,c.subWeaponAData.uses*2):
+                                            min(c.subWeaponAData.uses==1?c.subWeaponAData.uses:c.subWeaponAData.uses*c.ammoMult,c.subWeaponA.uses+ceil(c.subWeaponAData.uses*c.ammoMult/2))
                                         c.subWeaponA.cooldown=min(c.subWeaponA.cooldown,30)
                                     }else{
-                                        c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2*(listing[1].includes(c.playerType)?1/3:1)))
+                                        c.weapon.uses=c.weaponData.name==`Ammo Pack`?min(c.weapon.uses+1,c.weaponData.uses*2):
+                                            min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*c.ammoMult/2*(listing[1].includes(c.playerType)?1/3:1)))
                                         c.weapon.cooldown=min(c.weapon.cooldown,30)
                                     }
-                                    switch(game.level){
-                                        case 6:
-                                            this.type=[9,12][floor(random(0,2))]
-                                            this.setRules()
-                                        break
-                                        case 55: case 92:
-                                            this.remove=true
-                                        break
-                                        case 79: case 82: case 85:
-                                            let hold=[this.position.x,this.position.y]
-                                            let index=floor(random(0,game.placer[1].length))
-                                            let loc=game.placer[1][index]
-                                            let speed=[loc[0]-this.position.x,loc[1]-this.position.y]
-                                            game.placer[1].splice(index,1)
-                                            this.position.x+=speed[0]
-                                            this.position.y+=speed[1]
-                                            this.bounder.position.x+=speed[0]
-                                            this.bounder.position.y+=speed[1]
-                                            for(let a=0,la=this.boundary.length;a<la;a++){
-                                                for(let b=0,lb=this.boundary[a].length;b<lb;b++){
-                                                    for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
-                                                        this.boundary[a][b][c].x+=speed[0]
-                                                        this.boundary[a][b][c].y+=speed[1]
+                                    if(this.type==81){
+                                        this.remove=true
+                                    }else{
+                                        switch(game.level){
+                                            case 6:
+                                                this.type=[9,12][floor(random(0,2))]
+                                                this.setRules()
+                                            break
+                                            case 55: case 92:
+                                                this.remove=true
+                                            break
+                                            case 79: case 82: case 85:
+                                                let hold=[this.position.x,this.position.y]
+                                                let index=floor(random(0,game.placer[1].length))
+                                                let loc=game.placer[1][index]
+                                                let speed=[loc[0]-this.position.x,loc[1]-this.position.y]
+                                                game.placer[1].splice(index,1)
+                                                this.position.x+=speed[0]
+                                                this.position.y+=speed[1]
+                                                this.bounder.position.x+=speed[0]
+                                                this.bounder.position.y+=speed[1]
+                                                for(let a=0,la=this.boundary.length;a<la;a++){
+                                                    for(let b=0,lb=this.boundary[a].length;b<lb;b++){
+                                                        for(let c=0,lc=this.boundary[a][b].length;c<lc;c++){
+                                                            this.boundary[a][b][c].x+=speed[0]
+                                                            this.boundary[a][b][c].y+=speed[1]
+                                                        }
                                                     }
                                                 }
-                                            }
-                                            game.placer[1].push(hold)
-                                            this.recharge*=0.5
-                                        break
+                                                game.placer[1].push(hold)
+                                                this.recharge*=0.5
+                                            break
+                                        }
                                     }
                                 }
                             break

@@ -7338,7 +7338,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:663,
       desc:'Has a chance to have sidekicks',dpsBuff:1,
     },{
-      name:'PlayerLightPicker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:684,
     },{
       name:'PlayerDeployerMini',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -7782,7 +7782,7 @@ types={
       name:'PlayerCritKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:940,
     },{
-      name:'PlayerSplasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSplasherZ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:941,
     },{
       name:'PlayerDiscord',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -7820,6 +7820,54 @@ types={
     },{
       name:'PlayerLaunchSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:977,
+    },{
+      name:'PlayerPenaltyScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:979,
+    },{
+      name:'PlayerPainTrain',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:980,
+    },{
+      name:'PlayerScorchShot',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:981,
+    },{
+      name:'PlayerCharge',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:982,
+    },{
+      name:'PlayerTickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:983,
+    },{
+      name:'PlayerSpiralLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:984,
+    },{
+      name:'PlayerAmmoPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:985,
+    },{
+      name:'PlayerOverMedicC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:986,
+    },{
+      name:'PlayerHuntSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:987,
+    },{
+      name:'PlayerScopedSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.1,reloadBuff:1,crit:0,weapon:988,
+    },{
+      name:'PlayerOutback',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:989,
+    },{
+      name:'PlayerHealKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:990,
+    },{
+      name:'PlayerTeleportKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:991,
+    },{
+      name:'PlayerOrbital',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:992,
+    },{
+      name:'PlayerSplasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:993,
+    },{
+      name:'PlayerPushAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.8,reloadBuff:1.25,crit:0,weapon:994,
     },
 
     //mark c
@@ -18168,7 +18216,7 @@ types={
 		},{
 			name:'Degreaser',
 			ammo:44,
-			damage:40,
+			damage:50,
 			cooldown:3,
 			stop:75,
 			reload:2,
@@ -18391,7 +18439,7 @@ types={
 			speed:1.35,
       uses:10,
 		},{
-			name:'Splasher',
+			name:'Splasher Z',
 			ammo:24,
 			damage:25,
 			cooldown:15,
@@ -18629,7 +18677,7 @@ types={
 			ammo:10,
 			damage:40,
 			cooldown:12,
-			stop:30,
+			stop:15,
 			reload:6,
 			speed:1.4,
       uses:30,
@@ -18732,6 +18780,150 @@ types={
 			reload:6,
 			speed:1.4,
       uses:30,
+		},{
+			name:'Penalty Scattergun',
+			ammo:2,
+			damage:25,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:16,
+		},{
+			name:'Pain Train',
+			ammo:10,
+			damage:50,
+			cooldown:12,
+			stop:60,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Scorch Shot',
+			ammo:1,
+			damage:90,
+			cooldown:75,
+			stop:75,
+			reload:75,
+			speed:0.85,
+      uses:10,
+		},{
+			name:'Charge',
+			ammo:30,
+			damage:0,
+			cooldown:1,
+			stop:90,
+			reload:1,
+			speed:0.95,
+      uses:225,
+		},{
+			name:'Tickybomb Launcher',
+			ammo:4,
+			damage:80,
+			cooldown:45,
+			stop:90,
+			reload:54,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Spiral LMG',
+			ammo:30,
+			damage:75,
+			cooldown:5,
+			stop:180,
+			reload:2,
+			speed:0.8,
+      uses:90,
+		},{
+			name:'Ammo Pack',
+			ammo:1,
+			damage:0,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:1.3,
+      uses:2,
+		},{
+			name:'Over Medic C',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Hunt Sniper',
+			ammo:1,
+			damage:260,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Scoped Submachine',
+			ammo:12,
+			damage:45,
+			cooldown:6,
+			stop:40,
+			reload:3,
+			speed:1.15,
+      uses:60,
+		},{
+			name:'Outback',
+			ammo:10,
+			damage:40,
+			cooldown:6,
+			stop:80,
+			reload:4,
+			speed:1.15,
+      uses:50,
+		},{
+			name:'Heal Knife',
+			ammo:1,
+			damage:2000,
+			cooldown:90,
+			stop:240,
+			reload:120,
+			speed:1.35,
+      uses:10,
+		},{
+			name:'Teleport Knife',
+			ammo:1,
+			damage:2000,
+			cooldown:90,
+			stop:240,
+			reload:120,
+			speed:1.35,
+      uses:10,
+		},{
+			name:'Orbital',
+			ammo:6,
+			damage:90,
+			cooldown:40,
+			stop:150,
+			reload:24,
+			speed:0.975,
+      uses:36,
+		},{
+			name:'Splasher',
+			ammo:15,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:45,
+		},{
+			name:'Push Assault Rifle',
+			ammo:18,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:54,
 		},
 
     /*{

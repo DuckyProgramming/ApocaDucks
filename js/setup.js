@@ -36,7 +36,8 @@ function setup(){
         //game.noPlayer=true
 
 
-        entities.players[0].newWeaponSet(findName('PlayerScout',types.player))
+        //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
+        entities.players[0].newWeaponSet(findName('PlayerDroner',types.player))
     }
 }
 function windowResized(){
