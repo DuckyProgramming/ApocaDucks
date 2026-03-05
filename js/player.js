@@ -476,7 +476,7 @@ class player{
         this.calculateParts()
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y+this.offset.position.y+offsetY)
-        if(this.parachute||this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='ParaRocketBoss'){
+        if(this.parachute||this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='ParaRocketBoss'){
             layer.noFill()
             layer.stroke(200,this.fade)
             layer.strokeWeight(1)
@@ -1376,7 +1376,8 @@ class player{
             (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>0?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==795||this.subWeaponBType==795)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==817||this.subWeaponBType==817)?1.2:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)?1.2:1)*
-            (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)?1.1:1)
+            (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)?1.1:1)*
+            (this.playerData.name==`PlayerMedicW`&&(this.subWeaponAType==854||this.subWeaponBType==854)?0.8:1)
     }
     critCheck(){
         if(this.id<=0){
@@ -1435,6 +1436,7 @@ class player{
             case 'PlayerMedicW':
             case 'PlayerSniperW':
             case 'PlayerSpyW':
+            case 'PlayerDronerW':
                 this.newSubWeaponASet(game.loadout[core].main.length==0?`PlayerScattergun`:game.loadout[core].main[0])
                 this.newSubWeaponBSet(game.loadout[core].main.length==0?`PlayerPistol`:game.loadout[core].main[1])
                 if(listing[4][game.loadout[core].class].length>=3){
@@ -10750,7 +10752,7 @@ class player{
             this.fade=0
         }else if(!this.disable2){
             this.velocity.x*=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
-            this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='ParaRocketBoss'?1:1.5
+            this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='ParaRocketBoss'?1:1.5
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
             this.truePrevious.position.x=this.position.x
@@ -10837,7 +10839,7 @@ class player{
             if(this.velocity.y>0){
                 this.velocity.y*=0.6
             }
-        }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'){
+        }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'){
             this.velocity.x*=0.975
             if(this.velocity.y>0){
                 this.velocity.y*=0.7
