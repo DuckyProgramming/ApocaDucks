@@ -9,7 +9,7 @@ function setup(){
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
         game.level=40
         menu.level=game.level
@@ -35,9 +35,11 @@ function setup(){
         //game.margin=true
         //game.noPlayer=true
 
-
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        entities.players[0].newWeaponSet(findName('PlayerDroner',types.player))
+        let numKey=0
+        let sets=[4,0]
+        game.loadout[0]={main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
+        entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
     }
 }
 function windowResized(){
@@ -1965,7 +1967,7 @@ function mouseClicked(){
                             if(game.classicWeapon||game.randomizer||game.selector){
                                 game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                             }else{
-                                game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?57:48):13
+                                game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?116:115):13
                             }
                             updateRules()
                             game.mission=unit
@@ -2403,7 +2405,7 @@ function mouseClicked(){
                         if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
-                            game.level=game.classWeapon?(teamMode()?57:48):13
+                            game.level=game.classWeapon?(teamMode()?116:115):13
                         }
                         updateRules()
                         game.mission=menu.list[tick]
@@ -2470,10 +2472,11 @@ function mouseClicked(){
 function instant(){
     game.players=menu.players
     game.gaming=menu.gaming
+    updateRules()
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?57:48):13
+        game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?116:115):13
     }
     updateRules()
     game.mission=0

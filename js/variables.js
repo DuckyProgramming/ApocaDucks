@@ -6,7 +6,7 @@ game={
   classicWeapon:false,peakWeapon:false,selector:false,classWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,noPlayer:false,
   margin:false,bound:false,raid:0,newWave:false,
-  weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],
+  weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],loadout:[],
   sectors:[],respawners:[0,0],det:[],firstGen:true,
   deprecate:false,smile:false,yellow:false,nostat:false,
   deathlink:false,sentryCarry:false,ender:false,poison:false,chess:false,//options
@@ -6848,6 +6848,48 @@ types={
     },
 
     {
+      name:'PlayerScoutW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:995,
+      desc:'Fast, can double jump, armed with a scattergun and pistol',dpsBuff:0,
+    },{
+      name:'PlayerSoldierW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:996,
+      desc:'Has a rocket launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
+    },{
+      name:'PlayerPyroW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:997,
+      desc:'Has a flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
+    },{
+      name:'PlayerDemomanW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:998,
+      desc:'Has grenades and stickybombs triggered on weapon swap',dpsBuff:0,
+    },{
+      name:'PlayerHeavyWeaponsW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:999,
+      desc:'Has a large machine gun, shotgun, and damage resistance',dpsBuff:0,
+    },{
+      name:'PlayerEngineerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1000,
+      desc:'Has a shotgun and can place down a single rapid auto unit',dpsBuff:0,
+    },{
+      name:'PlayerMedicW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1001,
+      desc:'Can heal allies and place heal areas',dpsBuff:0,
+    },{
+      name:'PlayerSniperW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1002,
+      desc:'Has a sniper rifle and a submachine gun, and can see far',dpsBuff:0,
+    },{
+      name:'PlayerSpyW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1003,
+      desc:'Has a revolver and a knife and can become invisible',dpsBuff:0,
+    },{
+      name:'PlayerDronerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1004,
+      desc:'Manipulates drones and has an assault rifle',dpsBuff:0,
+    },
+    
+    {
       name:'PlayerScout',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:675,
       desc:'Fast, can double jump, armed with a scattergun and pistol',dpsBuff:0,
@@ -7756,7 +7798,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:931,
     },{
       name:'PlayerLeechMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1.25,crit:0,weapon:932,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:932,
     },{
       name:'PlayerHealburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:933,
@@ -7843,7 +7885,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:985,
     },{
       name:'PlayerOverMedicC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:986,
+      damageBuff:1.5,reloadBuff:1.375,crit:0,weapon:986,
     },{
       name:'PlayerHuntSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:987,
@@ -7868,6 +7910,18 @@ types={
     },{
       name:'PlayerPushAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.8,reloadBuff:1.25,crit:0,weapon:994,
+    },{
+      name:'PlayerInvisWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1005,
+    },{
+      name:'PlayerDeadRinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1006,
+    },{
+      name:'PlayerGhostWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1007,
+    },{
+      name:'PlayerSurvivalWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1008,
     },
 
     //mark c
@@ -17757,7 +17811,7 @@ types={
 		},{
 			name:'Trench Submachine',
 			ammo:16,
-			damage:56,
+			damage:55,
 			cooldown:5,
 			stop:65,
 			reload:2,
@@ -18893,7 +18947,7 @@ types={
 			ammo:1,
 			damage:2000,
 			cooldown:90,
-			stop:240,
+			stop:210,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -18924,6 +18978,132 @@ types={
 			reload:5,
 			speed:1.1,
       uses:54,
+		},{
+			name:'Scout W',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Soldier W',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Pyro W',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:1.075,
+      uses:125,
+		},{
+			name:'Demoman W',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Heavy W',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.8,
+      uses:120,
+		},{
+			name:'Engineer W',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Medic W',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Sniper W',
+			ammo:1,
+			damage:100,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.0625,
+      uses:8,
+		},{
+			name:'Spy W',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.4,
+      uses:12,
+		},{
+			name:'Droner W',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Invis Watch',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Dead Ringer W',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Ghost Watch',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Survival Watch',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 
     /*{

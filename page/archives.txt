@@ -1,5 +1,17 @@
 
 
+995 - scout w
+-
+1004 - droner w
+
+1005 - invis watch
+1006 - dead ringer
+1007 - ghost watch
+1008 - survival watch
+
+
+
+
 992 - orbital drone, 294
 993 - splasher, 168
 994 - push assault rifle
@@ -472,7 +484,7 @@ walltype 81 - ammo pack, 63
 347 - switcher
 
 
-711 - scout3
+711 - scout
 712 - soldier3
 713 - pyro3
 714 - demoman3

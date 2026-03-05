@@ -956,6 +956,7 @@ function mainloop(){
                         ?(game.level==7?1.5:1.75):
                         entities.players[c].weaponType==845||
                         game.classWeapon&&(
+                            entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
                             entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912
                         )?1.3:
                         entities.players[c].weaponType==846||

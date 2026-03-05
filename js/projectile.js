@@ -7783,7 +7783,7 @@ class projectile{
 			break
 			case 412:
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb)+b/lb*360,this.id,this.base.damage/3,10,this.crit,this.index))
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb)+b/lb*360,this.id,this.base.damage*0.4,10,this.crit,this.index))
 				}
 			break
 			case 413:
@@ -8850,6 +8850,8 @@ class projectile{
 											if(this.dets<=0){
 												this.active=false
 											}
+										}else{
+											this.active=false
 										}
 										this.explode()
 									}
@@ -10018,6 +10020,7 @@ class projectile{
 						(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0)
 					)&&
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.5)&&
+					!(entities.players[b].playerData.name=='PlayerSpyW'&&entities.players[b].subWeaponCType==1007&&entities.players[b].fade<=0.5)&&
 					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
 					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396||this.type==409||this.type==418)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp&&entities.players[b].id>0&&this.id>0||game.pvp&&entities.players[b].id>0&&entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
 					entities.players[b].life>0&&this.active&&

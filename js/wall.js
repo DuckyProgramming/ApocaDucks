@@ -11093,13 +11093,15 @@ class wall{
             break
             case 16:
                 let visible=false
-                for(let a=0,la=game.gaming;a<la;a++){
-                    if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
-                        visible=true
+                if(game.level!=115&&game.level!=116){
+                    for(let a=0,la=game.gaming;a<la;a++){
+                        if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
+                            visible=true
+                        }
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
-                if(this.recharge>0&&game.level!=13&&game.level!=29&&game.level!=14&&game.level!=35&&game.level!=37&&game.level!=48){
+                if(this.recharge>0&&game.level!=13&&game.level!=29&&game.level!=14&&game.level!=35&&game.level!=37&&game.level!=48&&game.level!=115&&game.level!=116){
                     this.recharge--
                 }
                 if(this.falling>0&&game.level==16){
@@ -13127,7 +13129,50 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
-                                if(types.player[this.weapon].name=='PlayerClassWars'){
+                                if(game.level==115||game.level==116){
+                                    if(types.player[this.weapon].name=='PlayerClassWars'){
+                                        game.level=menu.level
+                                        updateRules()
+                                        entities.players=[]
+                                        game.weapon=[[this.weapon]]
+                                        if(game.level==29){
+                                            newWave()
+                                        }else{
+                                            newLoop()
+                                        }
+                                        return true
+                                    }else if(this.weapon==findName('PlayerRandomClass',types.player)&&game.loadout[c.id-1].class==-1){
+                                        let tick=floor(random(0,10))
+                                        game.loadout[c.id-1]={main:[],sets:[0,1],class:tick}
+                                        game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
+                                        game.loadout[c.id-1].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                        game.loadout[c.id-1].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                        if(listing[4][tick].length>=3){
+                                            game.loadout[c.id-1].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                            game.loadout[c.id-1].sets.push(2)
+                                        }
+                                        this.recharge=1800
+                                    }else if(this.weapon>=findName('PlayerRandomScout',types.player)&&this.weapon<findName('PlayerRandomScout',types.player)+10&&!game.pvp&&game.weapon[c.id-1].length<(game.pvp?1:2)&&game.loadout[c.id-1].class==-1){
+                                        let tick=this.weapon-findName('PlayerRandomScout',types.player)
+                                        game.loadout[c.id-1]={main:[],sets:[0,1],class:tick}
+                                        game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
+                                        game.loadout[c.id-1].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                        game.loadout[c.id-1].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                        if(listing[4][tick].length>=3){
+                                            game.loadout[c.id-1].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                            game.loadout[c.id-1].sets.push(2)
+                                        }
+                                        this.recharge=1800
+                                    }else if(game.loadout[c.id-1].class==-1||this.loadout.class==game.loadout[c.id-1].class&&!game.loadout[c.id-1].sets.includes(this.loadout.set)){
+                                        game.loadout[c.id-1].main[this.loadout.set]=this.weapon
+                                        game.loadout[c.id-1].sets.push(this.loadout.set)
+                                        if(game.loadout[c.id-1].class==-1){
+                                            game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+this.loadout.class)
+                                            game.loadout[c.id-1].class=this.loadout.class
+                                        }
+                                        this.recharge=1800
+                                    }
+                                }else if(types.player[this.weapon].name=='PlayerClassWars'){
                                     game.level=menu.level
                                     updateRules()
                                     entities.players=[]
@@ -13295,11 +13340,18 @@ class wall{
                                     let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                     c.newWeaponSet(this.weapon)
                                     if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
-                                        c.weapon.ammo=this.ammo
-                                        c.weapon.uses=this.uses
-                                        this.weapon=reserve[0]
-                                        this.ammo=reserve[1]
-                                        this.uses=reserve[2]
+                                        if(game.classWeapon&&types.player[reserve[0]].name[types.player[reserve[0]].name.length-1]==`W`){
+                                            let chunk=listing[3]
+                                            this.weapon=chunk[game.loadout[c.id-1].class+floor(random(0,chunk.length/10))*10]
+                                            this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
+                                            this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                                        }else{
+                                            c.weapon.ammo=this.ammo
+                                            c.weapon.uses=this.uses
+                                            this.weapon=reserve[0]
+                                            this.ammo=reserve[1]
+                                            this.uses=reserve[2]
+                                        }
                                     }else{
                                         let chunk=listing[game.classWeapon?3:game.peakWeapon?1:0]
                                         this.weapon=chunk[floor(random(0,chunk.length))]
@@ -13499,7 +13551,7 @@ class wall{
                                                 c.jump.triple=1
                                                 c.jump.quadruple=1
                                             }
-                                            if(c.playerData.name=='PlayerScout4'){
+                                            if(c.playerData.name=='PlayerScout4'||c.playerData.name=='PlayerScoutW'&&(c.subWeaponAType==966||c.subWeaponBType==966)){
                                                 c.jump.double=1
                                                 c.jump.triple=1
                                             }
