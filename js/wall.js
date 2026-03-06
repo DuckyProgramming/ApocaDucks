@@ -9729,7 +9729,9 @@ class wall{
                     layer.rect(0,this.height/2+26,180,42,5)
                     layer.fill(0,(1-this.recharge/60)*this.infoFade)
                     layer.textSize(9)
-                    if(types.player[this.weapon].dpsBuff==0){
+                    if(game.level==115||game.level==116){
+                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
+                    }else if(types.player[this.weapon].dpsBuff==0){
                         layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
                     }else{
                         layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
@@ -11093,11 +11095,9 @@ class wall{
             break
             case 16:
                 let visible=false
-                if(game.level!=115&&game.level!=116){
-                    for(let a=0,la=game.gaming;a<la;a++){
-                        if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
-                            visible=true
-                        }
+                for(let a=0,la=game.gaming;a<la;a++){
+                    if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
+                        visible=true
                     }
                 }
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)

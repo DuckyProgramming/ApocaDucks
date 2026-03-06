@@ -3773,7 +3773,8 @@ types={
           //['PistolSplitterSplitterSplitter',1],
           //['PistolSplitterSplitter',5],
           //['HyperPistolSplitter',5],
-          ['CritBonkerSplitter',5],
+          //['CritBonkerSplitter',5],
+          ['HyperBonker',5],
           //['ShotgunChainShield',5],
           //['RapidRapidCritShotgun',5],
 
@@ -7594,7 +7595,7 @@ types={
       damageBuff:1,reloadBuff:2.5,crit:0,weapon:816,
     },{
       name:'PlayerPistolWhip',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:817,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:817,
     },{
       name:'PlayerTransmission',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1.375,crit:0,weapon:818,
@@ -17923,7 +17924,7 @@ types={
 			cooldown:30,
 			stop:60,
 			reload:20,
-			speed:1.3,
+			speed:1.15,
       uses:12,
 		},{
 			name:'Interceptor C',
@@ -17993,7 +17994,7 @@ types={
 			ammo:1,
 			damage:180,
 			cooldown:20,
-			stop:270,
+			stop:240,
 			reload:15,
 			speed:1.05,
       uses:4,
@@ -18298,9 +18299,9 @@ types={
 			name:'Donker',
 			ammo:1,
 			damage:120,
-			cooldown:30,
-			stop:60,
-			reload:20,
+			cooldown:70,
+			stop:70,
+			reload:70,
 			speed:1.05,
       uses:12,
 		},{
@@ -18343,7 +18344,7 @@ types={
 			name:'Anticannon',
 			ammo:6,
 			damage:225,
-			cooldown:24,
+			cooldown:27,
 			stop:144,
 			reload:36,
 			speed:0.8,
@@ -18810,7 +18811,7 @@ types={
 		},{
 			name:'Roller Launcher',
 			ammo:2,
-			damage:120,
+			damage:125,
 			cooldown:30,
 			stop:120,
 			reload:20,
@@ -18918,7 +18919,7 @@ types={
 		},{
 			name:'Scoped Submachine',
 			ammo:12,
-			damage:45,
+			damage:48,
 			cooldown:6,
 			stop:40,
 			reload:3,

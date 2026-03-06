@@ -372,10 +372,17 @@ class player{
                             this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
                         }
                         if(obj.subWeaponAType==728){
-                            layer.fill(150,obj.fade)
-                            layer.rect(5,-14,20,4,2)
-                            layer.fill(200,obj.fade)
-                            layer.rect(-5+10*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,-14,20*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,4,2)
+                            if(this.subWeaponBData.ammo>1){
+                                layer.fill(150,obj.fade)
+                                layer.rect(this.subWeaponBData.ammo*4,-14,(30-this.subWeaponBData.ammo*8),4,2)
+                                layer.fill(200,obj.fade)
+                                layer.rect(-15+this.subWeaponBData.ammo*8+(15-this.subWeaponBData.ammo*4)*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,-14,(30-this.subWeaponBData.ammo*8)*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,4,2)
+                            }else{
+                                layer.fill(150,obj.fade)
+                                layer.rect(5,-14,20,4,2)
+                                layer.fill(200,obj.fade)
+                                layer.rect(-5+10*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,-14,20*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,4,2)
+                            }
                         }else if(obj.subWeaponAType==919){
                             layer.fill(150,obj.fade)
                             layer.rect(5,-14,20,4,2)
@@ -1375,8 +1382,9 @@ class player{
             (this.rules.class&&this.subWeaponAType==988?0.5:1)*
             (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>0?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==795||this.subWeaponBType==795)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==817||this.subWeaponBType==817)?1.2:1)*
-            (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)?1.2:1)*
+            (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==2||this.subWeaponBType==2)?1.2:1)*
             (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)?1.1:1)*
+            (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==915||this.subWeaponBType==915)||this.playerData.name==`PlayerSpyW`&&(this.subWeaponAType==885||this.subWeaponBType==885)?0.9:1)*
             (this.playerData.name==`PlayerMedicW`&&(this.subWeaponAType==854||this.subWeaponBType==854)?0.8:1)
     }
     critCheck(){
@@ -2600,7 +2608,7 @@ class player{
                     this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
                     this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
                     this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
-                    this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'
+                    this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'||this.playerData.name=='PlayerPyroW'
                 )&&spec==0
                 ?0.8:
                 this.playerData.name=='PlayerStickyMan'&&spec==0
@@ -2720,7 +2728,6 @@ class player{
             if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||this.playerData.name=='PlayerSpyC12'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008)&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991))&&!((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)){
                 if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
                     damageBuff*=constrain(this.subWeaponA.time/60,1,4)
-                    print(constrain(this.subWeaponA.time/60,1,4))
                     this.subWeaponA.time=0
                 }
                 weapon.cooldown=weaponData.cooldown
@@ -6588,7 +6595,7 @@ class player{
                     break
                     case 975:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],6,(lsin(this.direction.main)<0?-90:90)+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
-                        if(weapon.ammo==0){
+                        if(weapon.ammo==0&&weapon.uses>0){
                             this.swapSubWeapons()
                         }
                     break
@@ -6661,7 +6668,7 @@ class player{
                         }
                     break
                     case 981:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],416,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,720,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],416,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,90,crit,this.index))
                     break
                     case 982:
                         this.velocity.x+=2*(lsin(this.direction.main)<0?-1:1)
@@ -7381,7 +7388,7 @@ class player{
                             ){
                                 this.swapSubWeapons()
                             }
-                            if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subWeaponAType.name==`PlayerPistolW`||this.subWeaponAType.name==`PlayerPistolC`))&&this.subWeaponA.uses>0&&this.subWeaponA.cooldown<5){
+                            if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&this.subWeaponA.cooldown<5){
                                 this.subWeaponA.cooldown=0
                             }
                             if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
@@ -7621,7 +7628,7 @@ class player{
                                     this.newWeaponSet(this.subPlayerBType)
                                 }
                             }else if(this.playerData.name=='PlayerSwapper'||this.rules.class){
-                                if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subWeaponAType.name==`PlayerPistolW`||this.subWeaponAType.name==`PlayerPistolC`||this.subWeaponAType.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&inputSetB[3]&&this.subWeaponA.cooldown<20){
+                                if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&inputSetB[3]&&this.subWeaponA.cooldown<20){
                                     this.subWeaponA.cooldown=0
                                 }
                                 if(this.playerData.name=='PlayerSniperW'&&this.subWeaponAType==728){
@@ -8088,7 +8095,10 @@ class player{
                     this.setColor()
                 }else if(this.construct&&this.die.killer!=-1){
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].index==this.builder&&entities.players[a].playerData.name=='PlayerEngineerC4'){
+                        if(entities.players[a].index==this.builder&&(
+                            entities.players[a].playerData.name=='PlayerEngineerC4'||
+                            entities.players[a].playerData.name=='PlayerEngineerW'&&(entities.players[a].subWeaponAType==751||entities.players[a].subWeaponAType==752)
+                        )){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,240)
                         }
                     }
@@ -10529,7 +10539,7 @@ class player{
                             entities.players[a].takeDamage((
                                 this.weaponType==415||this.weaponType==533?400:
                                 this.playerData.name=='DeadlyTank'||this.weaponType==461?200:
-                                game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?120:60):
+                                game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==996&&this.subWeaponAType==722&&this.subWeaponBType==722?180:this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?120:60):
                                 (this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?200:100)
                             )*(crit?3:1)*
                             (entities.players[a].fort&&!entities.players[a].auto?0.025:1)*

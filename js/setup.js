@@ -11,7 +11,7 @@ function setup(){
 
         game.players=5
         game.gaming=1
-        game.level=40
+        game.level=100
         menu.level=game.level
         updateRules()
         if(true){
@@ -36,8 +36,8 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=0
-        let sets=[4,0]
+        let numKey=2
+        let sets=[0,9]
         game.loadout[0]={main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
     }

@@ -292,7 +292,7 @@ class projectile{
 					this.velocity.x*=random(0.625,1.6)
 					this.velocity.y*=random(0.5,2)
 				}else if(this.type==376){
-					this.threshold=floor(random(2,6))
+					this.threshold=floor(random(2,5))
 				}else if(this.type==402){
 					this.hitting=0
 				}
@@ -862,6 +862,7 @@ class projectile{
 				this.bullet=true
 			break
 			case 416:
+				this.fail=false
 				this.width=4.5
 				this.height=4.5
 				this.speed=12
@@ -7660,8 +7661,8 @@ class projectile{
 			case 376:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=dist(this.position.x,this.position.y,entities.players[b].position.x,entities.players[b].position.y)
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<80&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
-						entities.players[b].takeDamage(this.damage*(1-c/80)*(c.fort||c.construct?2.5:1))
+					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<75&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!teamMode()))){
+						entities.players[b].takeDamage(this.damage*(1-c/75)*(c.fort||c.construct?2.5:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						if(game.invis){
@@ -7810,14 +7811,14 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,90)
 		}else if(this.rules.fader3){
 			this.fade=0
-		}else if(this.type==280||this.type==316||this.type==326||this.type==416){
+		}else if(this.type==280||this.type==316||this.type==326){
 			this.fade=smoothAnim(this.fade,this.active,0,1,60)
 		}else if(this.type==358){
 			this.fade-=0.2
 		}else if(this.type==406){
 			this.fade-=0.1
 		}else if(this.type==416){
-			this.fade=smoothAnim(this.fade,this.active,0,1,48)
+			this.fade=smoothAnim(this.fade,this.active,0,1,this.time<=0?15:60)
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}
@@ -7916,7 +7917,7 @@ class projectile{
 						if(this.timer%3==0){
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/5*2,10,this.crit,this.index))
 						}
-					}else if(this.type==416&&!this.active&&a==0){
+					}else if(this.type==416&&!this.active&&a==0&&!this.fail){
 						this.velocity.x*=0.9
 						this.velocity.y*=0.9
 						if(this.timer%3==0){
@@ -10287,7 +10288,7 @@ class projectile{
 							if(!entities.players[b].fort){
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
-										if(entities.players[d].subWeaponAType==684){
+										if(entities.players[d].subWeaponAType!=735){
 											entities.players[d].subWeaponA.cooldown=0
 											entities.players[d].subWeaponA.reload=0
 										}else{
@@ -10705,13 +10706,17 @@ class projectile{
 		if(this.time>0){
 			this.time--
         }else{
-			if((this.type==178||this.type==389)&&this.active){
-				this.explode()
-			}else if(this.type==414&&this.active){
-				for(let d=0,ld=entities.players.length;d<ld;d++){
-					if(entities.players[d].index==this.index){
-						entities.players[d].life=max(entities.players[d].life-this.damage*0.25)
+			if(this.active){
+				if((this.type==178||this.type==389)){
+					this.explode()
+				}else if(this.type==414){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].life=max(entities.players[d].life-this.damage*0.25)
+						}
 					}
+				}else if(this.type==416){
+					this.fail=true
 				}
 			}
 			this.active=false

@@ -6301,10 +6301,11 @@ function generateLevel(info,layer){
                 if(entities.walls[1][a].type==16){
                     if(ticker%21==0){
                         entities.walls[1][a].weapon=findName(game.level==116&&ticker>=100?'PlayerClassWars':'PlayerRandomClass',types.player)
+                        entities.walls[1][a].loadout={class:10,set:3}
                     }else{
                         let classNum=floor((ticker%21-1)/2)
                         entities.walls[1][a].weapon=ticker2[classNum][1]<0?findName('PlayerRandomScout',types.player)+classNum:findName(temp[classNum][ticker2[classNum][0]][ticker2[classNum][1]],types.player)
-                        entities.walls[1][a].loadout={class:classNum,set:ticker2[classNum][0]}
+                        entities.walls[1][a].loadout={class:classNum,set:ticker2[classNum][1]<0?3:ticker2[classNum][0]}
                         ticker2[classNum][1]++
                         if(ticker2[classNum][1]>=temp[classNum][ticker2[classNum][0]].length){
                             ticker2[classNum][0]++
