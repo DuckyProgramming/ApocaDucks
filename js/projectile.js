@@ -124,7 +124,7 @@ class projectile{
 			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
 			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
-			case 407: case 408: case 409: case 414: case 418: case 419: case 421: case 423:
+			case 407: case 408: case 409: case 418: case 419: case 421: case 423:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -857,6 +857,13 @@ class projectile{
 			case 411:
 				this.speed=8
 				this.time=time*2
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
+			break
+			case 414:
+				this.speed=random(6,8)
+				this.time=random(time*1.5,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
 				this.bullet=true
@@ -7918,8 +7925,8 @@ class projectile{
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/5*2,10,this.crit,this.index))
 						}
 					}else if(this.type==416&&!this.active&&a==0&&!this.fail){
-						this.velocity.x*=0.9
-						this.velocity.y*=0.9
+						this.velocity.x*=0.95
+						this.velocity.y*=0.95
 						if(this.timer%3==0){
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/2,10,this.crit,this.index))
 						}
@@ -10353,10 +10360,10 @@ class projectile{
 						case 416:
 							let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
 							let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-							this.velocity.x=sin(dir)*vec*0.5
-							this.velocity.y=cos(dir)*vec*0.5
-							entities.players[b].velocity.x-=sin(dir)*vec*1.5
-							entities.players[b].velocity.y-=cos(dir)*vec*1.5
+							this.velocity.x=sin(dir)*vec*0.4
+							this.velocity.y=cos(dir)*vec*0.4
+							entities.players[b].velocity.x-=sin(dir)*vec*1.6
+							entities.players[b].velocity.y-=cos(dir)*vec*1.6
 						break
 						case 419:
 							for(let d=0,ld=entities.players.length;d<ld;d++){

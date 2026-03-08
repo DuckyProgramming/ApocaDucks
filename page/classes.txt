@@ -1,7 +1,3 @@
-loadout system
-
-the scope weapon
-
 scout:
 
 primary:

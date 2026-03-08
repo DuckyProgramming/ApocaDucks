@@ -12884,6 +12884,8 @@ class wall{
                                     }
                                 }else if(c.type==416){
                                     c.active=false
+                                    c.velocity.x*=0.8
+                                    c.velocity.y*=0.8
                                 }
                             }
                         }
