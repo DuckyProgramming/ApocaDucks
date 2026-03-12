@@ -105,7 +105,7 @@ class player{
         this.free=false
         this.storeWeapon=false
         this.peace=false
-        this.assort={firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,intel:false,swivel:floor(random(0,100)),threshold:360}
+        this.assort={firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[]}
         this.sidekicks=[]
         this.bump=[false,false]
 
@@ -372,7 +372,12 @@ class player{
                             this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
                         }
                         if(obj.subWeaponAType==728){
-                            if(this.subWeaponBData.ammo>1){
+                            if(this.subWeaponBData.ammo>6){
+                                layer.fill(150,obj.fade)
+                                layer.rect(28,-14,20,4,2)
+                                layer.fill(200,obj.fade)
+                                layer.rect(18+10*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,-14,20*constrain(obj.subWeaponA.time/60-0.4,0,4)/4,4,2)
+                            }else if(this.subWeaponBData.ammo>1){
                                 layer.fill(150,obj.fade)
                                 layer.rect(this.subWeaponBData.ammo*4,-14,(30-this.subWeaponBData.ammo*8),4,2)
                                 layer.fill(200,obj.fade)
@@ -820,7 +825,7 @@ class player{
             break
             case 387: case 682: case 697: case 718: case 743: case 769: case 790: case 810: case 835: case 845:
             case 876: case 952: case 962: case 1002:
-                if(this.subPlayerAData.name=='PlayerSniper'||this.subPlayerAData.name=='PlayerHeavySniper'||this.subPlayerAData.name=='PlayerBow'||this.subPlayerAData.name=='PlayerScope'||this.subPlayerAData.name=='PlayerBorer'||this.subPlayerAData.name=='PlayerClassicSniper'||this.subPlayerAData.name=='PlayerScatterSniper'||this.subPlayerAData.name=='PlayerRecoilSniper'||this.subPlayerAData.name=='PlayerLightCarpenter'||this.subPlayerAData.name=='PlayerMedicSniper'||this.subPlayerAData.name=='PlayerPinSniper'||this.subPlayerAData.name=='PlayerPierceSniper'||this.subPlayerAData.name=='PlayerGlint'){
+                if(this.subPlayerAData.name=='PlayerSniper'||this.subPlayerAData.name=='PlayerHeavySniper'||this.subPlayerAData.name=='PlayerBow'||this.subPlayerAData.name=='PlayerScope'||this.subPlayerAData.name=='PlayerBorer'||this.subPlayerAData.name=='PlayerClassicSniper'||this.subPlayerAData.name=='PlayerScatterSniper'||this.subPlayerAData.name=='PlayerRecoilSniper'||this.subPlayerAData.name=='PlayerLightCarpenter'||this.subPlayerAData.name=='PlayerMedicSniper'||this.subPlayerAData.name=='PlayerPinSniper'||this.subPlayerAData.name=='PlayerPierceSniper'||this.subPlayerAData.name=='PlayerGlint'||this.subPlayerAData.name=='PlayerHuntSniper'){
                     layer.stroke(255,0,0,this.infoAnim.bar[0]*0.5*this.fade)
                     layer.strokeWeight(3)
                     layer.line(
@@ -1413,6 +1418,8 @@ class player{
             }
         }
         let core=(game.level==27||game.level==38||teamMode())&&game.pvp?this.index:this.id-1
+        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
+        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
         switch(this.playerData.name){
             case 'PlayerConglomeration':
                 this.newSubWeaponA(2)
@@ -1443,12 +1450,26 @@ class player{
             case 'PlayerSniperW':
             case 'PlayerSpyW':
             case 'PlayerDronerW':
-                this.newSubWeaponASet(game.loadout[core].main.length==0?`PlayerScattergun`:game.loadout[core].main[0])
-                this.newSubWeaponBSet(game.loadout[core].main.length==0?`PlayerPistol`:game.loadout[core].main[1])
-                if(listing[4][game.loadout[core].class].length>=3){
-                    this.newSubWeaponCSet(game.loadout[core].main.length==0?`PlayerInvisWatch`:game.loadout[core].main[2])
+                if(this.assort.storeSubWeapon.length>0){
+                    this.newSubWeaponASet(this.assort.storeSubWeapon[0])
+                    this.newSubWeaponBSet(this.assort.storeSubWeapon[1])
+                    if(this.assort.storeSubWeapon.length>=3){
+                        this.newSubWeaponCSet(this.assort.storeSubWeapon[2])
+                    }else{
+                        this.newSubWeaponCSet(findName('PlayerPickupSentry',types.player))
+                    }
+                    this.assort.storeSubWeapon=[]
                 }else{
-                    this.newSubWeaponCSet(findName('PlayerPickupSentry',types.player))
+                    this.newSubWeaponASet(game.loadout[core].main.length==0?`PlayerScattergun`:game.loadout[core].main[0])
+                    this.newSubWeaponBSet(game.loadout[core].main.length==0?`PlayerPistol`:game.loadout[core].main[1])
+                    if(listing[4][game.loadout[core].class].length>=3){
+                        this.newSubWeaponCSet(game.loadout[core].main.length==0?`PlayerInvisWatch`:game.loadout[core].main[2])
+                    }else{
+                        this.newSubWeaponCSet(findName('PlayerPickupSentry',types.player))
+                    }
+                }
+                if(this.subWeaponAType==942){
+                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,100,7200,crit,this.index))
                 }
             break
 
@@ -1465,7 +1486,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerShotgun',types.player))
             break
             case 'PlayerDemoman':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerStickybombLauncher',types.player))
             break
             case 'PlayerHeavyWeapons':
@@ -1505,7 +1526,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerFlareGun',types.player))
             break
             case 'PlayerDemoman2':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerSword',types.player))
             break
             case 'PlayerHeavyWeapons2':
@@ -1582,7 +1603,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerLightBooster',types.player))
             break
             case 'PlayerDemoman4':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerHeavyTimeBomb',types.player))
             break
             case 'PlayerHeavyWeapons4':
@@ -1702,7 +1723,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerShotgun',types.player))
             break
             case 'PlayerDemoman7':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerAirburstRifle',types.player))
             break
             case 'PlayerHeavyWeapons7':
@@ -1738,7 +1759,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman8':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerStickyJumper',types.player))
             break
             case 'PlayerHeavyWeapons8':
@@ -1778,7 +1799,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerSteamblast',types.player))
             break
             case 'PlayerDemoman9':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerStickySweeper',types.player))
             break
             case 'PlayerHeavyWeapons9':
@@ -1818,7 +1839,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerAirshot',types.player))
             break
             case 'PlayerDemoman10':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerCallerLauncher',types.player))
             break
             case 'PlayerHeavyWeapons10':
@@ -1874,7 +1895,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman11':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerDonker',types.player))
             break
             case 'PlayerHeavyWeapons11':
@@ -1914,7 +1935,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerReflector',types.player))
             break
             case 'PlayerDemoman12':
-                this.newSubWeaponASet(findName('PlayerGrenadier',types.player))
+                this.newSubWeaponASet(findName('PlayerGrenadierC',types.player))
                 this.newSubWeaponBSet(findName('PlayerStickywheel',types.player))
             break
             case 'PlayerHeavyWeapons12':
@@ -1945,8 +1966,6 @@ class player{
         if(this.playerData.name!='PlayerSpy'){
             this.setColor()
         }
-        let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
-        let spawn=[this.position.x+this.offset.position.x+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*10,this.position.y+this.offset.position.y+this.skin.arms[lsin(this.direction.main)<0?1:0].points.final.end.y*this.size]
 		switch(this.weaponType){
             case 222:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,(lsin(this.direction.main)<0?-90:90)+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,5400,crit,this.index))
@@ -2734,7 +2753,7 @@ class player{
             if(!((this.playerData.name=='PlayerSpyC'||this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyC3'||this.playerData.name=='PlayerSpyC4'||this.playerData.name=='PlayerSpyC5'||this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||this.playerData.name=='PlayerSpyC12'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008)&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991))&&!((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)){
                 if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
                     damageBuff*=constrain(this.subWeaponA.time/60,1,4)
-                    this.subWeaponA.time=0
+                    this.subWeaponA.time=max(0,min(240,this.subWeaponA.time)-480/this.subWeaponBData.ammo)
                     if(weapon.uses<=1){
                         this.subWeaponA.uses=0
                     }
@@ -6610,7 +6629,7 @@ class player{
                     break
                     case 976:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.4
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                     break
                     case 977:
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -6732,6 +6751,10 @@ class player{
                     break
                     case 1009:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],424,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                    break
+                    case 1011:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.4
                     break
 
                     //mark
@@ -7549,13 +7572,13 @@ class player{
                         this.jump.active=10
                     }else if(this.jump.quadruple==1&&this.jump.active==0){
                         this.jump.quadruple=0
-                        this.jump.active=10
+                        this.jump.active=8
                     }else if(this.jump.triple==1&&this.jump.active==0){
                         this.jump.triple=0
-                        this.jump.active=10
+                        this.jump.active=8
                     }else if(this.jump.double==1&&this.jump.active==0){
                         this.jump.double=0
-                        this.jump.active=10
+                        this.jump.active=8
                     }
                     this.jumpAction()
                 }else if((this.playerData.name=='PlayerHopper'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerEjector'||this.playerData.name=='PlayerKinematic'||this.playerData.name=='PlayerProgenitor'||this.playerData.name=='PlayerTelepointer')&&inputSetC[0]&&this.life>0&&this.jump.time>0&&this.stuckTime<=0){
@@ -8100,13 +8123,13 @@ class player{
                     break
                     case 'BombPod':
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,-90,this.id,180,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,90,this.id,180,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,-90,this.id,100,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,90,this.id,100,300,crit,this.index))
                     break
                     case 'BombTank':
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,-90,this.id,180,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,90,this.id,180,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,-90,this.id,100,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,375,90,this.id,100,300,crit,this.index))
                     break
                     case 'HyperPistolSplitterSplitter':
                         for(let a=0,la=2;a<la;a++){

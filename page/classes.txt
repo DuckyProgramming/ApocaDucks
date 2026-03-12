@@ -69,10 +69,8 @@ demoman:
 primary:
 grenadier
 sheller
-time bomb
 caber
 warning launcher
-donker
 roller launcher
 charge
 
@@ -85,6 +83,8 @@ stickybomb sweeper
 caller launcher
 stickwheel
 tickybomb launcher
+time bomb
+donker
 
 heavy:
 

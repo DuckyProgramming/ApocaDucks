@@ -522,8 +522,8 @@ function mainloop(){
             }
         break
         case 'mission':
-            for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){
+            for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
+                for(let b=0,lb=a==0?6:a==1?1:constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(menu.mode==b+1){
@@ -535,9 +535,20 @@ function mainloop(){
                         fill(0)
                         textSize(15)
                         text(['Easy','Medium','Hard','Expert','Unfair','Special'][b],pos[0],pos[1])
+                    }else if(a==1){
+                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
+                        fill(100)
+                        rect(pos[0]+37,pos[1],76,45,10)
+                        rect(pos[0]-37,pos[1],76,45,10)
+                        fill(0)
+                        textSize(15)
+                        text([`Difficulty: ${game.diff}`][b],pos[0],pos[1])
+                        textSize(10)
+                        text(['-'][b],pos[0]-52.5,pos[1]-15)
+                        text(['+'][b],pos[0]+52.5,pos[1]-15)
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
-                        let unit=menu.list[menu.mode-1][a*5+b-5]
+                        let unit=menu.list[menu.mode-1][a*5+b-10]
                         fill(100)
                         rect(pos[0],pos[1],150,45,10)
                         fill(0)
@@ -955,12 +966,12 @@ function mainloop(){
                         entities.players[c].weaponRules.seeFar
                         ?(game.level==7?1.5:1.75):
                         entities.players[c].weaponType==845||
-                        game.classWeapon&&(
+                        entities.players[c].rules.class&&(
                             entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
                             entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912
                         )?1.3:
                         entities.players[c].weaponType==846||
-                        game.classWeapon&&(
+                        entities.players[c].rules.class&&(
                             entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866
                         )?1.2:
                         entities.players[c].weaponType==613?0.75:

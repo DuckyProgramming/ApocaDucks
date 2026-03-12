@@ -6758,13 +6758,7 @@ types={
       desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
     },{
       name:'PlayerStickyMan',sizeBuff:1,lifeBuff:4,speedBuff:1.1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
-    },{
-      name:'PlayerAssaultRifleC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:965,
-    },{
-      name:'PlayerHeavyInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:338,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:687,
     },
 
     //mark di
@@ -7397,7 +7391,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:686,
     },{
       name:'PlayerStickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:687,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:687,
     },{
       name:'PlayerLightHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:688,
@@ -7628,7 +7622,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:850,
     },{
       name:'PlayerStickyJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:851,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:851,
     },{
       name:'PlayerIceCream',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:852,
@@ -7658,7 +7652,7 @@ types={
       damageBuff:4/3,reloadBuff:1.25,crit:0,weapon:860,
     },{
       name:'PlayerStickySweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:861,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:861,
     },{
       name:'PlayerDefensePack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:862,
@@ -7929,6 +7923,15 @@ types={
     },{
       name:'PlayerSurvivalWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1008,
+    },{
+      name:'PlayerAssaultRifleC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:965,
+    },{
+      name:'PlayerHeavyInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:338,
+    },{
+      name:'PlayerGrenadierC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:1011,
     },
 
     //mark c
@@ -7937,6 +7940,9 @@ types={
       name:'PlayerFakeHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:661,
       desc:'Puts down a health pack that kills players who pick it up',dpsBuff:0,
+    },{
+      name:'PlayerNone',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },
 
     {
@@ -16366,10 +16372,10 @@ types={
 		},{
 			name:'Stickybomb Launcher',
 			ammo:4,
-			damage:120,
+			damage:200,
 			cooldown:45,
 			stop:90,
-			reload:54,
+			reload:45,
 			speed:1.05,
       uses:18,
 		},{
@@ -17842,10 +17848,10 @@ types={
 		},{
 			name:'Stickybomb Jumper',
 			ammo:3,
-			damage:108,
+			damage:180,
 			cooldown:45,
 			stop:90,
-			reload:54,
+			reload:45,
 			speed:1.05,
       uses:18,
 		},{
@@ -17932,10 +17938,10 @@ types={
 		},{
 			name:'Stickybomb Sweeper',
 			ammo:5,
-			damage:120,
+			damage:200,
 			cooldown:36,
 			stop:90,
-			reload:54,
+			reload:45,
 			speed:1.05,
       uses:22.5,
 		},{
@@ -18481,10 +18487,10 @@ types={
 		},{
 			name:'Stickywheel',
 			ammo:3,
-			damage:105,
+			damage:120,
 			cooldown:45,
 			stop:90,
-			reload:36,
+			reload:45,
 			speed:1.05,
       uses:15,
 		},{
@@ -18666,7 +18672,7 @@ types={
 			stop:75,
 			reload:75,
 			speed:1,
-      uses:6.5,
+      uses:8,
 		},{
 			name:'Autumn C',
 			ammo:2,
@@ -19279,6 +19285,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:48,
+		},{
+			name:'Grenadier C',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:16,
 		},
 
     /*{

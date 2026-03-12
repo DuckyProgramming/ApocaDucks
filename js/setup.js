@@ -15,7 +15,7 @@ function setup(){
         menu.level=game.level
         updateRules()
         if(true){
-            game.mission=findName(`Test`,types.mission)
+            game.mission=findName(`Duck Time`,types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -36,8 +36,8 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=5
-        let sets=[6,6]
+        let numKey=3
+        let sets=[0,0]
         game.loadout[0]={main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
     }
@@ -1946,18 +1946,25 @@ function mouseClicked(){
         break
         */
         case 'mission':
-            for(let a=0,la=1+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:constrain(menu.list[menu.mode-1].length+5-a*5,0,5);b<lb;b++){
+            for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
+                for(let b=0,lb=a==0?6:a==1?1:constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     game.smile=floor(random(0,25))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                             menu.mode=b+1
                         }
+                    }else if(a==1){
+                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
+                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                            game.diff=max(5,round(game.diff*10-1))/10
+                        }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                            game.diff=min(20,round(game.diff*10+1))/10
+                        }
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                            let unit=menu.list[menu.mode-1][a*5+b-5]
+                            let unit=menu.list[menu.mode-1][a*5+b-10]
                             game.players=menu.players
                             game.gaming=menu.gaming
                             if(game.attacker){

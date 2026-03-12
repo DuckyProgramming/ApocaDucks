@@ -122,23 +122,34 @@ class wall{
                 this.rainbow=false
                 if(this.type==57){
                     let chunk=game.classWeapon?3:game.peakWeapon?1:0
-                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
-                    this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
-                    this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                    this.weapon=weaponize(chunk)
+                    if(game.classWeapon){
+                        this.ammo=[
+                            types.weapon[types.player[this.weapon[1]].weapon].ammo,
+                            types.weapon[types.player[this.weapon[2]].weapon].ammo
+                        ]
+                        this.uses=[
+                            types.weapon[types.player[this.weapon[1]].weapon].uses==1?types.weapon[types.player[this.weapon[1]].weapon].uses:types.weapon[types.player[this.weapon[1]].weapon].uses*game.ammoMult,
+                            types.weapon[types.player[this.weapon[2]].weapon].uses==1?types.weapon[types.player[this.weapon[2]].weapon].uses:types.weapon[types.player[this.weapon[2]].weapon].uses*game.ammoMult
+                        ]
+                    }else{
+                        this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
+                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                    }
                 }else if(this.type==50||this.type==61||this.type==69||this.type==72||this.type==81){
                     let chunk=game.classWeapon?3:1
-                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                    this.weapon=weaponize(chunk)
                 }else if(this.type==70){
                     let chunk=game.classWeapon?3:1
-                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                    this.weapon=weaponize(chunk)
                     if(game.level==55){
                         this.rainbow=floor(random(0,2))==0
                     }
                 }else if(this.type==71){
                     let chunk=game.classWeapon?3:game.peakWeapon?1:floor(random(1.5))
-                    this.weapon=listing[chunk][floor(random(listing[chunk].length))]
+                    this.weapon=weaponize(chunk)
                     chunk=game.classWeapon?3:game.peakWeapon?1:floor(random(1.5))
-                    this.weapon2=listing[chunk][floor(random(listing[chunk].length))]
+                    this.weapon2=weaponize(chunk)
                 }
                 if(game.level==55){
                     this.pos=-1
@@ -9722,7 +9733,15 @@ class wall{
                 if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
                     layer.fill(game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==77||game.level==78||game.level==84||game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102?250:game.level==71?150:180,1-this.recharge/60-this.hide)
                     layer.textSize(9)
-                    layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                    if((typeof this.weapon)==`object`){
+                        if(this.weapon.length==4){
+                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
+                        }else{
+                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                        }
+                    }else{
+                        layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                    }
                 }
                 if(this.infoFade>0){
                     layer.fill(200,(1-this.recharge/60)*this.infoFade)
@@ -9731,6 +9750,8 @@ class wall{
                     layer.textSize(9)
                     if(game.level==115||game.level==116){
                         layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
+                    }else if(game.classWeapon){
+                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
                     }else if(types.player[this.weapon].dpsBuff==0){
                         layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
                     }else{
@@ -10500,14 +10521,24 @@ class wall{
                 }
                 layer.fill(game.level==64||game.level==67||game.level==68||game.level==70||game.level==71||game.level==74||game.level==77||game.level==78||game.level==84||game.level==86||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99?250:180,1-this.recharge/60-this.hide)
                 layer.textSize(9)
-                layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                if((typeof this.weapon)==`object`){
+                    if(this.weapon.length==4){
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
+                    }else{
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                    }
+                }else{
+                    layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                }
                 layer.pop()
                 if(this.infoFade>0){
                     layer.fill(200,(1-this.recharge/60)*this.infoFade)
                     layer.rect(0,this.height/2+26,180,42,5)
                     layer.fill(0,(1-this.recharge/60)*this.infoFade)
                     layer.textSize(9)
-                    if(types.player[this.weapon].dpsBuff==0){
+                    if(game.classWeapon){
+                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
+                    }else if(types.player[this.weapon].dpsBuff==0){
                         layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
                     }else{
                         layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
@@ -10527,8 +10558,21 @@ class wall{
             case 71:
                 layer.fill(180,1-this.recharge/60-this.hide)
                 layer.textSize(9)
-                layer.text(cutName(cutName(types.weapon[types.player[this.weapon].weapon].name)),0,-this.height-10)
-                layer.text(cutName(cutName(types.weapon[types.player[this.weapon2].weapon].name)),0,-this.height)
+                if((typeof this.weapon)==`object`){
+                    if(this.weapon.length==4){
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height-10)
+                    }else{
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height-10)
+                    }
+                    if(this.weapon2.length==4){
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon2[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon2[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon2[3]].weapon].name)}`,0,-this.height)
+                    }else{
+                        layer.text(`${cutName(types.weapon[types.player[this.weapon2[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon2[2]].weapon].name)}`,0,-this.height)
+                    }
+                }else{
+                    layer.text(cutName(cutName(types.weapon[types.player[this.weapon].weapon].name)),0,-this.height-10)
+                    layer.text(cutName(cutName(types.weapon[types.player[this.weapon2].weapon].name)),0,-this.height)
+                }
             break
         }
         layer.pop()
@@ -12886,6 +12930,13 @@ class wall{
                                     c.active=false
                                     c.velocity.x*=0.8
                                     c.velocity.y*=0.8
+                                }else if(c.type==425&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    if(c.bounces>=3){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }
                             }
                         }
@@ -13131,7 +13182,13 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
-                                if(game.level==115||game.level==116){
+                                if((typeof this.weapon)=='object'){
+                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                    c.newWeaponSet(this.weapon[0])
+                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                    this.weapon=weaponize(chunk)
+                                    this.recharge=game.level==27&&game.pvp?14400:game.level==23||game.level==101?1200:3600-(game.gaming-1)*600
+                                }else if(game.level==115||game.level==116){
                                     if(types.player[this.weapon].name=='PlayerClassWars'){
                                         game.level=menu.level
                                         updateRules()
@@ -13326,6 +13383,13 @@ class wall{
                                 if(game.level==29){
                                     c.newWeapon()
                                     this.recharge=3600-(game.gaming-1)*600
+                                }else if((typeof this.weapon)=='object'){
+                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                    c.newWeaponSet(this.weapon[0])
+                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                    this.weapon=weaponize(chunk)
+                                    this.recharge=game.level==23||game.level==101?1200:3600-(game.gaming-1)*600
+                                    c.stunTime=480
                                 }else{
                                     c.newWeaponSet(this.weapon)
                                     let clump=game.classWeapon?3:1
@@ -13339,28 +13403,50 @@ class wall{
                             break
                             case 57:
                                 if(!(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&!(game.level==49&&game.pvp&&this.visible<1)&&!(game.level==100&&!game.pvp&&game.pointAnim[2]>=1)){
-                                    let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
-                                    c.newWeaponSet(this.weapon)
-                                    if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
-                                        if(game.classWeapon&&types.player[reserve[0]].name[types.player[reserve[0]].name.length-1]==`W`){
-                                            let chunk=listing[3]
-                                            this.weapon=chunk[game.loadout[c.id-1].class+floor(random(0,chunk.length/10))*10]
+                                    if((typeof this.weapon)=='object'){
+                                        for(let a=0,la=2;a<la;a++){
+                                            if(c.subWeaponAType==759||c.subWeaponBType==759){
+                                                c.swapSubWeapons()
+                                            }
+                                        }
+                                        let reserve=[[c.type,c.subPlayerAType,c.subPlayerBType],[c.subWeaponA.ammo,c.subWeaponB.ammo],[c.subWeaponA.uses,c.subWeaponB.uses]]
+                                        if(listing[4][c.type-findName(`PlayerScoutW`,types.player)].length==3){
+                                            reserve[0].push(c.subPlayerCType)
+                                        }
+                                        this.recharge=300
+                                        c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                        c.newWeaponSet(this.weapon[0])
+                                        c.subWeaponA.ammo=this.ammo[0]
+                                        c.subWeaponB.ammo=this.ammo[1]
+                                        c.subWeaponA.uses=this.uses[0]
+                                        c.subWeaponB.uses=this.uses[1]
+                                        this.weapon=reserve[0]
+                                        this.ammo=reserve[1]
+                                        this.uses=reserve[2]
+                                    }else{
+                                        let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
+                                        c.newWeaponSet(this.weapon)
+                                        if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
+                                            if(game.classWeapon&&types.player[reserve[0]].name[types.player[reserve[0]].name.length-1]==`W`){
+                                                let chunk=listing[3]
+                                                this.weapon=chunk[game.loadout[c.id-1].class+floor(random(0,chunk.length/10))*10]
+                                                this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
+                                                this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                                            }else{
+                                                c.weapon.ammo=this.ammo
+                                                c.weapon.uses=this.uses
+                                                this.weapon=reserve[0]
+                                                this.ammo=reserve[1]
+                                                this.uses=reserve[2]
+                                            }
+                                        }else{
+                                            let chunk=listing[game.classWeapon?3:game.peakWeapon?1:0]
+                                            this.weapon=chunk[floor(random(0,chunk.length))]
                                             this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
                                             this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
-                                        }else{
-                                            c.weapon.ammo=this.ammo
-                                            c.weapon.uses=this.uses
-                                            this.weapon=reserve[0]
-                                            this.ammo=reserve[1]
-                                            this.uses=reserve[2]
                                         }
-                                    }else{
-                                        let chunk=listing[game.classWeapon?3:game.peakWeapon?1:0]
-                                        this.weapon=chunk[floor(random(0,chunk.length))]
-                                        this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
-                                        this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
+                                        this.recharge=900
                                     }
-                                    this.recharge=900
                                 }
                             break
                             case 58:
@@ -13375,9 +13461,16 @@ class wall{
                                 }
                             break
                             case 61:
-                                c.newWeaponSet(this.weapon)
-                                clump=game.classWeapon?3:1
-                                this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                if((typeof this.weapon)=='object'){
+                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                    c.newWeaponSet(this.weapon[0])
+                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                    this.weapon=weaponize(chunk)
+                                }else{
+                                    c.newWeaponSet(this.weapon)
+                                    clump=game.classWeapon?3:1
+                                    this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                }
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.life*=0.2
                                 c.collect.time=max(c.collect.time,450)
@@ -13415,9 +13508,16 @@ class wall{
                                 }
                             break
                             case 69:
-                                c.newWeaponSet(this.weapon)
-                                clump=game.classWeapon?3:1
-                                this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                if((typeof this.weapon)=='object'){
+                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                    c.newWeaponSet(this.weapon[0])
+                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                    this.weapon=weaponize(chunk)
+                                }else{
+                                    c.newWeaponSet(this.weapon)
+                                    clump=game.classWeapon?3:1
+                                    this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                }
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.enigmaTime=max(c.enigmaTime,1800)
                                 if(game.level==55){
@@ -13466,9 +13566,16 @@ class wall{
                                 }
                             break
                             case 72:
-                                c.newWeaponSet(this.weapon)
-                                clump=game.classWeapon?3:1
-                                this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                if((typeof this.weapon)=='object'){
+                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                    c.newWeaponSet(this.weapon[0])
+                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                    this.weapon=weaponize(chunk)
+                                }else{
+                                    c.newWeaponSet(this.weapon)
+                                    clump=game.classWeapon?3:1
+                                    this.weapon=listing[clump][floor(random(listing[clump].length))]
+                                }
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.DOT.active+=300
                                 c.DOT.damage++

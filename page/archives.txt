@@ -2,11 +2,14 @@
 
 1009 - long gust, 413
 1010 - mini auto speed buff, 689
-
-
-
+1011 - grenadier c, 36
 
 424 - long gust, 222
+425 - grenadier c, 30
+
+
+
+
 
 
 995 - scout w
