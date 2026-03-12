@@ -9,13 +9,13 @@ function setup(){
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
         game.level=100
         menu.level=game.level
         updateRules()
         if(true){
-            game.mission=findName(`Duck Time`,types.mission)
+            game.mission=findName(`Test`,types.mission)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -36,8 +36,8 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=2
-        let sets=[0,9]
+        let numKey=5
+        let sets=[6,6]
         game.loadout[0]={main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
     }
@@ -1981,7 +1981,9 @@ function mouseClicked(){
                             }
                             stage.scene='wave'
                             if(types.mission[game.mission].wave[0].length==0){
-                                if(types.mission[game.mission].name=='Patchwork'){
+                                if(types.mission[game.mission].name=='Duck Time Deluxe'){
+                                    formMission(types.mission[game.mission].wave,0)
+                                }else if(types.mission[game.mission].name=='Patchwork'){
                                     compileMission(types.mission[game.mission].wave)
                                 }else{
                                     generateMission(types.mission[game.mission].wave,types.mission[game.mission].name)
