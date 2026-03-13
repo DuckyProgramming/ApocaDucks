@@ -9,7 +9,7 @@ function setup(){
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
         game.level=100
         menu.level=game.level

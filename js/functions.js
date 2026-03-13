@@ -2372,7 +2372,7 @@ function generateLevel(info,layer){
             game.edge=[level[0].length*40,level.length*32]
             game.tileset=[game.edge[0]/level[0].length,game.edge[1]/level.length]
             game.sectors=[
-                [game.tileset[0]*24.75,game.tileset[1]*39.5,game.tileset[0]*49.5,game.tileset[1]*5],
+                [game.tileset[0]*16.75,game.tileset[1]*39.5,game.tileset[0]*33.5,game.tileset[1]*5],
                 [game.tileset[0]*29.5,game.tileset[1]*45,game.tileset[0]*27,game.tileset[1]*6],
                 [game.tileset[0]*46.5,game.tileset[1]*44.5,game.tileset[0]*7,game.tileset[1]*5],
                 [game.tileset[0]*85.5,game.tileset[1]*51,game.tileset[0]*25,game.tileset[1]*8],
@@ -2406,7 +2406,7 @@ function generateLevel(info,layer){
                 [game.tileset[0]*58,game.tileset[1]*51,game.tileset[0]*30,game.tileset[1]*8],
                 [game.tileset[0]*101,game.tileset[1]*24.5,game.tileset[0]*20,game.tileset[1]*5],
                 [game.tileset[0]*95.25,game.tileset[1]*39.5,game.tileset[0]*11.5,game.tileset[1]*5],
-
+                [game.tileset[0]*41.5,game.tileset[1]*39.5,game.tileset[0]*16,game.tileset[1]*5],
             ]
         break
         case 101:

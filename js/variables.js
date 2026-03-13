@@ -8408,7 +8408,7 @@ types={
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'EnderSpy',sizeBuff:1,lifeBuff:3,speedBuff:1,
+      name:'EnderSpy',sizeBuff:1,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FlamethrowerSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
@@ -9383,6 +9383,9 @@ types={
       name:'BigCritPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
+      name:'BigCritPistolSpawner',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:1,
+    },{
       name:'BigCritPistolJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
@@ -10163,13 +10166,13 @@ types={
       name:'Planetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:531,
     },{
-      name:'EnderPistol',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'EnderPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'EnderShotgunMartyr',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'EnderShotgunMartyr',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
-      name:'EnderGrenadier',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'EnderGrenadier',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
     },{
       name:'ScorchShot',sizeBuff:1,lifeBuff:1,speedBuff:1,
