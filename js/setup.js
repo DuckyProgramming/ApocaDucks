@@ -4,7 +4,7 @@ function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
 
-    if(false){
+    if(true){
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true

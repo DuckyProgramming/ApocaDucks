@@ -1,5 +1,14 @@
 
 
+
+1012 - sticky sniper, 882
+1013 - chargable sticky launcher, 687
+
+
+
+
+
+
 1009 - long gust, 413
 1010 - mini auto speed buff, 689
 1011 - grenadier c, 36

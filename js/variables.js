@@ -7403,7 +7403,7 @@ types={
       damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
       name:'PlayerHeavySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:968,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:968,
     },{
       name:'PlayerHeavyFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.8,reloadBuff:1,crit:0,weapon:8,
@@ -7601,7 +7601,7 @@ types={
       damageBuff:2,reloadBuff:1.375,crit:0,weapon:818,
     },{
       name:'PlayerScatterSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:819,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:819,
     },{
       name:'PlayerHeavyPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:1,
@@ -7634,7 +7634,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:854,
     },{
       name:'PlayerRecoilSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:969,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:969,
     },{
       name:'PlayerDerringer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.125,crit:0,weapon:856,
@@ -7889,7 +7889,7 @@ types={
       damageBuff:1.5,reloadBuff:1.375,crit:0,weapon:986,
     },{
       name:'PlayerHuntSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:987,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:987,
     },{
       name:'PlayerScopedSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.1,reloadBuff:1,crit:0,weapon:988,
@@ -7932,6 +7932,9 @@ types={
     },{
       name:'PlayerGrenadierC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:1011,
+    },{
+      name:'PlayerStickySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:1012,
     },
 
     //mark c
@@ -8692,6 +8695,9 @@ types={
     },{
       name:'RapidCritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:2,crit:1,weapon:0,
+    },{
+      name:'SpamShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:4,crit:0,weapon:0,
     },{
       name:'SpamCritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:4,crit:1,weapon:0,
@@ -10056,10 +10062,10 @@ types={
       damageBuff:1,reloadBuff:0.9,crit:0,weapon:887,
     },{
       name:'Mortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
     },{
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:2,crit:0,weapon:151,
     },{
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -17401,7 +17407,7 @@ types={
 		},{
 			name:'Classic Sniper',
 			ammo:1,
-			damage:320,
+			damage:352,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -18400,7 +18406,7 @@ types={
 		},{
 			name:'Moonshot Launcher',
 			ammo:1,
-			damage:375,
+			damage:400,
 			cooldown:8,
 			stop:90,
 			reload:0,
@@ -18617,9 +18623,9 @@ types={
 			name:'Pierce Sniper',
 			ammo:1,
 			damage:200,
-			cooldown:80,
-			stop:80,
-			reload:80,
+			cooldown:75,
+			stop:75,
+			reload:75,
 			speed:0.85,
       uses:8,
 		},{
@@ -19208,7 +19214,7 @@ types={
 			speed:1.2,
       uses:50,
 		},{
-			name:'Sniper W',
+			name:'Sniper WC',
 			ammo:1,
 			damage:100,
 			cooldown:180,
@@ -19297,6 +19303,24 @@ types={
 			reload:20,
 			speed:1.05,
       uses:16,
+		},{
+			name:'Sticky Sniper',
+			ammo:1,
+			damage:150,
+			cooldown:45,
+			stop:90,
+			reload:45,
+			speed:1.05,
+      uses:9,
+		},{
+			name:'Stickybomb Launcher Test',
+			ammo:4,
+			damage:200,
+			cooldown:45,
+			stop:90,
+			reload:45,
+			speed:1.05,
+      uses:18,
 		},
 
     /*{

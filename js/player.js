@@ -1383,7 +1383,7 @@ class player{
             (this.rules.class&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==988?0.5:1)*
-            (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>0?0.5:1)*
+            (this.rules.class&&(this.subWeaponAType==919||this.subWeaponAType==1013)&&this.assort.firingTime>0?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==795||this.subWeaponBType==795)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==817||this.subWeaponBType==817)?1.2:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==2||this.subWeaponBType==2)?1.2:1)*
             (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==781||this.subWeaponBType==781)?1.1:1)*
@@ -2357,6 +2357,7 @@ class player{
             this.subWeaponB.time=0
         }
         this.updateWeaponRules()
+        this.assort.firingTime=0
     }
     resetValues(){
         this.position.y+=this.height/2
@@ -5644,7 +5645,9 @@ class player{
                     break
                     case 687:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                     break
                     case 699:
                         this.critBuff=max(this.critBuff,360)
@@ -5855,7 +5858,7 @@ class player{
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructControl',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
-                        entities.players[entities.players.length-1].weapon.cooldown-=60
+                        entities.players[entities.players.length-1].weapon.cooldown-=30
                         entities.players[entities.players.length-1].builder=this.index
                         entities.players[entities.players.length-1].remote=true
                         entities.players[entities.players.length-1].direction.goal=this.direction.goal
@@ -6050,6 +6053,8 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],361,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff*0.5,300,crit,this.index))
                         }else{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],360,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1800,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1+min(240,this.assort.firingTime)/180
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                         }
                     break
                     case 816:
@@ -6147,7 +6152,9 @@ class player{
                     break
                     case 851:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],368,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
+                        //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25+min(240,this.assort.firingTime)/144
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                     break
                     case 852:
                         this.life=min(max(this.base.life*2,this.life),this.life+this.base.life)
@@ -6196,7 +6203,9 @@ class player{
                     break
                     case 861:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],372,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/160
                     break
                     case 862:
                         entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,79))
@@ -6389,8 +6398,10 @@ class player{
                         for(let a=0,la=3;a<la;a++){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],392,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].tick=a
-                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
-                            entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                            //entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25+min(240,this.assort.firingTime)/144
                         }
                     break
                     case 923:
@@ -6595,7 +6606,9 @@ class player{
                     break
                     case 971:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                       // entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                     break
                     case 972:
                         for(let a=0,la=8;a<la;a++){
@@ -6706,7 +6719,9 @@ class player{
                     break
                     case 983:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],417,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                     break
                     case 984:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+(this.assort.firingTime<36?random(-2.5,2.5)*max(6-this.assort.firingTime/7.2,1):lsin((weapon.ammo+random(0,1))*66)*(5-weapon.ammo/weaponData.ammo*5)),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -6756,6 +6771,18 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.4
                     break
+                    case 1012:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                        //entities.projectiles[entities.projectiles.length-1].velocity.x*=2
+                        //entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=2+min(240,this.assort.firingTime)/90
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25+min(240,this.assort.firingTime)/144
+                    break
+                    case 1013:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
+                    break
 
                     //mark
                 }
@@ -6790,7 +6817,7 @@ class player{
         this.construct=true
         this.ammoMult*=4
         this.weapon.uses*=4
-        this.weapon.cooldown+=90
+        this.weapon.cooldown+=60
         if(this.id==0){
             this.multLife(0.5)
         }
@@ -7644,7 +7671,11 @@ class player{
                     entities.projectiles.push(new projectile(this.layer,this.position.x-50*lcos(this.time),this.position.y+50*lsin(this.time)-10,8,(lcos(this.time)>0?-90:90),this.id,this.weaponData.damage*this.playerData.damageBuff*2,360,crit,this.index))
                 }
                 if(this.life>0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='PlayerSquad'&&this.playerData.name!='PlayerDivision'&&this.playerData.name!='PlayerPointer'&&this.playerData.name!='PlayerFleet'&&this.playerData.name!='PlayerPatrol'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'&&this.playerData.name!='SidekickGuillotine'&&this.playerData.name!='SidekickBorder'&&this.playerData.name!='SidekickToxin'&&this.playerData.name!='SidekickIceberg'&&this.playerData.name!='SidekickBonkhive'&&!this.peace){
-                    if((inputSet[3]&&this.subWeaponAType!=919||inputSetC[1]&&this.subWeaponAType==919||this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading)){
+                    if((
+                        inputSet[3]&&(this.subWeaponAType!=687&&this.subWeaponAType!=815&&this.subWeaponAType!=851&&this.subWeaponAType!=861&&this.subWeaponAType!=919&&this.subWeaponAType!=922&&this.subWeaponAType!=971&&this.subWeaponAType!=983&&this.subWeaponAType!=1012&&this.subWeaponAType!=1013)||
+                        inputSetC[1]&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)||
+                        this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading
+                    )){
                         if(this.weaponType>=0){
                             if(this.playerData.name=='PlayerConglomeration'){
                                 if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0){
@@ -8007,6 +8038,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'PunchSplitter':
@@ -8015,6 +8047,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'BallerSplitter':
@@ -8023,6 +8056,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'GrenadierSplitter':
@@ -8031,6 +8065,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'HyperMedicSplitter':
@@ -8039,6 +8074,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'ShotgunMartyr': case 'FlamethrowerMartyr': case 'MedicMartyr':
@@ -8054,7 +8090,7 @@ class player{
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
                         }
                     break
-                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier':
+                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier': case 'HeavyMiniSentryCarrier':
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
@@ -8074,6 +8110,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'TankSplitterRandom':
@@ -8082,6 +8119,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'HyperPistolSplitter':
@@ -8090,6 +8128,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'CritBonkerSplitter':
@@ -8098,6 +8137,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'PistolSplitterSplitter':
@@ -8106,6 +8146,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'PistolSplitterSplitterSplitter':
@@ -8114,6 +8155,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'PlayerMobster':
@@ -8137,6 +8179,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'HyperMedicSplitterSplitter':
@@ -8145,6 +8188,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'TankSplitterShotgun':
@@ -8153,6 +8197,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                     case 'TankSplitterAssaultRifle':
@@ -8161,6 +8206,7 @@ class player{
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
                 }

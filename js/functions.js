@@ -156,7 +156,7 @@ function mergeNumbers2(left,right){
 	return [...result,...left,...right]
 }
 function cutName(name){
-    return name.substr(name.length-2,name.length).localeCompare(' C')==0||name.substr(name.length-2,name.length).localeCompare(' W')==0?name.substr(0,name.length-2):name
+    return name.substr(name.length-3,name.length).localeCompare(' WC')==0?name.substr(0,name.length-3):name.substr(name.length-2,name.length).localeCompare(' C')==0||name.substr(name.length-2,name.length).localeCompare(' W')==0?name.substr(0,name.length-2):name
 }
 function shuffleArray(array){
     let base=array.slice()
@@ -9826,7 +9826,7 @@ function formMission(wave,type){
                 ['Kamikaze',5],
                 ['HyperBonker',3],
                 ['CritBonkerSplitter',2],
-                ['SpamCritShotgun',2],
+                ['SpamShotgun',4],
                 ['EnderShotgunMartyr',1],
             ]
             for(let a=0,la=6;a<la;a++){
@@ -9867,7 +9867,7 @@ function setupLists(){
             [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonator`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`],
-            [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySweeper`,`PlayerCallerLauncher`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerHeavyTimeBomb`,`PlayerDonker`],
+            [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySweeper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerHeavyTimeBomb`,`PlayerDonker`],
         ],[
             [`PlayerLMG`,`PlayerMinigun`,`PlayerMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerSpiralLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerAmmoPack`],

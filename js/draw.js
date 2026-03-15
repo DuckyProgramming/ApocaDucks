@@ -966,14 +966,13 @@ function mainloop(){
                         entities.players[c].weaponRules.seeFar
                         ?(game.level==7?1.5:1.75):
                         entities.players[c].weaponType==845||
-                        entities.players[c].rules.class&&(
-                            entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
-                            entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912
-                        )?1.3:
                         entities.players[c].weaponType==846||
                         entities.players[c].rules.class&&(
-                            entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866
-                        )?1.2:
+                            entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
+                            entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866||
+                            entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912||
+                            entities.players[c].subWeaponAType==1012||entities.players[c].subWeaponBType==1012
+                        )?1.25:
                         entities.players[c].weaponType==613?0.75:
                         1
                     )
