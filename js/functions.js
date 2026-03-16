@@ -6335,7 +6335,10 @@ function generateLevel(info,layer){
             for(let a=0,la=game.players;a<la;a++){
                 game.weapon.push([])
                 game.weaponTick.push(0)
-                game.loadout.push({main:[],sets:[],class:-1})
+                game.loadout.push([])
+                for(let b=0,lb=game.pvp?1:2;b<lb;b++){
+                    game.loadout[a].push({main:[],sets:[],class:-1})
+                }
             }
         break
     }
@@ -6359,11 +6362,11 @@ function generateLevel(info,layer){
             if(game.classicWeapon||c>=game.gaming){
                 let tick=floor(random(0,10))
                 type=findName('PlayerScoutW',types.player)+tick
-                game.loadout[c]={main:[],class:tick}
-                game.loadout[c].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                game.loadout[c].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                game.loadout[c]=[{main:[],class:tick}]
+                game.loadout[c][0].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                game.loadout[c][0].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
                 if(listing[4][tick].length>=3){
-                    game.loadout[c].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                    game.loadout[c][0].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
                 }
             }
             let postC=(game.level==27?c%5:c)
@@ -8628,7 +8631,10 @@ function checkEnd(level,layer,key){
     }else if(game.level==115||game.level==116){
         let fail=false
         for(let a=0,la=game.gaming;a<la;a++){
-            if(game.loadout[a].class==-1||game.loadout[a].sets.length<listing[4][game.loadout[a].class].length){
+            if(
+                game.loadout[a][0].class==-1||game.loadout[a][0].sets.length<listing[4][game.loadout[a][0].class].length||
+                (game.loadout[a][1].class==-1||game.loadout[a][1].sets.length<listing[4][game.loadout[a][1].class].length)&&!game.pvp
+            ){
                 fail=true
             }
         }

@@ -105,7 +105,10 @@ class player{
         this.free=false
         this.storeWeapon=false
         this.peace=false
-        this.assort={firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[]}
+        this.assort={
+            firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
+            intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0
+        }
         this.sidekicks=[]
         this.bump=[false,false]
 
@@ -297,7 +300,11 @@ class player{
                         }else if(game.level==48||game.level==57||game.level==80){
                             layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
                         }else if((game.level==115||game.level==116)&&this.id<=game.gaming){
-                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1].class==-1?`None`:`${game.loadout[this.id-1].sets.length}/${listing[4][game.loadout[this.id-1].class].length}`}`,0,-35)
+                            if(game.pvp){
+                                layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1][0].class==-1?`None`:`${game.loadout[this.id-1][0].sets.length}/${listing[4][game.loadout[this.id-1][0].class].length}`}`,0,-35)
+                            }else{
+                                layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1][0].class==-1?`None`:`${game.loadout[this.id-1][0].sets.length}/${listing[4][game.loadout[this.id-1][0].class].length}`} + ${game.loadout[this.id-1][1].class==-1?`None`:`${game.loadout[this.id-1][1].sets.length}/${listing[4][game.loadout[this.id-1][1].class].length}`}`,0,-35)
+                            }
                         }else if(game.usurp){
                             layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                         }else if(game.level==30||game.level==54&&game.pvp){
@@ -343,7 +350,11 @@ class player{
                         }else if(game.level==48||game.level==57||game.level==80){
                             layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
                         }else if((game.level==115||game.level==116)&&this.id<=game.gaming){
-                            layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1].class==-1?`None`:`${game.loadout[this.id-1].sets.length}/${listing[4][game.loadout[this.id-1].class].length}`}`,0,-35)
+                            if(game.pvp){
+                                layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1][0].class==-1?`None`:`${game.loadout[this.id-1][0].sets.length}/${listing[4][game.loadout[this.id-1][0].class].length}`}`,0,-35)
+                            }else{
+                                layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1][0].class==-1?`None`:`${game.loadout[this.id-1][0].sets.length}/${listing[4][game.loadout[this.id-1][0].class].length}`} + ${game.loadout[this.id-1][1].class==-1?`None`:`${game.loadout[this.id-1][1].sets.length}/${listing[4][game.loadout[this.id-1][1].class].length}`}`,0,-35)
+                            }
                         }else if(game.usurp){
                             layer.text(`Lead Time: ${formatTime(this.stats.usurp)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                         }else if(game.level==30||game.level==54&&game.pvp){
@@ -1302,11 +1313,11 @@ class player{
                 if(game.classWeapon){
                     let tick=floor(random(0,10))
                     this.type=findName('PlayerScoutW',types.player)+tick
-                    game.loadout[this.id-1]={main:[],class:tick}
-                    game.loadout[this.id-1].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                    game.loadout[this.id-1].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                    game.loadout[this.id-1]=[{main:[],class:tick}]
+                    game.loadout[this.id-1][0].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                    game.loadout[this.id-1][0].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
                     if(listing[4][tick].length>=3){
-                        game.loadout[this.id-1].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                        game.loadout[this.id-1][0].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
                     }
                 }else{
                     let clump=listing[game.classWeapon?3:game.peakWeapon?1:dm()?0:(game.level==27||game.level==38)&&game.pvp?0:floor(random(0,1.5))]
@@ -1460,13 +1471,15 @@ class player{
                     }
                     this.assort.storeSubWeapon=[]
                 }else{
-                    this.newSubWeaponASet(game.loadout[core].main.length==0?`PlayerScattergun`:game.loadout[core].main[0])
-                    this.newSubWeaponBSet(game.loadout[core].main.length==0?`PlayerPistol`:game.loadout[core].main[1])
-                    if(listing[4][game.loadout[core].class].length>=3){
-                        this.newSubWeaponCSet(game.loadout[core].main.length==0?`PlayerInvisWatch`:game.loadout[core].main[2])
+                    let set=game.loadout[core][this.assort.coreTick%game.loadout[core].length]
+                    this.newSubWeaponASet(set.main.length==0?`PlayerScattergun`:set.main[0])
+                    this.newSubWeaponBSet(set.main.length==0?`PlayerPistol`:set.main[1])
+                    if(listing[4][set.class].length>=3){
+                        this.newSubWeaponCSet(set.main.length==0?`PlayerInvisWatch`:set.main[2])
                     }else{
                         this.newSubWeaponCSet(findName('PlayerPickupSentry',types.player))
                     }
+                    this.assort.coreTick++
                 }
                 if(this.subWeaponAType==942){
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,(lsin(this.direction.main)<0?-90:90)+180,this.id,100,7200,crit,this.index))
@@ -8090,7 +8103,7 @@ class player{
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
                         }
                     break
-                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier': case 'HeavyMiniSentryCarrier':
+                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier': case 'HeavyMiniSentryCarrier': case 'BigMiniSentryCarrier':
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()

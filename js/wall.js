@@ -13200,36 +13200,51 @@ class wall{
                                             newLoop()
                                         }
                                         return true
-                                    }else if(this.weapon==findName('PlayerRandomClass',types.player)&&game.loadout[c.id-1].class==-1){
-                                        let tick=floor(random(0,10))
-                                        game.loadout[c.id-1]={main:[],sets:[0,1],class:tick}
-                                        game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
-                                        game.loadout[c.id-1].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                                        game.loadout[c.id-1].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
-                                        if(listing[4][tick].length>=3){
-                                            game.loadout[c.id-1].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
-                                            game.loadout[c.id-1].sets.push(2)
+                                    }else if(this.weapon==findName('PlayerRandomClass',types.player)){
+                                        for(let e=0,le=game.pvp?1:2;e<le;e++){
+                                            if(game.loadout[c.id-1][e].class==-1){
+                                                let tick=floor(random(0,10))
+                                                game.loadout[c.id-1][e]={main:[],sets:[0,1],class:tick}
+                                                game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
+                                                game.loadout[c.id-1][e].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                                game.loadout[c.id-1][e].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                                if(listing[4][tick].length>=3){
+                                                    game.loadout[c.id-1][e].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                                    game.loadout[c.id-1][e].sets.push(2)
+                                                }
+                                                this.recharge=1800
+                                                break
+                                            }
                                         }
-                                        this.recharge=1800
-                                    }else if(this.weapon>=findName('PlayerRandomScout',types.player)&&this.weapon<findName('PlayerRandomScout',types.player)+10&&!game.pvp&&game.weapon[c.id-1].length<(game.pvp?1:2)&&game.loadout[c.id-1].class==-1){
-                                        let tick=this.weapon-findName('PlayerRandomScout',types.player)
-                                        game.loadout[c.id-1]={main:[],sets:[0,1],class:tick}
-                                        game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
-                                        game.loadout[c.id-1].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                                        game.loadout[c.id-1].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
-                                        if(listing[4][tick].length>=3){
-                                            game.loadout[c.id-1].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
-                                            game.loadout[c.id-1].sets.push(2)
+                                    }else if(this.weapon>=findName('PlayerRandomScout',types.player)&&this.weapon<findName('PlayerRandomScout',types.player)+10){
+                                        for(let e=0,le=game.pvp?1:2;e<le;e++){
+                                            if(game.loadout[c.id-1][e].class==-1){
+                                                let tick=this.weapon-findName('PlayerRandomScout',types.player)
+                                                game.loadout[c.id-1][e]={main:[],sets:[0,1],class:tick}
+                                                game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+tick)
+                                                game.loadout[c.id-1][e].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                                game.loadout[c.id-1][e].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                                if(listing[4][tick].length>=3){
+                                                    game.loadout[c.id-1][e].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                                    game.loadout[c.id-1][e].sets.push(2)
+                                                }
+                                                this.recharge=1800
+                                                break
+                                            }
                                         }
-                                        this.recharge=1800
-                                    }else if(game.loadout[c.id-1].class==-1||this.loadout.class==game.loadout[c.id-1].class&&!game.loadout[c.id-1].sets.includes(this.loadout.set)){
-                                        game.loadout[c.id-1].main[this.loadout.set]=this.weapon
-                                        game.loadout[c.id-1].sets.push(this.loadout.set)
-                                        if(game.loadout[c.id-1].class==-1){
-                                            game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+this.loadout.class)
-                                            game.loadout[c.id-1].class=this.loadout.class
+                                    }else{
+                                        for(let e=0,le=game.pvp?1:2;e<le;e++){
+                                            if(game.loadout[c.id-1][e].class==-1||this.loadout.class==game.loadout[c.id-1][e].class&&!game.loadout[c.id-1][e].sets.includes(this.loadout.set)){
+                                                game.loadout[c.id-1][e].main[this.loadout.set]=this.weapon
+                                                game.loadout[c.id-1][e].sets.push(this.loadout.set)
+                                                if(game.loadout[c.id-1][e].class==-1){
+                                                    game.weapon[c.id-1].push(findName(`PlayerScoutW`,types.player)+this.loadout.class)
+                                                    game.loadout[c.id-1][e].class=this.loadout.class
+                                                }
+                                                this.recharge=1800
+                                                break
+                                            }
                                         }
-                                        this.recharge=1800
                                     }
                                 }else if(types.player[this.weapon].name=='PlayerClassWars'){
                                     game.level=menu.level
@@ -13429,7 +13444,7 @@ class wall{
                                         if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){
                                             if(game.classWeapon&&types.player[reserve[0]].name[types.player[reserve[0]].name.length-1]==`W`){
                                                 let chunk=listing[3]
-                                                this.weapon=chunk[game.loadout[c.id-1].class+floor(random(0,chunk.length/10))*10]
+                                                this.weapon=chunk[game.loadout[c.id-1][c.assort.coreTick%game.loadout[c.id-1].length].class+floor(random(0,chunk.length/10))*10]
                                                 this.ammo=types.weapon[types.player[this.weapon].weapon].ammo
                                                 this.uses=types.weapon[types.player[this.weapon].weapon].uses==1?types.weapon[types.player[this.weapon].weapon].uses:types.weapon[types.player[this.weapon].weapon].uses*game.ammoMult
                                             }else{

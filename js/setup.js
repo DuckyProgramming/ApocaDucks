@@ -4,7 +4,7 @@ function setup(){
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
 
-    if(true){
+    if(false){
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
@@ -38,7 +38,9 @@ function setup(){
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
         let numKey=3
         let sets=[0,0]
-        game.loadout[0]={main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
+        game.loadout[0]=[
+            {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
+        ]
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
     }
 }
