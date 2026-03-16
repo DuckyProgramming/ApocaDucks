@@ -6376,7 +6376,7 @@ function generateLevel(info,layer){
                     if(game.attacker&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=57){
                         if(level[a][b]=='Z'){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
-                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48){
+                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
                             }
                             game.index++
@@ -6388,7 +6388,7 @@ function generateLevel(info,layer){
                             game.level!=89&&game.level!=94&&int(level[a][b])==((game.level==48||game.level==57||game.level==80||game.level==115||game.level==116)&&c>=game.gaming&&lc>5?5:game.level==34||game.level==96||game.level==97?0:game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57||game.level==115||game.level==116)
                         ){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
-                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48){
+                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
                             }
                             game.index++
@@ -6407,7 +6407,7 @@ function generateLevel(info,layer){
                         }
                         if(level[a][b]==encode&&game.pvp){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
-                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48){
+                            if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
                             }
                             game.index++
@@ -8633,7 +8633,7 @@ function checkEnd(level,layer,key){
         for(let a=0,la=game.gaming;a<la;a++){
             if(
                 game.loadout[a][0].class==-1||game.loadout[a][0].sets.length<listing[4][game.loadout[a][0].class].length||
-                (game.loadout[a][1].class==-1||game.loadout[a][1].sets.length<listing[4][game.loadout[a][1].class].length)&&!game.pvp
+                !game.pvp&&(game.loadout[a][1].class==-1||game.loadout[a][1].sets.length<listing[4][game.loadout[a][1].class].length)
             ){
                 fail=true
             }

@@ -5045,7 +5045,7 @@ types={
     },{
       name:'PlayerPinion',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:518,
-      desc:'Slicer with projectiels that cycle at the end of their extent',dpsBuff:2,
+      desc:'Slicer with projectiles that cycle at the end of their extent',dpsBuff:2,
     },{
       name:'PlayerRewind',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:584,
@@ -10062,10 +10062,10 @@ types={
       damageBuff:1,reloadBuff:0.9,crit:0,weapon:887,
     },{
       name:'Mortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:0.5,crit:0,weapon:151,
     },{
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:2,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
     },{
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,

@@ -1394,7 +1394,7 @@ class player{
             (this.rules.class&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==988?0.5:1)*
-            (this.rules.class&&(this.subWeaponAType==919||this.subWeaponAType==1013)&&this.assort.firingTime>0?0.5:1)*
+            (this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==795||this.subWeaponBType==795)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==817||this.subWeaponBType==817)?1.2:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==2||this.subWeaponBType==2)?1.2:1)*
             (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==781||this.subWeaponBType==781)?1.1:1)*
@@ -2622,25 +2622,9 @@ class player{
                 ?1/3:
                 (this.playerData.name=='PlayerBonkerception'||this.playerData.name=='PlayerMasonry')&&spec==0
                 ?0.5:
-                (
-                    this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
-                    this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
-                    this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
-                    this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
-                    this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='PlayerGasser'||
-                    this.playerData.name=='SidekickGuillotine'||this.playerData.name=='PlayerIrony'||this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||
-                    this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||
-                    this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'||
-                    this.playerData.name=='PlayerHeavyWeaponsW'
-                )&&spec==0
+                this.rules.take23&&spec==0
                 ?2/3:
-                (
-                    this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerTelepointer'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||
-                    this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
-                    this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
-                    this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
-                    this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'||this.playerData.name=='PlayerPyroW'
-                )&&spec==0
+                this.rules.take45&&spec==0
                 ?0.8:
                 this.playerData.name=='PlayerStickyMan'&&spec==0
                 ?0.9:
@@ -6905,7 +6889,23 @@ class player{
             jumper:this.playerData.name=='PistolJump'||this.playerData.name=='FastPunchJump'||this.playerData.name=='BigRocketLauncherJump'||this.playerData.name=='BigCritPistolJump'||this.playerData.name=='ShotgunJump'||this.playerData.name=='LongPunchJump'||this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='BigFastPunchJump'||this.playerData.name=='PistolHealSelfJump'||
                 this.playerData.name=='PistolJumpDamaged'||this.playerData.name=='BigPistolJump'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='TankJump'||this.playerData.name=='ParaMedic'||
                 this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='BallerJump'||this.playerData.name=='BigShotgunJump'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||
-                this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='ShotgunChainJump'||this.playerData.name=='FlameRocketLauncherJump'||this.playerData.name=='ParaRocketBoss'||this.playerData.name=='SpamBallerJump'||this.playerData.name=='MachineGunCritSelfJump'
+                this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='ShotgunChainJump'||this.playerData.name=='FlameRocketLauncherJump'||this.playerData.name=='ParaRocketBoss'||this.playerData.name=='SpamBallerJump'||this.playerData.name=='MachineGunCritSelfJump',
+            parachute:this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||
+                this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='ParaRocketBoss',
+            take23:this.playerData.name=='PlayerMedicArmored'||this.playerData.name=='PlayerDoublePushPunchArmored'||this.playerData.name=='PlayerRecoiler'||this.playerData.name=='PlayerBonker'||this.playerData.name=='PlayerIceberg'||
+                this.playerData.name=='PlayerSurprise'||this.playerData.name=='PlayerBorder'||this.playerData.name=='SidekickBonker'||this.playerData.name=='PlayerThrasher'||this.playerData.name=='PlayerCobalt'||
+                this.playerData.name=='PlayerAuger'||this.playerData.name=='PlayerToxin'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='SidekickBonkerGuard'||
+                this.playerData.name=='PlayerPlanetoid'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='PlayerWatcher'||this.playerData.name=='SidekickBorder'||
+                this.playerData.name=='SidekickToxin'||this.playerData.name=='SidekickIceberg'||this.playerData.name=='PlayerBonkhive'||this.playerData.name=='SidekickBonkhive'||this.playerData.name=='PlayerGasser'||
+                this.playerData.name=='SidekickGuillotine'||this.playerData.name=='PlayerIrony'||this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||
+                this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||
+                this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'||
+                this.playerData.name=='PlayerHeavyWeaponsW',
+            take45:this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerTelepointer'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||
+                this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
+                this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
+                this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
+                this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'||this.playerData.name=='PlayerPyroW',
         }
     }
     updateWeaponRules(){
@@ -8111,7 +8111,7 @@ class player{
                         entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     break
                     case 'Level3SentryCarrier': case `TinyLevel3SentryCarrier`:
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructLevel3',types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-15,this.id,0,[],false,findName('ConstructLevel3',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
                         entities.players[entities.players.length-1].builder=this.index
@@ -10984,7 +10984,7 @@ class player{
             if(!(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2])){
                 this.velocity.y*=0.9
             }
-        }else if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='ParaRocketBoss'){
+        }else if(this.rules.parachute){
             this.velocity.x*=0.9
             if(this.velocity.y>0){
                 this.velocity.y*=this.playerData.name=='PlayerWhirlybird'&&this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.96:0.6
