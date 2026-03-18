@@ -3,13 +3,14 @@ function setup(){
 
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
+    setupRules()
 
     if(false){
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=5
+        game.players=1
         game.gaming=1
         game.level=100
         menu.level=game.level
@@ -37,7 +38,7 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
         let numKey=3
-        let sets=[0,0]
+        let sets=[4,0]
         game.loadout[0]=[
             {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         ]

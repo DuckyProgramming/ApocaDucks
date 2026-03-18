@@ -32,7 +32,6 @@ class wall{
             this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
             this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
             this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81
-
         this.rules={
             collide:[
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
@@ -12579,7 +12578,7 @@ class wall{
                     if(
                         a==0&&this.rules.collide[0]&&
                         !((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)&&
-                        c.bouncer
+                        c.rules.bouncer
                     ){
                         if(!c.stop){
                             let d=collideBoxBox(this,c)
@@ -12918,14 +12917,17 @@ class wall{
                                 }else if(c.type==404&&d>=2){
                                     c.attack=0
                                 }else if(c.type==413&&c.bounceTimer==0){
+                                    if(c.bounces==0){
+                                        c.detTime=60
+                                    }
                                     c.bounces++
                                     c.bounceTimer=5
                                     c.velocity.x*=0.4
-                                    c.velocity.y*=0.4
-                                    if(c.bounces>=6){
+                                    c.velocity.y*=(c.velocity.y>0?0.8:0.4)
+                                    /*if(c.bounces>=6){
                                         c.explode()
                                         c.active=false
-                                    }
+                                    }*/
                                 }else if(c.type==416){
                                     c.active=false
                                     c.velocity.x*=0.8
@@ -12955,7 +12957,7 @@ class wall{
                             if(c.rules.stopper){
                                 c.active=false
                                 c.speed=0
-                                if(c.rocket){
+                                if(c.rules.rocket){
                                     c.explode()
                                 }else if(c.type==414){
                                     for(let e=0,le=entities.players.length;e<le;e++){

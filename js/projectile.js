@@ -14,101 +14,7 @@ class projectile{
 		this.previous={position:{x:this.position.x,y:this.position.y}}
 		this.projectileIndex=game.projectileIndex
 		game.projectileIndex++
-		this.exploder=this.type==2||this.type==16||this.type==21||this.type==22||this.type==26||
-			this.type==27||this.type==30||this.type==31||this.type==32||this.type==41||
-			this.type==45||this.type==47||this.type==48||this.type==53||this.type==54||
-			this.type==55||this.type==56||this.type==58||this.type==60||this.type==64||
-			this.type==65||this.type==66||this.type==73||this.type==75||this.type==78||
-			this.type==80||this.type==83||this.type==86||this.type==88||this.type==97||
-			this.type==98||this.type==101||this.type==104||this.type==110||this.type==113||
-			this.type==121||this.type==146||this.type==156||this.type==166||this.type==171||
-			this.type==178||this.type==187||this.type==200||this.type==205||this.type==206||
-			this.type==211||this.type==213||this.type==228||this.type==229||this.type==235||
-			this.type==250||this.type==262||this.type==266||this.type==279||this.type==280||
-			this.type==284||this.type==286||this.type==290||this.type==293||this.type==303||
-			this.type==307||this.type==308||this.type==311||this.type==312||this.type==313||
-			this.type==329||this.type==336||this.type==344||this.type==349||this.type==351||
-			this.type==353||this.type==356||this.type==359||this.type==360||this.type==362||
-			this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
-			this.type==378||this.type==379||this.type==384||this.type==385||this.type==389||
-			this.type==390||this.type==391||this.type==392||this.type==412||this.type==413||
-			this.type==417||this.type==425
-		this.rocket=this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
-			this.type==26||this.type==27||this.type==41||this.type==45||this.type==47||
-			this.type==48||this.type==53||this.type==54||this.type==55||this.type==56||
-			this.type==58||this.type==64||this.type==66||this.type==78||this.type==80||
-			this.type==86||this.type==101||this.type==187||this.type==213||this.type==229||
-			this.type==262||this.type==266||this.type==279||this.type==280||this.type==290||
-			this.type==307||this.type==308||this.type==313||this.type==336||this.type==351||
-			this.type==362||this.type==370||this.type==378||this.type==379||this.type==384||
-			this.type==385||this.type==412
-		this.bouncer=this.type==5||this.type==8||this.type==17||this.type==28||this.type==29||
-			this.type==30||this.type==34||this.type==35||this.type==42||this.type==51||
-			this.type==52||this.type==60||this.type==61||this.type==62||this.type==65||
-			this.type==68||this.type==69||this.type==70||this.type==73||this.type==83||
-			this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||
-			this.type==95||this.type==97||this.type==98||this.type==102||this.type==104||
-			this.type==106||this.type==107||this.type==108||this.type==110||this.type==111||
-			this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||
-			this.type==117||this.type==118||this.type==119||this.type==120||this.type==121||
-			this.type==122||this.type==123||this.type==124||this.type==128||this.type==129||
-			this.type==131||this.type==132||this.type==134||this.type==135||this.type==136||
-			this.type==137||this.type==138||this.type==139||this.type==140||this.type==141||
-			this.type==142||this.type==143||this.type==144||this.type==145||this.type==146||
-			this.type==156||this.type==157||this.type==158||this.type==159||this.type==160||
-			this.type==161||this.type==162||this.type==163||this.type==164||this.type==165||
-			this.type==166||this.type==168||this.type==169||this.type==170||this.type==171||
-			this.type==172||this.type==176||this.type==177||this.type==178||this.type==179||
-			this.type==180||this.type==181||this.type==182||this.type==183||this.type==184||
-			this.type==200||this.type==201||this.type==204||this.type==208||this.type==205||
-			this.type==206||this.type==208||this.type==209||this.type==210||this.type==211||
-			this.type==216||this.type==220||this.type==221||this.type==224||this.type==226||
-			this.type==227||this.type==228||this.type==233||this.type==235||this.type==237||
-			this.type==238||this.type==239||this.type==240||this.type==243||this.type==245||
-			this.type==246||this.type==247||this.type==248||this.type==250||this.type==252||
-			this.type==259||this.type==260||this.type==261||this.type==263||this.type==264||
-			this.type==267||this.type==268||this.type==271||this.type==272||this.type==275||
-			this.type==277||this.type==282||this.type==283||this.type==284||this.type==286||
-			this.type==292||this.type==293||this.type==295||this.type==301||this.type==392||
-			this.type==303||this.type==304||this.type==305||this.type==311||this.type==312||
-			this.type==314||this.type==315||this.type==318||this.type==323||this.type==326||
-			this.type==328||this.type==329||this.type==344||this.type==349||this.type==353||
-			this.type==356||this.type==359||this.type==360||this.type==366||this.type==368||
-			this.type==372||this.type==373||this.type==375||this.type==376||this.type==383||
-			this.type==389||this.type==390||this.type==391||this.type==392||this.type==402||
-			this.type==404||this.type==413||this.type==416||this.type==417||this.type==425
-		this.stickybomb=this.type==349||this.type==360||this.type==368||this.type==372||this.type==392||this.type==417
-		this.passer=this.type==85||this.type==89||this.type==103||this.type==193||this.type==194||this.type==195||this.type==215||this.type==270||this.type==297||this.type==310||this.type==337||this.type==398
-		this.rules={
-			slow:this.type==125||this.type==126||this.type==127||this.type==130||this.type==173||this.type==174||this.type==185||this.type==192||this.type==196||this.type==197||this.type==198||this.type==199||this.type==234||this.type==236||this.type==253||this.type==269||this.type==274||this.type==278||this.type==294||this.type==299||this.type==309||this.type==333||this.type==334,
-			fast:this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==203||this.type==251||this.type==322||this.type==332||this.type==361||this.type==407||this.type==409||this.type==421,
-			hitter:this.type!=85&&this.type!=156&&this.type!=190&&this.type!=191&&this.type!=214&&this.type!=255&&this.type!=256&&this.type!=257&&this.type!=265&&this.type!=300&&this.type!=205&&this.type!=206&&this.type!=221&&this.type!=228&&this.type!=250&&this.type!=271&&this.type!=284&&this.type!=286&&this.type!=329&&this.type!=349&&this.type!=360&&this.type!=368&&this.type!=372&&this.type!=375&&this.type!=392&&this.type!=417,
-			destroyAfter:this.type!=89&&this.type!=103&&this.type!=138&&this.type!=152&&this.type!=155&&this.type!=193&&this.type!=194&&this.type!=195&&this.type!=215&&this.type!=270&&this.type!=297&&this.type!=304&&this.type!=310&&this.type!=330&&this.type!=335&&this.type!=337&&this.type!=398,
-			multiHit:this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306||this.type==420,
-			trap:this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==156||this.type==181||this.type==201||this.type==205||this.type==209||this.type==216||this.type==220||this.type==221||this.type==243||this.type==245||this.type==246||this.type==247||this.type==250||this.type==284||this.type==286||this.type==304||this.type==314||this.type==323||this.type==329||this.type==349||this.type==360||this.type==368||this.type==372||this.type==375||this.type==392||this.type==417,
-			stopper:this.type!=7&&this.type!=23&&this.type!=25&&this.type!=32&&this.type!=37&&this.type!=40&&this.type!=46&&this.type!=79&&this.type!=84&&this.type!=89&&this.type!=100&&this.type!=103&&this.type!=112&&this.type!=193&&this.type!=194&&this.type!=195&&this.type!=270&&this.type!=297&&this.type!=310&&this.type!=330&&this.type!=335&&this.type!=335&&this.type!=405,
-			physBall:this.type!=68&&this.type!=135&&this.type!=136&&this.type!=240&&this.type!=311&&this.type!=312&&this.type!=392,
-			fader1:this.type==2||this.type==3||this.type==16||this.type==21||this.type==22||
-				this.type==26||this.type==27||this.type==30||this.type==31||this.type==32||
-				this.type==41||this.type==45||this.type==47||this.type==53||this.type==54||
-				this.type==55||this.type==56||this.type==58||this.type==64||this.type==65||
-				this.type==66||this.type==78||this.type==80||this.type==83||this.type==86||
-				this.type==88||this.type==98||this.type==101||this.type==104||this.type==110||
-				this.type==113||this.type==153||this.type==156||this.type==166||this.type==187||
-				this.type==206||this.type==211||this.type==213||this.type==228||this.type==229||
-				this.type==235||this.type==264||this.type==266||this.type==279||this.type==307||
-				this.type==308||this.type==313||this.type==336||this.type==344||this.type==349||
-				this.type==351||this.type==353||this.type==356||this.type==360||this.type==362||
-				this.type==368||this.type==370||this.type==372||this.type==375||this.type==376||
-				this.type==377||this.type==378||this.type==379||this.type==384||this.type==389||
-				this.type==390||this.type==391||this.type==392||this.type==412||this.type==413||
-				this.type==417||this.type==425,
-			fader2:this.type==48||this.type==89||this.type==103||this.type==193||this.type==194||
-				this.type==195||this.type==270||this.type==310||this.type==330||this.type==385||
-				this.type==398,
-			fader3:this.type==190||this.type==191||this.type==214||this.type==255||this.type==256||
-				this.type==257||this.type==265||this.type==300||this.type==365
-		}
+		this.rules=types.rules.projectile[this.type]
 		this.bullet=false
 		this.trap=false
 		this.drone=false
@@ -296,8 +202,10 @@ class projectile{
 					this.threshold=floor(random(2,5))
 				}else if(this.type==402){
 					this.hitting=0
+				}else if(this.type==413){
+					this.detTime=0
 				}
-				if(this.stickybomb){
+				if(this.rules.stickybomb){
 					let lim=this.type==392?9:this.type==372?10:this.type==368?3:8
 					let ct=0
 					for(let a=0,la=entities.projectiles.length;a<la;a++){
@@ -7605,9 +7513,9 @@ class projectile{
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<110+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 						entities.projectiles[b].active=false
-						if(entities.projectiles[b].stickybomb){
+						if(entities.projectiles[b].rules.stickybomb){
 							entities.projectiles[b].fail=true
-						}else if(entities.projectiles[b].exploder){
+						}else if(entities.projectiles[b].rules.exploder){
 							entities.projectiles[b].damage*=0.25
 							entities.projectiles[b].explode()
 						}
@@ -8059,6 +7967,13 @@ class projectile{
 						this.active=false
 						this.explode()
 					}
+					if(this.type==413&&this.detTime>0&&a==0){
+						this.detTime--
+						if(this.detTime<=0){
+							this.active=false
+							this.explode()
+						}
+					}
 				break
 				case 8: case 107: case 244: case 267: case 282: case 292:
 					if(a==2){
@@ -8272,7 +8187,7 @@ class projectile{
 						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 							if(inBoxBox(this,entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 								entities.projectiles[b].active=false
-								if(entities.projectiles[b].exploder){
+								if(entities.projectiles[b].rules.exploder){
 									entities.projectiles[b].explode()
 								}
 							}
@@ -8422,17 +8337,17 @@ class projectile{
 					if(a==1){
 						if(this.damage<300&&game.pvp&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].passer){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
-										let mult=(entities.projectiles[b].partisan?1:2)*(entities.projectiles[b].exploder?2:1)
+										let mult=(entities.projectiles[b].partisan?1:2)*(entities.projectiles[b].rules.exploder?2:1)
 										let harm=min(entities.projectiles[b].damage,this.damage/mult)
 										entities.projectiles[b].damage-=harm
 										this.damage-=harm*mult
 										if(entities.projectiles[b].damage<=0){
 											entities.projectiles[b].active=false
-											if(entities.projectiles[b].exploder){
+											if(entities.projectiles[b].rules.exploder){
 												entities.projectiles[b].damage*=0.5
 												entities.projectiles[b].explode()
 											}
@@ -8516,7 +8431,7 @@ class projectile{
 								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 										entities.projectiles[b].active=false
-										if(entities.projectiles[b].exploder){
+										if(entities.projectiles[b].rules.exploder){
 											entities.projectiles[b].explode()
 										}
 									}
@@ -8796,7 +8711,7 @@ class projectile{
 								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 										entities.projectiles[b].active=false
-										if(entities.projectiles[b].exploder){
+										if(entities.projectiles[b].rules.exploder){
 											entities.projectiles[b].explode()
 										}
 									}
@@ -8868,7 +8783,7 @@ class projectile{
 						if(this.stopAnim>0){
 							this.stopAnim-=0.1
 						}
-						if(this.stickybomb&&this.type!=360&&game.pvp&&this.active){
+						if(this.rules.stickybomb&&this.type!=360&&game.pvp&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(entities.projectiles[b].bullet||entities.projectiles[b].type==6||entities.projectiles[b].type==276)&&(entities.projectiles[b].id!=this.id&&!(!game.pvp&&entities.projectiles[b].id>0&&this.id>0))){
 									this.active=false
@@ -9008,17 +8923,17 @@ class projectile{
 					if(a==1){
 						if(this.damage<300&&game.pvp&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].passer){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
-										let mult=(entities.projectiles[b].partisan?1:4)*(entities.projectiles[b].exploder?2:1)
+										let mult=(entities.projectiles[b].partisan?1:4)*(entities.projectiles[b].rules.exploder?2:1)
 										let harm=min(entities.projectiles[b].damage,this.damage/mult)
 										entities.projectiles[b].damage-=harm
 										this.damage-=harm*mult
 										if(entities.projectiles[b].damage<=0){
 											entities.projectiles[b].active=false
-											if(entities.projectiles[b].exploder){
+											if(entities.projectiles[b].rules.exploder){
 												entities.projectiles[b].damage*=0.5
 												entities.projectiles[b].explode()
 											}
@@ -9665,7 +9580,7 @@ class projectile{
 								}
 							}else{
 								entities.projectiles[b].active=false
-								if(entities.projectiles[b].exploder){
+								if(entities.projectiles[b].rules.exploder){
 									entities.projectiles[b].damage*=0.25
 									entities.projectiles[b].explode()
 								}
@@ -9770,7 +9685,7 @@ class projectile{
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<22&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
-							if(entities.projectiles[b].exploder){
+							if(entities.projectiles[b].rules.exploder){
 								entities.projectiles[b].explode()
 							}
 						}
@@ -10009,7 +9924,7 @@ class projectile{
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<12+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
-							if(entities.projectiles[b].exploder){
+							if(entities.projectiles[b].rules.exploder){
 								entities.projectiles[b].damage*=0.25
 								entities.projectiles[b].explode()
 							}
@@ -10035,7 +9950,7 @@ class projectile{
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<5+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active){
 							entities.projectiles[b].active=false
-							if(entities.projectiles[b].exploder){
+							if(entities.projectiles[b].rules.exploder){
 								entities.projectiles[b].damage*=0.25
 								entities.projectiles[b].explode()
 							}
@@ -10433,7 +10348,7 @@ class projectile{
 							entities.players[b].takeDamage(this.damage*max(1,1.25-this.timer*0.025))
 						break
 						default:
-							if(this.exploder&&this.type!=389){
+							if(this.rules.exploder&&this.type!=389){
 								if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353||this.type==412){
 									entities.players[b].takeDamage(this.damage)
 								}else if(this.type==48){

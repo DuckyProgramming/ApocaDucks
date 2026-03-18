@@ -17415,13 +17415,13 @@ types={
       uses:9,
 		},{
 			name:'Magnifying Glass',
-			ammo:15,
+			ammo:13,
 			damage:45,
 			cooldown:2,
 			stop:75,
 			reload:4,
 			speed:1.15,
-      uses:60,
+      uses:65,
 		},{
 			name:'Minibomb Scout',
 			ammo:10,

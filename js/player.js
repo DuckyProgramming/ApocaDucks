@@ -1387,7 +1387,11 @@ class player{
             (this.assort.intel?0.75:1)*
             (game.level==29&&this.id==0?1.125:1)*
             ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
-            (this.rules.class&&((this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==801||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984)&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||this.subWeaponAType==725&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0)?1/3:1)*
+            (this.rules.class&&(
+                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
+                this.subWeaponAType==725&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
+                this.subWeaponAType==801&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.4
+            )?1/3:1)*
             (this.weaponType==924&&this.weapon.reload>this.weaponData.stop*0.5&&this.weapon.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==924&&(this.subWeaponA.reload>this.subWeaponAData.stop*0.5)&&this.subWeaponA.uses>0&&this.weapon.uses>0?1/3:1)*
             ((this.weaponType==883)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.1:1)*
@@ -8017,7 +8021,7 @@ class player{
                             if(!entities.projectiles[a].trap){
                                 entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                             }
-                            if(entities.projectiles[a].stickybomb&&entities.projectiles[a].active){
+                            if(entities.projectiles[a].rules.stickybomb&&entities.projectiles[a].active){
                                 entities.projectiles[a].active=false
                                 entities.projectiles[a].fail=true
                             }
@@ -9523,9 +9527,9 @@ class player{
                 switch(this.variant){
                     case 10:
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                            if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                                 entities.projectiles[a].active=false
-                                if(entities.projectiles[a].exploder){
+                                if(entities.projectiles[a].rules.exploder){
                                     entities.projectiles[a].explode()
                                 }
                             }
@@ -9543,8 +9547,8 @@ class player{
             }
             if(this.shieldBuff>0){
                 for(let a=0,la=entities.projectiles.length;a<la;a++){
-                    if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
-                        if(entities.projectiles[a].exploder){
+                    if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
+                        if(entities.projectiles[a].rules.exploder){
                             entities.projectiles[a].explode()
                             entities.projectiles[a].active=false
                         }else{
@@ -9581,8 +9585,8 @@ class player{
                 case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield': case 'CritEngineerShield':
                 case 'ShotgunShield': case 'TinyPistolShield': case 'BigPistolShield': case 'PistolShield': case 'BigBarrageRocketLauncherShield': case 'LongBallerShield': case 'ShotgunChainShield': case 'BallerShield': case 'SniperShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
-                            if(entities.projectiles[a].exploder){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                                 entities.projectiles[a].active=false
                             }else{
@@ -9765,9 +9769,9 @@ class player{
                             if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&(
                                 inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])||
                                 inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-60:60),y:this.position.y+this.offset.position.y-10},width:25,height:75},entities.projectiles[a])
-                            )&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                            )&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                                 entities.projectiles[a].active=false
-                                if(entities.projectiles[a].exploder){
+                                if(entities.projectiles[a].rules.exploder){
                                     entities.projectiles[a].explode()
                                 }
                             }
@@ -9876,9 +9880,9 @@ class player{
                 break
                 case 'PlayerRearguard': case 'PlayerBackFlak':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -9925,9 +9929,9 @@ class player{
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&(
                             inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?80:-80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])||
                             inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])
-                        )&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        )&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -10001,9 +10005,9 @@ class player{
                 break
                 case 'ConstructGuard': case 'SidekickDisappointmentGuard': case 'SidekickBonkerGuard': case 'PlayerGuard': case 'PlayerGuillotine': case 'SidekickGuillotine':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -10057,9 +10061,9 @@ class player{
                             if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&(
                                 dist(this.position.x+50*lsin(this.time),this.position.y+this.offset.position.y+50*lcos(this.time)-10,entities.projectiles[a].position.x,entities.projectiles[a].position.y)<12+entities.projectiles[a].width*0.25+entities.projectiles[a].height*0.25||
                                 dist(this.position.x-50*lsin(this.time),this.position.y+this.offset.position.y-50*lcos(this.time)-10,entities.projectiles[a].position.x,entities.projectiles[a].position.y)<12+entities.projectiles[a].width*0.25+entities.projectiles[a].height*0.25
-                            )&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                            )&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                                 entities.projectiles[a].active=false
-                                if(entities.projectiles[a].exploder){
+                                if(entities.projectiles[a].rules.exploder){
                                     entities.projectiles[a].explode()
                                 }
                             }
@@ -10422,9 +10426,9 @@ class player{
                 break
                 case 'PlayerKannon':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x,y:this.position.y+this.offset.position.y-100},width:100,height:25},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x,y:this.position.y+this.offset.position.y-100},width:100,height:25},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -10448,9 +10452,9 @@ class player{
                 break
                 case 'PlayerShovel':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -10464,7 +10468,7 @@ class player{
                 break
                 case 'PlayerBouncyShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             if(entities.projectiles[a].hasOwnProperty("velocity")){
                                 entities.projectiles[a].velocity.x*=-1
                             }
@@ -10476,9 +10480,9 @@ class player{
                 break
                 case 'PlayerSpiny':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
@@ -10546,9 +10550,9 @@ class player{
                 break
                 case 'PlayerColdfront':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].passer){
+                        if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:25,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             entities.projectiles[a].active=false
-                            if(entities.projectiles[a].exploder){
+                            if(entities.projectiles[a].rules.exploder){
                                 entities.projectiles[a].explode()
                             }
                         }
