@@ -256,10 +256,32 @@ class player{
             }
         }
     }
-    displayBack(){
-        if(this.primary&&this.id>0){
+    onRelease(key){
+        let core=(game.level==27||game.level==38||teamMode())&&game.pvp?this.index:this.id-1
+        if((game.gaming==1?1:game.gaming==2&&core==0?2:core)==key){
+            if(this.life>0&&this.weaponType>=0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='PlayerSquad'&&this.playerData.name!='PlayerDivision'&&this.playerData.name!='PlayerPointer'&&this.playerData.name!='PlayerFleet'&&this.playerData.name!='PlayerPatrol'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'&&this.playerData.name!='SidekickGuillotine'&&this.playerData.name!='SidekickBorder'&&this.playerData.name!='SidekickToxin'&&this.playerData.name!='SidekickIceberg'&&this.playerData.name!='SidekickBonkhive'&&!this.peace&&this.rules.class){
+                //if(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013){
+                if(this.subWeaponAType==919){
+                    if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&inputSetB[3]&&this.subWeaponA.cooldown<20){
+                        this.subWeaponA.cooldown=0
+                    }
+                    if(this.playerData.name=='PlayerSniperW'&&this.subWeaponAType==728){
+                        if(this.subWeaponB.cooldown<=0&&this.subWeaponB.ammo>0&&this.subWeaponBType>=0){
+                            this.attack(2)
+                        }
+                    }else{
+                        if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0){
+                            this.attack(1)
+                        }
+                    }
+                }
+            }
         }
     }
+    /*displayBack(){
+        if(this.primary&&this.id>0){
+        }
+    }*/
     displayInfo(layer,offsetX=0,offsetY=0){
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
@@ -1398,7 +1420,8 @@ class player{
             (this.rules.class&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==988?0.5:1)*
-            (this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
+            //(this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
+            (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>5?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==795||this.subWeaponBType==795)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==817||this.subWeaponBType==817)?1.2:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==2||this.subWeaponBType==2)?1.2:1)*
             (this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==781||this.subWeaponBType==781)?1.1:1)*
@@ -6643,7 +6666,8 @@ class player{
                     break
                     case 976:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.8
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.9
                     break
                     case 977:
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -6713,8 +6737,8 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],416,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,90,crit,this.index))
                     break
                     case 982:
-                        this.velocity.x+=2*(lsin(this.direction.main)<0?-1:1)
-                        if(weapon.ammo<20){
+                        this.velocity.x+=2.5*(lsin(this.direction.main)<0?-1:1)
+                        if(weapon.ammo<25){
                             this.critBuff=max(this.critBuff,30)
                         }
                     break
@@ -6770,7 +6794,8 @@ class player{
                     break
                     case 1011:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.4
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.9
                     break
                     case 1012:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
@@ -6863,9 +6888,6 @@ class player{
     validTarget(target){
         return (this.id==0&&target.id!=0||this.id!=0&&target.id==0||game.pvp&&this.id!=target.id||this.id==-1&&target.id!=-1||target.id==-1&&this.id!=-1||this.playerData.name.includes('Buster')&&(game.level==23||game.level==101))&&target.playerData.name!='PlayerSpy'&&(target.fade>0.2&&floor(random(0,5))==0||target.fade>0.6)&&!(this.playerData.name.includes('Buster')&&target.index!=this.target.index)&&target.life>0&&!(game.level==43&&target.fort&&display.cycle<4)
     }
-    med(){
-        return this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||this.weaponType==717||this.weaponType==742||this.weaponType==768||this.weaponType==789||this.weaponType==809||this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==961||this.weaponType==1001
-    }
     updateRules(){
         this.rules={
             doubleJump:this.playerData.name=='PlayerPistol'||this.playerData.name=='PlayerPushPistol'||this.playerData.name=='PlayerPistolVulnerable'||this.playerData.name=='PlayerPistolConfuse'||this.playerData.name=='PlayerMedicDoubleJump'||
@@ -6926,7 +6948,12 @@ class player{
                 this.weaponType==673||this.weaponType==682||this.weaponType==697||this.weaponType==718||this.weaponType==743&&this.subWeaponAType==6||
                 this.weaponType==769||this.weaponType==790||this.weaponType==810||this.weaponType==835||this.weaponType==876||
                 this.weaponType==952||this.weaponType==962||this.weaponType==1002&&this.subWeaponAType!=728&&this.subWeaponAType!=988&&this.subWeaponAType!=865&&this.subWeaponBType!=865||
-                (this.weaponType==387||this.weaponType==601)&&this.subWeaponAType==6
+                (this.weaponType==387||this.weaponType==601)&&this.subWeaponAType==6,
+            med:this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||
+                this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
+                this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||
+                this.weaponType==717||this.weaponType==742||this.weaponType==768||this.weaponType==789||this.weaponType==809||
+                this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==961||this.weaponType==1001&&this.subWeaponAType!=932&&this.subWeaponBType!=932
         }
     }
     explodable(){
@@ -7488,6 +7515,8 @@ class player{
                         }else if(this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.weaponType>=0&&!this.weapon.reloading){
                             this.attack(0)
                         }
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading){
+                        this.subWeaponA.ammo--
                     }else if(this.playerData.name=='PlayerDroner'||this.playerData.name=='PlayerDroner2'||this.playerData.name=='PlayerDroner3'||this.playerData.name=='PlayerDroner4'||this.playerData.name=='PlayerDroner5'||this.playerData.name=='PlayerDroner6'||this.playerData.name=='PlayerDroner8'||this.playerData.name=='PlayerDroner9'||this.playerData.name=='PlayerDroner11'||this.playerData.name=='PlayerDroner12'||this.playerData.name=='PlayerDronerW'){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital'&&floor(random(0,15))==0){
                             this.swapSubWeapons()
@@ -7689,8 +7718,8 @@ class player{
                 }
                 if(this.life>0&&this.playerData.name!='PlayerSplitter'&&this.playerData.name!='PlayerSquad'&&this.playerData.name!='PlayerDivision'&&this.playerData.name!='PlayerPointer'&&this.playerData.name!='PlayerFleet'&&this.playerData.name!='PlayerPatrol'&&this.playerData.name!='SidekickBonker'&&this.playerData.name!='SidekickDisappointmentGuard'&&this.playerData.name!='SidekickBonkerGuard'&&this.playerData.name!='SidekickGuillotine'&&this.playerData.name!='SidekickBorder'&&this.playerData.name!='SidekickToxin'&&this.playerData.name!='SidekickIceberg'&&this.playerData.name!='SidekickBonkhive'&&!this.peace){
                     if((
-                        inputSet[3]&&(this.subWeaponAType!=687&&this.subWeaponAType!=815&&this.subWeaponAType!=851&&this.subWeaponAType!=861&&this.subWeaponAType!=919&&this.subWeaponAType!=922&&this.subWeaponAType!=971&&this.subWeaponAType!=983&&this.subWeaponAType!=1012&&this.subWeaponAType!=1013)||
-                        inputSetC[1]&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)||
+                        inputSet[3]&&this.subWeaponAType!=919||
+                        /*&&(this.subWeaponAType!=687&&this.subWeaponAType!=815&&this.subWeaponAType!=851&&this.subWeaponAType!=861&&this.subWeaponAType!=919&&this.subWeaponAType!=922&&this.subWeaponAType!=971&&this.subWeaponAType!=983&&this.subWeaponAType!=1012&&this.subWeaponAType!=1013)*/
                         this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading
                     )){
                         if(this.weaponType>=0){
@@ -7731,6 +7760,8 @@ class player{
                                 this.attack(0)
                             }
                         }
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading){
+                        this.subWeaponA.ammo--
                     }
                     if(inputSet[3]){
                         this.assort.firingTime++
@@ -7991,14 +8022,14 @@ class player{
         }
         if(this.collect.time>0&&(this.playerData.name!='PlayerImmortal'||this.weaponData.uses<=0)){
             this.collect.time--
-            if(this.med()&&!this.fort){
+            if(this.rules.med&&!this.fort){
                 this.collect.time--
                 if(this.playerData.name=='PlayerCure'){
                     this.collect.time-=8
                 }
             }
         }else if((this.life>0||this.fort||this.playerData.name.includes('Buster')&&(game.level==23||game.level==101))&&(this.id>0||this.playerData.name.includes('Buster'))&&(this.size<2.25*0.5||this.fort)&&!this.construct){
-            this.life=min(max(this.life,this.base.life*((game.level==19||game.level==42)&&game.pvp&&this.fort&&this.collect.time<-1800?2:1)),this.life+this.base.life/(this.playerData.name=='PlayerImmortal'&&this.weaponData.uses>0?60:this.med()&&!this.fort&&this.weaponData.uses>0?150:300))
+            this.life=min(max(this.life,this.base.life*((game.level==19||game.level==42)&&game.pvp&&this.fort&&this.collect.time<-1800?2:1)),this.life+this.base.life/(this.playerData.name=='PlayerImmortal'&&this.weaponData.uses>0?60:this.rules.med&&!this.fort&&this.weaponData.uses>0?150:300))
             this.collect.time--
         }
         if(this.life>this.base.life&&!this.fort){

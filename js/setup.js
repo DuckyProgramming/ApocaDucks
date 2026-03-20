@@ -38,7 +38,7 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
         let numKey=3
-        let sets=[4,0]
+        let sets=[5,0]
         game.loadout[0]=[
             {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         ]
@@ -2551,23 +2551,43 @@ function keyReleased(){
         case 'ArrowLeft': inputs.keys[0][0]=false; break
         case 'ArrowRight': inputs.keys[0][1]=false; break
         case 'ArrowUp': inputs.keys[0][2]=false; break
-        case 'ArrowDown': case '/': inputs.keys[0][3]=false;inputs.release[0][1]=true; break
+        case 'ArrowDown': case '/':
+            inputs.keys[0][3]=false
+            inputs.release[0][1]=true
+            entities.players.forEach(player=>player.onRelease(0))
+        break
         case 'a': case 'A': inputs.keys[1][0]=false; break
         case 'd': case 'D': case `e`: case `E`: inputs.keys[1][1]=false; break
         case 'w': case 'W': inputs.keys[1][2]=false; break
-        case 's': case 'S': inputs.keys[1][3]=false;inputs.release[1][1]=true; break
+        case 's': case 'S':
+            inputs.keys[1][3]=false
+            inputs.release[1][1]=true
+            entities.players.forEach(player=>player.onRelease(1))
+        break
         case 'j': case 'J': inputs.keys[2][0]=false; break
         case 'l': case 'L': inputs.keys[2][1]=false; break
         case 'i': case 'I': inputs.keys[2][2]=false; break
-        case 'k': case 'K': inputs.keys[2][3]=false;inputs.release[2][1]=true; break
+        case 'k': case 'K': 
+            inputs.keys[2][3]=false
+            inputs.release[2][1]=true
+            entities.players.forEach(player=>player.onRelease(2))
+        break
         case 'f': case 'F': inputs.keys[3][0]=false; break
         case 'h': case 'H': inputs.keys[3][1]=false; break
         case 't': case 'T': inputs.keys[3][2]=false; break
-        case 'g': case 'G': inputs.keys[3][3]=false;inputs.release[3][1]=true; break
+        case 'g': case 'G':
+            inputs.keys[3][3]=false
+            inputs.release[3][1]=true
+            entities.players.forEach(player=>player.onRelease(3))
+        break
         case '4': inputs.keys[4][0]=false; break
         case '6': inputs.keys[4][1]=false; break
         case '8': inputs.keys[4][2]=false; break
-        case '5': inputs.keys[4][3]=false;inputs.release[4][1]=true; break
+        case '5':
+            inputs.keys[4][3]=false
+            inputs.release[4][1]=true
+            entities.players.forEach(player=>player.onRelease(4))
+        break
     }
     if(game.emergencyKey){
         switch(key){

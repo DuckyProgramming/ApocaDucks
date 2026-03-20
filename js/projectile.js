@@ -10108,7 +10108,7 @@ class projectile{
 					}
 					let base=entities.players[b].life
 					switch(this.type){
-						case 9: case 155: case 216: case 396:
+						case 9: case 155: case 216:
 							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
 								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 							}else{
@@ -10308,12 +10308,16 @@ class projectile{
 							entities.players[b].takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
 						break
 						case 396:
-							let startLife=entities.players[b].life
-							entities.players[b].takeDamage(this.damage)
-							if(entities.players[b].life<startLife){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=min(entities.players[d].life+(startLife-entities.players[b].life)*0.5,max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
+								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+							}else{
+								let startLife=entities.players[b].life
+								entities.players[b].takeDamage(this.damage)
+								if(entities.players[b].life<startLife){
+									for(let d=0,ld=entities.players.length;d<ld;d++){
+										if(entities.players[d].index==this.index){
+											entities.players[d].life=min(entities.players[d].life+(startLife-entities.players[b].life)*0.5,max(entities.players[b].life,entities.players[b].base.life*2))
+										}
 									}
 								}
 							}
