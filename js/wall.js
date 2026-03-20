@@ -12939,6 +12939,8 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
+                                    c.velocity.x*=0.95
+                                    c.velocity.y*=0.95
                                 }
                             }
                         }

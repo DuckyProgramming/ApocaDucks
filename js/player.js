@@ -5734,6 +5734,8 @@ class player{
                     break
                     case 724:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],344,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                     break
                     case 725:
                         //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -6666,8 +6668,8 @@ class player{
                     break
                     case 976:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.8
-                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.9
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=2
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                     break
                     case 977:
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -6794,8 +6796,8 @@ class player{
                     break
                     case 1011:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
-                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.9
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.8
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                     break
                     case 1012:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
@@ -7645,13 +7647,13 @@ class player{
                         this.jump.active=10
                     }else if(this.jump.quadruple==1&&this.jump.active==0){
                         this.jump.quadruple=0
-                        this.jump.active=8
+                        this.jump.active=7
                     }else if(this.jump.triple==1&&this.jump.active==0){
                         this.jump.triple=0
-                        this.jump.active=8
+                        this.jump.active=7
                     }else if(this.jump.double==1&&this.jump.active==0){
                         this.jump.double=0
-                        this.jump.active=8
+                        this.jump.active=7
                     }
                     this.jumpAction()
                 }else if((this.playerData.name=='PlayerHopper'||this.playerData.name=='PlayerGear'||this.playerData.name=='PlayerEjector'||this.playerData.name=='PlayerKinematic'||this.playerData.name=='PlayerProgenitor'||this.playerData.name=='PlayerTelepointer')&&inputSetC[0]&&this.life>0&&this.jump.time>0&&this.stuckTime<=0){
