@@ -12,7 +12,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=100
+        game.level=36
         menu.level=game.level
         updateRules()
         if(true){
@@ -25,7 +25,7 @@ function setup(){
         initialGraphics()
         game.classicWeapon=true
         //game.classicRespawn=false
-            //game.pvp=true
+            game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerClassWars',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -37,12 +37,14 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=3
-        let sets=[0,0]
+        let numKey=4
+        let sets=[3,3]
         game.loadout[0]=[
             {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         ]
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
+        entities.players[0].position.x-=1000
+        entities.players[0].position.y+=100
     }
 }
 function windowResized(){

@@ -45,7 +45,10 @@ class wall{
                 this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81,
 
                 this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67,
-            ]
+            ],
+            triangle:this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||
+                this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||
+                this.type==53||this.type==54
         }
     }
     set(){
@@ -12584,14 +12587,14 @@ class wall{
                             let d=collideBoxBox(this,c)
                             let incident
                             let vecBall
-                            if((c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302)&&d<0){
+                            if((c.rules.bounce2)&&d<0){
                                 let e={position:c.position,previous:c.previous,width:0,height:0}
                                 d=collideBoxBox(this,e)
                             }
                             if(d>=0&&!this.redundant[d]){
                                 switch(d){
                                     case 0:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.y<0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2
                                                 c.velocity.y*=-1
@@ -12608,9 +12611,9 @@ class wall{
                                         }
                                     break
                                     case 1:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.y>0){
-                                                c.position.y=this.position.y-this.height/2-c.height/2
+                                                c.position.y=this.position.y-this.sheight/2-c.height/2
                                                 c.velocity.y*=-1
                                                 c.direction+=180
                                                 c.hit=[]
@@ -12625,7 +12628,7 @@ class wall{
                                         }
                                     break
                                     case 2:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x<0){
                                                 c.position.x=this.position.x+this.width/2+c.width/2
                                                 c.velocity.x*=-1
@@ -12642,7 +12645,7 @@ class wall{
                                         }
                                     break
                                     case 3:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x>0){
                                                 c.position.x=this.position.x-this.width/2-c.width/2
                                                 c.velocity.x*=-1
@@ -12659,7 +12662,7 @@ class wall{
                                         }
                                     break
                                     case 4:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x<0){
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -12693,7 +12696,7 @@ class wall{
                                         }
                                     break
                                     case 5:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x>0){
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -12727,7 +12730,7 @@ class wall{
                                         }
                                     break
                                     case 6:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x<0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -12763,7 +12766,7 @@ class wall{
                                         }
                                     break
                                     case 7:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x>0){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                                 c.velocity.x*=-1
@@ -12799,7 +12802,7 @@ class wall{
                                         }
                                     break
                                     case 8:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x<0){
                                                 c.direction+=180
                                                 c.hit=[]
@@ -12814,7 +12817,7 @@ class wall{
                                         }
                                     break
                                     case 9:
-                                        if(c.type==91||c.type==92||c.type==93||c.type==96||c.type==108||c.type==204||c.type==208||c.type==237||c.type==238||c.type==239||c.type==275||c.type==302){
+                                        if(c.rules.bounce2){
                                             if(c.velocity.x>0){
                                                 c.direction+=180
                                                 c.hit=[]
@@ -12944,7 +12947,7 @@ class wall{
                                 }
                             }
                         }
-                     }else if(a==0&&((inBoxBox(this.bounder,c)||this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54))&&c.active&&
+                     }else if(a==0&&((inBoxBox(this.bounder,c)||this.rules.triangle))&&c.active&&
                         this.rules.collide[1]
                         &&!((this.type==37||this.type==24&&(game.level==59||game.level==60||game.level==79))&&c.position.y<c.previous.position.y)
                         &&!(this.type==65&&this.recharge>0)
@@ -12954,7 +12957,7 @@ class wall{
                         if(
                             d>=0&&!this.redundant[d]&&c.timer>8||
                             inBoxBox(this,proxyC)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||
-                            (this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||this.type==53||this.type==54)&&inTriangleBoxBasic(this.triangle,proxyC)
+                            this.rules.triangle&&inTriangleBoxBasic(this.triangle,proxyC)
                         ){
                             if(c.rules.stopper){
                                 c.active=false
@@ -13671,7 +13674,7 @@ class wall{
                                                 c.velocity.y=min(c.velocity.y,0)
                                             }
                                             c.jump.time=5
-                                            if(c.rules.doubleJump&&c.weapon.uses>0){
+                                            if((c.rules.doubleJump||(this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper')&&this.subPlayerAData.name=='PlayerPistol')&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
                                             if(c.playerData.name=='PlayerPistolQuadrupleJump'){

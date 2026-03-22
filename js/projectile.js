@@ -64,12 +64,11 @@ class projectile{
 			case 344: case 349: case 353: case 356: case 360: case 368: case 372: case 373: case 375: case 376:
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425:
 				this.partisan=true
-				this.width=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283||this.type==301||this.type==303?12:
+				let size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283||this.type==301||this.type==303?12:
 					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373||this.type==402?8:
 					4
-				this.height=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||this.type==259||this.type==268||this.type==283||this.type==301||this.type==303?12:
-					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373||this.type==402?8:
-					4
+				this.width=size
+				this.height=size
 				this.speed=
 					this.type==389?4+min(6,time/30):
 					this.type==376?10:
@@ -105,60 +104,64 @@ class projectile{
 					)
 				}
 				this.goal=-1
-				if(this.type==135||this.type==136||this.type==169||this.type==170||this.type==311||this.type==312){
-					this.effectiveDirection=this.direction
-					this.twistMult=1
-				}else if(
-					this.type==120||this.type==177||this.type==178||this.type==179||this.type==180||
-					this.type==182||this.type==183||this.type==210||this.type==227||this.type==271||
-					this.type==318
-				){
-					this.spin=random(-2,2)
-					if(this.type==271){
-						this.visible=1
-					}
-				}else if(this.type==145||this.type==315){
-					this.target=args[0]
-					for(let a=0,la=entities.players.length;a<la;a++){
-						if(entities.players[a].projectileIndex==this.target){
-							this.goal=a
+				switch(this.type){
+					case 135: case 136: case 169: case 170: case 311: case 312:
+						this.effectiveDirection=this.direction
+						this.twistMult=1
+					break
+					case 120: case 177: case 178: case 179: case 180:
+					case 182: case 183: case 210: case 227: case 271:
+					case 318:
+						this.spin=random(-2,2)
+						if(this.type==271){
+							this.visible=1
 						}
-					}
-					this.drone=true
-					this.aggro=false
-					this.orbit=35
-					this.offset=direction
-				}else if(
-					this.type==111||this.type==118||this.type==119||this.type==121||this.type==122||
-					this.type==123||this.type==124||this.type==128||this.type==129||this.type==132||
-					this.type==134||this.type==137||this.type==138||this.type==139||this.type==140||
-					this.type==141||this.type==142||this.type==143||this.type==144||this.type==157||
-					this.type==158||this.type==159||this.type==160||this.type==161||this.type==162||
-					this.type==163||this.type==164||this.type==165||this.type==168||this.type==171||
-					this.type==172||this.type==184||this.type==200||this.type==211||this.type==233||
-					this.type==248||this.type==252||this.type==259||this.type==260||this.type==261||
-					this.type==268||this.type==272||this.type==283||this.type==295||this.type==301||
-					this.type==328||this.type==373||this.type==404
-				){
-					for(let a=0,la=entities.players.length;a<la;a++){
-						if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
-							this.goal=a
+					break
+					case 145: case 315:
+						this.target=args[0]
+						for(let a=0,la=entities.players.length;a<la;a++){
+							if(entities.players[a].projectileIndex==this.target){
+								this.goal=a
+							}
 						}
-					}
-					this.drone=true
-					this.aggro=false
-					this.goalIndex=0
-					this.orbit=this.type==128?random(15,25):random(25,35)
-					this.offset=random(0,360)
-					if(this.type==119||this.type==121||this.type==132||this.type==200){
+						this.drone=true
+						this.aggro=false
+						this.orbit=35
+						this.offset=direction
+					break
+					case 111: case 118: case 119: case 121: case 122:
+					case 123: case 124: case 128: case 129: case 132:
+					case 134: case 137: case 138: case 139: case 140:
+					case 141: case 142: case 143: case 144: case 157:
+					case 158: case 159: case 160: case 161: case 162:
+					case 163: case 164: case 165: case 168: case 171:
+					case 172: case 184: case 200: case 211: case 233:
+					case 248: case 252: case 259: case 260: case 261:
+					case 268: case 272: case 283: case 295: case 301:
+					case 328: case 373: case 404:
+						for(let a=0,la=entities.players.length;a<la;a++){
+							if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
+								this.goal=a
+							}
+						}
+						this.drone=true
+						this.aggro=false
+						this.goalIndex=0
+						this.orbit=this.type==128?random(15,25):random(25,35)
+						this.offset=random(0,360)
+					break
+					case 119: case 121: case 132: case 200:
 						this.speed=random(8,10)
-					}else if(this.type==144){
+					break
+					case 144:
 						for(let b=0,lb=3;b<lb;b++){
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+b*120,this.id,this.damage/2,time,this.crit,this.index,[this.projectileIndex]))
 						}
-					}else if(this.type==261||this.type==373){
+					break
+					case 261: case 373:
 						this.radius=random(15,25)
-					}else if(this.type==404){
+					break
+					case 404:
 						this.past=[
 							[this.position.x,this.position.y],
 							[this.position.x,this.position.y],
@@ -168,44 +171,50 @@ class projectile{
 							[this.position.x,this.position.y]
 						]
 						this.attack=0
-					}
-				}else if(
-					this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||
-					this.type==146||this.type==156||this.type==181||this.type==205||this.type==206||
-					this.type==209||this.type==201||this.type==216||this.type==220||this.type==221||
-					this.type==243||this.type==245||this.type==246||this.type==247||this.type==250||
-					this.type==263||this.type==284||this.type==286||this.type==304||this.type==314||
-					this.type==323||this.type==329||this.type==349||this.type==360||this.type==368||
-					this.type==372||this.type==375||this.type==392||this.type==417
-				){
-					this.trap=true
-					this.stopAnim=1
-					if(this.type==117||this.type==245||this.type==246||this.type==247){
-						this.ammo=this.type==245?20:10
-					}else if(this.type==221){
-						this.targets=[]
-					}else if(this.type==263){
-						this.bounces=0
-						this.bounceTimer=0
-					}else if(this.type==372){
-						this.delay=0
-					}else if(this.type==417){
-						this.dets=2
-						this.detTimer=0
-					}
-				}else if(this.type==228){
-					this.explosion=0
-				}else if(this.type==235){
-					this.velocity.x*=random(0.625,1.6)
-					this.velocity.y*=random(0.5,2)
-				}else if(this.type==376){
-					this.threshold=floor(random(2,5))
-				}else if(this.type==402){
-					this.hitting=0
-				}else if(this.type==413){
-					this.detTime=0
+					break
+					case 113: case 114: case 115: case 116: case 117:
+					case 146: case 156: case 181: case 205: case 206:
+					case 209: case 201: case 216: case 220: case 221:
+					case 243: case 245: case 246: case 247: case 250:
+					case 263: case 284: case 286: case 304: case 314:
+					case 323: case 329: case 349: case 360: case 368:
+					case 372: case 375: case 392: case 417:
+						this.trap=true
+						this.stopAnim=1
+						if(this.type==117||this.type==245||this.type==246||this.type==247){
+							this.ammo=this.type==245?20:10
+						}else if(this.type==221){
+							this.targets=[]
+						}else if(this.type==263){
+							this.bounces=0
+							this.bounceTimer=0
+						}else if(this.type==372){
+							this.delay=0
+						}else if(this.type==417){
+							this.dets=2
+							this.detTimer=0
+						}
+					break
+					case 228:
+						this.explosion=0
+					break
+					case 235:
+						this.velocity.x*=random(0.625,1.6)
+						this.velocity.y*=random(0.5,2)
+					break
+					case 376:
+						this.threshold=floor(random(2,5))
+					break
+					case 402:
+						this.hitting=0
+					break
+					case 413:
+						this.detTime=0
+					break
 				}
 				if(this.rules.stickybomb){
+					this.width*=1.25
+					this.height*=1.25
 					let lim=this.type==392?9:this.type==372?10:this.type==368?3:8
 					let ct=0
 					for(let a=0,la=entities.projectiles.length;a<la;a++){
@@ -557,7 +566,8 @@ class projectile{
 								let point=intersectKey(this.position,extend,bound[b][0],bound[b][1])
 								if(dist(this.position.x,this.position.y,point.x,point.y)==this.extent){
 									if(this.type==406){
-										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.375-this.extent/400,1,1.25)*constrain(2-this.extent/1000,0.4,1))
+										this.damage*=(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.375-this.extent/400,1,1.25)*constrain(2-this.extent/1000,0.4,1)
+										c.takeDamage(this.damage)
 									}else{
 										c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
 									}
@@ -8040,7 +8050,7 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,90)
 		}else if(this.rules.fader3){
 			this.fade=0
-		}else if(this.type==280||this.type==316||this.type==326){
+		}else if(this.rules.fader4){
 			this.fade=smoothAnim(this.fade,this.active,0,1,60)
 		}else if(this.type==358){
 			this.fade-=0.2
@@ -8167,7 +8177,7 @@ class projectile{
 						this.position.y+=this.velocity.y/4
 						if(this.type==366){
 							this.velocity.y+=0.05
-						}else if(this.type!=68&&this.type!=135&&this.type!=136&&this.type!=169&&this.type!=170&&this.type!=240&&this.type!=311&&this.type!=312&&this.type!=367&&!(this.type==416&&this.active)){
+						}else if(this.rules.physBouncer&&!(this.type==416&&this.active)){
 							this.velocity.y+=0.1
 						}
 					}
@@ -8565,7 +8575,7 @@ class projectile{
 					if(a==1){
 						if(this.damage<300&&game.pvp&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
@@ -9011,9 +9021,9 @@ class projectile{
 						if(this.stopAnim>0){
 							this.stopAnim-=0.1
 						}
-						if(this.rules.stickybomb&&this.type!=360&&game.pvp&&this.active){
+						if(this.rules.stickybomb&&this.type!=360&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(entities.projectiles[b].bullet||entities.projectiles[b].type==6||entities.projectiles[b].type==276)&&(entities.projectiles[b].id!=this.id&&!(!game.pvp&&entities.projectiles[b].id>0&&this.id>0))){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(entities.projectiles[b].bullet||entities.projectiles[b].type==6||entities.projectiles[b].type==276)&&(entities.projectiles[b].id!=this.id&&!(!game.pvp&&entities.projectiles[b].id>0&&this.id>0))){
 									this.active=false
 									this.fail=true
 								}
@@ -9151,7 +9161,7 @@ class projectile{
 					if(a==1){
 						if(this.damage<300&&game.pvp&&this.active){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.5+this.height*0.5+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
+								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&(((this.id==0?1:0)!=(entities.projectiles[b].id==0?1:0)||this.id==-1&&entities.projectiles[b].id!=-1||game.pvp&&this.id!=entities.projectiles[b].id))&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
@@ -9187,8 +9197,9 @@ class projectile{
 							}
 							if(this.goal>=0){
 								let dir=atan2(entities.players[this.goal].position.x-this.position.x,entities.players[this.goal].position.y-this.position.y)
-								this.velocity.x+=lsin(dir)*(this.type==119||this.type==121||this.type==132||this.type==200?1:0.6)*2
-								this.velocity.y+=lcos(dir)*(this.type==119||this.type==121||this.type==132||this.type==200?1:0.6)*2
+								let speed=(this.type==119||this.type==121||this.type==132||this.type==200?1:0.6)*2
+								this.velocity.x+=lsin(dir)*speed
+								this.velocity.y+=lcos(dir)*speed
 							}
 							this.velocity.x*=0.91
 							this.velocity.y*=0.91
@@ -9232,8 +9243,9 @@ class projectile{
 								atan2(entities.players[this.goal].position.x+lsin(entities.players[this.goal].direction.main)*300+lsin((this.time+this.offset)*(this.type==119||this.type==121||this.type==132?this.speed:6))*this.orbit-this.position.x,entities.players[this.goal].position.y+lcos((this.time+this.offset)*(this.type==119||this.type==121||this.type==132?this.speed:6))*this.orbit-30-this.position.y)*/
 								let dir=this.type==132||this.type==137?atan2(entities.players[this.goal].position.x+lsin(this.time*(this.type==119||this.type==121||this.type==132||this.type==200?this.speed:6)+this.offset)*this.orbit-this.position.x,entities.players[this.goal].position.y+lcos(this.time*(this.type==119||this.type==121?this.speed:6)+this.offset)*this.orbit-35-this.position.y):
 								atan2(entities.players[this.goal].pointer.x+lsin(this.time*(this.type==119||this.type==121||this.type==132||this.type==200?this.speed:6)+this.offset)*this.orbit-this.position.x,entities.players[this.goal].pointer.y+lcos(this.time*(this.type==119||this.type==121||this.type==132?this.speed:6)+this.offset)*this.orbit-15-this.position.y)
-								this.velocity.x+=lsin(dir)*(this.type==119||this.type==121||this.type==132||this.type==200?1:this.type==295?0.3:0.6)
-								this.velocity.y+=lcos(dir)*(this.type==119||this.type==121||this.type==132||this.type==200?1:this.type==295?0.3:0.6)
+								let speed=(this.type==119||this.type==121||this.type==132||this.type==200?1:this.type==295?0.3:0.6)
+								this.velocity.x+=lsin(dir)*speed
+								this.velocity.y+=lcos(dir)*speed
 							}
 							this.velocity.x*=0.95
 							this.velocity.y*=0.95
@@ -9802,9 +9814,9 @@ class projectile{
 								entities.projectiles[b].direction+=180
 								entities.projectiles[b].id=this.id
 								entities.projectiles[b].index=this.index
-								if(entities.projectiles[b].crit!=1){
-									entities.projectiles[b].crit=1
-									entities.projectiles[b].damage*=2.5
+								if(entities.projectiles[b].crit==0){
+									entities.projectiles[b].crit=0.6
+									entities.projectiles[b].damage*=1.75
 								}
 							}else{
 								entities.projectiles[b].active=false
@@ -10251,30 +10263,31 @@ class projectile{
 							this.id==-1&&entities.players[b].id!=-1||
 							game.pvp&&this.id!=entities.players[b].id
 						)||(
-							this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||
-							this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||
-							this.type==273||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||
-							this.type==364||this.type==378||this.type==396||this.type==398||this.type==409||this.type==418
+							this.rules.medTarget
+							||this.type==216&&entities.players[b].life<entities.players[b].base.life*2
+							||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id
+							||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25
 						)&&
 						(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0)
 					)&&
 					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.5)&&
 					!(entities.players[b].playerData.name=='PlayerSpyW'&&entities.players[b].subWeaponCType==1007&&entities.players[b].fade<=0.5)&&
 					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-					!((this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==273||this.type==345||this.type==350||this.type==357||this.type==364||this.type==378||this.type==396||this.type==409||this.type==418)&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp&&entities.players[b].id>0&&this.id>0||game.pvp&&entities.players[b].id>0&&entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
+					!(this.rules.hitmed&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp&&entities.players[b].id>0&&this.id>0||game.pvp&&entities.players[b].id>0&&entities.players[b].id==this.id))&&entities.players[b].id!=-1)&&
 					entities.players[b].life>0&&this.active&&
-					!((this.type==91||this.type==92||this.type==93||this.type==96||this.type==108||this.type==192||this.type==203||this.type==204||this.type==207||this.type==208||this.type==237||this.type==238||this.type==239||this.type==275||this.type==296||this.type==302||this.type==306||this.type==420)&&this.hit.includes(entities.players[b].index))&&
+					!(this.rules.hitstack&&this.hit.includes(entities.players[b].index))&&
 					!(this.type==258&&entities.players[b].fort&&this.index==-1)
 					//!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
 				){
-					if(this.drone&&entities.players[b].id>0&&game.pvp&&this.type!=138){
+					let target=entities.players[b]
+					if(this.drone&&target.id>0&&game.pvp&&this.type!=138){
 						this.damage*=0.6
 					}
 					if(this.travel>750&&!this.rules.fast&&this.type!=336){
 						this.damage*=constrain(1.8-this.travel/750*0.8,0.2,1)
 					}
 					if(this.rules.multiHit){
-						this.hit.push(entities.players[b].index)
+						this.hit.push(target.index)
 						if(this.type==92||this.type==306){
 							let minimum=300
 							for(let c=0,lc=entities.players.length;c<lc;c++){
@@ -10303,311 +10316,311 @@ class projectile{
 						if(this.time<=0){
 							this.active=false
 						}
-						let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+						let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
 						this.velocity.x=sin(dir)*6
 						this.velocity.y=cos(dir)*6
-						entities.players[b].velocity.x-=sin(dir)*6
-						entities.players[b].velocity.y-=cos(dir)*6
+						target.velocity.x-=sin(dir)*6
+						target.velocity.y-=cos(dir)*6
 					}else if(this.type==226){
 						this.time-=60
 						if(this.time<=0){
 							this.active=false
 						}
-						let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+						let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
 						let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
 						this.velocity.x=sin(dir)*vec
 						this.velocity.y=cos(dir)*vec
-						entities.players[b].velocity.x-=sin(dir)*vec
-						entities.players[b].velocity.y-=cos(dir)*vec
+						target.velocity.x-=sin(dir)*vec
+						target.velocity.y-=cos(dir)*vec
 					}else if(this.type==389||this.type==404){
-						let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+						let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
 						let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
 						this.velocity.x=sin(dir)*vec
 						this.velocity.y=cos(dir)*vec
-						entities.players[b].velocity.x-=sin(dir)*vec
-						entities.players[b].velocity.y-=cos(dir)*vec
+						target.velocity.x-=sin(dir)*vec
+						target.velocity.y-=cos(dir)*vec
 					}else if(this.type==402){
 						this.hitting=20
 					}else if(this.rules.destroyAfter){
 						this.active=false
 					}
-					if(this.id==-1&&(entities.players[b].id>0||entities.players[b].fort)&&!entities.players[b].construct&&this.type==6){
-						this.damage*=entities.players[b].fort?0.1:0.25
+					if(this.id==-1&&(target.id>0||target.fort)&&!target.construct&&this.type==6){
+						this.damage*=target.fort?0.1:0.25
 					}
-					let base=entities.players[b].life
+					let base=target.life
 					switch(this.type){
 						case 9: case 155: case 216:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 10:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*3*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*3*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 11:
-							if((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp){
-								entities.players[b].life=entities.players[b].base.life
+							if((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp){
+								target.life=target.base.life
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 38:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].critBuff=max(480,entities.players[b].critBuff)
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+								target.critBuff=max(480,target.critBuff)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 63:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].defendBuff=max(480,entities.players[b].defendBuff)
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+								target.defendBuff=max(480,target.defendBuff)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 82:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].stunTime=0
-								entities.players[b].stuckTime=0
-								entities.players[b].vulnerableTime=0
-								entities.players[b].confuseTime=0
-								entities.players[b].dizzyTime=0
-								entities.players[b].DOT.active=0
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+								target.stunTime=0
+								target.stuckTime=0
+								target.vulnerableTime=0
+								target.confuseTime=0
+								target.dizzyTime=0
+								target.DOT.active=0
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 194: case 398:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id)){
-								if(!entities.players[b].fort){
-									entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*(this.index==entities.players[b].index?0.1:1),max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id)){
+								if(!target.fort){
+									target.life=min(target.life+this.damage*(min(2,target.base.life/125))*(this.index==target.index?0.1:1),max(target.life,target.base.life*2))
 								}
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 418:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*3))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*3))
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 6: case 15: case 33: case 74: case 75: case 81: case 276:
-							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?3:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:1))
+							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?3:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?2:1))
 							if(this.type==75){
 								this.explode()
 							}
 						break
 						case 72:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(entities.players[b].base.life/100),max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].jump.double=1
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(target.base.life/100),max(target.life,target.base.life*2))
+								target.jump.double=1
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 131:
-							entities.players[b].takeDamage(this.damage*(1+8*this.timer/this.base.time))
+							target.takeDamage(this.damage*(1+8*this.timer/this.base.time))
 						break
 						case 273:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*5))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*5))
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 339:
-							if(entities.players[b].construct&&entities.players[b].id==this.id){
-								entities.players[b].life=min(entities.players[b].life+this.damage,max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].defendBuff=max(entities.players[b].defendBuff,120)
+							if(target.construct&&target.id==this.id){
+								target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
+								target.defendBuff=max(target.defendBuff,120)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 345:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.8,max(entities.players[b].life,entities.players[b].base.life*1.5))
-								entities.players[b].critBuff=max(entities.players[b].critBuff,120)
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
+								target.critBuff=max(target.critBuff,120)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 350:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-								entities.players[b].speedBuff=max(entities.players[b].defendBuff,480)
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+								target.speedBuff=max(target.defendBuff,480)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 357:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*1.4,max(entities.players[b].life,entities.players[b].base.life*1.5))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*1.4,max(target.life,target.base.life*1.5))
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 364:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125))*0.9,max(entities.players[b].life,entities.players[b].base.life*1.75))
-								entities.players[b].weapon.cooldown=max(entities.players[b].weapon.cooldown-60,0)
-								entities.players[b].subWeaponA.cooldown=max(entities.players[b].subWeaponA.cooldown-60,0)
-								entities.players[b].weapon.reload=max(entities.players[b].weapon.reload-60,0)
-								entities.players[b].subWeaponA.reload=max(entities.players[b].subWeaponA.reload-60,0)
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
+								target.weapon.cooldown=max(target.weapon.cooldown-60,0)
+								target.subWeaponA.cooldown=max(target.subWeaponA.cooldown-60,0)
+								target.weapon.reload=max(target.weapon.reload-60,0)
+								target.subWeaponA.reload=max(target.subWeaponA.reload-60,0)
 							}
 						break
 						case 364:
-							entities.players[b].takeDamage(this.damage)
-							if(!entities.players[b].fort){
-								entities.players[b].confuseTime=max(entities.players[b].confuseTime,60)
+							target.takeDamage(this.damage)
+							if(!target.fort){
+								target.confuseTime=max(target.confuseTime,60)
 							}
 						break
 						case 369:
-							if(entities.players[b].construct&&entities.players[b].id==this.id){
-								entities.players[b].life=min(entities.players[b].life+this.damage*0.25,max(entities.players[b].life,entities.players[b].base.life*2))
+							if(target.construct&&target.id==this.id){
+								target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life*2))
 							}else{
-								entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?1.5:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?1.25:1))
+								target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?1.5:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.25:1))
 							}
 						break
 						case 388:
-							entities.players[b].takeDamage(this.damage*(entities.players[b].life>=1000&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?2:entities.players[b].life>=500&&!(entities.players[b].fort&&entities.players[b].id>0&&!game.pvp)?1.5:1))
+							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
 						break
 						case 111: case 134: case 182: case 373:
-							if(entities.players[b].id>0){
-								entities.players[b].takeDamage(this.damage*0.2)
+							if(target.id>0){
+								target.takeDamage(this.damage*0.2)
 							}
 						break
 						case 138:
-							entities.players[b].takeDamage(this.damage/30)
+							target.takeDamage(this.damage/30)
 						break
 						case 149:
-							entities.players[b].takeDamage(this.damage*this.speed/this.base.speed)
+							target.takeDamage(this.damage*this.speed/this.base.speed)
 						break
 						case 215:
-							entities.players[b].gasTime=max(7200,entities.players[b].gasTime+300)
-							entities.players[b].gasser=this.index
+							target.gasTime=max(7200,target.gasTime+300)
+							target.gasser=this.index
 						break
 						case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330:
-							if(entities.players[b].fort&&!entities.players[b].auto){
-								entities.players[b].takeDamage(this.damage*0.2)
+							if(target.fort&&!target.auto){
+								target.takeDamage(this.damage*0.2)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 304:
-							let saveLife=entities.players[b].life
-							entities.players[b].takeDamage(this.damage)
+							let saveLife=target.life
+							target.takeDamage(this.damage)
 							this.damage-=saveLife
 							if(this.damage<=0){
 								this.active=false
 							}
 						break
 						case 325:
-							if(entities.players[b].playerData.name.includes('Hyper')){
-								entities.players[b].life=0
+							if(target.playerData.name.includes('Hyper')){
+								target.life=0
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 337:
-							entities.players[b].gasTime=max(1200,entities.players[b].gasTime+120)
-							entities.players[b].gasser=this.index
+							target.gasTime=max(1200,target.gasTime+120)
+							target.gasser=this.index
 						break
 						case 341: case 343: case 354:
-							entities.players[b].takeDamage(this.damage*max(1,1.2-this.timer*0.025))
+							target.takeDamage(this.damage*max(1,1.2-this.timer*0.025))
 						break
 						case 355:
-							entities.players[b].takeDamage(this.damage*(entities.players[b].playerData.name.includes('Tank')?2:1),1)
+							target.takeDamage(this.damage*(target.playerData.name.includes('Tank')?2:1),1)
 						break
 						case 366:
-							entities.players[b].takeDamage(this.damage*(1+this.timer/15))
+							target.takeDamage(this.damage*(1+this.timer/15))
 						break
 						case 381:
-							entities.players[b].takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
+							target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
 						break
 						case 396:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
-								let startLife=entities.players[b].life
-								entities.players[b].takeDamage(this.damage)
-								if(entities.players[b].life<startLife){
+								let startLife=target.life
+								target.takeDamage(this.damage)
+								if(target.life<startLife){
 									for(let d=0,ld=entities.players.length;d<ld;d++){
 										if(entities.players[d].index==this.index){
-											entities.players[d].life=min(entities.players[d].life+(startLife-entities.players[b].life)*0.5,max(entities.players[b].life,entities.players[b].base.life*2))
+											entities.players[d].life=min(entities.players[d].life+(startLife-target.life)*0.5,max(target.life,target.base.life*2))
 										}
 									}
 								}
 							}
 						break
 						case 398:
-							if(entities.players[b].fort&&!entities.players[b].auto){
-								entities.players[b].takeDamage(this.damage*0.4)
+							if(target.fort&&!target.auto){
+								target.takeDamage(this.damage*0.4)
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 404:
 							if(this.attack!=0){
-								entities.players[b].takeDamage(this.damage*6)
-								entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,300)
+								target.takeDamage(this.damage*6)
+								target.dizzyTime=max(target.dizzyTime,300)
 								this.attack=0
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 						case 409:
-							if(((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index||this.id==entities.players[b].id&&this.type==216)){
-								entities.players[b].life=min(entities.players[b].life+this.damage*this.travel/400*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+								target.life=min(target.life+this.damage*this.travel/400*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
-								entities.players[b].takeDamage(this.damage*this.travel/400)
+								target.takeDamage(this.damage*this.travel/400)
 							}
 						break
 						case 411:
-							entities.players[b].takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
+							target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
 						break
 						case 414:
-							entities.players[b].takeDamage(this.damage*max(1,1.25-this.timer*0.025))
+							target.takeDamage(this.damage*max(1,1.25-this.timer*0.025))
 						break
 						default:
 							if(this.rules.exploder&&this.type!=389){
-								if(this.type==41||this.type==97||this.type==98||this.type==121||this.type==146||this.type==353||this.type==412){
-									entities.players[b].takeDamage(this.damage)
+								if(this.rules.explodeHit){
+									target.takeDamage(this.damage)
 								}else if(this.type==48){
 									this.speed=0
 								}else if(this.type==344){
-									entities.players[b].takeDamage(this.damage*0.5)
+									target.takeDamage(this.damage*0.5)
 								}
 								this.explode()
 							}else if(this.rules.fast&&this.type!=409||this.type==342){
-								entities.players[b].takeDamage(this.damage*min(1,0.5+this.timer*0.125))
+								target.takeDamage(this.damage*min(1,0.5+this.timer*0.125))
 								//snipers do less at close range lol
 							}else{
-								entities.players[b].takeDamage(this.damage)
+								target.takeDamage(this.damage)
 							}
 						break
 					}
-					if(entities.players[b].life>base){
+					if(target.life>base){
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
-								entities.players[d].stats.damage+=(entities.players[b].life-base)*0.25
+								entities.players[d].stats.damage+=(target.life-base)*0.25
 							}
 						}
 					}
 					switch(this.type){
 						case 13:
-							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
-							entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+15,entities.players[b].subWeaponA.cooldown+15)
+							target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)
 						break
 						case 36: case 249:
 							for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10617,8 +10630,8 @@ class projectile{
 							}
 						break
 						case 188:
-							entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+15,entities.players[b].weapon.cooldown+15)
-							entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+15,entities.players[b].subWeaponA.cooldown+15)
+							target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)
 							if(this.type==188){
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
@@ -10638,12 +10651,12 @@ class projectile{
 							for(let c=0,lc=entities.projectiles.length;c<lc;c++){
 								if(entities.projectiles[c].index==this.index&&entities.projectiles[c].type==118){
 									entities.projectiles[c].aggro=true
-									entities.projectiles[c].goalIndex=entities.players[b].index
+									entities.projectiles[c].goalIndex=target.index
 								}
 							}
 						break
 						case 347:
-							if(!entities.players[b].fort){
+							if(!target.fort){
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
 										if(entities.players[d].subWeaponAType!=735){
@@ -10709,12 +10722,12 @@ class projectile{
 							}
 						break
 						case 416:
-							let dir=atan2(this.position.x-entities.players[b].position.x,this.position.y-entities.players[b].position.y)
+							let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
 							let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
 							this.velocity.x=sin(dir)*vec*0.4
 							this.velocity.y=cos(dir)*vec*0.4
-							entities.players[b].velocity.x-=sin(dir)*vec*1.6
-							entities.players[b].velocity.y-=cos(dir)*vec*1.6
+							target.velocity.x-=sin(dir)*vec*1.6
+							target.velocity.y-=cos(dir)*vec*1.6
 						break
 						case 419:
 							for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10726,8 +10739,8 @@ class projectile{
 						case 420:
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
-									entities.players[d].position.x=entities.players[b].position.x
-									entities.players[d].position.y=entities.players[b].position.y+entities.players[b].height/2-entities.players[d].height/2
+									entities.players[d].position.x=target.position.x
+									entities.players[d].position.y=target.position.y+target.height/2-entities.players[d].height/2
 								}
 							}
 						break
@@ -10743,7 +10756,7 @@ class projectile{
 									}
 								}
 							}
-							if(entities.players[b].life<=0&&entities.players[b].playerData.sizeBuff>1){
+							if(target.life<=0&&target.playerData.sizeBuff>1){
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
 										entities.players[d].critBuff=max(entities.players[d].critBuff,150)
@@ -10752,25 +10765,25 @@ class projectile{
 							}
 						break
 					}
-					if(!entities.players[b].immune()){
+					if(!target.immune()){
 						switch(this.type){
 							case 12:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3
+								target.velocity.x+=this.speed*lsin(this.direction)*3
+								target.velocity.y-=this.speed*lcos(this.direction)*3
 							break
 							case 14: case 46:
-								entities.players[b].weaponType=-1
+								target.weaponType=-1
 							break
 							case 16: case 379:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*3.6
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*3.6
+								target.velocity.x+=this.speed*lsin(this.direction)*3.6
+								target.velocity.y-=this.speed*lcos(this.direction)*3.6
 							break
 							case 18:
-								entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*3)
+								target.velocity.y-=this.speed*abs(lsin(this.direction)*3)
 							break
 							case 19:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*-3
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*-3
+								target.velocity.x+=this.speed*lsin(this.direction)*-3
+								target.velocity.y-=this.speed*lcos(this.direction)*-3
 							break
 							case 23: case 24: case 33: case 35: case 39: case 51:
 								for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10780,14 +10793,14 @@ class projectile{
 								}
 							break
 							case 40:
-								entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+60,entities.players[b].weapon.cooldown+60)
-								entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+60,entities.players[b].subWeaponA.cooldown+60)
+								target.weapon.cooldown=min(target.weaponData.cooldown+60,target.weapon.cooldown+60)
+								target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+60,target.subWeaponA.cooldown+60)
 							break
 							case 43: case 186: case 320:
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
+								target.vulnerableTime=max(target.vulnerableTime,300)
 							break
 							case 44:
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+								target.stunTime=max(target.stunTime,30)
 							break
 							case 49:
 								for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10797,18 +10810,18 @@ class projectile{
 								}
 							break
 							case 55:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*6
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*6
+								target.velocity.x+=this.speed*lsin(this.direction)*6
+								target.velocity.y-=this.speed*lcos(this.direction)*6
 							break
 							case 56:
-								entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*2)
+								target.velocity.y-=this.speed*abs(lsin(this.direction)*2)
 							break
 							case 57:
-								entities.players[b].newWeapon()
+								target.newWeapon()
 							break
 							case 59:
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,300)
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+								target.vulnerableTime=max(target.vulnerableTime,300)
+								target.stunTime=max(target.stunTime,30)
 							break
 							case 61:
 								for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10816,36 +10829,36 @@ class projectile{
 										entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
 									}
 								}
-								entities.players[b].stunTime=max(entities.players[b].stunTime,60)
+								target.stunTime=max(target.stunTime,60)
 							break
 							case 67: case 285:
-								entities.players[b].confuseTime=max(entities.players[b].confuseTime,360)
+								target.confuseTime=max(target.confuseTime,360)
 							break
 							case 74: case 81:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*1.8
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*1.8
+								target.velocity.x+=this.speed*lsin(this.direction)*1.8
+								target.velocity.y-=this.speed*lcos(this.direction)*1.8
 							break
 							case 76:
-								entities.players[b].stunTime=max(entities.players[b].stunTime,30)
+								target.stunTime=max(target.stunTime,30)
 							break
 							case 77:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*24
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*24
+								target.velocity.x+=this.speed*lsin(this.direction)*24
+								target.velocity.y-=this.speed*lcos(this.direction)*24
 							break
 							case 87:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*7.5
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*7.5
+								target.velocity.x+=this.speed*lsin(this.direction)*7.5
+								target.velocity.y-=this.speed*lcos(this.direction)*7.5
 							break
 							case 94:
-								entities.players[b].stunTime=max(entities.players[b].stunTime,this.id==0?120:600)
+								target.stunTime=max(target.stunTime,this.id==0?120:600)
 							break
 							case 99:
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
 							break
 							case 102: case 115: case 151: case 167: case 175: case 189: case 193: case 202: case 220: case 258:
-								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
+								target.chillTime=max(target.chillTime,3600)
 								if(this.type==202){
-									entities.players[b].stunTime=max(entities.players[b].stunTime,600)
+									target.stunTime=max(target.stunTime,600)
 								}
 							break
 							case 105:
@@ -10856,196 +10869,196 @@ class projectile{
 								}
 							break
 							case 127:
-								entities.players[b].velocity.x+=lsin(this.direction)*20
-								entities.players[b].velocity.y-=lcos(this.direction)*20
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
+								target.velocity.x+=lsin(this.direction)*20
+								target.velocity.y-=lcos(this.direction)*20
+								target.lastingForce[0]+=lsin(this.direction)*12
+								target.lastingForce[1]-=lcos(this.direction)*12
 							break
 							case 195:
-								if(entities.players[b].life<=0){
-									entities.projectiles.push(new projectile(this.layer,entities.players[b].position.x,entities.players[b].position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+								if(target.life<=0){
+									entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
 								}
 							break
 							case 212:
-								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+15,30)
+								target.shrinkTime=max(target.shrinkTime+15,30)
 							break
 							case 222: case 374:
-								entities.players[b].velocity.x+=lsin(this.direction)*8
-								entities.players[b].velocity.y-=lcos(this.direction)*8
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*4
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*4
+								target.velocity.x+=lsin(this.direction)*8
+								target.velocity.y-=lcos(this.direction)*8
+								target.lastingForce[0]+=lsin(this.direction)*4
+								target.lastingForce[1]-=lcos(this.direction)*4
 							break
 							case 223:
-								entities.players[b].velocity.x+=lsin(this.direction)*12
-								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*6
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*6
-								entities.players[b].stunTime=max(entities.players[b].stunTime,600)
-								entities.players[b].vulnerableTime=max(entities.players[b].vulnerableTime,1800)
+								target.velocity.x+=lsin(this.direction)*12
+								target.velocity.y-=lcos(this.direction)*12
+								target.lastingForce[0]+=lsin(this.direction)*6
+								target.lastingForce[1]-=lcos(this.direction)*6
+								target.stunTime=max(target.stunTime,600)
+								target.vulnerableTime=max(target.vulnerableTime,1800)
 							break
 							case 225:
 								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].id>0&&!entities.players[d].inspect.includes(entities.players[b].index)){
-										entities.players[d].inspect.push(entities.players[b].index)
+									if(entities.players[d].id>0&&!entities.players[d].inspect.includes(target.index)){
+										entities.players[d].inspect.push(target.index)
 									}
 								}
 							break
 							case 231:
-								entities.players[b].stunTime=max(entities.players[b].stunTime,240)
+								target.stunTime=max(target.stunTime,240)
 							break
 							case 269:
-								entities.players[b].velocity.x+=lsin(this.direction)*15
-								entities.players[b].velocity.y-=lcos(this.direction)*15
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*9
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*9
+								target.velocity.x+=lsin(this.direction)*15
+								target.velocity.y-=lcos(this.direction)*15
+								target.lastingForce[0]+=lsin(this.direction)*9
+								target.lastingForce[1]-=lcos(this.direction)*9
 							break
 							case 281:
 								let pos=game.spawner[floor(random(0,game.spawner.length))]
-								entities.players[b].position.x=pos[0]
-								entities.players[b].position.y=pos[1]-entities.players[b].height/2
+								target.position.x=pos[0]
+								target.position.y=pos[1]-target.height/2
 							break
 							case 287:
-								entities.players[b].velocity.x+=lsin(this.direction)*12
-								entities.players[b].velocity.y-=lcos(this.direction)*12
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*12
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*12
-								entities.players[b].chillTime=max(entities.players[b].chillTime,3600)
+								target.velocity.x+=lsin(this.direction)*12
+								target.velocity.y-=lcos(this.direction)*12
+								target.lastingForce[0]+=lsin(this.direction)*12
+								target.lastingForce[1]-=lcos(this.direction)*12
+								target.chillTime=max(target.chillTime,3600)
 							break
 							case 288:
-								entities.players[b].velocity.x+=lsin(this.direction)*9
-								entities.players[b].velocity.y-=lcos(this.direction)*9
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*4.5
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*4.5
+								target.velocity.x+=lsin(this.direction)*9
+								target.velocity.y-=lcos(this.direction)*9
+								target.lastingForce[0]+=lsin(this.direction)*4.5
+								target.lastingForce[1]-=lcos(this.direction)*4.5
 							break
 							case 289:
-								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+600)
-								entities.players[b].gasser=this.index
-								entities.players[b].stunTime=240
+								target.gasTime=max(7200,target.gasTime+600)
+								target.gasser=this.index
+								target.stunTime=240
 							break
 							case 302:
-								entities.players[b].velocity.x+=abs(this.speed)*lsin(this.direction)*-3
-								entities.players[b].velocity.y-=abs(this.speed)*lcos(this.direction)*-3
-								entities.players[b].stunTime=max(entities.players[b].stunTime,60)
+								target.velocity.x+=abs(this.speed)*lsin(this.direction)*-3
+								target.velocity.y-=abs(this.speed)*lcos(this.direction)*-3
+								target.stunTime=max(target.stunTime,60)
 							break
 							case 310:
-								entities.players[b].gasTime=max(7200,entities.players[b].gasTime+3)
-								entities.players[b].gasser=this.index
+								target.gasTime=max(7200,target.gasTime+3)
+								target.gasser=this.index
 							break
 							case 319:
-								entities.players[b].velocity.x+=lsin(this.direction)*18
-								entities.players[b].velocity.y-=lcos(this.direction)*18
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*9
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*9
+								target.velocity.x+=lsin(this.direction)*18
+								target.velocity.y-=lcos(this.direction)*18
+								target.lastingForce[0]+=lsin(this.direction)*9
+								target.lastingForce[1]-=lcos(this.direction)*9
 							break
 							case 322:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*15
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*15
+								target.velocity.x+=this.speed*lsin(this.direction)*15
+								target.velocity.y-=this.speed*lcos(this.direction)*15
 							break
 							case 335:
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*0.1
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*0.1
-							break
+								target.lastingForce[0]+=lsin(this.direction)*0.1
+								target.lastingForce[1]-=lcos(this.direction)*0.1
+							brewak
 							case 343:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*0.9
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*0.9
+								target.velocity.x+=this.speed*lsin(this.direction)*0.9
+								target.velocity.y-=this.speed*lcos(this.direction)*0.9
 							break
 							case 371:
-								entities.players[b].velocity.x+=lsin(this.direction)*8
-								entities.players[b].velocity.y-=lcos(this.direction)*8
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*4
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*4
-								entities.players[b].gasTime=max(360,entities.players[b].gasTime+90)
-								entities.players[b].gasser=this.index
+								target.velocity.x+=lsin(this.direction)*8
+								target.velocity.y-=lcos(this.direction)*8
+								target.lastingForce[0]+=lsin(this.direction)*4
+								target.lastingForce[1]-=lcos(this.direction)*4
+								target.gasTime=max(300,target.gasTime+60)
+								target.gasser=this.index
 							break
 							case 388:
-								entities.players[b].weapon.cooldown=min(entities.players[b].weaponData.cooldown+10,entities.players[b].weapon.cooldown+10)
-								entities.players[b].subWeaponA.cooldown=min(entities.players[b].subWeaponAData.cooldown+10,entities.players[b].subWeaponA.cooldown+10)
+								target.weapon.cooldown=min(target.weaponData.cooldown+10,target.weapon.cooldown+10)
+								target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+10,target.subWeaponA.cooldown+10)
 							break
 							case 317:
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
 							break
 							case 324:
-								entities.players[b].shrinkTime=max(entities.players[b].shrinkTime+30,60)
+								target.shrinkTime=max(target.shrinkTime+30,60)
 							break
 							case 331:
-								entities.players[b].enigmaTime=max(entities.players[b].enigmaTime+480,1200)
+								target.enigmaTime=max(target.enigmaTime+480,1200)
 							break
 							case 332:
-								entities.players[b].blindTime=max(entities.players[b].blindTime+300,900)
+								target.blindTime=max(target.blindTime+300,900)
 							break
 							case 336:
-								entities.players[b].chillTime=max(entities.players[b].chillTime,300)
+								target.chillTime=max(target.chillTime,300)
 							break
 							case 338:
-								entities.players[b].gasTime=max(900,entities.players[b].gasTime+600)
-								entities.players[b].gasser=this.index
+								target.gasTime=max(900,target.gasTime+600)
+								target.gasser=this.index
 							break
 							case 346:
-								entities.players[b].chillTime=max(entities.players[b].chillTime,240)
+								target.chillTime=max(target.chillTime,240)
 							break
 							case 412:
-								entities.players[b].gasTime=max(5,entities.players[b].gasTime+3)
-								entities.players[b].gasser=this.index
+								target.gasTime=max(5,target.gasTime+3)
+								target.gasser=this.index
 							break
 							case 423:
-								entities.players[b].velocity.x+=this.speed*lsin(this.direction)*1.8
-								entities.players[b].velocity.y-=this.speed*lcos(this.direction)*1.8
+								target.velocity.x+=this.speed*lsin(this.direction)*1.8
+								target.velocity.y-=this.speed*lcos(this.direction)*1.8
 							break
 							case 424:
-								entities.players[b].velocity.x+=lsin(this.direction)*10
-								entities.players[b].velocity.y-=lcos(this.direction)*10
-								entities.players[b].lastingForce[0]+=lsin(this.direction)*5
-								entities.players[b].lastingForce[1]-=lcos(this.direction)*5
+								target.velocity.x+=lsin(this.direction)*10
+								target.velocity.y-=lcos(this.direction)*10
+								target.lastingForce[0]+=lsin(this.direction)*5
+								target.lastingForce[1]-=lcos(this.direction)*5
 							break
 						}
 						switch(this.type){
 							case 20:
-								entities.players[b].DOT.damage+=this.damage/180
-								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+30)
+								target.DOT.damage+=this.damage/180
+								target.DOT.active=min(120,target.DOT.active+30)
 							break
 							case 37: case 51:
-								entities.players[b].DOT.damage+=this.damage/180
-								entities.players[b].DOT.active=min(120,entities.players[b].DOT.active+60)
+								target.DOT.damage+=this.damage/180
+								target.DOT.active=min(120,target.DOT.active+60)
 							break
 							case 50:
-								entities.players[b].DOT.damage+=this.damage/360
-								entities.players[b].DOT.active=min(240,entities.players[b].DOT.active+90)
+								target.DOT.damage+=this.damage/360
+								target.DOT.active=min(240,target.DOT.active+90)
 							break
 							case 232: case 321:
-								entities.players[b].DOT.damage+=this.damage/120
-								entities.players[b].DOT.active=min(360,entities.players[b].DOT.active+180)
+								target.DOT.damage+=this.damage/120
+								target.DOT.active=min(360,target.DOT.active+180)
 							break
 							case 285: case 323:
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=min(600,entities.players[b].DOT.active+300)
+								target.DOT.damage+=this.damage/60
+								target.DOT.active=min(600,target.DOT.active+300)
 							break
 							case 298: case 324:
-								entities.players[b].DOT.damage+=this.damage/120
-								entities.players[b].DOT.active=max(240,entities.players[b].DOT.active+120)
+								target.DOT.damage+=this.damage/120
+								target.DOT.active=max(240,target.DOT.active+120)
 							break
 							case 327:
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=max(720,entities.players[b].DOT.active+240)
+								target.DOT.damage+=this.damage/60
+								target.DOT.active=max(720,target.DOT.active+240)
 							break
 							case 355:
-								entities.players[b].DOT.damage+=this.damage/600
-								entities.players[b].DOT.active=max(450,entities.players[b].DOT.active+150)
+								target.DOT.damage+=this.damage/600
+								target.DOT.active=max(450,target.DOT.active+150)
 							break
 							case 383:
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=max(900,entities.players[b].DOT.active+540)
+								target.DOT.damage+=this.damage/60
+								target.DOT.active=max(900,target.DOT.active+540)
 							break
 							case 422:
-								entities.players[b].DOT.damage+=this.damage/60
-								entities.players[b].DOT.active=min(360,entities.players[b].DOT.active+180)
+								target.DOT.damage+=this.damage/60
+								target.DOT.active=min(360,target.DOT.active+180)
 							break
 						}
 					}
 					if(game.invis){
-						entities.players[b].visible=15
+						target.visible=15
 					}
-					entities.players[b].die.killer=this.index
-					entities.players[b].collect.time=450
+					target.die.killer=this.index
+					target.collect.time=450
 				}
 			}
 		}
@@ -11079,7 +11092,7 @@ class projectile{
 							entities.players[d].life=max(entities.players[d].life-this.damage*0.25)
 						}
 					}
-				}else if(this.type==416){
+				}else if(this.type==416||this.rules.stickybomb){
 					this.fail=true
 				}
 			}

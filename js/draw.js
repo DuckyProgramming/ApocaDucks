@@ -1093,7 +1093,19 @@ function mainloop(){
             for(let a=0,la=game.gaming;a<la;a++){
                 if(game.pane){
                     if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
-                        graphics.pane[a].clear()
+                        //let startTime=performance.now()
+
+                        if(key[a]!=graphics.key[a]){
+                            graphics.pane[a].clear()
+                        }else{
+                            graphics.paneTemp.clear()
+                            graphics.paneTemp.image(
+                                graphics.pane[a],
+                                graphics.pane[a].width/2,graphics.pane[a].height/2,
+                                graphics.pane[a].width,graphics.pane[a].height
+                            )
+                            graphics.pane[a].clear()
+                        }
                         graphics.pane[a].push()
                         graphics.pane[a].translate(graphics.pane[a].width/2,graphics.pane[a].height/2)
                         graphics.pane[a].scale(1/key[a])
@@ -1102,15 +1114,30 @@ function mainloop(){
                         for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                             if(
                                 !(game.level==100&&entities.walls[0][b].type==37)&&
-                                entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
-                                game.level==7&&a==2&&
-                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                (
+                                    entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                    entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
+                                    game.level==7&&a==2&&
+                                    entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                    entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                    entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                )&&
+                                (
+                                    key[a]!=graphics.key[a]||!(
+                                        entities.walls[0][b].position.x-entities.walls[0][b].width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].position.x+entities.walls[0][b].width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].position.y-entities.walls[0][b].height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                        entities.walls[0][b].position.y+entities.walls[0][b].height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                        game.level==7&&a==2&&   
+                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
+                                    )
+                                )
                             ){
                                 entities.walls[0][b].display(graphics.pane[a])
                                 b2s.push(b)
@@ -1119,11 +1146,26 @@ function mainloop(){
                         if(game.level==30||game.level==56){
                             for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                                 if(
-                                    entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                    entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)&&
-                                    (entities.walls[0][b].type==37)
+                                    (entities.walls[0][b].type==37)&&
+                                    (
+                                        entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                        entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                    )&&
+                                    (
+                                        key[a]!=graphics.key[a]||!(
+                                            entities.walls[0][b].position.x-entities.walls[0][b].width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].position.x+entities.walls[0][b].width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].position.y-entities.walls[0][b].height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                            entities.walls[0][b].position.y+entities.walls[0][b].height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                            game.level==7&&a==2&&   
+                                            entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
+                                        )
+                                    )
                                 ){
                                     entities.walls[0][b].display(graphics.pane[a])
                                     b2s.push(b)
@@ -1139,11 +1181,22 @@ function mainloop(){
                             }
                         }
                         graphics.pane[a].pop()
+                        if(key[a]==graphics.key[a]){
+                            graphics.pane[a].image(
+                                graphics.paneTemp,
+                                (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2,
+                                (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2,
+                                graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                            )
+                        }
                         graphics.panePoint[a].position.x=effective[a][0]
                         graphics.panePoint[a].position.y=effective[a][1]
                         graphics.panePoint[a].width=graphics.main[0].width*key[a]*2
                         graphics.panePoint[a].height=graphics.main[0].height*key[a]*2
                         graphics.key[a]=key[a]
+
+                        //let endTime=performance.now()
+                        //print(`Pane: ${endTime - startTime} milliseconds`)
                     }
                     graphics.main[a].image(
                         graphics.pane[a],

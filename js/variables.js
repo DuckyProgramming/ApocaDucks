@@ -6820,554 +6820,554 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:760,
       desc:'Heavier duck with an uzi',dpsBuff:1.8,
     },{
-      name:'PlayerNightwatchShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerNightwatchShotgun',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:820,
       desc:'Has a watch shotgun and a flashlight',dpsBuff:0,
     },{
-      name:'PlayerDeluxeNightwatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDeluxeNightwatch',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:2.5,reloadBuff:1,crit:0,weapon:820,
       desc:'Has a deluxe watch shotgun and a flashlight',dpsBuff:0,
     },{
-      name:'PlayerNightwatchEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerNightwatchEngineer',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:821,
       desc:'Can place down temporary turrets',dpsBuff:0,
     },{
-      name:'PlayerNightwatchSoldier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerNightwatchSoldier',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:822,
       desc:'Can fire a blast rocket',dpsBuff:0,
     },{
-      name:'PlayerNightwatchHeavy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerNightwatchHeavy',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:823,
       desc:'Has extra health',dpsBuff:0,
     },{
-      name:'PlayerNightwatchPyro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerNightwatchPyro',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:827,
       desc:'Can fire flares',dpsBuff:0,
     },{
-      name:'PlayerTiny',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      name:'PlayerTiny',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:782,
     },
 
     {
-      name:'PlayerScoutW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScoutW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:995,
       desc:'Fast, can double jump, armed with a scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldierW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldierW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:996,
       desc:'Has a rocket launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyroW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyroW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:997,
       desc:'Has a flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemomanW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemomanW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:998,
       desc:'Has grenades and stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeaponsW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeaponsW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:999,
       desc:'Has a large machine gun, shotgun, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1000,
       desc:'Has a shotgun and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1001,
       desc:'Can heal allies and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1002,
       desc:'Has a sniper rifle and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1003,
       desc:'Has a revolver and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDronerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDronerW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1004,
       desc:'Manipulates drones and has an assault rifle',dpsBuff:0,
     },
     
     {
-      name:'PlayerScout',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:675,
       desc:'Fast, can double jump, armed with a scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:676,
       desc:'Has a rocket launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:677,
       desc:'Has a flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:678,
       desc:'Has grenades and stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:679,
       desc:'Has a large machine gun, shotgun, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:680,
       desc:'Has a shotgun and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:681,
       desc:'Can heal allies and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:682,
       desc:'Has a sniper rifle and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:683,
       desc:'Has a revolver and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:707,
       desc:'Manipulates drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:690,
       desc:'Fast, can double jump, with a scattergun, and can give crits and vulnerability to self',dpsBuff:0,
     },{
-      name:'PlayerSoldier2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:691,
       desc:'Can fire a bazooka and a shotgun and can collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:692,
       desc:'Has a flamethrower and flare gun, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:693,
       desc:'Has grenades and a sword for melee range, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:694,
       desc:'Has a large machine gun, can put down a health pack, and has damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:695,
       desc:'Has a repair gun and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:696,
       desc:'Can heal allies and place defense areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:697,
       desc:'Has a bow and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:698,
       desc:'Has a revolver and a knife and becomes invisible when hit',dpsBuff:0,
     },{
-      name:'PlayerDroner2',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner2',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:708,
       desc:'Manipulates drones and can mark targets with a gun',dpsBuff:0,
     },{
-      name:'PlayerScout3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:711,
       desc:'Fast, can double jump, armed with a pushing scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:712,
       desc:'Can fire a rocket launcher to attack, rocket jump, and collide hardly with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:713,
       desc:'Has a flame stream and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:714,
       desc:'Has shells and stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:715,
       desc:'Has a minigun, shotgun, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:716,
       desc:'Has a shotgun and can combine sentries to improve them',dpsBuff:0,
     },{
-      name:'PlayerMedicC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:717,
       desc:'Can crit buff and heal allies and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:718,
       desc:'Has a sniper rifle and can slightly freeze targets',dpsBuff:0,
     },{
-      name:'PlayerSpyC3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:719,
       desc:'Has a knife, can become invisible, and can recharge knife by hitting a shot',dpsBuff:0,
     },{
-      name:'PlayerDroner3',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner3',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:720,
       desc:'Manipulates swarm drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:736,
       desc:'Can triple jump, armed with a scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:737,
       desc:'Has a rocket launcher and a parachutist gun and can collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:738,
       desc:'Has a flamethrower and can boost self, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:739,
       desc:'Has grenades and can lay time bombs',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:740,
       desc:'Has a medium machine gun, shotgun, and slight damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:741,
       desc:'Has a shotgun, getting crits on sentry loss, and can place down a single controlled auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:742,
       desc:'Can heal allies and place damaging areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:743,
       desc:'Has a sniper rifle, can charge by scoping',dpsBuff:0,
     },{
-      name:'PlayerSpyC4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:744,
       desc:'Spy with a getaway revolver that gives speed buff and instant invisibility',dpsBuff:0,
     },{
-      name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner4',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:745,
       desc:'Manipulates motorizer drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:762,
       desc:'Fast, can double jump, armed with a peppergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:763,
       desc:'Has a blast launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:764,
       desc:'Has a flamethrower and detonator, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:765,
       desc:'Has a caber and stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:766,
       desc:'Has a shotgun, can put down a health pack, and has damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:767,
       desc:'Has a projectile-destroying cannon and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:768,
       desc:'Can heal allies and fire healing bolts',dpsBuff:0,
     },{
-      name:'PlayerSniperC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:769,
       desc:'Has a borer and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:770,
       desc:'Has an enforcer and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner5',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner5',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:771,
       desc:'Manipulates drones and can fire bullets to pull enemies',dpsBuff:0,
     },{
-      name:'PlayerScout6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:783,
       desc:'Fast, can double jump, armed with a scattergun and a baseball',dpsBuff:0,
     },{
-      name:'PlayerSoldier6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:784,
       desc:'Has a rocket launcher and a reserve shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:785,
       desc:'Fast, has a flamethrower and defroster, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:786,
       desc:'Has a warning launcher and stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:787,
       desc:'Has a firework LMG, shotgun, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:788,
       desc:'Has a shotgun and can place down a single rapid auto medical unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:789,
       desc:'Can heal allies quickly but with less overheal and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:790,
       desc:'Has a classic sniper rifle and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:791,
       desc:`Fast and can't be hit while invisible, but fragile`,dpsBuff:0,
     },{
-      name:'PlayerDroner6',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner6',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:792,
       desc:'Manipulates drones and has a magnifying glass',dpsBuff:0,
     },{
-      name:'PlayerScout7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:803,
       desc:'Fast, can double jump, armed with a scattergun and minibombs',dpsBuff:0,
     },{
-      name:'PlayerSoldier7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:804,
       desc:'Has a legal launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:805,
       desc:'Has a flamethrower and shotgun, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:806,
       desc:'Has grenades and an airburst rifle',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:807,
       desc:'Has a large machine gun, pistol, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:808,
       desc:'Has a pistol and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:809,
       desc:'Can heal while stunning allies and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:810,
       desc:'Has a sniper rifle with a backup scattergun and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:811,
       desc:'Has a revolver and a knife and can gain armor and speed when hit',dpsBuff:0,
     },{
-      name:'PlayerDroner7',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner7',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:812,
       desc:'Fires very large bullets and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:828,
       desc:'Fast, can double jump, armed with a scattergun and stargrazer',dpsBuff:0,
     },{
-      name:'PlayerSoldier8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:829,
       desc:'Has a rocket launcher and a musket and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:830,
       desc:'Has a flicker and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:831,
       desc:'Has grenades and jump stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:832,
       desc:'Has a large machine gun, ice cream, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:833,
       desc:'Has a blowtorch and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:834,
       desc:'Can heal allies with a machine gun and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:835,
       desc:'Has a recoiling sniper rifle and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:836,
       desc:'Has a derringer and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner8',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner8',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:837,
       desc:'Manipulates software drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:838,
       desc:'Fast, can double jump, armed with a popper scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:839,
       desc:'Has a rocket launcher and a pocket rocket and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:840,
       desc:'Has a flamethrower and steamblast, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:841,
       desc:'Has grenades and sweeping stickybombs triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:842,
       desc:'Has a large machine gun, can put down a defense pack, and has damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:843,
       desc:'Has a shotgun and can place down two rapid auto units',dpsBuff:0,
     },{
-      name:'PlayerMedicC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:844,
       desc:'Can heal allies and fire chroma bursts',dpsBuff:0,
     },{
-      name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:845,
       desc:'Has a sniper rifle and a trench submachine gun, and can see slightly far',dpsBuff:0,
     },{
-      name:'PlayerSpyC9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:846,
       desc:'Has a viewer revolver and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner9',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner9',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:847,
       desc:'Manipulates crowd drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:869,
       desc:'Fast, can double jump, armed with a rust gun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:870,
       desc:'Has a garbage launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:871,
       desc:'Has a flamethrower and airshot, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:872,
       desc:'Has grenades and can call teammates with a stickybomb triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:873,
       desc:'Has a battery machine gun and shotgun, and has damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:874,
       desc:'Has a shotgun and can place down a single rapid destructor unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:875,
       desc:'Can heal allies with rockets and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:876,
       desc:'Has a sniper rifle and can fire a pushing carpenter bullet, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:877,
       desc:'Has a revolver and a cluster bomb and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner10',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner10',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:878,
       desc:'Fires interceptor bullets and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:945,
       desc:'Fast, can double jump, armed with a deflector scattergun and pistol',dpsBuff:0,
     },{
-      name:'PlayerSoldier11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:946,
       desc:'Has a aftershock launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:947,
       desc:'Has a bubble blaster and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:948,
       desc:'Has grenades and chargable donker bombs',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:949,
       desc:'Has a anticannon, shotgun, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:950,
       desc:'Has a tapper and can place down a single rapid auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:951,
       desc:'Can heal allies and leech enemies and place heal areas',dpsBuff:0,
     },{
-      name:'PlayerSniperC11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:952,
       desc:'Has a piercing sniper rifle and a submachine gun, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:953,
       desc:'Has a shredder and a knife and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner11',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner11',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:954,
       desc:'Manipulates explosive drones and has an assault rifle',dpsBuff:0,
     },{
-      name:'PlayerScout12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerScout12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:955,
       desc:'Fast, can double jump, armed with a scattergun and throwable anthrax',dpsBuff:0,
     },{
-      name:'PlayerSoldier12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSoldier12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:956,
       desc:'Has a moonshot launcher and a shotgun and can jump to collide with enemies',dpsBuff:0,
     },{
-      name:'PlayerPyro12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerPyro12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:957,
       desc:'Has a kerosene flamethrower and reflector, and is immune to bullet side effects',dpsBuff:0,
     },{
-      name:'PlayerDemoman12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDemoman12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:958,
       desc:'Has grenades and stickywheels triggered on weapon swap',dpsBuff:0,
     },{
-      name:'PlayerHeavyWeapons12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerHeavyWeapons12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:959,
       desc:'Has a large machine gun, chainsaw, and damage resistance',dpsBuff:0,
     },{
-      name:'PlayerEngineerC12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerEngineerC12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:960,
       desc:'Has a shotgun and can place down a single shotgun auto unit',dpsBuff:0,
     },{
-      name:'PlayerMedicC12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerMedicC12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:961,
       desc:'Can heal allies and fire heal orbs',dpsBuff:0,
     },{
-      name:'PlayerSniperC12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSniperC12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:962,
       desc:'Has a sniper rifle and a bushwacker, and can see far',dpsBuff:0,
     },{
-      name:'PlayerSpyC12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerSpyC12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:963,
       desc:'Has a revolver and a knife that gives crits on hit and can become invisible',dpsBuff:0,
     },{
-      name:'PlayerDroner12',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerDroner12',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:964,
       desc:'Manipulates drones and has discord orbs',dpsBuff:0,
     },
@@ -7391,7 +7391,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:686,
     },{
       name:'PlayerStickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:687,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:687,
     },{
       name:'PlayerLightHealZone',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:688,
@@ -7502,7 +7502,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:751,
     },{
       name:'PlayerHeavyTimeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:971,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:971,
     },{
       name:'PlayerCarrySentry1',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:757,
@@ -7622,7 +7622,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:850,
     },{
       name:'PlayerStickyJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:851,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:851,
     },{
       name:'PlayerIceCream',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:852,
@@ -7652,7 +7652,7 @@ types={
       damageBuff:4/3,reloadBuff:1.25,crit:0,weapon:860,
     },{
       name:'PlayerStickySweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:861,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:861,
     },{
       name:'PlayerDefensePack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:862,
@@ -7706,13 +7706,13 @@ types={
       damageBuff:4/3,reloadBuff:2,crit:0,weapon:202,
     },{
       name:'PlayerHeavyMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.125,reloadBuff:2,crit:0,weapon:191,
+      damageBuff:1.25,reloadBuff:2,crit:0,weapon:191,
     },{
       name:'PlayerHeavySwarmer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:4/3,reloadBuff:1.75,crit:0,weapon:284,
     },{
       name:'PlayerDestroyerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.125,crit:0,weapon:904,
+      damageBuff:1.25,reloadBuff:1.25,crit:0,weapon:904,
     },{
       name:'PlayerHeavyAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1, 
       damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:4,
@@ -7934,7 +7934,7 @@ types={
       damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:1011,
     },{
       name:'PlayerStickySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:1012,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1012,
     },
 
     //mark c
@@ -16381,10 +16381,10 @@ types={
 		},{
 			name:'Stickybomb Launcher',
 			ammo:4,
-			damage:200,
-			cooldown:45,
-			stop:90,
-			reload:45,
+			damage:240,
+			cooldown:36,
+			stop:60,
+			reload:40,
 			speed:1.05,
       uses:18,
 		},{
@@ -17855,12 +17855,12 @@ types={
 			speed:0.95,
       uses:24,
 		},{
-			name:'Stickybomb Jumper',
+			name:'Sticky Jumper',
 			ammo:3,
-			damage:180,
-			cooldown:45,
-			stop:90,
-			reload:45,
+			damage:225,
+			cooldown:36,
+			stop:60,
+			reload:40,
 			speed:1.05,
       uses:18,
 		},{
@@ -17947,10 +17947,10 @@ types={
 		},{
 			name:'Stickybomb Sweeper',
 			ammo:5,
-			damage:200,
-			cooldown:36,
-			stop:90,
-			reload:45,
+			damage:240,
+			cooldown:30,
+			stop:60,
+			reload:40,
 			speed:1.05,
       uses:22.5,
 		},{
@@ -18432,13 +18432,13 @@ types={
       uses:12,
 		},{
 			name:'Kerosene',
-			ammo:58,
+			ammo:60,
 			damage:36,
 			cooldown:3,
 			stop:75,
 			reload:2,
 			speed:0.95,
-      uses:145,
+      uses:150,
 		},{
 			name:'Degreaser',
 			ammo:44,
@@ -18496,10 +18496,10 @@ types={
 		},{
 			name:'Stickywheel',
 			ammo:3,
-			damage:120,
-			cooldown:45,
+			damage:144,
+			cooldown:36,
 			stop:90,
-			reload:45,
+			reload:60,
 			speed:1.05,
       uses:15,
 		},{
@@ -18937,10 +18937,10 @@ types={
 		},{
 			name:'Time Bomb C',
 			ammo:4,
-			damage:144,
-			cooldown:45,
-			stop:105,
-			reload:54,
+			damage:240,
+			cooldown:36,
+			stop:60,
+			reload:40,
 			speed:1.05,
       uses:18,
 		},{
@@ -18982,7 +18982,7 @@ types={
 		},{
 			name:'Roller Launcher',
 			ammo:2,
-			damage:125,
+			damage:120,
 			cooldown:30,
 			stop:120,
 			reload:20,
@@ -19238,7 +19238,7 @@ types={
 			cooldown:240,
 			stop:240,
 			reload:240,
-			speed:0.975,
+			speed:1,
       uses:6,
 		},{
 			name:'Invis Watch',
@@ -19306,10 +19306,10 @@ types={
 		},{
 			name:'Sticky Sniper',
 			ammo:1,
-			damage:150,
-			cooldown:45,
-			stop:90,
-			reload:45,
+			damage:300,
+			cooldown:36,
+			stop:60,
+			reload:40,
 			speed:1.05,
       uses:9,
 		},{

@@ -22,6 +22,8 @@ function setupRules(){
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425,
+            explodeHit:a==41||a==97||a==98||a==121||a==146||
+                a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==41||a==45||a==47||
 				a==48||a==53||a==54||a==55||a==56||
@@ -66,6 +68,9 @@ function setupRules(){
 				a==372||a==373||a==375||a==376||a==383||
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425,
+            bounce2:a==91||a==92||a==93||a==96||a==108||
+                a==204||a==208||a==237||a==238||a==239||
+                a==275||a==302,
 			stickybomb:a==349||a==360||a==368||a==372||a==392||
 				a==417,
 			passer:a==85||a==89||a==103||a==193||a==194||
@@ -127,7 +132,22 @@ function setupRules(){
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
 			fader3:a==190||a==191||a==214||a==255||a==256||
-				a==257||a==265||a==300||a==365
+				a==257||a==265||a==300||a==365,
+            fader4:a==280||a==316||a==326,
+            hitstack:a==91||a==92||a==93||a==96||a==108||
+                a==192||a==203||a==204||a==207||a==208||
+                a==237||a==238||a==239||a==275||a==296||
+                a==302||a==306||a==420,
+            hitmed:a==9||a==10||a==11||a==38||a==63||
+                a==72||a==82||a==155||a==273||a==345||
+                a==350||a==357||a==364||a==378||a==396||
+                a==409||a==418,
+            medTarget:a==9||a==10||a==11||a==38||a==63||
+				a==72||a==82||a==155||a==194||a==273||
+				a==345||a==350||a==364||a==378||a==396||
+                a==398||a==409||a==418,
+            physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
+                a!=240&&a!=311&&a!=312&&a!=367
 		})
     }
 }
@@ -168,6 +188,35 @@ function updateRules(){
         game.level==86||game.level==87||game.level==88||game.level==89||game.level==90||game.level==91||game.level==92||game.level==93||game.level==94||game.level==95||
         game.level==96||game.level==97||game.level==98||game.level==99||game.level==100||game.level==101||game.level==103||game.level==104||game.level==105||game.level==106||
         game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113||game.level==114
+    rules.picker=game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116
+    rules.key={
+        info:game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||
+            game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102?
+                250:
+            game.level==71?
+                150:
+                180,
+        fortReload:game.level==22||game.level==25||game.level==28||game.level==32||game.level==35||game.level==37||game.level==38||game.level==63||game.level==81||game.level==100||
+                game.level==104
+            ?0.25:
+                game.level==23||game.level==26||game.level==27||game.level==33||game.level==40||game.level==43||game.level==44||game.level==47||game.level==55||game.level==58||
+                game.level==59||game.level==65||game.level==68||game.level==70||game.level==77||game.level==83||game.level==84||game.level==85||game.level==89||game.level==94||
+                game.level==96||game.level==97||game.level==98||game.level==99||game.level==101||game.level==103||game.level==105||game.level==108||game.level==109
+            ?0.5:
+                game.level==79||game.level==82
+            ?0.1:
+                game.level==42
+            ?2/3:
+            1,
+        bustMult:
+            game.level==19||game.level==31||game.level==42
+            ?5:
+            game.level==24||game.level==38||game.level==49
+            ?2:
+            game.level==32||game.level==33||game.level==58||game.level==63||game.level==70
+            ?2.5:
+            1
+    }
 }
 function dm(){
     return rules.dm
@@ -2880,6 +2929,8 @@ function generateLevel(info,layer){
             setupLayer(graphics.pane[a])
             graphics.panePoint.push({position:{x:-1000,y:-1000},width:0,height:0})
         }
+        graphics.paneTemp=createGraphics(graphics.main[0].width*2,graphics.main[0].height*2)
+        setupLayer(graphics.paneTemp)
     }else if(game.level!=112){
         for(let a=0,la=graphics.pane.length;a<la;a++){
             delete graphics.pane[a]
@@ -7504,7 +7555,7 @@ function generateLevel(info,layer){
                     options.splice(index,1)
                 }
 
-                //classPick=[3,4]
+                //classPick=[6,6]
 
                 options=[range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
