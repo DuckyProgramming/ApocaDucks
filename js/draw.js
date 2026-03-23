@@ -47,7 +47,8 @@ function mainloop(){
                         menu.mode==2&&a==8&&b==3||
                         menu.mode==2&&a==9&&b==1||
                         menu.mode==2&&a==9&&b==2||
-                        menu.mode==3&&a==9&&b==0
+                        menu.mode==3&&a==9&&b==0||
+                        menu.mode==4&&a==5&&b==0
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -153,6 +154,18 @@ function mainloop(){
                                         case 0:
                                             text(`Loop`,pos[0]-37,pos[1]+15)
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 4:
+                            switch(a){
+                                case 5:
+                                    switch(b){
+                                        case 0:
+                                            text(`1`,pos[0]-37,pos[1]+15)
+                                            text(`2`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -269,7 +282,8 @@ function mainloop(){
                         menu.mode==2&&a==7&&b==1||
                         menu.mode==2&&a==8&&b==3||
                         menu.mode==2&&a==9&&b==1||
-                        menu.mode==3&&a==9&&b==0
+                        menu.mode==3&&a==9&&b==0||
+                        menu.mode==4&&a==5&&b==0
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -371,6 +385,18 @@ function mainloop(){
                                         case 0:
                                             text(`Loop`,pos[0]-37,pos[1]+15)
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                            }
+                        break
+                        case 4:
+                            switch(a){
+                                case 5:
+                                    switch(b){
+                                        case 0:
+                                            text(`1`,pos[0]-37,pos[1]+15)
+                                            text(`2`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -997,7 +1023,7 @@ function mainloop(){
                 graphics.main[a].push()
                 graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                 graphics.main[a].scale(1/key[a])
-                if(backed()){
+                if(rules.backed){
                     graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                     for(let b=0,lb=entities.walls[2].length;b<lb;b++){
                         entities.walls[2][b].display(graphics.main[a])
@@ -1029,7 +1055,7 @@ function mainloop(){
                                 run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                             ){
                                 run.fore[a][b].display(graphics.main[c])
-                                if(a==(backed()?3:2)){
+                                if(a==(rules.backed?3:2)){
                                     bs[c].push([a,b])
                                 }
                             }else if(game.level==16){
@@ -1045,14 +1071,14 @@ function mainloop(){
                                         run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
                                     ){
                                         run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==(backed()?3:2)){
+                                        if(a==(rules.backed?3:2)){
                                             bs[c].push([a,b])
                                         }
                                         d=ld
                                     }
                                 }
                             }
-                            if(a==backed()?3:2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                            if(a==rules.backed?3:2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
                                 run.fore[a][b].displayOver(graphics.main[c])
                             }
                             if(game.level==7){
@@ -1398,7 +1424,7 @@ function mainloop(){
             }
             for(let a=0,la=bs.length;a<la;a++){
                 for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==(backed()?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                    if(!(bs[a][b][0]==(rules.backed?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
                         run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
                     }
                 }

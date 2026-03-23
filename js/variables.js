@@ -7935,6 +7935,12 @@ types={
     },{
       name:'PlayerStickySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1012,
+    },{
+      name:'PlayerVitasaw',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1014,
+    },{
+      name:'PlayerShield',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1015,
     },
 
     //mark c
@@ -19321,6 +19327,24 @@ types={
 			reload:45,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Vitasaw',
+			ammo:5,
+			damage:100,
+			cooldown:24,
+			stop:60,
+			reload:20,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Shield',
+			ammo:2,
+			damage:5,
+			cooldown:30,
+			stop:90,
+			reload:15,
+			speed:0.875,
+      uses:9,
 		},
 
     /*{

@@ -12,11 +12,12 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=36
+        game.level=117
         menu.level=game.level
         updateRules()
         if(true){
-            game.mission=findName(`Duck Time`,types.mission)
+            game.mission=findName(`Duck Time Deluxe`,types.mission)
+            formMission(types.mission[game.mission].wave,0)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -37,13 +38,13 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=4
-        let sets=[3,3]
+        let numKey=3
+        let sets=[0,0]
         game.loadout[0]=[
             {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         ]
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
-        entities.players[0].position.x-=1000
+        entities.players[0].position.x-=500
         entities.players[0].position.y+=100
     }
 }
@@ -341,7 +342,11 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                menu.level=36
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=36
+                                                }else{
+                                                    menu.level=117
+                                                }
                                                 //aerial
                                             break
                                             case 1:
@@ -1979,7 +1984,7 @@ function mouseClicked(){
                             if(game.classicWeapon||game.randomizer||game.selector){
                                 game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                             }else{
-                                game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?116:115):13
+                                game.level=menu.level==79||menu.level==82?80:game.classWeapon?(rules.teamMode||game.level==81?116:115):13
                             }
                             updateRules()
                             game.mission=unit
@@ -2419,7 +2424,7 @@ function mouseClicked(){
                         if(game.classicWeapon||game.randomizer||game.selector){
                             game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
                         }else{
-                            game.level=game.classWeapon?(teamMode()?116:115):13
+                            game.level=game.classWeapon?(rules.teamMode?116:115):13
                         }
                         updateRules()
                         game.mission=menu.list[tick]
@@ -2490,7 +2495,7 @@ function instant(){
     if(game.classicWeapon||game.randomizer||game.selector){
         game.level=game.pvp&&menu.level==22?23:game.pvp&&menu.level==25?26:menu.level
     }else{
-        game.level=menu.level==79||menu.level==82?80:game.classWeapon?(teamMode()||game.level==81?116:115):13
+        game.level=menu.level==79||menu.level==82?80:game.classWeapon?(rules.teamMode||game.level==81?116:115):13
     }
     updateRules()
     game.mission=0
