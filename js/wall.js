@@ -13442,7 +13442,11 @@ class wall{
                                             }
                                         }
                                         let reserve=[[c.type,c.subPlayerAType,c.subPlayerBType],[c.subWeaponA.ammo,c.subWeaponB.ammo],[c.subWeaponA.uses,c.subWeaponB.uses]]
-                                        if(listing[4][c.type-findName(`PlayerScoutW`,types.player)].length==3){
+                                        if(
+                                            c.type-findName(`PlayerScoutW`,types.player)>=0&&
+                                            c.type-findName(`PlayerScoutW`,types.player)<listing[4].length&&
+                                            listing[4][c.type-findName(`PlayerScoutW`,types.player)].length==3
+                                        ){
                                             reserve[0].push(c.subPlayerCType)
                                         }
                                         this.recharge=300

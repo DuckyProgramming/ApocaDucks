@@ -21,7 +21,7 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425,
+				a==417||a==425||a==430,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -32,7 +32,7 @@ function setupRules(){
 				a==262||a==266||a==279||a==280||a==290||
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
-				a==385||a==412,
+				a==385||a==412||a==430,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -127,7 +127,7 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==377||a==378||a==379||a==384||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425,
+				a==417||a==425||a==430,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -4838,9 +4838,9 @@ function generateLevel(info,layer){
                         break
                         case 117:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.6+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
-                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.8+a*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.4,1))
-                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],game.tileset[1]*1.8+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,17))
-                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],game.tileset[1]*1.8+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,18))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.2,1))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.25+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,17))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.25+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,18))
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
@@ -5275,6 +5275,21 @@ function generateLevel(info,layer){
                         break
                         case 114:
                             entities.walls[1].push(new wall(graphics.main,b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,77))
+                        break
+                        case 117:
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0]*3,game.tileset[1]*3,49))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],49))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],49))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1],52))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1],51))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[0],game.tileset[1],54))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[0],game.tileset[1],53))
+
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*3.8+a*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.4,1))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.5+b*game.tileset[0],game.tileset[1]*3.8+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,17))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.5+b*game.tileset[0],game.tileset[1]*3.8+a*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,18))
+
+                            clumper[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2.8+a*game.tileset[1],game.tileset[0]*0.15,game.tileset[1]*1.6,55))
                         break
                         default:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+0.5)*game.tileset[1],game.tileset[0],game.tileset[1],49))
@@ -6492,10 +6507,12 @@ function generateLevel(info,layer){
             ticker=0
             ticker2=[]
             for(let a=0,la=10;a<la;a++){
-                ticker2.push([0,-2])
+                //ticker2.push([0,-2])
+                ticker2.push(-2)
             }
             temp=listing[4].slice()
-            temp=temp.map(set=>
+            temp=temp.map(set=>set.map(clump=>clump.slice()))
+            /*temp=temp.map(set=>
                 set.map(clump=>{
                     let newer=clump.slice()
                     for(let a=0,la=clump.length/2;a<la;a++){
@@ -6503,7 +6520,7 @@ function generateLevel(info,layer){
                     }
                     return newer
                 })
-            )
+            )*/
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
                     if(ticker%21==0){
@@ -6511,13 +6528,25 @@ function generateLevel(info,layer){
                         entities.walls[1][a].loadout={class:10,set:3}
                     }else{
                         let classNum=floor((ticker%21-1)/2)
-                        entities.walls[1][a].weapon=ticker2[classNum][1]<0?findName('PlayerRandomScout',types.player)+classNum:findName(temp[classNum][ticker2[classNum][0]][ticker2[classNum][1]],types.player)
+                        let set=ticker2[classNum]<0?3:floor(ticker2[classNum]*listing[4][classNum].length/6)
+                        entities.walls[1][a].weapon=
+                            ticker2[classNum]<0?
+                            findName('PlayerRandomScout',types.player)+classNum:
+                            findName(
+                                temp[classNum][set].splice(
+                                    floor(random(0,temp[classNum][set].length)),1
+                                )[0],
+                                types.player
+                            )
+                        entities.walls[1][a].loadout={class:classNum,set:set}
+                        ticker2[classNum]++
+                        /*entities.walls[1][a].weapon=ticker2[classNum][1]<0?findName('PlayerRandomScout',types.player)+classNum:findName(temp[classNum][ticker2[classNum][0]][ticker2[classNum][1]],types.player)
                         entities.walls[1][a].loadout={class:classNum,set:ticker2[classNum][1]<0?3:ticker2[classNum][0]}
                         ticker2[classNum][1]++
                         if(ticker2[classNum][1]>=temp[classNum][ticker2[classNum][0]].length){
                             ticker2[classNum][0]++
                             ticker2[classNum][1]=0
-                        }
+                        }*/
                     }
                     ticker++
                 }
@@ -10056,7 +10085,7 @@ function setupLists(){
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergun`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazooka`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncher`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerRocketJump`],
+            [`PlayerHeavyRocketLauncher`,`PlayerBazooka`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncher`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerPocketRocket`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJump`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
@@ -10069,7 +10098,7 @@ function setupLists(){
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerAmmoPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerTapper`],
-            [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerMoreGunSentry`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`],
+            [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`,`PlayerHalfSentry`],
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerTransmission`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`],
             [`PlayerHealBolt`,`PlayerChroma`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerAmmoPack`],

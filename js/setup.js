@@ -12,7 +12,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=117
+        game.level=100
         menu.level=game.level
         updateRules()
         if(true){
@@ -44,8 +44,17 @@ function setup(){
             {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
         ]
         entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
-        entities.players[0].position.x-=500
-        entities.players[0].position.y+=100
+        entities.players[0].position.x-=100
+        entities.players[0].position.y+=500
+
+        /*numKey=5
+        sets=[0,0]
+        game.loadout[1]=[
+            {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
+        ]
+        entities.players[1].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
+        entities.players[1].position.x+=500
+        entities.players[1].position.y+=500*/
     }
 }
 function windowResized(){

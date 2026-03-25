@@ -1,9 +1,23 @@
 
+
+1016 - black box, 773
+1017 - half sentry, 685
+1018 - half sentry proxy, 730
+
+430 - black box, 351, 21
+
+
+
+
+
+
 1014 - vitasaw, 980
 1015 - shield, 705
 
 426 - vitasaw, 415
 427 - shield, 103
+428 - falloff bullet, 1
+429 - falloff card, 218
 
 
 

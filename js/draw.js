@@ -1153,10 +1153,10 @@ function mainloop(){
                                 )&&
                                 (
                                     key[a]!=graphics.key[a]||!(
-                                        entities.walls[0][b].position.x-entities.walls[0][b].width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].position.x+entities.walls[0][b].width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].position.y-entities.walls[0][b].height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                        entities.walls[0][b].position.y+entities.walls[0][b].height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
                                         game.level==7&&a==2&&   
                                         entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
                                         entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
@@ -1181,10 +1181,10 @@ function mainloop(){
                                     )&&
                                     (
                                         key[a]!=graphics.key[a]||!(
-                                            entities.walls[0][b].position.x-entities.walls[0][b].width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].position.x+entities.walls[0][b].width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].position.y-entities.walls[0][b].height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                            entities.walls[0][b].position.y+entities.walls[0][b].height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                            entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                            entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
                                             game.level==7&&a==2&&   
                                             entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
                                             entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&

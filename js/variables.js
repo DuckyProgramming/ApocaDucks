@@ -6757,8 +6757,8 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:171,
       desc:'Disguises as an enemy and can assasinate one, becomes partial revolver afterward',dpsBuff:0,
     },{
-      name:'PlayerStickyMan',sizeBuff:1,lifeBuff:4,speedBuff:1.1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:687,
+      name:'PlayerStickyMan',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:687,
     },
 
     //mark di
@@ -7877,7 +7877,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:982,
     },{
       name:'PlayerTickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:983,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:983,
     },{
       name:'PlayerSpiralLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:984,
@@ -7941,6 +7941,12 @@ types={
     },{
       name:'PlayerShield',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1015,
+    },{
+      name:'PlayerBlackBox',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:1.5,crit:0,weapon:1016,
+    },{
+      name:'PlayerHalfSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1017,
     },
 
     //mark c
@@ -8008,6 +8014,9 @@ types={
     },{
       name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:689,
+    },{
+      name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1018,
     },{
       name:'ConstructTemp',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:826,
@@ -16387,9 +16396,9 @@ types={
 		},{
 			name:'Stickybomb Launcher',
 			ammo:4,
-			damage:240,
+			damage:288,
 			cooldown:36,
-			stop:60,
+			stop:66,
 			reload:40,
 			speed:1.05,
       uses:18,
@@ -16505,7 +16514,7 @@ types={
 			name:'Bazooka',
 			ammo:3,
 			damage:120,
-			cooldown:12,
+			cooldown:20,
 			stop:360,
 			reload:40,
 			speed:0.8,
@@ -16932,12 +16941,12 @@ types={
 			stop:45,
 			reload:1,
 			speed:1.05,
-      uses:105,
+      uses:120,
 		},{
 			name:'Parachute',
 			ammo:12,
 			damage:105,
-			cooldown:8,
+			cooldown:12,
 			stop:30,
 			reload:6,
 			speed:1.2,
@@ -17179,7 +17188,7 @@ types={
 		},{
 			name:'Caber',
 			ammo:1,
-			damage:500,
+			damage:375,
 			cooldown:210,
 			stop:210,
 			reload:210,
@@ -17369,9 +17378,9 @@ types={
 			name:'Warning Launcher',
 			ammo:1,
 			damage:255,
-			cooldown:100,
-			stop:100,
-			reload:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
 			speed:1.05,
       uses:9,
 		},{
@@ -17863,9 +17872,9 @@ types={
 		},{
 			name:'Sticky Jumper',
 			ammo:3,
-			damage:225,
+			damage:252,
 			cooldown:36,
-			stop:60,
+			stop:66,
 			reload:40,
 			speed:1.05,
       uses:18,
@@ -17953,9 +17962,9 @@ types={
 		},{
 			name:'Stickybomb Sweeper',
 			ammo:5,
-			damage:240,
-			cooldown:30,
-			stop:60,
+			damage:288,
+			cooldown:36,
+			stop:66,
 			reload:40,
 			speed:1.05,
       uses:22.5,
@@ -17988,13 +17997,13 @@ types={
       uses:12,
 		},{
 			name:'Trench Submachine',
-			ammo:16,
-			damage:55,
+			ammo:15,
+			damage:54,
 			cooldown:5,
 			stop:65,
-			reload:2,
+			reload:3,
 			speed:1.15,
-      uses:80,
+      uses:75,
 		},{
 			name:'Viewer Revolver',
 			ammo:3,
@@ -18124,7 +18133,7 @@ types={
 		},{
 			name:'Garbage Launcher C',
 			ammo:1,
-			damage:180,
+			damage:150,
 			cooldown:20,
 			stop:240,
 			reload:0,
@@ -18502,9 +18511,9 @@ types={
 		},{
 			name:'Stickywheel',
 			ammo:3,
-			damage:144,
+			damage:168,
 			cooldown:36,
-			stop:90,
+			stop:99,
 			reload:60,
 			speed:1.05,
       uses:15,
@@ -18943,9 +18952,9 @@ types={
 		},{
 			name:'Time Bomb C',
 			ammo:4,
-			damage:240,
+			damage:288,
 			cooldown:36,
-			stop:60,
+			stop:66,
 			reload:40,
 			speed:1.05,
       uses:18,
@@ -19051,10 +19060,10 @@ types={
 		},{
 			name:'Tickybomb Launcher',
 			ammo:4,
-			damage:80,
-			cooldown:45,
-			stop:90,
-			reload:54,
+			damage:144,
+			cooldown:36,
+			stop:66,
+			reload:40,
 			speed:1.05,
       uses:18,
 		},{
@@ -19312,16 +19321,16 @@ types={
 		},{
 			name:'Sticky Sniper',
 			ammo:1,
-			damage:300,
+			damage:336,
 			cooldown:36,
-			stop:60,
+			stop:66,
 			reload:40,
 			speed:1.05,
       uses:9,
 		},{
 			name:'Stickybomb Launcher Test',
 			ammo:4,
-			damage:200,
+			damage:288,
 			cooldown:45,
 			stop:90,
 			reload:45,
@@ -19345,6 +19354,33 @@ types={
 			reload:15,
 			speed:0.875,
       uses:9,
+		},{
+			name:'Black Box',
+			ammo:2,
+			damage:100,
+			cooldown:20,
+			stop:135,
+			reload:40,
+			speed:0.8,
+      uses:14,
+		},{
+			name:'Pair Sentry C',
+			ammo:2,
+			damage:0,
+			cooldown:30,
+			stop:360,
+			reload:60,
+			speed:1.1,
+      uses:6,
+		},{
+			name:'Half Auto',
+			ammo:8,
+			damage:40,
+			cooldown:15,
+			stop:30,
+			reload:10,
+			speed:1.2,
+      uses:48,
 		},
 
     /*{
