@@ -12906,6 +12906,8 @@ class wall{
                                         c.velocity.y*=mult
                                     }else if(c.type==264){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,30,atan2(c.velocity.x,-c.velocity.y)+random(-15,15),c.id,c.damage,c.base.time,c.crit,c.index))
+                                    }else if(c.type==359){
+                                        c.time-=30
                                     }
                                     if(c.bounces>=4){
                                         c.explode()
@@ -12927,6 +12929,8 @@ class wall{
                                     if(c.bounces>=2){
                                         c.active=false
                                     }
+                                }else if((c.type==383||c.type==431)&&c.bounceTimer==0){
+                                    c.time-=30
                                 }else if(c.type==404&&d>=2){
                                     c.attack=0
                                 }else if(c.type==413&&c.bounceTimer==0){

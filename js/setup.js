@@ -6,6 +6,9 @@ function setup(){
     setupRules()
 
     if(false){
+        //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
+        //duel={trigger:true,numKey:[3,0],sets:[[0,0],[0,0]]}
+
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
@@ -25,8 +28,10 @@ function setup(){
         entities.players=[]
         initialGraphics()
         game.classicWeapon=true
-        //game.classicRespawn=false
-            game.pvp=true
+        if(rules.dm){
+            game.classicRespawn=false
+        }
+            //game.pvp=true
         //display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerClassWars',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -38,23 +43,6 @@ function setup(){
         //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
-        let numKey=3
-        let sets=[0,0]
-        game.loadout[0]=[
-            {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
-        ]
-        entities.players[0].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
-        entities.players[0].position.x-=100
-        entities.players[0].position.y+=500
-
-        /*numKey=5
-        sets=[0,0]
-        game.loadout[1]=[
-            {main:sets.map((item,index)=>findName(listing[4][numKey][index][item],types.player)),class:numKey}
-        ]
-        entities.players[1].newWeaponSet(findName('PlayerScoutW',types.player)+numKey)
-        entities.players[1].position.x+=500
-        entities.players[1].position.y+=500*/
     }
 }
 function windowResized(){

@@ -3,8 +3,12 @@
 1016 - black box, 773
 1017 - half sentry, 685
 1018 - half sentry proxy, 730
+1019 - electric knife, 684
 
 430 - black box, 351, 21
+431 - baseball, 28
+432 - electric knife, 207
+433 - electric chair, 89
 
 
 
@@ -16,8 +20,8 @@
 
 426 - vitasaw, 415
 427 - shield, 103
-428 - falloff bullet, 1
-429 - falloff card, 218
+428 - rampup (bow) bullet, 1
+429 - rampup (bow) card, 218
 
 
 

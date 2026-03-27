@@ -16470,7 +16470,7 @@ player.prototype.logic=function(){
             }
         }
         this.manage[1]=dist(this.position.x,this.position.y,this.target.position.x,this.target.position.y)<500?1:0
-        if(this.life<this.base.life*(game.level==81?0.6:0.4)&&rules.dm&&abs(this.position.x-this.target.position.x)<(game.level==81?600:300)&&this.position.x>150&&this.position.x<game.edge[0]-150){
+        if(this.life<this.base.life*(game.level==81?0.6:0.4)&&rules.dm&&abs(this.position.x-this.target.position.x)<(game.level==81?600:300)&&this.position.x>150&&this.position.x<game.edge[0]-150&&!this.rules.scoutLine){
             this.target.position.x=this.position.x*2-this.target.position.x
         }
     }

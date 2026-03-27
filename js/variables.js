@@ -10,6 +10,7 @@ game={
   sectors:[],respawners:[0,0],det:[],firstGen:true,
   deprecate:false,smile:false,yellow:false,nostat:false,
   deathlink:false,sentryCarry:false,ender:false,popison:false,chess:false,//options
+  readout:false,
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
@@ -49,6 +50,7 @@ game={
       ],
   ]
 }
+duel={trigger:false,numKey:[],sets:[]}
 rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[],mode:0}
@@ -7457,7 +7459,7 @@ types={
       damageBuff:1.4,reloadBuff:1,crit:0,weapon:723,
     },{
       name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:724,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:724,
     },{
       name:'PlayerMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:725,
@@ -7859,7 +7861,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:975,
     },{
       name:'PlayerRollerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:976,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:976,
     },{
       name:'PlayerLaunchSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:977,
@@ -7931,7 +7933,7 @@ types={
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:338,
     },{
       name:'PlayerGrenadierC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:1.6,crit:0,weapon:1011,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1011,
     },{
       name:'PlayerStickySniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1012,
@@ -7947,6 +7949,9 @@ types={
     },{
       name:'PlayerHalfSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1017,
+    },{
+      name:'PlayerElectricKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1019,
     },
 
     //mark c
@@ -8465,6 +8470,9 @@ types={
       name:'TankRegen',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'AcceleratorTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'RevolutioningTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -8694,6 +8702,9 @@ types={
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'ShotgunVault',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -9560,6 +9571,9 @@ types={
       name:'NapalmFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:109,
     },{
+      name:'FastNapalmFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:109,
+    },{
       name:'BigNapalmFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:109,
     },{
@@ -9800,6 +9814,9 @@ types={
       name:'OverMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:514,
     },{
+      name:'FastOverMedic',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:514,
+    },{
       name:'CritFlamethrowerHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:39,
     },{
@@ -9956,6 +9973,9 @@ types={
       name:'BigSubmachine',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:391,
     },{
+      name:'BigSubmachineTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.45,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:391,
+    },{
       name:'BigFastSubmachine',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:391,
     },{
@@ -10082,6 +10102,9 @@ types={
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
     },{
+      name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -10196,10 +10219,13 @@ types={
       name:'EnderGrenadier',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
     },{
-      name:'ScorchShot',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      name:'ScorchShot',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:981,
     },{
-      name:'Interceptor',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      name:'Interceptor',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:338,
+    },{
+      name:'HeavyInterceptor',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:338,
     },{
       name:'SniperStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -16729,10 +16755,10 @@ types={
 		},{
 			name:'Sheller',
 			ammo:2,
-			damage:200,
-			cooldown:60,
-			stop:150,
-			reload:25,
+			damage:315,
+			cooldown:30,
+			stop:90,
+			reload:30,
 			speed:1.05,
       uses:10,
 		},{
@@ -16956,7 +16982,7 @@ types={
 			ammo:1,
 			damage:2000,
 			cooldown:90,
-			stop:240,
+			stop:180,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -18404,9 +18430,9 @@ types={
 			name:'Anthrax',
 			ammo:1,
 			damage:60,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:1.05,
       uses:12,
 		},{
@@ -18675,7 +18701,7 @@ types={
 			ammo:1,
 			damage:2000,
 			cooldown:90,
-			stop:240,
+			stop:180,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -18934,10 +18960,10 @@ types={
 		},{
 			name:'Recoil Sniper W',
 			ammo:1,
-			damage:500,
-			cooldown:225,
-			stop:225,
-			reload:225,
+			damage:320,
+			cooldown:180,
+			stop:180,
+			reload:180,
 			speed:0.85,
       uses:5,
 		},{
@@ -18979,7 +19005,7 @@ types={
 		},{
 			name:'Molotov',
 			ammo:1,
-			damage:60,
+			damage:160,
 			cooldown:75,
 			stop:75,
 			reload:75,
@@ -18997,10 +19023,10 @@ types={
 		},{
 			name:'Roller Launcher',
 			ammo:2,
-			damage:120,
+			damage:225,
 			cooldown:30,
-			stop:120,
-			reload:20,
+			stop:90,
+			reload:30,
 			speed:1.05,
       uses:16,
 		},{
@@ -19105,7 +19131,7 @@ types={
 		},{
 			name:'Scoped Submachine',
 			ammo:12,
-			damage:48,
+			damage:62,
 			cooldown:6,
 			stop:40,
 			reload:3,
@@ -19125,7 +19151,7 @@ types={
 			ammo:1,
 			damage:2000,
 			cooldown:90,
-			stop:240,
+			stop:180,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -19134,7 +19160,7 @@ types={
 			ammo:1,
 			damage:2000,
 			cooldown:90,
-			stop:210,
+			stop:180,
 			reload:120,
 			speed:1.35,
       uses:10,
@@ -19312,10 +19338,10 @@ types={
 		},{
 			name:'Grenadier C',
 			ammo:2,
-			damage:120,
+			damage:225,
 			cooldown:30,
-			stop:120,
-			reload:20,
+			stop:90,
+			reload:30,
 			speed:1.05,
       uses:16,
 		},{
@@ -19381,6 +19407,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:48,
+		},{
+			name:'Electric Chair',
+			ammo:1,
+			damage:1,
+			cooldown:90,
+			stop:180,
+			reload:120,
+			speed:1.35,
+      uses:10,
 		},
 
     /*{
