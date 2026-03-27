@@ -46,9 +46,10 @@ class wall{
 
                 this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67,
             ],
-            triangle:this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||
-                this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||
-                this.type==53||this.type==54
+            triangle:this.type==17||this.type==18||this.type==19||this.type==21||this.type==44||this.type==45||this.type==46||this.type==47||this.type==51||this.type==52||
+                this.type==53||this.type==54,
+            nonTriangle:this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&
+                this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60
         }
     }
     set(){
@@ -10076,7 +10077,7 @@ class wall{
                     graphics.overlay[0].text(texts,25+place[0]*40,15+place[1]*25)
                     graphics.overlay[0].fill(...playerColor(this.owner))
                     graphics.overlay[0].rect(25+place[0]*40,25+place[1]*25,30,3,1)
-                    if(this.type==31&&this.pos==2){
+                    if(this.type==31&&this.pos==2&&game.pvp){
                         for(let a=0,la=this.timers.length;a<la;a++){
                             graphics.overlay[0].fill(255)
                             graphics.overlay[0].textSize(10)
@@ -12615,7 +12616,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.velocity.y<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y<c.previous.position.y){
+                                        }else if(c.velocity.y<0||c.offBouncer&&c.position.y<c.previous.position.y){
                                             c.position.y=this.position.y+this.height/2+c.height/2
                                             c.velocity.y*=-1
                                         }
@@ -12632,7 +12633,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.velocity.y>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.y>c.previous.position.y){
+                                        }else if(c.velocity.y>0||c.offBouncer&&c.position.y>c.previous.position.y){
                                             c.position.y=this.position.y-this.height/2-c.height/2
                                             c.velocity.y*=-1
                                         }
@@ -12649,7 +12650,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.velocity.x<0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x<c.previous.position.x){
+                                        }else if(c.velocity.x<0||c.offBouncer&&c.position.x<c.previous.position.x){
                                             c.position.x=this.position.x+this.width/2+c.width/2
                                             c.velocity.x*=-1
                                         }
@@ -12666,7 +12667,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.velocity.x>0||(c.type==135||c.type==136||c.type==169||c.type==170)&&c.position.x>c.previous.position.x){
+                                        }else if(c.velocity.x>0||c.offBouncer&&c.position.x>c.previous.position.x){
                                             c.position.x=this.position.x-this.width/2-c.width/2
                                             c.velocity.x*=-1
                                         }
@@ -12897,7 +12898,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
-                                }else if((c.type==30||c.type==60||c.type==65||c.type==73||c.type==83||c.type==98||c.type==104||c.type==110||c.type==235||c.type==264||c.type==293||c.type==324||c.type==326||c.type==359)&&c.bounceTimer==0){
+                                }else if(c.rules.baseGrenade&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     if(c.type==235){
@@ -12970,7 +12971,7 @@ class wall{
                         let proxyC={position:c.position,width:c.width*min(c.timer/10+0.2,1),height:c.height*min(c.timer/10+0.2,1)}
                         if(
                             d>=0&&!this.redundant[d]&&c.timer>8||
-                            inBoxBox(this,proxyC)&&this.type!=17&&this.type!=18&&this.type!=20&&this.type!=21&&this.type!=44&&this.type!=45&&this.type!=46&&this.type!=47&&this.type!=51&&this.type!=52&&this.type!=53&&this.type!=54&&this.type!=59&&this.type!=60||
+                            inBoxBox(this,proxyC)&&this.rules.nonTriangle||
                             this.rules.triangle&&inTriangleBoxBasic(this.triangle,proxyC)
                         ){
                             if(c.rules.stopper){
@@ -13679,9 +13680,11 @@ class wall{
                                     switch(d){
                                         case 0:
                                             if(
-                                                !(this.type==38&&this.height<this.base.height&&this.height>this.base.height-game.tileset[1]*1.5)&&
-                                                !(this.type==38&&this.base.height==10&&game.level==100&&this.height<game.tileset[1]*3&&this.height>game.tileset[1]*1.5)&&
-                                                !(this.type==38&&game.level==101&&this.base.height==game.tileset[1]*2&&this.height<game.tileset[1]*2)
+                                                !(this.type==38&&(
+                                                    this.height<this.base.height&&this.height>this.base.height-game.tileset[1]*1.5||
+                                                    this.base.height==10&&game.level==100&&this.height<game.tileset[1]*3&&this.height>game.tileset[1]*1.5||
+                                                    game.level==101&&this.base.height==game.tileset[1]*2&&this.height<game.tileset[1]*2
+                                                ))
                                             ){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=max(c.velocity.y,0)
@@ -14978,7 +14981,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42&&game.level!=52&&game.level!=53&&game.level!=56&&game.level!=75){
+                                                if(!game.pvp&&rules.paraStuck){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=60
                                                 }
@@ -15002,7 +15005,7 @@ class wall{
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
-                                                if(!game.pvp&&game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42&&game.level!=52&&game.level!=53&&game.level!=56&&game.level!=75){
+                                                if(!game.pvp&&rules.paraStuck){
                                                     c.weapon.cooldown+=120
                                                     c.stuckTime=60
                                                 }

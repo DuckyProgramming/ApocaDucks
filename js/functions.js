@@ -149,7 +149,11 @@ function setupRules(){
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
-                a!=240&&a!=311&&a!=312&&a!=367
+                a!=240&&a!=311&&a!=312&&a!=367,
+            offBouncer:a==135||a==136||a==169||a==170,
+            baseGrenade:a==30||a==60||a==65||a==73||a==83||
+                a==98||a==104||a==110||a==235||a==264||
+                a==293||a==324||a==326||a==359
 		})
     }
 }
@@ -191,6 +195,11 @@ function updateRules(){
         game.level==96||game.level==97||game.level==98||game.level==99||game.level==100||game.level==101||game.level==103||game.level==104||game.level==105||game.level==106||
         game.level==108||game.level==109||game.level==110||game.level==111||game.level==112||game.level==113||game.level==114||game.level==117
     rules.picker=game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116
+    rules.bust=game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=28&&game.level!=35&&game.level!=54&&game.level!=69&&game.level!=101&&game.level!=108&&
+        game.level!=109
+    rules.paraStuck=game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42&&game.level!=52&&game.level!=53&&game.level!=56&&game.level!=75
+    rules.botResupply=game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&
+        game.level!=57&&game.level!=65&&game.level!=76&&game.level!=77&&game.level!=80&&game.level!=85&&game.level!=101
     rules.key={
         info:game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||
             game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102?
@@ -217,7 +226,28 @@ function updateRules(){
             ?2:
             game.level==32||game.level==33||game.level==58||game.level==63||game.level==70
             ?2.5:
-            1
+            1,
+        spawnTimeMult:(game.level==7?3:1)*
+            (game.level==17?2:1)*
+            (game.level==27?0.9:1)*
+            (game.level==32?0.875:1)*
+            (game.level==33||game.level==87?1.25:1)*
+            (game.level==34?0.925:1)*
+            (game.level==30&&game.spawnIndex<20?0.4:1)*
+            (game.level==40?0.875:1)*
+            (game.level==47||game.level==70||game.level==84?1.15:1)*
+            (game.level==49?1.3:1)*
+            (game.level==55?1.125:1)*
+            (game.level==58||game.level==63||game.level==66?1.175:1)*
+            (game.level==59||game.level==83||game.level==85?1.2:1)*
+            (game.level==68?1.35:1)*
+            (game.level==79||game.level==82?2:1)*
+            (game.level==96?1.4:1)*
+            (game.level==97?1.5:1),
+        spawnPVPMult:
+            game.level==23||game.level==54||game.level==101||game.level==103?2.5:
+            game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69||game.level==109?5:
+            game.level==4?6:20
     }
 }
 function spy(name){
@@ -276,6 +306,16 @@ function weaponize(cluster){
     }else{
         return listing[cluster][floor(random(listing[cluster].length))]
     }
+}
+function getKey(spawn){
+    return game.level==89||game.level==94?'qwe'[game.spawnPoint]:
+        game.level==70||game.level==84?'ABC'[floor(random(0,3))]:
+        game.level==55?'AB'[floor(random(0,1.25))]:
+        game.level==34||game.level==47||game.level==54||game.level==58||game.level==59||game.level==63||game.level==66||game.level==68||game.level==69||game.level==87||
+        game.level==96||game.level==97||game.level==107||game.level==108||game.level==109?'A':
+        game.level==79||game.level==82||game.level==83||game.level==85||game.level==86||game.level==101||game.level==103||game.level==106?'AB'[spawn%2]:
+        game.level==100?'AB'[spawn==11?1:0]:
+        '123456ABCDEF'[spawn]
 }
 function stanh(value){
     return (2**value-1)/(2**value+1)*0.5+0.5
@@ -4633,7 +4673,9 @@ function generateLevel(info,layer){
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                         break
                         default:
-                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
+                            if(!duel.trigger){
+                                entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,27))
+                            }
                         break
                     }
                 break
@@ -6581,6 +6623,7 @@ function generateLevel(info,layer){
         game.det.push(0)
     }
     if(!(game.level==81&&!game.firstGen)){
+        game.traitorKey=floor(random(0,game.gaming))
         for(let c=0,lc=game.players;c<lc;c++){
             let clump=listing[game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp||game.level==37||game.level==38?0:floor(random(0,1.5))]
             let type=game.classWeapon&&(rules.teamMode)||rules.dm?0:game.selector?findName('PlayerSelector',types.player):game.randomizer?floor(random(listing[1][listing[1].length-1]+1,types.player.length)):game.classicWeapon||c>=game.gaming?(clump[floor(random(0,clump.length))]):(game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116?0:game.weapon[game.mainline?lc:c][game.weaponTick[c]%game.weapon[game.mainline?lc:c].length])
@@ -6595,7 +6638,7 @@ function generateLevel(info,layer){
                 }
             }
             let postC=(game.level==27?c%5:c)
-            let encode=rules.teamMode?'q':game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63||game.level==101||game.level==105)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC%6]
+            let encode=rules.teamMode?'q':game.traitor&&game.traitorKey==c?getKey(floor(random(6,12))):game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63||game.level==101||game.level==105)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC%6]
             for(let a=0,la=level.length;a<la;a++){
                 for(let b=0,lb=level[a].length;b<lb;b++){
                     if(game.attacker&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=57){
@@ -6610,7 +6653,16 @@ function generateLevel(info,layer){
                         let playerLength=entities.players.length
                         if(
                             (game.level==89||game.level==94)&&!game.pvp&&level[a][b]==encode||
-                            game.level!=89&&game.level!=94&&int(level[a][b])==((game.level==48||game.level==57||game.level==80||game.level==115||game.level==116)&&c>=game.gaming&&lc>5?5:game.level==34||game.level==96||game.level==97?0:game.level==32?1:game.level==27?c%5:c)+1&&(!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57||game.level==115||game.level==116)
+                            game.traitor&&game.traitorKey==c&&level[a][b]==encode||
+                            game.level!=89&&game.level!=94&&!(game.traitor&&game.traitorKey==c)&&
+                            int(level[a][b])==(
+                                (game.level==48||game.level==57||game.level==80||game.level==115||game.level==116)&&c>=game.gaming&&lc>5?5:
+                                game.level==34||game.level==96||game.level==97?0:
+                                game.level==32?1:
+                                game.level==27?c%5:
+                                c
+                            )+1&&
+                            (!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57||game.level==115||game.level==116)
                         ){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
                             if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
@@ -8663,6 +8715,7 @@ function newWave(){
         game.spawnIndex=0
         game.initial=true
         let supporting=false
+        let pEff=game.players-(game.traitor?2:0)
         for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){
             let spied=spy(types.mission[game.mission].wave[display.cycle][a][0])||
                 (game.level==79||game.level==82)&&floor(random(0,10))==0
@@ -8676,7 +8729,8 @@ function newWave(){
                     game.stack.push([spied?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0]])
                 }
             }else{
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==37?game.players*0.1+0.25:game.level==29?game.players*0.1+0.4:game.level==55?game.players*0.175+0.325:game.players*0.25+0.25)*(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.5:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19||game.level==31||game.level==42&&!game.pvp?2.5:1)*(game.level==29||game.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.level==32||game.level==33?1.2:1)*(game.level==42?0.5:1)*(game.level==108?1.25:1)*(game.peakWeapon?2:1)*(game.classWeapon?1.2:1)*game.diff);b<lb;b++){
+                let mult=(game.classicRespawn?1.25:1)*(game.level==7?0.6:1)*(game.level==8?(game.attacker?0.5:1.5):1)*(game.level==16?0.1:1)*(game.level==17?(game.attacker?0.4:1):1)*(game.level==19||game.level==31||game.level==42&&!game.pvp?2.5:1)*(game.level==29||game.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(game.level==32||game.level==33?1.2:1)*(game.level==42?0.5:1)*(game.level==108?1.25:1)*(game.peakWeapon?2:1)*(game.classWeapon?1.2:1)*game.diff
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==37?pEff*0.1+0.25:game.level==29?pEff*0.1+0.4:game.level==55?pEff*0.175+0.325:pEff*0.25+0.25)*mult);b<lb;b++){
                     if(supporting){
                         game.stack.splice(floor(random(0,game.stack.length)),0,[spied?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0],0])
                     }else{
@@ -9344,14 +9398,7 @@ function checkEnd(level,layer,key){
                             temp.splice(index,1)
                         }
                     }else{
-                        let key=game.level==89||game.level==94?'qwe'[game.spawnPoint]:
-                            game.level==70||game.level==84?'ABC'[floor(random(0,3))]:
-                            game.level==55?'AB'[floor(random(0,1.25))]:
-                            game.level==34||game.level==47||game.level==54||game.level==58||game.level==59||game.level==63||game.level==66||game.level==68||game.level==69||game.level==87||
-                            game.level==96||game.level==97||game.level==107||game.level==108||game.level==109?'A':
-                            game.level==79||game.level==82||game.level==83||game.level==85||game.level==86||game.level==101||game.level==103||game.level==106?'AB'[game.stack[0][0]%2]:
-                            game.level==100?'AB'[game.stack[0][0]==11?1:0]:
-                            '123456ABCDEF'[game.stack[0][0]]
+                        let key=getKey(game.stack[0][0])
                         for(let a=0,la=level.length;a<la;a++){
                             for(let b=0,lb=level[a].length;b<lb;b++){
                                 if(level[a][b]==key){
@@ -9406,45 +9453,25 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
+                let pEff=game.players-(game.traitor?2:0)
                 game.sendTime=time!=undefined?time:game.attacker||game.level==29&&game.initial||game.level==37?0:
                     types.mission[game.mission].sendTime*2.75/game.diff/
-                    max(1,(game.level==55?game.players*0.175+0.325:game.players*0.5+0.5))*
+                    max(1,(game.level==55?pEff*0.175+0.325:pEff*0.5+0.5))*
                     constrain(0.25+0.25*total,0.25,1)*
                     (game.classicRespawn?0.8:1)*
-                    (
-                        game.pvp?(game.level==23||game.level==54||game.level==101||game.level==103?2.5:
-                            game.level==19||game.level==26||game.level==30||game.level==31||game.level==33||game.level==49||game.level==63||game.level==69||game.level==109?5:
-                            game.level==4?6:20):
-                            1
-                    )*
+                    (game.pvp?rules.key.spawnPVPMult:1)*
                     (game.peakWeapon?0.5:1)*
                     (game.classWeapon?0.875:1)*
                     (game.mission==findName('Survival Lite',types.mission)||game.mission==findName('Survival',types.mission)?1/(6+display.cycle*2):1)*
                     (game.mission==findName('Survival Lite Hard',types.mission)||game.mission==findName('Survival Hard',types.mission)?1/(8+display.cycle*2):1)*
-                    (game.level==7?3:1)*
                     (game.level==15||game.level==18?(game.spawnIndex%6==0?5:0.5):1)*
                     (game.level==16&&game.spawnIndex>10?4:1)*
-                    (game.level==17?2:1)*
                     ((game.level==20||game.level==21)&&game.spawnIndex>5?2:1)*
                     (game.level==19||game.level==42&&!game.pvp?0.625:1)*
                     (game.level==22?constrain(0.75+0.025*total,1,1.5):1)*
                     (game.level==25?constrain(0.4+0.02*total,0.8,1):1)*
-                    (game.level==27?0.9:1)*
-                    (game.level==32?0.875:1)*
-                    (game.level==33||game.level==87?1.25:1)*
-                    (game.level==34?0.925:1)*
-                    (game.level==30&&game.spawnIndex<20?0.4:1)*
-                    (game.level==40?0.875:1)*
-                    (game.level==47||game.level==70||game.level==84?1.15:1)*
-                    (game.level==49?1.3:1)*
-                    (game.level==55?1.125:1)*
-                    (game.level==58||game.level==63||game.level==66?1.175:1)*
-                    (game.level==59||game.level==83||game.level==85?1.2:1)*
-                    (game.level==68?1.35:1)*
-                    (game.level==79||game.level==82?2:1)*
-                    (game.level==96?1.4:1)*
-                    (game.level==97?1.5:1)*
-                    (game.level==100?constrain(0.7+0.025*total,1,1.5):1)
+                    (game.level==100?constrain(0.7+0.025*total,1,1.5):1)*
+                    rules.key.spawnTimeMult
                 if(game.stack.length>0&&game.stack[0][3]==1&&entities.players.length>0){
                     entities.players[entities.players.length-1].record.support=true
                 }

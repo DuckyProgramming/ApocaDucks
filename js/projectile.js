@@ -6972,95 +6972,69 @@ class projectile{
 		}
 		layer.pop()
 	}
+	onTeam(target){
+		return (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)==
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey?0:game.pvp?target.id:1)||
+			this.id==target.id&&this.index!=target.index
+	}
+	distExplosion(target){
+		return min(dist(
+			this.position.x,this.position.y,
+			constrain(this.position.x,target.position.x-target.width/2,target.position.x+target.width/2),
+			constrain(this.position.y,target.position.y-target.height/2,target.position.y+target.height/2)
+		),dist(
+			this.position.x,this.position.y,
+			constrain(this.position.x,target.previous.position.x*3-target.position.x*2-target.width/2,target.previous.position.x*3-target.position.x*2+target.width/2),
+			constrain(this.position.y,target.previous.position.y*3-target.position.y*2-target.height/2,target.previous.position.y*3-target.position.y*2+target.height/2)
+		))
+	}
+	validExplodeTarget(target){
+		return (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey?0:game.pvp?target.id:1)||
+			game.pvp&&this.id==target.id&&!target.fort||
+			target.index==this.index
+	}
 	explode(){
 		this.exploded=true
-		let friendly=true
 		let radius
 		let falloff
 		switch(this.type){
 			case 2: case 26: case 31: case 32: case 41: case 48: case 80: case 266: case 307:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 3:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/240))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 16:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=30*(1.5-c/120)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=30*(1.5-c/120)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=30*(1.5-c/120)*lsin(dir)
+						entities.players[b].velocity.y-=30*(1.5-c/120)*lcos(dir)
 					}
 				}
 			break
 			case 21: case 53:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
 								entities.players[d].life=min(entities.players[d].life+this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1),entities.players[d].base.life)
@@ -7071,87 +7045,40 @@ class projectile{
 			break
 			case 22: case 58:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/240)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 27:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)&&!(this.id==-1&&entities.players[b].id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&(this.validExplodeTarget(entities.players[b]))&&!(this.id==-1&&entities.players[b].id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/240)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=20*(1.5-c/240)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=20*(1.5-c/240)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=20*(1.5-c/240)*lsin(dir)
+						entities.players[b].velocity.y-=20*(1.5-c/240)*lcos(dir)
 					}
 				}
 			break
 			case 30: case 166: case 211: case 228: case 290: case 311: case 312: case 344: case 425:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<100&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 45: case 54:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -7160,16 +7087,8 @@ class projectile{
 			break
 			case 47: case 78:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -7182,39 +7101,20 @@ class projectile{
 			break
 			case 55:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<180&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/180)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=25*(1.5-c/180)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=25*(1.5-c/180)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=25*(1.5-c/180)*lsin(dir)
+						entities.players[b].velocity.y-=25*(1.5-c/180)*lcos(dir)
 					}
 				}
 			break
 			case 56:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -7227,22 +7127,10 @@ class projectile{
 			break
 			case 60: case 324:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*(this.id==-1&&entities.players[b].id>0&&game.level!=19?(this.timer<5?0.1:0.5):1)*(entities.players[b].fort?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				for(let b=0,lb=5;b<lb;b++){
@@ -7251,16 +7139,8 @@ class projectile{
 			break
 			case 64:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -7275,45 +7155,22 @@ class projectile{
 			break
 			case 65:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<200&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)&&!(this.id==-1&&entities.players[b].id>0)&&!entities.players[b].construct){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<200&&(this.validExplodeTarget(entities.players[b]))&&!(this.id==-1&&entities.players[b].id>0)&&!entities.players[b].construct){
 						entities.players[b].takeDamage(this.damage*(1-c/200)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=20*(1.5-c/200)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=20*(1.5-c/200)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=20*(1.5-c/200)*lsin(dir)
+						entities.players[b].velocity.y-=20*(1.5-c/200)*lcos(dir)
 					}
 				}
 			break
 			case 66:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				let turn=floor(random(0,72))
@@ -7328,16 +7185,8 @@ class projectile{
 			break
 			case 73:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<100&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(entities.players[b].index==this.index?0.5:1)*(this.id==-1&&entities.players[b].id>0?(this.timer<5?0.1:0.5):1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
@@ -7353,64 +7202,28 @@ class projectile{
 			break
 			case 83:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<200&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<200&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/200)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 86: case 229: case 262:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<90&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<90&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 88: case 284:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<200&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<200&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/200)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -7423,64 +7236,28 @@ class projectile{
 			break
 			case 98:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<100&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 101:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<180&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/180)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 104:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<100&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/100)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -7490,43 +7267,19 @@ class projectile{
 			break
 			case 110:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<75&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<75&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/75)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 113: case 235: case 264:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<150&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -7544,43 +7297,19 @@ class projectile{
 			break
 			case 153:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].playerData.name!='ReusableBuster'&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].weaponRules.explodable&&entities.players[b].playerData.name!='ReusableBuster'&&entities.players[b].life>0&&c<180&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/180))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 156:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<180&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<180&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/180))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -7594,22 +7323,10 @@ class projectile{
 			break
 			case 187:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
 								entities.players[d].critBuff=max(300,entities.players[d].critBuff)
@@ -7626,45 +7343,21 @@ class projectile{
 			break
 			case 206: case 250:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<140&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<140&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/140))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 213:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
-					if((entities.players[b].id!=this.id&&game.pvp||entities.players[b].id==0&&this.id!=0||entities.players[b].id!=0&&this.id==0)&&entities.players[b].explodable()&&entities.players[b].life>0&&dist(entities.players[b].position.x,entities.players[b].position.y,this.position.x,this.position.y)<600){
+					if((entities.players[b].id!=this.id&&game.pvp||entities.players[b].id==0&&this.id!=0||entities.players[b].id!=0&&this.id==0)&&entities.players[b].explodable()&&dist(entities.players[b].position.x,entities.players[b].position.y,this.position.x,this.position.y)<600){
 				        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3*constrain(1.2-this.timer/this.base.time*4,0.2,1),300,this.crit,this.index))
                     }
 				}
@@ -7700,22 +7393,10 @@ class projectile{
 			break
 			case 279:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				let turn279=floor(random(0,72))
@@ -7732,22 +7413,10 @@ class projectile{
 			break
 			case 280:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<300&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<300&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/300))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -7759,22 +7428,10 @@ class projectile{
 			break
 			case 293:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<150&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,250,0,this.id,this.base.damage,300,this.crit,this.index))
@@ -7797,46 +7454,23 @@ class projectile{
 			break
 			case 308:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)&&!(this.id==-1&&entities.players[b].id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&(this.validExplodeTarget(entities.players[b]))&&!(this.id==-1&&entities.players[b].id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/240)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=20*(1.5-c/240)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=20*(1.5-c/240)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=20*(1.5-c/240)*lsin(dir)
+						entities.players[b].velocity.y-=20*(1.5-c/240)*lcos(dir)
 						entities.players[b].stunTime=max(entities.players[b].stunTime,60)
 					}
 				}
 			break
 			case 313:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				let turn313=floor(random(0,72))
@@ -7846,46 +7480,22 @@ class projectile{
 			break
 			case 329:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/240))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 336:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<40&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<40&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/40)*0.8*(entities.players[b].index==this.index?0.5:1))
 						if(!entities.players[b].immune()){
 							entities.players[b].chillTime=max(entities.players[b].chillTime,240*(1-c/40)+60)
 						}
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -7894,16 +7504,8 @@ class projectile{
 				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<radius&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
 						/*if(!entities.players[b].fort){
 							print(
@@ -7913,16 +7515,17 @@ class projectile{
 						}*/
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index==this.index&&c<100){
-							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}else if(entities.players[b].index!=this.index&&c<100){
-							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 							entities.players[b].stuckTime=max(ceil(15*(1-c/105)),entities.players[b].stuckTime)
 						}
 						if(game.invis){
@@ -7933,22 +7536,10 @@ class projectile{
 			break
 			case 351:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/105)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(game.classWeapon&&this.id==entities.players[b].id&&this.id>0?0.25:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 						entities.players[b].velocity.x+=15*(1.5-c/105)*lsin(atan2(entities.players[b].position.x-this.previous.position.x,this.previous.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
 						entities.players[b].velocity.y-=15*(1.5-c/105)*lcos(atan2(entities.players[b].position.x-this.previous.position.x,this.previous.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
 						entities.players[b].lastingForce[0]+=(1.5-c/105)*lsin(atan2(entities.players[b].position.x-this.previous.position.x,this.previous.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)
@@ -7958,24 +7549,12 @@ class projectile{
 			break
 			case 352:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<105&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<105&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].gasTime=max(entities.players[b].gasTime,ceil(5*(1-c/105)))
 						entities.players[b].gasser=this.index
 						entities.players[b].takeDamage(this.damage*(1-c/105))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -7996,117 +7575,59 @@ class projectile{
 			break
 			case 353:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||this.index==entities.players[b].index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||this.index==entities.players[b].index)){
 						entities.players[b].takeDamage(this.damage*min(1,4/3*(1-c/240))*(this.index==entities.players[b].index?0.375:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 356:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<150&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=12*(1.5-c/150)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
-						entities.players[b].velocity.y-=12*(1.5-c/150)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
-						entities.players[b].lastingForce[0]+=2*(1.5-c/150)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)
-						entities.players[b].lastingForce[1]-=2*(1.5-c/150)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=12*(1.5-c/150)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)
+						entities.players[b].velocity.y-=12*(1.5-c/150)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)
+						entities.players[b].lastingForce[0]+=2*(1.5-c/150)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)
+						entities.players[b].lastingForce[1]-=2*(1.5-c/150)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)
 					}
 				}
 			break
 			case 359:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<150&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/150)*0.8*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?5:1)*(entities.players[b].fort?2.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=10*(1.5-c/150)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
-						entities.players[b].velocity.y-=10*(1.5-c/150)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)
-						entities.players[b].lastingForce[0]+=(1.5-c/150)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)
-						entities.players[b].lastingForce[1]-=(1.5-c/150)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=10*(1.5-c/150)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)
+						entities.players[b].velocity.y-=10*(1.5-c/150)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)
+						entities.players[b].lastingForce[0]+=(1.5-c/150)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)
+						entities.players[b].lastingForce[1]-=(1.5-c/150)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)
 					}
 				}
 			break
 			case 360:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<225&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<225&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/225)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 362:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 						entities.players[b].weapon.cooldown+=90*(1-c/120*0.5)
 						entities.players[b].subWeaponA.cooldown+=90*(1-c/120*0.5)
 						entities.players[b].subWeaponB.cooldown+=90*(1-c/120*0.5)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -8115,32 +7636,25 @@ class projectile{
 				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-120)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<(entities.players[b].index==this.index?130:radius)&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index||entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
 							entities.players[b].collect.time=450
 							entities.players[b].die.killer=this.index
 							if(c<100){
-								entities.players[b].velocity.x+=2.25*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-								entities.players[b].velocity.y-=1.2*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-								entities.players[b].lastingForce[0]+=0.75*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-								entities.players[b].lastingForce[1]-=0.4*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+								entities.players[b].velocity.x+=2.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+								entities.players[b].velocity.y-=1.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+								entities.players[b].lastingForce[0]+=0.75*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+								entities.players[b].lastingForce[1]-=0.4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 								entities.players[b].stuckTime=max(ceil(15*(1-c/105)),entities.players[b].stuckTime)
 							}
 						}else{
-							entities.players[b].velocity.x+=9*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4.8*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=13.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=7.2*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=9*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4.8*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=13.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=7.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
@@ -8150,22 +7664,10 @@ class projectile{
 			break
 			case 370:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<102&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<102&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/102)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -8174,29 +7676,22 @@ class projectile{
 				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<radius&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index==this.index&&c<100){
-							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}else if(entities.players[b].index!=this.index&&c<100){
-							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.8*min(1,1.5-1.5*c/105)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.8*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 							entities.players[b].stuckTime=max(ceil(15*(1-c/105)),entities.players[b].stuckTime)
 						}
 						if(game.invis){
@@ -8218,61 +7713,29 @@ class projectile{
 			break
 			case 376:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<75&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<75&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/75)*(c.fort||c.construct?2.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 377:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<150&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<150&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/150))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 378:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<90){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<90){
 						if((this.id==0?1:0)==(entities.players[b].id==0?1:0)&&!game.pvp&&this.id!=-1&&entities.players[b].id!=-1||this.id==entities.players[b].id&&this.index!=entities.players[b].index){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/90)*(this.index==entities.players[b].index?0.5:1)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
-						}else if(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+						}else if((this.validExplodeTarget(entities.players[b]))){
 							entities.players[b].takeDamage(this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 							entities.players[b].die.killer=this.index
 							entities.players[b].collect.time=450
@@ -8285,88 +7748,41 @@ class projectile{
 			break
 			case 379:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
-						entities.players[b].velocity.x+=30*(1.5-c/120)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
-						entities.players[b].velocity.y-=30*(1.5-c/120)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))
+						entities.players[b].generalizedTake(this.index)
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+						entities.players[b].velocity.x+=30*(1.5-c/120)*lsin(dir)
+						entities.players[b].velocity.y-=30*(1.5-c/120)*lcos(dir)
 					}
 				}
 			break
 			case 384:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*((1-c/120)**1.5)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 385:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-(this.hitTime==0?this.timer:this.hitTime)/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 				this.hitTime=this.timer
 			break
 			case 389:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<165&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<165&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/165)*3)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -8375,29 +7791,22 @@ class projectile{
 				radius=90+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<radius&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
+						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index==this.index&&c<90){
-							entities.players[b].velocity.x+=4.5*min(0.6,1-c/90)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(0.6,1-c/90)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=6.75*min(0.6,1-c/90)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=3.6*min(0.6,1-c/90)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=4.5*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=6.75*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=3.6*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}else if(entities.players[b].index!=this.index&&c<90){
-							entities.players[b].velocity.x+=2.7*min(0.6,1-c/90)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=1.44*min(0.6,1-c/90)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=0.9*min(0.6,1-c/90)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.48*min(0.6,1-c/90)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y))*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=2.7*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=1.44*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=0.9*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.48*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 							entities.players[b].stuckTime=max(ceil(15*(1-c/90)),entities.players[b].stuckTime)
 						}
 						if(game.invis){
@@ -8408,22 +7817,10 @@ class projectile{
 			break
 			case 406:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<100&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<100&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/100)*5/9*(entities.players[b].index==this.index?1.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
@@ -8438,45 +7835,21 @@ class projectile{
 			break
 			case 413:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<87.5&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<87.5&&(this.validExplodeTarget(entities.players[b]))){
 						entities.players[b].takeDamage(this.damage*(1-c/87.5)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 					}
 				}
 			break
 			case 430:
 				let total430=0
 				for(let b=0,lb=entities.players.length;b<lb;b++){
-					let c=min(dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].position.x-entities.players[b].width/2,entities.players[b].position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].position.y-entities.players[b].height/2,entities.players[b].position.y+entities.players[b].height/2)
-					),dist(
-						this.position.x,this.position.y,
-						constrain(this.position.x,entities.players[b].previous.position.x-entities.players[b].width/2,entities.players[b].previous.position.x+entities.players[b].width/2),
-						constrain(this.position.y,entities.players[b].previous.position.y-entities.players[b].height/2,entities.players[b].previous.position.y+entities.players[b].height/2)
-					))
-					if(entities.players[b].explodable()&&entities.players[b].life>0&&c<120&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||friendly&&entities.players[b].index==this.index||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
+					let c=this.distExplosion(entities.players[b])
+					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						let dmg=this.damage*(1-c/105)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(game.classWeapon&&this.id==entities.players[b].id&&this.id>0?0.25:1)
 						entities.players[b].takeDamage(dmg)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
-						if(game.invis){
-							entities.players[b].visible=15
-						}
+						entities.players[b].generalizedTake(this.index)
 						if(entities.players[b].index!=this.index){
 							total430+=dmg*(entities.players[b].index==0?0.25:1)
 						}
@@ -10343,7 +9716,7 @@ class projectile{
 								entities.projectiles[b].index=this.index
 								if(entities.projectiles[b].crit==0){
 									entities.projectiles[b].crit=0.6
-									entities.projectiles[b].damage*=1.75
+									entities.projectiles[b].damage*=1.6
 								}
 							}else{
 								entities.projectiles[b].active=false
@@ -10812,12 +10185,14 @@ class projectile{
 							{x:entities.players[b].position.x,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
 						)||inBoxBox(this,entities.players[b])
 					)&&(
-						(
+						/*(
 							(this.id==0?1:0)!=(entities.players[b].id==0?1:0)||
 							entities.players[b].id==-1&&this.id!=-1||
 							this.id==-1&&entities.players[b].id!=-1||
 							game.pvp&&this.id!=entities.players[b].id
-						)||(
+						)*/
+						(this.id<=0?this.id:game.traitor&&this.index==game.traitorKey?0:game.pvp?this.id:1)!=
+            			(entities.players[b].id<=0?entities.players[b].id:game.traitor&&entities.players[b].index==game.traitorKey?0:game.pvp?entities.players[b].id:1)||(
 							this.rules.medTarget
 							||this.type==216&&entities.players[b].life<entities.players[b].base.life*2
 							||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id
@@ -10905,28 +10280,28 @@ class projectile{
 					let base=target.life
 					switch(this.type){
 						case 9: case 155: case 216:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+							if(this.onTeam(target)||this.index==target.index&&this.type==216){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
 								target.takeDamage(this.damage)
 							}
 						break
 						case 10:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*3*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
 								target.takeDamage(this.damage)
 							}
 						break
 						case 11:
-							if((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp){
+							if(this.onTeam(target)){
 								target.life=target.base.life
 							}else{
 								target.takeDamage(this.damage)
 							}
 						break
 						case 38:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 								target.critBuff=max(480,target.critBuff)
 							}else{
@@ -10934,7 +10309,7 @@ class projectile{
 							}
 						break
 						case 63:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 								target.defendBuff=max(480,target.defendBuff)
 							}else{
@@ -10942,7 +10317,7 @@ class projectile{
 							}
 						break
 						case 82:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 								target.stunTime=0
 								target.stuckTime=0
@@ -10955,7 +10330,7 @@ class projectile{
 							}
 						break
 						case 194: case 398:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id)){
+							if(this.onTeam(target)||this.index==target.index){
 								if(!target.fort){
 									target.life=min(target.life+this.damage*(min(2,target.base.life/125))*(this.index==target.index?0.1:1),max(target.life,target.base.life*2))
 								}
@@ -10964,7 +10339,7 @@ class projectile{
 							}
 						break
 						case 418:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*3))
 							}else{
 								target.takeDamage(this.damage)
@@ -10977,7 +10352,7 @@ class projectile{
 							}
 						break
 						case 72:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(target.base.life/100),max(target.life,target.base.life*2))
 								target.jump.double=1
 							}else{
@@ -10988,7 +10363,7 @@ class projectile{
 							target.takeDamage(this.damage*(1+8*this.timer/this.base.time))
 						break
 						case 273:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*5))
 							}else{
 								target.takeDamage(this.damage)
@@ -11003,7 +10378,7 @@ class projectile{
 							}
 						break
 						case 345:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
 								target.critBuff=max(target.critBuff,120)
 							}else{
@@ -11011,7 +10386,7 @@ class projectile{
 							}
 						break
 						case 350:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 								target.speedBuff=max(target.defendBuff,480)
 							}else{
@@ -11019,14 +10394,14 @@ class projectile{
 							}
 						break
 						case 357:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*1.4,max(target.life,target.base.life*1.5))
 							}else{
 								target.takeDamage(this.damage)
 							}
 						break
 						case 364:
-							if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
 								target.weapon.cooldown=max(target.weapon.cooldown-60,0)
 								target.subWeaponA.cooldown=max(target.subWeaponA.cooldown-60,0)

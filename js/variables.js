@@ -1,5 +1,5 @@
 game={
-  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,diff:1,lifeBuff:1,ammoMult:2,tileset:[0,0],edge:[0,0],tilecolor:[],
+  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,lifeBuff:1,ammoMult:2,tileset:[0,0],edge:[0,0],tilecolor:[],
   index:0,projectileIndex:0,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
@@ -7,10 +7,11 @@ game={
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,noPlayer:false,
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],loadout:[],
-  sectors:[],respawners:[0,0],det:[],firstGen:true,
-  deprecate:false,smile:false,yellow:false,nostat:false,
-  deathlink:false,sentryCarry:false,ender:false,popison:false,chess:false,//options
+  sectors:[],respawners:[0,0],det:[],traitorKey:0,firstGen:true,
+  deprecate:false,smile:false,yellow:false,
+  sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,
+  diff:1,traitor:true,deathlink:false,noStat:false,
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],

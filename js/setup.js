@@ -13,8 +13,8 @@ function setup(){
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=1
-        game.gaming=1
+        game.players=3
+        game.gaming=3
         game.level=100
         menu.level=game.level
         updateRules()
