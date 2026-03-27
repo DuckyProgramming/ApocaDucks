@@ -9,6 +9,7 @@
 431 - baseball, 28
 432 - electric knife, 207
 433 - electric chair, 89
+434 - dispenser shot, 9 (weapon 799)
 
 
 

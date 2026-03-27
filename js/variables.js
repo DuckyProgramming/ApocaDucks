@@ -11,7 +11,7 @@ game={
   deprecate:false,smile:false,yellow:false,
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,
-  diff:1,traitor:true,deathlink:false,noStat:false,
+  diff:1,deathlink:false,noStat:false,traitor:false,
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
@@ -17566,10 +17566,10 @@ types={
 		},{
 			name:'Minibomb',
 			ammo:1,
-			damage:180,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			damage:200,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:1.05,
       uses:12,
 		},{
@@ -17627,7 +17627,7 @@ types={
 			speed:1,
       uses:30,
 		},{
-			name:'Engineer W',
+			name:'Engineer WC',
 			ammo:2,
 			damage:20,
 			cooldown:30,
@@ -17636,7 +17636,7 @@ types={
 			speed:1.025,
       uses:12,
 		},{
-			name:'Soldier W',
+			name:'Soldier WC',
 			ammo:2,
 			damage:20,
 			cooldown:30,
@@ -17645,7 +17645,7 @@ types={
 			speed:0.95,
       uses:16,
 		},{
-			name:'Heavy Weapons W',
+			name:'Heavy Weapons WC',
 			ammo:30,
 			damage:20,
 			cooldown:4,
@@ -17681,7 +17681,7 @@ types={
 			speed:1.2,
       uses:48,
 		},{
-			name:'Pyro W',
+			name:'Pyro WC',
 			ammo:50,
 			damage:25,
 			cooldown:3,
@@ -17873,9 +17873,9 @@ types={
 			name:'Stargrazer',
 			ammo:1,
 			damage:100,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:1.05,
       uses:12,
 		},{
@@ -18016,7 +18016,7 @@ types={
 		},{
 			name:'Chroma',
 			ammo:3,
-			damage:70,
+			damage:60,
 			cooldown:20,
 			stop:150,
 			reload:40,
@@ -18154,7 +18154,7 @@ types={
 			damage:30,
 			cooldown:12,
 			stop:72,
-			reload:6,
+			reload:9,
 			speed:1.15,
       uses:30,
 		},{
@@ -18512,9 +18512,9 @@ types={
 			name:'Donker',
 			ammo:1,
 			damage:120,
-			cooldown:70,
-			stop:70,
-			reload:70,
+			cooldown:75,
+			stop:75,
+			reload:75,
 			speed:1.05,
       uses:12,
 		},{
@@ -19015,7 +19015,7 @@ types={
 		},{
 			name:'Degreaser',
 			ammo:10,
-			damage:36,
+			damage:40,
 			cooldown:3,
 			stop:45,
 			reload:2,
@@ -19087,7 +19087,7 @@ types={
 		},{
 			name:'Tickybomb Launcher',
 			ammo:4,
-			damage:144,
+			damage:180,
 			cooldown:36,
 			stop:66,
 			reload:40,

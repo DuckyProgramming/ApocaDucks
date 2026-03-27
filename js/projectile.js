@@ -31,7 +31,7 @@ class projectile{
 			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
 			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
-			case 407: case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429:
+			case 407: case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -6954,6 +6954,16 @@ class projectile{
 					}
 				}
 			break
+			case 434:
+				layer.fill(40,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(40,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(40,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -6974,7 +6984,7 @@ class projectile{
 	}
 	onTeam(target){
 		return (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)==
-            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey?0:game.pvp?target.id:1)||
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!target.fort?0:game.pvp?target.id:1)||
 			this.id==target.id&&this.index!=target.index
 	}
 	distExplosion(target){
@@ -6990,8 +7000,8 @@ class projectile{
 	}
 	validExplodeTarget(target){
 		return (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
-            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey?0:game.pvp?target.id:1)||
-			game.pvp&&this.id==target.id&&!target.fort||
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!target.fort?0:game.pvp?target.id:1)||
+			game.pvp&&this.id==target.id&&!target.fort&&!rules.teamMode||
 			target.index==this.index
 	}
 	explode(){
@@ -7953,7 +7963,7 @@ class projectile{
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
-				case 432:
+				case 432: case 434:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10164,7 +10174,7 @@ class projectile{
 			for(let b=0,lb=entities.players.length;b<lb;b++){
 				//if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
 				if(
-					(
+					inBoxBox(this,{position:entities.players[b].position,width:entities.players[b].width+50,height:entities.players[b].height+50})&&(
 						intersect(this.position,this.previous.position,
 							{x:entities.players[b].position.x-entities.players[b].width*0.5-this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
 							{x:entities.players[b].position.x+entities.players[b].width*0.5+this.width*0.5,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5}
@@ -10424,6 +10434,13 @@ class projectile{
 						break
 						case 388:
 							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
+						break
+						case 434:
+							if(this.onTeam(target)||this.index==target.index&&this.type==216){
+								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life))
+							}else{
+								target.takeDamage(this.damage)
+							}
 						break
 						case 111: case 134: case 182: case 373:
 							if(target.id>0){

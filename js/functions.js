@@ -143,11 +143,11 @@ function setupRules(){
             hitmed:a==9||a==10||a==11||a==38||a==63||
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
-                a==409||a==418,
+                a==409||a==418||a==434,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
-                a==398||a==409||a==418,
+                a==398||a==409||a==418||a==434,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -200,6 +200,7 @@ function updateRules(){
     rules.paraStuck=game.level!=19&&game.level!=29&&game.level!=31&&game.level!=41&&game.level!=42&&game.level!=52&&game.level!=53&&game.level!=56&&game.level!=75
     rules.botResupply=game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&
         game.level!=57&&game.level!=65&&game.level!=76&&game.level!=77&&game.level!=80&&game.level!=85&&game.level!=101
+    rules.overpane=game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90||game.level==94||game.level==114
     rules.key={
         info:game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||
             game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102?
@@ -6572,7 +6573,7 @@ function generateLevel(info,layer){
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
                     if(ticker%21==0){
-                        entities.walls[1][a].weapon=findName(game.level==116&&ticker>=100?'PlayerClassWars':'PlayerRandomClass',types.player)
+                        entities.walls[1][a].weapon=findName(game.level==116&&ticker>=80?'PlayerClassWars':'PlayerRandomClass',types.player)
                         entities.walls[1][a].loadout={class:10,set:3}
                     }else{
                         let classNum=floor((ticker%21-1)/2)
@@ -6638,7 +6639,7 @@ function generateLevel(info,layer){
                 }
             }
             let postC=(game.level==27?c%5:c)
-            let encode=rules.teamMode?'q':game.traitor&&game.traitorKey==c?getKey(floor(random(6,12))):game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63||game.level==101||game.level==105)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC%6]
+            let encode=rules.teamMode?'q':game.traitor&&game.traitorKey==c&&!rules.picker?getKey(floor(random(6,12))):game.level==89||game.level==94?'12345'[(postC+shifter)%5]:game.level==43||game.level==49||game.level==84||game.level==85?'qwert'[(postC+shifter)%5]:game.level==39||game.level==42?'qwerty'[(postC+shifter)%5]:(game.level==23||game.level==26||game.level==28||game.level==32||game.level==33||game.level==63||game.level==101||game.level==105)&&postC<4?'qwer'[(postC+shifter)%4]:'qwerty'[postC%6]
             for(let a=0,la=level.length;a<la;a++){
                 for(let b=0,lb=level[a].length;b<lb;b++){
                     if(game.attacker&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=57){
@@ -6653,8 +6654,8 @@ function generateLevel(info,layer){
                         let playerLength=entities.players.length
                         if(
                             (game.level==89||game.level==94)&&!game.pvp&&level[a][b]==encode||
-                            game.traitor&&game.traitorKey==c&&level[a][b]==encode||
-                            game.level!=89&&game.level!=94&&!(game.traitor&&game.traitorKey==c)&&
+                            game.traitor&&game.traitorKey==c&&!rules.picker&&level[a][b]==encode||
+                            game.level!=89&&game.level!=94&&!(game.traitor&&game.traitorKey==c&&!rules.picker)&&
                             int(level[a][b])==(
                                 (game.level==48||game.level==57||game.level==80||game.level==115||game.level==116)&&c>=game.gaming&&lc>5?5:
                                 game.level==34||game.level==96||game.level==97?0:

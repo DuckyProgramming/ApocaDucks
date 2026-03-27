@@ -7,15 +7,15 @@ function setup(){
 
     if(false){
         //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
-        //duel={trigger:true,numKey:[3,0],sets:[[0,0],[0,0]]}
+        duel={trigger:true,numKey:[5,0],sets:[[2,2],[0,0]]}
 
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=3
-        game.gaming=3
-        game.level=100
+        game.players=2
+        game.gaming=1
+        game.level=117
         menu.level=game.level
         updateRules()
         if(true){
@@ -31,7 +31,9 @@ function setup(){
         if(rules.dm){
             game.classicRespawn=false
         }
-            //game.pvp=true
+        if(duel.trigger){
+            game.pvp=true
+        }
         //display.cycle=0
         //newWave()
         game.weapon=[[findName('PlayerClassWars',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
@@ -1954,7 +1956,7 @@ function mouseClicked(){
         */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?1:constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3?4:3):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     game.smile=floor(random(0,25))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
@@ -1962,11 +1964,30 @@ function mouseClicked(){
                             menu.mode=b+1
                         }
                     }else if(a==1){
-                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
-                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
-                            game.diff=max(5,round(game.diff*10-1))/10
-                        }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
-                            game.diff=min(20,round(game.diff*10+1))/10
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        switch(b){
+                            case 0:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                    game.diff=max(5,round(game.diff*10-1))/10
+                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                    game.diff=min(20,round(game.diff*10+1))/10
+                                }
+                            break
+                            case 1:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.deathlink=!game.deathlink
+                                }
+                            break
+                            case 2:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.noStat=!game.noStat
+                                }
+                            break
+                            case 3:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.traitor=!game.traitor
+                                }
+                            break
                         }
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]

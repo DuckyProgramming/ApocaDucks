@@ -212,6 +212,7 @@ function mainloop(){
                 }
             }
         break
+        /*
         case 'menu':
             set=[
                 [],[
@@ -547,9 +548,10 @@ function mainloop(){
                 }
             }
         break
+        */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?1:constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3?4:3):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(menu.mode==b+1){
@@ -562,16 +564,22 @@ function mainloop(){
                         textSize(15)
                         text(['Easy','Medium','Hard','Expert','Unfair','Special'][b],pos[0],pos[1])
                     }else if(a==1){
-                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
-                        fill(100)
-                        rect(pos[0]+37,pos[1],76,45,10)
-                        rect(pos[0]-37,pos[1],76,45,10)
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.traitor?200:100,100)
+                        if(b==0){
+                            rect(pos[0]+37,pos[1],76,45,10)
+                            rect(pos[0]-37,pos[1],76,45,10)
+                        }else{
+                            rect(pos[0],pos[1],150,45,10)
+                        }
                         fill(0)
                         textSize(15)
-                        text([`Difficulty: ${game.diff}`][b],pos[0],pos[1])
-                        textSize(10)
-                        text(['-'][b],pos[0]-52.5,pos[1]-15)
-                        text(['+'][b],pos[0]+52.5,pos[1]-15)
+                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Traitor`][b],pos[0],pos[1])
+                        if(b==0){
+                            textSize(10)
+                            text(['-'][b],pos[0]-52.5,pos[1]-15)
+                            text(['+'][b],pos[0]+52.5,pos[1]-15)
+                        }
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         let unit=menu.list[menu.mode-1][a*5+b-10]
@@ -1201,7 +1209,7 @@ function mainloop(){
                         for(let b=0,lb=b2s.length;b<lb;b++){
                             entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
                         }
-                        if(game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90||game.level==94||game.level==114){
+                        if(rules.overpane){
                             for(let b=0,lb=b2s.length;b<lb;b++){
                                 entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
                             }

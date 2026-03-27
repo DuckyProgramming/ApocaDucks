@@ -5312,7 +5312,7 @@ class player{
                                     let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
                                     for(let a=0,la=4;a<la;a++){
                                         if(!((weaponType==689||weaponType==799||weaponType==826||weaponType==886||weaponType==1010)&&(a==0||a==3))){
-                                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),weaponType==799?9:1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),weaponType==799?434:1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                             entities.projectiles[entities.projectiles.length-1].speed=8
                                         }
                                     }
@@ -5322,7 +5322,7 @@ class player{
                                     let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
                                     for(let a=0,la=4;a<la;a++){
                                         if(!((weaponType==689||weaponType==799||weaponType==826||weaponType==886||weaponType==1010)&&(a==0||a==3))){
-                                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),weaponType==799?9:1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0]+(-6+a*4)*lcos(dir),spawn[1]+(-6+a*4)*lsin(dir),weaponType==799?434:1,dir-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                             entities.projectiles[entities.projectiles.length-1].speed=8
                                         }
                                     }
@@ -5333,7 +5333,7 @@ class player{
                         if(!fired620[0]&&lsin(this.direction.main)<0){
                             for(let a=0,la=4;a<la;a++){
                                 if(!((weaponType==689||weaponType==799||weaponType==826||weaponType==886||weaponType==1010)&&(a==0||a==3))){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,weaponType==799?9:1,-90+3-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,weaponType==799?434:1,-90+3-a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     entities.projectiles[entities.projectiles.length-1].speed=8
                                 }
                             }
@@ -5341,7 +5341,7 @@ class player{
                         if(!fired620[1]&&lsin(this.direction.main)>0){
                             for(let a=0,la=4;a<la;a++){
                                 if(!((weaponType==689||weaponType==799||weaponType==826||weaponType==886||weaponType==1010)&&(a==0||a==3))){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,weaponType==799?9:1,90-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-6+a*4,weaponType==799?434:1,90-3+a*2,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     entities.projectiles[entities.projectiles.length-1].speed=8
                                 }
                             }
@@ -6918,8 +6918,8 @@ class player{
     }
     validTarget(target){
         return (
-            (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
-            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey?0:game.pvp?target.id:1)||
+            (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey&&!this.fort?0:game.pvp?this.id:1)!=
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!this.fort?0:game.pvp?target.id:1)||
             this.playerData.name.includes('Buster')&&(game.level==23||game.level==101)
         )&&target.playerData.name!='PlayerSpy'&&(target.fade>0.6||target.fade>0.2&&floor(random(0,15))==0)&&!(this.playerData.name.includes('Buster')&&target.index!=this.target.index)&&target.life>0&&!(game.level==43&&target.fort&&display.cycle<4)
     }
@@ -7590,7 +7590,7 @@ class player{
                     this.life>0&&this.life>0&&
                     !(rules.dm&&this.position.y<300)
                 ){
-                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&!this.subWeaponB.reloading){
+                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
                     if(this.manage[1]==1||this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo){
@@ -7640,7 +7640,7 @@ class player{
                         }else if(this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.weaponType>=0&&!this.weapon.reloading){
                             this.attack(0)
                         }
-                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading){
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
                     }else if(this.rules.dronerLine){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital'&&floor(random(0,15))==0){
@@ -7852,7 +7852,7 @@ class player{
                     }
                 }
                 if(this.life>0&&this.rules.attackable&&!this.peace){
-                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&!this.subWeaponB.reloading){
+                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
                     if((
@@ -7898,7 +7898,7 @@ class player{
                                 this.attack(0)
                             }
                         }
-                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading){
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
                     }
                     if(inputSet[3]){
@@ -11214,7 +11214,7 @@ class player{
         if(this.assort.tiredTick>0){
             this.assort.tiredTick--
         }
-        this.assort.tired=constrain(this.assort.tired-(this.assort.tiredTick>0?0.4:2.4),0,150)
+        this.assort.tired=this.wet>0?0:constrain(this.assort.tired-(this.assort.tiredTick>0?0.4:2.4),0,150)
         if(game.usurp&&this.index==game.usurpIndex&&this.life>0){
             this.stats.usurp++
             this.velocity.x*=0.95
