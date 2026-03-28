@@ -1956,7 +1956,7 @@ function mouseClicked(){
         */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?(menu.players>=3?4:3):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&game.pvp?4:3):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     game.smile=floor(random(0,25))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]

@@ -7695,6 +7695,7 @@ function generateLevel(info,layer){
                             if(listing[4][tick].length>=3){
                                 entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
                             }
+                            game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
                             typeList[team].splice(index,1)
                         }
                     }
