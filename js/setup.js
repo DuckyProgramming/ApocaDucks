@@ -15,7 +15,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=123
+        game.level=127
         menu.level=game.level
         updateRules()
         if(true){
@@ -631,7 +631,11 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                menu.level=64
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=64
+                                                }else{
+                                                    menu.level=124
+                                                }
                                                 //rocksalt
                                             break
                                             case 1:
@@ -732,11 +736,19 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                menu.level=75
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=75
+                                                }else{
+                                                    menu.level=125
+                                                }
                                                 //rocketyard
                                             break
                                             case 1:
-                                                menu.level=91
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=91
+                                                }else{
+                                                    menu.level=126
+                                                }
                                                 //sulfite
                                             break
                                             case 2:
@@ -833,7 +845,11 @@ function mouseClicked(){
                                                 //zone 54
                                             break
                                             case 1:
-                                                menu.level=110
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=110
+                                                }else{
+                                                    menu.level=127
+                                                }
                                                 //cysteine
                                             break
                                             case 2:

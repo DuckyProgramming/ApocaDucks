@@ -54,7 +54,11 @@ function mainloop(){
                         menu.mode==4&&a==5&&b==2||
                         menu.mode==4&&a==6&&b==0||
                         menu.mode==4&&a==6&&b==1||
-                        menu.mode==4&&a==6&&b==2
+                        menu.mode==4&&a==6&&b==2||
+                        menu.mode==4&&a==7&&b==0||
+                        menu.mode==4&&a==8&&b==0||
+                        menu.mode==4&&a==8&&b==1||
+                        menu.mode==4&&a==9&&b==1
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -186,6 +190,30 @@ function mainloop(){
                                 case 6:
                                     switch(b){
                                         case 0: case 1: case 2:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 7:
+                                    switch(b){
+                                        case 0:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 8:
+                                    switch(b){
+                                        case 0: case 1:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 9:
+                                    switch(b){
+                                        case 1:
                                             text(`Base`,pos[0]-37,pos[1]+15)
                                             text(`Updated`,pos[0]+37,pos[1]+15)
                                         break
