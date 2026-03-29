@@ -48,7 +48,12 @@ function mainloop(){
                         menu.mode==2&&a==9&&b==1||
                         menu.mode==2&&a==9&&b==2||
                         menu.mode==3&&a==9&&b==0||
-                        menu.mode==4&&a==5&&b==0
+                        menu.mode==4&&a==4&&b==3||
+                        menu.mode==4&&a==5&&b==0||
+                        menu.mode==4&&a==5&&b==1||
+                        menu.mode==4&&a==5&&b==2||
+                        menu.mode==4&&a==6&&b==0||
+                        menu.mode==4&&a==6&&b==1
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -161,11 +166,27 @@ function mainloop(){
                         break
                         case 4:
                             switch(a){
+                                case 4:
+                                    switch(b){
+                                        case 3:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
                                 case 5:
                                     switch(b){
-                                        case 0:
-                                            text(`1`,pos[0]-37,pos[1]+15)
-                                            text(`2`,pos[0]+37,pos[1]+15)
+                                        case 0: case 1: case 2:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
+                                case 6:
+                                    switch(b){
+                                        case 0: case 1:
+                                            text(`Base`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
                                         break
                                     }
                                 break
@@ -1052,6 +1073,7 @@ function mainloop(){
                     for(let b=0,lb=run.fore[a].length;b<lb;b++){
                         if(run.fore[a][b].width>0&&run.fore[a][b].height>0){
                             if(
+                                run.fore[a][b].forceDisplay||
                                 run.fore[a][b].position.x+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
                                 run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
                                 run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&

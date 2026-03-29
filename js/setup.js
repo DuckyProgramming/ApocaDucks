@@ -7,15 +7,15 @@ function setup(){
 
     if(false){
         //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
-        duel={trigger:true,numKey:[5,0],sets:[[2,2],[0,0]]}
+        //duel={trigger:true,numKey:[3,0],sets:[[0,0],[0,0]]}
 
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
 
-        game.players=2
+        game.players=1
         game.gaming=1
-        game.level=117
+        game.level=122
         menu.level=game.level
         updateRules()
         if(true){
@@ -31,7 +31,7 @@ function setup(){
         if(rules.dm){
             game.classicRespawn=false
         }
-        if(duel.trigger){
+        if(duel.trigger||rules.dm){
             game.pvp=true
         }
         //display.cycle=0
@@ -182,7 +182,11 @@ function mouseClicked(){
                                                 //shogatsu
                                             break
                                             case 3:
-                                                menu.level=50
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=50
+                                                }else{
+                                                    menu.level=118
+                                                }
                                                 //arizona
                                             break
                                         }
@@ -349,11 +353,19 @@ function mouseClicked(){
                                                 //aerial
                                             break
                                             case 1:
-                                                menu.level=52
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=52
+                                                }else{
+                                                    menu.level=120
+                                                }
                                                 //alloy
                                             break
                                             case 2:
-                                                menu.level=41
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=41
+                                                }else{
+                                                    menu.level=121
+                                                }
                                                 //speleo
                                             break
                                             case 3:
@@ -487,11 +499,19 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                menu.level=92
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=92
+                                                }else{
+                                                    menu.level=119
+                                                }
                                                 //tailwater
                                             break
                                             case 1:
-                                                menu.level=60
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=60
+                                                }else{
+                                                    menu.level=122
+                                                }
                                                 //identify
                                             break
                                             case 2:

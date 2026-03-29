@@ -106,6 +106,7 @@ class player{
         this.free=false
         this.storeWeapon=false
         this.peace=false
+		this.forceDisplay=false
         this.assort={
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,
@@ -6919,7 +6920,7 @@ class player{
     validTarget(target){
         return (
             (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey&&!this.fort?0:game.pvp?this.id:1)!=
-            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!this.fort?0:game.pvp?target.id:1)||
+            (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!target.fort?0:game.pvp?target.id:1)||
             this.playerData.name.includes('Buster')&&(game.level==23||game.level==101)
         )&&target.playerData.name!='PlayerSpy'&&(target.fade>0.6||target.fade>0.2&&floor(random(0,15))==0)&&!(this.playerData.name.includes('Buster')&&target.index!=this.target.index)&&target.life>0&&!(game.level==43&&target.fort&&display.cycle<4)
     }
@@ -7511,7 +7512,7 @@ class player{
                     }
                 }
             }else{
-                let jumpMult=(game.level==33||game.level==39?0.5:(game.level==26||game.level==105)&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)
+                let jumpMult=(game.level==33||game.level==39?0.5:(game.level==26||game.level==105)&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)*(this.rules.scoutLine?0.5:1)
                 let jumpMult2=(game.level==26||game.level==105)&&this.wet>0?2:1
                 if(this.rules.jumper){
                     if(this.manage[2]==0&&(floor(random(0,180*jumpMult))==0||floor(random(0,30*jumpMult))==0&&this.position.y>this.target.position.y+25)){
@@ -11208,13 +11209,13 @@ class player{
         if(this.blindTime>0){
             this.blindTime-=(this.id>0?2:1)
         }
-        if(this.wet>0){
-            this.wet--
-        }
         if(this.assort.tiredTick>0){
             this.assort.tiredTick--
         }
-        this.assort.tired=this.wet>0?0:constrain(this.assort.tired-(this.assort.tiredTick>0?0.4:2.4),0,150)
+        this.assort.tired=this.wet>0?0:constrain(this.assort.tired-(this.assort.tiredTick>0?0.4:3),0,150)
+        if(this.wet>0){
+            this.wet--
+        }
         if(game.usurp&&this.index==game.usurpIndex&&this.life>0){
             this.stats.usurp++
             this.velocity.x*=0.95

@@ -22,6 +22,7 @@ class projectile{
 		this.travel=0
 		this.stop=false
         this.remove=false
+		this.forceDisplay=false
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 38: case 39: case 43: case 44: case 49: case 50: case 57:
@@ -491,6 +492,7 @@ class projectile{
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
 			case 365: case 400: case 406: case 415: case 426:
+				this.forceDisplay=true
 				this.time=time
 				this.speed=0
 				this.extent=this.type==363||this.type==400||this.type==415||this.type==426?80:this.type==365?400:2400
