@@ -15,9 +15,10 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=127
+        game.level=129
         menu.level=game.level
         updateRules()
+        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
         if(true){
             game.mission=findName(`Duck Time Deluxe`,types.mission)
             formMission(types.mission[game.mission].wave,0)
@@ -178,7 +179,11 @@ function mouseClicked(){
                                                 //gray gravel
                                             break
                                             case 2:
-                                                menu.level=56
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=56
+                                                }else{
+                                                    menu.level=128
+                                                }
                                                 //shogatsu
                                             break
                                             case 3:
@@ -857,7 +862,11 @@ function mouseClicked(){
                                                 //ascent
                                             break
                                             case 3:
-                                                menu.level=112
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=112
+                                                }else{
+                                                    menu.level=129
+                                                }
                                                 //bluestone
                                             break
                                         }
@@ -2047,7 +2056,7 @@ function mouseClicked(){
                             updateRules()
                             game.mission=unit
                             entities.players=[]
-                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
+                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
                             initialGraphics()
                             if(game.level==29){
                                 newWave()
@@ -2487,7 +2496,7 @@ function mouseClicked(){
                         updateRules()
                         game.mission=menu.list[tick]
                         entities.players=[]
-                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
+                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
                         initialGraphics()
                         if(game.level==29){
                             newWave()
@@ -2558,7 +2567,7 @@ function instant(){
     updateRules()
     game.mission=0
     entities.players=[]
-    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112
+    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
     initialGraphics()
     newLoop()
     stage.scene='wave'

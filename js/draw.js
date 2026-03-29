@@ -48,6 +48,8 @@ function mainloop(){
                         menu.mode==2&&a==9&&b==1||
                         menu.mode==2&&a==9&&b==2||
                         menu.mode==3&&a==9&&b==0||
+
+                        menu.mode==4&&a==4&&b==2||
                         menu.mode==4&&a==4&&b==3||
                         menu.mode==4&&a==5&&b==0||
                         menu.mode==4&&a==5&&b==1||
@@ -58,7 +60,8 @@ function mainloop(){
                         menu.mode==4&&a==7&&b==0||
                         menu.mode==4&&a==8&&b==0||
                         menu.mode==4&&a==8&&b==1||
-                        menu.mode==4&&a==9&&b==1
+                        menu.mode==4&&a==9&&b==1||
+                        menu.mode==4&&a==9&&b==3
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -173,7 +176,7 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 3:
+                                        case 2: case 3:
                                             text(`Base`,pos[0]-37,pos[1]+15)
                                             text(`Updated`,pos[0]+37,pos[1]+15)
                                         break
@@ -213,7 +216,7 @@ function mainloop(){
                                 break
                                 case 9:
                                     switch(b){
-                                        case 1:
+                                        case 1: case 3:
                                             text(`Base`,pos[0]-37,pos[1]+15)
                                             text(`Updated`,pos[0]+37,pos[1]+15)
                                         break
@@ -1228,7 +1231,7 @@ function mainloop(){
                                 b2s.push(b)
                             }
                         }
-                        if(game.level==30||game.level==56){
+                        if(game.level==30||game.level==56||game.level==128){
                             for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                                 if(
                                     (entities.walls[0][b].type==37)&&
