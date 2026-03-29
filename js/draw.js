@@ -53,7 +53,8 @@ function mainloop(){
                         menu.mode==4&&a==5&&b==1||
                         menu.mode==4&&a==5&&b==2||
                         menu.mode==4&&a==6&&b==0||
-                        menu.mode==4&&a==6&&b==1
+                        menu.mode==4&&a==6&&b==1||
+                        menu.mode==4&&a==6&&b==2
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -184,7 +185,7 @@ function mainloop(){
                                 break
                                 case 6:
                                     switch(b){
-                                        case 0: case 1:
+                                        case 0: case 1: case 2:
                                             text(`Base`,pos[0]-37,pos[1]+15)
                                             text(`Updated`,pos[0]+37,pos[1]+15)
                                         break

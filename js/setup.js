@@ -15,7 +15,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=122
+        game.level=123
         menu.level=game.level
         updateRules()
         if(true){
@@ -515,7 +515,11 @@ function mouseClicked(){
                                                 //identify
                                             break
                                             case 2:
-                                                menu.level=61
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=61
+                                                }else{
+                                                    menu.level=123
+                                                }
                                                 //hard hat
                                             break
                                             case 3:
