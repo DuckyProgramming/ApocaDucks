@@ -11143,7 +11143,7 @@ class player{
                 }else if(
                     (game.level==30||game.level==56)&&this.position.x<game.tileset[0]*15||
                     (game.level==32||game.level==33)&&(this.position.x>game.tileset[0]*40&&this.position.x<game.tileset[0]*60||this.position.x>game.edge[0]-game.tileset[0]*20)||
-                    game.level==36||game.level==51||game.level==69||game.level==73||game.level==117
+                    game.level==36||game.level==51||game.level==69||game.level==73||game.level==117||game.level==130
                 ){
                     if(this.fort&&this.auto){
                         this.position.x=this.base.position.x

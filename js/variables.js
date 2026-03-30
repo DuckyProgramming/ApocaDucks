@@ -40,7 +40,7 @@ game={
           ['Rocksalt','Globus','Cranberry','Mill'],
           ['Rocketyard','Sulfite','Burnt','Confines'],
           ['Zone 54','Cysteine','Ascent','Bluestone'],
-          ['Agar'],
+          ['Agar','Falloff'],
       ],[
           ['Pacman','Stalingrad','Prison','Steep'],
           ['Hard Hat'],

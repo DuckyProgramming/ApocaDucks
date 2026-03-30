@@ -15,7 +15,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=129
+        game.level=130
         menu.level=game.level
         updateRules()
         game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
@@ -60,7 +60,7 @@ function mouseClicked(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170,355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     if(a>=4){
                         ticker++
                     }
@@ -905,6 +905,10 @@ function mouseClicked(){
                                             case 0:
                                                 menu.level=114
                                                 //agar
+                                            break
+                                            case 1:
+                                                menu.level=130
+                                                //falloff
                                             break
                                         }
                                         game.pvp=true

@@ -8,7 +8,9 @@ function mainloop(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170,355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    //ticker==25 code moves falloff specifically
+                    //this code sucks but dw about it
                     if(a>=4){
                         ticker++
                     }
@@ -1201,6 +1203,7 @@ function mainloop(){
                         let b2s=[]
                         for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                             if(
+                                game.level==130&&entities.walls[0][b].type==62||
                                 !(game.level==100&&entities.walls[0][b].type==37)&&
                                 (
                                     entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
