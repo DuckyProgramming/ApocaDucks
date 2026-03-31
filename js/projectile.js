@@ -7518,7 +7518,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b])
 					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
+						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						/*if(!entities.players[b].fort){
 							print(
 								this.damage,sqrt(1-c/radius),falloff,
@@ -7652,7 +7652,7 @@ class projectile{
 					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index!=this.index){
-							entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
+							entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 							entities.players[b].collect.time=450
 							entities.players[b].die.killer=this.index
 							if(c<100){
@@ -7690,7 +7690,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b])
 					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
+						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
@@ -7805,7 +7805,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b])
 					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b]))){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1))
+						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
@@ -9005,9 +9005,10 @@ class projectile{
 									){
 										if(this.type==417){
 											this.dets--
-											this.detTimer=10
 											if(this.dets<=0){
 												this.active=false
+											}else{
+												this.detTimer=10
 											}
 										}else{
 											this.active=false

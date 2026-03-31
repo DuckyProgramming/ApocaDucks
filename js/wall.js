@@ -13722,7 +13722,7 @@ class wall{
                                     c.position.y=c.base.position.y
                                     this.recharge=1800
                                 }
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -13818,7 +13818,7 @@ class wall{
                                     this.recharge=game.level==23||game.level==101?1200:3600-(game.gaming-1)*600
                                     c.stunTime=480
                                 }
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -13912,7 +13912,7 @@ class wall{
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.life*=0.2
                                 c.collect.time=max(c.collect.time,450)
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -13941,7 +13941,7 @@ class wall{
                             case 68:
                                 this.recharge=1800-(game.gaming-1)*300
                                 c.life=min(max(c.life,c.base.life*2),c.life+c.base.life/2)
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -13958,7 +13958,7 @@ class wall{
                                 }
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.enigmaTime=max(c.enigmaTime,1800)
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -14009,7 +14009,7 @@ class wall{
                                     this.weapon2=listing[chunk][floor(random(listing[chunk].length))]
                                     this.recharge=3600-(game.gaming-1)*600
                                 }
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -14027,7 +14027,7 @@ class wall{
                                 this.recharge=3600-(game.gaming-1)*600
                                 c.DOT.active+=300
                                 c.DOT.damage++
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -14053,7 +14053,7 @@ class wall{
                             case 77:
                                 this.recharge=1800-(game.gaming-1)*300
                                 c.speedBuff=max(c.speedBuff,game.level==55?600:240)
-                                if(game.level==55){
+                                if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
                             break
@@ -15356,7 +15356,7 @@ class wall{
                                         break
                                         case 4:
                                             if(game.level!=30||c.position.y>this.position.y-this.height/2-c.height/2){
-                                                if(this.type==59||this.type==60){
+                                                if(this.type==59||this.type==60||this.type==130){
                                                     c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                                     c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
                                                 }else{
@@ -15383,7 +15383,7 @@ class wall{
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
                                         break
                                         case 5:
-                                            if(this.type==59||this.type==60){
+                                            if(this.type==59||this.type==60||this.type==130){
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                                 c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
                                             }else{
