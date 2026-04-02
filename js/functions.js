@@ -21,7 +21,7 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425||a==430,
+				a==417||a==425||a==430||a==435,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -68,12 +68,12 @@ function setupRules(){
 				a==372||a==373||a==375||a==376||a==383||
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
-                a==431,
+                a==431||a==435,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
 			stickybomb:a==349||a==360||a==368||a==372||a==392||
-				a==417,
+				a==417||a==435,
 			passer:a==85||a==89||a==103||a==193||a==194||
 				a==195||a==215||a==270||a==297||a==310||
 				a==337||a==398||a==427||a==433,
@@ -91,7 +91,7 @@ function setupRules(){
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
-				a!=417,
+				a!=417&&a!=435,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -106,7 +106,7 @@ function setupRules(){
 				a==245||a==246||a==247||a==250||a==284||
 				a==286||a==304||a==314||a==323||a==329||
 				a==349||a==360||a==368||a==372||a==375||
-				a==392||a==417,
+				a==392||a==417||a==435,
 			stopper:a!=7&&a!=23&&a!=25&&a!=32&&a!=37&&
 				a!=40&&a!=46&&a!=79&&a!=84&&a!=89&&
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
@@ -114,7 +114,7 @@ function setupRules(){
 				a!=335&&a!=335&&a!=405&&a!=427&&a!=433,
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
-                a!=392&&a!=417,
+                a!=392&&a!=417&&a!=435,
 			fader1:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==30||a==31||a==32||
 				a==41||a==45||a==47||a==53||a==54||
@@ -129,7 +129,7 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==377||a==378||a==379||a==384||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425||a==430,
+				a==417||a==425||a==430||a==435,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -8913,7 +8913,7 @@ function newWave(){
         game.spawnIndex=0
         game.initial=true
         let supporting=false
-        let pEff=game.players-(game.traitor?2:0)
+        let pEff=game.players-(game.traitor?2.5:0)
         for(let a=0,la=types.mission[game.mission].wave[display.cycle].length;a<la;a++){
             let spied=spy(types.mission[game.mission].wave[display.cycle][a][0])||
                 (game.level==79||game.level==82)&&floor(random(0,10))==0
@@ -9651,7 +9651,7 @@ function checkEnd(level,layer,key){
                         }
                     }
                 }
-                let pEff=game.players-(game.traitor?2:0)
+                let pEff=game.players-(game.traitor?2.5:0)
                 game.sendTime=time!=undefined?time:game.attacker||game.level==29&&game.initial||game.level==37?0:
                     types.mission[game.mission].sendTime*2.75/game.diff/
                     max(1,(game.level==55?pEff*0.175+0.325:pEff*0.5+0.5))*

@@ -7,15 +7,16 @@ function setup(){
 
     if(false){
         //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
-        //duel={trigger:true,numKey:[3,0],sets:[[0,0],[0,0]]}
+        duel={trigger:true,numKey:[0,0],sets:[[3,0],[0,0]]}
 
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
+        //game.traitor=true
 
-        game.players=1
+        game.players=2
         game.gaming=1
-        game.level=130
+        game.level=117
         menu.level=game.level
         updateRules()
         game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
@@ -32,7 +33,7 @@ function setup(){
         if(rules.dm){
             game.classicRespawn=false
         }
-        if(duel.trigger||rules.dm){
+        if(duel.trigger||rules.dm||rules.teamMode){
             game.pvp=true
         }
         //display.cycle=0

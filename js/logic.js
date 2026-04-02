@@ -10445,10 +10445,10 @@ player.prototype.logic=function(){
                             switch(goalPoint){
                                 case 0:
                                     if(this.weaponType==-1){
-                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.x=game.tileset[0]*10.5
                                         this.target.position.y=game.edge[1]
                                     }else{
-                                        this.target.position.x=game.tileset[0]*10.5
+                                        this.target.position.x=game.tileset[0]*8.5
                                         this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                     }
                                 break
@@ -10466,10 +10466,10 @@ player.prototype.logic=function(){
                                 break
                                 case 1:
                                     if(this.weaponType==-1){
-                                        this.target.position.x=game.tileset[0]*132.5
+                                        this.target.position.x=game.tileset[0]*130.5
                                         this.target.position.y=game.edge[1]
                                     }else{
-                                        this.target.position.x=game.tileset[0]*130.5
+                                        this.target.position.x=game.tileset[0]*132.5
                                         this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                     }
                                 break

@@ -13395,7 +13395,7 @@ class wall{
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     if(c.jump.active<=0){
-                                        c.jump.time=1
+                                        c.jump.time=6
                                     }
                                     c.jump.active=1
                                     c.wet=1
@@ -13408,7 +13408,7 @@ class wall{
                                     c.velocity.x*=0.9
                                     c.velocity.y*=0.6
                                     if(c.jump.active<=0){
-                                        c.jump.time=1
+                                        c.jump.time=6
                                     }
                                     c.jump.active=1
                                     c.wet=1
@@ -14101,7 +14101,7 @@ class wall{
                                             }else{
                                                 c.velocity.y=min(c.velocity.y,0)
                                             }
-                                            c.jump.time=5
+                                            c.jump.time=constrain(c.jump.time+2,0,6)
                                             if((c.rules.doubleJump||(c.playerData.name=='PlayerSwitcheroo'||c.playerData.name=='PlayerSwapper')&&c.subPlayerAData.name=='PlayerPistol')&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
@@ -15366,7 +15366,7 @@ class wall{
                                             }else{
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             }
-                                            c.jump.time=5
+                                            c.jump.time=constrain(c.jump.time+2,0,6)
                                             if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
@@ -15390,7 +15390,7 @@ class wall{
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                                 c.velocity.y=-c.velocity.x*this.height/this.width
                                             }
-                                            c.jump.time=5
+                                            c.jump.time=constrain(c.jump.time+2,0,6)
                                             if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }

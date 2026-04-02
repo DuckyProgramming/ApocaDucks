@@ -1197,9 +1197,11 @@ function mainloop(){
                             graphics.pane[a].clear()
                         }
                         graphics.pane[a].push()
-                        graphics.pane[a].translate(graphics.pane[a].width/2,graphics.pane[a].height/2)
+                        graphics.pane[a].translate(
+                            graphics.pane[a].width/2-round(effective[a][0]/key[a]),
+                            graphics.pane[a].height/2-round(effective[a][1]/key[a])
+                        )
                         graphics.pane[a].scale(1/key[a])
-                        graphics.pane[a].translate(-effective[a][0],-effective[a][1])
                         let b2s=[]
                         for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                             if(
@@ -1273,10 +1275,19 @@ function mainloop(){
                         }
                         graphics.pane[a].pop()
                         if(key[a]==graphics.key[a]){
+                            graphics.pane[a].erase()
+                            graphics.pane[a].fill(0)
+                            graphics.pane[a].noStroke()
+                            graphics.pane[a].rect(
+                                round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
+                                round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
+                                graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                            )
+                            graphics.pane[a].noErase()
                             graphics.pane[a].image(
                                 graphics.paneTemp,
-                                (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2,
-                                (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2,
+                                round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
+                                round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
                                 graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
                             )
                         }
