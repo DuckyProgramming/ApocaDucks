@@ -56,6 +56,7 @@ class player{
                 }
             }
             this.copy=this.copyset[floor(random(0,this.copyset.length))]
+            this.copyId=0
         }
         if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||game.randomizer){
             this.active=0
@@ -1215,13 +1216,16 @@ class player{
                     }
                     if(this.spy){
                         this.color=[
+                            {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
-                            {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,25,255],body:[225,15,255],legs:[210,0,255],arms:[215,5,255]}},
+                            rules.teamMode?
+                                {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,25,255],body:[225,15,255],legs:[210,0,255],arms:[215,5,255]}}:
+                                {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[245,30,55],body:[235,35,45],legs:[230,45,50],arms:[225,40,35]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[55,235,25],body:[55,225,15],legs:[55,210,0],arms:[55,215,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,105,25],body:[225,105,15],legs:[210,105,0],arms:[215,105,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
-                        ][this.copy]
+                        ][this.copyId]
                     }
                 break
                 case 0:
@@ -2701,6 +2705,7 @@ class player{
                     entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),this.index))
                     entities.players[entities.players.length-1].decoy=true
                     entities.players[entities.players.length-1].copy=this.index
+                    entities.players[entities.players.length-1].copyId=this.id
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].setColor()
                 }

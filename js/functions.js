@@ -7870,7 +7870,7 @@ function generateLevel(info,layer){
                     entities.players[a].position.y=loc[team][1]
                     if(game.classWeapon){
                         //DO NOT change the 10s here! they represent 10 classes, not 10 variants!
-                        if(duel.trigger){
+                        if(duel.trigger&&duel.experiment[0]!=-1){
                             let index=floor(random(0,typeList[team].length))
                             let tick=typeList[team][index]
                             if(team==0){
@@ -8865,8 +8865,8 @@ function generateLevel(info,layer){
             entities.players[a].position.x=game.edge[0]*0.5+(mix[a]*1000-la*500+500)*(game.level==117?1.25:1)
             entities.players[a].position.y+=500
         }
-    }else if(!rules.teamMode&&duel.trigger){
-        for(let a=0,la=game.players;a<la;a++){
+    }else if((!rules.teamMode||duel.experiment[0]==-1)&&duel.trigger){
+        for(let a=0,la=duel.sets.length;a<la;a++){
             game.loadout[a]=[
                 {main:duel.sets[a].map((item,index)=>findName(listing[4][duel.numKey[a]][index][item],types.player)),class:duel.numKey[a]}
             ]
