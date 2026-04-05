@@ -201,7 +201,12 @@ player.prototype.logic=function(){
             this.manage[1]=0
         }
     }else if(game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116){
+        if(!this.disable){
+            this.destroyProjectiles()
+        }
         this.disable=true
+        this.fade=0
+        this.position.y=10000
     }else if(game.level==15||game.level==18||game.level==19||game.level==31||game.level==39||game.level==42||game.level==43){
         let targets=[]
         this.target.position.x=this.position.x
@@ -3813,9 +3818,6 @@ player.prototype.logic=function(){
                 }
             }
         }
-    }else if(game.level==48||game.level==57||game.level==115||game.level==116){
-        this.fade=0
-        this.position.y=10000
     }else if(game.level==49){
         this.manage[1]=false
         if(this.playerData.name.includes('Buster')){

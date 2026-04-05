@@ -4,7 +4,8 @@ game={
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,classWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
-  usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,noPlayer:false,
+  usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,
+  noPlayer:false,noVisuals:false,
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],loadout:[],
   sectors:[],respawners:[0,0],det:[],traitorKey:0,firstGen:true,
@@ -51,7 +52,7 @@ game={
       ],
   ]
 }
-duel={trigger:false,numKey:[],sets:[]}
+duel={trigger:false,numKey:[],sets:[],experiment:[]}
 rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:0,level:6,list:[],mode:0}
@@ -7457,7 +7458,7 @@ types={
       damageBuff:2,reloadBuff:2.5,crit:0,weapon:722,
     },{
       name:'PlayerFlameStream',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.4,reloadBuff:1,crit:0,weapon:723,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:723,
     },{
       name:'PlayerSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:724,
@@ -7527,6 +7528,9 @@ types={
     },{
       name:'PlayerHeavyMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.75,reloadBuff:1.5,crit:0,weapon:2,
+    },{
+      name:'PlayerHeavierMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.875,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'PlayerPeppergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:772,
@@ -7603,6 +7607,9 @@ types={
       name:'PlayerTransmission',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1.375,crit:0,weapon:818,
     },{
+      name:'PlayerTransmissionC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.375,crit:0,weapon:1020,
+    },{
       name:'PlayerScatterSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.6,crit:0,weapon:819,
     },{
@@ -7643,7 +7650,7 @@ types={
       damageBuff:1,reloadBuff:1.125,crit:0,weapon:856,
     },{
       name:'PlayerSoftwareC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1,crit:0,weapon:857,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:857,
     },{
       name:'PlayerPopperScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:858,
@@ -7927,6 +7934,9 @@ types={
       name:'PlayerSurvivalWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1008,
     },{
+      name:'PlayerDecoyWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1021,
+    },{
       name:'PlayerAssaultRifleC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:965,
     },{
@@ -7946,13 +7956,16 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1015,
     },{
       name:'PlayerBlackBox',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.5,reloadBuff:1.5,crit:0,weapon:1016,
+      damageBuff:2.25,reloadBuff:1.5,crit:0,weapon:1016,
     },{
       name:'PlayerHalfSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1017,
     },{
       name:'PlayerElectricKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1019,
+    },{
+      name:'Decoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },
 
     //mark c
@@ -8260,6 +8273,9 @@ types={
 
     {
       name:'Buster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'EnderBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'SneakBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
@@ -16748,15 +16764,15 @@ types={
 			name:'Flame Stream',
 			ammo:80,
 			damage:20,
-			cooldown:2,
+			cooldown:3,
 			stop:45,
-			reload:1,
+			reload:2,
 			speed:0.95,
       uses:160,
 		},{
 			name:'Sheller',
 			ammo:2,
-			damage:300,
+			damage:250,
 			cooldown:30,
 			stop:90,
 			reload:30,
@@ -17197,10 +17213,10 @@ types={
 		},{
 			name:'Blast Launcher',
 			ammo:2,
-			damage:110,
-			cooldown:20,
-			stop:135,
-			reload:40,
+			damage:100,
+			cooldown:24,
+			stop:144,
+			reload:48,
 			speed:0.8,
       uses:14,
 		},{
@@ -17269,12 +17285,12 @@ types={
 		},{
 			name:'Pump Shotgun',
 			ammo:3,
-			damage:25,
+			damage:24,
 			cooldown:25,
 			stop:60,
-			reload:12,
+			reload:20,
 			speed:1.15,
-      uses:21,
+      uses:18,
 		},{
 			name:'Tiny',
 			ammo:10,
@@ -17926,10 +17942,10 @@ types={
 		},{
 			name:'Machine Medic C',
 			ammo:40,
-			damage:40,
+			damage:45,
 			cooldown:5,
 			stop:150,
-			reload:1,
+			reload:6,
 			speed:0.8,
       uses:120,
 		},{
@@ -17953,7 +17969,7 @@ types={
 		},{
 			name:'Software C',
 			ammo:1,
-			damage:600,
+			damage:500,
 			cooldown:720,
 			stop:720,
 			reload:720,
@@ -18154,7 +18170,7 @@ types={
 			damage:30,
 			cooldown:15,
 			stop:72,
-			reload:9,
+			reload:10,
 			speed:1.15,
       uses:30,
 		},{
@@ -19017,7 +19033,7 @@ types={
 			ammo:10,
 			damage:40,
 			cooldown:3,
-			stop:45,
+			stop:30,
 			reload:2,
 			speed:0.95,
       uses:60,
@@ -19385,9 +19401,9 @@ types={
 			name:'Black Box',
 			ammo:2,
 			damage:100,
-			cooldown:20,
-			stop:135,
-			reload:40,
+			cooldown:24,
+			stop:144,
+			reload:44,
 			speed:0.8,
       uses:14,
 		},{
@@ -19417,6 +19433,24 @@ types={
 			reload:120,
 			speed:1.35,
       uses:10,
+		},{
+			name:'Transmission C',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:60,
+			reload:8,
+			speed:1.2,
+      uses:50,
+		},{
+			name:'Decoy Watch',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 
     /*{

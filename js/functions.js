@@ -68,7 +68,7 @@ function setupRules(){
 				a==372||a==373||a==375||a==376||a==383||
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
-                a==431||a==435,
+                a==431||a==435||a==437,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -143,11 +143,11 @@ function setupRules(){
             hitmed:a==9||a==10||a==11||a==38||a==63||
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
-                a==409||a==418||a==434,
+                a==409||a==418||a==434||a==436,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
-                a==398||a==409||a==418||a==434,
+                a==398||a==409||a==418||a==434||a==436,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -6839,6 +6839,9 @@ function generateLevel(info,layer){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
                             if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
+                                if(game.classWeapon){
+                                    entities.players[c].assort.coreTick=game.weaponTick[c]-1
+                                }
                             }
                             game.index++
                         }
@@ -6860,6 +6863,9 @@ function generateLevel(info,layer){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
                             if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
+                                if(game.classWeapon){
+                                    entities.players[c].assort.coreTick=game.weaponTick[c]-1
+                                }
                             }
                             game.index++
                             if(game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116){
@@ -6879,6 +6885,9 @@ function generateLevel(info,layer){
                             entities.players.push(new player(layer,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],c+1,0,[],true,type,game.index))
                             if(!game.classicWeapon&&c<game.gaming&&game.level!=13&&game.level!=14&&game.level!=48&&game.level!=115&&game.level!=116){
                                 game.weaponTick[c]++
+                                if(game.classWeapon){
+                                    entities.players[c].assort.coreTick=game.weaponTick[c]-1
+                                }
                             }
                             game.index++
                             if(game.level==13||game.level==14||game.level==48||game.level==57||game.level==80||game.level==115||game.level==116){ 
@@ -7819,10 +7828,14 @@ function generateLevel(info,layer){
                 let split=[]
                 let possible=range(0,game.players)
                 let typeList=[range(0,10),range(0,10)]
-                for(let a=0,la=possible.length/2;a<la;a++){
-                    let index=floor(random(0,possible.length))
-                    split.push(possible[index])
-                    possible.splice(index,1)
+                if(duel.trigger){
+                    split=range(game.players*0.5,game.players)
+                }else{
+                    for(let a=0,la=possible.length/2;a<la;a++){
+                        let index=floor(random(0,possible.length))
+                        split.push(possible[index])
+                        possible.splice(index,1)
+                    }
                 }
                 let loc=[]
                 for(let c=0,lc=2;c<lc;c++){
@@ -7846,6 +7859,7 @@ function generateLevel(info,layer){
                 //classPick=[6,6]
 
                 options=[range(0,num),range(0,num)]
+                teamTick=[0,0]
                 for(let a=0,la=game.players;a<la;a++){
                     let team=split.includes(a)?1:0
                     entities.players[a].id=team+1
@@ -7856,14 +7870,55 @@ function generateLevel(info,layer){
                     entities.players[a].position.y=loc[team][1]
                     if(game.classWeapon){
                         //DO NOT change the 10s here! they represent 10 classes, not 10 variants!
-                        if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
-                            let index=floor(random(0,options[team].length))
-                            if(classPick[team]==10){
-                                entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+options[team][index])
+                        if(duel.trigger){
+                            let index=floor(random(0,typeList[team].length))
+                            let tick=typeList[team][index]
+                            if(team==0){
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][duel.experiment[0]][0][duel.experiment[1][0]==-1?tick%listing[4][duel.experiment[0]][0].length:duel.experiment[1][0]],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][duel.experiment[0]][1][duel.experiment[1][1]==-1?tick%listing[4][duel.experiment[0]][1].length:duel.experiment[1][1]],types.player)
+                                if(listing[4][duel.experiment[0]].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][duel.experiment[0]][1][duel.experiment[1][2]==-1?tick%listing[4][duel.experiment[0]][2].length:duel.experiment[1][2]],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:duel.experiment[0]}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.experiment[0])
                             }else{
-                                entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][0],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][0],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
                             }
-                            options[team].splice(index,1)
+                            typeList[team].splice(index,1)
+                        }else if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
+                            //let index=floor(random(0,options[team].length))
+                            let tick=classPick[team]
+                            if(tick==10){
+                                let tick=teamTick[team]
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                                //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+options[team][index])
+                            }else{
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                                //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                            }
+                            //options[team].splice(index,1)
                         }else if(a<game.gaming){
                             if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
                                 game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
@@ -7882,16 +7937,17 @@ function generateLevel(info,layer){
                             //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             let tick=typeList[team][index]
                             entities.players[a].assort.storeSubWeapon=[]
-                            entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
                             entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
                             entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
                             if(listing[4][tick].length>=3){
                                 entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
                             }
                             game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                            entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
                             typeList[team].splice(index,1)
                         }
                     }
+                    teamTick[team]++
                 }
                 if(game.level==76){
                     game.point=[-1,-1]
@@ -8772,7 +8828,7 @@ function generateLevel(info,layer){
             game.point=[-1,-1,-1]
         break
     }
-    if(entities.players.length<game.players){
+    if(entities.players.filter(player=>player.id>=0).length<game.players){
         print(`Player Spawning Failed`)
     }
     for(let c=0,lc=game.players;c<lc;c++){
@@ -8808,6 +8864,13 @@ function generateLevel(info,layer){
             entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.numKey[a])
             entities.players[a].position.x=game.edge[0]*0.5+(mix[a]*1000-la*500+500)*(game.level==117?1.25:1)
             entities.players[a].position.y+=500
+        }
+    }else if(!rules.teamMode&&duel.trigger){
+        for(let a=0,la=game.players;a<la;a++){
+            game.loadout[a]=[
+                {main:duel.sets[a].map((item,index)=>findName(listing[4][duel.numKey[a]][index][item],types.player)),class:duel.numKey[a]}
+            ]
+            entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.numKey[a])
         }
     }
 }
@@ -10353,7 +10416,7 @@ function setupLists(){
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergun`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazooka`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncher`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
+            [`PlayerHeavyRocketLauncher`,`PlayerBazooka`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerPocketRocket`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJump`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
@@ -10362,21 +10425,21 @@ function setupLists(){
             [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`],
             [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySweeper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerHeavyTimeBomb`,`PlayerDonker`],
         ],[
-            [`PlayerLMG`,`PlayerMinigun`,`PlayerMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerSpiralLMG`],
-            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerAmmoPack`],
+            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerSpiralLMG`],
+            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerTapper`],
             [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`,`PlayerHalfSentry`],
         ],[
-            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerTransmission`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`],
-            [`PlayerHealBolt`,`PlayerChroma`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerAmmoPack`],
+            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
+            [`PlayerHealBolt`,`PlayerChroma`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
             [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerClassicSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerDerringer`,`PlayerViewerRevolver`,`PlayerSpeedRevolver`],
             [`PlayerKnife`,`PlayerElectricKnife`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
-            [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerGhostWatch`,`PlayerSurvivalWatch`],
+            [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerW`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerPushAssaultRifle`,`PlayerLightUzi`],

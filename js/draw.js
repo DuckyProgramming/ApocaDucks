@@ -981,270 +981,242 @@ function mainloop(){
         break
         case 'main':
             //let startTime=performance.now()
-            
             let effective=[]
             let key=[]
             let bs=[]
-            for(let c=0,lc=game.gaming;c<lc;c++){
-                if(rules.grad==1){
-                    graphics.main[c].fill(0)
-                    graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
-                }else if(rules.grad==2){
-                    graphics.main[c].fill(0)
-                    graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
-                }else{
-                    graphics.main[c].background(0)
-                }
-                key.push(1)
-                if(game.level==6||game.level==45){
-                    key[c]*=0.8
-                }
-                //key[c]*=10
-                bs.push([])
-                let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369||(entities.players[c].weaponType==743||entities.players[c].weaponType==1002)&&entities.players[c].subWeaponAType==728||entities.players[c].subWeaponAType==988?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.425*key[c]:0
-                let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636
-                let center=entities.players[c]
-                let special=false
-                //special=true
-                if(entities.players[c].weaponType==275){
-                    for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==163&&entities.projectiles[a].id==entities.players[c].id){
-                            center=entities.projectiles[a]
-                            a=la
-                            special=true
+            if(!game.noVisuals){
+                for(let c=0,lc=game.gaming;c<lc;c++){
+                    if(rules.grad==1){
+                        graphics.main[c].fill(0)
+                        graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
+                    }else if(rules.grad==2){
+                        graphics.main[c].fill(0)
+                        graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
+                    }else{
+                        graphics.main[c].background(0)
+                    }
+                    key.push(1)
+                    if(game.level==6||game.level==45){
+                        key[c]*=0.8
+                    }
+                    //key[c]*=10
+                    bs.push([])
+                    let side=entities.players[c].weaponType==340||entities.players[c].weaponType==368||entities.players[c].weaponType==369||(entities.players[c].weaponType==743||entities.players[c].weaponType==1002)&&entities.players[c].subWeaponAType==728||entities.players[c].subWeaponAType==988?lsin(entities.players[c].direction.back)*graphics.main[c].width*0.425*key[c]:0
+                    let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636
+                    let center=entities.players[c]
+                    let special=false
+                    //special=true
+                    if(entities.players[c].weaponType==275){
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].type==163&&entities.projectiles[a].id==entities.players[c].id){
+                                center=entities.projectiles[a]
+                                a=la
+                                special=true
+                            }
+                        }
+                    }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316)&&entities.projectiles[a].id==entities.players[c].id){
+                                center=entities.projectiles[a]
+                                a=la
+                                special=true
+                                key[c]*=(game.level==7?1.5:game.players>=3?3:2)
+                            }
+                        }
+                    }else if(entities.players[c].playerData.name=='PlayerRemoteControl'||entities.players[c].assort.remote){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
+                                center=entities.players[a]
+                                a=la
+                                special=true
+                            }
+                        }
+                    }else if(entities.players[c].playerData.name=='PlayerDelta'){
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(entities.projectiles[a].type==316&&entities.projectiles[a].id==entities.players[c].id){
+                                center=entities.projectiles[a]
+                                a=la
+                                special=true
+                                key[c]*=(game.level==7?1.5:game.players>=3?3:2)
+                            }
+                        }
+                    }else if(entities.players[c].playerData.name=='PlayerHypnosis'){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
+                                center=entities.players[a]
+                                a=la
+                                special=true
+                            }
                         }
                     }
-                }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
-                    for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if((entities.projectiles[a].type==280||entities.projectiles[a].type==316)&&entities.projectiles[a].id==entities.players[c].id){
-                            center=entities.projectiles[a]
-                            a=la
-                            special=true
-                            key[c]*=(game.level==7?1.5:game.players>=3?3:2)
-                        }
-                    }
-                }else if(entities.players[c].playerData.name=='PlayerRemoteControl'||entities.players[c].assort.remote){
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].playerData.name=='ConstructRemote'&&entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
-                            center=entities.players[a]
-                            a=la
-                            special=true
-                        }
-                    }
-                }else if(entities.players[c].playerData.name=='PlayerDelta'){
-                    for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==316&&entities.projectiles[a].id==entities.players[c].id){
-                            center=entities.projectiles[a]
-                            a=la
-                            special=true
-                            key[c]*=(game.level==7?1.5:game.players>=3?3:2)
-                        }
-                    }
-                }else if(entities.players[c].playerData.name=='PlayerHypnosis'){
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].builder==entities.players[c].index&&entities.players[a].remote){
-                            center=entities.players[a]
-                            a=la
-                            special=true
-                        }
-                    }
-                }
-                if(!special){
-                    key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):min(
-                        game.edge[0]/graphics.main[0].width,entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
-                        entities.players[c].weaponRules.seeFar
-                        ?(game.level==7?1.5:1.75):
-                        entities.players[c].weaponType==845||
-                        entities.players[c].weaponType==846||
-                        entities.players[c].rules.class&&(
-                            entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
-                            entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866||
-                            entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912||
-                            entities.players[c].subWeaponAType==1012||entities.players[c].subWeaponBType==1012
-                        )?1.25:
-                        entities.players[c].weaponType==613?0.75:
-                        1
-                    )
-                }
-                if(game.level==7){
-                    effective.push([center.position.x+side,center.position.y])
-                }else if(game.level==16){
-                    effective.push([center.position.x+side,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
-                }else{
-                    effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
-                }
-            }
-            for(let a=0,la=graphics.main.length;a<la;a++){
-                switch(game.level){
-                    case 6: case 45:
-                        graphics.main[a].image(
-                            graphics.pane[graphics.pane.length-1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
-                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                    if(!special){
+                        key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):min(
+                            game.edge[0]/graphics.main[0].width,entities.players[c].blindTime>0?0.5:entities.players[c].parachute?(game.level==39||game.level==41||game.level==43||game.level==52?2:3):
+                            entities.players[c].weaponRules.seeFar
+                            ?(game.level==7?1.5:1.75):
+                            entities.players[c].weaponType==845||
+                            entities.players[c].weaponType==846||
+                            entities.players[c].rules.class&&(
+                                entities.players[c].subWeaponAType==865||entities.players[c].subWeaponBType==865||
+                                entities.players[c].subWeaponAType==866||entities.players[c].subWeaponBType==866||
+                                entities.players[c].subWeaponAType==912||entities.players[c].subWeaponBType==912||
+                                entities.players[c].subWeaponAType==1012||entities.players[c].subWeaponBType==1012
+                            )?1.25:
+                            entities.players[c].weaponType==613?0.75:
+                            1
                         )
-                    break
-                }
-                graphics.main[a].push()
-                graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
-                graphics.main[a].scale(1/key[a])
-                if(rules.backed){
-                    graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
-                    for(let b=0,lb=entities.walls[2].length;b<lb;b++){
-                        entities.walls[2][b].display(graphics.main[a])
                     }
-                    graphics.main[a].translate(-effective[a][0]+round(effective[a][0]),-effective[a][1]+round(effective[a][1]))
-                }else{
-                    graphics.main[a].translate(-effective[a][0],-effective[a][1])
-                }
-                if(display.anim>0){
-                    display.anim-=0.01
-                }
-                if(display.win>0){
-                    display.win-=0.01
-                }
-            }
-            for(let c=0,lc=game.gaming;c<lc;c++){
-                for(let a=0,la=run.fore.length;a<la;a++){
-                    for(let b=0,lb=run.fore[a].length;b<lb;b++){
-                        if(run.fore[a][b].width>0&&run.fore[a][b].height>0){
-                            if(
-                                run.fore[a][b].forceDisplay||
-                                run.fore[a][b].position.x+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                run.fore[a][b].position.y-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
-                                game.level==7&&a==2&&
-                                run.fore[a][b].internalBounder.position.x+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                run.fore[a][b].internalBounder.position.x-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                run.fore[a][b].internalBounder.position.y+run.fore[a][b].internalBounder.height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                            ){
-                                run.fore[a][b].display(graphics.main[c])
-                                if(a==(rules.backed?3:2)){
-                                    bs[c].push([a,b])
-                                }
-                            }else if(game.level==16){
-                                let bounce=[
-                                    [-game.edge[0],0],
-                                    [game.edge[0],0],
-                                ]
-                                for(let d=0,ld=bounce.length;d<ld;d++){
-                                    if(
-                                        run.fore[a][b].position.x+bounce[d][0]+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.x+bounce[d][0]-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.y+bounce[d][1]+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                                    ){
-                                        run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==(rules.backed?3:2)){
-                                            bs[c].push([a,b])
-                                        }
-                                        d=ld
-                                    }
-                                }
-                            }
-                            if(a==rules.backed?3:2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
-                                run.fore[a][b].displayOver(graphics.main[c])
-                            }
-                            if(game.level==7){
-                                let bounce=[
-                                    [-game.edge[0],-game.edge[1]],
-                                    [-game.edge[0],0],
-                                    [-game.edge[0],game.edge[1]],
-                                    [0,-game.edge[1]],
-                                    [0,game.edge[1]],
-                                    [game.edge[0],-game.edge[1]],
-                                    [game.edge[0],0],
-                                    [game.edge[0],game.edge[1]],
-                                ]
-                                for(let d=0,ld=bounce.length;d<ld;d++){
-                                    if(
-                                        run.fore[a][b].position.x+bounce[d][0]+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.x+bounce[d][0]-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.y+bounce[d][1]+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                        run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
-                                        game.level==7&&a==2&&
-                                        run.fore[a][b].internalBounder.position.x+bounce[d][0]+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].internalBounder.position.x+bounce[d][0]-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                        run.fore[a][b].internalBounder.position.y+bounce[d][1]+run.fore[a][b].internalBounder.height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                        run.fore[a][b].internalBounder.position.y+bounce[d][1]-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                                    ){
-                                        run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
-                                        if(a==2){
-                                            bs[c].push([a,b])
-                                        }
-                                        d=ld
-                                    }
-                                }
-                            }
-                        }
+                    if(game.level==7){
+                        effective.push([center.position.x+side,center.position.y])
+                    }else if(game.level==16){
+                        effective.push([center.position.x+side,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                    }else{
+                        effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                     }
                 }
-            }
-            for(let a=0,la=game.gaming;a<la;a++){
-                if(game.pane){
-                    if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
-                        //let startTime=performance.now()
-
-                        if(key[a]!=graphics.key[a]){
-                            graphics.pane[a].clear()
-                        }else{
-                            graphics.paneTemp.clear()
-                            graphics.paneTemp.image(
-                                graphics.pane[a],
-                                graphics.pane[a].width/2,graphics.pane[a].height/2,
-                                graphics.pane[a].width,graphics.pane[a].height
+                for(let a=0,la=graphics.main.length;a<la;a++){
+                    switch(game.level){
+                        case 6: case 45:
+                            graphics.main[a].image(
+                                graphics.pane[graphics.pane.length-1],graphics.main[a].width/2,graphics.main[a].height/2,graphics.main[a].width,graphics.main[a].height,
+                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
                             )
-                            graphics.pane[a].clear()
+                        break
+                    }
+                    graphics.main[a].push()
+                    graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
+                    graphics.main[a].scale(1/key[a])
+                    if(rules.backed){
+                        graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
+                        for(let b=0,lb=entities.walls[2].length;b<lb;b++){
+                            entities.walls[2][b].display(graphics.main[a])
                         }
-                        graphics.pane[a].push()
-                        graphics.pane[a].translate(
-                            graphics.pane[a].width/2-round(effective[a][0]/key[a]),
-                            graphics.pane[a].height/2-round(effective[a][1]/key[a])
-                        )
-                        graphics.pane[a].scale(1/key[a])
-                        let b2s=[]
-                        for(let b=0,lb=entities.walls[0].length;b<lb;b++){
-                            if(
-                                game.level==130&&entities.walls[0][b].type==62||
-                                !(game.level==100&&entities.walls[0][b].type==37)&&
-                                (
-                                    entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                    entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
+                        graphics.main[a].translate(-effective[a][0]+round(effective[a][0]),-effective[a][1]+round(effective[a][1]))
+                    }else{
+                        graphics.main[a].translate(-effective[a][0],-effective[a][1])
+                    }
+                    if(display.anim>0){
+                        display.anim-=0.01
+                    }
+                    if(display.win>0){
+                        display.win-=0.01
+                    }
+                }
+                for(let c=0,lc=game.gaming;c<lc;c++){
+                    for(let a=0,la=run.fore.length;a<la;a++){
+                        for(let b=0,lb=run.fore[a].length;b<lb;b++){
+                            if(run.fore[a][b].width>0&&run.fore[a][b].height>0){
+                                if(
+                                    run.fore[a][b].forceDisplay||
+                                    run.fore[a][b].position.x+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                    run.fore[a][b].position.x-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                    run.fore[a][b].position.y+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                    run.fore[a][b].position.y-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
                                     game.level==7&&a==2&&
-                                    entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                    entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                    entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
-                                )&&
-                                (
-                                    key[a]!=graphics.key[a]||!(
-                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
-                                        game.level==7&&a==2&&   
-                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
-                                    )
-                                )
-                            ){
-                                entities.walls[0][b].display(graphics.pane[a])
-                                b2s.push(b)
+                                    run.fore[a][b].internalBounder.position.x+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                    run.fore[a][b].internalBounder.position.x-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                    run.fore[a][b].internalBounder.position.y+run.fore[a][b].internalBounder.height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                    run.fore[a][b].internalBounder.position.y-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                                ){
+                                    run.fore[a][b].display(graphics.main[c])
+                                    if(a==(rules.backed?3:2)){
+                                        bs[c].push([a,b])
+                                    }
+                                }else if(game.level==16){
+                                    let bounce=[
+                                        [-game.edge[0],0],
+                                        [game.edge[0],0],
+                                    ]
+                                    for(let d=0,ld=bounce.length;d<ld;d++){
+                                        if(
+                                            run.fore[a][b].position.x+bounce[d][0]+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.x+bounce[d][0]-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.y+bounce[d][1]+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                                        ){
+                                            run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
+                                            if(a==(rules.backed?3:2)){
+                                                bs[c].push([a,b])
+                                            }
+                                            d=ld
+                                        }
+                                    }
+                                }
+                                if(a==rules.backed?3:2&&(run.fore[a][b].type==31||run.fore[a][b].type==33||run.fore[a][b].type==36||run.fore[a][b].type==42)&&c==0){
+                                    run.fore[a][b].displayOver(graphics.main[c])
+                                }
+                                if(game.level==7){
+                                    let bounce=[
+                                        [-game.edge[0],-game.edge[1]],
+                                        [-game.edge[0],0],
+                                        [-game.edge[0],game.edge[1]],
+                                        [0,-game.edge[1]],
+                                        [0,game.edge[1]],
+                                        [game.edge[0],-game.edge[1]],
+                                        [game.edge[0],0],
+                                        [game.edge[0],game.edge[1]],
+                                    ]
+                                    for(let d=0,ld=bounce.length;d<ld;d++){
+                                        if(
+                                            run.fore[a][b].position.x+bounce[d][0]+run.fore[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.x+bounce[d][0]-run.fore[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.y+bounce[d][1]+run.fore[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                            run.fore[a][b].position.y+bounce[d][1]-run.fore[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)||
+                                            game.level==7&&a==2&&
+                                            run.fore[a][b].internalBounder.position.x+bounce[d][0]+run.fore[a][b].internalBounder.width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].internalBounder.position.x+bounce[d][0]-run.fore[a][b].internalBounder.width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                            run.fore[a][b].internalBounder.position.y+bounce[d][1]+run.fore[a][b].internalBounder.height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                            run.fore[a][b].internalBounder.position.y+bounce[d][1]-run.fore[a][b].internalBounder.height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                                        ){
+                                            run.fore[a][b].display(graphics.main[c],bounce[d][0],bounce[d][1])
+                                            if(a==2){
+                                                bs[c].push([a,b])
+                                            }
+                                            d=ld
+                                        }
+                                    }
+                                }
                             }
                         }
-                        if(game.level==30||game.level==56||game.level==128){
+                    }
+                }
+                for(let a=0,la=game.gaming;a<la;a++){
+                    if(game.pane){
+                        if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
+                            //let startTime=performance.now()
+
+                            if(key[a]!=graphics.key[a]){
+                                graphics.pane[a].clear()
+                            }else{
+                                graphics.paneTemp.clear()
+                                graphics.paneTemp.image(
+                                    graphics.pane[a],
+                                    graphics.pane[a].width/2,graphics.pane[a].height/2,
+                                    graphics.pane[a].width,graphics.pane[a].height
+                                )
+                                graphics.pane[a].clear()
+                            }
+                            graphics.pane[a].push()
+                            graphics.pane[a].translate(
+                                graphics.pane[a].width/2-round(effective[a][0]/key[a]),
+                                graphics.pane[a].height/2-round(effective[a][1]/key[a])
+                            )
+                            graphics.pane[a].scale(1/key[a])
+                            let b2s=[]
                             for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                                 if(
-                                    (entities.walls[0][b].type==37)&&
+                                    game.level==130&&entities.walls[0][b].type==62||
+                                    !(game.level==100&&entities.walls[0][b].type==37)&&
                                     (
                                         entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
                                         entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
                                         entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                        entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                        entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
+                                        game.level==7&&a==2&&
+                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
                                     )&&
                                     (
                                         key[a]!=graphics.key[a]||!(
@@ -1264,341 +1236,374 @@ function mainloop(){
                                     b2s.push(b)
                                 }
                             }
-                        }
-                        for(let b=0,lb=b2s.length;b<lb;b++){
-                            entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
-                        }
-                        if(rules.overpane){
-                            for(let b=0,lb=b2s.length;b<lb;b++){
-                                entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
-                            }
-                        }
-                        graphics.pane[a].pop()
-                        if(key[a]==graphics.key[a]){
-                            graphics.pane[a].erase()
-                            graphics.pane[a].fill(0)
-                            graphics.pane[a].noStroke()
-                            graphics.pane[a].rect(
-                                round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
-                                round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
-                                graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
-                            )
-                            graphics.pane[a].noErase()
-                            graphics.pane[a].image(
-                                graphics.paneTemp,
-                                round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
-                                round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
-                                graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
-                            )
-                        }
-                        graphics.panePoint[a].position.x=effective[a][0]
-                        graphics.panePoint[a].position.y=effective[a][1]
-                        graphics.panePoint[a].width=graphics.main[0].width*key[a]*2
-                        graphics.panePoint[a].height=graphics.main[0].height*key[a]*2
-                        graphics.key[a]=key[a]
-
-                        //let endTime=performance.now()
-                        //print(`Pane: ${endTime - startTime} milliseconds`)
-                    }
-                    graphics.main[a].image(
-                        graphics.pane[a],
-                        graphics.panePoint[a].position.x,
-                        graphics.panePoint[a].position.y,
-                        graphics.panePoint[a].width,
-                        graphics.panePoint[a].height
-                    )
-                }else if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
-                    if(dev.sight){
-                        let h=graphics.pane[0].height*key[a]*graphics.main[a].width/graphics.pane[0].width
-                        graphics.main[a].image(
-                            graphics.pane[0],graphics.main[a].width*0.5*key[a],h*0.5,graphics.main[a].width*key[a],h
-                        )
-                    }else{
-                        graphics.main[a].image(
-                            graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                            effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                        )
-                    }
-                    if(game.level==7){
-                        if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                            if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
-                                graphics.main[a].image(
-                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                    effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                                )
-                            }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
-                                graphics.main[a].image(
-                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                    effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                                )
-                            }
-                        }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                            if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
-                                graphics.main[a].image(
-                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                    effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                                )
-                            }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
-                                graphics.main[a].image(
-                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                    effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                                )
-                            }
-                        }
-                        if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                        }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                        }
-                    }else if(game.level==16){
-                        if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]-(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                        }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
-                            graphics.main[a].image(
-                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
-                                effective[a][0]+(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
-                            )
-                        }
-                    }
-                }
-                graphics.main[a].noStroke()
-                if(display.anim>0){
-                    graphics.main[a].fill(255,display.anim)
-                    graphics.main[a].textSize(60)
-                    graphics.main[a].text('Wave '+display.cycle,entities.players[a].position.x,entities.players[a].position.y-100+100*display.anim)
-                }
-                if(display.win>0){
-                    graphics.main[a].fill(255,display.win)
-                    graphics.main[a].textSize(60)
-                    graphics.main[a].text('Battle Royale',entities.players[a].position.x,entities.players[a].position.y-100+100*display.win)
-                }
-                graphics.main[a].fill(255)
-                graphics.main[a].textSize(20)
-                if(!game.attacker){
-                    switch(game.level){
-                        case 0: case 1: case 2:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3-40)
-                        break
-                        case 3:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2-100,game.edge[1]/3-120)
-                        break
-                        case 4:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3)
-                        break
-                        case 5:
-                            graphics.main[a].text('Weapons\nHere',150,game.edge[1]-320)
-                        break
-                        case 6:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2+1300,game.edge[1]-120)
-                        break
-                        case 7:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/2+360)
-                        break
-                        case 8:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]-150,game.edge[1]-520)
-                        break
-                        case 15:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]-100,800)
-                        break
-                        case 17:
-                            graphics.main[a].text('Weapons\nHere',150,game.edge[1]-120)
-                        break
-                        case 18:
-                            graphics.main[a].text('Weapons\nHere',100,game.edge[1]-220)
-                        break
-                        case 20: case 46:
-                            graphics.main[a].text('Weapons\nHere',2250,965)
-                        break
-                        case 21:
-                            graphics.main[a].text('Weapons\nHere',3500,1200)
-                        break
-                        case 22: case 23:
-                            if(game.margin){
-                                graphics.main[a].noFill()
-                                graphics.main[a].stroke(255)
-                                graphics.main[a].strokeWeight(10)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
-                                }
-                                graphics.main[a].fill(255)
-                                graphics.main[a].noStroke()
-                                graphics.main[a].textSize(100)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1]*9/8)
-                                }
-                            }
-                        break
-                        case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
-                        case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
-                        case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
-                        case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
-                        case 100: case 101: case 103: case 104: case 105: case 108: case 109:
-                            if(game.margin){
-                                graphics.main[a].noFill()
-                                graphics.main[a].stroke(255)
-                                graphics.main[a].strokeWeight(10)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
-                                }
-                                graphics.main[a].fill(255)
-                                graphics.main[a].noStroke()
-                                graphics.main[a].textSize(100)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
-                                }
-                            }
-                        break
-                        case 30:
-                            if(game.margin){
-                                graphics.main[a].noFill()
-                                graphics.main[a].stroke(255)
-                                graphics.main[a].strokeWeight(10)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
-                                }
-                                graphics.main[a].fill(255)
-                                graphics.main[a].noStroke()
-                                graphics.main[a].textSize(100)
-                                for(let b=0,lb=game.sectors.length;b<lb;b++){
-                                    graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
-                                }
-                                graphics.main[a].fill(0,255,0)
-                                for(let b=0,lb=levels[game.level].length;b<lb;b++){
-                                    for(let c=0,lc=levels[game.level][b].length;c<lc;c++){
-                                        if(int(levels[game.level][b][c])>=0){
-                                            graphics.main[a].text(int(levels[game.level][b][c]),(c+0.5)*game.tileset[0],(b+0.5)*game.tileset[1])
-                                        }
+                            if(game.level==30||game.level==56||game.level==128){
+                                for(let b=0,lb=entities.walls[0].length;b<lb;b++){
+                                    if(
+                                        (entities.walls[0][b].type==37)&&
+                                        (
+                                            entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                            entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                            entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                            entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                        )&&
+                                        (
+                                            key[a]!=graphics.key[a]||!(
+                                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                                game.level==7&&a==2&&   
+                                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
+                                            )
+                                        )
+                                    ){
+                                        entities.walls[0][b].display(graphics.pane[a])
+                                        b2s.push(b)
                                     }
                                 }
                             }
-                        break
-                        case 106:
-                            graphics.main[a].text('Weapons\nHere',game.edge[0]*0.5,game.edge[1]-game.tileset[1]*6.5)
-                        break
-                        case 107:
-                            graphics.main[a].text('Weapons\nHere',game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21)
-                        break
-                    }
-                }
-            }
-            for(let a=0,la=bs.length;a<la;a++){
-                for(let b=0,lb=bs[a].length;b<lb;b++){
-                    if(!(bs[a][b][0]==(rules.backed?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
-                        run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
-                    }
-                }
-            }
-            for(let c=0,lc=game.gaming;c<lc;c++){
-                for(let a=0,la=run.info.length;a<la;a++){
-                    for(let b=0,lb=run.info[a].length;b<lb;b++){
-                        if(
-                            run.info[a][b].position.x+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                            run.info[a][b].position.x-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                            run.info[a][b].position.y+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                            run.info[a][b].position.y-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                        ){
-                            run.info[a][b].displayInfo(graphics.main[c])
-                        }else if(game.level==16){
-                            let bounce=[
-                                [-game.edge[0],0],
-                                [game.edge[0],0],
-                            ]
-                            for(let d=0,ld=bounce.length;d<ld;d++){
-                                if(
-                                    run.info[a][b].position.x+bounce[d][0]+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                    run.info[a][b].position.x+bounce[d][0]-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                    run.info[a][b].position.y+bounce[d][1]+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                    run.info[a][b].position.y+bounce[d][1]-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                                ){
-                                    run.info[a][b].displayInfo(graphics.main[c],bounce[d][0],bounce[d][1])
+                            for(let b=0,lb=b2s.length;b<lb;b++){
+                                entities.walls[0][b2s[b]].displayOver(graphics.pane[a])
+                            }
+                            if(rules.overpane){
+                                for(let b=0,lb=b2s.length;b<lb;b++){
+                                    entities.walls[0][b2s[b]].displayOver2(graphics.pane[a])
                                 }
                             }
+                            graphics.pane[a].pop()
+                            if(key[a]==graphics.key[a]){
+                                graphics.pane[a].erase()
+                                graphics.pane[a].fill(0)
+                                graphics.pane[a].noStroke()
+                                graphics.pane[a].rect(
+                                    round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
+                                    round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
+                                    graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                                )
+                                graphics.pane[a].noErase()
+                                graphics.pane[a].image(
+                                    graphics.paneTemp,
+                                    round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
+                                    round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
+                                    graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                                )
+                            }
+                            graphics.panePoint[a].position.x=effective[a][0]
+                            graphics.panePoint[a].position.y=effective[a][1]
+                            graphics.panePoint[a].width=graphics.main[0].width*key[a]*2
+                            graphics.panePoint[a].height=graphics.main[0].height*key[a]*2
+                            graphics.key[a]=key[a]
+
+                            //let endTime=performance.now()
+                            //print(`Pane: ${endTime - startTime} milliseconds`)
+                        }
+                        graphics.main[a].image(
+                            graphics.pane[a],
+                            graphics.panePoint[a].position.x,
+                            graphics.panePoint[a].position.y,
+                            graphics.panePoint[a].width,
+                            graphics.panePoint[a].height
+                        )
+                    }else if(game.level!=15&&game.level!=18&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=24){
+                        if(dev.sight){
+                            let h=graphics.pane[0].height*key[a]*graphics.main[a].width/graphics.pane[0].width
+                            graphics.main[a].image(
+                                graphics.pane[0],graphics.main[a].width*0.5*key[a],h*0.5,graphics.main[a].width*key[a],h
+                            )
+                        }else{
+                            graphics.main[a].image(
+                                graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                            )
                         }
                         if(game.level==7){
-                            let bounce=[
-                                [-game.edge[0],-game.edge[1]],
-                                [-game.edge[0],0],
-                                [-game.edge[0],game.edge[1]],
-                                [0,-game.edge[1]],
-                                [0,game.edge[1]],
-                                [game.edge[0],-game.edge[1]],
-                                [game.edge[0],0],
-                                [game.edge[0],game.edge[1]],
-                            ]
-                            for(let d=0,ld=bounce.length;d<ld;d++){
-                                if(
-                                    run.info[a][b].position.x+bounce[d][0]+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
-                                    run.info[a][b].position.x+bounce[d][0]-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
-                                    run.info[a][b].position.y+bounce[d][1]+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
-                                    run.info[a][b].position.y+bounce[d][1]-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
-                                ){
-                                    run.info[a][b].displayInfo(graphics.main[c],bounce[d][0],bounce[d][1])
+                            if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                                if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                                    graphics.main[a].image(
+                                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                        effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                    )
+                                }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                                    graphics.main[a].image(
+                                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                        effective[a][0]-game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                    )
+                                }
+                            }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                                if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                                    graphics.main[a].image(
+                                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                        effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                    )
+                                }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                                    graphics.main[a].image(
+                                        graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                        effective[a][0]+game.edge[0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                    )
+                                }
+                            }
+                            if(effective[a][1]>game.edge[1]-graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]-game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }else if(effective[a][1]<graphics.main[a].height*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-graphics.main[a].width/2*key[a],effective[a][1]+game.edge[1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }
+                        }else if(game.level==16){
+                            if(effective[a][0]>game.edge[0]-graphics.main[a].width*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]-(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }else if(effective[a][0]<graphics.main[a].width*key[a]*0.5){
+                                graphics.main[a].image(
+                                    graphics.pane[0],effective[a][0],effective[a][1],graphics.main[a].width*key[a],graphics.main[a].height*key[a],
+                                    effective[a][0]+(game.edge[0]-1)-graphics.main[a].width/2*key[a],effective[a][1]-graphics.main[a].height/2*key[a],graphics.main[a].width*key[a],graphics.main[a].height*key[a]
+                                )
+                            }
+                        }
+                    }
+                    graphics.main[a].noStroke()
+                    if(display.anim>0){
+                        graphics.main[a].fill(255,display.anim)
+                        graphics.main[a].textSize(60)
+                        graphics.main[a].text('Wave '+display.cycle,entities.players[a].position.x,entities.players[a].position.y-100+100*display.anim)
+                    }
+                    if(display.win>0){
+                        graphics.main[a].fill(255,display.win)
+                        graphics.main[a].textSize(60)
+                        graphics.main[a].text('Battle Royale',entities.players[a].position.x,entities.players[a].position.y-100+100*display.win)
+                    }
+                    graphics.main[a].fill(255)
+                    graphics.main[a].textSize(20)
+                    if(!game.attacker){
+                        switch(game.level){
+                            case 0: case 1: case 2:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3-40)
+                            break
+                            case 3:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]/2-100,game.edge[1]/3-120)
+                            break
+                            case 4:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/3)
+                            break
+                            case 5:
+                                graphics.main[a].text('Weapons\nHere',150,game.edge[1]-320)
+                            break
+                            case 6:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]/2+1300,game.edge[1]-120)
+                            break
+                            case 7:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]/2,game.edge[1]/2+360)
+                            break
+                            case 8:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]-150,game.edge[1]-520)
+                            break
+                            case 15:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]-100,800)
+                            break
+                            case 17:
+                                graphics.main[a].text('Weapons\nHere',150,game.edge[1]-120)
+                            break
+                            case 18:
+                                graphics.main[a].text('Weapons\nHere',100,game.edge[1]-220)
+                            break
+                            case 20: case 46:
+                                graphics.main[a].text('Weapons\nHere',2250,965)
+                            break
+                            case 21:
+                                graphics.main[a].text('Weapons\nHere',3500,1200)
+                            break
+                            case 22: case 23:
+                                if(game.margin){
+                                    graphics.main[a].noFill()
+                                    graphics.main[a].stroke(255)
+                                    graphics.main[a].strokeWeight(10)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1]*9/8,game.sectors[b][2]-20,game.sectors[b][3]*9/8-20)
+                                    }
+                                    graphics.main[a].fill(255)
+                                    graphics.main[a].noStroke()
+                                    graphics.main[a].textSize(100)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1]*9/8)
+                                    }
+                                }
+                            break
+                            case 25: case 26: case 27: case 32: case 33: case 34: case 38: case 40: case 42: case 44:
+                            case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
+                            case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
+                            case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
+                            case 100: case 101: case 103: case 104: case 105: case 108: case 109:
+                                if(game.margin){
+                                    graphics.main[a].noFill()
+                                    graphics.main[a].stroke(255)
+                                    graphics.main[a].strokeWeight(10)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
+                                    }
+                                    graphics.main[a].fill(255)
+                                    graphics.main[a].noStroke()
+                                    graphics.main[a].textSize(100)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
+                                    }
+                                }
+                            break
+                            case 30:
+                                if(game.margin){
+                                    graphics.main[a].noFill()
+                                    graphics.main[a].stroke(255)
+                                    graphics.main[a].strokeWeight(10)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].rect(game.sectors[b][0],game.sectors[b][1],game.sectors[b][2]-20,game.sectors[b][3]-20)
+                                    }
+                                    graphics.main[a].fill(255)
+                                    graphics.main[a].noStroke()
+                                    graphics.main[a].textSize(100)
+                                    for(let b=0,lb=game.sectors.length;b<lb;b++){
+                                        graphics.main[a].text(b,game.sectors[b][0],game.sectors[b][1])
+                                    }
+                                    graphics.main[a].fill(0,255,0)
+                                    for(let b=0,lb=levels[game.level].length;b<lb;b++){
+                                        for(let c=0,lc=levels[game.level][b].length;c<lc;c++){
+                                            if(int(levels[game.level][b][c])>=0){
+                                                graphics.main[a].text(int(levels[game.level][b][c]),(c+0.5)*game.tileset[0],(b+0.5)*game.tileset[1])
+                                            }
+                                        }
+                                    }
+                                }
+                            break
+                            case 106:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]*0.5,game.edge[1]-game.tileset[1]*6.5)
+                            break
+                            case 107:
+                                graphics.main[a].text('Weapons\nHere',game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21)
+                            break
+                        }
+                    }
+                }
+                for(let a=0,la=bs.length;a<la;a++){
+                    for(let b=0,lb=bs[a].length;b<lb;b++){
+                        if(!(bs[a][b][0]==(rules.backed?3:2)&&(run.fore[bs[a][b][0]][bs[a][b][1]].type==31||run.fore[bs[a][b][0]][bs[a][b][1]].type==33||run.fore[bs[a][b][0]][bs[a][b][1]].type==36||run.fore[bs[a][b][0]][bs[a][b][1]].type==42))){
+                            run.fore[bs[a][b][0]][bs[a][b][1]].displayOver(graphics.main[a])
+                        }
+                    }
+                }
+                for(let c=0,lc=game.gaming;c<lc;c++){
+                    for(let a=0,la=run.info.length;a<la;a++){
+                        for(let b=0,lb=run.info[a].length;b<lb;b++){
+                            if(
+                                run.info[a][b].position.x+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                run.info[a][b].position.x-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                run.info[a][b].position.y+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                run.info[a][b].position.y-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                            ){
+                                run.info[a][b].displayInfo(graphics.main[c])
+                            }else if(game.level==16){
+                                let bounce=[
+                                    [-game.edge[0],0],
+                                    [game.edge[0],0],
+                                ]
+                                for(let d=0,ld=bounce.length;d<ld;d++){
+                                    if(
+                                        run.info[a][b].position.x+bounce[d][0]+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                        run.info[a][b].position.x+bounce[d][0]-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                        run.info[a][b].position.y+bounce[d][1]+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                        run.info[a][b].position.y+bounce[d][1]-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                                    ){
+                                        run.info[a][b].displayInfo(graphics.main[c],bounce[d][0],bounce[d][1])
+                                    }
+                                }
+                            }
+                            if(game.level==7){
+                                let bounce=[
+                                    [-game.edge[0],-game.edge[1]],
+                                    [-game.edge[0],0],
+                                    [-game.edge[0],game.edge[1]],
+                                    [0,-game.edge[1]],
+                                    [0,game.edge[1]],
+                                    [game.edge[0],-game.edge[1]],
+                                    [game.edge[0],0],
+                                    [game.edge[0],game.edge[1]],
+                                ]
+                                for(let d=0,ld=bounce.length;d<ld;d++){
+                                    if(
+                                        run.info[a][b].position.x+bounce[d][0]+run.info[a][b].width>effective[c][0]-(graphics.main[c].width*key[c]*0.5+50)&&
+                                        run.info[a][b].position.x+bounce[d][0]-run.info[a][b].width<effective[c][0]+(graphics.main[c].width*key[c]*0.5+50)&&
+                                        run.info[a][b].position.y+bounce[d][1]+run.info[a][b].height>effective[c][1]-(graphics.main[c].height*key[c]*0.5+50)&&
+                                        run.info[a][b].position.y+bounce[d][1]-run.info[a][b].height<effective[c][1]+(graphics.main[c].height*key[c]*0.5+50)
+                                    ){
+                                        run.info[a][b].displayInfo(graphics.main[c],bounce[d][0],bounce[d][1])
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            for(let c=0,lc=game.gaming;c<lc;c++){
-                for(let a=0,la=entities.projectiles.length;a<la;a++){
-                    if(entities.projectiles[a].type==48){
-                        entities.projectiles[a].displayOver(graphics.main[c])
+                for(let c=0,lc=game.gaming;c<lc;c++){
+                    for(let a=0,la=entities.projectiles.length;a<la;a++){
+                        if(entities.projectiles[a].type==48){
+                            entities.projectiles[a].displayOver(graphics.main[c])
+                        }
                     }
                 }
-            }
-            for(let a=0,la=graphics.main.length;a<la;a++){
-                entities.players[a].displayOver(graphics.main[a])
+                for(let a=0,la=graphics.main.length;a<la;a++){
+                    entities.players[a].displayOver(graphics.main[a])
+                }
             }
             outer:
-            for(let a=0,la=run.update.length;a<la;a++){
-                /*if(a==0){
-                    startTime=performance.now()
-                }*/
-                for(let b=0,lb=run.update[a].length;b<lb;b++){
-                    if(b<run.update[a].length){
-                        if(run.update[a][b].update()){
-                            a=la
-                            break outer
-                        }
-                        if(run.update[a][b].remove){
-                            run.update[a].splice(b,1)
-                            b--
-                            lb--
+            for(let ru=0,lru=game.noVisuals?100:1;ru<lru;ru++){
+                for(let a=0,la=run.update.length;a<la;a++){
+                    /*if(a==0){
+                        startTime=performance.now()
+                    }*/
+                    for(let b=0,lb=run.update[a].length;b<lb;b++){
+                        if(b<run.update[a].length){
+                            if(run.update[a][b].update()){
+                                a=la
+                                break outer
+                            }
+                            if(run.update[a][b].remove){
+                                run.update[a].splice(b,1)
+                                b--
+                                lb--
+                            }
                         }
                     }
+                    /*if(a==0){
+                        endTime=performance.now()
+                        print(`TIME WALLS[0]: ${endTime - startTime} milliseconds`)
+                    }*/
                 }
-                /*if(a==0){
-                    endTime=performance.now()
-                    print(`TIME WALLS[0]: ${endTime - startTime} milliseconds`)
-                }*/
             }
-            for(let a=0,la=graphics.main.length;a<la;a++){
-                graphics.main[a].pop()
+            if(!game.noVisuals){
+                for(let a=0,la=graphics.main.length;a<la;a++){
+                    graphics.main[a].pop()
+                }
+                if(display.anim>0){
+                    display.anim-=0.01
+                }
+                if(display.win>0){
+                    display.win-=0.01
+                }
+                displayMain(graphics.main,effective,key)
             }
-            if(display.anim>0){
-                display.anim-=0.01
-            }
-            if(display.win>0){
-                display.win-=0.01
-            }
-            displayMain(graphics.main,effective,key)
             switch(game.level){
                 case 83:
                     checkEnd(levels[82],graphics.main[0],key)
