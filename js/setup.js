@@ -15,9 +15,9 @@ function setup(){
         //game.traitor=true
         //game.noVisuals=true
 
-        game.players=2
+        game.players=1
         game.gaming=1
-        game.level=88
+        game.level=117
         /*
         65 - tailwater 5cp
         88 - sulfite koth

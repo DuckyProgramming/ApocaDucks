@@ -16479,5 +16479,6 @@ player.prototype.logic=function(){
     if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='ParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='ParaRocketBoss'){
         this.manage[1]=1
     }
+    this.target.position.x=constrain(this.target.position.x,0,game.edge[0])
     this.manage[0]=abs(this.position.x-this.target.position.x)<(this.id!=0?1800:900)&&this.playerData.name.includes('SniperC')&&this.manage[3]==1&&(lsin(this.direction.main)<0&&this.target.position.x<this.position.x||lsin(this.direction.main)>0&&this.target.position.x>this.position.x)&&abs(this.target.position.y-this.position.y)<50?-1:this.position.x>this.target.position.x?0:1
 }

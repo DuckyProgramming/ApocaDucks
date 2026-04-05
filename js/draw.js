@@ -1275,20 +1275,38 @@ function mainloop(){
                             }
                             graphics.pane[a].pop()
                             if(key[a]==graphics.key[a]){
+                                let actual=[
+                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2-graphics.pane[a].width*graphics.key/key[a]/2,
+                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2-graphics.pane[a].height*graphics.key/key[a]/2,
+                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2+graphics.pane[a].width*graphics.key/key[a]/2,
+                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2+graphics.pane[a].height*graphics.key/key[a]/2,
+                                ]
+                                let sample=[
+                                    ceil(actual[0]/2)*2,
+                                    ceil(actual[1]/2)*2,
+                                    floor(actual[2]/2)*2,
+                                    floor(actual[3]/2)*2
+                                ]
                                 graphics.pane[a].erase()
                                 graphics.pane[a].fill(0)
                                 graphics.pane[a].noStroke()
                                 graphics.pane[a].rect(
-                                    round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
-                                    round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
-                                    graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                                    sample[0]*0.5+sample[2]*0.5,
+                                    sample[1]*0.5+sample[3]*0.5,
+                                    sample[2]-sample[0],
+                                    sample[3]-sample[1],
                                 )
                                 graphics.pane[a].noErase()
                                 graphics.pane[a].image(
                                     graphics.paneTemp,
-                                    round((graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2),
-                                    round((graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2),
-                                    graphics.pane[a].width*graphics.key/key[a],graphics.pane[a].height*graphics.key/key[a]
+                                    sample[0]*0.5+sample[2]*0.5,
+                                    sample[1]*0.5+sample[3]*0.5,
+                                    sample[2]-sample[0],
+                                    sample[3]-sample[1],
+                                    sample[0]-actual[0],
+                                    sample[1]-actual[1],
+                                    sample[2]-sample[0],
+                                    sample[3]-sample[1],
                                 )
                             }
                             graphics.panePoint[a].position.x=effective[a][0]

@@ -19184,7 +19184,7 @@ types={
 		},{
 			name:'Orbital',
 			ammo:6,
-			damage:90,
+			damage:80,
 			cooldown:40,
 			stop:150,
 			reload:24,
