@@ -21,7 +21,7 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425||a==430||a==435,
+				a==417||a==425||a==430||a==435||a==438,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -68,7 +68,7 @@ function setupRules(){
 				a==372||a==373||a==375||a==376||a==383||
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
-                a==431||a==435||a==437,
+                a==431||a==435||a==437||a==438,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -81,7 +81,7 @@ function setupRules(){
 				a==174||a==185||a==192||a==196||a==197||
 				a==198||a==199||a==234||a==236||a==253||
 				a==269||a==274||a==278||a==294||a==299||
-				a==309||a==333||a==334,
+				a==309||a==333||a==334||a==439,
 			fast:a==4||a==14||a==39||a==50||a==57||
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
@@ -91,7 +91,7 @@ function setupRules(){
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
-				a!=417&&a!=435,
+				a!=417&&a!=435&&a!=438,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -106,7 +106,7 @@ function setupRules(){
 				a==245||a==246||a==247||a==250||a==284||
 				a==286||a==304||a==314||a==323||a==329||
 				a==349||a==360||a==368||a==372||a==375||
-				a==392||a==417||a==435,
+				a==392||a==417||a==435||a==438,
 			stopper:a!=7&&a!=23&&a!=25&&a!=32&&a!=37&&
 				a!=40&&a!=46&&a!=79&&a!=84&&a!=89&&
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
@@ -9039,6 +9039,37 @@ function checkEnd(level,layer,key){
     for(let a=0,la=game.det.length;a<la;a++){
         game.det[a]=floor(random(0,30))
     }
+    if(duel.trigger&&game.noVisuals){
+        if(game.time%72==0&&game.time!=0){
+            if(duel.experiment.length==2){
+                duel.experiment.push([])
+            }
+            duel.experiment[2].push(entities.players.filter(player=>player.index<game.players*0.5).map(player=>player.stats.damage))
+            entities.players.forEach(player=>player.stats.damage=0)
+            if(duel.experiment[2].length%30==0){
+                let data=entities.players.filter(player=>player.index<game.players*0.5).map(player=>[])
+                duel.experiment[2].forEach(set=>set.forEach((item,index)=>data[index].push(item)))
+                let mean=[]
+                data.forEach(set=>mean.push(set.reduce((acc,current)=>acc+current,0)/set.length))
+                let se=[]
+                data.forEach((set,index)=>se.push(
+                    sqrt(set.reduce((acc,current)=>acc+(current-mean[index])**2,0))/set.length
+                ))
+                print(`EXPERIMENTAL RESULTS ${duel.experiment[2].length}`)
+                data.forEach((set,index)=>data.forEach((set2,index2)=>{
+                    if(index2>index&&abs(mean[index]-mean[index2])>2*(se[index]+se[index2])){
+                        print(
+`IMBALANCE DETECTED
+Weapons: ${entities.players[index].subWeaponAData.name}, ${entities.players[index].subWeaponBData.name} vs ${entities.players[index2].subWeaponAData.name}, ${entities.players[index2].subWeaponBData.name}
+Means: ${mean[index]} vs ${mean[index2]}
+Standard Errors: ${se[index]} vs ${se[index2]}
+`
+                        )
+                    }
+                }))
+            }
+        }
+    }
     if(game.newWave){
         newWave()
         game.newWave=false
@@ -10442,7 +10473,7 @@ function setupLists(){
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerW`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
-            [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerPushAssaultRifle`,`PlayerLightUzi`],
+            [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerDonutC`],
         ],
     ]
 

@@ -7,7 +7,7 @@ function setup(){
 
     if(false){
         //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
-        duel={trigger:true,numKey:[8,0],sets:[[0,0,2],[0,0]],experiment:[-1,[-1,0]]}
+        duel={trigger:true,numKey:[2,0],sets:[[0,8],[0,0]],experiment:[2,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,8 +15,8 @@ function setup(){
         //game.traitor=true
         //game.noVisuals=true
 
-        game.players=1
-        game.gaming=1
+        game.players=2
+        game.gaming=2
         game.level=117
         /*
         65 - tailwater 5cp

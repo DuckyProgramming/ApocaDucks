@@ -1461,7 +1461,7 @@ class player{
                 if(!entities.projectiles[a].trap){
                     entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                 }
-                if(entities.projectiles[a].rules.stickybomb&&entities.projectiles[a].active){
+                if((entities.projectiles[a].rules.stickybomb||entities.projectiles[a].type==438)&&entities.projectiles[a].active){
                     entities.projectiles[a].active=false
                     entities.projectiles[a].fail=true
                 }
@@ -2438,7 +2438,7 @@ class player{
         }
         this.updateWeaponRules()
         this.assort.firing=0
-         this.assort.firingTime=0
+        this.assort.firingTime=0
         this.assort.firingTick=0
     }
     resetValues(){
@@ -2717,7 +2717,7 @@ class player{
                 ?0.5:
                 this.rules.take23&&spec==0
                 ?2/3:
-                this.rules.take45&&spec==0
+                this.rules.take45||this.playerData.name=='PlayerDemomanW'&&(this.subWeaponAType==982||this.subWeaponBType==982)&&spec==0
                 ?0.8:
                 this.playerData.name=='PlayerStickyMan'&&spec==0
                 ?0.9:
@@ -2785,8 +2785,8 @@ class player{
                         id=entities.players[a].id
                     }
                 }
-                for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb*4)+b/lb*360,id,25,10,false,this.gasser))
+                for(let b=0,lb=6;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb*4)+b/lb*360,id,40,10,false,this.gasser))
                     let c=entities.projectiles[entities.projectiles.length-1]
                     c.position.x+=c.speed*lsin(c.direction)*5*this.size
 				    c.position.y-=c.speed*lcos(c.direction)*5*this.size
@@ -6540,7 +6540,7 @@ class player{
                         entities.walls[1][entities.walls[1].length-1].formBounder()
                     break
                     case 928:
-                        for(let a=0,la=16;a<la;a++){
+                        for(let a=0,la=15;a<la;a++){
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-13.5,13.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
@@ -6699,7 +6699,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],408,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,20,crit,this.index))
                     break
                     case 971:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],250,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],438,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                         //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5+min(240,this.assort.firingTime)/120
                         //entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
@@ -6907,6 +6907,9 @@ class player{
                     break
                     case 1020:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],436,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 1022:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],439,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                     break
 
                     //mark
@@ -7673,7 +7676,7 @@ class player{
                         this.subWeaponB.ammo--
                     }
                     if(this.manage[1]==1||this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo){
-                        if(this.subWeaponA.ammo<=0&&this.subWeaponB.ammo>0&&floor(random(0,15))==0&&this.life>0&&this.rules.class){
+                        if((this.subWeaponA.ammo<=0&&this.subWeaponB.ammo>0&&floor(random(0,10))==0||floor(random(0,300))==0)&&this.life>0&&this.rules.class){
                             this.swapSubWeapons()
                         }
                         if(this.playerData.name=='PlayerConglomeration'){
@@ -7702,7 +7705,7 @@ class player{
                             ){
                                 this.swapSubWeapons()
                             }
-                            if((this.rules.scoutLine&&this.subPlayerAData.name==`PlayerPistolW`/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&this.subWeaponA.cooldown<10){
+                            if((this.rules.scoutLine&&this.subPlayerAData.name==`PlayerPistolW`/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&this.assort.firing<20){
                                 this.subWeaponA.cooldown=0
                             }
                             if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){

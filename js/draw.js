@@ -1276,10 +1276,10 @@ function mainloop(){
                             graphics.pane[a].pop()
                             if(key[a]==graphics.key[a]){
                                 let actual=[
-                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2-graphics.pane[a].width*graphics.key/key[a]/2,
-                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2-graphics.pane[a].height*graphics.key/key[a]/2,
-                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2+graphics.pane[a].width*graphics.key/key[a]/2,
-                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2+graphics.pane[a].height*graphics.key/key[a]/2,
+                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2-graphics.pane[a].width*graphics.key[a]/key[a]/2,
+                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2-graphics.pane[a].height*graphics.key[a]/key[a]/2,
+                                    (graphics.panePoint[a].position.x-effective[a][0])/key[a]+graphics.pane[a].width/2+graphics.pane[a].width*graphics.key[a]/key[a]/2,
+                                    (graphics.panePoint[a].position.y-effective[a][1])/key[a]+graphics.pane[a].height/2+graphics.pane[a].height*graphics.key[a]/key[a]/2,
                                 ]
                                 let sample=[
                                     ceil(actual[0]/2)*2,

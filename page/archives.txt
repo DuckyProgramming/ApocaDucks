@@ -4,6 +4,7 @@
 1019 - electric knife, 684
 1020 - transmission c, 818
 1021 - decoy watch
+1022 - donut c, 776
 
 430 - black box, 351, 21
 431 - baseball, 28
@@ -13,7 +14,8 @@
 435 - sticky sniper, 349
 436 - transmission c, 364
 437 - software c, 134
-
+438 - time bomb c, 250
+439 - donut c, 173, 127
 
 
 

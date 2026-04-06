@@ -15361,7 +15361,7 @@ class wall{
                                                     c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
                                                 }else{
                                                     c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                                    c.velocity.y=c.velocity.x*this.height/this.width
+                                                    c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
                                                 }
                                             }else{
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
@@ -15388,7 +15388,7 @@ class wall{
                                                 c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
                                             }else{
                                                 c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                                c.velocity.y=-c.velocity.x*this.height/this.width
+                                                c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
                                             }
                                             c.jump.time=constrain(c.jump.time+2,0,6)
                                             if(c.rules.doubleJump&&c.weapon.uses>0){

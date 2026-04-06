@@ -6644,7 +6644,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:145,
     },{
       name:'PlayerAdjunct',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:288,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:300,
     },{
       name:'PlayerGlassCannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:160,
@@ -7530,7 +7530,7 @@ types={
       damageBuff:1.75,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'PlayerHeavierMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.875,reloadBuff:1.5,crit:0,weapon:2,
+      damageBuff:2,reloadBuff:1.5,crit:0,weapon:2,
     },{
       name:'PlayerPeppergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:772,
@@ -7659,7 +7659,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:859,
     },{
       name:'PlayerSteamblast',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:4/3,reloadBuff:1.25,crit:0,weapon:860,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:860,
     },{
       name:'PlayerStickySweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:861,
@@ -7920,7 +7920,7 @@ types={
       damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:993,
     },{
       name:'PlayerPushAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.8,reloadBuff:1.25,crit:0,weapon:994,
+      damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:994,
     },{
       name:'PlayerInvisWatch',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1005,
@@ -7941,7 +7941,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:965,
     },{
       name:'PlayerHeavyInterceptor',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:338,
+      damageBuff:1.375,reloadBuff:1.375,crit:0,weapon:338,
     },{
       name:'PlayerGrenadierC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1011,
@@ -7964,8 +7964,8 @@ types={
       name:'PlayerElectricKnife',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1019,
     },{
-      name:'Decoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+      name:'PlayerDonutC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.375,crit:0,weapon:1022,
     },
 
     //mark c
@@ -7977,6 +7977,9 @@ types={
     },{
       name:'PlayerNone',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'Decoy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },
 
     {
@@ -16439,7 +16442,7 @@ types={
 		},{
 			name:'Stickybomb Launcher',
 			ammo:4,
-			damage:288,
+			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
@@ -16574,10 +16577,10 @@ types={
 		},{
 			name:'Sword',
 			ammo:3,
-			damage:150,
-			cooldown:45,
-			stop:105,
-			reload:60,
+			damage:130,
+			cooldown:48,
+			stop:120,
+			reload:72,
 			speed:1.4,
       uses:15,
 		},{
@@ -16747,8 +16750,8 @@ types={
 			ammo:2,
 			damage:18,
 			cooldown:30,
-			stop:80,
-			reload:10,
+			stop:60,
+			reload:20,
 			speed:1.15,
       uses:16,
 		},{
@@ -17241,11 +17244,11 @@ types={
 			name:'Securer',
 			ammo:3,
 			damage:150,
-			cooldown:45,
-			stop:105,
-			reload:25,
+			cooldown:40,
+			stop:100,
+			reload:20,
 			speed:0.975,
-      uses:15,
+      uses:18,
 		},{
 			name:'Heal Bolt',
 			ammo:1,
@@ -17394,9 +17397,9 @@ types={
 			name:'Baseball',
 			ammo:1,
 			damage:180,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:1.05,
       uses:12,
 		},{
@@ -17582,7 +17585,7 @@ types={
 		},{
 			name:'Minibomb',
 			ammo:1,
-			damage:200,
+			damage:120,
 			cooldown:105,
 			stop:105,
 			reload:105,
@@ -17591,12 +17594,12 @@ types={
 		},{
 			name:'Airburst Rifle',
 			ammo:2,
-			damage:400,
-			cooldown:15,
-			stop:105,
-			reload:5,
+			damage:375,
+			cooldown:18,
+			stop:108,
+			reload:30,
 			speed:1.05,
-      uses:15,
+      uses:12,
 		},{
 			name:'Legal Launcher',
 			ammo:1,
@@ -17681,9 +17684,9 @@ types={
 		},{
 			name:'Blast Rocket',
 			ammo:1,
-			damage:110,
+			damage:100,
 			cooldown:20,
-			stop:135,
+			stop:144,
 			reload:40,
 			speed:0.8,
       uses:10,
@@ -17888,7 +17891,7 @@ types={
 		},{
 			name:'Stargrazer',
 			ammo:1,
-			damage:100,
+			damage:50,
 			cooldown:105,
 			stop:105,
 			reload:105,
@@ -17915,7 +17918,7 @@ types={
 		},{
 			name:'Sticky Jumper',
 			ammo:3,
-			damage:252,
+			damage:250,
 			cooldown:36,
 			stop:66,
 			reload:40,
@@ -18003,9 +18006,9 @@ types={
 			speed:1.05,
       uses:8,
 		},{
-			name:'Stickybomb Sweeper',
+			name:'Sticky Sweeper',
 			ammo:5,
-			damage:288,
+			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
@@ -18498,7 +18501,7 @@ types={
 			speed:0.95,
       uses:150,
 		},{
-			name:'Degreaser',
+			name:'Degreaser Z',
 			ammo:44,
 			damage:50,
 			cooldown:3,
@@ -18509,7 +18512,7 @@ types={
 		},{
 			name:'Bubble Blaster',
 			ammo:80,
-			damage:25,
+			damage:30,
 			cooldown:3,
 			stop:75,
 			reload:1,
@@ -18554,7 +18557,7 @@ types={
 		},{
 			name:'Stickywheel',
 			ammo:3,
-			damage:168,
+			damage:150,
 			cooldown:36,
 			stop:99,
 			reload:60,
@@ -18995,7 +18998,7 @@ types={
 		},{
 			name:'Time Bomb C',
 			ammo:4,
-			damage:288,
+			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
@@ -19023,15 +19026,15 @@ types={
 			name:'Molotov',
 			ammo:1,
 			damage:160,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:1.05,
       uses:12,
 		},{
 			name:'Degreaser',
 			ammo:10,
-			damage:40,
+			damage:45,
 			cooldown:3,
 			stop:30,
 			reload:2,
@@ -19060,7 +19063,7 @@ types={
 			ammo:10,
 			damage:36,
 			cooldown:12,
-			stop:30,
+			stop:15,
 			reload:6,
 			speed:1.4,
       uses:30,
@@ -19202,7 +19205,7 @@ types={
 		},{
 			name:'Push Assault Rifle',
 			ammo:18,
-			damage:25,
+			damage:22.5,
 			cooldown:20,
 			stop:90,
 			reload:5,
@@ -19364,7 +19367,7 @@ types={
 		},{
 			name:'Sticky Sniper',
 			ammo:1,
-			damage:336,
+			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
@@ -19373,7 +19376,7 @@ types={
 		},{
 			name:'Stickybomb Launcher Test',
 			ammo:4,
-			damage:288,
+			damage:300,
 			cooldown:45,
 			stop:90,
 			reload:45,
@@ -19451,6 +19454,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'Donut C',
+			ammo:3,
+			damage:120,
+			cooldown:40,
+			stop:100,
+			reload:20,
+			speed:0.975,
+      uses:18,
 		},
 
     /*{
