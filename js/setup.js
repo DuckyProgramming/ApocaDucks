@@ -7,7 +7,7 @@ function setup(){
 
     if(false){
         //duel={trigger:true,numKey:[8,0],sets:[[5,1,0],[0,0]]}
-        duel={trigger:true,numKey:[2,0],sets:[[0,8],[0,0]],experiment:[2,[0,-1]]}
+        duel={trigger:true,numKey:[9,0],sets:[[0,5],[0,0]],experiment:[2,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false

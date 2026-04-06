@@ -34,7 +34,7 @@ class projectile{
 			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
 			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
 			case 407: case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434:
-			case 436:
+			case 436: case 440: case 441: case 442:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -7050,6 +7050,51 @@ class projectile{
 				layer.strokeWeight(4)
 				layer.ellipse(0,0,8)
 			break
+			case 440:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,0.5,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,0.5,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,0.5,4)
+				layer.fill(255,255,150,this.fade)
+				layer.rect(-1,0,1,0,0,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(255,255,150,this.fade)
+				layer.rect(0,0,3,1)
+				layer.rect(0,0,1,3)
+			break
+			case 441:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,0.5,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,0.5,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,0.5,4)
+				layer.fill(255,175,100,this.fade)
+				layer.rect(-1,0,1,0,0,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(255,175,100,this.fade)
+				layer.rect(0,0,3,1)
+				layer.rect(0,0,1,3)
+			break
+			case 442:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,0.5,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,0.5,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,0.5,4)
+				layer.fill(255,255,150,this.fade)
+				layer.rect(-1,0,1,0,0,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+				layer.fill(255,255,150,this.fade)
+				layer.rect(0,0,3,1)
+				layer.rect(0,0,1,3)
+			break
 
 			//mark
         }
@@ -8117,7 +8162,7 @@ class projectile{
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
-				case 432: case 434: case 436: case 439:
+				case 432: case 434: case 436: case 439: case 440: case 441: case 442:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10451,7 +10496,7 @@ class projectile{
 					}
 					let base=target.life
 					switch(this.type){
-						case 9: case 155: case 216:
+						case 9: case 155: case 216: case 439:
 							if(this.onTeam(target)||this.index==target.index&&this.type==216){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 							}else{
@@ -10897,6 +10942,27 @@ class projectile{
 							target.velocity.x=0
 							target.velocity.y=0
 							entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,433,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+						break
+						case 440:
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].speedBuff=max(entities.players[d].speedBuff,240)
+								}
+							}
+						break
+						case 441:
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,240)
+								}
+							}
+						break
+						case 442:
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									entities.players[d].defendBuff=max(entities.players[d].defendBuff,240)
+								}
+							}
 						break
 					}
 					if(!target.immune()){

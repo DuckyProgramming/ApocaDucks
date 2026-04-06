@@ -7966,6 +7966,9 @@ types={
     },{
       name:'PlayerDonutC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.375,crit:0,weapon:1022,
+    },{
+      name:'PlayerAutumnW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1023,
     },
 
     //mark c
@@ -19463,6 +19466,15 @@ types={
 			reload:20,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Autumn W',
+			ammo:1,
+			damage:150,
+			cooldown:50,
+			stop:50,
+			reload:50,
+			speed:0.85,
+      uses:15,
 		},
 
     /*{
