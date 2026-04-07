@@ -1677,6 +1677,11 @@ class wall{
                 }
             }
         }
+        bounds[0]=min(bounds[0],this.position.x-this.width/2)
+        bounds[1]=max(bounds[1],this.position.x+this.width/2)
+        bounds[2]=min(bounds[2],this.position.y-this.height/2)
+        bounds[3]=max(bounds[3],this.position.y+this.height/2)
+        this.technicalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.base={position:{x:this.position.x,y:this.position.y},width:this.width,height:this.height}
         this.redundant[8]=false
     }
@@ -13825,6 +13830,7 @@ class wall{
                             case 57:
                                 if(!(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&!(game.level==49&&game.pvp&&this.visible<1)&&!(game.level==100&&!game.pvp&&game.pointAnim[2]>=1)){
                                     if((typeof this.weapon)=='object'){
+                                        let cancel=c.weaponType==-1
                                         for(let a=0,la=2;a<la;a++){
                                             if(c.subWeaponAType==759||c.subWeaponBType==759){
                                                 c.swapSubWeapons()
@@ -13845,7 +13851,7 @@ class wall{
                                         c.subWeaponB.ammo=this.ammo[1]
                                         c.subWeaponA.uses=this.uses[0]
                                         c.subWeaponB.uses=this.uses[1]
-                                        if(reserve[2][0]==0||reserve[2][1]==0){
+                                        if(reserve[2][0]==0||reserve[2][1]==0||cancel){
                                             let chunk=game.classWeapon?3:game.peakWeapon?1:0
                                             this.weapon=weaponize(chunk)
                                             this.ammo=[
@@ -13862,6 +13868,9 @@ class wall{
                                             this.uses=reserve[2]
                                         }
                                     }else{
+                                        if(game.classWeapon){
+                                            throw new Error(`Brown Crate Loadout Fail`)
+                                        }
                                         let reserve=[c.type,c.weapon.ammo,c.weapon.uses]
                                         c.newWeaponSet(this.weapon)
                                         if(c.weaponType>=0&&c.id>0&&!c.sidekick&&reserve[2]>0){

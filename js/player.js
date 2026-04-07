@@ -6912,7 +6912,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],439,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                     break
                     case 1023:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],440+weapon.uses%3,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],440+floor(weapon.uses)%3,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
 
                     //mark

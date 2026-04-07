@@ -6644,7 +6644,7 @@ types={
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:145,
     },{
       name:'PlayerAdjunct',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:300,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:288,
     },{
       name:'PlayerGlassCannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:160,

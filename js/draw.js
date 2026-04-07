@@ -1185,6 +1185,8 @@ function mainloop(){
                         if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
                             //let startTime=performance.now()
 
+                            effective[a][0]=round(effective[a][0])
+                            effective[a][1]=round(effective[a][1])
                             if(key[a]!=graphics.key[a]){
                                 graphics.pane[a].clear()
                             }else{
@@ -1208,27 +1210,27 @@ function mainloop(){
                                     game.level==130&&entities.walls[0][b].type==62||
                                     !(game.level==100&&entities.walls[0][b].type==37)&&
                                     (
-                                        entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                        entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                        entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                        entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
+                                        entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)||
                                         game.level==7&&a==2&&
-                                        entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                        entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                        entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                        entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                        entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                        entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
                                     )&&
                                     (
                                         key[a]!=graphics.key[a]||!(
-                                            entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
+                                            entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
                                             game.level==7&&a==2&&   
-                                            entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                            entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
+                                            entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                            entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
                                         )
                                     )
                                 ){
@@ -1241,22 +1243,17 @@ function mainloop(){
                                     if(
                                         (entities.walls[0][b].type==37)&&
                                         (
-                                            entities.walls[0][b].position.x+entities.walls[0][b].width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
-                                            entities.walls[0][b].position.x-entities.walls[0][b].width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
-                                            entities.walls[0][b].position.y+entities.walls[0][b].height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
-                                            entities.walls[0][b].position.y-entities.walls[0][b].height<effective[a][1]+(graphics.main[a].height*key[a]+100)
+                                            entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
+                                            entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&
+                                            entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height>effective[a][1]-(graphics.main[a].height*key[a]+100)&&
+                                            entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height<effective[a][1]+(graphics.main[a].height*key[a]+100)
                                         )&&
                                         (
                                             key[a]!=graphics.key[a]||!(
-                                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)||
-                                                game.level==7&&a==2&&   
-                                                entities.walls[0][b].internalBounder.position.x-entities.walls[0][b].internalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.x+entities.walls[0][b].internalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.y-entities.walls[0][b].internalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
-                                                entities.walls[0][b].internalBounder.position.y+entities.walls[0][b].internalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
+                                                entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width>graphics.panePoint[a].position.x-(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width<graphics.panePoint[a].position.x+(graphics.panePoint[a].width/2-100)&&
+                                                entities.walls[0][b].technicalBounder.position.y-entities.walls[0][b].technicalBounder.height>graphics.panePoint[a].position.y-(graphics.panePoint[a].height/2-100)&&
+                                                entities.walls[0][b].technicalBounder.position.y+entities.walls[0][b].technicalBounder.height<graphics.panePoint[a].position.y+(graphics.panePoint[a].height/2-100)
                                             )
                                         )
                                     ){
