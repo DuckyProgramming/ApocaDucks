@@ -7908,8 +7908,8 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<90){
-						if(this.onTeam(target)){
-							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/90)*(this.index==entities.players[b].index?0.5:1)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
+						if(this.onTeam(entities.players[b])){
+							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.validExplodeTarget(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].takeDamage(this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 							entities.players[b].die.killer=this.index
@@ -7925,7 +7925,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<120&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
-						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(entities.players[b].index==this.index?0.5:1))
+						entities.players[b].takeDamage(this.damage*(1-c/120)*0.8*(entities.players[b].index==this.index?0.25:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 						entities.players[b].generalizedTake(this.index)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].velocity.x+=30*(1.5-c/120)*lsin(dir)
@@ -7956,7 +7956,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<165&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/165)*(2+min(3,this.base.time/60)))
+						entities.players[b].takeDamage(this.damage*(1-c/165)*(2+min(3,this.base.time/60))*(entities.players[b].index==this.index?0.5:1))
 						entities.players[b].generalizedTake(this.index)
 					}
 				}
@@ -9079,8 +9079,8 @@ class projectile{
 							}
 						break
 						case 373:
-							if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994)){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/3,30,this.crit,this.index))
+							if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
+								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
 							}
 						break
 					}
@@ -10797,8 +10797,10 @@ class projectile{
 					}
 					switch(this.type){
 						case 13:
-							target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
-							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)
+							/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
+							target.weapon.cooldown=max(15,target.weapon.cooldown)
+							target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
 						break
 						case 36: case 249:
 							for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -10808,8 +10810,10 @@ class projectile{
 							}
 						break
 						case 188:
-							target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
-							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)
+							/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
+							target.weapon.cooldown=max(15,target.weapon.cooldown)
+							target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
 							if(this.type==188){
 								for(let d=0,ld=entities.players.length;d<ld;d++){
 									if(entities.players[d].index==this.index){
@@ -11171,8 +11175,9 @@ class projectile{
 								target.gasser=this.index
 							break
 							case 388:
-								target.weapon.cooldown=max(15,target.weapon.cooldown)
-								target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
+								/*target.weapon.cooldown=max(15,target.weapon.cooldown)
+								target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)*/
+								target.confuseTime=max(30,target.confuseTime)
 							break
 							case 317:
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))

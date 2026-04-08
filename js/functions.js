@@ -8720,7 +8720,83 @@ function generateLevel(info,layer){
                     entities.players[a].position.y=loc[team][1]
                     if(game.classWeapon){
                         //DO NOT change the 10s here! they represent 10 classes, not 10 variants!
-                        if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
+                        if(duel.trigger&&duel.experiment[0]!=-1){
+                            let index=floor(random(0,typeList[team].length))
+                            let tick=typeList[team][index]
+                            if(team==0){
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][duel.experiment[0]][0][duel.experiment[1][0]==-1?tick%listing[4][duel.experiment[0]][0].length:duel.experiment[1][0]],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][duel.experiment[0]][1][duel.experiment[1][1]==-1?tick%listing[4][duel.experiment[0]][1].length:duel.experiment[1][1]],types.player)
+                                if(listing[4][duel.experiment[0]].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][duel.experiment[0]][1][duel.experiment[1][2]==-1?tick%listing[4][duel.experiment[0]][2].length:duel.experiment[1][2]],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:duel.experiment[0]}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.experiment[0])
+                            }else{
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][0],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][0],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                            }
+                            typeList[team].splice(index,1)
+                        }else if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
+                            //let index=floor(random(0,options[team].length))
+                            let tick=classPick[team]
+                            if(tick==10){
+                                let tick=teamTick[team]
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                                //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+options[team][index])
+                            }else{
+                                entities.players[a].assort.storeSubWeapon=[]
+                                entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                                entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                                if(listing[4][tick].length>=3){
+                                    entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                }
+                                game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                                //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
+                            }
+                            //options[team].splice(index,1)
+                        }else if(a<game.gaming){
+                            if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){
+                                game.weapon[a][0]=listing[3][floor(random(0,listing[3].length))]
+                            }else if(game.weapon[a][0]>=findName('PlayerRandomScout',types.player)&&game.weapon[a][0]<findName('PlayerRandomScout',types.player)+10){
+                                game.weapon[a][0]=listing[3][game.weapon[a][0]-findName('PlayerRandomScout',types.player)+floor(random(0,num))*10]
+                            }
+                            entities.players[a].newWeaponSet(game.weapon[a][0])
+                            if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10)){
+                                typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10),1)
+                            }
+                            /*if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
+                                typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScout',types.player))%10),1)
+                            }*/
+                        }else{
+                            let index=floor(random(0,typeList[team].length))
+                            //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
+                            let tick=typeList[team][index]
+                            entities.players[a].assort.storeSubWeapon=[]
+                            entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                            entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                            if(listing[4][tick].length>=3){
+                                entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                            }
+                            game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
+                            entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
+                            typeList[team].splice(index,1)
+                        }
+                        /*if(game.weapon[0][0]==findName('PlayerClassWars',types.player)){
                             let index=floor(random(0,options[team].length))
                             entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+classPick[team]+options[team][index]*10)
                             options[team].splice(index,1)
@@ -8738,7 +8814,7 @@ function generateLevel(info,layer){
                             let index=floor(random(0,typeList[team].length))
                             entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             typeList[team].splice(index,1)
-                        }
+                        }*/
                     }
                 }
                 game.point=game.level==94?[1,2,3,-1,-1,-1,-1]:[1,2,3,-1,-1,-1]

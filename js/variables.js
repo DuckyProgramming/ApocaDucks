@@ -7845,7 +7845,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:943,
     },{
       name:'PlayerLightSkysweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:0.75,reloadBuff:1.25,crit:0,weapon:389,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:389,
     },{
       name:'PlayerWingPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:966,
@@ -16778,7 +16778,7 @@ types={
 		},{
 			name:'Sheller',
 			ammo:2,
-			damage:250,
+			damage:240,
 			cooldown:30,
 			stop:90,
 			reload:30,
@@ -17426,7 +17426,7 @@ types={
 		},{
 			name:'Warning Launcher',
 			ammo:1,
-			damage:255,
+			damage:240,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -19046,7 +19046,7 @@ types={
 		},{
 			name:'Roller Launcher',
 			ammo:2,
-			damage:225,
+			damage:240,
 			cooldown:30,
 			stop:90,
 			reload:30,
@@ -19361,7 +19361,7 @@ types={
 		},{
 			name:'Grenadier C',
 			ammo:2,
-			damage:225,
+			damage:240,
 			cooldown:30,
 			stop:90,
 			reload:30,
