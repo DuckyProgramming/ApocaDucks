@@ -5703,7 +5703,7 @@ class player{
                         }
                     break
                     case 670:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],331,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],331,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.pid,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 672:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
@@ -6972,7 +6972,7 @@ class player{
         this.base.life=this.life
         this.collect.life=this.life
         if(this.id>0&&game.level!=29&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=77){
-            this.multLife(game.level==23||game.level==24||game.level==26||game.level==101||game.level==105?1.5:game.level==40||game.level==49||game.level==55?3:2)
+            this.multLife(game.level==23||game.level==24||game.level==26||game.level==101||game.level==105||game.level==131?1.5:game.level==40||game.level==49||game.level==55?3:2)
         }
         if(game.level==44||game.level==65||game.level==77){
             this.multLife(game.players/8)
@@ -8202,7 +8202,7 @@ class player{
                 !this.construct&&!this.sidekick&&!this.auto&&game.level!=13&&game.level!=14&&!this.playerData.name.includes('Buster')&&(
                 dist(this.position.x,this.position.y,pos[0],pos[1])<pos[2]&
                 (this.effectiveId()>0&&this.effectiveId()<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33||game.level==101||game.level==105)&&this.effectiveId())&&!game.attacker||
-                this.effectiveId()>game.gaming&&rules.botResupply&&!(game.level==49&&game.pvp)&&!(game.level==89&&game.pvp)&&!(game.level==94&&game.pvp)||
+                this.effectiveId()>game.gaming&&rules.botResupply&&!(game.level==49&&game.pvp)&&!(game.level==89&&game.pvp)&&!(game.level==94&&game.pvp)&&!(game.level==131&&game.pvp)||
                 game.attacker&&this.effectiveId()!=0||
                 this.storeWeapon
             )){
@@ -8223,11 +8223,12 @@ class player{
                     }
                     let bust=game.bust&&rules.bust&&!rules.dm&&!(game.level==55&&this.peace)&&!(game.traitor&&game.traitorKey==this.index-1)
                     let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,6000,5000,4000,3200][game.players-1])*(game.classWeapon?1.25:1)*(game.peakWeapon?2:1)*rules.key.bustMult
+                    let ct=game.pvp?(game.level==28||game.level==38||game.level==49||game.level==131?1:4):1
                     if(bust){
                         if(entities.players[a].stats.bust>=threshold*(entities.players[a].construct?0.5:1)&&entities.players[a].id>0&&game.players>1&&!entities.players[a].fort){
                             entities.players[a].stats.bust=0
                             entities.players[a].stats.bustCount++
-                            for(let c=0,lc=game.pvp?(game.level==28||game.level==38||game.level==49?1:4):1;c<lc;c++){
+                            for(let c=0,lc=ct;c<lc;c++){
                                 if(game.level==7){
                                     let key='ABCDEF'[floor(random(0,6))]
                                     for(let a=0,la=levels[7].length;a<la;a++){
@@ -8261,7 +8262,7 @@ class player{
                                         if(entities.players[b].stats.bust>=threshold&&entities.players[b].id>0&&game.players>1&&!entities.players[b].fort){
                                             entities.players[b].stats.bust=0
                                             entities.players[b].stats.bustCount++
-                                            for(let c=0,lc=game.pvp?(game.level==28||game.level==38||game.level==49?1:4):1;c<lc;c++){
+                                            for(let c=0,lc=ct;c<lc;c++){
                                                 if(game.level==7){
                                                     let key='ABCDEF'[floor(random(0,6))]
                                                     for(let a=0,la=levels[7].length;a<la;a++){
@@ -9271,7 +9272,7 @@ class player{
                                 this.respawn()
                             }
                         }
-                    }else if(game.level==49){
+                    }else if(game.level==49||game.level==131){
                         if(game.pvp){
                             let max=game.edge[0]+game.edge[1]
                             let set=[0,0]
@@ -9293,7 +9294,7 @@ class player{
                                 this.base.position.y=set[1]-40
                                 this.respawn()
                             }else if(game.pvp&&this.die.timer>360){
-                                let key='F'
+                                let key=game.level==131?'A':'F'
                                 for(let a=0,la=levels[game.level].length;a<la;a++){
                                     for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
                                         if(levels[game.level][a][b]==key){

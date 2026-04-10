@@ -6,17 +6,18 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[1,0],sets:[[6,6],[0,0]],experiment:[2,[0,-1]]}
+        //duel={trigger:true,numKey:[1,0],sets:[[6,6],[0,0]],experiment:[2,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
         //game.noPlayer=true
         //game.traitor=true
         //game.noVisuals=true
+        //game.noEnemy=true
 
-        game.players=2
-        game.gaming=2
-        game.level=117
+        game.players=5
+        game.gaming=1
+        game.level=131
         /*
         65 - tailwater 5cp
         88 - sulfite koth
@@ -50,7 +51,6 @@ function setup(){
         stage.scene='main'
         //dev.sight=true
         //game.margin=true
-        //game.noPlayer=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
     }
@@ -894,6 +894,11 @@ function mouseClicked(){
                                                 menu.level=108
                                                 //bluestone
                                             break
+                                            case 1:
+                                                menu.level=131
+                                                game.classicWeapon=true
+                                                //lisp
+                                            break
                                         }
                                     break
                                     case 3:
@@ -904,6 +909,12 @@ function mouseClicked(){
                                                 game.pvp=true
                                                 instant()
                                                 //blueprint
+                                            break
+                                            case 1:
+                                                menu.level=131
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                //lisp
                                             break
                                         }
                                     break

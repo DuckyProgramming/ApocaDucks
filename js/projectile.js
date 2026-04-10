@@ -644,7 +644,7 @@ class projectile{
 										c.lastingForce[0]+=lsin(this.direction)*2
 										c.lastingForce[1]-=lcos(this.direction)*2
 										for(let d=0,ld=entities.players.length;d<ld;d++){
-											if(entities.players[d].index==this.index){
+											if(entities.players[d].index==this.index&&!entities.players[d].fort){
 												entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.2))
 											}
 										}
@@ -7908,7 +7908,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<90){
-						if(this.onTeam(entities.players[b])){
+						if(this.onTeam(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.validExplodeTarget(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].takeDamage(this.damage*(1-c/90)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))

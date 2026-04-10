@@ -3,9 +3,9 @@ game={
   index:0,projectileIndex:0,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
-  classicWeapon:false,peakWeapon:false,selector:false,classWeapon:false,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
+  classicWeapon:false,peakWeapon:false,selector:false,classWeapon:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,
-  noPlayer:false,noVisuals:false,
+  noPlayer:false,noEnemy:false,noVisuals:false,
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],loadout:[],
   sectors:[],respawners:[0,0],det:[],traitorKey:0,firstGen:true,
@@ -25,7 +25,7 @@ game={
           ['Abandoned','Identify','Divider','Rocksalt'],
           ['Bluefort','Bluefort Mini','Bluefort Micro','Railing'],
           ['Burnt','Confines','Ferrum','Cysteine'],
-          ['Bluestone'],
+          ['Bluestone','Lisp'],
       ],[
           ['DoubleMountain','Steel','Sulfate','Process'],
           ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -33,7 +33,7 @@ game={
           ['Cooked','Divider','Rocksalt','Bluefort'],
           ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
           ['Confines','Ferrum','Cysteine','Bluestone'],
-          ['Blueprint'],
+          ['Blueprint','Lisp'],
       ],[
           ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
           ['Aerial','Alloy','Speleo','Chasm'],
@@ -55,7 +55,7 @@ game={
 duel={trigger:false,numKey:[],sets:[],experiment:[]}
 rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
-menu={players:1,gaming:1,weapon:0,level:6,list:[],mode:0}
+menu={players:1,gaming:1,weapon:2,level:6,list:[],mode:0}
 dev={sight:false}
 types={
   mission:[
