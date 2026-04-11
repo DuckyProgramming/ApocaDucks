@@ -8,7 +8,7 @@ function mainloop(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     //ticker==25 code moves falloff specifically
                     //this code sucks but dw about it
                     if(a>=4){
@@ -41,15 +41,18 @@ function mainloop(){
                             rect(pos[0]+29.5,pos[1],61,45,10)
                             rect(pos[0]-29.5,pos[1],61,45,10)
                         }
+                    }else if(menu.mode==3&&a==9&&b==0){
+                        rect(pos[0]+49.5,pos[1],51,45,10)
+                        rect(pos[0],pos[1],51,45,10)
+                        rect(pos[0]-49.5,pos[1],51,45,10)
                     }else if(
                         menu.mode==1&&a==4&&b==1||
                         menu.mode==1&&a==4&&b==2||
                         menu.mode==2&&a==4&&b==1||
                         menu.mode==2&&a==7&&b==1||
                         menu.mode==2&&a==8&&b==3||
-                        menu.mode==2&&a==9&&b==1||
                         menu.mode==2&&a==9&&b==2||
-                        menu.mode==3&&a==9&&b==0||
+                        menu.mode==2&&a==9&&b==1||
 
                         menu.mode==4&&a==4&&b==2||
                         menu.mode==4&&a==4&&b==3||
@@ -167,8 +170,9 @@ function mainloop(){
                                 case 9:
                                     switch(b){
                                         case 0:
-                                            text(`Loop`,pos[0]-37,pos[1]+15)
-                                            text(`Hexagon`,pos[0]+37,pos[1]+15)
+                                            text(`Loop`,pos[0]-49.5,pos[1]+15)
+                                            text(`Hexagon`,pos[0],pos[1]+15)
+                                            text(`Line`,pos[0]+49.5,pos[1]+15)
                                         break
                                     }
                                 break
@@ -995,6 +999,13 @@ function mainloop(){
                     }else{
                         graphics.main[c].background(0)
                     }
+                    if(game.level==132){
+                        graphics.main[c].fill(163,187,197)
+                        graphics.main[c].ellipse(graphics.main[c].width*0.85,graphics.main[c].height*0.15,graphics.main[c].height*0.03,graphics.main[c].height*0.03)
+                        graphics.main[c].fill(163,187,197,0.1)
+                        graphics.main[c].ellipse(graphics.main[c].width*0.85,graphics.main[c].height*0.15,graphics.main[c].height*0.035,graphics.main[c].height*0.035)
+                        graphics.main[c].ellipse(graphics.main[c].width*0.85,graphics.main[c].height*0.15,graphics.main[c].height*0.04,graphics.main[c].height*0.04)
+                    }
                     key.push(1)
                     if(game.level==6||game.level==45){
                         key[c]*=0.8
@@ -1464,7 +1475,7 @@ function mainloop(){
                             case 47: case 49: case 54: case 55: case 58: case 59: case 63: case 65: case 66: case 67:
                             case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                             case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
-                            case 100: case 101: case 103: case 104: case 105: case 108: case 109: case 131:
+                            case 100: case 101: case 103: case 104: case 105: case 108: case 109: case 131: case 132: case 133:
                                 if(game.margin){
                                     graphics.main[a].noFill()
                                     graphics.main[a].stroke(255)

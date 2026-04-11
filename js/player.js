@@ -2627,7 +2627,7 @@ class player{
                             valid=false
                         }
                     break
-                    case 44: case 65:
+                    case 44: case 65: case 132:
                         local=0
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].fort&&(entities.players[a].id==this.id||entities.players[a].id==-1)&&this.id>0&&(
@@ -2647,7 +2647,7 @@ class player{
                             valid=false
                         }
                     break
-                    case 77: case 98: case 99:
+                    case 77: case 98: case 99: case 133:
                         local=0
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].fort&&(entities.players[a].id==this.id||entities.players[a].id==-1)&&this.id>0&&(
@@ -8221,7 +8221,7 @@ class player{
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
-                    let bust=game.bust&&rules.bust&&!rules.dm&&!(game.level==55&&this.peace)&&!(game.traitor&&game.traitorKey==this.index-1)
+                    let bust=game.bust&&rules.bust&&!rules.dm&&!rules.teamMode&&!(game.level==55&&this.peace)&&!(game.traitor&&game.traitorKey==this.index-1)
                     let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,6000,5000,4000,3200][game.players-1])*(game.classWeapon?1.25:1)*(game.peakWeapon?2:1)*rules.key.bustMult
                     let ct=game.pvp?(game.level==28||game.level==38||game.level==49||game.level==131?1:4):1
                     if(bust){
@@ -8688,7 +8688,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
-                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99?60:game.level==55?150:game.level==67||game.level==78||game.level==95?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99||game.level==132||game.level==133?60:game.level==55?150:game.level==67||game.level==78||game.level==95?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.traitor&&game.traitorKey==this.index){
                         if(this.die.timer>600){
                             let key=getKey(floor(random(6,12)))
@@ -9828,6 +9828,36 @@ class player{
                                 }
                             }
                             this.respawn()
+                        }
+                    }else if(game.level==132){
+                        if((game.point[0]==this.id||game.point[4]==this.id)&&this.die.timer>(this.id==1&&game.point[3]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[3]==2?540:690)){
+                            game.respawners[this.id-1]++
+                            if(this.die.timer>960){
+                                this.respawn()
+                            }
+                        }
+                    }else if(game.level==133){
+                        let key=''
+                        if(this.id==1){
+                            key=game.point[5]==1?'r':game.point[3]==1?'e':'q'
+                        }else{
+                            key=game.point[1]==2?'e':game.point[3]==2?'r':'w'
+                        }
+                        for(let a=0,la=levels[game.level].length;a<la;a++){
+                            for(let b=0,lb=levels[game.level][a].length;b<lb;b++){
+                                if(levels[game.level][a][b]==key){
+                                    this.base.position.x=game.tileset[0]*(b+0.5)
+                                    this.base.position.y=game.tileset[1]*(a+0.5)
+                                    a=la
+                                    b=lb
+                                }
+                            }
+                        }
+                        if((game.point[0]==this.id||game.point[6]==this.id)&&this.die.timer>(this.id==1&&game.point[5]==1||this.id==2&&game.point[1]==2?360:this.id==1&&game.point[1]==1||this.id==2&&game.point[5]==2?540:690)){
+                            game.respawners[this.id-1]++
+                            if(this.die.timer>960){
+                                this.respawn()
+                            }
                         }
                     }else{
                         this.respawn()
@@ -11102,9 +11132,6 @@ class player{
         if(this.stunTime>0){
             this.stunTime--
         }
-        if(this.noGravTime>0){
-            this.noGravTime--
-        }
         if(this.stuckTime>0){
             this.stuckTime--
         }
@@ -11191,7 +11218,10 @@ class player{
             this.fade=0
         }else if(!this.disable2){
             this.velocity.x*=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
-            if(this.noGravTime<=0){
+            if(this.noGravTime>0){
+                this.noGravTime--
+                this.velocity.y*=0.8
+            }else{
                 this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
             }
             this.previous.position.x=this.position.x

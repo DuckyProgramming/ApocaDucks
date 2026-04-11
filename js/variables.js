@@ -33,7 +33,7 @@ game={
           ['Cooked','Divider','Rocksalt','Bluefort'],
           ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
           ['Confines','Ferrum','Cysteine','Bluestone'],
-          ['Blueprint','Lisp'],
+          ['Lisp','Effigy'],
       ],[
           ['Vietnam','Gray Gravel','Shogatsu','Arizona'],
           ['Aerial','Alloy','Speleo','Chasm'],
@@ -48,7 +48,7 @@ game={
       ],[
           ['Bluefort','Bluefort Mini','Bluefort Micro','Gray Gravel'],
           ['Shogatsu','Basalt','Razorpoint','Valuation'],
-          ['Aerial','Cranberry'],
+          ['Aerial','Cranberry','Blueprint'],
       ],
   ]
 }

@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=5
+        game.players=20
         game.gaming=1
-        game.level=131
+        game.level=133
         /*
         65 - tailwater 5cp
         88 - sulfite koth
@@ -45,7 +45,7 @@ function setup(){
         }
         //display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerClassWars',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
+        game.weapon=[[findName('PlayerRandomDemoman',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
@@ -67,7 +67,7 @@ function mouseClicked(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     if(a>=4){
                         ticker++
                     }
@@ -565,6 +565,13 @@ function mouseClicked(){
                                                 instant()
                                                 //cranberry
                                             break
+                                            case 2:
+                                                menu.level=28
+                                                game.classicWeapon=true
+                                                game.pvp=true
+                                                instant()
+                                                //blueprint
+                                            break
                                         }
                                     break
                                 
@@ -817,10 +824,12 @@ function mouseClicked(){
                                     case 3:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
                                                     menu.level=89
-                                                }else{
+                                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:50,height:45})){
                                                     menu.level=94
+                                                }else{
+                                                    menu.level=133
                                                 }
                                                 game.pvp=true
                                                 menu.players*=3
@@ -904,17 +913,20 @@ function mouseClicked(){
                                     case 3:
                                         switch(b){
                                             case 0:
-                                                menu.level=28
-                                                game.classicWeapon=true
-                                                game.pvp=true
-                                                instant()
-                                                //blueprint
-                                            break
-                                            case 1:
                                                 menu.level=131
                                                 game.classicWeapon=true
                                                 game.pvp=true
                                                 //lisp
+                                            break
+                                            case 1:
+                                                menu.level=132
+                                                game.pvp=true
+                                                menu.players*=4
+                                                if(!game.classWeapon){
+                                                    game.classicWeapon=true
+                                                }
+                                                instant()
+                                                //effigy
                                             break
                                         }
                                     break
