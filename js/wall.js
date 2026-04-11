@@ -12939,7 +12939,7 @@ class wall{
                     if(
                         abs(entities.players[a].position.x-this.base.position.x)<250&&abs(entities.players[a].position.y-(this.base.position.y+this.base.height/2))<100&&
                         (entities.players[a].id>0||(game.level==89||game.level==94)&&!game.pvp||entities.players[a].spy)&&entities.players[a].life>0&&
-                        !((game.level==67||game.level==77||game.level==78||game.level==95||game.level==98||game.level==99)&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))&&
+                        !((game.level==67||game.level==77||game.level==78||game.level==95||game.level==98||game.level==99||game.level==133)&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))&&
                         !((game.level==89||game.level==94)&&game.pvp&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&(this.position.x<game.edge[0]/2||this.position.y>game.edge[1]/2)||entities.players[a].id==3&&(this.position.x<game.edge[0]/2||this.position.y<game.edge[1]/2)))
                     ){
                         visible74=true

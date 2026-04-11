@@ -4764,9 +4764,9 @@ function generateLevel(info,layer){
                         break
                         case 133:
                             if(b>lb/2){
-                                entities.walls[1].push(new wall(graphics.main,(b-4)*game.tileset[0],(a+2)*game.tileset[1],game.tileset[0]*10,game.tileset[1]*4,60))
+                                entities.walls[1].push(new wall(graphics.main,(b-3)*game.tileset[0],(a+2)*game.tileset[1],game.tileset[0]*8,game.tileset[1]*4,60))
                             }else{
-                                entities.walls[1].push(new wall(graphics.main,(b+5)*game.tileset[0],(a+2)*game.tileset[1],game.tileset[0]*10,game.tileset[1]*4,59))
+                                entities.walls[1].push(new wall(graphics.main,(b+4)*game.tileset[0],(a+2)*game.tileset[1],game.tileset[0]*8,game.tileset[1]*4,59))
                             }
                         break
                         default:
