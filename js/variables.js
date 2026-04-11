@@ -8424,6 +8424,9 @@ types={
       name:'Medic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
+      name:'MedicHealthPackCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
       name:'RapidMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:11,
     },{
@@ -8452,6 +8455,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'SpyRegen',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'EnderSpy',sizeBuff:1,lifeBuff:2,speedBuff:1,
@@ -8527,6 +8533,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankSpeedBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankDoubleBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankJump',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
@@ -8970,6 +8979,9 @@ types={
       name:'HeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:6,
     },{
+      name:'FastHeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.5,
+      damageBuff:1,reloadBuff:4,crit:0,weapon:6,
+    },{
       name:'CritHeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:1,weapon:6,
     },{
@@ -9210,6 +9222,9 @@ types={
       name:'Programmer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:550,
     },{
+      name:'ProgrammerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:550,
+    },{
       name:'BigProgrammer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:550,
     },{
@@ -9314,6 +9329,9 @@ types={
     },{
       name:'BigPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'BigPunchHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:28,
     },{
       name:'BigRapidPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:9,
@@ -9487,6 +9505,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
     },{
       name:'TinyPistol',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'TinySpy',sizeBuff:0.8,lifeBuff:0.6,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'TinyFlamethrower',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
@@ -9780,6 +9801,9 @@ types={
       name:'PushMachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:163,
     },{
+      name:'BigPushMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:163,
+    },{
       name:'DeadlyTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -10029,6 +10053,9 @@ types={
       name:'HyperMedicAura',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
+      name:'FastHyperMedicAura',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
+    },{
       name:'SlightPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.25,reloadBuff:1,crit:0,weapon:1,
     },{
@@ -10253,6 +10280,9 @@ types={
     },{
       name:'SniperStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:145,
+    },{
+      name:'Icosahedron',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:586,
     },
 
     //mark p

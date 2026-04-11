@@ -285,7 +285,9 @@ function spy(name){
         name=='FlamethrowerSpy'||
         name=='EnderSpy'||
         name=='MiniSentrySpy'||
-        name=='PushSpy'
+        name=='PushSpy'||
+        name=='TinySpy'||
+        name=='SpyRegen'
 }
 function playerColor(owner){
     switch(owner){
@@ -10962,6 +10964,10 @@ function formMission(wave,type){
                 ['EnderSpy',3],
                 ['RevolverSpy',3],
                 ['PushSpy',3],
+
+                ['TinySpy',3],
+                ['SpyRegen',3],
+                ['SpyTank',1],
             ]
             for(let a=0,la=3;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
@@ -10980,12 +10986,22 @@ function formMission(wave,type){
                 ['CritBonkerSplitter',2],
                 ['SpamShotgun',4],
                 ['EnderShotgunMartyr',1],
-                ['ShotgunVault',6],
+                ['ShotgunVault',10],
                 ['HeavyInterceptor',6],
-                ['FastOverMedic',6],
+                ['FastOverMedic',10],
                 ['BigSubmachineTier',4],
                 ['FastNapalmFlamethrower',3],
                 ['Mystery',10],
+
+                ['BigSpreadRocketLauncher',5],
+                ['Planetoid',4],
+                ['FastHyperMedicAura',3],
+                ['BigPunchHealSelf',5],
+                ['ProgrammerShield',4],
+                ['FastHeavySniper',8],
+                ['BigPushMachineGun',],
+                ['MedicHealthPackCarrier',4],
+                ['Icosahedron',3],
             ]
             for(let a=0,la=9;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
@@ -10996,6 +11012,9 @@ function formMission(wave,type){
                 
                 ['IronyTank',1],
                 ['AcceleratorTank',1],
+                
+                ['SlicingTank',1],
+                ['TankDoubleBuff',1],
             ]
             for(let a=0,la=2;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
