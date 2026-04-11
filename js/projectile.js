@@ -7659,12 +7659,12 @@ class projectile{
 			break
 			case 349: case 417: case 435:
 				//mark sticky
-				radius=110+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,(this.type==435?900:750)-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
+						entities.players[b].takeDamage(this.damage*sqrt(min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius))*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						/*if(!entities.players[b].fort){
 							print(
 								this.damage,sqrt(1-c/radius),falloff,
@@ -7674,17 +7674,17 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
-						if(entities.players[b].index==this.index&&c<110){
-							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-						}else if(entities.players[b].index!=this.index&&c<110){
-							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/110))),entities.players[b].stuckTime)
+						if(entities.players[b].index==this.index&&c<105){
+							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+						}else if(entities.players[b].index!=this.index&&c<105){
+							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
@@ -7800,28 +7800,28 @@ class projectile{
 			break
 			case 368:
 				//mark sticky
-				radius=110+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-120)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index!=this.index){
-							entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
+							entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 							entities.players[b].collect.time=450
 							entities.players[b].die.killer=this.index
 							if(c<100){
-								entities.players[b].velocity.x+=2.25*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-								entities.players[b].velocity.y-=1.2*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-								entities.players[b].lastingForce[0]+=0.75*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-								entities.players[b].lastingForce[1]-=0.4*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-								entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/110))),entities.players[b].stuckTime)
+								entities.players[b].velocity.x+=2.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+								entities.players[b].velocity.y-=1.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+								entities.players[b].lastingForce[0]+=0.75*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+								entities.players[b].lastingForce[1]-=0.4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+								entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 							}
 						}else{
-							entities.players[b].velocity.x+=9*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4.8*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=13.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=7.2*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=9*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4.8*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=13.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=7.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
@@ -7840,26 +7840,26 @@ class projectile{
 			break
 			case 372:
 				//mark sticky
-				radius=110+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
+						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						if(entities.players[b].index==this.index&&c<100){
-							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=11.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
 						}else if(entities.players[b].index!=this.index&&c<100){
-							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.8*min(1,1.5-1.5*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/110))),entities.players[b].stuckTime)
+							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.8*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
@@ -7968,7 +7968,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
+						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
@@ -8049,21 +8049,21 @@ class projectile{
 			break
 			case 438:
 				//mark sticky (actually time bomb)
-				radius=110
+				radius=105
 				falloff=min(1,0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
+						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?1.25:1))
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
-						if(entities.players[b].index!=this.index&&c<110){
-							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/110)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/110)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
-							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/110)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
-							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/110))),entities.players[b].stuckTime)
+						if(entities.players[b].index!=this.index&&c<105){
+							entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].lastingForce[0]+=1.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)
+							entities.players[b].lastingForce[1]-=0.8*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)
+							entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
