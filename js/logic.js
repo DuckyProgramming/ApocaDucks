@@ -16935,7 +16935,7 @@ player.prototype.logic=function(){
                         case 9:
                             switch(goalPoint){
                                 case 4:
-                                    if(game.point[1]==2){
+                                    if(game.point[3]==1){
                                         this.target.position.x=game.tileset[0]*164.5
                                         this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
                                     }else{
@@ -17637,7 +17637,7 @@ player.prototype.logic=function(){
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 6:
-                                    this.target.position.x=game.tileset[0]*143.5
+                                    this.target.position.x=game.tileset[0]*145.5
                                     this.target.position.y=game.edge[1]
                                 break
                             }
@@ -17649,7 +17649,7 @@ player.prototype.logic=function(){
                         case 15: case 16: case 20: case 22: case 24:
                             switch(goalPoint){
                                 case 0: case 1: case 2: case 3: case 6:
-                                    this.target.position.x=game.tileset[0]*143.5
+                                    this.target.position.x=game.tileset[0]*145.5
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 4: case 5:
@@ -17744,7 +17744,7 @@ player.prototype.logic=function(){
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 0:
-                                    this.target.position.x=game.tileset[0]*56.5
+                                    this.target.position.x=game.tileset[0]*54.5
                                     this.target.position.y=game.edge[1]
                                 break
                             }
@@ -17756,7 +17756,7 @@ player.prototype.logic=function(){
                         case 40: case 41: case 45: case 47: case 49:
                             switch(goalPoint){
                                 case 0: case 3: case 4: case 5: case 6:
-                                    this.target.position.x=game.tileset[0]*56.5
+                                    this.target.position.x=game.tileset[0]*54.5
                                     this.target.position.y=game.edge[1]
                                 break
                                 case 1: case 2:
