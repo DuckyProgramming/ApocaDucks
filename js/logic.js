@@ -16339,7 +16339,7 @@ player.prototype.logic=function(){
                         this.newWeaponSet(listing[0][floor(random(0,listing[0].length))])
                     }
                 }
-            }else if(this.target.point==-1||this.target.point!=4&&entities.players[game.players+[1,3,0,2][this.target.point]].id>0&&dist(this.position.x,this.position.y,entities.players[game.players+[1,3,0,2][this.target.point]].position.x,entities.players[game.players+[1,3,0,2][this.target.point]].position.y)<300||this.target.point==4&&dist(this.position.x,this.position.y,game.tileset[0]*58.5,game.tileset[1]*60)<300){
+            }else if(this.target.point==-1||this.target.point!=4&&entities.players[game.players+[1,3,0,2][this.target.point]].id>0&&dist(this.position.x,this.position.y,entities.players[game.players+[1,3,0,2][this.target.point]].position.x,entities.players[game.players+[1,3,0,2][this.target.point]].position.y)<300||this.target.point==4&&dist(this.position.x,this.position.y,game.tileset[0]*58.5,game.tileset[1]*40)<300){
                 let possible=[]
                 for(let a=0,la=4;a<la;a++){
                     if(game.point[a]!=this.id){

@@ -8035,7 +8035,7 @@ class projectile{
 						entities.players[b].takeDamage(dmg)
 						entities.players[b].generalizedTake(this.index)
 						if(entities.players[b].index!=this.index){
-							total430+=dmg*(entities.players[b].id==0?0.25:0.5)
+							total430+=dmg*(entities.players[b].id==0?0.5:1)
 						}
 					}
 				}

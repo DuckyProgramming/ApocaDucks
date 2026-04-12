@@ -8541,9 +8541,20 @@ class player{
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                         entities.players[entities.players.length-1].position.y-=entities.players[entities.players.length-1].height/2+1
+                        entities.players[entities.players.length-1].previous.position.y-=entities.players[entities.players.length-1].height/2+1
                     break
                     case 'MedicHealthPackCarrier':
                         entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,63))
+                        entities.walls[1][entities.walls[1].length-1].formBoundary()
+                        entities.walls[1][entities.walls[1].length-1].checkRedundancy()
+                        entities.walls[1][entities.walls[1].length-1].checkOverlay()
+                        entities.walls[1][entities.walls[1].length-1].set()
+                        entities.walls[1][entities.walls[1].length-1].checkGap()
+                        entities.walls[1][entities.walls[1].length-1].checkBar()
+                        entities.walls[1][entities.walls[1].length-1].formBounder()
+                    break
+                    case 'MedicFakeHealthPackCarrier':
+                        entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,41))
                         entities.walls[1][entities.walls[1].length-1].formBoundary()
                         entities.walls[1][entities.walls[1].length-1].checkRedundancy()
                         entities.walls[1][entities.walls[1].length-1].checkOverlay()
@@ -10898,7 +10909,7 @@ class player{
                     }
                 break
                 case 'TankRegen':
-                    this.life=min(this.base.life,this.life+this.base.life/(game.classWeapon||game.peakWeapon?900:1800))
+                    this.life=min(this.base.life,this.life+this.base.life/(game.classWeapon||game.peakWeapon?1800:3600))
                 break
                 case 'TankWare':
                     if(this.time==1){

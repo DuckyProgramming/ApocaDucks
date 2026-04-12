@@ -8427,6 +8427,9 @@ types={
       name:'MedicHealthPackCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
+      name:'MedicFakeHealthPackCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
       name:'RapidMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:11,
     },{
@@ -10147,10 +10150,10 @@ types={
       damageBuff:1,reloadBuff:0.9,crit:0,weapon:887,
     },{
       name:'Mortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:0.5,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:0.375,crit:0,weapon:151,
     },{
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:0.75,crit:0,weapon:151,
     },{
       name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,

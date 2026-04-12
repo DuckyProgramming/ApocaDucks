@@ -2638,6 +2638,17 @@ function keyPressed(){
         case '8': inputs.keys[4][2]=true;inputs.tap[4][2]=true; break
         case '5': inputs.keys[4][3]=true;inputs.tap[4][3]=true; break
         case '7': inputs.release[4][0]=true; break
+
+        case '-':
+            if(stage.scene=='mission'){
+                game.diff=max(5,round(game.diff*10-1))/10
+            }
+        break
+        case '+':
+            if(stage.scene=='mission'){
+                game.diff=min(20,round(game.diff*10+1))/10
+            }
+        break
     }
     if(game.emergencyKey){
         switch(key){

@@ -11000,7 +11000,7 @@ function formMission(wave,type){
                 ['ProgrammerShield',4],
                 ['FastHeavySniper',8],
                 ['BigPushMachineGun',],
-                ['MedicHealthPackCarrier',4],
+                ['MedicFakeHealthPackCarrier',1],
                 ['Icosahedron',3],
             ]
             for(let a=0,la=9;a<la;a++){
