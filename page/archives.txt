@@ -1,3 +1,6 @@
+444 - cosmetic melee
+
+
 1016 - black box, 773
 1017 - half sentry, 685
 1018 - half sentry proxy, 730
@@ -18,6 +21,7 @@
 438 - time bomb c, 250
 439 - donut c, 173, 127
 440-442 - autumn w, 340
+443 - battery lmg, 342, 219
 
 
 

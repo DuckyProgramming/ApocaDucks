@@ -38,7 +38,7 @@ class wall{
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                 this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=81,
+                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81,
 
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
@@ -13423,7 +13423,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.rules.collide[2]
+                    }else if(a==1&&inBoxBox(this.bounder,c)&&this.rules.collide[2]&&!this.remove
                         &&!(this.type==5&&(c.id>0&&!game.attacker&&game.level!=17&&game.level!=18||c.id==0&&(game.attacker||game.level==17||game.level==18)||this.exploded))
                         &&!((this.type==8||this.type==81)&&(this.time<45||c.id<=0||this.recharge>0||c.weaponType==-1
                             ||(!game.classWeapon||c.playerData.name.includes('CarrySentry'))&&(c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*c.ammoMult)||c.weapon.uses<=0)
@@ -15400,6 +15400,7 @@ class wall{
                                                     c.stuckTime=c.playerData.sizeBuff>=1.5?120:60
                                                 }
                                             }
+                                            c.assort.ramp=0
                                         break
                                         case 2:
                                             c.position.x=this.position.x+this.width/2+c.width/2+0.01
@@ -15454,6 +15455,7 @@ class wall{
                                                 }
                                             }
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
+                                            c.assort.ramp=this.height/this.width
                                         break
                                         case 5:
                                             if(this.type==59||this.type==60||this.type==130){
@@ -15478,6 +15480,7 @@ class wall{
                                                 }
                                             }
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
+                                            c.assort.ramp=this.height/this.width
                                         break
                                         case 6:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)

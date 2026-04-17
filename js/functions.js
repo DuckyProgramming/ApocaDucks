@@ -91,7 +91,7 @@ function setupRules(){
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
-				a!=417&&a!=435&&a!=438,
+				a!=417&&a!=435&&a!=438&&a!=444,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -10723,7 +10723,7 @@ function formMission(wave,type){
             ]))
             wave[0].push(randin([
                 ['LongFlamethrower',6],
-                ['RapidMortar',6],
+                ['SpamMortar',6],
                 ['LongGust',6],
             ]))
             wave[0].push(['Wait',15])
@@ -11090,4 +11090,10 @@ let newer=levels[133].map(
 let build=``
 newer.forEach(n=>build+=`"${n}",\n`)
 print(build)
+*/
+/*
+entities.walls[1][29].weapon=findName('PlayerGrenadierC',types.player)
+entities.walls[1][28].weapon=findName('PlayerRollerLauncher',types.player)
+entities.walls[1][71].weapon=findName('PlayerStickySweeper',types.player)
+entities.walls[1][70].weapon=findName('PlayerStickySniper',types.player)
 */

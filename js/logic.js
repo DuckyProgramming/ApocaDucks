@@ -3414,7 +3414,7 @@ player.prototype.logic=function(){
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
-                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,300))!=0)
+                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
             ){
                 this.target.heal=!this.validTarget(entities.players[a])
                 let b=entities.players[a]
@@ -5811,7 +5811,7 @@ player.prototype.logic=function(){
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
-                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,300))!=0)
+                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
             ){
                 this.target.heal=!this.validTarget(entities.players[a])
                 let b=entities.players[a]
@@ -16775,7 +16775,7 @@ player.prototype.logic=function(){
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
-                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,300))!=0)
+                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
             ){
                 this.target.heal=!this.validTarget(entities.players[a])
                 let b=entities.players[a]
@@ -17163,7 +17163,7 @@ player.prototype.logic=function(){
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
-                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,300))!=0)
+                !(this.playerData.name.includes('Spy')&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
             ){
                 this.target.heal=!this.validTarget(entities.players[a])
                 let b=entities.players[a]

@@ -31,10 +31,10 @@ class projectile{
 			case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188: case 202:
 			case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249: case 251:
 			case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
-			case 338: case 339: case 340: case 341: case 342: case 343: case 345: case 346: case 347: case 348:
-			case 350: case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403:
-			case 407: case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434:
-			case 436: case 440: case 441: case 442:
+			case 338: case 339: case 340: case 341: case 343: case 345: case 346: case 347: case 348: case 350:
+			case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403: case 407:
+			case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434: case 436:
+			case 440: case 441: case 442:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -752,6 +752,15 @@ class projectile{
 				this.width*=2
 				this.height*=2
 			break
+			case 342:
+				this.speed=random(6,8)
+				this.time=random(time,time*2)
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
+				this.width*=1.5
+				this.height*=1.5
+			break
 			case 352:
 				this.speed=3.5
 				this.time=random(time,time*2)
@@ -879,10 +888,23 @@ class projectile{
 				this.height=0
 				this.shocks=[]
 			break
+			case 443:
+				this.speed=random(6,8)
+				this.time=random(time,time*2)
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
+				this.width*=1.25
+				this.height*=1.25
+			break
+			case 444:
+				this.speed=2
+				this.time=time
+			break
 			
 		}
 		this.timer=0
-        this.fade=1
+        this.fade=this.type==444?0:1
         this.active=true
 		this.base={
 			time:this.time,damage:this.damage,speed:this.speed,
@@ -7095,6 +7117,24 @@ class projectile{
 				layer.rect(0,0,3,1)
 				layer.rect(0,0,1,3)
 			break
+			case 443:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1.125,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1.125,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1.125,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,2.5)
+			break
+			case 444:
+				layer.fill(250-this.crit*150,250,250,this.fade)
+				layer.beginShape()
+				layer.vertex(-10,0)
+				layer.bezierVertex(-2.5,-25,2.5,-25,10,0)
+				layer.bezierVertex(2.5,-20,-2.5,-20,-10,0)
+				layer.endShape()
+			break
 
 			//mark
         }
@@ -8090,6 +8130,8 @@ class projectile{
 			this.fade-=0.1
 		}else if(this.type==416){
 			this.fade=smoothAnim(this.fade,this.active,0,1,this.time<=0?15:60)
+		}else if(this.type==444){
+			this.fade=smoothAnim(this.fade,this.active,0,1,3)
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}
@@ -8162,7 +8204,7 @@ class projectile{
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
-				case 432: case 434: case 436: case 439: case 440: case 441: case 442:
+				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10365,6 +10407,10 @@ class projectile{
 						}
 					}
 				break
+				case 444:
+					this.position.x+=this.speed*lsin(this.direction)
+				    this.position.y-=this.speed*lcos(this.direction)
+				break
 
 				//mark
 			}
@@ -10651,10 +10697,10 @@ class projectile{
 						case 436:
 							if(this.onTeam(target)){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
-								target.hasteBuff=max(target.hasteBuff,60)
+								target.hasteBuff=max(target.hasteBuff,120)
 							}else{
 								target.takeDamage(this.damage)
-								target.confuseTime=max(target.confuseTime,60)
+								target.confuseTime=max(target.confuseTime,120)
 							}
 						break
 						case 111: case 134: case 182: case 373: case 437:

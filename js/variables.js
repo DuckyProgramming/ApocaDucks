@@ -10150,10 +10150,13 @@ types={
       damageBuff:1,reloadBuff:0.9,crit:0,weapon:887,
     },{
       name:'Mortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:0.375,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:0.25,crit:0,weapon:151,
     },{
       name:'RapidMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.5,reloadBuff:0.75,crit:0,weapon:151,
+      damageBuff:0.5,reloadBuff:0.5,crit:0,weapon:151,
+    },{
+      name:'SpamMortar',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:151,
     },{
       name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -18047,7 +18050,7 @@ types={
 			damage:300,
 			cooldown:36,
 			stop:66,
-			reload:40,
+			reload:30,
 			speed:1.05,
       uses:22.5,
 		},{
@@ -18612,9 +18615,9 @@ types={
 			name:'Anticannon',
 			ammo:6,
 			damage:225,
-			cooldown:27,
+			cooldown:33,
 			stop:144,
-			reload:36,
+			reload:45,
 			speed:0.8,
       uses:24,
 		},{
@@ -18728,8 +18731,8 @@ types={
 		},{
 			name:'Bushwack',
 			ammo:10,
-			damage:50,
-			cooldown:12,
+      damage:120,
+			cooldown:36,
 			stop:60,
 			reload:10,
 			speed:1.4,
@@ -19115,8 +19118,8 @@ types={
 		},{
 			name:'Pain Train',
 			ammo:10,
-			damage:50,
-			cooldown:12,
+			damage:120,
+			cooldown:36,
 			stop:60,
 			reload:10,
 			speed:1.4,
@@ -19421,8 +19424,8 @@ types={
 		},{
 			name:'Vitasaw',
 			ammo:5,
-			damage:100,
-			cooldown:24,
+			damage:120,
+			cooldown:36,
 			stop:60,
 			reload:20,
 			speed:1.4,
