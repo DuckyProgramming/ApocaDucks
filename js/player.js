@@ -5856,20 +5856,23 @@ class player{
                             }
                         }
                         if(build){
+                            let pos=-1
                             let type=findName('ConstructLevel1',types.player)
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if((entities.players[a].playerData.name=='ConstructLevel1'||entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3')&&entities.players[a].builder==this.index){
                                     if(this.effectiveId()>game.gaming){
                                         if(entities.players[a].playerData.name=='ConstructLevel1'){
                                             type=findName('ConstructLevel2',types.player)
+                                            pos=entities.players[a].position
                                         }else if(entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3'){
                                             type=findName('ConstructLevel3',types.player)
+                                            pos=entities.players[a].position
                                         }
                                     }
                                     entities.players[a].life=0
                                 }
                             }
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,type,game.index))
+                            entities.players.push(new player(this.layer,pos==-1?this.position.x:pos.x,pos==-1?this.position.y+this.height/2-12:pos.y,this.id,0,[],false,type,game.index))
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index
@@ -6379,18 +6382,19 @@ class player{
                         }
                     break
                     case 880:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],445,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*0.8,300,crit,this.index))
                         
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.16/3,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.32/3,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff*0.16/3,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff*0.32/3,300,crit,this.index))
 
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff*0.16/3,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.16/3,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed*=0.8
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-15,15),this.id,weaponData.damage*damageBuff*0.32/3,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],217,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.32/3,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].speed*=0.8
 
                         //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],5,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.4,150,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff*0.32/3,150,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],34,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff*0.24/3,150,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
                     break
@@ -6728,13 +6732,17 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
                         }
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*8,300,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.9
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*8,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
+                        entities.projectiles[entities.projectiles.length-1].stun=5
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.08
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=0.75
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*12,300,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
+                        entities.projectiles[entities.projectiles.length-1].stun=5
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*12,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=0.96
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
+                        entities.projectiles[entities.projectiles.length-1].stun=5
                     break
                     case 973:
                         for(let a=0,la=6;a<la;a++){

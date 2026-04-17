@@ -18220,7 +18220,7 @@ types={
 			ammo:1,
 			damage:150,
 			cooldown:20,
-			stop:240,
+			stop:180,
 			reload:0,
 			speed:0.8,
       uses:6,
