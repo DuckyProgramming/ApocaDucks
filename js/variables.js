@@ -7424,6 +7424,9 @@ types={
       name:'PlayerBazooka',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2.5,reloadBuff:2,crit:0,weapon:700,
     },{
+      name:'PlayerBazookaC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2.5,reloadBuff:2.5,crit:0,weapon:1024,
+    },{
       name:'PlayerFlareGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:701,
     },{
@@ -19128,9 +19131,9 @@ types={
 			name:'Scorch Shot',
 			ammo:1,
 			damage:90,
-			cooldown:75,
-			stop:75,
-			reload:75,
+			cooldown:105,
+			stop:105,
+			reload:105,
 			speed:0.85,
       uses:10,
 		},{
@@ -19511,6 +19514,15 @@ types={
 			reload:50,
 			speed:0.85,
       uses:15,
+		},{
+			name:'Bazooka C',
+			ammo:0,
+			damage:120,
+			cooldown:20,
+			stop:120,
+			reload:40,
+			speed:0.8,
+      uses:12,
 		},
 
     /*{

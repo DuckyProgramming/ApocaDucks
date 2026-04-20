@@ -853,6 +853,8 @@ class projectile{
 				this.width=4.5
 				this.height=4.5
 				this.speed=12
+				this.dets=1
+				this.detTimer=0
 				this.bounces=0
 				this.time=time*(this.id==0?0.6:1)
 				this.previous={position:{x:this.position.x,y:this.position.y}}
@@ -6772,6 +6774,14 @@ class projectile{
 				layer.fill(240-this.crit*200,this.crit*240,this.crit*240,this.fade)
 				layer.ellipse(0,0,3,7.5)
 				layer.ellipse(0,0,6,3)
+				if(this.detTimer>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.detTimer*0.08)
+					layer.ellipse(0,0,(150-this.detTimer*15)*(this.fail?0.25:1))
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.detTimer*0.08)
+					layer.ellipse(0,0,(100-this.detTimer*10)*(this.fail?0.25:1))
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.detTimer*0.08)
+					layer.ellipse(0,0,(50-this.detTimer*5)*(this.fail?0.25:1))
+				}
 			break
 			case 417:
 				layer.rotate(-this.direction)
@@ -7926,7 +7936,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-					if(entities.projectiles[b].active&&entities.projectiles[b].type==this.type&&entities.projectiles[b].index==this.index){
+					if(entities.projectiles[b].active&&entities.projectiles[b].type==this.type&&entities.projectiles[b].index==this.index&&entities.projectiles[b].timer>=30){
 						entities.projectiles[b].delay+=10
 					}else if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
 						entities.projectiles[b].active=false
@@ -8073,6 +8083,26 @@ class projectile{
 					if(entities.players[b].explodable()&&c<87.5&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/87.5)*0.8*(entities.players[b].index==this.index?0.5:1))
 						entities.players[b].generalizedTake(this.index)
+					}
+				}
+			break
+			case 416:
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].explodable()&&c<60&&this.validExplodeTarget(entities.players[b])){
+						entities.players[b].takeDamage(this.damage*(1-c/60)*(entities.players[b].index==this.index?0.5:1))
+						entities.players[b].generalizedTake(this.index)
+					}
+				}
+				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<50+this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+						entities.projectiles[b].active=false
+						if(entities.projectiles[b].rules.stickybomb){
+							entities.projectiles[b].fail=true
+						}else if(entities.projectiles[b].rules.exploder){
+							entities.projectiles[b].damage*=0.25
+							entities.projectiles[b].explode()
+						}
 					}
 				}
 			break
@@ -8260,22 +8290,22 @@ class projectile{
 						if(this.timer%3==0){
 							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
 						}
-					}else if(this.type==416&&!this.active&&a==0&&!this.fail){
-						this.velocity.x*=0.95
-						this.velocity.y*=0.95
-						if(this.timer%3==0){
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
-						}
-						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-							if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<5+this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-								entities.projectiles[b].active=false
-								if(entities.projectiles[b].rules.stickybomb){
-									entities.projectiles[b].fail=true
-								}else if(entities.projectiles[b].rules.exploder){
-									entities.projectiles[b].damage*=0.25
-									entities.projectiles[b].explode()
-								}
+					}else if(this.type==416&&a==0){
+						if(!this.active&&!this.fail&&this.fade>0){
+							this.velocity.x*=0.95
+							this.velocity.y*=0.95
+							if(this.timer%3==0){
+								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
 							}
+							if(this.fade<0.25&&this.dets>0){
+								this.dets=0
+								this.detTimer=10
+								this.explode()
+							}
+						}
+						if(this.detTimer>0){
+							this.detTimer--
+							this.remove=false
 						}
 					}
 					if(a==2){

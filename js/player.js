@@ -480,49 +480,55 @@ class player{
             }
             layer.rect(x-15+15*ammo/base,y,30*ammo/base,4,2)
         }else if(base==6){
-            for(let a=0,la=base;a<la;a++){
-                if(type==0){
-                    layer.fill(150,this.fade*anim[a])
-                }else{
-                    layer.fill(0,100,200,this.fade*anim[a])
+            for(let a=0,la=6;a<la;a++){
+                if(anim[a]>0){
+                    if(type==0){
+                        layer.fill(150,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,100,200,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-13.125+a*5.25,y,4.5)
+                    if(type==0){
+                        layer.fill(200,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,150,255,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-13.125+a*5.25,y,3)
                 }
-                layer.ellipse(x-13.125+a*5.25,y,4.5)
-                if(type==0){
-                    layer.fill(200,this.fade*anim[a])
-                }else{
-                    layer.fill(0,150,255,this.fade*anim[a])
-                }
-                layer.ellipse(x-13.125+a*5.25,y,3)
             }
         }else if(base==5){
-            for(let a=0,la=base;a<la;a++){
-                if(type==0){
-                    layer.fill(150,this.fade*anim[a])
-                }else{
-                    layer.fill(0,100,200,this.fade*anim[a])
+            for(let a=0,la=5;a<la;a++){
+                if(anim[a]>0){
+                    if(type==0){
+                        layer.fill(150,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,100,200,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-12.5+a*6.25,y,5.25)
+                    if(type==0){
+                        layer.fill(200,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,150,255,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-12.5+a*6.25,y,3.5)
                 }
-                layer.ellipse(x-12.5+a*6.25,y,5.25)
-                if(type==0){
-                    layer.fill(200,this.fade*anim[a])
-                }else{
-                    layer.fill(0,150,255,this.fade*anim[a])
-                }
-                layer.ellipse(x-12.5+a*6.25,y,3.5)
             }
         }else{
-            for(let a=0,la=base;a<la;a++){
-                if(type==0){
-                    layer.fill(150,this.fade*anim[a])
-                }else{
-                    layer.fill(0,100,200,this.fade*anim[a])
+            for(let a=0,la=4;a<la;a++){
+                if(anim[a]>0){
+                    if(type==0){
+                        layer.fill(150,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,100,200,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-12+a*8,y,6)
+                    if(type==0){
+                        layer.fill(200,this.fade*anim[a])
+                    }else{
+                        layer.fill(0,150,255,this.fade*anim[a])
+                    }
+                    layer.ellipse(x-12+a*8,y,4)
                 }
-                layer.ellipse(x-12+a*8,y,6)
-                if(type==0){
-                    layer.fill(200,this.fade*anim[a])
-                }else{
-                    layer.fill(0,150,255,this.fade*anim[a])
-                }
-                layer.ellipse(x-12+a*8,y,4)
             }
         }
     }
@@ -1359,11 +1365,20 @@ class player{
                 if(game.classWeapon){
                     let tick=floor(random(0,10))
                     this.type=findName('PlayerScoutW',types.player)+tick
-                    game.loadout[this.id-1]=[{main:[],class:tick}]
-                    game.loadout[this.id-1][0].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                    game.loadout[this.id-1][0].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
-                    if(listing[4][tick].length>=3){
-                        game.loadout[this.id-1][0].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                    if(game.level==27||game.level==38){
+                        this.assort.storeSubWeapon=[]
+                        this.assort.storeSubWeapon.push(findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player))
+                        this.assort.storeSubWeapon.push(findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player))
+                        if(listing[4][tick].length>=3){
+                            this.assort.storeSubWeapon.push(findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player))
+                        }
+                    }else{
+                        game.loadout[this.id-1]=[{main:[],class:tick}]
+                        game.loadout[this.id-1][0].main[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
+                        game.loadout[this.id-1][0].main[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                        if(listing[4][tick].length>=3){
+                            game.loadout[this.id-1][0].main[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                        }
                     }
                 }else{
                     let clump=listing[game.classWeapon?3:game.peakWeapon?1:rules.dm?0:(game.level==27||game.level==38)&&game.pvp?0:floor(random(0,1.5))]
@@ -2836,10 +2851,10 @@ class player{
             }
         }
         if(valid){
-            let weapon=[this.weapon,this.subWeaponA,this.subWeaponB,this.subWeaponC][variant]
-            let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType,this.subWeaponCType][variant]
-            let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData,this.subWeaponCData][variant]
-            let damageBuff=[this.playerData.damageBuff,this.subPlayerAData.damageBuff,this.subPlayerBData.damageBuff][variant]
+            let weapon=[this.weapon,this.subWeaponA,this.subWeaponB,this.subWeaponC,this.subWeaponA][variant]
+            let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType,this.subWeaponCType,this.subWeaponAType][variant]
+            let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData,this.subWeaponCData,this.subWeaponAData][variant]
+            let damageBuff=[this.playerData.damageBuff,this.subPlayerAData.damageBuff,this.subPlayerBData.damageBuff,this.subPlayerCData.damageBuff,this.subPlayerAData.damageBuff][variant]
             weapon.reloading=false
             if(this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006){
                 if(this.visible>0&&this.visible<480){
@@ -2859,7 +2874,11 @@ class player{
                 }
                 weapon.cooldown=weaponData.cooldown
                 weapon.reload=weaponData.stop
-                weapon.ammo--
+                if(variant==4){
+                    weapon.ammo++
+                }else{
+                    weapon.ammo--
+                }
                 if(this.fort&&this.auto){
                     weapon.uses--
                     if(weapon.uses<weaponData.uses-4){
@@ -6732,14 +6751,14 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
                         }
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*8,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
                         entities.projectiles[entities.projectiles.length-1].stun=5
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*8,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=1.08
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=0.75
                         entities.projectiles[entities.projectiles.length-1].stun=5
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*12,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*7.2,300,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.x*=0.96
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
                         entities.projectiles[entities.projectiles.length-1].stun=5
@@ -6948,6 +6967,18 @@ class player{
                     break
                     case 1023:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],440+floor(weapon.uses)%3,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 1024:
+                        if(variant==1){
+                            weapon.uses+=this.effectiveId()>game.gaming?0.5:this.auto?3:1
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        }else if(weapon.ammo>=4){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],2,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].explode()
+                            entities.projectiles[entities.projectiles.length-1].active=false
+                            entities.projectiles[entities.projectiles.length-1].speed=0
+                            weapon.ammo=0
+                        }
                     break
 
                     //mark
@@ -7984,7 +8015,20 @@ class player{
                     if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
-                    if((
+                    if(this.rules.class&&this.subWeaponAType==1024){
+                        if(inputSet[3]){
+                            if(this.subWeaponA.reload<=0){
+                                this.attack(4)
+                                if(this.subWeaponA.uses<=0){
+                                    this.attack(1)
+                                }
+                            }
+                        }else{
+                            if(this.subWeaponA.ammo>0&&this.subWeaponA.cooldown<=0){
+                                this.attack(1)
+                            }
+                        }
+                    }else if((
                         inputSet[3]&&this.subWeaponAType!=919||
                         /*&&(this.subWeaponAType!=687&&this.subWeaponAType!=815&&this.subWeaponAType!=851&&this.subWeaponAType!=861&&this.subWeaponAType!=919&&this.subWeaponAType!=922&&this.subWeaponAType!=971&&this.subWeaponAType!=983&&this.subWeaponAType!=1012&&this.subWeaponAType!=1013)*/
                         this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading
@@ -11094,7 +11138,7 @@ class player{
                                     game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==996&&this.subWeaponAType==722&&this.subWeaponBType==722?180:this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?120:60):
                                     (this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?200:100)
                                 )*(crit?3:1)*
-                                (entities.players[a].fort&&!entities.players[a].auto?0.025:1)*
+                                (entities.players[a].fort&&!entities.players[a].auto?(this.weaponRules.jumpBonker?0.1:0.025):1)*
                                 (entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1))
                                 if(dir[0]!=0||dir[1]!=0){
                                     if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
