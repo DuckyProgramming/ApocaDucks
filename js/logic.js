@@ -4,7 +4,7 @@ player.prototype.logic=function(){
         let targets=[]
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*600&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -23,7 +23,7 @@ player.prototype.logic=function(){
         this.target.position.y=game.edge[1]*0.1
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<400&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*400&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -40,19 +40,19 @@ player.prototype.logic=function(){
             }
             if(targets.length==0&&game.level==8){
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<1500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+25&&entities.players[a].life>0){
+                    if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*1500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+25&&entities.players[a].life>0){
                         targets.push([entities.players[a].position.x,entities.players[a].position.y])
                     }
                 }
                 if(targets.length==0){
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<2500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+50&&entities.players[a].life>0){
+                        if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*2500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+50&&entities.players[a].life>0){
                             targets.push([entities.players[a].position.x,entities.players[a].position.y])
                         }
                     }
                     if(targets.length==0){
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<5000&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+100&&entities.players[a].life>0){
+                            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*5000&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/5+100&&entities.players[a].life>0){
                                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
                             }
                         }
@@ -213,7 +213,7 @@ player.prototype.logic=function(){
         this.target.position.y=game.edge[1]
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(entities.players[a].fort?1000:500)&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(entities.players[a].fort?1000:500)&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -230,7 +230,7 @@ player.prototype.logic=function(){
             this.manage[1]=true
         }else{
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
+                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                 }
             }
@@ -366,7 +366,7 @@ player.prototype.logic=function(){
         this.target.position.y=game.edge[1]*0.1
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }else if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x-game.edge[0])<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x-game.edge[0])*0.3+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x-game.edge[0],entities.players[a].position.y])
@@ -381,7 +381,7 @@ player.prototype.logic=function(){
             this.manage[1]=true
         }else{
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<1000&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
+                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*1000&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                 }else if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x-game.edge[0])<1000&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x-game.edge[0])*0.4+25&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x-game.edge[0],entities.players[a].position.y])
@@ -836,7 +836,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0
                 &&!(game.pvp&&(entities.players[a].position.x<300||entities.players[a].position.x>game.edge[0]-300))
                 &&!(!game.pvp&&entities.players[a].id==0&&entities.players[a].fort)
                 &&!game.noPlayer&&!(this.id>0&&this.weaponType==-1&&!this.playerData.name.includes('Buster'))
@@ -1385,7 +1385,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0
             ){
                 let b=entities.players[a]
@@ -1741,7 +1741,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
             ){
                 let b=entities.players[a]
@@ -1854,7 +1854,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
             ){
                 let b=entities.players[a]
@@ -1896,7 +1896,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<180&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*600&&abs(this.position.y-entities.players[a].position.y)<180&&entities.players[a].life>0&&
                 !(entities.players[a].fort&&entities.players[a].id>0)
             ){
                 let b=entities.players[a]
@@ -1940,7 +1940,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(1200-max(20,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(1200-max(20,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0/*&&
                 (entities.players[a].stats.points>0||this.stats.points>0)*/
             ){
@@ -2384,7 +2384,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 (this.weaponType>=0||this.playerData.name.includes('Buster'))&&entities.players[a].position.x>984&&!(entities.players[a].position.x<3576&&entities.players[a].position.x<this.position.x-150)&&!(this.auto&&this.fort)&&entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -2610,7 +2610,7 @@ player.prototype.logic=function(){
         let targets=[]
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -2621,7 +2621,7 @@ player.prototype.logic=function(){
             this.manage[1]=true
         }else{
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
+                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                 }
             }
@@ -2862,7 +2862,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0&&!(this.id==3&&entities.players[a].fort&&game.point[0]==1&&game.point[1]==1&&game.point[2]==2&&game.point[3]==2)
                 &&entities.players[a].unProtected()
                 &&!(this.id==1&&entities.players[a].fort&&entities.players[a].pos==2&&entities.players[a].id==-1)
@@ -3177,7 +3177,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 (this.weaponType>=0||this.playerData.name.includes('Buster'))&&!(this.auto&&this.fort)&&entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -3410,7 +3410,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -3600,7 +3600,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 (this.weaponType>=0||this.playerData.name.includes('Buster'))&&!(this.auto&&this.fort)&&entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -3900,7 +3900,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !(game.pvp&&this.id>0&&this.position.x<game.tileset[0]*42.5)
             ){
@@ -4481,7 +4481,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(1200-max(20,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(1200-max(20,this.stats.points)*50):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0&&(!inPointBox(entities.players[a],{position:{x:game.sectors[10][0],y:game.sectors[10][1]},width:game.sectors[10][2],height:game.sectors[10][3]})||this.id==0)
             ){
                 let b=entities.players[a]
@@ -4943,7 +4943,7 @@ player.prototype.logic=function(){
         let targets=[]
         this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*500&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.3+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -4954,7 +4954,7 @@ player.prototype.logic=function(){
             this.manage[1]=true
         }else{
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
+                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*1000&&!(game.level==31&&entities.players[a].position.x<this.position.x-200)&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)*0.4+25&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                 }
             }
@@ -5138,7 +5138,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -5344,7 +5344,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:game.level==79?360:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:game.level==79?360:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -5682,7 +5682,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
@@ -5918,7 +5918,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -6091,7 +6091,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -6126,7 +6126,7 @@ player.prototype.logic=function(){
             this.manage[1]=true
         }else{
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
+                if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
                     targets.push([entities.players[a].position.x,entities.players[a].position.y])
                 }
             }
@@ -6136,7 +6136,7 @@ player.prototype.logic=function(){
                 this.target.position.y=target[1]
             }else{
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<600&&abs(this.position.y-entities.players[a].position.y)<160&&entities.players[a].life>0){
+                    if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*600&&abs(this.position.y-entities.players[a].position.y)<160&&entities.players[a].life>0){
                         targets.push([entities.players[a].position.x,entities.players[a].position.y])
                     }
                 }
@@ -6362,7 +6362,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -7043,7 +7043,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -7393,7 +7393,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
@@ -7572,7 +7572,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -7875,7 +7875,7 @@ player.prototype.logic=function(){
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(
                     (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                    abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                    abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                     abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                     entities.players[a].life>0&&
                     this.weaponType>=0&&entities.players[a].unProtected()
@@ -8021,7 +8021,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -8700,7 +8700,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -9446,7 +9446,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:360)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:360)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -9925,7 +9925,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
@@ -10228,7 +10228,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
@@ -10314,7 +10314,7 @@ player.prototype.logic=function(){
     }else if(game.level==87){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }
@@ -10402,7 +10402,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:150)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:150)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?180:90)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
@@ -10618,7 +10618,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
@@ -10981,7 +10981,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
@@ -11414,7 +11414,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -12063,7 +12063,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -12435,7 +12435,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -12812,7 +12812,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -13512,7 +13512,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -14134,7 +14134,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:450)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:450)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0
             ){
                 let b=entities.players[a]
                 let bar=[]
@@ -14726,7 +14726,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -15214,7 +15214,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -15739,7 +15739,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 this.weaponType>=0&&
                 !(game.pvp&&this.id==0&&entities.players[a].id!=0&&!game.point.includes(entities.players[a].id))&&
                 !(game.pvp&&this.id!=0&&entities.players[a].id==0&&!game.point.includes(this.id))
@@ -16003,7 +16003,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(game.level==33&&entities.players[a].fort&&entities.players[a].pos!=this.target.point&&!entities.players[a].auto?450+entities.players[a].pos*225:900):300)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 (this.weaponType>=0||this.playerData.name.includes('Buster'))&&!(this.auto&&this.fort)&&entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -16224,7 +16224,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
@@ -16484,7 +16484,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:entities.players[a].fort?60:120)&&entities.players[a].life>0&&
+                this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:entities.players[a].fort?60:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
                 !(game.pvp&&(entities.players[a].id>0||this.id>0)&&this.position.x<game.tileset[0]*20)
             ){
@@ -16882,7 +16882,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -17270,7 +17270,7 @@ player.prototype.logic=function(){
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.playerData.name.includes('SniperC')?2:1)&&
                 abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.playerData.name.includes('SniperC')?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
@@ -17919,7 +17919,7 @@ player.prototype.logic=function(){
             break
         }
         for(let a=0,la=entities.players.length;a<la;a++){
-            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
+            if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*240&&abs(this.position.y-entities.players[a].position.y)<80&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
             }
         }

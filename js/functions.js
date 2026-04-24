@@ -175,6 +175,7 @@ function updateRules(){
         game.level==67||game.level==68||game.level==69||game.level==71||game.level==77||game.level==78||game.level==79||game.level==88||game.level==89||game.level==91||
         game.level==92||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==104||game.level==105||game.level==110||
         game.level==114||game.level==119||game.level==122||game.level==126||game.level==127||game.level==128
+    rules.blueWater=game.level==67||game.level==68||game.level==77||game.level==78||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99
     rules.grad=game.level==15||game.level==18||game.level==30||game.level==36||game.level==37||game.level==38||game.level==40||game.level==41||game.level==43||game.level==44||
         game.level==49||game.level==51||game.level==52||game.level==55||game.level==56||game.level==59||game.level==60||game.level==61||game.level==62||game.level==65||
         game.level==67||game.level==68||game.level==69||game.level==71||game.level==72||game.level==73||game.level==74||game.level==75||game.level==77||game.level==78||

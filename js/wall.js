@@ -1090,7 +1090,7 @@ class wall{
         }
     }
     checkHorizontal(){
-        if(!this.remove&&!this.vv){
+        if(!this.remove&&!this.vv&&this.type!=59&&this.type!=60){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
@@ -1112,7 +1112,7 @@ class wall{
         }
     }
     checkVertical(){
-        if(!this.remove&&!this.vv&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93))){
+        if(!this.remove&&!this.vv&&this.type!=59&&this.type!=60&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93))){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
@@ -13442,7 +13442,16 @@ class wall{
                         let clump
                         switch(this.type){
                             case 3:
-                                if(rules.safeWater){
+                                if(rules.blueWater){
+                                    c.velocity.x*=0.8
+                                    c.velocity.y*=0.6
+                                    if(c.jump.active<=0){
+                                        c.jump.time=6
+                                    }
+                                    c.jump.active=1
+                                    c.blindTime=max(c.blindTime,600)
+                                    c.wet=1
+                                }else if(rules.safeWater){
                                     c.velocity.x*=0.925
                                     c.velocity.y*=0.6
                                     if(c.jump.active<=0){
