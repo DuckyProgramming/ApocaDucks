@@ -1107,7 +1107,7 @@ class player{
     displayOver(layer){
         layer.push()
         layer.translate(this.position.x,this.position.y)
-        if((this.inspect.length>0||game.level==67||game.level==78||game.level==95||game.usurp)&&!this.sidekick&&!this.construct){
+        if((this.inspect.length>0||game.level==67||game.level==78||game.level==95||game.level==134||game.usurp)&&!this.sidekick&&!this.construct){
             layer.noStroke()
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index!=this.index){
@@ -1126,7 +1126,7 @@ class player{
                         layer.rect((max(0,entities.players[a].collect.life)/entities.players[a].base.life)*15-15+sin(dir)*extent,cos(dir)*extent+30,(max(0,entities.players[a].collect.life)/entities.players[a].base.life)*30,1+min((max(0,entities.players[a].collect.life)/entities.players[a].base.life)*60,3),2)
                         layer.fill(min(255,510-max(0,entities.players[a].life)/entities.players[a].base.life*510)-max(0,5-max(0,entities.players[a].life)/entities.players[a].base.life*30)*25,max(0,entities.players[a].life)/entities.players[a].base.life*510,0)
                         layer.rect((max(0,entities.players[a].life)/entities.players[a].base.life)*15-15+sin(dir)*extent,cos(dir)*extent+30,(max(0,entities.players[a].life)/entities.players[a].base.life)*30,2+min((max(0,entities.players[a].life)/entities.players[a].base.life)*60,3),2)
-                    }else if((game.level==67||game.level==78||game.level==95)&&entities.players[a].assort.intel){
+                    }else if((game.level==67||game.level==78||game.level==95||game.level==134)&&entities.players[a].assort.intel){
                         let dir=atan2(entities.players[a].position.x-this.position.x,entities.players[a].position.y-this.position.y)
                         let extent=dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)/20+100
                         layer.fill(...entities.players[a].color.skin.body)
@@ -2668,7 +2668,7 @@ class player{
                             valid=false
                         }
                     break
-                    case 77: case 98: case 99: case 133:
+                    case 77: case 98: case 99: case 133: case 135:
                         local=0
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].fort&&(entities.players[a].id==this.id||entities.players[a].id==-1)&&this.id>0&&(
@@ -8805,7 +8805,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
-                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99||game.level==132||game.level==133?60:game.level==55?150:game.level==67||game.level==78||game.level==95?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
+                if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99||game.level==132||game.level==133||game.level==135?60:game.level==55?150:game.level==67||game.level==78||game.level==95||game.level==134?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.traitor&&game.traitorKey==this.index){
                         if(this.die.timer>600){
                             let key=getKey(floor(random(6,12)))
@@ -9532,7 +9532,7 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==67||game.level==78||game.level==95){
+                    }else if(game.level==67||game.level==78||game.level==95||game.level==134){
                         let key=''
                         if(this.id==1){
                             key='qe'[floor(random(0,1.5))]
@@ -9828,7 +9828,7 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==99){
+                    }else if(game.level==99||game.level==135){
                         let key=''
                         if(this.id==1){
                             key=game.point[4]==1?'t':game.point[3]==1?'q':'e'
@@ -11146,7 +11146,7 @@ class player{
                         if(inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])){
                             dir=[entities.players[a].position.x-(this.position.x/2+this.previous.position.x/2),entities.players[a].position.y+entities.players[a].height/2-(this.position.y/2+this.previous.position.y/2)-this.height/2]
                             hit=true
-                        }else if(inBoxBox(this,entities.players[a])&&this.validTarget(entities.players[a])){
+                        }else if(inBoxBox(this,entities.players[a])){
                             dir=[entities.players[a].position.x-this.position.x,entities.players[a].position.y+entities.players[a].height/2-this.position.y-this.height/2]
                             hit=true
                         }

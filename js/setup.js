@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[8,4],sets:[[0,0,1],[0,0]],experiment:[-1,[0,-1]]}
+        //duel={trigger:true,numKey:[8,4],sets:[[0,0,1],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
-        game.gaming=2
-        game.level=117
+        game.players=20
+        game.gaming=1
+        game.level=134
         /*
         65 - tailwater 5cp
         88 - sulfite koth
@@ -259,7 +259,11 @@ function mouseClicked(){
                                                 //bluefort mini
                                             break
                                             case 2:
-                                                menu.level=95
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=95
+                                                }else{
+                                                    menu.level=134
+                                                }
                                                 game.pvp=true
                                                 menu.players*=4
                                                 if(!game.classWeapon){
@@ -726,7 +730,11 @@ function mouseClicked(){
                                                 //bluefort
                                             break
                                             case 1:
-                                                menu.level=99
+                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=99
+                                                }else{
+                                                    menu.level=135
+                                                }
                                                 game.pvp=true
                                                 menu.players*=4
                                                 if(!game.classWeapon){

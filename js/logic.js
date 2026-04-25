@@ -21,7 +21,7 @@ player.prototype.logic=function(){
         let targets=[]
         this.target.position.x=this.position.x
         this.target.position.y=game.edge[1]*0.1
-        this.manage[1]=false
+        this.manage[1]=falsse
         for(let a=0,la=entities.players.length;a<la;a++){
             if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*400&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
@@ -17902,6 +17902,1249 @@ player.prototype.logic=function(){
                     }
                     a=la
                     this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+                }
+            }
+        }
+    }else if(game.level==134){
+        this.manage[1]=false
+        if(floor(random(0,100))==0){
+            this.assort.swivel=floor(random(0,100))
+        }
+        if(this.playerData.name.includes('Buster')){
+            if(this.target.point==-1||dist(this.position.x,this.position.y,game.tileset[0]*[39.5,6.5,this.id==1&&!this.assort.intel?22.5:36.5,60.5,93.5,this.id==2&&!this.assort.intel?77.5:63.5][this.target.point],game.tileset[1]*[33,36,50,33,36,50][this.target.point])<300){
+                this.target.point=floor(random(0,6))
+            }
+        }else if(this.assort.intel){
+            this.target.point=2+(this.id-1)*3
+        }else if(
+            this.target.point==-1||
+            floor(random(0,this.playerData.name.includes('Engineer')?15:game.point.includes(1)?30:300))==0||
+            dist(this.position.x,this.position.y,game.tileset[0]*[39.5,6.5,this.id==1&&!this.assort.intel?22.5:36.5,60.5,93.5,this.id==2&&!this.assort.intel?77.5:63.5][this.target.point],game.tileset[1]*[33,36,50,33,36,50][this.target.point])<300
+        ){
+            if(this.playerData.name.includes('Engineer')&&game.classWeapon&&game.point[this.id-1]==0&&game.weapon[0][0]!=findName('PlayerClassWars',types.player)&&floor(random(0,5))!=0){
+                this.target.point=[0,1,2,2,2][floor(random(0,5))]+(this.id-1)*3
+            }else if((this.target.point==0||this.target.point==1)&&this.id==2){
+                this.target.point=2
+            }else if((this.target.point==3||this.target.point==4)&&this.id==1){
+                this.target.point=5
+            }else if(game.point[2-this.id]==1){
+                this.target.point=floor(random(0,3))+(2-this.id)*3
+            }else if(game.point[this.id-1]==1){
+                this.target.point=floor(random(0,3))+(2-this.id)*3
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(entities.players[a].assort.intel&&entities.players[a].id==this.id){
+                        if(entities.players[a].position.x<=game.edge[0]*0.5){
+                            this.target.point=floor(random(0,3))
+                        }else{
+                            this.target.point=floor(random(0,3))+3
+                        }
+                    }
+                }
+            }else{
+                this.target.point=([0,1,1,2,2][floor(random(0,5))]+(2-this.id)*3+floor(random(0,1.5))*3)%6
+            }
+        }
+        let targets=[]
+        for(let a=0,la=entities.players.length;a<la;a++){
+            if(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                entities.players[a].unProtected()
+            ){
+                let b=entities.players[a]
+                let bar=[]
+                if(b.position.y<=this.position.y){
+                    bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                }else{
+                    bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:b.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                }
+                let valid=true
+                for(let c=0,lc=entities.walls.length;c<lc;c++){
+                    for(let d=0,ld=entities.walls[c].length;d<ld;d++){
+                        for(let e=0,le=bar.length;e<le;e++){
+                            if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
+                                valid=false
+                                c=lc
+                                d=ld
+                                e=le
+                            }
+                        }
+                    }
+                }
+                if(valid){
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                }
+            }
+        }
+        if(targets.length>0){
+            let target=targets[floor(random(targets.length))]
+            this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+            this.target.position.y=target[1]
+            this.manage[1]=true
+        }else{
+            if(this.parachute){
+                this.target.position.x=this.position.x+random(-50,50)
+                this.target.position.y=game.edge[1]
+            }else{
+                let goalPoint=this.target.point
+                let hit=false
+                for(let a=0,la=game.sectors.length;a<la;a++){
+                    if(inPointBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]},width:game.sectors[a][2],height:game.sectors[a][3]})){
+                        if(this.id==1&&this.index==0&&!game.pvp){
+                            print(a,this.id)
+                        }
+                        switch(a){
+                            case 0:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=this.playerData.sizeBuff<=1.25&&this.assort.swivel<25?game.tileset[0]*36.5:game.tileset[0]*44.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*44.5)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=this.playerData.sizeBuff<=1.25&&this.assort.swivel<25?game.tileset[0]*63.5:game.tileset[0]*55.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*55.5)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 1:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 2:
+                                this.target.position.x=game.tileset[0]*42.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 3:
+                                this.target.position.x=game.tileset[0]*57.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 4:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*30.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 5:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*69.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 6:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 7:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 8:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*6.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*16.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 9:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*83.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*93.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 10:
+                                this.target.position.x=game.tileset[0]*34.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 11:
+                                this.target.position.x=game.tileset[0]*65.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 12: case 54:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*39.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 13: case 55:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*60.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 14:
+                                this.target.position.x=game.tileset[0]*26.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 15:
+                                this.target.position.x=game.tileset[0]*73.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 16:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*36.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*24.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*31)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 17:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*63.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*75.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*69)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 18:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*39.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 19:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*60.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 20:
+                                this.target.position.x=game.tileset[0]*18.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                            case 21:
+                                this.target.position.x=game.tileset[0]*81.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                            case 22:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 23:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 24:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*14.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1:
+                                        this.target.position.x=game.tileset[0]*6.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=game.tileset[0]*3.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*10)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 25:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*85.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4:
+                                        this.target.position.x=game.tileset[0]*93.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5:
+                                        this.target.position.x=game.tileset[0]*96.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*90)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 26:
+                                this.target.position.x=game.tileset[0]*6.5
+                                this.target.position.y=game.edge[1]
+                                if(abs(this.position.x-game.tileset[0]*1.5)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 27:
+                                this.target.position.x=game.tileset[0]*93.5
+                                this.target.position.y=game.edge[1]
+                                if(abs(this.position.x-game.tileset[0]*98.5)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 28:
+                                this.target.position.x=game.tileset[0]*7.5
+                                this.target.position.y=game.edge[1] 
+                            break
+                            case 29:
+                                this.target.position.x=game.tileset[0]*92.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 30: case 32: case 34:
+                                switch(goalPoint){
+                                    case 0: case 1: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*7.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=this.assort.swivel<50?game.tileset[0]*14.5:game.tileset[0]*3.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 31: case 33: case 35:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*92.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 5:
+                                        this.target.position.x=this.assort.swivel<50?game.tileset[0]*85.5:game.tileset[0]*96.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 36:
+                                switch(goalPoint){
+                                    case 0: case 1: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*7.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=game.tileset[0]*16.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 37:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*92.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 5:
+                                        this.target.position.x=game.tileset[0]*83.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 38:
+                                switch(goalPoint){
+                                    case 0: case 1: case 3: case 4: case 5:
+                                        if(this.id==2&&!this.assort.intel&&game.point[1]==0&&abs(this.position.x-game.tileset[0]*45.5)<100){
+                                            this.target.position.x=game.tileset[0]*22.5
+                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                        }else{
+                                            this.target.position.x=game.tileset[0]*8.5
+                                            this.target.position.y=game.edge[1]
+                                        }
+                                    break
+                                    case 2:
+                                        if(this.id==2&&!this.assort.intel){
+                                            if(game.point[1]==0){
+                                                this.target.position.x=game.tileset[0]*22.5
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            }else{
+                                                this.target.point=floor(random(0,3))
+                                                this.target.position.x=game.tileset[0]*8.5
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            }
+                                        }else{
+                                            if(this.assort.intel){
+                                                this.target.position.x=game.tileset[0]*26.5
+                                                if(abs(this.position.x-this.target.position.x)<50){
+                                                    this.manage[1]=true
+                                                }
+                                            }else{
+                                                this.target.position.x=game.tileset[0]*22.5+random(-100,100)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                            }
+                                            this.target.position.y=game.edge[1]
+                                        }
+                                    break
+                                }
+                            break
+                            case 39:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        if(this.id==1&&!this.assort.intel&&game.point[0]==0){
+                                            this.target.position.x=game.tileset[0]*77.5
+                                            this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                        }else{
+                                            this.target.position.x=game.tileset[0]*91.5
+                                            this.target.position.y=game.edge[1]
+                                        }
+                                    break
+                                    case 5:
+                                        if(this.id==1&&!this.assort.intel){
+                                            if(game.point[0]==0){
+                                                this.target.position.x=game.tileset[0]*77.5
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            }else{
+                                                this.target.point=floor(random(0,3))+3
+                                                this.target.position.x=game.tileset[0]*91.5
+                                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                            }
+                                        }else{
+                                            if(this.assort.intel){
+                                                this.target.position.x=game.tileset[0]*73.5
+                                                if(abs(this.position.x-this.target.position.x)<50){
+                                                    this.manage[1]=true
+                                                }
+                                            }else{
+                                                this.target.position.x=game.tileset[0]*77.5+random(-100,100)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                            }
+                                            this.target.position.y=game.edge[1]
+                                        }
+                                    break
+                                }
+                            break
+                            case 40: case 56:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*24.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 41: case 57:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*75.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 42:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*20.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 43:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*79.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 44: case 48: case 50:
+                                this.target.position.x=game.tileset[0]*15.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 45: case 49: case 51:
+                                this.target.position.x=game.tileset[0]*84.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 46:
+                                switch(goalPoint){
+                                    case 0: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*12.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 47:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*87.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 52:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*30.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*18.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*36.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 53:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*63.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*69.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*81.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 58:
+                                this.target.position.x=game.tileset[0]*44.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 59:
+                                this.target.position.x=game.tileset[0]*55.5
+                                this.target.position.y=game.edge[1]
+                            break
+                        }
+                        a=la
+                        hit=true
+                        this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id!=0?0.5:1)
+                    }
+                }
+                if(!hit){
+                    this.target.position.x=this.position.x+random(-60,60)
+                    this.target.position.y=this.position.y
+                }
+            }
+        }
+    }else if(game.level==135){
+        this.manage[1]=false
+        if(floor(random(0,100))==0){
+            this.assort.swivel=floor(random(0,100))
+        }
+        if(
+            this.target.point==-1||
+            dist(this.position.x,this.position.y,game.tileset[0]*[22.5,6.5,39.5,50,60.5,93.5,77.5][this.target.point],game.tileset[1]*[50,36,33,46,33,36,50][this.target.point])<300||
+            floor(random(0,(game.pvp&&!this.playerData.name.includes('Buster')?5:this.life<=0?5:150)))==0||!game.pvp&&(
+                !this.playerData.name.includes('Buster')&&this.target.point>=0&&((entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].id==this.id?1:0)==(this.weaponType>=0?1:0)||!game.pvp&&(entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].id>0?1:0)==(this.id>0?1:0)?1:0)==(this.weaponType>=0?1:0)||
+                !this.playerData.name.includes('Buster')&&this.target.point>=0&!entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].unProtected()&&dist(entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].position.x,entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].position.y,this.position.x,this.position.y)<600||
+                this.playerData.name.includes('Buster')&&dist(entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].position.x,entities.players[game.players+[5,2,0,4,1,3,6][this.target.point]].position.y,this.position.x,this.position.y)<100
+            )
+        ){
+            if(game.pvp){
+                if(this.playerData.name.includes('Buster')){
+                    this.target.point=floor(random(0,5))
+                }else if(this.weaponType==-1&&!this.sidekick){
+                    let max=game.edge[0]+game.edge[1]
+                    let set=-1
+                    for(let a=0,la=entities.walls.length;a<la;a++){
+                        for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                            if(
+                                (entities.walls[a][b].type==31||entities.walls[a][b].type==33)&&
+                                dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)<max&&
+                                entities.walls[a][b].owner==this.id
+                            ){
+                                max=dist(entities.walls[a][b].position.x,entities.walls[a][b].position.y,this.position.x,this.position.y)
+                                set=entities.walls[a][b].pos
+                            }
+                        }
+                    }
+                    if(max<game.edge[0]+game.edge[1]&&set>=0){
+                        this.target.point=set
+                    }else{
+                        this.target.point=this.id==1?0:6
+                    }
+                }else{
+                    if(floor(random(0,4))==0){
+                        this.target.point=game.point[0]!=game.point[1]?floor(random(0,2)):
+                            game.point[1]!=game.point[2]?floor(random(0,2))+1:
+                            game.point[2]!=game.point[3]?floor(random(0,2))+2:
+                            game.point[3]!=game.point[4]?floor(random(0,2))+3:
+                            game.point[4]!=game.point[5]?floor(random(0,2))+4:
+                            game.point[5]!=game.point[6]?floor(random(0,2))+5:
+                            floor(random(0,7))
+                    }else if(this.id==1){
+                        this.target.point=game.point[0]!=1?0:game.point[1]!=1?1:game.point[2]!=1?2:game.point[3]!=1?3:game.point[4]!=1?4:game.point[5]!=1?5:6
+                    }else if(this.id==2){
+                        this.target.point=game.point[6]!=2?6:game.point[5]!=2?5:game.point[4]!=2?4:game.point[3]!=2?3:game.point[2]!=2?2:game.point[1]!=2?1:0
+                    }
+                }
+            }
+        }
+        let targets=[]
+        for(let a=0,la=entities.players.length;a<la;a++){
+            if(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC6'?1:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.playerData.name.includes('SniperC')?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                entities.players[a].unProtected()
+            ){
+                let b=entities.players[a]
+                let bar=[]
+                if(b.position.y<=this.position.y){
+                    bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:b.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:this.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                }else{
+                    bar=[{position:{x:this.position.x*0.5+b.position.x*0.5,y:this.position.y},width:abs(this.position.x-b.position.x),height:1},{position:{x:b.position.x,y:this.position.y*0.5+b.position.y*0.5},width:1,height:abs(this.position.y-b.position.y)}]
+                }
+                let valid=true
+                for(let c=0,lc=entities.walls.length;c<lc;c++){
+                    for(let d=0,ld=entities.walls[c].length;d<ld;d++){
+                        for(let e=0,le=bar.length;e<le;e++){
+                            if(inBoxBox(entities.walls[c][d],bar[e])&&(entities.walls[c][d].standard&&entities.walls[c][d].type!=3||entities.walls[c][d].type==38)){
+                                valid=false
+                                c=lc
+                                d=ld
+                                e=le
+                            }
+                        }
+                    }
+                }
+                if(valid){
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                }
+            }
+        }
+        if(targets.length>0){
+            let target=targets[floor(random(targets.length))]
+            this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
+            this.target.position.y=target[1]
+            this.manage[1]=true
+        }else{
+            if(this.parachute){
+                this.target.position.x=this.position.x+random(-50,50)
+                this.target.position.y=game.edge[1]
+            }else{
+                let goalPoint=this.target.point
+                let hit=false
+                for(let a=0,la=game.sectors.length;a<la;a++){
+                    if(inPointBox(this,{position:{x:game.sectors[a][0],y:game.sectors[a][1]},width:game.sectors[a][2],height:game.sectors[a][3]})){
+                        if(this.id==1&&this.index==0&&!game.pvp){
+                            print(a,this.id)
+                        }
+                        switch(a){
+                            case 0:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=this.playerData.sizeBuff<=1.25&&this.assort.swivel<25?game.tileset[0]*36.5:game.tileset[0]*44.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*44.5)<100?0:game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*44.5)<100?0:game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*50+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*55.5)<100?0:game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=this.playerData.sizeBuff<=1.25&&this.assort.swivel<25?game.tileset[0]*63.5:game.tileset[0]*55.5
+                                        this.target.position.y=abs(this.position.x-game.tileset[0]*55.5)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 1:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*50
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 2:
+                                this.target.position.x=game.tileset[0]*42.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 3:
+                                this.target.position.x=game.tileset[0]*57.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 4:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*30.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 5:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*69.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 6:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 7:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 8:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2:
+                                        this.target.position.x=game.tileset[0]*6.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*16.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 9:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*83.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*93.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 10:
+                                this.target.position.x=game.tileset[0]*34.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 11:
+                                this.target.position.x=game.tileset[0]*65.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 12: case 54:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*39.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 13: case 55:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*60.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 14:
+                                this.target.position.x=game.tileset[0]*26.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 15:
+                                this.target.position.x=game.tileset[0]*73.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 16:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*24.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*36.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*31)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 17:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*63.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*75.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*69)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 18:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=game.tileset[0]*39.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 19:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4:
+                                        this.target.position.x=game.tileset[0]*60.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 20:
+                                this.target.position.x=game.tileset[0]*18.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                            case 21:
+                                this.target.position.x=game.tileset[0]*81.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                            case 22:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*22.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 23:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*77.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 24:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*3.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1:
+                                        this.target.position.x=game.tileset[0]*6.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*14.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*10)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 25:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*85.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5:
+                                        this.target.position.x=game.tileset[0]*93.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 6:
+                                        this.target.position.x=game.tileset[0]*96.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                                if(abs(this.position.x-game.tileset[0]*90)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 26:
+                                this.target.position.x=game.tileset[0]*6.5
+                                this.target.position.y=game.edge[1]
+                                if(abs(this.position.x-game.tileset[0]*1.5)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 27:
+                                this.target.position.x=game.tileset[0]*93.5
+                                this.target.position.y=game.edge[1]
+                                if(abs(this.position.x-game.tileset[0]*98.5)<100){
+                                    this.manage[2]=1
+                                }
+                            break
+                            case 28:
+                                this.target.position.x=game.tileset[0]*5.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 29:
+                                this.target.position.x=game.tileset[0]*94.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 30: case 32: case 34:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=this.assort.swivel<50?game.tileset[0]*14.5:game.tileset[0]*3.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*7.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 31: case 33: case 35:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*92.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 5:
+                                        this.target.position.x=this.assort.swivel<50?game.tileset[0]*85.5:game.tileset[0]*96.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 36:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*16.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*6.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 37:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*93.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 6:
+                                        this.target.position.x=game.tileset[0]*83.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 38:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*22.5+random(-100,100)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 39:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 6:
+                                        this.target.position.x=game.tileset[0]*77.5+random(-100,100)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id>0?8:1)
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 40:
+                                this.target.position.x=game.tileset[0]*24.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 41:
+                                this.target.position.x=game.tileset[0]*75.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 42:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*8.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*20.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 43:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*79.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*91.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 44: case 48: case 50:
+                                this.target.position.x=game.tileset[0]*15.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 45: case 49: case 51:
+                                this.target.position.x=game.tileset[0]*84.5
+                                this.target.position.y=game.edge[1]
+                            break
+                            case 46:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*12.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 2: case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*32.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 47:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3: case 4:
+                                        this.target.position.x=game.tileset[0]*67.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*87.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 52:
+                                switch(goalPoint){
+                                    case 0: case 1:
+                                        this.target.position.x=game.tileset[0]*18.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 2:
+                                        this.target.position.x=game.tileset[0]*30.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 3: case 4: case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*36.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 53:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 3:
+                                        this.target.position.x=game.tileset[0]*63.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 4:
+                                        this.target.position.x=game.tileset[0]*69.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                    case 5: case 6:
+                                        this.target.position.x=game.tileset[0]*81.5
+                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 56:
+                                this.target.position.x=game.tileset[0]*34.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                            case 57:
+                                this.target.position.x=game.tileset[0]*65.5
+                                this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                            break
+                        }
+                        a=la
+                        hit=true
+                        this.target.position.x+=random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)*(this.id!=0?0.5:1)
+                    }
+                }
+                if(!hit){
+                    this.target.position.x=this.position.x+random(-60,60)
+                    this.target.position.y=this.position.y
                 }
             }
         }

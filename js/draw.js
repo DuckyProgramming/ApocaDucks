@@ -54,6 +54,8 @@ function mainloop(){
                         menu.mode==2&&a==9&&b==2||
                         menu.mode==2&&a==9&&b==1||
 
+                        menu.mode==3&&a==8&&b==1||
+
                         menu.mode==4&&a==4&&b==2||
                         menu.mode==4&&a==4&&b==3||
                         menu.mode==4&&a==5&&b==0||
@@ -66,7 +68,9 @@ function mainloop(){
                         menu.mode==4&&a==8&&b==0||
                         menu.mode==4&&a==8&&b==1||
                         menu.mode==4&&a==9&&b==1||
-                        menu.mode==4&&a==9&&b==3
+                        menu.mode==4&&a==9&&b==3||
+
+                        menu.mode==6&&a==4&&b==2
                     ){
                         rect(pos[0]+37,pos[1],76,45,10)
                         rect(pos[0]-37,pos[1],76,45,10)
@@ -167,6 +171,14 @@ function mainloop(){
                         break
                         case 3:
                             switch(a){
+                                case 8:
+                                    switch(b){
+                                        case 1:
+                                            text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
+                                        break
+                                    }
+                                break
                                 case 9:
                                     switch(b){
                                         case 0:
@@ -234,8 +246,12 @@ function mainloop(){
                             switch(a){
                                 case 4:
                                     switch(b){
-                                        case 0: case 1: case 2:
+                                        case 0: case 1:
                                             text(`CTF`,pos[0],pos[1]+15)
+                                        break
+                                        case 2:
+                                            text(`CTF`,pos[0]-37,pos[1]+15)
+                                            text(`Updated`,pos[0]+37,pos[1]+15)
                                         break
                                         case 3:
                                             text(`Search and Destroy`,pos[0],pos[1]+15)
@@ -1476,6 +1492,7 @@ function mainloop(){
                             case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                             case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
                             case 100: case 101: case 103: case 104: case 105: case 108: case 109: case 131: case 132: case 133:
+                            case 134: case 135:
                                 if(game.margin){
                                     graphics.main[a].noFill()
                                     graphics.main[a].stroke(255)
