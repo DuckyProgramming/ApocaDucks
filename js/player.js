@@ -11135,6 +11135,16 @@ class player{
                         }
                     }
                 break
+                case 'HeavyRocketLauncherDefendBuffHeal':
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                            if(!entities.players[a].playerData.name.includes('Tank')){
+                                entities.players[a].life=min(max(entities.players[a].base.life,entities.players[a].life),entities.players[a].life+sqrt(entities.players[a].base.life)/60)
+                            }
+                            entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
+                        }
+                    }
+                break
                 
             }
             if(this.playerData.name.includes('Tank')&&this.playerData.name!='PlayerTank'||game.brutal&&this.variant==13||this.weaponRules.baseBonker||this.weaponRules.jumpBonker&&this.jump.time<=0){

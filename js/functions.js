@@ -3074,8 +3074,8 @@ function generateLevel(info,layer){
                 [game.tileset[0]*21.75,game.tileset[1]*46.5,game.tileset[0]*17.5,game.tileset[1]*5],
                 [game.tileset[0]*78.25,game.tileset[1]*46.5,game.tileset[0]*17.5,game.tileset[1]*5],
                 
-                [game.tileset[0]*33.25,game.tileset[1]*46.5,game.tileset[0]*5.5,game.tileset[1]*5],
-                [game.tileset[0]*66.75,game.tileset[1]*46.5,game.tileset[0]*5.5,game.tileset[1]*5],
+                [game.tileset[0]*33.25,game.tileset[1]*46,game.tileset[0]*5.5,game.tileset[1]*4],
+                [game.tileset[0]*66.75,game.tileset[1]*46,game.tileset[0]*5.5,game.tileset[1]*4],
                 [game.tileset[0]*14.5,game.tileset[1]*37,game.tileset[0]*3,game.tileset[1]*6],
                 [game.tileset[0]*85.5,game.tileset[1]*37,game.tileset[0]*3,game.tileset[1]*6],
                 [game.tileset[0]*14.5,game.tileset[1]*41,game.tileset[0]*3,game.tileset[1]*2],
@@ -3091,8 +3091,8 @@ function generateLevel(info,layer){
                 [game.tileset[0]*74.5,game.tileset[1]*42,game.tileset[0]*19,game.tileset[1]*4],
                 [game.tileset[0]*25.5,game.tileset[1]*31,game.tileset[0]*3,game.tileset[1]*4],
                 [game.tileset[0]*74.5,game.tileset[1]*31,game.tileset[0]*3,game.tileset[1]*4],
-                [game.tileset[0]*37.25,game.tileset[1]*47.5,game.tileset[0]*2.5,game.tileset[1]*3],
-                [game.tileset[0]*62.75,game.tileset[1]*47.5,game.tileset[0]*2.5,game.tileset[1]*3],
+                [game.tileset[0]*34.75,game.tileset[1]*48.5,game.tileset[0]*7.5,game.tileset[1]],
+                [game.tileset[0]*65.25,game.tileset[1]*48.5,game.tileset[0]*7.5,game.tileset[1]],
                 [game.tileset[0]*39.25,game.tileset[1]*47.5,game.tileset[0]*1.5,game.tileset[1]*3],
                 [game.tileset[0]*60.75,game.tileset[1]*47.5,game.tileset[0]*1.5,game.tileset[1]*3],
             ]
@@ -3560,7 +3560,7 @@ function generateLevel(info,layer){
                                     a<la-1&&level[a+1][b+1]=='.'&&level[a+1][b]==']'&&level[a][b+1]!='<'&&(game.level==89||game.level==90||game.level==94||game.level==133)||
                                     a<la-2&&level[a+1][b]=='.'&&level[a+2][b-1]=='.'&&game.level==133
                                 )){
-                                    if(level[a][b-1]=='#'||(game.level==42||(game.level==67||game.level==77||game.level==78||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==133||game.level==134||game.level==135)&&(b>=lb/2+30||b<=lb/2-30)||game.level==68&&b>=30)&&level[a+1][b]=='#'){
+                                    if(level[a][b-1]=='#'||(game.level==42||(game.level==67||game.level==77||game.level==78||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==134||game.level==135)&&(b>=lb/2+30||b<=lb/2-30)||game.level==68&&b>=30)&&level[a+1][b]=='#'){
                                         for(let e=0,le=extent+1;e<le;e++){
                                             level[a+e]=level[a+e].substr(0,b-e)+'['+level[a+e].substr(b-e+1)
                                             if(reject.includes((a+e)*lb+(b-e))){
@@ -11183,7 +11183,7 @@ function formMission(wave,type){
                 ['BombPod',2],
                 ['Fume',4],
                 ['Kamikaze',5],
-                ['HyperBonker',3],
+                ['HeavyRocketLauncherDefendBuffHeal',3],
 
                 ['CritBonkerSplitter',2],
                 ['SpamShotgun',4],

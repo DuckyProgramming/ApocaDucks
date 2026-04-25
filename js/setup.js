@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=20
+        game.players=1
         game.gaming=1
-        game.level=134
+        game.level=131
         /*
         65 - tailwater 5cp
         88 - sulfite koth
@@ -50,7 +50,7 @@ function setup(){
         game.weaponTick=[0]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
+        dev.sight=true
         //game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))

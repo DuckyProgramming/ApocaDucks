@@ -1629,6 +1629,22 @@ function mainloop(){
                             }
                         }
                     }
+                    if(run.update[a].length>0&&run.update[a][0] instanceof projectile){
+                        game.projClump=[]
+                        for(let b=0,lb=run.update[a].length;b<lb;b++){
+                            let place=false
+                            for(let c=0,lc=game.projClump.length;c<lc;c++){
+                                if(inPointBox(run.update[a][b],game.projClump[c])&&inPointBox(run.update[a][b].previous,game.projClump[c])){
+                                    game.projClump[c].projectiles.push(run.update[a][b])
+                                    place=true
+                                    break
+                                }
+                            }
+                            if(!place){
+                                game.projClump.push({projectiles:[run.update[a][b]],position:{x:run.update[a][b].position.x,y:run.update[a][b].position.y},width:200,height:200})
+                            }
+                        }
+                    }
                     /*if(a==0){
                         endTime=performance.now()
                         print(`TIME WALLS[0]: ${endTime - startTime} milliseconds`)

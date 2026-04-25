@@ -13,6 +13,7 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,
   diff:1,deathlink:false,noStat:false,traitor:false,
+  projClump:[],
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
@@ -8626,6 +8627,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'HeavyRocketLauncherDefendBuff',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'HeavyRocketLauncherDefendBuffHeal',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'PushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,

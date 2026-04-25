@@ -13031,6 +13031,12 @@ class wall{
             this.reload=0
         }
         if(this.type!=7&&this.type!=55&&this.height>1){
+            this.collide[0]=entities.projectiles.filter(proj=>proj.timer==0)
+            for(let a=0,la=game.projClump.length;a<la;a++){
+                if(inBoxBox(this.bounder,game.projClump[a])){
+                    this.collide[0].push(...game.projClump[a].projectiles)
+                }
+            }
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]

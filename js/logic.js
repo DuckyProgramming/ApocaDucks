@@ -21,7 +21,7 @@ player.prototype.logic=function(){
         let targets=[]
         this.target.position.x=this.position.x
         this.target.position.y=game.edge[1]*0.1
-        this.manage[1]=falsse
+        this.manage[1]=false
         for(let a=0,la=entities.players.length;a<la;a++){
             if(this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*400&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
                 targets.push([entities.players[a].position.x,entities.players[a].position.y])
@@ -18410,26 +18410,26 @@ player.prototype.logic=function(){
                                     break
                                 }
                             break
-                            case 40: case 56:
+                            case 40:
                                 switch(goalPoint){
                                     case 0: case 1: case 2: case 4: case 5:
                                         this.target.position.x=game.tileset[0]*24.5
                                         this.target.position.y=game.edge[1]
                                     break
                                     case 3:
-                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.x=game.tileset[0]*34.5
                                         this.target.position.y=game.edge[1]
                                     break
                                 }
                             break
-                            case 41: case 57:
+                            case 41:
                                 switch(goalPoint){
                                     case 0:
                                         this.target.position.x=game.tileset[0]*75.5
                                         this.target.position.y=game.edge[1]
                                     break
                                     case 1: case 2: case 3: case 4: case 5:
-                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.x=game.tileset[0]*65.5
                                         this.target.position.y=game.edge[1]
                                     break
                                 }
@@ -18519,6 +18519,30 @@ player.prototype.logic=function(){
                                     case 4: case 5:
                                         this.target.position.x=game.tileset[0]*81.5
                                         this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                    break
+                                }
+                            break
+                            case 56:
+                                switch(goalPoint){
+                                    case 0: case 1: case 2: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*24.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 3:
+                                        this.target.position.x=game.tileset[0]*44.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                }
+                            break
+                            case 57:
+                                switch(goalPoint){
+                                    case 0:
+                                        this.target.position.x=game.tileset[0]*75.5
+                                        this.target.position.y=game.edge[1]
+                                    break
+                                    case 1: case 2: case 3: case 4: case 5:
+                                        this.target.position.x=game.tileset[0]*55.5
+                                        this.target.position.y=game.edge[1]
                                     break
                                 }
                             break
