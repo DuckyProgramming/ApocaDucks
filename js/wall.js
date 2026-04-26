@@ -12949,8 +12949,8 @@ class wall{
                         (entities.players[a].id>0||(game.level==89||game.level==94)&&!game.pvp||entities.players[a].spy)&&entities.players[a].life>0&&
                         !((game.level==67||game.level==77||game.level==78||game.level==95||game.level==98||game.level==99||game.level==133||game.level==134||game.level==135)&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&this.position.x<game.edge[0]/2))&&
                         !((game.level==89||game.level==94)&&game.pvp&&(entities.players[a].id==1&&this.position.x>game.edge[0]/2||entities.players[a].id==2&&(this.position.x<game.edge[0]/2||this.position.y>game.edge[1]/2)||entities.players[a].id==3&&(this.position.x<game.edge[0]/2||this.position.y<game.edge[1]/2)))&&
-                        !(game.level==134&&abs(this.position.x-game.tileset[0]*38.5)<1&&abs(entities.players[a].position.x-this.base.position.x+25)>=25)&&
-                        !(game.level==134&&abs(this.position.x-game.tileset[0]*61.5)<1&&abs(entities.players[a].position.x-this.base.position.x-25)>=25)
+                        !(game.level==134&&abs(this.position.x-game.tileset[0]*38.5)<1&&(abs(entities.players[a].position.x-this.base.position.x+25)>=25||abs(entities.players[a].position.y-this.base.position.y)>=40))&&
+                        !(game.level==134&&abs(this.position.x-game.tileset[0]*61.5)<1&&(abs(entities.players[a].position.x-this.base.position.x-25)>=25||abs(entities.players[a].position.y-this.base.position.y)>=40))
                     ){
                         visible74=true
                     }
@@ -13031,7 +13031,8 @@ class wall{
             this.reload=0
         }
         if(this.type!=7&&this.type!=55&&this.height>1){
-            this.collide[0]=entities.projectiles.filter(proj=>proj.timer==0)
+            //this.collide[0]=entities.projectiles.filter(proj=>proj.timer==0)
+            this.collide[0]=[]
             for(let a=0,la=game.projClump.length;a<la;a++){
                 if(inBoxBox(this.bounder,game.projClump[a])){
                     this.collide[0].push(...game.projClump[a].projectiles)

@@ -5887,23 +5887,29 @@ class player{
                             }
                         }
                         if(build){
-                            let pos=-1
                             let type=findName('ConstructLevel1',types.player)
+                            let pos=-1
+                            let life=0
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if((entities.players[a].playerData.name=='ConstructLevel1'||entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3')&&entities.players[a].builder==this.index){
                                     if(this.effectiveId()>game.gaming){
                                         if(entities.players[a].playerData.name=='ConstructLevel1'){
                                             type=findName('ConstructLevel2',types.player)
                                             pos=entities.players[a].position
+                                            life=entities.players[a].life
                                         }else if(entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3'){
                                             type=findName('ConstructLevel3',types.player)
                                             pos=entities.players[a].position
+                                            life=entities.players[a].life
                                         }
                                     }
                                     entities.players[a].life=0
                                 }
                             }
                             entities.players.push(new player(this.layer,pos==-1?this.position.x:pos.x,pos==-1?this.position.y+this.height/2-12:pos.y,this.id,0,[],false,type,game.index))
+                            if(pos!=-1){
+                                entities.players[entities.players.length-1].life=life
+                            }
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index

@@ -1610,12 +1610,31 @@ function mainloop(){
                     entities.players[a].displayOver(graphics.main[a])
                 }
             }
+            let clumped=false
             outer:
             for(let ru=0,lru=game.noVisuals?100:1;ru<lru;ru++){
                 for(let a=0,la=run.update.length;a<la;a++){
                     /*if(a==0){
                         startTime=performance.now()
                     }*/
+                    if(run.update[a].length>0&&run.update[a][0] instanceof wall&&!clumped){
+                        clumped=true
+                        game.projClump=[]
+                        for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+                            let place=false
+                            for(let c=0,lc=game.projClump.length;c<lc;c++){
+                                if(inPointBox(entities.projectiles[b],game.projClump[c])&&inPointBox(entities.projectiles[b].previous,game.projClump[c])){
+                                    game.projClump[c].projectiles.push(entities.projectiles[b])
+                                    place=true
+                                    break
+                                }
+                            }
+                            if(!place){
+                                game.projClump.push({projectiles:[entities.projectiles[b]],position:{x:entities.projectiles[b].position.x,y:entities.projectiles[b].position.y},width:200,height:200})
+                            }
+                        }
+                        //print(game.projClump,noLoop())
+                    }
                     for(let b=0,lb=run.update[a].length;b<lb;b++){
                         if(b<run.update[a].length){
                             if(run.update[a][b].update()){
@@ -1626,22 +1645,6 @@ function mainloop(){
                                 run.update[a].splice(b,1)
                                 b--
                                 lb--
-                            }
-                        }
-                    }
-                    if(run.update[a].length>0&&run.update[a][0] instanceof projectile){
-                        game.projClump=[]
-                        for(let b=0,lb=run.update[a].length;b<lb;b++){
-                            let place=false
-                            for(let c=0,lc=game.projClump.length;c<lc;c++){
-                                if(inPointBox(run.update[a][b],game.projClump[c])&&inPointBox(run.update[a][b].previous,game.projClump[c])){
-                                    game.projClump[c].projectiles.push(run.update[a][b])
-                                    place=true
-                                    break
-                                }
-                            }
-                            if(!place){
-                                game.projClump.push({projectiles:[run.update[a][b]],position:{x:run.update[a][b].position.x,y:run.update[a][b].position.y},width:200,height:200})
                             }
                         }
                     }

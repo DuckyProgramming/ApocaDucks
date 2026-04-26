@@ -2621,6 +2621,33 @@ function instant(){
     display.cycle=0
 }
 function keyPressed(){
+    switch(stage.scene){
+        case 'menumix':
+            let set=game.mapset
+            let ticker=0
+            for(let a=0,la=4+set[menu.mode].length;a<la;a++){
+                for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,0,6][a];b<lb;b++){
+                    if(key==`1234567890abcdefghijklmnopqrstuvwxyz`[ticker]||key==`1234567890ABCEFGHIJKLMNOPQRSTUVWXYZ`[ticker]){
+                        switch(a){
+                            case 0:
+                                menu.players=b+1
+                            break
+                            case 1:
+                                menu.gaming=b+1
+                            break
+                            case 3:
+                                menu.mode=b+1
+                            break
+                        }
+                        a=la
+                        b=lb
+                    }
+                    ticker++
+                }
+            }
+            updateRules()
+        break
+    }        
     switch(key){
         case 'ArrowLeft': inputs.keys[0][0]=true;inputs.tap[0][0]=true; break
         case 'ArrowRight': inputs.keys[0][1]=true;inputs.tap[0][1]=true; break
