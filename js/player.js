@@ -1334,7 +1334,7 @@ class player{
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[115,5,255]}}
                 break
                 default:
-                    let a=game.colorset[this.id-7]
+                    let a=game.colorset[this.id%7]
                     this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[a[0],a[1],a[2]],body:[a[0]-10,a[1]-10,a[2]-10],legs:[a[0]-25,a[1]-25,a[2]-25],arms:[a[0]-20,a[1]-20,a[2]-20]}}
                 break
             }
@@ -5989,7 +5989,7 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],346,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 735:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],347,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,20,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],weapon.ammo==0?347:1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,20,crit,this.index))
                     break
                     case 746:
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -9547,7 +9547,7 @@ class player{
                         }
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].life<=0&&entities.players[a].id==this.id){
-                                entities.players[a].assort.threshold=min(entities.players[a].assort.threshold+180,max(1080,entities.players[a].assort.threshold+90))
+                                entities.players[a].assort.threshold=min(entities.players[a].assort.threshold+(180+constrain(90-game.players*9,-120,0)),max(1080,entities.players[a].assort.threshold+(90+constrain(45-game.players*4.5,-60,0))))
                             }
                         }
                         for(let a=0,la=levels[game.level].length;a<la;a++){

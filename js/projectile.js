@@ -7805,6 +7805,13 @@ class projectile{
 					if(entities.players[b].explodable()&&c<240&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||this.index==entities.players[b].index)){
 						entities.players[b].takeDamage(this.damage*min(1,1.25*(1-c/240))*(this.index==entities.players[b].index?0.375:1))
 						entities.players[b].generalizedTake(this.index)
+						if(entities.players[b].index!=this.index&&c<240){
+							let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
+							entities.players[b].velocity.x+=6.75*min(1,1.5-1.5*c/240)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
+							entities.players[b].velocity.y-=3.6*min(1,1.2-1.2*c/240)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
+							entities.players[b].lastingForce[0]+=6.75*min(1,1.5-1.5*c/240)*lsin(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
+							entities.players[b].lastingForce[1]-=3.6*min(1,1.2-1.2*c/240)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
+						}
 					}
 				}
 			break
@@ -8777,7 +8784,7 @@ class projectile{
 				case 259: case 260: case 261: case 268: case 272: case 283: case 301: case 328: case 373: case 404:
 				case 437:
 					if(a==1){
-						if((this.damage<300||this.type==437)&&game.pvp&&this.active){
+						if((this.damage<300||this.type==437)&&game.pvp&&this.active&&this.type!=404){
 							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 								if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 									if(entities.projectiles[b].damage>this.base.damage){
@@ -10660,7 +10667,7 @@ class projectile{
 							}
 						break
 						case 6: case 15: case 33: case 74: case 75: case 81: case 276:
-							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?3:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?2:1))
+							target.takeDamage(this.damage*(target.base.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.base.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
 							if(this.type==75){
 								this.explode()
 							}

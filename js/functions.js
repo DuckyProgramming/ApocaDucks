@@ -8441,6 +8441,10 @@ function generateLevel(info,layer){
                 let split=[]
                 let possible=range(0,game.players)
                 let typeList=[range(0,10),range(0,10)]
+                if(game.players>20){
+                    typeList[0].push(...range(0,10))
+                    typeList[1].push(...range(0,10))
+                }
                 if(duel.trigger){
                     split=range(game.players*0.5,game.players)
                 }else{
@@ -9342,6 +9346,11 @@ function generateLevel(info,layer){
                 let split=[[],[]]
                 let possible=range(0,game.players)
                 let typeList=[range(0,10),range(0,10),range(0,10)]
+                if(game.players>30){
+                    typeList[0].push(...range(0,10))
+                    typeList[1].push(...range(0,10))
+                    typeList[2].push(...range(0,10))
+                }
                 for(let b=0,lb=2;b<lb;b++){
                     for(let a=0,la=game.players/3;a<la;a++){
                         let index=floor(random(0,possible.length))
