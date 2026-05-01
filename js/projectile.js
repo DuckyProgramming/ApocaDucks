@@ -502,7 +502,7 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
-			case 365: case 400: case 406: case 415: case 426:
+			case 365: case 400: case 406: case 415: case 426: case 446:
 				this.forceDisplay=true
 				this.time=time
 				this.speed=0
@@ -641,6 +641,14 @@ class projectile{
 											}
 										}
 										this.remove=true
+									}else if(this.type==446){
+										for(let d=0,ld=entities.players.length;d<ld;d++){
+											if(entities.players[d].builder==this.index&&entities.players[d].construct){
+												entities.players[d].weaponData.cooldown=0
+												entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,60)
+												entities.players[d].assort.autoTarget.push(c.index)
+											}
+										}
 									}
 								}
 							}
@@ -7155,6 +7163,20 @@ class projectile{
 					layer.ellipse(0,0,65-this.fade*65)
 				}
 			break
+			case 446:
+				layer.stroke(240-this.crit*200,40,40+this.crit*200,this.fade)
+				layer.strokeWeight(0.9)
+				layer.line(0,8,0,-this.extent)
+				layer.stroke(240-this.crit*200,80,80+this.crit*160,this.fade)
+				layer.strokeWeight(0.75)
+				layer.line(0,8,0,-this.extent)
+				layer.stroke(240-this.crit*200,120,120+this.crit*120,this.fade)
+				layer.strokeWeight(0.6)
+				layer.line(0,8,0,-this.extent)
+				layer.stroke(250,this.fade)
+				layer.strokeWeight(0.45)
+				layer.line(0,8,0,-this.extent)
+			break
 
 			//mark
         }
@@ -8188,6 +8210,8 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,this.time<=0?15:60)
 		}else if(this.type==444){
 			this.fade=smoothAnim(this.fade,this.active,0,1,3)
+		}else if(this.type==446){
+			this.fade-=0.25
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}

@@ -7973,6 +7973,9 @@ types={
     },{
       name:'PlayerAutumnW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1023,
+    },{
+      name:'PlayerWrangler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1025,
     },
 
     //mark c
@@ -19527,6 +19530,15 @@ types={
 			reload:40,
 			speed:0.8,
       uses:12,
+		},{
+			name:'Wrangler',
+			ammo:1,
+			damage:55,
+			cooldown:24,
+			stop:24,
+			reload:24,
+			speed:0.85,
+      uses:20,
 		},
 
     /*{

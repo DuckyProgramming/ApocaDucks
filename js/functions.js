@@ -154,8 +154,8 @@ function setupRules(){
                 a!=240&&a!=311&&a!=312&&a!=367,
             offBouncer:a==135||a==136||a==169||a==170,
             baseGrenade:a==30||a==60||a==65||a==73||a==83||
-                a==98||a==104||a==110||a==235||a==264||
-                a==293||a==324||a==326||a==359
+                a==104||a==110||a==235||a==264||a==293||
+                a==324||a==326||a==359
 		})
     }
 }
@@ -6466,6 +6466,7 @@ function generateLevel(info,layer){
                 0.0,color(17,18,20),
                 1.0,color(36,37,41)
             )
+            game.index=0
         break
         case 52: case 120:
             graphics.gradient=[new p5.LinearGradient(85,graphics.main[0].height)]
@@ -11262,7 +11263,7 @@ function setupLists(){
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerSpiralLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
-            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerTapper`],
+            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWrangler`],
             [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`,`PlayerHalfSentry`],
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],

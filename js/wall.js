@@ -13304,6 +13304,13 @@ class wall{
                                         c.explode()
                                     }
                                     c.stop=true
+                                }else if(c.type==98&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    if(c.bounces>=(c.id==0?3:4)){
+                                        c.explode()
+                                        c.active=false
+                                    }
                                 }else if((c.type==135||c.type==136||c.type==166||c.type==169||c.type==170||c.type==389)&&c.bounceTimer==0){
                                     //c.bounces++
                                     c.bounceTimer=5
@@ -13350,7 +13357,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }
-                                }else if(c.rules.baseGrenade&c.bounceTimer==0){
+                                }else if(c.rules.baseGrenade&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     if(c.type==235){
