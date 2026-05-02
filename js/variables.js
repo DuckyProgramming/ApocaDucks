@@ -10279,6 +10279,9 @@ types={
       name:'EnderPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'EnderShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
+    },{
       name:'EnderShotgunMartyr',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{

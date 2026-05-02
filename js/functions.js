@@ -10901,7 +10901,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['Mystery',15])
+            //wave[0].push(['EnderShotgun',15])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
