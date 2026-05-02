@@ -11260,7 +11260,7 @@ function setupLists(){
             [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`],
             [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySweeper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerHeavyTimeBomb`,`PlayerDonker`],
         ],[
-            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerSpiralLMG`],
+            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerRecoilLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWrangler`],

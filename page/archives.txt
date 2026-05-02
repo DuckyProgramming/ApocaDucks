@@ -1,6 +1,7 @@
 
 1024 - bazooka c, 700
 1025 - wrangler, 801
+1026 - recoil lmg, 616
 
 444 - cosmetic melee
 445 - mediocre rocket, 2, 86

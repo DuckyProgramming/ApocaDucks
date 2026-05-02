@@ -7976,6 +7976,9 @@ types={
     },{
       name:'PlayerWrangler',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1025,
+    },{
+      name:'PlayerRecoilLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1026,
     },
 
     //mark c
@@ -19542,6 +19545,15 @@ types={
 			reload:24,
 			speed:0.85,
       uses:20,
+		},{
+			name:'Recoil LMG',
+			ammo:30,
+			damage:75,
+			cooldown:5,
+			stop:180,
+			reload:2,
+			speed:0.8,
+      uses:90,
 		},
 
     /*{

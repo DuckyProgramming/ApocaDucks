@@ -13473,7 +13473,7 @@ class wall{
                                         c.jump.time=6
                                     }
                                     c.jump.active=1
-                                    c.blindTime=max(c.blindTime,600)
+                                    c.blindTime=max(c.blindTime+5,1800)
                                     c.wet=1
                                 }else if(rules.safeWater){
                                     c.velocity.x*=0.925

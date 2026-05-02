@@ -1450,9 +1450,9 @@ class player{
             (this.assort.intel?0.75:1)*
             //(game.level==29&&this.id==0?1.125:1)*
             (this.playerData.name==`AcceleratorTank`?5-this.life/this.base.life*4:1)*
-            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
+            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
             (this.rules.class&&(
-                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
+                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
                 this.subWeaponAType==725&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
                 this.subWeaponAType==801&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.4
             )?1/3:1)*
@@ -7040,6 +7040,11 @@ class player{
                     break
                     case 1025:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],446,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 1026:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],342,(lsin(this.direction.main)<0?-90:90)+random(-2.5,2.5)*max(6-this.assort.firingTime/6,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        this.velocity.x-=2*(lsin(this.direction.main)<0?-1:1)
+                        this.lastingForce[0]-=lsin(this.direction.main)<0?-1:1
                     break
 
                     //mark
