@@ -626,7 +626,7 @@ function mainloop(){
         */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?4:3):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?5:4):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(menu.mode==b+1){
@@ -640,7 +640,7 @@ function mainloop(){
                         text(['Easy','Medium','Hard','Expert','Unfair','Special'][b],pos[0],pos[1])
                     }else if(a==1){
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
-                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.traitor?200:100,100)
+                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.killStreak||b==4&&game.traitor?200:100,100)
                         if(b==0){
                             rect(pos[0]+37,pos[1],76,45,10)
                             rect(pos[0]-37,pos[1],76,45,10)
@@ -649,7 +649,7 @@ function mainloop(){
                         }
                         fill(0)
                         textSize(15)
-                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Traitor`][b],pos[0],pos[1])
+                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Traitor`][b],pos[0],pos[1])
                         if(b==0){
                             textSize(10)
                             text(['-'][b],pos[0]-52.5,pos[1]-15)

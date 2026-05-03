@@ -12,7 +12,7 @@ game={
   deprecate:false,smile:false,yellow:false,
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,
-  diff:1,deathlink:false,noStat:false,traitor:false,
+  diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   projClump:[],
   mapset:[
       [],[

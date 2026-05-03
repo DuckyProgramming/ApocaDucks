@@ -39,7 +39,7 @@ class player{
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
         this.die={timer:0,killer:-1}
-        this.stats={kills:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
+        this.stats={kills:0,killStreak:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
         if(
@@ -292,6 +292,9 @@ class player{
         if(this.primary&&this.id>0){
         }
     }*/
+    getAggressStat(){
+        return game.killStreak?`Killstreak: ${this.stats.killStreak}`:`Damage: ${regNum(this.stats.damage)}`
+    }
     displayInfo(layer,offsetX=0,offsetY=0){
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y-12.5-30*this.playerData.sizeBuff+this.offset.position.y+offsetY)
@@ -310,7 +313,7 @@ class player{
                     if(game.level==30){
                         layer.text(`Points: ${this.stats.points}`,0,-38)
                     }else{
-                        layer.text(`Damage: ${regNum(this.stats.damage)}`,0,-38)
+                        layer.text(`${this.getAggressStat()}`,0,-38)
                     }
                 }else if(this.spy){
                     let copy=this.copy>=entities.players.length?0:this.copy
@@ -320,18 +323,18 @@ class player{
                         layer.text(`Damage: ${regNum(entities.players[copy].stats.damage)}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
                     }
                 }else if(game.randomizer&&this.id>0){
-                    layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}`,0,-38)
+                    layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}`,0,-38)
                     layer.text(this.playerData.name,0,-18.5)
                 }else if(this.id>0&&!this.auto){
                     if(game.nostat){
                         layer.text(`Weapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-25)
                     }else{
                         if(game.level==13){
-                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
+                            layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/3`,0,-35)
                         }else if(game.level==14){
-                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
+                            layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.classWeapon?(game.pvp?1:2):game.peakWeapon?(game.mainline?1:2):4}`,0,-35)
                         }else if(game.level==48||game.level==57||game.level==80){
-                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
+                            layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.weapon[this.id-1].length}/${game.pvp?1:2}`,0,-35)
                         }else if((game.level==115||game.level==116)&&this.id<=game.gaming){
                             if(game.pvp){
                                 layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${game.loadout[this.id-1][0].class==-1?`None`:`${game.loadout[this.id-1][0].sets.length}/${listing[4][game.loadout[this.id-1][0].class].length}`}`,0,-35)
@@ -343,7 +346,7 @@ class player{
                         }else if(game.level==30||game.level==54&&game.pvp){
                             layer.text(`Points: ${this.stats.points}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                         }else{
-                            layer.text(`Damage: ${regNum(this.stats.damage)}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
+                            layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:(this.rules.class?cutName(this.subWeaponAData.name):this.weaponData.name)+(this.playerData.name==`PlayerConglomeration`||this.playerData.name==`PlayerSelector`?`[${this.subWeaponAData.name},${this.subWeaponBData.name}]`:this.playerData.name==`PlayerSwitcheroo`||this.playerData.name==`PlayerSwapper`?`[${this.subWeaponAData.name}]`:``)}`,0,-35)
                         }
                     }
                 }else{
@@ -2480,6 +2483,7 @@ class player{
         if(game.pvp){
             this.inspect=[]
         }
+        this.stats.killStreak=0
         this.respawned=true
         this.die.killer=-1
         this.stats.bust*=0.25
@@ -8745,6 +8749,7 @@ class player{
                             entities.players[a].position.x=this.position.x
                             entities.players[a].position.y=this.position.y+this.height/2-entities.players[a].height/2
                         }
+                        entities.players[a].stats.killStreak++
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
                         /*if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30&&game.level!=31){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
