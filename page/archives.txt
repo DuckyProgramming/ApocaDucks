@@ -2,10 +2,16 @@
 1024 - bazooka c, 700
 1025 - wrangler, 801
 1026 - recoil lmg, 616
+1027 - daydrinker, 687
+1028 - stealthybomb launcher, 687
+1029 - teamgust, 413
 
 444 - cosmetic melee
 445 - mediocre rocket, 2, 86
 446 - wrangler, 358
+447 - daydrinker, 344
+448 - stealthybomb launcher, 349
+449 - teamgust, 222
 
 
 

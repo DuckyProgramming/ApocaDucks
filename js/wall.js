@@ -13336,7 +13336,7 @@ class wall{
                                     c.active=false
                                     c.velocity.x=0
                                     c.velocity.y=0
-                                }else if(c.type==353&&c.active){
+                                }else if((c.type==353||c.type==447)&&c.active){
                                     c.explode()
                                     c.active=false
                                     c.velocity.x=0
@@ -13473,7 +13473,7 @@ class wall{
                                         c.jump.time=6
                                     }
                                     c.jump.active=1
-                                    c.blindTime=min(c.blindTime+6,1800)
+                                    c.blindTime=constrain(c.blindTime+6,60,1800)
                                     c.wet=1
                                 }else if(rules.safeWater){
                                     c.velocity.x*=0.925

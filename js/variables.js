@@ -7979,6 +7979,12 @@ types={
     },{
       name:'PlayerRecoilLMG',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1026,
+    },{
+      name:'PlayerDaydrinker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1027,
+    },{
+      name:'PlayerStealthybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1028,
     },
 
     //mark c
@@ -8540,6 +8546,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankShieldBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankInvisBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankDefendBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
@@ -10005,6 +10014,9 @@ types={
     },{
       name:'Gust',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.25,crit:0,weapon:413,
+    },{
+      name:'TeamGust',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.25,crit:0,weapon:1029,
     },{
       name:'RapidGust',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:413,
@@ -18811,7 +18823,7 @@ types={
 			name:'Mini Auto Shotgun',
 			ammo:3,
 			damage:32,
-			cooldown:24,
+			cooldown:36,
 			stop:45,
 			reload:15,
 			speed:1,
@@ -19554,6 +19566,33 @@ types={
 			reload:2,
 			speed:0.8,
       uses:90,
+		},{
+			name:'Daydrinker',
+			ammo:4,
+			damage:300,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Stealthybomb Launcher',
+			ammo:4,
+			damage:300,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Team Gust',
+			ammo:10,
+			damage:20,
+			cooldown:1,
+			stop:60,
+			reload:3,
+			speed:1.05,
+      uses:80,
 		},
 
     /*{

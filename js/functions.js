@@ -22,7 +22,7 @@ function setupRules(){
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
-                a==445,
+                a==445||a==447||a==448,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -33,7 +33,7 @@ function setupRules(){
 				a==262||a==266||a==279||a==280||a==290||
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
-				a==385||a==412||a==430||a==445,
+				a==385||a==412||a==430||a==445||a==447,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -69,12 +69,13 @@ function setupRules(){
 				a==372||a==373||a==375||a==376||a==383||
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
-                a==431||a==435||a==437||a==438, 
+                a==431||a==435||a==437||a==438||a==447||
+                a==448, 
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
 			stickybomb:a==349||a==360||a==368||a==372||a==392||
-				a==417||a==435,
+				a==417||a==435||a==448,
 			passer:a==85||a==89||a==103||a==193||a==194||
 				a==195||a==215||a==270||a==297||a==310||
 				a==337||a==398||a==427||a==433,
@@ -92,7 +93,7 @@ function setupRules(){
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
-				a!=417&&a!=435&&a!=438&&a!=444,
+				a!=417&&a!=435&&a!=438&&a!=444&&a!=448,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -107,7 +108,7 @@ function setupRules(){
 				a==245||a==246||a==247||a==250||a==284||
 				a==286||a==304||a==314||a==323||a==329||
 				a==349||a==360||a==368||a==372||a==375||
-				a==392||a==417||a==435||a==438,
+				a==392||a==417||a==435||a==438||a==448,
 			stopper:a!=7&&a!=23&&a!=25&&a!=32&&a!=37&&
 				a!=40&&a!=46&&a!=79&&a!=84&&a!=89&&
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
@@ -115,7 +116,7 @@ function setupRules(){
 				a!=335&&a!=335&&a!=405&&a!=427&&a!=433,
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
-                a!=392&&a!=417&&a!=435,
+                a!=392&&a!=417&&a!=435&&a!=448,
 			fader1:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==30||a==31||a==32||
 				a==41||a==45||a==47||a==53||a==54||
@@ -130,7 +131,8 @@ function setupRules(){
 				a==368||a==370||a==372||a==375||a==376||
 				a==377||a==378||a==379||a==384||a==389||
 				a==390||a==391||a==392||a==412||a==413||
-				a==417||a==425||a==430||a==435||a==445,
+				a==417||a==425||a==430||a==435||a==445||
+                a==447||a==448,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -144,12 +146,13 @@ function setupRules(){
             hitmed:a==9||a==10||a==11||a==38||a==63||
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
-                a==409||a==418||a==434||a==436||a==439,
+                a==409||a==418||a==434||a==436||a==439||
+                a==449,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
-                a==439,
+                a==439||a==449,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -7376,6 +7379,9 @@ function generateLevel(info,layer){
             game.index=0
         break
     }
+    if(rules.dm){
+        game.index=0
+    }
     let clump=listing[floor(random(1.5))]
     let weapon=clump[floor(random(0,clump.length))]
     let shifter=0
@@ -10924,7 +10930,7 @@ function formMission(wave,type){
             ]))
             preset=[
                 ['SpamBaller',2],
-                ['SpamMedic',2],
+                ['SpamShotgun',2],
                 ['SpamSniper',2],
             ]
             wave[0].push(preset.splice(floor(random(0,preset.length)),1)[0])
@@ -11196,7 +11202,7 @@ function formMission(wave,type){
                 ['HeavyRocketLauncherDefendBuffHeal',3],
 
                 ['CritBonkerSplitter',2],
-                ['SpamShotgun',4],
+                ['TeamGust',6],
                 ['EnderShotgunMartyr',1],
                 ['ShotgunVault',10],
                 ['HeavyInterceptor',6],
@@ -11258,7 +11264,7 @@ function setupLists(){
             [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonator`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`],
-            [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySweeper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerHeavyTimeBomb`,`PlayerDonker`],
+            [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`,`PlayerDaydrinker`,`PlayerStealthybombLauncher`],
         ],[
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerRecoilLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
