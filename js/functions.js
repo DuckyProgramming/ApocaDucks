@@ -5653,13 +5653,13 @@ function generateLevel(info,layer){
                         break
                         case 95: case 134:
                             if(a>la-15){
-                                entities.walls[2].push(new wall(graphics.main,(b+1)*game.tileset[0],(a+0.75)*game.tileset[1],game.tileset[0],0.5*game.tileset[1],1))
-                                entities.walls[2].push(new wall(graphics.main,(b-0.25)*game.tileset[0],(a+0.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],18))
-                                entities.walls[2].push(new wall(graphics.main,(b+2.25)*game.tileset[0],(a+0.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],17))
+                                entities.walls[0].push(new wall(graphics.main,(b+1)*game.tileset[0],(a+0.75)*game.tileset[1],game.tileset[0],0.5*game.tileset[1],1))
+                                entities.walls[0].push(new wall(graphics.main,(b-0.25)*game.tileset[0],(a+0.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],18))
+                                entities.walls[0].push(new wall(graphics.main,(b+2.25)*game.tileset[0],(a+0.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],17))
                             }else{
-                                entities.walls[2].push(new wall(graphics.main,(b+0.5)*game.tileset[0],(a+0.75)*game.tileset[1],2*game.tileset[0],0.5*game.tileset[1],43))
-                                entities.walls[2].push(new wall(graphics.main,(b-0.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],45))
-                                entities.walls[2].push(new wall(graphics.main,(b+1.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],44))
+                                entities.walls[0].push(new wall(graphics.main,(b+0.5)*game.tileset[0],(a+0.75)*game.tileset[1],2*game.tileset[0],0.5*game.tileset[1],43))
+                                entities.walls[0].push(new wall(graphics.main,(b-0.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],45))
+                                entities.walls[0].push(new wall(graphics.main,(b+1.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],44))
                             }
                         break
                         case 96: case 98:
@@ -5681,14 +5681,14 @@ function generateLevel(info,layer){
                         break
                         case 99: case 135:
                             if(a>la-15){
-                                entities.walls[2].push(new wall(graphics.main,(b+1)*game.tileset[0],(a+1.75)*game.tileset[1],game.tileset[0],0.5*game.tileset[1],1))
-                                entities.walls[2].push(new wall(graphics.main,(b-0.25)*game.tileset[0],(a+1.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],18))
-                                entities.walls[2].push(new wall(graphics.main,(b+2.25)*game.tileset[0],(a+1.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],17))
+                                entities.walls[0].push(new wall(graphics.main,(b+1)*game.tileset[0],(a+1.75)*game.tileset[1],game.tileset[0],0.5*game.tileset[1],1))
+                                entities.walls[0].push(new wall(graphics.main,(b-0.25)*game.tileset[0],(a+1.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],18))
+                                entities.walls[0].push(new wall(graphics.main,(b+2.25)*game.tileset[0],(a+1.75)*game.tileset[1],1.5*game.tileset[0],0.5*game.tileset[1],17))
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]+b*game.tileset[0],game.tileset[1]*1.5+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
                             }else{
-                                entities.walls[2].push(new wall(graphics.main,(b+0.5)*game.tileset[0],(a+0.75)*game.tileset[1],2*game.tileset[0],0.5*game.tileset[1],43))
-                                entities.walls[2].push(new wall(graphics.main,(b-0.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],45))
-                                entities.walls[2].push(new wall(graphics.main,(b+1.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],44))
+                                entities.walls[0].push(new wall(graphics.main,(b+0.5)*game.tileset[0],(a+0.75)*game.tileset[1],2*game.tileset[0],0.5*game.tileset[1],43))
+                                entities.walls[0].push(new wall(graphics.main,(b-0.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],45))
+                                entities.walls[0].push(new wall(graphics.main,(b+1.75)*game.tileset[0],(a+0.75)*game.tileset[1],0.5*game.tileset[0],0.5*game.tileset[1],44))
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*0.5+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
                             }
                         break
@@ -8480,7 +8480,7 @@ function generateLevel(info,layer){
                     options.splice(index,1)
                 }
 
-                //classPick=[6,6]
+                //classPick=[9,9]
 
                 options=[range(0,num),range(0,num)]
                 teamTick=[0,0]
@@ -11282,7 +11282,7 @@ function setupLists(){
             [`PlayerKnife`,`PlayerElectricKnife`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
-            [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerW`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
+            [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],
         ],
     ]

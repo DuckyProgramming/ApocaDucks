@@ -7728,6 +7728,9 @@ types={
       name:'PlayerDestroyerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.25,crit:0,weapon:904,
     },{
+      name:'PlayerDestroyerWC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1030,
+    },{
       name:'PlayerHeavyAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1, 
       damageBuff:1.92,reloadBuff:1.25,crit:0,weapon:4,
     },{
@@ -19593,6 +19596,15 @@ types={
 			reload:3,
 			speed:1.05,
       uses:80,
+		},{
+			name:'Destroyer WC',
+			ammo:1,
+			damage:800,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:0.9,
+      uses:5,
 		},
 
     /*{

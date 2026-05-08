@@ -1457,9 +1457,9 @@ class player{
             (this.assort.intel?0.75:1)*
             //(game.level==29&&this.id==0?1.125:1)*
             (this.playerData.name==`AcceleratorTank`?5-this.life/this.base.life*4:1)*
-            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
+            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026||this.weaponType==1030)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
             (this.rules.class&&(
-                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
+                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026||this.weaponType==1030)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
                 this.subWeaponAType==725&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
                 this.subWeaponAType==801&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.4
             )?1/3:1)*
@@ -1852,7 +1852,7 @@ class player{
                 this.newSubWeaponBSet(findName('PlayerSubmachine',types.player))
             break
             case 'PlayerDroner7':
-                this.newSubWeaponASet(findName('PlayerDestroyerW',types.player))
+                this.newSubWeaponASet(findName('PlayerDestroyerWC',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
             break
             case 'PlayerScout8':
@@ -2868,9 +2868,6 @@ class player{
         if(this.hasteBuff<=0){
             this.assort.autoTarget=[] 
         }
-        if(this.invisBuff>0){
-            this.invisBuff=0
-        }
         if((game.level==19||game.level==42)&&this.playerData.name.includes('Deployer')){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
@@ -2885,6 +2882,9 @@ class player{
             }
         }
         if(valid){
+            if(this.invisBuff>0){
+                this.invisBuff=0
+            }
             let weapon=[this.weapon,this.subWeaponA,this.subWeaponB,this.subWeaponC,this.subWeaponA][variant]
             let weaponType=[this.weaponType,this.subWeaponAType,this.subWeaponBType,this.subWeaponCType,this.subWeaponAType][variant]
             let weaponData=[this.weaponData,this.subWeaponAData,this.subWeaponBData,this.subWeaponCData,this.subWeaponAData][variant]
@@ -2898,7 +2898,7 @@ class player{
                 this.visible=this.rules.spyLineReduced||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1007?180:this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyW'?120:15
             }
             this.assort.firing=30
-            if(!((this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019))&&!((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)){
+            if(!((this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019))&&!((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1030&&this.assort.firingTick<1/3)){
                 if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
                     damageBuff*=constrain(this.subWeaponA.time/60,1,4)
                     this.subWeaponA.time=max(0,min(240,this.subWeaponA.time)-480/this.subWeaponBData.ammo)
@@ -7074,6 +7074,12 @@ class player{
                     case 1029:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],449,(lsin(this.direction.main)<0?-90:90)-25+(weapon.ammo*19+15)%50,this.id,weaponData.damage*damageBuff,15,crit,this.index))
                     break
+                    case 1030:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],125,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed*=1.5
+                        this.velocity.x+=10*(lsin(this.direction.main)<0?1:-1)
+                        this.lastingForce[0]+=3*(lsin(this.direction.main)<0?1:-1)
+                    break
 
                     //mark
                 }
@@ -7899,10 +7905,13 @@ class player{
                         this.subWeaponA.ammo--
                     }else if(this.rules.dronerLine){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital'){
-                            if(floor(random(0,15))==0){
+                            if(
+                                (this.subPlayerBData.name=='PlayerDirector'||this.subPlayerBData.name=='PlayerSwarmer'||this.subPlayerBData.name=='PlayerMotorizer'||this.subPlayerBData.name=='PlayerHeavyDirector'||this.subPlayerBData.name=='PlayerHeavySwarmer'||this.subPlayerBData.name=='PlayerLightSkysweeper'||this.subPlayerBData.name=='PlayerHeavyMotorizer'||this.subPlayerBData.name=='PlayerOrbital')&&
+                                floor(random(0,15))==0
+                            ){
                                 this.swapSubWeapons()
                             }
-                        }else if(this.subPlayerBData.name=='PlayerDirector'||this.subPlayerBData.name=='PlayerSwarmer'||this.subPlayerBData.name=='PlayerMotorizer'||this.subPlayerBData.name=='PlayerHeavyDirector'||this.subPlayerBData.name=='PlayerHeavySwarmer'||this.subPlayerBData.name=='PlayerLightSkysweeper'||this.subPlayerBData.name=='PlayerHeavyMotorizer'||this.subPlayerBData.name=='PlayerOrbital'){
+                        }else{
                             if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
                                 this.attack(1)
                             }
@@ -11393,7 +11402,7 @@ class player{
         this.assort.firingTick=smoothAnim(this.assort.firingTick,this.assort.firing>0,0,1,45)
         this.infoAnim.wet=smoothAnim(this.infoAnim.wet,this.wet>0,0,5,60)
         if(this.DOT.active>0){
-            this.DOT.active=max(0,this.DOT.active-(this.id>0?2:1))
+            this.DOT.active=max(0,this.DOT.active-(game.pvp?2:1))
             this.life=max(min(1,this.life),this.life-this.DOT.damage)
             this.collect.time=max(this.collect.time,150)
         }

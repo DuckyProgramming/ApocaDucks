@@ -5,6 +5,7 @@
 1027 - daydrinker, 687
 1028 - stealthybomb launcher, 687
 1029 - teamgust, 413
+1030 - destroyer wc, 904
 
 444 - cosmetic melee
 445 - mediocre rocket, 2, 86
