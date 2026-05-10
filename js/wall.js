@@ -6352,35 +6352,37 @@ class wall{
                 }
             break
             case 31: case 33: case 36:
-                if(game.level==29){
-                    layer.translate(0,30)
-                }else if(game.level==38||game.level==59||game.level==79||game.level==82||game.level==83||game.level==85){
-                    layer.translate(0,10)
-                }else if((game.level==101||game.level==103)&&this.pos>=5){
-                    layer.translate(0,12)
-                }
-                layer.fill(game.level==87||game.level==113?200:250)
-                layer.textSize(20)
-                let texts=''
-                if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==38||game.level==39&&!game.pvp||game.level==42){
-                    switch(this.type){
-                        case 31:
-                            texts='Fort'
-                        break
-                        case 33:
-                            texts='Turret'
-                        break
-                        case 36:
-                            texts='Outpost'
-                        break
+                if(!layer.index<game.disable.length&&game.disable[layer.index]==2){
+                    if(game.level==29){
+                        layer.translate(0,30)
+                    }else if(game.level==38||game.level==59||game.level==79||game.level==82||game.level==83||game.level==85){
+                        layer.translate(0,10)
+                    }else if((game.level==101||game.level==103)&&this.pos>=5){
+                        layer.translate(0,12)
                     }
-                }else{
-                    texts=game.level==94?['Point A','Point B','Point C','Node','Node','Node',game.pvp?'Point D':'Node'][this.pos]:game.level==37?'Gate':game.level==39||game.level==81||game.level==87||game.level==88||rules.dm?'Point':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.pos>=3&&(game.level==25||game.level==26||game.level==89||game.level==104||game.level==105)||this.pos>=5&&game.level!=77&&game.level!=98&&game.level!=99&&game.level!=133&&game.level!=135?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
-                }
-                layer.text(texts,0,-120)
-                if(game.level!=29){
-                    layer.fill(...playerColor(this.owner))
-                    layer.rect(0,-100,60,6,2)
+                    layer.fill(game.level==87||game.level==113?200:250)
+                    layer.textSize(20)
+                    let texts=''
+                    if(game.level==19||game.level==24||game.level==27||game.level==34||game.level==38||game.level==39&&!game.pvp||game.level==42){
+                        switch(this.type){
+                            case 31:
+                                texts='Fort'
+                            break
+                            case 33:
+                                texts='Turret'
+                            break
+                            case 36:
+                                texts='Outpost'
+                            break
+                        }
+                    }else{
+                        texts=game.level==94?['Point A','Point B','Point C','Node','Node','Node',game.pvp?'Point D':'Node'][this.pos]:game.level==37?'Gate':game.level==39||game.level==81||game.level==87||game.level==88||rules.dm?'Point':game.level==29?'Target':game.level==28?['Turret','Point ','Turret','Turret','Guster','Guster','Guster','Guster'][this.pos]:this.pos>=3&&(game.level==25||game.level==26||game.level==89||game.level==104||game.level==105)||this.pos>=5&&game.level!=77&&game.level!=98&&game.level!=99&&game.level!=133&&game.level!=135?'Node':'Point '+'ABCDEFG'[game.level==28?0:this.pos]
+                    }
+                    layer.text(texts,0,-120)
+                    if(game.level!=29){
+                        layer.fill(...playerColor(this.owner))
+                        layer.rect(0,-100,60,6,2)
+                    }
                 }
             break
             case 32:
@@ -10460,40 +10462,42 @@ class wall{
                 }
             break
             case 16: case 50: case 61: case 69: case 72: case 102: case 118:
-                if(this.type==16){
-                    if(game.level==22||game.level==100){
-                        layer.scale(1-game.pointAnim[2])
-                    }else if(game.level==25||game.level==104){
-                        layer.scale(1-game.pointAnim[1])
-                    }
-                }
-                if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
-                    layer.fill(rules.key.wallInfo,1-this.recharge/60-this.hide)
-                    layer.textSize(9)
-                    if((typeof this.weapon)==`object`){
-                        if(this.weapon.length==4){
-                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
-                        }else{
-                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
+                    if(this.type==16){
+                        if(game.level==22||game.level==100){
+                            layer.scale(1-game.pointAnim[2])
+                        }else if(game.level==25||game.level==104){
+                            layer.scale(1-game.pointAnim[1])
                         }
-                    }else{
-                        layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
                     }
-                }
-                if(this.infoFade>0){
-                    layer.fill(200,(1-this.recharge/60)*this.infoFade)
-                    layer.rect(0,this.height/2+26,180,42,5)
-                    layer.fill(0,(1-this.recharge/60)*this.infoFade)
-                    layer.textSize(9)
-                    if(game.level==115||game.level==116){
-                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
-                    }else if(game.classWeapon){
-                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
-                    }else if(types.player[this.weapon].dpsBuff==0){
-                        layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
-                    }else{
-                        layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
-                        layer.text(round(60*types.weapon[types.player[this.weapon].weapon].ammo*types.weapon[types.player[this.weapon].weapon].damage/(types.weapon[types.player[this.weapon].weapon].stop+(types.weapon[types.player[this.weapon].weapon].reload+types.weapon[types.player[this.weapon].weapon].cooldown)*(types.weapon[types.player[this.weapon].weapon].ammo-1))*types.player[this.weapon].damageBuff*types.player[this.weapon].reloadBuff*types.player[this.weapon].dpsBuff)+' DPS',0,this.height/2+26+14,180,14)
+                    if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
+                        layer.fill(rules.key.wallInfo,1-this.recharge/60-this.hide)
+                        layer.textSize(9)
+                        if((typeof this.weapon)==`object`){
+                            if(this.weapon.length==4){
+                                layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
+                            }else{
+                                layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                            }
+                        }else{
+                            layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                        }
+                    }
+                    if(this.infoFade>0){
+                        layer.fill(200,(1-this.recharge/60)*this.infoFade)
+                        layer.rect(0,this.height/2+26,180,42,5)
+                        layer.fill(0,(1-this.recharge/60)*this.infoFade)
+                        layer.textSize(9)
+                        if(game.level==115||game.level==116){
+                            layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
+                        }else if(game.classWeapon){
+                            layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
+                        }else if(types.player[this.weapon].dpsBuff==0){
+                            layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
+                        }else{
+                            layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
+                            layer.text(round(60*types.weapon[types.player[this.weapon].weapon].ammo*types.weapon[types.player[this.weapon].weapon].damage/(types.weapon[types.player[this.weapon].weapon].stop+(types.weapon[types.player[this.weapon].weapon].reload+types.weapon[types.player[this.weapon].weapon].cooldown)*(types.weapon[types.player[this.weapon].weapon].ammo-1))*types.player[this.weapon].damageBuff*types.player[this.weapon].reloadBuff*types.player[this.weapon].dpsBuff)+' DPS',0,this.height/2+26+14,180,14)
+                        }
                     }
                 }
             break
@@ -11275,36 +11279,38 @@ class wall{
                 }
             break
             case 57:
-                layer.push()
-                if(game.level==22||game.level==100){
-                    layer.scale(1-game.pointAnim[2])
-                }else if((game.level==49||game.level==131)&&!game.pvp){
-                    layer.scale(1-game.pointAnim[1])
-                }
-                layer.fill(rules.key.wallInfo,1-this.recharge/60-this.hide)
-                layer.textSize(9)
-                if((typeof this.weapon)==`object`){
-                    if(this.weapon.length==4){
-                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
-                    }else{
-                        layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
+                    layer.push()
+                    if(game.level==22||game.level==100){
+                        layer.scale(1-game.pointAnim[2])
+                    }else if((game.level==49||game.level==131)&&!game.pvp){
+                        layer.scale(1-game.pointAnim[1])
                     }
-                }else{
-                    layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
-                }
-                layer.pop()
-                if(this.infoFade>0){
-                    layer.fill(200,(1-this.recharge/60)*this.infoFade)
-                    layer.rect(0,this.height/2+26,180,42,5)
-                    layer.fill(0,(1-this.recharge/60)*this.infoFade)
+                    layer.fill(rules.key.wallInfo,1-this.recharge/60-this.hide)
                     layer.textSize(9)
-                    if(game.classWeapon){
-                        layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
-                    }else if(types.player[this.weapon].dpsBuff==0){
-                        layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
+                    if((typeof this.weapon)==`object`){
+                        if(this.weapon.length==4){
+                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[3]].weapon].name)}`,0,-this.height)
+                        }else{
+                            layer.text(`${cutName(types.weapon[types.player[this.weapon[1]].weapon].name)} / ${cutName(types.weapon[types.player[this.weapon[2]].weapon].name)}`,0,-this.height)
+                        }
                     }else{
-                        layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
-                        layer.text(round(60*types.weapon[types.player[this.weapon].weapon].ammo*types.weapon[types.player[this.weapon].weapon].damage/(types.weapon[types.player[this.weapon].weapon].stop+(types.weapon[types.player[this.weapon].weapon].reload+types.weapon[types.player[this.weapon].weapon].cooldown)*(types.weapon[types.player[this.weapon].weapon].ammo-1))*types.player[this.weapon].damageBuff*types.player[this.weapon].reloadBuff*types.player[this.weapon].dpsBuff)+' DPS',0,this.height/2+26+14,180,14)
+                        layer.text(cutName(types.weapon[types.player[this.weapon].weapon].name),0,-this.height)
+                    }
+                    layer.pop()
+                    if(this.infoFade>0){
+                        layer.fill(200,(1-this.recharge/60)*this.infoFade)
+                        layer.rect(0,this.height/2+26,180,42,5)
+                        layer.fill(0,(1-this.recharge/60)*this.infoFade)
+                        layer.textSize(9)
+                        if(game.classWeapon){
+                            layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
+                        }else if(types.player[this.weapon].dpsBuff==0){
+                            layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
+                        }else{
+                            layer.text(types.player[this.weapon].desc,0,this.height/2+26-7,180,28)
+                            layer.text(round(60*types.weapon[types.player[this.weapon].weapon].ammo*types.weapon[types.player[this.weapon].weapon].damage/(types.weapon[types.player[this.weapon].weapon].stop+(types.weapon[types.player[this.weapon].weapon].reload+types.weapon[types.player[this.weapon].weapon].cooldown)*(types.weapon[types.player[this.weapon].weapon].ammo-1))*types.player[this.weapon].damageBuff*types.player[this.weapon].reloadBuff*types.player[this.weapon].dpsBuff)+' DPS',0,this.height/2+26+14,180,14)
+                        }
                     }
                 }
             break

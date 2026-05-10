@@ -1012,6 +1012,8 @@ function mainloop(){
                     }else if(rules.grad==2){
                         graphics.main[c].fill(0)
                         graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
+                    }else if(c<game.disable.length&&game.disable[c]==2){
+                        graphics.main[c].background(1250,1500,2000)
                     }else{
                         graphics.main[c].background(0)
                     }
@@ -1113,6 +1115,12 @@ function mainloop(){
                     graphics.main[a].push()
                     graphics.main[a].translate(graphics.main[a].width/2,graphics.main[a].height/2)
                     graphics.main[a].scale(1/key[a])
+                    if(a<game.disable.length&&game.disable[a]==0){
+                        graphics.main[a].scale(2+0.5*lsin(game.time*6))
+                        graphics.main[a].rotate(15*lsin(game.time*7))
+                    }else if(a<game.disable.length&&game.disable[a]==2){
+                        graphics.main[a].colorMode(RGB,10000,10000,10000,1)
+                    }
                     if(rules.backed){
                         graphics.main[a].translate(-round(effective[a][0]),-round(effective[a][1]))
                         for(let b=0,lb=entities.walls[2].length;b<lb;b++){
@@ -1231,6 +1239,9 @@ function mainloop(){
                                 graphics.pane[a].height/2-round(effective[a][1]/key[a])
                             )
                             graphics.pane[a].scale(1/key[a])
+                            if(a<game.disable.length&&game.disable[a]==2){
+                                graphics.pane[a].colorMode(RGB,10000,10000,10000,1)
+                            }
                             let b2s=[]
                             for(let b=0,lb=entities.walls[0].length;b<lb;b++){
                                 if(

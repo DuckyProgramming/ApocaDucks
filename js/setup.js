@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[9,9],sets:[[3,3],[3,3]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[5,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -17,7 +17,7 @@ function setup(){
 
         game.players=2
         game.gaming=2
-        game.level=117
+        game.level=100
         /*
         65 - tailwater 5cp
         88 - sulfite koth

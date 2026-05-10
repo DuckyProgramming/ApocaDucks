@@ -17941,7 +17941,7 @@ player.prototype.logic=function(){
                     }
                 }
             }else{
-                this.target.point=([0,1,1,2,2][floor(random(0,5))]+(2-this.id)*3+floor(random(0,1.5))*3)%6
+                this.target.point=([0,1,1,2,2][floor(random(0,5))]+(2-this.id)*3+floor(random(0,game.point[2-this.id]==0?1.25:1.5))*3)%6
             }
         }
         let targets=[]

@@ -13,7 +13,12 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
-  projClump:[],
+  projClump:[],disable:[],
+  /*
+  0 - Drunk
+  1 - Skillless
+  2 - Racist
+  */
   mapset:[
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
@@ -10318,8 +10323,8 @@ types={
       name:'SniperStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:145,
     },{
-      name:'Icosahedron',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:586,
+      name:'Icosahedron',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:586,
     },
 
     //mark p
@@ -19548,7 +19553,7 @@ types={
 			damage:120,
 			cooldown:20,
 			stop:120,
-			reload:40,
+			reload:20,
 			speed:0.8,
       uses:12,
 		},{

@@ -644,7 +644,7 @@ class projectile{
 										c.knockbackForce(this.speed*2,this.direction,1,1)
 										for(let d=0,ld=entities.players.length;d<ld;d++){
 											if(entities.players[d].index==this.index&&!entities.players[d].fort){
-												entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.2))
+												entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.125))
 											}
 										}
 										this.remove=true
@@ -934,7 +934,7 @@ class projectile{
 		layer.noStroke()
         switch(this.type){
 			case 1: case 428:
-				if(this.fade==1){
+				if(this.fade==1&&!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
 					layer.image(graphics.minor[this.crit?1:0],0,0,10,20)
 				}else{
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
