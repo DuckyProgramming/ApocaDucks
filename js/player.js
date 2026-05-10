@@ -310,6 +310,9 @@ class player{
             if(this.index==layer.index){
                 layer.fill(10000,10000,10000,this.fade)
                 layer.text('Lobster',0,6)
+            }else if(this.index==1){
+                layer.fill(10000,10000,10000,this.fade)
+                layer.text('White Man',0,6)
             }
         }else{
             if((!this.sidekick&&!this.fort||this.auto)){
@@ -960,7 +963,7 @@ class player{
             }
         }*/
         let fade=this.fade*(this.playerData.name==`Mystery`?0.8+lsin(this.time*10)*0.2:1)
-        if(this.index<game.disable.length&&this.index==layer.index&&game.disable[this.index]==2){
+        if(layer.index<game.disable.length&&(this.index==layer.index||this.index==1)&&game.disable[layer.index]==2){
             layer.fill(10000,10000,10000,this.fade)
             layer.ellipse(0,this.skin.head.level,27,27)
             layer.ellipse(0,this.skin.body.level,14,24)

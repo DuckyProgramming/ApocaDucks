@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
-        game.gaming=2
-        game.level=100
+        game.players=3
+        game.gaming=3
+        game.level=131
         /*
         65 - tailwater 5cp
         88 - sulfite koth

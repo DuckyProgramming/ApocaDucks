@@ -6352,7 +6352,7 @@ class wall{
                 }
             break
             case 31: case 33: case 36:
-                if(!layer.index<game.disable.length&&game.disable[layer.index]==2){
+                if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
                     if(game.level==29){
                         layer.translate(0,30)
                     }else if(game.level==38||game.level==59||game.level==79||game.level==82||game.level==83||game.level==85){
