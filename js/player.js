@@ -763,7 +763,12 @@ class player{
             layer.strokeWeight(2)
             layer.line(0,-10,lsin(this.firearc[0])*50,-lcos(this.firearc[0])*50-10)
         }
-        layer.scale(this.size)
+        if(layer.index<game.disable.length&&!(this.index==layer.index||this.index==1)&&game.disable[layer.index]==2){
+            layer.translate(0,this.hieght/2-12*0.75)
+            layer.scale(0.75)
+        }else{
+            layer.scale(this.size)
+        }
         layer.noStroke()
         let buffs=[]
         if(this.playerData.crit==1||this.critBuff>0){
@@ -965,6 +970,7 @@ class player{
         let fade=this.fade*(this.playerData.name==`Mystery`?0.8+lsin(this.time*10)*0.2:1)
         if(layer.index<game.disable.length&&(this.index==layer.index||this.index==1)&&game.disable[layer.index]==2){
             layer.fill(10000,10000,10000,this.fade)
+            layer.noStroke()
             layer.ellipse(0,this.skin.head.level,27,27)
             layer.ellipse(0,this.skin.body.level,14,24)
             layer.ellipse(lsin(this.direction.main)*13,this.face.beak.main.level,12+2*lcos(this.direction.main),8)
@@ -11618,7 +11624,7 @@ class player{
         if(this.assort.tiredTick>0){
             this.assort.tiredTick--
         }
-        if(this.time%6==0&&floor(random(0,20))==0){
+        if(this.time%6==0&&floor(random(0,25))==0){
             this.assort.pivot=1-this.assort.pivot
         }
         this.assort.tired=this.wet>0||this.id>game.gaming?0:constrain(this.assort.tired-(this.assort.tiredTick>0?0.4:3),0,150)
