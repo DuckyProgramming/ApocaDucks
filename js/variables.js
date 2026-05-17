@@ -11,7 +11,7 @@ game={
   sectors:[],respawners:[0,0],det:[],traitorKey:0,firstGen:true,
   deprecate:false,smile:false,yellow:false,
   sentryCarry:false,ender:false,poison:false,chess:false,//options
-  readout:false,
+  readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   projClump:[],disable:[],
   /*
@@ -19559,10 +19559,10 @@ types={
 		},{
 			name:'Wrangler',
 			ammo:1,
-			damage:55,
-			cooldown:24,
-			stop:24,
-			reload:24,
+			damage:90,
+			cooldown:36,
+			stop:36,
+			reload:36,
 			speed:0.85,
       uses:20,
 		},{

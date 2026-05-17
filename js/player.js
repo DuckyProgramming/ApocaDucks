@@ -1274,7 +1274,7 @@ class player{
                         }
                     }
                     if(this.spy){
-                        this.color=[
+                        this.color=this.copyId<7?[
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
                             rules.teamMode?
@@ -1284,7 +1284,8 @@ class player{
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,105,25],body:[225,105,15],legs:[210,105,0],arms:[215,105,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
-                        ][this.copyId]
+                        ][this.copyId]:this.copyId<entities.players.length?entities.players[this.copyId].color:
+                        {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}}
                     }
                 break
                 case 0:
@@ -7893,7 +7894,7 @@ class player{
                     this.life>0&&!this.decoy&&
                     !(rules.dm&&this.position.y<300)
                 ){
-                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
+                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
                     if(this.manage[1]==1||this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo){
@@ -7943,7 +7944,7 @@ class player{
                         }else if(this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.weaponType>=0&&!this.weapon.reloading){
                             this.attack(0)
                         }
-                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
                     }else if(this.rules.dronerLine){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital'){
@@ -8166,7 +8167,7 @@ class player{
                     }
                 }
                 if(this.life>0&&this.rules.attackable&&!this.peace){
-                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
+                    if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
                     if(this.rules.class&&this.subWeaponAType==1024){
@@ -8225,7 +8226,7 @@ class player{
                                 this.attack(0)
                             }
                         }
-                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
+                    }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
                     }
                     if(inputSet[3]){
@@ -8802,7 +8803,7 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(entities.players[a].index==this.builder&&(
                             entities.players[a].playerData.name=='PlayerEngineerC4'||
-                            entities.players[a].playerData.name=='PlayerEngineerW'&&(entities.players[a].subWeaponAType==751||entities.players[a].subWeaponAType==752)
+                            entities.players[a].playerData.name=='PlayerEngineerW'&&(entities.players[a].subWeaponAType==751||entities.players[a].subWeaponBType==751)
                         )){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,240)
                         }
@@ -11649,7 +11650,9 @@ class player{
                     this.die.timer++
                     if(this.die.timer>=3600){
                         this.remove=true
-                        game.stack.push([-2,this.playerData.name,[this.position.x,this.position.y]])
+                        if(!this.construct){
+                            game.stack.push([-2,this.playerData.name,[this.position.x,this.position.y]])
+                        }
                     }
                 }else{
                     this.remove=true

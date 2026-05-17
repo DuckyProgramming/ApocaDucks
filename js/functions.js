@@ -4736,7 +4736,7 @@ function generateLevel(info,layer){
                         case 64: case 68: case 70: case 84: case 96: case 97: case 98: case 99: case 124:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,61))
                         break
-                        case 67: case 77: case 78: case 95: case 134: case 135:
+                        case 67: case 77: case 78: case 95:
                             if(game.classWeapon){
                                 entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,9))
                             }else{
@@ -4751,6 +4751,9 @@ function generateLevel(info,layer){
                         break
                         case 79: case 82: case 83: case 85:
                             game.placer[1].push([game.tileset[0]*(b+1),game.tileset[1]*(a+0.5)])
+                        break
+                        case 134: case 135:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,82))
                         break
                         default:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[0],game.tileset[1],15))

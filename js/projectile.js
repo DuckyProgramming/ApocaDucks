@@ -10771,7 +10771,7 @@ class projectile{
 								target.takeDamage(this.damage)
 							}
 						break
-						case 6: case 15: case 33: case 74: case 75: case 81: case 276:
+						case 6: case 15: case 33: case 74: case 75: case 81: case 276: case 386:
 							target.takeDamage(this.damage*(target.base.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.base.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
 							if(this.type==75){
 								this.explode()

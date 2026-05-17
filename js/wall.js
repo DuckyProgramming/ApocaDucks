@@ -32,18 +32,19 @@ class wall{
         this.standard=this.type!=3&&this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&
             this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
             this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
-            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81
+            this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&
+            this.type!=82
         this.rules={
             collide:[
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                 this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81,
+                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82,
 
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                 this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
-                this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81,
+                this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82,
 
                 this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67,
             ],
@@ -116,7 +117,7 @@ class wall{
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
             case 65: case 66: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 76:
-            case 77: case 79: case 80: case 81: case 123:
+            case 77: case 79: case 80: case 81: case 82:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -9165,6 +9166,75 @@ class wall{
                     }
                 }
             break
+            case 82:
+                for(let a=0,la=4;a<la;a++){
+                    if(lcos(a*90+this.time)>0){
+                        if(a%2==0){
+                            layer.fill(80+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.triangle(
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5
+                            )
+                            layer.fill(200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.triangle(
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5,
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5
+                            )
+                            layer.fill(120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.arc(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6,-135,45)
+                            layer.fill(240+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,240+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.arc(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6,45,225)
+                            layer.fill(40+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.07,-this.height*0.15,this.width*lcos(a*90+this.time)*0.05,this.height*0.05)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.195,-this.height*0.15,this.width*lcos(a*90+this.time)*0.05,this.height*0.05)
+                            layer.arc(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.1325,-this.height*0.025,this.width*lcos(a*90+this.time)*0.15,this.height*0.1,-180,0)
+                            layer.fill(120+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.14,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.06,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.02,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                        }else{
+                            layer.fill(80+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.triangle(
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5
+                            )
+                            layer.fill(200+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.triangle(
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                -this.height/2-0.5,
+                                this.width/2*lsin(a*90+this.time)+(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5,
+                                this.width/2*lsin(a*90+this.time)-(this.width/2+0.5)*lcos(a*90+this.time),
+                                this.height/2+0.5
+                            )
+                            layer.fill(120+lcos(a*90+this.time)*40,180+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.arc(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6,-225,-45)
+                            layer.fill(240+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,240+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.arc(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6,-45,135)
+                            layer.fill(40+lcos(a*90+this.time)*40,80+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.07,-this.height*0.15,this.width*lcos(a*90+this.time)*0.05,this.height*0.05)
+                            layer.ellipse(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.195,-this.height*0.15,this.width*lcos(a*90+this.time)*0.05,this.height*0.05)
+                            layer.arc(this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.1325,-this.height*0.025,this.width*lcos(a*90+this.time)*0.15,this.height*0.1,-180,0)
+                            layer.fill(120+lcos(a*90+this.time)*40,60+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.14,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)+this.width*lcos(a*90+this.time)*0.06,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                            regTriangle(layer,this.width/2*lsin(a*90+this.time)-this.width*lcos(a*90+this.time)*0.02,this.height*0.12,this.width*lcos(a*90+this.time)*0.08,this.height*0.08,-30)
+                        }
+                    }
+                }
+            break
             //mark
             
         }
@@ -11641,7 +11711,7 @@ class wall{
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
             case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 77:
-            case 78: case 79: case 80: case 81:
+            case 78: case 79: case 80: case 81: case 82:
                 if(this.rainbow&&this.time%15==0){
                     switch(this.type){
                         case 61: this.type=70; break
@@ -13464,7 +13534,7 @@ class wall{
                         &&!((this.type==12||this.type==70||this.type==76||this.type==77||this.type==80)&&(c.id<=0||this.recharge>0||c.construct||c.life<=0))
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=67&&!rules.dm||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerMobster'||c.control==1))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerMobster'||c.playerData.name=='PlayerTiny'))
-                        &&!(this.type==65&&this.recharge>0)
+                        &&!((this.type==65||this.type==82)&&this.recharge>0)
                         &&!((this.type==68||this.type==73||this.type==79||this.type==80)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&rules.dm&&this.position.y<game.tileset[1]*10&&this.time>600&&!((game.level==64||game.level==124)&&this.position.x<game.tileset[0]*10))
@@ -14034,7 +14104,7 @@ class wall{
                                 }
                             break
                             case 66:
-                                c.DOT.active+=300
+                                c.DOT.active+=300*(game.pvp?2:1)
                                 c.DOT.damage++
                                 this.remove=true
                             break
@@ -14125,7 +14195,7 @@ class wall{
                                     this.weapon=listing[clump][floor(random(listing[clump].length))]
                                 }
                                 this.recharge=3600-(game.gaming-1)*600
-                                c.DOT.active+=300
+                                c.DOT.active+=300*(game.pvp?2:1)
                                 c.DOT.damage++
                                 if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
@@ -14164,6 +14234,15 @@ class wall{
                             case 80:
                                 c.speedBuff=max(c.speedBuff,game.level==55?600:240)
                                 this.remove=true
+                            break
+                            case 82:
+                                c.DOT.active+=300*(game.pvp?2:1)
+                                c.DOT.damage++
+                                this.recharge=1800-(game.gaming-1)*300
+                                c.speedBuff=max(c.speedBuff,game.level==55?600:240)
+                                if(game.level==55||game.level==92||game.level==119){
+                                    this.remove=true
+                                }
                             break
                             default:
                                 let d=collideBoxBox(this,c)

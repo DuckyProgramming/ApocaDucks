@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=3
-        game.gaming=3
-        game.level=131
+        game.players=2
+        game.gaming=1
+        game.level=134
         /*
         65 - tailwater 5cp
         88 - sulfite koth
@@ -2123,7 +2123,14 @@ function mouseClicked(){
                             }
                             if(game.usurp){
                                 game.usurpIndex=floor(random(0,game.players))
-                        }
+                            }
+                            if(types.mission[game.mission].wave.length==1&&game.instantWave){
+                                stage.scene='main'
+                                display.cycle=0
+                                if(game.level==37){
+                                    newWave()
+                                }
+                            }
                         }
                     }
                 }
@@ -2557,6 +2564,13 @@ function mouseClicked(){
                         }
                         if(game.usurp){
                             game.usurpIndex=floor(random(0,game.players))
+                        }
+                        if(types.mission[game.mission].wave.length==1&&game.instantWave){
+                            stage.scene='main'
+                            display.cycle=a
+                            if(game.level==37){
+                                newWave()
+                            }
                         }
                     }
                     tick++
