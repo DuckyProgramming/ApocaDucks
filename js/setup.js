@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[5,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[3,3],sets:[[1,8],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,10 +15,11 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
+        game.players=10
         game.gaming=1
-        game.level=134
+        game.level=47
         /*
+        47 - big data ad
         65 - tailwater 5cp
         88 - sulfite koth
         100 - ferrum ad
@@ -30,6 +31,7 @@ function setup(){
         game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
         if(true){
             game.mission=findName(`Duck Time Deluxe`,types.mission)
+            //game.mission=findName(`Duck's Drill`,types.mission)
             formMission(types.mission[game.mission].wave,0)
         }else{
             game.mission=findName('Survival',types.mission)

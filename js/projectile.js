@@ -651,9 +651,12 @@ class projectile{
 									}else if(this.type==446){
 										for(let d=0,ld=entities.players.length;d<ld;d++){
 											if(entities.players[d].builder==this.index&&entities.players[d].construct){
-												entities.players[d].weaponData.cooldown=0
-												entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,60)
-												entities.players[d].assort.autoTarget=[c.index]
+												//entities.players[d].weaponData.cooldown=0
+												entities.players[d].weapon.cooldown=0
+												entities.players[d].weapon.ammo=entities.players[d].weaponData.ammo
+												entities.players[d].weapon.reloading=false
+												entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,120)
+												entities.players[d].assort.autoTarget=[c]
 											}
 										}
 									}

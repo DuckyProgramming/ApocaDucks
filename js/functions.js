@@ -7438,8 +7438,8 @@ function generateLevel(info,layer){
                                 (game.level==48||game.level==57||game.level==80||game.level==115||game.level==116)&&c>=game.gaming&&lc>5?5:
                                 game.level==34||game.level==96||game.level==97||game.level==131?0:
                                 game.level==32?1:
-                                game.level==27?c%5:
-                                c
+                                //game.level==27?c%5:
+                                c%5
                             )+1&&
                             (!game.pvp||game.level==13||game.level==14||game.level==48||game.level==57||game.level==115||game.level==116)
                         ){

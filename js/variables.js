@@ -10296,7 +10296,10 @@ types={
       name:'GrenadierSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:36,
     },{
-      name:'Planetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      name:'Planetoid',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:531,
+    },{
+      name:'HeavyPlanetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:531,
     },{
       name:'EnderPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
@@ -16906,7 +16909,7 @@ types={
 			ammo:8,
 			damage:80,
 			cooldown:15,
-			stop:30,
+			stop:60,
 			reload:10,
 			speed:1.2,
       uses:48,
@@ -16915,7 +16918,7 @@ types={
 			ammo:16,
 			damage:80,
 			cooldown:9,
-			stop:18,
+			stop:36,
 			reload:6,
 			speed:1.2,
       uses:96,
@@ -16924,7 +16927,7 @@ types={
 			ammo:16,
 			damage:80,
 			cooldown:9,
-			stop:18,
+			stop:36,
 			reload:6,
 			speed:1.2,
       uses:96,
@@ -19550,12 +19553,12 @@ types={
 		},{
 			name:'Bazooka C',
 			ammo:0,
-			damage:120,
+			damage:135,
 			cooldown:20,
 			stop:120,
 			reload:20,
 			speed:0.8,
-      uses:12,
+      uses:15,
 		},{
 			name:'Wrangler',
 			ammo:1,
