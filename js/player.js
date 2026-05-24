@@ -1297,7 +1297,7 @@ class player{
                         this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'||this.playerData.name=='TankSplitterPunch'||this.playerData.name=='TankSplitterFlamethrower'||this.playerData.name=='TankBuff'||
                         this.playerData.name=='GrenadingTank'||this.playerData.name=='TankShieldBuff'||this.playerData.name=='TankSplitterRandom'||this.playerData.name==`EnigmaTank`||this.playerData.name==`TankVulnerable`||
                         this.playerData.name==`BombTank`||this.playerData.name==`TankSplitterShotgun`||this.playerData.name==`TankSplitterAssaultRifle`||this.playerData.name==`IronyTank`||this.playerData.name==`AcceleratorTank`||
-                        this.playerData.name==`TankDoubleBuff`||this.playerData.name==`TankDamaged`||this.playerData.name==`TankInvisBuff`
+                        this.playerData.name==`TankDoubleBuff`||this.playerData.name==`TankDamaged`||this.playerData.name==`TankInvisBuff`||this.playerData.name==`DoubleDoubleAutoTank`
                     ){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                     }else if(this.playerData.name=='MegaTank'){
@@ -10259,7 +10259,7 @@ class player{
                     }
                 break
                 case 'EngineerSpawner': case 'TankSpawner': case 'BigMachineGunSpawner': case 'HyperMedicSpawner': case 'BigCritPistolSpawner':
-                    if(this.time%600==0&&!((game.level==23||game.level==101)&&(this.position.x<220||this.position.x>game.edge[0]-220))){
+                    if(this.time%600==0&&!((game.level==23||game.level==101)&&(this.position.x<220||this.position.x>game.edge[0]-220))&&!(game.level==29&&this.time>1200)){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Sniper','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
@@ -10701,7 +10701,7 @@ class player{
                     }
                 break
                 case 'SpawnerBoss':
-                    if(this.time%120==0&&!((game.level==23||game.level==101)&&(this.position.x<220||this.position.x>game.edge[0]-220))){
+                    if(this.time%120==0&&!((game.level==23||game.level==101)&&(this.position.x<220||this.position.x>game.edge[0]-220))&&!(game.level==29&&this.time>1200)){
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Sniper','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true

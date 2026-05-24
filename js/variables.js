@@ -9865,7 +9865,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'DoubleAutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
-      damageBuff:1,reloadBuff:0.4,crit:0,weapon:255
+      damageBuff:0.75,reloadBuff:0.4,crit:0,weapon:255,
+    },{
+      name:'DoubleDoubleAutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:0.5,reloadBuff:0.4,crit:0,weapon:600,
     },{
       name:'BombTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,

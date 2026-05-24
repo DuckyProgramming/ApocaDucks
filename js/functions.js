@@ -10910,7 +10910,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['EnderShotgun',15])
+            //wave[0].push(['DoubleDoubleAutoTank',15])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11158,7 +11158,7 @@ function formMission(wave,type){
                 ['EngineeringTank',2],
                 ['GasTank',2],
                 ['TankWare',2],
-                ['DoubleAutoTank',2],
+                ['DoubleDoubleAutoTank',2],
                 ['GlitchedTank',2],
             ]
             wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
