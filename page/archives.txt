@@ -18,6 +18,7 @@ walltype 82 - poison speed crate, 66, 77
 447 - daydrinker, 344
 448 - stealthybomb launcher, 349
 449 - teamgust, 222
+450 - grenade that can't hit for 0.25 seconds, 30
 
 
 

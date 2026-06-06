@@ -276,7 +276,7 @@ class player{
                     /*if((this.playerData.name=='PlayerScout'||this.playerData.name=='PlayerScout2'||this.playerData.name=='PlayerScout3'||this.playerData.name=='PlayerScout4'||this.playerData.name=='PlayerScout5'||this.playerData.name=='PlayerScout6'||this.playerData.name=='PlayerScout7'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerScout8'||this.playerData.name=='PlayerScout9'||this.playerData.name=='PlayerScout10'&&this.subWeaponAType!=879||this.playerData.name=='PlayerScout11'||this.playerData.name=='PlayerScout12'||this.playerData.name=='PlayerScoutW'&&this.subWeaponAType!=879||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&inputSetB[3]&&this.subWeaponA.cooldown<20){
                         this.subWeaponA.cooldown=0
                     }*/
-                    if(this.playerData.name=='PlayerSniperW'&&this.subWeaponAType==728){
+                    if(this.rules.classW&&this.subWeaponAType==728){
                         if(this.subWeaponB.cooldown<=0&&this.subWeaponB.ammo>0&&this.subWeaponBType>=0){
                             this.attack(2)
                         }
@@ -555,7 +555,7 @@ class player{
         this.calculateParts()
         layer.push()
         layer.translate(this.position.x+this.offset.position.x+offsetX,this.position.y+this.offset.position.y+offsetY)
-        if(this.parachute||this.rules.parachute||this.playerData.name=='PlayerDirigible'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'){
+        if(this.parachute||this.rules.parachute||this.playerData.name=='PlayerDirigible'||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'){
             layer.noFill()
             layer.stroke(200,this.fade)
             layer.strokeWeight(1)
@@ -2469,7 +2469,7 @@ class player{
     swapSubWeapons(){
         if(
             this.playerData.name=='PlayerEngineerC3'&&this.effectiveId()<=game.gaming||
-            this.playerData.name=='PlayerEngineerW'&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')
+            this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')
         ){
             let hold=this.subPlayerAType
             this.subPlayerAType=this.subPlayerBType
@@ -2809,7 +2809,7 @@ class player{
                 ?0.5:
                 this.rules.take23&&spec==0
                 ?2/3:
-                this.rules.take45||this.playerData.name=='PlayerDemomanW'&&(this.subWeaponAType==982||this.subWeaponBType==982)&&spec==0
+                this.rules.take45||this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982)&&spec==0
                 ?0.8:
                 this.playerData.name=='PlayerStickyMan'&&spec==0
                 ?0.9:
@@ -2893,8 +2893,8 @@ class player{
                 switch(this.playerData.name){
                     case 'EnderShotgunMartyr':
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,-90,this.id,100,180,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,90,this.id,100,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,-90,this.id,100,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,90,this.id,100,180,crit,this.index))
                     break
                 }
                 let set=game.spawner.filter(pos=>dist(pos[0],pos[1],this.position.x,this.position.y)<500)
@@ -2946,7 +2946,15 @@ class player{
                 this.visible=this.rules.spyLineReduced||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1007?180:this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyW'?120:15
             }
             this.assort.firing=30
-            if(!((this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&(weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019))&&!((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480)&&!((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1030&&this.assort.firingTick<1/3)){
+            if(
+                !(
+                    (this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&!this.assort.intel&&
+                    (weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019)
+                )&&
+                !((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480&&!this.assort.intel)&&
+                !((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)&&
+                !(weaponType==1030&&this.assort.firingTick<1/3)
+            ){
                 if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
                     damageBuff*=constrain(this.subWeaponA.time/60,1,4)
                     this.subWeaponA.time=max(0,min(240,this.subWeaponA.time)-480/this.subWeaponBData.ammo)
@@ -7978,7 +7986,7 @@ class player{
                                 this.subWeaponA.cooldown=0
                             }
                             if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
-                                if(this.playerData.name=='PlayerSniperW'&&this.subWeaponAType==728){
+                                if(this.rules.classW&&this.subWeaponAType==728){
                                     if(this.subWeaponB.cooldown<=0&&this.subWeaponB.ammo>0&&this.subWeaponBType>=0){
                                         this.attack(2)
                                     }
@@ -8260,7 +8268,7 @@ class player{
                                 if((this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`)/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`))&&this.subWeaponA.uses>0&&inputSetB[3]/*&&this.subWeaponA.cooldown<20*/){
                                     this.subWeaponA.cooldown=0
                                 }
-                                if(this.playerData.name=='PlayerSniperW'&&this.subWeaponAType==728){
+                                if(this.rules.classW&&this.subWeaponAType==728){
                                     if(this.subWeaponB.cooldown<=0&&this.subWeaponB.ammo>0&&this.subWeaponBType>=0){
                                         this.attack(2)
                                     }
@@ -8683,8 +8691,8 @@ class player{
                     break
                     case 'ShotgunMartyr': case 'FlamethrowerMartyr': case 'MedicMartyr':
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,-90,this.id,100,180,crit,this.index))
-                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,30,90,this.id,100,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,-90,this.id,100,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,90,this.id,100,180,crit,this.index))
                     break
                     case 'TankSplitterPunch':
                         for(let a=0,la=4;a<la;a++){
@@ -10220,13 +10228,18 @@ class player{
                     }
                 }
             }
+            let set=[]
             switch(this.playerData.name){
                 case 'RocketLauncherHeal': case 'BigRocketLauncherHeal': case 'FastPunchHeal': case 'PistolHeal': case 'CritRocketLauncherHeal': case 'SpyHeal': case 'HeavyPunchHeal': case 'EngineerHeal': case 'BigCritPistolHeal': case 'FlamethrowerHeal': case 'MachineGunHeal':
+                    set=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort&&!entities.players[a].playerData.name.includes('Tank')){
-                            entities.players[a].life=min(max(entities.players[a].base.life,entities.players[a].life),entities.players[a].life+sqrt(entities.players[a].base.life)/60)
+                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<360&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!entities.players[a].playerData.name.includes('Tank')){
+                            set.push(entities.players[a])
                         }
                     }
+                    set.forEach(player=>{
+                        player.life=min(max(player.base.life,player.life),player.life+sqrt(player.base.life)/(max(60,set.length*10)))
+                    })
                 break
                 case 'RocketLauncherBuff': case 'BigRocketLauncherBuff': case 'BigCritRocketLauncherBuff': case 'BigSpamRocketLauncherBuff': case 'RocketLauncherHealSelfBuff': case 'DamageOverTimeMachineGunBuff': case 'PistolBuff': case 'TankBuff': case 'RocketLauncherStopBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
@@ -10276,11 +10289,15 @@ class player{
                     this.life=min(this.base.life,this.life+this.base.life/(game.classWeapon||game.peakWeapon?300:600))
                 break
                 case 'BigMedicAura': case 'MedicAura': case 'HyperMedicAura': case 'PlusMedicAura':
+                    set=[]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<360&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!entities.players[a].playerData.name.includes('Tank')){
-                            entities.players[a].life=min(max(entities.players[a].base.life,entities.players[a].life),entities.players[a].life+sqrt(entities.players[a].base.life)/120)
+                            set.push(entities.players[a])
                         }
                     }
+                    set.forEach(player=>{
+                        player.life=min(max(player.base.life,player.life),player.life+sqrt(player.base.life)/(max(60,set.length*10)))
+                    })
                 break
                 case 'PlayerMedicAura':
                     for(let a=0,la=entities.players.length;a<la;a++){
@@ -11311,7 +11328,7 @@ class player{
                 break
                 case 'ConstructMiniSpeedBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)){
+                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id)){
                             entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
                         }
                     }
@@ -11549,7 +11566,7 @@ class player{
                 this.noGravTime--
                 this.velocity.y*=0.8
             }else{
-                this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
+                this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
             }
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
@@ -11637,7 +11654,7 @@ class player{
             if(this.velocity.y>0){
                 this.velocity.y*=0.6
             }
-        }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.playerData.name=='PlayerSoldierW'&&this.subPlayerAData.name=='PlayerLightParachutist'){
+        }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'){
             this.velocity.x*=0.975
             if(this.velocity.y>0){
                 this.velocity.y*=0.7

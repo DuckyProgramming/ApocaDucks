@@ -13536,7 +13536,7 @@ class wall{
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerMobster'||c.playerData.name=='PlayerTiny'))
                         &&!((this.type==65||this.type==82)&&this.recharge>0)
                         &&!((this.type==68||this.type==73||this.type==79||this.type==80)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
-                        &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.construct||c.sidekick||c.auto))
+                        &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.life<=0||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&rules.dm&&this.position.y<game.tileset[1]*10&&this.time>600&&!((game.level==64||game.level==124)&&this.position.x<game.tileset[0]*10))
                     ){
                         let clump

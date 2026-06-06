@@ -67,7 +67,7 @@ class projectile{
 			case 305: case 311: case 312: case 314: case 315: case 318: case 323: case 326: case 328: case 329:
 			case 344: case 349: case 353: case 356: case 360: case 368: case 372: case 373: case 375: case 376:
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425: case 435:
-			case 437: case 438: case 447: case 448:
+			case 437: case 438: case 447: case 448: case 450:
 				this.partisan=true
 				let size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||
 						this.type==259||this.type==268||this.type==283||this.type==301||this.type==303||this.type==437?16:
@@ -1287,7 +1287,7 @@ class projectile{
 				layer.quad(0,-1,-5,0,0,1,5,0)
 				layer.quad(0,-5,-1,0,0,5,1,0)
 			break
-			case 30: case 311: case 312:
+			case 30: case 311: case 312: case 450:
 				layer.rotate(-this.direction)
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
@@ -7379,7 +7379,7 @@ class projectile{
 					}
 				}
 			break
-			case 30: case 166: case 211: case 228: case 290: case 311: case 312: case 344:
+			case 30: case 166: case 211: case 228: case 290: case 311: case 312: case 344: case 450:
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<100&&this.validExplodeTarget(entities.players[b])){
@@ -7870,7 +7870,7 @@ class projectile{
 				}
 			break
 			case 352:
-				radius=105
+				radius=105*max(1,0.5+this.timer*0.05)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -8338,7 +8338,7 @@ class projectile{
 			case 323: case 326: case 328: case 329: case 344: case 349: case 353: case 356: case 359: case 360:
 			case 366: case 367: case 368: case 372: case 373: case 375: case 376: case 383: case 389: case 392:
 			case 402: case 404: case 410: case 412: case 413: case 416: case 417: case 425: case 431: case 435:
-			case 437: case 438: case 447: case 448:
+			case 437: case 438: case 447: case 448: case 450:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -8387,7 +8387,7 @@ class projectile{
 				case 135: case 136: case 147: case 166: case 169: case 170: case 176: case 226: case 235: case 240: case 258:
 				case 264: case 277: case 285: case 289: case 290: case 291: case 293: case 296: case 303: case 311: case 312:
 				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
-				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447:
+				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447: case 450:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -8954,229 +8954,189 @@ class projectile{
 					}
 					this.position.x+=this.velocity.x/4
 					this.position.y+=this.velocity.y/4
-					switch(this.type){
-						case 111: case 144:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 134: case 283: case 437:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=[450,450,450,450]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+					if(this.goal<entities.players.length){
+						switch(this.type){
+							case 111: case 144:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 134: case 283: case 437:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=[450,450,450,450]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
+										}
+									}
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<450){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/(this.type==437?5:10),30,this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<450){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/(this.type==437?5:10),30,this.crit,this.index))
-												a=la
+								if(this.type==283&&a==0){
+									for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+										if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+											entities.projectiles[b].active=false
+											if(entities.projectiles[b].rules.exploder){
+												entities.projectiles[b].explode()
 											}
 										}
 									}
 								}
-							}
-							if(this.type==283&&a==0){
-								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-										entities.projectiles[b].active=false
-										if(entities.projectiles[b].rules.exploder){
-											entities.projectiles[b].explode()
-										}
+							break
+							case 139:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
+									entities.projectiles.push(new projectile(this.layer,this.position.x+lcos(dir)*2,this.position.y+lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x-lcos(dir)*2,this.position.y-lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 140:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir+20,this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir-20,this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 141:
+								if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
+									entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*2,30,this.crit,this.index))
+								}
+							break
+							case 142:
+								if(this.timer%3==0&&this.timer%120<75&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 143:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 157:
+								if(this.timer%10==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,112,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 158:
+								if(this.timer%60==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage*4,30,this.crit,this.index))
+								}
+							break
+							case 159:
+								if(this.timer%45==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
+									entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*3,30,this.crit,this.index))
+								}
+							break
+							case 160:
+								if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,168,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
+								}
+							break
+							case 161:
+								if(this.timer%90==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									for(let a=0,la=3;a<la;a++){
+										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,113,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+a*120,this.id,this.base.damage,300,this.crit,this.index))
 									}
 								}
-							}
-						break
-						case 139:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-								entities.projectiles.push(new projectile(this.layer,this.position.x+lcos(dir)*2,this.position.y+lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x-lcos(dir)*2,this.position.y-lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 140:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir+20,this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir-20,this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 141:
-							if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-								entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*2,30,this.crit,this.index))
-							}
-						break
-						case 142:
-							if(this.timer%3==0&&this.timer%120<75&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 143:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 157:
-							if(this.timer%10==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,112,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 158:
-							if(this.timer%60==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage*4,30,this.crit,this.index))
-							}
-						break
-						case 159:
-							if(this.timer%45==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-								entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*3,30,this.crit,this.index))
-							}
-						break
-						case 160:
-							if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,168,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
-							}
-						break
-						case 161:
-							if(this.timer%90==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								for(let a=0,la=3;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,113,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+a*120,this.id,this.base.damage,300,this.crit,this.index))
-								}
-							}
-						break
-						case 162:
-							if(this.timer%40==0&&this.active&&a==0){
-								let minimum=[450,450,450,450]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+							break
+							case 162:
+								if(this.timer%40==0&&this.active&&a==0){
+									let minimum=[450,450,450,450]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
+										}
+									}
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<450){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,[124,143][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.25,300,this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<450){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,[124,143][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.25,300,this.crit,this.index))
-												a=la
+							break
+							case 164:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=[450,450,450,450,450,450]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*60)<75||abs(diff-b*60+360)<75||abs(diff-b*60-360)<75){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
+										}
+									}
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<450){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*60)*10,this.position.y-lcos(this.timer+b*60)*10,[168,1][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,[150,30][b%2],this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-							}
-						break
-						case 164:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=[450,450,450,450,450,450]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*60)<75||abs(diff-b*60+360)<75||abs(diff-b*60-360)<75){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+							break
+							case 165:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=[450,450,450,450,450]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75||b==4){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
+										}
+									}
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<450){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*(b==4?0:10),this.position.y-lcos(this.timer+b*90)*(b==4?0:10),1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<450){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*60)*10,this.position.y-lcos(this.timer+b*60)*10,[168,1][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,[150,30][b%2],this.crit,this.index))
-												a=la
-											}
-										}
-									}
-								}
-							}
-						break
-						case 165:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=[450,450,450,450,450]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75||b==4){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
-											}
-										}
-									}
-								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<450){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*(b==4?0:10),this.position.y-lcos(this.timer+b*90)*(b==4?0:10),1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
-												a=la
-											}
-										}
-									}
-								}
-							}
-						break
-						case 233:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=450
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
-									}
-								}
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-										for(let b=0,lb=4;b<lb;b++){
-											entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
-										}
-										a=la
-									}
-								}
-							}
-						break
-						case 248:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)-10,this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+10,this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 252:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=450
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
-									}
-								}
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,253,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,240,this.crit,this.index))
-									}
-								}
-							}
-						break
-						case 259:
-							if(this.active&&a==0){
-								if(this.time%360<180){
-									let minimum=480
+							break
+							case 233:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=450
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
 											minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
@@ -9184,111 +9144,153 @@ class projectile{
 									}
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+											for(let b=0,lb=4;b<lb;b++){
+												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+											}
+											a=la
+										}
+									}
+								}
+							break
+							case 248:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)-10,this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+10,this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 252:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=450
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+										}
+									}
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+											entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,253,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,240,this.crit,this.index))
+										}
+									}
+								}
+							break
+							case 259:
+								if(this.active&&a==0){
+									if(this.time%360<180){
+										let minimum=480
+										for(let a=0,la=entities.players.length;a<la;a++){
+											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+												minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+											}
+										}
+										for(let a=0,la=entities.players.length;a<la;a++){
+											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+												let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+												entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,dir,this.id,this.base.damage/100,1,this.crit,this.index))
+												entities.projectiles.splice(entities.projectiles.length-1,1)
+											}
+										}
+									}
+									if(this.time%120==0){
+										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
+										entities.projectiles[entities.projectiles.length-1].velocity.x=0
+										entities.projectiles[entities.projectiles.length-1].velocity.y=0
+									}
+								}
+							break
+							case 260:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x+18*lcos(this.time),this.position.y-18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x+18*lcos(this.time)),(this.position.y-18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									entities.projectiles.push(new projectile(this.layer,this.position.x-18*lcos(this.time),this.position.y+18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x-18*lcos(this.time)),(this.position.y+18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 261:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].attacking){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/2,30,this.crit,this.index))
+								}
+							break
+							case 268:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=[450,450,450,450]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
 											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-											entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,dir,this.id,this.base.damage/100,1,this.crit,this.index))
-											entities.projectiles.splice(entities.projectiles.length-1,1)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
 										}
 									}
-								}
-								if(this.time%120==0){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
-									entities.projectiles[entities.projectiles.length-1].velocity.x=0
-									entities.projectiles[entities.projectiles.length-1].velocity.y=0
-								}
-							}
-						break
-						case 260:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x+18*lcos(this.time),this.position.y-18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x+18*lcos(this.time)),(this.position.y-18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x-18*lcos(this.time),this.position.y+18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x-18*lcos(this.time)),(this.position.y+18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 261:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].attacking){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/2,30,this.crit,this.index))
-							}
-						break
-						case 268:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=[450,450,450,450]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<450){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,151,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<450){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,151,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
-												a=la
+							break
+							case 272:
+								if(this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/20,1,this.crit,this.index))
+									entities.projectiles.splice(entities.projectiles.length-1,1)
+								}
+							break
+							case 301:
+								if(this.timer%25==0&&this.active&&a==0){
+									let minimum=[900,900,900,900]
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
+											let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
+											let diff=(this.timer%360-dir+360)%360
+											for(let b=0,lb=minimum.length;b<lb;b++){
+												if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
+													minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+												}
+											}
+										}
+									}
+									for(let b=0,lb=minimum.length;b<lb;b++){
+										if(minimum[b]<900){
+											for(let a=0,la=entities.players.length;a<la;a++){
+												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
+													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.15,30,this.crit,this.index))
+													a=la
+												}
 											}
 										}
 									}
 								}
-							}
-						break
-						case 272:
-							if(this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/20,1,this.crit,this.index))
-								entities.projectiles.splice(entities.projectiles.length-1,1)
-							}
-						break
-						case 301:
-							if(this.timer%25==0&&this.active&&a==0){
-								let minimum=[900,900,900,900]
-								for(let a=0,la=entities.players.length;a<la;a++){
-									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)){
-										let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-										let diff=(this.timer%360-dir+360)%360
-										for(let b=0,lb=minimum.length;b<lb;b++){
-											if(abs(diff-b*90)<75||abs(diff-b*90+360)<75||abs(diff-b*90-360)<75){
-												minimum[b]=min(minimum[b],dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y))
+								if(this.type==283&&a==0){
+									for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+										if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+											entities.projectiles[b].active=false
+											if(entities.projectiles[b].rules.exploder){
+												entities.projectiles[b].explode()
 											}
 										}
 									}
 								}
-								for(let b=0,lb=minimum.length;b<lb;b++){
-									if(minimum[b]<900){
-										for(let a=0,la=entities.players.length;a<la;a++){
-											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.15,30,this.crit,this.index))
-												a=la
-											}
-										}
+							break
+							case 328:
+								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
+									for(let a=0,la=4;a<la;a++){
+										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+										entities.projectiles[entities.projectiles.length-1].speed=8-a
 									}
 								}
-							}
-							if(this.type==283&&a==0){
-								for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-									if(inBoxBox({position:this.position,width:120,height:120},entities.projectiles[b])&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-										entities.projectiles[b].active=false
-										if(entities.projectiles[b].rules.exploder){
-											entities.projectiles[b].explode()
-										}
-									}
+							break
+							case 373:
+								if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
+									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
 								}
-							}
-						break
-						case 328:
-							if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-								for(let a=0,la=4;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles[entities.projectiles.length-1].speed=8-a
-								}
-							}
-						break
-						case 373:
-							if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
-							}
-						break
+							break
+						}
 					}
 				break
 				case 112: case 241:
@@ -10585,7 +10587,7 @@ class projectile{
 			this.active&&this.rules.hitter&&
 			//!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==407||this.type==421)&&this.timer<5&&this.id==0)&&
 			!((this.rules.fast)&&this.timer<5&&this.id==0)&&
-			!(this.type==98&&this.timer<15)&&
+			!((this.type==98||this.type==450)&&this.timer<15)&&
 			!(this.type==100&&this.timer<3)&&
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
 			!(this.trap&&this.timer<150)
@@ -11397,7 +11399,8 @@ class projectile{
 							break
 							case 424:
 								target.knockback(this.speed*10,this.direction,1,1)
-								target.knockbackForce(this.speed*5,this.direction,1,1)
+								target.knockbackForce(this.speed*2.5,this.direction,1,1)
+								//target.knockbackForce(this.speed*5,this.direction,1,1)
 							break
 							case 439:
 								target.knockback(this.speed*10,this.direction,1,1)

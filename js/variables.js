@@ -13,6 +13,7 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
+  anyPrimary:false,anySecondary:false,
   projClump:[],disable:[],
   /*
   0 - Drunk
@@ -7857,7 +7858,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:943,
     },{
       name:'PlayerLightSkysweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:389,
+      damageBuff:0.75,reloadBuff:0.875,crit:0,weapon:389,
     },{
       name:'PlayerWingPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:966,
@@ -17298,7 +17299,7 @@ types={
 			name:'Blast Launcher',
 			ammo:2,
 			damage:100,
-			cooldown:24,
+			cooldown:36,
 			stop:144,
 			reload:48,
 			speed:0.8,
@@ -18047,7 +18048,7 @@ types={
 			damage:140,
 			cooldown:45,
 			stop:60,
-			reload:20,
+			reload:40,
 			speed:1.35,
       uses:10,
 		},{
@@ -19485,7 +19486,7 @@ types={
 			name:'Black Box',
 			ammo:2,
 			damage:100,
-			cooldown:24,
+			cooldown:36,
 			stop:144,
 			reload:44,
 			speed:0.8,

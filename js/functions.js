@@ -22,7 +22,7 @@ function setupRules(){
 				a==378||a==379||a==384||a==385||a==389||
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
-                a==445||a==447||a==448,
+                a==445||a==447||a==448||a==450,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -70,7 +70,7 @@ function setupRules(){
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
                 a==431||a==435||a==437||a==438||a==447||
-                a==448, 
+                a==448||a==450,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -132,7 +132,7 @@ function setupRules(){
 				a==377||a==378||a==379||a==384||a==389||
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==445||
-                a==447||a==448,
+                a==447||a==448||a==450,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -158,7 +158,7 @@ function setupRules(){
             offBouncer:a==135||a==136||a==169||a==170,
             baseGrenade:a==30||a==60||a==65||a==73||a==83||
                 a==104||a==110||a==235||a==264||a==293||
-                a==324||a==326||a==359
+                a==324||a==326||a==359||a==450,
 		})
     }
 }
@@ -10910,7 +10910,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['DoubleDoubleAutoTank',15])
+            //wave[0].push(['MedicMartyr',15])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11289,6 +11289,16 @@ function setupLists(){
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],
         ],
     ]
+    if(game.anyPrimary){
+        let pooled=[]
+        listing[4].forEach(set=>pooled.push(...set[0]))
+        listing[4].forEach((set,index,arr)=>arr[index][0]=pooled)
+    }
+    if(game.anySecondary){
+        let pooled=[]
+        listing[4].forEach(set=>pooled.push(...set[1]))
+        listing[4].forEach((set,index,arr)=>arr[index][1]=pooled)
+    }
 
     menu.list=[[],[],[],[],[],[]]
     for(let a=0,la=types.mission.length;a<la;a++){
@@ -11300,6 +11310,40 @@ function qa(name){
 }
 function outPlayers(){
     entities.players.forEach(player=>print(`${player.playerData.name}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage`))
+}
+function mergeListings(type){
+    switch(type){
+        case 0:
+            game.anyPrimary=true
+            if(game.anyPrimary){
+                let pooled=[]
+                listing[4].forEach(set=>pooled.push(...set[0]))
+                listing[4].forEach((set,index,arr)=>arr[index][0]=pooled)
+            }
+        break
+        case 1:
+            game.anySecondary=true
+            if(game.anySecondary){
+                let pooled=[]
+                listing[4].forEach(set=>pooled.push(...set[1]))
+                listing[4].forEach((set,index,arr)=>arr[index][1]=pooled)
+            }
+        break
+        default:
+            game.anyPrimary=true
+            game.anySecondary=true
+            if(game.anyPrimary){
+                let pooled=[]
+                listing[4].forEach(set=>pooled.push(...set[0]))
+                listing[4].forEach((set,index,arr)=>arr[index][0]=pooled)
+            }
+            if(game.anySecondary){
+                let pooled=[]
+                listing[4].forEach(set=>pooled.push(...set[1]))
+                listing[4].forEach((set,index,arr)=>arr[index][1]=pooled)
+            }
+        break
+    }
 }
 /*
 let newer=levels[133].map(
