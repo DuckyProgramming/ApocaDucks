@@ -118,7 +118,7 @@ class player{
         this.assort={
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
-            ender:50,pivot:0,
+            ender:50,pivot:0,penalty:0,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -1513,8 +1513,8 @@ class player{
             )?1/3:1)*
             (this.weaponType==924&&this.weapon.reload>this.weaponData.stop*0.5&&this.weapon.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==924&&(this.subWeaponA.reload>this.subWeaponAData.stop*0.5)&&this.subWeaponA.uses>0&&this.weapon.uses>0?1/3:1)*
-            ((this.weaponType==883)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.1:1)*
-            (this.rules.class&&(this.subWeaponAType==883)&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
+            ((this.weaponType==883||this.weaponType==1033)&&this.weapon.cooldown>0&&this.weapon.uses>0?0.1:1)*
+            (this.rules.class&&((this.subWeaponAType==883||this.subWeaponAType==1033))&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0&&this.subWeaponB.uses>0?1/3:1)*
             (this.rules.class&&this.subWeaponAType==988?0.5:1)*
             //(this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
@@ -2877,12 +2877,7 @@ class player{
                         id=entities.players[a].id
                     }
                 }
-                for(let b=0,lb=6;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb*4)+b/lb*360,id,40,10,false,this.gasser))
-                    let c=entities.projectiles[entities.projectiles.length-1]
-                    c.position.x+=c.speed*lsin(c.direction)*5*this.size
-				    c.position.y-=c.speed*lcos(c.direction)*5*this.size
-				}
+                this.gasBurst(6,id,this.gasser)
             }
             if((
                 this.id==0&&game.ender&&!this.fort||
@@ -2904,9 +2899,17 @@ class player{
             }
         }
     }
+    gasBurst(num,id,gasser){
+        for(let b=0,lb=num;b<lb;b++){
+            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360/lb*4)+b/lb*360,id,40,10,false,gasser))
+            let c=entities.projectiles[entities.projectiles.length-1]
+            c.position.x+=c.speed*lsin(c.direction)*5*this.size
+            c.position.y-=c.speed*lcos(c.direction)*5*this.size
+        }
+    }
     generalizedTake(index){
         this.die.killer=index
-        this.collect.time=450
+        this.collect.time=max(this.collect.time,450)
         if(game.invis){
             this.visible=15
         }
@@ -7173,6 +7176,38 @@ class player{
                         this.velocity.x+=10*(lsin(this.direction.main)<0?1:-1)
                         this.lastingForce[0]+=3*(lsin(this.direction.main)<0?1:-1)
                     break
+                    case 1031:
+                        entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y+this.height/2-game.tileset[1]*0.5,game.tileset[1]*0.6,game.tileset[1]*0.6,83))
+                        entities.walls[1][entities.walls[1].length-1].formBoundary()
+                        entities.walls[1][entities.walls[1].length-1].checkRedundancy()
+                        entities.walls[1][entities.walls[1].length-1].checkOverlay()
+                        entities.walls[1][entities.walls[1].length-1].set()
+                        entities.walls[1][entities.walls[1].length-1].checkGap()
+                        entities.walls[1][entities.walls[1].length-1].checkBar()
+                        entities.walls[1][entities.walls[1].length-1].formBounder()
+                    break
+                    case 1032:
+                        for(let a=0,la=12;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],451,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        }
+                        this.assort.penalty=0
+                    break
+                    case 1033:
+                        for(let a=0,la=20;a<la;a++){
+                            let a=random(0,360)
+                            let b=sqrt(random(0,1))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],453,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1+lsin(a)*b*0.25
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=1+lcos(a)*b*0.25
+                        }
+                        this.life=max(1,this.life-this.base.life/2)
+                        this.collect.time=max(this.collect.time,450)
+                        this.velocity.x+=7.5*(lsin(this.direction.main)<0?1:-1)
+                        this.lastingForce[0]+=2.25*(lsin(this.direction.main)<0?1:-1)
+                    break
+                    case 1034:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],452,(lsin(this.direction.main)<0?-90:90)+random(-0.5,0.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
 
                     //mark
                 }
@@ -7371,7 +7406,14 @@ class player{
                 this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
                 this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||
                 this.weaponType==717||this.weaponType==742||this.weaponType==768||this.weaponType==789||this.weaponType==809||
-                this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==961||this.weaponType==1001&&this.subWeaponAType!=932&&this.subWeaponBType!=932,
+                this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==932||this.weaponType==961||
+                this.weaponType==1001,
+            fastHeal:this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||
+                this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
+                this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||
+                this.weaponType==717||this.weaponType==742||this.weaponType==768||this.weaponType==789||this.weaponType==809||
+                this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==932||this.weaponType==961||
+                this.weaponType==1001&&this.subWeaponAType!=932&&this.subWeaponBType!=932,
             randomCrit:this.weaponType!=334&&this.weaponType!=335&&this.weaponType!=360&&this.weaponType!=394&&this.weaponType!=478&&
                 this.weaponType!=479&&this.weaponType!=480&&this.weaponType!=481&&this.weaponType!=557&&this.weaponType!=575&&
                 this.weaponType!=576,
@@ -7937,7 +7979,7 @@ class player{
                         this.assort.tiredTick=30
                     }
                     this.jumpAction()
-                }else if(this.playerData.name==`ShotgunVault`&&this.life<=this.base.life*0.5&&this.jump.time>2&&this.stuckTime<=0&&!this.assort.vault){
+                }else if(this.playerData.name==`ShotgunVault`&&this.life<=this.base.life*0.5&&this.jump.time>2&&this.stuckTime<=0&&!this.assort.vault&&this.life>0){
                     this.assort.vault=true
                     this.jump.time=0
                     this.velocity.x=lsin(this.direction.main)*30
@@ -8596,7 +8638,7 @@ class player{
         }
         if(this.collect.time>0&&(this.playerData.name!='PlayerImmortal'||this.weaponData.uses<=0)){
             this.collect.time--
-            if(this.weaponRules.med&&!this.fort){
+            if(this.weaponRules.fastHeal&&!this.fort){
                 this.collect.time--
                 if(this.playerData.name=='PlayerCure'){
                     this.collect.time-=8

@@ -33,18 +33,18 @@ class wall{
             this.type!=27&&this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=55&&this.type!=57&&
             this.type!=59&&this.type!=60&&this.type!=61&&this.type!=62&&this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&
             this.type!=70&&this.type!=71&&this.type!=72&&this.type!=73&&this.type!=75&&this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&
-            this.type!=82
+            this.type!=82&this.type!=82
         this.rules={
             collide:[
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                 this.type!=63&&this.type!=65&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&
-                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82,
+                this.type!=76&&this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82&&this.type!=83,
 
                 this.type!=3&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=27&&
                 this.type!=31&&this.type!=33&&this.type!=36&&this.type!=39&&this.type!=41&&this.type!=42&&this.type!=50&&this.type!=57&&this.type!=61&&this.type!=62&&
                 this.type!=63&&this.type!=66&&this.type!=67&&this.type!=68&&this.type!=69&&this.type!=70&&this.type!=71&&this.type!=72&&this.type!=75&&this.type!=76&&
-                this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82,
+                this.type!=77&&this.type!=79&&this.type!=80&&this.type!=81&&this.type!=82&&this.type!=83,
 
                 this.type!=36&&this.type!=39&&this.type!=42&&this.type!=62&&this.type!=67,
             ],
@@ -117,7 +117,7 @@ class wall{
             break
             case 8: case 9: case 12: case 16: case 27: case 41: case 50: case 57: case 61: case 63:
             case 65: case 66: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 76:
-            case 77: case 79: case 80: case 81: case 82:
+            case 77: case 79: case 80: case 81: case 82: case 83:
                 this.recharge=0
                 this.falling=0
                 this.infoFade=0
@@ -9235,6 +9235,23 @@ class wall{
                     }
                 }
             break
+            case 83:
+                for(let a=0,la=4;a<la;a++){
+                    if(lcos(a*90+this.time)>0){
+                        layer.fill(160+lcos(a*90+this.time)*40,100+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),-this.height/3,(this.width+1)*lcos(a*90+this.time),this.height/3)
+                        layer.fill(200+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,200+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,(this.width+1)*lcos(a*90+this.time),this.height/3)
+                        layer.fill(240+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,120+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),this.height/3,(this.width+1)*lcos(a*90+this.time),this.height/3)
+                        layer.fill(160+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.ellipse(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.6,this.height*0.6)
+                        layer.fill(240+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,40+lcos(a*90+this.time)*40,1-this.recharge/60)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.45,this.height*0.15)
+                        layer.rect(this.width/2*lsin(a*90+this.time),0,this.width*lcos(a*90+this.time)*0.15,this.height*0.45)
+                    }
+                }
+            break
             //mark
             
         }
@@ -11711,7 +11728,7 @@ class wall{
             break
             case 8: case 9: case 12: case 27: case 41: case 50: case 57: case 61: case 63: case 65: 
             case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 75: case 77:
-            case 78: case 79: case 80: case 81: case 82:
+            case 78: case 79: case 80: case 81: case 82: case 83:
                 if(this.rainbow&&this.time%15==0){
                     switch(this.type){
                         case 61: this.type=70; break
@@ -13535,7 +13552,7 @@ class wall{
                         &&!((this.type==16||this.type==50||this.type==61||this.type==69||this.type==71||this.type==72)&&(c.id<=0||c.id>game.gaming&&game.level!=27&&game.level!=38&&game.level!=44&&game.level!=65&&game.level!=67&&!rules.dm||this.recharge>0||c.construct||c.auto||c.playerData.name=='PlayerMobster'||c.control==1))
                         &&!((this.type==27||this.type==57)&&(c.id<=0||this.recharge>0||c.construct||c.sidekick||c.fort||c.auto||c.playerData.name=='PlayerMobster'||c.playerData.name=='PlayerTiny'))
                         &&!((this.type==65||this.type==82)&&this.recharge>0)
-                        &&!((this.type==68||this.type==73||this.type==79||this.type==80)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
+                        &&!((this.type==68||this.type==73||this.type==79||this.type==80||this.type==83)&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life*2||c.construct||c.sidekick||c.auto))
                         &&!(this.type==75&&(this.time<45||c.id<=0||this.recharge>0||c.life>=c.base.life&&c.weaponType!=-1&&!game.pvp||c.life<=0||c.construct||c.sidekick||c.auto))
                         &&!(this.type==1&&rules.dm&&this.position.y<game.tileset[1]*10&&this.time>600&&!((game.level==64||game.level==124)&&this.position.x<game.tileset[0]*10))
                     ){
@@ -14243,6 +14260,12 @@ class wall{
                                 if(game.level==55||game.level==92||game.level==119){
                                     this.remove=true
                                 }
+                            break
+                            case 83:
+                                this.recharge=1800-(game.gaming-1)*300
+                                this.remove=true
+                                c.life=min(c.base.life*2,c.life+c.base.life)
+                                c.chillTime=max(c.chillTime,600)
                             break
                             default:
                                 let d=collideBoxBox(this,c)

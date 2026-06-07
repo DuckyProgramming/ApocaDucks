@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3,3],sets:[[1,8],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[4,0],sets:[[5,3],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
+        game.players=2
         game.gaming=1
-        game.level=47
+        game.level=117
         /*
         47 - big data ad
         65 - tailwater 5cp
@@ -25,6 +25,7 @@ function setup(){
         100 - ferrum ad
         117 - aerial 2 dm
         131 - lisp
+        134 - bluefort micro
         */
         menu.level=game.level
         updateRules()

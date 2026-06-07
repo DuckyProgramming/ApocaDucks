@@ -11257,20 +11257,20 @@ function setupLists(){
     }
     listing[4]=[
         [
-            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergun`],
+            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunC`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerPocketRocket`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJump`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
-            [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonator`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
+            [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`],
             [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerAirburstRifle`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`,`PlayerDaydrinker`,`PlayerStealthybombLauncher`],
         ],[
-            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerBatteryLMG`,`PlayerAnticannon`,`PlayerRecoilLMG`],
-            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCream`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
+            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
+            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWrangler`],
             [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`,`PlayerHalfSentry`],

@@ -458,7 +458,7 @@ class projectile{
 				this.speed=2
 				this.time=time
 			break
-			case 147: case 244: case 258: case 285: case 289: case 290: case 291: case 296: case 410:
+			case 147: case 244: case 258: case 285: case 289: case 290: case 291: case 296: case 410: case 453:
 				this.speed=16
 				this.time=time
 				this.midpoint={position:{x:this.position.x,y:this.position.y}}
@@ -479,6 +479,9 @@ class projectile{
 				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)*(this.type==291?-1:1)}
 				if(this.type==296){
 					this.hit=[]
+				}else if(this.type==453){
+					this.width*=2
+					this.height*=2
 				}
 			break
 			case 150:
@@ -912,6 +915,21 @@ class projectile{
 			case 444:
 				this.speed=2
 				this.time=time
+			break
+			case 451:
+				this.speed=random(6,8)
+				this.time=random(time,time*2)
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
+				this.hit=[]
+			break
+			case 452:
+				this.speed=5
+				this.time=random(time,time*2)
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
 			break
 			
 		}
@@ -6756,7 +6774,7 @@ class projectile{
 					layer.ellipse(0,0,75-this.fade*75)
 				}
 			break
-			case 414:
+			case 414: case 451:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -7254,6 +7272,31 @@ class projectile{
 				layer.fill(160-this.crit*160,200,160+this.crit*80,this.fade*this.time/this.base.time)
 				layer.ellipse(0,0,30*(1-this.time/this.base.time))
 			break
+			case 452:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1.25,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1.25,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1.25,4)
+				layer.fill(30,150,30,this.fade)
+				layer.ellipse(0,0,8)
+				layer.fill(240,40,40,this.fade)
+				layer.quad(-4,0,0,-4,4,0,0,4)
+				layer.fill(240,120,40,this.fade)
+				layer.ellipse(0,0,5.5)
+				layer.fill(240,200,40,this.fade)
+				layer.ellipse(0,0,2.5)
+			break
+			case 453:
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,120+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,1.5)
+				layer.fill(240-this.crit*200,180,120+this.crit*200,this.fade)
+				layer.ellipse(this.past[6][0]-this.position.x,this.past[6][1]-this.position.y,3)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,10)
+			break
 
 			//mark
         }
@@ -7309,7 +7352,7 @@ class projectile{
 		return (this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
             (target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!target.fort?0:game.pvp?target.id:1)||
 			game.pvp&&this.id==target.id&&!target.fort&&!rules.teamMode||
-			target.index==this.index&&!(duel.trigger&&rules.teamMode)
+			target.index==this.index&&!(duel.trigger&&rules.teamMode&&game.noPlayer)
 	}
 	explode(){
 		this.exploded=true
@@ -8273,6 +8316,32 @@ class projectile{
 					}
 				}
 			break
+			case 452:
+				radius=90*max(1,0.5+this.timer*0.05)
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*2)
+						entities.players[b].generalizedTake(this.index)
+						entities.players[b].gasBurst(2,this.id,this.index)
+					}
+				}
+				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+						entities.projectiles[b].active=false
+						if(entities.projectiles[b].rules.stickybomb){
+							entities.projectiles[b].fail=true
+						}else if(entities.projectiles[b].rules.exploder){
+							entities.projectiles[b].damage*=0.25
+							entities.projectiles[b].explode()
+						}
+					}
+				}
+				for(let b=0,lb=10;b<lb;b++){
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
+					entities.projectiles[entities.projectiles.length-1].speed*=random(0.5,1)
+				}
+			break
 		}
 		//mark
 	}
@@ -8301,6 +8370,17 @@ class projectile{
 		}
         if(this.fade<=0){
 			this.remove=true
+			if(this.type==451&&this.hit.length==0){
+				for(let a=0,la=entities.players.length;a<la;a++){
+					if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
+						entities.players[a].assort.penalty++
+						if(entities.players[a].assort.penalty>=12){
+							entities.players[a].life=max(entities.players[a].life-this.damage*4,1)
+							entities.players[a].collect.time=max(entities.players[a].collect.time,450)
+						}
+					}
+				}
+			}
         }
 		let nudge=this.partisan?300:50
 		if((game.level==3||game.level==7)&&this.position.y>game.edge[1]){
@@ -8338,7 +8418,7 @@ class projectile{
 			case 323: case 326: case 328: case 329: case 344: case 349: case 353: case 356: case 359: case 360:
 			case 366: case 367: case 368: case 372: case 373: case 375: case 376: case 383: case 389: case 392:
 			case 402: case 404: case 410: case 412: case 413: case 416: case 417: case 425: case 431: case 435:
-			case 437: case 438: case 447: case 448: case 450:
+			case 437: case 438: case 447: case 448: case 450: case 453:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -8368,7 +8448,7 @@ class projectile{
 				case 355: case 357: case 361: case 362: case 364: case 369: case 378: case 379: case 381: case 382:
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
-				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445:
+				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -8387,7 +8467,7 @@ class projectile{
 				case 135: case 136: case 147: case 166: case 169: case 170: case 176: case 226: case 235: case 240: case 258:
 				case 264: case 277: case 285: case 289: case 290: case 291: case 293: case 296: case 303: case 311: case 312:
 				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
-				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447: case 450:
+				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447: case 450: case 453:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -10463,7 +10543,7 @@ class projectile{
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage,15,this.crit,this.index))
 					}
 				break
-				case 352:
+				case 352: case 452:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10702,6 +10782,9 @@ class projectile{
 						target.velocity.y-=cos(dir)*vec
 					}else if(this.type==402){
 						this.hitting=20
+					}else if(this.type==451){
+						this.hit.push(target.index)
+						this.active=false
 					}else if(this.rules.destroyAfter){
 						this.active=false
 					}
@@ -10914,7 +10997,7 @@ class projectile{
 							target.gasTime=max(1200,target.gasTime+120)
 							target.gasser=this.index
 						break
-						case 341: case 343: case 354:
+						case 341: case 343: case 354: case 451:
 							target.takeDamage(this.damage*max(1,1.2-this.timer*0.025))
 						break
 						case 355:
@@ -11104,7 +11187,7 @@ class projectile{
 								if(b!=d&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
 									entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
 									entities.players[d].die.killer=this.index
-									entities.players[d].collect.time=450
+									entities.players[d].collect.time=max(450,entities.players[d].collect.time)
 									if(game.invis){
 										entities.players[d].visible=15
 									}

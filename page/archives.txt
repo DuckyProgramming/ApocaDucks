@@ -1,5 +1,16 @@
-walltype 82 - poison speed crate, 66, 77
+1031 - ice cream c, 852
+1032 - penalty scattergun c, 979
+1033 - nutter, 883
+1034 - detonator c, 774
 
+451 - penalty scattergun c, 414
+452 - detonator c, 352
+453 - nutter, 147
+
+
+
+walltype 82 - poison speed crate, 66, 77
+walltype 83 - ice cream, 63
 
 
 

@@ -7994,6 +7994,18 @@ types={
     },{
       name:'PlayerStealthybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1028,
+    },{
+      name:'PlayerIceCreamC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1031,
+    },{
+      name:'PlayerPenaltyScattergunC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1032,
+    },{
+      name:'PlayerNutter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1033,
+    },{
+      name:'PlayerDetonatorC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1034,
     },
 
     //mark c
@@ -8501,13 +8513,13 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'Revolver',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:136,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:136,
     },{
       name:'RevolverSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:136,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:136,
     },{
       name:'SlightlyFastRevolverSpy',sizeBuff:1,lifeBuff:1,speedBuff:1.5,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:136,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:136,
     },{
       name:'CritSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
@@ -19175,7 +19187,7 @@ types={
 			stop:105,
 			reload:105,
 			speed:0.85,
-      uses:10,
+      uses:8,
 		},{
 			name:'Charge',
 			ammo:30,
@@ -19617,6 +19629,42 @@ types={
 			reload:150,
 			speed:0.9,
       uses:5,
+		},{
+			name:'Ice Cream C',
+			ammo:1,
+			damage:0,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:1.3,
+      uses:2,
+		},{
+			name:'Penalty Scattergun C',
+			ammo:4,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:28,
+		},{
+			name:'Nutter',
+			ammo:2,
+			damage:125,
+			cooldown:60,
+			stop:240,
+			reload:180,
+			speed:1.15,
+      uses:5,
+		},{
+			name:'Detonator C',
+			ammo:1,
+			damage:125,
+			cooldown:105,
+			stop:105,
+			reload:105,
+			speed:0.85,
+      uses:8,
 		},
 
     /*{
