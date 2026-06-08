@@ -327,8 +327,8 @@ class player{
                     regTriangle(layer,sin(dir)*40,cos(dir)*40+15,6,6,dir)
                     layer.text([
                         [`Mini Sentry`,`Levelled Sentry`,`Shotgun Sentry`,`Half Sentry`][this.assort.build%4],
-                        [`Teleporter Entrance`,`Catapult`,`Booster`,`Speed Bump`][floor(this.assort.build/16)],
-                        [`Healer`,`Dispenser`,`Radial Shield`,`Shrinker`][floor(this.assort.build/4)%4],
+                        [`Teleporter Entrance`,`Catapult`,`Booster`,`Trolliporter`][floor(this.assort.build/16)],
+                        [`Healer`,`Dispenser`,`Radial Shield`,`Speed Bump`][floor(this.assort.build/4)%4],
                         [`Teleporter Exit`,``,``,``][floor(this.assort.build/16)],
                     ][a],sin(dir)*40,cos(dir)*40+30)
                 }
@@ -3080,7 +3080,7 @@ class player{
                     'ConstructMiniMedicAuto',
                     'ConstructAmmoDispenser',
                     'ConstructRadialShield',
-                    'ConstructShrinker',
+                    'ConstructSpeedBumpC',
                 ][floor(this.assort.build/4)%4]
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
@@ -3118,7 +3118,7 @@ class player{
                     'ConstructTeleporterEntrance',
                     'ConstructCatapultC',
                     'ConstructBooster',
-                    'ConstructSpeedBumpC',
+                    'ConstructTrolliporter',
                 ][floor(this.assort.build/16)]
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
@@ -11792,6 +11792,24 @@ class player{
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(this.assort.building==0&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&!this.dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
                             entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
+                        }
+                    }
+                break
+                case 'ConstructTrolliporter':
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(
+                            !entities.players[a].dead&&
+                            !this.dead&&
+                            this.index!=entities.players[a].index&&
+                            this.assort.building==0&&
+                            ((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id)&&
+                            inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])
+                        ){
+                            this.life=0
+                            this.dead=true
+                            let pos=game.spawner[floor(random(0,game.spawner.length))]
+                            entities.players[a].position.x=pos[0]
+                            entities.players[a].position.y=pos[1]-entities.players[a].height/2
                         }
                     }
                 break

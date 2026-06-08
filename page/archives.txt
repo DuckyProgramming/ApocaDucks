@@ -9,12 +9,12 @@ build submodules:
     1 - health dispenser
     2 - ammo dispenser
     3 - radial shield
-    4 - shrinker
+    4 - speed bump
     
     1 - teleporter entrance / exit
     2 - catapult
-    3 - speed pad
-    4 - speed bump
+    3 - booster
+    4 - trolliporter
 
 1035 - build 111
 1036 - build 211
@@ -38,6 +38,7 @@ build submodules:
 1108 - speed pad
 1109 - speed bump c
 1110 - push pistol c
+1111 - trolliporter
 
 454 - widowmaker
 455 - wrench, 426

@@ -8214,6 +8214,9 @@ types={
     },{
       name:'ConstructSpeedBumpC',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1109,
+    },{
+      name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1111,
     },
     
     {
@@ -19896,6 +19899,15 @@ types={
 			reload:6,
 			speed:1.4,
       uses:100,
+		},{
+			name:'Trolliporter',
+			ammo:0,
+			damage:15,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
 		},
 
     /*{
