@@ -1,3 +1,54 @@
+engi rework:
+
+build submodules:
+    1 - mini sentry
+    2 - levelled sentry
+    3 - shotgun sentry
+    4 - half sentry
+
+    1 - health dispenser
+    2 - ammo dispenser
+    3 - radial shield
+    4 - shrinker
+    
+    1 - teleporter entrance / exit
+    2 - catapult
+    3 - speed pad
+    4 - speed bump
+
+1035 - build 111
+1036 - build 211
+1037 - build 311
+1038 - build 411
+1039-1042 - " 21
+1043-1046 - " 31
+1047-1050 - " 41
+1051-1066 - " 2
+1067-1082 - " 3
+1083-1098 - " 4
+1099 - widowmaker - if you get a kill instantly gain the ability to build (+1 ammo in clip, +1 reserve ammo), 0
+1100 - justice shotgun c - stores a crit per dead building, 751
+1101 - wrench - melee, can attack or heal and defend buff your buildings
+1102 - dispenser (ammo), 799
+1103 - radial shield
+1104 - shrinker
+1105 - teleporter entrance
+1106 - teleporter exit
+1107 - catapult c
+1108 - speed pad
+1109 - speed bump c
+1110 - push pistol c
+
+454 - widowmaker
+455 - wrench, 426
+456 - ammo dispenser, 434
+
+
+
+
+
+
+
 1031 - ice cream c, 852
 1032 - penalty scattergun c, 979
 1033 - nutter, 883

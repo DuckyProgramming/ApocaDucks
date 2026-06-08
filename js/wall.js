@@ -14312,9 +14312,11 @@ class wall{
                                                 c.jump.triple=1
                                                 c.jump.quadruple=1
                                             }
-                                            if(c.playerData.name=='PlayerScout4'||c.playerData.name=='PlayerScoutW'&&(c.subWeaponAType==966||c.subWeaponBType==966)){
+                                            if(c.playerData.name=='PlayerScout4'||c.rules.classW&&(c.subWeaponAType==966||c.subWeaponBType==966||c.subWeaponCType==966)){
                                                 c.jump.double=1
-                                                c.jump.triple=1
+                                                if(c.rules.doubleJump){
+                                                    c.jump.triple=1
+                                                }
                                             }
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34: case 48:

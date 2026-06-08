@@ -35,7 +35,7 @@ class projectile{
 			case 338: case 339: case 340: case 341: case 343: case 345: case 346: case 347: case 348: case 350:
 			case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403: case 407:
 			case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434: case 436:
-			case 440: case 441: case 442:
+			case 440: case 441: case 442: case 454: case 456:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -506,11 +506,11 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
-			case 365: case 400: case 406: case 415: case 426: case 446:
+			case 365: case 400: case 406: case 415: case 426: case 446: case 455:
 				this.forceDisplay=true
 				this.time=time
 				this.speed=0
-				this.extent=this.type==363||this.type==400||this.type==415||this.type==426?80:this.type==365?400:2400
+				this.extent=this.type==363||this.type==400||this.type==415||this.type==426||this.type==455?80:this.type==365?400:2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){
@@ -538,7 +538,7 @@ class projectile{
 				for(let a=0,la=entities.players.length;a<la;a++){
 					let c=entities.players[a]
 					if(
-						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0
+						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0||c.id==this.id&&c.construct&&this.type==455
 					){
 						let bound=[
 							[
@@ -569,7 +569,7 @@ class projectile{
 				for(let a=0,la=entities.players.length;a<la;a++){
 					let c=entities.players[a]
 					if(
-						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0
+						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0||c.id==this.id&&c.construct&&this.type==455
 					){
 						let bound=[
 							[
@@ -649,6 +649,12 @@ class projectile{
 											if(entities.players[d].index==this.index&&!entities.players[d].fort){
 												entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.125))
 											}
+										}
+										this.remove=true
+									}else if(this.type==455){
+										if(c.id==this.id){
+											c.life=min(max(c.life,c.base.life),c.life+this.damage)
+											c.defendBuff=max(c.defendBuff,120)
 										}
 										this.remove=true
 									}else if(this.type==446){
@@ -7297,6 +7303,35 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 			break
+			case 454:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.beginShape()
+				layer.vertex(0,0)
+				layer.vertex(1,-2)
+				layer.vertex(3,-3)
+				layer.vertex(0,-3)
+				layer.vertex(-2,0)
+				layer.vertex(0,3)
+				layer.vertex(3,3)
+				layer.vertex(1,2)
+				layer.endShape()
+			break
+			case 456:
+				layer.fill(160,40+this.crit*160,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(160,80+this.crit*120,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(160,120+this.crit*80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -8317,11 +8352,11 @@ class projectile{
 				}
 			break
 			case 452:
-				radius=90*max(1,0.5+this.timer*0.05)
+				radius=60*max(1,0.5+this.timer*0.05)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/radius)*2)
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*1.2)
 						entities.players[b].generalizedTake(this.index)
 						entities.players[b].gasBurst(2,this.id,this.index)
 					}
@@ -8376,6 +8411,7 @@ class projectile{
 						entities.players[a].assort.penalty++
 						if(entities.players[a].assort.penalty>=12){
 							entities.players[a].life=max(entities.players[a].life-this.damage*4,1)
+							entities.players[a].collect.life=entities.players[a].life
 							entities.players[a].collect.time=max(entities.players[a].collect.time,450)
 						}
 					}
@@ -8449,6 +8485,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
+				case 454: case 456:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10886,7 +10923,7 @@ class projectile{
 						case 339:
 							if(target.construct&&target.id==this.id){
 								target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
-								target.defendBuff=max(target.defendBuff,120)
+								//target.defendBuff=max(target.defendBuff,120)
 							}else{
 								target.takeDamage(this.damage)
 							}
@@ -10939,7 +10976,7 @@ class projectile{
 							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
 						break
 						case 434:
-							if(this.onTeam(target)||this.index==target.index&&this.type==216){
+							if(this.onTeam(target)&&!target.construct||this.index==target.index&&this.type==216){
 								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life))
 							}else{
 								target.takeDamage(this.damage)
@@ -11066,6 +11103,17 @@ class projectile{
 						break
 						case 433:
 							target.takeDamage(this.damage*(target.defendBuff>0?2:1))
+						break
+						case 456:
+							if(this.onTeam(target)){
+								if(target.rules.class){
+									target.subWeaponA.uses=min(target.subWeaponAData.uses*game.ammoMult,target.subWeaponA.uses+(target.subWeaponAData.uses*game.ammoMult>=10&&target.subWeaponAData.uses*game.ammoMult<40?1:floor(target.subWeaponAData.uses*game.ammoMult/40)))
+								}else{
+									target.weapon.uses=min(target.weaponData.uses*game.ammoMult,target.weapon.uses+(target.weaponData.uses*game.ammoMult>=10&&target.weaponData.uses*game.ammoMult<40?1:floor(target.weaponData.uses*game.ammoMult/40)))
+								}
+							}else{
+								target.takeDamage(this.damage)
+							}
 						break
 						default:
 							if(this.rules.exploder&&this.type!=389){
@@ -11264,6 +11312,26 @@ class projectile{
 							for(let d=0,ld=entities.players.length;d<ld;d++){
 								if(entities.players[d].index==this.index){
 									entities.players[d].defendBuff=max(entities.players[d].defendBuff,240)
+								}
+							}
+						break
+						case 454:
+							if(target.life<=0){
+								for(let d=0,ld=entities.players.length;d<ld;d++){
+									if(entities.players[d].index==this.index){
+										if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponA.reload=0
+											entities.players[d].subWeaponA.cooldown=0
+										}
+										if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponB.reload=0
+											entities.players[d].subWeaponB.cooldown=0
+										}
+										if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponC.reload=0
+											entities.players[d].subWeaponC.cooldown=0
+										}
+									}
 								}
 							}
 						break
@@ -11529,7 +11597,7 @@ class projectile{
 							break
 							case 422:
 								target.DOT.damage+=this.damage/60
-								target.DOT.active=min(360,target.DOT.active+180)
+								target.DOT.active=min(360,target.DOT.active+120)
 							break
 						}
 					}

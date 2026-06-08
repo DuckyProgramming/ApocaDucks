@@ -147,12 +147,12 @@ function setupRules(){
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
                 a==409||a==418||a==434||a==436||a==439||
-                a==449,
+                a==449||a==456,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
-                a==439||a==449,
+                a==439||a==449||a==456,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -217,6 +217,7 @@ function updateRules(){
     rules.botResupply=game.level!=13&&game.level!=14&&game.level!=23&&game.level!=26&&game.level!=27&&game.level!=33&&game.level!=38&&game.level!=44&&game.level!=48&&
         game.level!=57&&game.level!=65&&game.level!=76&&game.level!=77&&game.level!=80&&game.level!=85&&game.level!=101
     rules.overpane=game.level==64||game.level==70||game.level==84||game.level==87||game.level==89||game.level==90||game.level==94||game.level==114||game.level==124||game.level==133
+    rules.loop=game.level==3||game.level==7||game.level==16||game.level==115||game.level==116
     rules.key={
         info:game.level==61||game.level==64||game.level==67||game.level==68||game.level==70||game.level==74||game.level==76||game.level==77||game.level==78||game.level==84||
             game.level==86||game.level==89||game.level==90||game.level==94||game.level==95||game.level==96||game.level==97||game.level==98||game.level==99||game.level==102||
@@ -295,7 +296,8 @@ function spy(name){
         name=='MiniSentrySpy'||
         name=='PushSpy'||
         name=='TinySpy'||
-        name=='SpyRegen'
+        name=='SpyRegen'||
+        name=='SpySpawner'
 }
 function playerColor(owner){
     switch(owner){
@@ -510,6 +512,16 @@ function intersectKey(p1,q1,p2,q2){
     let ud=((q2.y-p2.y)*(q1.x-p1.x)-(q2.x-p2.x)*(q1.y-p1.y))
     let ua=((q2.x-p2.x)*(p1.y-p2.y)-(q2.y-p2.y)*(p1.x-p2.x))/ud
     return {x:p1.x+ua*(q1.x-p1.x),y:p1.y+ua*(q1.y-p1.y)}
+}
+function dist2(p,q){
+    return dist(p.x,p.y,q.x,q.y)**2
+}
+function pointToSegment(p,v,w){
+    let l2=dist2(v,w)
+    if(l2==0) return dist2(p,v)
+    let t=((p.x-v.x)*(w.x-v.x)+(p.y-v.y)*(w.y-v.y))/l2
+    t=max(0,min(1,t))
+    return dist(p.x,p.y,v.x+t*(w.x-v.x),v.y+t*(w.y-v.y))
 }
 function collideBoxBox(static,mobile){
     /*if(inBoxBox(static,{position:mobile.previous.position,width:mobile.width-1,height:mobile.height-1})){
@@ -11246,6 +11258,9 @@ function formMission(wave,type){
 function randin(array){
     return array[floor(random(0,array.length))]
 }
+function last(array){
+    return array[array.length-1]
+}
 function setupLists(){
     listing[0]=[...safeRange(0,findName('PlayerPanicShotgun',types.player)),...safeRange(0,10)]
     listing[1]=safeRange(findName('PlayerPanicShotgun',types.player),findName('PlayerTripleAuto',types.player)/*485,500*/)
@@ -11272,8 +11287,9 @@ function setupLists(){
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
-            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerJusticeShotgun`,`PlayerSecurer`,`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWrangler`],
-            [`PlayerDeployerMini`,`PlayerDeployerLevel`,`PlayerMiniDispenser`,`PlayerDestructorSentry`,`PlayerMiniShotgun`,`PlayerMiniSpeedBuff`,`PlayerLaunchSentry`,`PlayerHalfSentry`],
+            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerPushShotgun`,`PlayerJusticeShotgunC`,`PlayerWidowmaker`],
+            [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistol`,`PlayerWrench`,`PlayerPushPistolC`],
+            range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
             [`PlayerDonutC`,`PlayerChroma`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
