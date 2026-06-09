@@ -13163,7 +13163,11 @@ class wall{
                                             }
                                         }else if(c.velocity.y<0||c.offBouncer&&c.position.y<c.previous.position.y){
                                             c.position.y=this.position.y+this.height/2+c.height/2
-                                            c.velocity.y*=-1
+                                            if(c.type==457){
+                                                c.velocity.y=0
+                                            }else{
+                                                c.velocity.y*=-1
+                                            }
                                         }
                                     break
                                     case 1:
@@ -13180,7 +13184,11 @@ class wall{
                                             }
                                         }else if(c.velocity.y>0||c.offBouncer&&c.position.y>c.previous.position.y){
                                             c.position.y=this.position.y-this.height/2-c.height/2
-                                            c.velocity.y*=-1
+                                            if(c.type==457){
+                                                c.velocity.y=0
+                                            }else{
+                                                c.velocity.y*=-1
+                                            }
                                         }
                                     break
                                     case 2:
@@ -13197,7 +13205,11 @@ class wall{
                                             }
                                         }else if(c.velocity.x<0||c.offBouncer&&c.position.x<c.previous.position.x){
                                             c.position.x=this.position.x+this.width/2+c.width/2
-                                            c.velocity.x*=-1
+                                            if(c.type==457){
+                                                c.velocity.x=0
+                                            }else{
+                                                c.velocity.x*=-1
+                                            }
                                         }
                                     break
                                     case 3:
@@ -13214,7 +13226,11 @@ class wall{
                                             }
                                         }else if(c.velocity.x>0||c.offBouncer&&c.position.x>c.previous.position.x){
                                             c.position.x=this.position.x-this.width/2-c.width/2
-                                            c.velocity.x*=-1
+                                            if(c.type==457){
+                                                c.velocity.x=0
+                                            }else{
+                                                c.velocity.x*=-1
+                                            }
                                         }
                                     break
                                     case 4:
@@ -13233,7 +13249,7 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
@@ -13243,11 +13259,18 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
+                                                if(c.type==457){
+                                                    let a=[c.velocity.x,c.velocity.y]
+                                                    let b=[this.width,this.height]
+                                                    let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
+                                                    c.velocity.x=b[0]*d
+                                                    c.velocity.y=b[1]*d
+                                                }
                                             }
                                         }
                                     break
@@ -13267,7 +13290,7 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
@@ -13277,11 +13300,18 @@ class wall{
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
+                                                if(c.type==457){
+                                                    let a=[c.velocity.x,c.velocity.y]
+                                                    let b=[this.width,-this.height]
+                                                    let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
+                                                    c.velocity.x=b[0]*d
+                                                    c.velocity.y=b[1]*d
+                                                }
                                             }
                                         }
                                     break
@@ -13302,7 +13332,7 @@ class wall{
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
@@ -13313,11 +13343,18 @@ class wall{
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
+                                                if(c.type==457){
+                                                    let a=[c.velocity.x,c.velocity.y]
+                                                    let b=[this.width,-this.height]
+                                                    let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
+                                                    c.velocity.x=b[0]*d
+                                                    c.velocity.y=b[1]*d
+                                                }
                                             }
                                         }
                                     break
@@ -13338,7 +13375,7 @@ class wall{
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
@@ -13349,11 +13386,18 @@ class wall{
                                             c.previous.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
-                                            if(abs(incident-vecBall[0])<90||abs(incident-vecBall[0]-360)<90||abs(incident-vecBall[0]+360)<90){
+                                            if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
                                                 c.velocity.x=lsin(incident*2-vecBall[0])*vecBall[1]
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
+                                                if(c.type==457){
+                                                    let a=[c.velocity.x,c.velocity.y]
+                                                    let b=[this.width,this.height]
+                                                    let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
+                                                    c.velocity.x=b[0]*d
+                                                    c.velocity.y=b[1]*d
+                                                }
                                             }
                                         }
                                     break
@@ -13502,7 +13546,7 @@ class wall{
                                     c.active=false
                                     c.velocity.x*=0.8
                                     c.velocity.y*=0.8
-                                }else if(c.type==425&&c.bounceTimer==0){
+                                }else if((c.type==425||c.type==458)&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
                                     if(c.bounces>=3){
@@ -13511,6 +13555,14 @@ class wall{
                                     }
                                     c.velocity.x*=0.95
                                     c.velocity.y*=0.95
+                                }else if(c.type==457&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.velocity.x*=0.9
+                                    c.velocity.y*=0.9
+                                    /*let mag=sqrt(c.velocity.x**2+c.velocity.y**2)
+                                    c.velocity.x/=mag*5
+                                    c.velocity.y/=mag*5*/
                                 }
                             }
                         }

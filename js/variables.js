@@ -8091,7 +8091,14 @@ types={
     },{
       name:'PlayerPushPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1110,
+    },{
+      name:'PlayerPrimer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1112,
+    },{
+      name:'PlayerStairway',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1113,
     },
+
     //mark c
     
     {
@@ -8158,64 +8165,64 @@ types={
       name:'ConstructMini',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
     },{
-      name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:689,
     },{
-      name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1,speedBuff:0.6,
+      name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1018,
     },{
       name:'ConstructTemp',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:826,
     },{
-      name:'ConstructLevel1',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
+      name:'ConstructLevel1',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:730,
     },{
-      name:'ConstructLevel2',sizeBuff:1,lifeBuff:4.8,speedBuff:0.6,
+      name:'ConstructLevel2',sizeBuff:1,lifeBuff:7.2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:731,
     },{
-      name:'ConstructLevel3',sizeBuff:1,lifeBuff:5.76,speedBuff:0.6,
+      name:'ConstructLevel3',sizeBuff:1,lifeBuff:8.64,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },{
       name:'ConstructControl',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:750,
     },{
-      name:'ConstructMiniMedicAuto',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructMiniMedicAuto',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:799,
     },{
-      name:'ConstructDestructor',sizeBuff:0.8,lifeBuff:1.5,speedBuff:0.6,
+      name:'ConstructDestructor',sizeBuff:0.8,lifeBuff:2.25,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:886,
     },{
-      name:'ConstructMiniSpeedBuff',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructMiniSpeedBuff',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:1010,
     },{
-      name:'ConstructMiniShotgun',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructMiniShotgun',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:944,
     },{
-      name:'ConstructAmmoDispenser',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructAmmoDispenser',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1102,
     },{
-      name:'ConstructRadialShield',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructRadialShield',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1103,
     },{
-      name:'ConstructShrinker',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructShrinker',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1104,
     },{
-      name:'ConstructTeleporterEntrance',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructTeleporterEntrance',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1105,
     },{
-      name:'ConstructTeleporterExit',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructTeleporterExit',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1106,
     },{
-      name:'ConstructCatapultC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructCatapultC',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1107,
     },{
-      name:'ConstructBooster',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructBooster',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1108,
     },{
-      name:'ConstructSpeedBumpC',sizeBuff:1,lifeBuff:8,speedBuff:0.6,
+      name:'ConstructSpeedBumpC',sizeBuff:1,lifeBuff:9,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1109,
     },{
-      name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1111,
     },
     
@@ -18963,7 +18970,7 @@ types={
 		},{
 			name:'Mini Shotgun W',
 			ammo:3,
-			damage:32,
+			damage:24,
 			cooldown:36,
 			stop:45,
 			reload:15,
@@ -19471,7 +19478,7 @@ types={
 			cooldown:30,
 			stop:60,
 			reload:20,
-			speed:0.925,
+			speed:1.1,
       uses:12,
 		},{
 			name:'Medic W',
@@ -19782,7 +19789,7 @@ types={
 		},
     ...(Array(64).keys().map(num=>{return{
 			//name:`Build ${[`Mini Sentry`,`Levelled Sentry`,`Shotgun Sentry`,`Half Sentry`][num%4]} ${[`Healer`,`Dispenser`,`Radial Shield`,`Shrinker`][Math.floor(num/4)%4]} ${[`Teleporter`,`Catapult`,`Speed Pad`,`Speed Bump`][Math.floor(num/16)]}`,
-      name:`Build ${[`M`,`L`,`S`,`H`][num%4]}${[`H`,`D`,`R`,`S`][Math.floor(num/4)%4]}${[`T`,`C`,`B`,`S`][Math.floor(num/16)]}`,
+      name:`Build ${[`M`,`L`,`S`,`H`][num%4]}${[`H`,`D`,`R`,`S`][Math.floor(num/4)%4]}${[`T`,`C`,`B`,`L`][Math.floor(num/16)]}`,
 			ammo:1,
 			damage:0,
 			cooldown:300,
@@ -19908,6 +19915,24 @@ types={
 			reload:5,
 			speed:1.2,
       uses:48,
+		},{
+			name:'Primer',
+			ammo:3,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Stairway',
+			ammo:5,
+			damage:144,
+			cooldown:24,
+			stop:90,
+			reload:15,
+			speed:1.05,
+      uses:16,
 		},
 
     /*{
