@@ -1,9 +1,12 @@
 1112 - primer, 1011
 1113 - stairway, 1011
+1114 - scoped revolver, 136
+1115 - backshot, 136
 
 457 - primer, 425
 458 - stairway, 425
-
+459 - backshot, 90
+460 - scoped revolver, 90
 
 
 

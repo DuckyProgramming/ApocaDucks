@@ -1553,7 +1553,7 @@ class player{
             (this.rules.class&&this.subWeaponAType==883&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==1033&&(this.subWeaponA.cooldown>this.subWeaponAData.cooldown*0.5||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0&&this.subWeaponB.uses>0?1/3:1)*
-            (this.rules.class&&this.subWeaponAType==988?0.5:1)*
+            (this.rules.class&&(this.subWeaponAType==988||this.subWeaponAType==1114)?0.5:1)*
             //(this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
             (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>5?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)/*||this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)*/||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==781||this.subWeaponBType==781||this.subWeaponAType==2||this.subWeaponBType==2)?1.1:1)*
@@ -7489,8 +7489,14 @@ class player{
                     break
                     case 1113:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],458,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                        entities.projectiles[entities.projectiles.length-1].velocity.x*=2-0.2*round(weapon.ammo)
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=2.25-0.25*round(weapon.ammo)
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                    break
+                    case 1114:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],460,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,40,crit,this.index))
+                    break
+                    case 1115:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],459,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,20,crit,this.index))
                     break
 
                     //mark
@@ -8894,14 +8900,16 @@ class player{
                     pos=[game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21,80]
                 break
             }
-            if(pos.length>0&&
+            if(
                 !this.construct&&!this.sidekick&&!this.auto&&game.level!=13&&game.level!=14&&!this.playerData.name.includes('Buster')&&(
-                dist(this.position.x,this.position.y,pos[0],pos[1])<pos[2]&
-                (this.effectiveId()>0&&this.effectiveId()<=game.gaming||(game.level==23||game.level==26||game.level==27||game.level==33||game.level==101||game.level==105)&&this.effectiveId())&&!game.attacker||
-                this.effectiveId()>game.gaming&&rules.botResupply&&!(game.level==49&&game.pvp)&&!(game.level==89&&game.pvp)&&!(game.level==94&&game.pvp)&&!(game.level==131&&game.pvp)||
-                game.attacker&&this.effectiveId()!=0||
-                this.storeWeapon
-            )){
+                    pos.length>0&&dist(this.position.x,this.position.y,pos[0],pos[1])<pos[2]&&this.effectiveId()>0&&(
+                        this.effectiveId()<=game.gaming||game.level==23||game.level==26||game.level==27||game.level==33||game.level==101||game.level==105
+                    )&&!game.attacker||
+                    this.effectiveId()>game.gaming&&rules.botResupply&&!(game.level==49&&game.pvp)&&!(game.level==89&&game.pvp)&&!(game.level==94&&game.pvp)&&!(game.level==131&&game.pvp)||
+                    game.attacker&&this.effectiveId()!=0||
+                    this.storeWeapon
+                )
+            ){
                 if(this.storeWeapon){
                     this.storeWeapon=false
                 }

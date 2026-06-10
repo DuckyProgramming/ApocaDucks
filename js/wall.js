@@ -13557,9 +13557,9 @@ class wall{
                                     c.velocity.y*=0.95
                                 }else if(c.type==457&&c.bounceTimer==0){
                                     c.bounces++
-                                    c.bounceTimer=5
-                                    c.velocity.x*=0.9
-                                    c.velocity.y*=0.9
+                                    c.bounceTimer=1
+                                    c.velocity.x*=0.95
+                                    c.velocity.y*=0.95
                                     /*let mag=sqrt(c.velocity.x**2+c.velocity.y**2)
                                     c.velocity.x/=mag*5
                                     c.velocity.y/=mag*5*/

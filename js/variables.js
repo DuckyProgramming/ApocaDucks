@@ -8093,10 +8093,16 @@ types={
       damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1110,
     },{
       name:'PlayerPrimer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1112,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:1112,
     },{
       name:'PlayerStairway',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1113,
+    },{
+      name:'PlayerScopedRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.125,crit:0,weapon:1114,
+    },{
+      name:'PlayerBackshot',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.125,crit:0,weapon:1115,
     },
 
     //mark c
@@ -19366,7 +19372,7 @@ types={
 		},{
 			name:'Scoped Submachine',
 			ammo:12,
-			damage:62,
+			damage:64,
 			cooldown:6,
 			stop:40,
 			reload:3,
@@ -19932,7 +19938,25 @@ types={
 			stop:90,
 			reload:15,
 			speed:1.05,
-      uses:16,
+      uses:30,
+		},{
+			name:'Scoped Revolver',
+			ammo:3,
+			damage:245,
+			cooldown:30,
+			stop:100,
+			reload:20,
+			speed:1.35,
+      uses:12,
+		},{
+			name:'Backshot',
+			ammo:3,
+			damage:140,
+			cooldown:30,
+			stop:50,
+			reload:20,
+			speed:1.35,
+      uses:12,
 		},
 
     /*{

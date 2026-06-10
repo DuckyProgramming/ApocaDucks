@@ -88,7 +88,7 @@ function setupRules(){
 			fast:a==4||a==14||a==39||a==50||a==57||
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
-				a==407||a==409||a==421,
+				a==407||a==409||a==421||a==460,
 			hitter:a!=85&&a!=156&&a!=190&&a!=191&&a!=214&&
 				a!=255&&a!=256&&a!=257&&a!=265&&a!=300&&
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
@@ -11299,7 +11299,7 @@ function setupLists(){
             [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerClassicSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],
         ],[
-            [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerDerringer`,`PlayerViewerRevolver`,`PlayerSpeedRevolver`],
+            [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerScopedRevolver`,`PlayerBackshot`],
             [`PlayerKnife`,`PlayerElectricKnife`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
