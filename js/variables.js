@@ -8230,6 +8230,9 @@ types={
     },{
       name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1111,
+    },{
+      name:'ConstructConfuser',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1116,
     },
     
     {
@@ -17669,7 +17672,7 @@ types={
 			speed:1.1,
       uses:3,
 		},{
-			name:'Healer W',
+			name:'Dispenser W',
 			ammo:8,
 			damage:15,
 			cooldown:15,
@@ -19795,7 +19798,7 @@ types={
 		},
     ...(Array(64).keys().map(num=>{return{
 			//name:`Build ${[`Mini Sentry`,`Levelled Sentry`,`Shotgun Sentry`,`Half Sentry`][num%4]} ${[`Healer`,`Dispenser`,`Radial Shield`,`Shrinker`][Math.floor(num/4)%4]} ${[`Teleporter`,`Catapult`,`Speed Pad`,`Speed Bump`][Math.floor(num/16)]}`,
-      name:`Build ${[`M`,`L`,`S`,`H`][num%4]}${[`H`,`D`,`R`,`S`][Math.floor(num/4)%4]}${[`T`,`C`,`B`,`L`][Math.floor(num/16)]}`,
+      name:`Build ${[`M`,`L`,`S`,`H`][num%4]}${[`D`,`C`,`R`,`S`][Math.floor(num/4)%4]}${[`T`,`C`,`B`,`L`][Math.floor(num/16)]}`,
 			ammo:1,
 			damage:0,
 			cooldown:300,
@@ -19832,7 +19835,7 @@ types={
 			speed:1.4,
       uses:20,
 		},{
-			name:'Dispenser',
+			name:'Dispenser WC',
 			ammo:8,
 			damage:15,
 			cooldown:15,
@@ -19957,6 +19960,15 @@ types={
 			reload:20,
 			speed:1.35,
       uses:12,
+		},{
+			name:'Confuser',
+			ammo:8,
+			damage:15,
+			cooldown:15,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
 		},
 
     /*{

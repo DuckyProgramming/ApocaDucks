@@ -2,11 +2,13 @@
 1113 - stairway, 1011
 1114 - scoped revolver, 136
 1115 - backshot, 136
+1116 - confuser, 1102
 
 457 - primer, 425
 458 - stairway, 425
 459 - backshot, 90
 460 - scoped revolver, 90
+461 - confuser, 456
 
 
 
@@ -19,7 +21,7 @@ build submodules:
     4 - half sentry
 
     1 - health dispenser
-    2 - ammo dispenser
+    2 - confuser
     3 - radial shield
     4 - speed bump
     

@@ -35,7 +35,7 @@ class projectile{
 			case 338: case 339: case 340: case 341: case 343: case 345: case 346: case 347: case 348: case 350:
 			case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403: case 407:
 			case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434: case 436:
-			case 440: case 441: case 442: case 454: case 456: case 459: case 460:
+			case 440: case 441: case 442: case 454: case 456: case 459: case 460: case 461:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -7404,6 +7404,16 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,3)
 			break
+			case 461:
+				layer.fill(240,40+this.crit*200,80+this.crit*160,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240,40+this.crit*200,120+this.crit*120,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240,40+this.crit*200,160+this.crit*80,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -8629,7 +8639,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460:
+				case 454: case 456: case 459: case 460: case 461:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -11122,7 +11132,7 @@ class projectile{
 						break
 						case 434:
 							if(this.onTeam(target)&&!target.construct||this.index==target.index&&this.type==216){
-								target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life))
+								target.life=min(target.life+this.damage*0.5*(min(2,target.base.life/125)),max(target.life,target.base.life))
 							}else{
 								target.takeDamage(this.damage)
 							}
@@ -11665,7 +11675,7 @@ class projectile{
 							case 388:
 								/*target.weapon.cooldown=max(15,target.weapon.cooldown)
 								target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)*/
-								target.confuseTime=max(30,target.confuseTime)
+								target.confuseTime=max(15,target.confuseTime)
 							break
 							case 317:
 								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
@@ -11704,6 +11714,9 @@ class projectile{
 							case 439:
 								target.knockback(this.speed*10,this.direction,1,1)
 								target.knockbackForce(this.speed*6,this.direction,1,1)
+							break
+							case 461:
+								target.confuseTime=max(target.confuseTime,180)
 							break
 						}
 						switch(this.type){
