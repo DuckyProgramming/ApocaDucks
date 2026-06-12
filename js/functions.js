@@ -23,7 +23,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
-                a==458,
+                a==458||a==462,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -71,7 +71,7 @@ function setupRules(){
 				a==389||a==390||a==391||a==392||a==402||
 				a==404||a==413||a==416||a==417||a==425||
                 a==431||a==435||a==437||a==438||a==447||
-                a==448||a==450||a==457||a==458,
+                a==448||a==450||a==457||a==458||a==462,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -118,7 +118,8 @@ function setupRules(){
 				a!=335&&a!=335&&a!=405&&a!=427&&a!=433,
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
-                a!=392&&a!=417&&a!=435&&a!=448,
+                a!=392&&a!=417&&a!=435&&a!=448&&a!=463&&
+                a!=464,
 			fader1:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==30||a==31||a==32||
 				a==41||a==45||a==47||a==53||a==54||
@@ -134,7 +135,8 @@ function setupRules(){
 				a==377||a==378||a==379||a==384||a==389||
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==445||
-                a==447||a==448||a==450||a==457||a==458,
+                a==447||a==448||a==450||a==457||a==458||
+                a==462,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -149,14 +151,14 @@ function setupRules(){
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
                 a==409||a==418||a==434||a==436||a==439||
-                a==449||a==456,
+                a==449||a==456||a==463||a==464,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
-                a==439||a==449||a==456,
+                a==439||a==449||a==456||a==463||a==464,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
-                a!=240&&a!=311&&a!=312&&a!=367,
+                a!=240&&a!=311&&a!=312&&a!=367&&a!=463&&a!=464,
             offBouncer:a==135||a==136||a==169||a==170,
             baseGrenade:a==30||a==60||a==65||a==73||a==83||
                 a==104||a==110||a==235||a==264||a==293||
@@ -7412,7 +7414,9 @@ function generateLevel(info,layer){
     for(let c=0,lc=game.players+1;c<lc;c++){
         game.det.push(0)
     }
-    if(!(game.level==81&&!game.firstGen)){
+    if(game.level==81&&!game.firstGen){
+        game.index=entities.players.length
+    }else{
         game.traitorKey=floor(random(0,game.gaming))
         for(let c=0,lc=game.players;c<lc;c++){
             let clump=listing[game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp||game.level==37||game.level==38?0:floor(random(0,1.5))]
@@ -11283,7 +11287,7 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerRollerLauncher`,`PlayerCharge`,`PlayerPrimer`,`PlayerStairway`],
+            [`PlayerGrenadierC`,`PlayerSheller`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`],
             [`PlayerStickybombLauncher`,`PlayerSword`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`,`PlayerDaydrinker`],
         ],[
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
@@ -11294,7 +11298,7 @@ function setupLists(){
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
-            [`PlayerDonutC`,`PlayerChroma`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
+            [`PlayerDonutC`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
             [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerClassicSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],

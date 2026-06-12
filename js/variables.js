@@ -7881,7 +7881,7 @@ types={
       name:'PlayerDegreaser',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:975,
     },{
-      name:'PlayerRollerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerLingerer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:976,
     },{
       name:'PlayerLaunchSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -8009,6 +8009,12 @@ types={
     },{
       name:'PlayerPushShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
+      name:'PlayerRollerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1117,
+    },{
+      name:'PlayerChromaC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1118,
     },
     
     {name:'PlayerBuild111',sizeBuff:1,lifeBuff:4,speedBuff:1,damageBuff:1,reloadBuff:1,crit:0,weapon:1035},
@@ -19265,7 +19271,7 @@ types={
 			speed:0.95,
       uses:60,
 		},{
-			name:'Roller Launcher',
+			name:'Lingerer',
 			ammo:2,
 			damage:240,
 			cooldown:30,
@@ -19969,6 +19975,24 @@ types={
 			reload:5,
 			speed:1.2,
       uses:48,
+		},{
+			name:'Roller Launcher',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Chroma C',
+			ammo:3,
+			damage:84,
+			cooldown:36,
+			stop:90,
+			reload:45,
+			speed:1.05,
+      uses:12,
 		},
 
     /*{

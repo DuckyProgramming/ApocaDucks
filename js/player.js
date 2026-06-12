@@ -2568,6 +2568,7 @@ class player{
         this.collect.life=this.life
         this.record.life=this.base.life
         this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
+        this.inspect=[]
     }
     respawn(reject){
         if(game.pvp){
@@ -7498,6 +7499,15 @@ class player{
                     case 1115:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],459,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,20,crit,this.index))
                     break
+                    case 1117:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],462,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                        entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                    break
+                    case 1118:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],463,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],464,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    break
 
                     //mark
                 }
@@ -8206,57 +8216,61 @@ class player{
                     }
                 }
             }else{
-                if(this.life>0&&this.assort.build>=0){
-                    let possible=[0,1,2,3]
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].construct&&entities.players[a].builder==this.index){
-                            let remove=-1
-                            switch(entities.players[a].name){
-                                case 'ConstructMiniC': case 'ConstructMiniShotgun':
-                                    remove=0
-                                break
-                                case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
-                                    remove=1
-                                break
-                                case 'ConstructTeleporterExit':
-                                    remove=2
-                                break
-                                case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
-                                    remove=3
-                                break
-                            }
-                            if(possible.includes(remove)){
-                                possible.splice(possible.indexOf(remove))
-                            }
-                        }
-                    }
-                    if(possible.length==0){
-                        possible=[0,1,2,3]
-                        if(entities.players[a].construct&&entities.players[a].builder==this.index&&entities.players[a].stats.damage>0){
-                            let remove=-1
-                            switch(entities.players[a].name){
-                                case 'ConstructMiniC': case 'ConstructMiniShotgun':
-                                    remove=0
-                                break
-                                case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
-                                    remove=1
-                                break
-                                case 'ConstructTeleporterExit':
-                                    remove=2
-                                break
-                                case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
-                                    remove=3
-                                break
-                            }
-                            if(possible.includes(remove)){
-                                possible.splice(possible.indexOf(remove))
+                if(this.life>0&&this.assort.build>=0&&this.assort.build<64){
+                    if(this.manage[1]==1){
+                        this.callBuild(0)
+                    }else{
+                        let possible=[0,1,2,3]
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].construct&&entities.players[a].builder==this.index){
+                                let remove=-1
+                                switch(entities.players[a].name){
+                                    case 'ConstructMiniC': case 'ConstructMiniShotgun':
+                                        remove=0
+                                    break
+                                    case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
+                                        remove=1
+                                    break
+                                    case 'ConstructTeleporterExit':
+                                        remove=2
+                                    break
+                                    case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
+                                        remove=3
+                                    break
+                                }
+                                if(possible.includes(remove)){
+                                    possible.splice(possible.indexOf(remove))
+                                }
                             }
                         }
                         if(possible.length==0){
                             possible=[0,1,2,3]
+                            if(entities.players[a].construct&&entities.players[a].builder==this.index&&entities.players[a].stats.damage>0){
+                                let remove=-1
+                                switch(entities.players[a].name){
+                                    case 'ConstructMiniC': case 'ConstructMiniShotgun':
+                                        remove=0
+                                    break
+                                    case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
+                                        remove=1
+                                    break
+                                    case 'ConstructTeleporterExit':
+                                        remove=2
+                                    break
+                                    case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
+                                        remove=3
+                                    break
+                                }
+                                if(possible.includes(remove)){
+                                    possible.splice(possible.indexOf(remove))
+                                }
+                            }
+                            if(possible.length==0){
+                                possible=[0,1,2,3]
+                            }
                         }
+                        this.callBuild(randin(possible))
                     }
-                    this.callBuild(randin(possible))
                 }
                 let jumpMult=(game.level==33||game.level==39?0.5:(game.level==26||game.level==105)&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)*(this.rules.scoutLine?0.5:1)
                 let jumpMult2=(game.level==26||game.level==105)&&this.wet>0?2:1
@@ -8522,7 +8536,7 @@ class player{
                 let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&core==0?2:core]
                 let inputSetB=inputs.tap[game.gaming==1?1:game.gaming==2&&core==0?2:core]
                 let inputSetC=inputs.release[game.gaming==1?1:game.gaming==2&&core==0?2:core]
-                if(this.life>0&&this.assort.build>=0){
+                if(this.life>0&&this.assort.build>=0&&this.assort.build<64){
                     for(let a=0,la=4;a<la;a++){
                         if(inputSetB[a]){
                             this.callBuild(a)
@@ -11780,127 +11794,137 @@ class player{
                     }
                 break
                 case 'ConstructTeleporterEntrance':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(
-                            !entities.players[a].dead&&
-                            !this.dead&&
-                            this.index!=entities.players[a].index&&
-                            this.assort.building==0&&
-                            /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
-                            inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
-                            !entities.players[a].assort.intel
-                        ){
-                            for(let b=0,lb=entities.players.length;b<lb;b++){
-                                if(
-                                    entities.players[b].playerData.name==`ConstructTeleporterExit`&&
-                                    this.builder==entities.players[b].builder&&
-                                    !entities.players[b].dead&&
-                                    entities.players[b].assort.building==0
-                                ){
-                                    this.life=0
-                                    this.dead=true
-                                    entities.players[b].life=0
-                                    entities.players[b].dead=true
-                                    entities.players[a].position.x=entities.players[b].position.x
-                                    entities.players[a].position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
+                    if(this.assort.building==0&&!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(
+                                !entities.players[a].dead&&
+                                this.index!=entities.players[a].index&&
+                                /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
+                                inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
+                                !entities.players[a].assort.intel
+                            ){
+                                for(let b=0,lb=entities.players.length;b<lb;b++){
+                                    if(
+                                        entities.players[b].playerData.name==`ConstructTeleporterExit`&&
+                                        this.builder==entities.players[b].builder&&
+                                        !entities.players[b].dead&&
+                                        entities.players[b].assort.building==0
+                                    ){
+                                        this.life=0
+                                        this.dead=true
+                                        entities.players[b].life=0
+                                        entities.players[b].dead=true
+                                        entities.players[a].position.x=entities.players[b].position.x
+                                        entities.players[a].position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
+                                    }
                                 }
                             }
                         }
                     }
                 break
                 case 'ConstructCatapultC':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(
-                            !entities.players[a].dead&&
-                            !this.dead&&
-                            this.index!=entities.players[a].index&&
-                            this.assort.building==0&&
-                            /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
-                            inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])
-                        ){
-                            this.life=0
-                            this.dead=true
-                            entities.players[a].velocity.x=(lsin(this.direction.main)<0?-1:1)*40
-                            entities.players[a].lastingForce[0]+=(lsin(this.direction.main)<0?-1:1)*10
-                            entities.players[a].velocity.y=-30
-                            entities.players[a].lastingForce[1]-=(lsin(this.direction.main)<0?-1:1)*2
+                    if(!this.dead&&this.assort.building==0){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(
+                                !entities.players[a].dead&&
+                                this.index!=entities.players[a].index&&
+                                /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
+                                inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])
+                            ){
+                                this.life=0
+                                this.dead=true
+                                entities.players[a].velocity.x=(lsin(this.direction.main)<0?-1:1)*40
+                                entities.players[a].lastingForce[0]+=(lsin(this.direction.main)<0?-1:1)*10
+                                entities.players[a].velocity.y=-30
+                                entities.players[a].lastingForce[1]-=(lsin(this.direction.main)<0?-1:1)*2
+                            }
                         }
                     }
                 break
                 case 'ConstructShrinker':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(this.assort.building==0&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&!this.dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
-                            if(entities.players[a].size>0.3&&this.index!=entities.players[a].index){
-                                entities.players[a].size-=0.005
-                                entities.players[a].width=8*entities.players[a].size*2
-                                entities.players[a].height=24*entities.players[a].size*2
-                                entities.players[a].offset={position:{x:0,y:12*entities.players[a].size*2}}
+                    if(this.assort.building==0&&!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
+                                if(entities.players[a].size>0.3&&this.index!=entities.players[a].index){
+                                    entities.players[a].size-=0.005
+                                    entities.players[a].width=8*entities.players[a].size*2
+                                    entities.players[a].height=24*entities.players[a].size*2
+                                    entities.players[a].offset={position:{x:0,y:12*entities.players[a].size*2}}
+                                }
                             }
                         }
                     }
                 break
                 case 'ConstructSpeedBumpC':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(!entities.players[a].dead&&!this.dead&&this.validTarget(entities.players[a])&&inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])){
-                            entities.players[a].dizzyTime=max(entities.players[a].dizzyTime,300)
+                    if(this.assort.building==0&&!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(!entities.players[a].dead&&this.validTarget(entities.players[a])&&inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])){
+                                entities.players[a].life-=5/3
+                                entities.players[a].generalizedTake(this.index)
+                                entities.players[a].dizzyTime=max(entities.players[a].dizzyTime,300)
+                            }
                         }
                     }
                 break
                 case 'ConstructRadialShield':
-                    let target=entities.players.filter(player=>this.validTarget(player)&&player.fade>=0.5&&dist(player.position.x,player.position.y,this.position.x,this.position.y)<400&&abs(this.position.y-player.position.y)<200).sort((a,b)=>dist(a.position.x,a.position.y,this.position.x,this.position.y)-dist(b.position.x,b.position.y,this.position.x,this.position.y))
-                    if(target.length>0){
-                        this.assort.radial=atan2(last(target).position.x-this.position.x,this.position.y-last(target).position.y)+90
-                    }
-                    for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(this.assort.building==0&&((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x,y:this.position.y},width:200,height:200},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
-                            let pts=pointToSegment(
-                                entities.projectiles[a].position,
-                                {x:this.position.x-lcos(this.assort.radial)*80+lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80+lcos(this.assort.radial)*50},
-                                {x:this.position.x-lcos(this.assort.radial)*80-lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80-lcos(this.assort.radial)*50},
-                            )
-                            if(pts<10+entities.projectiles[a].width*0.35+entities.projectiles[a].height*0.35){
-                                entities.projectiles[a].active=false
-                                if(entities.projectiles[a].rules.exploder){
-                                    entities.projectiles[a].explode()
+                    if(this.assort.building==0&&!this.dead){
+                        let target=entities.players.filter(player=>this.validTarget(player)&&player.fade>=0.5&&dist(player.position.x,player.position.y,this.position.x,this.position.y)<400&&abs(this.position.y-player.position.y)<200).sort((a,b)=>dist(a.position.x,a.position.y,this.position.x,this.position.y)-dist(b.position.x,b.position.y,this.position.x,this.position.y))
+                        if(target.length>0){
+                            this.assort.radial=atan2(last(target).position.x-this.position.x,this.position.y-last(target).position.y)+90
+                        }
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp&&entities.projectiles[a].id!=this.id||this.id==-1||entities.projectiles[a].id==-1)&&inBoxBox({position:{x:this.position.x,y:this.position.y},width:200,height:200},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
+                                let pts=pointToSegment(
+                                    entities.projectiles[a].position,
+                                    {x:this.position.x-lcos(this.assort.radial)*80+lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80+lcos(this.assort.radial)*50},
+                                    {x:this.position.x-lcos(this.assort.radial)*80-lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80-lcos(this.assort.radial)*50},
+                                )
+                                if(pts<10+entities.projectiles[a].width*0.35+entities.projectiles[a].height*0.35){
+                                    entities.projectiles[a].active=false
+                                    if(entities.projectiles[a].rules.exploder){
+                                        entities.projectiles[a].explode()
+                                    }
                                 }
-                            }
-                            pts=pointToSegment(
-                                {x:entities.projectiles[a].position.x*0.5+entities.projectiles[a].previous.position.x*0.5,y:entities.projectiles[a].position.y*0.5+entities.projectiles[a].previous.position.y*0.5},
-                                {x:this.position.x-lcos(this.assort.radial)*80+lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80+lcos(this.assort.radial)*50},
-                                {x:this.position.x-lcos(this.assort.radial)*80-lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80-lcos(this.assort.radial)*50},
-                            )
-                            if(pts<10+entities.projectiles[a].width*0.35+entities.projectiles[a].height*0.35){
-                                entities.projectiles[a].active=false
-                                if(entities.projectiles[a].rules.exploder){
-                                    entities.projectiles[a].explode()
+                                pts=pointToSegment(
+                                    {x:entities.projectiles[a].position.x*0.5+entities.projectiles[a].previous.position.x*0.5,y:entities.projectiles[a].position.y*0.5+entities.projectiles[a].previous.position.y*0.5},
+                                    {x:this.position.x-lcos(this.assort.radial)*80+lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80+lcos(this.assort.radial)*50},
+                                    {x:this.position.x-lcos(this.assort.radial)*80-lsin(this.assort.radial)*50,y:this.position.y+lsin(this.assort.radial)*80-lcos(this.assort.radial)*50},
+                                )
+                                if(pts<10+entities.projectiles[a].width*0.35+entities.projectiles[a].height*0.35){
+                                    entities.projectiles[a].active=false
+                                    if(entities.projectiles[a].rules.exploder){
+                                        entities.projectiles[a].explode()
+                                    }
                                 }
                             }
                         }
                     }
                 break
                 case 'ConstructBooster':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(this.assort.building==0&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&!this.dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
-                            entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
+                    if(this.assort.building==0&&!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
+                                entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
+                            }
                         }
                     }
                 break
                 case 'ConstructTrolliporter':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        if(
-                            !entities.players[a].dead&&
-                            !this.dead&&
-                            this.index!=entities.players[a].index&&
-                            this.assort.building==0&&
-                            /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
-                            inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
-                            !entities.players[a].assort.intel
-                        ){
-                            this.life=0
-                            this.dead=true
-                            let pos=game.spawner[floor(random(0,game.spawner.length))]
-                            entities.players[a].position.x=pos[0]
-                            entities.players[a].position.y=pos[1]-entities.players[a].height/2
+                    if(this.assort.building==0&&!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(
+                                !entities.players[a].dead&&
+                                this.index!=entities.players[a].index&&
+                                /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
+                                inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
+                                !entities.players[a].assort.intel
+                            ){
+                                this.life=0
+                                this.dead=true
+                                let pos=game.spawner[floor(random(0,game.spawner.length))]
+                                entities.players[a].position.x=pos[0]
+                                entities.players[a].position.y=pos[1]-entities.players[a].height/2
+                            }
                         }
                     }
                 break

@@ -3,12 +3,17 @@
 1114 - scoped revolver, 136
 1115 - backshot, 136
 1116 - confuser, 1102
+1117 - roller launcher c, 1112
+1118 - chroma c, 864
 
 457 - primer, 425
 458 - stairway, 425
 459 - backshot, 90
 460 - scoped revolver, 90
 461 - confuser, 456
+462 - roller launcher c, 457
+463 - chroma c a, 135
+464 - chroma c a, 136
 
 
 
