@@ -8177,67 +8177,67 @@ types={
       name:'ConstructMini',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:233,
     },{
-      name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructMiniC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:689,
     },{
-      name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1.5,speedBuff:0.6,
+      name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1018,
     },{
       name:'ConstructTemp',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:826,
     },{
-      name:'ConstructLevel1',sizeBuff:1,lifeBuff:6,speedBuff:0.6,
+      name:'ConstructLevel1',sizeBuff:1,lifeBuff:4,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:730,
     },{
-      name:'ConstructLevel2',sizeBuff:1,lifeBuff:7.2,speedBuff:0.6,
+      name:'ConstructLevel2',sizeBuff:1,lifeBuff:4.8,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:731,
     },{
-      name:'ConstructLevel3',sizeBuff:1,lifeBuff:8.64,speedBuff:0.6,
+      name:'ConstructLevel3',sizeBuff:1,lifeBuff:5.76,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },{
       name:'ConstructControl',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:750,
     },{
-      name:'ConstructMiniMedicAuto',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructMiniMedicAuto',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:799,
     },{
       name:'ConstructDestructor',sizeBuff:0.8,lifeBuff:2.25,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:886,
     },{
-      name:'ConstructMiniSpeedBuff',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructMiniSpeedBuff',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:1010,
     },{
-      name:'ConstructMiniShotgun',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructMiniShotgun',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:944,
     },{
-      name:'ConstructAmmoDispenser',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructAmmoDispenser',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1102,
     },{
-      name:'ConstructRadialShield',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructRadialShield',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1103,
     },{
-      name:'ConstructShrinker',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructShrinker',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1104,
     },{
-      name:'ConstructTeleporterEntrance',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructTeleporterEntrance',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1105,
     },{
-      name:'ConstructTeleporterExit',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructTeleporterExit',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1106,
     },{
-      name:'ConstructCatapultC',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructCatapultC',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1107,
     },{
-      name:'ConstructBooster',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructBooster',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1108,
     },{
-      name:'ConstructSpeedBumpC',sizeBuff:1,lifeBuff:9,speedBuff:0,
+      name:'ConstructSpeedBumpC',sizeBuff:1,lifeBuff:8,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1109,
     },{
-      name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:3,speedBuff:0,
+      name:'ConstructTrolliporter',sizeBuff:0.8,lifeBuff:2,speedBuff:0,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1111,
     },{
-      name:'ConstructConfuser',sizeBuff:0.8,lifeBuff:3,speedBuff:0.6,
+      name:'ConstructConfuser',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1116,
     },
     
