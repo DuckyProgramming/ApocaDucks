@@ -5,6 +5,7 @@
 1116 - confuser, 1102
 1117 - roller launcher c, 1112
 1118 - chroma c, 864
+1119 - widowmaker c, 1099
 
 457 - primer, 425
 458 - stairway, 425
@@ -14,6 +15,7 @@
 462 - roller launcher c, 457
 463 - chroma c a, 135
 464 - chroma c a, 136
+465 - widowmaker c, 454
 
 
 

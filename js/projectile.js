@@ -35,7 +35,7 @@ class projectile{
 			case 338: case 339: case 340: case 341: case 343: case 345: case 346: case 347: case 348: case 350:
 			case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403: case 407:
 			case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434: case 436:
-			case 440: case 441: case 442: case 454: case 456: case 459: case 460: case 461:
+			case 440: case 441: case 442: case 454: case 456: case 459: case 460: case 461: case 465:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -598,6 +598,15 @@ class projectile{
 										case 415:
 											c.takeDamage(this.damage*(this.crit?2.5:1)*(c.fort?2:1)*constrain(1.8-this.extent/1500,0.2,1))
 										break
+										case 455:
+											if(c.id==this.id){
+												c.life=min(max(c.life,c.base.life),c.life+this.damage)
+												c.defendBuff=max(c.defendBuff,120)
+											}else{
+												c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
+											}
+											this.remove=true
+										break
 										default:
 											c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
 										break
@@ -651,13 +660,13 @@ class projectile{
 											}
 										}
 										this.remove=true
-									}else if(this.type==455){
+									}/*else if(this.type==455){
 										if(c.id==this.id){
 											c.life=min(max(c.life,c.base.life),c.life+this.damage)
 											c.defendBuff=max(c.defendBuff,120)
 										}
 										this.remove=true
-									}else if(this.type==446){
+									}*/else if(this.type==446){
 										for(let d=0,ld=entities.players.length;d<ld;d++){
 											if(entities.players[d].builder==this.index&&entities.players[d].construct){
 												//entities.players[d].weaponData.cooldown=0
@@ -7306,7 +7315,7 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,10)
 			break
-			case 454:
+			case 454: case 465:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -8104,7 +8113,7 @@ class projectile{
 				}
 			break
 			case 352:
-				radius=105*max(1,0.5+this.timer*0.05)
+				radius=150*min(1,0.5+this.timer*0.05)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -8527,7 +8536,7 @@ class projectile{
 				}
 			break
 			case 452:
-				radius=60*max(1,0.5+this.timer*0.05)
+				radius=100*min(1,0.5+this.timer*0.05)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -8677,7 +8686,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460: case 461:
+				case 454: case 456: case 459: case 460: case 461: case 465:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -11125,7 +11134,8 @@ class projectile{
 						break
 						case 339:
 							if(target.construct&&target.id==this.id){
-								target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
+								//target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
+								target.life=min(target.life+this.damage,max(target.life,target.base.life))
 								//target.defendBuff=max(target.defendBuff,120)
 							}else{
 								target.takeDamage(this.damage)
@@ -11170,7 +11180,8 @@ class projectile{
 						break
 						case 369:
 							if(target.construct&&target.id==this.id){
-								target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life*2))
+								//target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life*2))
+								target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life))
 							}else{
 								target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?1.5:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.25:1))
 							}
@@ -11537,6 +11548,29 @@ class projectile{
 											entities.players[d].subWeaponC.reload=0
 											entities.players[d].subWeaponC.cooldown=0
 										}
+									}
+								}
+							}
+						break
+						case 465:
+							if(target.life<=0){
+								for(let d=0,ld=entities.players.length;d<ld;d++){
+									if(entities.players[d].index==this.index){
+										entities.players[d].subWeaponA.reload=0
+										if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponA.cooldown=0
+										}
+										entities.players[d].subWeaponA.ammo=entities.players[d].subWeaponAData.ammo
+										entities.players[d].subWeaponB.reload=0
+										if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponB.cooldown=0
+										}
+										entities.players[d].subWeaponB.ammo=entities.players[d].subWeaponBData.ammo
+										entities.players[d].subWeaponC.reload=0
+										if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+											entities.players[d].subWeaponC.cooldown=0
+										}
+										entities.players[d].subWeaponC.ammo=entities.players[d].subWeaponCData.ammo
 									}
 								}
 							}

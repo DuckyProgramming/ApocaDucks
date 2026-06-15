@@ -8009,12 +8009,6 @@ types={
     },{
       name:'PlayerPushShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
-    },{
-      name:'PlayerRollerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1117,
-    },{
-      name:'PlayerChromaC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1118,
     },
     
     {name:'PlayerBuild111',sizeBuff:1,lifeBuff:4,speedBuff:1,damageBuff:1,reloadBuff:1,crit:0,weapon:1035},
@@ -8109,6 +8103,15 @@ types={
     },{
       name:'PlayerBackshot',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.125,crit:0,weapon:1115,
+    },{
+      name:'PlayerRollerLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1117,
+    },{
+      name:'PlayerChromaC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1118,
+    },{
+      name:'PlayerWidowmakerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1119,
     },
 
     //mark c
@@ -19992,6 +19995,15 @@ types={
 			stop:90,
 			reload:45,
 			speed:1.05,
+      uses:12,
+		},{
+			name:'Widowmaker C',
+			ammo:2,
+			damage:18,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
       uses:12,
 		},
 

@@ -2949,23 +2949,39 @@ class player{
     }
     callBuild(value){
         let name
+        let build=true
         switch(value){
             case 0:
                 switch(this.assort.build%4){
                     case 0:
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].playerData.name=='ConstructMiniC'&&entities.players[a].builder==this.index){
-                                entities.players[a].life=0
-                                entities.players[a].die.killer=-1
+                            if(entities.players[a].playerData.name=='ConstructMiniC'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                                entities.players[a].life<entities.players[a].base.life||
+                                entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                            )){
+                                entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                                build=false
+                                if(!this.inspect.includes(entities.players[a].index)){
+                                    this.inspect.push(entities.players[a].index)
+                                }
                             }
                         }
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
-                        game.index++
-                        entities.players[entities.players.length-1].constructify()
-                        entities.players[entities.players.length-1].builder=this.index
-                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                        this.inspect.push(entities.players[entities.players.length-1].index)
-                        this.assort.build=-1
+                        if(build){
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(entities.players[a].playerData.name=='ConstructMiniC'&&entities.players[a].builder==this.index){
+                                    entities.players[a].life=0
+                                    entities.players[a].die.killer=-1
+                                }
+                            }
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].constructify()
+                            entities.players[entities.players.length-1].builder=this.index
+                            entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                            this.inspect.push(entities.players[entities.players.length-1].index)
+                            this.assort.build=-1
+                        }
                     break
                     case 1:
                         if(this.subPlayerAType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
@@ -2977,7 +2993,6 @@ class player{
                         if(this.subPlayerCType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
                             this.subWeaponC.reload+=240
                         }
-                        let build=true
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].playerData.name=='ConstructLevel3'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                 //entities.players[a].life=max(min(entities.players[a].base.life*2,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
@@ -3046,35 +3061,76 @@ class player{
                     break
                     case 2:
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].playerData.name=='ConstructMiniShotgun'&&entities.players[a].builder==this.index){
-                                entities.players[a].life=0
-                                entities.players[a].die.killer=-1
+                            if(entities.players[a].playerData.name=='ConstructMiniShotgun'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                                entities.players[a].life<entities.players[a].base.life||
+                                entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                            )){
+                                entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                                build=false
+                                if(!this.inspect.includes(entities.players[a].index)){
+                                    this.inspect.push(entities.players[a].index)
+                                }
                             }
                         }
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniShotgun',types.player),game.index))
-                        game.index++
-                        entities.players[entities.players.length-1].constructify()
-                        entities.players[entities.players.length-1].builder=this.index
-                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                        this.inspect.push(entities.players[entities.players.length-1].index)
+                        if(build){
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(entities.players[a].playerData.name=='ConstructMiniShotgun'&&entities.players[a].builder==this.index){
+                                    entities.players[a].life=0
+                                    entities.players[a].die.killer=-1
+                                }
+                            }
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniShotgun',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].constructify()
+                            entities.players[entities.players.length-1].builder=this.index
+                            entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                            this.inspect.push(entities.players[entities.players.length-1].index)
+                        }
                     break
                     case 3:
                         let total1017=0
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
                                 total1017++
-                                if(total1017>=2){
-                                    entities.players[la-1-a].life=0
-                                    entities.players[la-1-a].die.killer=-1
+                            }
+                        }
+                        if(total1017>=2){
+                            for(let a=0,la=entities.players.length;a<la;a++){
+                                if(entities.players[a].playerData.name=='ConstructHalf'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                                    entities.players[a].life<entities.players[a].base.life||
+                                    entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                                )){
+                                    entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                    entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                                    build=false
+                                    if(!this.inspect.includes(entities.players[a].index)){
+                                        this.inspect.push(entities.players[a].index)
+                                    }
+                                    break
+                                }
+                            }
+                            if(build){
+                                total1017=0
+                                for(let a=0,la=entities.players.length;a<la;a++){
+                                    if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
+                                        total1017++
+                                        if(total1017>=2){
+                                            entities.players[la-1-a].life=0
+                                            entities.players[la-1-a].die.killer=-1
+                                        }
+                                    }
                                 }
                             }
                         }
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
-                        game.index++
-                        entities.players[entities.players.length-1].constructify()
-                        entities.players[entities.players.length-1].builder=this.index
-                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                        this.inspect.push(entities.players[entities.players.length-1].index)
+                        if(build){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].constructify()
+                            entities.players[entities.players.length-1].builder=this.index
+                            entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                            this.inspect.push(entities.players[entities.players.length-1].index)
+                        }
                     break
                 }
                 this.assort.build=-1
@@ -3087,34 +3143,64 @@ class player{
                     'ConstructSpeedBumpC',
                 ][floor(this.assort.build/4)%4]
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
-                        entities.players[a].life=0
-                        entities.players[a].die.killer=-1
+                    if(entities.players[a].playerData.name==name&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                        entities.players[a].life<entities.players[a].base.life||
+                        entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                    )){
+                        entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                        build=false
+                        if(!this.inspect.includes(entities.players[a].index)){
+                            this.inspect.push(entities.players[a].index)
+                        }
                     }
                 }
-                entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName(name,types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-                this.assort.build=-1
-            break
-            case 2:
-                if(floor(this.assort.build/16)==0){
+                if(build){
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(entities.players[a].playerData.name=='ConstructTeleporterExit'&&entities.players[a].builder==this.index){
+                        if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
                             entities.players[a].life=0
                             entities.players[a].die.killer=-1
                         }
                     }
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructTeleporterExit',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName(name,types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].constructify()
                     entities.players[entities.players.length-1].builder=this.index
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     this.inspect.push(entities.players[entities.players.length-1].index)
                     this.assort.build=-1
+                }
+            break
+            case 2:
+                if(floor(this.assort.build/16)==0){
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].playerData.name=='ConstructTeleporterExit'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                            entities.players[a].life<entities.players[a].base.life||
+                            entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                        )){
+                            entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                            entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                            build=false
+                            if(!this.inspect.includes(entities.players[a].index)){
+                                this.inspect.push(entities.players[a].index)
+                            }
+                        }
+                    }
+                    if(build){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            if(entities.players[a].playerData.name=='ConstructTeleporterExit'&&entities.players[a].builder==this.index){
+                                entities.players[a].life=0
+                                entities.players[a].die.killer=-1
+                            }
+                        }
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructTeleporterExit',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                        this.inspect.push(entities.players[entities.players.length-1].index)
+                        this.assort.build=-1
+                    }
                 }
             break
             case 3:
@@ -3125,18 +3211,33 @@ class player{
                     'ConstructTrolliporter',
                 ][floor(this.assort.build/16)]
                 for(let a=0,la=entities.players.length;a<la;a++){
-                    if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
-                        entities.players[a].life=0
-                        entities.players[a].die.killer=-1
+                    if(entities.players[a].playerData.name==name&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                        entities.players[a].life<entities.players[a].base.life||
+                        entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                    )){
+                        entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
+                        build=false
+                        if(!this.inspect.includes(entities.players[a].index)){
+                            this.inspect.push(entities.players[a].index)
+                        }
                     }
                 }
-                entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName(name,types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].constructify()
-                entities.players[entities.players.length-1].builder=this.index
-                entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                this.inspect.push(entities.players[entities.players.length-1].index)
-                this.assort.build=-1
+                if(build){
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].playerData.name==name&&entities.players[a].builder==this.index){
+                            entities.players[a].life=0
+                            entities.players[a].die.killer=-1
+                        }
+                    }
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName(name,types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].constructify()
+                    entities.players[entities.players.length-1].builder=this.index
+                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    this.inspect.push(entities.players[entities.players.length-1].index)
+                    this.assort.build=-1
+                }
             break
         }
     }
@@ -7020,19 +7121,19 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],203,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                     break
                     case 937:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                             entities.projectiles.splice(entities.projectiles.length-1,1)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             if(!entities.projectiles[entities.projectiles.length-1].remove){
                                 entities.projectiles.splice(entities.projectiles.length-1,1)
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                 if(!entities.projectiles[entities.projectiles.length-1].remove){
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     if(!entities.projectiles[entities.projectiles.length-1].remove){
                                         entities.projectiles.splice(entities.projectiles.length-1,1)
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],400,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                                             entities.projectiles.splice(entities.projectiles.length-1,1)
                                         }
@@ -7217,19 +7318,19 @@ class player{
                         }
                     break
                     case 980:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                             entities.projectiles.splice(entities.projectiles.length-1,1)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             if(!entities.projectiles[entities.projectiles.length-1].remove){
                                 entities.projectiles.splice(entities.projectiles.length-1,1)
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                 if(!entities.projectiles[entities.projectiles.length-1].remove){
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     if(!entities.projectiles[entities.projectiles.length-1].remove){
                                         entities.projectiles.splice(entities.projectiles.length-1,1)
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],415,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                                             entities.projectiles.splice(entities.projectiles.length-1,1)
                                         }
@@ -7317,19 +7418,19 @@ class player{
                         entities.projectiles[entities.projectiles.length-1].velocity.y*=1+min(240,this.assort.firingTime)/180
                     break
                     case 1014:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                             entities.projectiles.splice(entities.projectiles.length-1,1)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             if(!entities.projectiles[entities.projectiles.length-1].remove){
                                 entities.projectiles.splice(entities.projectiles.length-1,1)
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                 if(!entities.projectiles[entities.projectiles.length-1].remove){
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     if(!entities.projectiles[entities.projectiles.length-1].remove){
                                         entities.projectiles.splice(entities.projectiles.length-1,1)
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],426,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                                             entities.projectiles.splice(entities.projectiles.length-1,1)
                                         }
@@ -7461,19 +7562,19 @@ class player{
                         }
                     break
                     case 1101:
-                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                             entities.projectiles.splice(entities.projectiles.length-1,1)
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)-30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             if(!entities.projectiles[entities.projectiles.length-1].remove){
                                 entities.projectiles.splice(entities.projectiles.length-1,1)
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+30,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                 if(!entities.projectiles[entities.projectiles.length-1].remove){
                                     entities.projectiles.splice(entities.projectiles.length-1,1)
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                     if(!entities.projectiles[entities.projectiles.length-1].remove){
                                         entities.projectiles.splice(entities.projectiles.length-1,1)
-                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff*1.1,300,crit,this.index))
+                                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],455,(lsin(this.direction.main)<0?-90:90)+15,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                                         if(!entities.projectiles[entities.projectiles.length-1].remove){
                                             entities.projectiles.splice(entities.projectiles.length-1,1)
                                         }
@@ -7507,6 +7608,11 @@ class player{
                     case 1118:
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],463,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],464,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                    break
+                    case 1119:
+                        for(let a=0,la=12;a<la;a++){
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],465,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                        }
                     break
 
                     //mark
