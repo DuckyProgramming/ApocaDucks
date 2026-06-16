@@ -9372,20 +9372,36 @@ function generateLevel(info,layer){
             if(game.pvp){
                 game.firstGen=false
                 let split=[[],[]]
-                let possible=range(0,game.players)
+                //let possible=range(3,game.players)
                 let typeList=[range(0,10),range(0,10),range(0,10)]
                 if(game.players>30){
                     typeList[0].push(...range(0,10))
                     typeList[1].push(...range(0,10))
                     typeList[2].push(...range(0,10))
                 }
-                for(let b=0,lb=2;b<lb;b++){
+                let roll=range(0,3)
+                for(let a=0,la=game.players;a<la;a++){
+                    let index=floor(random(roll.length))
+                    switch(roll[index]){
+                        case 1:
+                            split[0].push(a)
+                        break
+                        case 2:
+                            split[1].push(a)
+                        break
+                    }
+                    roll.splice(index,1)
+                    if(roll.length==0){
+                        roll=range(0,3)
+                    }
+                }
+                /*for(let b=0,lb=2;b<lb;b++){
                     for(let a=0,la=game.players/3;a<la;a++){
                         let index=floor(random(0,possible.length))
                         split[b].push(possible[index])
                         possible.splice(index,1)
                     }
-                }
+                }*/
                 let loc=[]
                 for(let c=0,lc=3;c<lc;c++){
                     for(let a=0,la=level.length;a<la;a++){
@@ -11366,6 +11382,21 @@ function mergeListings(type){
             }
         break
     }
+}
+function factor(num){
+    let current=num
+    let div=2
+    let set=[]
+    while(current>div){
+        if(current%div==0){
+            current/=div
+            set.push(div)
+        }else{
+            div++
+        }
+    }
+    set.push(current)
+    return set.join(`, `)
 }
 /*
 let newer=levels[133].map(

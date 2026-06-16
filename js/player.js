@@ -11656,17 +11656,20 @@ class player{
                     }
                 break
                 case 'PlayerPlanetoid': case 'Planetoid': case 'HeavyPlanetoid':
-                    for(let a=0,la=entities.players.length;a<la;a++){
-                        for(let b=0,lb=4;b<lb;b++){
-                            if(inBoxBox({position:{x:this.position.x+50*lsin(this.time+b*90),y:this.position.y+50*lcos(this.time+b*90)-10},width:(this.id==0?12:16),height:(this.id==0?12:16)},entities.players[a])&&this.validTarget(entities.players[a])&&!entities.players[a].dead&&!this.dead){
-                                let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),entities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
-                                entities.players[a].takeDamage(100*(crit?3:1)*(entities.players[a].fort?0.1:1))
-                                entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
-                                entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
-                                entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
-                                entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))
-                                entities.players[a].collect.time=450
-                                entities.players[a].die.killer=this.index
+                    if(!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            for(let b=0,lb=4;b<lb;b++){
+                                if(inBoxBox({position:{x:this.position.x+50*lsin(this.time+b*90),y:this.position.y+50*lcos(this.time+b*90)-10},width:(this.id==0?12:16),height:(this.id==0?12:16)},entities.players[a])&&this.validTarget(entities.players[a])&&!entities.players[a].dead){
+                                    let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),entities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
+                                    entities.players[a].takeDamage(100*(crit?3:1)*(entities.players[a].fort?0.1:1))
+                                    entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                                    entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                                    entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
+                                    entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))
+                                    entities.players[a].collect.time=450
+                                    entities.players[a].die.killer=this.index
+                                    break
+                                }
                             }
                         }
                     }
@@ -12061,8 +12064,8 @@ class player{
                                         game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==996&&this.subWeaponAType==722&&this.subWeaponBType==722?180:this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?120:60):
                                         (this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?200:100)
                                     )*(crit?3:1)*
-                                    (entities.players[a].fort&&!entities.players[a].auto?(this.weaponRules.jumpBonker?0.1:0.025):1)*
-                                    (entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1))
+                                    (entities.players[a].fort&&!entities.players[a].auto?(this.weaponRules.jumpBonker?0.1:0.025):1)//*
+                                    /*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1)*/)
                                 }
                                 if(dir[0]!=0||dir[1]!=0){
                                     if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
@@ -12188,7 +12191,7 @@ class player{
         if(this.DOT.active>0){
             this.DOT.active=max(0,this.DOT.active-(game.pvp?2:1))
             this.life=max(min(1,this.life),this.life-this.DOT.damage)
-            this.collect.time=max(this.collect.time,150)
+            this.collect.time=max(this.collect.time,1/*150*/)
         }
         if(game.invis){
             if(this.visible>0){

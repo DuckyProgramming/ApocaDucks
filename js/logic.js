@@ -3412,7 +3412,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -5929,7 +5929,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -6382,7 +6382,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -7904,7 +7904,7 @@ player.prototype.logic=function(){
                     (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -8059,7 +8059,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -8747,7 +8747,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -10284,7 +10284,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -10467,7 +10467,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -10692,7 +10692,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -11064,7 +11064,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -11506,7 +11506,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -12913,7 +12913,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -13622,7 +13622,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -14845,7 +14845,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -15342,7 +15342,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -17019,7 +17019,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -17416,7 +17416,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -18103,7 +18103,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||
@@ -18808,7 +18808,7 @@ player.prototype.logic=function(){
                 (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*((
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
-                    this.playerData.name=='PlayerMedicCW'&&(
+                    this.playerData.name=='PlayerMedicW'&&(
                         this.subPlayerAData.name==`PlayerBuffMedic`||
                         this.subPlayerBData.name==`PlayerBuffMedic`||
                         this.subPlayerAData.name==`PlayerQuickfix`||

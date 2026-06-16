@@ -19814,7 +19814,7 @@ types={
 			stop:300,
 			reload:300,
 			speed:0.85,
-      uses:2,
+      uses:3,
 		}})),
     {
 			name:'Widowmaker',

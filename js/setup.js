@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[5,0],sets:[[0,0,3],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -844,7 +844,8 @@ function mouseClicked(){
                                                     menu.level=133
                                                 }
                                                 game.pvp=true
-                                                menu.players*=3
+                                                //menu.players*=3
+                                                menu.players*=6
                                                 if(!game.classWeapon){
                                                     game.classicWeapon=true
                                                 }

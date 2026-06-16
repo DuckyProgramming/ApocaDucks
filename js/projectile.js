@@ -11533,24 +11533,24 @@ class projectile{
 							}
 						break
 						case 454:
-							if(target.life<=0){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
-											entities.players[d].subWeaponA.reload=0
-											entities.players[d].subWeaponA.cooldown=0
-										}
-										if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
-											entities.players[d].subWeaponB.reload=0
-											entities.players[d].subWeaponB.cooldown=0
-										}
-										if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
-											entities.players[d].subWeaponC.reload=0
-											entities.players[d].subWeaponC.cooldown=0
-										}
+							//if(target.life<=0){
+							for(let d=0,ld=entities.players.length;d<ld;d++){
+								if(entities.players[d].index==this.index){
+									if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+										entities.players[d].subWeaponA.reload=0
+										entities.players[d].subWeaponA.cooldown=0
+									}
+									if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+										entities.players[d].subWeaponB.reload=0
+										entities.players[d].subWeaponB.cooldown=0
+									}
+									if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+										entities.players[d].subWeaponC.reload=0
+										entities.players[d].subWeaponC.cooldown=0
 									}
 								}
 							}
+							//}
 						break
 						case 465:
 							if(target.life<=0){
