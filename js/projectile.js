@@ -946,6 +946,10 @@ class projectile{
 				this.position.y-=this.speed*lcos(this.direction)
 				this.bullet=true
 			break
+			case 466:
+				this.speed=7
+				this.time=time
+			break
 			
 		}
 		this.timer=0
@@ -6447,7 +6451,7 @@ class projectile{
 				regPoly(layer,0,0,16,4,4,0)
 				regStar(layer,0,0,5,7,7,1,1,this.time*3)
 			break
-			case 384:
+			case 384: case 466:
 				layer.fill(240-this.crit*200,240,240,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(200-this.crit*160,200,200,this.fade)
@@ -8571,6 +8575,16 @@ class projectile{
 					}
 				}
 			break
+			case 466:
+				radius=120
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
+						entities.players[b].takeDamage(this.damage*((1-c/radius)**2)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
+						entities.players[b].generalizedTake(this.index)
+					}
+				}
+			break
 		}
 		for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 			if(entities.projectiles[b].type==457&&dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
@@ -8686,7 +8700,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460: case 461: case 465:
+				case 454: case 456: case 459: case 460: case 461: case 465: case 466:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed

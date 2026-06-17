@@ -10447,9 +10447,9 @@ player.prototype.logic=function(){
         }else if(floor(random(0,5))==0||this.target.point==-1){
             let alive=[0,0]
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(entities.players[a].id==this.id&&entities.players[a].life>0){
+                if(entities.players[a].id==this.id&&entities.players[a].life>0&&!entities.players[a].construct){
                     alive[0]++
-                }else if(entities.players[a].id!=this.id&&entities.players[a].life>0){
+                }else if(entities.players[a].id!=this.id&&entities.players[a].life>0&&!entities.players[a].construct){
                     alive[1]++
                 }
             }

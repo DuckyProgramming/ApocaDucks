@@ -7614,6 +7614,9 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],465,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
+                    case 1120:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],466,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
 
                     //mark
                 }
@@ -9387,6 +9390,15 @@ class player{
                         entities.walls[1][entities.walls[1].length-1].checkGap()
                         entities.walls[1][entities.walls[1].length-1].checkBar()
                         entities.walls[1][entities.walls[1].length-1].formBounder()
+                    break
+                    case 'TinyPistolSplitter':
+                        for(let a=0,la=2;a<la;a++){
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,0,0,[],true,findName('Pistol',types.player),game.index))
+                            game.index++
+                            entities.players[entities.players.length-1].free=true
+                            entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
+                            entities.players[entities.players.length-1].weapon.cooldown+=60
+                        }
                     break
                 }
                 if(this.fort){
@@ -12012,7 +12024,7 @@ class player{
                 case 'ConstructBooster':
                     if(this.assort.building==0&&!this.dead){
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
+                            if(!entities.players[a].construct&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
                                 entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
                             }
                         }

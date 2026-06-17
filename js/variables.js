@@ -7764,6 +7764,9 @@ types={
       name:'PlayerMoonshotLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:912,
     },{
+      name:'PlayerMoonshot',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1120,
+    },{
       name:'PlayerAftershockLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:913,
     },{
@@ -10026,6 +10029,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'PistolSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'TinyPistolSplitter',sizeBuff:1,lifeBuff:1.2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'PistolSplitterSplitter',sizeBuff:1.4,lifeBuff:2.5,speedBuff:0.6,
@@ -20005,6 +20011,15 @@ types={
 			reload:20,
 			speed:1.15,
       uses:12,
+		},{
+			name:'Moonshot',
+			ammo:1,
+			damage:400,
+			cooldown:8,
+			stop:90,
+			reload:0,
+			speed:0.8,
+      uses:8,
 		},
 
     /*{

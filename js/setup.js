@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[1,5],sets:[[5,0],[0,0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false

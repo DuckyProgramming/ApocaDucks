@@ -6,6 +6,7 @@
 1117 - roller launcher c, 1112
 1118 - chroma c, 864
 1119 - widowmaker c, 1099
+1120 - moonshot, 912
 
 457 - primer, 425
 458 - stairway, 425
@@ -16,6 +17,7 @@
 463 - chroma c a, 135
 464 - chroma c a, 136
 465 - widowmaker c, 454
+466 - moonshot, 384
 
 
 

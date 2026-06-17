@@ -23,7 +23,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
-                a==458||a==462,
+                a==458||a==462||a==466,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -34,7 +34,8 @@ function setupRules(){
 				a==262||a==266||a==279||a==280||a==290||
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
-				a==385||a==412||a==430||a==445||a==447,
+				a==385||a==412||a==430||a==445||a==447||
+                a==466,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -8501,7 +8502,7 @@ function generateLevel(info,layer){
                     options.splice(index,1)
                 }
 
-                //classPick=[9,9]
+                //classPick=[3,5]
 
                 options=[range(0,num),range(0,num)]
                 teamTick=[0,0]
@@ -11106,7 +11107,7 @@ function formMission(wave,type){
             wave[0].push(randin([
                 ['Level3SentryCarrier',1],
                 ['TinyLevel3SentryCarrier',1],
-                ['PistolSplitterSplitterSplitter',1],
+                ['TinyPistolSplitter',1],
             ]))
             wave[0].push(['Wait',3])
             wave[0].push(randin([
@@ -11297,7 +11298,7 @@ function setupLists(){
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunC`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshotLauncher`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
+            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerPocketRocket`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJump`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
