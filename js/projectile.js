@@ -950,6 +950,13 @@ class projectile{
 				this.speed=7
 				this.time=time
 			break
+			case 467:
+				this.speed=9
+				this.time=random(time,time*2)
+				this.position.x+=this.speed*lsin(this.direction)
+				this.position.y-=this.speed*lcos(this.direction)
+				this.bullet=true
+			break
 			
 		}
 		this.timer=0
@@ -7464,6 +7471,19 @@ class projectile{
 				layer.fill(150,250,150,this.fade)
 				layer.ellipse(0,0,6)
 			break
+			case 467:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(125,150,175,this.fade)
+				layer.ellipse(0,0,6,2)
+				layer.ellipse(0,0,2,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,3)
+			break
 
 			//mark
         }
@@ -8625,7 +8645,7 @@ class projectile{
 						entities.players[a].assort.penalty++
 						if(entities.players[a].assort.penalty>=12){
 							entities.players[a].life=max(entities.players[a].life-this.damage*4,1)
-							entities.players[a].collect.life=entities.players[a].life
+							//entities.players[a].collect.life=entities.players[a].life
 							entities.players[a].collect.time=max(entities.players[a].collect.time,450)
 						}
 					}
@@ -8700,7 +8720,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460: case 461: case 465: case 466:
+				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -11813,6 +11833,14 @@ class projectile{
 							break
 							case 461:
 								target.confuseTime=max(target.confuseTime,180)
+							break
+							case 467:
+								target.vulnerableTime=max(target.vulnerableTime,120)
+								for(let d=0,ld=entities.players.length;d<ld;d++){
+									if(entities.players[d].index==this.index&&!entities.players[d].inspect.includes(target.index)){
+										entities.players[d].inspect.push(target.index)
+									}
+								}
 							break
 						}
 						switch(this.type){

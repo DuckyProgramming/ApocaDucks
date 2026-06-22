@@ -13,7 +13,7 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
-  anyPrimary:false,anySecondary:false,
+  anyPrimary:false,anySecondary:false,classPick:[],
   projClump:[],disable:[],
   /*
   0 - Drunk
@@ -8012,6 +8012,12 @@ types={
     },{
       name:'PlayerPushShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
+      name:'PlayerTaggerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1121,
+    },{
+      name:'PlayerTapperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1122,
     },
     
     {name:'PlayerBuild111',sizeBuff:1,lifeBuff:4,speedBuff:1,damageBuff:1,reloadBuff:1,crit:0,weapon:1035},
@@ -19969,7 +19975,7 @@ types={
 		},{
 			name:'Backshot',
 			ammo:3,
-			damage:140,
+			damage:125,
 			cooldown:30,
 			stop:50,
 			reload:20,
@@ -20020,6 +20026,24 @@ types={
 			reload:0,
 			speed:0.8,
       uses:8,
+		},{
+			name:'Tagger C',
+			ammo:4,
+			damage:105,
+			cooldown:24,
+			stop:45,
+			reload:12,
+			speed:1.35,
+      uses:16,
+		},{
+			name:'Tapper C',
+			ammo:4,
+			damage:80,
+			cooldown:4,
+			stop:72,
+			reload:20,
+			speed:1.15,
+      uses:24,
 		},
 
     /*{

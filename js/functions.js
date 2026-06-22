@@ -8503,6 +8503,7 @@ function generateLevel(info,layer){
                 }
 
                 //classPick=[3,5]
+                classPick=game.classPick.length>0?game.classPick:classPick
 
                 options=[range(0,num),range(0,num)]
                 teamTick=[0,0]
@@ -9380,8 +9381,12 @@ function generateLevel(info,layer){
                     typeList[1].push(...range(0,10))
                     typeList[2].push(...range(0,10))
                 }
+                if(game.classPick.length>0){
+                    split[0].push(1)
+                    split[1].push(2)
+                }
                 let roll=range(0,3)
-                for(let a=0,la=game.players;a<la;a++){
+                for(let a=game.classPick.length?3:0,la=game.players;a<la;a++){
                     let index=floor(random(roll.length))
                     switch(roll[index]){
                         case 1:
@@ -9421,6 +9426,7 @@ function generateLevel(info,layer){
                     classPick.push(options[index])
                     options.splice(index,1)
                 }
+                classPick=game.classPick.length>0?game.classPick:classPick
                 options=[range(0,num),range(0,num),range(0,num)]
                 for(let a=0,la=game.players;a<la;a++){
                     let team=split[1].includes(a)?2:split[0].includes(a)?1:0
@@ -11310,7 +11316,7 @@ function setupLists(){
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
-            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerPushShotgun`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`],
+            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
             [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistol`,`PlayerWrench`,`PlayerPushPistolC`],
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
@@ -11320,7 +11326,7 @@ function setupLists(){
             [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerClassicSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],
         ],[
-            [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerScopedRevolver`,`PlayerBackshot`],
+            [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
             [`PlayerKnife`,`PlayerElectricKnife`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[

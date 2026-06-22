@@ -13660,7 +13660,9 @@ class wall{
                                         c.jump.time=6
                                     }
                                     c.jump.active=1
-                                    c.blindTime=constrain(c.blindTime+6,60,1800)
+                                    if(c.id!=0){
+                                        c.blindTime=constrain(c.blindTime+6,60,1800)
+                                    }
                                     c.wet=1
                                 }else if(rules.safeWater){
                                     c.velocity.x*=0.925
