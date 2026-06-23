@@ -1041,6 +1041,15 @@ class player{
                         layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,fade*this.skin.arms[a].fade)
                         layer.noStroke()
                         layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                        if(this.construct){
+                            layer.fill(
+                                this.assort.lastColor.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                this.assort.lastColor.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                this.assort.lastColor.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                fade*this.skin.body.fade
+                            )
+                            layer.rect(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,2)
+                        }
                     }
                 }
                 for(let a=0,la=2;a<la;a++){
@@ -1058,6 +1067,10 @@ class player{
                 if(this.remote){
                     layer.fill(25,225,250,fade)
                     layer.ellipse(0,this.skin.body.level,5)
+                }
+                if(this.construct){
+                    layer.fill(...this.assort.lastColor.skin.body,fade*this.skin.body.fade)
+                    layer.rect(0,this.skin.body.level+0.5,14,2)
                 }
             }
             if(this.playerData.name=='GlitchedTank'){
@@ -1135,6 +1148,15 @@ class player{
                         layer.fill(this.color.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,this.color.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,fade*this.skin.arms[a].fade)
                         layer.noStroke()
                         layer.ellipse(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,12)
+                        if(this.construct){
+                            layer.fill(
+                                this.assort.lastColor.skin.arms[0]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                this.assort.lastColor.skin.arms[1]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                this.assort.lastColor.skin.arms[2]+lcos(this.skin.arms[a].anim.phi+this.direction.main)*20,
+                                fade*this.skin.body.fade
+                            )
+                            layer.rect(this.skin.arms[a].points.final.end.x,this.skin.arms[a].points.final.end.y,12,2)
+                        }
                     }
                 }
                 if(this.face.eye[a].display){
@@ -7659,6 +7681,7 @@ class player{
         }
 	}
     constructify(){
+        this.assort.lastColor={eye:{back:this.color.eye.back},beak:{main:this.color.beak.main,mouth:this.color.beak.mouth,nostril:this.color.beak.nostril},skin:{head:this.color.skin.head,body:this.color.skin.body,legs:this.color.skin.legs,arms:this.color.skin.arms}}
         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
         this.base.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
         this.construct=true
@@ -11978,6 +12001,8 @@ class player{
                                         entities.players[b].dead=true
                                         entities.players[a].position.x=entities.players[b].position.x
                                         entities.players[a].position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
+                                        entities.players[a].previous.position.x=entities.players[b].position.x
+                                        entities.players[a].previous.position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
                                     }
                                 }
                             }

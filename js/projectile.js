@@ -9649,7 +9649,7 @@ class projectile{
 								}
 							break
 							case 373:
-								if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
+								if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==511||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
 									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
 								}
 							break

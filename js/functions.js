@@ -5920,6 +5920,9 @@ function generateLevel(info,layer){
                         case 132:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],5+(a-0.6)*game.tileset[1],game.tileset[0]*0.2,10,38))
                         break
+                        case 136:
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],(a+1.5)*game.tileset[1],game.tileset[1]*1.2,game.tileset[1]*3,10))
+                        break
                     }
                 break
                 case 'r':
