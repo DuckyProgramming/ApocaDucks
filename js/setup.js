@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[5,8],sets:[[5,0,0],[0,5,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[3,5],sets:[[0,0],[0,0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=20
+        game.players=2
         game.gaming=1
-        game.level=134
+        game.level=117
         /*
         8 - normandy
         47 - big data ad
@@ -27,6 +27,7 @@ function setup(){
         117 - aerial 2 dm
         131 - lisp
         134 - bluefort micro ctf
+        136 - normanDBZ
         */
         menu.level=game.level
         updateRules()
@@ -72,7 +73,7 @@ function mouseClicked(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     if(a>=4){
                         ticker++
                     }
@@ -456,6 +457,10 @@ function mouseClicked(){
                                                 menu.level=66
                                                 game.classicWeapon=true
                                                 //abandoned
+                                            break
+                                            case 2:
+                                                menu.level=136
+                                                //normandbz
                                             break
                                         }
                                     break

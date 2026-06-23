@@ -24,7 +24,7 @@ game={
       [],[
           ['Vietnam','Normandy','Isonzo','Stalingrad'],
           ['Prison','Steep','Basalt','Zone 54'],
-          ['Ascent','Abandoned'],
+          ['Ascent','Abandoned','NormanDBZ'],
       ],[
           ['DoubleMountain','Steel','Sulfate','Process'],
           ['Downward','Arizona','Fragile','Alloy'],
@@ -36,7 +36,7 @@ game={
       ],[
           ['DoubleMountain','Steel','Sulfate','Process'],
           ['Downward','Sierra Leone','Fragile','NuclearMountain'],
-          ['Entropy','Rusted','Tailwater','Abandoned'],
+        ['Entropy','Rusted','Tailwater','Abandoned'],
           ['Cooked','Divider','Rocksalt','Bluefort'],
           ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
           ['Confines','Ferrum','Cysteine','Bluestone'],
@@ -9869,6 +9869,9 @@ types={
       name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.4,crit:0,weapon:99,
     },{
+      name:'Auto',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.4,crit:0,weapon:99,
+    },{
       name:'RadiusGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:121,
     },{
@@ -10361,7 +10364,13 @@ types={
       name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'MysteryBoss',sizeBuff:1.2,lifeBuff:2,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TrolliporterCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'HeavyMiniSentryCarrier',sizeBuff:1,lifeBuff:2,speedBuff:0.175,

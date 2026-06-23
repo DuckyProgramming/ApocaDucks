@@ -19433,8 +19433,12 @@ player.prototype.logic=function(){
             }
         }
         this.manage[1]=dist(this.position.x,this.position.y,this.target.position.x,this.target.position.y)<500?1:0
-        if(this.life<this.base.life*(game.level==81?0.6:0.4)&&rules.dm&&abs(this.position.x-this.target.position.x)<(game.level==81?600:300)&&this.position.x>150&&this.position.x<game.edge[0]-150&&!this.rules.scoutLine){
+        if((
+            this.life<this.base.life*(game.level==81?0.6:0.4)||
+            this.life<this.base.life*0.8&&this.collect.life==0
+        )&&rules.dm&&abs(this.position.x-this.target.position.x)<(game.level==81?600:480)&&this.position.x>150&&this.position.x<game.edge[0]-150&&this.position.y>150&&!this.rules.scoutLine){
             this.target.position.x=this.position.x*2-this.target.position.x
+            this.target.position.y-=1200
         }
     }
     if(this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='ParaGrenadier'||this.playerData.name=='PlayerStratofortress'||this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='BigParaRocketLauncher'||this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||this.playerData.name=='PlayerHurricane'||this.playerData.name=='PlayerRTX'||this.playerData.name=='PlayerAircraft'||this.playerData.name=='PlayerDirigible'||this.playerData.name=='ParaRocketBoss'){

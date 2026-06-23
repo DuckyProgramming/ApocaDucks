@@ -8,7 +8,7 @@ function mainloop(){
             let ticker=0
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
-                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
+                    let pos=a>=4?[width/2-340+ticker%5*170+(ticker==25||menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:0),355+floor(ticker/5)*55]:[a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)]
                     //ticker==25 code moves falloff specifically
                     //this code sucks but dw about it
                     if(a>=4){
@@ -1549,6 +1549,9 @@ function mainloop(){
                             break
                             case 107:
                                 graphics.main[a].text('Weapons\nHere',game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21)
+                            break
+                            case 136:
+                                graphics.main[a].text('Weapons\nHere',game.edge[0]-game.tileset[0]*8,game.edge[1]-690)
                             break
                         }
                     }

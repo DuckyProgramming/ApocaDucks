@@ -1002,7 +1002,7 @@ class player{
                 layer.rect(this.skin.arms[a].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*4,this.skin.arms[a].points.final.end.y+1,8,1)
             }
         }*/
-        let fade=this.fade*(this.playerData.name==`Mystery`?0.8+lsin(this.time*10)*0.2:1)
+        let fade=this.fade*(this.playerData.name==`Mystery`||this.playerData.name==`MysteryBoss`?0.8+lsin(this.time*10)*0.2:1)
         if(layer.index<game.disable.length&&(this.index==layer.index||this.index==1)&&game.disable[layer.index]==2){
             layer.fill(10000,10000,10000,this.fade)
             layer.noStroke()
@@ -1358,6 +1358,8 @@ class player{
                         this.color={eye:{back:[255,255,255]},beak:{main:this.colorChances[floor(random(0,this.colorChances.length))],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:this.colorChances[floor(random(0,this.colorChances.length))],body:this.colorChances[floor(random(0,this.colorChances.length))],legs:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]],arms:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]]}}
                     }else if(this.playerData.name=='Mystery'){
                         this.color={eye:{back:[255,255,255]},beak:{main:[0,190,0],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,200,0],body:[0,195,0],legs:[0,180,0],arms:[0,185,0]}}
+                    }else if(this.playerData.name=='MysteryBoss'){
+                        this.color={eye:{back:[255,255,255]},beak:{main:[0,90,190],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,100,200],body:[0,95,195],legs:[0,80,180],arms:[0,85,185]}}
                     }else if(this.spy){
                         this.color=[
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
@@ -2612,7 +2614,7 @@ class player{
         this.size=0.5*this.playerData.sizeBuff
         this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
         this.assort.build=-1
-        if((game.level==8||game.level==17)&&this.base.position.y<game.tileset[1]*5){
+        if((game.level==8||game.level==17||game.level==136)&&this.base.position.y<game.tileset[1]*5){
             this.position.x=game.edge[0]/2
             this.position.y=1000
             this.parachute=true
@@ -2934,9 +2936,11 @@ class player{
                     break
                 }
                 let set=game.spawner.filter(pos=>dist(pos[0],pos[1],this.position.x,this.position.y)<500)
-                let pos=set[floor(random(0,set.length))]
-                this.position.x=pos[0]
-                this.position.y=pos[1]-this.height/2
+                if(set.length>0){
+                    let pos=set[floor(random(0,set.length))]
+                    this.position.x=pos[0]
+                    this.position.y=pos[1]-this.height/2
+                }
             }
         }
     }
@@ -7664,13 +7668,15 @@ class player{
         if(this.id==0){
             this.multLife(0.5)
         }
-        if(this.playerData.sizeBuff<1&&this.playerData.speedBuff>0){
+        this.life=this.base.life*0.25
+        this.assort.building+=this.base.life*9/20
+        /*if(this.playerData.sizeBuff<1&&this.playerData.speedBuff>0){
             this.life=this.base.life*0.5
             this.assort.building+=this.base.life*3/10
         }else{
             this.life=1
             this.assort.building+=this.base.life*3/5
-        }
+        }*/
     }
     fortify(){
         this.fort=true
@@ -8245,7 +8251,7 @@ class player{
                         }
                     }
                     this.attacking=this.manage[1]
-                    if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&game.level==8){
+                    if(this.manage[1]==1&&this.life>0&&this.weapon.cooldown<=0&&this.weapon.ammo>0&&this.life>0&&!this.weapon.reloading&&(game.level==8||game.level==136)){
                         this.attack(0)
                     }
                 }else{
@@ -8336,14 +8342,35 @@ class player{
                 }
             }else{
                 if(this.life>0&&this.assort.build>=0&&this.assort.build<64){
-                    if(this.manage[1]==1){
-                        this.callBuild(0)
-                    }else{
-                        let possible=[0,1,2,3]
+                    let possible=[0,1,2,3]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].construct&&entities.players[a].builder==this.index){
+                            let remove=-1
+                            switch(entities.players[a].playerData.name){
+                                case 'ConstructMiniC': case 'ConstructMiniShotgun':
+                                    remove=0
+                                break
+                                case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
+                                    remove=1
+                                break
+                                case 'ConstructTeleporterExit':
+                                    remove=2
+                                break
+                                case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
+                                    remove=3
+                                break
+                            }
+                            if(possible.includes(remove)){
+                                possible.splice(possible.indexOf(remove),1)
+                            }
+                        }
+                    }
+                    if(possible.length==0){
+                        possible=[0,1,2,3]
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].construct&&entities.players[a].builder==this.index){
+                            if(entities.players[a].construct&&entities.players[a].builder==this.index&&entities.players[a].stats.damage>0){
                                 let remove=-1
-                                switch(entities.players[a].name){
+                                switch(entities.players[a].playerData.name){
                                     case 'ConstructMiniC': case 'ConstructMiniShotgun':
                                         remove=0
                                     break
@@ -8358,38 +8385,24 @@ class player{
                                     break
                                 }
                                 if(possible.includes(remove)){
-                                    possible.splice(possible.indexOf(remove))
+                                    possible.splice(possible.indexOf(remove),1)
                                 }
                             }
                         }
                         if(possible.length==0){
                             possible=[0,1,2,3]
-                            if(entities.players[a].construct&&entities.players[a].builder==this.index&&entities.players[a].stats.damage>0){
-                                let remove=-1
-                                switch(entities.players[a].name){
-                                    case 'ConstructMiniC': case 'ConstructMiniShotgun':
-                                        remove=0
-                                    break
-                                    case 'ConstructMiniMedicAuto': case 'ConstructAmmoDispenser': case 'ConstructRadialShield': case 'ConstructSpeedBumpC':
-                                        remove=1
-                                    break
-                                    case 'ConstructTeleporterExit':
-                                        remove=2
-                                    break
-                                    case 'ConstructTeleporterEntrance': case 'ConstructCatapultC': case 'ConstructBooster': case 'ConstructTrolliporter':
-                                        remove=3
-                                    break
-                                }
-                                if(possible.includes(remove)){
-                                    possible.splice(possible.indexOf(remove))
-                                }
-                            }
-                            if(possible.length==0){
-                                possible=[0,1,2,3]
-                            }
                         }
-                        this.callBuild(randin(possible))
                     }
+                    if(possible.includes(2)&&possible.includes(3)){
+                        possible.splice(possible.indexOf(2),1)
+                    }
+                    if(possible.includes(0)&&game.pvp){
+                        possible.push(0)
+                    }
+                    if(this.manage[1]==1&&possible.includes(0)){
+                        possible=[0]
+                    }
+                    this.callBuild(randin(possible))
                 }
                 let jumpMult=(game.level==33||game.level==39?0.5:(game.level==26||game.level==105)&&this.wet>0?0.25:game.level==1||game.level==6?0.5:game.level==15||game.level==18?2:1)*(this.id>0?0.8:1)*(this.rules.scoutLine?0.5:1)
                 let jumpMult2=(game.level==26||game.level==105)&&this.wet>0?2:1
@@ -9032,6 +9045,9 @@ class player{
                 case 107:
                     pos=[game.tileset[0]*4.5,game.edge[1]-game.tileset[1]*21,80]
                 break
+                case 136:
+                    pos=[game.edge[0]-game.tileset[0]*8,game.edge[1]-690,80]
+                break
             }
             if(
                 !this.construct&&!this.sidekick&&!this.auto&&game.level!=13&&game.level!=14&&!this.playerData.name.includes('Buster')&&(
@@ -9196,6 +9212,7 @@ class player{
                     entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y,405,0,this.id,0,2,false,this.index))
                 }
                 let crit
+                let type
                 switch(this.playerData.name){
                     case 'PistolSplitter':
                         for(let a=0,la=2;a<la;a++){
@@ -9264,6 +9281,13 @@ class player{
                     break
                     case 'Level3SentryCarrier': case `TinyLevel3SentryCarrier`:
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-15,this.id,0,[],false,findName('ConstructLevel3',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].constructify()
+                        entities.players[entities.players.length-1].builder=this.index
+                        entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                    break
+                    case 'TrolliporterCarrier':
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructTrolliporter',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
                         entities.players[entities.players.length-1].builder=this.index
@@ -9375,7 +9399,14 @@ class player{
                         }
                     break
                     case 'Mystery':
-                        let type=floor(random(findName('Wait',types.player)+1,types.player.length))
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
+                        entities.players[entities.players.length-1].weapon.cooldown+=60
+                    break
+                    case 'MysteryBoss':
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>types.player[num].name.includes('Boss')))
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
@@ -12046,7 +12077,7 @@ class player{
                             if(
                                 !entities.players[a].dead&&
                                 this.index!=entities.players[a].index&&
-                                /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
+                                /*(*/entities.players[a].id>0&&//!game.pvp||this.id==entities.players[a].id)&&
                                 inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
                                 !entities.players[a].assort.intel
                             ){
