@@ -1,6 +1,7 @@
 game={
-  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,lifeBuff:1,ammoMult:2,tileset:[0,0],edge:[0,0],tilecolor:[],
+  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,ammoMult:2,tileset:[0,0],edge:[0,0],tilecolor:[],
   index:0,projectileIndex:0,
+  lifeBuff:1,lifeBuffAll:1,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,classWeapon:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
@@ -8124,6 +8125,18 @@ types={
     },{
       name:'PlayerTouhou',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1123,
+    },{
+      name:'PlayerLevel1Proxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:730,
+    },{
+      name:'PlayerLevel2Proxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:731,
+    },{
+      name:'PlayerLevel3Proxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1124,
+    },{
+      name:'PlayerLevel3CProxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },
 
     //mark c
@@ -8208,6 +8221,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:731,
     },{
       name:'ConstructLevel3',sizeBuff:1,lifeBuff:5.76,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1124,
+    },{
+      name:'ConstructLevel3C',sizeBuff:1,lifeBuff:5.76,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },{
       name:'ConstructControl',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
@@ -17102,7 +17118,7 @@ types={
 			speed:1.2,
       uses:96,
 		},{
-			name:'Level 3 Sentry',
+			name:'Level 3 Sentry C',
 			ammo:16,
 			damage:80,
 			cooldown:9,
@@ -19816,7 +19832,7 @@ types={
 			damage:125,
 			cooldown:60,
 			stop:240,
-			reload:180,
+			reload:120,
 			speed:1.15,
       uses:5,
 		},{
@@ -20065,6 +20081,15 @@ types={
 			reload:15,
 			speed:0.85,
       uses:120,
+		},{
+			name:'Level 3 Sentry',
+			ammo:16,
+			damage:80,
+			cooldown:9,
+			stop:36,
+			reload:6,
+			speed:1.2,
+      uses:96,
 		},
 
     /*{
