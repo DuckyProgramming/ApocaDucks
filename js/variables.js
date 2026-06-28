@@ -8121,6 +8121,9 @@ types={
     },{
       name:'PlayerWidowmakerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1119,
+    },{
+      name:'PlayerTouhou',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1123,
     },
 
     //mark c
@@ -19342,7 +19345,7 @@ types={
 		},{
 			name:'Scorch Shot',
 			ammo:1,
-			damage:90,
+			damage:120,
 			cooldown:105,
 			stop:105,
 			reload:105,
@@ -20053,6 +20056,15 @@ types={
 			reload:20,
 			speed:1.15,
       uses:24,
+		},{
+			name:'Touhou',
+			ammo:15,
+			damage:90,
+			cooldown:10,
+			stop:105,
+			reload:15,
+			speed:0.85,
+      uses:120,
 		},
 
     /*{

@@ -3021,7 +3021,10 @@ class player{
                             this.subWeaponC.reload+=240
                         }
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].playerData.name=='ConstructLevel3'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0){
+                            if(entities.players[a].playerData.name=='ConstructLevel3'&&(
+                                dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
+                                this.effectiveId()>game.gaming
+                            )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                 //entities.players[a].life=max(min(entities.players[a].base.life*2,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
                                 entities.players[a].life=max(min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
@@ -3033,7 +3036,10 @@ class player{
                         }
                         if(build){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructLevel2'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0){
+                                if(entities.players[a].playerData.name=='ConstructLevel2'&&(
+                                    dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
+                                    this.effectiveId()>game.gaming
+                                )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                     entities.players[a].newWeaponSet(findName('ConstructLevel3',types.player))
                                     entities.players[a].multBuild(1.2)
                                     build=false
@@ -3045,7 +3051,10 @@ class player{
                         }
                         if(build){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructLevel1'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0){
+                                if(entities.players[a].playerData.name=='ConstructLevel1'&&(
+                                    dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
+                                    this.effectiveId()>game.gaming
+                                )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                     entities.players[a].newWeaponSet(findName('ConstructLevel2',types.player))
                                     entities.players[a].multBuild(1.2)
                                     build=false
@@ -3059,7 +3068,7 @@ class player{
                             let type=findName('ConstructLevel1',types.player)
                             let pos=-1
                             let life=0
-                            for(let a=0,la=entities.players.length;a<la;a++){
+                            /*for(let a=0,la=entities.players.length;a<la;a++){
                                 if((entities.players[a].playerData.name=='ConstructLevel1'||entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3')&&entities.players[a].builder==this.index){
                                     if(this.effectiveId()>game.gaming){
                                         if(entities.players[a].playerData.name=='ConstructLevel1'){
@@ -3074,7 +3083,7 @@ class player{
                                     }
                                     entities.players[a].life=0
                                 }
-                            }
+                            }*/
                             entities.players.push(new player(this.layer,pos==-1?this.position.x:pos.x,pos==-1?this.position.y+this.height/2-12:pos.y,this.id,0,[],false,type,game.index))
                             if(pos!=-1){
                                 entities.players[entities.players.length-1].life=life
@@ -7652,6 +7661,10 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-4.5,4.5),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                         }
                     break
+                    case 1123:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],468,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,90,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].velocity.y-=1.5
+                    break
 
                     //mark
                 }
@@ -8365,7 +8378,7 @@ class player{
                 }
             }else{
                 if(this.life>0&&this.assort.build>=0&&this.assort.build<64){
-                    let possible=[0,1,2,3]
+                    let possible=floor(this.assort.build/16)==0?[0,1,2,3]:[0,1,3]
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(entities.players[a].construct&&entities.players[a].builder==this.index){
                             let remove=-1
@@ -8389,7 +8402,7 @@ class player{
                         }
                     }
                     if(possible.length==0){
-                        possible=[0,1,2,3]
+                        possible=floor(this.assort.build/16)==0?[0,1,2,3]:[0,1,3]
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(entities.players[a].construct&&entities.players[a].builder==this.index&&entities.players[a].stats.damage>0){
                                 let remove=-1
