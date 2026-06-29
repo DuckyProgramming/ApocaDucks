@@ -6489,7 +6489,7 @@ class projectile{
 				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade*5)
 				layer.ellipse(0,0,6,20)
 				layer.stroke(200,this.fade*5)
-				layer.strokeWeight(1)
+				layer.strokeWeight(0.5)
 				layer.noFill()
 				layer.ellipse(0,0,5)
 				layer.ellipse(0,0,2.5)

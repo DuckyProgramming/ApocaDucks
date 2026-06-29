@@ -39,7 +39,7 @@ class player{
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
         this.die={timer:0,killer:-1}
-        this.stats={kills:0,killStreak:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
+        this.stats={kills:0,idealKills:0,killStreak:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
         if(
@@ -300,7 +300,7 @@ class player{
         }
     }*/
     getAggressStat(){
-        return game.killStreak?`Killstreak: ${this.stats.killStreak}`:rules.teamMode?`Kills: ${this.stats.kills}`:`Damage: ${regNum(this.stats.damage)}`
+        return game.killStreak?`Killstreak: ${this.stats.killStreak}`:rules.teamMode?`Kills: ${this.stats.idealKills}`:`Damage: ${regNum(this.stats.damage)}`
     }
     bonking(){
         return this.playerData.name.includes('Tank')&&this.playerData.name!='PlayerTank'||game.brutal&&this.variant==13||this.weaponRules.baseBonker||this.weaponRules.jumpBonker&&this.jump.time<=0
@@ -346,14 +346,18 @@ class player{
                             if(game.level==30){
                                 layer.text(`Points: ${this.stats.points}`,0,-38)
                             }else{
-                                layer.text(`${cutName(this.weaponData.name)}\n${this.getAggressStat()}`,0,-38)
+                                if(this.weaponData.ammo==0){
+                                    layer.text(`${cutName(this.weaponData.name)}`,0,-30)
+                                }else{
+                                    layer.text(`${cutName(this.weaponData.name)}\n${this.getAggressStat()}`,0,-38)
+                                }
                             }
                         }else if(this.spy){
                             let copy=this.copy>=entities.players.length?0:this.copy
                             if(game.level==30||game.level==54&&game.pvp){
                                 layer.text(`Points: ${entities.players[copy].stats.points}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?entities.players[copy].subWeaponAData.name:entities.players[copy].weaponData.name)}`,0,-35)
                             }else{
-                                layer.text(`Damage: ${regNum(entities.players[copy].stats.damage)}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
+                                layer.text(`${entities.players[copy].getAggressStat()}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
                             }
                         }else if(game.randomizer&&this.id>0){
                             layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}`,0,-38)
@@ -2932,6 +2936,8 @@ class player{
                     entities.players[entities.players.length-1].setColor()
                     entities.players[entities.players.length-1].life=0
                     entities.players[entities.players.length-1].collect.life=this.life
+                    entities.players[entities.players.length-1].fade=this.fade
+                    this.fade=0
                 }else if(this.visible>=60){
                     this.visible2=30
                 }
@@ -3194,6 +3200,7 @@ class player{
                         entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
+                        this.assort.build=-1
                         if(!this.inspect.includes(entities.players[a].index)){
                             this.inspect.push(entities.players[a].index)
                         }
@@ -3262,6 +3269,7 @@ class player{
                         entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
+                        this.assort.build=-1
                         if(!this.inspect.includes(entities.players[a].index)){
                             this.inspect.push(entities.players[a].index)
                         }
@@ -9547,6 +9555,9 @@ class player{
                         }
                         entities.players[a].stats.killStreak++
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
+                        if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2){
+                            entities.players[a].stats.idealKills++
+                        }
                         /*if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30&&game.level!=31){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
                         }*/
@@ -9554,6 +9565,9 @@ class player{
                             for(let b=0,lb=entities.players.length;b<lb;b++){
                                 if(entities.players[b].index==entities.players[a].builder){
                                     entities.players[b].stats.kills=round(entities.players[b].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
+                                    if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2){
+                                        entities.players[b].stats.idealKills++
+                                    }
                                 }
                             }
                         }
@@ -12036,7 +12050,8 @@ class player{
                                 this.index!=entities.players[a].index&&
                                 /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
                                 inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
-                                !entities.players[a].assort.intel
+                                !entities.players[a].assort.intel&&
+                                !entities.players[a].fort
                             ){
                                 for(let b=0,lb=entities.players.length;b<lb;b++){
                                     if(
@@ -12066,7 +12081,8 @@ class player{
                                 !entities.players[a].dead&&
                                 this.index!=entities.players[a].index&&
                                 /*(*/(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&//!game.pvp||this.id==entities.players[a].id)&&
-                                inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])
+                                inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
+                                !entities.players[a].fort
                             ){
                                 this.life=0
                                 this.dead=true
@@ -12095,7 +12111,7 @@ class player{
                 case 'ConstructSpeedBumpC':
                     if(this.assort.building==0&&!this.dead){
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(!entities.players[a].dead&&this.validTarget(entities.players[a])&&inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])){
+                            if(!entities.players[a].dead&&!entities.players[a].fort&&this.validTarget(entities.players[a])&&inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])){
                                 entities.players[a].life-=5/3
                                 entities.players[a].generalizedTake(this.index)
                                 entities.players[a].dizzyTime=max(entities.players[a].dizzyTime,300)
@@ -12154,7 +12170,8 @@ class player{
                                 this.index!=entities.players[a].index&&
                                 /*(*/entities.players[a].id>0&&//!game.pvp||this.id==entities.players[a].id)&&
                                 inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
-                                !entities.players[a].assort.intel
+                                !entities.players[a].assort.intel&&
+                                !entities.players[a].fort
                             ){
                                 this.life=0
                                 this.dead=true
@@ -12551,7 +12568,7 @@ class player{
             if(this.time>300){
                 this.decoy=true
             }
-            this.fade=smoothAnim(this.fade,true,0,0.4,12)
+            this.fade=smoothAnim(this.fade,false,0.4,1,12)
         }else{
             if(this.invincible>0){
                 this.invincible--
