@@ -1698,7 +1698,8 @@ class wall{
                             if(!(game.level==55&&map((b+0.5)/lb,0,1,this.boundary[set[g]][a][0].x,this.boundary[set[g]][a][1].x)>game.tileset[0]*110)){
                                 game.spawner.push([
                                     map((b+0.5)/lb,0,1,this.boundary[set[g]][a][0].x,this.boundary[set[g]][a][1].x),
-                                    map((b+0.5)/lb,0,1,this.boundary[set[g]][a][0].y,this.boundary[set[g]][a][1].y)
+                                    map((b+0.5)/lb,0,1,this.boundary[set[g]][a][0].y,this.boundary[set[g]][a][1].y),
+                                    set[g]>=4?this.height/this.width:0
                                 ])
                             }
                         }

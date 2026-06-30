@@ -1,5 +1,6 @@
 class player{
     constructor(layer,x,y,id,control,inputs,primary,type,index){
+        //print(index)
         layer=layer
         this.position={x:x,y:y}
         this.id=id
@@ -30,6 +31,7 @@ class player{
         this.velocity={x:0,y:0}
         this.offset={position:{x:0,y:12*((game.level==1||game.level==6)&&this.playerData.sizeBuff>1?this.playerData.sizeBuff*0.1+0.9:this.playerData.sizeBuff)}}
         this.previous={position:{x:this.position.x,y:this.position.y}}
+        //this.safe={position:{x:this.position.x,y:this.position.y}}
         this.truePrevious={position:{x:this.position.x,y:this.position.y}}
         this.infoAnim={life:1,ammo:[0,0,0,0,0,0],uses:[0,0,0,0,0,0],ammoA:[0,0,0,0,0,0],usesA:[0,0,0,0,0,0],ammoB:[0,0,0,0,0,0],usesB:[0,0,0,0,0,0]}
         this.jump={time:0,double:0,triple:0,quadruple:0,active:0}
@@ -38,7 +40,7 @@ class player{
         this.record={life:this.life,support:false,injure:0}
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
-        this.die={timer:0,killer:-1}
+        this.die={timer:0,objectiveTimer:0,killer:-1}
         this.stats={kills:0,idealKills:0,killStreak:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
         this.invincible=0
         this.spy=false
@@ -120,7 +122,7 @@ class player{
         this.assort={
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
-            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,
+            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -355,9 +357,9 @@ class player{
                         }else if(this.spy){
                             let copy=this.copy>=entities.players.length?0:this.copy
                             if(game.level==30||game.level==54&&game.pvp){
-                                layer.text(`Points: ${entities.players[copy].stats.points}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?entities.players[copy].subWeaponAData.name:entities.players[copy].weaponData.name)}`,0,-35)
+                                layer.text(`Points: ${entities.players[copy].stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?entities.players[copy].subWeaponAData.name:entities.players[copy].weaponData.name)}`,0,-35)
                             }else{
-                                layer.text(`${entities.players[copy].getAggressStat()}\nDeaths: ${entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
+                                layer.text(`${entities.players[copy].getAggressStat()}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
                             }
                         }else if(game.randomizer&&this.id>0){
                             layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}`,0,-38)
@@ -407,9 +409,9 @@ class player{
                             }
                         }else if(this.spy){
                             if(game.level==30||game.level==54&&game.pvp){
-                                layer.text(`Points: ${entities.players[this.copy].stats.points}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:cutName(entities.players[this.copy].weaponData.name)}`,0,-35)
+                                layer.text(`Points: ${entities.players[this.copy].stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:cutName(entities.players[this.copy].weaponData.name)}`,0,-35)
                             }else{
-                                layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
+                                layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
                             }
                         }else if(game.randomizer&&this.id>0){
                             layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38)
@@ -2598,9 +2600,80 @@ class player{
         this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
         this.inspect=[]
     }
+    getSpectate(){
+        let possible
+        if(game.pvp){
+            possible=entities.players.filter(player=>player.id==this.id&&!player.fort&&player.life>0&&!player.construct)
+        }else{
+            possible=entities.players.filter(player=>player.id>0&&!player.fort&&player.life>0&&!player.construct)
+        }
+        if(possible.length<=0){
+            return this
+        }else{
+            if(possible.some(player=>player.index==this.assort.spectate)){
+                return possible.find(player=>player.index==this.assort.spectate)
+            }
+            let further=possible.filter(player=>player.index>this.assort.spectate).sort((a,b)=>a.index-b.index)
+            if(further.length==0){
+                this.assort.spectate=possible[0].index
+                return possible[0]
+            }else{
+                this.assort.spectate=further[0].index
+                return further[0]
+            }
+            //return possible[this.assort.spectate%possible.length]
+        }
+    }
+    getSpectateSafe(spectate){
+        return game.pvp&&!entities.players.some(other=>distPos(other,spectate)<250&&other.life>0&&other.id!=this.id)||
+            !game.pvp&&!entities.players.some(other=>distPos(other,spectate)<250&&other.life>0&&other.id==0)
+    }
     respawn(reject){
         if(game.pvp){
             this.inspect=[]
+        }
+        if(game.teamSpawn){
+            let possible
+            if(game.pvp){
+                possible=entities.players.filter(player=>player.id==this.id&&!player.fort&&player.life>0&&player.life>=player.base.life&&!player.construct&&!entities.players.some(other=>distPos(other,player)<500&&other.life>0&&other.id!=this.id))
+            }else{
+                possible=entities.players.filter(player=>player.id>0&&!player.fort&&player.life>0&&player.life>=player.base.life&&!player.construct&&!entities.players.some(other=>distPos(other,player)<500&&other.life>0&&other.id==0))
+            }
+            if(possible.length>0){
+                let spawner=randin(possible)
+                this.base.position.x=spawner.position.x
+                this.base.position.y=spawner.position.y+spawner.height/2-this.height/2-max(0,spawner.assort.ramp*(this.width-spawner.width)/2)-max(0,spawner.velocity.y)
+            }
+        }else if(game.spectateSpawn[0]){
+            let possible
+            if(game.pvp){
+                possible=entities.players.filter(player=>player.id==this.id&&!player.fort&&player.life>0&&!player.construct)
+            }else{
+                possible=entities.players.filter(player=>player.id>0&&!player.fort&&player.life>0&&!player.construct)
+            }
+            if(possible.length>0){
+                let spawner
+                if(this.effectiveId()<=game.gaming){
+                    spawner=this.getSpectate()
+                }else{
+                    spawner=randin(possible)
+                }
+                if(!entities.players.some(other=>distPos(other,spawner)<250&&other.life>0&&other.id!=this.id)||!game.spectateSpawn[1]){
+                    this.base.position.x=spawner.previous.position.x
+                    this.base.position.y=spawner.previous.position.y+spawner.height/2-this.height/2-max(0,spawner.assort.ramp*(this.width-spawner.width)/2)-max(0,spawner.velocity.y)
+                }else if(this.effectiveId()<=0){
+                    if(game.pvp){
+                        possible=possible.filter(player=>!entities.players.some(other=>distPos(other,player)<250&&other.life>0&&other.id!=this.id))
+                    }else{
+                        possible=possible.filter(player=>!entities.players.some(other=>distPos(other,player)<250&&other.life>0&&other.id==0))
+                    }
+                    spawner=randin(possible)
+                    if(!entities.players.some(other=>distPos(other,spawner)<250&&other.life>0&&other.id!=this.id)||!game.spectateSpawn[1]){
+                        this.base.position.x=spawner.previous.position.x
+                        this.base.position.y=spawner.previous.position.y+spawner.height/2-this.height/2-max(0,spawner.assort.ramp*(this.width-spawner.width)/2)-max(0,spawner.velocity.y)
+                    }
+                }
+            }
         }
         this.stats.killStreak=0
         this.respawned=true
@@ -2615,6 +2688,7 @@ class player{
         this.record.life=this.base.life
         this.dead=false
         this.die.timer=0
+        this.die.objectiveTimer=0
         this.visible=0
         if(game.randomSpawn){
             this.position.x=random(0,game.edge[0])
@@ -2647,7 +2721,9 @@ class player{
         }
     }
     resetKeys(){
-        this.invincible=this.fort?30:60
+        if(this.fort||!game.teamSpawn&&!game.spectateSpawn[0]){
+            this.invincible=30//this.fort?30:60
+        }
         this.DOT.active=0
         this.critBuff=0
         this.critTick=0
@@ -2863,7 +2939,8 @@ class player{
             }else if(this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1021){
                 if(this.visible==0){
                     this.visible=600
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+                    game.index++
                     entities.players[entities.players.length-1].decoy=true
                     entities.players[entities.players.length-1].copy=this.index
                     entities.players[entities.players.length-1].copyId=this.id
@@ -2926,10 +3003,15 @@ class player{
                 (this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&
                 this.visible<585
             ){
-                if(this.visible==0/*&&this.life<this.base.life*0.9*/&&this.assort.firing<=15){
+                if(this.visible==0/*&&this.life<this.base.life*0.9*/&&this.assort.firing<=15&&this.life>0){
                     this.visible=600
-                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),this.index))
+                    entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+                    game.index++
                     entities.players[entities.players.length-1].decoy2=true
+                    entities.players[entities.players.length-1].velocity.x=this.velocity.x
+                    entities.players[entities.players.length-1].velocity.y=this.velocity.y
+                    entities.players[entities.players.length-1].lastingForce[0]=this.lastingForce[0]
+                    entities.players[entities.players.length-1].lastingForce[1]=this.lastingForce[1]
                     entities.players[entities.players.length-1].copy=this.index
                     entities.players[entities.players.length-1].copyId=this.id
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
@@ -2937,6 +3019,7 @@ class player{
                     entities.players[entities.players.length-1].life=0
                     entities.players[entities.players.length-1].collect.life=this.life
                     entities.players[entities.players.length-1].fade=this.fade
+                    entities.players[entities.players.length-1].assort.copyDeaths=this.stats.deaths+1
                     this.fade=0
                 }else if(this.visible>=60){
                     this.visible2=30
@@ -2962,7 +3045,7 @@ class player{
                 this.id==0&&game.ender&&!this.fort||
                 this.playerData.name.includes('Ender')
             )&&this.base.life-this.life>=this.assort.ender&&this.life>0){
-                this.assort.ender+=50
+                this.assort.ender=this.base.life-this.life+50
                 let crit
                 switch(this.playerData.name){
                     case 'EnderShotgunMartyr':
@@ -2975,7 +3058,7 @@ class player{
                 if(set.length>0){
                     let pos=set[floor(random(0,set.length))]
                     this.position.x=pos[0]
-                    this.position.y=pos[1]-this.height/2
+                    this.position.y=pos[1]-this.height/2-this.width/2*pos[2]
                 }
             }
         }
@@ -7705,6 +7788,21 @@ class player{
                         entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],468,(lsin(this.direction.main)<0?-90:90)+random(-10,10),this.id,weaponData.damage*damageBuff,90,crit,this.index))
                         entities.projectiles[entities.projectiles.length-1].velocity.y-=1.5
                     break
+                    case 1125:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],469,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                    break
+                    case 1126:
+                        entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+this.height/2,379,180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        entities.projectiles[entities.projectiles.length-1].speed=0
+                        entities.projectiles[entities.projectiles.length-1].explode()
+                        entities.projectiles[entities.projectiles.length-1].active=false
+                        this.jump.time=0
+                        this.velocity.x=lsin(this.direction.main)*20
+                        this.velocity.y=-10
+                        this.lastingForce[0]+=lsin(this.direction.main)*2
+                        this.lastingForce[1]-=2
+                        this.thrown=true
+                    break
 
                     //mark
                 }
@@ -8761,6 +8859,9 @@ class player{
                 if(this.life>0&&game.past){
                     this.inputs.push([inputSet[0],inputSet[1],inputSet[2],inputSet[3]])
                 }
+                if(this.life<=0&&inputSetC[0]){
+                    this.assort.spectate++
+                }
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(inputSet[inputSwap]&&!inputSet[1-inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
@@ -9150,7 +9251,7 @@ class player{
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
             for(let a=0,la=entities.players.length;a<la;a++){
-                if(entities.players[a].index==this.die.killer&&entities.players[a].id!=this.id){
+                if(entities.players[a].index==this.die.killer&&(entities.players[a].id!=this.id||this.fort)){
                     entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
@@ -9555,7 +9656,7 @@ class player{
                         }
                         entities.players[a].stats.killStreak++
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
-                        if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2){
+                        if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2&&entities.players[a].index!=this.index){
                             entities.players[a].stats.idealKills++
                         }
                         /*if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30&&game.level!=31){
@@ -9565,7 +9666,7 @@ class player{
                             for(let b=0,lb=entities.players.length;b<lb;b++){
                                 if(entities.players[b].index==entities.players[a].builder){
                                     entities.players[b].stats.kills=round(entities.players[b].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
-                                    if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2){
+                                    if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2&&entities.players[a].index!=this.index){
                                         entities.players[b].stats.idealKills++
                                     }
                                 }
@@ -9683,6 +9784,7 @@ class player{
                 }
             }else if(this.id>0&&!this.remote&&!this.auto){
                 this.die.timer++
+                this.die.objectiveTimer++
                 if(this.die.timer>(game.assault||game.level==44||game.level==65||game.level==77||game.level==98||game.level==99||game.level==132||game.level==133||game.level==135?60:game.level==55?150:game.level==67||game.level==78||game.level==95||game.level==134?this.assort.threshold:game.level==79||game.level==82?480:300)&&game.classicRespawn&&!game.past||this.id>game.gaming&&this.die.timer>600&&!game.past&&!game.classicRespawn&&!game.pvp){
                     if(game.traitor&&game.traitorKey==this.index){
                         if(this.die.timer>600){
@@ -12064,10 +12166,10 @@ class player{
                                         this.dead=true
                                         entities.players[b].life=0
                                         entities.players[b].dead=true
-                                        entities.players[a].position.x=entities.players[b].position.x
-                                        entities.players[a].position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
-                                        entities.players[a].previous.position.x=entities.players[b].position.x
-                                        entities.players[a].previous.position.y=entities.players[b].position.y+entities.players[b].height/2-12-2.4*entities.players[b].assort.ramp
+                                        entities.players[a].position.x=entities.players[b].previous.position.x
+                                        entities.players[a].position.y=entities.players[b].previous.position.y+entities.players[b].height/2-entities.players[a].height/2-2.4*entities.players[b].assort.ramp
+                                        entities.players[a].previous.position.x=entities.players[b].previous.position.x
+                                        entities.players[a].previous.position.y=entities.players[b].previous.position.y+entities.players[b].height/2-entities.players[a].height/2-2.4*entities.players[b].assort.ramp
                                     }
                                 }
                             }
@@ -12177,7 +12279,7 @@ class player{
                                 this.dead=true
                                 let pos=game.spawner[floor(random(0,game.spawner.length))]
                                 entities.players[a].position.x=pos[0]
-                                entities.players[a].position.y=pos[1]-entities.players[a].height/2
+                                entities.players[a].position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
                             }
                         }
                     }
@@ -12394,7 +12496,7 @@ class player{
                 this.noGravTime--
                 this.velocity.y*=0.8
             }else{
-                this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'?1:1.5
+                this.velocity.y+=this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'?1:game.gravity
             }
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y

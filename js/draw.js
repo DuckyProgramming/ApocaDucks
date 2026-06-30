@@ -1077,6 +1077,8 @@ function mainloop(){
                                 special=true
                             }
                         }
+                    }else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=30){
+                        center=entities.players[c].getSpectate()
                     }
                     if(!special){
                         key[c]*=dev.sight?game.edge[0]/graphics.main[0].width*(game.level==44?0.25:1):min(
@@ -1104,6 +1106,10 @@ function mainloop(){
                         effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                     }
                 }
+                /*entities.players.forEach(player=>{
+                    player.safe.position.x=player.position.x
+                    player.safe.position.y=player.position.y
+                })*/
                 for(let a=0,la=graphics.main.length;a<la;a++){
                     switch(game.level){
                         case 6: case 45:
@@ -1611,6 +1617,15 @@ function mainloop(){
                                     }
                                 }
                             }
+                        }
+                    }
+                    if(entities.players[c].life<=0&&entities.players[c].die.timer>=30){
+                        center=entities.players[c].getSpectate()
+                        if(center!=entities.players[c]){
+                            let fail=game.spectateSpawn[0]&&game.spectateSpawn[1]&&!entities.players[c].getSpectateSafe(center)
+                            graphics.main[c].fill(255,fail?0:255,fail?0:255)
+                            graphics.main[c].textSize(20)
+                            graphics.main[c].text(`Spectating`,center.position.x,center.position.y+60)
                         }
                     }
                 }

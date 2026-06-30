@@ -1,7 +1,8 @@
 game={
-  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,ammoMult:2,tileset:[0,0],edge:[0,0],tilecolor:[],
+  level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,tileset:[0,0],edge:[0,0],tilecolor:[],
   index:0,projectileIndex:0,
   lifeBuff:1,lifeBuffAll:1,
+  ammoMult:2,gravity:1.5,
   emergencyKey:false,newStats:true,spawnIndex:0,spawner:[],
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,classWeapon:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
@@ -15,8 +16,15 @@ game={
   readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
+  teamSpawn:false,spectateSpawn:[false,false],
+  /*
+  spectateSpawn
+  0 - enables spawning on teammates
+  1 - prohibits spawning on teammates in combat
+  */
   projClump:[],disable:[],
   /*
+  disable
   0 - Drunk
   1 - Skillless
   2 - Racist
@@ -37,7 +45,7 @@ game={
       ],[
           ['DoubleMountain','Steel','Sulfate','Process'],
           ['Downward','Sierra Leone','Fragile','NuclearMountain'],
-        ['Entropy','Rusted','Tailwater','Abandoned'],
+          ['Entropy','Rusted','Tailwater','Abandoned'],
           ['Cooked','Divider','Rocksalt','Bluefort'],
           ['Bluefort Mini','Bluefort Micro','Railing','Sulfite'],
           ['Confines','Ferrum','Cysteine','Bluestone'],
@@ -8137,6 +8145,12 @@ types={
     },{
       name:'PlayerLevel3CProxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
+    },{
+      name:'PlayerElectricCharge',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1125,
+    },{
+      name:'PlayerRocketJumpC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1126,
     },
 
     //mark c
@@ -20090,6 +20104,24 @@ types={
 			reload:6,
 			speed:1.2,
       uses:96,
+		},{
+			name:'Electric Charge',
+			ammo:1,
+			damage:300,
+			cooldown:20,
+			stop:150,
+			reload:0,
+			speed:0.8,
+      uses:3.5,
+		},{
+			name:'Rocket Jump C',
+			ammo:1,
+			damage:60,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
 		},
 
     /*{

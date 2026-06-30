@@ -23,7 +23,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
-                a==458||a==462||a==466,
+                a==458||a==462||a==466||a==469,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -35,7 +35,7 @@ function setupRules(){
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
-                a==466,
+                a==466||a==469,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -138,7 +138,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==445||
                 a==447||a==448||a==450||a==457||a==458||
-                a==462,
+                a==462||a==469,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -518,6 +518,9 @@ function intersectKey(p1,q1,p2,q2){
     let ud=((q2.y-p2.y)*(q1.x-p1.x)-(q2.x-p2.x)*(q1.y-p1.y))
     let ua=((q2.x-p2.x)*(p1.y-p2.y)-(q2.y-p2.y)*(p1.x-p2.x))/ud
     return {x:p1.x+ua*(q1.x-p1.x),y:p1.y+ua*(q1.y-p1.y)}
+}
+function distPos(p1,p2){
+	return dist(p1.position.x,p1.position.y,p2.position.x,p2.position.y)
 }
 function dist2(p,q){
     return dist(p.x,p.y,q.x,q.y)**2
@@ -11339,7 +11342,7 @@ function setupLists(){
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
-            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerPocketRocket`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJump`],
+            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJumpC`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
