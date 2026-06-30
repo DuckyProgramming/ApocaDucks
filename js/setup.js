@@ -91,7 +91,9 @@ function mouseClicked(){
                                 game.classWeapon=menu.weapon==2
                             break
                             case 3:
-                                game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})
+                                //game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})
+                                game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:40,height:45})
+                                game.speedArena=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+40,y:pos[1]},width:40,height:45})
                                 menu.mode=b+1
                             break
                             case 4:
@@ -2058,7 +2060,7 @@ function mouseClicked(){
         */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?5:4):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?6:5):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     game.smile=floor(random(0,100))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
@@ -2066,32 +2068,49 @@ function mouseClicked(){
                             menu.mode=b+1
                         }
                     }else if(a==1){
-                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
+                        //let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         switch(b){
                             case 0:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-30,y:pos[1]},width:60,height:45})){
+                                    game.diff=max(5,round(game.diff*10-1))/10
+                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})){
+                                    game.diff=min(20,round(game.diff*10+1))/10
+                                }
+                                /*if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                     game.diff=max(5,round(game.diff*10-1))/10
                                 }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
                                     game.diff=min(20,round(game.diff*10+1))/10
-                                }
+                                }*/
                             break
                             case 1:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.deathlink=!game.deathlink
                                 }
                             break
                             case 2:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.noStat=!game.noStat
                                 }
                             break
                             case 3:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.killStreak=!game.killStreak
                                 }
                             break
                             case 4:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                    game.spectateSpawn[0]=!game.spectateSpawn[0]
+                                    game.spectateSpawn[1]=!game.spectateSpawn[1]
+                                }
+                            break
+                            case 5:
+                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.traitor=!game.traitor
                                 }
                             break
@@ -2141,6 +2160,39 @@ function mouseClicked(){
                                     newWave()
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        break
+        case 'options':
+            for(let a=0,la=2;a<la;a++){
+                for(let b=0,lb=[3,1][a];b<lb;b++){
+                    game.smile=floor(random(0,100))==0
+                    if(a==0){
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        switch(b){
+                            case 0:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.noStat=!game.noStat
+                                }
+                            break
+                            case 1:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.killStreak=!game.killStreak
+                                }
+                            break
+                            case 2:
+                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                    game.spectateSpawn[0]=!game.spectateSpawn[0]
+                                    game.spectateSpawn[1]=!game.spectateSpawn[1]
+                                }
+                            break
+                        }
+                    }else{
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                            stage.scene='main'
                         }
                     }
                 }
@@ -2308,7 +2360,7 @@ function mouseClicked(){
                                             menu.level=50
                                             game.classicWeapon=true
                                             game.pvp=true
-                                            game.classicRespawn=false
+                                            game.awn=false
                                             instant()
                                         }
                                     break
@@ -2646,7 +2698,7 @@ function instant(){
     if(types.mission[game.mission].wave[0].length==0){
         generateMission(types.mission[game.mission].wave)
     }
-    stage.scene='main'
+    stage.scene=rules.dm?'main':'options'
     display.cycle=0
 }
 function keyPressed(){

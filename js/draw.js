@@ -26,20 +26,39 @@ function mainloop(){
                     }
                     if(a==3&&b==3){
                         if(menu.mode==b+1){
-                            if(game.past){
+                            if(game.speedArena){
                                 fill(100)
+                                rect(pos[0]-39.5,pos[1],41,45,10)
+                                rect(pos[0],pos[1],41,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]+39.5,pos[1],41,45,10)
+                            }else if(game.past){
+                                fill(100)
+                                rect(pos[0]-39.5,pos[1],41,45,10)
+                                rect(pos[0]+39.5,pos[1],41,45,10)
+                                fill(100,200,100)
+                                rect(pos[0],pos[1],41,45,10)
+                                /*fill(100)
                                 rect(pos[0]-29.5,pos[1],61,45,10)
                                 fill(100,200,100)
-                                rect(pos[0]+29.5,pos[1],61,45,10)
+                                rect(pos[0]+29.5,pos[1],61,45,10)*/
                             }else{
                                 fill(100)
+                                rect(pos[0],pos[1],41,45,10)
+                                rect(pos[0]+39.5,pos[1],41,45,10)
+                                fill(100,200,100)
+                                rect(pos[0]-39.5,pos[1],41,45,10)
+                                /*fill(100)
                                 rect(pos[0]+29.5,pos[1],61,45,10)
                                 fill(100,200,100)
-                                rect(pos[0]-29.5,pos[1],61,45,10)
+                                rect(pos[0]-29.5,pos[1],61,45,10)*/
                             }
                         }else{
-                            rect(pos[0]+29.5,pos[1],61,45,10)
-                            rect(pos[0]-29.5,pos[1],61,45,10)
+                            //rect(pos[0]+29.5,pos[1],61,45,10)
+                            //rect(pos[0]-29.5,pos[1],61,45,10)
+                            rect(pos[0]-39.5,pos[1],41,45,10)
+                            rect(pos[0],pos[1],41,45,10)
+                            rect(pos[0]+39.5,pos[1],41,45,10)
                         }
                     }else if(menu.mode==3&&a==9&&b==0){
                         rect(pos[0]+49.5,pos[1],51,45,10)
@@ -101,8 +120,9 @@ function mainloop(){
                                 text(`PvP`,pos[0],pos[1]+15)
                             break
                             case 3:
-                                text(`PvP`,pos[0]-30,pos[1]+15)
-                                text(`Past`,pos[0]+30,pos[1]+15)
+                                text(`PvP`,pos[0]-40,pos[1]+15)
+                                text(`Past`,pos[0],pos[1]+15)
+                                text(`Speed`,pos[0]+40,pos[1]+15)
                             break
                             case 5:
                                 text(`PvP/PvE`,pos[0],pos[1]+15)
@@ -626,7 +646,7 @@ function mainloop(){
         */
         case 'mission':
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
-                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?5:4):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
+                for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?6:5):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
                         if(menu.mode==b+1){
@@ -639,8 +659,24 @@ function mainloop(){
                         textSize(15)
                         text(['Easy','Medium','Hard','Expert','Unfair','Special'][b],pos[0],pos[1])
                     }else if(a==1){
-                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
-                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.killStreak||b==4&&game.traitor?200:100,100)
+                        let pos=[width/2+b*140-lb*70+70,60+a*55+40]
+                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.killStreak||b==4&&game.spectateSpawn[0]||b==5&&game.traitor?200:100,100)
+                        if(b==0){
+                            rect(pos[0]+29.5,pos[1],61,45,10)
+                            rect(pos[0]-29.5,pos[1],61,45,10)
+                        }else{
+                            rect(pos[0],pos[1],120,45,10)
+                        }
+                        fill(0)
+                        textSize(15)
+                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Team Spawn`,`Traitor`][b],pos[0],pos[1])
+                        if(b==0){
+                            textSize(10)
+                            text(['-'][b],pos[0]-45,pos[1]-15)
+                            text(['+'][b],pos[0]+45,pos[1]-15)
+                        }
+                        /*let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        fill(100,b==1&&game.deathlink||b==2&&game.noStat||b==3&&game.killStreak||b==4&&game.spectateSpawn[0]||b==5&&game.traitor?200:100,100)
                         if(b==0){
                             rect(pos[0]+37,pos[1],76,45,10)
                             rect(pos[0]-37,pos[1],76,45,10)
@@ -649,12 +685,12 @@ function mainloop(){
                         }
                         fill(0)
                         textSize(15)
-                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Traitor`][b],pos[0],pos[1])
+                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Team Spawn`,`Traitor`][b],pos[0],pos[1])
                         if(b==0){
                             textSize(10)
                             text(['-'][b],pos[0]-52.5,pos[1]-15)
                             text(['+'][b],pos[0]+52.5,pos[1]-15)
-                        }
+                        }*/
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         let unit=menu.list[menu.mode-1][a*5+b-10]
@@ -666,6 +702,27 @@ function mainloop(){
                         textSize(11.25)
                         text(`${['Easy','Medium','Hard','Expert','Unfair','Special'][types.mission[unit].difficulty]}`,pos[0]-37,pos[1]+15)
                         text(`${types.mission[unit].wave.length} Wave${types.mission[unit].wave.length!=1?`s`:``}`,pos[0]+37,pos[1]+15)
+                    }
+                }
+            }
+        break
+        case 'options':
+            for(let a=0,la=2;a<la;a++){
+                for(let b=0,lb=[3,1][a];b<lb;b++){
+                    if(a==0){
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        fill(100,b==0&&game.noStat||b==1&&game.killStreak||b==2&&game.spectateSpawn[0]?200:100,100)
+                        rect(pos[0],pos[1],150,45,10)
+                        fill(0)
+                        textSize(15)
+                        text([`No Stats`,`Killstreak`,`Team Spawn`][b],pos[0],pos[1])
+                    }else{
+                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        fill(100)
+                        rect(pos[0],pos[1],150,45,10)
+                        fill(0)
+                        textSize(15)
+                        text(`Begin`,pos[0],pos[1])
                     }
                 }
             }

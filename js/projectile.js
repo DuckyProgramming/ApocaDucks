@@ -11572,7 +11572,7 @@ class projectile{
 								if(entities.players[d].index==this.index){
 									if(entities.players[d].life>0&&(entities.players[d].playerData.name=='PlayerSpyC2'||entities.players[d].playerData.name=='PlayerSpyW'&&entities.players[d].subWeaponCType==1006)){
 										entities.players[d].visible=600
-										entities.players.push(new player(entities.players[d].layer,entities.players[d].position.x,entities.players[d].position.y+entities.players[d].height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+										entities.players.push(new player(entities.players[d].layer,entities.players[d].previous.position.x,entities.players[d].previous.position.y+entities.players[d].height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
 										game.index++
 										entities.players[entities.players.length-1].decoy2=true
 										entities.players[entities.players.length-1].velocity.x=entities.players[d].velocity.x
@@ -11586,7 +11586,7 @@ class projectile{
 										entities.players[entities.players.length-1].life=0
 										entities.players[entities.players.length-1].collect.life=entities.players[d].life
 										entities.players[entities.players.length-1].fade=entities.players[d].fade
-										entities.players[entities.players.length-1].assort.copyDeaths=entities.players[d].deaths+1
+										entities.players[entities.players.length-1].assort.copyDeaths=entities.players[d].stats.deaths+1
 										entities.players[d].fade=0
 									}else{
 										entities.players[d].speedBuff=max(entities.players[d].speedBuff,180)

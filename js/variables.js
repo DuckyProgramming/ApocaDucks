@@ -17,6 +17,7 @@ game={
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
+  speedArena:true,
   /*
   spectateSpawn
   0 - enables spawning on teammates
@@ -65,6 +66,8 @@ game={
           ['Bluefort','Bluefort Mini','Bluefort Micro','Gray Gravel'],
           ['Shogatsu','Basalt','Razorpoint','Valuation'],
           ['Aerial','Cranberry','Blueprint'],
+      ],[
+        ['Aerial'],
       ],
   ]
 }
@@ -19025,9 +19028,9 @@ types={
 			name:'Discord',
 			ammo:1,
 			damage:0,
-			cooldown:45,
-			stop:45,
-			reload:45,
+			cooldown:30,
+			stop:30,
+			reload:30,
 			speed:1,
       uses:9,
 		},{
