@@ -1134,7 +1134,7 @@ function mainloop(){
                                 special=true
                             }
                         }
-                    }else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=30){
+                    }else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=60){
                         center=entities.players[c].getSpectate()
                     }
                     if(!special){
@@ -1676,7 +1676,7 @@ function mainloop(){
                             }
                         }
                     }
-                    if(entities.players[c].life<=0&&entities.players[c].die.timer>=30){
+                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=60){
                         center=entities.players[c].getSpectate()
                         if(center!=entities.players[c]){
                             let fail=game.spectateSpawn[0]&&game.spectateSpawn[1]&&!entities.players[c].getSpectateSafe(center)

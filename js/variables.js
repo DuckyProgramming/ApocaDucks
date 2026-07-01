@@ -7731,6 +7731,9 @@ types={
       name:'PlayerLightCarpenter',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:888,
     },{
+      name:'PlayerLighterCarpenter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:0.75,reloadBuff:1.5,crit:0,weapon:888,
+    },{
       name:'PlayerRejuvenator',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:887,
     },{

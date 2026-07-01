@@ -8705,7 +8705,8 @@ class projectile{
 						if(entities.players[a].assort.penalty>=12){
 							entities.players[a].life=max(entities.players[a].life-this.damage*4,1)
 							//entities.players[a].collect.life=entities.players[a].life
-							entities.players[a].collect.time=max(entities.players[a].collect.time,450)
+							//entities.players[a].collect.time=max(entities.players[a].collect.time,450)
+							entities.players[a].collect.time=max(entities.players[a].collect.time,150)
 						}
 					}
 				}
@@ -11404,7 +11405,9 @@ class projectile{
 							target.takeDamage(this.damage*max(1,1.25-this.timer*0.025))
 						break
 						case 419:
-							if(!target.fort){
+							if(target.fort){
+								target.takeDamage(this.damage)
+							}else{
 								let preLife=target.life
 								target.takeDamage(this.damage)
 								if(target.life<preLife){

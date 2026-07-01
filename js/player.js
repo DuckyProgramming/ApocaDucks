@@ -3093,7 +3093,8 @@ class player{
                                 entities.players[a].life<entities.players[a].base.life||
                                 entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             )){
-                                entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 build=false
                                 if(!this.inspect.includes(entities.players[a].index)){
@@ -3208,7 +3209,8 @@ class player{
                                 entities.players[a].life<entities.players[a].base.life||
                                 entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             )){
-                                entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 build=false
                                 if(!this.inspect.includes(entities.players[a].index)){
@@ -3244,7 +3246,8 @@ class player{
                                     entities.players[a].life<entities.players[a].base.life||
                                     entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 )){
-                                    entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                    //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                                    entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                     entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                     build=false
                                     if(!this.inspect.includes(entities.players[a].index)){
@@ -3290,7 +3293,8 @@ class player{
                         entities.players[a].life<entities.players[a].base.life||
                         entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                     )){
-                        entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
                         this.assort.build=-1
@@ -3322,7 +3326,8 @@ class player{
                             entities.players[a].life<entities.players[a].base.life||
                             entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         )){
-                            entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                            //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                            entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                             entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             build=false
                             if(!this.inspect.includes(entities.players[a].index)){
@@ -3359,7 +3364,8 @@ class player{
                         entities.players[a].life<entities.players[a].base.life||
                         entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                     )){
-                        entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
+                        entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
                         this.assort.build=-1
