@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[1,0],sets:[[0,7],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[5,0],sets:[[0,0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -2727,6 +2727,11 @@ function keyPressed(){
                 }
             }
             updateRules()
+        break
+        case 'options':
+            if(key==`Enter`){
+                stage.scene='main'
+            }
         break
     }        
     switch(key){

@@ -7981,7 +7981,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1012,
     },{
       name:'PlayerVitasaw',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1014,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1014,
     },{
       name:'PlayerShield',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1015,
@@ -8111,7 +8111,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1100,
     },{
       name:'PlayerWrench',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1101,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1101,
     },{
       name:'PlayerPushPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1110,
@@ -19839,13 +19839,13 @@ types={
       uses:2,
 		},{
 			name:'Penalty Scattergun C',
-			ammo:4,
+			ammo:6,
 			damage:20,
 			cooldown:30,
 			stop:60,
 			reload:20,
 			speed:1.15,
-      uses:28,
+      uses:36,
 		},{
 			name:'Nutter',
 			ammo:2,

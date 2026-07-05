@@ -41,7 +41,15 @@ class player{
         this.weapon={ammo:this.weaponData.ammo,cooldown:0,reload:0,uses:(this.weaponData.uses==1?this.weaponData.uses:this.weaponData.uses*this.ammoMult),reloading:false}
         this.DOT={damage:0,active:0}
         this.die={timer:0,objectiveTimer:0,killer:-1}
-        this.stats={kills:0,idealKills:0,killStreak:0,deaths:0,damage:0,bust:0,bustCount:0,usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0}
+        this.stats={
+            kills:0,subKills:[0,0,0],
+            idealKills:0,subIdealKills:[0,0,0],
+            damage:0,subDamage:[0,0,0],
+            taken:0,subTaken:[0,0,0],
+            killStreak:0,deaths:0,
+            bust:0,bustCount:0,
+            usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0
+        }
         this.invincible=0
         this.spy=false
         if(
@@ -2460,7 +2468,7 @@ class player{
         this.subPlayerAData=types.player[this.subPlayerAType]
         this.subWeaponAType=this.subPlayerAData.weapon
         this.subWeaponAData=types.weapon[this.subWeaponAType]
-        this.subWeaponA={ammo:this.subWeaponAData.ammo,cooldown:0,reload:0,uses:(this.subWeaponAData.uses==1?this.subWeaponAData.uses:this.subWeaponAData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponA={ammo:this.subWeaponAData.ammo,cooldown:0,reload:0,uses:(this.subWeaponAData.uses==1?this.subWeaponAData.uses:this.subWeaponAData.uses*this.ammoMult),reloading:false,time:0,id:0}
         this.updateWeaponRules()
     }
     newSubWeaponB(set){
@@ -2469,7 +2477,7 @@ class player{
         this.subPlayerBData=types.player[this.subPlayerBType]
         this.subWeaponBType=this.subPlayerBData.weapon
         this.subWeaponBData=types.weapon[this.subWeaponBType]
-        this.subWeaponB={ammo:this.subWeaponBData.ammo,cooldown:0,reload:0,uses:(this.subWeaponBData.uses==1?this.subWeaponBData.uses:this.subWeaponBData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponB={ammo:this.subWeaponBData.ammo,cooldown:0,reload:0,uses:(this.subWeaponBData.uses==1?this.subWeaponBData.uses:this.subWeaponBData.uses*this.ammoMult),reloading:false,time:0,id:1}
         this.updateWeaponRules()
     }
     newSubWeaponC(set){
@@ -2478,7 +2486,7 @@ class player{
         this.subPlayerCData=types.player[this.subPlayerCType]
         this.subWeaponCType=this.subPlayerCData.weapon
         this.subWeaponCData=types.weapon[this.subWeaponCType]
-        this.subWeaponC={ammo:this.subWeaponCData.ammo,cooldown:0,reload:0,uses:(this.subWeaponCData.uses==1?this.subWeaponCData.uses:this.subWeaponCData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponC={ammo:this.subWeaponCData.ammo,cooldown:0,reload:0,uses:(this.subWeaponCData.uses==1?this.subWeaponCData.uses:this.subWeaponCData.uses*this.ammoMult),reloading:false,time:0,id:2}
         this.updateWeaponRules()
     }
     newWeaponSet(type){
@@ -2506,7 +2514,7 @@ class player{
         this.subPlayerAData=types.player[this.subPlayerAType]
         this.subWeaponAType=this.subPlayerAData.weapon
         this.subWeaponAData=types.weapon[this.subWeaponAType]
-        this.subWeaponA={ammo:this.subWeaponAData.ammo,cooldown:0,reload:0,uses:(this.subWeaponAData.uses==1?this.subWeaponAData.uses:this.subWeaponAData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponA={ammo:this.subWeaponAData.ammo,cooldown:0,reload:0,uses:(this.subWeaponAData.uses==1?this.subWeaponAData.uses:this.subWeaponAData.uses*this.ammoMult),reloading:false,time:0,id:0}
         this.updateWeaponRules()
     }
     newSubWeaponBSet(type){
@@ -2514,7 +2522,7 @@ class player{
         this.subPlayerBData=types.player[this.subPlayerBType]
         this.subWeaponBType=this.subPlayerBData.weapon
         this.subWeaponBData=types.weapon[this.subWeaponBType]
-        this.subWeaponB={ammo:this.subWeaponBData.ammo,cooldown:0,reload:0,uses:(this.subWeaponBData.uses==1?this.subWeaponBData.uses:this.subWeaponBData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponB={ammo:this.subWeaponBData.ammo,cooldown:0,reload:0,uses:(this.subWeaponBData.uses==1?this.subWeaponBData.uses:this.subWeaponBData.uses*this.ammoMult),reloading:false,time:0,id:1}
         this.updateWeaponRules()
     }
     newSubWeaponCSet(type){
@@ -2522,7 +2530,7 @@ class player{
         this.subPlayerCData=types.player[this.subPlayerCType]
         this.subWeaponCType=this.subPlayerCData.weapon
         this.subWeaponCData=types.weapon[this.subWeaponCType]
-        this.subWeaponC={ammo:this.subWeaponCData.ammo,cooldown:0,reload:0,uses:(this.subWeaponCData.uses==1?this.subWeaponCData.uses:this.subWeaponCData.uses*this.ammoMult),reloading:false,time:0}
+        this.subWeaponC={ammo:this.subWeaponCData.ammo,cooldown:0,reload:0,uses:(this.subWeaponCData.uses==1?this.subWeaponCData.uses:this.subWeaponCData.uses*this.ammoMult),reloading:false,time:0,id:2}
         this.updateWeaponRules()
     }
     newWeaponSelect(type){
@@ -2533,12 +2541,13 @@ class player{
             }
         }
     }
-    swapSubWeapons(){
-        if(
-            this.playerData.name=='PlayerEngineerC3'&&this.effectiveId()<=game.gaming||
+    swap3(){
+        return this.playerData.name=='PlayerEngineerC3'&&this.effectiveId()<=game.gaming||
             this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')||
             this.playerData.name=='PlayerEngineerW'
-        ){
+    }
+    swapSubWeapons(){
+        if(this.swap3()){
             let hold=this.subPlayerAType
             this.subPlayerAType=this.subPlayerBType
             this.subPlayerBType=this.subPlayerCType
@@ -3094,7 +3103,7 @@ class player{
                                 entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             )){
                                 //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                                entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                                entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 build=false
                                 if(!this.inspect.includes(entities.players[a].index)){
@@ -3210,7 +3219,7 @@ class player{
                                 entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             )){
                                 //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                                entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                                entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 build=false
                                 if(!this.inspect.includes(entities.players[a].index)){
@@ -3247,7 +3256,7 @@ class player{
                                     entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 )){
                                     //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                                    entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                                    entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                                     entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                     build=false
                                     if(!this.inspect.includes(entities.players[a].index)){
@@ -3294,7 +3303,7 @@ class player{
                         entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                     )){
                         //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                        entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                        entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
                         this.assort.build=-1
@@ -3327,7 +3336,7 @@ class player{
                             entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         )){
                             //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                            entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                            entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                             entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                             build=false
                             if(!this.inspect.includes(entities.players[a].index)){
@@ -3365,7 +3374,7 @@ class player{
                         entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                     )){
                         //entities.players[a].life=max(entities.players[a].base.life,entities.players[a].life)
-                        entities.players[a].building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
+                        entities.players[a].assort.building+=(max(entities.players[a].base.life,entities.players[a].life)-entities.players[a].life)*3/5
                         entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                         build=false
                         this.assort.build=-1
@@ -8162,10 +8171,18 @@ class player{
             break
         }
         for(let a=0,la=this.infoAnim.ammo.length;a<la;a++){
-            this.infoAnim.ammo[a]=smoothAnim(this.infoAnim.ammo[a],this.weapon.ammo>a,0,1,5)
+            /*if(this.weaponData.ammo>6){
+                this.infoAnim.ammo[a]=0
+            }else{*/
+                this.infoAnim.ammo[a]=smoothAnim(this.infoAnim.ammo[a],this.weapon.ammo>a,0,1,5)
+            //}
         }
         for(let a=0,la=this.infoAnim.uses.length;a<la;a++){
-            this.infoAnim.uses[a]=smoothAnim(this.infoAnim.uses[a],this.weapon.uses>a,0,1,5)
+            /*if(this.weaponData.uses>6){
+                this.infoAnim.uses[a]=0
+            }else{*/
+                this.infoAnim.uses[a]=smoothAnim(this.infoAnim.uses[a],this.weapon.uses>a,0,1,5)
+            //}
         }
         if(abs(this.direction.main-this.direction.goal)<=18||abs(this.direction.main-this.direction.goal-360)<=18||abs(this.direction.main-this.direction.goal+360)<=18||abs(this.direction.main-this.direction.goal-720)<=18||abs(this.direction.main-this.direction.goal+720)<=18){
             this.direction.main=this.direction.goal
@@ -9268,9 +9285,12 @@ class player{
         if(this.record.life<this.life){
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
+            this.stats.taken+=this.record.life-max(0,this.life)
+            this.stats.subTaken[this.subWeaponA.id]+=this.record.life-max(0,this.life)
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index==this.die.killer&&(entities.players[a].id!=this.id||this.fort)){
                     entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    entities.players[a].stats.subDamage[entities.players[a].subWeaponA.id]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                     if(!game.pvp||this.id>0){
                         entities.players[a].stats.bust+=this.record.life-max(0,this.life)
                     }
@@ -9308,6 +9328,14 @@ class player{
                             for(let b=0,lb=entities.players.length;b<lb;b++){
                                 if(entities.players[b].index==entities.players[a].builder){
                                     entities.players[b].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    /*if(entities.players[b].subWeaponA.id==2){
+                                        entities.players[b].stats.subDamage[0]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }else if(entities.players[b].subWeaponB.id==2){
+                                        entities.players[b].stats.subDamage[1]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }else if(entities.players[b].subWeaponC.id==2){
+                                        entities.players[b].stats.subDamage[2]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }*/
+                                    entities.players[b].stats.subDamage[2]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1) 
                                     if(!game.pvp||this.id>0){
                                         entities.players[b].stats.bust+=this.record.life-max(0,this.life)
                                     }
@@ -9348,6 +9376,14 @@ class player{
                             for(let b=0,lb=entities.players.length;b<lb;b++){
                                 if(entities.players[b].index==entities.players[a].builder){
                                     entities.players[b].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    /*if(entities.players[b].subWeaponA.id==2){
+                                        entities.players[b].stats.subDamage[0]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }else if(entities.players[b].subWeaponB.id==2){
+                                        entities.players[b].stats.subDamage[1]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }else if(entities.players[b].subWeaponC.id==2){
+                                        entities.players[b].stats.subDamage[2]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                                    }*/
+                                    entities.players[b].stats.subDamage[2]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                                 }
                             }
                         }
@@ -9674,8 +9710,10 @@ class player{
                         }
                         entities.players[a].stats.killStreak++
                         entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
+                        entities.players[a].stats.subKills[entities.players[a].subWeaponA.id]=round(entities.players[a].stats.subKills[entities.players[a].subWeaponA.id]*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
                         if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2&&entities.players[a].index!=this.index){
                             entities.players[a].stats.idealKills++
+                            entities.players[a].stats.subIdealKills[entities.players[a].subWeaponA.id]=round(entities.players[a].stats.subIdealKills[entities.players[a].subWeaponA.id]*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
                         }
                         /*if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30&&game.level!=31){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
@@ -9684,8 +9722,10 @@ class player{
                             for(let b=0,lb=entities.players.length;b<lb;b++){
                                 if(entities.players[b].index==entities.players[a].builder){
                                     entities.players[b].stats.kills=round(entities.players[b].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
+                                    entities.players[b].stats.subKills[2]=round(entities.players[b].stats.subKills[2]*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
                                     if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2&&entities.players[a].index!=this.index){
                                         entities.players[b].stats.idealKills++
+                                        entities.players[b].stats.subIdealKills[2]++
                                     }
                                 }
                             }
@@ -9729,6 +9769,8 @@ class player{
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
                                     entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
                                     entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
+                                    entities.projectiles[entities.projectiles.length-1].previous.position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
+                                    entities.projectiles[entities.projectiles.length-1].previous.position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                 }
                             }
                             this.id=entities.players[a].id
@@ -10991,6 +11033,35 @@ class player{
                 }
             }
         }
+        switch(this.playerData.name){
+            case 'PlayerScout': case 'PlayerSoldier': case 'PlayerPyro': case 'PlayerDemoman': case 'PlayerHeavyWeapons': case 'PlayerEngineerC': case 'PlayerMedicC': case 'PlayerSniperC': case 'PlayerSpyC': case 'PlayerDroner':
+            case 'PlayerScout2': case 'PlayerSoldier2': case 'PlayerPyro2': case 'PlayerDemoman2': case 'PlayerHeavyWeapons2': case 'PlayerEngineerC2': case 'PlayerMedicC2': case 'PlayerSniperC2': case 'PlayerSpyC2': case 'PlayerDroner2':
+            case 'PlayerScout3': case 'PlayerSoldier3': case 'PlayerPyro3': case 'PlayerDemoman3': case 'PlayerHeavyWeapons3': case 'PlayerEngineerC3': case 'PlayerMedicC3': case 'PlayerSniperC3': case 'PlayerSpyC3': case 'PlayerDroner3':
+            case 'PlayerScout4': case 'PlayerSoldier4': case 'PlayerPyro4': case 'PlayerDemoman4': case 'PlayerHeavyWeapons4': case 'PlayerEngineerC4': case 'PlayerMedicC4': case 'PlayerSniperC4': case 'PlayerSpyC4': case 'PlayerDroner4':
+            case 'PlayerScout5': case 'PlayerSoldier5': case 'PlayerPyro5': case 'PlayerDemoman5': case 'PlayerHeavyWeapons5': case 'PlayerEngineerC5': case 'PlayerMedicC5': case 'PlayerSniperC5': case 'PlayerSpyC5': case 'PlayerDroner5':
+            case 'PlayerScout6': case 'PlayerSoldier6': case 'PlayerPyro6': case 'PlayerDemoman6': case 'PlayerHeavyWeapons6': case 'PlayerEngineerC6': case 'PlayerMedicC6': case 'PlayerSniperC6': case 'PlayerSpyC6': case 'PlayerDroner6':
+            case 'PlayerScout7': case 'PlayerSoldier7': case 'PlayerPyro7': case 'PlayerDemoman7': case 'PlayerHeavyWeapons7': case 'PlayerEngineerC7': case 'PlayerMedicC7': case 'PlayerSniperC7': case 'PlayerSpyC7': case 'PlayerDroner7':
+            case 'PlayerScout8': case 'PlayerSoldier8': case 'PlayerPyro8': case 'PlayerDemoman8': case 'PlayerHeavyWeapons8': case 'PlayerEngineerC8': case 'PlayerMedicC8': case 'PlayerSniperC8': case 'PlayerSpyC8': case 'PlayerDroner8':
+            case 'PlayerScout9': case 'PlayerSoldier9': case 'PlayerPyro9': case 'PlayerDemoman9': case 'PlayerHeavyWeapons9': case 'PlayerEngineerC9': case 'PlayerMedicC9': case 'PlayerSniperC9': case 'PlayerSpyC9': case 'PlayerDroner9':
+            case 'PlayerScout10': case 'PlayerSoldier10': case 'PlayerPyro10': case 'PlayerDemoman10': case 'PlayerHeavyWeapons10': case 'PlayerEngineerC10': case 'PlayerMedicC10': case 'PlayerSniperC10': case 'PlayerSpyC10': case 'PlayerDroner10':
+            case 'PlayerScout11': case 'PlayerSoldier11': case 'PlayerPyro11': case 'PlayerDemoman11': case 'PlayerHeavyWeapons11': case 'PlayerEngineerC11': case 'PlayerMedicC11': case 'PlayerSniperC11': case 'PlayerSpyC11': case 'PlayerDroner11':
+            case 'PlayerScout12': case 'PlayerSoldier12': case 'PlayerPyro12': case 'PlayerDemoman12': case 'PlayerHeavyWeapons12': case 'PlayerEngineerC12': case 'PlayerMedicC12': case 'PlayerSniperC12': case 'PlayerSpyC12': case 'PlayerDroner12':
+            case 'PlayerScoutW': case 'PlayerSoldierW': case 'PlayerPyroW': case 'PlayerDemomanW': case 'PlayerHeavyWeaponsW': case 'PlayerEngineerW': case 'PlayerMedicW': case 'PlayerSniperW': case 'PlayerSpyW': case 'PlayerDronerW':
+            case 'PlayerMobster': case 'PlayerNightwatchEngineer': case 'PlayerNightwatchSoldier': case 'PlayerNightwatchHeavy': case 'PlayerNightwatchPyro':
+                for(let a=0,la=this.infoAnim.ammoA.length;a<la;a++){
+                    this.infoAnim.ammoA[a]=smoothAnim(this.infoAnim.ammoA[a],this.subWeaponA.ammo>a,0,1,5)
+                }
+                for(let a=0,la=this.infoAnim.usesA.length;a<la;a++){
+                    this.infoAnim.usesA[a]=smoothAnim(this.infoAnim.usesA[a],this.subWeaponA.uses>a,0,1,5)
+                }
+                for(let a=0,la=this.infoAnim.ammoB.length;a<la;a++){
+                    this.infoAnim.ammoB[a]=smoothAnim(this.infoAnim.ammoB[a],this.subWeaponB.ammo>a,0,1,5)
+                }
+                for(let a=0,la=this.infoAnim.usesB.length;a<la;a++){
+                    this.infoAnim.usesB[a]=smoothAnim(this.infoAnim.usesB[a],this.subWeaponB.uses>a,0,1,5)
+                }
+            break
+        }
         if(this.life>0){
             let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
             if(game.brutal){
@@ -12067,18 +12138,6 @@ class player{
                         this.weapon.uses=0
                     }
                     this.subWeaponA.time++
-                    for(let a=0,la=this.infoAnim.ammoA.length;a<la;a++){
-                        this.infoAnim.ammoA[a]=smoothAnim(this.infoAnim.ammoA[a],this.subWeaponA.ammo>a,0,1,5)
-                    }
-                    for(let a=0,la=this.infoAnim.usesA.length;a<la;a++){
-                        this.infoAnim.usesA[a]=smoothAnim(this.infoAnim.usesA[a],this.subWeaponA.uses>a,0,1,5)
-                    }
-                    for(let a=0,la=this.infoAnim.ammoB.length;a<la;a++){
-                        this.infoAnim.ammoB[a]=smoothAnim(this.infoAnim.ammoB[a],this.subWeaponB.ammo>a,0,1,5)
-                    }
-                    for(let a=0,la=this.infoAnim.usesB.length;a<la;a++){
-                        this.infoAnim.usesB[a]=smoothAnim(this.infoAnim.usesB[a],this.subWeaponB.uses>a,0,1,5)
-                    }
                     if(this.playerData.name=='PlayerMobster'){
                         for(let a=0,la=entities.players.length;a<la;a++){
                             if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<120&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&(this.id==0?1:0)==(entities.players[a].id==0?1:0)&&entities.players[a].weaponType==-1){
@@ -12298,6 +12357,8 @@ class player{
                                 let pos=game.spawner[floor(random(0,game.spawner.length))]
                                 entities.players[a].position.x=pos[0]
                                 entities.players[a].position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
+                                entities.players[a].previous.position.x=pos[0]
+                                entities.players[a].previous.position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
                             }
                         }
                     }

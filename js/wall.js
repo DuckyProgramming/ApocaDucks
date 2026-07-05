@@ -13256,11 +13256,12 @@ class wall{
                             let d=collideBoxBox(this,c)
                             let incident
                             let vecBall
-                            if((c.rules.bounce2)&&d<0){
+                            if(c.rules.bounce2&&d<0){
                                 let e={position:c.position,previous:c.previous,width:0,height:0}
                                 d=collideBoxBox(this,e)
                             }
                             if(d>=0&&!this.redundant[d]){
+                                //let inside=inBoxBox(c,{position:this.internalBounder.position,width:this.internalBounder.width+5,height:this.internalBounder.height+5})
                                 switch(d){
                                     case 0:
                                         if(c.rules.bounce2){
@@ -13576,14 +13577,16 @@ class wall{
                                     break
                                 }
                                 if(c.rules.trap){
-                                    if(c.type==201&&!c.stop){
-                                        entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
-                                    }else if(c.type==314&&!c.stop){
-                                        entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,315,c.direction,c.id,c.damage,1800,c.crit,c.index,[c.projectileIndex]))
-                                    }else if((c.type==221||c.type==304)&&!c.stop){
-                                        c.explode()
-                                    }
-                                    c.stop=true
+                                    //if(inside){
+                                        if(c.type==201&&!c.stop){
+                                            entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
+                                        }else if(c.type==314&&!c.stop){
+                                            entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,315,c.direction,c.id,c.damage,1800,c.crit,c.index,[c.projectileIndex]))
+                                        }else if((c.type==221||c.type==304)&&!c.stop){
+                                            c.explode()
+                                        }
+                                        c.stop=true
+                                    //}
                                 }else if(c.type==98&&c.bounceTimer==0){
                                     c.bounces++
                                     c.bounceTimer=5
@@ -14500,6 +14503,7 @@ class wall{
                                             ){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=max(c.velocity.y,0)
+                                                c.lastingForce[1]=0
                                                 switch(this.type){
                                                     case 15:
                                                         if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
@@ -14518,6 +14522,7 @@ class wall{
                                                 c.velocity.y=min(c.velocity.y,-c.velocity.y*0.6)
                                             }else{
                                                 c.velocity.y=min(c.velocity.y,0)
+                                                c.lastingForce[1]=0
                                             }
                                             c.jump.time=constrain(c.jump.time+2,0,6)
                                             if((c.rules.doubleJump||(c.playerData.name=='PlayerSwitcheroo'||c.playerData.name=='PlayerSwapper')&&c.subPlayerAData.name=='PlayerPistol')&&c.weapon.uses>0){
@@ -15781,6 +15786,7 @@ class wall{
                                             c.position.x=this.position.x+this.width/2+c.width/2+0.01
                                             c.previous.position.x=this.position.x+this.width/2+c.width/2+0.01
                                             c.velocity.x=this.velocity.x
+                                            c.lastingForce[0]=0
                                             if(this.type==38&&game.level==47){
                                                 c.target.point=-1
                                             }
@@ -15792,6 +15798,7 @@ class wall{
                                             c.position.x=this.position.x-this.width/2-c.width/2-0.01
                                             c.previous.position.x=this.position.x-this.width/2-c.width/2-0.01
                                             c.velocity.x=this.velocity.x
+                                            c.lastingForce[0]=0
                                             switch(this.type){
                                                 case 13: case 15: case 18:
                                                     if(this.reload<=0&&!c.auto&&c.id>0&&c.life>0&&c.attacking){

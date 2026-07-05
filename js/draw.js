@@ -1694,7 +1694,9 @@ function mainloop(){
                     }
                 }
                 for(let a=0,la=graphics.main.length;a<la;a++){
-                    entities.players[a].displayOver(graphics.main[a])
+                    if(!(entities.players[a].life<=0&&entities.players[a].die.objectiveTimer>=60)){
+                        entities.players[a].displayOver(graphics.main[a])
+                    }
                 }
             }
             let clumped=false
