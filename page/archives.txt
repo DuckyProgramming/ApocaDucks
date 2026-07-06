@@ -5,10 +5,12 @@
 1125 - electric charge, 859
 1126 - rocket jump c, 722
 1127 - planetoid c (restrictrix)
+1128 - rgb, 335
 
 467 - tagger c, 225
 468 - touhou, 416
 469 - electric charge, 370
+470 - rgb, 191
 
 
 

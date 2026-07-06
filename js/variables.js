@@ -8686,6 +8686,9 @@ types={
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'SpyShield',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'SpySpawner',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
@@ -8771,6 +8774,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankDoubleBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankTripleBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankJump',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
@@ -8975,6 +8981,9 @@ types={
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunVault',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'ShotgunVaultAll',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'ShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -10120,6 +10129,9 @@ types={
       name:'MiniSentry',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:685,
     },{
+      name:'MiniSentryShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+    },{
       name:'MiniSentrySpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:685,
     },{
@@ -10551,6 +10563,12 @@ types={
     },{
       name:'Icosahedron',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:586,
+    },{
+      name:'RGB',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.25,reloadBuff:1,crit:0,weapon:1128,
+    },{
+      name:'RGBSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
+      damageBuff:0.25,reloadBuff:1,crit:0,weapon:1128,
     },
 
     //mark p
@@ -20145,6 +20163,15 @@ types={
 			reload:0,
 			speed:0.85,
       uses:1,
+		},{
+			name:'RGB',
+			ammo:120,
+			damage:8,
+			cooldown:1,
+			stop:135,
+			reload:1,
+			speed:0.875,
+      uses:480,
 		},
 
     /*{

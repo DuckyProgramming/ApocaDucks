@@ -1,8 +1,0 @@
-eng 1102
-movebuild shoes
-120/80
-144/96
-https://issuu.com/rivista.militare1/docs/storia-delle-fanterie-vol-14-testo/334?e=338&o=1 (read page by page miserably)
-attempt to build an axis/allied order of battle but without invalidating units (replacements, aa, etc)
-leetcode
-icathia

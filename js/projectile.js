@@ -506,7 +506,7 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
-			case 365: case 400: case 406: case 415: case 426: case 446: case 455:
+			case 365: case 400: case 406: case 415: case 426: case 446: case 455: case 470:
 				this.forceDisplay=true
 				this.time=time
 				this.speed=0
@@ -676,6 +676,13 @@ class projectile{
 												entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,120)
 												entities.players[d].assort.autoTarget=[c]
 											}
+										}
+									}else if(this.type==470){
+										if(!c.immune()){
+											c.critBuff=max(c.critBuff,120)
+											c.DOT.damage+=this.damage/600
+											c.DOT.active=max(c.DOT.active,120)
+											c.vulnerableTime=max(c.vulnerableTime,120)
 										}
 									}
 								}
@@ -7529,6 +7536,20 @@ class projectile{
 					layer.ellipse(0,0,160-this.fade*160)
 					layer.ellipse(0,0,80-this.fade*80)
 				}
+			break
+			case 470:
+				layer.stroke(240-this.crit*240,80+this.crit*160,80+this.crit*160,this.fade)
+				layer.strokeWeight(4)
+				layer.line(0,0,0,-this.extent)
+				layer.stroke(80-this.crit*80,240,80+this.crit*160,this.fade)
+				layer.strokeWeight(3)
+				layer.line(0,0,0,-this.extent)
+				layer.stroke(80-this.crit*80,80+this.crit*160,240,this.fade)
+				layer.strokeWeight(2)
+				layer.line(0,0,0,-this.extent)
+				layer.stroke(240-this.crit*240,240,240,this.fade)
+				layer.strokeWeight(1)
+				layer.line(0,0,0,-this.extent)
 			break
 
 			//mark

@@ -97,7 +97,7 @@ function setupRules(){
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
-                a!=457,
+                a!=457&&a!=470,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -143,7 +143,7 @@ function setupRules(){
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
 			fader3:a==190||a==191||a==214||a==255||a==256||
-				a==257||a==265||a==300||a==365,
+				a==257||a==265||a==300||a==365||a==470,
             fader4:a==280||a==316||a==326||a==433,
             hitstack:a==91||a==92||a==93||a==96||a==108||
                 a==192||a==203||a==204||a==207||a==208||
@@ -303,7 +303,8 @@ function spy(name){
         name=='PushSpy'||
         name=='TinySpy'||
         name=='SpyRegen'||
-        name=='SpySpawner'
+        name=='SpySpawner'||
+        name=='SpyShield'
 }
 function playerColor(owner){
     switch(owner){
@@ -10985,7 +10986,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['Restrictrix',15])
+            //wave[0].push(['SpyShield',5])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11078,9 +11079,17 @@ function formMission(wave,type){
                     ['Baller',3],
                     ['BallerShield',1],
                 ],[
-                    ['SniperShield',1],
+                    ['SpyShield',1],
                     ['Spy',3],
+                    ['SpyShield',1],
+                ],[
                     ['SniperShield',1],
+                    ['Sniper',3],
+                    ['SniperShield',1],
+                ],[
+                    ['MiniSentryShield',1],
+                    ['MiniSentry',3],
+                    ['MiniSentryShield',1],
                 ],
             ]
             for(let a=0,la=4;a<la;a++){
@@ -11270,7 +11279,7 @@ function formMission(wave,type){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
             }
             set=[
-                ['MiniSentry',5],
+                ['ShotgunVaultAll',4],
                 ['SmokeRocketLauncher',10],
                 ['ShotgunMartyr',10],
                 ['RapidCritApplyMedic',5],
@@ -11301,7 +11310,7 @@ function formMission(wave,type){
                 ['BigPushMachineGun',],
                 ['MedicFakeHealthPackCarrier',1],
                 ['Icosahedron',3],
-                ['Auto',6],
+                ['RGBSplitter',6],
             ]
             for(let a=0,la=10;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
@@ -11314,7 +11323,7 @@ function formMission(wave,type){
                 ['AcceleratorTank',1],
                 
                 ['SlicingTank',1],
-                ['TankDoubleBuff',1],
+                ['TankTripleBuff',1],
             ]
             for(let a=0,la=2;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
