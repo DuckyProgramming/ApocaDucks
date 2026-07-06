@@ -70,7 +70,8 @@ class player{
                     }
                 }
             }
-            this.copy=this.copyset[floor(random(0,this.copyset.length))]
+            //this.copy=this.copyset[floor(random(0,this.copyset.length))]
+            this.copy=entities.players[this.copyset[floor(random(0,this.copyset.length))]]
             this.copyId=0
         }
         if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||game.randomizer){
@@ -363,12 +364,18 @@ class player{
                                 }
                             }
                         }else if(this.spy){
-                            let copy=this.copy>=entities.players.length?0:this.copy
+                            //let copy=this.copy>=entities.players.length?0:this.copy
+                            let copy=this.copy
                             if(game.level==30||game.level==54&&game.pvp){
+                                layer.text(`Points: ${copy.stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:copy.stats.deaths}\nWeapon: ${copy.weaponType==-1?`None`:(game.classWeapon?copy.subWeaponAData.name:copy.weaponData.name)}`,0,-35)
+                            }else{
+                                layer.text(`${copy.getAggressStat()}\nDeaths: ${this.decoy2?this.assort.copyDeaths:copy.stats.deaths}\nWeapon: ${copy.weaponType==-1?`None`:(game.classWeapon?cutName(copy.subWeaponAData.name):copy.weaponData.name)}`,0,-35)
+                            }
+                            /*if(game.level==30||game.level==54&&game.pvp){
                                 layer.text(`Points: ${entities.players[copy].stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?entities.players[copy].subWeaponAData.name:entities.players[copy].weaponData.name)}`,0,-35)
                             }else{
                                 layer.text(`${entities.players[copy].getAggressStat()}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[copy].weaponType==-1?`None`:(game.classWeapon?cutName(entities.players[copy].subWeaponAData.name):entities.players[copy].weaponData.name)}`,0,-35)
-                            }
+                            }*/
                         }else if(game.randomizer&&this.id>0){
                             layer.text(`${this.getAggressStat()}\nDeaths: ${this.stats.deaths}`,0,-38)
                             layer.text(this.playerData.name,0,-18.5)
@@ -416,11 +423,17 @@ class player{
                                 layer.text(`${cutName(this.weaponData.name)}\nKills: ${this.stats.kills}`,0,-38)
                             }
                         }else if(this.spy){
+                            let copy=this.copy
                             if(game.level==30||game.level==54&&game.pvp){
+                                layer.text(`Points: ${copy.stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:copy.stats.deaths}\nWeapon: ${copy.weaponType==-1?`None`:cutName(copy.weaponData.name)}`,0,-35)
+                            }else{
+                                layer.text(`Kills: ${copy.stats.kills}\nDeaths: ${this.decoy2?this.assort.copyDeaths:copy.stats.deaths}\nWeapon: ${copy.weaponType==-1?`None`:copy.weaponData.name}`,0,-35)
+                            }
+                            /*if(game.level==30||game.level==54&&game.pvp){
                                 layer.text(`Points: ${entities.players[this.copy].stats.points}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:cutName(entities.players[this.copy].weaponData.name)}`,0,-35)
                             }else{
                                 layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${this.decoy2?this.assort.copyDeaths:entities.players[copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35)
-                            }
+                            }*/
                         }else if(game.randomizer&&this.id>0){
                             layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38)
                             layer.text(this.playerData.name,0,-18.5)
@@ -454,7 +467,8 @@ class player{
                 layer.fill(150,this.fade*this.infoAnim.life)
                 layer.rect(0,0,30,4,2)
                 if((this.id>0&&this.playerData.name!='PlayerSpy'||this.spy)&&!this.fort&&this.playerData.name!='FieldArmy'){
-                    let obj=this.spy?entities.players[this.copy]:this
+                    //let obj=this.spy?entities.players[this.copy]:this
+                    let obj=this.spy?this.copy:this
                     if(!game.randomizer){
                         if(obj.weaponType>=0){
                             if(obj.rules.class){
@@ -804,6 +818,21 @@ class player{
                     layer.triangle(-80,-50,-80,50,0,0)
                     layer.rotate(-this.assort.radial)
                     layer.translate(0,10)
+                }
+            break
+            case 'Restrictrix':
+                layer.stroke(150,this.fade)
+                layer.strokeWeight(2)
+                layer.noFill()
+                layer.ellipse(0,-10,100)
+                layer.noStroke()
+                layer.fill(100,this.fade)
+                for(let a=0,la=2;a<la;a++){
+                    regPoly(layer,50*lsin(this.time+a*180),50*lcos(this.time+a*180)-10,6,14,14,this.time*3)
+                }
+                layer.fill(175,this.fade)
+                for(let a=0,la=2;a<la;a++){
+                    layer.ellipse(50*lsin(this.time+a*180),50*lcos(this.time+a*180)-10,20)
                 }
             break
         }
@@ -1345,7 +1374,7 @@ class player{
                         }
                     }
                     if(this.spy){
-                        this.color=this.copyId<7?[
+                        /*this.color=this.copyId<7?[
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
                             rules.teamMode?
@@ -1356,7 +1385,8 @@ class player{
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,245,255],body:[15,235,255],legs:[0,220,255],arms:[5,225,255]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[135,25,255],body:[125,15,255],legs:[110,0,255],arms:[215,5,255]}}
                         ][this.copyId]:this.copyId<entities.players.length?entities.players[this.copyId].color:
-                        {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}}
+                        {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[255,235,25],body:[255,225,15],legs:[255,210,0],arms:[255,215,5]}}*/
+                        this.color=JSON.parse(JSON.stringify(this.copy.color))
                     }
                 break
                 case 0:
@@ -1397,7 +1427,7 @@ class player{
                     }else if(this.playerData.name=='MysteryBoss'){
                         this.color={eye:{back:[255,255,255]},beak:{main:[0,90,190],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,100,200],body:[0,95,195],legs:[0,80,180],arms:[0,85,185]}}
                     }else if(this.spy){
-                        this.color=[
+                        /*this.color=[
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,25,255],body:[225,15,255],legs:[210,0,255],arms:[215,5,255]}},
                             {eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[55,235,25],body:[55,225,15],legs:[55,210,0],arms:[55,215,5]}},
@@ -1411,7 +1441,8 @@ class player{
                             }else{
                                 this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[25,85,255],body:[15,75,255],legs:[0,60,255],arms:[5,65,255]}}
                             }
-                        }
+                        }*/
+                        this.color=JSON.parse(JSON.stringify(this.copy.color))
                     }else if(this.playerData.name.includes('Raider')){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[235,255,25],body:[225,255,15],legs:[210,255,0],arms:[215,255,5]}}
                     }else if(this.playerData.name.includes('Splitter')){
@@ -1568,7 +1599,7 @@ class player{
     getSpeed(first=true){
         let effectiveWeaponSpeed=this.weaponType==-1?1:this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subWeaponAData.speed:this.weaponData.speed
         let effectivePlayerSpeed=this.playerData.name=='PlayerSwitcheroo'||this.playerData.name=='PlayerSwapper'?this.subPlayerAData.speedBuff:this.playerData.speedBuff
-        return this.spy&&first?min(this.getSpeed(false),entities.players[this.copy].getSpeed(false)):
+        return this.spy&&first?min(this.getSpeed(false),this.copy.getSpeed(false))://entities.players[this.copy].getSpeed(false)):
             (this.weaponType==-1&&this.id!=0&&!this.fort?(this.remote?effectivePlayerSpeed:1.6):effectiveWeaponSpeed*effectivePlayerSpeed)*
             (this.id>0&&game.randomizer?5/3:1)*
             (this.id!=1&&game.assault?0.45:1)*
@@ -2961,7 +2992,8 @@ class player{
                     entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].decoy=true
-                    entities.players[entities.players.length-1].copy=this.index
+                    //entities.players[entities.players.length-1].copy=this.index
+                    entities.players[entities.players.length-1].copy=this
                     entities.players[entities.players.length-1].copyId=this.id
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].setColor()
@@ -3031,7 +3063,8 @@ class player{
                     entities.players[entities.players.length-1].velocity.y=this.velocity.y
                     entities.players[entities.players.length-1].lastingForce[0]=this.lastingForce[0]
                     entities.players[entities.players.length-1].lastingForce[1]=this.lastingForce[1]
-                    entities.players[entities.players.length-1].copy=this.index
+                    //entities.players[entities.players.length-1].copy=this.index
+                    entities.players[entities.players.length-1].copy=this
                     entities.players[entities.players.length-1].copyId=this.id
                     entities.players[entities.players.length-1].direction.goal=this.direction.goal
                     entities.players[entities.players.length-1].setColor()
@@ -9714,6 +9747,9 @@ class player{
                         if(!this.construct&&!this.fort&&!this.decoy&&!this.decoy2&&entities.players[a].index!=this.index){
                             entities.players[a].stats.idealKills++
                             entities.players[a].stats.subIdealKills[entities.players[a].subWeaponA.id]=round(entities.players[a].stats.subIdealKills[entities.players[a].subWeaponA.id]*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?5:this.size>1.25*0.5?1:0.2):(this.size>2.25*0.5?25:this.size>1.25*0.5?5:1))*10)/10
+                            if(game.speedArena&&game.speedArenaKey==1){
+                                entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
+                            }
                         }
                         /*if(this.id>0&&game.pvp&&entities.players[a].life>0&&!this.construct&&!this.sidekick&&!this.fort&&!entities.players[a].fort&&game.level!=19&&game.level!=22&&game.level!=23&&game.level!=25&&game.level!=26&&game.level!=27&&game.level!=28&&game.level!=30&&game.level!=31){
                             entities.players[a].life=max(entities.players[a].life,entities.players[a].base.life)
@@ -11028,6 +11064,7 @@ class player{
                             this.invincible=60
                             this.dead=false
                             this.die.timer=0
+                            this.die.objectiveTimer=0
                         }
                     }
                 }
@@ -11992,7 +12029,7 @@ class player{
                             for(let b=0,lb=4;b<lb;b++){
                                 if(inBoxBox({position:{x:this.position.x+50*lsin(this.time+b*90),y:this.position.y+50*lcos(this.time+b*90)-10},width:(this.id==0?12:16),height:(this.id==0?12:16)},entities.players[a])&&this.validTarget(entities.players[a])&&!entities.players[a].dead){
                                     let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),entities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
-                                    entities.players[a].takeDamage(100*(crit?3:1)*(entities.players[a].fort?0.1:1))
+                                    entities.players[a].takeDamage(100*(crit?3:1)*(entities.players[a].fort?0.1:1)*(this.id==0?0.5:1))
                                     entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
                                     entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                                     entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
@@ -12359,6 +12396,25 @@ class player{
                                 entities.players[a].position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
                                 entities.players[a].previous.position.x=pos[0]
                                 entities.players[a].previous.position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
+                            }
+                        }
+                    }
+                break
+                case 'Restrictrix':
+                    if(!this.dead){
+                        for(let a=0,la=entities.players.length;a<la;a++){
+                            for(let b=0,lb=2;b<lb;b++){
+                                if(inBoxBox({position:{x:this.position.x+50*lsin(this.time+b*180),y:this.position.y+50*lcos(this.time+b*180)-10},width:(this.id==0?12:16),height:(this.id==0?12:16)},entities.players[a])&&this.validTarget(entities.players[a])&&!entities.players[a].dead){
+                                    let dir=[entities.players[a].position.x-(this.position.x+50*lsin(this.time+a*90)),entities.players[a].position.y+entities.players[a].height/2-(this.position.y+50*lcos(this.time+a*90)-10)]
+                                    entities.players[a].takeDamage(100*(crit?3:1)*(entities.players[a].fort?0.1:1)*(this.id==0?0.5:1))
+                                    entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                                    entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                                    entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*2
+                                    entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))
+                                    entities.players[a].collect.time=450
+                                    entities.players[a].die.killer=this.index
+                                    break
+                                }
                             }
                         }
                     }

@@ -17,11 +17,16 @@ game={
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
-  speedArena:true,
+  speedArena:false,speedArenaKey:0,
   /*
   spectateSpawn
   0 - enables spawning on teammates
   1 - prohibits spawning on teammates in combat
+  */
+  /*
+  speedArenaKey
+  0 - normal
+  1 - heal on kill
   */
   projClump:[],disable:[],
   /*
@@ -10517,6 +10522,9 @@ types={
       name:'HeavyPlanetoid',sizeBuff:1,lifeBuff:3,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:531,
     },{
+      name:'Restrictrix',sizeBuff:1,lifeBuff:1.5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1127,
+    },{
       name:'EnderPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
@@ -20128,6 +20136,15 @@ types={
 			reload:0,
 			speed:0.8,
       uses:8,
+		},{
+			name:'Restrictrix',
+			ammo:0,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
 		},
 
     /*{

@@ -11582,7 +11582,8 @@ class projectile{
 										entities.players[entities.players.length-1].velocity.y=entities.players[d].velocity.y
 										entities.players[entities.players.length-1].lastingForce[0]=entities.players[d].lastingForce[0]
 										entities.players[entities.players.length-1].lastingForce[1]=entities.players[d].lastingForce[1]
-										entities.players[entities.players.length-1].copy=entities.players[d].index
+										//entities.players[entities.players.length-1].copy=entities.players[d].index
+										entities.players[entities.players.length-1].copy=entities.players[d]
 										entities.players[entities.players.length-1].copyId=entities.players[d].id
 										entities.players[entities.players.length-1].direction.goal=entities.players[d].direction.goal
 										entities.players[entities.players.length-1].setColor()

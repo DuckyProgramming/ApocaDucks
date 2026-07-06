@@ -10985,7 +10985,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['TrolliporterCarrier',15])
+            //wave[0].push(['Restrictrix',15])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11262,7 +11262,8 @@ function formMission(wave,type){
                 ['PushSpy',3],
 
                 ['TinySpy',3],
-                ['SpyRegen',3],
+                //['SpyRegen',3],
+                ['MiniSentrySpy',3],
                 ['SpyTank',1],
             ]
             for(let a=0,la=3;a<la;a++){
@@ -11292,7 +11293,7 @@ function formMission(wave,type){
                 ['MysteryBoss',1],
 
                 ['BigSpreadRocketLauncher',5],
-                ['Planetoid',4],
+                ['Restrictrix',4],
                 ['FastHyperMedicAura',3],
                 ['BigPunchHealSelf',5],
                 ['ProgrammerShield',4],
@@ -11398,7 +11399,7 @@ function outPlayersSub(){
 }
 function outKD(){
     entities.players.forEach(player=>{
-        if(player.index<game.gaming){
+        if(player.effectiveId()<=game.gaming){
             let weapon=[]
             let data=[]
             weapon[player.subWeaponA.id]=player.subWeaponA
@@ -11411,7 +11412,7 @@ function outKD(){
 `${player.playerData.name}:
 
 ${player.stats.idealKills} Kills
-${player.stats.deaths} Deaths
+${player.stats.deaths} Deaths   
 ${round(player.stats.idealKills/player.stats.deaths*100)/100} K/D
 
 ${round(player.stats.damage)} Damage Dealt
