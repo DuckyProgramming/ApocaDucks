@@ -5,7 +5,7 @@ function setup(){
     setupGraphics()
     setupRules()
 
-    if(true){
+    if(false){
         duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
