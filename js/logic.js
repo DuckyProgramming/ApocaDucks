@@ -3934,7 +3934,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -5171,7 +5171,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -5377,7 +5377,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -5693,7 +5693,7 @@ player.prototype.logic=function(){
             if(
                 this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
-                !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
+                !((entities.players[a].id==0&&!entities.players[a].rules.tank||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
                 let b=entities.players[a]
                 let bar=[]
@@ -5716,7 +5716,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -6133,7 +6133,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -6413,7 +6413,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -7094,7 +7094,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -7422,7 +7422,7 @@ player.prototype.logic=function(){
             if(
                 this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
-                !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
+                !((entities.players[a].id==0&&!entities.players[a].rules.tank||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
                 let b=entities.players[a]
                 let bar=[]
@@ -7445,7 +7445,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -7623,7 +7623,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -8090,7 +8090,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -8778,7 +8778,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -9524,7 +9524,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -9981,7 +9981,7 @@ player.prototype.logic=function(){
             if(
                 this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
-                !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
+                !((entities.players[a].id==0&&!entities.players[a].rules.tank||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
                 let b=entities.players[a]
                 let bar=[]
@@ -10004,7 +10004,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -11537,7 +11537,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -12186,7 +12186,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -12558,7 +12558,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -12944,7 +12944,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -13653,7 +13653,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -16361,7 +16361,7 @@ player.prototype.logic=function(){
             if(
                 this.validTarget(entities.players[a])&&abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:entities.players[a].fort?150:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:90)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()&&
-                !((entities.players[a].id==0&&!entities.players[a].playerData.name.includes('Tank')||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
+                !((entities.players[a].id==0&&!entities.players[a].rules.tank||entities.players[a].id>0&&!game.point.includes(entities.players[a].id))&&(this.id==0||!game.point.includes(this.id))&&!entities.players[a].fort)
             ){
                 let b=entities.players[a]
                 let bar=[]
@@ -16384,7 +16384,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -16644,7 +16644,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -18134,7 +18134,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }
@@ -18839,7 +18839,7 @@ player.prototype.logic=function(){
                     }
                 }
                 if(valid){
-                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].playerData.name.includes('Tank')?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
+                    targets.push([entities.players[a].position.x+(this.id>0&&entities.players[a].rules.tank?(this.position.x<entities.players[a].position.x?-50:50):0),entities.players[a].position.y])
                 }
             }
         }

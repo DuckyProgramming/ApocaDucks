@@ -8518,6 +8518,15 @@ types={
     },{
       name:'ReusableBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'BusterSpawner',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'HyperBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'NerfBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
     {
@@ -10569,6 +10578,21 @@ types={
     },{
       name:'RGBSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.25,reloadBuff:1,crit:0,weapon:1128,
+    },{
+      name:'PistolVault',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PistolVaultTankSpawner',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PistolVaultTankGrenadeSpawner',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'LongerHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
+    },{
+      name:'MainBattleTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1129,
     },
 
     //mark p
@@ -20172,6 +20196,15 @@ types={
 			reload:1,
 			speed:0.875,
       uses:480,
+		},{
+			name:'Machine Gun Firework Auto Mortar',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
 		},
 
     /*{

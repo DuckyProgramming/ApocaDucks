@@ -48,7 +48,7 @@ class projectile{
 				this.speed=5
 				this.time=time
 			break
-			case 3: case 153: case 377:
+			case 3: case 153: case 377: case 471:
 				this.speed=0
 				this.time=time
 			break
@@ -7551,6 +7551,16 @@ class projectile{
 				layer.strokeWeight(1)
 				layer.line(0,0,0,-this.extent)
 			break
+			case 471:
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,80+this.crit*160,240,this.fade)
+					layer.ellipse(0,0,360-this.fade*360)
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(120-this.crit*120,160+this.crit*80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
+				}
+			break
 
 			//mark
         }
@@ -8685,6 +8695,21 @@ class projectile{
 					}
 				}
 			break
+			case 471:
+				radius=180
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].weaponRules.explodable&&entities.players[b].playerData.name!='ReusableBuster'&&entities.players[b].life>0&&c<radius&&this.validExplodeTarget(entities.players[b])){
+						let d=entities.players[b]
+						d.takeDamage(this.damage*(1-c/radius))
+						d.generalizedTake(this.index)
+						d.DOT.damage+=this.damage/600
+						d.DOT.active=max(d.DOT.active,600)
+						d.vulnerableTime=max(d.vulnerableTime,600)
+						d.confuseTime=max(d.confuseTime,600)
+					}
+				}
+			break
 		}
 		for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 			if(entities.projectiles[b].type==457&&dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
@@ -8809,7 +8834,7 @@ class projectile{
 						this.active=false
 					}
 				break
-				case 3: case 153: case 377:
+				case 3: case 153: case 377: case 471:
 					if(this.active){
 						this.active=false
 						this.explode()

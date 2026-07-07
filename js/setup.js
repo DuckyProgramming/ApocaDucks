@@ -5,7 +5,7 @@ function setup(){
     setupGraphics()
     setupRules()
 
-    if(false){
+    if(true){
         duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
@@ -17,7 +17,7 @@ function setup(){
 
         game.players=1
         game.gaming=1
-        game.level=131
+        game.level=47
         /*
         8 - normandy
         47 - big data ad

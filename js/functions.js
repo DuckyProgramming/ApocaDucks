@@ -138,7 +138,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==445||
                 a==447||a==448||a==450||a==457||a==458||
-                a==462||a==469,
+                a==462||a==469||a==471,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398,
@@ -10986,7 +10986,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['SpyShield',5])
+            //wave[0].push(['PistolVaultTankGrenadeSpawner',5])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11036,7 +11036,7 @@ function formMission(wave,type){
             ]))
             wave[0].push(['Wait',5])
             bit=[randin([
-                ['HyperMedic',2],
+                ['LongerHyperMedic',2],
                 ['CritApplyMedic',2],
                 ['MedicMartyr',2],
             ])]
@@ -11241,7 +11241,7 @@ function formMission(wave,type){
                 ['GrenadingTank',2],
                 ['EngineeringTank',2],
                 ['GasTank',2],
-                ['TankWare',2],
+                ['MainBattleTank',2],
                 ['DoubleDoubleAutoTank',2],
                 ['GlitchedTank',2],
             ]
@@ -11293,7 +11293,7 @@ function formMission(wave,type){
                 ['CritBonkerSplitter',2],
                 ['TeamGust',6],
                 ['EnderShotgunMartyr',1],
-                ['ShotgunVault',10],
+                ['PistolVaultTankGrenadeSpawner',2],
                 ['HeavyInterceptor',6],
                 ['FastOverMedic',10],
                 ['BigSubmachineTier',4],
