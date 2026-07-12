@@ -8038,6 +8038,9 @@ types={
     },{
       name:'PlayerTapperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1122,
+    },{
+      name:'PlayerMinibombC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1131,
     },
     
     {name:'PlayerBuild111',sizeBuff:1,lifeBuff:4,speedBuff:1,damageBuff:1,reloadBuff:1,crit:0,weapon:1035},
@@ -10593,6 +10596,12 @@ types={
     },{
       name:'MainBattleTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1129,
+    },{
+      name:'BonkerVault',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
+      name:'FreezeShot',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:1130,
     },
 
     //mark p
@@ -17911,9 +17920,9 @@ types={
 			name:'Destroyer C',
 			ammo:1,
 			damage:180,
-			cooldown:240,
-			stop:240,
-			reload:240,
+			cooldown:216,
+			stop:216,
+			reload:216,
 			speed:0.975,
       uses:6,
 		},{
@@ -20205,6 +20214,24 @@ types={
 			reload:3,
 			speed:0.9,
       uses:120,
+		},{
+			name:'Freeze Shot',
+			ammo:1,
+			damage:120,
+			cooldown:105,
+			stop:105,
+			reload:105,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Minibomb C',
+			ammo:1,
+			damage:120,
+			cooldown:105,
+			stop:105,
+			reload:105,
+			speed:1.05,
+      uses:12,
 		},
 
     /*{

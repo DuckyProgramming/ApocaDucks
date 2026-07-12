@@ -23,7 +23,7 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
-                a==458||a==462||a==466||a==469,
+                a==458||a==462||a==466||a==469||a==473,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -73,7 +73,7 @@ function setupRules(){
 				a==404||a==413||a==416||a==417||a==425||
                 a==431||a==435||a==437||a==438||a==447||
                 a==448||a==450||a==457||a==458||a==462||
-                a==468,
+                a==468||a==472||a==473,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -164,7 +164,7 @@ function setupRules(){
             offBouncer:a==135||a==136||a==169||a==170,
             baseGrenade:a==30||a==60||a==65||a==73||a==83||
                 a==104||a==110||a==235||a==264||a==293||
-                a==324||a==326||a==359||a==450,
+                a==324||a==326||a==359||a==450||a==473,
 		})
     }
 }
@@ -5454,10 +5454,16 @@ function generateLevel(info,layer){
                             game.placer[0].push([game.tileset[0]*(b+0.5),game.tileset[1]*(a+2)])
                         break
                         case 117:
-                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.6+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
+                            /*entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.6+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*3,game.tileset[1]*0.2,1))
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.25+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,17))
-                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.25+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,18))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.25+b*game.tileset[0],game.tileset[1]*1.9+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,18))*/
+                            entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2.2+a*game.tileset[1],game.tileset[1]*8,game.tileset[1]*4,33))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]*2.6+a*game.tileset[1],game.tileset[0]*5,game.tileset[1]*0.8,1))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.75+b*game.tileset[0],game.tileset[1]*2.1+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,1))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.75+b*game.tileset[0],game.tileset[1]*2.1+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,1))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*2.25+b*game.tileset[0],game.tileset[1]*2.1+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,18))
+                            entities.walls[0].push(new wall(graphics.main,game.tileset[0]*-1.25+b*game.tileset[0],game.tileset[1]*2.1+a*game.tileset[1],game.tileset[0]*0.5,game.tileset[1]*0.2,17))
                         break
                         case 133:
                             if(abs(b-(lb/2))<=1){
@@ -10986,7 +10992,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['PistolVaultTankGrenadeSpawner',5])
+            //wave[0].push(['FreezeShot',5])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11309,7 +11315,7 @@ function formMission(wave,type){
                 ['FastHeavySniper',8],
                 ['BigPushMachineGun',],
                 ['MedicFakeHealthPackCarrier',1],
-                ['Icosahedron',3],
+                ['FreezeShot',3],
                 ['RGBSplitter',6],
             ]
             for(let a=0,la=10;a<la;a++){
@@ -11349,7 +11355,7 @@ function setupLists(){
     listing[4]=[
         [
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunC`],
-            [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibomb`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
+            [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJumpC`],

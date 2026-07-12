@@ -7,12 +7,16 @@
 1127 - planetoid c (restrictrix)
 1128 - rgb, 335
 1129 - mainbattletank, 124
+1130 - freezeshot, 981
+1131 - minibomb c, 814
 
 467 - tagger c, 225
 468 - touhou, 416
 469 - electric charge, 370
 470 - rgb, 191
 471 - nerf buster, 153
+472 - freeze shot, 416
+473 - minibomb c, 359
 
 
 

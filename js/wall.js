@@ -13649,8 +13649,12 @@ class wall{
                                         c.velocity.y*=mult
                                     }else if(c.type==264){
                                         entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,30,atan2(c.velocity.x,-c.velocity.y)+random(-15,15),c.id,c.damage,c.base.time,c.crit,c.index))
-                                    }else if(c.type==359){
+                                    }else if(c.type==359||c.type==473){
                                         c.time-=30
+                                        if(c.time<=0){
+                                            c.explode()
+                                            c.active=false
+                                        }
                                     }
                                     if(c.bounces>=4){
                                         c.explode()
@@ -13688,7 +13692,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
-                                }else if(c.type==416||c.type==468){
+                                }else if(c.type==416||c.type==468||c.type==472){
                                     c.active=false
                                     c.velocity.x*=0.8
                                     c.velocity.y*=0.8
@@ -13978,6 +13982,10 @@ class wall{
                                 c.target.position.x=this.position.x-game.tileset[0]
                             break
                             case 16:
+                                if(game.speedArena&&game.level==117){
+                                    c.parachute=true
+                                    c.velocity.y+=20
+                                }
                                 if((typeof this.weapon)=='object'){
                                     c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
                                     c.newWeaponSet(this.weapon[0])

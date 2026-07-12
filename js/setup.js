@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[9,0],sets:[[8,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,14 +15,15 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
-        game.gaming=1
-        game.level=47
+        game.players=2
+        game.gaming=2
+        game.level=117
         /*
         8 - normandy
         47 - big data ad
         65 - tailwater 5cp
         88 - sulfite koth
+        94 - confines 7cp
         100 - ferrum ad
         117 - aerial 2 dm
         131 - lisp
@@ -46,8 +47,9 @@ function setup(){
         if(rules.dm){
             game.classicRespawn=false
         }
-        if(rules.dm||rules.teamMode){
+        if(rules.dm||rules.teamMode||game.level==94){
             game.pvp=true
+            updateRules()
         }
         //display.cycle=0
         //newWave()

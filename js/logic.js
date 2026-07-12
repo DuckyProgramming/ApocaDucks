@@ -19436,7 +19436,7 @@ player.prototype.logic=function(){
         if((
             this.life<this.base.life*(game.level==81?0.6:0.4)||
             this.life<this.base.life*0.8&&this.collect.life==0
-        )&&rules.dm&&abs(this.position.x-this.target.position.x)<(game.level==81?600:480)&&this.position.x>150&&this.position.x<game.edge[0]-150&&this.position.y>150&&!this.rules.scoutLine){
+        )&&rules.dm&&!game.speedArena&&abs(this.position.x-this.target.position.x)<(game.level==81?600:480)&&this.position.x>150&&this.position.x<game.edge[0]-150&&this.position.y>150&&!this.rules.scoutLine){
             this.target.position.x=this.position.x*2-this.target.position.x
             this.target.position.y-=1200
         }
