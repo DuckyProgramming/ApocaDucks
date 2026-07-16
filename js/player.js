@@ -1625,7 +1625,7 @@ class player{
             (this.rules.class&&this.subWeaponAType==883&&(this.subWeaponA.cooldown>0||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             (this.rules.class&&this.subWeaponAType==1033&&(this.subWeaponA.cooldown>this.subWeaponAData.cooldown*0.5||this.assort.firing>0)&&this.subWeaponA.uses>0?0.1:1)*
             //(this.rules.class&&this.subWeaponAType==728&&this.subWeaponA.uses>0&&this.subWeaponB.uses>0?1/3:1)*
-            (this.rules.class&&(this.subWeaponAType==728&&this.subWeaponA.uses>0&&this.subWeaponB.uses>0||this.subWeaponAType==988||this.subWeaponAType==1114)?0.5:1)*
+            (this.rules.class&&(this.subWeaponAType==728&&this.subWeaponA.uses>0&&this.subWeaponB.uses>0||this.subWeaponAType==988&&this.subWeaponA.uses>0||this.subWeaponAType==1114&&this.subWeaponA.uses>0)?0.5:1)*
             //(this.rules.class&&(this.subWeaponAType==687||this.subWeaponAType==815||this.subWeaponAType==851||this.subWeaponAType==861||this.subWeaponAType==919||this.subWeaponAType==922||this.subWeaponAType==971||this.subWeaponAType==983||this.subWeaponAType==1012||this.subWeaponAType==1013)&&this.assort.firingTime>15?0.5:1)*
             (this.rules.class&&this.subWeaponAType==919&&this.assort.firingTime>5?0.5:1)*
             (this.playerData.name==`PlayerPyroW`&&(this.subWeaponAType==975||this.subWeaponBType==975)/*||this.playerData.name==`PlayerEngineerW`&&(this.subWeaponAType==813||this.subWeaponBType==813)*/||(this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerDronerW`)&&(this.subWeaponAType==1||this.subWeaponBType==1)||this.playerData.name==`PlayerHeavyWeaponsW`&&(this.subWeaponAType==781||this.subWeaponBType==781||this.subWeaponAType==2||this.subWeaponBType==2)?1.1:1)*

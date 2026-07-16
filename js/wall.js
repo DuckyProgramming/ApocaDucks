@@ -13283,6 +13283,9 @@ class wall{
                                                 c.velocity.y*=-1
                                             }
                                         }
+                                        if(c.rules.trap){
+                                            c.stopPlane=0
+                                        }
                                     break
                                     case 1:
                                         if(c.rules.bounce2){
@@ -13303,6 +13306,9 @@ class wall{
                                             }else{
                                                 c.velocity.y*=-1
                                             }
+                                        }
+                                        if(c.rules.trap){
+                                            c.stopPlane=180
                                         }
                                     break
                                     case 2:
@@ -13325,6 +13331,9 @@ class wall{
                                                 c.velocity.x*=-1
                                             }
                                         }
+                                        if(c.rules.trap){
+                                            c.stopPlane=90
+                                        }
                                     break
                                     case 3:
                                         if(c.rules.bounce2){
@@ -13345,6 +13354,9 @@ class wall{
                                             }else{
                                                 c.velocity.x*=-1
                                             }
+                                        }
+                                        if(c.rules.trap){
+                                            c.stopPlane=270
                                         }
                                     break
                                     case 4:
@@ -13387,6 +13399,9 @@ class wall{
                                                 }
                                             }
                                         }
+                                        if(c.rules.trap){
+                                            c.stopPlane=180+atan2(this.height,this.width)
+                                        }
                                     break
                                     case 5:
                                         if(c.rules.bounce2){
@@ -13427,6 +13442,9 @@ class wall{
                                                     c.velocity.y=b[1]*d
                                                 }
                                             }
+                                        }
+                                        if(c.rules.trap){
+                                            c.stopPlane=180-atan2(this.height,this.width)
                                         }
                                     break
                                     case 6:
@@ -13471,6 +13489,9 @@ class wall{
                                                 }
                                             }
                                         }
+                                        if(c.rules.trap){
+                                            c.stopPlane=atan2(this.height,this.width)
+                                        }
                                     break
                                     case 7:
                                         if(c.rules.bounce2){
@@ -13513,6 +13534,9 @@ class wall{
                                                     c.velocity.y=b[1]*d
                                                 }
                                             }
+                                        }
+                                        if(c.rules.trap){
+                                            c.stopPlane=-atan2(this.height,this.width)
                                         }
                                     break
                                     case 8:

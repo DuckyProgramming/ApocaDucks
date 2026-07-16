@@ -17753,7 +17753,7 @@ types={
 			stop:105,
 			reload:105,
 			speed:1.05,
-      uses:12,
+      uses:18,
 		},{
 			name:'Reserve Shotgun',
 			ammo:4,
