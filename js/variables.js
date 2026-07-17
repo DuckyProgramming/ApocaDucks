@@ -18270,7 +18270,7 @@ types={
 		},{
 			name:'Sticky Jumper',
 			ammo:3,
-			damage:250,
+			damage:240,
 			cooldown:36,
 			stop:66,
 			reload:40,

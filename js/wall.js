@@ -15805,6 +15805,9 @@ class wall{
                                             if(c.thrown2&&this.type!=30){
                                                 c.thrown2=false
                                             }
+                                            if(c.thrown3&&this.type!=30){
+                                                c.thrown3=false
+                                            }
                                             if(c.parachute){
                                                 c.parachute=false
                                                 if(!game.pvp&&c.id==0){
@@ -15861,6 +15864,12 @@ class wall{
                                             if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }
+                                            if(c.thrown2&&this.type!=30){
+                                                c.thrown2=false
+                                            }
+                                            if(c.thrown3&&this.type!=30){
+                                                c.thrown3=false
+                                            }
                                             if(c.parachute){
                                                 c.parachute=false
                                                 if(!game.pvp&&rules.paraStuck){
@@ -15885,6 +15894,12 @@ class wall{
                                             }
                                             if(c.thrown&&this.type!=26){
                                                 c.thrown=false
+                                            }
+                                            if(c.thrown2&&this.type!=30){
+                                                c.thrown2=false
+                                            }
+                                            if(c.thrown3&&this.type!=30){
+                                                c.thrown3=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false

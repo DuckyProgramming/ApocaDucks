@@ -110,6 +110,7 @@ class player{
         this.exploded=false
         this.thrown=false
         this.thrown2=false
+        this.thrown3=false
         this.parachute=false
         this.disable=false
         this.attacking=false
@@ -2961,7 +2962,7 @@ class player{
         this.lastingForce[1]-=power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
     getKnockback(){
-        return this.rules.knockbackResist?0.25:1
+        return this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
     }
     takeDamage(damage,spec=0){
         if(game.readout){
@@ -8813,13 +8814,13 @@ class player{
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(this.manage[0]==inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.x<this.base.position.x-150)){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(this.manage[0]==1-inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.x>this.base.position.x+150)){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -9071,13 +9072,13 @@ class player{
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(inputSet[inputSwap]&&!inputSet[1-inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(inputSet[1-inputSwap]&&!inputSet[inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -9255,13 +9256,13 @@ class player{
             }else{
                 if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2){
+                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -12805,12 +12806,16 @@ class player{
                 this.life=0
             }
         }else if(!this.disable2){
-            this.velocity.x*=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
+            let friction=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
+            this.velocity.x*=friction
             if(this.noGravTime>0){
                 this.noGravTime--
                 this.velocity.y*=0.8
             }else{
                 this.velocity.y+=game.speedArena&&this.parachute&&game.level==117?0.3:this.playerData.name=='PlayerDirigible'?(this.id>0&&this.id<=game.gaming&&inputs.keys[game.gaming==1?1:this.id-1][2]?0.5:0):this.rules.parachute||this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'||this.rules.classW&&this.subPlayerAData.name=='PlayerLightParachutist'?1:game.gravity
+            }
+            if(this.velocity.y<-15&&this.jump.time==0&&this.jump.active==0){
+                this.velocity.y*=friction
             }
             this.previous.position.x=this.position.x
             this.previous.position.y=this.position.y
