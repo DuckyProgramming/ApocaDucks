@@ -15,8 +15,8 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
-        game.gaming=2
+        game.players=1
+        game.gaming=1
         game.level=117
         /*
         8 - normandy

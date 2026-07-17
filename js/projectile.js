@@ -8204,7 +8204,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index==this.index&&c<105){
 							/*entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8212,8 +8212,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(7.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(11.25*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}else if(entities.players[b].index!=this.index&&c<105){
 							/*entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8225,8 +8225,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
@@ -8380,7 +8380,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*sqrt(min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius))*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
 							//entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
@@ -8397,8 +8397,8 @@ class projectile{
 								entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 								/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 								entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-								entities.players[b].knockback(8*launch,dir,1,1)
-								entities.players[b].knockbackForce(4*launch,dir,1,1)
+								entities.players[b].knockbackSet(6*launch,dir,1,1)
+								entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 								entities.players[b].thrown3=true
 								//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 							}
@@ -8409,8 +8409,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=7.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(7.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(11.25*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}
 						if(game.invis){
 							entities.players[b].visible=15
@@ -8457,7 +8457,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index==this.index&&c<105){
 							/*entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8465,8 +8465,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(7.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(11.25*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}else if(entities.players[b].index!=this.index&&c<100){
 							/*entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=2.4*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8478,8 +8478,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
@@ -8600,7 +8600,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/90)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index==this.index&&c<90){
 							/*entities.players[b].velocity.x+=4.5*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=3.6*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8608,8 +8608,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=3.6*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(6.75*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(4.8*launch,dir,1,1)
-							entities.players[b].knockbackForce(2.4*launch,dir,1,1)
+							entities.players[b].knockbackSet(3.6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
 						}else if(entities.players[b].index!=this.index&&c<90){
 							/*entities.players[b].velocity.x+=2.7*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=1.44*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8621,8 +8621,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=3.6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(2.7*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(2.7*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(4.8*launch,dir,1,1)
-							entities.players[b].knockbackForce(2.4*launch,dir,1,1)
+							entities.players[b].knockbackSet(3.6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/90))),entities.players[b].stuckTime)
 						}
@@ -8745,7 +8745,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index!=this.index&&c<105){
 							/*entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8757,8 +8757,8 @@ class projectile{
 							entities.players[b].lastingForce[1]-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockback(8*launch,dir,1,1)
-							entities.players[b].knockbackForce(4*launch,dir,1,1)
+							entities.players[b].knockbackSet(6*launch,dir,1,1)
+							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}

@@ -2961,6 +2961,14 @@ class player{
         this.lastingForce[0]+=power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
         this.lastingForce[1]-=power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
+    knockbackSet(power,dir,x,y){
+        this.velocity.x=this.velocity.x*0.5+power*lsin(dir)*x*this.getKnockback()*(abs(this.velocity.x)>30?0.1296:abs(this.velocity.x)>24?0.216:abs(this.velocity.x)>18?0.36:abs(this.velocity.x)>12?0.6:1)
+        this.velocity.y=this.velocity.y*0.5-power*lcos(dir)*y*this.getKnockback()*(abs(this.velocity.y)>10?0.1296:abs(this.velocity.y)>8?0.216:abs(this.velocity.y)>6?0.36:abs(this.velocity.y)>4?0.6:1)
+    }
+    knockbackSetForce(power,dir,x,y){
+        this.lastingForce[0]=this.lastingForce[0]*0.5+power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
+        this.lastingForce[1]=this.lastingForce[1]*0.5-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
+    }
     getKnockback(){
         return this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
     }
