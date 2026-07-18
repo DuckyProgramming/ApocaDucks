@@ -13636,7 +13636,7 @@ class wall{
                                     if(c.bounces>=2){
                                         c.stop=true
                                     }
-                                }else if(c.type==344&&c.active){
+                                }else if((c.type==344||c.type==474)&&c.active){
                                     c.damage*=0.5
                                     c.fail=true
                                     c.explode()

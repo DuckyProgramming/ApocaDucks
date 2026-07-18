@@ -68,6 +68,7 @@ class projectile{
 			case 344: case 349: case 353: case 356: case 360: case 368: case 372: case 373: case 375: case 376:
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 457: case 458: case 462: case 463: case 464:
+			case 474:
 				this.partisan=true
 				let size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||
 					this.type==259||this.type==268||this.type==283||this.type==301||this.type==303||this.type==437?16:
@@ -84,6 +85,7 @@ class projectile{
 					this.type==210?0:
 					this.type==209?random(8,10):
 					this.type==447?6.6:
+					this.type==474?15:
 					this.type==120||this.type==177||this.type==178||this.type==179||this.type==182|this.type==183|this.type==227||this.type==271||this.type==318?1:
 					6
 				this.bounces=0
@@ -106,6 +108,7 @@ class projectile{
 				]
 				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)-
 					(
+						this.type==474?3:
 						this.type==68||this.type==132||this.type==134||this.type==135||this.type==136||this.type==169||this.type==170||this.type==206||this.type==210||this.type==233||
 						this.type==240||this.type==283||this.type==301||this.type==311||this.type==312||this.type==376||this.type==437||this.type==463||this.type==464?0:
 						this.type==344||this.type==404||this.type==447?5:
@@ -5853,7 +5856,7 @@ class projectile{
 				layer.ellipse(0,0,3)
 				layer.ellipse(-1.5,0,1.5)
 			break
-			case 344:
+			case 344: case 474:
 				layer.rotate(-this.direction)
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
@@ -7726,6 +7729,7 @@ class projectile{
 				}
 			break
 			case 30: case 166: case 211: case 228: case 290: case 311: case 312: case 344: case 450: case 457:
+			case 474:
 				radius=100
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -8982,7 +8986,7 @@ class projectile{
 			case 366: case 367: case 368: case 372: case 373: case 375: case 376: case 383: case 389: case 392:
 			case 402: case 404: case 410: case 412: case 413: case 416: case 417: case 425: case 431: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 453: case 457: case 458: case 462: case 463:
-			case 464: case 468: case 472: case 473:
+			case 464: case 468: case 472: case 473: case 474:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -9033,7 +9037,7 @@ class projectile{
 				case 264: case 277: case 285: case 289: case 290: case 291: case 293: case 296: case 303: case 311: case 312:
 				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
 				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447: case 450: case 453:
-				case 457: case 458: case 462: case 463: case 464: case 468: case 472: case 473:
+				case 457: case 458: case 462: case 463: case 464: case 468: case 472: case 473: case 474:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -11700,7 +11704,8 @@ class projectile{
 								this.speed=0
 							}else if(this.type==344){
 								target.takeDamage(this.damage*0.5)
-							}else if(this.type==477){
+							}else if(this.type==474){
+								//this said 477 at some point but that was invalid, idk what it was originally meant for
 								target.takeDamage(this.damage*0.25)
 							}
 							this.explode()
@@ -12215,7 +12220,8 @@ class projectile{
 							target.knockbackForce(this.speed*6,this.direction,1,1)
 						break
 						case 461:
-							target.confuseTime=max(target.confuseTime,180)
+							//target.confuseTime=max(target.confuseTime,180)
+							target.confuseTime=max(target.confuseTime,120)
 						break
 						case 467:
 							target.vulnerableTime=max(target.vulnerableTime,120)

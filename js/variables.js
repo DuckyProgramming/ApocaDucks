@@ -8165,6 +8165,9 @@ types={
     },{
       name:'PlayerRocketJumpC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1126,
+    },{
+      name:'PlayerShellerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1132,
     },
 
     //mark c
@@ -20232,6 +20235,15 @@ types={
 			reload:105,
 			speed:1.05,
       uses:12,
+		},{
+			name:'Sheller C',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
 		},
 
     /*{

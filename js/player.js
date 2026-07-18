@@ -2961,13 +2961,21 @@ class player{
         this.lastingForce[0]+=power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
         this.lastingForce[1]-=power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
+    /*knockbackSet(power,dir,x,y,set){
+        this.velocity.x=this.velocity.x*set+power*lsin(dir)*x*this.getKnockback()*(abs(this.velocity.x)>30?0.1296:abs(this.velocity.x)>24?0.216:abs(this.velocity.x)>18?0.36:abs(this.velocity.x)>12?0.6:1)
+        this.velocity.y=this.velocity.y*set-power*lcos(dir)*y*this.getKnockback()*(abs(this.velocity.y)>10?0.1296:abs(this.velocity.y)>8?0.216:abs(this.velocity.y)>6?0.36:abs(this.velocity.y)>4?0.6:1)
+    }
+    knockbackSetForce(power,dir,x,y,set){
+        this.lastingForce[0]=this.lastingForce[0]*set+power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
+        this.lastingForce[1]=this.lastingForce[1]*set-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
+    }*/
     knockbackSet(power,dir,x,y){
-        this.velocity.x=this.velocity.x*0.5+power*lsin(dir)*x*this.getKnockback()*(abs(this.velocity.x)>30?0.1296:abs(this.velocity.x)>24?0.216:abs(this.velocity.x)>18?0.36:abs(this.velocity.x)>12?0.6:1)
-        this.velocity.y=this.velocity.y*0.5-power*lcos(dir)*y*this.getKnockback()*(abs(this.velocity.y)>10?0.1296:abs(this.velocity.y)>8?0.216:abs(this.velocity.y)>6?0.36:abs(this.velocity.y)>4?0.6:1)
+        this.velocity.x=power*(this.velocity.x>0.5?0.5:this.velocity.x<0.5?-0.5:0)*this.getKnockback()+power*lsin(dir)*x*this.getKnockback()*(abs(this.velocity.x)>30?0.1296:abs(this.velocity.x)>24?0.216:abs(this.velocity.x)>18?0.36:abs(this.velocity.x)>12?0.6:1)
+        this.velocity.y=-power*lcos(dir)*y*this.getKnockback()*(abs(this.velocity.y)>10?0.1296:abs(this.velocity.y)>8?0.216:abs(this.velocity.y)>6?0.36:abs(this.velocity.y)>4?0.6:1)
     }
     knockbackSetForce(power,dir,x,y){
-        this.lastingForce[0]=this.lastingForce[0]*0.5+power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
-        this.lastingForce[1]=this.lastingForce[1]*0.5-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
+        this.lastingForce[0]=power*(this.velocity.x>0.5?0.5:this.velocity.x<0.5?-0.5:0)*this.getKnockback()+power*lsin(dir)*x*this.getKnockback()*(abs(this.lastingForce[0])>9?0.216:abs(this.lastingForce[0])>6?0.36:abs(this.lastingForce[0])>3?0.6:1)
+        this.lastingForce[1]=-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
     getKnockback(){
         return this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
@@ -7999,6 +8007,9 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                         break
+                        case 1132:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],474,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        break
 
                         //mark
                     }
@@ -8133,9 +8144,10 @@ class player{
                 this.playerData.name=='PlayerHeavyWeaponsW',
             take45:this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerTelepointer'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||
                 this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRanger'||
-                this.playerData.name=='PlayerJammer'||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
+                this.playerData.name=='PlayerJammer',
+                /*||this.playerData.name=='PlayerPyro'||this.playerData.name=='PlayerPyro2'||this.playerData.name=='PlayerPyro3'||this.playerData.name=='PlayerPyro4'||
                 this.playerData.name=='PlayerPyro5'||this.playerData.name=='PlayerPyro6'||this.playerData.name=='PlayerPyro7'||this.playerData.name=='PlayerPyro8'||this.playerData.name=='PlayerPyro9'||
-                this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'||this.playerData.name=='PlayerPyroW',
+                this.playerData.name=='PlayerPyro10'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerPyro11'||this.playerData.name=='PlayerPyro12'||this.playerData.name=='PlayerPyroW'*/
             parachute:this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='PlayerParaRocketLauncher'||this.playerData.name=='PlayerParaGrenadier'||this.playerData.name=='PlayerStratofortress'||
                 this.playerData.name=='PlayerParachutist'||this.playerData.name=='PlayerDropship'||this.playerData.name=='PlayerApache'||this.playerData.name=='ParaMedic'||this.playerData.name=='BigParaRocketLauncher'||
                 this.playerData.name=='BigCritParaRocketLauncher'||this.playerData.name=='PlayerAirdrop'||this.playerData.name=='SidekickGuardian'||this.playerData.name=='PlayerRadio'||this.playerData.name=='PlayerWhirlybird'||
