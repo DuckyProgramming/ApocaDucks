@@ -13610,10 +13610,10 @@ class wall{
                                             c.explode()
                                         }
                                         c.stop=true
-                                        if(c.timer<=1){
+                                        /*if(c.timer<=1){
                                             print(c.position.x,c.position.y,c.previous.position.x,c.previous.position.y)
                                             noLoop()
-                                        }
+                                        }*/
                                     //}
                                 }else if(c.type==98&&c.bounceTimer==0){
                                     c.bounces++
