@@ -16796,13 +16796,13 @@ types={
       uses:3,
 		},{
 			name:'Stickybomb Launcher',
-			ammo:4,
+			ammo:400,
 			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
 			speed:1.05,
-      uses:18,
+      uses:1800,
 		},{
 			name:'Heal Area',
 			ammo:1,

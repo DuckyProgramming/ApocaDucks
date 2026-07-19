@@ -12819,6 +12819,12 @@ class player{
             this.base.color.skin.arms=mergeColor(this.base.color.skin.arms,[255,255,255],0.6)
             this.base.control=0
         }
+        if(entities.projectiles.length>projectilesLength){
+            for(let a=projectilesLength,la=entities.projectiles.length;a<la;a++){
+                entities.projectiles[a].previous.position.x=this.position.x
+                entities.projectiles[a].previous.position.y=this.position.y
+            }
+        }
         if(rules.picker&&this.id>game.gaming){
             this.position.x=game.edge[0]+500
             this.fade=0
@@ -13062,12 +13068,12 @@ class player{
                 this.fade=smoothAnim(this.fade,!this.dead&this.invisBuff<=0,this.invisBuff>0?0:0.4,1,this.invisBuff>0||!this.dead?12:5)
             }
         }
-        if(entities.projectiles.length>projectilesLength){
+        /*if(entities.projectiles.length>projectilesLength){
             for(let a=projectilesLength,la=entities.projectiles.length;a<la;a++){
                 entities.projectiles[a].previous.position.x=this.position.x
                 entities.projectiles[a].previous.position.y=this.position.y
             }
-        }
+        }*/
         if(this.position.x!=this.position.x||this.position.y!=this.position.y){
             print(this.position,this.playerData.name,'Fail, player.js: 11306',this)
             this.respawn()

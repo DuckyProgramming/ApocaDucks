@@ -15,7 +15,7 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=30
+        game.players=1
         game.gaming=1
         game.level=94
         /*
