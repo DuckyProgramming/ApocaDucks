@@ -7921,7 +7921,7 @@ class player{
                                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,dir+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                 }
                                 if(weapon.ammo%12==0){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                 }
@@ -7936,7 +7936,7 @@ class player{
                                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,dir+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                         }
                                         if(weapon.ammo%12==0){
-                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                         }
@@ -7955,7 +7955,7 @@ class player{
                                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,dir+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                         }
                                         if(weapon.ammo%12==0){
-                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                         }
@@ -7968,7 +7968,7 @@ class player{
                                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,dir+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                         }
                                         if(weapon.ammo%12==0){
-                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                             entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                         }
@@ -7982,7 +7982,7 @@ class player{
                                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,-90+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                 }
                                 if(weapon.ammo%12==0){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                 }
@@ -7993,7 +7993,7 @@ class player{
                                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],86,90+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
                                 }
                                 if(weapon.ammo%12==0){
-                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6.25,180,crit,this.index))
+                                    entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],98,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*3.125,180,crit,this.index))
                                     entities.projectiles[entities.projectiles.length-1].velocity.x*=1.25
                                     entities.projectiles[entities.projectiles.length-1].velocity.y*=3
                                 }
@@ -8009,6 +8009,15 @@ class player{
                         break
                         case 1132:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],474,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        break
+                        case 1133:
+                            if(weapon.ammo%2==0){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            }else{
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],475,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            }
                         break
 
                         //mark

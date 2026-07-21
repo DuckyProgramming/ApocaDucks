@@ -10,6 +10,7 @@
 1130 - freezeshot, 981
 1131 - minibomb c, 814
 1132 - sheller c, 724
+1133 - daydrinker c, 1027
 
 467 - tagger c, 225
 468 - touhou, 416
@@ -19,6 +20,7 @@
 472 - freeze shot, 416
 473 - minibomb c, 359
 474 - sheller c, 344
+475 - daydrinker c, 447, 474
 
 
 

@@ -3326,6 +3326,13 @@ types={
         [],[],[],[],[],[],[],[],[],[],
       ],
     },{
+      name:`Easy 10`,
+      sendTime:45,
+      difficulty:5,
+      wave:[
+        [],[],[],[],[],[],[],[],[],[],
+      ],
+    },{
       name:`Duck Disaster`,
       sendTime:45,
       difficulty:4,
@@ -8032,15 +8039,6 @@ types={
     },{
       name:'PlayerPushShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:126,
-    },{
-      name:'PlayerTaggerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1121,
-    },{
-      name:'PlayerTapperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1122,
-    },{
-      name:'PlayerMinibombC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1131,
     },
     
     {name:'PlayerBuild111',sizeBuff:1,lifeBuff:4,speedBuff:1,damageBuff:1,reloadBuff:1,crit:0,weapon:1035},
@@ -8145,6 +8143,21 @@ types={
       name:'PlayerWidowmakerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1119,
     },{
+      name:'PlayerTaggerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1121,
+    },{
+      name:'PlayerTapperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1122,
+    },{
+      name:'PlayerElectricCharge',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1125,
+    },{
+      name:'PlayerRocketJumpC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1126,
+    },{
+      name:'PlayerMinibombC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1131,
+    },{
       name:'PlayerTouhou',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1123,
     },{
@@ -8160,14 +8173,11 @@ types={
       name:'PlayerLevel3CProxy',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:732,
     },{
-      name:'PlayerElectricCharge',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1125,
-    },{
-      name:'PlayerRocketJumpC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1126,
-    },{
       name:'PlayerShellerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1132,
+    },{
+      name:'PlayerDaydrinkerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1133,
     },
 
     //mark c
@@ -16796,13 +16806,13 @@ types={
       uses:3,
 		},{
 			name:'Stickybomb Launcher',
-			ammo:400,
+			ammo:4,
 			damage:300,
 			cooldown:36,
 			stop:66,
 			reload:40,
 			speed:1.05,
-      uses:1800,
+      uses:18,
 		},{
 			name:'Heal Area',
 			ammo:1,
@@ -20237,6 +20247,15 @@ types={
       uses:12,
 		},{
 			name:'Sheller C',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Daydrinker C',
 			ammo:2,
 			damage:240,
 			cooldown:30,
