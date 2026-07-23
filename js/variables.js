@@ -8193,6 +8193,9 @@ types={
     },{
       name:'PlayerGustC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:1138,
+    },{
+      name:'PlayerAirshotC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1139,
     },
 
     //mark c
@@ -20316,6 +20319,15 @@ types={
       uses:30,
 		},{
 			name:'Gust C',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:100,
+			reload:3,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Airshot C',
 			ammo:1,
 			damage:20,
 			cooldown:1,

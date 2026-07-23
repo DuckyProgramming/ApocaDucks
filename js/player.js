@@ -8050,6 +8050,23 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
                             }
                         break
+                        case 1139:
+                            for(let a=0,la=8;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],479,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
+                            }
+                            entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],147,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*10,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
+                            entities.projectiles[entities.projectiles.length-1].stun=5
+                            entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],410,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*8,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.08
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=0.75
+                            entities.projectiles[entities.projectiles.length-1].stun=5
+                            entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],291,(lsin(this.direction.main)<0?-105:105)+random(-3,3),this.id,weaponData.damage*damageBuff*6,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=0.96
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
+                            entities.projectiles[entities.projectiles.length-1].stun=5
+                        break
 
                         //mark
                     }
