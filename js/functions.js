@@ -159,7 +159,8 @@ function setupRules(){
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
-                a==439||a==449||a==456||a==463||a==464,
+                a==439||a==449||a==456||a==463||a==464||
+                a==479,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367&&a!=463&&a!=464,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -11356,14 +11357,14 @@ function setupLists(){
     }
     listing[4]=[
         [
-            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunC`],
+            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunW`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJumpC`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
-            [`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerDefroster`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
+            [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshot`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSword`,`PlayerDaydrinkerC`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],

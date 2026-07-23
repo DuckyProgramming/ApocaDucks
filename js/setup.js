@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3,3],sets:[[9,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[2,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,7 +15,7 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
+        game.players=30
         game.gaming=1
         game.level=94
         /*

@@ -7,7 +7,7 @@ game={
   classicRespawn:true,invis:false,pvp:false,royale:false,randomSpawn:false,past:false,assault:false,body:false,attacker:false,bust:true,
   classicWeapon:false,peakWeapon:false,selector:false,classWeapon:true,brutal:false,flash:false,mainline:false,perpetual:false,delete:false,nuke:false,
   usurp:false,usurpIndex:-1,randomizer:false,pool:true,pane:true,
-  noPlayer:false,noEnemy:false,noVisuals:false,
+  noPlayer:false,noEnemy:false,noVisuals:false,preCrit:false,hitscan:false,
   margin:false,bound:false,raid:0,newWave:false,
   weapon:[],weaponTick:[],point:[],pointAnim:[],gate:[true,true],loadout:[],
   sectors:[],respawners:[0,0],det:[],traitorKey:0,firstGen:true,
@@ -8178,6 +8178,21 @@ types={
     },{
       name:'PlayerDaydrinkerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1133,
+    },{
+      name:'PlayerPenaltyScattergunW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1134,
+    },{
+      name:'PlayerSnapShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1135,
+    },{
+      name:'PlayerSnapScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1136,
+    },{
+      name:'PlayerSnapPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1137,
+    },{
+      name:'PlayerGustC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1138,
     },
 
     //mark c
@@ -18940,7 +18955,7 @@ types={
 		},{
 			name:'Anticannon',
 			ammo:6,
-			damage:225,
+			damage:180,
 			cooldown:33,
 			stop:144,
 			reload:45,
@@ -20263,6 +20278,51 @@ types={
 			reload:30,
 			speed:1.05,
       uses:16,
+		},{
+			name:'Penalty Scattergun W',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:16,
+		},{
+			name:'Snap Shotgun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Snap Scattergun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:16,
+		},{
+			name:'Snap Pistol W',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:15,
+			reload:6,
+			speed:1.4,
+      uses:30,
+		},{
+			name:'Gust C',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:100,
+			reload:3,
+			speed:1.05,
+      uses:8,
 		},
 
     /*{

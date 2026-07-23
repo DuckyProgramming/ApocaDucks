@@ -25,6 +25,29 @@ class projectile{
 		this.forceDisplay=false
 		this.fort=false
 		this.stun=0
+		if(game.hitscan){
+			switch(this.type){
+				case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
+				case 20: case 24: case 36: case 38: case 39: case 43: case 44: case 49: case 50: case 57:
+				case 59: case 63: case 67: case 72: case 82: case 84: case 87: case 88: case 90: case 94:
+				case 99: case 100: case 105: case 112: case 151: case 155: case 175: case 186: case 188: case 202:
+				case 212: case 217: case 218: case 219: case 225: case 231: case 232: case 241: case 249: case 251:
+				case 273: case 281: case 298: case 317: case 322: case 324: case 325: case 327: case 331: case 332:
+				case 338: case 339: case 340: case 341: case 343: case 345: case 346: case 347: case 348: case 350:
+				case 355: case 357: case 361: case 364: case 380: case 381: case 382: case 396: case 403: case 407:
+				case 408: case 409: case 418: case 419: case 421: case 423: case 428: case 429: case 434: case 436:
+				case 440: case 441: case 442: case 454: case 456: case 459: case 460: case 461: case 465:
+					this.time=random(time,time*2)
+					this.hitscanConvert=true
+					this.prevType=this.type
+					this.prevSpeed=random(6,8)
+					this.type=477
+				break
+				case 341:
+					this.type=478
+				break
+			}
+		}
 		switch(this.type){
 			case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 			case 20: case 24: case 36: case 38: case 39: case 43: case 44: case 49: case 50: case 57:
@@ -210,6 +233,8 @@ class projectile{
 							this.bounceTimer=0
 						}else if(this.type==372){
 							this.delay=0
+						}else if(this.type==375){
+							this.fail=false
 						}else if(this.type==417){
 							this.dets=2
 							this.detTimer=0
@@ -224,6 +249,7 @@ class projectile{
 					break
 					case 376:
 						this.threshold=floor(random(2,5))
+						this.fail=false
 					break
 					case 402:
 						this.hitting=0
@@ -268,7 +294,7 @@ class projectile{
 				this.speed=time/4
 				this.time=5
 			break
-			case 15: case 74: case 75: case 222: case 223: case 287: case 288: case 371: case 449:
+			case 15: case 74: case 75: case 222: case 223: case 287: case 288: case 371: case 449: case 479:
 				this.speed=random(3,5)*1.25
 				this.time=random(time,time*2)
 				this.width*=4
@@ -515,11 +541,20 @@ class projectile{
 				this.height*=2
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
-			case 365: case 400: case 406: case 415: case 426: case 446: case 455: case 470:
+			case 365: case 400: case 406: case 415: case 426: case 446: case 455: case 470: case 477: case 478:
 				this.forceDisplay=true
 				this.time=time
 				this.speed=0
-				this.extent=this.type==363||this.type==400||this.type==415||this.type==426||this.type==455?80:this.type==365?400:2400
+				if(this.type==477||this.type==478){
+					this.transverse=true
+					if(!this.hitscanConvert){
+						this.time=random(time,time*2)
+					}
+				}
+				this.extent=this.type==363||this.type==400||this.type==415||this.type==426||this.type==455?80:
+					this.type==365?400:
+					this.type==477||this.type==478?this.transverse*this.time*4:
+					2400
 				let extend={x:this.position.x+lsin(this.direction)*this.extent,y:this.position.y-lcos(this.direction)*this.extent}
 				for(let a=0,la=entities.walls.length;a<la;a++){
 					for(let b=0,lb=entities.walls[a].length;b<lb;b++){
@@ -575,6 +610,7 @@ class projectile{
 						}
 					}
 				}
+				this.hit=false
 				for(let a=0,la=entities.players.length;a<la;a++){
 					let c=entities.players[a]
 					if(
@@ -599,99 +635,118 @@ class projectile{
 							if(intersect(this.position,extend,bound[b][0],bound[b][1])){
 								let point=intersectKey(this.position,extend,bound[b][0],bound[b][1])
 								if(dist(this.position.x,this.position.y,point.x,point.y)==this.extent){
-									switch(this.type){
-										case 406:
-											this.damage*=(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.375-this.extent/400,1,1.25)*constrain(2-this.extent/1000,0.4,1)
-											c.takeDamage(this.damage)
-										break
-										case 415:
-											c.takeDamage(this.damage*(this.crit?2.5:1)*(c.fort?2:1)*constrain(1.8-this.extent/1500,0.2,1))
-										break
-										case 455:
+									this.hit=true
+									if(this.crit==1){
+										this.damage*=2.5
+									}
+									if(this.hitscanConvert){
+										this.timer=this.extent/4/this.transverse
+										let type=this.type
+										this.type=this.prevType
+										this.speed=this.prevSpeed
+										this.hitPlayer(c)
+										this.type=type
+									}else{
+										switch(this.type){
+											case 406:
+												this.damage*=(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.375-this.extent/400,1,1.25)*constrain(2-this.extent/1000,0.4,1)
+												c.takeDamage(this.damage)
+											break
+											case 415:
+												c.takeDamage(this.damage*(c.fort?2:1)*constrain(1.8-this.extent/1500,0.2,1))
+											break
+											case 455:
+												if(c.id==this.id){
+													c.life=min(max(c.life,c.base.life),c.life+this.damage)
+													c.defendBuff=max(c.defendBuff,120)
+												}else{
+													c.takeDamage(this.damage*constrain(1.8-this.extent/1500,0.2,1))
+												}
+												this.remove=true
+											break
+											case 477:
+												c.takeDamage(this.damage)
+											break
+											case 478:
+												c.takeDamage(this.damage*max(1,1.2-this.extent/4/this.transverse*0.025))
+											break
+											default:
+												c.takeDamage(this.damage*constrain(1.8-this.extent/1500,0.2,1))
+											break
+										}
+										c.die.killer=this.index
+										c.collect.time=450
+										if(this.type==190&&!c.fort){
+											c.chillTime=max(c.chillTime,3600)
+										}else if(this.type==256){
+											entities.projectiles.push(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
+										}else if(this.type==257){
+											c.shrinkTime=max(c.shrinkTime+4,120)
+										}else if(this.type==265&&!c.fort){
+											c.stunTime=5
+										}else if(this.type==300){
+											c.knockback(this.speed*3,this.direction,1,1)
+										}else if(this.type==363){
+											c.velocity.x*=0.5
+											c.knockback(this.speed*20,this.direction,1,1)
+											c.knockbackForce(this.speed*3,this.direction,1,1)
+											c.stuckTime=max(c.stuckTime,15)
+											this.remove=true
+										}else if(this.type==365&&!c.fort){
+											entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,25)
+										}else if(this.type==400){
+											c.velocity.x*=0.5
+											c.knockback(this.speed*10,this.direction,1,1)
+											c.knockbackForce(this.speed*2,this.direction,1,1)
+											if(!c.immune()){
+												c.stuckTime=max(c.stuckTime,10)
+												c.vulnerableTime=max(c.vulnerableTime,240)
+											}
+											this.remove=true
+										}else if(this.type==415){
+											c.velocity.x*=0.5
+											c.knockback(this.speed*10,this.direction,1,1)
+											c.knockbackForce(this.speed*2,this.direction,1,1)
+											for(let d=0,ld=entities.players.length;d<ld;d++){
+												if(entities.players[d].index==this.index){
+													entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
+												}
+											}
+											this.remove=true
+										}else if(this.type==426){
+											c.velocity.x*=0.5
+											c.knockback(this.speed*10,this.direction,1,1)
+											c.knockbackForce(this.speed*2,this.direction,1,1)
+											for(let d=0,ld=entities.players.length;d<ld;d++){
+												if(entities.players[d].index==this.index&&!entities.players[d].fort){
+													entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.125))
+												}
+											}
+											this.remove=true
+										}/*else if(this.type==455){
 											if(c.id==this.id){
 												c.life=min(max(c.life,c.base.life),c.life+this.damage)
 												c.defendBuff=max(c.defendBuff,120)
-											}else{
-												c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
 											}
 											this.remove=true
-										break
-										default:
-											c.takeDamage(this.damage*(this.crit?2.5:1)*constrain(1.8-this.extent/1500,0.2,1))
-										break
-									}
-									c.die.killer=this.index
-									c.collect.time=450
-									if(this.type==190&&!c.fort){
-										c.chillTime=max(c.chillTime,3600)
-									}else if(this.type==256){
-										entities.projectiles.push(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
-									}else if(this.type==257){
-										c.shrinkTime=max(c.shrinkTime+4,120)
-									}else if(this.type==265&&!c.fort){
-										c.stunTime=5
-									}else if(this.type==300){
-										c.knockback(this.speed*3,this.direction,1,1)
-									}else if(this.type==363){
-										c.velocity.x*=0.5
-										c.knockback(this.speed*20,this.direction,1,1)
-										c.knockbackForce(this.speed*3,this.direction,1,1)
-										c.stuckTime=max(c.stuckTime,15)
-										this.remove=true
-									}else if(this.type==365&&!c.fort){
-										entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,25)
-									}else if(this.type==400){
-										c.velocity.x*=0.5
-										c.knockback(this.speed*10,this.direction,1,1)
-										c.knockbackForce(this.speed*2,this.direction,1,1)
-										if(!c.immune()){
-											c.stuckTime=max(c.stuckTime,10)
-											c.vulnerableTime=max(c.vulnerableTime,240)
-										}
-										this.remove=true
-									}else if(this.type==415){
-										c.velocity.x*=0.5
-										c.knockback(this.speed*10,this.direction,1,1)
-										c.knockbackForce(this.speed*2,this.direction,1,1)
-										for(let d=0,ld=entities.players.length;d<ld;d++){
-											if(entities.players[d].index==this.index){
-												entities.players[d].speedBuff=max(entities.players[d].speedBuff,300)
+										}*/else if(this.type==446){
+											for(let d=0,ld=entities.players.length;d<ld;d++){
+												if(entities.players[d].builder==this.index&&entities.players[d].construct){
+													//entities.players[d].weaponData.cooldown=0
+													entities.players[d].weapon.cooldown=0
+													entities.players[d].weapon.ammo=entities.players[d].weaponData.ammo
+													entities.players[d].weapon.reloading=false
+													entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,120)
+													entities.players[d].assort.autoTarget=[c]
+												}
 											}
-										}
-										this.remove=true
-									}else if(this.type==426){
-										c.velocity.x*=0.5
-										c.knockback(this.speed*10,this.direction,1,1)
-										c.knockbackForce(this.speed*2,this.direction,1,1)
-										for(let d=0,ld=entities.players.length;d<ld;d++){
-											if(entities.players[d].index==this.index&&!entities.players[d].fort){
-												entities.players[d].life=max(entities.players[d].life,min(entities.players[d].base.life*2,entities.players[d].life+entities.players[d].base.life*0.125))
+										}else if(this.type==470){
+											if(!c.immune()){
+												c.critBuff=max(c.critBuff,120)
+												c.DOT.damage+=this.damage/600
+												c.DOT.active=max(c.DOT.active,120)
+												c.vulnerableTime=max(c.vulnerableTime,120)
 											}
-										}
-										this.remove=true
-									}/*else if(this.type==455){
-										if(c.id==this.id){
-											c.life=min(max(c.life,c.base.life),c.life+this.damage)
-											c.defendBuff=max(c.defendBuff,120)
-										}
-										this.remove=true
-									}*/else if(this.type==446){
-										for(let d=0,ld=entities.players.length;d<ld;d++){
-											if(entities.players[d].builder==this.index&&entities.players[d].construct){
-												//entities.players[d].weaponData.cooldown=0
-												entities.players[d].weapon.cooldown=0
-												entities.players[d].weapon.ammo=entities.players[d].weaponData.ammo
-												entities.players[d].weapon.reloading=false
-												entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,120)
-												entities.players[d].assort.autoTarget=[c]
-											}
-										}
-									}else if(this.type==470){
-										if(!c.immune()){
-											c.critBuff=max(c.critBuff,120)
-											c.DOT.damage+=this.damage/600
-											c.DOT.active=max(c.DOT.active,120)
-											c.vulnerableTime=max(c.vulnerableTime,120)
 										}
 									}
 								}
@@ -702,12 +757,20 @@ class projectile{
 				for(let c=0,lc=game.gaming;c<lc;c++){
 					this.display(graphics.main[c])
 				}
-				if(this.type==406){
-					this.position.x+=lsin(this.direction)*this.extent
-					this.position.y-=lcos(this.direction)*this.extent
-					this.explode()
-					this.position.x-=lsin(this.direction)*this.extent
-					this.position.y+=lcos(this.direction)*this.extent
+				switch(this.type){
+					case 406:
+						if(!this.hit){
+							this.damage*=(this.crit?2.5:1)*constrain(0.25+0.75*this.extent/500,0.5,1)*constrain(1.375-this.extent/400,1,1.25)*constrain(2-this.extent/1000,0.4,1)
+						}
+						this.position.x+=lsin(this.direction)*this.extent
+						this.position.y-=lcos(this.direction)*this.extent
+						this.explode()
+						this.position.x-=lsin(this.direction)*this.extent
+						this.position.y+=lcos(this.direction)*this.extent
+					break
+					case 477: case 478:
+						this.deviation=random(40,100)
+					break
 				}
 			break
 			case 192:
@@ -947,7 +1010,7 @@ class projectile{
 				this.speed=2
 				this.time=time
 			break
-			case 451:
+			case 451: case 476:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -4096,7 +4159,7 @@ class projectile{
 				layer.fill(50,250,50,this.fade)
 				layer.ellipse(0,0,4)
 			break
-			case 222: case 424:
+			case 222: case 424: case 479:
 				layer.fill(200-this.crit*200,240,200+this.crit*40,this.fade*this.time/this.base.time)
 				layer.ellipse(0,0,60*(1-this.time/this.base.time))
 				layer.fill(160-this.crit*160,200,160+this.crit*80,this.fade*this.time/this.base.time)
@@ -6366,11 +6429,11 @@ class projectile{
 				layer.rect(0,0,2.5)
 				if(!this.active&&this.fade<1){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,135-this.fade*135)
+					layer.ellipse(0,0,(135-this.fade*135)*(this.fail?0.25:1))
 					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,90-this.fade*90)
+					layer.ellipse(0,0,(90-this.fade*90)*(this.fail?0.25:1))
 					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
-					layer.ellipse(0,0,45-this.fade*45)
+					layer.ellipse(0,0,(45-this.fade*45)*(this.fail?0.25:1))
 				}
 			break
 			case 377:
@@ -6719,16 +6782,16 @@ class projectile{
 			case 406:
 				layer.stroke(160-this.crit*160,40+this.crit*200,240,this.fade*5-4)
 				layer.strokeWeight(1.8)
-				layer.line(0,7.5,0,-this.extent)
+				layer.line(0,4,0,-this.extent)
 				layer.stroke(160-this.crit*160,40+this.crit*120,160+this.crit*80,this.fade*5-4)
 				layer.strokeWeight(1.5)
-				layer.line(0,7.5,0,-this.extent)
+				layer.line(0,4,0,-this.extent)
 				layer.stroke(160-this.crit*160,40,80+this.crit*160,this.fade*5-4)
 				layer.strokeWeight(1.2)
-				layer.line(0,7.5,0,-this.extent)
+				layer.line(0,4,0,-this.extent)
 				layer.stroke(250,this.fade)
 				layer.strokeWeight(0.9)
-				layer.line(0,7.5,0,-this.extent)
+				layer.line(0,4,0,-this.extent)
 				layer.noStroke()
 				layer.fill(240-this.crit*200,160,120+this.crit*120,this.fade)
 				layer.ellipse(0,-this.extent,(150-this.fade*150))
@@ -6819,7 +6882,7 @@ class projectile{
 					layer.ellipse(0,0,70-this.fade*70)
 				}
 			break
-			case 414: case 451:
+			case 414: case 451: case 476:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -7592,6 +7655,17 @@ class projectile{
 					layer.ellipse(0,0,(50-this.detTimer*5)*(this.fail?0.25:1))
 				}
 			break
+			case 477: case 478:
+				layer.stroke(250,this.fade)
+				layer.strokeWeight(1)
+				layer.line(0,-(this.timer-1)*this.deviation,0,-this.extent)
+				if(!this.hit){
+					layer.stroke(250,this.fade*0.4)
+					layer.line(0,-this.extent,0,-this.extent-this.deviation)
+					layer.stroke(250,this.fade*0.2)
+					layer.line(0,-this.extent-this.deviation,0,-this.extent-this.deviation*2)
+				}
+			break
 
 			//mark
         }
@@ -8295,13 +8369,7 @@ class projectile{
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-						entities.projectiles[b].active=false
-						if(entities.projectiles[b].rules.stickybomb){
-							entities.projectiles[b].fail=true
-						}else if(entities.projectiles[b].rules.exploder){
-							entities.projectiles[b].damage*=0.25
-							entities.projectiles[b].explode()
-						}
+						entities.projectiles[b].defuse()
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -8497,20 +8565,16 @@ class projectile{
 					if(entities.projectiles[b].active&&entities.projectiles[b].type==this.type&&entities.projectiles[b].index==this.index&&entities.projectiles[b].timer>=30){
 						entities.projectiles[b].delay+=10
 					}else if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-						entities.projectiles[b].active=false
-						if(entities.projectiles[b].rules.stickybomb){
-							entities.projectiles[b].fail=true
-						}else if(entities.projectiles[b].rules.exploder){
-							entities.projectiles[b].damage*=0.25
-							entities.projectiles[b].explode()
-						}
+						entities.projectiles[b].defuse()
 					}
 				}
 			break
 			case 375:
-				let turn375=random(0,40)
-				for(let b=0,lb=9;b<lb;b++){
+				let count375=9//this.fail?6:9
+				let turn375=random(0,360/count375)
+				for(let b=0,lb=count375;b<lb;b++){
 					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,376,this.direction+turn375+b/lb*360,this.id,this.base.damage,300,this.crit,this.index))
+					entities.projectiles[entities.projectiles.length-1].fail=this.fail
 				}
 			break
 			case 376:
@@ -8659,7 +8723,8 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],2)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/radius)*5/9*(entities.players[b].index==this.index?1.5:1))
+						//entities.players[b].takeDamage(this.damage*(1-c/radius)*5/9*(entities.players[b].index==this.index?1.5:1))
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*2/3*(entities.players[b].index==this.index?1.5:1))
 						entities.players[b].generalizedTake(this.index)
 					}
 				}
@@ -8697,13 +8762,7 @@ class projectile{
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<50+this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-						entities.projectiles[b].active=false
-						if(entities.projectiles[b].rules.stickybomb){
-							entities.projectiles[b].fail=true
-						}else if(entities.projectiles[b].rules.exploder){
-							entities.projectiles[b].damage*=0.25
-							entities.projectiles[b].explode()
-						}
+						entities.projectiles[b].defuse()
 					}
 				}
 			break
@@ -8827,13 +8886,7 @@ class projectile{
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 					if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-						entities.projectiles[b].active=false
-						if(entities.projectiles[b].rules.stickybomb){
-							entities.projectiles[b].fail=true
-						}else if(entities.projectiles[b].rules.exploder){
-							entities.projectiles[b].damage*=0.25
-							entities.projectiles[b].explode()
-						}
+						entities.projectiles[b].defuse()
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -8911,6 +8964,27 @@ class projectile{
 		}
 		//mark ex
 	}
+	defuse(){
+		this.active=false
+		if(this.rules.stickybomb){
+			this.fail=true
+		}else if(this.type==375){
+			this.fail=true
+			this.explode()
+		}else if(this.rules.exploder){
+			this.damage*=0.25
+			this.base.damage*=0.25
+			this.explode()
+		}
+	}
+	defusonate(){
+		this.active=false
+		if(this.rules.exploder){
+			this.damage*=0.5
+			this.base.damage*=0.5
+			this.explode()
+		}
+	}
     update(){
 		this.timer++
 		if(this.rules.fader1){
@@ -8929,14 +9003,14 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,this.time<=0?15:60)
 		}else if(this.type==444){
 			this.fade=smoothAnim(this.fade,this.active,0,1,3)
-		}else if(this.type==446){
+		}else if(this.type==446||this.type==477||this.type==478){
 			this.fade-=0.25
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}
         if(this.fade<=0){
 			this.remove=true
-			if(this.type==451&&this.hit.length==0){
+			if((this.type==451||this.type==476)&&this.hit.length==0){
 				for(let a=0,la=entities.players.length;a<la;a++){
 					if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
 						entities.players[a].assort.penalty++
@@ -9018,7 +9092,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467:
+				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -9567,11 +9641,7 @@ class projectile{
 										this.damage-=harm*mult
 										//print(this.damage,this.time)
 										if(entities.projectiles[b].damage<=0||this.type==437){
-											entities.projectiles[b].active=false
-											if(entities.projectiles[b].rules.exploder){
-												entities.projectiles[b].damage*=0.5
-												entities.projectiles[b].explode()
-											}
+											entities.projectiles[b].defusonate()
 										}
 										if(this.damage<=0){
 											this.active=false
@@ -10165,11 +10235,7 @@ class projectile{
 										entities.projectiles[b].damage-=harm
 										this.damage-=harm*mult
 										if(entities.projectiles[b].damage<=0){
-											entities.projectiles[b].active=false
-											if(entities.projectiles[b].rules.exploder){
-												entities.projectiles[b].damage*=0.5
-												entities.projectiles[b].explode()
-											}
+											entities.projectiles[b].defusonate()
 										}
 										if(this.damage<=0){
 											this.active=false
@@ -10802,7 +10868,7 @@ class projectile{
 						}
 					}
 				break
-				case 222: case 223: case 287: case 288: case 319: case 371: case 374: case 424: case 449:
+				case 222: case 223: case 287: case 288: case 319: case 371: case 374: case 424: case 449: case 479:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10824,11 +10890,7 @@ class projectile{
 									entities.projectiles[b].damage*=1.6
 								}
 							}else{
-								entities.projectiles[b].active=false
-								if(entities.projectiles[b].rules.exploder){
-									entities.projectiles[b].damage*=0.25
-									entities.projectiles[b].explode()
-								}
+								entities.projectiles[b].defusonate()
 							}
 						}
 					}
@@ -11168,11 +11230,7 @@ class projectile{
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<12+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-							entities.projectiles[b].active=false
-							if(entities.projectiles[b].rules.exploder){
-								entities.projectiles[b].damage*=0.25
-								entities.projectiles[b].explode()
-							}
+							entities.projectiles[b].defuse()
 						}
 					}
 				break
@@ -11195,11 +11253,7 @@ class projectile{
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<5+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
-							entities.projectiles[b].active=false
-							if(entities.projectiles[b].rules.exploder){
-								entities.projectiles[b].damage*=0.25
-								entities.projectiles[b].explode()
-							}
+							entities.projectiles[b].defuse()
 						}
 					}
 				break
@@ -11329,954 +11383,7 @@ class projectile{
 			}
 			if(targets.length>0){
 				let target=targets.length==1?targets[0]:targets.sort((a,b)=>distPos(this.previous,a)-distPos(this.previous,b))[0]
-				/*if(this.drone&&target.id>0&&game.pvp&&this.type!=138){
-					this.damage*=0.6
-				}*/
-				if(this.travel>750&&!this.rules.fast&&this.type!=336){
-					this.damage*=constrain(1.8-this.travel/750*0.8,0.2,1)
-				}
-				if(this.rules.multiHit){
-					this.hit.push(target.index)
-					if(this.type==92||this.type==306){
-						let minimum=300
-						for(let c=0,lc=entities.players.length;c<lc;c++){
-							if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&!this.hit.includes(entities.players[c].index)){
-								minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y))
-							}
-						}
-						if(minimum<300){
-							for(let c=0,lc=entities.players.length;c<lc;c++){
-								if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&minimum==dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y)&&!this.hit.includes(entities.players[c].index)){
-									this.direction=atan2(entities.players[c].position.x-this.position.x,this.position.y-entities.players[c].position.y)
-									c=lc
-								}
-							}
-						}
-						this.speed=this.base.speed
-					}
-					if(
-						(this.type==192||this.type==203||this.type==207||this.type==420)&&this.hit.length>=3||
-						this.type==306&&this.hit.length>=2
-					){
-						this.active=false
-					}
-				}else if(this.type==179){
-					this.time-=180
-					if(this.time<=0){
-						this.active=false
-					}
-					let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
-					this.velocity.x=sin(dir)*6
-					this.velocity.y=cos(dir)*6
-					target.velocity.x-=sin(dir)*6
-					target.velocity.y-=cos(dir)*6
-				}else if(this.type==226){
-					this.time-=60
-					if(this.time<=0){
-						this.active=false
-					}
-					let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
-					let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-					this.velocity.x=sin(dir)*vec
-					this.velocity.y=cos(dir)*vec
-					target.velocity.x-=sin(dir)*vec
-					target.velocity.y-=cos(dir)*vec
-				}else if(this.type==389||this.type==404){
-					let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
-					let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-					this.velocity.x=sin(dir)*vec
-					this.velocity.y=cos(dir)*vec
-					target.velocity.x-=sin(dir)*vec
-					target.velocity.y-=cos(dir)*vec
-				}else if(this.type==402){
-					this.hitting=20
-				}else if(this.type==451){
-					this.hit.push(target.index)
-					this.active=false
-				}else if(this.rules.destroyAfter){
-					this.active=false
-				}
-				if(this.id==-1&&(target.id>0||target.fort)&&!target.construct&&this.type==6){
-					this.damage*=target.fort?0.1:0.25
-				}
-				let base=target.life
-				switch(this.type){
-					case 9: case 155: case 216: case 439: case 449: case 463: case 464:
-						if(this.onTeam(target)||this.index==target.index&&this.type==216){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 10:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*3*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 11:
-						if(this.onTeam(target)){
-							target.life=target.base.life
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 38:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-							target.critBuff=max(480,target.critBuff)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 63:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-							target.defendBuff=max(480,target.defendBuff)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 82:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-							target.stunTime=0
-							target.stuckTime=0
-							target.vulnerableTime=0
-							target.confuseTime=0
-							target.dizzyTime=0
-							target.DOT.active=0
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 194: case 398:
-						if(this.onTeam(target)||this.index==target.index){
-							if(!target.fort){
-								target.life=min(target.life+this.damage*(min(2,target.base.life/125))*(this.index==target.index?0.1:1),max(target.life,target.base.life*2))
-							}
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 418:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*3))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 6: case 15: case 33: case 74: case 75: case 81: case 276: case 386:
-						target.takeDamage(this.damage*(target.base.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.base.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
-						if(this.type==75){
-							this.explode()
-						}
-						if(target.chillTime>0){
-							target.chillTime=0
-						}
-					break
-					case 72:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(target.base.life/100),max(target.life,target.base.life*2))
-							target.jump.double=1
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 131:
-						target.takeDamage(this.damage*(1+8*this.timer/this.base.time))
-					break
-					case 273:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*5))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 339:
-						if(target.construct&&target.id==this.id){
-							//target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
-							target.life=min(target.life+this.damage,max(target.life,target.base.life))
-							//target.defendBuff=max(target.defendBuff,120)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 345:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
-							target.critBuff=max(target.critBuff,120)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 350:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-							target.speedBuff=max(target.defendBuff,480)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 357:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125))*1.4,max(target.life,target.base.life*1.5))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 364:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
-							target.weapon.cooldown=max(target.weapon.cooldown-60,0)
-							target.subWeaponA.cooldown=max(target.subWeaponA.cooldown-60,0)
-							target.weapon.reload=max(target.weapon.reload-60,0)
-							target.subWeaponA.reload=max(target.subWeaponA.reload-60,0)
-						}else{
-							target.takeDamage(this.damage)
-							if(!target.fort){
-								target.confuseTime=max(target.confuseTime,60)
-							}
-						}
-					break
-					case 369:
-						if(target.construct&&target.id==this.id){
-							//target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life*2))
-							target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life))
-						}else{
-							target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?1.5:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.25:1))
-						}
-					break
-					case 388:
-						target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
-					break
-					case 434:
-						if(this.onTeam(target)&&!target.construct||this.index==target.index&&this.type==216){
-							target.life=min(target.life+this.damage*0.5*(min(2,target.base.life/125)),max(target.life,target.base.life))
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 436:
-						if(this.onTeam(target)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
-							target.hasteBuff=max(target.hasteBuff,120)
-						}else{
-							target.takeDamage(this.damage)
-							target.confuseTime=max(target.confuseTime,120)
-						}
-					break
-					case 111: case 134: case 182: case 373: case 437:
-						if(target.id>0){
-							target.takeDamage(this.damage*0.2)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 138:
-						target.takeDamage(this.damage/30)
-					break
-					case 149:
-						target.takeDamage(this.damage*this.speed/this.base.speed)
-					break
-					case 215:
-						target.gasTime=max(7200,target.gasTime+300)
-						target.gasser=this.index
-					break
-					case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330:
-						if(target.fort&&!target.auto){
-							target.takeDamage(this.damage*0.2)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 304:
-						let saveLife=target.life
-						target.takeDamage(this.damage)
-						this.damage-=saveLife
-						if(this.damage<=0){
-							this.active=false
-						}
-					break
-					case 325:
-						if(target.playerData.name.includes('Hyper')){
-							target.life=0
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 337:
-						target.gasTime=max(1200,target.gasTime+120)
-						target.gasser=this.index
-					break
-					case 341: case 343: case 354: case 451:
-						target.takeDamage(this.damage*max(1,1.2-this.timer*0.025))
-					break
-					case 355:
-						target.takeDamage(this.damage*(target.playerData.name.includes('Tank')?2:1),1)
-					break
-					case 366:
-						target.takeDamage(this.damage*(1+this.travel/this.speed/10))
-					break
-					case 381:
-						target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
-					break
-					case 396:
-						if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
-							target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-						}else{
-							let startLife=target.life
-							target.takeDamage(this.damage)
-							if(target.life<startLife){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=max(entities.players[d].life,min(entities.players[d].life+(startLife-target.life)*0.5,entities.players[d].base.life*2))
-									}
-								}
-							}
-						}
-					break
-					case 398:
-						if(target.fort&&!target.auto){
-							target.takeDamage(this.damage*0.4)
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 404:
-						if(this.attack!=0){
-							target.takeDamage(this.damage*6)
-							target.dizzyTime=max(target.dizzyTime,300)
-							this.attack=0
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 409:
-						if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
-							target.life=min(target.life+this.damage*this.travel/400*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
-						}else{
-							target.takeDamage(this.damage*this.travel/400)
-						}
-					break
-					case 411:
-						target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
-					break
-					case 414:
-						target.takeDamage(this.damage*max(1,1.25-this.timer*0.025))
-					break
-					case 419:
-						if(target.fort){
-							target.takeDamage(this.damage)
-						}else{
-							let preLife=target.life
-							target.takeDamage(this.damage)
-							if(target.life<preLife){
-								for(let d=0,ld=entities.players.length;d<ld;d++){
-									if(entities.players[d].index==this.index){
-										entities.players[d].life=min(entities.players[d].life+min(entities.players[d].base.life,preLife-max(0,target.life)),max(entities.players[d].life,entities.players[d].base.life*2))
-									}
-								}
-							}
-						}
-					break
-					case 433:
-						target.takeDamage(this.damage*(target.defendBuff>0?2:1))
-					break
-					case 456:
-						if(this.onTeam(target)){
-							if(target.rules.class){
-								target.subWeaponA.uses=min(target.subWeaponAData.uses*game.ammoMult,target.subWeaponA.uses+(target.subWeaponAData.uses*game.ammoMult>=10&&target.subWeaponAData.uses*game.ammoMult<40?1:floor(target.subWeaponAData.uses*game.ammoMult/40)))
-							}else{
-								target.weapon.uses=min(target.weaponData.uses*game.ammoMult,target.weapon.uses+(target.weaponData.uses*game.ammoMult>=10&&target.weaponData.uses*game.ammoMult<40?1:floor(target.weaponData.uses*game.ammoMult/40)))
-							}
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-					case 459:
-						target.takeDamage(this.damage*((lsin(this.direction)>0?1:0)==(lsin(target.direction.main)>0?1:0)?3:1))
-					break
-					default:
-						if(this.rules.exploder&&this.type!=389){
-							if(this.rules.explodeHit){
-								target.takeDamage(this.damage)
-							}else if(this.type==48){
-								this.speed=0
-							}else if(this.type==344){
-								target.takeDamage(this.damage*0.5)
-							}else if(this.type==474){
-								//this said 477 at some point but that was invalid, idk what it was originally meant for
-								target.takeDamage(this.damage*0.25)
-							}
-							this.explode()
-						}else if(this.rules.fast&&this.type!=409||this.type==342||this.type==428||this.type==429){
-							target.takeDamage(this.damage*min(1,0.5+this.timer*0.125))
-							//snipers do less at close range lol
-						}else{
-							target.takeDamage(this.damage)
-						}
-					break
-				}
-				if(target.life>base){
-					for(let d=0,ld=entities.players.length;d<ld;d++){
-						if(entities.players[d].index==this.index){
-							entities.players[d].stats.damage+=(target.life-base)*0.25
-						}
-					}
-				}
-				let dir
-				let vec
-				switch(this.type){
-					case 13:
-						/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
-						target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
-						target.weapon.cooldown=max(15,target.weapon.cooldown)
-						target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
-					break
-					case 36: case 249:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].critBuff=max(300,entities.players[d].critBuff)
-							}
-						}
-					break
-					case 188:
-						/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
-						target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
-						target.weapon.cooldown=max(15,target.weapon.cooldown)
-						target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
-						if(this.type==188){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].critBuff=max(300,entities.players[d].critBuff)
-								}
-							}
-						}
-					break
-					case 277:
-						entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
-						entities.players[entities.players.length-1].sidekick=true
-						entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
-						entities.players[entities.players.length-1].DOT.damage=0.25
-						entities.players[entities.players.length-1].DOT.active=9999
-					break
-					case 340:
-						for(let c=0,lc=entities.projectiles.length;c<lc;c++){
-							if(entities.projectiles[c].index==this.index&&entities.projectiles[c].type==118){
-								entities.projectiles[c].aggro=true
-								entities.projectiles[c].goalIndex=target.index
-							}
-						}
-					break
-					case 347:
-						if(!target.fort){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									if(entities.players[d].subWeaponAType!=735){
-										entities.players[d].subWeaponA.cooldown=0
-										entities.players[d].subWeaponA.reload=0
-									}else{
-										entities.players[d].subWeaponB.cooldown=0
-										entities.players[d].subWeaponB.reload=0
-									}
-								}
-							}
-						}
-					break
-					case 348:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].speedBuff=max(entities.players[d].speedBuff,360)
-								entities.players[d].visible=0
-							}
-						}
-					break
-					case 362:
-						target.weapon.cooldown+=30
-						target.subWeaponA.cooldown+=30
-						target.subWeaponB.cooldown+=30
-					break
-					case 382:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								if(entities.players[d].class()){
-									if(entities.players[d].subWeaponA.ammo>0){
-										entities.players[d].attack(1)
-									}
-								}else{
-									if(entities.players[d].weapon.ammo>0){
-										entities.players[d].attack(0)
-									}
-								}
-							}
-						}
-					break
-					case 403:
-						if(!target.fort){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].critBuff=max(entities.players[d].critBuff,180)
-								}
-							}
-						}
-					break
-					case 407:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
-							if(entities.players[d].id==0&&entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
-								entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
-								entities.players[d].die.killer=this.index
-								entities.players[d].collect.time=max(450,entities.players[d].collect.time)
-								if(game.invis){
-									entities.players[d].visible=15
-								}
-							}
-						}
-					break
-					case 408:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index&&entities.players[d].life>0){
-								if((entities.players[d].playerData.name=='PlayerSpyC2'||entities.players[d].playerData.name=='PlayerSpyW'&&entities.players[d].subWeaponCType==1006)){
-									entities.players[d].visible=600
-									entities.players.push(new player(entities.players[d].layer,entities.players[d].previous.position.x,entities.players[d].previous.position.y+entities.players[d].height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
-									game.index++
-									entities.players[entities.players.length-1].decoy2=true
-									entities.players[entities.players.length-1].velocity.x=entities.players[d].velocity.x
-									entities.players[entities.players.length-1].velocity.y=entities.players[d].velocity.y
-									entities.players[entities.players.length-1].lastingForce[0]=entities.players[d].lastingForce[0]
-									entities.players[entities.players.length-1].lastingForce[1]=entities.players[d].lastingForce[1]
-									//entities.players[entities.players.length-1].copy=entities.players[d].index
-									entities.players[entities.players.length-1].copy=entities.players[d]
-									entities.players[entities.players.length-1].copyId=entities.players[d].id
-									entities.players[entities.players.length-1].direction.goal=entities.players[d].direction.goal
-									entities.players[entities.players.length-1].setColor()
-									entities.players[entities.players.length-1].life=0
-									entities.players[entities.players.length-1].collect.life=entities.players[d].life
-									entities.players[entities.players.length-1].fade=entities.players[d].fade
-									entities.players[entities.players.length-1].assort.copyDeaths=entities.players[d].stats.deaths+1
-									entities.players[d].fade=0
-								}else if(entities.players[d].playerData.name=='PlayerSpyC7'||entities.players[d].playerData.name=='PlayerSpyW'&&entities.players[d].subWeaponCType==1008){
-									entities.players[d].visible=600
-									entities.players[d].defendBuff=max(entities.players[d].defendBuff,60)
-									entities.players[d].speedBuff=max(entities.players[d].speedBuff,60)
-								}else{
-									entities.players[d].speedBuff=max(entities.players[d].speedBuff,180)
-									entities.players[d].visible=0
-								}
-							}
-						}
-					break
-					case 416: case 468:
-						dir=atan2(this.previous.position.x-target.position.x,this.previous.position.y-target.position.y)
-						vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-						this.velocity.x+=sin(dir)*vec
-						this.velocity.y+=cos(dir)*vec
-						target.velocity.x-=sin(dir)*vec*target.getKnockback()
-						target.velocity.y-=cos(dir)*vec*target.getKnockback()
-						target.lastingForce[0]-=0.125*sin(dir)*vec*target.getKnockback()
-						target.lastingForce[1]-=0.125*cos(dir)*vec*target.getKnockback()
-						//target.stuckTime=max(target.stuckTime,15)
-					break
-					case 420:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].position.x=target.position.x
-								entities.players[d].position.y=target.position.y+target.height/2-entities.players[d].height/2
-							}
-						}
-					break
-					case 421:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
-							if(entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
-								entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
-								entities.players[d].die.killer=this.index
-								entities.players[d].collect.time=450
-								if(game.invis){
-									entities.players[d].visible=15
-								}
-							}
-						}
-						if(target.life<=0&&target.playerData.sizeBuff>1){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].critBuff=max(entities.players[d].critBuff,150)
-								}
-							}
-						}
-					break
-					case 432:
-						target.stunTime=max(target.stunTime,600)
-						target.noGravTime=max(target.noGravTime,600)
-						target.velocity.x=0
-						target.velocity.y=0
-						entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,433,this.direction,this.id,this.base.damage,600,this.crit,this.index))
-					break
-					case 440:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].speedBuff=max(entities.players[d].speedBuff,240)
-							}
-						}
-					break
-					case 441:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,240)
-							}
-						}
-					break
-					case 442:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								entities.players[d].defendBuff=max(entities.players[d].defendBuff,240)
-							}
-						}
-					break
-					case 454:
-						//if(target.life<=0){
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index){
-								if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
-									entities.players[d].subWeaponA.reload=0
-									entities.players[d].subWeaponA.cooldown=0
-								}
-								if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
-									entities.players[d].subWeaponB.reload=0
-									entities.players[d].subWeaponB.cooldown=0
-								}
-								if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
-									entities.players[d].subWeaponC.reload=0
-									entities.players[d].subWeaponC.cooldown=0
-								}
-							}
-						}
-						//}
-					break
-					case 465:
-						if(target.life<=0){
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].subWeaponA.reload=0
-									if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
-										entities.players[d].subWeaponA.cooldown=0
-									}
-									entities.players[d].subWeaponA.ammo=entities.players[d].subWeaponAData.ammo
-									entities.players[d].subWeaponB.reload=0
-									if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
-										entities.players[d].subWeaponB.cooldown=0
-									}
-									entities.players[d].subWeaponB.ammo=entities.players[d].subWeaponBData.ammo
-									entities.players[d].subWeaponC.reload=0
-									if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
-										entities.players[d].subWeaponC.cooldown=0
-									}
-									entities.players[d].subWeaponC.ammo=entities.players[d].subWeaponCData.ammo
-								}
-							}
-						}
-					break
-					case 467:
-						for(let d=0,ld=entities.players.length;d<ld;d++){
-							if(entities.players[d].index==this.index&&!entities.players[d].inspect.includes(target.index)){
-								entities.players[d].inspect.push(target.index)
-							}
-						}
-					break
-					case 472:
-						dir=atan2(this.previous.position.x-target.position.x,this.previous.position.y-target.position.y)
-						vec=sqrt(this.velocity.x**2+this.velocity.y**2)
-						this.velocity.x+=sin(dir)*vec
-						this.velocity.y+=cos(dir)*vec
-						target.velocity.x-=sin(dir)*vec*target.getKnockback()
-						target.velocity.y-=cos(dir)*vec*target.getKnockback()
-						target.lastingForce[0]-=0.125*sin(dir)*vec*target.getKnockback()
-						target.lastingForce[1]-=0.125*cos(dir)*vec*target.getKnockback()
-						if(!target.immune()){
-							target.freezeTime=max(target.freezeTime,120)
-						}
-						//target.stuckTime=max(target.stuckTime,15)
-					break
-				}
-				if(!target.immune()){
-					switch(this.type){
-						case 12:
-							target.knockback(this.speed*3,this.direction,1,1)
-						break
-						case 14: case 46:
-							target.weaponType=-1
-						break
-						case 16: case 379:
-							target.knockback(this.speed*3.6,this.direction,1,1)
-						break
-						case 18:
-							target.velocity.y-=this.speed*abs(lsin(this.direction)*3)
-						break
-						case 19:
-							target.knockback(this.speed*-3,this.direction,1,1)
-						break
-						case 23: case 24: case 33: case 35: case 39: case 51:
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
-								}
-							}
-						break
-						case 40:
-							target.weapon.cooldown=min(target.weaponData.cooldown+60,target.weapon.cooldown+60)
-							target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+60,target.subWeaponA.cooldown+60)
-						break
-						case 43: case 186: case 320:
-							target.vulnerableTime=max(target.vulnerableTime,300)
-						break
-						case 44:
-							target.stunTime=max(target.stunTime,30)
-						break
-						case 49:
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].life=entities.players[d].base.life
-								}
-							}
-						break
-						case 55:
-							target.knockback(this.speed*6,this.direction,1,1)
-						break
-						case 56:
-							target.velocity.y-=this.speed*abs(lsin(this.direction)*2)
-						break
-						case 57:
-							target.newWeapon()
-						break
-						case 59:
-							target.vulnerableTime=max(target.vulnerableTime,300)
-							target.stunTime=max(target.stunTime,30)
-						break
-						case 61:
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
-								}
-							}
-							target.stunTime=max(target.stunTime,60)
-						break
-						case 67: case 285:
-							target.confuseTime=max(target.confuseTime,360)
-						break
-						case 74: case 81:
-							target.knockback(this.speed*1.8,this.direction,1,1)
-						break
-						case 76:
-							target.stunTime=max(target.stunTime,30)
-						break
-						case 77:
-							target.knockback(this.speed*24,this.direction,1,1)
-						break
-						case 87:
-							target.knockback(this.speed*7.5,this.direction,1,1)
-						break
-						case 94:
-							target.stunTime=max(target.stunTime,this.id==0?120:600)
-						break
-						case 99:
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
-						break
-						case 102: case 115: case 151: case 167: case 175: case 189: case 193: case 202: case 220: case 258:
-							target.chillTime=max(target.chillTime,3600)
-							if(this.type==202){
-								target.stunTime=max(target.stunTime,600)
-							}
-						break
-						case 105:
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].index==this.index){
-									entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life*2)
-								}
-							}
-						break
-						case 127:
-							target.knockback(this.speed*20,this.direction,1,1)
-							target.knockbackForce(this.speed*12,this.direction,1,1)
-						break
-						case 195:
-							if(target.life<=0){
-								entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
-							}
-						break
-						case 212:
-							target.shrinkTime=max(target.shrinkTime+15,30)
-						break
-						case 222: case 374: case 449:
-							target.knockback(this.speed*8,this.direction,1,1)
-							target.knockbackForce(this.speed*2,this.direction,1,1)
-						break
-						case 223:
-							target.knockback(this.speed*12,this.direction,1,1)
-							target.knockbackForce(this.speed*6,this.direction,1,1)
-							target.stunTime=max(target.stunTime,600)
-							target.vulnerableTime=max(target.vulnerableTime,1800)
-						break
-						case 225:
-							for(let d=0,ld=entities.players.length;d<ld;d++){
-								if(entities.players[d].id>0&&!entities.players[d].inspect.includes(target.index)){
-									entities.players[d].inspect.push(target.index)
-								}
-							}
-						break
-						case 231:
-							target.stunTime=max(target.stunTime,240)
-						break
-						case 269:
-							target.knockback(this.speed*15,this.direction,1,1)
-							target.knockbackForce(this.speed*9,this.direction,1,1)
-						break
-						case 281:
-							let pos=game.spawner[floor(random(0,game.spawner.length))]
-							target.position.x=pos[0]
-							target.position.y=pos[1]-target.height/2
-						break
-						case 287:
-							target.knockback(this.speed*12,this.direction,1,1)
-							target.knockbackForce(this.speed*12,this.direction,1,1)
-							target.chillTime=max(target.chillTime,3600)
-						break
-						case 288:
-							target.knockback(this.speed*9,this.direction,1,1)
-							target.knockbackForce(this.speed*4,this.direction,1,1)
-						break
-						case 289:
-							target.gasTime=max(7200,target.gasTime+600)
-							target.gasser=this.index
-							target.stunTime=240
-						break
-						case 302:
-							target.knockback(this.speed*-3,this.direction,1,1)
-							target.stunTime=max(target.stunTime,60)
-						break
-						case 310:
-							target.gasTime=max(7200,target.gasTime+3)
-							target.gasser=this.index
-						break
-						case 319:
-							target.knockback(this.speed*18,this.direction,1,1)
-							target.knockbackForce(this.speed*9,this.direction,1,1)
-						break
-						case 322:
-							target.knockback(this.speed*15,this.direction,1,1)
-						break
-						case 335:
-							target.knockbackForce(this.speed*0.1,this.direction,1,1)
-						break
-						case 343:
-							target.knockback(this.speed*0.9,this.direction,1,1)
-						break
-						case 371:
-							target.knockback(this.speed*8,this.direction,1,1)
-							target.knockbackForce(this.speed*2,this.direction,1,1)
-							target.gasTime=max(300,target.gasTime+60)
-							target.gasser=this.index
-						break
-						case 388:
-							/*target.weapon.cooldown=max(15,target.weapon.cooldown)
-							target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)*/
-							target.confuseTime=max(15,target.confuseTime)
-						break
-						case 317:
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
-						break
-						case 324:
-							target.shrinkTime=max(target.shrinkTime+30,60)
-						break
-						case 331:
-							target.enigmaTime=max(target.enigmaTime+480,1200)
-						break
-						case 332:
-							target.blindTime=max(target.blindTime+300,900)
-						break
-						case 336:
-							target.chillTime=max(target.chillTime,300)
-						break
-						case 338:
-							target.gasTime=max(300,target.gasTime+150)
-							target.gasser=this.index
-						break
-						case 346:
-							target.chillTime=max(target.chillTime,240)
-						break
-						case 412:
-							target.gasTime=max(30,target.gasTime+15)
-							target.gasser=this.index
-						break
-						case 423:
-							target.knockback(this.speed*1.8,this.direction,1,1)
-						break
-						case 424:
-							target.knockback(this.speed*10,this.direction,1,1)
-							target.knockbackForce(this.speed*2.5,this.direction,1,1)
-							//target.knockbackForce(this.speed*5,this.direction,1,1)
-						break
-						case 439:
-							target.knockback(this.speed*10,this.direction,1,1)
-							target.knockbackForce(this.speed*6,this.direction,1,1)
-						break
-						case 461:
-							//target.confuseTime=max(target.confuseTime,180)
-							target.confuseTime=max(target.confuseTime,120)
-						break
-						case 467:
-							target.vulnerableTime=max(target.vulnerableTime,120)
-						break
-					}
-					switch(this.type){
-						case 20:
-							target.DOT.damage+=this.damage/180
-							target.DOT.active=min(120,target.DOT.active+30)
-						break
-						case 37: case 51:
-							target.DOT.damage+=this.damage/180
-							target.DOT.active=min(120,target.DOT.active+60)
-						break
-						case 50:
-							target.DOT.damage+=this.damage/360
-							target.DOT.active=min(240,target.DOT.active+90)
-						break
-						case 232: case 321:
-							target.DOT.damage+=this.damage/120
-							target.DOT.active=min(360,target.DOT.active+180)
-						break
-						case 285: case 323:
-							target.DOT.damage+=this.damage/60
-							target.DOT.active=min(600,target.DOT.active+300)
-						break
-						case 298: case 324:
-							target.DOT.damage+=this.damage/120
-							target.DOT.active=max(240,target.DOT.active+120)
-						break
-						case 327:
-							target.DOT.damage+=this.damage/60
-							target.DOT.active=max(720,target.DOT.active+240)
-						break
-						case 355:
-							target.DOT.damage+=this.damage/600
-							target.DOT.active=max(450,target.DOT.active+150)
-						break
-						case 383:
-							target.DOT.damage+=this.damage/60
-							target.DOT.active=max(666,target.DOT.active+333)
-						break
-						case 422:
-							target.DOT.damage+=this.damage/60
-							target.DOT.active=min(360,target.DOT.active+120)
-						break
-					}
-				}
-				if(game.invis){
-					target.visible=15
-				}
-				target.die.killer=this.index
-				target.collect.time=450
+				this.hitPlayer(target)
 			}
 		}
 		switch(this.type){
@@ -12317,4 +11424,975 @@ class projectile{
 			this.active=false
 		}
     }
+	hitPlayer(target){
+		/*if(this.drone&&target.id>0&&game.pvp&&this.type!=138){
+			this.damage*=0.6
+		}*/
+		if(this.travel>750&&!this.rules.fast&&this.type!=336){
+			this.damage*=constrain(1.8-this.travel/750*0.8,0.2,1)
+		}
+		if(this.rules.multiHit){
+			this.hit.push(target.index)
+			if(this.type==92||this.type==306){
+				let minimum=300
+				for(let c=0,lc=entities.players.length;c<lc;c++){
+					if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&!this.hit.includes(entities.players[c].index)){
+						minimum=min(minimum,dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y))
+					}
+				}
+				if(minimum<300){
+					for(let c=0,lc=entities.players.length;c<lc;c++){
+						if(entities.players[c].life>0&&((this.id==0?1:0)!=(entities.players[c].id==0?1:0)||this.id==-1||game.pvp&&this.id!=entities.players[c].id)&&minimum==dist(this.position.x,this.position.y,entities.players[c].position.x,entities.players[c].position.y)&&!this.hit.includes(entities.players[c].index)){
+							this.direction=atan2(entities.players[c].position.x-this.position.x,this.position.y-entities.players[c].position.y)
+							c=lc
+						}
+					}
+				}
+				this.speed=this.base.speed
+			}
+			if(
+				(this.type==192||this.type==203||this.type==207||this.type==420)&&this.hit.length>=3||
+				this.type==306&&this.hit.length>=2
+			){
+				this.active=false
+			}
+		}else if(this.type==179){
+			this.time-=180
+			if(this.time<=0){
+				this.active=false
+			}
+			let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
+			this.velocity.x=sin(dir)*6
+			this.velocity.y=cos(dir)*6
+			target.velocity.x-=sin(dir)*6
+			target.velocity.y-=cos(dir)*6
+		}else if(this.type==226){
+			this.time-=60
+			if(this.time<=0){
+				this.active=false
+			}
+			let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
+			let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
+			this.velocity.x=sin(dir)*vec
+			this.velocity.y=cos(dir)*vec
+			target.velocity.x-=sin(dir)*vec
+			target.velocity.y-=cos(dir)*vec
+		}else if(this.type==389||this.type==404){
+			let dir=atan2(this.position.x-target.position.x,this.position.y-target.position.y)
+			let vec=sqrt(this.velocity.x**2+this.velocity.y**2)
+			this.velocity.x=sin(dir)*vec
+			this.velocity.y=cos(dir)*vec
+			target.velocity.x-=sin(dir)*vec
+			target.velocity.y-=cos(dir)*vec
+		}else if(this.type==402){
+			this.hitting=20
+		}else if(this.type==451||this.type==476){
+			this.hit.push(target.index)
+			this.active=false
+		}else if(this.type==479&&this.onTeam(target)){
+			target.vulnerableTime=0
+			target.stunTime=0
+			target.stuckTime=0
+			target.confuseTime=0
+			target.gasTime=0
+			target.enigmaTime=0
+			target.blindTime=0
+			target.dizzyTime=0
+			target.DOT.active=0
+			return
+		}else if(this.rules.destroyAfter){
+			this.active=false
+		}
+		if(this.id==-1&&(target.id>0||target.fort)&&!target.construct&&this.type==6){
+			this.damage*=target.fort?0.1:0.25
+		}
+		let base=target.life
+		switch(this.type){
+			case 9: case 155: case 216: case 439: case 449: case 463: case 464:
+				if(this.onTeam(target)||this.index==target.index&&this.type==216){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 10:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*3*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 11:
+				if(this.onTeam(target)){
+					target.life=target.base.life
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 38:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+					target.critBuff=max(480,target.critBuff)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 63:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+					target.defendBuff=max(480,target.defendBuff)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 82:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+					target.stunTime=0
+					target.stuckTime=0
+					target.vulnerableTime=0
+					target.confuseTime=0
+					target.dizzyTime=0
+					target.DOT.active=0
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 194: case 398:
+				if(this.onTeam(target)||this.index==target.index){
+					if(!target.fort){
+						target.life=min(target.life+this.damage*(min(2,target.base.life/125))*(this.index==target.index?0.1:1),max(target.life,target.base.life*2))
+					}
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 418:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*3))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 6: case 15: case 33: case 74: case 75: case 81: case 276: case 386:
+				target.takeDamage(this.damage*(target.base.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.base.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
+				if(this.type==75){
+					this.explode()
+				}
+				if(target.chillTime>0){
+					target.chillTime=0
+				}
+			break
+			case 72:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(target.base.life/100),max(target.life,target.base.life*2))
+					target.jump.double=1
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 131:
+				target.takeDamage(this.damage*(1+8*this.timer/this.base.time))
+			break
+			case 273:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*5))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 339:
+				if(target.construct&&target.id==this.id){
+					//target.life=min(target.life+this.damage,max(target.life,target.base.life*2))
+					target.life=min(target.life+this.damage,max(target.life,target.base.life))
+					//target.defendBuff=max(target.defendBuff,120)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 345:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
+					target.critBuff=max(target.critBuff,120)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 350:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+					target.speedBuff=max(target.defendBuff,480)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 357:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*1.4,max(target.life,target.base.life*1.5))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 364:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
+					target.weapon.cooldown=max(target.weapon.cooldown-60,0)
+					target.subWeaponA.cooldown=max(target.subWeaponA.cooldown-60,0)
+					target.weapon.reload=max(target.weapon.reload-60,0)
+					target.subWeaponA.reload=max(target.subWeaponA.reload-60,0)
+				}else{
+					target.takeDamage(this.damage)
+					if(!target.fort){
+						target.confuseTime=max(target.confuseTime,60)
+					}
+				}
+			break
+			case 369:
+				if(target.construct&&target.id==this.id){
+					//target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life*2))
+					target.life=min(target.life+this.damage*0.25,max(target.life,target.base.life))
+				}else{
+					target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?1.5:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.25:1))
+				}
+			break
+			case 388:
+				target.takeDamage(this.damage*(target.life>=1000&&!(target.fort&&target.id>0&&!game.pvp)?2:target.life>=500&&!(target.fort&&target.id>0&&!game.pvp)?1.5:1))
+			break
+			case 434:
+				if(this.onTeam(target)&&!target.construct||this.index==target.index&&this.type==216){
+					target.life=min(target.life+this.damage*0.5*(min(2,target.base.life/125)),max(target.life,target.base.life))
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 436:
+				if(this.onTeam(target)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
+					target.hasteBuff=max(target.hasteBuff,120)
+				}else{
+					target.takeDamage(this.damage)
+					target.confuseTime=max(target.confuseTime,120)
+				}
+			break
+			case 111: case 134: case 182: case 373: case 437:
+				if(target.id>0){
+					target.takeDamage(this.damage*0.2)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 138:
+				target.takeDamage(this.damage/30)
+			break
+			case 149:
+				target.takeDamage(this.damage*this.speed/this.base.speed)
+			break
+			case 215:
+				target.gasTime=max(7200,target.gasTime+300)
+				target.gasser=this.index
+			break
+			case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330:
+				if(target.fort&&!target.auto){
+					target.takeDamage(this.damage*0.2)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 304:
+				let saveLife=target.life
+				target.takeDamage(this.damage)
+				this.damage-=saveLife
+				if(this.damage<=0){
+					this.active=false
+				}
+			break
+			case 325:
+				if(target.playerData.name.includes('Hyper')){
+					target.life=0
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 337:
+				target.gasTime=max(1200,target.gasTime+120)
+				target.gasser=this.index
+			break
+			case 341: case 343: case 354: case 451: case 476:
+				target.takeDamage(this.damage*max(1,1.2-this.timer*0.025))
+			break
+			case 355:
+				target.takeDamage(this.damage*(target.playerData.name.includes('Tank')?2:1),1)
+			break
+			case 366:
+				target.takeDamage(this.damage*(1+this.travel/this.speed/10))
+			break
+			case 381:
+				target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
+			break
+			case 396:
+				if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+				}else{
+					let startLife=target.life
+					target.takeDamage(this.damage)
+					if(target.life<startLife){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								entities.players[d].life=max(entities.players[d].life,min(entities.players[d].life+(startLife-target.life)*0.5,entities.players[d].base.life*2))
+							}
+						}
+					}
+				}
+			break
+			case 398:
+				if(target.fort&&!target.auto){
+					target.takeDamage(this.damage*0.4)
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 404:
+				if(this.attack!=0){
+					target.takeDamage(this.damage*6)
+					target.dizzyTime=max(target.dizzyTime,300)
+					this.attack=0
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 409:
+				if(((this.id==0?1:0)==(target.id==0?1:0)&&!game.pvp&&this.id!=-1&&target.id!=-1||this.id==target.id&&this.index!=target.index||this.id==target.id&&this.type==216)){
+					target.life=min(target.life+this.damage*this.travel/400*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
+				}else{
+					target.takeDamage(this.damage*this.travel/400)
+				}
+			break
+			case 411:
+				target.takeDamage(this.damage*max(1,1.3-this.timer*0.0375))
+			break
+			case 414:
+				target.takeDamage(this.damage*max(1,1.25-this.timer*0.025))
+			break
+			case 419:
+				if(target.fort){
+					target.takeDamage(this.damage)
+				}else{
+					let preLife=target.life
+					target.takeDamage(this.damage)
+					if(target.life<preLife){
+						for(let d=0,ld=entities.players.length;d<ld;d++){
+							if(entities.players[d].index==this.index){
+								entities.players[d].life=min(entities.players[d].life+min(entities.players[d].base.life,preLife-max(0,target.life)),max(entities.players[d].life,entities.players[d].base.life*2))
+							}
+						}
+					}
+				}
+			break
+			case 433:
+				target.takeDamage(this.damage*(target.defendBuff>0?2:1))
+			break
+			case 456:
+				if(this.onTeam(target)){
+					if(target.rules.class){
+						target.subWeaponA.uses=min(target.subWeaponAData.uses*game.ammoMult,target.subWeaponA.uses+(target.subWeaponAData.uses*game.ammoMult>=10&&target.subWeaponAData.uses*game.ammoMult<40?1:floor(target.subWeaponAData.uses*game.ammoMult/40)))
+					}else{
+						target.weapon.uses=min(target.weaponData.uses*game.ammoMult,target.weapon.uses+(target.weaponData.uses*game.ammoMult>=10&&target.weaponData.uses*game.ammoMult<40?1:floor(target.weaponData.uses*game.ammoMult/40)))
+					}
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+			case 459:
+				target.takeDamage(this.damage*((lsin(this.direction)>0?1:0)==(lsin(target.direction.main)>0?1:0)?3:1))
+			break
+			default:
+				if(this.rules.exploder&&this.type!=389){
+					if(this.rules.explodeHit){
+						target.takeDamage(this.damage)
+					}else if(this.type==48){
+						this.speed=0
+					}else if(this.type==344){
+						target.takeDamage(this.damage*0.5)
+					}else if(this.type==474){
+						//this said 477 at some point but that was invalid, idk what it was originally meant for
+						target.takeDamage(this.damage*0.25)
+					}
+					this.explode()
+				}else if(this.rules.fast&&this.type!=409||this.type==342||this.type==428||this.type==429){
+					target.takeDamage(this.damage*min(1,0.5+this.timer*0.125))
+					//snipers do less at close range lol
+				}else{
+					target.takeDamage(this.damage)
+				}
+			break
+		}
+		if(target.life>base){
+			for(let d=0,ld=entities.players.length;d<ld;d++){
+				if(entities.players[d].index==this.index){
+					entities.players[d].stats.damage+=(target.life-base)*0.25
+				}
+			}
+		}
+		let dir
+		let vec
+		switch(this.type){
+			case 13:
+				/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+				target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
+				target.weapon.cooldown=max(15,target.weapon.cooldown)
+				target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
+			break
+			case 36: case 249:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].critBuff=max(300,entities.players[d].critBuff)
+					}
+				}
+			break
+			case 188:
+				/*target.weapon.cooldown=min(target.weaponData.cooldown+15,target.weapon.cooldown+15)
+				target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+15,target.subWeaponA.cooldown+15)*/
+				target.weapon.cooldown=max(15,target.weapon.cooldown)
+				target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)
+				if(this.type==188){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].critBuff=max(300,entities.players[d].critBuff)
+						}
+					}
+				}
+			break
+			case 277:
+				entities.players.push(new player(this.layer,this.position.x,this.position.y-10,this.id,0,[],false,findName('SidekickLight',types.player),this.index))
+				entities.players[entities.players.length-1].sidekick=true
+				entities.players[entities.players.length-1].direction.goal=-54+floor(random(0,2))*108
+				entities.players[entities.players.length-1].DOT.damage=0.25
+				entities.players[entities.players.length-1].DOT.active=9999
+			break
+			case 340:
+				for(let c=0,lc=entities.projectiles.length;c<lc;c++){
+					if(entities.projectiles[c].index==this.index&&entities.projectiles[c].type==118){
+						entities.projectiles[c].aggro=true
+						entities.projectiles[c].goalIndex=target.index
+					}
+				}
+			break
+			case 347:
+				if(!target.fort){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							if(entities.players[d].subWeaponAType!=735){
+								entities.players[d].subWeaponA.cooldown=0
+								entities.players[d].subWeaponA.reload=0
+							}else{
+								entities.players[d].subWeaponB.cooldown=0
+								entities.players[d].subWeaponB.reload=0
+							}
+						}
+					}
+				}
+			break
+			case 348:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].speedBuff=max(entities.players[d].speedBuff,360)
+						entities.players[d].visible=0
+					}
+				}
+			break
+			case 362:
+				target.weapon.cooldown+=30
+				target.subWeaponA.cooldown+=30
+				target.subWeaponB.cooldown+=30
+			break
+			case 382:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						if(entities.players[d].class()){
+							if(entities.players[d].subWeaponA.ammo>0){
+								entities.players[d].attack(1)
+							}
+						}else{
+							if(entities.players[d].weapon.ammo>0){
+								entities.players[d].attack(0)
+							}
+						}
+					}
+				}
+			break
+			case 403:
+				if(!target.fort){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].critBuff=max(entities.players[d].critBuff,180)
+						}
+					}
+				}
+			break
+			case 407:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
+					if(entities.players[d].id==0&&entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
+						entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
+						entities.players[d].die.killer=this.index
+						entities.players[d].collect.time=max(450,entities.players[d].collect.time)
+						if(game.invis){
+							entities.players[d].visible=15
+						}
+					}
+				}
+			break
+			case 408:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index&&entities.players[d].life>0){
+						if((entities.players[d].playerData.name=='PlayerSpyC2'||entities.players[d].playerData.name=='PlayerSpyW'&&entities.players[d].subWeaponCType==1006)){
+							entities.players[d].visible=600
+							entities.players.push(new player(entities.players[d].layer,entities.players[d].previous.position.x,entities.players[d].previous.position.y+entities.players[d].height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+							game.index++
+							entities.players[entities.players.length-1].decoy2=true
+							entities.players[entities.players.length-1].velocity.x=entities.players[d].velocity.x
+							entities.players[entities.players.length-1].velocity.y=entities.players[d].velocity.y
+							entities.players[entities.players.length-1].lastingForce[0]=entities.players[d].lastingForce[0]
+							entities.players[entities.players.length-1].lastingForce[1]=entities.players[d].lastingForce[1]
+							//entities.players[entities.players.length-1].copy=entities.players[d].index
+							entities.players[entities.players.length-1].copy=entities.players[d]
+							entities.players[entities.players.length-1].copyId=entities.players[d].id
+							entities.players[entities.players.length-1].direction.goal=entities.players[d].direction.goal
+							entities.players[entities.players.length-1].setColor()
+							entities.players[entities.players.length-1].life=0
+							entities.players[entities.players.length-1].collect.life=entities.players[d].life
+							entities.players[entities.players.length-1].fade=entities.players[d].fade
+							entities.players[entities.players.length-1].assort.copyDeaths=entities.players[d].stats.deaths+1
+							entities.players[d].fade=0
+						}else if(entities.players[d].playerData.name=='PlayerSpyC7'||entities.players[d].playerData.name=='PlayerSpyW'&&entities.players[d].subWeaponCType==1008){
+							entities.players[d].visible=600
+							entities.players[d].defendBuff=max(entities.players[d].defendBuff,60)
+							entities.players[d].speedBuff=max(entities.players[d].speedBuff,60)
+						}else{
+							entities.players[d].speedBuff=max(entities.players[d].speedBuff,180)
+							entities.players[d].visible=0
+						}
+					}
+				}
+			break
+			case 416: case 468:
+				dir=atan2(this.previous.position.x-target.position.x,this.previous.position.y-target.position.y)
+				vec=sqrt(this.velocity.x**2+this.velocity.y**2)
+				this.velocity.x+=sin(dir)*vec
+				this.velocity.y+=cos(dir)*vec
+				target.velocity.x-=sin(dir)*vec*target.getKnockback()
+				target.velocity.y-=cos(dir)*vec*target.getKnockback()
+				target.lastingForce[0]-=0.125*sin(dir)*vec*target.getKnockback()
+				target.lastingForce[1]-=0.125*cos(dir)*vec*target.getKnockback()
+				//target.stuckTime=max(target.stuckTime,15)
+			break
+			case 420:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].position.x=target.position.x
+						entities.players[d].position.y=target.position.y+target.height/2-entities.players[d].height/2
+					}
+				}
+			break
+			case 421:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
+					if(entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
+						entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
+						entities.players[d].die.killer=this.index
+						entities.players[d].collect.time=450
+						if(game.invis){
+							entities.players[d].visible=15
+						}
+					}
+				}
+				if(target.life<=0&&target.playerData.sizeBuff>1){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].critBuff=max(entities.players[d].critBuff,150)
+						}
+					}
+				}
+			break
+			case 432:
+				target.stunTime=max(target.stunTime,600)
+				target.noGravTime=max(target.noGravTime,600)
+				target.velocity.x=0
+				target.velocity.y=0
+				entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,433,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+			break
+			case 440:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].speedBuff=max(entities.players[d].speedBuff,240)
+					}
+				}
+			break
+			case 441:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].hasteBuff=max(entities.players[d].hasteBuff,240)
+					}
+				}
+			break
+			case 442:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						entities.players[d].defendBuff=max(entities.players[d].defendBuff,240)
+					}
+				}
+			break
+			case 454:
+				//if(target.life<=0){
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index){
+						if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+							entities.players[d].subWeaponA.reload=0
+							entities.players[d].subWeaponA.cooldown=0
+						}
+						if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+							entities.players[d].subWeaponB.reload=0
+							entities.players[d].subWeaponB.cooldown=0
+						}
+						if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+							entities.players[d].subWeaponC.reload=0
+							entities.players[d].subWeaponC.cooldown=0
+						}
+					}
+				}
+				//}
+			break
+			case 465:
+				if(target.life<=0){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].subWeaponA.reload=0
+							if(entities.players[d].subPlayerAType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+								entities.players[d].subWeaponA.cooldown=0
+							}
+							entities.players[d].subWeaponA.ammo=entities.players[d].subWeaponAData.ammo
+							entities.players[d].subWeaponB.reload=0
+							if(entities.players[d].subPlayerBType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+								entities.players[d].subWeaponB.cooldown=0
+							}
+							entities.players[d].subWeaponB.ammo=entities.players[d].subWeaponBData.ammo
+							entities.players[d].subWeaponC.reload=0
+							if(entities.players[d].subPlayerCType>=findName(`PlayerBuild111`,types.player)&&entities.players[d].subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+								entities.players[d].subWeaponC.cooldown=0
+							}
+							entities.players[d].subWeaponC.ammo=entities.players[d].subWeaponCData.ammo
+						}
+					}
+				}
+			break
+			case 467:
+				for(let d=0,ld=entities.players.length;d<ld;d++){
+					if(entities.players[d].index==this.index&&!entities.players[d].inspect.includes(target.index)){
+						entities.players[d].inspect.push(target.index)
+					}
+				}
+			break
+			case 472:
+				dir=atan2(this.previous.position.x-target.position.x,this.previous.position.y-target.position.y)
+				vec=sqrt(this.velocity.x**2+this.velocity.y**2)
+				this.velocity.x+=sin(dir)*vec
+				this.velocity.y+=cos(dir)*vec
+				target.velocity.x-=sin(dir)*vec*target.getKnockback()
+				target.velocity.y-=cos(dir)*vec*target.getKnockback()
+				target.lastingForce[0]-=0.125*sin(dir)*vec*target.getKnockback()
+				target.lastingForce[1]-=0.125*cos(dir)*vec*target.getKnockback()
+				if(!target.immune()){
+					target.freezeTime=max(target.freezeTime,120)
+				}
+				//target.stuckTime=max(target.stuckTime,15)
+			break
+		}
+		if(!target.immune()){
+			switch(this.type){
+				case 12:
+					target.knockback(this.speed*3,this.direction,1,1)
+				break
+				case 14: case 46:
+					target.weaponType=-1
+				break
+				case 16: case 379:
+					target.knockback(this.speed*3.6,this.direction,1,1)
+				break
+				case 18:
+					target.velocity.y-=this.speed*abs(lsin(this.direction)*3)
+				break
+				case 19:
+					target.knockback(this.speed*-3,this.direction,1,1)
+				break
+				case 23: case 24: case 33: case 35: case 39: case 51:
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
+						}
+					}
+				break
+				case 40:
+					target.weapon.cooldown=min(target.weaponData.cooldown+60,target.weapon.cooldown+60)
+					target.subWeaponA.cooldown=min(target.subWeaponAData.cooldown+60,target.subWeaponA.cooldown+60)
+				break
+				case 43: case 186: case 320:
+					target.vulnerableTime=max(target.vulnerableTime,300)
+				break
+				case 44:
+					target.stunTime=max(target.stunTime,30)
+				break
+				case 49:
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].life=entities.players[d].base.life
+						}
+					}
+				break
+				case 55:
+					target.knockback(this.speed*6,this.direction,1,1)
+				break
+				case 56:
+					target.velocity.y-=this.speed*abs(lsin(this.direction)*2)
+				break
+				case 57:
+					target.newWeapon()
+				break
+				case 59:
+					target.vulnerableTime=max(target.vulnerableTime,300)
+					target.stunTime=max(target.stunTime,30)
+				break
+				case 61:
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life)
+						}
+					}
+					target.stunTime=max(target.stunTime,60)
+				break
+				case 67: case 285:
+					target.confuseTime=max(target.confuseTime,360)
+				break
+				case 74: case 81:
+					target.knockback(this.speed*1.8,this.direction,1,1)
+				break
+				case 76:
+					target.stunTime=max(target.stunTime,30)
+				break
+				case 77:
+					target.knockback(this.speed*24,this.direction,1,1)
+				break
+				case 87:
+					target.knockback(this.speed*7.5,this.direction,1,1)
+				break
+				case 94:
+					target.stunTime=max(target.stunTime,this.id==0?120:600)
+				break
+				case 99:
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+				break
+				case 102: case 115: case 151: case 167: case 175: case 189: case 193: case 202: case 220: case 258:
+					target.chillTime=max(target.chillTime,3600)
+					if(this.type==202){
+						target.stunTime=max(target.stunTime,600)
+					}
+				break
+				case 105:
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].life=min(entities.players[d].life+this.damage,entities.players[d].base.life*2)
+						}
+					}
+				break
+				case 127:
+					target.knockback(this.speed*20,this.direction,1,1)
+					target.knockbackForce(this.speed*12,this.direction,1,1)
+				break
+				case 195:
+					if(target.life<=0){
+						entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+					}
+				break
+				case 212:
+					target.shrinkTime=max(target.shrinkTime+15,30)
+				break
+				case 222: case 374: case 449:
+					target.knockback(this.speed*8,this.direction,1,1)
+					target.knockbackForce(this.speed*2,this.direction,1,1)
+				break
+				case 223:
+					target.knockback(this.speed*12,this.direction,1,1)
+					target.knockbackForce(this.speed*6,this.direction,1,1)
+					target.stunTime=max(target.stunTime,600)
+					target.vulnerableTime=max(target.vulnerableTime,1800)
+				break
+				case 225:
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].id>0&&!entities.players[d].inspect.includes(target.index)){
+							entities.players[d].inspect.push(target.index)
+						}
+					}
+				break
+				case 231:
+					target.stunTime=max(target.stunTime,240)
+				break
+				case 269:
+					target.knockback(this.speed*15,this.direction,1,1)
+					target.knockbackForce(this.speed*9,this.direction,1,1)
+				break
+				case 281:
+					let pos=game.spawner[floor(random(0,game.spawner.length))]
+					target.position.x=pos[0]
+					target.position.y=pos[1]-target.height/2
+				break
+				case 287:
+					target.knockback(this.speed*12,this.direction,1,1)
+					target.knockbackForce(this.speed*12,this.direction,1,1)
+					target.chillTime=max(target.chillTime,3600)
+				break
+				case 288:
+					target.knockback(this.speed*9,this.direction,1,1)
+					target.knockbackForce(this.speed*4,this.direction,1,1)
+				break
+				case 289:
+					target.gasTime=max(7200,target.gasTime+600)
+					target.gasser=this.index
+					target.stunTime=240
+				break
+				case 302:
+					target.knockback(this.speed*-3,this.direction,1,1)
+					target.stunTime=max(target.stunTime,60)
+				break
+				case 310:
+					target.gasTime=max(7200,target.gasTime+3)
+					target.gasser=this.index
+				break
+				case 319:
+					target.knockback(this.speed*18,this.direction,1,1)
+					target.knockbackForce(this.speed*9,this.direction,1,1)
+				break
+				case 322:
+					target.knockback(this.speed*15,this.direction,1,1)
+				break
+				case 335:
+					target.knockbackForce(this.speed*0.1,this.direction,1,1)
+				break
+				case 343:
+					target.knockback(this.speed*0.9,this.direction,1,1)
+				break
+				case 371:
+					target.knockback(this.speed*8,this.direction,1,1)
+					target.knockbackForce(this.speed*2,this.direction,1,1)
+					target.gasTime=max(300,target.gasTime+60)
+					target.gasser=this.index
+				break
+				case 388:
+					/*target.weapon.cooldown=max(15,target.weapon.cooldown)
+					target.subWeaponA.cooldown=max(15,target.subWeaponA.cooldown)*/
+					target.confuseTime=max(15,target.confuseTime)
+				break
+				case 317:
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+				break
+				case 324:
+					target.shrinkTime=max(target.shrinkTime+30,60)
+				break
+				case 331:
+					target.enigmaTime=max(target.enigmaTime+480,1200)
+				break
+				case 332:
+					target.blindTime=max(target.blindTime+300,900)
+				break
+				case 336:
+					target.chillTime=max(target.chillTime,300)
+				break
+				case 338:
+					target.gasTime=max(300,target.gasTime+150)
+					target.gasser=this.index
+				break
+				case 346:
+					target.chillTime=max(target.chillTime,240)
+				break
+				case 412:
+					target.gasTime=max(30,target.gasTime+15)
+					target.gasser=this.index
+				break
+				case 423:
+					target.knockback(this.speed*1.8,this.direction,1,1)
+				break
+				case 424:
+					target.knockback(this.speed*10,this.direction,1,1)
+					target.knockbackForce(this.speed*2.5,this.direction,1,1)
+					//target.knockbackForce(this.speed*5,this.direction,1,1)
+				break
+				case 439:
+					target.knockback(this.speed*10,this.direction,1,1)
+					target.knockbackForce(this.speed*6,this.direction,1,1)
+				break
+				case 461:
+					//target.confuseTime=max(target.confuseTime,180)
+					target.confuseTime=max(target.confuseTime,120)
+				break
+				case 467:
+					target.vulnerableTime=max(target.vulnerableTime,120)
+				break
+				case 479:
+					if(!this.onTeam(target)){
+						target.knockback(this.speed*8,this.direction,1,1)
+						target.knockbackForce(this.speed*2,this.direction,1,1)
+					}
+				break
+			}
+			switch(this.type){
+				case 20:
+					target.DOT.damage+=this.damage/180
+					target.DOT.active=min(120,target.DOT.active+30)
+				break
+				case 37: case 51:
+					target.DOT.damage+=this.damage/180
+					target.DOT.active=min(120,target.DOT.active+60)
+				break
+				case 50:
+					target.DOT.damage+=this.damage/360
+					target.DOT.active=min(240,target.DOT.active+90)
+				break
+				case 232: case 321:
+					target.DOT.damage+=this.damage/120
+					target.DOT.active=min(360,target.DOT.active+180)
+				break
+				case 285: case 323:
+					target.DOT.damage+=this.damage/60
+					target.DOT.active=min(600,target.DOT.active+300)
+				break
+				case 298: case 324:
+					target.DOT.damage+=this.damage/120
+					target.DOT.active=max(240,target.DOT.active+120)
+				break
+				case 327:
+					target.DOT.damage+=this.damage/60
+					target.DOT.active=max(720,target.DOT.active+240)
+				break
+				case 355:
+					target.DOT.damage+=this.damage/600
+					target.DOT.active=max(450,target.DOT.active+150)
+				break
+				case 383:
+					target.DOT.damage+=this.damage/60
+					target.DOT.active=max(666,target.DOT.active+333)
+				break
+				case 422:
+					target.DOT.damage+=this.damage/60
+					target.DOT.active=min(360,target.DOT.active+120)
+				break
+				case 476:
+					target.DOT.damage+=this.damage/240
+					target.DOT.active=max(240,target.DOT.active+60)
+				break
+			}
+		}
+		if(game.invis){
+			target.visible=15
+		}
+		target.die.killer=this.index
+		target.collect.time=450
+	}
 }

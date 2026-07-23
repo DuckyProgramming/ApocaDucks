@@ -1,3 +1,18 @@
+
+1134 - penalty scattergun w, 1032
+1135 - snap shotgun, 710
+1136 - snap scattergun, 1135
+1137 - snap pistol w, 967
+1138 - gust c, 795
+
+476 - penalty scattergun w, 451
+477 - snap shotgun, 341, 358 (bullet 1 in general)
+478 - snap scattergun, 477
+479 - gust c, 222
+
+
+
+
 1121 - tagger c, 729
 1122 - tapper c, 928
 1123 - touhou, 981
