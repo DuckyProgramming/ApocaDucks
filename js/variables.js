@@ -8196,6 +8196,12 @@ types={
     },{
       name:'PlayerAirshotC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:1139,
+    },{
+      name:'PlayerChainsawC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1140,
+    },{
+      name:'PlayerElectricChair',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1141,
     },
 
     //mark c
@@ -20335,6 +20341,24 @@ types={
 			reload:3,
 			speed:1.05,
       uses:8,
+		},{
+			name:'Chainsaw C',
+			ammo:15,
+			damage:125,
+			cooldown:4,
+			stop:90,
+			reload:1,
+			speed:0.75,
+      uses:60,
+		},{
+			name:'Electric Chair',
+			ammo:1,
+			damage:1,
+			cooldown:90,
+			stop:180,
+			reload:120,
+			speed:1.35,
+      uses:10,
 		},
 
     /*{

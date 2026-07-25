@@ -5,11 +5,15 @@
 1137 - snap pistol w, 967
 1138 - gust c, 795
 1139 - airshot c, 972
+1140 - chainsaw w, 927
+1141 - electric chair c, 1019
 
 476 - penalty scattergun w, 451
 477 - snap shotgun, 341, 358 (bullet 1 in general)
 478 - snap scattergun, 477
 479 - gust c, 222
+480 - electric knife c, 432
+481 - electric chair c, 433
 
 
 

@@ -82,7 +82,7 @@ function setupRules(){
 				a==417||a==435||a==448,
 			passer:a==85||a==89||a==103||a==193||a==194||
 				a==195||a==215||a==270||a==297||a==310||
-				a==337||a==398||a==427||a==433,
+				a==337||a==398||a==427||a==433||a==481,
 			slow:a==125||a==126||a==127||a==130||a==173||
 				a==174||a==185||a==192||a==196||a==197||
 				a==198||a==199||a==234||a==236||a==253||
@@ -102,7 +102,7 @@ function setupRules(){
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
-				a!=337&&a!=398&&a!=427&&a!=433,
+				a!=337&&a!=398&&a!=427&&a!=433&&a!=481,
 			multiHit:a==91||a==92||a==93||a==96||a==108||
 				a==192||a==203||a==204||a==207||a==208||
 				a==237||a==238||a==239||a==275||a==296||
@@ -118,7 +118,8 @@ function setupRules(){
 				a!=40&&a!=46&&a!=79&&a!=84&&a!=89&&
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
 				a!=195&&a!=270&&a!=297&&a!=310&&a!=330&&
-				a!=335&&a!=335&&a!=405&&a!=427&&a!=433,
+				a!=335&&a!=335&&a!=405&&a!=427&&a!=433&&
+                a!=481,
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
                 a!=392&&a!=417&&a!=435&&a!=448&&a!=463&&
@@ -145,7 +146,7 @@ function setupRules(){
 				a==398,
 			fader3:a==190||a==191||a==214||a==255||a==256||
 				a==257||a==265||a==300||a==365||a==470,
-            fader4:a==280||a==316||a==326||a==433,
+            fader4:a==280||a==316||a==326||a==433||a==481,
             hitstack:a==91||a==92||a==93||a==96||a==108||
                 a==192||a==203||a==204||a==207||a==208||
                 a==237||a==238||a==239||a==275||a==296||
@@ -11370,7 +11371,7 @@ function setupLists(){
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
-            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsaw`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
+            [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
             [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistol`,`PlayerWrench`,`PlayerPushPistolC`],
@@ -11383,7 +11384,7 @@ function setupLists(){
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerLightCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
-            [`PlayerKnife`,`PlayerElectricKnife`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
+            [`PlayerKnife`,`PlayerElectricChair`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],

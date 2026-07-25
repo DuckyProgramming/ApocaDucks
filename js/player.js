@@ -1613,9 +1613,9 @@ class player{
             (this.assort.intel?0.75:1)*
             //(game.level==29&&this.id==0?1.125:1)*
             (this.playerData.name==`AcceleratorTank`?5-this.life/this.base.life*4:1)*
-            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026||this.weaponType==1030||this.weaponType==1122)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
+            ((this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026||this.weaponType==1030||this.weaponType==1122||this.weaponType==1140)&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||this.weaponType==725&&this.assort.firingTick>0?1/3:1)*
             (this.rules.class&&(
-                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026||this.weaponType==1030||this.weaponType==1122)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
+                (this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026||this.subWeaponAType==1030||this.subWeaponAType==1122||this.subWeaponAType==1140)&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
                 this.subWeaponAType==725&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
                 this.subWeaponAType==801&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.4
             )?1/3:1)*
@@ -3239,7 +3239,7 @@ class player{
                             let pos=-1
                             let life=0
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if((entities.players[a].playerData.name=='ConstructLevel1'||entities.players[a].playerData.name=='ConstructLevel2'||entities.players[a].playerData.name=='ConstructLevel3')&&entities.players[a].builder==this.index){
+                                if((entities.players[a].playerData.name=='ConstructLevel1'||entities.players[a].playerData.name=='ConstructLevel2'/*||entities.players[a].playerData.name=='ConstructLevel3'*/)&&entities.players[a].builder==this.index){
                                     /*if(this.effectiveId()>game.gaming){
                                         if(entities.players[a].playerData.name=='ConstructLevel1'){
                                             type=findName('ConstructLevel2',types.player)
@@ -3500,10 +3500,10 @@ class player{
                 if(
                     !(
                         (this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&!this.assort.intel&&
-                        (weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019)
+                        (weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019||weaponType==1141)
                     )&&
                     !((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480&&!this.assort.intel)&&
-                    !((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1122&&this.assort.firingTick<3/9)&&
+                    !((weaponType==725||weaponType==927||weaponType==1140)&&this.assort.firingTick<1)&&!(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1122&&this.assort.firingTick<3/9)&&
                     !(weaponType==1030&&this.assort.firingTick<1/3)
                 ){
                     if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
@@ -8067,6 +8067,12 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=-0.5
                             entities.projectiles[entities.projectiles.length-1].stun=5
                         break
+                        case 1140:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],25,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,max(0.5,abs(this.velocity.x))+(lsin(this.direction.main)<0?-0.5:0.5),crit,this.index))
+                        break
+                        case 1141:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],480,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,5,crit,this.index))
+                        break
 
                         //mark
                     }
@@ -12620,7 +12626,7 @@ class player{
                 case 'ConstructBooster':
                     if(this.assort.building==0&&!this.dead){
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(!entities.players[a].construct&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
+                            if(!entities.players[a].construct&&!entities.players[a].fort&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300&&this.position.x!=entities.players[a].position.x&&(!entities.players[a].dead&&((this.id==0?1:0)==(entities.players[a].id==0?1:0)&&!game.pvp||this.id==entities.players[a].id))){
                                 entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
                             }
                         }

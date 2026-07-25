@@ -454,6 +454,7 @@ class projectile{
 				this.time=time
 			break
 			case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330: case 433:
+			case 481:
 				this.speed=0
 				this.time=time
 				this.width*=60
@@ -465,7 +466,8 @@ class projectile{
 					}
 				}
 			break
-			case 91: case 92: case 93: case 96: case 108: case 208: case 237: case 238: case 239: case 275: case 302:
+			case 91: case 92: case 93: case 96: case 108: case 208: case 237: case 238: case 239: case 275:
+			case 302:
 				this.velocity={x:0,y:0}
 				this.speed=5
 				this.spin=0
@@ -786,7 +788,7 @@ class projectile{
 				this.width*=3
 				this.height*=3
 			break
-			case 203: case 207: case 306: case 420: case 432:
+			case 203: case 207: case 306: case 420: case 432: case 480:
 				this.speed=random(6,8)
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
@@ -7106,7 +7108,7 @@ class projectile{
 				layer.noFill()
 				layer.arc(0,1.5,8,6,-165,-15)
 			break
-			case 432:
+			case 432: case 480:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -7122,7 +7124,7 @@ class projectile{
 				layer.noFill()
 				layer.ellipse(0,0,5)
 			break
-			case 433:
+			case 433: case 481:
 				layer.stroke(255-this.crit*150,255,100+this.crit*150,this.fade)
 				layer.strokeWeight(3)
 				layer.noFill()
@@ -8283,7 +8285,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index==this.index&&c<105){
 							/*entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8309,6 +8311,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
+						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(this.type==448&&c<105&&!entities.players[b].fort){
 							entities.players[b].invisBuff=max(entities.players[b].invisBuff,120*(1.5-c/105))
 						}
@@ -8453,7 +8456,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*sqrt(min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius))*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
 							//entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
@@ -8485,6 +8488,7 @@ class projectile{
 							entities.players[b].knockbackSet(6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}
+						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -8530,7 +8534,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index==this.index&&c<105){
 							/*entities.players[b].velocity.x+=7.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8556,6 +8560,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
+						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -8695,6 +8700,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/90))),entities.players[b].stuckTime)
 						}
+						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -8809,7 +8815,7 @@ class projectile{
 						entities.players[b].die.killer=this.index
 						entities.players[b].collect.time=450
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
-						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?3:1)
+						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index!=this.index&&c<105){
 							/*entities.players[b].velocity.x+=4.5*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=2.4*min(1,1.2-1.2*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8826,6 +8832,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
+						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(game.invis){
 							entities.players[b].visible=15
 						}
@@ -9092,7 +9099,7 @@ class projectile{
 				case 384: case 386: case 387: case 388: case 396: case 403: case 407: case 408: case 409: case 411:
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
-				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476:
+				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -9391,7 +9398,7 @@ class projectile{
 					}
 				break
 				case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330: case 398:
-				case 433:
+				case 433: case 481:
 					if(this.type==398){
 						this.position.x+=this.speed*lsin(this.direction)
 				    	this.position.y-=this.speed*lcos(this.direction)
@@ -9401,7 +9408,7 @@ class projectile{
 						}
 					}
 					if(a==0){
-						if(this.type==433){
+						if(this.type==433||this.type==481){
 							if(this.timer%4==0&&this.active){
 								let dir=random(0,360)
 								let power=random(6,10)
@@ -11788,7 +11795,7 @@ class projectile{
 					}
 				}
 			break
-			case 433:
+			case 433: case 481:
 				target.takeDamage(this.damage*(target.defendBuff>0?2:1))
 			break
 			case 456:
@@ -12105,6 +12112,17 @@ class projectile{
 					target.freezeTime=max(target.freezeTime,120)
 				}
 				//target.stuckTime=max(target.stuckTime,15)
+			break
+			case 480:
+				target.stunTime=max(target.stunTime,15)
+				target.noGravTime=max(target.noGravTime,15)
+				target.velocity.x=0
+				target.velocity.y=0
+				entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,481,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+			break
+			case 481:
+				target.stunTime=max(target.stunTime,15)
+				target.noGravTime=max(target.noGravTime,15)
 			break
 		}
 		if(!target.immune()){
