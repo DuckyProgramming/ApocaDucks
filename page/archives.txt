@@ -7,6 +7,7 @@
 1139 - airshot c, 972
 1140 - chainsaw w, 927
 1141 - electric chair c, 1019
+1142 - wing pistol c, 966
 
 476 - penalty scattergun w, 451
 477 - snap shotgun, 341, 358 (bullet 1 in general)

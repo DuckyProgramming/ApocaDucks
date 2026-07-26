@@ -8202,6 +8202,9 @@ types={
     },{
       name:'PlayerElectricChair',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1141,
+    },{
+      name:'PlayerWingPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1142,
     },
 
     //mark c
@@ -20359,6 +20362,15 @@ types={
 			reload:120,
 			speed:1.35,
       uses:10,
+		},{
+			name:'Wing Pistol C',
+			ammo:4,
+			damage:105,
+			cooldown:12,
+			stop:60,
+			reload:6,
+			speed:1.4,
+      uses:50,
 		},
 
     /*{

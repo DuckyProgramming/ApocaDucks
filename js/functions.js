@@ -11374,7 +11374,7 @@ function setupLists(){
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
-            [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistol`,`PlayerWrench`,`PlayerPushPistolC`],
+            [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistolC`,`PlayerWrench`,`PlayerPushPistolC`],
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],

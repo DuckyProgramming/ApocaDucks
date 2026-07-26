@@ -10157,7 +10157,8 @@ class projectile{
 											(
 												lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
 												lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
-												abs(this.position.x-entities.players[a].position.x)<75
+												abs(this.position.x-entities.players[a].position.x)<75&&
+												abs(this.position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
 											)&&
 											!(this.type==417&&this.detTimer>0)
 										){
@@ -11389,8 +11390,15 @@ class projectile{
 				}
 			}
 			if(targets.length>0){
-				let target=targets.length==1?targets[0]:targets.sort((a,b)=>distPos(this.previous,a)-distPos(this.previous,b))[0]
-				this.hitPlayer(target)
+				//let target=targets.length==1?targets[0]:targets.sort((a,b)=>distPos(this.previous,a)-distPos(this.previous,b))[0]
+				//this.hitPlayer(target)
+				targets.sort((a,b)=>distPos(this.previous,a)-distPos(this.previous,b))
+				for(let a=0,la=targets.length;a<la;a++){
+					this.hitPlayer(targets[a])
+					if(!this.active){
+						break
+					}
+				}
 			}
 		}
 		switch(this.type){
@@ -12119,10 +12127,13 @@ class projectile{
 				target.velocity.x=0
 				target.velocity.y=0
 				entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,481,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+				entities.projectiles[entities.projectiles.length-1].objective=target.index
 			break
 			case 481:
-				target.stunTime=max(target.stunTime,15)
-				target.noGravTime=max(target.noGravTime,15)
+				if(target.index==this.objective){
+					target.stunTime=max(target.stunTime,15)
+					target.noGravTime=max(target.noGravTime,15)
+				}
 			break
 		}
 		if(!target.immune()){

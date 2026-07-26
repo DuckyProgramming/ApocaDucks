@@ -3006,18 +3006,6 @@ class player{
                     this.defendBuff=max(this.defendBuff,60)
                     this.speedBuff=max(this.speedBuff,60)
                 }
-            }else if(this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1021){
-                if(this.visible==0){
-                    this.visible=600
-                    entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
-                    game.index++
-                    entities.players[entities.players.length-1].decoy=true
-                    //entities.players[entities.players.length-1].copy=this.index
-                    entities.players[entities.players.length-1].copy=this
-                    entities.players[entities.players.length-1].copyId=this.id
-                    entities.players[entities.players.length-1].direction.goal=this.direction.goal
-                    entities.players[entities.players.length-1].setColor()
-                }
             }
             let charMult=
                 (this.playerData.name=='PlayerDisappointment'||this.playerData.name=='SidekickDisappointmentGuard'||this.playerData.name=='PlayerTank')&&spec==0
@@ -3065,6 +3053,19 @@ class player{
                 }
             }else if(this.playerData.name=='PlayerAdrenaline'){
                 this.critBuff=max(this.critBuff,150)
+            }else if(this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1021){
+                //if(this.visible==0){
+                this.visible=600
+                entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+                game.index++
+                entities.players[entities.players.length-1].decoy=true
+                entities.players[entities.players.length-1].life=this.life
+                //entities.players[entities.players.length-1].copy=this.index
+                entities.players[entities.players.length-1].copy=this
+                entities.players[entities.players.length-1].copyId=this.id
+                entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                entities.players[entities.players.length-1].setColor()
+                //}
             }
             if(this.rules.spyLineReduced||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1006){
                 this.visible2=30
@@ -3560,6 +3561,7 @@ class player{
                             }
                         break
                         case 1: case 131: case 142: case 178: case 470: case 549: case 813: case 899: case 966: case 967:
+                        case 1142:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
                         case 2: case 161: case 176: case 179: case 189: case 190: case 195: case 211: case 222: case 225:
@@ -9006,7 +9008,7 @@ class player{
                             ){
                                 this.swapSubWeapons()
                             }
-                            if((this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerWingPistol`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`))&&this.subWeaponA.uses>0&&this.assort.firing<20){
+                            if((this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerWingPistol`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`))&&this.subWeaponA.uses>0&&this.assort.firing<20){
                                 this.subWeaponA.cooldown=0
                             }
                             if(this.subWeaponA.cooldown<=0&&this.subWeaponA.ammo>0&&this.subWeaponAType>=0&&!this.subWeaponA.reloading){
@@ -9301,7 +9303,7 @@ class player{
                                     this.newWeaponSet(this.subPlayerBType)
                                 }
                             }else if(this.playerData.name=='PlayerSwapper'||this.rules.class){
-                                if((this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`))&&this.subWeaponA.uses>0&&inputSetB[3]/*&&this.subWeaponA.cooldown<20*/){
+                                if((this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerWingPistol`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||this.playerData.name=='PlayerEngineerC7'||this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`))&&this.subWeaponA.uses>0&&inputSetB[3]/*&&this.subWeaponA.cooldown<20*/){
                                     this.subWeaponA.cooldown=0
                                 }
                                 if(this.rules.classW&&this.subWeaponAType==728){
