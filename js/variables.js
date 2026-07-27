@@ -20106,7 +20106,7 @@ types={
 			ammo:5,
 			damage:144,
 			cooldown:24,
-			stop:90,
+			stop:60,
 			reload:15,
 			speed:1.05,
       uses:30,

@@ -22,10 +22,12 @@ class projectile{
 		this.travel=0
 		this.stop=false
         this.remove=false
+        this.active=true
 		this.forceDisplay=false
 		this.fort=false
 		this.stun=0
 		if(game.hitscan){
+			this.divergence=0
 			switch(this.type){
 				case 1: case 4: case 9: case 10: case 11: case 12: case 13: case 14: case 18: case 19:
 				case 20: case 24: case 36: case 38: case 39: case 43: case 44: case 49: case 50: case 57:
@@ -42,6 +44,14 @@ class projectile{
 					this.prevType=this.type
 					this.prevSpeed=random(6,8)
 					this.type=477
+				break
+				case 342:
+					this.time=random(time,time*2)
+					this.hitscanConvert=true
+					this.prevType=this.type
+					this.prevSpeed=random(6,8)
+					this.type=477
+					this.divergence=1
 				break
 				case 341:
 					this.type=478
@@ -544,11 +554,14 @@ class projectile{
 			break
 			case 190: case 191: case 214: case 255: case 256: case 257: case 265: case 300: case 358: case 363:
 			case 365: case 400: case 406: case 415: case 426: case 446: case 455: case 470: case 477: case 478:
+				if(this.divergence==undefined){
+					this.divergence=0
+				}
 				this.forceDisplay=true
 				this.time=time
 				this.speed=0
 				if(this.type==477||this.type==478){
-					this.transverse=true
+					this.transverse=this.prevSpeed
 					if(!this.hitscanConvert){
 						this.time=random(time,time*2)
 					}
@@ -583,22 +596,20 @@ class projectile{
 				noLoop()*/
 				for(let a=0,la=entities.players.length;a<la;a++){
 					let c=entities.players[a]
-					if(
-						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0||c.id==this.id&&c.construct&&this.type==455
-					){
+					if(this.canHit(c)){
 						let bound=[
 							[
-								{x:c.position.x-c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y-c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y-c.height/2-this.divergence},
 							],[
-								{x:c.position.x-c.width/2,y:c.position.y+c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y+c.height/2+this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],[
-								{x:c.position.x-c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x-c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],[
-								{x:c.position.x+c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],
 						]
 						for(let b=0,lb=bound.length;b<lb;b++){
@@ -615,22 +626,20 @@ class projectile{
 				this.hit=false
 				for(let a=0,la=entities.players.length;a<la;a++){
 					let c=entities.players[a]
-					if(
-						((this.id==0?1:0)!=(c.id==0?1:0)||this.id==-1||c.id==-1||game.pvp&&this.id!=c.id)&&c.life>0||c.id==this.id&&c.construct&&this.type==455
-					){
+					if(this.canHit(c)){
 						let bound=[
 							[
-								{x:c.position.x-c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y-c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y-c.height/2-this.divergence},
 							],[
-								{x:c.position.x-c.width/2,y:c.position.y+c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y+c.height/2+this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],[
-								{x:c.position.x-c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x-c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x-c.width/2-this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],[
-								{x:c.position.x+c.width/2,y:c.position.y-c.height/2},
-								{x:c.position.x+c.width/2,y:c.position.y+c.height/2},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y-c.height/2-this.divergence},
+								{x:c.position.x+c.width/2+this.divergence,y:c.position.y+c.height/2+this.divergence},
 							],
 						]
 						for(let b=0,lb=bound.length;b<lb;b++){
@@ -646,6 +655,7 @@ class projectile{
 										let type=this.type
 										this.type=this.prevType
 										this.speed=this.prevSpeed
+										this.travel=this.extent
 										this.hitPlayer(c)
 										this.type=type
 									}else{
@@ -1042,7 +1052,6 @@ class projectile{
 		}
 		this.timer=0
         this.fade=this.type==444?0:1
-        this.active=true
 		this.base={
 			time:this.time,damage:this.damage,speed:this.speed,
 			index:this.index,id:this.id,
@@ -7658,13 +7667,14 @@ class projectile{
 				}
 			break
 			case 477: case 478:
-				layer.stroke(250,this.fade)
-				layer.strokeWeight(1)
+				let color=this.rules.medTarget?[40,240,40+this.crit*200]:[250-this.crit*150,250-this.crit*50,250]
+				layer.stroke(...color,this.fade)
+				layer.strokeWeight(1+this.divergence)
 				layer.line(0,-(this.timer-1)*this.deviation,0,-this.extent)
 				if(!this.hit){
-					layer.stroke(250,this.fade*0.4)
+					layer.stroke(...color,this.fade*0.4)
 					layer.line(0,-this.extent,0,-this.extent-this.deviation)
-					layer.stroke(250,this.fade*0.2)
+					layer.stroke(...color,this.fade*0.2)
 					layer.line(0,-this.extent-this.deviation,0,-this.extent-this.deviation*2)
 				}
 			break
@@ -11360,30 +11370,7 @@ class projectile{
 							{x:entities.players[b].position.x,y:entities.players[b].position.y-entities.players[b].height*0.5-this.height*0.5},
 							{x:entities.players[b].position.x,y:entities.players[b].position.y+entities.players[b].height*0.5+this.height*0.5}
 						)||inBoxBox(this,entities.players[b])
-					)&&(
-						/*(
-							(this.id==0?1:0)!=(entities.players[b].id==0?1:0)||
-							entities.players[b].id==-1&&this.id!=-1||
-							this.id==-1&&entities.players[b].id!=-1||
-							game.pvp&&this.id!=entities.players[b].id
-						)*/
-						(this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
-            			(entities.players[b].id<=0?entities.players[b].id:game.traitor&&entities.players[b].id-1==game.traitorKey&&!entities.players[b].fort?0:game.pvp?entities.players[b].id:1)||(
-							this.rules.medTarget
-							||this.type==216&&entities.players[b].life<entities.players[b].base.life*2
-							||(this.type==339||this.type==369)&&entities.players[b].construct&&entities.players[b].id==this.id
-							||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25
-						)&&
-						(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0)
-					)&&
-					!(entities.players[b].playerData.name=='PlayerSpyC6'&&entities.players[b].fade<=0.5)&&
-					!(entities.players[b].playerData.name=='PlayerSpyW'&&entities.players[b].subWeaponCType==1007&&entities.players[b].fade<=0.5)&&
-					!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&entities.players[b].id>0)&&
-					!(this.rules.hitmed&&(this.index==entities.players[b].index||entities.players[b].fort&&(!game.pvp&&entities.players[b].id>0&&this.id>0||game.pvp&&entities.players[b].id>0&&entities.players[b].id==this.id)))&&
-					entities.players[b].life>0&&this.active&&
-					!(this.rules.hitstack&&this.hit.includes(entities.players[b].index))&&
-					!(this.type==258&&entities.players[b].fort&&this.index==-1)&&
-					!(this.type==434&&this.onTeam(entities.players[b])&&entities.players[b].construct)
+					)&&this.canHit(entities.players[b])
 					//!((this.type==5||this.type==65)&&this.id==-1&&this.timer<15&&entities.players[b].id>0)&&
 				){
 					targets.push(entities.players[b])
@@ -11439,6 +11426,32 @@ class projectile{
 			this.active=false
 		}
     }
+	canHit(target){
+		return (
+			/*(
+				(this.id==0?1:0)!=(target.id==0?1:0)||
+				target.id==-1&&this.id!=-1||
+				this.id==-1&&target.id!=-1||
+				game.pvp&&this.id!=target.id
+			)*/
+			(this.id<=0?this.id:game.traitor&&this.id-1==game.traitorKey?0:game.pvp?this.id:1)!=
+			(target.id<=0?target.id:game.traitor&&target.id-1==game.traitorKey&&!target.fort?0:game.pvp?target.id:1)||
+			(
+				this.rules.medTarget
+				||this.type==216&&target.life<target.base.life*2
+				||(this.type==339||this.type==369||this.type==455)&&target.construct&&target.id==this.id
+				||this.type==357&&target.life<=target.base.life*1.25
+			)&&(!target.playerData.name.includes('Medic')||target.id!=0)
+		)&&
+		!(target.playerData.name=='PlayerSpyC6'&&target.fade<=0.5)&&
+		!(target.playerData.name=='PlayerSpyW'&&target.subWeaponCType==1007&&target.fade<=0.5)&&
+		!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&target.id>0)&&
+		!(this.rules.hitmed&&(this.index==target.index||target.fort&&(!game.pvp&&target.id>0&&this.id>0||game.pvp&&target.id>0&&target.id==this.id)))&&
+		!(this.rules.hitstack&&this.hit.includes(target.index))&&
+		!(this.type==258&&target.fort&&this.index==-1)&&
+		!(this.type==434&&this.onTeam(target)&&target.construct)&&
+		target.life>0&&this.active
+	}
 	hitPlayer(target){
 		/*if(this.drone&&target.id>0&&game.pvp&&this.type!=138){
 			this.damage*=0.6
