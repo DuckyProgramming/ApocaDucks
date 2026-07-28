@@ -17,7 +17,7 @@ game={
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
-  speedArena:false,speedArenaKey:0,
+  speedArena:false,speedArenaKey:0,pvpPoint:false,
   /*
   spectateSpawn
   0 - enables spawning on teammates
@@ -8205,6 +8205,30 @@ types={
     },{
       name:'PlayerWingPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1142,
+    },{
+      name:'PlayerPushSniper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:1143,
+    },{
+      name:'PlayerMinigunC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1144,
+    },{
+      name:'PlayerFireworkMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1145,
+    },{
+      name:'PlayerRecoilMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1146,
+    },{
+      name:'PlayerLMGC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1147,
+    },{
+      name:'PlayerAnticannonC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1148,
+    },{
+      name:'PlayerShieldMinigun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1149,
+    },{
+      name:'PlayerWingSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1150,
     },
 
     //mark c
@@ -19646,7 +19670,7 @@ types={
 			cooldown:4,
 			stop:120,
 			reload:3,
-			speed:0.8,
+			speed:0.85,
       uses:120,
 		},{
 			name:'Engineer W',
@@ -20371,6 +20395,78 @@ types={
 			reload:6,
 			speed:1.4,
       uses:50,
+		},{
+			name:'Push Sniper',
+			ammo:1,
+			damage:320,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.85,
+      uses:5,
+		},{
+			name:'Minigun C',
+			ammo:36,
+			damage:75,
+			cooldown:5,
+			stop:180,
+			reload:2,
+			speed:0.75,
+      uses:108,
+		},{
+			name:'Firework Minigun',
+			ammo:24,
+			damage:75,
+			cooldown:7,
+			stop:210,
+			reload:2,
+			speed:0.75,
+      uses:72,
+		},{
+			name:'Recoil Minigun',
+			ammo:36,
+			damage:75,
+			cooldown:5,
+			stop:180,
+			reload:2,
+			speed:0.75,
+      uses:108,
+		},{
+			name:'LMG C',
+			ammo:25,
+			damage:60,
+			cooldown:6,
+			stop:120,
+			reload:2,
+			speed:0.8,
+      uses:75,
+		},{
+			name:'Anticannon C',
+			ammo:6,
+			damage:240,
+			cooldown:33,
+			stop:144,
+			reload:45,
+			speed:0.8,
+      uses:24,
+		},{
+			name:'Shield Minigun',
+			ammo:30,
+			damage:75,
+			cooldown:5,
+			stop:240,
+			reload:2,
+			speed:0.75,
+      uses:108,
+		},{
+			name:'Wing Submachine',
+			ammo:6,
+			damage:56,
+			cooldown:6,
+			stop:40,
+			reload:3,
+			speed:1.15,
+      uses:30,
 		},
 
     /*{

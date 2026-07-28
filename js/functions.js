@@ -24,9 +24,9 @@ function setupRules(){
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
                 a==458||a==462||a==466||a==469||a==473||
-                a==474||a==475,
+                a==474||a==475||a==482,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
-                a==353||a==412,
+                a==353||a==412||a==482,
 			rocket:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==41||a==45||a==47||
 				a==48||a==53||a==54||a==55||a==56||
@@ -36,7 +36,7 @@ function setupRules(){
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
-                a==466||a==469,
+                a==466||a==469||a==482,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -82,7 +82,8 @@ function setupRules(){
 				a==417||a==435||a==448,
 			passer:a==85||a==89||a==103||a==193||a==194||
 				a==195||a==215||a==270||a==297||a==310||
-				a==337||a==398||a==427||a==433||a==481,
+				a==337||a==398||a==427||a==433||a==481||
+                a==483,
 			slow:a==125||a==126||a==127||a==130||a==173||
 				a==174||a==185||a==192||a==196||a==197||
 				a==198||a==199||a==234||a==236||a==253||
@@ -91,7 +92,7 @@ function setupRules(){
 			fast:a==4||a==14||a==39||a==50||a==57||
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
-				a==407||a==409||a==421||a==460,
+				a==407||a==409||a==421||a==460||a==482,
 			hitter:a!=85&&a!=156&&a!=190&&a!=191&&a!=214&&
 				a!=255&&a!=256&&a!=257&&a!=265&&a!=300&&
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
@@ -102,7 +103,8 @@ function setupRules(){
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
-				a!=337&&a!=398&&a!=427&&a!=433&&a!=481,
+				a!=337&&a!=398&&a!=427&&a!=433&&a!=481&&
+                a!=483,
 			multiHit:a==91||a==92||a==93||a==96||a==108||
 				a==192||a==203||a==204||a==207||a==208||
 				a==237||a==238||a==239||a==275||a==296||
@@ -119,7 +121,7 @@ function setupRules(){
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
 				a!=195&&a!=270&&a!=297&&a!=310&&a!=330&&
 				a!=335&&a!=335&&a!=405&&a!=427&&a!=433&&
-                a!=481,
+                a!=481&&a!=483,
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
                 a!=392&&a!=417&&a!=435&&a!=448&&a!=463&&
@@ -9914,8 +9916,11 @@ function runTransition(layer){
     }
 }
 function checkEnd(level,layer,key){
-    for(let a=0,la=game.det.length;a<la;a++){
-        game.det[a]=floor(random(0,30))
+    if(game.time%5==0){
+        for(let a=0,la=game.det.length;a<la;a++){
+            game.det[a]=1
+            //game.det[a]=floor(random(0,60))
+        }
     }
     if(duel.trigger&&game.noVisuals){
         if(game.time%72==0&&game.time!=0){
@@ -11370,7 +11375,7 @@ function setupLists(){
             [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSword`,`PlayerDaydrinkerC`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
-            [`PlayerLMG`,`PlayerMinigun`,`PlayerHeavierMachineGun`,`PlayerPumpShotgun`,`PlayerFireworkLMG`,`PlayerNutter`,`PlayerAnticannon`,`PlayerRecoilLMG`],
+            [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerSecurer`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
@@ -11380,8 +11385,8 @@ function setupLists(){
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
             [`PlayerDonutC`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
-            [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerClassicSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
-            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerLightCarpenter`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`],
+            [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
+            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
             [`PlayerKnife`,`PlayerElectricChair`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
@@ -11427,35 +11432,37 @@ function outKD(){
             data[player.subWeaponB.id]=player.subWeaponBData
             weapon[player.subWeaponC.id]=player.subWeaponC
             data[player.subWeaponC.id]=player.subWeaponCData
-            print(
-`${player.playerData.name}:
+            if(data[0]!=undefined){
+                print(
+    `${player.playerData.name}:
 
-${player.stats.idealKills} Kills
-${player.stats.deaths} Deaths   
-${round(player.stats.idealKills/player.stats.deaths*100)/100} K/D
+    ${player.stats.idealKills} Kills
+    ${player.stats.deaths} Deaths   
+    ${round(player.stats.idealKills/player.stats.deaths*100)/100} K/D
 
-${round(player.stats.damage)} Damage Dealt
-${round(player.stats.taken)} Damage Taken
-${round(player.stats.damage/player.stats.taken*100)/100} D/T
+    ${round(player.stats.damage)} Damage Dealt
+    ${round(player.stats.taken)} Damage Taken
+    ${round(player.stats.damage/player.stats.taken*100)/100} D/T
 
-${data[0].name}:
-${round(player.stats.subIdealKills[0])} Kills
-${round(player.stats.subDamage[0])} Damage Dealt
-${round(player.stats.subTaken[0])} Damage Taken
-${round(player.stats.subDamage[0]/player.stats.subTaken[0]*100)/100} D/T
+    ${data[0].name}:
+    ${round(player.stats.subIdealKills[0])} Kills
+    ${round(player.stats.subDamage[0])} Damage Dealt
+    ${round(player.stats.subTaken[0])} Damage Taken
+    ${round(player.stats.subDamage[0]/player.stats.subTaken[0]*100)/100} D/T
 
-${data[1].name}:
-${round(player.stats.subIdealKills[1])} Kills
-${round(player.stats.subDamage[1])} Damage Dealt
-${round(player.stats.subTaken[1])} Damage Taken
-${round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()?`
+    ${data[1].name}:
+    ${round(player.stats.subIdealKills[1])} Kills
+    ${round(player.stats.subDamage[1])} Damage Dealt
+    ${round(player.stats.subTaken[1])} Damage Taken
+    ${round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()?`
 
-${data[2].name}:
-${round(player.stats.subIdealKills[2])} Kills
-${round(player.stats.subDamage[2])} Damage Dealt
-${round(player.stats.subTaken[2])} Damage Taken
-${round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:``}`
-            )
+    ${data[2].name}:
+    ${round(player.stats.subIdealKills[2])} Kills
+    ${round(player.stats.subDamage[2])} Damage Dealt
+    ${round(player.stats.subTaken[2])} Damage Taken
+    ${round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:``}`
+                )
+            }
         }
     })
 }

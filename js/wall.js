@@ -14015,11 +14015,17 @@ class wall{
                                     c.velocity.y+=20
                                 }
                                 if((typeof this.weapon)=='object'){
-                                    c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
-                                    c.newWeaponSet(this.weapon[0])
-                                    let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
-                                    this.weapon=weaponize(chunk)
-                                    this.recharge=game.level==27&&game.pvp?14400:game.level==23||game.level==101?1200:3600-(game.gaming-1)*600
+                                    if(
+                                        !((game.level==22||game.level==100)&&game.pointAnim[2]>=1)&&
+                                        !((game.level==23||game.level==26||game.level==101||game.level==105)&&this.visible<1)&&
+                                        !((game.level==25||game.level==104)&&!game.point[1])
+                                    ){
+                                        c.assort.storeSubWeapon=this.weapon.length==4?[this.weapon[1],this.weapon[2],this.weapon[3]]:[this.weapon[1],this.weapon[2]]
+                                        c.newWeaponSet(this.weapon[0])
+                                        let chunk=game.classWeapon?3:game.peakWeapon?1:game.level==27&&game.pvp?0:floor(random(0,1.5))
+                                        this.weapon=weaponize(chunk)
+                                        this.recharge=game.level==27&&game.pvp?14400:game.level==23||game.level==101?1200:3600-(game.gaming-1)*600
+                                    }
                                 }else if(game.level==115||game.level==116){
                                     if(types.player[this.weapon].name=='PlayerClassWars'){
                                         game.level=menu.level
@@ -14569,7 +14575,11 @@ class wall{
                                                 c.jump.triple=1
                                                 c.jump.quadruple=1
                                             }
-                                            if(c.playerData.name=='PlayerScout4'||c.rules.classW&&(c.subWeaponAType==966||c.subWeaponBType==966||c.subWeaponCType==966)){
+                                            if(c.playerData.name=='PlayerScout4'||c.rules.classW&&(
+                                                c.subWeaponAType==966||c.subWeaponBType==966||c.subWeaponCType==966||
+                                                c.subWeaponAType==1142||c.subWeaponBType==1142||c.subWeaponCType==1142||
+                                                c.subWeaponAType==1150||c.subWeaponBType==1150||c.subWeaponCType==1150
+                                            )){
                                                 c.jump.double=1
                                                 if(c.rules.doubleJump){
                                                     c.jump.triple=1

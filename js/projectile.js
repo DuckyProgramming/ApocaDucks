@@ -274,7 +274,7 @@ class projectile{
 					this.height*=1.25
 					this.launch=false
 					//let lim=this.type==392?9:this.type==372?10:this.type==368?3:8
-					let lim=100000//this.type==392?9:this.type==372?10:this.type==368?3:4
+					let lim=this.type==392?9:this.type==372?10:this.type==368?3:4
 					let ct=0
 					for(let a=0,la=entities.projectiles.length;a<la;a++){
 						if(entities.projectiles[la-1-a].type==this.type&&entities.projectiles[la-1-a].index==this.index){
@@ -656,6 +656,11 @@ class projectile{
 										this.type=this.prevType
 										this.speed=this.prevSpeed
 										this.travel=this.extent
+										this.base={
+											time:this.time,damage:this.damage,speed:this.speed,
+											index:this.index,id:this.id,
+											position:{x:this.position.x,y:this.position.y}
+										}
 										this.hitPlayer(c)
 										this.type=type
 									}else{
@@ -687,6 +692,7 @@ class projectile{
 											break
 										}
 										c.die.killer=this.index
+										c.die.projectile=this
 										c.collect.time=450
 										if(this.type==190&&!c.fort){
 											c.chillTime=max(c.chillTime,3600)
@@ -1047,6 +1053,21 @@ class projectile{
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
 				this.bullet=true
+			break
+			case 482:
+				this.speed=8
+				this.time=time
+				this.rules.fast=true
+			break
+			case 483:
+				this.speed=6
+				this.time=time
+				this.maxWidth=this.width*40
+				this.maxHeight=this.height*40
+				this.scale=0
+				this.width=0
+				this.height=0
+				this.shocks=[]
 			break
 			
 		}
@@ -7667,7 +7688,7 @@ class projectile{
 				}
 			break
 			case 477: case 478:
-				let color=this.rules.medTarget?[40,240,40+this.crit*200]:[250-this.crit*150,250-this.crit*50,250]
+				let color=this.rules.medTarget?[100,250,100+this.crit*150]:[250-this.crit*150,250-this.crit*50,250]
 				layer.stroke(...color,this.fade)
 				layer.strokeWeight(1+this.divergence)
 				layer.line(0,-(this.timer-1)*this.deviation,0,-this.extent)
@@ -7676,6 +7697,44 @@ class projectile{
 					layer.line(0,-this.extent,0,-this.extent-this.deviation)
 					layer.stroke(...color,this.fade*0.2)
 					layer.line(0,-this.extent-this.deviation,0,-this.extent-this.deviation*2)
+				}
+			break
+			case 482:
+				layer.fill(160-this.crit*160,40+this.crit*200,240,this.fade)
+				layer.rect(0,4,1,8)
+				layer.fill(160-this.crit*160,40+this.crit*120,160+this.crit*80,this.fade)
+				layer.rect(0,3,1,6)
+				layer.fill(160-this.crit*160,40,80+this.crit*160,this.fade)
+				layer.rect(0,2,1,4)
+				layer.fill(250,this.fade*0.2)
+				layer.stroke(250,this.fade*0.5)
+				layer.strokeWeight(1)
+				layer.ellipse(0,0,5,24)
+				layer.ellipse(0,0,3,22)
+				layer.ellipse(0,0,1,20)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,160,120+this.crit*120,this.fade)
+					layer.ellipse(0,0,(150-this.fade*150))
+					layer.fill(240-this.crit*200,100,120+this.crit*120,this.fade)
+					layer.ellipse(0,0,(100-this.fade*100))
+					layer.fill(240-this.crit*200,40,120+this.crit*120,this.fade)
+					layer.ellipse(0,0,(50-this.fade*50))
+				}
+			break
+			case 483:
+				layer.scale(this.scale)
+				layer.stroke(255-this.crit*150,100+this.crit*150,100+this.crit*150,this.fade)
+				layer.strokeWeight(2)
+				layer.noFill()
+				layer.ellipse(0,0,80)
+				for(let a=0,la=this.shocks.length;a<la;a++){
+					layer.stroke(255-this.crit*150,100+this.crit*150,100+this.crit*150,this.fade*this.shocks[a][2])
+					layer.line(
+						lsin(this.shocks[a][0])*32,
+						lcos(this.shocks[a][0])*32,
+						lsin(this.shocks[a][1])*16,
+						lcos(this.shocks[a][1])*16
+					)
 				}
 			break
 
@@ -7752,7 +7811,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7762,7 +7821,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7772,7 +7831,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(30*(1.5-c/radius),dir,1,1)
 					}
@@ -7784,7 +7843,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
 								entities.players[d].life=min(entities.players[d].life+this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1),entities.players[d].base.life)
@@ -7799,7 +7858,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7809,7 +7868,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])&&!(this.id==-1&&entities.players[b].id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(20*(1.5-c/radius),dir,1,1)
 					}
@@ -7822,7 +7881,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7832,7 +7891,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -7845,12 +7904,8 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						entities.players[b].stunTime=max(entities.players[b].stunTime,30)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 			break
@@ -7860,7 +7915,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(25*(1.5-c/radius),dir,1,1)
 					}
@@ -7872,12 +7927,8 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						entities.players[b].velocity.y-=this.speed*abs(lsin(this.direction)*3)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 			break
@@ -7887,7 +7938,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*(this.id==-1&&entities.players[b].id>0&&game.level!=19?(this.timer<5?0.1:0.5):1)*(entities.players[b].fort?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				for(let b=0,lb=5;b<lb;b++){
@@ -7900,13 +7951,9 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].fort){
 							entities.players[b].confuseTime=max(entities.players[b].confuseTime,240)
-						}
-						if(game.invis){
-							entities.players[b].visible=15
 						}
 					}
 				}
@@ -7917,7 +7964,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])&&!(this.id==-1&&entities.players[b].id>0)&&!entities.players[b].construct){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(20*(1.5-c/radius),dir,1,1)
 					}
@@ -7929,7 +7976,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				let turn=floor(random(0,72))
@@ -7948,12 +7995,8 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*(this.id==-1&&entities.players[b].id>0?(this.timer<5?0.1:0.5):1))
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,entities.players[b].id>0?90:180)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 			break
@@ -7966,7 +8009,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7976,7 +8019,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -7986,7 +8029,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8003,7 +8046,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8013,7 +8056,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8023,7 +8066,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
@@ -8037,7 +8080,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8047,7 +8090,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8069,7 +8112,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].weaponRules.explodable&&entities.players[b].playerData.name!='ReusableBuster'&&entities.players[b].life>0&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8079,7 +8122,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8097,7 +8140,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						for(let d=0,ld=entities.players.length;d<ld;d++){
 							if(entities.players[d].index==this.index){
 								entities.players[d].critBuff=max(300,entities.players[d].critBuff)
@@ -8118,7 +8161,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8128,7 +8171,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 					if((entities.players[b].id!=this.id&&game.pvp||entities.players[b].id==0&&this.id!=0||entities.players[b].id!=0&&this.id==0)&&entities.players[b].explodable()&&dist(entities.players[b].position.x,entities.players[b].position.y,this.position.x,this.position.y)<600){
 				        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3*constrain(1.2-this.timer/this.base.time*4,0.2,1),300,this.crit,this.index))
@@ -8170,7 +8213,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				let turn279=floor(random(0,72))
@@ -8191,7 +8234,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8207,7 +8250,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,250,0,this.id,this.base.damage,300,this.crit,this.index))
@@ -8234,7 +8277,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])&&!(this.id==-1&&entities.players[b].id>0)){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(20*(1.5-c/radius),dir,1,1)
 						entities.players[b].stunTime=max(entities.players[b].stunTime,60)
@@ -8247,7 +8290,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.4*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				let turn313=floor(random(0,72))
@@ -8261,7 +8304,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8274,7 +8317,7 @@ class projectile{
 						if(!entities.players[b].immune()){
 							entities.players[b].chillTime=max(entities.players[b].chillTime,240*(1-c/radius)+60)
 						}
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8292,8 +8335,7 @@ class projectile{
 								this.damage*sqrt(1-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)
 							)
 						}*/
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
 						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index==this.index&&c<105){
@@ -8325,9 +8367,6 @@ class projectile{
 						if(this.type==448&&c<105&&!entities.players[b].fort){
 							entities.players[b].invisBuff=max(entities.players[b].invisBuff,120*(1.5-c/105))
 						}
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -8354,7 +8393,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(game.classWeapon&&this.id==entities.players[b].id&&this.id>0?0.25:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(this.index==entities.players[b].index){
 							entities.players[b].velocity.x+=22.5*(1.5-c/radius)*lsin(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y+3))*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=min(15,22.5*(1.5-c/radius)*lcos(atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y+3)))*entities.players[b].getKnockback()
@@ -8377,7 +8416,7 @@ class projectile{
 						entities.players[b].gasTime=max(entities.players[b].gasTime,max(4,ceil(5*(1-c/radius))))
 						entities.players[b].gasser=this.index
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -8396,7 +8435,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||this.index==entities.players[b].index)){
 						entities.players[b].takeDamage(this.damage*min(1,1.25*(1-c/radius))*(this.index==entities.players[b].index?0.375:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(entities.players[b].index!=this.index&&c<radius){
 							let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 							entities.players[b].velocity.x+=6.75*min(1,1.5-1.5*c/radius)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
@@ -8413,7 +8452,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(12*(1.5-c/radius),dir,1,1)
 						entities.players[b].knockbackForce(2*(1.5-c/radius),dir,1,1)
@@ -8426,7 +8465,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?5:1)*(entities.players[b].fort?2:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(10*(1.5-c/radius),dir,1,1)
 						entities.players[b].knockbackForce(1.5-c/radius,dir,1,1)
@@ -8439,7 +8478,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8454,7 +8493,7 @@ class projectile{
 						entities.players[b].weapon.cooldown+=stall
 						entities.players[b].subWeaponA.cooldown+=stall
 						entities.players[b].subWeaponB.cooldown+=stall
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8470,8 +8509,7 @@ class projectile{
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*sqrt(min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius))*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
 							//entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
-							entities.players[b].collect.time=450
-							entities.players[b].die.killer=this.index
+							entities.players[b].generalizedTake(this)
 							if(c<105){
 								/*entities.players[b].velocity.x+=2.25*min(1,1.5-1.5*c/105)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 								entities.players[b].velocity.y-=1.2*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -8499,9 +8537,6 @@ class projectile{
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}
 						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 						//note to self: the above two blocks are in swapped order to the regular sticky code
 					}
 				}
@@ -8529,7 +8564,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8541,8 +8576,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
 						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index==this.index&&c<105){
@@ -8571,9 +8605,6 @@ class projectile{
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -8598,7 +8629,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(c.fort||c.construct?2.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8608,7 +8639,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8621,11 +8652,7 @@ class projectile{
 							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.validExplodeTarget(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-							entities.players[b].die.killer=this.index
-							entities.players[b].collect.time=450
-							if(game.invis){
-								entities.players[b].visible=15
-							}
+							entities.players[b].generalizedTake(this)
 						}
 					}
 				}
@@ -8636,7 +8663,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&/*(*/this.validExplodeTarget(entities.players[b])/*||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)*/){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.25:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(30*(1.5-c/radius),dir,1,1)
 					}
@@ -8648,7 +8675,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*((1-c/radius)**1.5)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8658,7 +8685,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-(this.hitTime==0?this.timer:this.hitTime)/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				this.hitTime=this.timer
@@ -8669,7 +8696,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(2+min(3,this.base.time/60))*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8681,8 +8708,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
 						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/90)*(entities.players[b].jump.time==0?3:1)
 						if(entities.players[b].index==this.index&&c<90){
@@ -8711,9 +8737,6 @@ class projectile{
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/90))),entities.players[b].stuckTime)
 						}
 						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -8734,14 +8757,14 @@ class projectile{
 					}
 				}
 			break
-			case 406:
+			case 406: case 482:
 				radius=100
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],2)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						//entities.players[b].takeDamage(this.damage*(1-c/radius)*5/9*(entities.players[b].index==this.index?1.5:1))
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*2/3*(entities.players[b].index==this.index?1.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8760,7 +8783,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8770,7 +8793,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(this.type==472&&!entities.players[b].immune()){
 							entities.players[b].freezeTime=max(entities.players[b].freezeTime,120)
 						}
@@ -8788,7 +8811,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*min(1,1.4-this.bounces*0.4)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8800,7 +8823,7 @@ class projectile{
 					if(entities.players[b].explodable()&&c<radius&&(this.validExplodeTarget(entities.players[b])||game.classWeapon&&this.id==entities.players[b].id&&this.id>0)){
 						let dmg=this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(game.classWeapon&&this.id==entities.players[b].id&&this.id>0?0.5:1)
 						entities.players[b].takeDamage(dmg)
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(entities.players[b].index!=this.index){
 							total430+=dmg*(entities.players[b].id==0?0.5:1)
 						}
@@ -8822,8 +8845,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*min(1,(entities.players[b].jump.time==0?1.25:1)-c/radius)*falloff*(entities.players[b].index==this.index?0.5:1)/**(entities.players[b].construct?1.25:1)*/)
-						entities.players[b].die.killer=this.index
-						entities.players[b].collect.time=450
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y-entities.players[b].height/2)
 						let launch=min(1,1.5+(entities.players[b].index==this.index?0.5:0)-1.5*c/105)*(entities.players[b].jump.time==0?(entities.players[b].velocity.y<0?3:1.5):1)
 						if(entities.players[b].index!=this.index&&c<105){
@@ -8843,9 +8865,6 @@ class projectile{
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
-						if(game.invis){
-							entities.players[b].visible=15
-						}
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -8872,7 +8891,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8882,7 +8901,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*0.2*(1-c/radius)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].immune()){
 							entities.players[b].vulnerableTime=min(entities.players[b].vulnerableTime+360*(1-c*0.8/radius),720)
 							entities.players[b].DOT.damage+=this.damage/720*(1-c*0.8/radius)
@@ -8897,7 +8916,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*1.2)
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						entities.players[b].gasBurst(2,this.id,this.index)
 					}
 				}
@@ -8917,7 +8936,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*min(1,1.2-this.bounces*0.2)*(entities.players[b].index==this.index?0.5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8927,7 +8946,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*((1-c/radius)**2)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 					}
 				}
 			break
@@ -8937,7 +8956,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*(entities.players[b].index==this.index?0.5:1)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].immune()){
 							entities.players[b].stunTime=max(entities.players[b].stunTime,30*(1-0.5*c/radius))
 						}
@@ -8951,7 +8970,7 @@ class projectile{
 					if(entities.players[b].weaponRules.explodable&&entities.players[b].playerData.name!='ReusableBuster'&&entities.players[b].life>0&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						let d=entities.players[b]
 						d.takeDamage(this.damage*(1-c/radius))
-						d.generalizedTake(this.index)
+						d.generalizedTake(this)
 						d.DOT.damage+=this.damage/600
 						d.DOT.active=max(d.DOT.active,600)
 						d.vulnerableTime=max(d.vulnerableTime,600)
@@ -8965,7 +8984,7 @@ class projectile{
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*(entities.players[b].index==this.index?0.5:1)*(entities.players[b].construct?5:1))
-						entities.players[b].generalizedTake(this.index)
+						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.previous.position.x,this.previous.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(5*(1.5-c/radius),dir,1,1)
 						entities.players[b].knockbackForce(1.5-c/radius,dir,1,1)
@@ -9110,6 +9129,7 @@ class projectile{
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
+				case 482:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -10154,13 +10174,8 @@ class projectile{
 					}
 					if(this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448){
 						let id=((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)
-						let inputSet=this.id==0||id>game.gaming?[game.det[id]==0]:inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1]
-						if(inputSet[0]){
-							this.det=5
-						}
-						if(this.det>0){
-							this.det--
-							if(this.det>0&&this.timer>=this.detTick&&this.active&&!(this.type==372&&this.delay>0)){
+						if(a==0&&id>game.gaming&&floor(random(0,10))==0){
+							if(entities.players.some(player=>!this.onTeam(player)&&distPos(this,player)<50)){
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].index==this.index){
 										if(
@@ -10170,19 +10185,47 @@ class projectile{
 												abs(this.position.x-entities.players[a].position.x)<75&&
 												abs(this.position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
 											)&&
-											!(this.type==417&&this.detTimer>0)
+											!(this.type==417&&this.detTimer>0)&&
+											distPos(this,entities.players[a])<1000
 										){
-											if(this.type==417){
-												this.dets--
-												if(this.dets<=0){
-													this.active=false
+											game.det[id]=0
+										}
+										break
+									}
+								}
+							}
+						}else if(a==1){
+							let inputSet=this.id==0||id>game.gaming?[game.det[id]==0]:inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1]
+							if(inputSet[0]){
+								this.det=5
+							}
+							if(this.det>0){
+								this.det--
+								if(this.det>0&&this.timer>=this.detTick&&this.active&&!(this.type==372&&this.delay>0)){
+									for(let a=0,la=entities.players.length;a<la;a++){
+										if(entities.players[a].index==this.index){
+											if(
+												(
+													lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
+													lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
+													abs(this.position.x-entities.players[a].position.x)<75&&
+													abs(this.position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
+												)&&
+												!(this.type==417&&this.detTimer>0)
+											){
+												if(this.type==417){
+													this.dets--
+													if(this.dets<=0){
+														this.active=false
+													}else{
+														this.detTimer=10
+													}
 												}else{
-													this.detTimer=10
+													this.active=false
 												}
-											}else{
-												this.active=false
+												this.explode()
 											}
-											this.explode()
+											break
 										}
 									}
 								}
@@ -11330,6 +11373,36 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 				break
+				case 483:
+					if(a==0){
+						this.position.x+=this.speed*lsin(this.direction)
+				    	this.position.y-=this.speed*lcos(this.direction)
+						if(this.timer%4==0&&this.active){
+							this.shocks.push([random(0,360),random(0,360),1])
+						}
+						for(let a=0,la=this.shocks.length;a<la;a++){
+							this.shocks[a][2]-=0.1
+							if(this.shocks[a][2]<=0){
+								this.shocks.splice(a,1)
+								a--
+								la--
+							}
+						}
+						if(this.type==483&&a==0){
+							this.scale=sin(this.timer/this.base.time*90)*2
+							this.width=this.maxWidth*this.scale
+							this.height=this.maxHeight*this.scale
+							for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+								if(inBoxBox(this,entities.projectiles[b])&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+									entities.projectiles[b].active=false
+									if(entities.projectiles[b].rules.exploder){
+										entities.projectiles[b].explode()
+									}
+								}
+							}
+						}
+					}
+				break
 
 				//mark
 			}
@@ -11345,7 +11418,7 @@ class projectile{
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
 			!(this.trap&&this.timer<150)
 		){
-			let bound=this.fast?100:50
+			let bound=this.rules.fast?100:50
 			let targets=[]
 			for(let b=0,lb=entities.players.length;b<lb;b++){
 				//if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&
@@ -11962,11 +12035,7 @@ class projectile{
 					let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
 					if(entities.players[d].id==0&&entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
 						entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
-						entities.players[d].die.killer=this.index
-						entities.players[d].collect.time=max(450,entities.players[d].collect.time)
-						if(game.invis){
-							entities.players[d].visible=15
-						}
+						entities.players[d].generalizedTake(this)
 					}
 				}
 			break
@@ -12027,11 +12096,7 @@ class projectile{
 					let e=dist(this.position.x,this.position.y,entities.players[d].position.x,entities.players[d].position.y)
 					if(entities.players[d]!=target&&entities.players[d].explodable()&&entities.players[d].life>0&&e<60&&((this.id==0?1:0)!=(entities.players[d].id==0?1:0)||this.id==-1||entities.players[d].id==-1||game.pvp&&(this.id!=entities.players[d].id||!rules.teamMode))){
 						entities.players[d].takeDamage(this.damage*(1-e/60)*0.5*constrain(1.2-this.timer/this.base.time*10,0.2,1)*min(1,0.5+this.timer*0.125))
-						entities.players[d].die.killer=this.index
-						entities.players[d].collect.time=450
-						if(game.invis){
-							entities.players[d].visible=15
-						}
+						entities.players[b].generalizedTake(this)
 					}
 				}
 				if(target.life<=0&&target.playerData.sizeBuff>1){
@@ -12435,6 +12500,7 @@ class projectile{
 			target.visible=15
 		}
 		target.die.killer=this.index
+		target.die.projectile=this
 		target.collect.time=450
 	}
 }

@@ -1,4 +1,22 @@
 
+
+
+1143 - push sniper, 969, 888
+1144 - minigun c, 725
+1145 - firework minigun, 797
+1146 - recoil minigun, 1026
+1147 - lmg c, 616
+1148 - anticannon c, 924
+1149 - shield minigun, 1144
+1150 - wing submachine, 391
+
+482 - anticannon, 406, 466
+483 - shield minigun, 427
+
+
+
+
+
 1134 - penalty scattergun w, 1032
 1135 - snap shotgun, 710
 1136 - snap scattergun, 1135

@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[6,4],sets:[[0,0],[0,5]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[3,5],sets:[[0,0],[0,0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -17,7 +17,7 @@ function setup(){
 
         game.players=2
         game.gaming=2
-        game.level=47
+        game.level=117
         /*
         8 - normandy
         41 - speleo dm
