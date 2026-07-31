@@ -9916,9 +9916,11 @@ function runTransition(layer){
     }
 }
 function checkEnd(level,layer,key){
-    if(game.time%5==0){
+    if(game.time%3==0){
         for(let a=0,la=game.det.length;a<la;a++){
-            game.det[a]=1
+            if(game.det[a]>0){
+                game.det[a]--
+            }
             //game.det[a]=floor(random(0,60))
         }
     }

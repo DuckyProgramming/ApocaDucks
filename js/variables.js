@@ -15,7 +15,7 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
-  anyPrimary:false,anySecondary:false,classPick:[],
+  anyPrimary:false,anySecondary:false,classPick:[3,5,5],
   teamSpawn:false,spectateSpawn:[false,false],
   speedArena:false,speedArenaKey:0,pvpPoint:false,
   /*

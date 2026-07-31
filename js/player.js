@@ -3537,7 +3537,7 @@ class player{
                     )&&
                     !((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480&&!this.assort.intel)&&
                     !((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&
-                    !((weaponType==1140||weaponType==1144||weaponType==1145||weaponType==1146||weaponType==1148)&&this.assort.firingTick<2/3)&&
+                    !((weaponType==1140||weaponType==1144||weaponType==1145||weaponType==1146||weaponType==1148||weaponType==1149)&&this.assort.firingTick<2/3)&&
                     !(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1122&&this.assort.firingTick<3/9)&&
                     !(weaponType==1030&&this.assort.firingTick<1/3)
                 ){
