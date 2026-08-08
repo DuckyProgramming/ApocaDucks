@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3,3],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[9,9],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,20 +15,23 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
+        game.players=1
         game.gaming=1
-        game.level=117
+        game.level=49
         /*
         8 - normandy
         41 - speleo dm
         47 - big data ad
+        49 - rusted ad
         65 - tailwater 5cp
+        83 - railing ad
         88 - sulfite koth
         94 - confines 7cp
         100 - ferrum ad
         101 - ferrum pvp
         117 - aerial 2 dm
-        131 - lisp
+        120 - alloy 2 dm
+        131 - lisp ad
         134 - bluefort micro ctf
         136 - normanDBZ
         */
@@ -36,7 +39,7 @@ function setup(){
         updateRules()
         game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
         if(true){
-            game.mission=findName(`Duck Time Deluxe`,types.mission)
+            game.mission=findName(`Duck Termination`,types.mission)
             //game.mission=findName(`Duck's Drill`,types.mission)
             formMission(types.mission[game.mission].wave,0)
         }else{
@@ -55,11 +58,11 @@ function setup(){
         }
         //display.cycle=0
         //newWave()
-        game.weapon=[[findName('PlayerRandomDemoman',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
-        game.weaponTick=[0]
+        game.weapon=[[findName('PlayerRandomDemoman',types.player)],[findName('PlayerRandomDemoman',types.player)],[findName('PlayerRandomDemoman',types.player)],[findName('PlayerRandomDemoman',types.player)]]//[[floor(random(findName('PlayerScout',types.player),findName('PlayerGun',types.player)))]]
+        game.weaponTick=[0,0,0,0]
         newLoop()
         stage.scene='main'
-        //dev.sight=true
+        dev.sight=true
         //game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))

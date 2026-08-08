@@ -1,4 +1,37 @@
 
+1165 - sidekick c, 857
+
+
+
+
+1151 - mini shotgun c, 944
+1152 - assault rifle w, 965
+1153 - bayonet rifle, 965
+1154 - smoke bomb, 1027
+1155 - bowling ball, 793
+1156 - scatter sniper c, 819
+1157 - bushwack c, 937
+1158 - escape plan, 937
+1159 - adrenaline c, 699
+1160 - crowbar, 937
+1161 - shoulder rocket, 3
+1162 - pistol q, 967, 46
+1163 - random insurgent, 898
+1164 - insurgent w, 1004
+
+484 - smoke bomb, 475, 48
+485 - bowling ball, 431, 462
+486 - bushwack c, 400
+487 - escape plan, 400 (no side effect melee)
+488 - crowbar, 400
+489 - shoulder rocket, 2
+490 - ied c, 235, 438
+491 - bayonet, 363
+492 - pistol q, 1, 20
+
+
+
+
 
 
 1143 - push sniper, 969, 888

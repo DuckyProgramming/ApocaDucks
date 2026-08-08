@@ -24,7 +24,8 @@ function setupRules(){
 				a==417||a==425||a==430||a==435||a==438||
                 a==445||a==447||a==448||a==450||a==457||
                 a==458||a==462||a==466||a==469||a==473||
-                a==474||a==475||a==482,
+                a==474||a==475||a==482||a==484||a==489||
+                a==490,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -36,7 +37,7 @@ function setupRules(){
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
-                a==466||a==469||a==482,
+                a==466||a==469||a==482||a==489,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -74,7 +75,8 @@ function setupRules(){
 				a==404||a==413||a==416||a==417||a==425||
                 a==431||a==435||a==437||a==438||a==447||
                 a==448||a==450||a==457||a==458||a==462||
-                a==468||a==472||a==473||a==474||a==475,
+                a==468||a==472||a==473||a==474||a==475||
+                a==484||a==485||a==490,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -99,7 +101,7 @@ function setupRules(){
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
-                a!=457&&a!=470,
+                a!=457&&a!=470&&a!=490,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -142,10 +144,11 @@ function setupRules(){
 				a==390||a==391||a==392||a==412||a==413||
 				a==417||a==425||a==430||a==435||a==445||
                 a==447||a==448||a==450||a==457||a==458||
-                a==462||a==469||a==471||a==474||a==475,
+                a==462||a==469||a==471||a==474||a==475||
+                a==485||a==489,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
-				a==398,
+				a==398||a==484,
 			fader3:a==190||a==191||a==214||a==255||a==256||
 				a==257||a==265||a==300||a==365||a==470,
             fader4:a==280||a==316||a==326||a==433||a==481,
@@ -412,7 +415,9 @@ function mergeNumbers2(left,right){
 	return [...result,...left,...right]
 }
 function cutName(name){
-    return name.substr(name.length-3,name.length).localeCompare(' WC')==0?name.substr(0,name.length-3):name.substr(name.length-2,name.length).localeCompare(' C')==0||name.substr(name.length-2,name.length).localeCompare(' W')==0?name.substr(0,name.length-2):name
+    return name.substr(name.length-3,name.length).localeCompare(' WC')==0?name.substr(0,name.length-3):
+        name.substr(name.length-2,name.length).localeCompare(' C')==0||name.substr(name.length-2,name.length).localeCompare(' W')==0||name.substr(name.length-2,name.length).localeCompare(' Q')==0?name.substr(0,name.length-2):
+        name
 }
 function shuffleArray(array){
     let base=array.slice()
@@ -11007,7 +11012,8 @@ function formMission(wave,type){
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
-                ['BigDeflectorMachineGun',4],
+                ['BigMachineGunSpawner',4],
+                //['BigDeflectorMachineGun',4],
             ]))
             wave[0].push(randin([
                 ['TankRegen',2],
@@ -11366,15 +11372,15 @@ function setupLists(){
     listing[4]=[
         [
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergun`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunW`],
-            [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerMolotov`],
+            [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistol`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerLegalLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`],
-            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerPainTrain`,`PlayerRocketJumpC`],
+            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
+            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerRocketJumpC`,`PlayerEscapePlan`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshotC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSword`,`PlayerDaydrinkerC`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncher`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerHeavySword`,`PlayerDaydrinkerC`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
@@ -11387,16 +11393,21 @@ function setupLists(){
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
             [`PlayerDonutC`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
-            [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerScatterSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`],
-            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerBushwack`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`],
+            [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`],
+            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
             [`PlayerKnife`,`PlayerElectricChair`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
+            [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`],
+            //+5
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`],
+            //+1
+        ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],
-        ],
+        ],*/
     ]
     if(game.anyPrimary){
         let pooled=[]
@@ -11423,9 +11434,9 @@ function outPlayers(){
 function outPlayersSub(){
     entities.players.forEach(player=>{if(player.rules.classW){print(`${player.playerData.name}: (${player.subWeaponAData.name}: ${round(player.stats.subDamage[player.subWeaponA.id])} Damage, ${player.subWeaponBData.name}: ${round(player.stats.subDamage[player.subWeaponB.id])} Damage)`)}})
 }
-function outKD(){
+function outKD(bypass){
     entities.players.forEach(player=>{
-        if(player.effectiveId()<=game.gaming){
+        if(player.effectiveId()<=game.gaming||bypass){
             let weapon=[]
             let data=[]
             weapon[player.subWeaponA.id]=player.subWeaponA

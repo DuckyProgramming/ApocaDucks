@@ -9487,8 +9487,15 @@ player.prototype.logic=function(){
             if(this.target.point==-1||floor(random(0,300))==0||this.life<=0||this.id==0&&this.target.point>=0&&entities.players[game.players+[0,1,2,3,4][this.target.point]].id==0||this.target.point>=0&&dist(this.position.x,this.position.y,entities.players[game.players+[0,1,2,3,4][this.target.point]].position.x,entities.players[game.players+[0,1,2,3,4][this.target.point]].position.y)<300){
                 let possible=[]
                 for(let a=0,la=game.point.length;a<la;a++){
-                    if((game.point[a]!=0||this.id>0)&&!(this.id==0&&(this.base.position.x<game.edge[0]*0.5&&(a==1||a==4)||this.base.position.x>game.edge[0]*0.5&&(a==0||a==3)))){
+                    if(a!=2&&(game.point[a]!=0||this.id>0)&&!(this.id==0&&(this.base.position.x<game.edge[0]*0.5&&(a==1||a==4)||this.base.position.x>game.edge[0]*0.5&&(a==0||a==3)))){
                         possible.push(a)
+                    }
+                }
+                if(possible.length==0){
+                    for(let a=0,la=game.point.length;a<la;a++){
+                        if((game.point[a]!=0||this.id>0)&&!(this.id==0&&(this.base.position.x<game.edge[0]*0.5&&(a==1||a==4)||this.base.position.x>game.edge[0]*0.5&&(a==0||a==3)))){
+                            possible.push(a)
+                        }
                     }
                 }
                 if(possible.length==0){

@@ -1137,7 +1137,7 @@ function mainloop(){
                                 special=true
                             }
                         }
-                    }else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=60){
+                    }else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
                         center=entities.players[c].getSpectate()
                         side=false
                         down=false
@@ -1681,7 +1681,7 @@ function mainloop(){
                             }
                         }
                     }
-                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=60){
+                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
                         center=entities.players[c].getSpectate()
                         if(center!=entities.players[c]){
                             let fail=game.spectateSpawn[0]&&game.spectateSpawn[1]&&!entities.players[c].getSpectateSafe(center)
@@ -1693,13 +1693,13 @@ function mainloop(){
                 }
                 for(let c=0,lc=game.gaming;c<lc;c++){
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if(entities.projectiles[a].type==48){
+                        if(entities.projectiles[a].type==48||entities.projectiles[a].type==484){
                             entities.projectiles[a].displayOver(graphics.main[c])
                         }
                     }
                 }
                 for(let a=0,la=graphics.main.length;a<la;a++){
-                    if(!(entities.players[a].life<=0&&entities.players[a].die.objectiveTimer>=60)){
+                    if(!(entities.players[a].life<=0&&entities.players[a].die.objectiveTimer>=constants.spectate)){
                         entities.players[a].displayOver(graphics.main[a])
                     }
                 }

@@ -15,9 +15,9 @@ game={
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,instantWave:true,
   diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
-  anyPrimary:false,anySecondary:false,classPick:[3,5,5],
+  anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
-  speedArena:false,speedArenaKey:0,pvpPoint:false,
+  speedArena:false,speedArenaKey:2,pvpPoint:false,
   /*
   spectateSpawn
   0 - enables spawning on teammates
@@ -27,6 +27,7 @@ game={
   speedArenaKey
   0 - normal
   1 - heal on kill
+  2 - regen on kill
   */
   projClump:[],disable:[],
   /*
@@ -6847,6 +6848,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:897,
       desc:'Selects a random spy variant',dpsBuff:0,
     },{
+      name:'PlayerRandomInsurgent',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1163,
+      desc:'Selects a random insurgent variant',dpsBuff:0,
+    },{
       name:'PlayerRandomDroner',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:898,
       desc:'Selects a random droner variant',dpsBuff:0,
@@ -6919,6 +6924,10 @@ types={
       name:'PlayerSpyW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1003,
       desc:'Has a revolver and a knife and can become invisible',dpsBuff:0,
+    },{
+      name:'PlayerInsurgentW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1164,
+      desc:'Has an assault rifle and pistol, and drops an IED on death',dpsBuff:0,
     },{
       name:'PlayerDronerW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1004,
@@ -7467,6 +7476,9 @@ types={
       name:'PlayerSword',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:702,
     },{
+      name:'PlayerHeavySword',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.2,reloadBuff:1.25,crit:0,weapon:702,
+    },{
       name:'PlayerHealthPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:703,
     },{
@@ -7557,6 +7569,9 @@ types={
       name:'PlayerLightUzi',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:511,
     },{
+      name:'PlayerMediumUzi',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:511,
+    },{
       name:'PlayerOverhealPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:761,
     },{
@@ -7624,7 +7639,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:802,
     },{
       name:'PlayerPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:813,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:813,
     },{
       name:'PlayerMinibomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:814,
@@ -7636,7 +7651,7 @@ types={
       damageBuff:1,reloadBuff:2.5,crit:0,weapon:816,
     },{
       name:'PlayerPistolWhip',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:817,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:817,
     },{
       name:'PlayerTransmission',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1.375,crit:0,weapon:818,
@@ -7894,10 +7909,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:966,
     },{
       name:'PlayerPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:967,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:967,
     },{
       name:'PlayerPushPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:978,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:978,
     },{
       name:'PlayerAirshot',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:972,
@@ -8120,7 +8135,7 @@ types={
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:1101,
     },{
       name:'PlayerPushPistolC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1110,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1110,
     },{
       name:'PlayerPrimer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1,crit:0,weapon:1112,
@@ -8189,7 +8204,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1136,
     },{
       name:'PlayerSnapPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5625,reloadBuff:1,crit:0,weapon:1137,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1137,
     },{
       name:'PlayerGustC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:1138,
@@ -8229,6 +8244,42 @@ types={
     },{
       name:'PlayerWingSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1150,
+    },{
+      name:'PlayerAssaultRifleW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1152,
+    },{
+      name:'PlayerBayonetRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1153,
+    },{
+      name:'PlayerSmokeBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1154,
+    },{
+      name:'PlayerBowlingBall',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1155,
+    },{
+      name:'PlayerScatterSniperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.6,crit:0,weapon:1156,
+    },{
+      name:'PlayerBushwackC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1157,
+    },{
+      name:'PlayerEscapePlan',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1158,
+    },{
+      name:'PlayerAdrenalineC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1159,
+    },{
+      name:'PlayerCrowbar',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1160,
+    },{
+      name:'PlayerShoulderRocket',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1161,
+    },{
+      name:'PlayerPistolQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1162,
+    },{
+      name:'PlayerSidekickC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1165,
     },
 
     //mark c
@@ -8362,6 +8413,9 @@ types={
     },{
       name:'ConstructConfuser',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1116,
+    },{
+      name:'ConstructMiniShotgunC',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1151,
     },
     
     {
@@ -8568,6 +8622,9 @@ types={
     },{
       name:'SidekickGunHybrid',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:660,
+    },{
+      name:'SidekickAssaultRifleW',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1152,
     },
 
     {
@@ -17813,9 +17870,9 @@ types={
 			name:'Baseball',
 			ammo:1,
 			damage:180,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:90,
+			stop:90,
+			reload:90,
 			speed:1.05,
       uses:18,
 		},{
@@ -18002,9 +18059,9 @@ types={
 			name:'Minibomb',
 			ammo:1,
 			damage:120,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:12,
 		},{
@@ -18307,10 +18364,10 @@ types={
 		},{
 			name:'Stargrazer',
 			ammo:1,
-			damage:50,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			damage:60,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:12,
 		},{
@@ -18866,9 +18923,9 @@ types={
 			name:'Anthrax',
 			ammo:1,
 			damage:60,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:12,
 		},{
@@ -19442,9 +19499,9 @@ types={
 			name:'Molotov',
 			ammo:1,
 			damage:160,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:12,
 		},{
@@ -19505,9 +19562,9 @@ types={
 			name:'Scorch Shot',
 			ammo:1,
 			damage:120,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:0.85,
       uses:8,
 		},{
@@ -19559,9 +19616,9 @@ types={
 			name:'Hunt Sniper',
 			ammo:1,
 			damage:260,
-			cooldown:150,
-			stop:150,
-			reload:150,
+			cooldown:120,
+			stop:120,
+			reload:120,
 			speed:0.85,
       uses:8,
 		},{
@@ -19982,9 +20039,9 @@ types={
 			name:'Detonator C',
 			ammo:1,
 			damage:125,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:0.85,
       uses:8,
 		},
@@ -20019,13 +20076,13 @@ types={
       uses:10,
 		},{
 			name:'Wrench',
-			ammo:5,
+			ammo:12,
 			damage:120,
 			cooldown:36,
 			stop:60,
 			reload:20,
 			speed:1.4,
-      uses:20,
+      uses:48,
 		},{
 			name:'Dispenser WC',
 			ammo:8,
@@ -20282,18 +20339,18 @@ types={
 			name:'Freeze Shot',
 			ammo:1,
 			damage:120,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:0.85,
       uses:8,
 		},{
 			name:'Minibomb C',
 			ammo:1,
 			damage:120,
-			cooldown:105,
-			stop:105,
-			reload:105,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:12,
 		},{
@@ -20407,7 +20464,7 @@ types={
 		},{
 			name:'Minigun C',
 			ammo:36,
-			damage:75,
+			damage:80,
 			cooldown:5,
 			stop:180,
 			reload:2,
@@ -20416,7 +20473,7 @@ types={
 		},{
 			name:'Firework Minigun',
 			ammo:24,
-			damage:75,
+			damage:80,
 			cooldown:7,
 			stop:210,
 			reload:2,
@@ -20425,7 +20482,7 @@ types={
 		},{
 			name:'Recoil Minigun',
 			ammo:36,
-			damage:75,
+			damage:80,
 			cooldown:5,
 			stop:180,
 			reload:2,
@@ -20452,7 +20509,7 @@ types={
 		},{
 			name:'Shield Minigun',
 			ammo:30,
-			damage:75,
+			damage:80,
 			cooldown:5,
 			stop:240,
 			reload:2,
@@ -20467,6 +20524,141 @@ types={
 			reload:3,
 			speed:1.15,
       uses:30,
+		},{
+			name:'Mini Shotgun C',
+			ammo:2,
+			damage:30,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1,
+      uses:12,
+		},{
+			name:'Assault Rifle W',
+			ammo:24,
+			damage:55,
+			cooldown:18,
+			stop:108,
+			reload:48,
+			speed:1.1,
+      uses:72,
+		},{
+			name:'Bayonet Rifle',
+			ammo:24,
+			damage:55,
+			cooldown:18,
+			stop:144,
+			reload:48,
+			speed:1.1,
+      uses:72,
+		},{
+			name:'Smoke Bomb',
+			ammo:1,
+			damage:80,
+			cooldown:108,
+			stop:108,
+			reload:108,
+			speed:1.05,
+      uses:12,
+		},{
+			name:'Bowling Ball',
+			ammo:1,
+			damage:180,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Scatter Sniper W',
+			ammo:2,
+			damage:320,
+			cooldown:15,
+			stop:135,
+			reload:5,
+			speed:0.85,
+      uses:12,
+		},{
+			name:'Bushwack C',
+			ammo:10,
+      damage:120,
+			cooldown:36,
+			stop:60,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Escape Plan',
+			ammo:10,
+			damage:120,
+			cooldown:36,
+			stop:60,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Adrenaline',
+			ammo:1,
+			damage:0,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:1.3,
+      uses:2,
+		},{
+			name:'Crowbar',
+			ammo:12,
+			damage:120,
+			cooldown:36,
+			stop:60,
+			reload:20,
+			speed:1.4,
+      uses:48,
+		},{
+			name:'Shoulder Rocket',
+			ammo:1,
+			damage:600,
+			cooldown:20,
+			stop:120,
+			reload:0,
+			speed:0.8,
+      uses:6,
+		},{
+			name:'Pistol Q',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:75,
+			reload:6,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Random Insurgent',
+			ammo:1,
+			damage:0,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1,
+      uses:1,
+		},{
+			name:'Insurgent W',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:6,
+		},{
+			name:'Reinforcements C',
+			ammo:1,
+			damage:500,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:1.05,
+      uses:3,
 		},
 
     /*{
@@ -20498,7 +20690,7 @@ graphics={main:[],overlay:[],pane:[],panePoint:[],key:[],gradient:[]}
 entities={projectiles:[],players:[],walls:[]}
 deployer={spawn:[],timer:0,speed:0,position:0,interval:0,artillery:[1200,1200,1200,1200],flip:false}
 run={fore:[],info:[],back:[]}
-constants={trig:[[],[]]}
+constants={trig:[[],[]],spectate:90}
 inputs={
   mouse:{x:0,y:0},rel:{x:0,y:0},
   keys:[
