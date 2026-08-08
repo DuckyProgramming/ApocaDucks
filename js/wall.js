@@ -13644,7 +13644,7 @@ class wall{
                                     if(c.bounces>=2){
                                         c.stop=true
                                     }
-                                }else if((c.type==344||c.type==474)&&c.active){
+                                }else if((c.type==344||c.type==474||c.type==493)&&c.active){
                                     c.damage*=0.5
                                     c.fail=true
                                     c.explode()
@@ -13712,7 +13712,7 @@ class wall{
                                     c.time-=30
                                 }else if(c.type==404&&d>=2){
                                     c.attack=0
-                                }else if((c.type==413||c.type==490)&&c.bounceTimer==0){
+                                }else if(c.type==413&&c.bounceTimer==0){
                                     if(c.bounces==0){
                                         c.detTime=60
                                     }
@@ -13753,6 +13753,19 @@ class wall{
                                     c.bounceTimer=5
                                     c.velocity.x*=0.8
                                     c.velocity.y*=(c.velocity.y>0?0.9:0.8)
+                                    /*if(c.bounces>=6){
+                                        c.explode()
+                                        c.active=false
+                                    }*/
+                                }else if((c.type==490||c.type==495||c.type==496)&&c.bounceTimer==0){
+                                    if(c.bounces==0){
+                                        c.detTime=60
+                                    }
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    let mult=random(0.25,0.5)
+                                    c.velocity.x*=mult
+                                    c.velocity.y*=mult*(c.velocity.y>0?2:1)
                                     /*if(c.bounces>=6){
                                         c.explode()
                                         c.active=false

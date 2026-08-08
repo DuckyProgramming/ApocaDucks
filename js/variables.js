@@ -8280,6 +8280,27 @@ types={
     },{
       name:'PlayerSidekickC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1165,
+    },{
+      name:'PlayerMortarRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1166,
+    },{
+      name:'PlayerDrone',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1167,
+    },{
+      name:'PlayerIEDC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1168,
+    },{
+      name:'PlayerReinforcement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1169,
+    },{
+      name:'PlayerNailBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1170,
+    },{
+      name:'PlayerChlorineBomb',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1171,
+    },{
+      name:'PlayerDonutW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1172,
     },
 
     //mark c
@@ -20659,6 +20680,69 @@ types={
 			reload:720,
 			speed:1.05,
       uses:3,
+		},{
+			name:'Mortar Rifle',
+			ammo:12,
+			damage:55,
+			cooldown:18,
+			stop:108,
+			reload:48,
+			speed:1.1,
+      uses:48,
+		},{
+			name:'Drone',
+			ammo:1,
+			damage:320,
+			cooldown:216,
+			stop:216,
+			reload:216,
+			speed:1.05,
+      uses:12,
+		},{
+			name:'IED C',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Reinforcement',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Nail Bomb',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Chlorine Bomb',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Donut W',
+			ammo:3,
+			damage:120,
+			cooldown:36,
+			stop:90,
+			reload:20,
+			speed:0.975,
+      uses:18,
 		},
 
     /*{

@@ -25,9 +25,9 @@ function setupRules(){
                 a==445||a==447||a==448||a==450||a==457||
                 a==458||a==462||a==466||a==469||a==473||
                 a==474||a==475||a==482||a==484||a==489||
-                a==490,
+                a==490||a==493||a==494||a==495||a==496,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
-                a==353||a==412||a==482,
+                a==353||a==412||a==482||a==493,
 			rocket:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==41||a==45||a==47||
 				a==48||a==53||a==54||a==55||a==56||
@@ -37,7 +37,7 @@ function setupRules(){
 				a==307||a==308||a==313||a==336||a==351||
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
-                a==466||a==469||a==482||a==489,
+                a==466||a==469||a==482||a==489||a==494,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -76,7 +76,8 @@ function setupRules(){
                 a==431||a==435||a==437||a==438||a==447||
                 a==448||a==450||a==457||a==458||a==462||
                 a==468||a==472||a==473||a==474||a==475||
-                a==484||a==485||a==490,
+                a==484||a==485||a==490||a==493||a==495||
+                a==496,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -90,7 +91,7 @@ function setupRules(){
 				a==174||a==185||a==192||a==196||a==197||
 				a==198||a==199||a==234||a==236||a==253||
 				a==269||a==274||a==278||a==294||a==299||
-				a==309||a==333||a==334||a==439,
+				a==309||a==333||a==334||a==439||a==497,
 			fast:a==4||a==14||a==39||a==50||a==57||
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
@@ -101,7 +102,7 @@ function setupRules(){
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
-                a!=457&&a!=470&&a!=490,
+                a!=457&&a!=470&&a!=490&&a!=495&&a!=496,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -145,13 +146,14 @@ function setupRules(){
 				a==417||a==425||a==430||a==435||a==445||
                 a==447||a==448||a==450||a==457||a==458||
                 a==462||a==469||a==471||a==474||a==475||
-                a==485||a==489,
+                a==485||a==489||a==490||a==493||a==495,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
 			fader3:a==190||a==191||a==214||a==255||a==256||
 				a==257||a==265||a==300||a==365||a==470,
-            fader4:a==280||a==316||a==326||a==433||a==481,
+            fader4:a==280||a==316||a==326||a==433||a==481||
+                a==494||a==496,
             hitstack:a==91||a==92||a==93||a==96||a==108||
                 a==192||a==203||a==204||a==207||a==208||
                 a==237||a==238||a==239||a==275||a==296||
@@ -160,13 +162,13 @@ function setupRules(){
                 a==72||a==82||a==155||a==273||a==345||
                 a==350||a==357||a==364||a==378||a==396||
                 a==409||a==418||a==434||a==436||a==439||
-                a==449||a==456||a==463||a==464,
+                a==449||a==456||a==463||a==464||a==497,
             medTarget:a==9||a==10||a==11||a==38||a==63||
 				a==72||a==82||a==155||a==194||a==273||
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
                 a==439||a==449||a==456||a==463||a==464||
-                a==479,
+                a==479||a==497,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367&&a!=463&&a!=464,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -11391,7 +11393,7 @@ function setupLists(){
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
-            [`PlayerDonutC`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
+            [`PlayerDonutW`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
             [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
@@ -11400,10 +11402,9 @@ function setupLists(){
             [`PlayerKnife`,`PlayerElectricChair`,`PlayerClusterBomb`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
-            [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`],
-            //+5
-            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`],
-            //+1
+            [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDrone`],
+            [`PlayerIEDC`,`PlayerReinforcement`,`PlayerNailBomb`,`PlayerChlorineBomb`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],

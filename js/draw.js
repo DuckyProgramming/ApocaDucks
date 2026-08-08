@@ -1103,13 +1103,15 @@ function mainloop(){
                                 special=true
                             }
                         }
-                    }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].assort.missile){
+                    }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].playerData.name=='PlayerInsurgentW'||entities.players[c].assort.missile){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316)&&entities.projectiles[a].id==entities.players[c].id){
+                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494)&&entities.projectiles[a].id==entities.players[c].id){
                                 center=entities.projectiles[a]
                                 a=la
                                 special=true
-                                key[c]*=(game.level==7?1.5:game.players>=3?3:2)
+                                if(entities.projectiles[a].type==280||entities.projectiles[a].type==316){
+                                    key[c]*=(game.level==7?1.5:game.players>=3?3:2)
+                                }
                             }
                         }
                     }else if(entities.players[c].playerData.name=='PlayerRemoteControl'||entities.players[c].assort.remote){
