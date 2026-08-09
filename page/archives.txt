@@ -6,12 +6,14 @@
 1170 - nail bomb, ''
 1171 - chlorine bomb, ''
 1172 - donut w, 1022
+1173 - drone c, 275
 
 493 - rifle pipe, 98, 344
 494 - drone, 280
 495 - nail bomb, 490
 496 - chlorine bomb, 490
 497 - donut w, 439
+498 - drone c, 163
 
 
 

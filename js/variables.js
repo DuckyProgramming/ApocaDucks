@@ -48,7 +48,7 @@ game={
           ['Abandoned','Identify','Divider','Rocksalt'],
           ['Bluefort','Bluefort Mini','Bluefort Micro','Railing'],
           ['Burnt','Confines','Ferrum','Cysteine'],
-          ['Bluestone','Lisp'],
+          ['Bluestone','Lisp',`NormanDBZ`],
       ],[
           ['DoubleMountain','Steel','Sulfate','Process'],
           ['Downward','Sierra Leone','Fragile','NuclearMountain'],
@@ -7566,10 +7566,10 @@ types={
       name:'PlayerPickupSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:759,
     },{
-      name:'PlayerLightUzi',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      name:'PlayerLightUzi',sizeBuff:1,lifeBuff:4,speedBuff:0.75,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:511,
     },{
-      name:'PlayerMediumUzi',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      name:'PlayerMediumUzi',sizeBuff:1,lifeBuff:4,speedBuff:0.75,
       damageBuff:0.8,reloadBuff:1,crit:0,weapon:511,
     },{
       name:'PlayerOverhealPack',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -8301,6 +8301,9 @@ types={
     },{
       name:'PlayerDonutW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1172,
+    },{
+      name:'PlayerDroneC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1173,
     },
 
     //mark c
@@ -8646,6 +8649,15 @@ types={
     },{
       name:'SidekickAssaultRifleW',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1152,
+    },{
+      name:'SidekickBayonetRifle',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1153,
+    },{
+      name:'SidekickMortarRifle',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1166,
+    },{
+      name:'SidekickMediumUzi',sizeBuff:0.8,lifeBuff:2,speedBuff:11/15,
+      damageBuff:0.8,reloadBuff:1,crit:0,weapon:511,
     },
 
     {
@@ -20743,6 +20755,15 @@ types={
 			reload:20,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Drone C',
+			ammo:1,
+			damage:300,
+			cooldown:216,
+			stop:216,
+			reload:216,
+			speed:1.05,
+      uses:4,
 		},
 
     /*{

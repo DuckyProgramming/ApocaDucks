@@ -1109,6 +1109,18 @@ class projectile{
 				this.time=time
 				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)-2}
 			break
+			case 498:
+				this.speed=1
+				this.time=time
+				this.pivot=false
+				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)}
+				this.initialVelocity={x:this.velocity.x,y:this.velocity.y}
+				this.midpoint={position:{x:this.position.x,y:this.position.y}}
+				this.width*=2
+				this.height*=2
+				this.goal=-1
+				this.fail=false
+			break
 			
 		}
 		this.timer=0
@@ -7893,26 +7905,35 @@ class projectile{
 				}
 			break
 			case 494:
+				let fade494=2*this.fade-1
 				layer.rotate(atan2(this.velocity.x,-this.velocity.y)-this.direction)
-				layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
+				layer.fill(240-this.crit*200,240,40+this.crit*200,fade494)
 				layer.rect(0,6,1,12)
-				layer.fill(240-this.crit*200,160,40+this.crit*200,(6*this.fade-5))
+				layer.fill(240-this.crit*200,160,40+this.crit*200,fade494)
 				layer.rect(0,4.5,1,9)
-				layer.fill(240-this.crit*200,80,40+this.crit*200,(6*this.fade-5))
+				layer.fill(240-this.crit*200,80,40+this.crit*200,fade494)
 				layer.rect(0,3,1,6)
-				layer.fill(120,120+this.crit*200,120+this.crit*200,(6*this.fade-5))
+				layer.fill(120,120+this.crit*200,120+this.crit*200,fade494)
 				layer.ellipse(0,0,6,20)
-				layer.fill(100,100+this.crit*200,100+this.crit*200,(6*this.fade-5))
+				layer.fill(100,100+this.crit*200,100+this.crit*200,fade494)
 				layer.ellipse(0,0,4,16)
-				layer.fill(225,125,25,(6*this.fade-5))
+				layer.fill(225,125,25,fade494)
 				layer.ellipse(0,0,4)
-				if(!this.active&&this.fade<1&&6*this.fade-5>0){
+				/*if(!this.active&&this.fade<1&&6*this.fade-5>0){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
 					layer.ellipse(0,0,195-(6*this.fade-5)*195)
 					layer.fill(240-this.crit*200,160,40+this.crit*200,(6*this.fade-5))
 					layer.ellipse(0,0,130-(6*this.fade-5)*130)
 					layer.fill(240-this.crit*200,80,40+this.crit*200,(6*this.fade-5))
 					layer.ellipse(0,0,65-(6*this.fade-5)*65)
+				}*/
+				if(!this.active&&this.fade<1&&fade494>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,fade494)
+					layer.ellipse(0,0,270-fade494*270)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,fade494)
+					layer.ellipse(0,0,180-fade494*180)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,fade494)
+					layer.ellipse(0,0,90-fade494*90)
 				}
 			break
 			case 495:
@@ -7958,6 +7979,38 @@ class projectile{
 				layer.rect(0,0,6,6,1.5)
 				layer.fill(75-this.crit*75,175+this.crit*75,25+this.crit*200,this.fade*6-5)
 				layer.rect(0,0,4,2,0.5)
+			break
+			case 498:
+				let fade498=2*this.fade-1
+				layer.rotate(-this.direction)
+				layer.fill(220,220+this.crit*50,220+this.crit*50,fade498)
+				layer.rect(0,0,16,6,2)
+				layer.rect(-6,-4,1,2)
+				layer.rect(6,-4,1,2)
+				layer.ellipse(-6+2*lsin(this.time*9),-5,4*lsin(this.time*9),1.5)
+				layer.ellipse(-6-2*lsin(this.time*9),-5,4*lsin(this.time*9),1.5)
+				layer.ellipse(6+2*lsin(this.time*9),-5,4*lsin(this.time*9),1.5)
+				layer.ellipse(6-2*lsin(this.time*9),-5,4*lsin(this.time*9),1.5)
+				layer.fill(200,200+this.crit*50,200+this.crit*50,fade498)
+				layer.rect(0,0,14,4,2)
+				layer.fill(225,125,25,fade498)
+				layer.rect(0,0,12*this.time/this.base.time,2,1)
+				/*if(!this.active&&this.fade<1&&6*this.fade-5>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,195-(6*this.fade-5)*195)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,130-(6*this.fade-5)*130)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,(6*this.fade-5))
+					layer.ellipse(0,0,65-(6*this.fade-5)*65)
+				}*/
+				if(!this.active&&this.fade<1&&fade498>0){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,fade498)
+					layer.ellipse(0,0,(270-fade498*270)*(this.fail?0.25:1))
+					layer.fill(240-this.crit*200,160,40+this.crit*200,fade498)
+					layer.ellipse(0,0,(180-fade498*180)*(this.fail?0.25:1))
+					layer.fill(240-this.crit*200,80,40+this.crit*200,fade498)
+					layer.ellipse(0,0,(90-fade498*90)*(this.fail?0.25:1))
+				}
 			break
 
 			//mark
@@ -9296,12 +9349,15 @@ class projectile{
 					}
 				}
 			break
-			case 494:
-				radius=100
+			case 494: case 498:
+				//radius=100
+				//radius=135
+				radius=120
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/radius))
+						//entities.players[b].takeDamage(this.damage*(1-c/radius))
+						entities.players[b].takeDamage(this.damage*sqrt(1-c/radius))
 						entities.players[b].generalizedTake(this)
 					}
 				}
@@ -9380,6 +9436,8 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,3)
 		}else if(this.type==446||this.type==477||this.type==478){
 			this.fade-=0.25
+		}else if(this.type==494||this.type==498){
+			this.fade=smoothAnim(this.fade,this.active,0,1,30)
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
 		}
@@ -11779,12 +11837,14 @@ class projectile{
 					if(!this.active){
 						this.speed*=0.9
 					}
-				    this.velocity.x+=this.speed*lsin(this.direction)*0.05
-				    this.velocity.y-=this.speed*lcos(this.direction)*0.05
+				    this.velocity.x+=this.speed*lsin(this.direction)*0.04
+				    this.velocity.y-=this.speed*lcos(this.direction)*0.04
 					this.position.x+=this.velocity.x
 					this.position.y+=this.velocity.y
 					this.velocity.x*=0.95
+					//this.velocity.x*=0.96
 					this.velocity.y*=0.95
+					//this.velocity.y*=0.96
 					this.velocity.y+=0.05
 					if(!this.active){
 						this.velocity.x*=0.75
@@ -11794,13 +11854,89 @@ class projectile{
 						this.direction+=this.angularVelocity
 						let inputSet=this.id==0||((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)>game.gaming?[false,false]:inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
 						if(inputSet[0]){
-							this.angularVelocity-=0.3
+							this.angularVelocity-=0.4
 						}
 						if(inputSet[1]){
-							this.angularVelocity+=0.3
+							this.angularVelocity+=0.4
 						}
 						this.angularVelocity*=0.95
+						//this.angularVelocity*=0.96
 					}
+				break
+				case 498:
+					if(this.active){
+						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+							if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
+								this.active=false
+								this.fail=true
+							}
+						}
+					}
+					if(a==0&&this.active){
+						if(this.id==0||((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)>game.gaming){
+							if(this.goal==-1){
+								this.goal=-1
+								for(let a=0,la=entities.players.length;a<la;a++){
+									if(!this.onTeam(entities.players[a])&&distPos(this,entities.players[a])<200&&entities.players[a].life>0){
+										this.goal=entities.players[a]
+									}
+								}
+								if(this.initialVelocity.x<0){
+									this.velocity.x-=0.2
+								}else{
+									this.velocity.x+=0.2
+								}
+							}else{
+								if(this.goal.life<=0||distPos(this,this.goal)>250){
+									this.goal=-1
+								}else{
+									if(this.position.x>this.goal.position.x+25){
+										this.velocity.x-=0.2
+									}
+									if(this.position.x<this.goal.position.x-25){
+										this.velocity.x+=0.2
+									}
+									if(this.position.y>this.goal.position.y+25){
+										this.velocity.y-=0.2
+									}
+									if(this.position.y<this.goal.position.y-25){
+										this.velocity.y+=0.2
+									}
+								}
+							}
+						}else{
+							let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
+							if(inputSet[0]){
+								this.velocity.x-=0.2
+							}
+							if(inputSet[1]){
+								this.velocity.x+=0.2
+							}
+							if(inputSet[2]){
+								this.velocity.y-=0.2
+							}
+							if(inputSet[3]){
+								if(this.pivot){
+									this.velocity.y+=0.2
+								}
+							}else{
+								this.pivot=true
+							}
+							
+						}
+						this.velocity.x*=0.95
+						this.velocity.y*=0.95
+					}
+					if(!this.active){
+						this.velocity.x*=0.75
+						this.velocity.y*=0.75
+					}
+					if(a==2){
+						this.midpoint.position.x=this.position.x
+						this.midpoint.position.y=this.position.y
+					}
+					this.position.x+=this.velocity.x
+					this.position.y+=this.velocity.y
 				break
 
 				//mark
@@ -11812,6 +11948,7 @@ class projectile{
 			this.active&&this.rules.hitter&&
 			//!((this.type==4||this.type==14||this.type==39||this.type==50||this.type==57||this.type==88||this.type==94||this.type==167||this.type==175||this.type==186||this.type==407||this.type==421)&&this.timer<5&&this.id==0)&&
 			!(this.rules.fast&&this.timer<5&&this.id==0)&&
+			!(this.type==65&&this.id==-1&&this.timer<5)&&
 			!((this.type==98||this.type==450)&&this.timer<15)&&
 			!(this.type==100&&this.timer<3)&&
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
@@ -12314,9 +12451,9 @@ class projectile{
 						target.takeDamage(this.damage)
 					}else if(this.type==48){
 						this.speed=0
-					}else if(this.type==344||this.type==493){
+					}else if(this.type==344){
 						target.takeDamage(this.damage*0.5)
-					}else if(this.type==474){
+					}else if(this.type==474||this.type==493){
 						//this said 477 at some point but that was invalid, idk what it was originally meant for
 						target.takeDamage(this.damage*0.25)
 					}
