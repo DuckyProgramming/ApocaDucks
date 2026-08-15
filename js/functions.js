@@ -1,7 +1,7 @@
 //basic
 function setupRules(){
     types.rules={projectile:[]}
-    for(let a=0,la=500;a<la;a++){
+    for(let a=0,la=600;a<la;a++){
         types.rules.projectile.push({
 			exploder:a==2||a==16||a==21||a==22||a==26||
 				a==27||a==30||a==31||a==32||a==41||
@@ -26,7 +26,7 @@ function setupRules(){
                 a==458||a==462||a==466||a==469||a==473||
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
-                a==498,
+                a==498||a==500,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -79,7 +79,7 @@ function setupRules(){
                 a==448||a==450||a==457||a==458||a==462||
                 a==468||a==472||a==473||a==474||a==475||
                 a==484||a==485||a==490||a==493||a==495||
-                a==496,
+                a==496||a==499||a==500,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -104,12 +104,13 @@ function setupRules(){
 				a!=271&&a!=284&&a!=286&&a!=329&&a!=349&&
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
-                a!=457&&a!=470&&a!=490&&a!=495&&a!=496,
+                a!=457&&a!=470&&a!=490&&a!=495&&a!=496&&
+                a!=500,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
 				a!=337&&a!=398&&a!=427&&a!=433&&a!=481&&
-                a!=483,
+                a!=483&&a!=499,
 			multiHit:a==91||a==92||a==93||a==96||a==108||
 				a==192||a==203||a==204||a==207||a==208||
 				a==237||a==238||a==239||a==275||a==296||
@@ -148,7 +149,7 @@ function setupRules(){
 				a==417||a==425||a==430||a==435||a==445||
                 a==447||a==448||a==450||a==457||a==458||
                 a==462||a==469||a==471||a==474||a==475||
-                a==485||a==489||a==490||a==493||a==495,
+                a==489||a==490||a==493||a==495||a==500,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -276,11 +277,12 @@ function updateRules(){
         spawnTimeMult:(game.level==7?3:1)*
             (game.level==17?2:1)*
             (game.level==27?0.9:1)*
-            (game.level==32||game.level==40||game.level==41?0.875:1)*
+            (game.level==32||game.level==40?0.875:1)*
             (game.level==33||game.level==87?1.25:1)*
             (game.level==34?0.925:1)*
             (game.level==30&&game.spawnIndex<20?0.4:1)*
             //(game.level==40?0.875:1)*
+            (game.level==41?1.125:1)*
             (game.level==47||game.level==70||game.level==84?1.15:1)*
             (game.level==49?1.3:1)*
             (game.level==55?1.125:1)*
@@ -318,6 +320,12 @@ function spy(name){
         name=='SpyRegen'||
         name=='SpySpawner'||
         name=='SpyShield'
+}
+function shotgun(name){
+    return name.includes(`Shotgun`)||
+        name.includes(`Scattergun`)||
+        name==`Peppergun`||
+        name==`Securer`
 }
 function playerColor(owner){
     switch(owner){
@@ -8349,7 +8357,9 @@ function generateLevel(info,layer){
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==31||entities.walls[1][a].type==33||entities.walls[1][a].type==36||entities.walls[1][a].type==42){
                     entities.walls[1][a].pos=[0][ticker]
-                    entities.players[entities.walls[1][a].index].pos=[0][ticker]
+                    if(!duel.trigger||!rules.dm){
+                        entities.players[entities.walls[1][a].index].pos=[0][ticker]
+                    }
                     ticker++
                 }
             }
@@ -8708,6 +8718,8 @@ function generateLevel(info,layer){
                             entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
                             typeList[team].splice(index,1)
                         }
+                    }else{
+                        entities.players[a].newWeapon()
                     }
                     teamTick[team]++
                 }
@@ -9651,6 +9663,8 @@ function generateLevel(info,layer){
                             entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             typeList[team].splice(index,1)
                         }*/
+                    }else{
+                        entities.players[a].newWeapon()
                     }
                 }
                 game.point=game.level==94?[1,2,3,-1,-1,-1,-1]:[1,2,3,-1,-1,-1]
@@ -9928,7 +9942,12 @@ function newWave(){
                     (game.peakWeapon?2:1)*
                     (game.classWeapon?1.2:1)*
                     game.diff
-                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*(game.level==37?pEff*0.1+0.25:game.level==29?pEff*0.1+0.4:game.level==55?pEff*0.175+0.325:pEff*0.25+0.25)*mult);b<lb;b++){
+                let mEff=//game.level==37?pEff*0.1+0.25:
+                    game.level==37?pEff*0.05+0.3:
+                    game.level==29?pEff*0.1+0.4:
+                    game.level==55?pEff*0.175+0.325:
+                    pEff*0.25+0.25
+                for(let b=0,lb=ceil(types.mission[game.mission].wave[display.cycle][a][1]*mEff*mult);b<lb;b++){
                     if(supporting){
                         game.stack.splice(floor(random(0,game.stack.length)),0,[spied?-1:floor(random(0,6))+6,types.mission[game.mission].wave[display.cycle][a][0],0])
                     }else{
@@ -10365,7 +10384,8 @@ Standard Errors: ${se[index]} vs ${se[index2]}
             if(deployer.timer>0){
                 deployer.timer--
             }
-        }else if(game.level==22||game.level==40){
+        //}else if(game.level==22||game.level==40){
+        }else if(game.level==22){
             for(let a=0,la=game.point.length;a<la;a++){
                 if(!game.point[a]&&game.pointAnim[a]<1){
                     game.pointAnim[a]+=1/300
@@ -10420,6 +10440,14 @@ Standard Errors: ${se[index]} vs ${se[index2]}
             }
             if(game.time%6==0&&game.time%3000<1200&&game.time%3000>=900){
                 entities.projectiles.push(new projectile(graphics.main[0],game.edge[0]+50,game.tileset[1]*random(25,35),335,random(-4,4)-90,-1,0.5,2400,false,-1))
+            }
+        }else if(game.level==40||game.level==100){
+            for(let a=0,la=game.point.length;a<la;a++){
+                if(!game.point[a]&&game.pointAnim[a]<1){
+                    game.pointAnim[a]+=1/300
+                }else if(game.point[a]&&game.pointAnim[a]>0){
+                    game.pointAnim[a]-=1/300
+                }
             }
         }else if(game.level==44||game.level==65||game.level==132){
             if(game.respawners[0]>=game.players/8+0.125&&game.point[0]==1){
@@ -10505,14 +10533,6 @@ Standard Errors: ${se[index]} vs ${se[index2]}
             }
             game.respawners[0]=0
             game.respawners[1]=0
-        }else if(game.level==100){
-            for(let a=0,la=game.point.length;a<la;a++){
-                if(!game.point[a]&&game.pointAnim[a]<1){
-                    game.pointAnim[a]+=1/300
-                }else if(game.point[a]&&game.pointAnim[a]>0){
-                    game.pointAnim[a]-=1/300
-                }
-            }
         }else if(game.level==104){
             for(let a=0,la=game.point.length;a<la;a++){
                 if(game.point[a]==0&&game.pointAnim[a]<1){
@@ -10980,12 +11000,15 @@ function generateMission(wave,name){
         let mixer=[]
         while(divide[0]>0){
             let type=floor(random(bar,types.player.length))
+            let skip=floor(random(0,2))==0
             while(
                 types.player[type].lifeBuff<=5||types.player[type].name.includes('Damaged')||types.player[type].name.includes('Boss')||
                 (name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=18)||
-                floor(random(0,2))==0&&(name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=20||types.player[type].name.includes('Splitter'))
+                skip&&(name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=20||types.player[type].name.includes('Splitter'))||
+                skip&&types.player[type].name.includes(`Crit`)
             ){
                 type=floor(random(bar,types.player.length))
+                skip=floor(random(0,2))==0
             }
             let num=floor(random(game.players==1?1:2,min(5,ceil(divide[0]*1.5))))
             mixer.push([types.player[type].name,num])
@@ -10993,12 +11016,15 @@ function generateMission(wave,name){
         }
         while(divide[1]>0){
             let type=floor(random(bar,types.player.length))
+            let skip=floor(random(0,2))==0
             while(
                 types.player[type].lifeBuff>5||types.player[type].name.includes('Damaged')||types.player[type].name.includes('Boss')||
                 (name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=18)||
-                floor(random(0,2))==0&&(name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=20||types.player[type].name.includes('Splitter'))
+                skip&&(name=='Survival Lite'||name=='Survival Lite Hard')&&(types.player[type].name.length>=20||types.player[type].name.includes('Splitter'))||
+                skip&&types.player[type].name.includes(`Crit`)
             ){
                 type=floor(random(bar,types.player.length))
+                skip=floor(random(0,2))==0
             }
             let num=floor(random(2,min(11,ceil(divide[1]*1.5))))
             mixer.push([types.player[type].name,num])
@@ -11445,7 +11471,7 @@ function setupLists(){
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
             [`PlayerDonutW`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
         ],[
-            [`PlayerHeavySniper`,`PlayerBow`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`],
+            [`PlayerHeavySniper`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`,`PlayerBowC`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
@@ -11454,7 +11480,7 @@ function setupLists(){
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
             [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneC`],
-            [`PlayerIEDC`,`PlayerReinforcement`,`PlayerNailBomb`,`PlayerChlorineBomb`],
+            [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],

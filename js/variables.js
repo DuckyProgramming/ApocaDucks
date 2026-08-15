@@ -8304,6 +8304,15 @@ types={
     },{
       name:'PlayerDroneC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1173,
+    },{
+      name:'PlayerRazor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1174,
+    },{
+      name:'PlayerIEDW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1176,
+    },{
+      name:'PlayerBowC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1175,
     },
 
     //mark c
@@ -20568,7 +20577,7 @@ types={
       uses:12,
 		},{
 			name:'Assault Rifle W',
-			ammo:24,
+			ammo:18,
 			damage:55,
 			cooldown:18,
 			stop:108,
@@ -20577,7 +20586,7 @@ types={
       uses:72,
 		},{
 			name:'Bayonet Rifle',
-			ammo:24,
+			ammo:18,
 			damage:55,
 			cooldown:18,
 			stop:144,
@@ -20694,13 +20703,13 @@ types={
       uses:3,
 		},{
 			name:'Mortar Rifle',
-			ammo:12,
+			ammo:9,
 			damage:55,
 			cooldown:18,
 			stop:108,
 			reload:48,
 			speed:1.1,
-      uses:48,
+      uses:45,
 		},{
 			name:'Drone',
 			ammo:1,
@@ -20759,11 +20768,38 @@ types={
 			name:'Drone C',
 			ammo:1,
 			damage:300,
-			cooldown:216,
-			stop:216,
-			reload:216,
+			cooldown:360,
+			stop:360,
+			reload:360,
 			speed:1.05,
       uses:4,
+		},{
+			name:'Razor',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Bow C',
+			ammo:1,
+			damage:200,
+			cooldown:24,
+			stop:96,
+			reload:16,
+			speed:1.2,
+      uses:24,
+		},{
+			name:'IED W',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 
     /*{

@@ -9,7 +9,7 @@ function mainloop(){
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
                     let pos=a>=4?[
-                        width/2-340+ticker%5*170+(menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:ticker>=25?255:0),
+                        width/2-340+ticker%5*170+(menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:ticker>=25?(menu.mode==2?255:340):0),
                         355+floor(ticker/5)*55
                     ]:[
                         a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,
@@ -1120,7 +1120,8 @@ function mainloop(){
                         }
                     }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].playerData.name=='PlayerInsurgentW'||entities.players[c].assort.missile){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].id==entities.players[c].id){
+                            //if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].id==entities.players[c].id){
+                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].index==entities.players[c].index){
                                 center=entities.projectiles[a]
                                 if(entities.projectiles[a].type==280||entities.projectiles[a].type==316){
                                     key[c]*=(game.level==7?1.5:game.players>=3?3:2)

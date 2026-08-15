@@ -475,14 +475,16 @@ class wall{
                         game.level==131||game.level==136
                     )&&!game.pvp&&!game.attacker?floor(random(1,game.players+1)):
                     -1
-                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Turret',types.player),game.index))
-                game.index++
-                entities.players[entities.players.length-1].fortify()
-                if(game.level==44||game.level==65){
-                    entities.players[entities.players.length-1].pos=this.pos
+                if(!duel.trigger||!rules.dm){
+                    entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,this.owner,0,[],false,findName('Turret',types.player),game.index))
+                    game.index++
+                    entities.players[entities.players.length-1].fortify()
+                    if(game.level==44||game.level==65){
+                        entities.players[entities.players.length-1].pos=this.pos
+                    }
+                    entities.players[entities.players.length-1].fortHealth()
+                    this.index=entities.players.length-1
                 }
-                entities.players[entities.players.length-1].fortHealth()
-                this.index=entities.players.length-1
                 switch(game.level){
                     case 22:
                         entities.players[entities.players.length-1].multLife(3)
@@ -6436,7 +6438,10 @@ class wall{
                 }
             break
             case 31: case 33: case 36:
-                if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
+                if(
+                    !(layer.index<game.disable.length&&game.disable[layer.index]==2)&&
+                    (!duel.trigger||!rules.dm)
+                ){
                     if(game.level==29){
                         layer.translate(0,30)
                     }else if(game.level==38||game.level==59||game.level==79||game.level==82||game.level==83||game.level==85){
@@ -13358,7 +13363,7 @@ class wall{
                                             }
                                         }else if(c.velocity.y<0||c.offBouncer&&c.position.y<c.previous.position.y){
                                             c.position.y=this.position.y+this.height/2+c.height/2
-                                            if(c.type==457||c.type==462||c.type==485){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                 c.velocity.y=0
                                             }else{
                                                 c.velocity.y*=-1
@@ -13382,7 +13387,7 @@ class wall{
                                             }
                                         }else if(c.velocity.y>0||c.offBouncer&&c.position.y>c.previous.position.y){
                                             c.position.y=this.position.y-this.height/2-c.height/2
-                                            if(c.type==457||c.type==462||c.type==485){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                 c.velocity.y=0
                                             }else{
                                                 c.velocity.y*=-1
@@ -13406,7 +13411,7 @@ class wall{
                                             }
                                         }else if(c.velocity.x<0||c.offBouncer&&c.position.x<c.previous.position.x){
                                             c.position.x=this.position.x+this.width/2+c.width/2
-                                            if(c.type==457||c.type==462||c.type==485){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                 c.velocity.x=0
                                             }else{
                                                 c.velocity.x*=-1
@@ -13430,7 +13435,7 @@ class wall{
                                             }
                                         }else if(c.velocity.x>0||c.offBouncer&&c.position.x>c.previous.position.x){
                                             c.position.x=this.position.x-this.width/2-c.width/2
-                                            if(c.type==457||c.type==462||c.type==485){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                 c.velocity.x=0
                                             }else{
                                                 c.velocity.x*=-1
@@ -13471,7 +13476,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13515,7 +13520,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,-this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13561,7 +13566,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,-this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13607,7 +13612,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13630,7 +13635,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.type==457||c.type==462||c.type==485){
+                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -13660,7 +13665,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.type==457||c.type==462||c.type==485){
+                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -13834,7 +13839,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
-                                }else if((c.type==490||c.type==495||c.type==496)&&c.bounceTimer==0){
+                                }else if((c.type==490||c.type==495||c.type==496||c.type==500)&&c.bounceTimer==0){
                                     if(c.bounces==0){
                                         c.detTime=60
                                     }
@@ -13847,6 +13852,8 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
+                                }else if(c.type==499){
+                                    c.velocity.x*=0.995
                                 }
                             }
                         }
