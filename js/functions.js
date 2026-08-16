@@ -321,6 +321,18 @@ function spy(name){
         name=='SpySpawner'||
         name=='SpyShield'
 }
+function tank(name){
+    return name.includes('Tank')&&name!='PistolVaultTankSpawner'&&name!='PistolVaultTankGrenadeSpawner'&&name!='MysteryTank'
+        /*name=='Tank'||name=='BallingTank'||name=='PistolingTank'||name=='EngineeringTank'||name=='TankSpawner'||
+        name=='FlamethrowingTank'||name=='HyperTank'||name=='RocketLaunchingTank'||name=='AutoTank'||name=='TankDefendBuff'||
+        name=='TankJump'||name=='TankBump'||name=='TankShield'||name=='TankSpeedBuff'||name=='SlicingTank'||
+        name=='RevolutioningTank'||name=='TankRegen'||name=='SwarmingTank'||name=='TankWare'||name=='DoubleAutoTank'||
+        name=='InterceptingTank'||name=='InvisTank'||name=='TankSplitterPunch'||name=='TankSplitterFlamethrower'||name=='TankBuff'||
+        name=='GrenadingTank'||name=='TankShieldBuff'||name=='TankSplitterRandom'||name==`EnigmaTank`||name==`TankVulnerable`||
+        name==`BombTank`||name==`TankSplitterShotgun`||name==`TankSplitterAssaultRifle`||name==`IronyTank`||name==`AcceleratorTank`||
+        name==`TankDoubleBuff`||name==`TankDamaged`||name==`TankInvisBuff`||name==`DoubleDoubleAutoTank`||name==`TankTripleBuff`||
+        name==`MainBattleTank`||name==`TankRotateBuff`*/
+}
 function shotgun(name){
     return name.includes(`Shotgun`)||
         name.includes(`Scattergun`)||
@@ -11087,7 +11099,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            wave[0].push(['TankRotateBuff',5])
+            //wave[0].push(['BigSpamPhaseRocketLauncher',5])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11400,8 +11412,8 @@ function formMission(wave,type){
                 ['FastOverMedic',10],
                 ['BigSubmachineTier',4],
                 ['FastNapalmFlamethrower',3],
-                ['Mystery',10],
-                ['MysteryBoss',1],
+                ['SwarmerShield',5],
+                ['BigSpamPhaseRocketLauncher',2],
 
                 ['BigSpreadRocketLauncher',5],
                 ['Restrictrix',4],
@@ -11415,6 +11427,19 @@ function formMission(wave,type){
                 ['RGBSplitter',6],
             ]
             for(let a=0,la=10;a<la;a++){
+                wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
+            }
+            set=[
+                ['Mystery',10],
+                ['CritMystery',4],
+                
+                ['HeavyMystery',6],
+                ['MysteryMystery',3],
+
+                ['MysteryTank',2],
+                ['MysteryBoss',1],
+            ]
+            for(let a=0,la=2;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])
             }
             set=[

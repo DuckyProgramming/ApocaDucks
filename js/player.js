@@ -173,7 +173,7 @@ class player{
             }else if(this.variant==14){
                 this.active=0
             }
-        }else if(game.diffComposite>1&&random(0,1)<(game.diffComposite/(game.diffComposite*0.5+0.5)-1)&&this.id==0){
+        }else if(game.diffComposite>1&&random(0,1)<(game.diffComposite/(game.diffComposite*0.5+0.5)-1)&&this.id==0&&!this.construct){
             this.multLife(2)
             this.assort.brutal=true
         }
@@ -1052,7 +1052,7 @@ class player{
                 layer.rect(this.skin.arms[a].points.final.end.x+constrain(lsin(this.direction.main)*3,-1,1)*4,this.skin.arms[a].points.final.end.y+1,8,1)
             }
         }*/
-        let fade=this.fade*(this.playerData.name==`Mystery`||this.playerData.name==`MysteryBoss`?0.8+lsin(this.time*10)*0.2:1)
+        let fade=this.fade*(this.playerData.name==`Mystery`||this.playerData.name==`CritMystery`||this.playerData.name==`HeavyMystery`||this.playerData.name==`MysteryMystery`||this.playerData.name==`MysteryTank`||this.playerData.name==`MysteryBoss`?0.8+lsin(this.time*10)*0.2:1)
         if(layer.index<game.disable.length&&(this.index==layer.index||this.index==1)&&game.disable[layer.index]==2){
             layer.fill(10000,10000,10000,this.fade)
             layer.noStroke()
@@ -1402,19 +1402,7 @@ class player{
                     }
                 break
                 case 0:
-                    if(
-                        this.playerData.name=='Tank'||this.playerData.name=='BallingTank'||this.playerData.name=='PistolingTank'||this.playerData.name=='EngineeringTank'||this.playerData.name=='TankSpawner'||
-                        this.playerData.name=='FlamethrowingTank'||this.playerData.name=='HyperTank'||this.playerData.name=='RocketLaunchingTank'||this.playerData.name=='AutoTank'||this.playerData.name=='TankDefendBuff'||
-                        this.playerData.name=='TankJump'||this.playerData.name=='TankBump'||this.playerData.name=='TankShield'||this.playerData.name=='TankSpeedBuff'||this.playerData.name=='SlicingTank'||
-                        this.playerData.name=='RevolutioningTank'||this.playerData.name=='TankRegen'||this.playerData.name=='SwarmingTank'||this.playerData.name=='TankWare'||this.playerData.name=='DoubleAutoTank'||
-                        this.playerData.name=='InterceptingTank'||this.playerData.name=='InvisTank'||this.playerData.name=='TankSplitterPunch'||this.playerData.name=='TankSplitterFlamethrower'||this.playerData.name=='TankBuff'||
-                        this.playerData.name=='GrenadingTank'||this.playerData.name=='TankShieldBuff'||this.playerData.name=='TankSplitterRandom'||this.playerData.name==`EnigmaTank`||this.playerData.name==`TankVulnerable`||
-                        this.playerData.name==`BombTank`||this.playerData.name==`TankSplitterShotgun`||this.playerData.name==`TankSplitterAssaultRifle`||this.playerData.name==`IronyTank`||this.playerData.name==`AcceleratorTank`||
-                        this.playerData.name==`TankDoubleBuff`||this.playerData.name==`TankDamaged`||this.playerData.name==`TankInvisBuff`||this.playerData.name==`DoubleDoubleAutoTank`||this.playerData.name==`TankTripleBuff`||
-                        this.playerData.name==`MainBattleTank`||this.playerData.name==`TankRotateBuff`
-                    ){
-                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
-                    }else if(this.playerData.name=='MegaTank'){
+                    if(this.playerData.name=='MegaTank'){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[220,225,230],body:[210,215,220],legs:[200,205,210],arms:[205,210,215]}}
                     }else if(this.playerData.name=='HeavyTank'){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[200,205,210],body:[190,195,200],legs:[180,185,190],arms:[185,190,195]}}
@@ -1435,8 +1423,14 @@ class player{
                     }else if(this.playerData.name=='GlitchedTank'){
                         this.colorChances=[[200,0,255],[0,175,175],[0,150,255],[255,150,50],[255,75,255],[50,255,50],[125,255,125],[255,255,100],[180,180,180],[255,100,100]]
                         this.color={eye:{back:[255,255,255]},beak:{main:this.colorChances[floor(random(0,this.colorChances.length))],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:this.colorChances[floor(random(0,this.colorChances.length))],body:this.colorChances[floor(random(0,this.colorChances.length))],legs:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]],arms:[this.colorChances[floor(random(0,this.colorChances.length))],this.colorChances[floor(random(0,this.colorChances.length))]]}}
-                    }else if(this.playerData.name=='Mystery'){
+                    }else if(tank(this.playerData.name)){
+                        this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
+                    }else if(this.playerData.name=='Mystery'||this.playerData.name=='CritMystery'||this.playerData.name=='HeavyMystery'){
                         this.color={eye:{back:[255,255,255]},beak:{main:[0,190,0],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,200,0],body:[0,195,0],legs:[0,180,0],arms:[0,185,0]}}
+                    }else if(this.playerData.name=='MysteryMystery'){
+                        this.color={eye:{back:[255,255,255]},beak:{main:[140,140,140],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,200,0],body:[0,95,195],legs:[180,90,0],arms:[185,0,185]}}
+                    }else if(this.playerData.name=='MysteryTank'){
+                        this.color={eye:{back:[255,255,255]},beak:{main:[140,140,140],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[150,150,150],body:[145,145,145],legs:[130,130,130],arms:[135,135,135]}}
                     }else if(this.playerData.name=='MysteryBoss'){
                         this.color={eye:{back:[255,255,255]},beak:{main:[0,90,190],mouth:[255,255,255],nostril:[255,255,255]},skin:{head:[0,100,200],body:[0,95,195],legs:[0,80,180],arms:[0,85,185]}}
                     }else if(this.spy){
@@ -8378,6 +8372,9 @@ class player{
                         case 1175:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],4,(lsin(this.direction.main)<0?-90:90)+random(-0.25,0.25),this.id,weaponData.damage*damageBuff*(1+this.assort.firingTime/30),300,crit,this.index))
                         break
+                        case 1177:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],32,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        break
 
                         //mark
                     }
@@ -8527,7 +8524,7 @@ class player{
                 this.playerData.name=='PlayerGuard'||this.playerData.name=='PlayerGuillotine'||this.playerData.name=='SidekickGuillotine'||this.playerData.name=='FlamethrowerShield'||this.playerData.name=='RocketLauncherShield'||
                 this.playerData.name=='CritEngineerShield'||this.playerData.name=='ShotgunShield'||this.playerData.name=='TinyPistolShield'||this.playerData.name=='BigPistolShield'||this.playerData.name=='PistolShield'||
                 this.playerData.name=='BigBarrageRocketLauncherShield'||this.playerData.name=='LongBallerShield'||this.playerData.name=='ShotgunChainShield'||this.playerData.name=='BallerShield'||this.playerData.name=='SniperShield'||
-                this.playerData.name=='ProgrammerShield'||this.playerData.name=='MiniSentryShield'||this.playerData.name=='SpyShield',
+                this.playerData.name=='ProgrammerShield'||this.playerData.name=='MiniSentryShield'||this.playerData.name=='SpyShield'||this.playerData.name=='SwarmerShield',
             minesweep:this.playerData.name=='PlayerMinesweeper'||this.playerData.name=='PlayerDegausser'||this.playerData.name=='PlayerRangefinder'||this.playerData.name=='PlayerAnapsid'||this.playerData.name=='PlayerRadio'||
                 this.playerData.name=='PlayerMinesweeperception'||this.playerData.name=='PlayerRanger'||this.playerData.name=='PlayerRescue'||this.playerData.name=='SidekickMinesweeper'||this.playerData.name=='PlayerTelepointer'||
                 this.playerData.name=='PlayerJammer',
@@ -8576,7 +8573,7 @@ class player{
             knockbackResist:this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||
                 this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||
                 this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'||this.playerData.name=='PlayerHeavyWeaponsW',
-            tank:this.playerData.name.includes('Tank')&&this.playerData.name!='PistolVaultTankSpawner'&&this.playerData.name!='PistolVaultTankGrenadeSpawner',
+            tank:tank(this.playerData.name),
         }
     }
     updateWeaponRules(){
@@ -10285,7 +10282,35 @@ class player{
                         }
                     break
                     case 'Mystery':
-                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')))
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
+                        entities.players[entities.players.length-1].weapon.cooldown+=60
+                    break
+                    case 'CritMystery':
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)&&types.player[num].crit>0))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
+                        entities.players[entities.players.length-1].weapon.cooldown+=60
+                    break
+                    case 'HeavyMystery':
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)&&types.player[num].name.includes('Heavy')>0))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
+                        entities.players[entities.players.length-1].weapon.cooldown+=60
+                    break
+                    case 'MysteryMystery':
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>types.player[num].name.includes('Mystery')))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
+                        entities.players[entities.players.length-1].weapon.cooldown+=60
+                    break
+                    case 'MysteryTank':
+                        type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>tank(types.player[num].name)))
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
@@ -11802,7 +11827,7 @@ class player{
                 break
                 case 'MedicShield': case 'HyperMedicShield': case 'CritApplyMedicShield': case 'EngineerShield': case 'BigMedicShield': case 'BigFastRapidMedicShield': case 'TankShield': case 'FlamethrowerShield': case 'RocketLauncherShield': case 'CritEngineerShield':
                 case 'ShotgunShield': case 'TinyPistolShield': case 'BigPistolShield': case 'PistolShield': case 'BigBarrageRocketLauncherShield': case 'LongBallerShield': case 'ShotgunChainShield': case 'BallerShield': case 'SniperShield': case 'ProgrammerShield':
-                case 'MiniSentryShield': case 'SpyShield':
+                case 'MiniSentryShield': case 'SpyShield': case 'SwarmerShield':
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
                         if(((entities.projectiles[a].id==0?1:0)!=(this.id==0?1:0)||game.pvp)&&inBoxBox({position:{x:this.position.x+(lsin(this.direction.main)<0?-80:80),y:this.position.y+this.offset.position.y-10},width:15,height:100},entities.projectiles[a])&&entities.projectiles[a].active&&!entities.projectiles[a].rules.passer){
                             if(entities.projectiles[a].rules.exploder){

@@ -2,6 +2,7 @@
 1174 - razor, 1168
 1175 - bow c, 706
 1176 - ied w, 1168
+1177 - spam phase rocket launcher, 38
 
 499 - razor, 485
 500 - ied w, 490

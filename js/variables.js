@@ -9101,7 +9101,10 @@ types={
       name:'BigSpamRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:18,
     },{
-      name:'PunchBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:1.2,
+      name:'PunchBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.6,
+      damageBuff:2,reloadBuff:2,crit:1,weapon:9,
+    },{
+      name:'FastPunchBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:1.2,
       damageBuff:2,reloadBuff:2,crit:1,weapon:9,
     },{
       name:'LongFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -10541,8 +10544,17 @@ types={
       name:'Swarmer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:284,
     },{
+      name:'SwarmerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:284,
+    },{
       name:'BigHeavyMachineGun',sizeBuff:2,lifeBuff:10,speedBuff:0.125,
       damageBuff:1,reloadBuff:1,crit:0,weapon:2,
+    },{
+      name:'BigRapidPhaseRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:38,
+    },{
+      name:'BigSpamPhaseRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:4,crit:0,weapon:1177,
     },{
       name:'BigPhaseCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:38,
@@ -10598,7 +10610,19 @@ types={
       name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'MysteryBoss',sizeBuff:1.2,lifeBuff:2,speedBuff:0.4,
+      name:'MysteryMystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'HeavyMystery',sizeBuff:1,lifeBuff:2,speedBuff:0.15,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:91,
+    },{
+      name:'CritMystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:-1,
+    },{
+      name:'MysteryTank',sizeBuff:1.2,lifeBuff:2,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'MysteryBoss',sizeBuff:1.4,lifeBuff:3,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'MiniSentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
@@ -20803,6 +20827,15 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'Spam Phase Rocket Launcher',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
 		},
 
     /*{
