@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[7,7],sets:[[7,0],[7,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[3],sets:[[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
-        game.gaming=2
-        game.level=117
+        game.players=1
+        game.gaming=1
+        game.level=47
         /*
         8 - normandy
         41 - speleo dm
@@ -2098,9 +2098,11 @@ function mouseClicked(){
                         switch(b){
                             case 0:
                                 if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-30,y:pos[1]},width:60,height:45})){
-                                    game.diff=max(5,round(game.diff*10-1))/10
+                                    //game.diff=max(5,round(game.diff*10-1))/10
+                                    game.diffComposite=max(5,round(game.diffComposite*10-1))/10
                                 }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})){
-                                    game.diff=min(20,round(game.diff*10+1))/10
+                                    //game.diff=min(20,round(game.diff*10+1))/10
+                                    game.diffComposite=min(20,round(game.diffComposite*10+1))/10
                                 }
                                 /*if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                     game.diff=max(5,round(game.diff*10-1))/10
@@ -2788,12 +2790,14 @@ function keyPressed(){
 
         case '-':
             if(stage.scene=='mission'){
-                game.diff=max(5,round(game.diff*10-1))/10
+                //game.diff=max(5,round(game.diff*10-1))/10
+                game.diffComposite=max(5,round(game.diffComposite*10-1))/10
             }
         break
         case '+':
             if(stage.scene=='mission'){
-                game.diff=min(20,round(game.diff*10+1))/10
+                //game.diff=min(20,round(game.diff*10+1))/10
+                game.diffComposite=min(20,round(game.diffComposite*10+1))/10
             }
         break
     }

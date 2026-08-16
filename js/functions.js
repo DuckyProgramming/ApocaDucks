@@ -9941,7 +9941,8 @@ function newWave(){
                     (game.level==108||game.level==136?1.25:1)*
                     (game.peakWeapon?2:1)*
                     (game.classWeapon?1.2:1)*
-                    game.diff
+                    game.diff*
+                    (game.diffComposite*0.5+0.5)
                 let mEff=//game.level==37?pEff*0.1+0.25:
                     game.level==37?pEff*0.05+0.3:
                     game.level==29?pEff*0.1+0.4:
@@ -11086,7 +11087,7 @@ function formMission(wave,type){
     let set
     switch(type){
         case 0:
-            //wave[0].push(['FreezeShot',5])
+            wave[0].push(['TankRotateBuff',5])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
@@ -11424,7 +11425,7 @@ function formMission(wave,type){
                 ['AcceleratorTank',1],
                 
                 ['SlicingTank',1],
-                ['TankTripleBuff',1],
+                ['TankRotateBuff',1],
             ]
             for(let a=0,la=2;a<la;a++){
                 wave[0].push(set.splice(floor(random(0,set.length)),1)[0])

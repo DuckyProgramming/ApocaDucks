@@ -14,7 +14,7 @@ game={
   deprecate:false,smile:false,yellow:false,
   sentryCarry:false,ender:false,poison:false,chess:false,//options
   readout:false,instantWave:true,
-  diff:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
+  diff:1,diffComposite:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
   speedArena:false,speedArenaKey:2,pvpPoint:false,
@@ -8952,6 +8952,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankTripleBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankRotateBuff',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'TankJump',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,

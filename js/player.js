@@ -132,7 +132,7 @@ class player{
         this.assort={
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
-            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,
+            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -173,6 +173,9 @@ class player{
             }else if(this.variant==14){
                 this.active=0
             }
+        }else if(game.diffComposite>1&&random(0,1)<(game.diffComposite/(game.diffComposite*0.5+0.5)-1)&&this.id==0){
+            this.multLife(2)
+            this.assort.brutal=true
         }
         /*if(this.id==0){
             this.critBuff=999999
@@ -1180,7 +1183,7 @@ class player{
                 if(this.playerData.name.includes('Celestial')){
                     for(let a=0,la=12;a<la;a++){
                         layer.ellipse(lsin(a/la*360+this.time*2)*50,-24+lcos(a/la*360+this.time*2)*50,6)
-                    }   
+                    }
                 }
             }
             for(let a=0,la=2;a<la;a++){
@@ -1245,6 +1248,11 @@ class player{
                 for(let a=0,la=2;a<la;a++){
                     layer.line(lsin(this.direction.main-6+a*12)*16,this.face.beak.nostril.level,lsin(this.direction.main-6+a*12)*16,this.face.beak.nostril.level+0.5)
                 }
+            }
+            if(this.assort.brutal){
+                layer.noStroke()
+                layer.fill(80,fade*this.skin.head.fade)
+                layer.arc(0,this.skin.head.level,30,30,-180,0)
             }
         }
         layer.pop()
@@ -1403,7 +1411,7 @@ class player{
                         this.playerData.name=='GrenadingTank'||this.playerData.name=='TankShieldBuff'||this.playerData.name=='TankSplitterRandom'||this.playerData.name==`EnigmaTank`||this.playerData.name==`TankVulnerable`||
                         this.playerData.name==`BombTank`||this.playerData.name==`TankSplitterShotgun`||this.playerData.name==`TankSplitterAssaultRifle`||this.playerData.name==`IronyTank`||this.playerData.name==`AcceleratorTank`||
                         this.playerData.name==`TankDoubleBuff`||this.playerData.name==`TankDamaged`||this.playerData.name==`TankInvisBuff`||this.playerData.name==`DoubleDoubleAutoTank`||this.playerData.name==`TankTripleBuff`||
-                        this.playerData.name==`MainBattleTank`
+                        this.playerData.name==`MainBattleTank`||this.playerData.name==`TankRotateBuff`
                     ){
                         this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[160,165,170],body:[150,155,160],legs:[140,145,150],arms:[145,150,155]}}
                     }else if(this.playerData.name=='MegaTank'){
@@ -1518,7 +1526,6 @@ class player{
         this.base.color={eye:{back:this.color.eye.back},beak:{main:this.color.beak.main,mouth:this.color.beak.mouth,nostril:this.color.beak.nostril},skin:{head:this.color.skin.head,body:this.color.skin.body,legs:this.color.skin.legs,arms:this.color.skin.arms}}
     }
     newWeapon(){
-        print('a')
         let stoppage=false
         if(rules.teamMode&&game.classWeapon||game.level==79||game.level==82){
             if(this.playerData.name=='PlayerCarrySentry1'||this.playerData.name=='PlayerCarrySentry2'||this.playerData.name=='PlayerCarrySentry3'){
@@ -13077,6 +13084,19 @@ class player{
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                             entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
                             entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
+                        }
+                    }
+                break
+                case 'TankRotateBuff':
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                            if(this.time%360<120){
+                                entities.players[a].critBuff=max(entities.players[a].critBuff,15)
+                            }else if(this.time%360<240){
+                                entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
+                            }else{
+                                entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
+                            }
                         }
                     }
                 break

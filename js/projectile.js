@@ -6739,11 +6739,15 @@ class projectile{
 				}
 				if(this.timer>30&&this.timer<35){
 					layer.fill(225-this.crit*175,75+this.crit*150,100+this.crit*150,this.fade*(1-(this.timer-30)/5))
-					layer.ellipse(0,0,4+(this.timer-30)*3)
+					layer.ellipse(0,0,4+(this.timer-30)*8/3)
 				}
-				if(this.timer>45&&this.timer<50){
+				/*if(this.timer>45&&this.timer<50){
 					layer.fill(225-this.crit*175,75+this.crit*150,100+this.crit*150,this.fade*(1-(this.timer-45)/5))
 					layer.ellipse(0,0,4+(this.timer-35)*3)
+				}*/
+				if(this.timer>40&&this.timer<45){
+					layer.fill(225-this.crit*175,75+this.crit*150,100+this.crit*150,this.fade*(1-(this.timer-40)/5))
+					layer.ellipse(0,0,4+(this.timer-40)*8/3)
 				}
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,4)

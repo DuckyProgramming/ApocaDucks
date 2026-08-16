@@ -680,7 +680,8 @@ function mainloop(){
                         }
                         fill(0)
                         textSize(15)
-                        text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Team Spawn`,`Traitor`][b],pos[0],pos[1])
+                        //text([`Difficulty: ${game.diff}`,`Deathlink`,`No Stats`,`Killstreak`,`Team Spawn`,`Traitor`][b],pos[0],pos[1])
+                        text([`Difficulty: ${game.diffComposite}`,`Deathlink`,`No Stats`,`Killstreak`,`Team Spawn`,`Traitor`][b],pos[0],pos[1])
                         if(b==0){
                             textSize(10)
                             text(['-'][b],pos[0]-45,pos[1]-15)
@@ -989,6 +990,25 @@ function mainloop(){
                 let ticker=0
                 let lb=types.mission[game.mission].wave[a].length
                 fill(100)
+                let mult=(game.classicRespawn?1.25:1)*
+                    (game.level==7?0.6:1)*
+                    (game.level==8?(game.attacker?0.5:1.5):1)*
+                    (game.level==16?0.1:1)*
+                    (game.level==17?(game.attacker?0.4:1):1)*
+                    (game.level==19||game.level==31||game.level==42&&!game.pvp?2.5:1)*
+                    (game.level==29||game.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*
+                    (game.level==32||game.level==33?1.2:1)*
+                    (game.level==42?0.5:1)*
+                    (game.level==108||game.level==136?1.25:1)*
+                    (game.peakWeapon?2:1)*
+                    (game.classWeapon?1.2:1)*
+                    game.diff*
+                    (game.diffComposite*0.5+0.5)
+                let mEff=//game.level==37?pEff*0.1+0.25:
+                    game.level==37?pEff*0.05+0.3:
+                    game.level==29?pEff*0.1+0.4:
+                    game.level==55?pEff*0.175+0.325:
+                    pEff*0.25+0.25
                 if(la>20){
                     rect(width/2+(a%5)*210-420,height/2-260+floor(a/5)*130,200,120,10)
                     fill(0)
@@ -998,7 +1018,8 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'&&types.mission[game.mission].wave[a][b][0]!='Support'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2*(menu.level==42?0.5:1):1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%5)*210-420,height/2-275+ticker*10+floor(a/5)*130)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*mEff*mult)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%5)*210-420,height/2-275+ticker*10+floor(a/5)*130)
+                            //text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.5:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2*(menu.level==42?0.5:1):1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%5)*210-420,height/2-275+ticker*10+floor(a/5)*130)
                             ticker++
                         }
                     }
@@ -1012,7 +1033,8 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'&&types.mission[game.mission].wave[a][b][0]!='Support'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2:1)*(menu.level==42?0.5:1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*11.875+floor(a/4)*310)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*mEff*mult)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*11.875+floor(a/4)*310)
+                            //text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2:1)*(menu.level==42?0.5:1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*11.875+floor(a/4)*310)
                             ticker++
                             if(ticker>=48){
                                 ticker-=48
@@ -1030,7 +1052,8 @@ function mainloop(){
                     for(let b=0;b<lb;b++){
                         if(types.mission[game.mission].wave[a][b][0]!='Wait'&&types.mission[game.mission].wave[a][b][0]!='Support'){
                             let num=types.mission[game.mission].wave[a][b][1]
-                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2:1)*(menu.level==42?0.5:1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
+                            text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*mEff*mult)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
+                            //text(`${types.mission[game.mission].wave[a][b][0].includes('Boss')?num:ceil(num*(menu.level==37?game.players*0.1+0.25:menu.level==29?game.players*0.1+0.4:game.players*0.25+0.25)*(game.classicRespawn?2:1)*(menu.level==7?0.6:1)*(menu.level==8?(game.attacker?0.75:1.5):1)*(menu.level==16?0.4:1)*(menu.level==17?(game.attacker?0.4:1):1)*(menu.level==19||menu.level==31||menu.level==42&&!game.pvp?2.5:1)*(menu.level==29||menu.level==37?(types.mission[game.mission].wave.length==1?0.3:1.8):1)*(menu.level==32||menu.level==33?1.2:1)*(menu.level==42?0.5:1)*(menu.weapon==1?2:1)*(menu.weapon==2?1.2:1)*game.diff)} x ${types.mission[game.mission].wave[a][b][0]}`,width/2+(a%4)*210-315+ticker2*210,height/2-265+ticker*14.375+floor(a/4)*310)
                             ticker++
                             if(ticker>=40){
                                 ticker-=40
