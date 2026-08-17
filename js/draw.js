@@ -6,13 +6,18 @@ function mainloop(){
         case 'menumix':
             set=game.mapset
             let ticker=0
+            push()
+            translate(width/2,0)
+            scale(height/700)
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
                     let pos=a>=4?[
-                        width/2-340+ticker%5*170+(menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:ticker>=25?(menu.mode==2?255:340):0),
+                        //width/2-340+ticker%5*170+(menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:ticker>=25?(menu.mode==2?255:340):0),
+                        -340+ticker%5*170+(menu.mode==1&&ticker==10||menu.mode==6&&ticker==10?340:ticker>=25?(menu.mode==2?255:340):0),
                         355+floor(ticker/5)*55
                     ]:[
-                        a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,
+                        //a==3?width/2+b*140-lb*70+70:width/2+b*170-lb*85+85,
+                        a==3?b*140-lb*70+70:b*170-lb*85+85,
                         90+a*55+(a>=2?15:0)+(a>=3?15:0)+(a>=4?15:0)
                     ]
                     //ticker==25 code moves falloff specifically
@@ -317,6 +322,7 @@ function mainloop(){
                     }
                 }
             }
+            pop()
         break
         /*
         case 'menu':
@@ -656,6 +662,9 @@ function mainloop(){
         break
         */
         case 'mission':
+            push()
+            translate(width/2,0)
+            scale(height/700)
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
                 for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?6:5):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     if(a==0){
@@ -717,19 +726,25 @@ function mainloop(){
                     }
                 }
             }
+            pop()
         break
         case 'options':
+            push()
+            translate(width/2,0)
+            scale(height/700)
             for(let a=0,la=2;a<la;a++){
                 for(let b=0,lb=[3,1][a];b<lb;b++){
                     if(a==0){
-                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        //let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        let pos=[b*170-lb*85+85,60+a*55+40]
                         fill(100,b==0&&game.noStat||b==1&&game.killStreak||b==2&&game.spectateSpawn[0]?200:100,100)
                         rect(pos[0],pos[1],150,45,10)
                         fill(0)
                         textSize(15)
                         text([`No Stats`,`Killstreak`,`Team Spawn`][b],pos[0],pos[1])
                     }else{
-                        let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        //let pos=[width/2+b*170-lb*85+85,60+a*55+40]
+                        let pos=[b*170-lb*85+85,60+a*55+40]
                         fill(100)
                         rect(pos[0],pos[1],150,45,10)
                         fill(0)
@@ -738,6 +753,7 @@ function mainloop(){
                     }
                 }
             }
+            pop()
         break
         case 'menuFull':
             for(let a=0,la=game.deprecate?11:10;a<la;a++){
@@ -1099,10 +1115,14 @@ function mainloop(){
                 for(let c=0,lc=game.gaming;c<lc;c++){
                     if(rules.grad==1){
                         graphics.main[c].fill(0)
-                        graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
+                        //graphics.main[c].backgroundPattern(graphics.gradient[0].gradient)
+                        graphics.main[c].fillGradient(graphics.gradient[0].gradient)
+                        graphics.main[c].rect(graphics.main[c].width*0.5,graphics.main[c].height*0.5,graphics.main[c].width,graphics.main[c].height)
                     }else if(rules.grad==2){
                         graphics.main[c].fill(0)
-                        graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
+                        //graphics.main[c].backgroundPattern(graphics.gradient[1].gradient)
+                        graphics.main[c].fillGradient(graphics.gradient[1].gradient)
+                        graphics.main[c].rect(graphics.main[c].width*0.5,graphics.main[c].height*0.5,graphics.main[c].width,graphics.main[c].height)
                     }else if(c<game.disable.length&&game.disable[c]==2){
                         graphics.main[c].background(1250,1500,2000)
                     }else{
@@ -1116,6 +1136,8 @@ function mainloop(){
                         graphics.main[c].ellipse(graphics.main[c].width*0.85,graphics.main[c].height*0.15,graphics.main[c].height*0.04,graphics.main[c].height*0.04)
                     }
                     key.push(1)
+                    key[c]*=(lc==1?0.6:1.2)
+                    //the insane fix
                     if(game.level==6||game.level==45){
                         key[c]*=0.8
                     }

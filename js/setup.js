@@ -78,10 +78,15 @@ function windowResized(){
 function mouseClicked(){
     updateMouse(graphics.main[0])
     let set=[]
+    let mouse
     switch(stage.scene){
         case 'menumix':
             set=game.mapset
             let ticker=0
+            mouse={
+                x:(inputs.mouse.x-width/2)*700/height+width/2,
+                y:inputs.mouse.y*700/height,
+            }
             for(let a=0,la=4+set[menu.mode].length;a<la;a++){
                 for(let b=0,lb=a>=4?set[menu.mode][a-4].length:[5,5,3,6][a];b<lb;b++){
                     let pos=a>=4?[
@@ -94,7 +99,7 @@ function mouseClicked(){
                     if(a>=4){
                         ticker++
                     }
-                    if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:a==3?120:150,height:45})){
+                    if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:a==3?120:150,height:45})){
                         switch(a){
                             case 0:
                                 menu.players=b+1
@@ -108,9 +113,9 @@ function mouseClicked(){
                                 game.classWeapon=menu.weapon==2
                             break
                             case 3:
-                                //game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})
-                                game.past=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:40,height:45})
-                                game.speedArena=b==3&&inPointBox({position:inputs.mouse},{position:{x:pos[0]+40,y:pos[1]},width:40,height:45})
+                                //game.past=b==3&&inPointBox({position:mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})
+                                game.past=b==3&&inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:40,height:45})
+                                game.speedArena=b==3&&inPointBox({position:mouse},{position:{x:pos[0]+40,y:pos[1]},width:40,height:45})
                                 menu.mode=b+1
                             break
                             case 4:
@@ -124,7 +129,7 @@ function mouseClicked(){
                                                 //vietnam
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=8
                                                 }else{
                                                     menu.level=17
@@ -132,7 +137,7 @@ function mouseClicked(){
                                                 //normandy
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=15
                                                 }else{
                                                     menu.level=18
@@ -152,7 +157,7 @@ function mouseClicked(){
                                                 //doublemountain
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=22
                                                 }else{
                                                     menu.level=35
@@ -211,7 +216,7 @@ function mouseClicked(){
                                                 //gray gravel
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=56
                                                 }else{
                                                     menu.level=128
@@ -219,7 +224,7 @@ function mouseClicked(){
                                                 //shogatsu
                                             break
                                             case 3:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=50
                                                 }else{
                                                     menu.level=118
@@ -283,7 +288,7 @@ function mouseClicked(){
                                                 //bluefort mini
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=95
                                                 }else{
                                                     menu.level=134
@@ -386,7 +391,7 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=36
                                                 }else{
                                                     menu.level=117
@@ -394,7 +399,7 @@ function mouseClicked(){
                                                 //aerial
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=52
                                                 }else{
                                                     menu.level=120
@@ -402,7 +407,7 @@ function mouseClicked(){
                                                 //alloy
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=41
                                                 }else{
                                                     menu.level=121
@@ -544,7 +549,7 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=92
                                                 }else{
                                                     menu.level=119
@@ -552,7 +557,7 @@ function mouseClicked(){
                                                 //tailwater
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=60
                                                 }else{
                                                     menu.level=122
@@ -560,7 +565,7 @@ function mouseClicked(){
                                                 //identify
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=61
                                                 }else{
                                                     menu.level=123
@@ -621,7 +626,7 @@ function mouseClicked(){
                                                 //abandoned
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=59
                                                     game.classicWeapon=true
                                                 }else{
@@ -683,7 +688,7 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=64
                                                 }else{
                                                     menu.level=124
@@ -699,7 +704,7 @@ function mouseClicked(){
                                                 //cranberry
                                             break
                                             case 3:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=74
                                                 }else{
                                                     menu.level=137
@@ -736,7 +741,7 @@ function mouseClicked(){
                                                 //bluefort micro
                                             break
                                             case 3:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=83
                                                     game.classicWeapon=true
                                                 }else{
@@ -762,7 +767,7 @@ function mouseClicked(){
                                                 //bluefort
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=99
                                                 }else{
                                                     menu.level=135
@@ -796,7 +801,7 @@ function mouseClicked(){
                                     case 4:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=75
                                                 }else{
                                                     menu.level=125
@@ -804,7 +809,7 @@ function mouseClicked(){
                                                 //rocketyard
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=91
                                                 }else{
                                                     menu.level=126
@@ -839,7 +844,7 @@ function mouseClicked(){
                                                 //burnt
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=89
                                                 }else{
                                                     menu.level=94
@@ -847,7 +852,7 @@ function mouseClicked(){
                                                 //confines
                                             break
                                             case 2:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=100
                                                 }else{
                                                     menu.level=103
@@ -865,9 +870,9 @@ function mouseClicked(){
                                     case 3:
                                         switch(b){
                                             case 0:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
                                                     menu.level=89
-                                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:50,height:45})){
+                                                }else if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:50,height:45})){
                                                     menu.level=94
                                                 }else{
                                                     menu.level=133
@@ -908,7 +913,7 @@ function mouseClicked(){
                                                 //zone 54
                                             break
                                             case 1:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=110
                                                 }else{
                                                     menu.level=127
@@ -920,7 +925,7 @@ function mouseClicked(){
                                                 //ascent
                                             break
                                             case 3:
-                                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                                     menu.level=112
                                                 }else{
                                                     menu.level=129
@@ -2084,12 +2089,16 @@ function mouseClicked(){
         break
         */
         case 'mission':
+            mouse={
+                x:(inputs.mouse.x-width/2)*700/height+width/2,
+                y:inputs.mouse.y*700/height,
+            }
             for(let a=0,la=2+(menu.mode==0?0:ceil(menu.list[menu.mode-1].length/5));a<la;a++){
                 for(let b=0,lb=a==0?6:a==1?(menu.players>=3&&!game.pvp?6:5):constrain(menu.list[menu.mode-1].length+10-a*5,0,5);b<lb;b++){
                     game.smile=floor(random(0,100))==0
                     if(a==0){
                         let pos=[width/2+b*140-lb*70+70,60+a*55+40]
-                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                        if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                             menu.mode=b+1
                         }
                     }else if(a==1){
@@ -2097,54 +2106,54 @@ function mouseClicked(){
                         //let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         switch(b){
                             case 0:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-30,y:pos[1]},width:60,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0]-30,y:pos[1]},width:60,height:45})){
                                     //game.diff=max(5,round(game.diff*10-1))/10
                                     game.diffComposite=max(5,round(game.diffComposite*10-1))/10
-                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})){
+                                }else if(inPointBox({position:mouse},{position:{x:pos[0]+30,y:pos[1]},width:60,height:45})){
                                     //game.diff=min(20,round(game.diff*10+1))/10
                                     game.diffComposite=min(20,round(game.diffComposite*10+1))/10
                                 }
-                                /*if(inPointBox({position:inputs.mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                /*if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
                                     game.diff=max(5,round(game.diff*10-1))/10
-                                }else if(inPointBox({position:inputs.mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
+                                }else if(inPointBox({position:mouse},{position:{x:pos[0]+37.5,y:pos[1]},width:75,height:45})){
                                     game.diff=min(20,round(game.diff*10+1))/10
                                 }*/
                             break
                             case 1:
-                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                //if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.deathlink=!game.deathlink
                                 }
                             break
                             case 2:
-                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                //if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.noStat=!game.noStat
                                 }
                             break
                             case 3:
-                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                //if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.killStreak=!game.killStreak
                                 }
                             break
                             case 4:
-                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                //if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.spectateSpawn[0]=!game.spectateSpawn[0]
                                     game.spectateSpawn[1]=!game.spectateSpawn[1]
                                 }
                             break
                             case 5:
-                                //if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
+                                //if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:120,height:45})){
                                     game.traitor=!game.traitor
                                 }
                             break
                         }
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
-                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                        if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                             let unit=menu.list[menu.mode-1][a*5+b-10]
                             game.players=menu.players
                             game.gaming=menu.gaming
@@ -2193,6 +2202,10 @@ function mouseClicked(){
             }
         break
         case 'options':
+            mouse={
+                x:(inputs.mouse.x-width/2)*700/height+width/2,
+                y:inputs.mouse.y*700/height,
+            }
             for(let a=0,la=2;a<la;a++){
                 for(let b=0,lb=[3,1][a];b<lb;b++){
                     game.smile=floor(random(0,100))==0
@@ -2200,17 +2213,17 @@ function mouseClicked(){
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
                         switch(b){
                             case 0:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                                     game.noStat=!game.noStat
                                 }
                             break
                             case 1:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                                     game.killStreak=!game.killStreak
                                 }
                             break
                             case 2:
-                                if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                                if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                                     game.spectateSpawn[0]=!game.spectateSpawn[0]
                                     game.spectateSpawn[1]=!game.spectateSpawn[1]
                                 }
@@ -2218,7 +2231,7 @@ function mouseClicked(){
                         }
                     }else{
                         let pos=[width/2+b*170-lb*85+85,60+a*55+40]
-                        if(inPointBox({position:inputs.mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
+                        if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:150,height:45})){
                             stage.scene='main'
                         }
                     }

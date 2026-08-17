@@ -1076,6 +1076,96 @@ function displayMain(layer,effective,keyStore){
     for(let a=0,la=layer.length;a<la;a++){
         stage.scale=min(width/layer[a].width,height/layer[a].height)
     }
+    let scalar
+    switch(game.gaming){
+        case 1:
+            scalar=min(width/layer[0].width,height/layer[0].height)
+            image(
+                layer[0],
+                width/2,height/2,layer[0].width*scalar,layer[0].height*scalar
+            )
+        break
+        case 2:
+            scalar=max(width*0.5/layer[0].width,height*0.5/layer[0].height)
+            if(width*0.5/layer[0].width>height*0.5/layer[0].height){
+                image(
+                    layer[0],
+                    width/2-layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    layer[1],
+                    width/2+layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                )
+            }else{
+                image(
+                    layer[0],
+                    width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    layer[1],
+                    width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            }
+        break
+        case 3:
+            scalar=min(width*0.5/layer[0].width,height*0.5/layer[0].height)
+            image(
+                layer[0],
+                width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[1],
+                width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[2],
+                width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+        break
+        case 4:
+            scalar=min(width*0.5/layer[0].width,height*0.5/layer[0].height)
+            image(
+                layer[0],
+                width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[1],
+                width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[2],
+                width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[3],
+                width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+        break
+        case 5:
+            scalar=min(width/3/layer[0].width,height*0.5/layer[0].height)
+            image(
+                layer[0],
+                width/2-layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[1],
+                width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[2],
+                width/2+layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[3],
+                width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+            image(
+                layer[4],
+                width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+            )
+        break
+    }
+    /*
     if(game.gaming==1){
         image(
             layer[0],
@@ -1143,8 +1233,92 @@ function displayMain(layer,effective,keyStore){
             )
         }
     }
+    */
     if(game.level==62){
-        if(game.gaming==1){
+        switch(game.gaming){
+            case 1:
+                image(
+                    graphics.overlay[1],
+                    width/2,height/2,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 2:
+                if(width*0.5/layer[0].width>height*0.5/layer[0].height){
+                    image(
+                        graphics.overlay[1],
+                        width/2-layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                    image(
+                        graphics.overlay[1],
+                        width/2+layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                }else{
+                    image(
+                        graphics.overlay[1],
+                        width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                    image(
+                        graphics.overlay[1],
+                        width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                }
+            break
+            case 3:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 4:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 5:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2+layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[1],
+                    width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+        }
+        /*if(game.gaming==1){
             image(
                 graphics.overlay[1],
                 width/2,height/2,width,height
@@ -1210,10 +1384,93 @@ function displayMain(layer,effective,keyStore){
                     width*3/4,height*3/4,width/2,height/2
                 )
             }
-        }
+        }*/
     }
     if(game.flash&&game.level!=13&&game.level!=14||game.level==79||game.level==82){
-        if(game.gaming==1){
+        switch(game.gaming){
+            case 1:
+                image(
+                    graphics.overlay[1],
+                    width/2,height/2,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 2:
+                if(width*0.5/layer[0].width>height*0.5/layer[0].height){
+                    image(
+                        graphics.overlay[1],
+                        width/2-layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                    image(
+                        graphics.overlay[2],
+                        width/2+layer[0].width*scalar*0.5,height/2,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                }else{
+                    image(
+                        graphics.overlay[1],
+                        width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                    image(
+                        graphics.overlay[2],
+                        width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                    )
+                }
+            break
+            case 3:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[2],
+                    width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[3],
+                    width/2,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 4:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[2],
+                    width/2+layer[0].width*scalar*0.5,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[3],
+                    width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[4],
+                    width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+            case 5:
+                image(
+                    graphics.overlay[1],
+                    width/2-layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[2],
+                    width/2,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[3],
+                    width/2+layer[0].width*scalar,height/2-layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[4],
+                    width/2-layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+                image(
+                    graphics.overlay[5],
+                    width/2+layer[0].width*scalar*0.5,height/2+layer[0].height*scalar*0.5,layer[0].width*scalar,layer[0].height*scalar
+                )
+            break
+        }
+        /*if(game.gaming==1){
             image(
                 graphics.overlay[1],
                 width/2,height/2,width,height
@@ -1250,13 +1507,65 @@ function displayMain(layer,effective,keyStore){
                     width*3/4,height*3/4,width/2,height/2
                 )
             }
-        }
+        }*/
     }
     if(rules.overlay){
-        image(
+        /*image(
             graphics.overlay[0],
             width/2,graphics.overlay[0].height*0.5,width,graphics.overlay[0].height
-        )
+        )*/
+        let scalar2=min(width/graphics.overlay[0].width,height/graphics.overlay[0].height)
+        switch(game.gaming){
+            case 1:
+                image(
+                    graphics.overlay[0],
+                    width/2-layer[0].width*scalar*0.5+graphics.overlay[0].width*0.5*scalar2,
+                    height/2-layer[0].height*scalar*0.5+graphics.overlay[0].height*0.5*scalar2,
+                    graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                )
+            break
+            case 2:
+                if(width*0.5/layer[0].width>height*0.5/layer[0].height){
+                    image(
+                        graphics.overlay[0],
+                        width/2-layer[0].width*scalar+graphics.overlay[0].width*0.5*scalar2,
+                        height/2-layer[0].height*scalar*0.5+graphics.overlay[0].height*0.5*scalar2,
+                        graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                    )
+                }else{
+                    image(
+                        graphics.overlay[0],
+                        width/2-layer[0].width*scalar*0.5+graphics.overlay[0].width*0.5*scalar2,
+                        height/2-layer[0].height*scalar+graphics.overlay[0].height*0.5*scalar2,
+                        graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                    )
+                }
+            break
+            case 3:
+                image(
+                    graphics.overlay[0],
+                    width/2-layer[0].width*scalar+graphics.overlay[0].width*0.5*scalar2,
+                    height/2-layer[0].height*scalar+graphics.overlay[0].height*0.5*scalar2,
+                    graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                )
+            break
+            case 4:
+                image(
+                    graphics.overlay[0],
+                    width/2-layer[0].width*scalar+graphics.overlay[0].width*0.5*scalar2,
+                    height/2-layer[0].height*scalar+graphics.overlay[0].height*0.5*scalar2,
+                    graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                )
+            break
+            case 5:
+                image(
+                    graphics.overlay[0],
+                    width/2-layer[0].width*scalar*1.5+graphics.overlay[0].width*0.5*scalar2,
+                    height/2-layer[0].height*scalar+graphics.overlay[0].height*0.5*scalar2,
+                    graphics.overlay[0].width*scalar2,graphics.overlay[0].height*scalar2
+                )
+            break
+        }
         graphics.overlay[0].clear()
     }
 }
@@ -10879,9 +11188,10 @@ function initialGraphics(){
         menu.level==120||menu.level==121||menu.level==122||menu.level==123||menu.level==124||menu.level==125||menu.level==126||menu.level==127||menu.level==128||menu.level==129||
         menu.level==130||menu.level==131||menu.level==132||menu.level==133||menu.level==134||menu.level==135||menu.level==136||menu.level==137
     ){
-        graphics.overlay.push(createGraphics(width,menu.players>5&&!rules.teamMode?400:200))
+        //graphics.overlay.push(createGraphics(width,menu.players>5&&!rules.teamMode?400:200))
+        graphics.overlay.push(createGraphics(1200,menu.players>5&&!rules.teamMode?400:200))
     }
-    if(game.gaming==1){
+    /*if(game.gaming==1){
         graphics.main.push(createGraphics(width,height))
         if(game.flash||menu.level==79||menu.level==82){
             graphics.overlay.push(createGraphics(width,height))
@@ -10916,6 +11226,14 @@ function initialGraphics(){
             if(game.gaming==4){
                 graphics.overlay.push(createGraphics(width/2,height/2))
             }
+        }
+    }*/
+    for(let a=0,la=game.gaming;a<la;a++){
+        //graphics.main.push(createGraphics(1080,500))
+        graphics.main.push(createGraphics(la>=2?750:1500,la>=2?375:750))
+        if(game.flash||menu.level==79||menu.level==82){
+            //graphics.overlay.push(createGraphics(1080,500))
+            graphics.overlay.push(createGraphics(la>=2?750:1500,la>=2?375:750))
         }
     }
     for(let a=0,la=graphics.main.length;a<la;a++){
