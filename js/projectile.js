@@ -8796,12 +8796,13 @@ class projectile{
 				radius=150
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
+					let launch=min(1,2-2*c/radius)*(entities.players[b].jump.time==0&&entities.players[b].velocity.y<0?3:1)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
-						entities.players[b].knockback(12*(1.5-c/radius),dir,1,1)
-						entities.players[b].knockbackForce(2*(1.5-c/radius),dir,1,1)
+						entities.players[b].knockback(12*launch,dir,1,1)
+						entities.players[b].knockbackForce(2*launch,dir,1,1)
 					}
 				}
 			break

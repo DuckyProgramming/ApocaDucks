@@ -1136,7 +1136,8 @@ function mainloop(){
                         graphics.main[c].ellipse(graphics.main[c].width*0.85,graphics.main[c].height*0.15,graphics.main[c].height*0.04,graphics.main[c].height*0.04)
                     }
                     key.push(1)
-                    key[c]*=(lc==1?0.6:1.2)
+                    //key[c]*=(lc==1?0.6:1.2)
+                    key[c]*=1000/graphics.main[c].width
                     //the insane fix
                     if(game.level==6||game.level==45){
                         key[c]*=0.8
