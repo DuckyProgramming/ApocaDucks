@@ -81,7 +81,7 @@ duel={trigger:false,numKey:[],sets:[],experiment:[]}
 rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:2,level:6,list:[],mode:0}
-dev={sight:false}
+dev={sight:false,speed:1}
 types={
   mission:[
     {
@@ -3704,7 +3704,7 @@ types={
           ['EngineerShield',1],
           ['Engineer',3],
           ['EngineerShield',1],
-          ['HyperMedic',2],
+          ['LongHyperMedic',2],
           ['TinyPistol',2],
           ['Gust',1],
           ['Wait',3],
@@ -3714,7 +3714,7 @@ types={
           ['FlamethrowerShield',1],
           ['Flamethrower',3],
           ['FlamethrowerShield',1],
-          ['HyperMedic',2],
+          ['LongHyperMedic',2],
           ['TinyPistol',2],
           ['Gust',1],
           ['Wait',3],
@@ -3724,7 +3724,7 @@ types={
           ['RocketLauncherShield',1],
           ['RocketLauncher',3],
           ['RocketLauncherShield',1],
-          ['HyperMedic',2],
+          ['LongHyperMedic',2],
           ['TinyPistol',2],
           ['Gust',1],
           ['Wait',3],
@@ -3790,14 +3790,15 @@ types={
           ['HyperSpy',3],
           ['FlamethrowerSpy',3],
           ['EnderSpy',3],
-          ['MiniSentry',5],
+          //['MiniSentry',5],
           ['SmokeRocketLauncher',10],
           ['ShotgunMartyr',10],
           ['RapidCritApplyMedic',5],
           ['HyperBonker',4],
-          ['TankShieldBuff',1],
-          ['EnigmaTank',1],
           ['BombPod',2],
+          //['TankShieldBuff',1],
+          ['SlicingTank',1],
+          ['EnigmaTank',1],
         ],
       ],
     },{
@@ -8313,6 +8314,12 @@ types={
     },{
       name:'PlayerBowC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1175,
+    },{
+      name:'PlayerWarningLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1178,
+    },{
+      name:'PlayerPeppergunC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1179,
     },
 
     //mark c
@@ -8498,7 +8505,7 @@ types={
     {
       //gaea
       name:'CelestialG',sizeBuff:2,lifeBuff:25,speedBuff:0.75,
-      damageBuff:0.75,reloadBuff:1,crit:0,weapon:666,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:666,
     },{
       //rune
       name:'CelestialR',sizeBuff:2,lifeBuff:25,speedBuff:0.75,
@@ -8527,6 +8534,30 @@ types={
       //tartarus
       name:'CelestialT',sizeBuff:2,lifeBuff:25,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:668,
+    },{
+      name:'MiniCelestialG',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:666,
+    },{
+      name:'MiniCelestialR',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:596,
+    },{
+      name:'MiniCelestialS',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:597,
+    },{
+      name:'MiniCelestialK',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:598,
+    },{
+      name:'MiniCelestialC',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:667,
+    },{
+      name:'MiniCelestialL',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:599,
+    },{
+      name:'MiniCelestialN',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:341,
+    },{
+      name:'MiniCelestialT',sizeBuff:1.5,lifeBuff:10,speedBuff:0.75,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:668,
     },
 
     {
@@ -8829,6 +8860,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'MedicFakeHealthPackCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'SpyFakeHealthPackCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'RapidMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -9330,10 +9364,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'BigBarrageRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
     },{
       name:'BigBarrageRocketLauncherShield',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
     },{
       name:'PushRadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:32,
@@ -9440,11 +9474,14 @@ types={
       name:'BigMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:42,
     },{
+      name:'BigMachineGunCritSelfTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:42,
+    },{
       name:'BigDeflectorMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:330,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1180,
     },{
       name:'BigDeflectorMachineGunCritSelfTier',sizeBuff:2,lifeBuff:7.5,speedBuff:0.45,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:330,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1180,
     },{
       name:'FastMachineGunHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:29,
@@ -9615,7 +9652,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:56,
     },{
       name:'BigRapidBarrageRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:6,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:6,crit:0,weapon:1181,
     },{
       name:'FastMachineGunStop',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:57,
@@ -9675,7 +9712,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:59,
     },{
       name:'BarrageRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
     },{
       name:'ShortHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
@@ -9789,7 +9826,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:65,
     },{
       name:'BigBarrageCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:1,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:1181,
     },{
       name:'FastLongFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:19,
@@ -9989,6 +10026,9 @@ types={
       name:'SpreadMachineGunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:85,
     },{
+      name:'RapidSlowRocketLauncherConfuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:4,crit:0,weapon:86,
+    },{
       name:'BigRapidSlowRocketLauncherConfuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:86,
     },{
@@ -10100,6 +10140,9 @@ types={
       name:'RocketLaunchingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.75,crit:0,weapon:119,
     },{
+      name:'RocketWaveTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:0.75,crit:0,weapon:1182,
+    },{
       name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.4,crit:0,weapon:99,
     },{
@@ -10114,6 +10157,9 @@ types={
     },{
       name:'BigRapidRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1.5,crit:0,weapon:121,
+    },{
+      name:'BigCritRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:0.75,crit:1,weapon:121,
     },{
       name:'PistolConfuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:91,
@@ -10339,6 +10385,9 @@ types={
     },{
       name:'GasTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'RocketWaveTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1182,
     },{
       name:'EnigmaTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
@@ -10610,6 +10659,9 @@ types={
       name:'Mystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'MysterySpy',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'MysteryMystery',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -10620,6 +10672,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:-1,
     },{
       name:'MysteryTank',sizeBuff:1.2,lifeBuff:2,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'MysteryMiniCelestial',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'MysteryBoss',sizeBuff:1.4,lifeBuff:3,speedBuff:0.4,
@@ -10792,6 +10847,15 @@ types={
     },{
       name:'FreezeShot',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:1130,
+    },{
+      name:'BowlingBall',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1155,
+    },{
+      name:'TankRadialShield',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'MainBattleSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1129,
     },
 
     //mark p
@@ -20443,7 +20507,7 @@ types={
 		},{
 			name:'Penalty Scattergun W',
 			ammo:2,
-			damage:20,
+			damage:24,
 			cooldown:30,
 			stop:60,
 			reload:20,
@@ -20623,7 +20687,7 @@ types={
 		},{
 			name:'Smoke Bomb',
 			ammo:1,
-			damage:80,
+			damage:120,
 			cooldown:108,
 			stop:108,
 			reload:108,
@@ -20831,6 +20895,51 @@ types={
 			name:'Spam Phase Rocket Launcher',
 			ammo:1,
 			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Warning Launcher C',
+			ammo:1,
+			damage:240,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.05,
+      uses:9,
+		},{
+			name:'Peppergun C',
+			ammo:4,
+			damage:32,
+			cooldown:20,
+			stop:75,
+			reload:10,
+			speed:1.15,
+      uses:24,
+		},{
+			name:'Deflector Machine Gun Crit Self C',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Barrage Rocket Launcher C',
+			ammo:10,
+			damage:150,
+			cooldown:30,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:20,
+		},{
+			name:'Rocket Wave',
+			ammo:1,
+			damage:100,
 			cooldown:20,
 			stop:180,
 			reload:0,

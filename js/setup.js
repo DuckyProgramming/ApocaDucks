@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3],sets:[[3,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[1,1],sets:[[7,0],[7,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
-        game.gaming=1
-        game.level=47
+        game.players=2
+        game.gaming=2
+        game.level=117
         /*
         8 - normandy
         41 - speleo dm
@@ -25,7 +25,7 @@ function setup(){
         49 - rusted ad
         55 - tailwater ad
         65 - tailwater 5cp
-        70 - rocksalt ad
+        70 - rocksalt pl
         74 - mill dm
         83 - railing ad
         88 - sulfite koth
@@ -38,10 +38,11 @@ function setup(){
         134 - bluefort micro ctf
         136 - normanDBZ sv
         137 - mill 2 dm
+        138 - rocksalt ad
         */
         menu.level=game.level
         updateRules()
-        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
+        game.pane=!game.pane?false:menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
         if(true){
             game.mission=findName(`Duck Time Deluxe`,types.mission)
             //game.mission=findName(`Duck's Drill`,types.mission)
@@ -70,6 +71,8 @@ function setup(){
         //game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
+
+        //entities.players[0].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
     }
 }
 function windowResized(){
@@ -643,7 +646,11 @@ function mouseClicked(){
                                                 //divider
                                             break
                                             case 3:
-                                                menu.level=70
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                    menu.level=70
+                                                }else{
+                                                    menu.level=138
+                                                }
                                                 game.classicWeapon=true
                                                 //rocksalt
                                             break
@@ -2169,7 +2176,7 @@ function mouseClicked(){
                             updateRules()
                             game.mission=unit
                             entities.players=[]
-                            game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
+                            game.pane=!game.pane?false:menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
                             initialGraphics()
                             if(game.level==29){
                                 newWave()
@@ -2653,7 +2660,7 @@ function mouseClicked(){
                         updateRules()
                         game.mission=menu.list[tick]
                         entities.players=[]
-                        game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
+                        game.pane=!game.pane?false:menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
                         initialGraphics()
                         if(game.level==29){
                             newWave()
@@ -2680,10 +2687,14 @@ function mouseClicked(){
             }
         break
         case 'wave':
+            mouse={
+                x:(inputs.mouse.x-width/2)*700/height+width/2,
+                y:(inputs.mouse.y-height/2)*700/height+height/2,
+            }
             for(let a=0,la=types.mission[game.mission].wave.length;a<la;a++){
                 let lb=types.mission[game.mission].wave[a].length
                 if(la>20){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%5)*210-420,y:height/2-260+floor(a/5)*130},width:200,height:120})){
+                    if(inPointBox({position:mouse},{position:{x:width/2+(a%5)*210-420,y:height/2-260+floor(a/5)*130},width:200,height:120})){
                         stage.scene='main'
                         display.cycle=a
                         if(game.level==37){
@@ -2691,7 +2702,7 @@ function mouseClicked(){
                         }
                     }
                 }else if(lb>44){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
+                    if(inPointBox({position:mouse},{position:{x:width/2+(a%4)*210-210,y:height/2+floor(a/4)*310},width:410,height:610})){
                         stage.scene='main'
                         display.cycle=a
                         if(game.level==37){
@@ -2699,7 +2710,7 @@ function mouseClicked(){
                         }
                     }
                 }else if(lb>22){
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2+floor(a/4)*310},width:200,height:610})){
+                    if(inPointBox({position:mouse},{position:{x:width/2+(a%4)*210-315,y:height/2+floor(a/4)*310},width:200,height:610})){
                         stage.scene='main'
                         display.cycle=a
                         if(game.level==37){
@@ -2707,7 +2718,7 @@ function mouseClicked(){
                         }
                     }
                 }else{
-                    if(inPointBox({position:inputs.mouse},{position:{x:width/2+(a%4)*210-315,y:height/2-155+floor(a/4)*310},width:200,height:300})){
+                    if(inPointBox({position:mouse},{position:{x:width/2+(a%4)*210-315,y:height/2-155+floor(a/4)*310},width:200,height:300})){
                         stage.scene='main'
                         display.cycle=a
                         if(game.level==37){
@@ -2731,7 +2742,7 @@ function instant(){
     updateRules()
     game.mission=0
     entities.players=[]
-    game.pane=menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
+    game.pane=!game.pane?false:menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
     initialGraphics()
     newLoop()
     stage.scene='wave'
