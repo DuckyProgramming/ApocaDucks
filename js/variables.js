@@ -8730,6 +8730,9 @@ types={
       name:'Wait',sizeBuff:0,lifeBuff:0,speedBuff:0,
       damageBuff:0,reloadBuff:0,crit:0,weapon:-1,
     },{
+      name:'Support',sizeBuff:0,lifeBuff:0,speedBuff:0,
+      damageBuff:0,reloadBuff:0,crit:0,weapon:-1,
+    },{
       name:'Pistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
@@ -9364,10 +9367,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'BigBarrageRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1183,
     },{
       name:'BigBarrageRocketLauncherShield',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1183,
     },{
       name:'PushRadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:32,
@@ -9652,7 +9655,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:56,
     },{
       name:'BigRapidBarrageRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:6,crit:0,weapon:1181,
+      damageBuff:1,reloadBuff:6,crit:0,weapon:1183,
     },{
       name:'FastMachineGunStop',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:57,
@@ -9712,7 +9715,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:59,
     },{
       name:'BarrageRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:1181,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:1183,
     },{
       name:'ShortHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
@@ -9826,7 +9829,7 @@ types={
       damageBuff:1,reloadBuff:2,crit:0,weapon:65,
     },{
       name:'BigBarrageCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:2,crit:1,weapon:1181,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:1183,
     },{
       name:'FastLongFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:19,
@@ -20945,6 +20948,15 @@ types={
 			reload:0,
 			speed:0.8,
       uses:8,
+		},{
+			name:'Barrage Rocket Launcher W',
+			ammo:10,
+			damage:150,
+			cooldown:20,
+			stop:360,
+			reload:0,
+			speed:0.8,
+      uses:20,
 		},
 
     /*{

@@ -385,7 +385,7 @@ class projectile{
 					this.travel=0
 				}
 			break
-			case 31: case 47: case 56: case 64:
+			case 31: case 47: case 56: case 64: case 507:
 				this.speed=2
 				this.time=time*2
 			break
@@ -8142,7 +8142,7 @@ class projectile{
 				layer.fill(200,250,250,this.fade)
 				layer.ellipse(0,0,3)
 			break
-			case 505:
+			case 505: case 507:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.triangle(-0.5,2,0.5,2,0,7.5)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -8476,7 +8476,7 @@ class projectile{
 					}
 				}
 			break
-			case 86: case 229: case 262: case 505:
+			case 86: case 229: case 262: case 505: case 507:
 				radius=90
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -9749,7 +9749,7 @@ class projectile{
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
-				case 482: case 492: case 497: case 503:
+				case 482: case 492: case 497: case 503: case 507:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed

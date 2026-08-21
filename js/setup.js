@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[1,1],sets:[[7,0],[7,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -16,8 +16,8 @@ function setup(){
         //game.noEnemy=true
 
         game.players=2
-        game.gaming=2
-        game.level=117
+        game.gaming=1
+        game.level=139
         /*
         8 - normandy
         41 - speleo dm
@@ -39,6 +39,7 @@ function setup(){
         136 - normanDBZ sv
         137 - mill 2 dm
         138 - rocksalt ad
+        139 - flat
         */
         menu.level=game.level
         updateRules()
@@ -72,7 +73,7 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
 
-        //entities.players[0].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
+        entities.players[1].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
     }
 }
 function windowResized(){

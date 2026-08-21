@@ -8395,6 +8395,9 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],506,45,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],506,0,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
+                        case 1183:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],507,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        break
 
                         //mark
                     }
@@ -10112,7 +10115,8 @@ class player{
                         break
                         case 1174:
                             for(let a=0,la=2;a<la;a++){
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(75,105)+a*180,this.id,25,150,crit,this.index))
+                                //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(75,105)+a*180,this.id,20,150,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+a*165,this.id,40,150,crit,this.index))
                             }
                         break
                         case 1176:

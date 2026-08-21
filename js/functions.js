@@ -26,7 +26,8 @@ function setupRules(){
                 a==458||a==462||a==466||a==469||a==473||
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
-                a==498||a==500||a==501||a==505||a==506,
+                a==498||a==500||a==501||a==505||a==506||
+                a==507,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -39,7 +40,7 @@ function setupRules(){
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
-                a==498||a==505||a==506,
+                a==498||a==505||a==506||a==507,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -150,7 +151,7 @@ function setupRules(){
                 a==447||a==448||a==450||a==457||a==458||
                 a==462||a==469||a==471||a==474||a==475||
                 a==489||a==490||a==493||a==495||a==500||
-                a==501||a==505||a==506,
+                a==501||a==505||a==506||a==507,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -11796,7 +11797,7 @@ function formMission(wave,type){
                 ['Fume',4],
                 ['Kamikaze',5],
                 ['HeavyRocketLauncherDefendBuffHeal',3],
-                ['TrolliporterCarrier'],
+                ['TrolliporterCarrier',1],
 
                 ['CritBonkerSplitter',2],
                 ['TeamGust',6],
@@ -11815,7 +11816,7 @@ function formMission(wave,type){
                 ['BigPunchHealSelf',5],
                 ['ProgrammerShield',4],
                 ['FastHeavySniper',8],
-                ['BigPushMachineGun',],
+                ['BigPushMachineGun',3],
                 ['MedicFakeHealthPackCarrier',1],
                 ['FreezeShot',3],
                 ['RGBSplitter',6],
@@ -12027,6 +12028,26 @@ function factor(num){
 }
 function checkValid(){
     types.mission.forEach(mission=>mission.wave.forEach(set=>set.forEach(item=>{if(item[0]!='Support'){findName(item[0],types.player)}})))
+}
+function totalHealth(){
+    for(let a=0,la=types.mission.length;a<la;a++){
+        if(types.mission[a].wave[0].length==0){
+            if(types.mission[a].name=='Duck Time Deluxe'){
+                formMission(types.mission[a].wave,0)
+            }else if(types.mission[a].name=='Patchwork'){
+                compileMission(types.mission[a].wave)
+            }else{
+                generateMission(types.mission[a].wave,types.mission[a].name)
+            }
+        }
+    }
+    print(types.mission.map(mission=>mission.name+`: `+mission.wave.reduce((acc,wave)=>acc+wave.reduce((acc,set)=>{
+        let value=types.player[findName(set[0],types.player)].lifeBuff*100*set[1]
+        if(value!=value){
+            throw new Error(set)
+        }
+        return acc+value
+    },0),0)).join(`\n`))
 }
 /*
 let newer=levels[133].map(

@@ -8,6 +8,7 @@
 1180 - deflector mg crit self c, 330
 1181 - barrage rocket launcher c, 31
 1182 - rocket wave, 119
+1183 - barrage rocket launcher w, 31
 
 499 - razor, 485
 500 - ied w, 490
@@ -17,6 +18,7 @@
 504 - small deflector mg crit self c, 188, 502
 505 - barrage rocket launcher c, 26
 506 - rocket wave, 2
+507 - barrage launcher w, 26
 
 
 1166 - pipe rifle, 1152
