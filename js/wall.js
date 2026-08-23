@@ -8521,7 +8521,7 @@ class wall{
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
-                        if((game.level==49||game.level==131)&&game.pvp){
+                        if((game.level==49||game.level==101||game.level==131)&&game.pvp){
                             layer.fill(
                                 (100+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
                                 (80+lcos(a*90+this.time)*40)*this.visible+50*(1-this.visible),
@@ -11288,7 +11288,8 @@ class wall{
                                 layer.fill(220-this.reload/3)
                             break
                             case 1:
-                                layer.fill(160-this.reload/15,180-this.reload/15,200-this.reload/15)
+                                layer.fill(160-this.reload/5,180-this.reload/5,200-this.reload/5)
+                                //layer.fill(160-this.reload/15,180-this.reload/15,200-this.reload/15)
                             break
                             case 2:
                                 switch(this.target){
@@ -11972,6 +11973,8 @@ class wall{
                         this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
                         if((game.level==49||game.level==131)&&game.pvp){
                             this.visible=smoothAnim(this.visible,game.point[1]>0&&game.point[1]<=game.players&&(abs(entities.players[game.point[1]-1].position.x-this.position.x)<300&&abs(entities.players[game.point[1]-1].position.y-this.position.y)<120),0,1,10)
+                        }else if(game.level==101&&game.pvp){
+                            this.visible=smoothAnim(this.visible,game.point[2]>0&&game.point[2]<=game.players&&(abs(entities.players[game.point[2]-1].position.x-this.position.x)<300&&abs(entities.players[game.point[2]-1].position.y-this.position.y)<120),0,1,10)
                         }
                     }
                 }
@@ -14408,6 +14411,7 @@ class wall{
                                     !(game.level==49&&!game.pvp&&game.pointAnim[1]>=1)&&
                                     !(game.level==49&&game.pvp&&this.visible<1)&&
                                     !(game.level==100&&!game.pvp&&game.pointAnim[2]>=1)&&
+                                    !(game.level==101&&game.pvp&&this.visible<1)&&
                                     !(game.level==131&&!game.pvp&&game.pointAnim[1]>=1)&&
                                     !(game.level==131&&game.pvp&&this.visible<1)
                                 ){
@@ -15064,7 +15068,7 @@ class wall{
                                                                 if(this.type==13){
                                                                     for(let e=0,le=entities.walls[1].length;e<le;e++){
                                                                         if(entities.walls[1][e].type==33&&dist(this.position.x,this.position.y,entities.walls[1][e].position.x,entities.walls[1][e].position.y)<300&&(entities.walls[1][e].owner==c.id&&c.id>=0||entities.walls[1][e].owner>0&&c.id>0&&!game.pvp)){
-                                                                            if(entities.walls[1][e].pos==4){
+                                                                            if(entities.walls[1][e].pos==4&&game.level!=101){
                                                                                 hit=true
                                                                                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
                                                                                 game.index++
@@ -15073,10 +15077,12 @@ class wall{
                                                                                 entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
                                                                                 entities.players[entities.players.length-1].velocity.y=-20
                                                                             }else{
-                                                                                hit=true
-                                                                                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,findName('FieldArmy',types.player),game.index))
-                                                                                entities.players[entities.players.length-1].auto=true
-                                                                                game.index++
+                                                                                if(game.level!=101||game.point[0]==c.id){
+                                                                                    hit=true
+                                                                                    entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,findName('FieldArmy',types.player),game.index))
+                                                                                    entities.players[entities.players.length-1].auto=true
+                                                                                    game.index++
+                                                                                }
                                                                             }
                                                                             e=le
                                                                         }
@@ -15357,7 +15363,7 @@ class wall{
                                                                     entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                                                 }
                                                             break
-                                                            case 23: case 101:
+                                                            case 23:
                                                                 if(game.point[0]==c.id){
                                                                     for(let e=0,le=10;e<le;e++){
                                                                         entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,200,1200,false,-1))
@@ -15448,6 +15454,16 @@ class wall{
                                                                 c.storeWeapon=true
                                                                 c.weapon.cooldown=random(90,180)
                                                             break
+                                                            case 101:
+                                                                for(let e=0,le=10;e<le;e++){
+                                                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,114,random(-120,-240),c.id,200,1200,false,-1))
+                                                                    let mult=random(1.25,2.5)
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                                                    entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
+                                                                    entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
+                                                                }
+                                                            break
                                                         }
                                                     }
                                                 break
@@ -15499,7 +15515,7 @@ class wall{
                                                             case 23: case 101:
                                                                 switch(this.pos){
                                                                     case 0:
-                                                                        if(game.point[0]==c.id){
+                                                                        if(game.point[0]==c.id||game.level==101){
                                                                             for(let e=0,le=15;e<le;e++){
                                                                                 entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,258,-255+(e+0.5)/le*150,c.id,50,120,false,-1))
                                                                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.1
@@ -15531,7 +15547,8 @@ class wall{
                                                                                 }
                                                                             }
                                                                             game.index++
-                                                                            this.reload=900
+                                                                            //this.reload=900
+                                                                            this.reload=480
                                                                         }else{
                                                                             this.reload=0
                                                                         }

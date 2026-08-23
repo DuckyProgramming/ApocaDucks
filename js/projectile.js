@@ -15,10 +15,7 @@ class projectile{
 		this.projectileIndex=game.projectileIndex
 		game.projectileIndex++
 		this.rules=types.rules.projectile[this.type]
-		this.bullet=false
-		this.trap=false
-		this.drone=false
-		this.partisan=false
+		this.classification={bullet:false,drone:false,partisan:false,flame:false}
 		this.travel=0
 		this.stop=false
         this.remove=false
@@ -76,7 +73,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 2: case 16: case 21: case 22: case 27: case 32: case 45: case 48: case 55: case 66:
 			case 78: case 86: case 101: case 187: case 213: case 266: case 279: case 308: case 313: case 351:
@@ -105,7 +102,7 @@ class projectile{
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 457: case 458: case 462: case 463: case 464:
 			case 474: case 475: case 484: case 490: case 493: case 495: case 496: case 499: case 500: case 501:
-				this.partisan=true
+				this.classification.partisan=true
 				size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||
 					this.type==259||this.type==268||this.type==283||this.type==301||this.type==303||this.type==437||this.type==499?16:
 					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||
@@ -124,7 +121,8 @@ class projectile{
 					this.type==474||this.type==475||this.type==484?15:
 					this.type==120||this.type==177||this.type==178||this.type==179||this.type==182|this.type==183|this.type==227||this.type==271||this.type==318?1:
 					this.type==490||this.type==495||this.type==496||this.type==500?random(2,6):
-					this.type==499?random(4,6):
+					//this.type==499?random(4,6):
+					this.type==499?random(3,5):
 					6
 				this.bounces=0
 				this.bounceTimer=0
@@ -175,7 +173,7 @@ class projectile{
 								this.goal=a
 							}
 						}
-						this.drone=true
+						this.classification.drone=true
 						this.aggro=false
 						this.orbit=35
 						this.offset=direction
@@ -195,7 +193,7 @@ class projectile{
 								this.goal=a
 							}
 						}
-						this.drone=true
+						this.classification.drone=true
 						this.aggro=false
 						this.goalIndex=0
 						this.orbit=this.type==128?random(15,25):random(25,35)
@@ -238,7 +236,7 @@ class projectile{
 					case 323: case 329: case 349: case 360: case 368:
 					case 372: case 375: case 392: case 417: case 435:
 					case 438: case 448:
-						this.trap=true
+						//this.classification.trap=true
 						this.stopAnim=1
 						this.stopPlane=0
 						this.det=0
@@ -306,6 +304,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.width*=4
 				this.height*=4
+				this.classification.flame=true
 			break
 			case 7: case 23: case 37: case 40: case 46: case 76: case 77:
 				this.width*=5
@@ -318,6 +317,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.width*=4
 				this.height*=4
+				this.classification.flame=true
 			break
 			case 17:
 				this.width=6
@@ -877,6 +877,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.width*=2
 				this.height*=2
+				this.classification.flame=true
 			break
 			case 280: case 316:
 				this.speed=4
@@ -888,6 +889,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.width*=4
 				this.height*=4
+				this.classification.flame=true
 			break
 			case 333:
 				this.speed=2
@@ -912,7 +914,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 				this.width*=2
 				this.height*=2
 			break
@@ -921,7 +923,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 				this.width*=1.5
 				this.height*=1.5
 			break
@@ -930,7 +932,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 354:
 				this.speed=2.75
@@ -1002,14 +1004,14 @@ class projectile{
 				this.time=time*2
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 414:
 				this.speed=random(6,8)
 				this.time=random(time*1.5,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 416: case 468: case 472:
 				this.fail=false
@@ -1043,6 +1045,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.width*=4
 				this.height*=4
+				this.classification.flame=true
 			break
 			case 427:
 				this.speed=0
@@ -1059,9 +1062,11 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
-				this.width*=1.25
-				this.height*=1.25
+				this.classification.bullet=true
+				/*this.width*=1.25
+				this.height*=1.25*/
+				this.width*=1.5
+				this.height*=1.5
 			break
 			case 444:
 				this.speed=2
@@ -1072,7 +1077,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 				this.hit=[]
 			break
 			case 452:
@@ -1080,7 +1085,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 466:
 				this.speed=7
@@ -1091,7 +1096,7 @@ class projectile{
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
-				this.bullet=true
+				this.classification.bullet=true
 			break
 			case 482:
 				this.speed=8
@@ -1143,7 +1148,7 @@ class projectile{
 		if(this.crit==1){
 			this.damage*=2.5
 		}
-		if(this.drone){
+		if(this.classification.drone){
 			this.check=[]
 		}
     }
@@ -9679,7 +9684,7 @@ class projectile{
 				}
 			}
         }
-		let nudge=this.partisan?300:50
+		let nudge=this.classification.partisan?300:50
 		if((game.level==3||game.level==7)&&this.position.y>game.edge[1]){
 			this.position.y=0
 			this.previous.position.y=0
@@ -10302,7 +10307,7 @@ class projectile{
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
-										let mult=(entities.projectiles[b].partisan?1:4)
+										let mult=(entities.projectiles[b].classification.partisan?1:4)
 										let harm=min(entities.projectiles[b].damage,this.damage/mult)
 										entities.projectiles[b].damage-=harm
 										this.damage-=harm*mult
@@ -10765,13 +10770,13 @@ class projectile{
 						}
 						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 							if(
-								entities.projectiles[b].bullet&&
+								entities.projectiles[b].classification.bullet&&
 								(entities.projectiles[b].id!=this.id&&!(!game.pvp&&entities.projectiles[b].id>0&&this.id>0))&&
 								(
 									dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35||
 									dist(this.position.x,this.position.y,entities.projectiles[b].previous.position.x*0.5+entities.projectiles[b].position.x*0.5,entities.projectiles[b].previous.position.y*0.5+entities.projectiles[b].position.y*0.5)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35
 								)
-								//(entities.projectiles[b].bullet/*||entities.projectiles[b].type==6||entities.projectiles[b].type==15||entities.projectiles[b].type==276*/)
+								//(entities.projectiles[b].classification.bullet/*||entities.projectiles[b].type==6||entities.projectiles[b].type==15||entities.projectiles[b].type==276*/)
 							){
 								this.active=false
 								this.fail=true
@@ -10963,7 +10968,7 @@ class projectile{
 									if(entities.projectiles[b].damage>this.base.damage){
 										this.active=false
 									}else{
-										let mult=(entities.projectiles[b].partisan?1:4)
+										let mult=(entities.projectiles[b].classification.partisan?1:4)
 										let harm=min(entities.projectiles[b].damage,this.damage/mult)
 										entities.projectiles[b].damage-=harm
 										this.damage-=harm*mult
@@ -12283,7 +12288,7 @@ class projectile{
 			!((this.type==98||this.type==450)&&this.timer<15)&&
 			!(this.type==100&&this.timer<3)&&
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
-			!(this.trap&&this.timer<150)
+			!(this.rules.trap&&this.timer<150)
 		){
 			let bound=this.rules.fast?100:50
 			let targets=[]
@@ -12334,7 +12339,7 @@ class projectile{
 				this.height/=36
 			break
 		}
-		if(this.drone&&this.timer%30==0){
+		if(this.classification.drone&&this.timer%30==0){
 			let rad=this.type==404?5:10
 			if(
 				this.check.length>=4&&
@@ -12393,10 +12398,11 @@ class projectile{
 		!(this.rules.hitstack&&this.hit.includes(target.index))&&
 		!(this.type==258&&target.fort&&this.index==-1)&&
 		!(this.type==434&&this.onTeam(target)&&target.construct)&&
-		target.life>0&&this.active
+		target.life>0&&this.active&&
+		this.fade>0.5
 	}
 	hitPlayer(target){
-		/*if(this.drone&&target.id>0&&game.pvp&&this.type!=138){
+		/*if(this.classification.drone&&target.id>0&&game.pvp&&this.type!=138){
 			this.damage*=0.6
 		}*/
 		if(this.travel>750&&!this.rules.fast&&this.type!=336){

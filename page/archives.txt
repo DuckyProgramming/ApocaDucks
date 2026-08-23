@@ -9,6 +9,7 @@
 1181 - barrage rocket launcher c, 31
 1182 - rocket wave, 119
 1183 - barrage rocket launcher w, 31
+1184 - sword c, 702
 
 499 - razor, 485
 500 - ied w, 490
@@ -19,6 +20,7 @@
 505 - barrage rocket launcher c, 26
 506 - rocket wave, 2
 507 - barrage launcher w, 26
+
 
 
 1166 - pipe rifle, 1152
@@ -36,7 +38,6 @@
 496 - chlorine bomb, 490
 497 - donut w, 439
 498 - drone c, 163
-
 
 
 

@@ -612,8 +612,10 @@ class player{
             layer.noFill()
             layer.stroke(200,this.fade)
             layer.strokeWeight(1)
-            layer.line(-25,-90,0,-5)
-            layer.line(25,-90,0,-5)
+            /*layer.line(-25,-90,0,-5)
+            layer.line(25,-90,0,-5)*/
+            layer.line(-25,-90,0,-10)
+            layer.line(25,-90,0,-10)
             layer.stroke(160,this.fade)
             layer.strokeWeight(5)
             layer.arc(0,-80,80,20,-165,-15)
@@ -1677,8 +1679,8 @@ class player{
     }
     destroyProjectiles(){
         for(let a=0,la=entities.projectiles.length;a<la;a++){
-            if(entities.projectiles[a].index==this.index&&entities.projectiles[a].partisan){
-                if(!entities.projectiles[a].trap){
+            if(entities.projectiles[a].index==this.index&&entities.projectiles[a].classification.partisan){
+                if(!entities.projectiles[a].classification.trap){
                     entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                 }
                 if((entities.projectiles[a].rules.stickybomb||entities.projectiles[a].type==438||entities.projectiles[a].type==498)&&entities.projectiles[a].active){
@@ -1711,7 +1713,7 @@ class player{
             }
         }
         for(let a=0,la=entities.projectiles.length;a<la;a++){
-            if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].trap&&entities.projectiles[a].partisan){
+            if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].classification.trap&&entities.projectiles[a].classification.partisan){
                 entities.projectiles[a].time=min(15,entities.projectiles[a].time)
             }
         }
@@ -8398,6 +8400,11 @@ class player{
                         case 1183:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],507,(lsin(this.direction.main)<0?-90:90)+random(-7.5,7.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
+                        case 1184:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],91,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,45,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed*=0.64
+                            entities.projectiles[entities.projectiles.length-1].base.speed*=0.64
+                        break
 
                         //mark
                     }
@@ -8407,7 +8414,7 @@ class player{
                                 this.weaponType=-1
                                 this.updateWeaponRules()
                                 for(let a=0,la=entities.projectiles.length;a<la;a++){
-                                    if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].trap&&entities.projectiles[a].partisan){
+                                    if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].classification.trap&&entities.projectiles[a].classification.partisan){
                                         entities.projectiles[a].time=min(60,entities.projectiles[a].time)
                                     }
                                 }
@@ -8678,7 +8685,7 @@ class player{
             case 629: case 630: case 644: case 655: case 660: case 707: case 708: case 720: case 745: case 771:
             case 792: case 954: case 964: case 1004:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
-                if(!this.sidekick&&!(this.weaponRules.dronerLine&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital')){
+                if(!this.sidekick&&!(this.weaponrules.dronerLine&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital')){
                     if(this.time%5==0){
                         let hit=false
                         if(![191,226,228,230,265,266].includes(this.weaponType)){
@@ -10118,6 +10125,7 @@ class player{
                                 //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(75,105)+a*180,this.id,20,150,crit,this.index))
                                 entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+a*165,this.id,40,150,crit,this.index))
                             }
+                            //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+floor(random(0,2))*165,this.id,50,150,crit,this.index))
                         break
                         case 1176:
                             entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,500,random(90,270),this.id,500,60,crit,this.index))

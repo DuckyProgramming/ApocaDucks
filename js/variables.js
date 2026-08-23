@@ -8320,6 +8320,9 @@ types={
     },{
       name:'PlayerPeppergunC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1179,
+    },{
+      name:'PlayerSwordC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1184,
     },
 
     //mark c
@@ -20957,6 +20960,15 @@ types={
 			reload:0,
 			speed:0.8,
       uses:20,
+		},{
+			name:'Sword C',
+			ammo:3,
+			damage:160,
+			cooldown:36,
+			stop:96,
+			reload:60,
+			speed:1.4,
+      uses:15,
 		},
 
     /*{

@@ -14864,7 +14864,8 @@ player.prototype.logic=function(){
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !game.noPlayer&&!(this.id>0&&this.weaponType==-1&&!this.playerData.name.includes('Buster'))&&
-                !(this.id>0&&entities.players[a].id>0&&!game.point.includes(this.id)&&!game.point.includes(entities.players[a].id))
+                !(this.id>0&&entities.players[a].id>0&&!game.point.includes(this.id)&&!game.point.includes(entities.players[a].id))&&
+                !(this.playerData.name.includes('Buster')&&entities.players[a].fort)
             ){
                 this.target.heal=!this.validTarget(entities.players[a])
                 let b=entities.players[a]
@@ -14892,12 +14893,22 @@ player.prototype.logic=function(){
                 }
             }
         }
-        if(game.pvp&&this.position.x<150&&this.position.y>1200&&game.gate[0]&&this.id==0){
-            this.target.position.x=random(0,150)
-            this.target.position.y=game.edge[1]
-        }else if(game.pvp&&this.position.x>game.edge[0]-150&&this.position.y>1200&&game.gate[1]&&this.id==0){
-            this.target.position.x=random(game.edge[0]-150,game.edge[0])
-            this.target.position.y=game.edge[1]
+        if(game.pvp&&this.position.x<150&&this.position.y>1200&&this.id==0){
+            if(game.gate[0]){
+                this.target.position.x=random(0,150)
+                this.target.position.y=game.edge[1]
+            }else{
+                this.target.position.x=game.edge[0]
+                this.target.position.y=game.edge[1]
+            }
+        }else if(game.pvp&&this.position.x>game.edge[0]-150&&this.position.y>1200&&this.id==0){
+            if(game.gate[1]){
+                this.target.position.x=random(game.edge[0]-150,game.edge[0])
+                this.target.position.y=game.edge[1]
+            }else{
+                this.target.position.x=0
+                this.target.position.y=game.edge[1]
+            }
         }else if(targets.length>0){
             let target=targets[floor(random(targets.length))]
             this.target.position.x=target[0]+random(-60,60)*(this.weaponData.name.includes('Punch')?0.2:1)
