@@ -8405,6 +8405,11 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].speed*=0.64
                             entities.projectiles[entities.projectiles.length-1].base.speed*=0.64
                         break
+                        case 1185:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],508,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                            this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?2:1)
+                            this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?2:1)
+                        break
 
                         //mark
                     }
@@ -9759,7 +9764,7 @@ class player{
             let rate=(this.hasteBuff>0?2:1)*
                 (game.brutal&&this.variant==11?3:1)*
                 (this.confuseTime>0||this.dizzyTime>0?1/3:1)*
-                (this.fort?(rules.dm||game.pvp&&!game.pvpPoint?0:game.level==49&&game.pvp?0.5:rules.key.fortReload):1)*
+                (this.fort?(rules.dm||game.pvp&&!game.pvpPoint&&!this.auto?0:game.level==49&&game.pvp?0.5:rules.key.fortReload):1)*
                 (!game.peakWeapon&&this.fort?0.5:1)*
                 ((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*
                 (this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&!game.classWeapon&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*

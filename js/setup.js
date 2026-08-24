@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3,0],sets:[[8,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[7],sets:[[0,7]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=2
+        game.players=1
         game.gaming=1
-        game.level=139
+        game.level=47
         /*
         8 - normandy
         41 - speleo dm
@@ -73,7 +73,7 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
 
-        entities.players[1].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
+        //entities.players[1].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
     }
 }
 function windowResized(){

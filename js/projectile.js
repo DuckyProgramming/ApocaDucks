@@ -102,11 +102,13 @@ class projectile{
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 457: case 458: case 462: case 463: case 464:
 			case 474: case 475: case 484: case 490: case 493: case 495: case 496: case 499: case 500: case 501:
+			case 508:
 				this.classification.partisan=true
 				size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||
 					this.type==259||this.type==268||this.type==283||this.type==301||this.type==303||this.type==437||this.type==499?16:
 					this.type==118||this.type==122||this.type==123||this.type==128||this.type==129||this.type==137||this.type==140||this.type==141||this.type==142||this.type==144||
-					this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373||this.type==402?8:
+					this.type==157||this.type==171||this.type==249||this.type==260||this.type==261||this.type==272||this.type==328||this.type==356||this.type==373||this.type==402||
+					this.type==501?8:
 					4
 				this.width=size
 				this.height=size
@@ -6019,7 +6021,7 @@ class projectile{
 				layer.ellipse(0,0,3)
 				layer.ellipse(-1.5,0,1.5)
 			break
-			case 344: case 474:
+			case 344:
 				layer.rotate(-this.direction)
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
@@ -7151,7 +7153,17 @@ class projectile{
 				layer.ellipse(0,0,8)
 				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
 				layer.rotate(this.position.x*4)
-				layer.rect(0,0,3,8)
+				layer.rect(0,0,1,8)
+				layer.beginShape()
+				layer.vertex(-3,-2.7)
+				layer.vertex(-3,2.7)
+				layer.bezierVertex(-4.25,1.2,-4.25,-1.2,-3,-2.7)
+				layer.endShape()
+				layer.beginShape()
+				layer.vertex(3,-2.7)
+				layer.vertex(3,2.7)
+				layer.bezierVertex(4.25,1.2,4.25,-1.2,3,-2.7)
+				layer.endShape()
 				if(!this.active&&this.fade<1){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 					layer.ellipse(0,0,210-this.fade*210)
@@ -7634,9 +7646,13 @@ class projectile{
 				layer.fill(250,this.fade)
 				layer.ellipse(0,0,8)
 				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.rotate(this.position.x*4)
 				layer.rect(0,0,4)
-				layer.fill(100,this.fade)
-				layer.quad(0,-2,-2,0,0,2,2,0)
+				//layer.fill(100,this.fade)
+				layer.fill(250,this.fade)
+				//layer.quad(0,-2,-2,0,0,2,2,0)
+				layer.rotate(this.position.x*-8)
+				layer.rect(0,0,2)
 				if(!this.active&&this.fade<1){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 					layer.ellipse(0,0,222.5-this.fade*222.5)
@@ -7760,6 +7776,28 @@ class projectile{
 					layer.ellipse(0,0,(100-this.detTimer*10)*(this.fail?0.25:1))
 					layer.stroke(160-this.crit*160,160,160,this.detTimer*0.08)
 					layer.ellipse(0,0,(50-this.detTimer*5)*(this.fail?0.25:1))
+				}
+			break
+			case 474:
+				layer.rotate(-this.direction)
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[0][0]-this.position.x,this.past[0][1]-this.position.y,2)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[4][0]-this.position.x,this.past[4][1]-this.position.y,4)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
+				layer.fill(250,this.fade)
+				layer.ellipse(0,0,8)
+				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
+				layer.rotate(this.position.x*4)
+				layer.rect(0,0,3,8)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,(270-this.fade*270)*(this.fail?0.5:1))
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,(180-this.fade*180)*(this.fail?0.5:1))
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,(90-this.fade*90)*(this.fail?0.5:1))
 				}
 			break
 			case 477: case 478:
@@ -8193,6 +8231,17 @@ class projectile{
 					layer.ellipse(0,0,100-this.fade*100)
 					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
 					layer.ellipse(0,0,50-this.fade*50)
+				}
+			break
+			case 508:
+				layer.rotate(-this.direction)
+				if(!this.active&&this.fade<1){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,360-this.fade*360)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,240-this.fade*240)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade)
+					layer.ellipse(0,0,120-this.fade*120)
 				}
 			break
 
@@ -8900,8 +8949,8 @@ class projectile{
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.5,1)
 				}
 			break
-			case 353:
-				radius=240
+			case 353: case 508:
+				radius=this.type==508?225:240
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||this.id==-1||entities.players[b].id==-1||game.pvp&&(this.id!=entities.players[b].id||!rules.teamMode&&!entities.players[b].fort)||this.index==entities.players[b].index)){
@@ -9722,7 +9771,7 @@ class projectile{
 			case 402: case 404: case 410: case 412: case 413: case 416: case 417: case 425: case 431: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 453: case 457: case 458: case 462: case 463:
 			case 464: case 468: case 472: case 473: case 474: case 475: case 484: case 485: case 490: case 493:
-			case 495: case 496: case 499: case 500: case 501:
+			case 495: case 496: case 499: case 500: case 501: case 508:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -9775,7 +9824,7 @@ class projectile{
 				case 326: case 344: case 353: case 356: case 359: case 366: case 367: case 376: case 383: case 389: case 390:
 				case 391: case 402: case 410: case 412: case 413: case 416: case 425: case 431: case 447: case 450: case 453:
 				case 457: case 458: case 462: case 463: case 464: case 468: case 472: case 473: case 474: case 475: case 484:
-				case 485: case 490: case 493: case 495: case 496: case 499: case 500: case 501:
+				case 485: case 490: case 493: case 495: case 496: case 499: case 500: case 501: case 508:
 					if(this.type==240&&this.timer%20==0&&a==0&&this.active){
 						this.velocity.y*=-1
 					}
@@ -9861,7 +9910,7 @@ class projectile{
 							)
 						}
 					}
-					if(this.type==353&&this.active&&this.time>=15){
+					if((this.type==353||this.type==508)&&this.active&&this.time>=15){
 						this.active=false
 						this.explode()
 					}
@@ -12399,7 +12448,7 @@ class projectile{
 		!(this.type==258&&target.fort&&this.index==-1)&&
 		!(this.type==434&&this.onTeam(target)&&target.construct)&&
 		target.life>0&&this.active&&
-		this.fade>0.5
+		(this.fade>0.5||this.forceDisplay)
 	}
 	hitPlayer(target){
 		/*if(this.classification.drone&&target.id>0&&game.pvp&&this.type!=138){

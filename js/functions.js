@@ -27,9 +27,9 @@ function setupRules(){
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
-                a==507,
+                a==507||a==508,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
-                a==353||a==412||a==482||a==493,
+                a==353||a==412||a==482||a==493||a==508,
 			rocket:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==41||a==45||a==47||
 				a==48||a==53||a==54||a==55||a==56||
@@ -80,7 +80,7 @@ function setupRules(){
                 a==448||a==450||a==457||a==458||a==462||
                 a==468||a==472||a==473||a==474||a==475||
                 a==484||a==485||a==490||a==493||a==495||
-                a==496||a==499||a==500||a==501,
+                a==496||a==499||a==500||a==501||a==508,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -151,7 +151,7 @@ function setupRules(){
                 a==447||a==448||a==450||a==457||a==458||
                 a==462||a==469||a==471||a==474||a==475||
                 a==489||a==490||a==493||a==495||a==500||
-                a==501||a==505||a==506||a==507,
+                a==501||a==505||a==506||a==507||a==508,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -4735,7 +4735,7 @@ function generateLevel(info,layer){
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]*5.5+b*game.tileset[0],game.tileset[1]+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,75))
                             entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*5.5+b*game.tileset[0],(a+1.7)*game.tileset[1],game.tileset[0],game.tileset[1]*0.4,37))
                         break
-                        case 88: case 91: case 104: case 105: case 110: case 126: case 127: case 132:
+                        case 88: case 91: case 101: case 104: case 105: case 110: case 126: case 127: case 132:
                             if(level[a][b+1]=='<'&&level[a][b+2]=='<'&&level[a][b+3]=='<'&&game.level==132){
                                 entities.walls[0].splice(0,0,new wall(graphics.main,game.tileset[0]*2+b*game.tileset[0],(a+0.2)*game.tileset[1],game.tileset[0]*4,game.tileset[1]*0.4,24))
                             }else if(level[a][b-1]=='>'&&level[a][b-2]=='>'&&level[a][b-3]=='>'&&game.level==132){
@@ -5595,7 +5595,7 @@ function generateLevel(info,layer){
                                 entities.walls[1].push(new wall(graphics.main,random(100,game.edge[0]-100),random(-2000,0),game.tileset[1]*0.6,game.tileset[1]*0.6,27))
                             }
                         break
-                        case 19: case 22: case 23: case 31: case 35: case 100: case 101: case 103:
+                        case 19: case 22: case 23: case 31: case 35:
                             entities.walls[0].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+(a-0.5)*game.tileset[1],game.tileset[0],game.tileset[1]*2,17))
                         break
                         case 25: case 26: case 28: case 30: case 49: case 54: case 56: case 104: case 105: case 110:
@@ -11879,7 +11879,7 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshotC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerC`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaberC`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerC`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],

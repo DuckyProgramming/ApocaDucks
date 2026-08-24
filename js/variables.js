@@ -17,7 +17,7 @@ game={
   diff:1,diffComposite:1,deathlink:false,noStat:false,killStreak:false,traitor:false,
   anyPrimary:false,anySecondary:false,classPick:[],
   teamSpawn:false,spectateSpawn:[false,false],
-  speedArena:false,speedArenaKey:2,pvpPoint:false,
+  speedArena:false,speedArenaKey:2,pvpPoint:true,
   /*
   spectateSpawn
   0 - enables spawning on teammates
@@ -8323,6 +8323,9 @@ types={
     },{
       name:'PlayerSwordC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1184,
+    },{
+      name:'PlayerCaberC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1185,
     },
 
     //mark c
@@ -20969,6 +20972,15 @@ types={
 			reload:60,
 			speed:1.4,
       uses:15,
+		},{
+			name:'Caber C',
+			ammo:1,
+			damage:375,
+			cooldown:210,
+			stop:210,
+			reload:210,
+			speed:1.05,
+      uses:2,
 		},
 
     /*{
