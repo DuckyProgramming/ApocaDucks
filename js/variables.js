@@ -8400,6 +8400,9 @@ types={
       name:'ConstructHalf',sizeBuff:2/3,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1018,
     },{
+      name:'ConstructHeavyHalf',sizeBuff:2/3,lifeBuff:1.2,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1018,
+    },{
       name:'ConstructTemp',sizeBuff:0.8,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:826,
     },{

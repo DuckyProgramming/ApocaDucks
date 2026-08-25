@@ -71,7 +71,10 @@ function mainloop(){
                             rect(pos[0],pos[1],41,45,10)
                             rect(pos[0]+39.5,pos[1],41,45,10)
                         }
-                    }else if(menu.mode==3&&a==9&&b==0){
+                    }else if(
+                        menu.mode==2&&a==9&&b==2||
+                        menu.mode==3&&a==9&&b==0
+                    ){
                         rect(pos[0]+49.5,pos[1],51,45,10)
                         rect(pos[0],pos[1],51,45,10)
                         rect(pos[0]-49.5,pos[1],51,45,10)
@@ -82,7 +85,7 @@ function mainloop(){
                         menu.mode==2&&a==7&&b==1||
                         menu.mode==2&&a==7&&b==3||
                         menu.mode==2&&a==8&&b==3||
-                        menu.mode==2&&a==9&&b==2||
+                        //menu.mode==2&&a==9&&b==2||
                         menu.mode==2&&a==9&&b==1||
 
                         menu.mode==3&&a==8&&b==1||
@@ -199,8 +202,11 @@ function mainloop(){
                                             text(`Hexagon`,pos[0]+37,pos[1]+15)
                                         break
                                         case 2:
-                                            text(`Standard`,pos[0]-37,pos[1]+15)
-                                            text(`Chaos`,pos[0]+37,pos[1]+15)
+                                            /*text(`Standard`,pos[0]-37,pos[1]+15)
+                                            text(`Chaos`,pos[0]+37,pos[1]+15)*/
+                                            text(`1`,pos[0]-49.5,pos[1]+15)
+                                            text(`2`,pos[0],pos[1]+15)
+                                            text(`Chaos`,pos[0]+49.5,pos[1]+15)
                                         break
                                     }
                                 break
@@ -1387,8 +1393,11 @@ function mainloop(){
                         if(!inFullBoxBox({position:{x:effective[a][0],y:effective[a][1]},width:graphics.main[0].width*key[a],height:graphics.main[0].height*key[a]},graphics.panePoint[a])||key[a]!=graphics.key[a]){
                             //let startTime=performance.now()
 
-                            effective[a][0]=round(effective[a][0])
+                            effective[a][0]=round(effective[a][0]/key[a])*key[a]
+                            effective[a][1]=round(effective[a][1]/key[a])*key[a]
+                            /*effective[a][0]=round(effective[a][0])
                             effective[a][1]=round(effective[a][1])
+                            print(effective[a])*/
                             if(key[a]!=graphics.key[a]){
                                 graphics.pane[a].clear()
                             }else{
@@ -1670,7 +1679,7 @@ function mainloop(){
                             case 68: case 69: case 70: case 76: case 77: case 78: case 79: case 82: case 83: case 84:
                             case 85: case 86: case 88: case 89: case 94: case 95: case 96: case 97: case 98: case 99:
                             case 100: case 101: case 103: case 104: case 105: case 108: case 109: case 131: case 132: case 133:
-                            case 134: case 135: case 138:
+                            case 134: case 135: case 138: case 140:
                                 if(game.margin){
                                     graphics.main[a].noFill()
                                     graphics.main[a].stroke(255)

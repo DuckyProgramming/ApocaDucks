@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[7],sets:[[0,7]],experiment:[-1,[0,-1]]}
+        //duel={trigger:true,numKey:[7],sets:[[0,7]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
+        game.players=5
         game.gaming=1
-        game.level=47
+        game.level=140
         /*
         8 - normandy
         41 - speleo dm
@@ -40,6 +40,7 @@ function setup(){
         137 - mill 2 dm
         138 - rocksalt ad
         139 - flat
+        140 - ferrum 2 ad
         */
         menu.level=game.level
         updateRules()
@@ -73,7 +74,7 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
 
-        //entities.players[1].newWeaponSet(findName('BigBarrageCritRocketLauncher',types.player))
+        //entities.players[0].newWeaponSet(findName('PlayerRocketJumpC',types.player))
     }
 }
 function windowResized(){
@@ -860,8 +861,10 @@ function mouseClicked(){
                                                 //confines
                                             break
                                             case 2:
-                                                if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
+                                                if(inPointBox({position:mouse},{position:{x:pos[0]-50,y:pos[1]},width:50,height:45})){
                                                     menu.level=100
+                                                }else if(inPointBox({position:mouse},{position:{x:pos[0],y:pos[1]},width:50,height:45})){
+                                                    menu.level=140
                                                 }else{
                                                     menu.level=103
                                                 }

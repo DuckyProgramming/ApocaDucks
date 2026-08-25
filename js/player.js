@@ -1334,7 +1334,7 @@ class player{
     }
     jumpAction(){
         if(this.bounceTime>0){
-            let bounceMult=game.level==1?3:1.5
+            let bounceMult=game.level==1||game.level==42?3:1.5
             if(this.rules.jumper){
                 this.velocity.y=min(-(21-max(0,min(120,this.assort.tired)-30-this.life/this.base.life*30)/30)*bounceMult*(this.wet>0?0.5:1),this.velocity.y-2.25*bounceMult*(this.wet>0?0.5:1))
             }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'){
@@ -3360,13 +3360,13 @@ class player{
                     case 3:
                         let total1017=0
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
+                            if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
                                 total1017++
                             }
                         }
                         if(total1017>=2){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructHalf'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                                if(entities.players[a].playerData.name=='ConstructHeavyHalf'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
                                     entities.players[a].life<entities.players[a].base.life||
                                     entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 )){
@@ -3383,7 +3383,7 @@ class player{
                             if(build){
                                 total1017=0
                                 for(let a=0,la=entities.players.length;a<la;a++){
-                                    if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
+                                    if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
                                         total1017++
                                         if(total1017>=2){
                                             entities.players[la-1-a].life=0
@@ -3394,7 +3394,7 @@ class player{
                             }
                         }
                         if(build){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHeavyHalf',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index
@@ -7786,7 +7786,7 @@ class player{
                         case 1017:
                             let total1017=0
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
+                                if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
                                     total1017++
                                     if(total1017>=2){
                                         entities.players[la-1-a].life=0
@@ -7794,7 +7794,7 @@ class player{
                                     }
                                 }
                             }
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHeavyHalf',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index
@@ -7975,12 +7975,12 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].speed=0
                             entities.projectiles[entities.projectiles.length-1].explode()
                             entities.projectiles[entities.projectiles.length-1].active=false
-                            this.jump.time=0
                             this.velocity.x=lsin(this.direction.main)*20
-                            this.velocity.y=-10
+                            this.velocity.y=-(this.jump.time==0?10:20)
                             this.lastingForce[0]+=lsin(this.direction.main)*2
                             this.lastingForce[1]-=2
                             this.thrown=true
+                            this.jump.time=0
                         break
                         case 1128:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],470,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,1,crit,this.index))
@@ -8690,7 +8690,7 @@ class player{
             case 629: case 630: case 644: case 655: case 660: case 707: case 708: case 720: case 745: case 771:
             case 792: case 954: case 964: case 1004:
                 this.infoAnim.bar=[smoothAnim(this.infoAnim.bar[0],lsin(this.direction.main)<0,0,1,5),smoothAnim(this.infoAnim.bar[1],lsin(this.direction.main)>0,0,1,5)]
-                if(!this.sidekick&&!(this.weaponrules.dronerLine&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital')){
+                if(!this.sidekick&&!(this.rules.dronerLine&&this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital')){
                     if(this.time%5==0){
                         let hit=false
                         if(![191,226,228,230,265,266].includes(this.weaponType)){
@@ -10416,7 +10416,7 @@ class player{
                     break
                 }
                 if(this.fort){
-                    this.id=(game.level==27||rules.teamMode)&&game.pvp?(this.id==-1?-1:3-this.id):game.level==22||game.level==100?0:-1
+                    this.id=(game.level==27||rules.teamMode)&&game.pvp?(this.id==-1?-1:3-this.id):game.level==22||game.level==100||game.level==140?0:-1
                     this.attacking=false
                     this.manage[1]=false
                     this.setColor()
@@ -10578,7 +10578,7 @@ class player{
                                     entities.walls[a][b].owner=this.id
                                     if(game.level==22&&this.id==0){
                                         game.point[entities.walls[a][b].pos]=false
-                                    }else if(game.level==100){
+                                    }else if(game.level==100||game.level==140){
                                         game.point[entities.walls[a][b].pos]=this.id!=0
                                     }else if(rules.quickPoint){
                                         game.point[entities.walls[a][b].pos]=this.id
@@ -10658,7 +10658,7 @@ class player{
                                 }
                             }
                         }
-                    }else if(game.level==22||game.level==35||game.level==100||game.level==103){
+                    }else if(game.level==22||game.level==35||game.level==100||game.level==103||game.level==140){
                         for(let a=0,la=entities.walls.length;a<la;a++){
                             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                                 if(entities.walls[a][b].type==33&&entities.walls[a][b].pos==4&&entities.walls[a][b].owner>0){

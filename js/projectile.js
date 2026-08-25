@@ -12438,12 +12438,12 @@ class projectile{
 				||this.type==216&&target.life<target.base.life*2
 				||(this.type==339||this.type==369||this.type==455)&&target.construct&&target.id==this.id
 				||this.type==357&&target.life<=target.base.life*1.25
-			)&&(!target.playerData.name.includes('Medic')||target.id!=0)
+			)&&(!target.playerData.name.includes('Medic')||target.id!=0)&&!target.fort&&this.index!=target.index
 		)&&
 		!(target.playerData.name=='PlayerSpyC6'&&target.fade<=0.5)&&
 		!(target.playerData.name=='PlayerSpyW'&&target.subWeaponCType==1007&&target.fade<=0.5)&&
 		!(this.id==-1&&(this.type==60||this.type==73)&&this.timer<12&&target.id>0)&&
-		!(this.rules.hitmed&&(this.index==target.index||target.fort&&(!game.pvp&&target.id>0&&this.id>0||game.pvp&&target.id>0&&target.id==this.id)))&&
+		//!(this.rules.hitmed&&(this.index==target.index||target.fort&&(!game.pvp&&target.id>0&&this.id>0||game.pvp&&target.id>0&&target.id==this.id)))&&
 		!(this.rules.hitstack&&this.hit.includes(target.index))&&
 		!(this.type==258&&target.fort&&this.index==-1)&&
 		!(this.type==434&&this.onTeam(target)&&target.construct)&&
