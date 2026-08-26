@@ -10837,10 +10837,13 @@ types={
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:586,
     },{
       name:'RGB',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:0.25,reloadBuff:1,crit:0,weapon:1128,
+      damageBuff:0.125,reloadBuff:1,crit:0,weapon:1128,
     },{
       name:'RGBSplitter',sizeBuff:1.2,lifeBuff:2,speedBuff:0.6,
-      damageBuff:0.25,reloadBuff:1,crit:0,weapon:1128,
+      damageBuff:0.125,reloadBuff:1,crit:0,weapon:1128,
+    },{
+      name:'FastRGB',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:0.125,reloadBuff:1,crit:0,weapon:1128,
     },{
       name:'PistolVault',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,

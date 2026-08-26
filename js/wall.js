@@ -1105,11 +1105,11 @@ class wall{
         }
     }
     checkHorizontal(){
-        if(!this.remove&&!this.vv&&this.type!=59&&this.type!=60){
+        if(!this.remove&&!this.vv&&!this.vv2&&this.type!=59&&this.type!=60){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&!c.exempt&&!c.vv&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove&&!(game.level==54&&abs(this.position.x+this.width/2-game.tileset[0]*149)<1&&this.position.y>game.edge[1]*0.9)){
+                    if(c.type==this.type&&!c.exempt&&!c.vv&&!c.vv2&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove&&!(game.level==54&&abs(this.position.x+this.width/2-game.tileset[0]*149)<1&&this.position.y>game.edge[1]*0.9)){
                         if(abs(this.height-c.height)<1&&abs(c.position.x-(this.position.x+this.width/2+c.width/2))<1&&abs(c.position.y-this.position.y)<1&&!c.remove){
                             this.width+=c.width
                             this.position.x+=c.width/2
@@ -1127,11 +1127,11 @@ class wall{
         }
     }
     checkVertical(){
-        if(!this.remove&&!this.vv&&this.type!=59&&this.type!=60&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93||game.level==137))){
+        if(!this.remove&&!this.vv&&!this.vv2&&this.type!=59&&this.type!=60&&!(this.type==28&&(game.level==62||game.level==72||game.level==74||game.level==81||game.level==93||game.level==137))){
             for(let a=0,la=entities.walls.length;a<la;a++){
                 for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                     let c=entities.walls[a][b]
-                    if(c.type==this.type&&!c.exempt&&!c.vv&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove){
+                    if(c.type==this.type&&!c.exempt&&!c.vv&&!c.vv2&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&!c.remove){
                         if(abs(this.width-c.width)<1&&abs(c.position.y-(this.position.y+this.height/2+c.height/2))<1&&abs(c.position.x-this.position.x)<1&&!c.remove){
                             this.height+=c.height
                             this.position.y+=c.height/2
@@ -1360,7 +1360,16 @@ class wall{
         for(let a=0,la=entities.walls.length;a<la;a++){
             for(let b=0,lb=entities.walls[a].length;b<lb;b++){
                 let c=entities.walls[a][b]
-                if(c.standard&&(this.type!=37||game.level==41||game.level==76||game.level==86||game.level==89||game.level==90||game.level==94||game.level==121||game.level==133)&&(c.type!=37||game.level==69)&&!(c.type==24&&(game.level==59||game.level==60||game.level==79||game.level==122))&&(this.type!=38&&c.type!=38||game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49&&game.level!=88&&game.level!=100&&game.level!=101&&game.level!=108&&game.level!=109&&game.level!=131)&&this.type!=56&&c.type!=56&&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56||game.level==128))&&this.type!=74&&c.type!=74){
+                if(c.standard&&!c.vv&&!c.vv2&&(
+                    this.type!=37||game.level==41||game.level==76||game.level==86||game.level==89||game.level==90||game.level==94||game.level==121||game.level==133
+                )&&(c.type!=37||game.level==69)&&
+                !(c.type==24&&(game.level==59||game.level==60||game.level==79||game.level==122))&&
+                (
+                    this.type!=38&&c.type!=38||
+                    game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49&&game.level!=88&&game.level!=100&&game.level!=101&&
+                    game.level!=108&&game.level!=109&&game.level!=131&&game.level!=140)&&this.type!=56&&c.type!=56&&
+                    !((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56||game.level==128))&&this.type!=74&&c.type!=74
+                ){
                     if(this.type==17&&c.type==47){
                         if(
                             inFullBoxBoxOpen(this,entities.walls[a][b])||
@@ -1491,7 +1500,7 @@ class wall{
                     &&(
                         this.type!=38&&c.type!=38||
                         game.level!=22&&game.level!=23&&game.level!=33&&game.level!=37&&game.level!=43&&game.level!=47&&game.level!=49&&game.level!=88&&game.level!=100&&game.level!=101&&
-                        game.level!=108&&game.level!=109&&game.level!=131
+                        game.level!=108&&game.level!=109&&game.level!=131&&game.level!=140
                     )&&this.type!=56&&c.type!=56
                     &&!((c.type==20||c.type==21)&&this.type==24&&(game.level==30||game.level==56||game.level==128))
                     &&!(this.type==35||c.type==35&&game.level==29)&&this.type!=74&&c.type!=74
@@ -1608,78 +1617,80 @@ class wall{
         }
     }
     checkBar(){
-        for(let a=0,la=entities.walls.length;a<la;a++){
-            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
-                let c=entities.walls[a][b]
-                if((c.position.x!=this.position.x||c.position.y!=this.position.y)&&(c.type==this.type||([1,17,18,20,21].includes(this.type)&&[1,17,18,20,21].includes(c.type)))){
-                    for(let d=0,ld=2;d<ld;d++){
-                        if(abs((this.position.y+this.height/2)-(c.position.y+c.height/2))<1&&!this.redundant[0]&&!c.redundant[0]){
-                            for(let e=0,le=this.boundary[0].length;e<le;e++){
-                                for(let f=0,lf=c.boundary[0].length;f<lf;f++){
-                                    if(abs(this.boundary[0][e][d].x-c.boundary[0][f][1-d].x)<1){
-                                        this.boundary[0][e][d].x=c.boundary[0][f][d].x
-                                        c.boundary[0].splice(f,1)
-                                        f--
-                                        lf--
+        if(!this.vv&&!this.vv2){
+            for(let a=0,la=entities.walls.length;a<la;a++){
+                for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                    let c=entities.walls[a][b]
+                    if(!c.vv&&!c.vv2&&(c.position.x!=this.position.x||c.position.y!=this.position.y)&&(c.type==this.type||([1,17,18,20,21].includes(this.type)&&[1,17,18,20,21].includes(c.type)))){
+                        for(let d=0,ld=2;d<ld;d++){
+                            if(abs((this.position.y+this.height/2)-(c.position.y+c.height/2))<1&&!this.redundant[0]&&!c.redundant[0]){
+                                for(let e=0,le=this.boundary[0].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[0].length;f<lf;f++){
+                                        if(abs(this.boundary[0][e][d].x-c.boundary[0][f][1-d].x)<1){
+                                            this.boundary[0][e][d].x=c.boundary[0][f][d].x
+                                            c.boundary[0].splice(f,1)
+                                            f--
+                                            lf--
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(abs((this.position.y-this.height/2)-(c.position.y-c.height/2))<1&&!this.redundant[1]&&!c.redundant[1]&&!this.vv&&!c.vv){
-                            for(let e=0,le=this.boundary[1].length;e<le;e++){
-                                for(let f=0,lf=c.boundary[1].length;f<lf;f++){
-                                    if(abs(this.boundary[1][e][d].x-c.boundary[1][f][1-d].x)<1){
-                                        this.boundary[1][e][d].x=c.boundary[1][f][d].x
-                                        c.boundary[1].splice(f,1)
-                                        f--
-                                        lf--
+                            if(abs((this.position.y-this.height/2)-(c.position.y-c.height/2))<1&&!this.redundant[1]&&!c.redundant[1]&&!this.vv&&!c.vv){
+                                for(let e=0,le=this.boundary[1].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[1].length;f<lf;f++){
+                                        if(abs(this.boundary[1][e][d].x-c.boundary[1][f][1-d].x)<1){
+                                            this.boundary[1][e][d].x=c.boundary[1][f][d].x
+                                            c.boundary[1].splice(f,1)
+                                            f--
+                                            lf--
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(abs((this.position.x+this.width/2)-(c.position.x+c.width/2))<1&&!this.redundant[2]&&!c.redundant[2]){
-                            for(let e=0,le=this.boundary[2].length;e<le;e++){
-                                for(let f=0,lf=c.boundary[2].length;f<lf;f++){
-                                    if(abs(this.boundary[2][e][d].y-c.boundary[2][f][1-d].y)<1){
-                                        this.boundary[2][e][d].y=c.boundary[2][f][d].y
-                                        c.boundary[2].splice(f,1)
-                                        f--
-                                        lf--
+                            if(abs((this.position.x+this.width/2)-(c.position.x+c.width/2))<1&&!this.redundant[2]&&!c.redundant[2]){
+                                for(let e=0,le=this.boundary[2].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[2].length;f<lf;f++){
+                                        if(abs(this.boundary[2][e][d].y-c.boundary[2][f][1-d].y)<1){
+                                            this.boundary[2][e][d].y=c.boundary[2][f][d].y
+                                            c.boundary[2].splice(f,1)
+                                            f--
+                                            lf--
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(abs((this.position.x-this.width/2)-(c.position.x-c.width/2))<1&&!this.redundant[3]&&!c.redundant[3]){
-                            for(let e=0,le=this.boundary[3].length;e<le;e++){
-                                for(let f=0,lf=c.boundary[3].length;f<lf;f++){
-                                    if(abs(this.boundary[3][e][d].y-c.boundary[3][f][1-d].y)<1){
-                                        this.boundary[3][e][d].y=c.boundary[3][f][d].y
-                                        c.boundary[3].splice(f,1)
-                                        f--
-                                        lf--
+                            if(abs((this.position.x-this.width/2)-(c.position.x-c.width/2))<1&&!this.redundant[3]&&!c.redundant[3]){
+                                for(let e=0,le=this.boundary[3].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[3].length;f<lf;f++){
+                                        if(abs(this.boundary[3][e][d].y-c.boundary[3][f][1-d].y)<1){
+                                            this.boundary[3][e][d].y=c.boundary[3][f][d].y
+                                            c.boundary[3].splice(f,1)
+                                            f--
+                                            lf--
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(c.type==this.type){
-                            for(let g=4,lg=8;g<lg;g++){
-                                if(this.boundary[g].length>0&&c.boundary[g].length>0&&abs(this.width/this.height-c.width/c.height)<0.01){
-                                    for(let e=0,le=this.boundary[g].length;e<le;e++){
-                                        for(let f=0,lf=c.boundary[g].length;f<lf;f++){
-                                            if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&(c.boundary[g][f][d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][d].y<this.boundary[g][e][d].y&&g>=6)){
-                                                this.boundary[g][e][d].x=c.boundary[g][f][d].x
-                                                this.boundary[g][e][d].y=c.boundary[g][f][d].y
-                                                c.boundary[g].splice(f,1)
-                                                f--
-                                                lf--
-                                                this.checkBar()
-                                            }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&(c.boundary[g][f][1-d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][1-d].y<this.boundary[g][e][d].y&&g>=6)){
-                                                this.boundary[g][e][d].x=c.boundary[g][f][1-d].x
-                                                this.boundary[g][e][d].y=c.boundary[g][f][1-d].y
-                                                c.boundary[g].splice(f,1)
-                                                f--
-                                                lf--
-                                                this.checkBar()
+                            if(c.type==this.type){
+                                for(let g=4,lg=8;g<lg;g++){
+                                    if(this.boundary[g].length>0&&c.boundary[g].length>0&&abs(this.width/this.height-c.width/c.height)<0.01){
+                                        for(let e=0,le=this.boundary[g].length;e<le;e++){
+                                            for(let f=0,lf=c.boundary[g].length;f<lf;f++){
+                                                if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&(c.boundary[g][f][d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][d].y<this.boundary[g][e][d].y&&g>=6)){
+                                                    this.boundary[g][e][d].x=c.boundary[g][f][d].x
+                                                    this.boundary[g][e][d].y=c.boundary[g][f][d].y
+                                                    c.boundary[g].splice(f,1)
+                                                    f--
+                                                    lf--
+                                                    this.checkBar()
+                                                }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&(c.boundary[g][f][1-d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][1-d].y<this.boundary[g][e][d].y&&g>=6)){
+                                                    this.boundary[g][e][d].x=c.boundary[g][f][1-d].x
+                                                    this.boundary[g][e][d].y=c.boundary[g][f][1-d].y
+                                                    c.boundary[g].splice(f,1)
+                                                    f--
+                                                    lf--
+                                                    this.checkBar()
+                                                }
                                             }
                                         }
                                     }
@@ -1692,6 +1703,10 @@ class wall{
         }
     }
     formBounder(){
+        if(this.vv2){
+            this.boundary[3]=[[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]]
+            this.redundant[3]=false
+        }
         let bounds=[this.position.x-this.width/2,this.position.x+this.width/2,this.position.y-this.height/2,this.position.y+this.height/2]
         for(let a=0,la=this.boundary.length;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -3451,7 +3466,9 @@ class wall{
                     layer.arc(0,-80,80,20,-165,-15)
                     layer.noStroke()
                 }else if(game.level==22||game.level==100||game.level==140){
+                    layer.translate(0,this.height/2)
                     layer.scale(1-game.pointAnim[4])
+                    layer.translate(0,-this.height/2)
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
@@ -4248,9 +4265,13 @@ class wall{
                     layer.arc(0,-80,80,20,-165,-15)
                     layer.noStroke()
                 }else if(game.level==22||game.level==100||game.level==140){
+                    layer.translate(0,this.height/2)
                     layer.scale(1-game.pointAnim[2])
+                    layer.translate(0,-this.height/2)
                 }else if(game.level==25||game.level==104){
+                    layer.translate(0,this.height/2)
                     layer.scale(1-game.pointAnim[1])
+                    layer.translate(0,-this.height/2)
                 }
                 let fade=game.speedArena?1-this.recharge/30:1-this.recharge/60
                 for(let a=0,la=4;a<la;a++){
@@ -8516,9 +8537,13 @@ class wall{
             break
             case 57:
                 if((game.level==49||game.level==131)&&!game.pvp){
+                    layer.translate(0,this.height/2)
                     layer.scale(1-game.pointAnim[1])
+                    layer.translate(0,-this.height/2)
                 }else if(game.level==22||game.level==100||game.level==140){
+                    layer.translate(0,this.height/2)
                     layer.scale(1-game.pointAnim[2])
+                    layer.translate(0,-this.height/2)
                 }
                 for(let a=0,la=4;a<la;a++){
                     if(lcos(a*90+this.time)>0){
@@ -10722,9 +10747,13 @@ class wall{
                 if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
                     if(this.type==16){
                         if(game.level==22||game.level==100||game.level==140){
+                            layer.translate(0,this.height/2)
                             layer.scale(1-game.pointAnim[2])
+                            layer.translate(0,-this.height/2)
                         }else if(game.level==25||game.level==104){
+                            layer.translate(0,this.height/2)
                             layer.scale(1-game.pointAnim[1])
+                            layer.translate(0,-this.height/2)
                         }
                     }
                     if(this.type==16||this.type==50&&game.level!=29||this.type==61||this.type==69||this.type==72){
@@ -11571,9 +11600,13 @@ class wall{
                 if(!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
                     layer.push()
                     if(game.level==22||game.level==100||game.level==140){
+                        layer.translate(0,this.height/2)
                         layer.scale(1-game.pointAnim[2])
+                        layer.translate(0,-this.height/2)
                     }else if((game.level==49||game.level==131)&&!game.pvp){
+                        layer.translate(0,this.height/2)
                         layer.scale(1-game.pointAnim[1])
+                        layer.translate(0,-this.height/2)
                     }
                     layer.fill(rules.key.wallInfo,1-this.recharge/60-this.hide)
                     layer.textSize(9)
@@ -12031,7 +12064,7 @@ class wall{
                     (
                         game.level==100||
                         game.level==140&&(
-                            abs(this.position.x-game.tileset[0]*85.5)<1||
+                            abs(this.position.x-game.tileset[0]*85.5)<1&&this.position.y<game.edge[1]-game.tileset[1]*10||
                             abs(this.position.x-game.tileset[0]*125.5)<1
                         )
                     )&&!game.point[1]&&this.height>2
@@ -12054,7 +12087,7 @@ class wall{
                     (
                         game.level==100||
                         game.level==140&&(
-                            abs(this.position.x-game.tileset[0]*85.5)<1||
+                            abs(this.position.x-game.tileset[0]*85.5)<1&&this.position.y<game.edge[1]-game.tileset[1]*10||
                             abs(this.position.x-game.tileset[0]*125.5)<1
                         )
                     )&&game.point[1]&&this.height<this.base.height
