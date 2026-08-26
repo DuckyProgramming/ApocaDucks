@@ -12339,7 +12339,7 @@ class projectile{
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
 			!(this.rules.trap&&this.timer<150)
 		){
-			let bound=this.rules.fast?100:50
+			let bound=this.rules.fast||this.type==467?100:50
 			let targets=[]
 			for(let b=0,lb=entities.players.length;b<lb;b++){
 				//if(inBoxBox(this,entities.players[b])&&(((this.id==0?1:0)!=(entities.players[b].id==0?1:0)||entities.players[b].id==-1&&this.id!=-1||this.id==-1&&entities.players[b].id!=-1||game.pvp&&this.id!=entities.players[b].id)||(this.type==9||this.type==10||this.type==11||this.type==38||this.type==63||this.type==72||this.type==82||this.type==155||this.type==194||this.type==216&&entities.players[b].life<entities.players[b].base.life*2||this.type==273||this.type==339&&entities.players[b].construct&&entities.players[b].id==this.id||this.type==345||this.type==350||this.type==357&&entities.players[b].life<=entities.players[b].base.life*1.25||this.type==364)&&(!entities.players[b].playerData.name.includes('Medic')||entities.players[b].id!=0))&&

@@ -69,8 +69,8 @@ function setup(){
         game.weaponTick=[0,0,0,0]
         newLoop()
         stage.scene='main'
-        //game.bound=true
-        //dev.sight=true
+        game.bound=true
+        dev.sight=true
         //game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
