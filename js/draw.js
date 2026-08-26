@@ -1423,6 +1423,7 @@ function mainloop(){
                                 if(
                                     game.level==130&&entities.walls[0][b].type==62||
                                     !(game.level==100&&entities.walls[0][b].type==37)&&
+                                    !(game.level==140&&entities.walls[0][b].type==37)&&
                                     (
                                         entities.walls[0][b].technicalBounder.position.x+entities.walls[0][b].technicalBounder.width>effective[a][0]-(graphics.main[a].width*key[a]+100)&&
                                         entities.walls[0][b].technicalBounder.position.x-entities.walls[0][b].technicalBounder.width<effective[a][0]+(graphics.main[a].width*key[a]+100)&&

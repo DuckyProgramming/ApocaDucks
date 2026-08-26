@@ -12887,7 +12887,7 @@ class wall{
                                 }
                             }
                         }
-                    }else if(abs(this.base.position.x-game.tileset[0]*48.5)<1&&(!game.point[2]||game.point[1])&&this.width<game.tileset[0]*5){
+                    }else if(abs(this.base.position.x-game.tileset[0]*48.5)<1&&(!game.point[2]||game.point[1])&&this.width<game.tileset[0]){
                         this.width+=1
                         this.bounder.width+=1
                         this.position.x+=0.5

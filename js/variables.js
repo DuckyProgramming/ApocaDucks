@@ -10366,18 +10366,21 @@ types={
       damageBuff:1,reloadBuff:1,crit:1,weapon:39,
     },{
       name:'MiniSentry',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:685,
     },{
       name:'MiniSentryShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:685,
     },{
       name:'MiniSentrySpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:685,
     },{
       name:'BigMiniSentry',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:685,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:685,
     },{
       name:'BigFastMiniSentry',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:685,
+    },{
+      name:'BigRapidMiniSentry',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:685,
     },{
       name:'SlightlyFastSpy',sizeBuff:1,lifeBuff:1,speedBuff:1.5,

@@ -19946,15 +19946,15 @@ player.prototype.logic=function(){
                                 break
                                 case 5:
                                     if(!game.point[0]){
-                                        this.target.position.x=game.tileset[0]*121.5
-                                        this.target.position.y=abs(this.position.x-this.target.position.x)<100?0:game.edge[1]
+                                        this.target.position.x=game.tileset[0]*137.5
+                                        this.target.position.y=game.edge[1]
                                     }else{
                                         this.target.position.x=game.tileset[0]*97.5
                                         this.target.position.y=game.edge[1]
                                     }
                                 break
                                 case 6:
-                                    this.target.position.x=this.position.x<game.tileset[0]*121.5?game.tileset[0]*97.5:game.tileset[0]*145.5
+                                    this.target.position.x=this.position.x<game.tileset[0]*137.5?game.tileset[0]*97.5:game.tileset[0]*145.5
                                     this.target.position.y=game.edge[1]
                                 break
                             }
