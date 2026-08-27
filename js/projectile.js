@@ -9440,7 +9440,7 @@ class projectile{
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*0.2*(1-c/radius)*entities.players[b].selfDamageCheck(this.index))
+						entities.players[b].takeDamage(this.damage*(entities.players[b].fort?1:0.5)*(1-c/radius)*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].immune()){
 							entities.players[b].vulnerableTime=min(entities.players[b].vulnerableTime+360*(1-c*0.8/radius),720)
@@ -10926,7 +10926,7 @@ class projectile{
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].index==this.index){
 											if(
-												(
+												this.autoDet||(
 													lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
 													lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
 													abs(this.position.x-entities.players[a].position.x)<75&&
@@ -11665,13 +11665,23 @@ class projectile{
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<15+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
 							if(this.type==374&&this.time>5){
+								let sendDirection=lsin(this.direction)<0?-90:90
 								if(entities.projectiles[b].hasOwnProperty("velocity")){
-									entities.projectiles[b].velocity.x*=-1
-									entities.projectiles[b].velocity.y*=-1
+									/*entities.projectiles[b].velocity.x*=-1
+									entities.projectiles[b].velocity.y*=-1*/
+									let mag=sqrt(entities.projectiles[b].velocity.x**2+entities.projectiles[b].velocity.y**2)
+									let dir=atan2(entities.projectiles[b].velocity.x,-entities.projectiles[b].velocity.y)
+									dir=sendDirection*2-dir-180
+									entities.projectiles[b].velocity.x=lsin(dir)*mag
+									entities.projectiles[b].velocity.y=lcos(dir)*-mag
 								}
-								entities.projectiles[b].direction+=180
+								//entities.projectiles[b].direction+=180
+								entities.projectiles[b].direction=sendDirection*2-entities.projectiles[b].direction-180
 								entities.projectiles[b].id=this.id
 								entities.projectiles[b].index=this.index
+								entities.projectiles[b].subWeapon=this.subWeapon
+								entities.projectiles[b].travel=0
+								entities.projectiles[b].time=entities.projectiles[b].base.time
 								if(entities.projectiles[b].crit==0){
 									entities.projectiles[b].crit=0.6
 									entities.projectiles[b].damage*=1.6
@@ -13167,23 +13177,108 @@ class projectile{
 				}
 			break
 		}
+		switch(this.type){
+			case 12:
+				target.knockback(this.speed*3,this.direction,1,1)
+			break
+			case 16: case 379:
+				target.knockback(this.speed*3.6,this.direction,1,1)
+			break
+			case 19:
+				target.knockback(this.speed*-3,this.direction,1,1)
+			break
+			case 55:
+				target.knockback(this.speed*6,this.direction,1,1)
+			break
+			case 74: case 81:
+				target.knockback(this.speed*1.8,this.direction,1,1)
+			break
+			case 77:
+				target.knockback(this.speed*24,this.direction,1,1)
+			break
+			case 87:
+				target.knockback(this.speed*7.5,this.direction,1,1)
+			break
+			case 127:
+				target.knockback(this.speed*20,this.direction,1,1)
+				target.knockbackForce(this.speed*12,this.direction,1,1)
+			break
+			case 222: case 374: case 449:
+				target.knockback(this.speed*8,this.direction,1,1)
+				target.knockbackForce(this.speed*2,this.direction,1,1)
+			break
+			case 223:
+				target.knockback(this.speed*12,this.direction,1,1)
+				target.knockbackForce(this.speed*6,this.direction,1,1)
+			break
+			case 269:
+				target.knockback(this.speed*15,this.direction,1,1)
+				target.knockbackForce(this.speed*9,this.direction,1,1)
+			break
+			case 287:
+				target.knockback(this.speed*12,this.direction,1,1)
+				target.knockbackForce(this.speed*12,this.direction,1,1)
+			break
+			case 288:
+				target.knockback(this.speed*9,this.direction,1,1)
+				target.knockbackForce(this.speed*4,this.direction,1,1)
+			break
+			case 319:
+				target.knockback(this.speed*18,this.direction,1,1)
+				target.knockbackForce(this.speed*9,this.direction,1,1)
+			break
+			case 322:
+				target.knockback(this.speed*15,this.direction,1,1)
+			break
+			case 335:
+				target.knockbackForce(this.speed*0.1,this.direction,1,1)
+			break
+			case 343:
+				target.knockback(this.speed*0.9,this.direction,1,1)
+			break
+			case 371:
+				target.knockback(this.speed*8,this.direction,1,1)
+				target.knockbackForce(this.speed*2,this.direction,1,1)
+			break
+			case 423:
+				target.knockback(this.speed*1.8,this.direction,1,1)
+			break
+			case 424:
+				target.knockback(this.speed*10,this.direction,1,1)
+				target.knockbackForce(this.speed*2.5,this.direction,1,1)
+			break
+			case 439:
+				target.knockback(this.speed*10,this.direction,1,1)
+				target.knockbackForce(this.speed*6,this.direction,1,1)
+			break
+			case 479:
+				if(!this.onTeam(target)){
+					target.knockback(this.speed*8,this.direction,1,1)
+					target.knockbackForce(this.speed*2,this.direction,1,1)
+				}
+			break
+			case 497:
+				target.knockback(this.speed*6,this.direction,1,1)
+				target.knockbackForce(this.speed*3,this.direction,1,1)
+			break
+		}
 		if(!target.immune()){
 			switch(this.type){
-				case 12:
+				/*case 12:
 					target.knockback(this.speed*3,this.direction,1,1)
-				break
+				break*/
 				case 14: case 46:
 					target.weaponType=-1
 				break
-				case 16: case 379:
+				/*case 16: case 379:
 					target.knockback(this.speed*3.6,this.direction,1,1)
-				break
+				break*/
 				case 18:
 					target.velocity.y-=this.speed*abs(lsin(this.direction)*3)
 				break
-				case 19:
+				/*case 19:
 					target.knockback(this.speed*-3,this.direction,1,1)
-				break
+				break*/
 				case 23: case 24: case 33: case 35: case 39: case 51:
 					for(let d=0,ld=entities.players.length;d<ld;d++){
 						if(entities.players[d].index==this.index){
@@ -13208,9 +13303,9 @@ class projectile{
 						}
 					}
 				break
-				case 55:
+				/*case 55:
 					target.knockback(this.speed*6,this.direction,1,1)
-				break
+				break*/
 				case 56:
 					target.velocity.y-=this.speed*abs(lsin(this.direction)*2)
 				break
@@ -13232,18 +13327,18 @@ class projectile{
 				case 67: case 285:
 					target.confuseTime=max(target.confuseTime,360)
 				break
-				case 74: case 81:
+				/*case 74: case 81:
 					target.knockback(this.speed*1.8,this.direction,1,1)
-				break
+				break*/
 				case 76:
 					target.stunTime=max(target.stunTime,30)
 				break
-				case 77:
+				/*case 77:
 					target.knockback(this.speed*24,this.direction,1,1)
-				break
-				case 87:
+				break*/
+				/*case 87:
 					target.knockback(this.speed*7.5,this.direction,1,1)
-				break
+				break*/
 				case 94:
 					target.stunTime=max(target.stunTime,this.id==0?120:600)
 				break
@@ -13263,10 +13358,10 @@ class projectile{
 						}
 					}
 				break
-				case 127:
+				/*case 127:
 					target.knockback(this.speed*20,this.direction,1,1)
 					target.knockbackForce(this.speed*12,this.direction,1,1)
-				break
+				break*/
 				case 195:
 					if(target.life<=0){
 						entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
@@ -13275,13 +13370,13 @@ class projectile{
 				case 212:
 					target.shrinkTime=max(target.shrinkTime+15,30)
 				break
-				case 222: case 374: case 449:
+				/*case 222: case 374: case 449:
 					target.knockback(this.speed*8,this.direction,1,1)
 					target.knockbackForce(this.speed*2,this.direction,1,1)
-				break
+				break*/
 				case 223:
-					target.knockback(this.speed*12,this.direction,1,1)
-					target.knockbackForce(this.speed*6,this.direction,1,1)
+					/*target.knockback(this.speed*12,this.direction,1,1)
+					target.knockbackForce(this.speed*6,this.direction,1,1)*/
 					target.stunTime=max(target.stunTime,600)
 					target.vulnerableTime=max(target.vulnerableTime,1800)
 				break
@@ -13295,24 +13390,24 @@ class projectile{
 				case 231:
 					target.stunTime=max(target.stunTime,240)
 				break
-				case 269:
+				/*case 269:
 					target.knockback(this.speed*15,this.direction,1,1)
 					target.knockbackForce(this.speed*9,this.direction,1,1)
-				break
+				break*/
 				case 281:
 					let pos=game.spawner[floor(random(0,game.spawner.length))]
 					target.position.x=pos[0]
 					target.position.y=pos[1]-target.height/2
 				break
 				case 287:
-					target.knockback(this.speed*12,this.direction,1,1)
-					target.knockbackForce(this.speed*12,this.direction,1,1)
+					/*target.knockback(this.speed*12,this.direction,1,1)
+					target.knockbackForce(this.speed*12,this.direction,1,1)*/
 					target.chillTime=max(target.chillTime,3600)
 				break
-				case 288:
+				/*case 288:
 					target.knockback(this.speed*9,this.direction,1,1)
 					target.knockbackForce(this.speed*4,this.direction,1,1)
-				break
+				break*/
 				case 289:
 					target.gasTime=max(7200,target.gasTime+600)
 					target.gasser=this.index
@@ -13326,7 +13421,7 @@ class projectile{
 					target.gasTime=max(7200,target.gasTime+3)
 					target.gasser=this.index
 				break
-				case 319:
+				/*case 319:
 					target.knockback(this.speed*18,this.direction,1,1)
 					target.knockbackForce(this.speed*9,this.direction,1,1)
 				break
@@ -13338,10 +13433,10 @@ class projectile{
 				break
 				case 343:
 					target.knockback(this.speed*0.9,this.direction,1,1)
-				break
+				break*/
 				case 371:
-					target.knockback(this.speed*8,this.direction,1,1)
-					target.knockbackForce(this.speed*2,this.direction,1,1)
+					/*target.knockback(this.speed*8,this.direction,1,1)
+					target.knockbackForce(this.speed*2,this.direction,1,1)*/
 					target.gasTime=max(300,target.gasTime+60)
 					target.gasser=this.index
 				break
@@ -13376,7 +13471,7 @@ class projectile{
 					target.gasTime=max(30,target.gasTime+15)
 					target.gasser=this.index
 				break
-				case 423:
+				/*case 423:
 					target.knockback(this.speed*1.8,this.direction,1,1)
 				break
 				case 424:
@@ -13387,7 +13482,7 @@ class projectile{
 				case 439:
 					target.knockback(this.speed*10,this.direction,1,1)
 					target.knockbackForce(this.speed*6,this.direction,1,1)
-				break
+				break*/
 				case 461:
 					//target.confuseTime=max(target.confuseTime,180)
 					target.confuseTime=max(target.confuseTime,120)
@@ -13395,7 +13490,7 @@ class projectile{
 				case 467:
 					target.vulnerableTime=max(target.vulnerableTime,120)
 				break
-				case 479:
+				/*case 479:
 					if(!this.onTeam(target)){
 						target.knockback(this.speed*8,this.direction,1,1)
 						target.knockbackForce(this.speed*2,this.direction,1,1)
@@ -13404,7 +13499,7 @@ class projectile{
 				case 497:
 					target.knockback(this.speed*6,this.direction,1,1)
 					target.knockbackForce(this.speed*3,this.direction,1,1)
-				break
+				break*/
 			}
 			switch(this.type){
 				case 20:

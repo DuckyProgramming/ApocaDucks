@@ -11999,6 +11999,9 @@ function setupLists(){
         menu.list[types.mission[a].difficulty].push(a)
     }
 }
+function outWeaponCodes(classC){
+    listing[4][classC].forEach(set=>set.forEach(weapon=>print(types.weapon[types.player[findName(weapon,types.player)].weapon].name,types.player[findName(weapon,types.player)].weapon)))
+}
 function qa(name){
     entities.players[0].newWeaponSet(findName(name,types.player))
 }

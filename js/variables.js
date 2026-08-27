@@ -20516,7 +20516,7 @@ types={
 		},{
 			name:'Daydrinker C',
 			ammo:2,
-			damage:240,
+			damage:100,
 			cooldown:30,
 			stop:90,
 			reload:30,

@@ -8632,6 +8632,10 @@ class player{
                 this.weaponType==717||this.weaponType==742||this.weaponType==768||this.weaponType==789||this.weaponType==809||
                 this.weaponType==834||this.weaponType==844||this.weaponType==875||this.weaponType==932||this.weaponType==961||
                 this.weaponType==1001,
+            medA:this.subWeaponAType==11||this.subWeaponAType==703||this.subWeaponAType==727||this.subWeaponAType==800||
+                this.subWeaponAType==854||this.subWeaponAType==862||this.subWeaponAType==887||this.subWeaponAType==926||
+                this.subWeaponAType==932||this.subWeaponAType==986||this.subWeaponAType==1020||this.subWeaponAType==1118||
+                this.subWeaponAType==1172,
             fastHeal:this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||
                 this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
                 this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||

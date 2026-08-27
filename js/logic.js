@@ -3409,7 +3409,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -5926,7 +5926,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -6379,7 +6379,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -7901,7 +7901,7 @@ player.prototype.logic=function(){
             let targets=[]
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(
-                    (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                    (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -8056,7 +8056,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -8744,7 +8744,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -10288,7 +10288,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -10471,7 +10471,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -10696,7 +10696,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -11068,7 +11068,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -11510,7 +11510,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -12917,7 +12917,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -13626,7 +13626,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -14849,7 +14849,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -15357,7 +15357,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.id>0&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -17063,7 +17063,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -17460,7 +17460,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -18147,7 +18147,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(
@@ -18852,7 +18852,7 @@ player.prototype.logic=function(){
         let targets=[]
         for(let a=0,la=entities.players.length;a<la;a++){
             if(
-                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&this.weaponRules.med&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
+                (this.validTarget(entities.players[a])||entities.players[a].id==this.id&&(this.rules.class&&this.weaponRules.medA||!this.rules.class&&this.weaponRules.med)&&!entities.players[a].fort&&(entities.players[a].life<entities.players[a].base.life*(entities.players[a].construct?1:(
                     this.playerData.name=='PlayerMedicC3'||
                     this.playerData.name=='PlayerMedicC6'||
                     this.playerData.name=='PlayerMedicW'&&(

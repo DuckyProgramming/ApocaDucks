@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        //duel={trigger:true,numKey:[7],sets:[[0,7]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[2,2],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,14 +15,14 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=5
-        game.gaming=1
-        game.level=140
+        game.players=2
+        game.gaming=2
+        game.level=117
         /*
         8 - normandy
         41 - speleo dm
         47 - big data ad
-        49 - rusted ad
+        49 - rusted adzz
         55 - tailwater ad
         65 - tailwater 5cp
         70 - rocksalt pl
@@ -69,8 +69,8 @@ function setup(){
         game.weaponTick=[0,0,0,0]
         newLoop()
         stage.scene='main'
-        game.bound=true
-        dev.sight=true
+        //game.bound=true
+        //dev.sight=true
         //game.margin=true
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
