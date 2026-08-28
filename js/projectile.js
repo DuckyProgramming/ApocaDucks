@@ -8883,7 +8883,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
-						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
+						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						if(this.type==448&&c<105&&!entities.players[b].fort){
 							entities.players[b].invisBuff=max(entities.players[b].invisBuff,120*(1.5-c/105))
 						}
@@ -9060,7 +9060,7 @@ class projectile{
 							entities.players[b].knockbackSet(6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
 						}
-						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
+						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 						//note to self: the above two blocks are in swapped order to the regular sticky code
 					}
 				}
@@ -9131,7 +9131,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
-						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
+						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9267,7 +9267,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/90))),entities.players[b].stuckTime)
 						}
-						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
+						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -9404,7 +9404,7 @@ class projectile{
 							entities.players[b].thrown3=true
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
-						entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
+						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){

@@ -3024,7 +3024,7 @@ class player{
         this.lastingForce[1]=-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
     getKnockback(){
-        return this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
+        return this.fort?0:this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
     }
     takeDamage(damage,spec=0){
         if(game.readout){
@@ -3634,7 +3634,7 @@ class player{
                             }
                         break
                         case 1: case 131: case 142: case 178: case 470: case 549: case 813: case 899: case 966: case 967:
-                        case 1142:
+                        case 1142: case 1186:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1,1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
                         case 2: case 161: case 176: case 179: case 189: case 190: case 195: case 211: case 222: case 225:
@@ -9371,7 +9371,7 @@ class player{
                             if(
                                 (this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerWingPistol`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||
                                 this.playerData.name=='PlayerEngineerC7'||
-                                this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`||this.subPlayerAData.name==`PlayerPistolQ`)
+                                this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`||this.subPlayerAData.name==`PlayerPistolQ`||this.subPlayerAData.name==`PlayerWingPistolW`)
                             )&&this.subWeaponA.uses>0&&this.assort.firing<20){
                                 this.subWeaponA.cooldown=0
                             }
@@ -9676,7 +9676,7 @@ class player{
                                 if(
                                     (this.rules.scoutLine&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPushPistolW`||this.subPlayerAData.name==`PlayerWingPistol`||this.subPlayerAData.name==`PlayerSnapPistolW`)/*this.subWeaponAType!=879*/||
                                     this.playerData.name=='PlayerEngineerC7'||
-                                    this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`||this.subPlayerAData.name==`PlayerPistolQ`)
+                                    this.rules.classW&&(this.subPlayerAData.name==`PlayerPistolW`||this.subPlayerAData.name==`PlayerPistolC`||this.subPlayerAData.name==`PlayerPistol`||this.subPlayerAData.name==`PlayerPushPistolC`||this.subPlayerAData.name==`PlayerWingPistolC`||this.subPlayerAData.name==`PlayerSnapPistolW`||this.subPlayerAData.name==`PlayerPistolQ`||this.subPlayerAData.name==`PlayerWingPistolW`)
                                 )&&this.subWeaponA.uses>0&&inputSetB[3]){
                                     this.subWeaponA.cooldown=0
                                 }
@@ -10074,6 +10074,7 @@ class player{
         if(this.life<=0){
             this.life=0
             if(!this.dead){
+                print(this.playerData.name,game.time)
                 this.dead=true
                 if(!this.sidekick&&!this.construct&&!this.fort){
                     this.destroyProjectiles()
@@ -10132,7 +10133,8 @@ class player{
                         case 1174:
                             for(let a=0,la=2;a<la;a++){
                                 //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(75,105)+a*180,this.id,20,150,crit,this.index))
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+a*165,this.id,40,150,crit,this.index))
+                                //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+a*165,this.id,40,150,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+a*165,this.id,30,150,crit,this.index))
                             }
                             //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+floor(random(0,2))*165,this.id,50,150,crit,this.index))
                         break

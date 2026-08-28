@@ -5,8 +5,8 @@ function setup(){
     setupGraphics()
     setupRules()
 
-    if(false){
-        duel={trigger:true,numKey:[2,2],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+    if(true){
+        duel={trigger:true,numKey:[4,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -16,8 +16,8 @@ function setup(){
         //game.noEnemy=true
 
         game.players=2
-        game.gaming=2
-        game.level=117
+        game.gaming=1
+        game.level=139
         /*
         8 - normandy
         41 - speleo dm
@@ -46,9 +46,9 @@ function setup(){
         updateRules()
         game.pane=!game.pane?false:menu.level!=7&&menu.level!=16&&menu.level!=108&&menu.level!=109&&menu.level!=112&&menu.level!=129
         if(true){
-            game.mission=findName(`Duck Time Deluxe`,types.mission)
+            game.mission=findName(`Duck's Drill`,types.mission)
             //game.mission=findName(`Duck's Drill`,types.mission)
-            formMission(types.mission[game.mission].wave,0)
+            //formMission(types.mission[game.mission].wave,0)
         }else{
             game.mission=findName('Survival',types.mission)
             generateMission(types.mission[game.mission].wave)
@@ -75,7 +75,12 @@ function setup(){
 
         //entities.players[0].newWeaponSet(findName('PlayerScout',types.player)+floor(random(0,9)))
 
-        //entities.players[0].newWeaponSet(findName('PlayerRocketJumpC',types.player))
+        entities.players[1].newWeaponSet(findName('Tank',types.player))
+        entities.players[0].position.x=game.edge[0]/2-50
+        entities.players[1].position.x=game.edge[0]/2+50
+        entities.players[1].id=0
+        entities.players[1].multLife(12.5)
+        entities.players[1].stuckTime=99999999999999
     }
 }
 function windowResized(){

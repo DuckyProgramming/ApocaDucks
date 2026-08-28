@@ -11,6 +11,7 @@
 1183 - barrage rocket launcher w, 31
 1184 - sword c, 702
 1185 - caber c, 775
+1186 - wing pistol w, 966
 
 499 - razor, 485
 500 - ied w, 490

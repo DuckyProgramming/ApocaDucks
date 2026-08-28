@@ -14894,7 +14894,8 @@ class wall{
                                             if(c.playerData.name=='PlayerScout4'||c.rules.classW&&(
                                                 c.subWeaponAType==966||c.subWeaponBType==966||c.subWeaponCType==966||
                                                 c.subWeaponAType==1142||c.subWeaponBType==1142||c.subWeaponCType==1142||
-                                                c.subWeaponAType==1150||c.subWeaponBType==1150||c.subWeaponCType==1150
+                                                c.subWeaponAType==1150||c.subWeaponBType==1150||c.subWeaponCType==1150||
+                                                c.subWeaponAType==1186||c.subWeaponBType==1186||c.subWeaponCType==1186
                                             )){
                                                 c.jump.double=1
                                                 if(c.rules.doubleJump){

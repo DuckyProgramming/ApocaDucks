@@ -8326,6 +8326,9 @@ types={
     },{
       name:'PlayerCaberC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1185,
+    },{
+      name:'PlayerWingPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1186,
     },
 
     //mark c
@@ -19577,7 +19580,7 @@ types={
 		},{
 			name:'Wing Pistol',
 			ammo:4,
-			damage:105,
+			damage:90,
 			cooldown:12,
 			stop:30,
 			reload:6,
@@ -20597,9 +20600,9 @@ types={
 		},{
 			name:'Wing Pistol C',
 			ammo:4,
-			damage:105,
+			damage:90,
 			cooldown:12,
-			stop:60,
+			stop:45,
 			reload:6,
 			speed:1.4,
       uses:50,
@@ -20642,7 +20645,7 @@ types={
 		},{
 			name:'LMG C',
 			ammo:25,
-			damage:60,
+			damage:72,
 			cooldown:6,
 			stop:120,
 			reload:2,
@@ -20990,6 +20993,15 @@ types={
 			reload:210,
 			speed:1.05,
       uses:2,
+		},{
+			name:'Wing Pistol W',
+			ammo:4,
+			damage:90,
+			cooldown:12,
+			stop:15,
+			reload:6,
+			speed:1.4,
+      uses:16,
 		},
 
     /*{

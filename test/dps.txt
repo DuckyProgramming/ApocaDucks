@@ -1,0 +1,35 @@
+10 Frames Per Mash:
+Regular Pistol 242 DPS
+Wing Pistol 323 DPS
+
+8 Frames Per Mash:
+Regular Pistol 272 DPS
+Wing Pistol 350 DPS
+
+5 Frames Per Mash:
+Regular Pistol 337 DPS
+Wing Pistol 400 DPS
+
+Assault Rifle 220 DPS
+Stickybomb Launcher 245 * Splash DPS
+Chiller 252 DPS
+Trench Submachine 275 DPS
+LMG 288 DPS
+Minigun 406 DPS
+Knife 500 DPS
+
+Time to kill a GlitchedTank
+
+8 Frames Per Mash:
+Regular Pistol 1145 Frames
+Wing Pistol 971 Frames
+
+Minigun 752 Frames
+LMG 1213 Frames
+Shotgun 1455 Frames
+
+Results of this test:
+1. Both forms of wing pistol are too strong
+2. LMG is too weak
+
+
