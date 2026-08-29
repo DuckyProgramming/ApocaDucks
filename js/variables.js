@@ -8329,6 +8329,9 @@ types={
     },{
       name:'PlayerWingPistolW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1186,
+    },{
+      name:'PlayerStickywheelC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1187,
     },
 
     //mark c
@@ -21002,6 +21005,15 @@ types={
 			reload:6,
 			speed:1.4,
       uses:16,
+		},{
+			name:'Stickywheel C',
+			ammo:3,
+			damage:150,
+			cooldown:36,
+			stop:99,
+			reload:60,
+			speed:1.05,
+      uses:15,
 		},
 
     /*{

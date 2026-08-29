@@ -27,7 +27,7 @@ function setupRules(){
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
-                a==507||a==508,
+                a==507||a==508||a==509,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -68,24 +68,25 @@ function setupRules(){
 				a==259||a==260||a==261||a==263||a==264||
 				a==267||a==268||a==271||a==272||a==275||
 				a==277||a==282||a==283||a==284||a==286||
-				a==292||a==293||a==295||a==301||a==392||
-				a==303||a==304||a==305||a==311||a==312||
-				a==314||a==315||a==318||a==323||a==326||
-				a==328||a==329||a==344||a==349||a==353||
-				a==356||a==359||a==360||a==366||a==368||
-				a==372||a==373||a==375||a==376||a==383||
-				a==389||a==390||a==391||a==392||a==402||
-				a==404||a==413||a==416||a==417||a==425||
-                a==431||a==435||a==437||a==438||a==447||
-                a==448||a==450||a==457||a==458||a==462||
-                a==468||a==472||a==473||a==474||a==475||
-                a==484||a==485||a==490||a==493||a==495||
-                a==496||a==499||a==500||a==501||a==508,
+				a==292||a==293||a==295||a==301||a==303||
+                //a==302||
+                a==304||a==305||a==311||a==312||a==314||
+                a==315||a==318||a==323||a==326||a==328||
+                a==329||a==344||a==349||a==353||a==356||
+                a==359||a==360||a==366||a==368||a==372||
+                a==373||a==375||a==376||a==383||a==389||
+                a==390||a==391||a==392||a==402||a==404||
+                a==413||a==416||a==417||a==425||a==431||
+                a==435||a==437||a==438||a==447||a==448||
+                a==450||a==457||a==458||a==462||a==468||
+                a==472||a==473||a==474||a==475||a==484||
+                a==485||a==490||a==493||a==495||a==496||
+                a==499||a==500||a==501||a==508||a==509,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
 			stickybomb:a==349||a==360||a==368||a==372||a==392||
-				a==417||a==435||a==448,
+				a==417||a==435||a==448||a==509,
 			passer:a==85||a==89||a==103||a==193||a==194||
 				a==195||a==215||a==270||a==297||a==310||
 				a==337||a==398||a==427||a==433||a==481||
@@ -106,7 +107,7 @@ function setupRules(){
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
                 a!=457&&a!=470&&a!=490&&a!=495&&a!=496&&
-                a!=500,
+                a!=500&&a!=509,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -122,7 +123,8 @@ function setupRules(){
 				a==245||a==246||a==247||a==250||a==284||
 				a==286||a==304||a==314||a==323||a==329||
 				a==349||a==360||a==368||a==372||a==375||
-				a==392||a==417||a==435||a==438||a==448,
+				a==392||a==417||a==435||a==438||a==448||
+                a==509,
 			stopper:a!=7&&a!=23&&a!=25&&a!=32&&a!=37&&
 				a!=40&&a!=46&&a!=79&&a!=84&&a!=89&&
 				a!=100&&a!=103&&a!=112&&a!=193&&a!=194&&
@@ -132,7 +134,7 @@ function setupRules(){
 			physBall:a!=68&&a!=135&&a!=136&&a!=240&&a!=311&&
 				a!=312&&a!=349&&a!=360&&a!=369&&a!=372&&
                 a!=392&&a!=417&&a!=435&&a!=448&&a!=463&&
-                a!=464,
+                a!=464&&a!=509,
 			fader1:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==30||a==31||a==32||
 				a==41||a==45||a==47||a==53||a==54||
@@ -151,7 +153,8 @@ function setupRules(){
                 a==447||a==448||a==450||a==457||a==458||
                 a==462||a==469||a==471||a==474||a==475||
                 a==489||a==490||a==493||a==495||a==500||
-                a==501||a==505||a==506||a==507||a==508,
+                a==501||a==505||a==506||a==507||a==508||
+                a==509,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -10691,7 +10694,7 @@ Standard Errors: ${se[index]} vs ${se[index2]}
                                 entities.walls[1][a].set()
                                 entities.walls[1][a].checkGap()
                                 entities.walls[1][a].checkBar()
-                                entities.walls[1][a].formBounder()
+                                entities.walls[1][a].formBounder(true)
                             }
                             let tick=0
                             while(deployer.spawn.length>0){
@@ -11295,7 +11298,7 @@ Standard Errors: ${se[index]} vs ${se[index2]}
             }
         }
     }
-    if(types.mission[game.mission].name=='Return of the 25'&&game.time%max(300,1200-(game.players-1)*240)==0&&game.stack.length==0&&display.cycle>0){
+    if(types.mission[game.mission].name=='Return of the 25'&&game.time%max(300,1200-(game.players-1)*240)==0&&game.stack.length==0&&display.cycle>0&&entities.players.some(player=>player.id==0&&player.playerData.sizeBuff>=f1)){
         let name
         if(display.cycle<=10){
             name=['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Sniper','Medic','Spy'][floor(random(0,9))]
@@ -11956,7 +11959,7 @@ function setupLists(){
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshotC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaberC`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerC`],
-            [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheel`,`PlayerTickybombLauncher`,`PlayerDonker`],
+            [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],

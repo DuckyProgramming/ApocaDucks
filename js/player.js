@@ -108,9 +108,10 @@ class player{
         this.wet=0
         this.gasser=0
         this.exploded=false
-        this.thrown=false
+        /*this.thrown=false
         this.thrown2=false
-        this.thrown3=false
+        this.thrown3=false*/
+        this.thrown=0.15
         this.parachute=false
         this.disable=false
         this.attacking=false
@@ -6580,7 +6581,7 @@ class player{
                             this.jump.time=0
                             this.velocity.x=lsin(this.direction.main)*30
                             this.velocity.y=-10
-                            this.thrown=true
+                            //this.thrown=0.04
                         break
                         case 723:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],276,(lsin(this.direction.main)<0?-90:90)+random(-5,5),this.id,weaponData.damage*damageBuff,10,crit,this.index))
@@ -7979,7 +7980,7 @@ class player{
                             this.velocity.y=-(this.jump.time==0?10:20)
                             this.lastingForce[0]+=lsin(this.direction.main)*2
                             this.lastingForce[1]-=2
-                            this.thrown=true
+                            this.thrown=0.04
                             this.jump.time=0
                         break
                         case 1128:
@@ -8344,7 +8345,7 @@ class player{
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].velocity.x=sign(lsin(this.direction.goal))*16
                             entities.players[entities.players.length-1].velocity.y=-6
-                            entities.players[entities.players.length-1].thrown=true
+                            entities.players[entities.players.length-1].thrown=0.04
                         break
                         case 1166:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-1.5,1.5),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -8409,6 +8410,14 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],508,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?2:1)
                             this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?2:1)
+                        break
+                        case 1187:
+                            for(let a=0,la=3;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],509,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].tick=a
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                            }
                         break
 
                         //mark
@@ -9255,13 +9264,15 @@ class player{
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(this.manage[0]==inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.x<this.base.position.x-150)){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(this.manage[0]==1-inputSwap&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.x>this.base.position.x+150)){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -9299,7 +9310,7 @@ class player{
                     this.jump.time=0
                     this.velocity.x=lsin(this.direction.main)*30
                     this.velocity.y=-25
-                    this.thrown=true
+                    this.thrown=0.04
                 }else if(this.playerData.name==`ShotgunVaultAll`&&this.life<=this.base.life*0.5&&this.jump.time>2&&this.stuckTime<=0&&!this.assort.vault&&this.life>0){
                     this.assort.vault=true
                     this.assort.vaultTimer=15
@@ -9308,7 +9319,7 @@ class player{
                             entities.players[a].jump.time=0
                             entities.players[a].velocity.x=lsin(this.direction.main)*30
                             entities.players[a].velocity.y=-25
-                            entities.players[a].thrown=true
+                            entities.players[a].thrown=0.04
                         }
                     }
                 }
@@ -9526,13 +9537,15 @@ class player{
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(inputSet[inputSwap]&&!inputSet[1-inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(inputSet[1-inputSwap]&&!inputSet[inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -9568,7 +9581,7 @@ class player{
                     this.jump.time=0
                     this.velocity.x=lsin(this.direction.main)*30
                     this.velocity.y=-25
-                    this.thrown=true
+                    this.thrown=0.04
                 }
                 this.attacking=inputSet[3]
                 if(this.rules.masher1&&this.weapon.uses>0&&inputSetB[3]){
@@ -9715,13 +9728,15 @@ class player{
             }else{
                 if(this.inputs[this.selector][0]&&!this.inputs[this.selector][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x-=this.getSpeed()
                     }
                     this.runAnim(1/30)
                 }else if(this.inputs[this.selector][1]&&!this.inputs[this.selector][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    //if(!this.thrown&&!this.thrown2&&!this.thrown3){
+                    if(this.thrown==0.15){
                         this.velocity.x+=this.getSpeed()
                     }
                     this.runAnim(1/30)
@@ -10074,7 +10089,7 @@ class player{
         if(this.life<=0){
             this.life=0
             if(!this.dead){
-                print(this.playerData.name,game.time)
+                //print(this.playerData.name,game.time)
                 this.dead=true
                 if(!this.sidekick&&!this.construct&&!this.fort){
                     this.destroyProjectiles()
@@ -10139,7 +10154,8 @@ class player{
                             //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,499,random(-90,-75)+floor(random(0,2))*165,this.id,50,150,crit,this.index))
                         break
                         case 1176:
-                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,500,random(90,270),this.id,500,60,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,500,random(90,270),this.id,500,36,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,500,random(90,270),this.id,500,60,crit,this.index))
                         break
                     }           
                 }
@@ -10511,7 +10527,7 @@ class player{
                                 entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,entities.players[a].id,0,[],false,findName('ConstructGust',types.player),game.index))
                                 game.index++
                                 entities.players[entities.players.length-1].constructify()
-                                entities.players[entities.players.length-1].thrown=true
+                                entities.players[entities.players.length-1].thrown=0.04
                                 entities.players[entities.players.length-1].velocity.x=random(4,10)*(floor(random(0,2))*2-1)
                                 entities.players[entities.players.length-1].velocity.y=-10
                             }
@@ -12613,7 +12629,7 @@ class player{
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].velocity.x=sign(lsin(this.direction.goal))*24
                             entities.players[entities.players.length-1].velocity.y=-18
-                            entities.players[entities.players.length-1].thrown=true
+                            entities.players[entities.players.length-1].thrown=0.04
                         }
                     }
                 break
@@ -13439,7 +13455,8 @@ class player{
                 this.life=0
             }
         }else if(!this.disable2){
-            let friction=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
+            //let friction=1-(this.thrown2?0.025:this.thrown?0.04:0.15)*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
+            let friction=1-this.thrown*(this.playerData.name=='PlayerAuger'&&this.weapon.uses>0?0.2:1)
             this.velocity.x*=friction
             if(this.noGravTime>0){
                 this.noGravTime--

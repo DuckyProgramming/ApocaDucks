@@ -1714,7 +1714,7 @@ class wall{
             }
         }
     }
-    formBounder(){
+    formBounder(noSpawner){
         if(this.vv2){
             this.boundary[3]=[[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x-this.width/2,y:this.position.y+this.height/2}]]
             this.redundant[3]=false
@@ -1738,7 +1738,7 @@ class wall{
         }
         this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+(this.standard||this.type==59||this.type==60?100:20),height:bounds[3]-bounds[2]+(this.standard||this.type==59||this.type==60?100:20)}
-        if((this.standard||(this.type==17||this.type==18||this.type==20||this.type==21)&&game.level==37)&&this.boundary[1].length>0&&this.type!=3&&(this.type!=24||game.level==37)){
+        if(!noSpawner&&(this.standard||(this.type==17||this.type==18||this.type==20||this.type==21)&&game.level==37)&&this.boundary[1].length>0&&this.type!=3&&(this.type!=24||game.level==37)){
             let set=[1,4,5]
             for(let g=0,lg=set.length;g<lg;g++){
                 for(let a=0,la=this.boundary[set[g]].length;a<la;a++){
@@ -14035,7 +14035,7 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
-                                }else if((c.type==490||c.type==495||c.type==496||c.type==500)&&c.bounceTimer==0){
+                                }else if((c.type==490||c.type==495||c.type==496)&&c.bounceTimer==0){
                                     if(c.bounces==0){
                                         c.detTime=60
                                     }
@@ -14050,6 +14050,19 @@ class wall{
                                     }*/
                                 }else if(c.type==499){
                                     c.velocity.x*=0.995
+                                }else if(c.type==500&&c.bounceTimer==0){
+                                    if(c.bounces==0){
+                                        c.detTime=60
+                                    }
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    let mult=random(0.25,1/3)
+                                    c.velocity.x*=mult
+                                    c.velocity.y*=mult*(c.velocity.y>0?3:1)
+                                    /*if(c.bounces>=6){
+                                        c.explode()
+                                        c.active=false
+                                    }*/
                                 }else if(c.type==501){
                                     c.bounces++
                                     c.bounceTimer=5
@@ -15248,7 +15261,7 @@ class wall{
                                                                                 entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
                                                                                 game.index++
                                                                                 entities.players[entities.players.length-1].constructify()
-                                                                                entities.players[entities.players.length-1].thrown=true
+                                                                                entities.players[entities.players.length-1].thrown=0.04
                                                                                 entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)
                                                                                 entities.players[entities.players.length-1].velocity.y=-20
                                                                             }else{
@@ -15489,14 +15502,14 @@ class wall{
                                                     if(c.id>0){
                                                         c.velocity.x=-175
                                                         c.velocity.y=-40
-                                                        c.thrown=true
+                                                        c.thrown=0.04
                                                     }
                                                 break
                                                 case 30:
                                                     c.velocity.x=175
                                                     c.velocity.y=-80
                                                     c.position.y-=100
-                                                    c.thrown2=true
+                                                    c.thrown=0.025
                                                 break
                                                 case 32:
                                                     if(this.reload<=0&&!c.auto&&(!c.fort||c.id==0||game.level==42)&&(c.id>0||game.attacker||game.level==17||game.level==18||game.level==19||game.level==31)&&c.life>0&&(c.attacking&&!(game.level==42&&c.fort)||game.level==42&&c.id>game.gaming&&c.fort&&this.reload<=-1200)){
@@ -15513,7 +15526,7 @@ class wall{
                                                                         entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,entities.walls[1][e].owner,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
                                                                         game.index++
                                                                         entities.players[entities.players.length-1].constructify()
-                                                                        entities.players[entities.players.length-1].thrown=true
+                                                                        entities.players[entities.players.length-1].thrown=0.04
                                                                         entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)*(game.level==42?0.6:1)
                                                                         entities.players[entities.players.length-1].velocity.y=-20
                                                                     }else if(entities.walls[1][e].type==31&&abs(this.position.x-entities.walls[1][e].position.x)<600&&game.pvp&&entities.walls[1][e].owner!=c.id&&c.id>0&&!c.auto&&!c.sidekick){
@@ -16175,7 +16188,7 @@ class wall{
                                                 break
                                                 
                                             }
-                                            if(c.thrown&&this.type!=26){
+                                            /*if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }
                                             if(c.thrown2&&this.type!=30){
@@ -16183,6 +16196,9 @@ class wall{
                                             }
                                             if(c.thrown3&&this.type!=30){
                                                 c.thrown3=false
+                                            }*/
+                                            if(this.type!=26&&this.type!=30){
+                                                c.thrown=0.15
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16237,7 +16253,7 @@ class wall{
                                             if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
-                                            if(c.thrown&&this.type!=26){
+                                            /*if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }
                                             if(c.thrown2&&this.type!=30){
@@ -16245,6 +16261,9 @@ class wall{
                                             }
                                             if(c.thrown3&&this.type!=30){
                                                 c.thrown3=false
+                                            }*/
+                                            if(this.type!=26&&this.type!=30){
+                                                c.thrown=0.15
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16268,7 +16287,7 @@ class wall{
                                             if(c.rules.doubleJump&&c.weapon.uses>0){
                                                 c.jump.double=1
                                             }
-                                            if(c.thrown&&this.type!=26){
+                                            /*if(c.thrown&&this.type!=26){
                                                 c.thrown=false
                                             }
                                             if(c.thrown2&&this.type!=30){
@@ -16276,6 +16295,9 @@ class wall{
                                             }
                                             if(c.thrown3&&this.type!=30){
                                                 c.thrown3=false
+                                            }*/
+                                            if(this.type!=26&&this.type!=30){
+                                                c.thrown=0.15
                                             }
                                             if(c.parachute){
                                                 c.parachute=false

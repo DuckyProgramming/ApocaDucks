@@ -102,7 +102,7 @@ class projectile{
 			case 389: case 390: case 391: case 392: case 402: case 404: case 413: case 417: case 425: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 457: case 458: case 462: case 463: case 464:
 			case 474: case 475: case 484: case 490: case 493: case 495: case 496: case 499: case 500: case 501:
-			case 508:
+			case 508: case 509:
 				this.classification.partisan=true
 				size=this.type==97||this.type==134||this.type==138||this.type==162||this.type==163||this.type==164||this.type==165||this.type==233||this.type==243||this.type==252||
 					this.type==259||this.type==268||this.type==283||this.type==301||this.type==303||this.type==437||this.type==499?16:
@@ -237,7 +237,7 @@ class projectile{
 					case 263: case 284: case 286: case 304: case 314:
 					case 323: case 329: case 349: case 360: case 368:
 					case 372: case 375: case 392: case 417: case 435:
-					case 438: case 448:
+					case 438: case 448: case 509:
 						//this.classification.trap=true
 						this.stopAnim=1
 						this.stopPlane=0
@@ -278,12 +278,17 @@ class projectile{
 					break
 				}
 				if(this.rules.stickybomb){
-					this.detTick=this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448?30:60
-					this.width*=1.25
-					this.height*=1.25
+					this.detTick=this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448||this.type==509?30:60
+					if(this.type==509){
+						this.width*=0.75
+						this.height*=0.75
+					}else{
+						this.width*=1.25
+						this.height*=1.25
+					}
 					this.launch=false
 					//let lim=this.type==392?9:this.type==372?10:this.type==368?3:8
-					let lim=this.type==392?9:this.type==372?10:this.type==368?3:4
+					let lim=this.type==392||this.type==509?9:this.type==372?10:this.type==368?3:4
 					let ct=0
 					for(let a=0,la=entities.projectiles.length;a<la;a++){
 						if(entities.projectiles[la-1-a].type==this.type&&entities.projectiles[la-1-a].index==this.index){
@@ -6741,7 +6746,7 @@ class projectile{
 					layer.ellipse(0,0,125-this.fade*125)
 				}
 			break
-			case 392:
+			case 392: case 509:
 				layer.rotate(-this.direction)
 				if(this.stopAnim>0){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
@@ -8840,7 +8845,7 @@ class projectile{
 			break
 			case 349: case 417: case 435: case 448:
 				//mark sticky
-				radius=105+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,(this.type==435?900:750)-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -8880,7 +8885,7 @@ class projectile{
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
 							entities.players[b].knockbackSet(6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
-							entities.players[b].thrown3=true
+							entities.players[b].thrown=0.1
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
@@ -9020,7 +9025,7 @@ class projectile{
 			break
 			case 368:
 				//mark sticky
-				radius=105+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -9047,7 +9052,7 @@ class projectile{
 								entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
 								entities.players[b].knockbackSet(6*launch,dir,1,1)
 								entities.players[b].knockbackSetForce(3*launch,dir,1,1)
-								entities.players[b].thrown3=true
+								entities.players[b].thrown=0.1
 								//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
 							}
 						}else{
@@ -9094,7 +9099,7 @@ class projectile{
 			break
 			case 372:
 				//mark sticky
-				radius=105+constrain(this.timer*0.125-15,0,15)
+				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -9128,7 +9133,7 @@ class projectile{
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
 							entities.players[b].knockbackSet(6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
-							entities.players[b].thrown3=true
+							entities.players[b].thrown=0.1
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
@@ -9228,9 +9233,9 @@ class projectile{
 					}
 				}
 			break
-			case 392:
+			case 392: case 509:
 				//mark sticky
-				radius=90+constrain(this.timer*0.125-15,0,15)
+				radius=90+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
 				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -9249,8 +9254,13 @@ class projectile{
 							entities.players[b].lastingForce[1]-=3.6*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(4.5*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(6.75*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockbackSet(3.6*launch,dir,1,1)
-							entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
+							if(this.type==392){
+								entities.players[b].knockbackSet(3.6*launch,dir,1,1)
+								entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
+							}else if(this.type==509){
+								entities.players[b].knockbackSet(4.8*launch,dir,1,1)
+								entities.players[b].knockbackSetForce(2.4*launch,dir,1,1)
+							}
 						}else if(entities.players[b].index!=this.index&&c<90){
 							/*entities.players[b].velocity.x+=2.7*min(0.6,1-c/90)*lsin(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.x)*0.2)*entities.players[b].getKnockback()
 							entities.players[b].velocity.y-=1.44*min(0.6,1-c/90)*lcos(dir)*(this.index==entities.players[b].index?1.5:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()
@@ -9262,9 +9272,14 @@ class projectile{
 							entities.players[b].lastingForce[1]-=3.6*min(1,1.5-1.5*c/105)*lcos(dir)*(this.index==entities.players[b].index?2.25:1)/(1+abs(entities.players[b].velocity.y)*0.2)*entities.players[b].getKnockback()*/
 							/*entities.players[b].knockback(2.7*min(1,1.5-1.5*c/105),dir,1,0.8)
 							entities.players[b].knockbackForce(2.7*min(1,1.5-1.5*c/105),dir,1,0.5)*/
-							entities.players[b].knockbackSet(3.6*launch,dir,1,1)
-							entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
-							entities.players[b].thrown3=true
+							if(this.type==392){
+								entities.players[b].knockbackSet(3.6*launch,dir,1,1)
+								entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
+							}else if(this.type==509){
+								entities.players[b].knockbackSet(4.8*launch,dir,1,1)
+								entities.players[b].knockbackSetForce(2.4*launch,dir,1,1)
+							}
+							entities.players[b].thrown=0.1
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/90))),entities.players[b].stuckTime)
 						}
 						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
@@ -9401,7 +9416,7 @@ class projectile{
 							entities.players[b].knockbackForce(4.5*min(1,1.5-1.5*c/105),dir,1,0.5)*/
 							entities.players[b].knockbackSet(6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(3*launch,dir,1,1)
-							entities.players[b].thrown3=true
+							entities.players[b].thrown=0.1
 							//entities.players[b].stuckTime=max(ceil(min(15,22.5*(1-c/105))),entities.players[b].stuckTime)
 						}
 						//entities.players[b].stuckTime=max(ceil(min(10,15*(1-c/105))),entities.players[b].stuckTime)
@@ -9624,7 +9639,8 @@ class projectile{
 				}
 			break
 			case 500:
-				radius=135
+				//radius=135
+				radius=150
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -9633,8 +9649,9 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*random(0.2,0.3),random(1,60),this.crit,this.index))
-					entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
+					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*random(0.2,0.3),random(15,60),this.crit,this.index))
+					//entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
+					entities.projectiles[entities.projectiles.length-1].speed*=random(0.8,1)
 				}
 			break
 			case 501:
@@ -9771,7 +9788,7 @@ class projectile{
 			case 402: case 404: case 410: case 412: case 413: case 416: case 417: case 425: case 431: case 435:
 			case 437: case 438: case 447: case 448: case 450: case 453: case 457: case 458: case 462: case 463:
 			case 464: case 468: case 472: case 473: case 474: case 475: case 484: case 485: case 490: case 493:
-			case 495: case 496: case 499: case 500: case 501: case 508:
+			case 495: case 496: case 499: case 500: case 501: case 508: case 509:
 				delete this.past[0]
 				this.past.splice(0,1)
 				this.past.push([this.position.x,this.position.y])
@@ -10795,7 +10812,7 @@ class projectile{
 				case 113: case 114: case 115: case 116: case 146: case 156: case 181: case 201: case 205: case 206:
 				case 209: case 216: case 220: case 221: case 243: case 250: case 263: case 284: case 286: case 304:
 				case 314: case 323: case 329: case 349: case 360: case 368: case 372: case 375: case 392: case 417:
-				case 435: case 438: case 448:
+				case 435: case 438: case 448: case 509:
 					if(this.rules.stickybomb&&this.type!=360&&/*(this.stop||this.timer>=this.detTick)*/this.stop&&this.active){
 						for(let b=0,lb=entities.players.length;b<lb;b++){
 							if(
@@ -10865,11 +10882,16 @@ class projectile{
 							let theta=this.timer*12+this.tick*120
 							let omega=PI/15
 							let a=[
-								(ddr-r*omega*omega)*lcos(theta)-(2*dr*omega)*lsin(theta),
-								(ddr-r*omega*omega)*lsin(theta)+(2*dr*omega)*lcos(theta)
+								((ddr-r*omega*omega)*lcos(theta)-(2*dr*omega)*lsin(theta)),
+								((ddr-r*omega*omega)*lsin(theta)+(2*dr*omega)*lcos(theta))
 							]
 							this.velocity.x+=a[0]
 							this.velocity.y+=a[1]
+						}
+						if(this.type==509&&a==la-1&&!this.launch){
+							let k=8
+							this.velocity.x+=(lsin(this.timer*12+this.tick*120)*min(1,this.timer/30)-lsin((this.timer-1)*12+this.tick*120)*min(1,(this.timer-1)/30))*k
+							this.velocity.y+=(lcos(this.timer*12+this.tick*120)*min(1,this.timer/30)-lcos((this.timer-1)*12+this.tick*120)*min(1,(this.timer-1)/30))*k
 						}
 					}
 					if((
@@ -10886,7 +10908,10 @@ class projectile{
 					if(this.type==417&&this.detTimer>0&&a==0){
 						this.detTimer--
 					}
-					if(this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448){
+					if(
+						this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448||
+						this.type==509
+					){
 						let id=((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)
 						//if(a==0&&id>game.gaming&&floor(random(0,10))==0){
 						if(a==0&&id>game.gaming&&this.timer%5==0&&floor(random(0,2))==0){
@@ -10926,7 +10951,7 @@ class projectile{
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].index==this.index){
 											if(
-												this.autoDet||(
+												this.autoDet&&this.stop||!this.autoDet&&(
 													lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
 													lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
 													abs(this.position.x-entities.players[a].position.x)<75&&
