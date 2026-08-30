@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[9,0],sets:[[0,0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[9,0],sets:[[0,7,0],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -16,15 +16,18 @@ function setup(){
         //game.noEnemy=true
 
         game.players=2
-        game.gaming=2
-        game.level=117
+        game.gaming=1
+        game.level=23
         /*
         8 - normandy
+        22 - steel ad
+        23 - steel pvp
         41 - speleo dm
         47 - big data ad
         49 - rusted adzz
         55 - tailwater ad
         65 - tailwater 5cp
+        69 - cooked koth
         70 - rocksalt pl
         74 - mill dm
         83 - railing ad
@@ -59,7 +62,7 @@ function setup(){
         if(rules.dm){
             game.classicRespawn=false
         }
-        if(rules.dm||rules.teamMode||game.level==94||game.level==101){
+        if(rules.dm||rules.teamMode||game.level==23||game.level==69||game.level==94||game.level==101){
             game.pvp=true
             updateRules()
         }

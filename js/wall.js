@@ -14048,6 +14048,11 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
+                                }else if(c.type==498&&c.active){
+                                    c.active=false
+                                    c.velocity.x*=0.1
+                                    c.velocity.y*=0.1
+                                    c.explode()
                                 }else if(c.type==499){
                                     c.velocity.x*=0.995
                                 }else if(c.type==500&&c.bounceTimer==0){
@@ -14068,6 +14073,10 @@ class wall{
                                     c.bounceTimer=5
                                     c.velocity.x*=0.6
                                     c.velocity.y*=0.6
+                                }else if(c.type==510&&c.active){
+                                    c.active=false
+                                    c.velocity.x*=0.1
+                                    c.velocity.y*=0.1
                                 }
                             }
                         }

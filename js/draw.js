@@ -1203,7 +1203,7 @@ function mainloop(){
                     }else if(entities.players[c].playerData.name=='PlayerGuidedMissile'||entities.players[c].playerData.name=='PlayerInsurgentW'||entities.players[c].assort.missile){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
                             //if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].id==entities.players[c].id){
-                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].index==entities.players[c].index){
+                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==entities.players[c].index){
                                 center=entities.projectiles[a]
                                 if(entities.projectiles[a].type==280||entities.projectiles[a].type==316){
                                     key[c]*=(game.level==7?1.5:game.players>=3?3:2)

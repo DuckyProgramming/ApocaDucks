@@ -8332,6 +8332,9 @@ types={
     },{
       name:'PlayerStickywheelC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1187,
+    },{
+      name:'PlayerRecon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1188,
     },
 
     //mark c
@@ -21014,6 +21017,15 @@ types={
 			reload:60,
 			speed:1.05,
       uses:15,
+		},{
+			name:'Recon C',
+			ammo:1,
+			damage:300,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.05,
+      uses:4,
 		},
 
     /*{

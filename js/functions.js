@@ -27,7 +27,7 @@ function setupRules(){
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
-                a==507||a==508||a==509,
+                a==507||a==508||a==509||a==510,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -40,7 +40,7 @@ function setupRules(){
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
-                a==498||a==505||a==506||a==507,
+                a==498||a==505||a==506||a==507||a==510,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -81,7 +81,8 @@ function setupRules(){
                 a==450||a==457||a==458||a==462||a==468||
                 a==472||a==473||a==474||a==475||a==484||
                 a==485||a==490||a==493||a==495||a==496||
-                a==499||a==500||a==501||a==508||a==509,
+                a==498||a==499||a==500||a==501||a==508||
+                a==509||a==510,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -10272,9 +10273,11 @@ function generateLevel(info,layer){
             game.loadout[a]=[
                 {main:duel.sets[a].map((item,index)=>findName(listing[4][duel.numKey[a]][index][item],types.player)),class:duel.numKey[a]}
             ]
-            entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.numKey[a])
-            entities.players[a].position.x=game.edge[0]*0.5+(mix[a]*1000-la*500+500)*(game.level==117?1.25:1)
-            entities.players[a].position.y+=500
+            if(!entities.players[a].fort){
+                entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.numKey[a])
+                entities.players[a].position.x=game.edge[0]*0.5+(mix[a]*1000-la*500+500)*(game.level==117?1.25:1)
+                entities.players[a].position.y+=500
+            }
         }
     }else if((!rules.teamMode||duel.experiment[0]==-1)&&duel.trigger){
         for(let a=0,la=duel.sets.length;a<la;a++){
@@ -11298,7 +11301,7 @@ Standard Errors: ${se[index]} vs ${se[index2]}
             }
         }
     }
-    if(types.mission[game.mission].name=='Return of the 25'&&game.time%max(300,1200-(game.players-1)*240)==0&&game.stack.length==0&&display.cycle>0&&entities.players.some(player=>player.id==0&&player.playerData.sizeBuff>=f1)){
+    if(types.mission[game.mission].name=='Return of the 25'&&game.time%max(300,1200-(game.players-1)*240)==0&&game.stack.length==0&&display.cycle>0&&entities.players.some(player=>player.id==0&&player.playerData.sizeBuff>=1)){
         let name
         if(display.cycle<=10){
             name=['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Sniper','Medic','Spy'][floor(random(0,9))]
@@ -11339,7 +11342,7 @@ function initialGraphics(){
         menu.level==120||menu.level==121||menu.level==122||menu.level==123||menu.level==124||menu.level==125||menu.level==126||menu.level==127||menu.level==128||menu.level==129||
         menu.level==130||menu.level==131||menu.level==132||menu.level==133||menu.level==134||menu.level==135||menu.level==136||menu.level==137||menu.level==138||menu.level==140
     ){
-        graphics.overlay.push(createGraphics(width,menu.players>5&&!rules.teamMode?400:200))
+        graphics.overlay.push(createGraphics(width,(menu.players>5&&!rules.teamMode?400:200)*width/1500))
         graphics.overlay[0].scale(width/1200)
         //graphics.overlay.push(createGraphics(1200,menu.players>5&&!rules.teamMode?400:200))
     }
@@ -11979,7 +11982,7 @@ function setupLists(){
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
-            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneC`],
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerRecon`,`PlayerDroneC`],
             [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],

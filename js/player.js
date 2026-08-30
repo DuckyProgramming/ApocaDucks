@@ -1335,7 +1335,9 @@ class player{
     }
     jumpAction(){
         if(this.bounceTime>0){
-            let bounceMult=game.level==1||game.level==42?3:1.5
+            let bounceMult=game.level==1||game.level==42?3:
+                game.level==22||game.level==23?2:
+                1.5
             if(this.rules.jumper){
                 this.velocity.y=min(-(21-max(0,min(120,this.assort.tired)-30-this.life/this.base.life*30)/30)*bounceMult*(this.wet>0?0.5:1),this.velocity.y-2.25*bounceMult*(this.wet>0?0.5:1))
             }else if(this.playerData.name=='PlayerSoldier4'&&this.subPlayerAData.name=='PlayerLightParachutist'){
@@ -1684,7 +1686,7 @@ class player{
                 if(!entities.projectiles[a].classification.trap){
                     entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                 }
-                if((entities.projectiles[a].rules.stickybomb||entities.projectiles[a].type==438||entities.projectiles[a].type==498)&&entities.projectiles[a].active){
+                if((entities.projectiles[a].rules.stickybomb||entities.projectiles[a].type==438||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].active){
                     entities.projectiles[a].active=false
                     entities.projectiles[a].fail=true
                 }
@@ -8419,6 +8421,12 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
                             }
                         break
+                        case 1188:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],510,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,3600,crit,this.index))
+                            if(this.effectiveId()>0&&this.effectiveId()<=game.gaming){
+                                this.disable=true
+                            }
+                        break
 
                         //mark
                     }
@@ -9116,7 +9124,7 @@ class player{
                     }else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.effectiveId()<=game.gaming){
                         this.disable=false
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].index==this.index){
+                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
                                 if(this.life<=0){
                                     entities.projectiles[a].active=false
                                 }
@@ -9467,7 +9475,7 @@ class player{
                 }else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.effectiveId()<=game.gaming){
                     this.disable=false
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].index==this.index){
+                        if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
                             if(this.life<=0){
                                 entities.projectiles[a].active=false
                             }

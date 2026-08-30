@@ -1126,7 +1126,7 @@ class projectile{
 				this.time=time
 				this.velocity={x:this.speed*lsin(this.direction),y:this.speed*lcos(this.direction)-2}
 			break
-			case 498:
+			case 498: case 510:
 				this.speed=1
 				this.time=time
 				this.pivot=false
@@ -1136,7 +1136,7 @@ class projectile{
 				this.width*=2
 				this.height*=2
 				this.goal=-1
-				this.fail=false
+				this.fail=this.type==510
 			break
 			case 505:
 				this.speed=3
@@ -8046,7 +8046,7 @@ class projectile{
 				layer.fill(75-this.crit*75,175+this.crit*75,25+this.crit*200,this.fade*6-5)
 				layer.rect(0,0,4,2,0.5)
 			break
-			case 498:
+			case 498: case 510:
 				let fade498=2*this.fade-1
 				layer.rotate(-this.direction)
 				layer.fill(220-this.crit*200,220+this.crit*50,220+this.crit*50,fade498)
@@ -8059,7 +8059,11 @@ class projectile{
 				layer.ellipse(6-2*lsin(this.time*9),-5,4*lsin(this.time*9),1.5)
 				layer.fill(200,200+this.crit*50,200+this.crit*50,fade498)
 				layer.rect(0,0,14,4,2)
-				layer.fill(225,125,25,fade498)
+				if(this.type==498){
+					layer.fill(225,125,25,fade498)
+				}else{
+					layer.fill(25,125,225,fade498)
+				}
 				layer.rect(0,0,12*this.time/this.base.time,2,1)
 				/*if(!this.active&&this.fade<1&&6*this.fade-5>0){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,(6*this.fade-5))
@@ -9728,7 +9732,7 @@ class projectile{
 			this.fade=smoothAnim(this.fade,this.active,0,1,3)
 		}else if(this.type==446||this.type==477||this.type==478){
 			this.fade-=0.25
-		}else if(this.type==494||this.type==498){
+		}else if(this.type==494||this.type==498||this.type==510){
 			this.fade=smoothAnim(this.fade,this.active,0,1,30)
 		}else{
 			this.fade=smoothAnim(this.fade,this.active,0,1,5)
@@ -12206,7 +12210,7 @@ class projectile{
 						//this.angularVelocity*=0.96
 					}
 				break
-				case 498:
+				case 498: case 510:
 					if(this.active){
 						for(let b=0,lb=entities.players.length;b<lb;b++){
 							if(
@@ -12269,7 +12273,8 @@ class projectile{
 								}
 							}
 						}else{
-							let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&this.id==1?2:this.id-1]
+			                let core=(game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index:this.id-1
+							let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&core==0?2:core]
 							if(inputSet[0]){
 								this.velocity.x-=speed
 							}
@@ -12448,7 +12453,7 @@ class projectile{
 							entities.players[d].life=max(entities.players[d].life-this.damage*0.25)
 						}
 					}
-				}else if(this.type==416||this.type==468||this.type==472||this.type==498||this.rules.stickybomb){
+				}else if(this.type==416||this.type==468||this.type==472||this.type==498||this.type==510||this.rules.stickybomb){
 					this.fail=true
 				}
 			}
