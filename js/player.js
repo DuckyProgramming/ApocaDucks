@@ -133,7 +133,7 @@ class player{
         this.assort={
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
-            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,
+            ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -3066,8 +3066,9 @@ class player{
                 ?0.5:
                 this.rules.take23&&spec==0
                 ?2/3:
-                this.rules.take45||this.rules.classW&&(
-                    this.subWeaponAType==982||this.subWeaponBType==982//||
+                (
+                    this.rules.take45||
+                    this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982)
                     //this.subWeaponAType==1189||this.subWeaponBType==1189
                 )&&spec==0
                 ?0.8:
@@ -3082,7 +3083,7 @@ class player{
                 this.playerData.name=='PlayerSpyC7'||this.playerData.name=='PlayerSpyC8'||this.playerData.name=='PlayerSpyC9'||this.playerData.name=='PlayerSpyC10'||this.playerData.name=='PlayerSpyC11'||
                 this.playerData.name=='PlayerSpyC12'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1007
                 ?1.25:
-                this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyW'
+                this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1007
                 ?5/3:
                 1
             let value=damage*
@@ -3123,9 +3124,9 @@ class player{
                     entities.players[entities.players.length-1].setColor()
                 }
             }
-            if(this.rules.spyLineReduced||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1006){
+            if(this.rules.spyLineReduced/*||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1006*/){
                 this.visible2=30
-            }else if(this.playerData.name=='PlayerSpyC6'){
+            }else if(this.playerData.name=='PlayerSpyC6'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1006){
                 this.visible2=15
             }else if(
                 (this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&
@@ -7635,7 +7636,9 @@ class player{
                         break
                         case 976:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.8
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.8
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x*=1.92
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                         break
                         case 977:
@@ -9182,10 +9185,10 @@ class player{
                             }
                         }
                     //}else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.id<=game.gaming){
-                    }else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.effectiveId()<=game.gaming){
+                    }else if(this.playerData.name=='PlayerGuidedMissile'&&this.effectiveId()<=game.gaming){
                         this.disable=false
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
-                            if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
+                            if(entities.projectiles[a].type==280&&entities.projectiles[a].index==this.index){
                                 if(this.life<=0){
                                     entities.projectiles[a].active=false
                                 }
@@ -9229,6 +9232,28 @@ class player{
                                 a=la
                             }
                         }
+                    }else if(this.playerData.name=='PlayerInsurgentW'&&this.effectiveId()<=game.gaming){
+                        this.disable=false
+                        if(this.assort.drone!=-1&&!this.assort.drone.remove){
+                            if((this.assort.drone.type==494||this.assort.drone.type==498||this.assort.drone.type==510)&&this.assort.drone.index==this.index){
+                                this.disable=true
+                            }else{
+                                this.assort.drone=1
+                            }
+                        }
+                        if(!this.disable){
+                            for(let a=0,la=entities.projectiles.length;a<la;a++){
+                                if((entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
+                                    if(this.life<=0){
+                                        entities.projectiles[a].active=false
+                                    }
+                                    this.assort.drone=entities.projectiles[a]
+                                    this.disable=true
+                                    a=la
+                                }
+                            }
+                        }
+                    //}else if(this.playerData.name=='PlayerRemoteControl'&&this.id<=game.gaming){
                     }else{
                         this.disable=false
                     }
@@ -9533,10 +9558,10 @@ class player{
                         }
                     }
                 //}else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.id<=game.gaming){
-                }else if((this.playerData.name=='PlayerGuidedMissile'||this.playerData.name=='PlayerInsurgentW')&&this.effectiveId()<=game.gaming){
+                }else if(this.playerData.name=='PlayerGuidedMissile'&&this.effectiveId()<=game.gaming){
                     this.disable=false
                     for(let a=0,la=entities.projectiles.length;a<la;a++){
-                        if((entities.projectiles[a].type==280||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
+                        if(entities.projectiles[a].type==280&&entities.projectiles[a].index==this.index){
                             if(this.life<=0){
                                 entities.projectiles[a].active=false
                             }
@@ -9578,6 +9603,27 @@ class player{
                             }
                             this.disable=true
                             a=la
+                        }
+                    }
+                }else if(this.playerData.name=='PlayerInsurgentW'&&this.effectiveId()<=game.gaming){
+                    this.disable=false
+                    if(this.assort.drone!=-1&&!this.assort.drone.remove){
+                        if((this.assort.drone.type==494||this.assort.drone.type==498||this.assort.drone.type==510)&&this.assort.drone.index==this.index){
+                            this.disable=true
+                        }else{
+                            this.assort.drone=1
+                        }
+                    }
+                    if(!this.disable){
+                        for(let a=0,la=entities.projectiles.length;a<la;a++){
+                            if((entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==this.index){
+                                if(this.life<=0){
+                                    entities.projectiles[a].active=false
+                                }
+                                this.assort.drone=entities.projectiles[a]
+                                this.disable=true
+                                a=la
+                            }
                         }
                     }
                 }else{

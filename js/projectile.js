@@ -7795,7 +7795,17 @@ class projectile{
 				layer.ellipse(0,0,8)
 				layer.fill(250-this.crit*200,this.crit*200,this.crit*200,this.fade)
 				layer.rotate(this.position.x*4)
-				layer.rect(0,0,3,8)
+				//layer.rect(0,0,3,8)
+				layer.beginShape()
+				layer.vertex(-1.5,3.6)
+				layer.vertex(-1.5,-3.6)
+				layer.vertex(-0.5,-4)
+				layer.vertex(0.5,-4)
+				layer.vertex(1.5,-3.6)
+				layer.vertex(1.5,3.6)
+				layer.vertex(0.5,4)
+				layer.vertex(-0.5,4)
+				layer.endShape()
 				if(!this.active&&this.fade<1){
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 					layer.ellipse(0,0,(270-this.fade*270)*(this.fail?0.5:1))
@@ -8322,8 +8332,10 @@ class projectile{
 					constrain(this.position.y,target.position.y-target.height/2-this.height/2,target.position.y+target.height/2+this.height/2)
 				),dist(
 					this.position.x,this.position.y,
-					constrain(this.position.x,target.previous.position.x*3-target.position.x*2-target.width/2-this.width/2,target.previous.position.x*3-target.position.x*2+target.width/2+this.width/2),
-					constrain(this.position.y,target.previous.position.y*3-target.position.y*2-target.height/2-this.height/2,target.previous.position.y*3-target.position.y*2+target.height/2+this.height/2)
+					constrain(this.position.x,target.previous.position.x*2-target.position.x-target.width/2-this.width/2,target.previous.position.x*2-target.position.x+target.width/2+this.width/2),
+					constrain(this.position.y,target.previous.position.y*2-target.position.y-target.height/2-this.height/2,target.previous.position.y*2-target.position.y+target.height/2+this.height/2)
+					//constrain(this.position.x,target.previous.position.x*3-target.position.x*2-target.width/2-this.width/2,target.previous.position.x*3-target.position.x*2+target.width/2+this.width/2),
+					//constrain(this.position.y,target.previous.position.y*3-target.position.y*2-target.height/2-this.height/2,target.previous.position.y*3-target.position.y*2+target.height/2+this.height/2)
 				))
 			case 1:
 				return min(dist(
