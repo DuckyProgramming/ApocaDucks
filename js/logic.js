@@ -20358,5 +20358,10 @@ player.prototype.logic=function(){
         this.manage[1]=1
     }
     this.target.position.x=constrain(this.target.position.x,0,game.edge[0])
-    this.manage[0]=abs(this.position.x-this.target.position.x)<(this.id!=0?1800:900)&&this.rules.sniperLine&&this.manage[3]==1&&(lsin(this.direction.main)<0&&this.target.position.x<this.position.x||lsin(this.direction.main)>0&&this.target.position.x>this.position.x)&&abs(this.target.position.y-this.position.y)<50?-1:this.position.x>this.target.position.x?0:1
+    this.manage[0]=abs(this.position.x-this.target.position.x)<(this.id!=0?1800:900)&&
+        this.rules.sniperLine&&this.manage[3]==1&&
+        this.subWeaponAData.name!='Bushwack'&&
+        (lsin(this.direction.main)<0&&this.target.position.x<this.position.x||lsin(this.direction.main)>0&&this.target.position.x>this.position.x)&&
+        abs(this.target.position.y-this.position.y)<50?-1:
+        this.position.x>this.target.position.x?0:1
 }

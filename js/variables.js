@@ -81,7 +81,7 @@ duel={trigger:false,numKey:[],sets:[],experiment:[]}
 rules={dm:false,teamMode:false,backed:false,safeWater:false,grad:0,quickPoint:false,overlay:false}
 listing=[[],[],[]]
 menu={players:1,gaming:1,weapon:2,level:6,list:[],mode:0}
-dev={sight:false,speed:1}
+dev={sight:false,speed:1,rampSlope:false,rampSlopeProj:true}
 types={
   mission:[
     {
@@ -8335,6 +8335,30 @@ types={
     },{
       name:'PlayerRecon',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1188,
+    },{
+      name:'PlayerPenaltyScattergunQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1189,
+    },{
+      name:'PlayerGrenadierW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1190,
+    },{
+      name:'PlayerLingererC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1191,
+    },{
+      name:'PlayerRollerLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1192,
+    },{
+      name:'PlayerShellerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1193,
+    },{
+      name:'PlayerDaydrinkerW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1194,
+    },{
+      name:'PlayerStairwayC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1195,
+    },{
+      name:'PlayerWarningLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1196,
     },
 
     //mark c
@@ -20661,9 +20685,9 @@ types={
 			name:'Anticannon C',
 			ammo:6,
 			damage:240,
-			cooldown:33,
+			cooldown:45,
 			stop:144,
-			reload:45,
+			reload:36,
 			speed:0.8,
       uses:24,
 		},{
@@ -20931,9 +20955,9 @@ types={
 			name:'Warning Launcher C',
 			ammo:1,
 			damage:240,
-			cooldown:120,
-			stop:120,
-			reload:120,
+			cooldown:108,
+			stop:108,
+			reload:108,
 			speed:1.05,
       uses:9,
 		},{
@@ -21026,6 +21050,78 @@ types={
 			reload:360,
 			speed:1.05,
       uses:4,
+		},{
+			name:'Penalty Scattergun Q',
+			ammo:2,
+			damage:24,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:16,
+		},{
+			name:'Grenadier W',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Lingerer C',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Roller Launcher C',
+			ammo:2,
+			damage:180,
+			cooldown:20,
+			stop:150,
+			reload:12,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Sheller W',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Daydrinker W',
+			ammo:2,
+			damage:100,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
+		},{
+			name:'Stairway C',
+			ammo:5,
+			damage:150,
+			cooldown:24,
+			stop:60,
+			reload:15,
+			speed:1.05,
+      uses:30,
+		},{
+			name:'Warning Launcher W',
+			ammo:1,
+			damage:240,
+			cooldown:108,
+			stop:108,
+			reload:108,
+			speed:1.05,
+      uses:9,
 		},
 
     /*{

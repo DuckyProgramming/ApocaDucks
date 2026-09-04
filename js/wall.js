@@ -13544,6 +13544,7 @@ class wall{
                             }
                             if(d>=0&&!this.redundant[d]){
                                 //let inside=inBoxBox(c,{position:this.internalBounder.position,width:this.internalBounder.width+5,height:this.internalBounder.height+5})
+                                let push
                                 switch(d){
                                     case 0:
                                         if(c.rules.bounce2){
@@ -13642,9 +13643,29 @@ class wall{
                                         }
                                     break
                                     case 4:
+                                        push=false
                                         if(c.rules.bounce2){
                                             if(c.velocity.x<0){
+                                                push=true
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170||c.type==463||c.type==464){
+                                            push=true
+                                        }else{
+                                            push=true
+                                        }
+                                        if(push){
+                                            if(dev.rampSlopeProj){
+                                                let opPoint={x:c.position.x-c.width/2-this.position.x,y:c.position.y+c.height/2-this.position.y}
+                                                let move=abs(opPoint.x/this.width-opPoint.y/this.height)/dist(0,0,1/this.width,1/this.height)+0.1
+                                                let angle=atan(this.height/this.width)
+                                                c.position.x+=lsin(angle)*move
+                                                c.position.y-=lcos(angle)*move
+                                            }else{
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                            }
+                                        }
+                                        if(c.rules.bounce2){
+                                            if(c.velocity.x<0){
                                                 c.velocity.x*=-1
                                                 c.direction+=180
                                                 c.hit=[]
@@ -13654,7 +13675,6 @@ class wall{
                                                 }
                                             }
                                         }else if(c.type==135||c.type==136||c.type==169||c.type==170||c.type==463||c.type==464){
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
                                             if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
@@ -13664,7 +13684,6 @@ class wall{
                                                 c.position.y+=c.velocity.y*0.1
                                             }
                                         }else{
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                             if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
@@ -13686,9 +13705,29 @@ class wall{
                                         }
                                     break
                                     case 5:
+                                        push=false
                                         if(c.rules.bounce2){
                                             if(c.velocity.x>0){
+                                                push=true
+                                            }
+                                        }else if(c.type==135||c.type==136||c.type==169||c.type==170||c.type==463||c.type==464){
+                                            push=true
+                                        }else{
+                                            push=true
+                                        }
+                                        if(push){
+                                            if(dev.rampSlopeProj){
+                                                let opPoint={x:c.position.x+c.width/2-this.position.x,y:c.position.y+c.height/2-this.position.y}
+                                                let move=abs(opPoint.x/this.width+opPoint.y/this.height)/dist(0,0,1/this.width,1/this.height)+0.1
+                                                let angle=atan(this.height/this.width)
+                                                c.position.x-=lsin(angle)*move
+                                                c.position.y-=lcos(angle)*move
+                                            }else{
                                                 c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                            }
+                                        }
+                                        if(c.rules.bounce2){
+                                            if(c.velocity.x>0){
                                                 c.velocity.x*=-1
                                                 c.direction+=180
                                                 c.hit=[]
@@ -13698,7 +13737,6 @@ class wall{
                                                 }
                                             }
                                         }else if(c.type==135||c.type==136||c.type==169||c.type==170||c.type==463||c.type==464){
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[c.effectiveDirection+180,sqrt(c.velocity.x**2+c.velocity.y**2)]
                                             if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
@@ -13708,7 +13746,6 @@ class wall{
                                                 c.position.y+=c.velocity.y*0.1
                                             }
                                         }else{
-                                            c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                             if(abs(incident-vecBall[0])<=90||abs(incident-vecBall[0]-360)<=90||abs(incident-vecBall[0]+360)<=90){
@@ -14825,6 +14862,8 @@ class wall{
                             case 75:
                                 this.recharge=120
                                 c.life=max(c.life,c.base.life)
+                                //c.DOT.active=0
+                                c.clean()
                                 if(c.weaponType==-1||game.pvp&&!game.royale){
                                     c.newWeapon()
                                 }
@@ -14880,6 +14919,7 @@ class wall{
                                                     this.base.height==10&&(game.level==100||game.level==140)&&this.height<game.tileset[1]*3&&this.height>game.tileset[1]*1.5||
                                                     game.level==101&&this.base.height==game.tileset[1]*2&&this.height<game.tileset[1]*2
                                                 ))
+                                                //&&!(c.velocity.y>0&&c.thrown!=0.15)
                                             ){
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=max(c.velocity.y,0)
@@ -14897,6 +14937,7 @@ class wall{
                                             }
                                         break
                                         case 1:
+                                            //if(!(c.velocity.y<0&&c.thrown!=0.15)){
                                             c.position.y=this.position.y-this.height/2-c.height/2-0.01
                                             if(this.type==28&&game.level==114){
                                                 c.velocity.y=min(c.velocity.y,-c.velocity.y*0.6)
@@ -14924,6 +14965,7 @@ class wall{
                                                     c.jump.triple=1
                                                 }
                                             }
+                                            //mark button
                                             switch(this.type){
                                                 case 2: case 25: case 29: case 34: case 48:
                                                     if((game.level==19||game.level==31)&&this.type!=25&&this.type!=34){
@@ -15820,7 +15862,7 @@ class wall{
                                                                         entities.projectiles[entities.projectiles.length-1].position.x+=entities.projectiles[entities.projectiles.length-1].velocity.x
                                                                         entities.projectiles[entities.projectiles.length-1].position.y+=entities.projectiles[entities.projectiles.length-1].velocity.y
                                                                     }
-                                                                   }else{
+                                                                }else{
                                                                     this.reload=0
                                                                 }
                                                             break
@@ -16247,16 +16289,29 @@ class wall{
                                             }
                                         break
                                         case 4:
-                                            if(game.level!=30||c.position.y>this.position.y-this.height/2-c.height/2){
-                                                if(this.type==59||this.type==60||this.type==130){
-                                                    c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                    c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
+                                            if(dev.rampSlope){
+                                                let opPoint={x:c.position.x-c.width/2-this.position.x,y:c.position.y+c.height/2-this.position.y}
+                                                /*
+                                                this is a line from x-width/2,y-width/2 to x+width/2,y+width/2
+                                                x/this.width-y/this.height=0
+                                                */
+                                                let move=abs(opPoint.x/this.width-opPoint.y/this.height)/dist(0,0,1/this.width,1/this.height)+0.1
+                                                let angle=atan(this.height/this.width)
+                                                c.position.x+=lsin(angle)*move
+                                                c.position.y-=lcos(angle)*move
+                                                c.velocity.y=min(c.velocity.y,c.velocity.x*this.height/this.width)
+                                            }else{
+                                                if(game.level!=30||c.position.y>this.position.y-this.height/2-c.height/2){
+                                                    if(this.type==59||this.type==60||this.type==130){
+                                                        c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                                        c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
+                                                    }else{
+                                                        c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                                        c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
+                                                    }
                                                 }else{
                                                     c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
-                                                    c.velocity.y=min(c.velocity.y,c.velocity.x*min(3,this.height/this.width))
                                                 }
-                                            }else{
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             }
                                             c.jump.time=constrain(c.jump.time+2,0,6)
                                             if(c.rules.doubleJump&&c.weapon.uses>0){
@@ -16285,12 +16340,21 @@ class wall{
                                             c.assort.ramp=this.height/this.width
                                         break
                                         case 5:
-                                            if(this.type==59||this.type==60||this.type==130){
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
+                                            if(dev.rampSlope){
+                                                let opPoint={x:c.position.x+c.width/2-this.position.x,y:c.position.y+c.height/2-this.position.y}
+                                                let move=abs(opPoint.x/this.width+opPoint.y/this.height)/dist(0,0,1/this.width,1/this.height)+0.1
+                                                let angle=atan(this.height/this.width)
+                                                c.position.x-=lsin(angle)*move
+                                                c.position.y-=lcos(angle)*move
+                                                c.velocity.y=min(c.velocity.y,-c.velocity.x*this.height/this.width)
                                             }else{
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
-                                                c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
+                                                if(this.type==59||this.type==60||this.type==130){
+                                                    c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                                    c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
+                                                }else{
+                                                    c.position.y=this.position.y-this.height/2-c.height/2-0.01+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                                    c.velocity.y=min(c.velocity.y,-c.velocity.x*min(3,this.height/this.width))
+                                                }
                                             }
                                             c.jump.time=constrain(c.jump.time+2,0,6)
                                             if(c.rules.doubleJump&&c.weapon.uses>0){

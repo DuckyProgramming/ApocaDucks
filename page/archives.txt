@@ -1,9 +1,20 @@
 
 1187 - stickywheel
 1188 - recon, 1173
+1189 - penalty scattergun q, 1134
+test only [
+    1190 - grenadier w, 1011
+    1191 - lingerer c, 976
+    1192 - roller launcher c, 1117
+    1193 - sheller w, 1132
+    1194 - daydrinker w, 1133
+    1195 - stairway c, 1113
+    1196 - warning launcher w, 1178
+]
 
 509 - stickywheel c
 510 - recon, 498
+511 - penalty scattergun q, 451
 
 
 
@@ -92,7 +103,7 @@
 1149 - shield minigun, 1144
 1150 - wing submachine, 391
 
-482 - anticannon, 406, 466
+482 - anticannon c, 406, 466
 483 - shield minigun, 427
 
 

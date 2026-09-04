@@ -10271,7 +10271,7 @@ function generateLevel(info,layer){
             .map(({value})=>value)
         for(let a=0,la=game.players;a<la;a++){
             game.loadout[a]=[
-                {main:duel.sets[a].map((item,index)=>findName(listing[4][duel.numKey[a]][index][item],types.player)),class:duel.numKey[a]}
+                {main:duel.sets[a].filter((item,index)=>index<listing[4][duel.numKey[a]].length).map((item,index)=>findName(listing[4][duel.numKey[a]][index][item],types.player)),class:duel.numKey[a]}
             ]
             if(!entities.players[a].fort){
                 entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+duel.numKey[a])
@@ -11952,7 +11952,7 @@ function setupLists(){
     }
     listing[4]=[
         [
-            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunW`],
+            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerSlugScattergun`,`PlayerPenaltyScattergunQ`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
@@ -11961,7 +11961,7 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerAirshotC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaberC`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerC`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerC`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
@@ -11982,7 +11982,7 @@ function setupLists(){
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
-            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerRecon`,`PlayerDroneC`],
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneC`],
             [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
