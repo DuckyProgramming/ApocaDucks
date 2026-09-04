@@ -11,10 +11,12 @@ test only [
     1195 - stairway c, 1113
     1196 - warning launcher w, 1178
 ]
+1195 - daydrinker q, 1133
 
 509 - stickywheel c
 510 - recon, 498
 511 - penalty scattergun q, 451
+512 - daydrinker q, 475
 
 
 

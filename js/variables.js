@@ -8359,6 +8359,9 @@ types={
     },{
       name:'PlayerWarningLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1196,
+    },{
+      name:'PlayerDaydrinkerQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1197,
     },
 
     //mark c
@@ -21098,7 +21101,7 @@ types={
 		},{
 			name:'Daydrinker W',
 			ammo:2,
-			damage:100,
+			damage:120,
 			cooldown:30,
 			stop:90,
 			reload:30,
@@ -21122,6 +21125,15 @@ types={
 			reload:108,
 			speed:1.05,
       uses:9,
+		},{
+			name:'Daydrinker Q',
+			ammo:2,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:16,
 		},
 
     /*{
