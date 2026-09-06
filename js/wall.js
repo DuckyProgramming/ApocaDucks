@@ -13925,6 +13925,8 @@ class wall{
                                             entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,89,c.direction,c.id,1,450,c.crit,c.index))
                                         }else if(c.type==314&&!c.stop){
                                             entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,315,c.direction,c.id,c.damage,1800,c.crit,c.index,[c.projectileIndex]))
+                                        }else if(c.type==514&&!c.stop){
+                                            entities.projectiles.push(new projectile(c.layer,c.position.x,c.position.y,515,c.direction,c.id,c.damage,1800,c.crit,c.index,[c.projectileIndex]))
                                         }else if((c.type==221||c.type==304)&&!c.stop){
                                             c.explode()
                                         }

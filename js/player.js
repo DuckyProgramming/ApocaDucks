@@ -1691,7 +1691,8 @@ class player{
     destroyProjectiles(){
         for(let a=0,la=entities.projectiles.length;a<la;a++){
             if(entities.projectiles[a].index==this.index&&entities.projectiles[a].classification.partisan){
-                if(!entities.projectiles[a].classification.trap){
+                //if(!entities.projectiles[a].classification.trap){
+                if(entities.projectiles[a].classification.drone){
                     entities.projectiles[a].time=min(15,entities.projectiles[a].time)
                 }
                 if((entities.projectiles[a].rules.stickybomb||entities.projectiles[a].type==438||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].active){

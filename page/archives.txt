@@ -20,6 +20,8 @@ test only [
 511 - penalty scattergun q, 451
 512 - daydrinker q, 475
 513 - pomson, 354
+514 - pomson block, 201
+515 - pomson drone, 111, 145
 
 
 
