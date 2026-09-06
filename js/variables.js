@@ -7596,7 +7596,7 @@ types={
     },{
       name:'PlayerSecurer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.375,crit:0,weapon:776,
-    },{
+    },{ 
       name:'PlayerHealBolt',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:777,
     },{
@@ -8362,6 +8362,12 @@ types={
     },{
       name:'PlayerDaydrinkerQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1197,
+    },{
+      name:'PlayerSunriseC',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1198,
+    },{
+      name:'PlayerPomsonC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.375,crit:0,weapon:1199,
     },
 
     //mark c
@@ -10910,6 +10916,9 @@ types={
     },{
       name:'MainBattleSpy',sizeBuff:1,lifeBuff:1,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1129,
+    },{
+      name:'HyperRGB',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.125,reloadBuff:1,crit:0,weapon:1128,
     },
 
     //mark p
@@ -21134,6 +21143,24 @@ types={
 			reload:30,
 			speed:1.05,
       uses:16,
+		},{
+			name:'Sunrise C',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:100,
+			reload:3,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Pomson C',
+			ammo:3,
+			damage:150,
+			cooldown:40,
+			stop:100,
+			reload:20,
+			speed:0.975,
+      uses:18,
 		},
 
     /*{

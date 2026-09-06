@@ -1143,6 +1143,12 @@ class projectile{
 				this.time=time
 				this.lift=floor(random(0,2))
 			break
+			case 513:
+				this.speed=4.5
+				this.time=time
+				this.width*=3
+				this.height*=3
+			break
 			
 		}
 		this.timer=0
@@ -8292,6 +8298,28 @@ class projectile{
 					layer.ellipse(0,0,(84-this.fade*84)*(this.fail?0.5:1))
 				}
 			break
+			case 513:
+				let swivel=lsin(this.timer*12)
+				layer.strokeWeight(2)
+				layer.line(0,0,4,6)
+				layer.stroke(200-this.crit*200,this.crit*200,50+this.crit*200,this.fade*0.8)
+				layer.line(-4*swivel,18,4*swivel,6)
+				layer.stroke(200-this.crit*200,this.crit*200,50+this.crit*200,this.fade*0.6)
+				layer.line(-4*swivel,18,4*swivel,30)
+				layer.stroke(200-this.crit*200,this.crit*200,50+this.crit*200,this.fade*0.4)
+				layer.line(-4*swivel,42,4*swivel,30)
+				layer.stroke(200-this.crit*200,this.crit*200,50+this.crit*200,this.fade*0.2)
+				layer.line(-4*swivel,42,0,48)
+				layer.noStroke()
+				layer.fill(225-this.crit*200,25+this.crit*200,75+this.crit*200,this.fade*0.2)
+				for(let a=0,la=4;a<la;a++){
+					regStar(layer,0,0,7,12-a,12-a,7.2-a*0.6,7.2-a*0.6,this.timer*3)
+				}
+				layer.fill(255,this.fade*0.2)
+				for(let a=0,la=8;a<la;a++){
+					regStar(layer,0,0,7,8-a,8-a,4.8-a*0.6,4.8-a*0.6,this.timer*3)
+				}
+			break
 
 			//mark
         }
@@ -9746,7 +9774,8 @@ class projectile{
 						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].immune()){
 							entities.players[b].vulnerableTime=min(entities.players[b].vulnerableTime+360*(1-c*0.8/radius),720)
-							entities.players[b].DOT.damage+=this.damage/90*(1-c*0.8/radius)
+							//entities.players[b].DOT.damage+=this.damage/90*(1-c*0.8/radius)
+							entities.players[b].DOT.damage+=this.damage/90*(1-c*0.8/radius)*entities.players[b].selfDamageCheck(this.index)
 							entities.players[b].DOT.active=min(entities.players[b].DOT.active+360*(1-c*0.8/radius),720)
 						}
 					}
@@ -12117,7 +12146,7 @@ class projectile{
 						}
 					}
 				break
-				case 354:
+				case 354: case 513:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -12242,12 +12271,13 @@ class projectile{
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
-					if(this.travel>(this.rules.fast||this.type==336?4500:1500)&&this.type!=335){
+					/*if(this.travel>(this.rules.fast||this.type==336?4500:1500)&&this.type!=335){
 						this.active=false
-					}
+					}*/
 					if(this.travel>360&&this.active){
 						this.active=false
 						this.explode()
+						this.speed*=0.6
 					}
 				break
 				case 494:
@@ -12959,6 +12989,19 @@ class projectile{
 			break
 			case 503:
 				target.takeDamage(this.damage*max(1,1.1-this.timer*0.0125))
+			break
+			case 513:
+				if(target.playerData.name.includes('Hyper')||target.rules.spyLineFull&&target.fade<1){
+					target.life=0
+					let turn313=floor(random(0,72))
+					for(let b=0,lb=7;b<lb;b++){
+						entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,209,this.direction+b*72+turn313,this.id,this.base.damage*0.5,600,this.crit,this.index))
+						entities.projectiles[entities.projectiles.length-1].velocity.x*=0.5
+						entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+					}
+				}else{
+					target.takeDamage(this.damage)
+				}
 			break
 			/*case 511:
 				let startLife=target.life

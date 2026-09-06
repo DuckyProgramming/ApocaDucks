@@ -53,9 +53,11 @@ class player{
         this.invincible=0
         this.spy=false
         if(
-            this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||
+            /*this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||this.playerData.name=='SpyTank'||this.playerData.name=='CritSpy'||this.playerData.name=='RevolverSpy'||this.playerData.name=='SpyHeal'||this.playerData.name=='HyperSpy'||this.playerData.name=='SlightlyFastSpy'||this.playerData.name=='ShotgunSpy'||
             this.playerData.name=='HeavySpy'||this.playerData.name=='GrenadierSpy'||this.playerData.name=='SpyBuster'||this.playerData.name=='FlamethrowerSpy'||this.playerData.name=='EnderSpy'||this.playerData.name=='MiniSentrySpy'||this.playerData.name=='PushSpy'||this.playerData.name=='Decoy'||this.playerData.name=='TinySpy'||this.playerData.name=='SpyRegen'||
-            this.playerData.name=='SpySpawner'||this.playerData.name=='SpyShield'||this.playerData.name=='MysterySpy'||this.playerData.name=='SpyFakeHealthPackCarrier'||
+            this.playerData.name=='SpySpawner'||this.playerData.name=='SpyShield'||this.playerData.name=='MysterySpy'||this.playerData.name=='SpyFakeHealthPackCarrier'||*/
+            spy(this.playerData.name)||
+            this.playerData.name=='Decoy'||
             game.randomizer
         ){
             this.spy=true
@@ -74,7 +76,13 @@ class player{
             this.copy=entities.players[this.copyset[floor(random(0,this.copyset.length))]]
             this.copyId=0
         }
-        if(this.weaponType==14||this.weaponType==66||this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperTank'||this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||this.playerData.name=='HyperBuster'||game.randomizer){
+        if(
+            this.weaponType==14||this.weaponType==66||
+            this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperTank'||
+            this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||
+            this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||this.playerData.name=='HyperBuster'||this.playerData.name=='HyperRGB'||
+            game.randomizer
+        ){
             this.active=0
         }
         this.visible=0
@@ -3030,7 +3038,7 @@ class player{
         this.lastingForce[1]=-power*lcos(dir)*y*this.getKnockback()*(abs(this.lastingForce[1])>3?0.216:abs(this.lastingForce[1])>2?0.36:abs(this.lastingForce[1])>1?0.6:1)
     }
     getKnockback(){
-        return this.fort?0:this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2?0.5:1
+        return this.fort?0:this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2||this.construct?0.5:1
     }
     takeDamage(damage,spec=0){
         if(game.readout){
@@ -8491,6 +8499,21 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
                             }
                         break
+                        case 1198:
+                            for(let a=0,la=8;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,(lsin(this.direction.main)<0?-90:90)-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
+                                //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90)-10+a*20/7,this.id,weaponData.damage*damageBuff*5,300,crit,this.index))
+                                //entities.projectiles[entities.projectiles.length-1].speed*=2
+                            }
+                            for(let a=0,la=9;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,133,(lsin(this.direction.main)<0?-90:90)-10+a*2.5,this.id,weaponData.damage*damageBuff*5,300,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed*=1.6-abs(a-4)*0.2
+                            }
+                        break
+                        case 1199:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],513,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        break
 
                         //mark
                     }
@@ -8685,7 +8708,7 @@ class player{
                 this.playerData.name=='PlayerVPN'||this.playerData.name=='PlayerVanguard',
             sideHyper:this.playerData.name=='HyperPistol'||this.playerData.name=='CritHyperPistol'||this.playerData.name=='BigHyperPistol'||this.playerData.name=='HyperCaffeinePistol'||this.playerData.name=='HyperTank'||
                 this.playerData.name=='HyperShotgun'||this.playerData.name=='BigFastHyperPistol'||this.playerData.name=='HyperSpy'||this.playerData.name=='LongHyperPistol'||this.playerData.name=='HyperHeavyPunch'||
-                this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||this.playerData.name=='HyperBuster',
+                this.playerData.name=='HyperBonker'||this.playerData.name=='HyperPistolSplitter'||this.playerData.name=='HyperPistolSplitterSplitter'||this.playerData.name=='HyperBuster'||this.playerData.name=='HyperRGB',
             knockbackResist:this.playerData.name=='PlayerHeavyWeapons'||this.playerData.name=='PlayerHeavyWeapons2'||this.playerData.name=='PlayerHeavyWeapons3'||this.playerData.name=='PlayerHeavyWeapons4'||this.playerData.name=='PlayerHeavyWeapons5'||
                 this.playerData.name=='PlayerHeavyWeapons6'||this.playerData.name=='PlayerHeavyWeapons7'||this.playerData.name=='PlayerHeavyWeapons8'||this.playerData.name=='PlayerHeavyWeapons9'||this.playerData.name=='PlayerHeavyWeapons10'||
                 this.playerData.name=='PlayerHeavyWeapons11'||this.playerData.name=='PlayerHeavyWeapons12'||this.playerData.name=='PlayerHeavyWeaponsW',
