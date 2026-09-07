@@ -13573,7 +13573,7 @@ class wall{
                                     case 1:
                                         if(c.rules.bounce2){
                                             if(c.velocity.y>0){
-                                                c.position.y=this.position.y-this.sheight/2-c.height/2
+                                                c.position.y=this.position.y-this.height/2-c.height/2
                                                 c.velocity.y*=-1
                                                 c.direction+=180
                                                 c.hit=[]

@@ -1105,7 +1105,7 @@ class projectile{
 				this.position.y-=this.speed*lcos(this.direction)
 				this.classification.bullet=true
 			break
-			case 482:
+			case 482: case 516:
 				this.speed=8
 				this.time=time
 				this.rules.fast=true
@@ -7833,7 +7833,7 @@ class projectile{
 					layer.line(0,-this.extent-this.deviation,0,-this.extent-this.deviation*2)
 				}
 			break
-			case 482:
+			case 482: case 516:
 				layer.fill(160-this.crit*160,40+this.crit*200,240,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(160-this.crit*160,40+this.crit*120,160+this.crit*80,this.fade)
@@ -9808,6 +9808,16 @@ class projectile{
 					}
 				}
 			break
+			case 516:
+				radius=100
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*constrain(1.2-this.timer/this.base.time*4,0.2,1),1)
+						entities.players[b].generalizedTake(this)
+					}
+				}
+			break
 		}
 		for(let b=0,lb=entities.projectiles.length;b<lb;b++){
 			if(entities.projectiles[b].type==457&&dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<radius+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
@@ -9950,7 +9960,7 @@ class projectile{
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
-				case 482: case 492: case 497: case 503: case 507: case 511:
+				case 482: case 492: case 497: case 503: case 507: case 511: case 516:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -13048,6 +13058,32 @@ class projectile{
 			break*/
 			default:
 				if(this.rules.exploder&&this.type!=389){
+					if(this.rules.fast||this.speed>=10){
+						if(intersect(this.position,this.previous.position,
+							{x:target.position.x-target.width*0.5-this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5},
+							{x:target.position.x+target.width*0.5+this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5}
+						)&&this.position.y>target.position.y-target.height*0.5){
+							this.position.y=target.position.y-target.height*0.5
+						}
+						if(intersect(this.position,this.previous.position,
+							{x:target.position.x-target.width*0.5-this.width*0.5,y:target.position.y+target.height*0.5+this.height*0.5},
+							{x:target.position.x+target.width*0.5+this.width*0.5,y:target.position.y+target.height*0.5+this.height*0.5}
+						)&&this.position.y<target.position.y+target.height*0.5){
+							this.position.y=target.position.y+target.height*0.5
+						}
+						if(intersect(this.position,this.previous.position,
+							{x:target.position.x-target.width*0.5-this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5},
+							{x:target.position.x-target.width*0.5-this.width*0.5,y:target.position.y+target.height*0.5+this.height*0.5}
+						)&&this.position.x>target.position.x-target.width*0.5){
+							this.position.x=target.position.x-target.width*0.5
+						}
+						if(intersect(this.position,this.previous.position,
+							{x:target.position.x+target.width*0.5+this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5},
+							{x:target.position.x+target.width*0.5+this.width*0.5,y:target.position.y+target.height*0.5+this.height*0.5}
+						)&&this.position.x<target.position.x+target.width*0.5){
+							this.position.x=target.position.x+target.width*0.5
+						}
+					}
 					if(this.rules.explodeHit){
 						target.takeDamage(this.damage)
 					}else if(this.type==48){
@@ -13057,6 +13093,8 @@ class projectile{
 					}else if(this.type==474||this.type==493){
 						//this said 477 at some point but that was invalid, idk what it was originally meant for
 						target.takeDamage(this.damage*0.25)
+					}else if(this.type==516){
+						target.takeDamage(this.damage*0.2)
 					}
 					this.explode()
 				}else if(this.rules.fast&&this.type!=409||this.type==342||this.type==428||this.type==429){

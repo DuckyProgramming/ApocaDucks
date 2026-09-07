@@ -27,7 +27,8 @@ function setupRules(){
                 a==474||a==475||a==482||a==484||a==489||
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
-                a==507||a==508||a==509||a==510||a==512,
+                a==507||a==508||a==509||a==510||a==512||
+                a==516,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -40,7 +41,8 @@ function setupRules(){
 				a==362||a==370||a==378||a==379||a==384||
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
-                a==498||a==505||a==506||a==507||a==510,
+                a==498||a==505||a==506||a==507||a==510||
+                a==516,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -100,7 +102,8 @@ function setupRules(){
 			fast:a==4||a==14||a==39||a==50||a==57||
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
-				a==407||a==409||a==421||a==460||a==482,
+				a==407||a==409||a==421||a==460||a==482||
+                a==516,
 			hitter:a!=85&&a!=156&&a!=190&&a!=191&&a!=214&&
 				a!=255&&a!=256&&a!=257&&a!=265&&a!=300&&
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
@@ -9149,9 +9152,11 @@ function generateLevel(info,layer){
                             if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10)){
                                 typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10),1)
                             }*/
-                            if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
+                            /*if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScout',types.player))%10)){
                                 typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScout',types.player))%10),1)
-                            }
+                            }*/
+                            //for some reason this above 3 lines were uncommented at one time
+                            //this caused a crash sometimes so it will be removed
                         }else{
                             let index=floor(random(0,typeList[team].length))
                             //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
@@ -11972,10 +11977,10 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordC`,`PlayerDaydrinkerQ`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
-            [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonC`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
+            [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonW`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             [`PlayerShotgun`,`PlayerRepairGun`,`PlayerPomsonC`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],

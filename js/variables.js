@@ -8368,6 +8368,12 @@ types={
     },{
       name:'PlayerPomsonC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.375,crit:0,weapon:1199,
+    },{
+      name:'PlayerSwordW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1200,
+    },{
+      name:'PlayerAnticannonW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1201,
     },
 
     //mark c
@@ -21158,9 +21164,27 @@ types={
 			damage:150,
 			cooldown:40,
 			stop:100,
-			reload:20,
+			reload:24,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Sword W',
+			ammo:3,
+			damage:160,
+			cooldown:36,
+			stop:96,
+			reload:60,
+			speed:1.4,
+      uses:15,
+		},{
+			name:'Anticannon W',
+			ammo:6,
+			damage:300,
+			cooldown:45,
+			stop:144,
+			reload:36,
+			speed:0.8,
+      uses:24,
 		},
 
     /*{

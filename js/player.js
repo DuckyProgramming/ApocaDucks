@@ -1634,17 +1634,17 @@ class player{
             (
                 (
                     this.weaponType==616||this.weaponType==725||this.weaponType==797||this.weaponType==854||this.weaponType==924||this.weaponType==925||this.weaponType==927||this.weaponType==928||this.weaponType==984||this.weaponType==1026||
-                    this.weaponType==1030||this.weaponType==1122||this.weaponType==1140||this.weaponType==1144||this.weaponType==1145||this.weaponType==1148||this.weaponType==1149
+                    this.weaponType==1030||this.weaponType==1122||this.weaponType==1140||this.weaponType==1144||this.weaponType==1145||this.weaponType==1148||this.weaponType==1149||this.weaponType==1201
                 )&&this.weapon.reload>this.weaponData.stop*0.8&&this.weapon.uses>0||
-                (this.weaponType==725||this.weaponType==1144||this.weaponType==1145||this.weaponType==1148||this.weaponType==1149)&&this.assort.firingTick>0||
+                (this.weaponType==725||this.weaponType==1144||this.weaponType==1145||this.weaponType==1148||this.weaponType==1149||this.weaponType==1201)&&this.assort.firingTick>0||
                 this.weaponType==1146&&this.assort.firingTick>0&&this.assort.firing>25
             ?1/3:1)*
             (this.rules.class&&(
                 (
                     this.subWeaponAType==616||this.subWeaponAType==725||this.subWeaponAType==797||this.subWeaponAType==854||this.subWeaponAType==924||this.subWeaponAType==925||this.subWeaponAType==927||this.subWeaponAType==928||this.subWeaponAType==984||this.subWeaponAType==1026||
-                    this.subWeaponAType==1030||this.subWeaponAType==1122||this.subWeaponAType==1140||this.subWeaponAType==1144||this.subWeaponAType==1145||this.subWeaponAType==1148||this.subWeaponAType==1149
+                    this.subWeaponAType==1030||this.subWeaponAType==1122||this.subWeaponAType==1140||this.subWeaponAType==1144||this.subWeaponAType==1145||this.subWeaponAType==1148||this.subWeaponAType==1149||this.subWeaponAType==1201
                 )&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.8||
-                (this.subWeaponAType==725||this.subWeaponAType==1144||this.subWeaponAType==1145||this.subWeaponAType==1148||this.subWeaponAType==1149)&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
+                (this.subWeaponAType==725||this.subWeaponAType==1144||this.subWeaponAType==1145||this.subWeaponAType==1148||this.subWeaponAType==1149||this.subWeaponAType==1201)&&this.assort.firingTick>0&&this.subWeaponA.uses>0&&this.weapon.uses>0||
                 this.subWeaponAType==801&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.reload>this.subWeaponAData.stop*0.4||
                 this.subWeaponAType==1146&&this.assort.firingTick>0&&this.assort.firing>25
             )?1/3:1)*
@@ -1724,10 +1724,13 @@ class player{
                 graphics.panePoint[this.id-1]={position:{x:-1000,y:-1000},width:0,height:0}
             }
         }
-        for(let a=0,la=entities.projectiles.length;a<la;a++){
+        /*for(let a=0,la=entities.projectiles.length;a<la;a++){
             if(entities.projectiles[a].index==this.index&&!entities.projectiles[a].classification.trap&&entities.projectiles[a].classification.partisan){
                 entities.projectiles[a].time=min(15,entities.projectiles[a].time)
             }
+        }*/
+        if(!rules.teamMode){
+            this.destroyProjectiles()
         }
         let core=(game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index:this.id-1
         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
@@ -3099,7 +3102,7 @@ class player{
                 ((game.pvp?this.index+1:this.id)>game.gaming&&!game.pvp?0.8:1)*
                 (this.vulnerableTime>0?2:1)*
                 (this.defendBuff>0&&spec==0?0.5:1)*
-                (this.disable&&!this.assort.remote&&!this.assort.missile?0.25:1)*
+                (this.disable&&!this.assort.remote&&!this.assort.missile&&this.id==0?0.25:1)*
                 charMult
             this.life-=value
             if(this.playerData.name=='PlayerGlassCannon'&&this.weapon.cooldown<this.weaponData.cooldown){
@@ -3590,7 +3593,7 @@ class player{
                     )&&
                     !((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480&&!this.assort.intel)&&
                     !((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&
-                    !((weaponType==1140||weaponType==1144||weaponType==1145||weaponType==1146||weaponType==1148||weaponType==1149)&&this.assort.firingTick<2/3)&&
+                    !((weaponType==1140||weaponType==1144||weaponType==1145||weaponType==1146||weaponType==1148||weaponType==1149||weaponType==1201)&&this.assort.firingTick<2/3)&&
                     !(weaponType==928&&this.assort.firingTick<4/9)&&!(weaponType==1122&&this.assort.firingTick<3/9)&&
                     !((weaponType==1030||weaponType==1161)&&this.assort.firingTick<1/3)
                 ){
@@ -8514,6 +8517,20 @@ class player{
                         break
                         case 1199:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],513,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                        break
+                        case 1200:
+                            if(this.jump.time==0||this.assort.ramp==0||lsin(this.direction.main)<0&&this.assort.ramp>0||lsin(this.direction.main)>0&&this.assort.ramp<0){
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],91,(lsin(this.direction.main)<0?-1:1)*90,this.id,weaponData.damage*damageBuff,45,crit,this.index))
+                            }else{
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],91,(lsin(this.direction.main)<0?-1:1)*atan2(1,this.assort.ramp),this.id,weaponData.damage*damageBuff,45,crit,this.index))
+                            }
+                            entities.projectiles[entities.projectiles.length-1].speed*=0.64
+                            entities.projectiles[entities.projectiles.length-1].base.speed*=0.64
+                            entities.projectiles[entities.projectiles.length-1].width*=0.5
+                            entities.projectiles[entities.projectiles.length-1].height*=0.5
+                        break
+                        case 1201:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],516,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,240,crit,this.index))
                         break
 
                         //mark
