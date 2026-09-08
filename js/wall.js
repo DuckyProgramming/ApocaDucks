@@ -16382,7 +16382,7 @@ class wall{
                                                 }
                                             }
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
-                                            c.assort.ramp=this.height/this.width
+                                            c.assort.ramp=-this.height/this.width
                                         break
                                         case 6:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)

@@ -8519,10 +8519,10 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],513,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,600,crit,this.index))
                         break
                         case 1200:
-                            if(this.jump.time==0||this.assort.ramp==0||lsin(this.direction.main)<0&&this.assort.ramp>0||lsin(this.direction.main)>0&&this.assort.ramp<0){
+                            if(this.jump.time==0||abs(this.assort.ramp)==0||lsin(this.direction.main)<0&&this.assort.ramp<0||lsin(this.direction.main)>0&&this.assort.ramp>0){
                                 entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],91,(lsin(this.direction.main)<0?-1:1)*90,this.id,weaponData.damage*damageBuff,45,crit,this.index))
                             }else{
-                                entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],91,(lsin(this.direction.main)<0?-1:1)*atan2(1,this.assort.ramp),this.id,weaponData.damage*damageBuff,45,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,this.position.x,spawn[1],91,(lsin(this.direction.main)<0?-1:1)*atan2(1,abs(this.assort.ramp)),this.id,weaponData.damage*damageBuff,45,crit,this.index))
                             }
                             entities.projectiles[entities.projectiles.length-1].speed*=0.64
                             entities.projectiles[entities.projectiles.length-1].base.speed*=0.64
@@ -8531,6 +8531,12 @@ class player{
                         break
                         case 1201:
                             entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],516,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                        break
+                        case 1202:
+                            for(let a=0,la=6;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                            }
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],517,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6,30,crit,this.index))
                         break
 
                         //mark
@@ -10433,7 +10439,7 @@ class player{
                     break
                     case 'PistolSplitterSplitter':
                         for(let a=0,la=2;a<la;a++){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*this.assort.ramp,0,0,[],true,findName('PistolSplitter',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*abs(this.assort.ramp),0,0,[],true,findName('PistolSplitter',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
@@ -10442,7 +10448,7 @@ class player{
                     break
                     case 'PistolSplitterSplitterSplitter':
                         for(let a=0,la=2;a<la;a++){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-16.8-4.8*this.assort.ramp,0,0,[],true,findName('PistolSplitterSplitter',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-16.8-4.8*abs(this.assort.ramp),0,0,[],true,findName('PistolSplitterSplitter',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
@@ -10465,7 +10471,7 @@ class player{
                     break
                     case 'HyperPistolSplitterSplitter':
                         for(let a=0,la=2;a<la;a++){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*this.assort.ramp,0,0,[],true,findName('HyperPistolSplitter',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*abs(this.assort.ramp),0,0,[],true,findName('HyperPistolSplitter',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
@@ -10474,7 +10480,7 @@ class player{
                     break
                     case 'HyperMedicSplitterSplitter':
                         for(let a=0,la=2;a<la;a++){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*this.assort.ramp,0,0,[],true,findName('HyperMedicSplitter',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-14.4-2.4*abs(this.assort.ramp),0,0,[],true,findName('HyperMedicSplitter',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].free=true
                             entities.players[entities.players.length-1].lastingForce[0]+=[0.25,-0.25][a]
@@ -10501,56 +10507,56 @@ class player{
                     break
                     case 'Mystery':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'CritMystery':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)&&types.player[num].crit>0))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'HeavyMystery':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>!types.player[num].name.includes('Boss')&&!tank(types.player[num].name)&&types.player[num].name.includes('Heavy')>0))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'MysteryMystery':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>types.player[num].name.includes('Mystery')))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'MysteryTank':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>tank(types.player[num].name)))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'MysteryBoss':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>types.player[num].name.includes('Boss')))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'MysteryMiniCelestial':
                         type=randin(range(0,types.player.length).filter(num=>types.player[num].name.includes('MiniCelestial')&&types.player[num].name!=`MysteryMiniCelestial`))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
                     break
                     case 'MysterySpy':
                         type=randin(range(findName('Wait',types.player)+1,types.player.length).filter(num=>spy(types.player[num].name)))
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*this.assort.ramp,0,0,[],true,type,game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12*types.player[type].sizeBuff-12*max(0,types.player[type].sizeBuff-1)*abs(this.assort.ramp),0,0,[],true,type,game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         entities.players[entities.players.length-1].weapon.cooldown+=60
@@ -13755,12 +13761,12 @@ class player{
             if(this.assort.vaultTimer==0){
                 switch(this.playerData.name){
                     case 'PistolVaultTankSpawner':
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18-this.assort.ramp*6,0,0,[],true,findName('Tank',types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18-abs(this.assort.ramp)*6,0,0,[],true,findName('Tank',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                     break
                     case 'PistolVaultTankGrenadeSpawner':
-                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18-this.assort.ramp*6,0,0,[],true,findName('Tank',types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18-abs(this.assort.ramp)*6,0,0,[],true,findName('Tank',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].free=true
                         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)

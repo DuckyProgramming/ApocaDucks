@@ -1265,7 +1265,9 @@ function mainloop(){
                                 entities.players[c].subWeaponAType==1012||entities.players[c].subWeaponBType==1012||
                                 entities.players[c].subWeaponAType==1120||entities.players[c].subWeaponBType==1120
                             )?1.25:
-                            entities.players[c].weaponType==613?0.75:
+                            entities.players[c].weaponType==613||entities.players[c].rules.class&&(
+                                entities.players[c].subWeaponAType==1202||entities.players[c].subWeaponBType==1202
+                            )?0.75:
                             1
                         )
                     }

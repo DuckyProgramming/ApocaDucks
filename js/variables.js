@@ -8374,6 +8374,9 @@ types={
     },{
       name:'PlayerAnticannonW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1201,
+    },{
+      name:'PlayerTunnelScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1202,
     },
 
     //mark c
@@ -21185,6 +21188,15 @@ types={
 			reload:36,
 			speed:0.8,
       uses:24,
+		},{
+			name:'Tunnel Scattergun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:16,
 		},
 
     /*{
