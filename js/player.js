@@ -3044,6 +3044,9 @@ class player{
     getKnockback(){
         return this.fort?0:this.rules.knockbackResist||this.rules.tank?0.25:this.playerData.sizeBuff>=2||this.construct?0.5:1
     }
+    regularize(vel){
+        return vel>10?max(vel-10,0):min(vel+10,0)
+    }
     takeDamage(damage,spec=0){
         if(game.readout){
             print(damage)
@@ -3275,12 +3278,20 @@ class player{
                             this.subWeaponC.reload+=240
                         }*/
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[a].playerData.name=='ConstructLevel3'&&(
+                            if((
+                                entities.players[a].playerData.name=='ConstructLevel1'&&entities.players[a].life<entities.players[a].base.life||
+                                entities.players[a].playerData.name=='ConstructLevel2'&&entities.players[a].life<entities.players[a].base.life||
+                                entities.players[a].playerData.name=='ConstructLevel3'
+                            )&&(
                                 dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
                                 this.effectiveId()>game.gaming
                             )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                 //entities.players[a].life=max(min(entities.players[a].base.life*2,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
-                                entities.players[a].life=max(min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
+                                //entities.players[a].life=max(min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
+                                let ls=max(min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
+                                if(ls>entities.players[a].life){
+                                    entities.players[a].assort.building+=(ls-entities.players[a].life)*3/5
+                                }
                                 entities.players[a].weapon.uses=entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 build=false
                                 if(!this.inspect.includes(entities.players[a].index)){
@@ -3290,7 +3301,7 @@ class player{
                         }
                         if(build){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructLevel2'&&(
+                                if(entities.players[a].playerData.name=='ConstructLevel2'&&entities.players[a].life>=entities.players[a].base.life&&(
                                     dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
                                     this.effectiveId()>game.gaming
                                 )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
@@ -3305,7 +3316,7 @@ class player{
                         }
                         if(build){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructLevel1'&&(
+                                if(entities.players[a].playerData.name=='ConstructLevel1'&&entities.players[a].life>=entities.players[a].base.life&&(
                                     dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
                                     this.effectiveId()>game.gaming
                                 )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
@@ -8458,41 +8469,42 @@ class player{
                         break
                         case 1190:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                         break
                         case 1191:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                         break
                         case 1192:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],462,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                         break
                         case 1193:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],474,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
                         break
                         case 1194:
                             if(weapon.ammo%2==0){
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.velocity.x*0.1
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                             }else{
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],475,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].velocity.x+=this.velocity.x*0.1
+                                //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],475,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
                             }
                         break
                         case 1195:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],458,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*(2.2-0.2*round(weapon.ammo))+this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*(2.2-0.2*round(weapon.ammo))+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                         break
                         case 1196:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],501,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.velocity.x*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
                         break
                         case 1197:
                             if(weapon.ammo%2==0){
@@ -13404,6 +13416,9 @@ class player{
                 break
                 
             }
+            /*if(this.index==0){
+                print(this.velocity)
+            }*/
             if(this.bonking()){
                 let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
                 for(let a=0,la=entities.players.length;a<la;a++){
@@ -13419,8 +13434,8 @@ class player{
                         }
                         if(hit){
                             if((this.weaponType==253||this.weaponType==400)&&(!entities.players[a].fort||entities.players[a].auto)&&(dir[0]!=0||dir[1]!=0)){
-                                entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8
-                                entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4
+                                entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*8*entities.players[a].getKnockback()
+                                entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*4*entities.players[a].getKnockback()
                             }else{
                                 if(!entities.players[a].bonking()){
                                     entities.players[a].takeDamage((
@@ -13434,11 +13449,11 @@ class player{
                                 }
                                 if(dir[0]!=0||dir[1]!=0){
                                     if(this.playerData.name=='TankBump'&&(!entities.players[a].fort||entities.players[a].auto)){
-                                        entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4
-                                        entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2
+                                        entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*4*entities.players[a].getKnockback()
+                                        entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*2*entities.players[a].getKnockback()
                                     }else{
-                                        entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*0.3
-                                        entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*0.15
+                                        entities.players[a].lastingForce[0]+=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*0.3*entities.players[a].getKnockback()
+                                        entities.players[a].lastingForce[1]+=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*0.15*entities.players[a].getKnockback()
                                     }
                                 }
                                 if(this.playerData.name=='ColdTank'&&!entities.players[a].fort){

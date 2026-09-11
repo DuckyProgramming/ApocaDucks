@@ -20243,7 +20243,7 @@ types={
 		},{
 			name:'Detonator C',
 			ammo:1,
-			damage:125,
+			damage:120,
 			cooldown:108,
 			stop:108,
 			reload:108,

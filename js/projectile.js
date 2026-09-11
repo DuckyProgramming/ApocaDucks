@@ -1097,6 +1097,7 @@ class projectile{
 			break
 			case 452:
 				this.speed=5
+				this.det=0
 				this.time=random(time,time*2)
 				this.position.x+=this.speed*lsin(this.direction)
 				this.position.y-=this.speed*lcos(this.direction)
@@ -6988,9 +6989,11 @@ class projectile{
 				layer.ellipse(this.past[8][0]-this.position.x,this.past[8][1]-this.position.y,6)
 				layer.fill(200,this.fade*0.5)
 				regPoly(layer,0,0,16,5,5,0)
-				layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				//layer.fill(240-this.crit*200,120,this.crit*200,this.fade*this.time/this.base.time)
+				layer.fill(240-this.crit*200,120+this.crit*60,this.crit*240,this.fade*this.time/this.base.time)
 				layer.ellipse(0,0,6*(0.8+0.2*lsin(this.time*12)))
-				layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				//layer.fill(240-this.crit*200,180,this.crit*200,this.fade*this.time/this.base.time)
+				layer.fill(240-this.crit*200,180+this.crit*60,this.crit*240,this.fade*this.time/this.base.time)
 				layer.ellipse(0,0,3*(0.8+0.2*lsin(this.time*12)))
 			break
 			case 413:
@@ -8980,7 +8983,9 @@ class projectile{
 			case 349: case 417: case 435: case 448:
 				//mark sticky
 				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
-				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,(this.type==435?900:750)-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,(this.type==435?900:750)-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,(this.type==435?900:750)-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				falloff=1
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -9162,7 +9167,8 @@ class projectile{
 			case 368:
 				//mark sticky
 				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
-				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				falloff=1
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<(entities.players[b].index==this.index?130:radius)&&(this.validExplodeTarget(entities.players[b])||entities.players[b].index==this.index)){
@@ -9238,7 +9244,8 @@ class projectile{
 			case 372:
 				//mark sticky
 				radius=105+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
-				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				falloff=1
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -9376,7 +9383,8 @@ class projectile{
 			case 392: case 509:
 				//mark sticky
 				radius=90+constrain(this.timer*0.125-15,0,15)+(this.stop?5:0)
-				falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,(this.timer-150)/300)*0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				falloff=1
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -9537,7 +9545,8 @@ class projectile{
 			case 438:
 				//mark sticky (actually time bomb)
 				radius=105
-				falloff=min(1,0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				//falloff=min(1,0.5+max(0,750-dist(this.position.x,this.position.y,this.base.position.x,this.base.position.y))/300*0.5)
+				falloff=1
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
@@ -9613,11 +9622,14 @@ class projectile{
 				}
 			break
 			case 452:
-				radius=100*min(1,0.5+this.timer*0.05)
+				//radius=100*min(1,0.5+this.timer*0.05)
+				radius=100*min(1,0.5+this.timer*0.1)
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&c<radius&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/radius)*1.2)
+						//entities.players[b].takeDamage(this.damage*(1-c/radius)*2)
+						//entities.players[b].takeDamage(this.damage*(1-c/radius)*1.2)
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*1.5)
 						entities.players[b].generalizedTake(this)
 						entities.players[b].gasBurst(2,this.id,this.index)
 					}
@@ -9628,7 +9640,8 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
+					//entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
+					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage/6,10,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.5,1)
 				}
 			break
@@ -11088,7 +11101,8 @@ class projectile{
 					){
 						let id=((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)
 						//if(a==0&&id>game.gaming&&floor(random(0,10))==0){
-						if(a==0&&id>game.gaming&&this.timer%5==0&&floor(random(0,2))==0){
+						//if(a==0&&id>game.gaming&&this.timer%5==0&&floor(random(0,2))==0){
+						if(a==0&&id>game.gaming&&this.timer%5==0&&floor(random(0,1.5))==0){
 							if(entities.players.some(player=>!this.onTeam(player)&&distPos(this,player)<50)){
 								/*for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].index==this.index){
@@ -11185,7 +11199,9 @@ class projectile{
 										}
 									}
 								}
-								this.det--
+								if(this.det>0){
+									this.det--
+								}
 							}
 						}
 					}
@@ -12238,7 +12254,7 @@ class projectile{
 						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage,15,this.crit,this.index))
 					}
 				break
-				case 352: case 452:
+				case 352:
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -12345,6 +12361,33 @@ class projectile{
 					this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 				break
+				case 452:
+					this.position.x+=this.speed*lsin(this.direction)
+				    this.position.y-=this.speed*lcos(this.direction)
+					this.travel+=this.speed
+					if(this.travel>(this.rules.fast||this.type==336?4500:1500)&&this.type!=335){
+						this.active=false
+					}
+					if(this.active){
+						let id=((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)
+						if(a==0&&id>game.gaming&&this.timer%2==0&&floor(random(0,1.5))==0){
+							if(entities.players.some(player=>!this.onTeam(player)&&distPos(this,player)<100)){
+								game.det[id]=2
+							}
+						}else if(a==1){
+							//let inputSet=this.id==0||id>game.gaming?[game.det[id]==0]:inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1]
+							let inputSet=this.id==0||id>game.gaming?[game.det[id]>0]:[inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][0]||game.det[id]>0]
+							if(inputSet[0]){
+								this.det=5
+							}
+							if(this.det>0){
+								this.active=false
+								this.explode()
+								this.det--
+							}
+						}
+					}
+				break	
 				case 483:
 					if(a==0){
 						this.position.x+=this.speed*lsin(this.direction)
