@@ -13968,7 +13968,7 @@ class wall{
                                     c.active=false
                                     c.velocity.x=0
                                     c.velocity.y=0
-                                }else if((c.type==353||c.type==447||c.type==475||c.type==484||c.type==512)&&c.active){
+                                }else if((c.type==353||c.type==447||c.type==475||c.type==484||c.type==512||c.type==518)&&c.active){
                                     c.explode()
                                     c.active=false
                                     c.velocity.x=0

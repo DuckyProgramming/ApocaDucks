@@ -8377,6 +8377,9 @@ types={
     },{
       name:'PlayerTunnelScattergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1202,
+    },{
+      name:'PlayerClassicSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1203,
     },
 
     //mark c
@@ -21197,6 +21200,15 @@ types={
 			reload:20,
 			speed:1.15,
       uses:16,
+		},{
+			name:'Classic Sheller',
+			ammo:3,
+			damage:360,
+			cooldown:24,
+			stop:72,
+			reload:5,
+			speed:1.05,
+      uses:15,
 		},
 
     /*{

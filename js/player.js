@@ -1260,7 +1260,7 @@ class player{
                     layer.line(lsin(this.direction.main-6+a*12)*16,this.face.beak.nostril.level,lsin(this.direction.main-6+a*12)*16,this.face.beak.nostril.level+0.5)
                 }
             }
-            if(this.assort.brutal){
+            if(this.assort.brutal&&!this.spy){
                 layer.noStroke()
                 layer.fill(80,fade*this.skin.head.fade)
                 layer.arc(0,this.skin.head.level,30,30,-180,0)
@@ -8549,6 +8549,9 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],341,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             }
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],517,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff*6,30,crit,this.index))
+                        break
+                        case 1203:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],518,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                         break
 
                         //mark

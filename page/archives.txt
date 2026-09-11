@@ -17,6 +17,7 @@ test only [
 1200 - sword w, 1184
 1201 - anticannon w, 1148
 1202 - tunnel scattergun, 973
+1203 - classic sheller, 1132
 
 509 - stickywheel c
 510 - recon, 498
@@ -27,6 +28,7 @@ test only [
 515 - pomson drone, 111, 145
 516 - anticannon w, 482
 517 - tunnel scattergun, 341, 342, 411
+518 - classic sheller, 474
 
 
 
