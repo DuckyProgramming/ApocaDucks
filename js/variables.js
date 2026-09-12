@@ -10761,6 +10761,9 @@ types={
       name:'BigMiniSentryCarrier',sizeBuff:2,lifeBuff:5,speedBuff:0.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
+      name:'BigFastMiniSentryCarrier',sizeBuff:2,lifeBuff:5,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
       name:'BombPod',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
@@ -10931,6 +10934,9 @@ types={
     },{
       name:'HyperRGB',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.125,reloadBuff:1,crit:0,weapon:1128,
+    },{
+      name:'RocketLauncherBuffVault',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },
 
     //mark p
@@ -18617,7 +18623,7 @@ types={
 		},{
 			name:'Blowtorch',
 			ammo:32,
-			damage:55,
+			damage:65,
 			cooldown:3,
 			stop:90,
 			reload:3,

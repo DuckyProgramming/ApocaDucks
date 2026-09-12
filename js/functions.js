@@ -11917,7 +11917,8 @@ function formMission(wave,type){
                 ['ProgrammerShield',4],
                 //['FastHeavySniper',8],
                 ['BigPushMachineGun',3],
-                ['MedicFakeHealthPackCarrier',1],
+                //['MedicFakeHealthPackCarrier',1],
+                ['RocketLauncherBuffVault',2],
                 ['FreezeShot',3],
                 ['RGBSplitter',6],
             ]
@@ -11978,14 +11979,15 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerClassicSheller`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonW`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
-            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerPomsonC`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
-            [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistolC`,`PlayerWrench`,`PlayerPushPistolC`],
+            [`PlayerShotgun`,`PlayerRepairGun`,`PlayerPomsonC`,`PlayerJusticeShotgunC`,`PlayerTapperC`,`PlayerPistolC`,`PlayerRevolver`,`PlayerBlowtorch`],
+            //[`PlayerShotgun`,`PlayerRepairGun`,`PlayerPomsonC`,`PlayerJusticeShotgunC`,`PlayerWidowmakerC`,`PlayerTapperC`],
+            //[`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistolC`,`PlayerWrench`,`PlayerPushPistolC`],
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],

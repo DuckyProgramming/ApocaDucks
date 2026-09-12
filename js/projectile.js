@@ -9632,6 +9632,9 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*1.5)
 						entities.players[b].generalizedTake(this)
 						entities.players[b].gasBurst(2,this.id,this.index)
+						if(entities.players[b].chillTime>0){
+							entities.players[b].chillTime=0
+						}
 					}
 				}
 				for(let b=0,lb=entities.projectiles.length;b<lb;b++){

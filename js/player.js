@@ -2632,8 +2632,8 @@ class player{
     }
     swap3(){
         return this.playerData.name=='PlayerEngineerC3'&&this.effectiveId()<=game.gaming||
-            this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')||
-            this.playerData.name=='PlayerEngineerW'
+            this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')//||
+            //this.playerData.name=='PlayerEngineerW'
     }
     swapSubWeapons(){
         if(this.swap3()){
@@ -3392,15 +3392,30 @@ class player{
                         }
                     break
                     case 3:
+                        if(this.subPlayerAType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
+                            print('a')
+                            this.subWeaponA.cooldown/=2
+                            this.subWeaponA.reload/=2
+                        }
+                        if(this.subPlayerBType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
+                            print('b')
+                            this.subWeaponB.cooldown/=2
+                            this.subWeaponB.reload/=2
+                        }
+                        if(this.subPlayerCType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
+                            print('c')
+                            this.subWeaponC.cooldown/=2
+                            this.subWeaponC.reload/=2
+                        }
                         let total1017=0
                         for(let a=0,la=entities.players.length;a<la;a++){
-                            if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
+                            if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
                                 total1017++
                             }
                         }
                         if(total1017>=2){
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[a].playerData.name=='ConstructHeavyHalf'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
+                                if(entities.players[a].playerData.name=='ConstructHalf'&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100&&entities.players[a].builder==this.index&&entities.players[a].life>0&&(
                                     entities.players[a].life<entities.players[a].base.life||
                                     entities.players[a].weapon.uses<entities.players[a].weaponData.uses*entities.players[a].ammoMult
                                 )){
@@ -3417,7 +3432,7 @@ class player{
                             if(build){
                                 total1017=0
                                 for(let a=0,la=entities.players.length;a<la;a++){
-                                    if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
+                                    if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
                                         total1017++
                                         if(total1017>=2){
                                             entities.players[la-1-a].life=0
@@ -3428,7 +3443,7 @@ class player{
                             }
                         }
                         if(build){
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHeavyHalf',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index
@@ -7822,7 +7837,7 @@ class player{
                         case 1017:
                             let total1017=0
                             for(let a=0,la=entities.players.length;a<la;a++){
-                                if(entities.players[la-1-a].playerData.name=='ConstructHeavyHalf'&&entities.players[la-1-a].builder==this.index){
+                                if(entities.players[la-1-a].playerData.name=='ConstructHalf'&&entities.players[la-1-a].builder==this.index){
                                     total1017++
                                     if(total1017>=2){
                                         entities.players[la-1-a].life=0
@@ -7830,7 +7845,7 @@ class player{
                                     }
                                 }
                             }
-                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHeavyHalf',types.player),game.index))
+                            entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-10,this.id,0,[],false,findName('ConstructHalf',types.player),game.index))
                             game.index++
                             entities.players[entities.players.length-1].constructify()
                             entities.players[entities.players.length-1].builder=this.index
@@ -9460,7 +9475,7 @@ class player{
                         this.assort.tiredTick=30
                     }
                     this.jumpAction()
-                }else if((this.playerData.name==`ShotgunVault`||this.playerData.name==`PistolVault`||this.playerData.name==`PistolVaultTankSpawner`||this.playerData.name==`PistolVaultTankGrenadeSpawner`||this.playerData.name==`BonkerVault`)&&this.life<=this.base.life*0.5&&this.jump.time>2&&this.stuckTime<=0&&!this.assort.vault&&this.life>0){
+                }else if((this.playerData.name==`ShotgunVault`||this.playerData.name==`PistolVault`||this.playerData.name==`PistolVaultTankSpawner`||this.playerData.name==`PistolVaultTankGrenadeSpawner`||this.playerData.name==`BonkerVault`||this.playerData.name==`RocketLauncherBuffVault`)&&this.life<=this.base.life*0.5&&this.jump.time>2&&this.stuckTime<=0&&!this.assort.vault&&this.life>0){
                     this.assort.vault=true
                     this.assort.vaultTimer=15
                     this.jump.time=0
@@ -10395,7 +10410,7 @@ class player{
                             entities.players[entities.players.length-1].lastingForce[0]+=-0.75+a*0.5
                         }
                     break
-                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier': case 'HeavyMiniSentryCarrier': case 'BigMiniSentryCarrier':
+                    case 'MiniSentryCarrier': case 'FastMiniSentryCarrier': case 'HeavyMiniSentryCarrier': case 'BigMiniSentryCarrier': case 'BigFastMiniSentryCarrier':
                         entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName('ConstructMiniC',types.player),game.index))
                         game.index++
                         entities.players[entities.players.length-1].constructify()
@@ -10629,6 +10644,7 @@ class player{
                             entities.players[a].critBuff=max(entities.players[a].critBuff,240)
                         }else if(entities.players[a].index==this.builder&&entities.players[a].playerData.name=='PlayerEngineerW'&&(entities.players[a].subWeaponAType==1100||entities.players[a].subWeaponBType==1100)){
                             entities.players[a].critTick++
+                            //entities.players[a].critTick+=3
                         }
                     }
                 }
@@ -12064,7 +12080,7 @@ class player{
                         player.life=min(max(player.base.life,player.life),player.life+sqrt(player.base.life)/(max(60,set.length*10)))
                     })
                 break
-                case 'RocketLauncherBuff': case 'BigRocketLauncherBuff': case 'BigCritRocketLauncherBuff': case 'BigSpamRocketLauncherBuff': case 'RocketLauncherHealSelfBuff': case 'DamageOverTimeMachineGunBuff': case 'PistolBuff': case 'TankBuff': case 'RocketLauncherStopBuff':
+                case 'RocketLauncherBuff': case 'BigRocketLauncherBuff': case 'BigCritRocketLauncherBuff': case 'BigSpamRocketLauncherBuff': case 'RocketLauncherHealSelfBuff': case 'DamageOverTimeMachineGunBuff': case 'PistolBuff': case 'TankBuff': case 'RocketLauncherStopBuff': case 'RocketLauncherBuffVault':
                     for(let a=0,la=entities.players.length;a<la;a++){
                         if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
