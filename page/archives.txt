@@ -1,4 +1,11 @@
 
+1204 - cluster bomb c, 885
+
+519 - cluster bomb c, 375
+520 - bomblet c, 376
+
+
+
 1187 - stickywheel c
 1188 - recon, 1173
 1189 - penalty scattergun q, 1134

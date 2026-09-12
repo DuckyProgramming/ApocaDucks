@@ -14116,6 +14116,15 @@ class wall{
                                     c.active=false
                                     c.velocity.x*=0.1
                                     c.velocity.y*=0.1
+                                }else if(c.type==520&&c.bounceTimer==0){
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    if(c.bounces>=3){
+                                        c.explode()
+                                        c.active=false
+                                    }
+                                    c.velocity.x*=0.9
+                                    c.velocity.y*=0.9
                                 }
                             }
                         }
@@ -15701,10 +15710,18 @@ class wall{
                                                                 }
                                                             break
                                                             case 69:
-                                                                c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerDeployerGU',types.player)+1)))
+                                                                hit=true
+                                                                entities.players.push(new player(graphics.main[1],this.position.x,this.position.y-50,c.id,0,[],false,floor(random(findName('ConstructMachineGun',types.player),findName('ConstructRemote',types.player))),game.index))
+                                                                game.index++
+                                                                entities.players[entities.players.length-1].constructify()
+                                                                entities.players[entities.players.length-1].thrown=0.04
+                                                                entities.players[entities.players.length-1].velocity.x=random(10,25)*(floor(random(0,2))*2-1)*(game.level==42?0.6:1)
+                                                                entities.players[entities.players.length-1].velocity.y=-10
+                                                                /*c.newWeaponSet(floor(random(findName('PlayerDeployerM',types.player),findName('PlayerDeployerGU',types.player)+1)))
                                                                 c.weapon.uses=1
                                                                 c.storeWeapon=true
-                                                                c.weapon.cooldown=random(90,180)
+                                                                c.weapon.cooldown=60*/
+                                                                //c.weapon.cooldown=random(90,180)
                                                             break
                                                             case 101:
                                                                 for(let e=0,le=10;e<le;e++){

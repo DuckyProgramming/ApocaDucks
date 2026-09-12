@@ -3393,17 +3393,14 @@ class player{
                     break
                     case 3:
                         if(this.subPlayerAType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerAType<findName(`PlayerBuild111`,types.player)+64){
-                            print('a')
                             this.subWeaponA.cooldown/=2
                             this.subWeaponA.reload/=2
                         }
                         if(this.subPlayerBType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerBType<findName(`PlayerBuild111`,types.player)+64){
-                            print('b')
                             this.subWeaponB.cooldown/=2
                             this.subWeaponB.reload/=2
                         }
                         if(this.subPlayerCType>=findName(`PlayerBuild111`,types.player)&&this.subPlayerCType<findName(`PlayerBuild111`,types.player)+64){
-                            print('c')
                             this.subWeaponC.cooldown/=2
                             this.subWeaponC.reload/=2
                         }
@@ -3615,7 +3612,7 @@ class player{
                 if(
                     !(
                         (this.rules.spyLine||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType!=1008&&this.subWeaponCType!=1021)&&this.fade<1&&!this.assort.intel&&
-                        (weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019||weaponType==1141)
+                        (weaponType==684||weaponType==749||weaponType==885||weaponType==939||weaponType==940||weaponType==990||weaponType==991||weaponType==1019||weaponType==1141||weaponType==1204)
                     )&&
                     !((this.playerData.name=='PlayerSpyC2'||this.playerData.name=='PlayerSpyW'&&this.subWeaponCType==1006)&&this.visible>=480&&!this.assort.intel)&&
                     !((weaponType==725||weaponType==927)&&this.assort.firingTick<1)&&
@@ -8557,7 +8554,8 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].height*=0.5
                         break
                         case 1201:
-                            entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],516,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],516,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],516,(lsin(this.direction.main)<0?-90:90)+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
                         case 1202:
                             for(let a=0,la=6;a<la;a++){
@@ -8567,6 +8565,9 @@ class player{
                         break
                         case 1203:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],518,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                        break
+                        case 1204:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],519,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
 
                         //mark
@@ -8648,7 +8649,8 @@ class player{
         if(game.pvp){
             this.multLife(0.8)
         }
-        if(rules.dm||game.level==69||game.level==109){
+        //if(rules.dm||game.level==69||game.level==109){
+        if(rules.dm||game.level==109){
             this.multLife(0.5)
         }
         if(game.level==84){

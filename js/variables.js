@@ -8380,6 +8380,9 @@ types={
     },{
       name:'PlayerClassicSheller',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1203,
+    },{
+      name:'PlayerClusterBombC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1204,
     },
 
     //mark c
@@ -21215,6 +21218,15 @@ types={
 			reload:5,
 			speed:1.05,
       uses:15,
+		},{
+			name:'Cluster Bomb C',
+			ammo:1,
+			damage:160,
+			cooldown:20,
+			stop:240,
+			reload:15,
+			speed:1.05,
+      uses:4,
 		},
 
     /*{
