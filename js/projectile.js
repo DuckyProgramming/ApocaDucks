@@ -23,6 +23,7 @@ class projectile{
 		this.forceDisplay=false
 		this.fort=false
 		this.stun=0
+		this.subWeapon=2
 		if(game.hitscan){
 			this.divergence=0
 			switch(this.type){
@@ -221,7 +222,7 @@ class projectile{
 					break
 					case 144:
 						for(let b=0,lb=3;b<lb;b++){
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+b*120,this.id,this.damage/2,time,this.crit,this.index,[this.projectileIndex]))
+							this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+b*120,this.id,this.damage/2,time,this.crit,this.index,[this.projectileIndex]))
 						}
 					break
 					case 261:
@@ -497,7 +498,7 @@ class projectile{
 				this.shocks=[]
 				if(this.type==330){
 					for(let b=0,lb=6;b<lb;b++){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+360*b/lb,this.id,this.damage*120,time,this.crit,this.index,[this.projectileIndex]))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+360*b/lb,this.id,this.damage*120,time,this.crit,this.index,[this.projectileIndex]))
 					}
 				}
 			break
@@ -522,7 +523,7 @@ class projectile{
 				this.height*=8
 				if(this.type==299){
 					for(let b=0,lb=8;b<lb;b++){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+b*45,this.id,this.damage/8,time,this.crit,this.index,[this.projectileIndex]))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,145,this.direction+b*45,this.id,this.damage/8,time,this.crit,this.index,[this.projectileIndex]))
 					}
 				}
 			break
@@ -727,7 +728,7 @@ class projectile{
 										if(this.type==190&&!c.fort){
 											c.chillTime=max(c.chillTime,3600)
 										}else if(this.type==256){
-											entities.projectiles.push(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
+											this.addProjectile(new projectile(this.layer,point.x,point.y,6,random(0,360),this.id,this.damage,10,this.crit,this.index))
 										}else if(this.type==257){
 											c.shrinkTime=max(c.shrinkTime+4,120)
 										}else if(this.type==265&&!c.fort){
@@ -8595,7 +8596,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/6,10,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/6,10,this.crit,this.index))
 				}
 			break
 			case 47: case 78:
@@ -8642,7 +8643,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?10:5)*2,10,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/(this.timer<5?10:5)*2,10,this.crit,this.index))
 				}
 			break
 			case 64:
@@ -8681,10 +8682,10 @@ class projectile{
 				}
 				let turn=floor(random(0,72))
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*72+turn,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*72+turn,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
 				}
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*72+turn+36,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*72+turn+36,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
 					entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
 				}
@@ -8701,7 +8702,7 @@ class projectile{
 				}
 			break
 			case 75:
-				entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,random(0,360),this.id,this.base.damage,180,this.crit,this.index))
+				this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,random(0,360),this.id,this.base.damage,180,this.crit,this.index))
 			break
 			case 83:
 				radius=200
@@ -8736,8 +8737,8 @@ class projectile{
 			case 97:
 				let turn97=floor(random(0,90))
 				for(let b=0,lb=4;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn97,this.id,this.base.damage/5,180,this.crit,this.index))
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+(b+0.5)*90+turn97,this.id,this.base.damage/10,180,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn97,this.id,this.base.damage/5,180,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+(b+0.5)*90+turn97,this.id,this.base.damage/10,180,this.crit,this.index))
 				}
 			break
 			case 98:
@@ -8770,7 +8771,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*0.5,random(1,60),this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*0.5,random(1,60),this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
 				}
 			break
@@ -8796,14 +8797,14 @@ class projectile{
 			break
 			case 121: case 200:
 				for(let b=0,lb=4;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage/2,random(1,60),this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage/2,random(1,60),this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
 				}
 			break
 			case 146:
 				let turn146=floor(random(0,90))
 				for(let b=0,lb=4;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn146,this.id,this.base.damage/2,240,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,5,this.direction+b*90+turn146,this.id,this.base.damage/2,240,this.crit,this.index))
 				}
 			break
 			case 153:
@@ -8828,11 +8829,11 @@ class projectile{
 			break
 			case 171:
 				for(let b=0,lb=3;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,119,this.direction+b*120+60,this.id,this.base.damage/2,600,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,119,this.direction+b*120+60,this.id,this.base.damage/2,600,this.crit,this.index))
 				}
 			break
 			case 178:
-				entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,180,this.direction,this.id,this.base.damage,900,this.crit,this.index))
+				this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,180,this.direction,this.id,this.base.damage,900,this.crit,this.index))
 			break
 			case 187:
 				radius=120
@@ -8852,7 +8853,7 @@ class projectile{
 			case 205:
 				let turn205=random(0,120)
 				for(let b=0,lb=3;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,206,this.direction+turn205+b/lb*360,this.id,this.base.damage,300,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,206,this.direction+turn205+b/lb*360,this.id,this.base.damage,300,this.crit,this.index))
 				}
 			break
 			case 206: case 250:
@@ -8874,7 +8875,7 @@ class projectile{
 						entities.players[b].generalizedTake(this)
 					}
 					if((entities.players[b].id!=this.id&&game.pvp||entities.players[b].id==0&&this.id!=0||entities.players[b].id!=0&&this.id==0)&&entities.players[b].explodable()&&dist(entities.players[b].position.x,entities.players[b].position.y,this.position.x,this.position.y)<600){
-				        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3*constrain(1.2-this.timer/this.base.time*4,0.2,1),300,this.crit,this.index))
+				        this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y),this.id,this.base.damage/3*constrain(1.2-this.timer/this.base.time*4,0.2,1),300,this.crit,this.index))
                     }
 				}
 			break
@@ -8918,12 +8919,12 @@ class projectile{
 				}
 				let turn279=floor(random(0,72))
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,132,this.direction+b*72+turn279,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,132,this.direction+b*72+turn279,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].velocity.x*=2
 					entities.projectiles[entities.projectiles.length-1].velocity.y*=2
 				}
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,132,this.direction+b*72+turn279+36,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,132,this.direction+b*72+turn279+36,this.id,this.base.damage/5*constrain(1.2-this.timer/this.base.time*4,0.2,1),120,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].velocity.x*=3
 					entities.projectiles[entities.projectiles.length-1].velocity.y*=3
 				}
@@ -8941,7 +8942,7 @@ class projectile{
 			case 286:
 				let turn286=floor(random(0,120))
 				for(let b=0,lb=3;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+b*120+turn286,this.id,this.base.damage/2,150,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+b*120+turn286,this.id,this.base.damage/2,150,this.crit,this.index))
 				}
 			break
 			case 293:
@@ -8953,12 +8954,12 @@ class projectile{
 						entities.players[b].generalizedTake(this)
 					}
 				}
-				entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,250,0,this.id,this.base.damage,300,this.crit,this.index))
+				this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,250,0,this.id,this.base.damage,300,this.crit,this.index))
 			break
 			case 303:
 				let turn303=floor(random(0,36))
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,119,this.direction+b*36+turn303,this.id,this.base.damage/10,300,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,119,this.direction+b*36+turn303,this.id,this.base.damage/10,300,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].velocity.x*=3
 					entities.projectiles[entities.projectiles.length-1].velocity.y*=3
 				}
@@ -8995,7 +8996,7 @@ class projectile{
 				}
 				let turn313=floor(random(0,72))
 				for(let b=0,lb=5;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,209,this.direction+b*72+turn313,this.id,this.base.damage*constrain(1.2-this.timer/this.base.time*4,0.2,1),600,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,209,this.direction+b*72+turn313,this.id,this.base.damage*constrain(1.2-this.timer/this.base.time*4,0.2,1),600,this.crit,this.index))
 				}
 			break
 			case 329:
@@ -9132,7 +9133,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.5,1)
 				}
 			break
@@ -9339,7 +9340,7 @@ class projectile{
 				let count375=9//this.fail?6:9
 				let turn375=random(0,360/count375)
 				for(let b=0,lb=count375;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,376,this.direction+turn375+b/lb*360,this.id,this.base.damage,300,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,376,this.direction+turn375+b/lb*360,this.id,this.base.damage,300,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].fail=this.fail
 				}
 			break
@@ -9509,7 +9510,7 @@ class projectile{
 			case 412:
 				for(let b=0,lb=10;b<lb;b++){
 					let dir=random(0,360/lb)+b/lb*360
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,dir,this.id,this.base.damage*0.25,10,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,dir,this.id,this.base.damage*0.25,10,this.crit,this.index))
 					let c=entities.projectiles[entities.projectiles.length-1]
                     c.position.x+=c.speed*lsin(c.direction)*5
 				    c.position.y-=c.speed*lcos(c.direction)*5
@@ -9684,8 +9685,8 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					//entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage/6,10,this.crit,this.index))
+					//this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage*0.25,10,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,b/lb*360+random(0,360/lb),this.id,this.base.damage/6,10,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.5,1)
 				}
 			break
@@ -9828,7 +9829,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage,random(1,60),this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage,random(1,60),this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
 				}
 			break
@@ -9854,7 +9855,7 @@ class projectile{
 					}
 				}
 				for(let b=0,lb=10;b<lb;b++){
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*random(0.2,0.3),random(15,60),this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,1,random(0,360),this.id,this.base.damage*random(0.2,0.3),random(15,60),this.crit,this.index))
 					//entities.projectiles[entities.projectiles.length-1].speed*=random(0.4,1)
 					entities.projectiles[entities.projectiles.length-1].speed*=random(0.8,1)
 				}
@@ -9925,7 +9926,7 @@ class projectile{
 					let count519=5
 					let turn519=random(0,360/count519)
 					for(let b=0,lb=count519;b<lb;b++){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,520,this.direction+turn519+b/lb*360,this.id,this.base.damage*0.5,300,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,520,this.direction+turn519+b/lb*360,this.id,this.base.damage*0.5,300,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].fail=this.fail
 					}
 				}
@@ -9938,6 +9939,10 @@ class projectile{
 			}
 		}
 		//mark ex
+	}
+	addProjectile(projectile){
+		projectile.subWeapon=this.subWeapon
+		entities.projectiles.push(projectile)
 	}
 	defuse(){
 		this.active=false
@@ -10102,7 +10107,7 @@ class projectile{
 					if(this.type==326&&!this.active&&a==0){
 						this.velocity.x*=0.8
 						if(this.timer%3==0){
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
 						}
 					}else if((this.type==416||this.type==468||this.type==472)&&a==0){
 						if(!this.active&&!this.fail&&this.fade>0){
@@ -10110,7 +10115,7 @@ class projectile{
 							//this.velocity.y*=0.95
 							this.velocity.y*=0.99
 							if(this.timer%3==0){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,this.type==472?189:6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
+								this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,this.type==472?189:6,random(0,360),this.id,this.base.damage*0.4,10,this.crit,this.index))
 							}
 							if(this.fade<0.25&&this.dets>0){
 								this.dets=0
@@ -10233,13 +10238,13 @@ class projectile{
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 									if(this.type==267){
 										for(let b=0,lb=4;b<lb;b++){
-											entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*13.5,this.position.y+lcos(this.time+b*90)*13.5,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*13.5),(this.position.y+lcos(this.time+b*90)*13.5)-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
+											this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*13.5,this.position.y+lcos(this.time+b*90)*13.5,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*13.5),(this.position.y+lcos(this.time+b*90)*13.5)-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
 										}
 									}else{
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
 									}
 									if(this.type==282){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,145,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,120,this.crit,this.index,[this.projectileIndex]))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,145,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,120,this.crit,this.index,[this.projectileIndex]))
 									}
 									a=la
 								}
@@ -10265,7 +10270,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,5,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,120,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,5,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,120,this.crit,this.index))
 									a=la
 								}
 							}
@@ -10290,7 +10295,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -10315,7 +10320,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,86,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.8,60,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,86,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.8,60,this.crit,this.index))
 									a=la
 								}
 							}
@@ -10340,7 +10345,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,8,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,240,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,8,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,240,this.crit,this.index))
 									a=la
 								}
 							}
@@ -10379,7 +10384,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.active&&a==0){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/5,10,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,6,random(0,360),this.id,this.base.damage/5,10,this.crit,this.index))
 					}
 				break
 				case 89: case 103: case 193: case 194: case 195: case 270: case 297: case 310: case 330: case 398:
@@ -10489,7 +10494,7 @@ class projectile{
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 										for(let b=0,lb=4;b<lb;b++){
-											entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*60,this.position.y+lcos(this.time+b*90)*60,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*60),(this.position.y+lcos(this.time+b*90)*60)-entities.players[a].position.y),this.id,this.base.damage*50,30,this.crit,this.index))
+											this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.time+b*90)*60,this.position.y+lcos(this.time+b*90)*60,1,atan2(entities.players[a].position.x-(this.position.x+lsin(this.time+b*90)*60),(this.position.y+lcos(this.time+b*90)*60)-entities.players[a].position.y),this.id,this.base.damage*50,30,this.crit,this.index))
 										}
 										a=la
 									}
@@ -10538,7 +10543,7 @@ class projectile{
 						}
 					}
 					if(this.type==93&&this.timer%5==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage*0.5,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage*0.5,30,this.crit,this.index))
 					}
 					if(this.speed<0&&!this.trigger){
 						this.trigger=true
@@ -10576,7 +10581,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -10598,7 +10603,7 @@ class projectile{
 						this.speed*=0.9
 					}
 					if(this.type==93&&this.timer%4==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+(this.speed<0?0:180),this.id,this.base.damage,30,this.crit,this.index))
 					}
 					if(this.speed<0&&this.trigger==0){
 						this.trigger=1
@@ -10685,7 +10690,7 @@ class projectile{
 						switch(this.type){
 							case 111: case 144:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 134: case 283: case 437:
@@ -10706,7 +10711,7 @@ class projectile{
 										if(minimum[b]<450){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/(this.type==437?5:10),30,this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/(this.type==437?5:10),30,this.crit,this.index))
 													a=la
 												}
 											}
@@ -10727,59 +10732,59 @@ class projectile{
 							case 139:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-									entities.projectiles.push(new projectile(this.layer,this.position.x+lcos(dir)*2,this.position.y+lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x-lcos(dir)*2,this.position.y-lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x+lcos(dir)*2,this.position.y+lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x-lcos(dir)*2,this.position.y-lsin(dir)*2,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 140:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir+20,this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir-20,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,dir+20,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,dir-20,this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 141:
 								if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-									entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*2,30,this.crit,this.index))
 								}
 							break
 							case 142:
 								if(this.timer%3==0&&this.timer%120<75&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+random(-5,5),this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 143:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 157:
 								if(this.timer%10==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,112,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,112,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 158:
 								if(this.timer%60==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage*4,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,130,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage*4,30,this.crit,this.index))
 								}
 							break
 							case 159:
 								if(this.timer%45==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									let dir=atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)
-									entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*3,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x+lsin(dir)*10,this.position.y-lcos(dir)*10,4,dir,this.id,this.base.damage*3,30,this.crit,this.index))
 								}
 							break
 							case 160:
 								if(this.timer%30==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,168,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,168,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
 								}
 							break
 							case 161:
 								if(this.timer%90==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									for(let a=0,la=3;a<la;a++){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,113,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+a*120,this.id,this.base.damage,300,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,113,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+a*120,this.id,this.base.damage,300,this.crit,this.index))
 									}
 								}
 							break
@@ -10801,7 +10806,7 @@ class projectile{
 										if(minimum[b]<450){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,[124,143][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.25,300,this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,[124,143][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.25,300,this.crit,this.index))
 													a=la
 												}
 											}
@@ -10827,7 +10832,7 @@ class projectile{
 										if(minimum[b]<450){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*60)*10,this.position.y-lcos(this.timer+b*60)*10,[168,1][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,[150,30][b%2],this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*60)*10,this.position.y-lcos(this.timer+b*60)*10,[168,1][b%2],atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,[150,30][b%2],this.crit,this.index))
 													a=la
 												}
 											}
@@ -10853,7 +10858,7 @@ class projectile{
 										if(minimum[b]<450){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*(b==4?0:10),this.position.y-lcos(this.timer+b*90)*(b==4?0:10),1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*(b==4?0:10),this.position.y-lcos(this.timer+b*90)*(b==4?0:10),1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
 													a=la
 												}
 											}
@@ -10872,7 +10877,7 @@ class projectile{
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 											for(let b=0,lb=4;b<lb;b++){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+												this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
 											}
 											a=la
 										}
@@ -10881,9 +10886,9 @@ class projectile{
 							break
 							case 248:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)-10,this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+10,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)-10,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,20,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y)+10,this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 252:
@@ -10896,7 +10901,7 @@ class projectile{
 									}
 									for(let a=0,la=entities.players.length;a<la;a++){
 										if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-											entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,253,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,240,this.crit,this.index))
+											this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,253,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,240,this.crit,this.index))
 										}
 									}
 								}
@@ -10913,13 +10918,13 @@ class projectile{
 										for(let a=0,la=entities.players.length;a<la;a++){
 											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 												let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-												entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,dir,this.id,this.base.damage/100,1,this.crit,this.index))
+												this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,255,dir,this.id,this.base.damage/100,1,this.crit,this.index))
 												entities.projectiles.splice(entities.projectiles.length-1,1)
 											}
 										}
 									}
 									if(this.time%120==0){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage/4,3600,this.crit,this.index))
 										entities.projectiles[entities.projectiles.length-1].velocity.x=0
 										entities.projectiles[entities.projectiles.length-1].velocity.y=0
 									}
@@ -10927,13 +10932,13 @@ class projectile{
 							break
 							case 260:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x+18*lcos(this.time),this.position.y-18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x+18*lcos(this.time)),(this.position.y-18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x-18*lcos(this.time),this.position.y+18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x-18*lcos(this.time)),(this.position.y+18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x+18*lcos(this.time),this.position.y-18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x+18*lcos(this.time)),(this.position.y-18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x-18*lcos(this.time),this.position.y+18*lsin(this.time),1,atan2(entities.players[this.goal].pointer.x-(this.position.x-18*lcos(this.time)),(this.position.y+18*lsin(this.time))-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 261:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].attacking){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/2,30,this.crit,this.index))
 								}
 							break
 							case 268:
@@ -10954,7 +10959,7 @@ class projectile{
 										if(minimum[b]<450){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,151,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,151,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
 													a=la
 												}
 											}
@@ -10964,7 +10969,7 @@ class projectile{
 							break
 							case 272:
 								if(this.active&&a==0&&entities.players[this.goal].pointer.hit){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,255,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/20,1,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,255,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/20,1,this.crit,this.index))
 									entities.projectiles.splice(entities.projectiles.length-1,1)
 								}
 							break
@@ -10986,7 +10991,7 @@ class projectile{
 										if(minimum[b]<900){
 											for(let a=0,la=entities.players.length;a<la;a++){
 												if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-													entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.15,30,this.crit,this.index))
+													this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,4,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.15,30,this.crit,this.index))
 													a=la
 												}
 											}
@@ -11007,14 +11012,14 @@ class projectile{
 							case 328:
 								if(this.timer%20==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
 									for(let a=0,la=4;a<la;a++){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage/2,30,this.crit,this.index))
 										entities.projectiles[entities.projectiles.length-1].speed=8-a
 									}
 								}
 							break
 							case 373:
 								if(this.active&&a==0&&entities.players[this.goal].assort.firing==29&&(entities.players[this.goal].subWeaponAType==1||entities.players[this.goal].subWeaponAType==4||entities.players[this.goal].subWeaponAType==511||entities.players[this.goal].subWeaponAType==780||entities.players[this.goal].subWeaponAType==802||entities.players[this.goal].subWeaponAType==965||entities.players[this.goal].subWeaponAType==993||entities.players[this.goal].subWeaponAType==994||entities.players[this.goal].subWeaponAType==1023)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,lsin(entities.players[this.goal].direction.main)<0?-90:90,this.id,this.base.damage/(entities.players[this.goal].subWeaponAType==1023?1:entities.players[this.goal].subWeaponAType==802?6:3),30,this.crit,this.index))
 								}
 							break
 						}
@@ -11282,7 +11287,7 @@ class projectile{
 					if(this.type==221&&a==0&&this.timer%30==0){
 						for(let a=0,la=this.targets.length;a<la;a++){
 							let dir=atan2(this.targets[a].x-this.position.x,this.position.y-this.targets[a].y)
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/4,dist(this.targets[a].x,this.targets[a].y,this.position.x,this.position.y)/6-2,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,dir,this.id,this.base.damage/4,dist(this.targets[a].x,this.targets[a].y,this.position.x,this.position.y)/6-2,this.crit,this.index))
 							entities.projectiles[entities.projectiles.length-1].speed=6
 							entities.projectiles[entities.projectiles.length-1].position.x+=sin(dir)*3
 							entities.projectiles[entities.projectiles.length-1].position.y-=cos(dir)*3
@@ -11305,7 +11310,7 @@ class projectile{
 								}
 								for(let a=0,la=entities.players.length;a<la;a++){
 									if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,this.type==247?119:1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,this.type==247?300:30,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,this.type==247?119:1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,this.type==247?300:30,this.crit,this.index))
 										entities.projectiles[entities.projectiles.length-1].update()
 										a=la
 									}
@@ -11420,32 +11425,32 @@ class projectile{
 					this.position.x+=this.velocity.x/4
 					this.position.y+=this.velocity.y/4
 					if(this.type==122&&this.timer%60==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,1800,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,1800,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].velocity.x=0
 						entities.projectiles[entities.projectiles.length-1].velocity.y=0
 					}
 					if(this.type==123&&this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage,20,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage,20,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage,20,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage,20,this.crit,this.index))
 					}
 					if(this.type==128&&this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
 					}
 					if(this.type==129&&this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,68,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage*0.8,300,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,68,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage*0.8,300,this.crit,this.index))
 					}
 					if(this.type==171&&this.time==900&&this.active){
 						this.active=false
 						this.explode()
 					}
 					if(this.type==184&&this.timer%12==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
 						if(this.timer%60==0){
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,180-atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,180-atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
 						}
 					}
 					if(this.type==200&&this.timer%15==0&&this.active&&a==0&&entities.players[this.goal].pointer.hit){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[this.goal].pointer.x-this.position.x,this.position.y-entities.players[this.goal].pointer.y),this.id,this.base.damage,30,this.crit,this.index))
 					}
 				break
 				case 120: case 177: case 178: case 179: case 180: case 182: case 183: case 210: case 227: case 271:
@@ -11467,36 +11472,36 @@ class projectile{
 						switch(this.type){
 							case 120:
 								for(let a=0,la=2;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,121,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,121,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
 								}
 							break
 							case 177:
 								for(let a=0,la=3;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
 									if(this.timer%180==0){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,this.direction+(a+0.5)/la*360,this.id,this.base.damage/2,300,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,this.direction+(a+0.5)/la*360,this.id,this.base.damage/2,300,this.crit,this.index))
 									}
 								}
 							break
 							case 178: case 179: case 182: case 183: case 271: case 318:
 								for(let a=0,la=3;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
 								}
 							break
 							case 180:
 								for(let a=0,la=2;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/6,300,this.crit,this.index))
 								}
 							break
 							case 210:
 								for(let a=0,la=4;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,132,this.direction+a/la*360,this.id,this.base.damage/6,240,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,132,this.direction+a/la*360,this.id,this.base.damage/6,240,this.crit,this.index))
 								}
 							break
 							case 227:
 								for(let a=0,la=3;a<la;a++){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/4,300,this.crit,this.index))
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,132,this.direction+(a+0.5)/la*360,this.id,this.base.damage/8,120,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,119,this.direction+a/la*360,this.id,this.base.damage/4,300,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,132,this.direction+(a+0.5)/la*360,this.id,this.base.damage/8,120,this.crit,this.index))
 								}
 							break
 						}
@@ -11511,7 +11516,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -11526,7 +11531,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/10,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/10,15,this.crit,this.index))
 					}
 				break
 				case 133: case 148: case 149: case 230: case 242: case 262: case 320:
@@ -11569,9 +11574,9 @@ class projectile{
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 									if(this.type==315){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.4,30,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.4,30,this.crit,this.index))
 									}else if(this.type==515){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.5,30,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage*0.5,30,this.crit,this.index))
 									}
 									a=la
 								}
@@ -11645,19 +11650,19 @@ class projectile{
 					this.position.x+=this.velocity.x/4
 					this.position.y+=this.velocity.y/4
 					if(this.type==122&&this.timer%60==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,3600,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,0,this.id,this.base.damage,3600,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].velocity.x=0
 						entities.projectiles[entities.projectiles.length-1].velocity.y=0
 					}
 					if(this.type==123&&this.timer%6==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage/2,30,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage/2,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)-165,this.id,this.base.damage/2,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y)+165,this.id,this.base.damage/2,30,this.crit,this.index))
 					}
 					if(this.type==128&&this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage/2,30,this.crit,this.index))
 					}
 					if(this.type==129&&this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,68,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage*0.8,300,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,68,atan2(this.velocity.x,-this.velocity.y),this.id,this.base.damage*0.8,300,this.crit,this.index))
 					}
 				break
 				case 150:
@@ -11682,8 +11687,8 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%5==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.direction+this.time*5)*15,this.position.y-lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5,this.id,this.base.damage/5,10,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x-lsin(this.direction+this.time*5)*15,this.position.y+lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5+180,this.id,this.base.damage/5,10,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.direction+this.time*5)*15,this.position.y-lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5,this.id,this.base.damage/5,10,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x-lsin(this.direction+this.time*5)*15,this.position.y+lcos(this.direction+this.time*5)*15,1,this.direction+this.time*5+180,this.id,this.base.damage/5,10,this.crit,this.index))
 					}
 				break
 				case 173:
@@ -11694,7 +11699,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 174:
@@ -11714,7 +11719,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -11777,7 +11782,7 @@ class projectile{
 									if(minimum[b]<450){
 										for(let a=0,la=entities.players.length;a<la;a++){
 											if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum[b]==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-												entities.projectiles.push(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
+												this.addProjectile(new projectile(this.layer,this.position.x+lsin(this.timer+b*90)*10,this.position.y-lcos(this.timer+b*90)*10,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/10,30,this.crit,this.index))
 												a=la
 											}
 										}
@@ -11871,7 +11876,7 @@ class projectile{
 					if(this.timer%15==0&&this.active&&a==0){
 						if(this.timer%120==0){
 							for(let a=0,la=3;a<la;a++){
-								entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,114,this.direction+this.position.x+a/la*360,this.id,this.base.damage/6,1800,this.crit,this.index))
+								this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,114,this.direction+this.position.x+a/la*360,this.id,this.base.damage/6,1800,this.crit,this.index))
 							}
 						}
 						let minimum=300
@@ -11883,7 +11888,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/9,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/9,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -11898,7 +11903,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}else if(this.timer%30==15&&a==0&&this.active){
 						let minimum=300
 						for(let a=0,la=entities.players.length;a<la;a++){
@@ -11909,7 +11914,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -11924,8 +11929,8 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x-lcos(this.direction)*2,this.position.y-lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x+lcos(this.direction)*2,this.position.y+lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x-lcos(this.direction)*2,this.position.y-lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x+lcos(this.direction)*2,this.position.y+lsin(this.direction)*2,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 198:
@@ -11936,7 +11941,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%40==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 199:
@@ -11947,7 +11952,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 213:
@@ -11967,7 +11972,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/3,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/3,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -12023,8 +12028,8 @@ class projectile{
 						for(let a=0,la=entities.players.length;a<la;a++){
 							if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<300){
 								let dir=atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)
-								entities.projectiles.push(new projectile(this.layer,this.position.x-cos(dir)*2,this.position.y-sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
-								entities.projectiles.push(new projectile(this.layer,this.position.x+cos(dir)*2,this.position.y+sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
+								this.addProjectile(new projectile(this.layer,this.position.x-cos(dir)*2,this.position.y-sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
+								this.addProjectile(new projectile(this.layer,this.position.x+cos(dir)*2,this.position.y+sin(dir)*2,1,dir,this.id,this.base.damage/3,30,this.crit,this.index))
 							}
 						}
 					}
@@ -12081,20 +12086,20 @@ class projectile{
 							if((entities.players[a].id!=this.id&&game.pvp||entities.players[a].id==0&&this.id!=0||entities.players[a].id!=0&&this.id==0)&&entities.players[a].life>0){
 								let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
 								if(!fired[0]&&distance==minimum[0]){
-									entities.projectiles.push(new projectile(this.layer,this.position.x-6,this.position.y,1,atan2(entities.players[a].position.x-this.position.x+6,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,15,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x-6,this.position.y,1,atan2(entities.players[a].position.x-this.position.x+6,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,15,this.crit,this.index))
 									fired[0]=true
 								}
 								if(!fired[1]&&distance==minimum[1]){
-									entities.projectiles.push(new projectile(this.layer,this.position.x+6,this.position.y,1,atan2(entities.players[a].position.x-this.position.x-6,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,15,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x+6,this.position.y,1,atan2(entities.players[a].position.x-this.position.x-6,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,15,this.crit,this.index))
 									fired[1]=true
 								}
 							}
 						}
 						if(!fired[0]){
-							entities.projectiles.push(new projectile(this.layer,this.position.x-6,this.position.y,1,-90,this.id,this.base.damage/2,15,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x-6,this.position.y,1,-90,this.id,this.base.damage/2,15,this.crit,this.index))
 						}
 						if(!fired[1]){
-							entities.projectiles.push(new projectile(this.layer,this.position.x+6,this.position.y,1,90,this.id,this.base.damage/2,15,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x+6,this.position.y,1,90,this.id,this.base.damage/2,15,this.crit,this.index))
 						}
 					}
 				break
@@ -12122,8 +12127,8 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction-30,this.id,this.base.damage/2,15,this.crit,this.index))
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+30,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction-30,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction+30,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 254:
@@ -12143,7 +12148,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/2,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -12158,7 +12163,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%20==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,12,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,12,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 					}
 				break
 				case 274:
@@ -12169,7 +12174,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%45==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage*0.8,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage*0.8,15,this.crit,this.index))
 					}
 				break
 				case 278:
@@ -12189,7 +12194,7 @@ class projectile{
 						if(minimum<300){
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
-									entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
+									this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y),this.id,this.base.damage/4,30,this.crit,this.index))
 									a=la
 								}
 							}
@@ -12223,7 +12228,7 @@ class projectile{
 					}
 					if(this.timer%30==0&&a==0&&this.active){
 						for(let a=0,la=3;a<la;a++){
-							entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
+							this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/2,15,this.crit,this.index))
 						}
 					}
 				break
@@ -12246,7 +12251,7 @@ class projectile{
 							for(let a=0,la=entities.players.length;a<la;a++){
 								if(entities.players[a].life>0&&entities.players[a].fade>0&&((this.id==0?1:0)!=(entities.players[a].id==0?1:0)||this.id==-1||entities.players[a].id==-1||game.pvp&&this.id!=entities.players[a].id)&&minimum==dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)){
 									for(let b=0,lb=10;b<lb;b++){
-										entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-20,20),this.id,this.base.damage*0.4,60,this.crit,this.index))
+										this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+random(-20,20),this.id,this.base.damage*0.4,60,this.crit,this.index))
 									}
 									a=la
 								}
@@ -12262,9 +12267,9 @@ class projectile{
 						this.active=false
 					}
 					if(this.active&&a==0&&(this.timer==10||this.timer==30||this.timer==50)){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,86,this.direction+10,this.id,this.base.damage,60,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,86,this.direction+10,this.id,this.base.damage,60,this.crit,this.index))
 					}else if(this.active&&a==0&&(this.timer==20||this.timer==40||this.timer==60)){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,86,this.direction-10,this.id,this.base.damage,60,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,86,this.direction-10,this.id,this.base.damage,60,this.crit,this.index))
 					}
 				break
 				case 309:
@@ -12275,7 +12280,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%30==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,86,this.direction,this.id,this.base.damage,300,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,86,this.direction,this.id,this.base.damage,300,this.crit,this.index))
 					}
 				break
 				case 316:
@@ -12296,7 +12301,7 @@ class projectile{
 						this.angularVelocity*=0.95
 					}
 					if(this.timer%10==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/4,60,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/4,60,this.crit,this.index))
 					}
 				break
 				case 333:
@@ -12307,7 +12312,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%45==0&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,334,this.direction,this.id,this.base.damage/2,360,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,334,this.direction,this.id,this.base.damage/2,360,this.crit,this.index))
 					}
 				break
 				case 334:
@@ -12318,7 +12323,7 @@ class projectile{
 						this.active=false
 					}
 					if(this.timer%45==15&&a==0&&this.active){
-						entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage,15,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage,15,this.crit,this.index))
 					}
 				break
 				case 352:
@@ -12551,7 +12556,10 @@ class projectile{
 							}
 						}
 						for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-							if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
+							if((
+								dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35||
+								dist(this.position.x,this.position.y,entities.projectiles[b].previous.position.x*0.5+entities.projectiles[b].position.x*0.5,entities.projectiles[b].previous.position.y*0.5+entities.projectiles[b].position.y*0.5)<this.width*0.35+this.height*0.35+entities.projectiles[b].width*0.35+entities.projectiles[b].height*0.35
+							)&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active&&!entities.projectiles[b].rules.passer){
 								this.active=false
 								this.fail=true
 							}
@@ -13211,18 +13219,18 @@ class projectile{
 			case 513:
 				if(target.playerData.name.includes('Hyper')||target.rules.spyLineFull&&target.fade<1){
 					target.life=0
-					entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,514,random(0,360),this.id,this.base.damage,3600,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,514,random(0,360),this.id,this.base.damage,3600,this.crit,this.index))
 					entities.projectiles[entities.projectiles.length-1].velocity.x*=0.5
 					entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
 					/*let turn313=floor(random(0,72))
 					for(let b=0,lb=7;b<lb;b++){
-						entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,209,this.direction+b*72+turn313,this.id,this.base.damage*0.5,600,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,209,this.direction+b*72+turn313,this.id,this.base.damage*0.5,600,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].velocity.x*=0.5
 						entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
 					}*/
 					let turn513=floor(random(0,72))
 					for(let b=0,lb=7;b<lb;b++){
-						entities.projectiles.push(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+b*72+turn513,this.id,this.base.damage*0.5,600,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,this.previous.position.x,this.previous.position.y,34,this.direction+b*72+turn513,this.id,this.base.damage*0.5,600,this.crit,this.index))
 						entities.projectiles[entities.projectiles.length-1].velocity.x*=0.8
 						entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
 					}
@@ -13489,7 +13497,7 @@ class projectile{
 				target.noGravTime=max(target.noGravTime,600)
 				target.velocity.x=0
 				target.velocity.y=0
-				entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,433,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+				this.addProjectile(new projectile(this.layer,target.position.x,target.position.y,433,this.direction,this.id,this.base.damage,600,this.crit,this.index))
 			break
 			case 440:
 				for(let d=0,ld=entities.players.length;d<ld;d++){
@@ -13581,7 +13589,7 @@ class projectile{
 				target.noGravTime=max(target.noGravTime,15)
 				target.velocity.x=0
 				target.velocity.y=0
-				entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,481,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+				this.addProjectile(new projectile(this.layer,target.position.x,target.position.y,481,this.direction,this.id,this.base.damage,600,this.crit,this.index))
 				entities.projectiles[entities.projectiles.length-1].objective=target.index
 			break
 			case 481:
@@ -13765,7 +13773,7 @@ class projectile{
 					target.stunTime=max(target.stunTime,this.id==0?120:600)
 				break
 				case 99:
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,100,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
 				break
 				case 102: case 115: case 151: case 167: case 175: case 189: case 193: case 202: case 220: case 258:
 					target.chillTime=max(target.chillTime,3600)
@@ -13786,7 +13794,7 @@ class projectile{
 				break*/
 				case 195:
 					if(target.life<=0){
-						entities.projectiles.push(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
+						this.addProjectile(new projectile(this.layer,target.position.x,target.position.y,195,this.direction,this.id,this.base.damage,this.time,this.crit,this.index))
 					}
 				break
 				case 212:
@@ -13868,7 +13876,7 @@ class projectile{
 					target.confuseTime=max(15,target.confuseTime)
 				break
 				case 317:
-					entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
+					this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,209,this.direction,this.id,this.base.damage,600,this.crit,this.index))
 				break
 				case 324:
 					target.shrinkTime=max(target.shrinkTime+30,60)

@@ -11199,7 +11199,9 @@ Standard Errors: ${se[index]} vs ${se[index2]}
                 }
                 let pEff=game.players-(game.traitor?2.5:0)
                 game.sendTime=time!=undefined?time:game.attacker||game.level==29&&game.initial||game.level==37?0:
-                    types.mission[game.mission].sendTime*2.75/game.diff/
+                    types.mission[game.mission].sendTime*2.75/
+                    game.diff/
+                    (game.diffComposite*0.5+0.5)/
                     max(1,(game.level==55?pEff*0.175+0.325:pEff*0.5+0.5))*
                     constrain(0.25+0.25*total,0.25,1)*
                     (game.classicRespawn?0.8:1)*
@@ -11970,16 +11972,16 @@ function setupLists(){
     }
     listing[4]=[
         [
-            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergun`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerTunnelScattergun`,`PlayerPenaltyScattergunQ`],
+            [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergunC`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerTunnelScattergun`,`PlayerPenaltyScattergunQ`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerPistol`,`PlayerRocketJumpC`,`PlayerEscapePlan`],
+            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapePlan`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairway`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
+            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairwayW`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonW`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
@@ -12075,7 +12077,11 @@ function outKD(bypass){
     ${round(player.stats.subIdealKills[2])} Kills
     ${round(player.stats.subDamage[2])} Damage Dealt
     ${round(player.stats.subTaken[2])} Damage Taken
-    ${round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:``}`
+    ${round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:player.rules.insurgentLine?`
+
+    ${data[2].name}:
+    ${round(player.stats.subIdealKills[2])} Kills
+    ${round(player.stats.subDamage[2])} Damage Dealt`:``}`
                 )
             }
         }
@@ -12169,4 +12175,5 @@ entities.walls[1][29].weapon=findName('PlayerGrenadierC',types.player)
 entities.walls[1][28].weapon=findName('PlayerRollerLauncher',types.player)
 entities.walls[1][71].weapon=findName('PlayerStickySweeper',types.player)
 entities.walls[1][70].weapon=findName('PlayerStickySniper',types.player)
+entities.walls[1][29].weapon=findName('PlayerClassicSheller',types.player)
 */

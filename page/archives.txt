@@ -1,5 +1,8 @@
 
 1204 - cluster bomb c, 885
+1205 - stairway w, 1113
+1206 - popper scattergun c, 858
+1207 - pistol q, 1
 
 519 - cluster bomb c, 375
 520 - bomblet c, 376
@@ -95,7 +98,7 @@ test only [
 1159 - adrenaline c, 699
 1160 - crowbar, 937
 1161 - shoulder rocket, 3
-1162 - pistol q, 967, 46
+1162 - improvised pistol, 967, 46
 1163 - random insurgent, 898
 1164 - insurgent w, 1004
 1165 - sidekick c, 857
@@ -108,7 +111,7 @@ test only [
 489 - shoulder rocket, 2
 490 - ied c, 235, 438
 491 - bayonet, 363
-492 - pistol q, 1, 20
+492 - improvised pistol, 1, 20
 
 
 

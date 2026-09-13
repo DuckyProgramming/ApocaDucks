@@ -7666,6 +7666,9 @@ types={
       name:'PlayerHeavyPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'PlayerSemiHeavyPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'PlayerTempSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:824,
     },{
@@ -8276,8 +8279,8 @@ types={
       name:'PlayerShoulderRocket',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1161,
     },{
-      name:'PlayerPistolQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1162,
+      name:'PlayerImprovisedPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:1162,
     },{
       name:'PlayerSidekickC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1165,
@@ -8383,6 +8386,15 @@ types={
     },{
       name:'PlayerClusterBombC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1204,
+    },{
+      name:'PlayerStairwayW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1205,
+    },{
+      name:'PlayerPopperScattergunC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1206,
+    },{
+      name:'PlayerPistolQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.6,reloadBuff:1,crit:0,weapon:1207,
     },
 
     //mark c
@@ -10959,7 +10971,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -11087,7 +11099,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11159,7 +11171,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11168,7 +11180,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11366,7 +11378,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11384,7 +11396,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11429,7 +11441,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11456,7 +11468,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11519,7 +11531,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11564,7 +11576,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11654,7 +11666,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11708,7 +11720,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -11771,7 +11783,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -11843,7 +11855,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:60,
 		},{
@@ -11906,7 +11918,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -12050,7 +12062,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -12122,7 +12134,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -12131,7 +12143,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -12167,7 +12179,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:60,
 		},{
@@ -12230,7 +12242,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -12491,7 +12503,7 @@ types={
 			damage:1500,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -12500,7 +12512,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:30,
 		},{
@@ -12554,7 +12566,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -13373,7 +13385,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -13382,7 +13394,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -13607,7 +13619,7 @@ types={
 			damage:100,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -14444,7 +14456,7 @@ types={
 			damage:0,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:1,
 		},{
@@ -14759,7 +14771,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -15182,7 +15194,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -15443,7 +15455,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -15893,7 +15905,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -16685,7 +16697,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17027,7 +17039,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17162,7 +17174,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17351,7 +17363,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17576,7 +17588,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17810,7 +17822,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -17999,7 +18011,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -18179,7 +18191,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -18404,7 +18416,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -18494,7 +18506,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -18773,7 +18785,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -19043,7 +19055,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:0.85,
       uses:40,
 		},{
@@ -19133,7 +19145,7 @@ types={
 			damage:60,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:32,
 		},{
@@ -19457,7 +19469,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -19547,7 +19559,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -19657,7 +19669,7 @@ types={
 			stop:15,
 			reload:6,
 			speed:1.4,
-      uses:30,
+      uses:25,
 		},{
 			name:'Sniper W',
 			ammo:1,
@@ -19756,7 +19768,7 @@ types={
 			stop:15,
 			reload:6,
 			speed:1.4,
-      uses:30,
+      uses:25,
 		},{
 			name:'Penalty Scattergun',
 			ammo:2,
@@ -19907,7 +19919,7 @@ types={
 			damage:40,
 			cooldown:12,
 			stop:30,
-			reload:10,
+			reload:6,
 			speed:1.4,
       uses:40,
 		},{
@@ -20623,7 +20635,7 @@ types={
 			stop:15,
 			reload:6,
 			speed:1.4,
-      uses:30,
+      uses:25,
 		},{
 			name:'Gust C',
 			ammo:1,
@@ -20841,7 +20853,7 @@ types={
 			speed:0.8,
       uses:6,
 		},{
-			name:'Pistol Q',
+			name:'Improvised Pistol',
 			ammo:10,
 			damage:40,
 			cooldown:12,
@@ -21064,7 +21076,7 @@ types={
 			stop:15,
 			reload:6,
 			speed:1.4,
-      uses:16,
+      uses:14,
 		},{
 			name:'Stickywheel C',
 			ammo:3,
@@ -21227,6 +21239,33 @@ types={
 			reload:15,
 			speed:1.05,
       uses:4,
+		},{
+			name:'Stairway W',
+			ammo:5,
+			damage:144,
+			cooldown:24,
+			stop:60,
+			reload:15,
+			speed:1.05,
+      uses:30,
+		},{
+			name:'Popper Scattergun C',
+			ammo:1,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Pistol Q',
+			ammo:10,
+			damage:40,
+			cooldown:12,
+			stop:90,
+			reload:0,
+			speed:1.4,
+      uses:50,
 		},
 
     /*{

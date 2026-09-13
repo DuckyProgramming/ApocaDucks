@@ -33,3 +33,11 @@ Results of this test:
 2. LMG is too weak
 
 
+
+PISTOLS
+scout: reloads in 75 ticks, 50 ammo
+soldier: reloads in 90 ticks, 80 ammo
+insurgent: reloads in 90 ticks (all at once), 100 ammo
+engineer: reloads in 105 ticks, 200 ammo
+
+
