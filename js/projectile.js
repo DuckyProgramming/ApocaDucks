@@ -12373,7 +12373,11 @@ class projectile{
 						this.active=false
 					}
 					for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-						if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<5+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+						//if(dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<5+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
+						if((
+							dist(this.position.x,this.position.y,entities.projectiles[b].position.x,entities.projectiles[b].position.y)<4+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4||
+							dist(this.position.x*0.5+this.previous.position.x*0.5,this.position.y*0.5+this.previous.position.y*0.5,entities.projectiles[b].position.x*0.5+entities.projectiles[b].previous.position.x*0.5,entities.projectiles[b].position.y*0.5+entities.projectiles[b].previous.position.y*0.5)<4+entities.projectiles[b].width*0.4+entities.projectiles[b].height*0.4
+						)&&!this.onTeam(entities.projectiles[b])&&entities.projectiles[b].active){
 							entities.projectiles[b].defuse()
 						}
 					}
