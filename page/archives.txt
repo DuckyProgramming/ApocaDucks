@@ -3,9 +3,12 @@
 1205 - stairway w, 1113
 1206 - popper scattergun c, 858
 1207 - pistol q, 1
+1208 - drone w, 1173
+1209 - potion, 974
 
 519 - cluster bomb c, 375
 520 - bomblet c, 376
+521 - potion, 412
 
 
 

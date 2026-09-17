@@ -1,0 +1,27 @@
+9/16/26 MGE
+
+Me vs Scout Bot
+
+Scout v Scout: 3-10
+Soldier v Scout: 7-10
+Pyro v Scout 10-6
+Demo v Scout 10-7
+Heavy v Scout 10-1
+Engineer v Scout 10-3
+Medic v Scout 3-10
+Sniper v Scout 10-9
+Spy v Scout 10-4
+Insurgent v Scout 6-10
+
+Me vs Soldier Bot
+
+Scout v Soldier: 10-1
+Soldier v Soldier 10-2
+Pyro v Soldier 10-2
+Demo v Soldier 10-1
+Heavy v Soldier 10-2
+Engineer v Soldier 10-4
+Medic v Soldier 6-10
+Sniper v Soldier 10-2
+Spy v Soldier 10-6
+Insurgent v Soldier 10-3

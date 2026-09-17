@@ -1,3 +1,4 @@
+
 game={
   level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,tileset:[0,0],edge:[0,0],tilecolor:[],
   index:0,projectileIndex:0,
@@ -8395,6 +8396,12 @@ types={
     },{
       name:'PlayerPistolQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.6,reloadBuff:1,crit:0,weapon:1207,
+    },{
+      name:'PlayerDroneW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1208,
+    },{
+      name:'PlayerPotion',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1209,
     },
 
     //mark c
@@ -19727,7 +19734,7 @@ types={
 		},{
 			name:'Molotov',
 			ammo:1,
-			damage:160,
+			damage:80,
 			cooldown:108,
 			stop:108,
 			reload:108,
@@ -21266,6 +21273,24 @@ types={
 			reload:0,
 			speed:1.4,
       uses:50,
+		},{
+			name:'Drone W',
+			ammo:1,
+			damage:300,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.05,
+      uses:4.5,
+		},{
+			name:'Potion',
+			ammo:1,
+			damage:120,
+			cooldown:108,
+			stop:108,
+			reload:108,
+			speed:1.05,
+      uses:12,
 		},
 
     /*{

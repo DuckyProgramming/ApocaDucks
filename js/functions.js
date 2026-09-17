@@ -28,9 +28,9 @@ function setupRules(){
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
                 a==507||a==508||a==509||a==510||a==512||
-                a==516||a==518||a==519||a==520,
+                a==516||a==518||a==519||a==520||a==521,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
-                a==353||a==412||a==482||a==493||a==508,
+                a==353||a==412||a==482||a==493||a==508||a==521,
 			rocket:a==2||a==3||a==16||a==21||a==22||
 				a==26||a==27||a==41||a==45||a==47||
 				a==48||a==53||a==54||a==55||a==56||
@@ -42,7 +42,7 @@ function setupRules(){
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
                 a==498||a==505||a==506||a==507||a==510||
-                a==516,
+                a==516||a==521,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -159,7 +159,8 @@ function setupRules(){
                 a==462||a==469||a==471||a==474||a==475||
                 a==489||a==490||a==493||a==495||a==500||
                 a==501||a==505||a==506||a==507||a==508||
-                a==509||a==512||a==518||a==519||a==520,
+                a==509||a==512||a==518||a==519||a==520||
+                a==521,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -11979,7 +11980,7 @@ function setupLists(){
             [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapePlan`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
-            [`PlayerGustC`,`PlayerReflector`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
+            [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairwayW`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncher`,`PlayerStickyJumper`,`PlayerStickySniper`,`PlayerStickywheelC`,`PlayerTickybombLauncher`,`PlayerDonker`],
@@ -11992,8 +11993,8 @@ function setupLists(){
             [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistolC`,`PlayerWrench`,`PlayerPushPistolC`],
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
-            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerQuickfix`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
-            [`PlayerDonutW`,`PlayerChromaC`,`PlayerHealthPack`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`],
+            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerDonutW`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
+            [`PlayerHealthPack`,`PlayerChromaC`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`,`PlayerPotion`],
         ],[
             [`PlayerHeavySniper`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`,`PlayerBowC`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
@@ -12003,7 +12004,7 @@ function setupLists(){
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
-            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneC`],
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneW`],
             [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
