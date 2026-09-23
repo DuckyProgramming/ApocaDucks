@@ -142,6 +142,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
+            stickyJump:false,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -1526,7 +1527,7 @@ class player{
                 this.color={eye:{back:[0,0,0]},beak:{main:[130,70,15],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[40,80,100],body:[35,75,95],legs:[30,70,90],arms:[35,75,95]}}
             }else if(this.playerData.name=='NerfBuster'){
                 this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[200,160,80],body:[190,150,70],legs:[180,140,60],arms:[185,145,65]}}
-            }else if(this.playerData.name=='Buster'||this.playerData.name=='BusterSpawner'||this.playerData.name=='HyperBuster'){
+            }else if(this.playerData.name=='Buster'||this.playerData.name=='BusterSpawner'||this.playerData.name=='HyperBuster'||this.playerData.name=='FastBuster'){
                 this.color={eye:{back:[0,0,0]},beak:{main:[255,140,25],mouth:[0,0,0],nostril:[0,0,0]},skin:{head:[80,160,200],body:[70,150,190],legs:[60,140,180],arms:[65,145,185]}}
             }
         }
@@ -8528,7 +8529,8 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
                             }else{
-                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
+                                //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.2,7200,crit,this.index))
                             }
                         break
                         case 1198:
@@ -8599,6 +8601,56 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],521,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,240,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
+                        break
+                        case 1210:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],368,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
+                        break
+                        case 1211:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
+                        break
+                        case 1212:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],435,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=2
+                            entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
+                        break
+                        case 1213:
+                            for(let a=0,la=3;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],509,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].tick=a
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
+                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                }
+                            }
+                        break
+                        case 1214:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],417,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
 
                         //mark
@@ -8680,8 +8732,8 @@ class player{
         if(game.pvp){
             this.multLife(0.8)
         }
-        //if(rules.dm||game.level==69||game.level==109){
-        if(rules.dm||game.level==109){
+        if(rules.dm||game.level==69||game.level==109){
+        //if(rules.dm||game.level==109){
             this.multLife(0.5)
         }
         if(game.level==84){
@@ -10213,16 +10265,16 @@ class player{
                                     for(let a=0,la=levels[7].length;a<la;a++){
                                         for(let b=0,lb=levels[7][a].length;b<lb;b++){
                                             if(levels[7][a][b]==key){
-                                                entities.players.push(new player(this.layer,game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5),0,0,[],true,findName(entities.players[a].stats.bustCount==3||entities.players[a].stats.bustCount>=5&&entities.players[a].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster'][floor(random(0,6))]:'Buster',types.player),game.index))
+                                                entities.players.push(new player(this.layer,game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5),0,0,[],true,findName(entities.players[a].stats.bustCount==3||entities.players[a].stats.bustCount>=5&&entities.players[a].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster','FastBuster'][floor(random(0,7))]:'Buster',types.player),game.index))
                                                 game.index++
                                             }
                                         }
                                     }
                                 }else{
-                                    if(entities.players[a].stats.bustCount%3==0&&floor(random(0,4))==0){
+                                    if(entities.players[a].stats.bustCount%3==0&&floor(random(0,8))==0){
                                         game.stack.push([-1,'SpyBuster'])
                                     }else{
-                                        entities.players.push(new player(this.layer,entities.players[a].position.x,-50-c*100,0,0,[],true,findName(entities.players[a].stats.bustCount==3||entities.players[a].stats.bustCount>=5&&entities.players[a].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster'][floor(random(0,6))]:'Buster',types.player),game.index))
+                                        entities.players.push(new player(this.layer,entities.players[a].position.x,-50-c*100,0,0,[],true,findName(entities.players[a].stats.bustCount==3||entities.players[a].stats.bustCount>=5&&entities.players[a].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster','FastBuster'][floor(random(0,7))]:'Buster',types.player),game.index))
                                         entities.players[entities.players.length-1].parachute=true
                                         entities.players[entities.players.length-1].target.index=entities.players[a].index
                                         game.index++
@@ -10255,16 +10307,16 @@ class player{
                                                     for(let a=0,la=levels[7].length;a<la;a++){
                                                         for(let b=0,lb=levels[7][b].length;b<lb;b++){
                                                             if(levels[7][b][b]==key){
-                                                                entities.players.push(new player(this.layer,game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5),0,0,[],true,findName(entities.players[b].stats.bustCount==3||entities.players[b].stats.bustCount>=5&&entities.players[b].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster'][floor(random(0,6))]:'Buster',types.player),game.index))
+                                                                entities.players.push(new player(this.layer,game.tileset[0]*(b+0.5),game.tileset[1]*(a+0.5),0,0,[],true,findName(entities.players[b].stats.bustCount==3||entities.players[b].stats.bustCount>=5&&entities.players[b].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster','FastBuster'][floor(random(0,7))]:'Buster',types.player),game.index))
                                                                 game.index++
                                                             }
                                                         }
                                                     }
                                                 }else{
-                                                    if(entities.players[b].stats.bustCount%3==0&&floor(random(0,4))==0){
+                                                    if(entities.players[b].stats.bustCount%3==0&&floor(random(0,8))==0){
                                                         game.stack.push([-1,'SpyBuster'])
                                                     }else{
-                                                        entities.players.push(new player(this.layer,entities.players[b].position.x,-50-c*100,0,0,[],true,findName(entities.players[b].stats.bustCount==3||entities.players[b].stats.bustCount>=5&&entities.players[b].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster'][floor(random(0,6))]:'Buster',types.player),game.index))
+                                                        entities.players.push(new player(this.layer,entities.players[b].position.x,-50-c*100,0,0,[],true,findName(entities.players[b].stats.bustCount==3||entities.players[b].stats.bustCount>=5&&entities.players[b].stats.bustCount%2==1?['SneakBuster','ReusableBuster','EnderBuster','BusterSpawner','HyperBuster','NerfBuster','FastBuster'][floor(random(0,7))]:'Buster',types.player),game.index))
                                                         entities.players[entities.players.length-1].parachute=true
                                                         entities.players[entities.players.length-1].target.index=entities.players[b].index
                                                         game.index++
@@ -13548,8 +13600,10 @@ class player{
                                 }
                             }
                             if(!entities.players[a].fort||entities.players[a].auto){
-                                entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
-                                entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                                //entities.players[a].velocity.x=dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                                //entities.players[a].velocity.y=dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
+                                entities.players[a].velocity.x=this.velocity.x*0.5+dir[0]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.x
+                                entities.players[a].velocity.y=this.velocity.y*0.5+dir[1]/(sqrt(dir[0]**2+dir[1]**2))*20+this.velocity.y
                             }
                             entities.players[a].collect.time=450
                             entities.players[a].die.killer=this.index

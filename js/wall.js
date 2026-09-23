@@ -11931,9 +11931,10 @@ class wall{
                         this.reload-=(
                             game.level==28&&this.type==40?0.225:
                             game.level==28&&this.type==35?1/3:
-                            game.level==25||game.level==26||game.level==104||game.level==105?0.225:
+                            //game.level==25||game.level==26||game.level==104||game.level==105?0.225:
+                            game.level==25||game.level==26||game.level==105?0.225:
                             game.level==24?0.225:
-                            game.level==22||game.level==23||game.level==33||game.level==40||game.level==49&&this.type==32||game.level==59||game.level==69||game.level==79||game.level==100||game.level==101?0.5:
+                            game.level==22||game.level==23||game.level==33||game.level==40||game.level==49&&this.type==32||game.level==59||game.level==69||game.level==79||game.level==100||game.level==101||game.level==104?0.5:
                             (game.level==19||game.level==31)&&this.type!=35&&!(this.type==32&&game.pvp)?1/3:
                             game.level==131||game.level==140?3:
                             1
@@ -16306,6 +16307,7 @@ class wall{
                                             }*/
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
+                                                c.assort.stickyJump=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16384,6 +16386,7 @@ class wall{
                                             }*/
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
+                                                c.assort.stickyJump=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16427,6 +16430,7 @@ class wall{
                                             }*/
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
+                                                c.assort.stickyJump=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false

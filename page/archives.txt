@@ -5,6 +5,11 @@
 1207 - pistol q, 1
 1208 - drone w, 1173
 1209 - potion, 974
+1210 - sticky jumper c, 851
+1211 - stickybomb launcher c, 687
+1212 - sticky sniper c, 1012
+1213 - stickywheel w, 1187
+1214 - tickybomb launcher c, 983
 
 519 - cluster bomb c, 375
 520 - bomblet c, 376

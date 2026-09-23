@@ -8402,6 +8402,21 @@ types={
     },{
       name:'PlayerPotion',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1209,
+    },{
+      name:'PlayerStickyJumperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1210,
+    },{
+      name:'PlayerStickybombLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1211,
+    },{
+      name:'PlayerStickySniperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1212,
+    },{
+      name:'PlayerStickywheelW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1213,
+    },{
+      name:'PlayerTickybombLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1214,
     },
 
     //mark c
@@ -8808,6 +8823,9 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'NerfBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'FastBuster',sizeBuff:1.1,lifeBuff:8,speedBuff:2.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },
     
@@ -9960,6 +9978,9 @@ types={
     },{
       name:'BigBarrageRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:67,
+    },{
+      name:'TinyCritFastLongPunch',sizeBuff:0.8,lifeBuff:0.6,speedBuff:1.8,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:30,
     },{
       name:'TinyCritPistolStop',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:68,
@@ -20290,7 +20311,7 @@ types={
 			stop:300,
 			reload:300,
 			speed:0.85,
-      uses:3,
+      uses:num%4==3?4:3,
 		}})),
     {
 			name:'Widowmaker',
@@ -21291,6 +21312,51 @@ types={
 			reload:108,
 			speed:1.05,
       uses:12,
+		},{
+			name:'Sticky Jumper C',
+			ammo:3,
+			damage:240,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Stickybomb Launcher C',
+			ammo:4,
+			damage:300,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Sticky Sniper C',
+			ammo:1,
+			damage:300,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:9,
+		},{
+			name:'Stickywheel W',
+			ammo:3,
+			damage:150,
+			cooldown:36,
+			stop:99,
+			reload:60,
+			speed:1.05,
+      uses:15,
+		},{
+			name:'Tickybomb Launcher C',
+			ammo:4,
+			damage:180,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
 		},
 
     /*{

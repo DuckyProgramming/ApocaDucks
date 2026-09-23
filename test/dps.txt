@@ -1,3 +1,5 @@
+(Stats below prior to wing pistol and LMG rebalances)
+
 10 Frames Per Mash:
 Regular Pistol 242 DPS
 Wing Pistol 323 DPS
@@ -13,10 +15,13 @@ Wing Pistol 400 DPS
 Assault Rifle 220 DPS
 Stickybomb Launcher 245 * Splash DPS
 Chiller 252 DPS
+Shotgun 262 DPS
 Trench Submachine 275 DPS
 LMG 288 DPS
 Minigun 406 DPS
+Flamethrower 422 DPS
 Knife 500 DPS
+BigBarrageCritRocketLauncher 1000 DPS
 
 Time to kill a GlitchedTank
 
@@ -37,7 +42,13 @@ Results of this test:
 PISTOLS
 scout: reloads in 75 ticks, 50 ammo
 soldier: reloads in 90 ticks, 80 ammo
-insurgent: reloads in 90 ticks (all at once), 100 ammo
 engineer: reloads in 105 ticks, 200 ammo
+insurgent: reloads in 90 ticks (all at once), 100 ammo
+
+
+
+OP WEAPONS
+Classic Sheller 498 * Splash DPS (748 Directs)
+Tobacco Flamethrower 586 DPS
 
 
