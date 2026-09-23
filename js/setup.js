@@ -24,7 +24,7 @@ function setup(){
         23 - steel pvp
         41 - speleo dm
         47 - big data ad
-        49 - rusted adzz
+        49 - rusted ad
         55 - tailwater ad
         65 - tailwater 5cp
         69 - cooked koth

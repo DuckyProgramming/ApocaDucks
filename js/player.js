@@ -8486,51 +8486,106 @@ class player{
                         break
                         case 1190:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1191:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],413,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1192:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],462,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,360,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1193:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],474,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                            if(this.velocity.x/4.5-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-0.05
+                            }else if(this.velocity.x/4.5+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+0.05
+                            }
                         break
                         case 1194:
                             if(weapon.ammo%2==0){
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                                //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
+                                entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                }
                             }else{
                                 //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],475,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
-                                entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                                //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                }
                             }
                         break
                         case 1195:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],458,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*(2.2-0.2*round(weapon.ammo))+this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*(2.2-0.2*round(weapon.ammo))+this.regularize(this.velocity.x)*0.1
+                            entities.projectiles[entities.projectiles.length-1].velocity.x*=(2.2-0.2*round(weapon.ammo))
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1196:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],501,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,60,crit,this.index))
-                            entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                            //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1197:
                             if(weapon.ammo%2==0){
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                }
                             }else{
                                 //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,(lsin(this.direction.main)<0?-90:90)+random(-3,3),this.id,weaponData.damage*damageBuff*0.2,7200,crit,this.index))
+                                if(this.velocity.x/4.5-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-0.05
+                                }else if(this.velocity.x/4.5+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+0.05
+                                }
                             }
                         break
                         case 1198:
@@ -8579,6 +8634,11 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],458,(lsin(this.direction.main)<0?-90:90),this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1+0.25*round(weapon.ammo)
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
                         break
                         case 1206:
                             for(let a=0,la=12;a<la;a++){

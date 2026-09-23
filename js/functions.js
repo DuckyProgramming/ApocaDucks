@@ -11985,7 +11985,7 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierC`,`PlayerShellerC`,`PlayerCaber`,`PlayerWarningLauncherC`,`PlayerLingerer`,`PlayerCharge`,`PlayerStairwayW`,`PlayerRollerLauncher`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
+            [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaber`,`PlayerWarningLauncherW`,`PlayerLingererC`,`PlayerCharge`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncherC`,`PlayerStickyJumperC`,`PlayerStickySniperC`,`PlayerStickywheelW`,`PlayerTickybombLauncherC`,`PlayerDonker`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonW`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
