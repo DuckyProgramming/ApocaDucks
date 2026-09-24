@@ -8417,6 +8417,9 @@ types={
     },{
       name:'PlayerTickybombLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1214,
+    },{
+      name:'PlayerVitasawC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1215,
     },
 
     //mark c
@@ -21357,6 +21360,15 @@ types={
 			reload:40,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Vitasaw C',
+			ammo:5,
+			damage:120,
+			cooldown:36,
+			stop:60,
+			reload:20,
+			speed:1.4,
+      uses:20,
 		},
 
     /*{

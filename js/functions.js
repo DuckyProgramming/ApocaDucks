@@ -11997,7 +11997,7 @@ function setupLists(){
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
             [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerDonutW`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
-            [`PlayerHealthPack`,`PlayerChromaC`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasaw`,`PlayerSpeedPack`,`PlayerPotion`],
+            [`PlayerHealthPack`,`PlayerChromaC`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasawC`,`PlayerSpeedPack`,`PlayerPotion`],
         ],[
             [`PlayerHeavySniper`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`,`PlayerBowC`],
             [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
