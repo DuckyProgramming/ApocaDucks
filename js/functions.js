@@ -284,7 +284,7 @@ function updateRules(){
             ?2:
             game.level==32||game.level==33||game.level==58||game.level==63||game.level==70||game.level==138
             ?2.5:
-            game.level==59
+            game.level==59||game.level==103
             ?1.5:
             1,
         spawnTimeMult:(game.level==7?3:1)*
@@ -9023,7 +9023,7 @@ function generateLevel(info,layer){
             }else{
                 game.firstGen=false
                 let split=[]
-                let possible=range(0,game.players)
+                let possible=range(game.stockTeamSulfite?2:0,game.players)
                 let typeList=[range(0,10),range(0,10)]
                 if(game.players>20){
                     typeList[0].push(...range(0,10))
@@ -9032,6 +9032,9 @@ function generateLevel(info,layer){
                 if(duel.trigger){
                     split=range(game.players*0.5,game.players)
                 }else{
+                    if(game.stockTeamSulfite){
+                        split.push(0)
+                    }
                     for(let a=0,la=possible.length/2;a<la;a++){
                         let index=floor(random(0,possible.length))
                         split.push(possible[index])
@@ -9167,10 +9170,10 @@ function generateLevel(info,layer){
                             //entities.players[a].newWeaponSet(findName('PlayerScout',types.player)+typeList[team][index]+floor(random(0,num))*10)
                             let tick=typeList[team][index]
                             entities.players[a].assort.storeSubWeapon=[]
-                            entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][floor(random(0,listing[4][tick][0].length))],types.player)
-                            entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][floor(random(0,listing[4][tick][1].length))],types.player)
+                            entities.players[a].assort.storeSubWeapon[0]=findName(listing[4][tick][0][game.stockTeamSulfite?0:floor(random(0,listing[4][tick][0].length))],types.player)
+                            entities.players[a].assort.storeSubWeapon[1]=findName(listing[4][tick][1][game.stockTeamSulfite?0:floor(random(0,listing[4][tick][1].length))],types.player)
                             if(listing[4][tick].length>=3){
-                                entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][floor(random(0,listing[4][tick][2].length))],types.player)
+                                entities.players[a].assort.storeSubWeapon[2]=findName(listing[4][tick][2][game.stockTeamSulfite?0:floor(random(0,listing[4][tick][2].length))],types.player)
                             }
                             game.loadout[entities.players[a].index]=[{main:entities.players[a].assort.storeSubWeapon,class:tick}]
                             entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
@@ -12182,5 +12185,18 @@ entities.walls[1][29].weapon=findName('PlayerGrenadierC',types.player)
 entities.walls[1][28].weapon=findName('PlayerRollerLauncher',types.player)
 entities.walls[1][71].weapon=findName('PlayerStickySweeper',types.player)
 entities.walls[1][70].weapon=findName('PlayerStickySniper',types.player)
+
+entities.walls[1][29].weapon=findName('PlayerCharge',types.player)
+entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
+entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
+entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
+entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
+entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
+
 entities.walls[1][29].weapon=findName('PlayerClassicSheller',types.player)
+
+entities.walls[1][70].weapon=findName('PlayerStickyJumper',types.player)
+entities.walls[1][49].weapon=findName('PlayerCaberC',types.player)
+entities.walls[1][43].weapon=findName('PlayerPopperScattergunC',types.player)
+entities.walls[1][64].weapon=findName('PlayerBaseball',types.player)
 */

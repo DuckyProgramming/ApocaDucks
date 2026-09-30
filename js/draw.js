@@ -1812,6 +1812,8 @@ function mainloop(){
                             graphics.main[c].fill(255,fail?0:255,fail?0:255)
                             graphics.main[c].textSize(20)
                             graphics.main[c].text(`Spectating`,center.position.x,center.position.y+60)
+                            graphics.main[c].textSize(10)
+                            graphics.main[c].text(`Damage Last Life: ${floor(entities.players[c].stats.lifeDamage)}`,center.position.x,center.position.y+80)
                         }
                     }
                 }
