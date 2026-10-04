@@ -8420,6 +8420,9 @@ types={
     },{
       name:'PlayerVitasawC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:1215,
+    },{
+      name:'PlayerChargeC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1216,
     },
 
     //mark c
@@ -21372,6 +21375,15 @@ types={
 			reload:20,
 			speed:1.4,
       uses:20,
+		},{
+			name:'Charge C',
+			ammo:30,
+			damage:0,
+			cooldown:1,
+			stop:90,
+			reload:1,
+			speed:0.95,
+      uses:240,
 		},
 
     /*{

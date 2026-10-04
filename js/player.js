@@ -95,6 +95,7 @@ class player{
         this.target={position:{x:this.position.x,y:this.position.y},index:0,point:-1,heal:false}
         this.time=0
         this.critBuff=0
+        this.critBuffTick=0
         this.critTick=0
         this.defendBuff=0
         this.speedBuff=0
@@ -865,7 +866,7 @@ class player{
         }
         layer.noStroke()
         let buffs=[]
-        if(this.playerData.crit==1||this.critBuff>0||this.critTick>0){
+        if(this.playerData.crit==1||this.critBuff>0||this.critBuffTick>0||this.critTick>0){
             buffs.push([150,255,255])
         }
         if(this.defendBuff>0){
@@ -2844,6 +2845,7 @@ class player{
             this.invincible=30//this.fort?30:60
         }
         this.critBuff=0
+        this.critBuffTick=0
         this.critTick=0
         this.defendBuff=0
         this.speedBuff=0
@@ -3088,7 +3090,7 @@ class player{
                 ?2/3:
                 (
                     this.rules.take45||
-                    this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982)
+                    this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982||this.subWeaponAType==1216||this.subWeaponBType==1216)
                     //this.subWeaponAType==1189||this.subWeaponBType==1189
                 )&&spec==0
                 ?0.8:
@@ -3673,6 +3675,10 @@ class player{
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+(game.preCrit?0:this.critCheck()),0,1)
                         if(!crit&&this.critTick>0){
                             this.critTick--
+                            crit=1
+                        }
+                        if(!crit&&this.critBuffTick>0){
+                            this.critBuffTick=0
                             crit=1
                         }
                         if(game.preCrit){
@@ -8737,6 +8743,10 @@ class player{
                             }
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],444,(lsin(this.direction.main)<0?-90:90),this.id,0,6,crit,this.index))
                         break
+                        case 1216:
+                            this.velocity.x+=2.5*(lsin(this.direction.main)<0?-1:1)
+                            this.critBuffTick=max(this.critBuffTick,30)
+                        break
 
                         //mark
                     }
@@ -9672,6 +9682,14 @@ class player{
                     if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
+                    if(this.rules.class&&this.subWeaponBType==1216&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
+                        this.subWeaponB.ammo--
+                        this.subWeaponB.uses--
+                        if(this.subWeaponB.uses<=0&&this.id>0&&!game.randomizer){
+                            this.weaponType=-1
+                            this.updateWeaponRules()
+                        }
+                    }
                     if(this.playerData.name=='PlayerEngineerW'){
                         if((
                             this.subWeaponBData.name.includes('Build')&&this.subWeaponB.ammo>0||
@@ -9749,6 +9767,13 @@ class player{
                         }
                     }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
+                    }else if(this.rules.class&&this.subWeaponAType==1216&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
+                        this.subWeaponA.ammo--
+                        this.subWeaponA.uses--
+                        if(this.subWeaponA.uses<=0&&this.id>0&&!game.randomizer){
+                            this.weaponType=-1
+                            this.updateWeaponRules()
+                        }
                     }else if(this.rules.dronerLine){
                         if(this.subPlayerAData.name!='PlayerDirector'&&this.subPlayerAData.name!='PlayerSwarmer'&&this.subPlayerAData.name!='PlayerMotorizer'&&this.subPlayerAData.name!='PlayerHeavyDirector'&&this.subPlayerAData.name!='PlayerHeavySwarmer'&&this.subPlayerAData.name!='PlayerLightSkysweeper'&&this.subPlayerAData.name!='PlayerHeavyMotorizer'&&this.subPlayerAData.name!='PlayerOrbital'){
                             if(
@@ -10013,6 +10038,14 @@ class player{
                     if(this.rules.class&&this.subWeaponBType==982&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
                         this.subWeaponB.ammo--
                     }
+                    if(this.rules.class&&this.subWeaponBType==1216&&this.subWeaponB.ammo>0&&this.subWeaponB.ammo<this.subWeaponBData.ammo&&this.subWeaponB.ammo<this.subWeaponB.uses&&!this.subWeaponB.reloading){
+                        this.subWeaponB.ammo--
+                        this.subWeaponB.uses--
+                        if(this.subWeaponB.uses<=0&&this.id>0&&!game.randomizer){
+                            this.weaponType=-1
+                            this.updateWeaponRules()
+                        }
+                    }
                     if(this.rules.class&&this.subWeaponAType==1024){
                         if(inputSet[3]){
                             if(this.subWeaponA.reload<=0){
@@ -10080,6 +10113,13 @@ class player{
                         }
                     }else if(this.rules.class&&this.subWeaponAType==982&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
                         this.subWeaponA.ammo--
+                    }else if(this.rules.class&&this.subWeaponAType==1216&&this.subWeaponA.ammo>0&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&this.subWeaponA.ammo<this.subWeaponA.uses&&!this.subWeaponA.reloading){
+                        this.subWeaponA.ammo--
+                        this.subWeaponA.uses--
+                        if(this.subWeaponA.uses<=0&&this.id>0&&!game.randomizer){
+                            this.weaponType=-1
+                            this.updateWeaponRules()
+                        }
                     }
                     if(inputSet[3]){
                         this.assort.firingTime++
@@ -13732,6 +13772,9 @@ class player{
         }
         if(this.critBuff>0){
             this.critBuff--
+        }
+        if(this.critBuffTick>0){
+            this.critBuffTick--
         }
         if(this.defendBuff>0){
             this.defendBuff--

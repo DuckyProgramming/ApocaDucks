@@ -238,6 +238,7 @@ class projectile{
 							[this.position.x,this.position.y]
 						]
 						this.attack=0
+						this.attackTimer=0
 					break
 					case 113: case 114: case 115: case 116: case 117:
 					case 146: case 156: case 181: case 205: case 206:
@@ -9842,7 +9843,8 @@ class projectile{
 						entities.players[b].takeDamage(this.damage*(1-c/radius)*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
 						if(!entities.players[b].immune()&&c<radius*0.8){
-							entities.players[b].dizzyTime=max(entities.players[b].dizzyTime+360*(1-c/radius*1.25),720)
+							//entities.players[b].dizzyTime=max(entities.players[b].dizzyTime+360*(1-c/radius*1.25),720)
+							entities.players[b].dizzyTime=min(entities.players[b].dizzyTime+max(0,360*(1-c/radius*1.25)),720)
 						}
 					}
 				}
@@ -10742,6 +10744,13 @@ class projectile{
 								if(entities.players[a].index==this.index&&!entities.players[a].sidekick){
 									this.goal=a
 								}
+							}
+						}
+						if(this.type==404){
+							if(this.attack!=0){
+								this.attackTimer++
+							}else{
+								this.attackTimer=0
 							}
 						}
 						if(this.type==404&&this.bumpTime>0){
@@ -13293,10 +13302,10 @@ class projectile{
 				}
 			break
 			case 404:
-				if(this.attack!=0){
+				if(this.attack!=0&&this.attackTimer>10){
 					//target.takeDamage(this.damage*6)
 					target.takeDamage(this.damage*8)
-					target.dizzyTime=max(target.dizzyTime,300)
+					//target.dizzyTime=max(target.dizzyTime,300)
 					this.attack=0
 				}else{
 					target.takeDamage(this.damage)

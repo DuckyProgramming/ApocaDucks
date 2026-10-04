@@ -14977,6 +14977,7 @@ class wall{
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.01
                                                 c.velocity.y=max(c.velocity.y,0)
                                                 c.lastingForce[1]=0
+                                                c.jump.active=0
                                                 switch(this.type){
                                                     case 15:
                                                         if(this.reload<=0&&!c.auto&&(c.id>0||game.attacker||game.level==17||game.level==18)&&c.life>0&&c.attacking){
@@ -16450,11 +16451,13 @@ class wall{
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             c.velocity.y=-c.velocity.x*min(3,this.height/this.width)
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
+                                            c.jump.active=0
                                         break
                                         case 7:
                                             c.position.y=this.position.y+this.height/2+c.height/2+0.01-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             c.velocity.y=c.velocity.x*min(3,this.height/this.width)
                                             c.velocity.x*=1-this.height/this.width*0.1*(c.playerData.name=='PlayerAuger'?0.2:1)
+                                            c.jump.active=0
                                         break
                                         case 8: case 10:
                                             c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.01
