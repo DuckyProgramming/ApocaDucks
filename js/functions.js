@@ -12062,29 +12062,29 @@ function outKD(bypass){
 
     ${player.stats.idealKills} Kills
     ${player.stats.deaths} Deaths   
-    ${round(player.stats.idealKills/player.stats.deaths*100)/100} K/D
+    ${player.stats.deaths==0?`Infinity`:round(player.stats.idealKills/player.stats.deaths*100)/100} K/D
 
     ${round(player.stats.damage)} Damage Dealt
-    ${round(player.stats.taken)} Damage Taken
-    ${round(player.stats.damage/player.stats.taken*100)/100} D/T
+    ${round(player.stats.taken)} Damage Taken${round(player.stats.taken)>0?` (${round(player.stats.selfTaken)} Self)`:``}
+    ${player.stats.taken==0?`Infinity`:round(player.stats.damage/player.stats.taken*100)/100} D/T
 
     ${data[0].name}:
     ${round(player.stats.subIdealKills[0])} Kills
     ${round(player.stats.subDamage[0])} Damage Dealt
-    ${round(player.stats.subTaken[0])} Damage Taken
-    ${round(player.stats.subDamage[0]/player.stats.subTaken[0]*100)/100} D/T
+    ${round(player.stats.subTaken[0])} Damage Taken${round(player.stats.subTaken[0])>0?` (${round(player.stats.subSelfTaken[0])} Self)`:``}
+    ${player.stats.subTaken[0]==0?`Infinity`:round(player.stats.subDamage[0]/player.stats.subTaken[0]*100)/100} D/T
 
     ${data[1].name}:
     ${round(player.stats.subIdealKills[1])} Kills
     ${round(player.stats.subDamage[1])} Damage Dealt
-    ${round(player.stats.subTaken[1])} Damage Taken
-    ${round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()?`
+    ${round(player.stats.subTaken[1])} Damage Taken${round(player.stats.subTaken[1])>0?` (${round(player.stats.subSelfTaken[1])} Self)`:``}
+    ${player.stats.subTaken[1]==0?`Infinity`:round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()?`
 
     ${data[2].name}:
     ${round(player.stats.subIdealKills[2])} Kills
     ${round(player.stats.subDamage[2])} Damage Dealt
-    ${round(player.stats.subTaken[2])} Damage Taken
-    ${round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:player.rules.insurgentLine?`
+    ${round(player.stats.subTaken[2])} Damage Taken${round(player.stats.subTaken[2])>0?` (${round(player.stats.subSelfTaken[2])} Self)`:``}
+    ${player.stats.subTaken[2]==0?`Infinity`:round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:player.rules.insurgentLine?`
 
     ${data[2].name}:
     ${round(player.stats.subIdealKills[2])} Kills

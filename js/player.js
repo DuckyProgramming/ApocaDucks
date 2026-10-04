@@ -45,7 +45,7 @@ class player{
             kills:0,subKills:[0,0,0],
             idealKills:0,subIdealKills:[0,0,0],
             damage:0,subDamage:[0,0,0],lifeDamage:0,
-            taken:0,subTaken:[0,0,0],
+            taken:0,subTaken:[0,0,0],selfTaken:0,subSelfTaken:[0,0,0],
             killStreak:0,deaths:0,
             bust:0,bustCount:0,
             usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0
@@ -10369,8 +10369,14 @@ class player{
         if(this.record.life<this.life){
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
+            let hitself=this.die.projectile!=-1&&this.die.projectile!=undefined&&this.die.projectile.index==this.index
+            let subId=hitself?this.die.projectile.subWeapon:this.subWeaponA.id
             this.stats.taken+=this.record.life-max(0,this.life)
-            this.stats.subTaken[this.subWeaponA.id]+=this.record.life-max(0,this.life)
+            this.stats.subTaken[subId]+=this.record.life-max(0,this.life)
+            if(hitself){
+                this.stats.selfTaken+=this.record.life-max(0,this.life)
+                this.stats.subSelfTaken[subId]+=this.record.life-max(0,this.life)
+            }
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index==this.die.killer&&(entities.players[a].id!=this.id||this.fort)){
                     entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
@@ -10558,6 +10564,7 @@ class player{
                             entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-12,this.id,0,[],false,findName(name,types.player),this.index))
                             entities.players[entities.players.length-1].sidekick=true
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
+                            entities.players[entities.players.length-1].weapon.cooldown+=30
                         break
                         case 1170:
                             //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,495,random(90,270),this.id,480,60,crit,this.index))
