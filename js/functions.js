@@ -28,7 +28,8 @@ function setupRules(){
                 a==490||a==493||a==494||a==495||a==496||
                 a==498||a==500||a==501||a==505||a==506||
                 a==507||a==508||a==509||a==510||a==512||
-                a==516||a==518||a==519||a==520||a==521,
+                a==516||a==518||a==519||a==520||a==521||
+                a==523,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508||a==521,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -42,7 +43,7 @@ function setupRules(){
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
                 a==498||a==505||a==506||a==507||a==510||
-                a==516||a==521,
+                a==516||a==521||a==523,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -104,7 +105,7 @@ function setupRules(){
 				a==88||a==94||a==167||a==175||a==186||
 				a==203||a==251||a==322||a==332||a==361||
 				a==407||a==409||a==421||a==460||a==482||
-                a==516,
+                a==516||a==523,
 			hitter:a!=85&&a!=156&&a!=190&&a!=191&&a!=214&&
 				a!=255&&a!=256&&a!=257&&a!=265&&a!=300&&
 				a!=205&&a!=206&&a!=221&&a!=228&&a!=250&&
@@ -11153,7 +11154,7 @@ Standard Errors: ${se[index]} vs ${se[index2]}
                         for(let a=0,la=level.length;a<la;a++){
                             for(let b=0,lb=level[a].length;b<lb;b++){
                                 if(level[a][b]==key){
-                                    if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&(game.level==8||game.level==136)||game.level==16){
+                                    if((a>5||floor(random(0,2))==0&&types.player[findName(game.stack[0][1],types.player)].sizeBuff>=1.5)&&game.stack[0][0]>=6&&(game.level==8||game.level==136)||game.level==16||game.level==136&&game.stack[0][1].includes('Boss')){
                                         deployer.spawn.push(new player(layer,game.tileset[0]/2+b*game.tileset[0]+random(-20,20),game.tileset[1]/2+a*game.tileset[1],0,0,[],true,findName(game.stack[0][1],types.player),game.index))
                                         game.index++
                                         game.spawnIndex++
@@ -11991,7 +11992,7 @@ function setupLists(){
             [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaber`,`PlayerWarningLauncherW`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncherC`,`PlayerStickyJumperC`,`PlayerStickySniperC`,`PlayerStickywheelW`,`PlayerTickybombLauncherC`,`PlayerDonker`],
         ],[
-            [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonW`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
+            [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonQ`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
         ],[
             //[`PlayerShotgun`,`PlayerRepairGun`,`PlayerPomsonC`,`PlayerJusticeShotgunC`,`PlayerTapperC`,`PlayerPistolC`,`PlayerRevolver`,`PlayerBlowtorch`],
@@ -12169,6 +12170,18 @@ function totalHealth(){
 function pl(id){
     return entities.players[id]
 }
+function opd(){
+    entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
+    entities.walls[1][29].weapon=findName('PlayerChargeC',types.player)
+    entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
+    entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
+    entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
+    entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
+
+    entities.walls[1][41].weapon=findName('PlayerMortarRifle',types.player)
+    entities.walls[1][62].weapon=findName('PlayerSmokeBomb',types.player)
+    entities.walls[1][83].weapon=findName('PlayerRazor',types.player)
+}
 /*
 let newer=levels[133].map(
     set=>
@@ -12185,13 +12198,6 @@ entities.walls[1][29].weapon=findName('PlayerGrenadierC',types.player)
 entities.walls[1][28].weapon=findName('PlayerRollerLauncher',types.player)
 entities.walls[1][71].weapon=findName('PlayerStickySweeper',types.player)
 entities.walls[1][70].weapon=findName('PlayerStickySniper',types.player)
-
-entities.walls[1][29].weapon=findName('PlayerCharge',types.player)
-entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
-entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
-entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
-entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
-entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
 
 entities.walls[1][29].weapon=findName('PlayerClassicSheller',types.player)
 

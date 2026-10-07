@@ -743,7 +743,8 @@ class projectile{
 											c.velocity.x*=0.5
 											c.knockback(this.speed*20,this.direction,1,1)
 											c.knockbackForce(this.speed*3,this.direction,1,1)
-											c.stuckTime=max(c.stuckTime,15)
+											//c.stuckTime=max(c.stuckTime,15)
+											c.stuckTime=max(c.stuckTime,10)
 											this.remove=true
 										}else if(this.type==365&&!c.fort){
 											entities.players[b].dizzyTime=max(entities.players[b].dizzyTime,25)
@@ -1130,7 +1131,7 @@ class projectile{
 				this.position.y-=this.speed*lcos(this.direction)
 				this.classification.bullet=true
 			break
-			case 482: case 516:
+			case 482: case 516: case 523:
 				this.speed=8
 				this.time=time
 				this.rules.fast=true
@@ -7882,7 +7883,7 @@ class projectile{
 					layer.line(0,-this.extent-this.deviation,0,-this.extent-this.deviation*2)
 				}
 			break
-			case 482: case 516:
+			case 482: case 516: case 523:
 				layer.fill(160-this.crit*160,40+this.crit*200,240,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(160-this.crit*160,40+this.crit*120,160+this.crit*80,this.fade)
@@ -9974,7 +9975,7 @@ class projectile{
 					}
 				}
 			break
-			case 516:
+			case 516: case 523:
 				radius=100
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -10168,7 +10169,7 @@ class projectile{
 				case 414: case 418: case 419: case 420: case 421: case 422: case 423: case 428: case 429: case 430:
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
-				case 482: case 492: case 497: case 503: case 507: case 511: case 516: case 517:
+				case 482: case 492: case 497: case 503: case 507: case 511: case 516: case 517: case 523:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -13430,7 +13431,7 @@ class projectile{
 					}else if(this.type==474||this.type==493){
 						//this said 477 at some point but that was invalid, idk what it was originally meant for
 						target.takeDamage(this.damage*0.25)
-					}else if(this.type==516){
+					}else if(this.type==516||this.type==523){
 						//target.takeDamage(this.damage*0.2)
 						target.takeDamage(this.damage*0.2*constrain(1.1-this.timer/this.base.time*8,0.6,1))
 					}
@@ -13833,6 +13834,10 @@ class projectile{
 			case 497:
 				target.knockback(this.speed*6,this.direction,1,1)
 				target.knockbackForce(this.speed*3,this.direction,1,1)
+			break
+			case 523:
+				target.knockback(this.speed*4,this.direction,1,1)
+				target.knockbackForce(this.speed*0.5,this.direction,1,1)
 			break
 		}
 		if(!target.immune()){

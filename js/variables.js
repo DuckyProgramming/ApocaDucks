@@ -8423,6 +8423,9 @@ types={
     },{
       name:'PlayerChargeC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1216,
+    },{
+      name:'PlayerAnticannonQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1217,
     },
 
     //mark c
@@ -9175,10 +9178,10 @@ types={
       name:'BigFastHyperPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'FastPistol',sizeBuff:1,lifebuff:0.5,speedBuff:1.5,
+      name:'FastPistol',sizeBuff:1,lifeBuff:0.5,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'CritFastPistol',sizeBuff:1,lifebuff:0.5,speedBuff:1.5,
+      name:'CritFastPistol',sizeBuff:1,lifeBuff:0.5,speedBuff:1.5,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'BigCritFastPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.75,
@@ -9988,16 +9991,16 @@ types={
       name:'BigBarrageRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:67,
     },{
-      name:'TinyCritFastLongPunch',sizeBuff:0.8,lifebuff:0.5,speedBuff:1.8,
+      name:'TinyCritFastLongPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1.8,
       damageBuff:1,reloadBuff:1,crit:1,weapon:30,
     },{
-      name:'TinyCritPistolStop',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyCritPistolStop',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:68,
     },{
-      name:'TinyPistolStop',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPistolStop',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:68,
     },{
-      name:'TinyPullPistol',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPullPistol',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:24,
     },{
       name:'CritDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -10081,22 +10084,22 @@ types={
       name:'BigBarrageRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:77,
     },{
-      name:'TinyPistolStopVulnerable',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPistolStopVulnerable',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:78,
     },{
-      name:'TinyPistolVulnerable',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPistolVulnerable',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
     },{
-      name:'TinyPistol',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPistol',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'TinySpy',sizeBuff:0.8,lifebuff:0.5,speedBuff:1,
+      name:'TinySpy',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'TinyFlamethrower',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyFlamethrower',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
-      name:'TinyCritPistolStopVulnerable',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyCritPistolStopVulnerable',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:78,
     },{
       name:'HeavySpreadSniperHealSelf',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
@@ -10111,7 +10114,7 @@ types={
       name:'BigCritFlameBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:80,
     },{
-      name:'TinyFlameBaller',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyFlameBaller',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:80,
     },{
       name:'FlameBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -10546,7 +10549,7 @@ types={
       name:'SlicerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.4,
       damageBuff:1.5,reloadBuff:1.5,crit:1,weapon:137,
     },{
-      name:'TinyShotgun',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyShotgun',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'BigLongPushFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -10825,10 +10828,10 @@ types={
       name:'Level3SentryCarrier',sizeBuff:1,lifeBuff:1,speedBuff:0.4,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'TinyLevel3SentryCarrier',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.6,
+      name:'TinyLevel3SentryCarrier',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
-      name:'TinyPistolShield',sizeBuff:0.8,lifebuff:0.5,speedBuff:0.9,
+      name:'TinyPistolShield',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'BigPistolShield',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -10989,6 +10992,9 @@ types={
     },{
       name:'RocketLauncherBuffVault',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'MainBattleBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:1129,
     },
 
     //mark p
@@ -21384,6 +21390,15 @@ types={
 			reload:1,
 			speed:0.95,
       uses:240,
+		},{
+			name:'Anticannon Q',
+			ammo:6,
+			damage:250,
+			cooldown:45,
+			stop:144,
+			reload:36,
+			speed:0.8,
+      uses:24,
 		},
 
     /*{
