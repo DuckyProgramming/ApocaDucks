@@ -1197,7 +1197,7 @@ class projectile{
 		if(this.crit==1){
 			this.damage*=2.5
 		}
-		if(this.classification.drone){
+		if(this.classification.drone||this.type==499){
 			this.check=[]
 		}
     }
@@ -12898,7 +12898,7 @@ class projectile{
 				this.height/=36
 			break
 		}
-		if(this.classification.drone&&this.timer%30==0){
+		if((this.classification.drone||this.type==499)&&this.timer%30==0){
 			let rad=this.type==404?5:10
 			if(
 				this.check.length>=4&&
@@ -13613,10 +13613,12 @@ class projectile{
 				//target.stuckTime=max(target.stuckTime,15)
 			break
 			case 420:
-				for(let d=0,ld=entities.players.length;d<ld;d++){
-					if(entities.players[d].index==this.index){
-						entities.players[d].position.x=target.position.x
-						entities.players[d].position.y=target.position.y+target.height/2-entities.players[d].height/2
+				if(target.life<=0){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].position.x=target.position.x
+							entities.players[d].position.y=target.position.y+target.height/2-entities.players[d].height/2
+						}
 					}
 				}
 			break
@@ -13708,9 +13710,11 @@ class projectile{
 				}
 			break
 			case 467:
-				for(let d=0,ld=entities.players.length;d<ld;d++){
-					if(entities.players[d].index==this.index&&!entities.players[d].inspect.includes(target.index)){
-						entities.players[d].inspect.push(target.index)
+				if(target.life>0){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index&&!entities.players[d].inspect.includes(target.index)){
+							entities.players[d].inspect.push(target.index)
+						}
 					}
 				}
 			break

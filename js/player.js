@@ -143,7 +143,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,
+            stickyJump:false,buildMash:0,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -2637,8 +2637,8 @@ class player{
     }
     swap3(){
         return this.playerData.name=='PlayerEngineerC3'&&this.effectiveId()<=game.gaming||
-            this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')||
-            this.playerData.name=='PlayerEngineerW'
+            this.rules.classW&&this.effectiveId()<=game.gaming&&(this.subPlayerAData.name=='PlayerDeployerLevel'||this.subPlayerBData.name=='PlayerDeployerLevel'||this.subPlayerCData.name=='PlayerDeployerLevel')/*||
+            this.playerData.name=='PlayerEngineerW'*/
     }
     swapSubWeapons(){
         if(this.swap3()){
@@ -3686,7 +3686,7 @@ class player{
                         }
                     }
                     switch(weaponType){
-                        case 0: case 177: case 257: case 578: case 582: case 751: case 1100:
+                        case 0: case 177: case 257: case 578: case 582: case 751: case 1100: case 1218:
                             for(let a=0,la=12;a<la;a++){
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],1,(lsin(this.direction.main)<0?-90:90)+random(-11.25,11.25),this.id,weaponData.damage*damageBuff,15,crit,this.index))
                             }
@@ -9693,14 +9693,24 @@ class player{
                             this.updateWeaponRules()
                         }
                     }
+                    if(this.rules.class&&this.subWeaponAType==1218&&this.life<=this.base.life*0.5){
+                        this.speedBuff=max(this.speedBuff,15)
+                    }
                     if(this.playerData.name=='PlayerEngineerW'){
-                        if((
+                        /*if((
                             this.subWeaponBData.name.includes('Build')&&this.subWeaponB.ammo>0||
                             this.subWeaponCData.name.includes('Build')&&this.subWeaponC.ammo>0
                         )&&floor(random(0,15))==0){
                             this.swapSubWeapons()
                         }else if(floor(random(0,120))==0&&this.subWeaponAData.name.includes('Build')&&this.subWeaponA.ammo>0){
                             this.attack(1)
+                        }*/
+                        if(this.subWeaponC.ammo>0){
+                            this.attack(3)
+                            if(this.subWeaponC.uses<=0&&this.id>0&&!game.randomizer){
+                                this.weaponType=-1
+                                this.updateWeaponRules()
+                            }
                         }
                     }
                     if(
@@ -10001,7 +10011,17 @@ class player{
                         this.subWeaponA.cooldown=hold
                     }
                     if(this.rules.class){
-                        this.swapSubWeapons()
+                        if(this.playerData.name=='PlayerEngineerW'&&this.assort.buildMash>0&&this.subWeaponC.ammo>0){
+                            this.assort.buildMash=0
+                            this.attack(3)
+                            if(this.subWeaponC.uses<=0&&this.id>0&&!game.randomizer){
+                                this.weaponType=-1
+                                this.updateWeaponRules()
+                            }
+                        }else{
+                            this.swapSubWeapons()
+                            this.assort.buildMash=10
+                        }
                     }
                     if(this.playerData.name=='PlayerUltraviolet'&&this.assort.ultraviolet==0){
                         let crit=constrain(this.playerData.crit+(this.critBuff>0?1:0)+this.critCheck(),0,1)
@@ -10048,6 +10068,9 @@ class player{
                             this.weaponType=-1
                             this.updateWeaponRules()
                         }
+                    }
+                    if(this.rules.class&&this.subWeaponAType==1218&&this.life<=this.base.life*0.5){
+                        this.speedBuff=max(this.speedBuff,15)
                     }
                     if(this.rules.class&&this.subWeaponAType==1024){
                         if(inputSet[3]){
@@ -10526,6 +10549,9 @@ class player{
         }
         if(this.firearc[1]>0){
             this.firearc[1]--
+        }
+        if(this.assort.buildMash>0){
+            this.assort.buildMash--
         }
         if(this.dead&&this.life>0){
             this.life=0

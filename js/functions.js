@@ -11984,7 +11984,7 @@ function setupLists(){
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
             [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapePlan`],
+            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapeShotgun`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
@@ -12177,6 +12177,13 @@ function opd(){
     entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
     entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
     entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
+
+    entities.walls[1][38].weapon=findName('PlayerTaggerC',types.player)
+    entities.walls[1][39].weapon=findName('PlayerSwitcher',types.player)
+    entities.walls[1][59].weapon=findName('PlayerKnife',types.player)
+    entities.walls[1][60].weapon=findName('PlayerTeleportKnife',types.player)
+    entities.walls[1][80].weapon=findName('PlayerInvisWatch',types.player)
+    entities.walls[1][81].weapon=findName('PlayerDeadRinger',types.player)
 
     entities.walls[1][41].weapon=findName('PlayerMortarRifle',types.player)
     entities.walls[1][62].weapon=findName('PlayerSmokeBomb',types.player)

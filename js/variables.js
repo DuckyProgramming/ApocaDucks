@@ -8426,6 +8426,9 @@ types={
     },{
       name:'PlayerAnticannonQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1217,
+    },{
+      name:'PlayerEscapeShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1218,
     },
 
     //mark c
@@ -20348,13 +20351,13 @@ types={
       uses:10,
 		},{
 			name:'Wrench',
-			ammo:12,
+			ammo:10,
 			damage:120,
 			cooldown:36,
 			stop:60,
-			reload:20,
+			reload:10,
 			speed:1.4,
-      uses:48,
+      uses:40,
 		},{
 			name:'Dispenser WC',
 			ammo:8,
@@ -21399,6 +21402,15 @@ types={
 			reload:36,
 			speed:0.8,
       uses:24,
+		},{
+			name:'Escape Shotgun',
+			ammo:1,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:10,
 		},
 
     /*{
