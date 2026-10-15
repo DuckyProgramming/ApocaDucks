@@ -12043,6 +12043,9 @@ function qa(name){
 function outPlayers(){
     entities.players.forEach(player=>print(`${player.playerData.name}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage`))
 }
+function outPlayersKD(){
+    entities.players.forEach(player=>print(`${player.playerData.name}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage, ${player.stats.idealKills} Kills, ${player.stats.deaths} Deaths`))
+}
 function outPlayersSub(){
     entities.players.forEach(player=>{if(player.rules.classW){print(`${player.playerData.name}: (${player.subWeaponAData.name}: ${round(player.stats.subDamage[player.subWeaponA.id])} Damage, ${player.subWeaponBData.name}: ${round(player.stats.subDamage[player.subWeaponB.id])} Damage)`)}})
 }
@@ -12185,9 +12188,21 @@ function opd(){
     entities.walls[1][80].weapon=findName('PlayerInvisWatch',types.player)
     entities.walls[1][81].weapon=findName('PlayerDeadRinger',types.player)
 
-    entities.walls[1][41].weapon=findName('PlayerMortarRifle',types.player)
-    entities.walls[1][62].weapon=findName('PlayerSmokeBomb',types.player)
-    entities.walls[1][83].weapon=findName('PlayerRazor',types.player)
+    entities.walls[1][40].weapon=findName('PlayerMortarRifle',types.player)
+    entities.walls[1][41].weapon=findName('PlayerBayonetRifle',types.player)
+    entities.walls[1][61].weapon=findName('PlayerMolotov',types.player)
+    entities.walls[1][62].weapon=findName('PlayerAdrenalineC',types.player)
+    entities.walls[1][82].weapon=findName('PlayerRazor',types.player)
+    entities.walls[1][83].weapon=findName('PlayerChlorineBomb',types.player)
+}
+function opt(){
+    entities.walls[1][70].weapon=findName('PlayerStickyJumperC',types.player)
+    entities.walls[1][49].weapon=findName('PlayerCaberC',types.player)
+    entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
+    entities.walls[1][28].weapon=findName('PlayerGrenadierC',types.player)
+
+    entities.walls[1][43].weapon=findName('PlayerPopperScattergunC',types.player)
+    entities.walls[1][64].weapon=findName('PlayerBaseball',types.player)
 }
 /*
 let newer=levels[133].map(

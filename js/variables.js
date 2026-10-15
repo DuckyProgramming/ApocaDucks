@@ -20038,7 +20038,8 @@ types={
 			cooldown:30,
 			stop:60,
 			reload:20,
-			speed:1.4,
+			//speed:1.4,
+      speed:1.3,
       uses:12,
 		},{
 			name:'Droner W',
