@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     if(false){
-        duel={trigger:true,numKey:[3,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
+        duel={trigger:true,numKey:[1,1],sets:[[0,1],[0,0]],experiment:[-1,[0,-1]]}
 
         game.classWeapon=true
         //game.pane=false
@@ -15,9 +15,9 @@ function setup(){
         //game.noVisuals=true
         //game.noEnemy=true
 
-        game.players=1
-        game.gaming=1
-        game.level=117
+        game.players=2
+        game.gaming=2
+        game.level=136
         /*
         8 - normandy
         22 - steel ad

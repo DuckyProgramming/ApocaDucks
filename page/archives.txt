@@ -4,8 +4,12 @@
 1216 - charge c, 982
 1217 - anticannon q, 1201
 1218 - escape shotgun, 1158
+1219 - donker c, 919
+1220 - parachute c, 748, 728
+1221 - blast launcher c, 773
 
 523 - anticannon q, 516
+524 - blast rocket c, 351
 
 
 

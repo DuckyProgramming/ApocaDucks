@@ -29,7 +29,7 @@ function setupRules(){
                 a==498||a==500||a==501||a==505||a==506||
                 a==507||a==508||a==509||a==510||a==512||
                 a==516||a==518||a==519||a==520||a==521||
-                a==523,
+                a==523||a==524,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508||a==521,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -43,7 +43,7 @@ function setupRules(){
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
                 a==498||a==505||a==506||a==507||a==510||
-                a==516||a==521||a==523,
+                a==516||a==521||a==523||a==524,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -161,7 +161,7 @@ function setupRules(){
                 a==489||a==490||a==493||a==495||a==500||
                 a==501||a==505||a==506||a==507||a==508||
                 a==509||a==512||a==518||a==519||a==520||
-                a==521,
+                a==521||a==524,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -11983,14 +11983,14 @@ function setupLists(){
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergunC`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerTunnelScattergun`,`PlayerPenaltyScattergunQ`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncher`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerShotgun`,`PlayerLightParachutist`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapeShotgun`],
+            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncherC`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncher`,`PlayerBlackBox`,`PlayerShoulderRocket`],
+            [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerElectricCharge`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapeShotgun`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaber`,`PlayerWarningLauncherW`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
-            [`PlayerStickybombLauncherC`,`PlayerStickyJumperC`,`PlayerStickySniperC`,`PlayerStickywheelW`,`PlayerTickybombLauncherC`,`PlayerDonker`],
+            [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaberC`,`PlayerWarningLauncherW`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
+            [`PlayerStickybombLauncherC`,`PlayerStickyJumperC`,`PlayerStickySniperC`,`PlayerStickywheelW`,`PlayerTickybombLauncherC`,`PlayerDonkerC`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonQ`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],
             [`PlayerShotgun`,`PlayerHealthPack`,`PlayerPistolWhip`,`PlayerIceCreamC`,`PlayerDefensePack`,`PlayerChainsawC`,`PlayerReserveShotgun`,`PlayerSpeedPack`],
@@ -12011,7 +12011,7 @@ function setupLists(){
             [`PlayerInvisWatch`,`PlayerDeadRinger`,`PlayerDecoyWatch`,`PlayerSurvivalWatch`],
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
-            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaber`,`PlayerAdrenalineC`,`PlayerDroneW`],
+            [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaberC`,`PlayerAdrenalineC`,`PlayerDroneW`],
             [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
@@ -12040,7 +12040,7 @@ function outWeaponCodes(classC){
 function qa(name){
     entities.players[0].newWeaponSet(findName(name,types.player))
 }
-function outPlayers(){
+/*function outPlayers(){
     entities.players.forEach(player=>print(`${player.playerData.name}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage`))
 }
 function outPlayersKD(){
@@ -12048,6 +12048,15 @@ function outPlayersKD(){
 }
 function outPlayersSub(){
     entities.players.forEach(player=>{if(player.rules.classW){print(`${player.playerData.name}: (${player.subWeaponAData.name}: ${round(player.stats.subDamage[player.subWeaponA.id])} Damage, ${player.subWeaponBData.name}: ${round(player.stats.subDamage[player.subWeaponB.id])} Damage)`)}})
+}*/
+function outPlayers(){
+    entities.players.forEach(player=>print(`${player.id==0||player.fort?player.playerData.name:cutName(types.weapon[player.playerData.weapon].name)}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage`))
+}
+function outPlayersKD(){
+    entities.players.forEach(player=>print(`${player.id==0||player.fort?player.playerData.name:cutName(types.weapon[player.playerData.weapon].name)}: ${player.rules.classW?`(${player.subWeaponAData.name}, ${player.subWeaponBData.name}) `:``}${round(player.stats.damage)} Damage, ${player.stats.idealKills} Kills, ${player.stats.deaths} Deaths`))
+}
+function outPlayersSub(){
+    entities.players.forEach(player=>{if(player.rules.classW){print(`${player.id==0||player.fort?player.playerData.name:cutName(types.weapon[player.playerData.weapon].name)}: (${player.subWeaponAData.name}: ${round(player.stats.subDamage[player.subWeaponA.id])} Damage, ${player.subWeaponBData.name}: ${round(player.stats.subDamage[player.subWeaponB.id])} Damage)`)}})
 }
 function outKD(bypass){
     entities.players.forEach(player=>{
@@ -12176,7 +12185,8 @@ function pl(id){
 function opd(){
     entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
     entities.walls[1][29].weapon=findName('PlayerChargeC',types.player)
-    entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
+    //entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
+    entities.walls[1][49].weapon=findName('PlayerDaydrinkerQ',types.player)
     entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
     entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
     entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
@@ -12192,6 +12202,28 @@ function opd(){
     entities.walls[1][41].weapon=findName('PlayerBayonetRifle',types.player)
     entities.walls[1][61].weapon=findName('PlayerMolotov',types.player)
     entities.walls[1][62].weapon=findName('PlayerAdrenalineC',types.player)
+    entities.walls[1][82].weapon=findName('PlayerRazor',types.player)
+    entities.walls[1][83].weapon=findName('PlayerChlorineBomb',types.player)
+}
+function opd2(){
+    entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
+    entities.walls[1][29].weapon=findName('PlayerChargeC',types.player)
+    entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)
+    entities.walls[1][50].weapon=findName('PlayerTickybombLauncherC',types.player)
+    entities.walls[1][70].weapon=findName('PlayerStickySniperC',types.player)
+    entities.walls[1][71].weapon=findName('PlayerStickybombLauncherC',types.player)
+
+    entities.walls[1][38].weapon=findName('PlayerTaggerC',types.player)
+    entities.walls[1][39].weapon=findName('PlayerSwitcher',types.player)
+    entities.walls[1][59].weapon=findName('PlayerKnife',types.player)
+    entities.walls[1][60].weapon=findName('PlayerTeleportKnife',types.player)
+    entities.walls[1][80].weapon=findName('PlayerInvisWatch',types.player)
+    entities.walls[1][81].weapon=findName('PlayerDeadRinger',types.player)
+
+    entities.walls[1][40].weapon=findName('PlayerMortarRifle',types.player)
+    entities.walls[1][41].weapon=findName('PlayerBayonetRifle',types.player)
+    entities.walls[1][61].weapon=findName('PlayerCaberC',types.player)
+    entities.walls[1][62].weapon=findName('PlayerMolotov',types.player)
     entities.walls[1][82].weapon=findName('PlayerRazor',types.player)
     entities.walls[1][83].weapon=findName('PlayerChlorineBomb',types.player)
 }

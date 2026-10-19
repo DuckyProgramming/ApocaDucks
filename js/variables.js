@@ -8429,6 +8429,15 @@ types={
     },{
       name:'PlayerEscapeShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1218,
+    },{
+      name:'PlayerDonkerC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1219,
+    },{
+      name:'PlayerParachute',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1220,
+    },{
+      name:'PlayerBlastLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:1221,
     },
 
     //mark c
@@ -21412,6 +21421,33 @@ types={
 			reload:20,
 			speed:1.15,
       uses:10,
+		},{
+			name:'Donker C',
+			ammo:1,
+			damage:120,
+			cooldown:75,
+			stop:75,
+			reload:75,
+			speed:1.05,
+      uses:12,
+		},{
+			name:'Parachute C',
+			ammo:12,
+			damage:105,
+			cooldown:12,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:60,
+		},{
+			name:'Blast Launcher C',
+			ammo:2,
+			damage:240,
+			cooldown:24,
+			stop:96,
+			reload:32,
+			speed:0.8,
+      uses:14,
 		},
 
     /*{

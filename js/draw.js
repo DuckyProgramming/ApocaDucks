@@ -1184,14 +1184,17 @@ function mainloop(){
                         entities.players[c].subWeaponAType==1114&&entities.players[c].subWeaponA.uses>0?
                         lsin(entities.players[c].direction.back)*graphics.main[c].width*0.425*key[c]:0
                     let down=entities.players[c].weaponType==107||entities.players[c].weaponType==166||entities.players[c].weaponType==271||entities.players[c].weaponType==279||entities.players[c].weaponType==282||entities.players[c].weaponType==289||entities.players[c].weaponType==388||entities.players[c].weaponType==416||entities.players[c].weaponType==421||entities.players[c].weaponType==466||
-                        entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636
+                        entities.players[c].weaponType==486||entities.players[c].weaponType==510||entities.players[c].weaponType==636?1:
+                        /*entities.players[c].rules.class&&(
+                            entities.players[c].subWeaponAType==1220||entities.players[c].subWeaponBType==1220
+                        )?0.5:*/0
                     let center=entities.players[c]
                     let special=false
                     //special=true
                     if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
                         center=entities.players[c].getSpectate()
                         side=false
-                        down=false
+                        down=0
                     }else if(entities.players[c].weaponType==275){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
                             if(entities.projectiles[a].type==163&&entities.projectiles[a].id==entities.players[c].id){
@@ -1274,9 +1277,9 @@ function mainloop(){
                     if(game.level==7){
                         effective.push([center.position.x+side,center.position.y])
                     }else if(game.level==16){
-                        effective.push([center.position.x+side,constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                        effective.push([center.position.x+side,constrain(center.position.y+down*graphics.main[c].height*0.2*key[c],graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                     }else{
-                        effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+(down?graphics.main[c].height*0.2*key[c]:0),graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
+                        effective.push([constrain(center.position.x+side,graphics.main[c].width/2*key[c],game.edge[0]-graphics.main[c].width/2*key[c]),constrain(center.position.y+down*graphics.main[c].height*0.2*key[c],graphics.main[c].height/2*key[c],game.edge[1]-graphics.main[c].height/2*key[c])])
                     }
                 }
                 /*entities.players.forEach(player=>{
