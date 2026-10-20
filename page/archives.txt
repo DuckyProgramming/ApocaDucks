@@ -7,9 +7,11 @@
 1219 - donker c, 919
 1220 - parachute c, 748, 728
 1221 - blast launcher c, 773
+1222 - warning launcher q, 1196
 
 523 - anticannon q, 516
 524 - blast rocket c, 351
+525 - warning launcher q, 501
 
 
 

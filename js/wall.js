@@ -14163,6 +14163,18 @@ class wall{
                                     }
                                     c.velocity.x*=0.9
                                     c.velocity.y*=0.9
+                                }else if(c.type==525&&c.bounceTimer==0){
+                                    if(c.bounces==0){
+                                        c.detTime=36
+                                    }
+                                    c.bounces++
+                                    c.bounceTimer=5
+                                    c.velocity.x*=0.6
+                                    c.velocity.y*=(c.velocity.y>0?0.8:0.6)
+                                    /*if(c.bounces>=6){
+                                        c.explode()
+                                        c.active=false
+                                    }*/
                                 }
                             }
                         }

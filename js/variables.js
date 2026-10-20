@@ -8438,6 +8438,9 @@ types={
     },{
       name:'PlayerBlastLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2,reloadBuff:1,crit:0,weapon:1221,
+    },{
+      name:'PlayerWarningLauncherQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1222,
     },
 
     //mark c
@@ -21448,6 +21451,15 @@ types={
 			reload:32,
 			speed:0.8,
       uses:14,
+		},{
+			name:'Warning Launcher Q',
+			ammo:1,
+			damage:240,
+			cooldown:30,
+			stop:90,
+			reload:30,
+			speed:1.05,
+      uses:10,
 		},
 
     /*{

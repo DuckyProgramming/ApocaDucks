@@ -29,7 +29,7 @@ function setupRules(){
                 a==498||a==500||a==501||a==505||a==506||
                 a==507||a==508||a==509||a==510||a==512||
                 a==516||a==518||a==519||a==520||a==521||
-                a==523||a==524,
+                a==523||a==524||a==525,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==493||a==508||a==521,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -86,7 +86,7 @@ function setupRules(){
                 a==485||a==490||a==493||a==495||a==496||
                 a==498||a==499||a==500||a==501||a==508||
                 a==509||a==510||a==512||a==514||a==515||
-                a==518||a==519||a==520,
+                a==518||a==519||a==520||a==525,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -161,7 +161,7 @@ function setupRules(){
                 a==489||a==490||a==493||a==495||a==500||
                 a==501||a==505||a==506||a==507||a==508||
                 a==509||a==512||a==518||a==519||a==520||
-                a==521||a==524,
+                a==521||a==524||a==525,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -11989,7 +11989,7 @@ function setupLists(){
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
-            [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaberC`,`PlayerWarningLauncherW`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
+            [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaberC`,`PlayerWarningLauncherQ`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
             [`PlayerStickybombLauncherC`,`PlayerStickyJumperC`,`PlayerStickySniperC`,`PlayerStickywheelW`,`PlayerTickybombLauncherC`,`PlayerDonkerC`],
         ],[
             [`PlayerMinigunC`,`PlayerLMGC`,`PlayerPumpShotgun`,`PlayerFireworkMinigun`,`PlayerNutter`,`PlayerAnticannonQ`,`PlayerRecoilMinigun`,`PlayerShieldMinigun`],

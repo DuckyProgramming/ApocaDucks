@@ -8785,6 +8785,14 @@ class player{
                         case 1221:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],524,faced,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
+                        case 1222:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],525,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
+                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            }
+                        break
 
                         //mark
                     }
