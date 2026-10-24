@@ -10506,12 +10506,19 @@ class player{
             }
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index==this.die.killer&&(entities.players[a].id!=this.id||this.fort)){
-                    entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
-                    entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    let mult=this.fort||this.decoy||this.decoy2?0.2:this.construct?0.5:1
+                    //if(!this.decoy){
+                    entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*mult
+                    entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*mult
                     let classification=entities.players[a].life<=0&&entities.players[a].rules.insurgentLine?2:this.die.projectile.subWeapon
-                    entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult
+                    //entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    //entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    //entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
+                    //}
                     if(!game.pvp||this.id>0){
-                        entities.players[a].stats.bust+=(this.record.life-max(0,this.life))*(this.rules.tank?0.5:1)
+                        entities.players[a].stats.bust+=(this.record.life-max(0,this.life))*(this.rules.tank?0.5:1)*mult
+                        //entities.players[a].stats.bust+=(this.record.life-max(0,this.life))*(this.rules.tank?0.5:1)*(this.fort?0.2:1)
                     }
                     let bust=game.bust&&rules.bust&&!rules.dm&&!rules.teamMode&&!(game.level==55&&this.peace)&&!(game.traitor&&game.traitorKey==this.index-1)
                     let threshold=(game.pvp?[1600,1500,1400,1300,1200][game.players-1]:game.attacker?[3200,2800,2400,2000,1600][game.players-1]:[8000,6000,5000,4000,3200][game.players-1])*(game.classWeapon?1.25:1)*(game.peakWeapon?2:1)*rules.key.bustMult
@@ -14235,6 +14242,10 @@ class player{
             }else{
                 this.fade=smoothAnim(this.fade,!this.dead,0,1,5)
             }
+            if(this.decoy&&this.copy.life<=0){
+                this.life=0
+                this.collect.life=0
+            }
             if(this.dead&&this.fade<=0){
                 if(game.level==29&&this.id==0){
                     this.die.timer++
@@ -14256,6 +14267,7 @@ class player{
                 }
             }
         }else if(this.decoy2){
+            //if(this.time>300||this.copy.life<=0){
             if(this.time>300){
                 this.decoy=true
             }

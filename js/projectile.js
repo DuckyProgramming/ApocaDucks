@@ -10197,6 +10197,8 @@ class projectile{
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						entities.players[b].knockback(12*launch,dir,1,1)
 						entities.players[b].knockbackForce(3*launch,dir,1,1)
+						entities.players[b].thrown=0.1375
+						entities.players[b].stuckTime=max(entities.players[b].stuckTime,15)
 					}
 				}
 			break
@@ -11361,11 +11363,13 @@ class projectile{
 								if(shotgun(entities.players[b].subWeaponAData.name)&&entities.players[b].subWeaponA.ammo>0){
 									entities.players[b].manage[1]=true
 								}else if(
-									shotgun(entities.players[b].subWeaponBData.name)&&entities.players[b].subWeaponB.ammo>0||
-									shotgun(entities.players[b].subWeaponCData.name)&&entities.players[b].subWeaponC.ammo>0
+									shotgun(entities.players[b].subWeaponBData.name)&&entities.players[b].subWeaponB.ammo>0/*||
+									shotgun(entities.players[b].subWeaponCData.name)&&entities.players[b].subWeaponC.ammo>0*/
 								){
 									entities.players[b].swapSubWeapons()
 									entities.players[b].manage[1]=true
+								}else{
+									entities.players[b].manage[2]=true
 								}
 							}
 						}
@@ -12867,8 +12871,8 @@ class projectile{
 								if(shotgun(entities.players[b].subWeaponAData.name)&&entities.players[b].subWeaponA.ammo>0){
 									entities.players[b].manage[1]=true
 								}else if(
-									shotgun(entities.players[b].subWeaponBData.name)&&entities.players[b].subWeaponB.ammo>0||
-									shotgun(entities.players[b].subWeaponCData.name)&&entities.players[b].subWeaponC.ammo>0
+									shotgun(entities.players[b].subWeaponBData.name)&&entities.players[b].subWeaponB.ammo>0/*||
+									shotgun(entities.players[b].subWeaponCData.name)&&entities.players[b].subWeaponC.ammo>0*/
 								){
 									entities.players[b].swapSubWeapons()
 									entities.players[b].manage[1]=true
@@ -14018,8 +14022,8 @@ class projectile{
 				target.knockbackForce(this.speed*3,this.direction,1,1)
 			break
 			case 523:
-				target.knockback(this.speed*4,this.direction,1,1)
-				target.knockbackForce(this.speed*0.5,this.direction,1,1)
+				target.knockback(this.speed*4*constrain(1.2-this.timer/this.base.time*8,0.2,1),this.direction,1,1)
+				target.knockbackForce(this.speed*0.5*constrain(1.2-this.timer/this.base.time*8,0.2,1),this.direction,1,1)
 			break
 		}
 		if(!target.immune()){

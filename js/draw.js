@@ -1240,7 +1240,8 @@ function mainloop(){
                                 special=true
                             }
                         }
-                    }else if(entities.players[c].playerData.name=='PlayerInsurgentW'){
+                    //}else if(entities.players[c].playerData.name=='PlayerInsurgentW'){
+                    }else if(entities.players[c].rules.classW&&entities.players[c].disable){
                         for(let a=0,la=entities.projectiles.length;a<la;a++){
                             //if((entities.projectiles[a].type==280||entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498)&&entities.projectiles[a].id==entities.players[c].id){
                             if((entities.projectiles[a].type==316||entities.projectiles[a].type==494||entities.projectiles[a].type==498||entities.projectiles[a].type==510)&&entities.projectiles[a].index==entities.players[c].index){

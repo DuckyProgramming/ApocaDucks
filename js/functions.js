@@ -12028,6 +12028,11 @@ function setupLists(){
         listing[4].forEach(set=>pooled.push(...set[1]))
         listing[4].forEach((set,index,arr)=>arr[index][1]=pooled)
     }
+    if(game.anyEither){
+        let pooled=[]
+        listing[4].forEach(set=>pooled.push(...set[0],...set[1]))
+        listing[4].forEach((set,index,arr)=>{arr[index][0]=pooled;arr[index][1]=pooled})
+    }
 
     menu.list=[[],[],[],[],[],[]]
     for(let a=0,la=types.mission.length;a<la;a++){
