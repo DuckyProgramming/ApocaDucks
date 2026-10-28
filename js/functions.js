@@ -12188,6 +12188,13 @@ function pl(id){
     return entities.players[id]
 }
 function opd(){
+    entities.walls[1][22].weapon=findName('PlayerPenaltyScattergunQ',types.player)
+    entities.walls[1][23].weapon=findName('PlayerTunnelScattergun',types.player)
+    entities.walls[1][43].weapon=findName('PlayerPopperScattergunC',types.player)
+    entities.walls[1][44].weapon=findName('PlayerPistol',types.player)
+    entities.walls[1][64].weapon=findName('PlayerBaseball',types.player)
+    entities.walls[1][65].weapon=findName('PlayerBowlingBall',types.player)
+
     entities.walls[1][28].weapon=findName('PlayerLingererC',types.player)
     entities.walls[1][29].weapon=findName('PlayerChargeC',types.player)
     //entities.walls[1][49].weapon=findName('PlayerStairwayW',types.player)

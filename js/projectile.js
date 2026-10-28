@@ -13345,7 +13345,8 @@ class projectile{
 			break
 			case 345:
 				if(this.onTeam(target)){
-					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
+					//target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.8,max(target.life,target.base.life*1.5))
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*1.5))
 					target.critBuff=max(target.critBuff,120)
 				}else{
 					target.takeDamage(this.damage)
@@ -13400,7 +13401,8 @@ class projectile{
 			break
 			case 436:
 				if(this.onTeam(target)){
-					target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
+					//target.life=min(target.life+this.damage*(min(2,target.base.life/125))*0.9,max(target.life,target.base.life*1.75))
+					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*1.5))
 					target.hasteBuff=max(target.hasteBuff,120)
 				}else{
 					target.takeDamage(this.damage)

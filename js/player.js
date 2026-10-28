@@ -45,7 +45,7 @@ class player{
             kills:0,subKills:[0,0,0],
             idealKills:0,subIdealKills:[0,0,0],
             damage:0,subDamage:[0,0,0],lifeDamage:0,
-            taken:0,subTaken:[0,0,0],selfTaken:0,subSelfTaken:[0,0,0],
+            taken:0,subTaken:[0,0,0],lifeTaken:0,selfTaken:0,subSelfTaken:[0,0,0],
             killStreak:0,deaths:0,
             bust:0,bustCount:0,
             usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0
@@ -98,6 +98,7 @@ class player{
         this.critBuffTick=0
         this.critTick=0
         this.defendBuff=0
+        this.defendBuffTick=0
         this.speedBuff=0
         this.hasteBuff=0
         this.shieldBuff=0
@@ -880,7 +881,7 @@ class player{
         if(this.playerData.crit==1||this.critBuff>0||this.critBuffTick>0||this.critTick>0){
             buffs.push([150,255,255])
         }
-        if(this.defendBuff>0){
+        if(this.defendBuff>0||this.defendBuffTick>0){
             buffs.push([255,255,150])
         }
         if(this.speedBuff>0){
@@ -2301,6 +2302,7 @@ class player{
         if(this.playerData.name!='PlayerSpy'){
             this.setColor()
         }
+        let faced=(lsin(this.direction.main)<0?-90:90)
 		switch(this.weaponType){
             case 222:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,faced+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,5400,crit,this.index))
@@ -2862,6 +2864,7 @@ class player{
         this.critBuffTick=0
         this.critTick=0
         this.defendBuff=0
+        this.defendBuffTick=0
         this.speedBuff=0
         this.hasteBuff=0
         this.shieldBuff=0
@@ -2869,6 +2872,8 @@ class player{
         this.infoAnim.wet=0
         this.storeWeapon=false
         this.stats.lifeDamage=0
+        this.stats.lifeTaken=0
+        this.stats.lifeTime=0
         this.clean()
     }
     clean(){
@@ -3110,7 +3115,8 @@ class player{
                 ?2/3:
                 (
                     this.rules.take45||
-                    this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982||this.subWeaponAType==1216||this.subWeaponBType==1216)
+                    this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982)
+                    //this.rules.classW&&(this.subWeaponAType==982||this.subWeaponBType==982||this.subWeaponAType==1216||this.subWeaponBType==1216)
                     //this.subWeaponAType==1189||this.subWeaponBType==1189
                 )&&spec==0
                 ?0.8:
@@ -3131,7 +3137,7 @@ class player{
             let value=damage*
                 ((game.pvp?this.index+1:this.id)>game.gaming&&!game.pvp?0.8:1)*
                 (this.vulnerableTime>0?2:1)*
-                (this.defendBuff>0&&spec==0?0.5:1)*
+                ((this.defendBuff>0||this.defendBuffTick>0)&&spec==0?0.5:1)*
                 (this.disable&&!this.assort.remote&&!this.assort.missile&&this.id==0?0.25:1)*
                 charMult
             this.life-=value
@@ -3236,6 +3242,8 @@ class player{
             let pos=set[floor(random(0,set.length))]
             this.position.x=pos[0]
             this.position.y=pos[1]-this.height/2-this.width/2*pos[2]
+            this.velocity.x=0
+            this.velocity.y=0
         }
     }
     enderArena(){
@@ -3247,6 +3255,8 @@ class player{
             let pos=set[floor(random(0,set.length))]
             this.position.x=pos[0]
             this.position.y=pos[1]-this.height/2-this.width/2*pos[2]
+            this.velocity.x=0
+            this.velocity.y=0
         }
     }
     gasBurst(num,id,gasser){
@@ -3599,7 +3609,8 @@ class player{
     }
     selfDamageCheck(index){
         //return this.index==index&&this.rules.demomanLine?0.5:1
-        return this.index==index&&this.rules.demomanLine?0.75:1
+        //return this.index==index&&this.rules.demomanLine?0.75:1
+        return this.index==index&&this.rules.demomanLine?2/3:1
     }
 	attack(variant){
         let valid=true
@@ -3707,6 +3718,9 @@ class player{
                         if(!crit&&this.critBuffTick>0){
                             this.critBuffTick=0
                             crit=1
+                        }
+                        if(this.defendBuffTick>0){
+                            this.defendBuffTick=0
                         }
                         if(game.preCrit){
                             this.critTick+=this.critCheck()?1:0
@@ -8774,6 +8788,7 @@ class player{
                         case 1216:
                             this.velocity.x+=2.5*(lsin(this.direction.main)<0?-1:1)
                             this.critBuffTick=max(this.critBuffTick,30)
+                            this.defendBuffTick=max(this.defendBuffTick,30)
                         break
                         case 1217:
                             entities.projectiles.push(new projectile(this.layer,spawn[0]*0.5+this.position.x*0.5,spawn[1],523,faced+random(-0.1,0.1),this.id,weaponData.damage*damageBuff,300,crit,this.index))
@@ -10493,12 +10508,14 @@ class player{
                 this.newWeapon()
             }
         }
+        this.stats.lifeTime++
         if(this.record.life<this.life){
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
             let hitself=this.die.projectile!=-1&&this.die.projectile!=undefined&&this.die.projectile.index==this.index
             let subId=hitself?this.die.projectile.subWeapon:this.subWeaponA.id
             this.stats.taken+=this.record.life-max(0,this.life)
+            this.stats.lifeTaken+=this.record.life-max(0,this.life)
             this.stats.subTaken[subId]+=this.record.life-max(0,this.life)
             if(hitself){
                 this.stats.selfTaken+=this.record.life-max(0,this.life)
@@ -12470,14 +12487,28 @@ class player{
                 break
                 case 'RocketLauncherBuff': case 'BigRocketLauncherBuff': case 'BigCritRocketLauncherBuff': case 'BigSpamRocketLauncherBuff': case 'RocketLauncherHealSelfBuff': case 'DamageOverTimeMachineGunBuff': case 'PistolBuff': case 'TankBuff': case 'RocketLauncherStopBuff': case 'RocketLauncherBuffVault':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                         }
                     }
                 break
                 case 'RocketLauncherDefendBuff': case 'BigCritRocketLauncherDefendBuff': case 'BigRocketLauncherDefendBuff': case 'RocketLauncherHealSelfDefendBuff': case 'HeavyPunchDefendBuff': case 'EngineerDefendBuff': case 'DamageOverTimeMachineGunDefendBuff': case 'TankDefendBuff': case 'RapidRocketLauncherDefendBuff': case 'HeavyRocketLauncherDefendBuff': case 'FlamethrowerDefendBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
                         }
                     }
@@ -12954,7 +12985,14 @@ class player{
                 break
                 case 'BigRocketLauncherDoubleBuff': case 'TankDoubleBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                             entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
                         }
@@ -13169,7 +13207,14 @@ class player{
                 break
                 case 'RocketLauncherSpeedBuff': case 'BigRocketLauncherSpeedBuff': case 'TankSpeedBuff': case 'ShotgunSpeedBuff': case 'EngineerSpeedBuff': case 'BigRocketLauncherSpeedBuffTier':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
                         }
                     }
@@ -13461,6 +13506,7 @@ class player{
                 break
                 case 'TankWare':
                     if(this.time==1){
+                        let faced=(lsin(this.direction.main)<0?-90:90)
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,134,faced+180,this.id,300,5400,0,this.index))
                     }
                 break
@@ -13577,7 +13623,15 @@ class player{
                 break
                 case 'TankShieldBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<180&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            //dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<180&&
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].shieldBuff=max(entities.players[a].shieldBuff,15)
                         }
                     }
@@ -13594,7 +13648,15 @@ class player{
                 break
                 case 'TankInvisBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<180&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            //dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<180&&
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].invisBuff=max(entities.players[a].invisBuff,15)
                         }
                     }
@@ -13615,7 +13677,8 @@ class player{
                                         entities.players[b].playerData.name==`ConstructTeleporterExit`&&
                                         this.builder==entities.players[b].builder&&
                                         !entities.players[b].dead&&
-                                        entities.players[b].assort.building==0
+                                        entities.players[b].assort.building==0&&
+                                        entities.players[a].stats.lifeTime>30
                                     ){
                                         this.life=0
                                         this.dead=true
@@ -13625,6 +13688,8 @@ class player{
                                         entities.players[a].position.y=entities.players[b].previous.position.y+entities.players[b].height/2-entities.players[a].height/2-2.4*entities.players[b].assort.ramp
                                         entities.players[a].previous.position.x=entities.players[b].previous.position.x
                                         entities.players[a].previous.position.y=entities.players[b].previous.position.y+entities.players[b].height/2-entities.players[a].height/2-2.4*entities.players[b].assort.ramp
+                                        entities.players[a].velocity.x=0
+                                        entities.players[a].velocity.y=0
                                     }
                                 }
                             }
@@ -13767,7 +13832,8 @@ class player{
                                 /*(*/entities.players[a].id>0&&//!game.pvp||this.id==entities.players[a].id)&&
                                 inBoxBox({position:{x:(this.position.x/2+this.previous.position.x/2),y:(this.position.y/2+this.previous.position.y/2)},width:this.width,height:this.height},entities.players[a])&&
                                 !entities.players[a].assort.intel&&
-                                !entities.players[a].fort
+                                !entities.players[a].fort&&
+                                entities.players[a].stats.lifeTime>30
                             ){
                                 this.life=0
                                 this.dead=true
@@ -13776,6 +13842,8 @@ class player{
                                 entities.players[a].position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
                                 entities.players[a].previous.position.x=pos[0]
                                 entities.players[a].previous.position.y=pos[1]-entities.players[a].height/2-entities.players[a].width/2*pos[2]
+                                entities.players[a].velocity.x=0
+                                entities.players[a].velocity.y=0
                             }
                         }
                     }
@@ -13801,7 +13869,14 @@ class player{
                 break
                 case 'TankTripleBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                             entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
                             entities.players[a].speedBuff=max(entities.players[a].speedBuff,15)
@@ -13810,7 +13885,14 @@ class player{
                 break
                 case 'TankRotateBuff':
                     for(let a=0,la=entities.players.length;a<la;a++){
-                        if(dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&this.position.x!=entities.players[a].position.x&&!entities.players[a].dead&&!this.dead&&this.id==entities.players[a].id&&!entities.players[a].fort){
+                        if(
+                            dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<240&&
+                            //this.position.x!=entities.players[a].position.x&&
+                            this.playerData.name!=entities.players[a].playerData.name&&
+                            !entities.players[a].dead&&!this.dead&&
+                            this.id==entities.players[a].id&&
+                            !entities.players[a].fort
+                        ){
                             if(this.time%360<120){
                                 entities.players[a].critBuff=max(entities.players[a].critBuff,15)
                             }else if(this.time%360<240){
@@ -13932,6 +14014,9 @@ class player{
         }
         if(this.defendBuff>0){
             this.defendBuff--
+        }
+        if(this.defendBuffTick>0){
+            this.defendBuffTick--
         }
         if(this.speedBuff>0){
             this.speedBuff--
