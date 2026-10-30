@@ -13561,7 +13561,7 @@ class wall{
                                             }
                                         }else if(c.velocity.y<0||c.offBouncer&&c.position.y<c.previous.position.y){
                                             c.position.y=this.position.y+this.height/2+c.height/2
-                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                 c.velocity.y=0
                                             }else{
                                                 c.velocity.y*=-1
@@ -13585,7 +13585,7 @@ class wall{
                                             }
                                         }else if(c.velocity.y>0||c.offBouncer&&c.position.y>c.previous.position.y){
                                             c.position.y=this.position.y-this.height/2-c.height/2
-                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                 c.velocity.y=0
                                             }else{
                                                 c.velocity.y*=-1
@@ -13609,7 +13609,7 @@ class wall{
                                             }
                                         }else if(c.velocity.x<0||c.offBouncer&&c.position.x<c.previous.position.x){
                                             c.position.x=this.position.x+this.width/2+c.width/2
-                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                 c.velocity.x=0
                                             }else{
                                                 c.velocity.x*=-1
@@ -13633,7 +13633,7 @@ class wall{
                                             }
                                         }else if(c.velocity.x>0||c.offBouncer&&c.position.x>c.previous.position.x){
                                             c.position.x=this.position.x-this.width/2-c.width/2
-                                            if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                            if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                 c.velocity.x=0
                                             }else{
                                                 c.velocity.x*=-1
@@ -13692,7 +13692,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13754,7 +13754,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,-this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13816,7 +13816,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,-this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13883,7 +13883,7 @@ class wall{
                                                 c.velocity.y=lcos(incident*2-vecBall[0])*vecBall[1]
                                                 c.position.x+=c.velocity.x*0.1
                                                 c.position.y+=c.velocity.y*0.1
-                                                if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                                if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                                     let a=[c.velocity.x,c.velocity.y]
                                                     let b=[this.width,this.height]
                                                     let d=(a[0]*b[0]+a[1]*b[1])/(b[0]**2+b[1]**2)
@@ -13906,7 +13906,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                             incident=atan2(game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -13936,7 +13936,7 @@ class wall{
                                                     c.active=false
                                                 }
                                             }
-                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499){
+                                        }else if(c.type==457||c.type==462||c.type==485||c.type==499||c.type==528){
                                             c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                             incident=atan2(-game.tileset[0]*this.height/this.width,-game.tileset[0])
                                             vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -14175,6 +14175,19 @@ class wall{
                                         c.explode()
                                         c.active=false
                                     }*/
+                                }else if(c.type==528){
+                                    if(c.active){
+                                        c.active=false
+                                        c.explodeHalt.trigger=true
+                                        c.explodeHalt.x=c.position.x
+                                        c.explodeHalt.y=c.position.y
+                                        /*c.velocity.x=0.5
+                                        c.velocity.y=0.5*/
+                                        c.explode()
+                                    }else{
+                                        c.velocity.x*=0.9
+                                        c.velocity.y*=0.9
+                                    }
                                 }
                             }
                         }

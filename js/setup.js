@@ -94,6 +94,30 @@ function setup(){
                 game.gaming=1
                 game.level=47
             break
+            case 10:
+                //alone
+                duel.numKey=[0]
+                duel.sets=[[0,0]]
+                game.players=1
+                game.gaming=1
+                game.level=117
+            break
+            case 11:
+                //aftershock test 1
+                duel.numKey=[0,1]
+                duel.sets=[[0,0],[5,0]]
+                game.players=2
+                game.gaming=2
+                game.level=117
+            break
+            case 12:
+                //demo vs banner bot test
+                duel.numKey=[3,1]
+                duel.sets=[[0,0],[0,4]]
+                game.players=2
+                game.gaming=1
+                game.level=117
+            break
         }
         /*
         8 - normandy

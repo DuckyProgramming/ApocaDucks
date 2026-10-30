@@ -48,7 +48,9 @@ class player{
             taken:0,subTaken:[0,0,0],lifeTaken:0,selfTaken:0,subSelfTaken:[0,0,0],
             killStreak:0,deaths:0,
             bust:0,bustCount:0,
-            usurp:0,points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0
+            lifeTime:0,
+            usurp:0,
+            points:this.playerData.name.includes('Buster')?0:this.id==0?(this.playerData.lifeBuff>=25?5:this.playerData.lifeBuff>=5?2:1):0
         }
         this.invincible=0
         this.spy=false
@@ -144,7 +146,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:0,
+            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:[0,0],
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -480,19 +482,33 @@ class player{
                         }
                     }
                 }
-                layer.fill(150,this.fade*this.infoAnim.life)
-                layer.rect(0,0,30,4,2)
+                this.displayLife(layer,0,0)
                 if((this.id>0&&this.playerData.name!='PlayerSpy'||this.spy)&&!this.fort&&this.playerData.name!='FieldArmy'){
                     //let obj=this.spy?entities.players[this.copy]:this
                     let obj=this.spy?this.copy:this
                     if(!game.randomizer){
+                        //if(obj.weaponType>=0&&this.index==layer.index){
                         if(obj.weaponType>=0){
                             if(obj.rules.class){
                                 if(obj.subWeaponAType==1224){
                                     layer.fill(150,obj.fade)
                                     layer.rect(0,-14,30,4,2)
-                                    layer.fill(200,obj.fade)
-                                    layer.rect(-15+15*constrain(obj.assort.banner/800,0,1),-14,30*constrain(obj.assort.banner/800,0,1),4,2)
+                                    if(obj.assort.banner>=1200||obj.assort.bannerActive[0]>0){
+                                        layer.fill(225+lsin(this.time*15)*25,225+lsin(this.time*15)*25,175-lsin(this.time*15)*25,obj.fade)
+                                    }else{
+                                        layer.fill(200,obj.fade)
+                                    }
+                                    layer.rect(-15+15*constrain(obj.assort.banner/1200,0,1),-14,30*constrain(obj.assort.banner/1200,0,1),4,2)
+                                    this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
+                                }else if(obj.subWeaponAType==1225){
+                                    layer.fill(150,obj.fade)
+                                    layer.rect(0,-14,30,4,2)
+                                    if(obj.assort.banner>=1200||obj.assort.bannerActive[0]>0){
+                                        layer.fill(175-lsin(this.time*15)*25,225+lsin(this.time*15)*25,225+lsin(this.time*15)*25,obj.fade)
+                                    }else{
+                                        layer.fill(200,obj.fade)
+                                    }
+                                    layer.rect(-15+15*constrain(obj.assort.banner/1200,0,1),-14,30*constrain(obj.assort.banner/1200,0,1),4,2)
                                     this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
                                 }else if(obj.subWeaponAType==728||obj.subWeaponAType==1220){
                                     this.displayWeapon(layer,0,-14,0,obj.subWeaponB.ammo,obj.subWeaponBData.ammo,obj.infoAnim.ammoB)
@@ -550,19 +566,32 @@ class player{
                     }
                 }
             }
-            if(this.collect.life>=this.life){
-                layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
-                layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,1+min((max(0,this.collect.life)/this.base.life)*60,3),2)
-                layer.fill(min(255,510-max(0,this.life)/this.base.life*510)-max(0,5-max(0,this.life)/this.base.life*30)*25,max(0,this.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
-                layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,3),2)
-            }else if(this.collect.life<this.life){
-                layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
-                layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,1+min((max(0,this.life)/this.base.life)*60,3),2)
-                layer.fill(min(255,510-max(0,this.collect.life)/this.base.life*510)-max(0,5-max(0,this.collect.life)/this.base.life*30)*25,max(0,this.collect.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
-                layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,3),2)
-            }
         }
         layer.pop()
+    }
+    displayLife(layer,x,y){
+        layer.fill(150,this.fade*this.infoAnim.life)
+        layer.rect(x,y,30,4,2)
+        let cap=4
+        let cap2=4.5
+        if(abs(this.collect.life-this.life)<1){
+            layer.fill(min(255,510-max(0,this.life)/this.base.life*510)-max(0,5-max(0,this.life)/this.base.life*30)*25,max(0,this.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
+            layer.rect(x+(max(0,this.life)/this.base.life)*15-15,y,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,cap2-2),2)
+        }else if(this.collect.life>=this.life){
+            layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
+            //layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,1+min((max(0,this.collect.life)/this.base.life)*60,3),2)
+            layer.rect(x+(max(0,this.collect.life)/this.base.life)*15-15,y,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,cap-2),2)
+            layer.fill(min(255,510-max(0,this.life)/this.base.life*510)-max(0,5-max(0,this.life)/this.base.life*30)*25,max(0,this.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
+            //layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,3),2)
+            layer.rect(x+(max(0,this.life)/this.base.life)*15-15,y,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,cap2-2),2)
+        }else if(this.collect.life<this.life){
+            layer.fill(240,0,0,this.fade*this.fade*this.infoAnim.life)
+            //layer.rect((max(0,this.life)/this.base.life)*15-15,0,(max(0,this.life)/this.base.life)*30,1+min((max(0,this.life)/this.base.life)*60,3),2)
+            layer.rect(x+(max(0,this.life)/this.base.life)*15-15,y,(max(0,this.life)/this.base.life)*30,2+min((max(0,this.life)/this.base.life)*60,cap-2),2)
+            layer.fill(min(255,510-max(0,this.collect.life)/this.base.life*510)-max(0,5-max(0,this.collect.life)/this.base.life*30)*25,max(0,this.collect.life)/this.base.life*510,0,this.fade*this.infoAnim.life)
+            //layer.rect((max(0,this.collect.life)/this.base.life)*15-15,0,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,3),2)
+            layer.rect(x+(max(0,this.collect.life)/this.base.life)*15-15,y,(max(0,this.collect.life)/this.base.life)*30,2+min((max(0,this.collect.life)/this.base.life)*60,cap2-2),2)
+        }
     }
     displayWeapon(layer,x,y,type,ammo,base,anim){
         if(base>6){
@@ -2881,6 +2910,8 @@ class player{
         this.stats.lifeDamage=0
         this.stats.lifeTaken=0
         this.stats.lifeTime=0
+        this.assort.banner=0
+        this.assort.bannerActive=[0,0]
         this.clean()
     }
     clean(){
@@ -8825,14 +8856,29 @@ class player{
                             this.thrown=0.1375
                         break
                         case 1224:
-                            if(this.assort.banner>=800){
-                                this.assort.banner=800
-                                this.assort.bannerActive=max(this.assort.bannerActive,480)
-                                this.defendBuff=max(this.defendBuff,480)
+                            if(this.assort.banner>=1200){
+                                this.assort.banner=1200
+                                this.assort.bannerActive[0]=max(this.assort.bannerActive[0],600)
+                                this.assort.bannerActive[1]=0
+                                this.defendBuff=max(this.defendBuff,600)
                             }else{
                                 weapon.ammo++
                                 weapon.uses++
                             }
+                        break
+                        case 1225:
+                            if(this.assort.banner>=1200){
+                                this.assort.banner=1200
+                                this.assort.bannerActive[0]=max(this.assort.bannerActive[0],600)
+                                this.assort.bannerActive[1]=1
+                                this.critBuff=max(this.critBuff,600)
+                            }else{
+                                weapon.ammo++
+                                weapon.uses++
+                            }
+                        break
+                        case 1226:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],528,faced,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
 
                         //mark
@@ -9060,7 +9106,7 @@ class player{
             medA:this.subWeaponAType==11||this.subWeaponAType==703||this.subWeaponAType==727||this.subWeaponAType==800||
                 this.subWeaponAType==854||this.subWeaponAType==862||this.subWeaponAType==887||this.subWeaponAType==926||
                 this.subWeaponAType==932||this.subWeaponAType==986||this.subWeaponAType==1020||this.subWeaponAType==1118||
-                this.subWeaponAType==1172,
+                this.subWeaponAType==1172||this.subWeaponAType==1209,
             fastHeal:this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||
                 this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
                 this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||
@@ -9840,12 +9886,21 @@ class player{
                         if(this.subWeaponA.ammo>0&&this.assort.firingTime>=10+abs(this.target.position.x-this.position.x)/5){
                             this.attack(1)
                         }
+                    }else if(this.rules.class&&(this.subWeaponAType==1224||this.subWeaponAType==1225)){
+                        if(((this.subWeaponA.ammo<=0||this.assort.banner<=1200)&&(this.subWeaponB.ammo>0||this.subWeaponBType==1024)&&floor(random(0,10))==0||floor(random(0,300))==0)&&this.life>0&&this.rules.class){
+                            this.swapSubWeapons()
+                        }
+                        this.attack(1)
                     }else if(
                         this.manage[1]==1&&!(this.rules.scoutLine&&this.jump.double==0&&shotgun(this.subWeaponAData.name))||
                         this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading||
                         this.rules.class&&(this.subWeaponAType==1152||this.subWeaponAType==1153||this.subWeaponAType==1166)&&this.subWeaponA.ammo%3!=0&&!this.subWeaponA.reloading
                     ){
-                        if((this.subWeaponA.ammo<=0&&(this.subWeaponB.ammo>0||this.subWeaponBType==1024)&&floor(random(0,10))==0||floor(random(0,300))==0)&&this.life>0&&this.rules.class){
+                        if(
+                            (this.subWeaponA.ammo<=0&&(this.subWeaponB.ammo>0||this.subWeaponBType==1024)&&floor(random(0,10))==0||
+                            floor(random(0,300))==0)&&this.life>0&&this.rules.class&&
+                            !((this.subWeaponBType==1224||this.subWeaponBType==1225)&&this.assort.banner<1200)
+                        ){
                             this.swapSubWeapons()
                         }
                         if(this.playerData.name=='PlayerConglomeration'){
@@ -10562,7 +10617,7 @@ class player{
                     entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*mult
                     let classification=entities.players[a].life<=0&&entities.players[a].rules.insurgentLine?2:this.die.projectile.subWeapon
                     entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult
-                    if(entities.players[a].assort.bannerActive<=0){
+                    if(entities.players[a].assort.bannerActive[0]<=0){
                         entities.players[a].assort.banner+=(this.record.life-max(0,this.life))*mult
                     }
                     //entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
@@ -12507,9 +12562,9 @@ class player{
                         }
                     }
                 }
-            }else if(this.assort.bannerActive>0){
-                this.assort.bannerActive--
-                this.assort.banner-=5/3
+            }else if(this.assort.bannerActive[0]>0){
+                this.assort.bannerActive[0]--
+                this.assort.banner-=2
                 for(let a=0,la=entities.players.length;a<la;a++){
                     if(
                         !this.validTarget(entities.players[a])&&
@@ -12517,7 +12572,14 @@ class player{
                         !entities.players[a].dead&&!this.dead&&
                         !entities.players[a].fort
                     ){
-                        entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
+                        switch(this.assort.bannerActive[1]){
+                            case 0:
+                                entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
+                            break
+                            case 1:
+                                entities.players[a].critBuff=max(entities.players[a].critBuff,15)
+                            break
+                        }
                     }
                 }
             }

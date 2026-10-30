@@ -8018,7 +8018,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1015,
     },{
       name:'PlayerBlackBox',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2.25,reloadBuff:1.5,crit:0,weapon:1016,
+      damageBuff:2.5,reloadBuff:1.5,crit:0,weapon:1016,
     },{
       name:'PlayerHalfSentry',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1017,
@@ -8436,7 +8436,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:1220,
     },{
       name:'PlayerBlastLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:1221,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1221,
     },{
       name:'PlayerWarningLauncherQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1222,
@@ -8446,6 +8446,12 @@ types={
     },{
       name:'PlayerBackup',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1224,
+    },{
+      name:'PlayerBanner',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1225,
+    },{
+      name:'PlayerAftershockLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1226,
     },
 
     //mark c
@@ -21450,7 +21456,7 @@ types={
 		},{
 			name:'Blast Launcher C',
 			ammo:2,
-			damage:240,
+			damage:250,
 			cooldown:24,
 			stop:96,
 			reload:32,
@@ -21483,6 +21489,24 @@ types={
 			reload:0,
 			speed:1.05,
       uses:2,
+		},{
+			name:'Banner',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.05,
+      uses:2,
+		},{
+			name:'Aftershock Launcher C',
+			ammo:1,
+			damage:300,
+			cooldown:8,
+			stop:72,
+			reload:0,
+			speed:0.8,
+      uses:8,
 		},
 
     /*{

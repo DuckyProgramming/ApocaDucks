@@ -1020,6 +1020,7 @@ class projectile{
 			break
 			case 385:
 				this.speed=5
+				this.velocity={x:this.speed*lsin(this.direction),y:-this.speed*lcos(this.direction)}
 				this.time=time
 				this.secondary=false
 				this.hitTime=0
@@ -1188,6 +1189,14 @@ class projectile{
 				this.classification.bullet=true
 				this.width*=1.5
 				this.height*=1.5
+			break
+			case 528:
+				this.speed=5
+				this.velocity={x:this.speed*lsin(this.direction),y:-this.speed*lcos(this.direction)}
+				this.time=time
+				this.secondary=false
+				this.hitTime=0
+				this.explodeHalt={x:0,y:0,trigger:false}
 			break
 			
 		}
@@ -8498,6 +8507,42 @@ class projectile{
 					layer.ellipse(0,0,120-this.fade*120)
 				}
 			break
+			case 528:
+				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade*5)
+				layer.rect(0,4,1,8)
+				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade*5)
+				layer.rect(0,3,1,6)
+				layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade*5)
+				layer.rect(0,2,1,4)
+				layer.fill(120,120+this.crit*200,120+this.crit*200,this.fade*5)
+				layer.ellipse(0,0,6,20)
+				layer.stroke(200,this.fade*5)
+				layer.strokeWeight(0.5)
+				layer.noFill()
+				layer.ellipse(0,0,5)
+				layer.ellipse(0,0,2.5)
+				layer.noStroke()
+				if(!this.active&&this.fade<0.3){
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade*10/3)
+					layer.ellipse(0,0,240-(this.fade*10/3)*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade*10/3)
+					layer.ellipse(0,0,160-(this.fade*10/3)*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade*10/3)
+					layer.ellipse(0,0,80-(this.fade*10/3)*80)
+				}
+				if(!this.active&&this.fade>=0.7&&this.fade<1){
+					if(this.explodeHalt.trigger){
+						layer.rotate(-this.direction)
+						layer.translate(this.explodeHalt.x-this.position.x,this.explodeHalt.y-this.position.y)
+					}
+					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade*10/3-7/3)
+					layer.ellipse(0,0,240-(this.fade*10/3-7/3)*240)
+					layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade*10/3-7/3)
+					layer.ellipse(0,0,160-(this.fade*10/3-7/3)*160)
+					layer.fill(240-this.crit*200,80,40+this.crit*200,this.fade*10/3-7/3)
+					layer.ellipse(0,0,80-(this.fade*10/3-7/3)*80)
+				}
+			break
 
 			//mark
         }
@@ -10287,6 +10332,19 @@ class projectile{
 						entities.players[b].generalizedTake(this)
 					}
 				}
+			break
+			case 528:
+				radius=120
+				for(let b=0,lb=entities.players.length;b<lb;b++){
+					let c=this.distExplosion(entities.players[b],0)
+					if(entities.players[b].explodable()&&c<radius*this.explodeCalc(entities.players[b])&&this.validExplodeTarget(entities.players[b])){
+						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-(this.hitTime==0?this.timer:this.hitTime)/this.base.time*4,0.2,1))
+						entities.players[b].generalizedTake(this)
+					}
+				}
+				this.hitTime=this.timer
+				this.velocity.x*=0.5
+				this.velocity.y*=0.5
 			break
 		}
 		for(let b=0,lb=entities.projectiles.length;b<lb;b++){
@@ -13101,6 +13159,22 @@ class projectile{
 						this.speed=5
 					}
 				break
+				case 528:
+				    this.position.x+=this.velocity.x
+				    this.position.y+=this.velocity.y
+					this.travel+=dist(0,0,this.velocity.x,this.velocity.y)
+					if(this.travel>(this.rules.fast||this.type==336?4500:1500)&&this.type!=335){
+						this.active=false
+					}
+					if(this.fade<0.2&&!this.secondary){
+						this.secondary=true
+						this.explode()
+					}
+					if(!this.active){
+						this.velocity.y+=0.1
+						this.direction+=this.velocity.x*5
+					}
+				break
 
 				//mark
 			}
@@ -13705,6 +13779,9 @@ class projectile{
 					}else if(this.type==516||this.type==523){
 						//target.takeDamage(this.damage*0.2)
 						target.takeDamage(this.damage*0.2*constrain(1.1-this.timer/this.base.time*8,0.6,1))
+					}else if(this.type==528){
+						this.velocity.x*=0.5
+						this.velocity.y*=0.5
 					}
 					this.explode()
 				}else if(this.rules.fast&&this.type!=409/*||this.type==342*/||this.type==428||this.type==429){
