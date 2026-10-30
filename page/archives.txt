@@ -9,6 +9,7 @@
 1221 - blast launcher c, 773
 1222 - warning launcher q, 1196
 1223 - caber w, 1185
+1224 - backup
 
 523 - anticannon q, 516
 524 - blast rocket c, 351

@@ -144,7 +144,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,buildMash:0,juggled:false,
+            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:0,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -488,7 +488,13 @@ class player{
                     if(!game.randomizer){
                         if(obj.weaponType>=0){
                             if(obj.rules.class){
-                                if(obj.subWeaponAType==728||obj.subWeaponAType==1220){
+                                if(obj.subWeaponAType==1224){
+                                    layer.fill(150,obj.fade)
+                                    layer.rect(0,-14,30,4,2)
+                                    layer.fill(200,obj.fade)
+                                    layer.rect(-15+15*constrain(obj.assort.banner/800,0,1),-14,30*constrain(obj.assort.banner/800,0,1),4,2)
+                                    this.displayWeapon(layer,0,-7,1,obj.subWeaponA.uses,obj.subWeaponAData.uses*obj.ammoMult,obj.infoAnim.usesA)
+                                }else if(obj.subWeaponAType==728||obj.subWeaponAType==1220){
                                     this.displayWeapon(layer,0,-14,0,obj.subWeaponB.ammo,obj.subWeaponBData.ammo,obj.infoAnim.ammoB)
                                     this.displayWeapon(layer,0,-7,1,obj.subWeaponB.uses,obj.subWeaponBData.uses*obj.ammoMult,obj.infoAnim.usesB)
                                 }else{
@@ -3785,6 +3791,7 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],11,faced+random(-3,3),this.id,weaponData.damage*damageBuff,300,crit,this.index))
                             }else{
                                 weapon.ammo++
+                                weapon.uses++
                             }
                         break
                         case 15: case 163: case 978: case 1110:
@@ -8817,6 +8824,16 @@ class player{
                             this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
                             this.thrown=0.1375
                         break
+                        case 1224:
+                            if(this.assort.banner>=800){
+                                this.assort.banner=800
+                                this.assort.bannerActive=max(this.assort.bannerActive,480)
+                                this.defendBuff=max(this.defendBuff,480)
+                            }else{
+                                weapon.ammo++
+                                weapon.uses++
+                            }
+                        break
 
                         //mark
                     }
@@ -10125,7 +10142,7 @@ class player{
                         this.subWeaponA.cooldown=hold
                     }
                     if(this.rules.class){
-                        if(this.playerData.name=='PlayerEngineerW'&&this.assort.buildMash>0&&this.subWeaponC.ammo>0){
+                        if(this.playerData.name=='PlayerEngineerW'&&this.assort.buildMash>0&&this.subWeaponC.ammo>0&&this.stats.lifeTime>15){
                             this.assort.buildMash=0
                             this.attack(3)
                             this.swapSubWeapons()
@@ -10545,6 +10562,9 @@ class player{
                     entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*mult
                     let classification=entities.players[a].life<=0&&entities.players[a].rules.insurgentLine?2:this.die.projectile.subWeapon
                     entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult
+                    if(entities.players[a].assort.bannerActive<=0){
+                        entities.players[a].assort.banner+=(this.record.life-max(0,this.life))*mult
+                    }
                     //entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                     //entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                     //entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
@@ -12485,6 +12505,19 @@ class player{
                                 entities.projectiles[a].active=false
                             }
                         }
+                    }
+                }
+            }else if(this.assort.bannerActive>0){
+                this.assort.bannerActive--
+                this.assort.banner-=5/3
+                for(let a=0,la=entities.players.length;a<la;a++){
+                    if(
+                        !this.validTarget(entities.players[a])&&
+                        dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<360&&
+                        !entities.players[a].dead&&!this.dead&&
+                        !entities.players[a].fort
+                    ){
+                        entities.players[a].defendBuff=max(entities.players[a].defendBuff,15)
                     }
                 }
             }

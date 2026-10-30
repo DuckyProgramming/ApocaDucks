@@ -1,4 +1,3 @@
-
 game={
   level:0,players:1,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,initial:0,tileset:[0,0],edge:[0,0],tilecolor:[],
   index:0,projectileIndex:0,
@@ -8444,6 +8443,9 @@ types={
     },{
       name:'PlayerCaberW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1223,
+    },{
+      name:'PlayerBackup',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1224,
     },
 
     //mark c
@@ -21470,6 +21472,15 @@ types={
 			cooldown:210,
 			stop:210,
 			reload:210,
+			speed:1.05,
+      uses:2,
+		},{
+			name:'Backup',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
 			speed:1.05,
       uses:2,
 		},
