@@ -118,6 +118,14 @@ function setup(){
                 game.gaming=1
                 game.level=117
             break
+            case 13:
+                //banner test 2
+                duel.numKey=[3]
+                duel.sets=[[0,0]]
+                game.players=5
+                game.gaming=1
+                game.level=131
+            break
         }
         /*
         8 - normandy

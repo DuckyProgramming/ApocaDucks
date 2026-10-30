@@ -1659,6 +1659,8 @@ class player{
         this.assort.firing=0
         this.assort.firingTick=0
         this.assort.firingTime=0
+        this.assort.banner=0
+        this.assort.bannerActive=[0,0]
         this.subWeaponA.cooldown=30
         this.subWeaponB.cooldown=30
         this.subWeaponC.cooldown=30
@@ -2910,8 +2912,8 @@ class player{
         this.stats.lifeDamage=0
         this.stats.lifeTaken=0
         this.stats.lifeTime=0
-        this.assort.banner=0
-        this.assort.bannerActive=[0,0]
+        /*this.assort.banner=0
+        this.assort.bannerActive=[0,0]*/
         this.clean()
     }
     clean(){
@@ -3264,10 +3266,18 @@ class player{
                 this.assort.ender=this.base.life-this.life+50
                 let crit
                 switch(this.playerData.name){
-                    case 'EnderShotgunMartyr':
+                    case 'EnderShotgunGrenadeSpawner':
                         crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,-90,this.id,100,180,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,90,this.id,100,180,crit,this.index))
+                    break
+                    case 'EnderShotgunTankGrenadeSpawner':
+                        crit=constrain(this.playerData.crit+(this.critBuff>0?1:0),0,1)
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,-90,this.id,100,180,crit,this.index))
+                        entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,90,this.id,100,180,crit,this.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y+this.height/2-18-abs(this.assort.ramp)*6,0,0,[],true,findName('Tank',types.player),game.index))
+                        game.index++
+                        entities.players[entities.players.length-1].free=true
                     break
                 }
                 this.ender()
@@ -10892,7 +10902,7 @@ class player{
                             entities.players[entities.players.length-1].weapon.cooldown+=60
                         }
                     break
-                    case 'ShotgunMartyr': case 'FlamethrowerMartyr': case 'MedicMartyr':
+                    case 'ShotgunMartyr': case 'FlamethrowerMartyr': case 'MedicMartyr': case 'EnderShotgunMartyr':
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,-90,this.id,100,180,crit,this.index))
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,450,90,this.id,100,180,crit,this.index))
                     break

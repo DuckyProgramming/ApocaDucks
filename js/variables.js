@@ -10956,6 +10956,12 @@ types={
       name:'EnderShotgunMartyr',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
     },{
+      name:'EnderShotgunGrenadeSpawner',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'EnderShotgunTankGrenadeSpawner',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
+      damageBuff:0.75,reloadBuff:1,crit:0,weapon:0,
+    },{
       name:'EnderGrenadier',sizeBuff:1,lifeBuff:2,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
     },{

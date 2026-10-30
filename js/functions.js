@@ -341,7 +341,7 @@ function spy(name){
         name=='SpyFakeHealthPackCarrier'
 }
 function tank(name){
-    return name.includes('Tank')&&name!='PistolVaultTankSpawner'&&name!='PistolVaultTankGrenadeSpawner'&&name!='MysteryTank'
+    return name.includes('Tank')&&name!='PistolVaultTankSpawner'&&name!='PistolVaultTankGrenadeSpawner'&&name!='MysteryTank'&&name!='EnderShotgunTankGrenadeSpawner'
         /*name=='Tank'||name=='BallingTank'||name=='PistolingTank'||name=='EngineeringTank'||name=='TankSpawner'||
         name=='FlamethrowingTank'||name=='HyperTank'||name=='RocketLaunchingTank'||name=='AutoTank'||name=='TankDefendBuff'||
         name=='TankJump'||name=='TankBump'||name=='TankShield'||name=='TankSpeedBuff'||name=='SlicingTank'||
@@ -11602,6 +11602,7 @@ function formMission(wave,type){
     switch(type){
         case 0:
             //wave[0].push(['RocketWaveTank',10])
+            //wave[0].push(['EnderShotgunTankGrenadeSpawner',10])
             wave[0].push(randin([
                 ['BigFlameMachineGun',4],
                 ['BigMachineGunFirework',4],
