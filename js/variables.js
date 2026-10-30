@@ -8441,6 +8441,9 @@ types={
     },{
       name:'PlayerWarningLauncherQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1222,
+    },{
+      name:'PlayerCaberW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1223,
     },
 
     //mark c
@@ -21460,6 +21463,15 @@ types={
 			reload:30,
 			speed:1.05,
       uses:10,
+		},{
+			name:'Caber W',
+			ammo:1,
+			damage:375,
+			cooldown:210,
+			stop:210,
+			reload:210,
+			speed:1.05,
+      uses:2,
 		},
 
     /*{

@@ -39,6 +39,45 @@ function setup(){
                 game.gaming=1
                 game.level=47
             break
+            case 3:
+                //testing mortar rifle
+                duel.numKey=[0,9]
+                duel.sets=[[0,0],[3,0,0]]
+                game.players=2
+                game.gaming=2
+                game.level=117
+            break
+            case 4:
+                //testing caber
+                duel.numKey=[0,3]
+                duel.sets=[[0,0],[2,0]]
+                game.players=2
+                game.gaming=2
+                game.level=117
+            break
+            case 5:
+                //demo vs scout bot mge
+                duel.numKey=[3,0]
+                game.players=2
+                game.gaming=1
+                game.level=117
+            break
+            case 6:
+                //demo vs donker bot test
+                duel.numKey=[3,3]
+                duel.sets=[[0,0],[0,5]]
+                game.players=2
+                game.gaming=1
+                game.level=117
+            break
+            case 7:
+                //drone test
+                duel.numKey=[0,9]
+                duel.sets=[[0,0],[0,7,0]]
+                game.players=2
+                game.gaming=2
+                game.level=117
+            break
         }
         /*
         8 - normandy

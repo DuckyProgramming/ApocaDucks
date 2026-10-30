@@ -16325,6 +16325,7 @@ class wall{
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
                                                 c.assort.stickyJump=false
+                                                c.assort.juggled=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16404,6 +16405,7 @@ class wall{
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
                                                 c.assort.stickyJump=false
+                                                c.assort.juggled=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false
@@ -16448,6 +16450,7 @@ class wall{
                                             if(this.type!=26&&this.type!=30){
                                                 c.thrown=0.15
                                                 c.assort.stickyJump=false
+                                                c.assort.juggled=false
                                             }
                                             if(c.parachute){
                                                 c.parachute=false

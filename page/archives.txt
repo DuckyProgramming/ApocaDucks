@@ -8,10 +8,13 @@
 1220 - parachute c, 748, 728
 1221 - blast launcher c, 773
 1222 - warning launcher q, 1196
+1223 - caber w, 1185
 
 523 - anticannon q, 516
 524 - blast rocket c, 351
 525 - warning launcher q, 501
+526 - caber w, 508
+527 - donker c, 389
 
 
 

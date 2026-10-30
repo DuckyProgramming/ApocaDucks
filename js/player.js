@@ -144,7 +144,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,buildMash:0,
+            stickyJump:false,buildMash:0,juggled:false,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -1646,6 +1646,7 @@ class player{
             (this.auto&&game.level==38?0.6:1)*
             (this.chillTime>0?0.5:1)*
             (this.assort.intel?0.75:1)*
+            (this.assort.juggled?0.25:1)*
             //(game.level==29&&this.id==0?1.125:1)*
             (this.playerData.name==`AcceleratorTank`?5-this.life/this.base.life*4:1)*
             (
@@ -8808,6 +8809,14 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
                             }
                         break
+                        case 1223:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],526,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                            /*this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0&&this.jump.active>0&&this.velocity.y<0?3:1)
+                            this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0&&this.jump.active>0&&this.velocity.y<0?3:1)*/
+                            this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
+                            this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
+                            this.thrown=0.1375
+                        break
 
                         //mark
                     }
@@ -9806,6 +9815,13 @@ class player{
                             }else if(this.subWeaponB.ammo==0){
                                 this.subWeaponB.assort=0
                             }
+                        }
+                    }else if(this.rules.class&&this.subWeaponAType==1219){
+                        if((this.subWeaponA.ammo<=0&&(this.subWeaponB.ammo>0||this.subWeaponBType==1024)&&floor(random(0,10))==0||floor(random(0,300))==0)&&this.life>0&&this.rules.class){
+                            this.swapSubWeapons()
+                        }
+                        if(this.subWeaponA.ammo>0&&this.assort.firingTime>=10+abs(this.target.position.x-this.position.x)/5){
+                            this.attack(1)
                         }
                     }else if(
                         this.manage[1]==1&&!(this.rules.scoutLine&&this.jump.double==0&&shotgun(this.subWeaponAData.name))||
