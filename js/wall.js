@@ -14395,10 +14395,12 @@ class wall{
                                 if(!(game.level==22&&(abs(this.base.position.y-game.tileset[1]*49.75)<1||abs(this.base.position.y-game.tileset[1]*48.75)<1)&&!game.point[1])&&!((game.level==100||game.level==140)&&!game.point[1])){
                                     if(game.level==23){
                                         if(this.height>=this.base.height){
-                                            c.defendBuff=max(c.defendBuff,15)
+                                            //c.defendBuff=max(c.defendBuff,15)
+                                            c.defendBuff=max(c.defendBuff,5)
                                         }
                                     }else if((c.id>0&&!game.attacker||c.id==0&&game.attacker)&&!c.fort){
-                                        c.defendBuff=max(c.defendBuff,15)
+                                        //c.defendBuff=max(c.defendBuff,15)
+                                        c.defendBuff=max(c.defendBuff,5)
                                     }else{
                                         c.velocity.x*=0.75
                                         if(c.velocity.y<0){
@@ -14944,7 +14946,18 @@ class wall{
                                 c.clean()
                                 if(c.weaponType==-1||game.pvp&&!game.royale){
                                     c.newWeapon()
-                                }
+                                }//else if(game.pvp&&!game.royale){
+                                    /*let banner=c.assort.banner
+                                    c.newWeapon()
+                                    c.assort.banner=banner*/
+                                    /*if(game.class){
+                                        c.subWeaponA.uses=c.subWeaponDataA.uses
+                                        c.subWeaponB.uses=c.subWeaponDataB.uses
+                                        c.subWeaponC.uses=c.subWeaponDataC.uses
+                                    }else{
+                                        c.weapon.uses=c.weaponData.uses
+                                    }*/
+                                //}
                             break
                             case 76:
                                 if(c.id==1&&this.position.x>game.edge[0]/2||c.id==2&&this.position.x<game.edge[0]/2){

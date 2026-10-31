@@ -22,6 +22,7 @@ class projectile{
         this.active=true
 		this.forceDisplay=false
 		this.fort=false
+		this.direct=-1
 		this.stun=0
 		this.subWeapon=2
 		if(game.hitscan){
@@ -1197,6 +1198,12 @@ class projectile{
 				this.secondary=false
 				this.hitTime=0
 				this.explodeHalt={x:0,y:0,trigger:false}
+			break
+			case 529:
+				this.speed=2
+				this.time=time
+				this.width*=4
+				this.height*=4
 			break
 			
 		}
@@ -7388,7 +7395,7 @@ class projectile{
 					layer.ellipse(0,0,64-this.fade*64)
 				}
 			break
-			case 439: case 497:
+			case 439: case 497: case 529:
 				layer.noFill()
 				if(this.crit==1){
 					layer.stroke(100,250,250,this.fade*0.5)
@@ -8575,6 +8582,9 @@ class projectile{
 			this.id==target.id&&this.index!=target.index
 	}
 	distExplosion(target,type){
+		if(target==this.direct){
+			return 0
+		}
 		switch(type){
 			case 0:
 				return min(dist(
@@ -10494,6 +10504,7 @@ class projectile{
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
 				case 482: case 492: case 497: case 503: case 507: case 511: case 516: case 517: case 523: case 524:
+				case 529:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -13400,7 +13411,7 @@ class projectile{
 		}
 		let base=target.life
 		switch(this.type){
-			case 9: case 155: case 216: case 439: case 449: case 463: case 464: case 497:
+			case 9: case 155: case 216: case 439: case 449: case 463: case 464: case 497: case 529:
 				if(this.onTeam(target)||this.index==target.index&&this.type==216){
 					target.life=min(target.life+this.damage*(min(2,target.base.life/125)),max(target.life,target.base.life*2))
 				}else{
@@ -13766,6 +13777,7 @@ class projectile{
 							this.position.x=target.position.x+target.width*0.5
 						}
 					}
+					this.direct=target
 					if(this.rules.explodeHit){
 						target.takeDamage(this.damage)
 					}else if(this.type==48){
@@ -13784,6 +13796,7 @@ class projectile{
 						this.velocity.y*=0.5
 					}
 					this.explode()
+					this.direct=-1
 				}else if(this.rules.fast&&this.type!=409/*||this.type==342*/||this.type==428||this.type==429){
 					target.takeDamage(this.damage*min(1,0.5+this.timer*0.125))
 					//snipers do less at close range lol
@@ -14190,6 +14203,11 @@ class projectile{
 			case 523:
 				target.knockback(this.speed*4*constrain(1.2-this.timer/this.base.time*8,0.2,1),this.direction,1,1)
 				target.knockbackForce(this.speed*0.5*constrain(1.2-this.timer/this.base.time*8,0.2,1),this.direction,1,1)
+			break
+			case 529:
+				print(this.speed)
+				target.knockback(this.speed*4,this.direction,1,1)
+				target.knockbackForce(this.speed*2,this.direction,1,1)
 			break
 		}
 		if(!target.immune()){

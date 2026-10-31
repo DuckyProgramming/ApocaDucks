@@ -1659,8 +1659,10 @@ class player{
         this.assort.firing=0
         this.assort.firingTick=0
         this.assort.firingTime=0
-        this.assort.banner=0
-        this.assort.bannerActive=[0,0]
+        if(!this.rules.class||this.subWeaponAType!=1224&&this.subWeaponBType!=1224&&this.subWeaponAType!=1225&&this.subWeaponBType!=1225){
+            this.assort.banner=0
+            this.assort.bannerActive=[0,0]
+        }
         this.subWeaponA.cooldown=30
         this.subWeaponB.cooldown=30
         this.subWeaponC.cooldown=30
@@ -2912,8 +2914,8 @@ class player{
         this.stats.lifeDamage=0
         this.stats.lifeTaken=0
         this.stats.lifeTime=0
-        /*this.assort.banner=0
-        this.assort.bannerActive=[0,0]*/
+        this.assort.banner=0
+        this.assort.bannerActive=[0,0]
         this.clean()
     }
     clean(){
@@ -8390,7 +8392,8 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],484,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                         break
                         case 1155:
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                         break
                         case 1156:
@@ -8889,6 +8892,10 @@ class player{
                         break
                         case 1226:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],528,faced,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        break
+                        case 1227:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],529,faced,this.id,weaponData.damage*damageBuff,600,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed*=1.5
                         break
 
                         //mark
@@ -10627,7 +10634,10 @@ class player{
                     entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*mult
                     let classification=entities.players[a].life<=0&&entities.players[a].rules.insurgentLine?2:this.die.projectile.subWeapon
                     entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult
-                    if(entities.players[a].assort.bannerActive[0]<=0){
+                    if(entities.players[a].assort.bannerActive[0]<=0&&entities.players[a].rules.class&&(
+                        entities.players[a].subWeaponAType==1224||entities.players[a].subWeaponBType==1224||
+                        entities.players[a].subWeaponAType==1225||entities.players[a].subWeaponBType==1225
+                    )){
                         entities.players[a].assort.banner+=(this.record.life-max(0,this.life))*mult
                     }
                     //entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)

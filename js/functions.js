@@ -185,7 +185,7 @@ function setupRules(){
 				a==345||a==350||a==364||a==378||a==396||
                 a==398||a==409||a==418||a==434||a==436||
                 a==439||a==449||a==456||a==463||a==464||
-                a==479||a==497,
+                a==479||a==497||a==529,
             physBouncer:a!=68&&a!=135&&a!=136&&a!=169&&a!=170&&
                 a!=240&&a!=311&&a!=312&&a!=367&&a!=463&&a!=464,
             offBouncer:a==135||a==136||a==169||a==170,
@@ -12003,7 +12003,7 @@ function setupLists(){
             [`PlayerPistolC`,`PlayerBlowtorch`,`PlayerRevolver`,`PlayerWingPistolC`,`PlayerWrench`,`PlayerPushPistolC`],
             range(0,64).map(num=>types.player[findName(`PlayerBuild111`,types.player)+num].name),
         ],[
-            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerDonutW`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
+            [`PlayerHeavyMedic`,`PlayerBuffMedic`,`PlayerDonutQ`,`PlayerMachineMedic`,`PlayerRejuvenator`,`PlayerLeechMedic`,`PlayerOverMedicC`,`PlayerTransmissionC`],
             [`PlayerHealthPack`,`PlayerChromaC`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasawC`,`PlayerSpeedPack`,`PlayerPotion`],
         ],[
             [`PlayerHeavySniper`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`,`PlayerBowC`],

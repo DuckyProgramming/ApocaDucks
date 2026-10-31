@@ -12,6 +12,7 @@
 1224 - backup
 1225 - buff banner
 1226 - aftershock launcher c, 913
+1227 - donut q, 1172
 
 523 - anticannon q, 516
 524 - blast rocket c, 351
@@ -19,6 +20,7 @@
 526 - caber w, 508
 527 - donker c, 389
 528 - aftershock c, 385
+529 - donut q, 497
 
 
 

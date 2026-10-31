@@ -8452,6 +8452,9 @@ types={
     },{
       name:'PlayerAftershockLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1226,
+    },{
+      name:'PlayerDonutQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1227,
     },
 
     //mark c
@@ -21496,7 +21499,7 @@ types={
 			speed:1.05,
       uses:2,
 		},{
-			name:'Banner',
+			name:'Buff Banner',
 			ammo:1,
 			damage:0,
 			cooldown:0,
@@ -21513,6 +21516,15 @@ types={
 			reload:0,
 			speed:0.8,
       uses:8,
+		},{
+			name:'Donut Q',
+			ammo:3,
+			damage:120,
+			cooldown:36,
+			stop:90,
+			reload:20,
+			speed:0.975,
+      uses:18,
 		},
 
     /*{
