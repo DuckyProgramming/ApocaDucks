@@ -30,7 +30,8 @@ function setupRules(){
                 a==507||a==508||a==509||a==510||a==512||
                 a==516||a==518||a==519||a==520||a==521||
                 a==523||a==524||a==525||a==526||a==527||
-                a==528,
+                a==528||a==530||a==531||a==532||a==533||
+                a==534,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==508||a==521||a==526,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -44,7 +45,8 @@ function setupRules(){
 				a==385||a==412||a==430||a==445||a==447||
                 a==466||a==469||a==482||a==489||a==494||
                 a==498||a==505||a==506||a==507||a==510||
-                a==516||a==521||a==523||a==524||a==528,
+                a==516||a==521||a==523||a==524||a==528||
+                a==530||a==531||a==532||a==533||a==534,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -88,7 +90,8 @@ function setupRules(){
                 a==498||a==499||a==500||a==501||a==508||
                 a==509||a==510||a==512||a==514||a==515||
                 a==518||a==519||a==520||a==525||a==526||
-                a==527||a==528,
+                a==527||a==528||a==530||a==531||a==532||
+                a==533,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -163,14 +166,15 @@ function setupRules(){
                 a==489||a==490||a==493||a==495||a==500||
                 a==501||a==505||a==506||a==507||a==508||
                 a==509||a==512||a==518||a==519||a==520||
-                a==521||a==524||a==525||a==526||a==527,
+                a==521||a==524||a==525||a==526||a==527||
+                a==530||a==533||a==534,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
 			fader3:a==190||a==191||a==214||a==255||a==256||
 				a==257||a==265||a==300||a==365||a==470,
             fader4:a==280||a==316||a==326||a==433||a==481||
-                a==496||a==528,
+                a==496||a==528||a==531,
             hitstack:a==91||a==92||a==93||a==96||a==108||
                 a==192||a==203||a==204||a==207||a==208||
                 a==237||a==238||a==239||a==275||a==296||
@@ -403,8 +407,8 @@ function getKey(spawn){
         game.level==138?'ABCD'[floor(random(0,4))]:
         game.level==55?'AB'[floor(random(0,1.25))]:
         game.level==34||game.level==47||game.level==54||game.level==58||game.level==59||game.level==63||game.level==66||game.level==68||game.level==69||game.level==87||
+        game.level==39||game.level==79||game.level==82||game.level==83||game.level==85||game.level==86||game.level==101||game.level==103||game.level==106?'AB'[spawn%2]:
         game.level==96||game.level==97||game.level==107||game.level==108||game.level==109||game.level==131?'A':
-        game.level==79||game.level==82||game.level==83||game.level==85||game.level==86||game.level==101||game.level==103||game.level==106?'AB'[spawn%2]:
         game.level==100||game.level==140?'AB'[spawn==11?1:0]:
         '123456ABCDEF'[spawn]
 }
@@ -4545,7 +4549,8 @@ function generateLevel(info,layer){
                         case 61: case 102: case 123:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]+(b+(game.level==7?0.5:0))*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,8))
                         break
-                        case 67: case 78: case 95: case 134: case 135:
+                        //case 67: case 78: case 95: case 134: case 135:
+                        case 67: case 78: case 95: case 134:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,76))
                         break
                         default:
@@ -11986,8 +11991,9 @@ function setupLists(){
             [`PlayerScattergun`,`PlayerPushScattergun`,`PlayerPeppergunC`,`PlayerPopperScattergunC`,`PlayerRustGun`,`PlayerDeflectorScattergun`,`PlayerTunnelScattergun`,`PlayerPenaltyScattergunQ`],
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
-            [`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncherC`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncherC`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerSemiHeavyPistol`,`PlayerRocketJumpC`,`PlayerEscapeShotgun`],
+            //[`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncherC`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncherC`,`PlayerBlackBox`,`PlayerShoulderRocket`],
+            [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocket`,`PlayerRocketJumper`],
+            [`PlayerShotgun`,`PlayerParachuteC`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerBackup`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
@@ -12007,7 +12013,7 @@ function setupLists(){
             [`PlayerHealthPack`,`PlayerChromaC`,`PlayerDefensePack`,`PlayerAnthrax`,`PlayerShield`,`PlayerVitasawC`,`PlayerSpeedPack`,`PlayerPotion`],
         ],[
             [`PlayerHeavySniper`,`PlayerBorer`,`PlayerPushSniper`,`PlayerRecoilSniper`,`PlayerPierceSniper`,`PlayerHuntSniper`,`PlayerScatterSniperC`,`PlayerBowC`],
-            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerWingSubmachine`,`PlayerBushwackC`],
+            [`PlayerSubmachine`,`PlayerChiller`,`PlayerScope`,`PlayerTrenchSubmachine`,`PlayerScopedSubmachine`,`PlayerOutback`,`PlayerFireworkSubmachine`,`PlayerBushwackC`],
         ],[
             [`PlayerRevolver`,`PlayerSwitcher`,`PlayerEnforcer`,`PlayerSpeedRevolver`,`PlayerBackshot`,`PlayerTaggerC`],
             [`PlayerKnife`,`PlayerElectricChair`,`PlayerClusterBombC`,`PlayerCritKnife`,`PlayerHealKnife`,`PlayerTeleportKnife`],

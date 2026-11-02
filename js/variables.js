@@ -8455,6 +8455,33 @@ types={
     },{
       name:'PlayerDonutQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1227,
+    },{
+      name:'PlayerParachuteC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1228,
+    },{
+      name:'PlayerFireworkSubmachine',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1229,
+    },{
+      name:'PlayerRocketLauncherC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1230,
+    },{
+      name:'PlayerBazookaW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1231,
+    },{
+      name:'PlayerAftershockLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1232,
+    },{
+      name:'PlayerMoonshotC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1233,
+    },{
+      name:'PlayerBlackBoxC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1234,
+    },{
+      name:'PlayerGarbageLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1235,
+    },{
+      name:'PlayerRocketJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1236,
     },
 
     //mark c
@@ -20071,7 +20098,8 @@ types={
 			stop:60,
 			reload:20,
 			//speed:1.4,
-      speed:1.3,
+      //speed:1.3,
+      speed:1.25,
       uses:12,
 		},{
 			name:'Droner W',
@@ -21490,7 +21518,7 @@ types={
 			speed:1.05,
       uses:2,
 		},{
-			name:'Backup',
+			name:`Battalion's Backup`,
 			ammo:1,
 			damage:0,
 			cooldown:0,
@@ -21525,6 +21553,87 @@ types={
 			reload:20,
 			speed:0.975,
       uses:18,
+		},{
+			name:'Parachute W',
+			ammo:12,
+			damage:105,
+			cooldown:12,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:60,
+		},{
+			name:'Firework Submachine',
+			ammo:6,
+			damage:90,
+			cooldown:12,
+			stop:40,
+			reload:6,
+			speed:1.15,
+      uses:30,
+		},{
+			name:'Rocket Launcher C',
+			ammo:2,
+			damage:300,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:16,
+		},{
+			name:'Bazooka W',
+			ammo:0,
+			damage:300,
+			cooldown:6,
+			stop:24,
+			reload:30,
+			speed:0.8,
+      uses:15,
+		},{
+			name:'Aftershock',
+			ammo:2,
+			damage:250,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:16,
+		},{
+			name:'Moonshot C',
+			ammo:2,
+			damage:375,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:16,
+		},{
+			name:'Black Box',
+			ammo:2,
+			damage:250,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:16,
+		},{
+			name:'Garbage Launcher W',
+			ammo:1,
+			damage:300,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:10,
+		},{
+			name:'Rocket Jumper',
+			ammo:2,
+			damage:200,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:16,
 		},
 
     /*{

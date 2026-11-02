@@ -1,6 +1,24 @@
 
 
 
+1228 - parachute w, 1220
+1229 - firework submachine, 391
+1230 - rocket launcher c, 1221
+1231 - bazooka w, 1024
+1232 - aftershock w, 1226
+1233 - moonshot c, 1120
+1234 - black box c, 1016
+1235 - garbage launcher w, 880
+1236 - rocket jumper, 1230
+
+530 - rocket launcher c, 524
+531 - aftershock w, 528
+532 - moonshot c, 466
+533 - black box c, 430
+534 - rocket jumper, 530
+
+
+
 1216 - charge c, 982
 1217 - anticannon q, 1201
 1218 - escape shotgun, 1158

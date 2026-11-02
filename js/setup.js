@@ -142,6 +142,22 @@ function setup(){
                 game.gaming=2
                 game.level=117
             break
+            case 16:
+                //bluefort micro 7cp test
+                duel.numKey=[2,2]
+                duel.sets=[[0,0],[0,0]]
+                game.players=2
+                game.gaming=1
+                game.level=135
+            break
+            case 17:
+                //general soldier test 1
+                duel.numKey=[0,1]
+                duel.sets=[[0,0],[0,0]]
+                game.players=2
+                game.gaming=2
+                game.level=117
+            break
         }
         /*
         8 - normandy
@@ -164,6 +180,7 @@ function setup(){
         120 - alloy 2 dm
         131 - lisp ad
         134 - bluefort micro ctf
+        135 - bluefort micro 7cp
         136 - normanDBZ sv
         137 - mill 2 dm
         138 - rocksalt ad
@@ -907,7 +924,7 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
-                                                //bluefort
+                                                //bluefort mini
                                             break
                                             case 1:
                                                 if(inPointBox({position:mouse},{position:{x:pos[0]-37.5,y:pos[1]},width:75,height:45})){
@@ -921,7 +938,7 @@ function mouseClicked(){
                                                     game.classicWeapon=true
                                                 }
                                                 instant()
-                                                //bluefort
+                                                //bluefort micro
                                             break
                                             case 2:
                                                 menu.level=85
