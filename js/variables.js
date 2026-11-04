@@ -8482,6 +8482,12 @@ types={
     },{
       name:'PlayerRocketJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1236,
+    },{
+      name:'PlayerShoulderRocketC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1237,
+    },{
+      name:'PlayerIEDQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1238,
     },
 
     //mark c
@@ -21608,7 +21614,7 @@ types={
 			speed:0.8,
       uses:16,
 		},{
-			name:'Black Box',
+			name:'Black Box C',
 			ammo:2,
 			damage:250,
 			cooldown:24,
@@ -21626,7 +21632,7 @@ types={
 			speed:0.8,
       uses:10,
 		},{
-			name:'Rocket Jumper',
+			name:'Blast Launcher',
 			ammo:2,
 			damage:200,
 			cooldown:24,
@@ -21634,6 +21640,24 @@ types={
 			reload:30,
 			speed:0.8,
       uses:16,
+		},{
+			name:'Shoulder Rocket C',
+			ammo:1,
+			damage:600,
+			cooldown:24,
+			stop:120,
+			reload:30,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'IED Q',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
 		},
 
     /*{

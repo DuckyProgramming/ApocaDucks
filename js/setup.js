@@ -151,11 +151,27 @@ function setup(){
                 game.level=135
             break
             case 17:
-                //general soldier test 1
+                //general soldier test 1 (1228-1237)
                 duel.numKey=[0,1]
                 duel.sets=[[0,0],[0,0]]
                 game.players=2
                 game.gaming=2
+                game.level=117
+            break
+            case 18:
+                //general soldier test 2 (1228-1237)
+                duel.numKey=[1]
+                duel.sets=[[0,1]]
+                game.players=1
+                game.gaming=1
+                game.level=94
+            break
+            case 19:
+                //drone bot test
+                duel.numKey=[0,9]
+                duel.sets=[[0,0],[0,7,0]]
+                game.players=2
+                game.gaming=1
                 game.level=117
             break
         }

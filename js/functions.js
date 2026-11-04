@@ -31,7 +31,7 @@ function setupRules(){
                 a==516||a==518||a==519||a==520||a==521||
                 a==523||a==524||a==525||a==526||a==527||
                 a==528||a==530||a==531||a==532||a==533||
-                a==534,
+                a==534||a==535||a==536,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==508||a==521||a==526,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -46,7 +46,8 @@ function setupRules(){
                 a==466||a==469||a==482||a==489||a==494||
                 a==498||a==505||a==506||a==507||a==510||
                 a==516||a==521||a==523||a==524||a==528||
-                a==530||a==531||a==532||a==533||a==534,
+                a==530||a==531||a==532||a==533||a==534||
+                a==535,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -91,7 +92,7 @@ function setupRules(){
                 a==509||a==510||a==512||a==514||a==515||
                 a==518||a==519||a==520||a==525||a==526||
                 a==527||a==528||a==530||a==531||a==532||
-                a==533,
+                a==533||a==535||a==536,
             bounce2:a==91||a==92||a==93||a==96||a==108||
                 a==204||a==208||a==237||a==238||a==239||
                 a==275||a==302,
@@ -118,7 +119,7 @@ function setupRules(){
 				a!=360&&a!=368&&a!=372&&a!=375&&a!=392&&
 				a!=417&&a!=435&&a!=438&&a!=444&&a!=448&&
                 a!=457&&a!=470&&a!=490&&a!=495&&a!=496&&
-                a!=500&&a!=509&&a!=519,
+                a!=500&&a!=509&&a!=519&&a!=536,
 			destroyAfter:a!=89&&a!=103&&a!=138&&a!=152&&a!=155&&
 				a!=193&&a!=194&&a!=195&&a!=215&&a!=270&&
 				a!=297&&a!=304&&a!=310&&a!=330&&a!=335&&
@@ -167,7 +168,7 @@ function setupRules(){
                 a==501||a==505||a==506||a==507||a==508||
                 a==509||a==512||a==518||a==519||a==520||
                 a==521||a==524||a==525||a==526||a==527||
-                a==530||a==533||a==534,
+                a==530||a==533||a==534||a==535||a==536,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -11992,8 +11993,8 @@ function setupLists(){
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
             //[`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncherC`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncherC`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocket`,`PlayerRocketJumper`],
-            [`PlayerShotgun`,`PlayerParachuteC`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerBackup`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
+            [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocketC`,`PlayerRocketJumper`],
+            [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerRocketJumpC`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
@@ -12021,7 +12022,7 @@ function setupLists(){
         ],[
             [`PlayerAssaultRifleW`,`PlayerBayonetRifle`,`PlayerMediumUzi`,`PlayerMortarRifle`],
             [`PlayerPistolQ`,`PlayerMolotov`,`PlayerSmokeBomb`,`PlayerCrowbar`,`PlayerDiscord`,`PlayerCaberW`,`PlayerAdrenalineC`,`PlayerDroneW`],
-            [`PlayerIEDW`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
+            [`PlayerIEDQ`,`PlayerReinforcement`,`PlayerChlorineBomb`,`PlayerRazor`],
         ],/*[
             [`PlayerHeavyDirector`,`PlayerHeavySwarmer`,`PlayerHeavyMotorizer`,`PlayerDestroyerWC`,`PlayerSoftwareC`,`PlayerCrowdC`,`PlayerHeavyInterceptor`,`PlayerLightSkysweeper`,`PlayerDiscord`,`PlayerOrbital`],
             [`PlayerHeavyAssaultRifle`,`PlayerPuller`,`PlayerMagnifyingGlass`,`PlayerPistol`,`PlayerLightUzi`,`PlayerAutumnW`],
@@ -12204,9 +12205,16 @@ function opd(){
     entities.walls[1][64].weapon=findName('PlayerBaseball',types.player)
     entities.walls[1][65].weapon=findName('PlayerBowlingBall',types.player)
 
-    entities.walls[1][24].weapon=findName('PlayerBlackBox',types.player)
+    /*entities.walls[1][24].weapon=findName('PlayerBlackBox',types.player)
     entities.walls[1][25].weapon=findName('PlayerBlastLauncherC',types.player)
     entities.walls[1][45].weapon=findName(`PlayerAftershockLauncherC`,types.player)
+    entities.walls[1][46].weapon=findName('PlayerBanner',types.player)
+    entities.walls[1][66].weapon=findName('PlayerEscapeShotgun',types.player)
+    entities.walls[1][67].weapon=findName('PlayerParachute',types.player)*/
+
+    entities.walls[1][24].weapon=findName('PlayerBlackBoxC',types.player)
+    entities.walls[1][25].weapon=findName('PlayerBlastLauncherW',types.player)
+    entities.walls[1][45].weapon=findName(`PlayerAftershockLauncherW`,types.player)
     entities.walls[1][46].weapon=findName('PlayerBanner',types.player)
     entities.walls[1][66].weapon=findName('PlayerEscapeShotgun',types.player)
     entities.walls[1][67].weapon=findName('PlayerParachute',types.player)

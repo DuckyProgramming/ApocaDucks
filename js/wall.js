@@ -13655,6 +13655,10 @@ class wall{
                                             push=true
                                         }
                                         if(push){
+                                            /*if(c.type==530||c.type==531||c.type==532||c.type==533||c.type==534||c.type==535){
+                                                print('a')
+                                                c.position.x=this.position.x-this.width/2+c.width/2+this.width*max((c.position.y+c.height/2-this.position.y+this.height/2)/this.height,0)
+                                            }*/
                                             if(dev.rampSlopeProj){
                                                 let opPoint={x:c.position.x-c.width/2-this.position.x,y:c.position.y+c.height/2-this.position.y}
                                                 let move=abs(opPoint.x/this.width-opPoint.y/this.height)/dist(0,0,1/this.width,1/this.height)+0.1
@@ -14132,7 +14136,7 @@ class wall{
                                     c.explode()
                                 }else if(c.type==499){
                                     c.velocity.x*=0.995
-                                }else if(c.type==500&&c.bounceTimer==0){
+                                }else if((c.type==500||c.type==536)&&c.bounceTimer==0){
                                     if(c.bounces==0){
                                         c.detTime=60
                                     }
@@ -14188,7 +14192,7 @@ class wall{
                                         c.velocity.x*=0.9
                                         c.velocity.y*=0.9
                                     }
-                                }else if((c.type==530||c.type==532||c.type==533||c.type==534)&&c.active){
+                                }else if((c.type==530||c.type==532||c.type==533||c.type==534||c.type==535)&&c.active){
                                     c.active=false
                                     c.explode()
                                     c.speed=0

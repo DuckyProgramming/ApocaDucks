@@ -10,12 +10,16 @@
 1234 - black box c, 1016
 1235 - garbage launcher w, 880
 1236 - rocket jumper, 1230
+1237 - shoulder rocket c, 1161
+1238 - ied q, 1176
 
 530 - rocket launcher c, 524
 531 - aftershock w, 528
 532 - moonshot c, 466
 533 - black box c, 430
 534 - rocket jumper, 530
+535 - shoulder rocket c, 489
+536 - ied q, 500
 
 
 
