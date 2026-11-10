@@ -31,7 +31,7 @@ function setupRules(){
                 a==516||a==518||a==519||a==520||a==521||
                 a==523||a==524||a==525||a==526||a==527||
                 a==528||a==530||a==531||a==532||a==533||
-                a==534||a==535||a==536,
+                a==534||a==535||a==536||a==537,
             explodeHit:a==41||a==97||a==98||a==121||a==146||
                 a==353||a==412||a==482||a==508||a==521||a==526,
 			rocket:a==2||a==3||a==16||a==21||a==22||
@@ -47,7 +47,7 @@ function setupRules(){
                 a==498||a==505||a==506||a==507||a==510||
                 a==516||a==521||a==523||a==524||a==528||
                 a==530||a==531||a==532||a==533||a==534||
-                a==535,
+                a==535||a==537,
 			bouncer:a==5||a==8||a==17||a==28||a==29||
 				a==30||a==34||a==35||a==42||a==51||
 				a==52||a==60||a==61||a==62||a==65||
@@ -168,7 +168,8 @@ function setupRules(){
                 a==501||a==505||a==506||a==507||a==508||
                 a==509||a==512||a==518||a==519||a==520||
                 a==521||a==524||a==525||a==526||a==527||
-                a==530||a==533||a==534||a==535||a==536,
+                a==530||a==533||a==534||a==535||a==536||
+                a==537,
 			fader2:a==48||a==89||a==103||a==193||a==194||
 				a==195||a==270||a==310||a==330||a==385||
 				a==398||a==484,
@@ -466,7 +467,7 @@ function mergeNumbers2(left,right){
 	return [...result,...left,...right]
 }
 function cutName(name){
-    return name.substr(name.length-3,name.length).localeCompare(' WC')==0?name.substr(0,name.length-3):
+    return name.substr(name.length-3,name.length).localeCompare(' WC')==0||name.substr(name.length-3,name.length).localeCompare(' WQ')==0?name.substr(0,name.length-3):
         name.substr(name.length-2,name.length).localeCompare(' C')==0||name.substr(name.length-2,name.length).localeCompare(' W')==0||name.substr(name.length-2,name.length).localeCompare(' Q')==0?name.substr(0,name.length-2):
         name
 }
@@ -6736,7 +6737,8 @@ function generateLevel(info,layer){
             ticker=0
             for(let a=0,la=entities.walls[1].length;a<la;a++){
                 if(entities.walls[1][a].type==16){
-                    entities.walls[1][a].weapon=findName('PlayerNightwatchEngineer',types.player)+[1,1,3,3,2,2,0,0][ticker]
+                    //entities.walls[1][a].weapon=findName('PlayerNightwatchEngineer',types.player)+[1,1,3,3,2,2,0,0][ticker]
+                    entities.walls[1][a].weapon=findName(['PlayerNightwatchEngineerW','PlayerNightwatchSoldierW','PlayerNightwatchHeavy','PlayerNightwatchPyro'][[1,1,3,3,2,2,0,0][ticker]],types.player)
                     ticker++
                 }
             }
@@ -9739,8 +9741,10 @@ function generateLevel(info,layer){
                 game.placer[1].splice(index,1)
             }
             lister=[
-                findName('PlayerNightwatchEngineer',types.player),
-                findName('PlayerNightwatchSoldier',types.player),
+                /*findName('PlayerNightwatchEngineer',types.player),
+                findName('PlayerNightwatchSoldier',types.player),*/
+                findName('PlayerNightwatchEngineerW',types.player),
+                findName('PlayerNightwatchSoldierW',types.player),
                 findName('PlayerNightwatchHeavy',types.player),
                 findName('PlayerNightwatchPyro',types.player)
             ]
@@ -9754,8 +9758,10 @@ function generateLevel(info,layer){
                     }else{
                         if(lister.length==0){
                             lister=[
-                                findName('PlayerNightwatchEngineer',types.player),
-                                findName('PlayerNightwatchSoldier',types.player),
+                                /*findName('PlayerNightwatchEngineer',types.player),
+                                findName('PlayerNightwatchSoldier',types.player),*/
+                                findName('PlayerNightwatchEngineerW',types.player),
+                                findName('PlayerNightwatchSoldierW',types.player),
                                 findName('PlayerNightwatchHeavy',types.player),
                                 findName('PlayerNightwatchPyro',types.player)
                             ]
@@ -9801,8 +9807,10 @@ function generateLevel(info,layer){
                 game.placer[1].splice(index,1)
             }
             lister=[
-                findName('PlayerNightwatchEngineer',types.player),
-                findName('PlayerNightwatchSoldier',types.player),
+                /*findName('PlayerNightwatchEngineer',types.player),
+                findName('PlayerNightwatchSoldier',types.player),*/
+                findName('PlayerNightwatchEngineerW',types.player),
+                findName('PlayerNightwatchSoldierW',types.player),
                 findName('PlayerNightwatchHeavy',types.player),
                 findName('PlayerNightwatchPyro',types.player)
             ]
@@ -9816,8 +9824,10 @@ function generateLevel(info,layer){
                     }else{
                         if(lister.length==0){
                             lister=[
-                                findName('PlayerNightwatchEngineer',types.player),
-                                findName('PlayerNightwatchSoldier',types.player),
+                                /*findName('PlayerNightwatchEngineer',types.player),
+                                findName('PlayerNightwatchSoldier',types.player),*/
+                                findName('PlayerNightwatchEngineerW',types.player),
+                                findName('PlayerNightwatchSoldierW',types.player),
                                 findName('PlayerNightwatchHeavy',types.player),
                                 findName('PlayerNightwatchPyro',types.player)
                             ]
@@ -11434,16 +11444,22 @@ function setupMinor(){
         createGraphics(10,20),
         createGraphics(10,20)
     ]*/
-    graphics.minor=[
+    /*graphics.minor=[
         createGraphics(20,40),
         createGraphics(20,40)
+    ]*/
+    graphics.minor=[
+        createGraphics(20,30),
+        createGraphics(20,30)
     ]
     for(let a=0,la=graphics.minor.length;a<la;a++){
         setupLayer(graphics.minor[a])
-        graphics.minor[a].translate(graphics.minor[a].width*0.5,graphics.minor[a].height*0.5)
+        //graphics.minor[a].translate(graphics.minor[a].width*0.5,graphics.minor[a].height*0.5)
+        graphics.minor[a].translate(graphics.minor[a].width*0.5,graphics.minor[a].height/3)
     }
     for(let a=0,la=2;a<la;a++){
         let layer=graphics.minor[a]
+        //layer.background(0)
         layer.scale(2)
         layer.fill(240-a*200,240,40+a*200)
         layer.rect(0,4,1,8)
@@ -11993,8 +12009,8 @@ function setupLists(){
             [`PlayerPistolW`,`PlayerCola`,`PlayerBaseball`,`PlayerMinibombC`,`PlayerStargrazer`,`PlayerWingPistolW`,`PlayerPushPistolW`,`PlayerBowlingBall`],
         ],[
             //[`PlayerHeavyRocketLauncher`,`PlayerBazookaC`,`PlayerBlastLauncherC`,`PlayerGarbageLauncherC`,`PlayerMoonshot`,`PlayerAftershockLauncherC`,`PlayerBlackBox`,`PlayerShoulderRocket`],
-            [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocketC`,`PlayerRocketJumper`],
-            [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerRocketJumpC`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
+            [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocketC`,`PlayerBlastLauncherQ`],
+            [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerRocketJumpW`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
         ],[
             [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
@@ -12106,7 +12122,7 @@ function outKD(bypass){
     ${round(player.stats.subIdealKills[1])} Kills
     ${round(player.stats.subDamage[1])} Damage Dealt
     ${round(player.stats.subTaken[1])} Damage Taken${round(player.stats.subTaken[1])>0?` (${round(player.stats.subSelfTaken[1])} Self)`:``}
-    ${player.stats.subTaken[1]==0?`Infinity`:round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()?`
+    ${player.stats.subTaken[1]==0?`Infinity`:round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()||player.playerData.name=='PlayerEngineerW'?`
 
     ${data[2].name}:
     ${round(player.stats.subIdealKills[2])} Kills
@@ -12212,7 +12228,8 @@ function opd(){
     entities.walls[1][66].weapon=findName('PlayerEscapeShotgun',types.player)
     entities.walls[1][67].weapon=findName('PlayerParachute',types.player)*/
 
-    entities.walls[1][24].weapon=findName('PlayerBlackBoxC',types.player)
+    //entities.walls[1][24].weapon=findName('PlayerBlackBoxC',types.player)
+    entities.walls[1][24].weapon=findName('PlayerRocketLauncherC',types.player)
     entities.walls[1][25].weapon=findName('PlayerBlastLauncherW',types.player)
     entities.walls[1][45].weapon=findName(`PlayerAftershockLauncherW`,types.player)
     entities.walls[1][46].weapon=findName('PlayerBanner',types.player)

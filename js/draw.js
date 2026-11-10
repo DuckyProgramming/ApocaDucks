@@ -1191,7 +1191,7 @@ function mainloop(){
                     let center=entities.players[c]
                     let special=false
                     //special=true
-                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
+                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate&&!(game.level==79||game.level==82)){
                         center=entities.players[c].getSpectate()
                         side=false
                         down=0
@@ -1250,7 +1250,7 @@ function mainloop(){
                                 special=true
                             }
                         }
-                    }/*else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
+                    }/*else if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate&&!((game.level==79||game.level==82))){
                         center=entities.players[c].getSpectate()
                         side=false
                         down=false
@@ -1811,7 +1811,7 @@ function mainloop(){
                             }
                         }
                     }
-                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate){
+                    if(entities.players[c].life<=0&&entities.players[c].die.objectiveTimer>=constants.spectate&&!(game.level==79||game.level==82)){
                         center=entities.players[c].getSpectate()
                         if(center!=entities.players[c]){
                             let fail=game.spectateSpawn[0]&&game.spectateSpawn[1]&&!entities.players[c].getSpectateSafe(center)
@@ -1831,7 +1831,7 @@ function mainloop(){
                     }
                 }
                 for(let a=0,la=graphics.main.length;a<la;a++){
-                    if(!(entities.players[a].life<=0&&entities.players[a].die.objectiveTimer>=constants.spectate)){
+                    if(!(entities.players[a].life<=0&&entities.players[a].die.objectiveTimer>=constants.spectate&&!(game.level==79||game.level==82))){
                         entities.players[a].displayOver(graphics.main[a])
                     }
                 }

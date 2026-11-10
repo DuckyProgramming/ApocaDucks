@@ -6,6 +6,7 @@ function setup(){
     setupRules()
 
     let comm=-1
+    //20
     if(comm>=0){
         duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
@@ -153,7 +154,7 @@ function setup(){
             case 17:
                 //general soldier test 1 (1228-1237)
                 duel.numKey=[0,1]
-                duel.sets=[[0,0],[0,0]]
+                duel.sets=[[0,0],[0,5]]
                 game.players=2
                 game.gaming=2
                 game.level=117
@@ -161,7 +162,7 @@ function setup(){
             case 18:
                 //general soldier test 2 (1228-1237)
                 duel.numKey=[1]
-                duel.sets=[[0,1]]
+                duel.sets=[[0,5]]
                 game.players=1
                 game.gaming=1
                 game.level=94
@@ -171,6 +172,14 @@ function setup(){
                 duel.numKey=[0,9]
                 duel.sets=[[0,0],[0,7,0]]
                 game.players=2
+                game.gaming=1
+                game.level=117
+            break
+            case 20:
+                //testing sticky jumper
+                duel.numKey=[3]
+                duel.sets=[[0,1]]
+                game.players=1
                 game.gaming=1
                 game.level=117
             break

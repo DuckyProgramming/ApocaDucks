@@ -87,7 +87,7 @@ class projectile{
 			break
 			case 2: case 16: case 21: case 22: case 27: case 32: case 45: case 48: case 55: case 66:
 			case 78: case 86: case 101: case 187: case 213: case 266: case 279: case 308: case 313: case 351:
-			case 362: case 378: case 379: case 430: case 445: case 489: case 524:
+			case 362: case 378: case 379: case 430: case 445: case 489: case 524: case 537:
 				this.speed=5
 				this.time=time
 			break
@@ -1239,7 +1239,10 @@ class projectile{
         switch(this.type){
 			case 1: case 428:
 				if(this.fade==1&&!(layer.index<game.disable.length&&game.disable[layer.index]==2)){
-					layer.image(graphics.minor[this.crit?1:0],0,0,10,20)
+					//layer.image(graphics.minor[this.crit?1:0],0,0,10,20)
+					layer.image(graphics.minor[this.crit?1:0],0,2.5,10,15)
+					/*layer.fill(0)
+					layer.ellipse(0,0,5)*/
 				}else{
 					layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 					layer.rect(0,4,1,8)
@@ -6218,7 +6221,7 @@ class projectile{
 				layer.fill(200,250,200,this.fade)
 				layer.ellipse(0,0,3)
 			break
-			case 351: case 524: case 534:
+			case 351: case 524: case 534: case 537:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -9310,8 +9313,13 @@ class projectile{
 						let launch=min(1,2-2*c/radius*pivot)*(jump?3:1)
 						entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/radius))*pivot*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
+						//entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						/*if(this.position.y>entities.players[b].position.y){
+							entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						}*/
 						entities.players[b].knockbackSet(6*launch,dir,1,1)
 						entities.players[b].knockbackSetForce(3*launch,dir,1,1)
+						//entities.players[b].thrown=0
 						entities.players[b].assort.stickyJump=true
 						entities.players[b].juggle=true
 						if(this.type==448&&c<105&&!entities.players[b].fort){
@@ -9541,7 +9549,7 @@ class projectile{
 				}
 			break
 			case 368:
-				//mark sticky
+				//mark sticky (stickyjumper)
 				radius=120
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
@@ -9554,8 +9562,15 @@ class projectile{
 							entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/radius))*pivot*entities.players[b].selfDamageCheck(this.index))
 							entities.players[b].generalizedTake(this)
 						}
+						//entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						/*if(this.position.y>entities.players[b].position.y){
+							entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						}*/
 						entities.players[b].knockbackSet(6*launch,dir,1,1)
 						entities.players[b].knockbackSetForce(3*launch,dir,1,1)
+						/*entities.players[b].knockbackSet(20*launch,dir,1,1)
+						entities.players[b].knockbackSetForce(2*launch,dir,1,1)*/
+						//entities.players[b].thrown=0.08
 						entities.players[b].assort.stickyJump=true
 						entities.players[b].juggle=true
 					}
@@ -9814,9 +9829,13 @@ class projectile{
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						let jump=entities.players[b].jump.time==0&&entities.players[b].jump.active>0&&entities.players[b].velocity.y<0||entities.players[b].assort.stickyJump
 						let pivot=jump?0.8:1
-						let launch=min(1,2-2*c/radius*pivot)*(jump?3:1)
+					let launch=min(1,2-2*c/radius*pivot)*(jump?3:1)
 						entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/radius))*pivot*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
+						//entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						/*if(this.position.y>entities.players[b].position.y){
+							entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
+						}*/
 						if(this.type==392){
 							entities.players[b].knockbackSet(3.6*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(1.8*launch,dir,1,1)
@@ -9824,6 +9843,7 @@ class projectile{
 							entities.players[b].knockbackSet(4.8*launch,dir,1,1)
 							entities.players[b].knockbackSetForce(2.4*launch,dir,1,1)
 						}
+						//entities.players[b].thrown=0
 						entities.players[b].assort.stickyJump=true
 						entities.players[b].juggle=true
 					}
@@ -10693,13 +10713,16 @@ class projectile{
 					}
 				}
 			break
-			case 534:
+			case 534: case 537:
 				radius=105
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					if(entities.players[b].explodable()&&this.validExplodeRadius(c,radius,entities.players[b])&&this.validExplodeTarget(entities.players[b])){
-						entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(this.id==entities.players[b].id?0:1))
-						entities.players[b].generalizedTake(this)
+						//entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(this.id==entities.players[b].id?0:1))
+						if(this.id!=entities.players[b].id){
+							entities.players[b].takeDamage(this.damage*(1-c/radius)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
+							entities.players[b].generalizedTake(this)
+						}
 						let pos=entities.players[b].index==this.index?this.position:this.previous.position
 						if(entities.players[b].jump.time==0||entities.players[b].assort.stickyJump){
 							let dir=atan2(entities.players[b].position.x-pos.x,pos.y-entities.players[b].position.y+3)
@@ -10937,7 +10960,7 @@ class projectile{
 				case 432: case 434: case 436: case 439: case 440: case 441: case 442: case 443: case 445: case 451:
 				case 454: case 456: case 459: case 460: case 461: case 465: case 466: case 467: case 476: case 480:
 				case 482: case 492: case 497: case 503: case 507: case 511: case 516: case 517: case 523: case 524:
-				case 529: case 530: case 532: case 533: case 534:
+				case 529: case 530: case 532: case 533: case 534: case 537:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -12070,6 +12093,7 @@ class projectile{
 							]
 							if(inputSet[0]){
 								this.det=5
+								//this.det=10
 							}
 							if(id>0&&id<=game.gaming&&this.timer>5&&this.timer<15&&!this.stop&&inputs.tap[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][3]){
 								this.autoDet=true

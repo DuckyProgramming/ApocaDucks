@@ -1600,7 +1600,7 @@ class player{
     }
     newWeapon(){
         let stoppage=false
-        if(rules.teamMode&&game.classWeapon||game.level==79||game.level==82){
+        if(rules.teamMode&&game.classWeapon/*||game.level==79||game.level==82*/){
             if(this.playerData.name=='PlayerCarrySentry1'||this.playerData.name=='PlayerCarrySentry2'||this.playerData.name=='PlayerCarrySentry3'){
                 this.type=this.assort.lastWeapon
                 stoppage=true
@@ -1611,7 +1611,7 @@ class player{
             }else if(game.randomizer){
                 this.type=floor(random(listing[1][listing[1].length-1]+1,types.player.length))
             }else if(game.classicWeapon||this.id>game.gaming){
-                if(game.classWeapon){
+                if(game.classWeapon&&game.level!=79&&game.level!=82){
                     let tick=floor(random(0,10))
                     this.type=findName('PlayerScoutW',types.player)+tick
                     if(game.level==27||game.level==38){
@@ -1637,6 +1637,9 @@ class player{
                 if((game.level==27||game.level==38||rules.teamMode)&&game.pvp){
                     this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.index]%game.weapon[game.mainline?game.players:this.index].length]
                     game.weaponTick[this.index]++
+                }else if(game.level==79||game.level==82){
+                    game.weaponTick[this.id-1]++
+                    this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.id-1]%game.weapon[game.mainline?game.players:this.id-1].length]
                 }else{
                     this.type=game.weapon[game.mainline?game.players:this.id-1][game.weaponTick[this.id-1]%game.weapon[game.mainline?game.players:this.id-1].length]
                     game.weaponTick[this.id-1]++
@@ -2355,6 +2358,14 @@ class player{
             case 'PlayerDroner12':
                 this.newSubWeaponASet(findName('PlayerDiscord',types.player))
                 this.newSubWeaponBSet(findName('PlayerAssaultRifleC',types.player))
+            break
+            case 'PlayerNightwatchEngineerW':
+                this.newSubWeaponASet(findName('PlayerNightwatchShotgun',types.player))
+                this.newSubWeaponBSet(findName('PlayerBuild111',types.player))
+            break
+            case 'PlayerNightwatchSoldierW':
+                this.newSubWeaponASet(findName('PlayerNightwatchShotgun',types.player))
+                this.newSubWeaponBSet(findName('PlayerBlastRocketW',types.player))
             break
         }
         if(this.playerData.name!='PlayerSpy'){
@@ -3794,6 +3805,8 @@ class player{
                             this.critTick+=this.critCheck()?1:0
                         }
                     }
+                    let pivKey=[0.3,0.05]
+                    //let pivKey=[0.5,0.05]
                     switch(weaponType){
                         case 0: case 177: case 257: case 578: case 582: case 751: case 1100: case 1218:
                             for(let a=0,la=12;a<la;a++){
@@ -8608,10 +8621,14 @@ class player{
                             //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1191:
@@ -8619,10 +8636,14 @@ class player{
                             //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1192:
@@ -8630,19 +8651,27 @@ class player{
                             //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1193:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],474,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
-                            if(this.velocity.x/4.5-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-0.05
-                            }else if(this.velocity.x/4.5+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+0.05
+                            if(this.velocity.x/4.5-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-pivKey[1]
+                            }else if(this.velocity.x/4.5+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1194:
@@ -8651,19 +8680,27 @@ class player{
                                 //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*1.6+this.regularize(this.velocity.x)*0.1
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                                }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                                }
+                                if(this.assort.stickyJump){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                    entities.projectiles[entities.projectiles.length-1].detTick-=5
                                 }
                             }else{
                                 //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],475,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,faced+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
                                 //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
-                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                                }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                                }
+                                if(this.assort.stickyJump){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                    entities.projectiles[entities.projectiles.length-1].detTick-=5
                                 }
                             }
                         break
@@ -8672,19 +8709,27 @@ class player{
                             //entities.projectiles[entities.projectiles.length-1].velocity.x=entities.projectiles[entities.projectiles.length-1].velocity.x*(2.2-0.2*round(weapon.ammo))+this.regularize(this.velocity.x)*0.1
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=(2.2-0.2*round(weapon.ammo))
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1196:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],501,faced,this.id,weaponData.damage*damageBuff,60,crit,this.index))
                             //entities.projectiles[entities.projectiles.length-1].velocity.x+=this.regularize(this.velocity.x)*0.1
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1197:
@@ -8692,18 +8737,26 @@ class player{
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],425,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                                }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                                }
+                                if(this.assort.stickyJump){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                    entities.projectiles[entities.projectiles.length-1].detTick-=5
                                 }
                             }else{
                                 //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,faced+random(-3,3),this.id,weaponData.damage*damageBuff*0.25,7200,crit,this.index))
                                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],512,faced+random(-3,3),this.id,weaponData.damage*damageBuff*0.2,7200,crit,this.index))
-                                if(this.velocity.x/4.5-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-0.05
-                                }else if(this.velocity.x/4.5+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+0.05
+                                if(this.velocity.x/4.5-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5-pivKey[1]
+                                }else if(this.velocity.x/4.5+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/4.5+pivKey[1]
+                                }
+                                if(this.assort.stickyJump){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                    entities.projectiles[entities.projectiles.length-1].detTick-=5
                                 }
                             }
                         break
@@ -8753,10 +8806,14 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],458,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1+0.25*round(weapon.ammo)
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=0.8
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1206:
@@ -8782,32 +8839,44 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.2
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                         break
-                        case 1210:
+                        case 1210: case 1243:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],368,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1211:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],349,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1212:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],435,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=2
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1213:
@@ -8816,20 +8885,28 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].tick=a
                                 entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
                                 entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
-                                if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                                }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                                if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                                }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                    entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
                                 }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
+                            }
                             }
                         break
                         case 1214:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],417,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.6
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1215:
@@ -8872,10 +8949,14 @@ class player{
                         break
                         case 1222:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],525,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
-                            if(this.velocity.x/3-0.05>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3-0.05
-                            }else if(this.velocity.x/3+0.05<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
-                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x/3+0.05
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
                         case 1223:
@@ -8960,11 +9041,20 @@ class player{
                             entities.projectiles[entities.projectiles.length-1].velocity.x*=1.5
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.25
                         break
-                        case 1236:
+                        case 1236: case 1239:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],534,faced,this.id,weaponData.damage*damageBuff,300,crit,this.index))
                         break
                         case 1237:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],535,faced,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                        break
+                        case 1242:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]+this.height/2,537,180,this.id,weaponData.damage*damageBuff,300,crit,this.index))
+                            entities.projectiles[entities.projectiles.length-1].speed=0
+                            entities.projectiles[entities.projectiles.length-1].explode()
+                            entities.projectiles[entities.projectiles.length-1].active=false
+                            this.velocity.x=lsin(this.direction.main)*24
+                            this.lastingForce[0]=lsin(this.direction.main)*3
+                            this.jump.time=0
                         break
 
                         //mark
@@ -9083,7 +9173,8 @@ class player{
                 this.playerData.name==`PlayerScout12`||this.playerData.name==`PlayerSoldier12`||this.playerData.name==`PlayerPyro12`||this.playerData.name==`PlayerDemoman12`||this.playerData.name==`PlayerHeavyWeapons12`||this.playerData.name==`PlayerEngineerC12`||this.playerData.name==`PlayerMedicC12`||this.playerData.name==`PlayerSniperC12`||this.playerData.name==`PlayerSpyC12`||this.playerData.name==`PlayerDroner12`||
                 this.playerData.name==`PlayerScoutW`||this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerPyroW`||this.playerData.name==`PlayerDemomanW`||this.playerData.name==`PlayerHeavyWeaponsW`||this.playerData.name==`PlayerEngineerW`||this.playerData.name==`PlayerMedicW`||this.playerData.name==`PlayerSniperW`||this.playerData.name==`PlayerSpyW`||this.playerData.name==`PlayerDronerW`||
                 this.playerData.name==`PlayerInsurgentW`||
-                this.playerData.name=='PlayerMobster'||this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerNightwatchSoldier'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerNightwatchPyro',
+                this.playerData.name=='PlayerMobster'||
+                this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerNightwatchSoldier'||this.playerData.name=='PlayerNightwatchHeavy'||this.playerData.name=='PlayerNightwatchPyro'||this.playerData.name=='PlayerNightwatchEngineerW'||this.playerData.name=='PlayerNightwatchSoldierW',
             classW:this.playerData.name==`PlayerScoutW`||this.playerData.name==`PlayerSoldierW`||this.playerData.name==`PlayerPyroW`||this.playerData.name==`PlayerDemomanW`||this.playerData.name==`PlayerHeavyWeaponsW`||this.playerData.name==`PlayerEngineerW`||this.playerData.name==`PlayerMedicW`||this.playerData.name==`PlayerSniperW`||this.playerData.name==`PlayerSpyW`||this.playerData.name==`PlayerDronerW`||
                 this.playerData.name==`PlayerInsurgentW`,
             jumper:this.playerData.name=='PistolJump'||this.playerData.name=='FastPunchJump'||this.playerData.name=='BigRocketLauncherJump'||this.playerData.name=='BigCritPistolJump'||this.playerData.name=='ShotgunJump'||this.playerData.name=='LongPunchJump'||this.playerData.name=='ParaPistol'||this.playerData.name=='ParaRocketLauncher'||this.playerData.name=='BigFastPunchJump'||this.playerData.name=='PistolHealSelfJump'||
@@ -9137,7 +9228,7 @@ class player{
                 this.playerData.name=='PlayerDemoman11'||this.playerData.name=='PlayerDemoman12'||this.playerData.name=='PlayerDemomanW',
             engineerLine:this.playerData.name=='PlayerEngineerC'||this.playerData.name=='PlayerEngineerC2'||this.playerData.name=='PlayerEngineerC3'||this.playerData.name=='PlayerEngineerC4'||this.playerData.name=='PlayerEngineerC5'||
                 this.playerData.name=='PlayerEngineerC6'||this.playerData.name=='PlayerEngineerC7'||this.playerData.name=='PlayerEngineerC8'||this.playerData.name=='PlayerEngineerC9'||this.playerData.name=='PlayerEngineerC10'||
-                this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerEngineerC11'||this.playerData.name=='PlayerEngineerC12'||this.playerData.name=='PlayerEngineerW',
+                this.playerData.name=='PlayerNightwatchEngineer'||this.playerData.name=='PlayerEngineerC11'||this.playerData.name=='PlayerEngineerC12'||this.playerData.name=='PlayerEngineerW'||this.playerData.name=='PlayerNightwatchEngineerW',
             medicLine:this.playerData.name=='PlayerMedicC'||this.playerData.name=='PlayerMedicC2'||this.playerData.name=='PlayerMedicC3'||this.playerData.name=='PlayerMedicC4'||this.playerData.name=='PlayerMedicC5'||
                 this.playerData.name=='PlayerMedicC6'||this.playerData.name=='PlayerMedicC7'||this.playerData.name=='PlayerMedicC8'||this.playerData.name=='PlayerMedicC9'||this.playerData.name=='PlayerMedicC10'||
                 this.playerData.name=='PlayerMedicC11'||this.playerData.name=='PlayerMedicC12'||this.playerData.name=='PlayerMedicW',
@@ -9209,7 +9300,7 @@ class player{
                 this.weaponType==543||this.weaponType==634||this.weaponType==671||this.weaponType==899||this.weaponType==903,
             jumpBonker:this.weaponType==676||this.weaponType==691||this.weaponType==712||this.weaponType==737||this.weaponType==763||
                 this.weaponType==784||this.weaponType==804||this.weaponType==829||this.weaponType==839||this.weaponType==870||
-                this.weaponType==946||this.weaponType==956||this.weaponType==996,
+                this.weaponType==946||this.weaponType==956||this.weaponType==996||this.weaponType==1241,
             explodable:this.weaponType!=406&&this.weaponType!=495,
             immune:this.weaponType==370||this.weaponType==381||this.weaponType==432||this.weaponType==434||this.weaponType==640||
                 this.weaponType==677||this.weaponType==692||this.weaponType==713||this.weaponType==738||this.weaponType==764||
@@ -10687,7 +10778,7 @@ class player{
             this.record.life=this.life
         }else if(this.record.life>max(0,this.life)){
             let hitself=this.die.projectile!=-1&&this.die.projectile!=undefined&&this.die.projectile.index==this.index
-            let subId=hitself?this.die.projectile.subWeapon:this.subWeaponA.id
+            let subId=this.assort.build>=0?2:hitself?this.die.projectile.subWeapon:this.subWeaponA.id
             this.stats.taken+=this.record.life-max(0,this.life)
             this.stats.lifeTaken+=this.record.life-max(0,this.life)
             this.stats.subTaken[subId]+=this.record.life-max(0,this.life)
@@ -12601,7 +12692,7 @@ class player{
             case 'PlayerScout12': case 'PlayerSoldier12': case 'PlayerPyro12': case 'PlayerDemoman12': case 'PlayerHeavyWeapons12': case 'PlayerEngineerC12': case 'PlayerMedicC12': case 'PlayerSniperC12': case 'PlayerSpyC12': case 'PlayerDroner12':
             case 'PlayerScoutW': case 'PlayerSoldierW': case 'PlayerPyroW': case 'PlayerDemomanW': case 'PlayerHeavyWeaponsW': case 'PlayerEngineerW': case 'PlayerMedicW': case 'PlayerSniperW': case 'PlayerSpyW': case 'PlayerDronerW':
             case 'PlayerInsurgentW':
-            case 'PlayerMobster': case 'PlayerNightwatchEngineer': case 'PlayerNightwatchSoldier': case 'PlayerNightwatchHeavy': case 'PlayerNightwatchPyro':
+            case 'PlayerMobster': case 'PlayerNightwatchEngineer': case 'PlayerNightwatchSoldier': case 'PlayerNightwatchHeavy': case 'PlayerNightwatchPyro': case 'PlayerNightwatchEngineerW': case 'PlayerNightwatchSoldierW':
                 for(let a=0,la=this.infoAnim.ammoA.length;a<la;a++){
                     this.infoAnim.ammoA[a]=smoothAnim(this.infoAnim.ammoA[a],this.subWeaponA.ammo>a,0,1,5)
                 }
@@ -14134,7 +14225,7 @@ class player{
                                         this.weaponType==415||this.weaponType==533?400:
                                         this.playerData.name=='DeadlyTank'||this.weaponType==461?200:
                                         game.classWeapon&&game.pvp&&entities.players[a].id>0?(this.weaponType==996&&this.subWeaponAType==722&&this.subWeaponBType==722?180:this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722)?120:60):
-                                        (this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722||this.subWeaponAType==1220||this.subWeaponBType==1220||this.subWeaponAType==1228||this.subWeaponBType==1228)?200:100)
+                                        (this.weaponType==712||this.weaponType==996&&(this.subWeaponAType==722||this.subWeaponBType==722||this.subWeaponAType==1220||this.subWeaponBType==1220||this.subWeaponAType==1228||this.subWeaponBType==1228||this.subWeaponAType==1228||this.subWeaponBType==1228)?200:100)
                                     )*(crit?3:1)*
                                     (entities.players[a].fort&&!entities.players[a].auto?(this.weaponRules.jumpBonker?0.1:0.025):1)//*
                                     /*(entities.players[a].effectiveId()>game.gaming&&this.playerData.name.includes(`Tank`)&&this.id==0?0.6:1)*/)

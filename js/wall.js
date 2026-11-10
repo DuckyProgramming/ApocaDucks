@@ -10800,9 +10800,11 @@ class wall{
                         if(game.level==115||game.level==116){
                             //layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
                             layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Insurgent`,`Random`][this.loadout.class]+` `+[`Primary`,`Secondary`,`PDA`,`Weapon`][this.loadout.set],0,this.height/2+26,180,42)
-                        }else if(game.classWeapon){
+                        }else if(game.classWeapon&&menu.level!=79&&menu.level!=82){
+                            //if(menu.level!=79&&menu.level!=82){
                             //layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Droner`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
                             layer.text([`Scout`,`Soldier`,`Pyro`,`Demoman`,`Heavy`,`Engineer`,`Medic`,`Sniper`,`Spy`,`Insurgent`,`Random`][this.weapon[0]-findName(`PlayerScoutW`,types.player)],0,this.height/2+26,180,42)
+                            //}
                         }else if(types.player[this.weapon].dpsBuff==0){
                             layer.text(types.player[this.weapon].desc,0,this.height/2+26,180,42)
                         }else{
@@ -12282,11 +12284,13 @@ class wall{
             break
             case 16:
                 let visible=false
+                //if(menu.level!=79&&menu.level!=82){
                 for(let a=0,la=game.gaming;a<la;a++){
                     if(dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)<150){
                         visible=true
                     }
                 }
+                //}
                 this.infoFade=smoothAnim(this.infoFade,visible,0,1,5)
                 if(
                     this.recharge>0&&

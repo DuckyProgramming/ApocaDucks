@@ -6887,6 +6887,14 @@ types={
     },{
       name:'PlayerTiny',sizeBuff:0.8,lifeBuff:2,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:782,
+    },{
+      name:'PlayerNightwatchEngineerW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1240,
+      desc:'Can place down temporary turrets',dpsBuff:0,
+    },{
+      name:'PlayerNightwatchSoldierW',sizeBuff:1,lifeBuff:4,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1241,
+      desc:'Can fire a blast rocket',dpsBuff:0,
     },
 
     {
@@ -7585,7 +7593,7 @@ types={
       name:'PlayerPeppergun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:772,
     },{
-      name:'PlayerBlastLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerBlastLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:2.5,reloadBuff:1.5,crit:0,weapon:773,
     },{
       name:'PlayerDetonator',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -8480,7 +8488,7 @@ types={
       name:'PlayerGarbageLauncherW',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1235,
     },{
-      name:'PlayerRocketJumper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      name:'PlayerBlastLauncherQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1236,
     },{
       name:'PlayerShoulderRocketC',sizeBuff:1,lifeBuff:4,speedBuff:1,
@@ -8488,6 +8496,15 @@ types={
     },{
       name:'PlayerIEDQ',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1238,
+    },{
+      name:'PlayerBlastRocketW',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1239,
+    },{
+      name:'PlayerRocketJumpW',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1242,
+    },{
+      name:'PlayerSuperStickyJumperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1243,
     },
 
     //mark c
@@ -21632,7 +21649,7 @@ types={
 			speed:0.8,
       uses:10,
 		},{
-			name:'Blast Launcher',
+			name:'Blast Launcher W',
 			ammo:2,
 			damage:200,
 			cooldown:24,
@@ -21658,6 +21675,51 @@ types={
 			reload:10,
 			speed:1.2,
       uses:30,
+		},{
+			name:'Blast Rocket W',
+			ammo:1,
+			damage:200,
+			cooldown:24,
+			stop:90,
+			reload:30,
+			speed:0.8,
+      uses:10,
+		},{
+			name:'Engineer WQ',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.025,
+      uses:12,
+		},{
+			name:'Soldier WQ',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:0.95,
+      uses:16,
+		},{
+			name:'Rocket Jump W',
+			ammo:1,
+			damage:200,
+			cooldown:20,
+			stop:90,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Super Sticky Jumper C',
+			ammo:8,
+			damage:240,
+			cooldown:36,
+			stop:24,
+			reload:24,
+			speed:1.05,
+      uses:18,
 		},
 
     /*{
