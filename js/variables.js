@@ -8505,6 +8505,9 @@ types={
     },{
       name:'PlayerSuperStickyJumperC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1243,
+    },{
+      name:'PlayerKeroseneC',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1244,
     },
 
     //mark c
@@ -21720,6 +21723,15 @@ types={
 			reload:24,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Kerosene C',
+			ammo:30,
+			damage:45,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:75,
 		},
 
     /*{

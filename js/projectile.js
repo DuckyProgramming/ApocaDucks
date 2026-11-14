@@ -14843,7 +14843,8 @@ class projectile{
 				case 371:
 					/*target.knockback(this.speed*8,this.direction,1,1)
 					target.knockbackForce(this.speed*2,this.direction,1,1)*/
-					target.gasTime=max(300,target.gasTime+60)
+					//target.gasTime=max(300,target.gasTime+60)
+					target.gasTime=max(180,target.gasTime+60)
 					target.gasser=this.index
 				break
 				case 388:

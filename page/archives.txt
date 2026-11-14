@@ -4,6 +4,7 @@
 1241 - nightwatch soldier w, 822
 1242 - rocket jump w, 1126
 1243 - super sticky jumper, 1210
+1244 - kerosene c, 8, 915
 
 537 - rocket jump w, 379
 

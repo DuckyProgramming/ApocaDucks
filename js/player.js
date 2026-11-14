@@ -8969,7 +8969,8 @@ class player{
                             /*this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0&&this.jump.active>0&&this.velocity.y<0?3:1)
                             this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0&&this.jump.active>0&&this.velocity.y<0?3:1)*/
                             this.velocity.x+=12*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
-                            this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
+                            //this.lastingForce[0]+=4*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
+                            this.lastingForce[0]+=2*(lsin(this.direction.main)<0?1:-1)*(this.jump.time==0?3:1)
                             this.thrown=0.1375
                         break
                         case 1224:
@@ -9060,6 +9061,9 @@ class player{
                             this.velocity.x=lsin(this.direction.main)*24
                             this.lastingForce[0]=lsin(this.direction.main)*3
                             this.jump.time=0
+                        break
+                        case 1244:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],386,faced+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit||weapon.ammo>=24,this.index))
                         break
 
                         //mark

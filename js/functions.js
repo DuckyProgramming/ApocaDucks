@@ -4308,7 +4308,8 @@ function generateLevel(info,layer){
                         case 52: case 53: case 54: case 56: case 61: case 62: case 64: case 70: case 71: case 72:
                         case 73: case 74: case 75: case 81: case 84: case 86: case 90: case 91: case 92: case 93:
                         case 110: case 111: case 112: case 113: case 117: case 118: case 119: case 120: case 123: case 124:
-                        case 125: case 126: case 127: case 128: case 129: case 130: case 131: case 133: case 137: case 138:
+                        case 125: case 126: case 127: case 128: case 129: case 130: case 131: case 137: case 138:
+                        //case 125: case 126: case 127: case 128: case 129: case 130: case 131: case 133: case 137: case 138:
                             entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+b*game.tileset[0],game.tileset[1]/2+a*game.tileset[1],game.tileset[1]*0.6,game.tileset[1]*0.6,16))
                             entities.walls[1][entities.walls[1].length-1].weapon=weaponize(cluster)
                         break
@@ -12012,7 +12013,7 @@ function setupLists(){
             [`PlayerRocketLauncherC`,`PlayerBazookaW`,`PlayerGarbageLauncherW`,`PlayerMoonshotC`,`PlayerAftershockLauncherW`,`PlayerBlackBoxC`,`PlayerShoulderRocketC`,`PlayerBlastLauncherQ`],
             [`PlayerShotgun`,`PlayerParachute`,`PlayerReserveShotgun`,`PlayerMusket`,`PlayerBanner`,`PlayerRocketJumpW`,`PlayerSemiHeavyPistol`,`PlayerEscapeShotgun`],
         ],[
-            [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKerosene`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
+            [`PlayerHeavyFlamethrower`,`PlayerFlameStream`,`PlayerFlickerC`,`PlayerKeroseneC`,`PlayerBubbleBlaster`,`PlayerDegreaser`],
             [`PlayerReflector`,`PlayerGustC`,`PlayerFlareGun`,`PlayerLightBooster`,`PlayerDetonatorC`,`PlayerShotgun`,`PlayerSteamblast`,`PlayerSunriseC`,`PlayerMolotov`,`PlayerScorchShot`],
         ],[
             [`PlayerGrenadierW`,`PlayerShellerW`,`PlayerCaberW`,`PlayerWarningLauncherQ`,`PlayerLingererC`,`PlayerChargeC`,`PlayerStairwayW`,`PlayerRollerLauncherC`,`PlayerSwordW`,`PlayerDaydrinkerQ`],
