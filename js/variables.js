@@ -8508,6 +8508,9 @@ types={
     },{
       name:'PlayerKeroseneC',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1244,
+    },{
+      name:'PlayerFastStickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1245,
     },
 
     //mark c
@@ -21732,6 +21735,15 @@ types={
 			reload:2,
 			speed:0.95,
       uses:75,
+		},{
+			name:'Fast Stickybomb Launcher',
+			ammo:4,
+			damage:300,
+			cooldown:36,
+			stop:66,
+			reload:40,
+			speed:1.05,
+      uses:18,
 		},
 
     /*{

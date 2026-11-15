@@ -9065,6 +9065,18 @@ class player{
                         case 1244:
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],386,faced+random(-12.5,12.5),this.id,weaponData.damage*damageBuff,10,crit||weapon.ammo>=24,this.index))
                         break
+                        case 1245:
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],538,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
+                            if(this.velocity.x*pivKey[0]-pivKey[1]>entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x>0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]-pivKey[1]
+                            }else if(this.velocity.x*pivKey[0]+pivKey[1]<entities.projectiles[entities.projectiles.length-1].velocity.x&&entities.projectiles[entities.projectiles.length-1].velocity.x<0){
+                                entities.projectiles[entities.projectiles.length-1].velocity.x=this.velocity.x*pivKey[0]+pivKey[1]
+                            }
+                            if(this.assort.stickyJump){
+                                entities.projectiles[entities.projectiles.length-1].velocity.y*=0.5
+                                entities.projectiles[entities.projectiles.length-1].detTick-=5
+                            }
+                        break
 
                         //mark
                     }
