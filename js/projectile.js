@@ -9385,7 +9385,8 @@ class projectile{
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						let jump=entities.players[b].jump.time==0&&entities.players[b].jump.active>0&&entities.players[b].velocity.y<0||entities.players[b].assort.stickyJump
 						let pivot=jump?0.8:1
-						let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						//let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						let launch=min(1,2-2*c/ver*pivot)*(jump?(entities.players[b].index==this.index?3:2):1)
 						entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/ver))*pivot*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
 						//entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
@@ -9642,7 +9643,8 @@ class projectile{
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						let jump=entities.players[b].jump.time==0&&entities.players[b].jump.active>0&&entities.players[b].velocity.y<0||entities.players[b].assort.stickyJump
 						let pivot=jump?0.8:1
-						let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						//let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						let launch=min(1,2-2*c/ver*pivot)*(jump?(entities.players[b].index==this.index?3:2):1)
 						if(entities.players[b].index!=this.index){
 							entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/ver))*pivot*entities.players[b].selfDamageCheck(this.index))
 							entities.players[b].generalizedTake(this)
@@ -9926,7 +9928,8 @@ class projectile{
 						let dir=atan2(entities.players[b].position.x-this.position.x,this.position.y-entities.players[b].position.y)
 						let jump=entities.players[b].jump.time==0&&entities.players[b].jump.active>0&&entities.players[b].velocity.y<0||entities.players[b].assort.stickyJump
 						let pivot=jump?0.8:1
-					let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						//let launch=min(1,2-2*c/ver*pivot)*(jump?3:1)
+						let launch=min(1,2-2*c/ver*pivot)*(jump?(entities.players[b].index==this.index?3:2):1)
 						entities.players[b].takeDamage(this.damage*sqrt(min(1,1-c/ver))*pivot*entities.players[b].selfDamageCheck(this.index))
 						entities.players[b].generalizedTake(this)
 						//entities.players[b].velocity.y=min(0,entities.players[b].velocity.y)
@@ -10998,6 +11001,94 @@ class projectile{
 			}
 		}
 		//mark ex
+	}
+	attemptDet(){
+		if(this.active&&(
+			this.type==284||this.type==286||this.type==329||this.type==349||this.type==368||this.type==372||this.type==392||this.type==417||this.type==435||this.type==448||
+			this.type==509||this.type==538
+		)){
+			let id=((game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index+1:this.id)
+			let inputSet=this.id==0||id>game.gaming?[game.det[id]>0,false]:[
+				inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][0]||game.det[id]>0,
+				inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][1]
+			]
+			if(inputSet[0]){
+				this.det=5
+				//this.det=10
+			}
+			if(id>0&&id<=game.gaming&&this.timer>5&&this.timer<15&&!this.stop&&inputs.tap[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][3]){
+				this.autoDet=true
+			}
+			if(this.det>0||this.autoDet){
+				if(this.timer>=this.detTick&&this.active&&!(this.type==372&&this.delay>0)){
+					for(let a=0,la=entities.players.length;a<la;a++){
+						if(entities.players[a].index==this.index){
+							if(
+								this.autoDet&&this.stop||!this.autoDet&&(
+									lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
+									lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
+									abs(this.position.x-entities.players[a].position.x)<75&&
+									abs(this.position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
+								)&&
+								!(this.type==417&&this.detTimer>0)
+							){
+								if(this.type==417){
+									this.dets--
+									if(this.dets<=0){
+										this.active=false
+									}else{
+										this.detTimer=10
+									}
+								}else{
+									this.active=false
+								}
+								this.explode()
+								if(this.autoDet){
+									/*game.det[id]=2
+									this.autoDet=false*/
+									for(let b=0,lb=entities.projectiles.length;b<lb;b++){
+										if(
+											entities.projectiles[b].index==this.index&&
+											entities.projectiles[b].projectileIndex!=this.projectileIndex&&
+											entities.projectiles[b].timer>=entities.projectiles[b].detTick&&
+											entities.projectiles[b].active&&
+											!(entities.projectiles[b].type==372&&entities.projectiles[b].delay>0)
+										){
+											if(
+												(
+													this.position.x<entities.players[a].position.x&&entities.projectiles[b].position.x<entities.players[a].position.x||
+													this.position.x>entities.players[a].position.x&&entities.projectiles[b].position.x>entities.players[a].position.x||
+													abs(entities.projectiles[b].position.x-entities.players[a].position.x)<75&&
+													abs(entities.projectiles[b].position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
+												)&&
+												!(entities.projectiles[b].type==417&&entities.projectiles[b].detTimer>0)
+											){
+												if(entities.projectiles[b].type==417){
+													entities.projectiles[b].dets--
+													if(entities.projectiles[b].dets<=0){
+														entities.projectiles[b].active=false
+													}else{
+														entities.projectiles[b].detTimer=10
+													}
+												}else{
+													entities.projectiles[b].active=false
+												}
+												entities.projectiles[b].explode()
+											}
+										}
+									}
+									this.autoDet=false
+								}
+							}
+							break
+						}
+					}
+				}
+				if(this.det>0){
+					this.det--
+				}
+			}
+		}
 	}
 	addProjectile(projectile){
 		projectile.subWeapon=this.subWeapon
@@ -12264,87 +12355,9 @@ class projectile{
 								}*/
 								game.det[id]=2
 							}
-						}else if(a==1){
-							let inputSet=this.id==0||id>game.gaming?[game.det[id]>0,false]:[
-								inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][0]||game.det[id]>0,
-								inputs.release[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][1]
-							]
-							if(inputSet[0]){
-								this.det=5
-								//this.det=10
-							}
-							if(id>0&&id<=game.gaming&&this.timer>5&&this.timer<15&&!this.stop&&inputs.tap[game.gaming==1?1:game.gaming==2&&id==1?2:id-1][3]){
-								this.autoDet=true
-							}
-							if(this.det>0||this.autoDet){
-								if(this.timer>=this.detTick&&this.active&&!(this.type==372&&this.delay>0)){
-									for(let a=0,la=entities.players.length;a<la;a++){
-										if(entities.players[a].index==this.index){
-											if(
-												this.autoDet&&this.stop||!this.autoDet&&(
-													lsin(entities.players[a].direction.main)<0&&this.position.x<entities.players[a].position.x||
-													lsin(entities.players[a].direction.main)>0&&this.position.x>entities.players[a].position.x||
-													abs(this.position.x-entities.players[a].position.x)<75&&
-													abs(this.position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
-												)&&
-												!(this.type==417&&this.detTimer>0)
-											){
-												if(this.type==417){
-													this.dets--
-													if(this.dets<=0){
-														this.active=false
-													}else{
-														this.detTimer=10
-													}
-												}else{
-													this.active=false
-												}
-												this.explode()
-												if(this.autoDet){
-													/*game.det[id]=2
-													this.autoDet=false*/
-													for(let b=0,lb=entities.projectiles.length;b<lb;b++){
-														if(
-															entities.projectiles[b].index==this.index&&
-															entities.projectiles[b].projectileIndex!=this.projectileIndex&&
-															entities.projectiles[b].timer>=entities.projectiles[b].detTick&&
-															entities.projectiles[b].active&&
-															!(entities.projectiles[b].type==372&&entities.projectiles[b].delay>0)
-														){
-															if(
-																(
-																	this.position.x<entities.players[a].position.x&&entities.projectiles[b].position.x<entities.players[a].position.x||
-																	this.position.x>entities.players[a].position.x&&entities.projectiles[b].position.x>entities.players[a].position.x||
-																	abs(entities.projectiles[b].position.x-entities.players[a].position.x)<75&&
-																	abs(entities.projectiles[b].position.y-entities.players[a].position.y)<150+entities.players[a].height*0.5
-																)&&
-																!(entities.projectiles[b].type==417&&entities.projectiles[b].detTimer>0)
-															){
-																if(entities.projectiles[b].type==417){
-																	entities.projectiles[b].dets--
-																	if(entities.projectiles[b].dets<=0){
-																		entities.projectiles[b].active=false
-																	}else{
-																		entities.projectiles[b].detTimer=10
-																	}
-																}else{
-																	entities.projectiles[b].active=false
-																}
-																entities.projectiles[b].explode()
-															}
-														}
-													}
-													this.autoDet=false
-												}
-											}
-											break
-										}
-									}
-								}
-								if(this.det>0){
-									this.det--
-								}
-							}
+						//}else if(a==1){
+						}else if(a==0){
+							this.attemptDet()
 						}
 					}
 					if(this.type==372&&this.delay>0){

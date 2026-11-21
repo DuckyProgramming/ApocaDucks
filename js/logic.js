@@ -3419,8 +3419,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !(this.rules.spyLineFull&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
@@ -5936,8 +5936,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !(this.rules.spyLineFull&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
@@ -6389,7 +6389,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -7911,8 +7911,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                    abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                    abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                    abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                    abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                     entities.players[a].life>0&&
                     this.weaponType>=0&&entities.players[a].unProtected()
                 ){
@@ -8066,7 +8066,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -8754,7 +8754,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -10298,8 +10298,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
             ){
@@ -10481,8 +10481,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:150)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?180:90)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?900:150)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0&&this.target.point>=2||this.position.x<game.tileset[0]*31||this.position.x>game.edge[0]-game.tileset[0]*31?180:90)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
             ){
@@ -10706,8 +10706,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
             ){
@@ -11078,8 +11078,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()
             ){
@@ -11520,7 +11520,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -12927,7 +12927,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -13636,7 +13636,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -14859,8 +14859,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !game.noPlayer&&!(this.id>0&&this.weaponType==-1&&!this.playerData.name.includes('Buster'))&&
@@ -15367,8 +15367,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?(entities.players[a].fort&&entities.players[a].pos>=5?450:900):300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !game.noPlayer&&!(this.id>0&&this.weaponType==-1&&!this.playerData.name.includes('Buster'))&&
@@ -17073,8 +17073,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !(this.rules.spyLineFull&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
@@ -17470,8 +17470,8 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine?2:1)&&
-                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine?2:1)&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.id!=0?900:300)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
+                abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)*(this.rules.sniperLine&&!this.weaponRules.closeSniper?2:1)&&
                 entities.players[a].life>0&&
                 this.weaponType>=0&&entities.players[a].unProtected()&&
                 !(this.rules.spyLineFull&&this.fade<0.1&&!entities.players[a].fort&&floor(random(0,600))!=0&&entities.players[a].life>entities.players[a].base.life*0.25)
@@ -18157,7 +18157,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.assort.intel?300:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -18862,7 +18862,7 @@ player.prototype.logic=function(){
                         this.subPlayerBData.name==`PlayerQuickfix`
                     )
                 )?1.125:1.5)||this.playerData.name=='PlayerMedicC3'&&entities.players[a].critBuff<=0&&this.subWeaponAType==727)&entities.players[a].index!=this.index)&&
-                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
+                abs(this.position.x-entities.players[a].position.x)<(this.blindTime>0?0.5:1)*(this.playerData.name.includes('Buster')?1500:this.rules.sniperLine&&!this.weaponRules.closeSniper?1200:600)&&abs(this.position.y-entities.players[a].position.y)<(this.playerData.name.includes('Buster')?240:this.id!=0?180:120)&&entities.players[a].life>0&&
                 entities.players[a].unProtected()
             ){
                 let b=entities.players[a]
@@ -20359,7 +20359,7 @@ player.prototype.logic=function(){
     }
     this.target.position.x=constrain(this.target.position.x,0,game.edge[0])
     this.manage[0]=abs(this.position.x-this.target.position.x)<(this.id!=0?1800:900)&&
-        this.rules.sniperLine&&this.manage[3]==1&&
+        this.rules.sniperLine&&!this.weaponRules.closeSniper&&this.manage[3]==1&&
         this.subWeaponAData.name!='Bushwack'&&
         (lsin(this.direction.main)<0&&this.target.position.x<this.position.x||lsin(this.direction.main)>0&&this.target.position.x>this.position.x)&&
         abs(this.target.position.y-this.position.y)<50?-1:

@@ -9041,6 +9041,9 @@ function generateLevel(info,layer){
                     typeList[0].push(...range(0,10))
                     typeList[1].push(...range(0,10))
                 }
+                if(game.players==12){
+                    typeList=[[0,0,1,1,3,6],[0,0,1,1,3,6]]
+                }
                 if(duel.trigger){
                     split=range(game.players*0.5,game.players)
                 }else{
@@ -9964,6 +9967,9 @@ function generateLevel(info,layer){
                     typeList[0].push(...range(0,10))
                     typeList[1].push(...range(0,10))
                     typeList[2].push(...range(0,10))
+                }
+                if(game.players==18){
+                    typeList=[[0,0,1,1,3,6],[0,0,1,1,3,6],[0,0,1,1,3,6]]
                 }
                 if(game.classPick.length>0){
                     split[0].push(1)

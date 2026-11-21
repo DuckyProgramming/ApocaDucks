@@ -146,7 +146,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:[0,0],
+            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:[0,0],facing:this.direction.main,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -1865,7 +1865,8 @@ class player{
                 }
                 if(this.subWeaponAType==942){
                     //let faced=(lsin(this.direction.main)<0?-90:90)
-                    let faced=lsin(this.direction.goal)<0?-90:90
+                    //let faced=lsin(this.direction.goal)<0?-90:90
+                    let faced=lsin(this.assort.facing)<0?-90:90
                     //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,faced+180,this.id,100,7200,crit,this.index))
                     entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],404,faced+180,this.id,80,7200,crit,this.index))
                 }
@@ -2373,7 +2374,8 @@ class player{
             this.setColor()
         }
         //let faced=(lsin(this.direction.main)<0?-90:90)
-        let faced=lsin(this.direction.goal)<0?-90:90
+        //let faced=lsin(this.direction.goal)<0?-90:90
+        let faced=lsin(this.assort.facing)<0?-90:90
 		switch(this.weaponType){
             case 222:
                 entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],134,faced+180,this.id,this.weaponData.damage*this.playerData.damageBuff*10,5400,crit,this.index))
@@ -3743,7 +3745,8 @@ class player{
                     !((weaponType==1030||weaponType==1161||weaponType==1237)&&this.assort.firingTick<1/3)
                 ){
                     //let faced=(lsin(this.direction.main)<0?-90:90)
-                    let faced=lsin(this.direction.goal)<0?-90:90
+                    //let faced=lsin(this.direction.goal)<0?-90:90
+                    let faced=lsin(this.assort.facing)<0?-90:90
                     if(this.playerData.name==`PlayerSniperW`&&this.subWeaponAType==728){
                         damageBuff*=constrain(this.subWeaponA.time/60,1,4)
                         this.subWeaponA.time=max(0,min(240,this.subWeaponA.time)-480/this.subWeaponBData.ammo)
@@ -9329,6 +9332,7 @@ class player{
                 this.weaponType==871||this.weaponType==947||this.weaponType==957||this.weaponType==997,
             dronerLine:this.weaponType==707||this.weaponType==708||this.weaponType==720||this.weaponType==745||this.weaponType==771||
                 this.weaponType==792||this.weaponType==954||this.weaponType==964||this.weaponType==1004,
+            closeSniper:this.subWeaponAType==1157,
         }
     }
     explodable(){
@@ -9472,6 +9476,7 @@ class player{
             //this.direction.main+=18*randSign()
             this.direction.main+=turn*randSign()
         }
+        this.assort.facing=this.direction.goal
         if(this.direction.main>180){
             this.direction.main-=360
         }else if(this.direction.main<-180){
@@ -10329,6 +10334,7 @@ class player{
                 let inputSwap=this.enigmaTime>0||this.index<game.disable.length&&game.disable[this.index]==1&&this.assort.pivot==1?1:0
                 if(inputSet[inputSwap]&&!inputSet[1-inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
+                    this.assort.facing=-54
                     //if(!this.thrown&&!this.thrown2&&!this.thrown3){
                     if(this.thrown==0.15){
                         this.velocity.x-=this.getSpeed()
@@ -10336,6 +10342,7 @@ class player{
                     this.runAnim(1/30)
                 }else if(inputSet[1-inputSwap]&&!inputSet[inputSwap]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
+                    this.assort.facing=54
                     //if(!this.thrown&&!this.thrown2&&!this.thrown3){
                     if(this.thrown==0.15){
                         this.velocity.x+=this.getSpeed()
@@ -10488,8 +10495,8 @@ class player{
                             }
                         }
                     }else if((
-                        inputSet[3]&&this.subWeaponAType!=919&&this.subWeaponAType!=1175&&this.subWeaponAType!=1219||
                         /*&&(this.subWeaponAType!=687&&this.subWeaponAType!=815&&this.subWeaponAType!=851&&this.subWeaponAType!=861&&this.subWeaponAType!=919&&this.subWeaponAType!=922&&this.subWeaponAType!=971&&this.subWeaponAType!=983&&this.subWeaponAType!=1012&&this.subWeaponAType!=1013)*/
+                        inputSet[3]&&this.subWeaponAType!=919&&this.subWeaponAType!=1175&&this.subWeaponAType!=1219||
                         this.rules.class&&this.subWeaponAType==879&&this.subWeaponA.ammo<this.subWeaponAData.ammo&&!this.subWeaponA.reloading||
                         this.rules.class&&(this.subWeaponAType==1152||this.subWeaponAType==1153||this.subWeaponAType==1166)&&this.subWeaponA.ammo%3!=0&&!this.subWeaponA.reloading
                     )){
@@ -11025,6 +11032,7 @@ class player{
                             entities.players[entities.players.length-1].sidekick=true
                             entities.players[entities.players.length-1].direction.goal=this.direction.goal
                             entities.players[entities.players.length-1].weapon.cooldown+=30
+                            entities.players[entities.players.length-1].stuckTime=5
                         break
                         case 1170:
                             //entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,495,random(90,270),this.id,480,60,crit,this.index))
@@ -13826,7 +13834,8 @@ class player{
                 case 'TankWare':
                     if(this.time==1){
                         //let faced=(lsin(this.direction.main)<0?-90:90)
-                        let faced=lsin(this.direction.goal)<0?-90:90
+                        //let faced=lsin(this.direction.goal)<0?-90:90
+                        let faced=lsin(this.assort.facing)<0?-90:90
                         entities.projectiles.push(new projectile(this.layer,this.position.x,this.position.y,134,faced+180,this.id,300,5400,0,this.index))
                     }
                 break
