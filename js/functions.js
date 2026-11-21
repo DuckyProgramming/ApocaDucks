@@ -9152,6 +9152,8 @@ function generateLevel(info,layer){
                                 entities.players[a].newWeaponSet(game.weapon[a][0])
                                 if(typeList[team].includes((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10)){
                                     typeList[team].splice(typeList[team].indexOf((game.weapon[a][0]-findName('PlayerScoutW',types.player))%10),1)
+                                }else if(game.players==12&&typeList[team].includes(0)){
+                                    typeList[team].splice(typeList[team].indexOf(0),1)
                                 }
                             }else{
                                 entities.players[a].assort.storeSubWeapon=[]
@@ -9164,6 +9166,8 @@ function generateLevel(info,layer){
                                 entities.players[a].newWeaponSet(findName('PlayerScoutW',types.player)+tick)
                                 if(typeList[team].includes(tick)){
                                     typeList[team].splice(typeList[team].indexOf(tick),1)
+                                }else if(game.players==18&&typeList[team].includes(0)){
+                                    typeList[team].splice(typeList[team].indexOf(0),1)
                                 }
                             }
                             /*if(game.weapon[a][0]==findName('PlayerRandomClass',types.player)){

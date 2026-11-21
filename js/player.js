@@ -1429,6 +1429,27 @@ class player{
             }
         }
     }
+    checkJump(){
+        if(this.id==0&&this.blindTime>0){
+            return false
+        }else if(this.construct&&!this.remote||this.fort&&(!this.auto||game.level==38&&(this.pos==1&&this.id==2||this.pos==2&&this.id==1||this.id==-1))){
+            return false
+        }else if(this.effectiveId()>game.gaming||this.id==0||this.auto||this.decoy||this.decoy2||game.noPlayer){
+            return this.manage[2]==1&&this.life>0&&this.stunTime<=0&&
+                (this.jump.time>2||this.jump.double==1&&this.velocity.y>0||this.jump.active>0)&&this.stuckTime<=0&&
+                !(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.y<this.base.position.y+50)&&
+                !this.decoy&&!this.decoy
+        }else if(this.control==0){
+            let core=(game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index:this.id-1
+            let inputSet=inputs.keys[game.gaming==1?1:game.gaming==2&&core==0?2:core]
+            let inputSetB=inputs.tap[game.gaming==1?1:game.gaming==2&&core==0?2:core]
+            return inputSet[2]&&this.life>0&&this.stunTime<=0&&
+                (this.jump.time>2||this.jump.active>0||this.jump.double==1&&inputSetB[2]||this.jump.triple==1&&inputSetB[2]||this.jump.quadruple==1&&inputSetB[2])&&this.stuckTime<=0
+        }else{
+            return this.inputs[this.selector][2]&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.active>0)&&this.stuckTime<=0
+        }
+        //return false
+    }
     setColor(){
         if(this.playerData.name=='BigMachineGunDamaged'||this.playerData.name=='BigCritRocketLauncherDamaged'){
             this.takeDamage(150)
@@ -8431,8 +8452,8 @@ class player{
                             entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],484,faced+random(-3,3),this.id,weaponData.damage*damageBuff,7200,crit,this.index))
                         break
                         case 1155:
-                            //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,240,crit,this.index))
-                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
+                            entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,240,crit,this.index))
+                            //entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],485,faced,this.id,weaponData.damage*damageBuff,180,crit,this.index))
                             entities.projectiles[entities.projectiles.length-1].velocity.y*=1.5
                         break
                         case 1156:
@@ -9972,7 +9993,8 @@ class player{
                 }else if(this.animSet.loop>=1){
                     this.animSet.loop=0
                 }
-                if(!this.decoy&&!this.decoy2&&this.manage[2]==1&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.double==1&&this.velocity.y>0||this.jump.active>0)&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.y<this.base.position.y+50)&&this.stunTime<=0){
+                //if(!this.decoy&&!this.decoy2&&this.manage[2]==1&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.double==1&&this.velocity.y>0||this.jump.active>0)&&this.stuckTime<=0&&!(game.attacker&&this.id==0&&!this.free&&!this.playerData.name.includes('Buster')&&this.position.y<this.base.position.y+50)&&this.stunTime<=0){
+                if(this.checkJump()){
                     if(this.jump.time>2){
                         this.jump.time=0
                         this.jump.active=ceil((10-floor(max(0,this.assort.tired-this.life/this.base.life*30)/30))*(this.chillTime>0?0.5:1))
@@ -10353,7 +10375,8 @@ class player{
                 }else if(this.animSet.loop>=1){
                     this.animSet.loop=0
                 }
-                if(inputSet[2]&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.active>0||this.jump.double==1&&inputSetB[2]||this.jump.triple==1&&inputSetB[2]||this.jump.quadruple==1&&inputSetB[2])&&this.stuckTime<=0){
+                //if(inputSet[2]&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.active>0||this.jump.double==1&&inputSetB[2]||this.jump.triple==1&&inputSetB[2]||this.jump.quadruple==1&&inputSetB[2])&&this.stuckTime<=0){
+                if(this.checkJump()){
                     if(this.jump.time>2){
                         this.jump.time=0
                         this.jump.active=ceil((10-floor(max(0,this.assort.tired-this.life/this.base.life*30)/30))*(this.chillTime>0?0.5:1))
@@ -10594,7 +10617,8 @@ class player{
                 }else if(this.animSet.loop>=1){
                     this.animSet.loop=0
                 }
-                if(this.inputs[this.selector][2]&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.active>0)&&this.stuckTime<=0){
+                //if(this.inputs[this.selector][2]&&this.life>0&&this.stunTime<=0&&(this.jump.time>2||this.jump.active>0)&&this.stuckTime<=0){
+                if(this.checkJump()){
                     if(this.jump.time>2){
                         this.jump.time=0
                         this.jump.active=ceil((10-floor(max(0,this.assort.tired-this.life/this.base.life*30)/30))*(this.chillTime>0?0.5:1))

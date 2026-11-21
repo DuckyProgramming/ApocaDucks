@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     let comm=-1
-    //27
+    //28
     if(comm>=0){
         duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
@@ -235,6 +235,14 @@ function setup(){
                 //testing bushwack bot
                 duel.numKey=[3,7]
                 duel.sets[1]=[0,7]
+                game.players=2
+                game.gaming=1
+                game.level=117
+            break
+            case 28:
+                //testing bot vs bowling ball
+                duel.numKey=[0,4]
+                duel.sets[0]=[0,7]
                 game.players=2
                 game.gaming=1
                 game.level=117
