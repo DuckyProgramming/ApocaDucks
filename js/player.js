@@ -303,6 +303,7 @@ class player{
         }
     }
     onRelease(key){
+        let projectilesLength=entities.projectiles.length
         let core=(game.level==27||game.level==38||rules.teamMode)&&game.pvp?this.index:this.id-1
         if((game.gaming==1?1:game.gaming==2&&core==0?2:core)==key){
             if(this.life>0&&this.weaponType>=0&&this.rules.attackable&&!this.peace&&this.rules.class){
@@ -321,6 +322,13 @@ class player{
                         }
                     }
                 }
+            }
+        }
+        if(entities.projectiles.length>projectilesLength){
+            for(let a=projectilesLength,la=entities.projectiles.length;a<la;a++){
+                entities.projectiles[a].previous.position.x=this.position.x
+                entities.projectiles[a].previous.position.y=this.position.y
+                entities.projectiles[a].subWeapon=this.subWeaponA.id
             }
         }
     }
@@ -3259,7 +3267,8 @@ class player{
                 if(this.visible==0){
                     this.visible=600
                     //this.visible=300
-                    entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+                    //entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,-1,0,[],false,findName('Decoy',types.player),game.index))
+                    entities.players.push(new player(this.layer,this.previous.position.x,this.previous.position.y+this.height/2-12,this.id,0,[],false,findName('Decoy',types.player),game.index))
                     game.index++
                     entities.players[entities.players.length-1].decoy=true
                     entities.players[entities.players.length-1].life=this.life
@@ -10855,17 +10864,18 @@ class player{
             }
             for(let a=0,la=entities.players.length;a<la;a++){
                 if(entities.players[a].index==this.die.killer&&(entities.players[a].id!=this.id||this.fort)){
-                    let mult=this.fort||this.decoy||this.decoy2?0.2:this.construct?0.5:1
+                    let mult=this.fort?0.2:this.construct?0.5:1
+                    let mult2=this.fort||this.decoy||this.decoy2?0.2:this.construct?0.5:1
                     //if(!this.decoy){
                     entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*mult
                     entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*mult
                     let classification=entities.players[a].life<=0&&entities.players[a].rules.insurgentLine?2:this.die.projectile.subWeapon
-                    entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult
+                    entities.players[a].stats.subDamage[classification]+=(this.record.life-max(0,this.life))*mult2
                     if(entities.players[a].assort.bannerActive[0]<=0&&entities.players[a].rules.class&&(
                         entities.players[a].subWeaponAType==1224||entities.players[a].subWeaponBType==1224||
                         entities.players[a].subWeaponAType==1225||entities.players[a].subWeaponBType==1225
                     )){
-                        entities.players[a].assort.banner+=(this.record.life-max(0,this.life))*mult
+                        entities.players[a].assort.banner+=(this.record.life-max(0,this.life))*mult2
                     }
                     //entities.players[a].stats.damage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
                     //entities.players[a].stats.lifeDamage+=(this.record.life-max(0,this.life))*(this.fort?0.2:1)
