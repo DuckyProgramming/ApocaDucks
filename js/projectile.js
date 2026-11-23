@@ -536,7 +536,7 @@ class projectile{
 					}
 				}
 			break
-			case 133: case 148: case 149: case 230: case 262: case 320:
+			case 133: case 148: case 149: case 230: case 262: case 320: case 539:
 				this.speed=2
 				this.time=time
 			break
@@ -3024,7 +3024,7 @@ class projectile{
 				layer.rotate(this.position.x+this.timer)
 				layer.rect(0,0,6)
 			break
-			case 133:
+			case 133: case 539:
 				layer.fill(240-this.crit*200,240,40+this.crit*200,this.fade)
 				layer.rect(0,4,1,8)
 				layer.fill(240-this.crit*200,160,40+this.crit*200,this.fade)
@@ -12637,7 +12637,7 @@ class projectile{
 						this.addProjectile(new projectile(this.layer,this.position.x,this.position.y,1,this.direction,this.id,this.base.damage/10,15,this.crit,this.index))
 					}
 				break
-				case 133: case 148: case 149: case 230: case 242: case 262: case 320:
+				case 133: case 148: case 149: case 230: case 242: case 262: case 320: case 539:
 				    this.position.x+=this.speed*lsin(this.direction)
 				    this.position.y-=this.speed*lcos(this.direction)
 					this.travel+=this.speed
@@ -13866,7 +13866,7 @@ class projectile{
 			!(this.rules.fast&&this.timer<5&&this.id==0)&&
 			!(this.type==65&&this.id==-1&&this.timer<5)&&
 			!((this.type==98||this.type==450)&&this.timer<15)&&
-			!(this.type==100&&this.timer<3)&&
+			!((this.type==100||this.type==539)&&this.timer<3)&&
 			//!((this.type==113||this.type==114||this.type==115||this.type==116||this.type==117||this.type==146||this.type==181||this.type==201||this.type==209||this.type==216||this.type==220||this.type==243||this.type==245||this.type==246||this.type==247||this.type==263||this.type==304||this.type==314||this.type==323)&&this.timer<150)
 			!(this.rules.trap&&this.timer<150)
 		){

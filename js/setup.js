@@ -6,7 +6,7 @@ function setup(){
     setupRules()
 
     let comm=-1
-    //28
+    //29
     if(comm>=0){
         duel={trigger:true,numKey:[0,0],sets:[[0,0],[0,0]],experiment:[-1,[0,-1]]}
 
@@ -245,6 +245,14 @@ function setup(){
                 duel.sets[0]=[0,7]
                 game.players=2
                 game.gaming=1
+                game.level=117
+            break
+            case 29:
+                //testing sunrise
+                duel.numKey=[2,0]
+                duel.sets[0]=[0,7]
+                game.players=2
+                game.gaming=2
                 game.level=117
             break
         }

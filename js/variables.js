@@ -8511,6 +8511,9 @@ types={
     },{
       name:'PlayerFastStickybombLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1245,
+    },{
+      name:'PlayerSunriseW',sizeBuff:1,lifeBuff:4,speedBuff:1.125,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:1246,
     },
 
     //mark c
@@ -10115,6 +10118,9 @@ types={
       name:'TinyFastPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1.8,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
+      name:'TinyCritFastLongPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1.8,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:30,
+    },{
       name:'BigPushierRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:72,
     },{
@@ -10279,6 +10285,9 @@ types={
     },{
       name:'ParaRocketBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.45,
       damageBuff:1,reloadBuff:1.5,crit:1,weapon:107,
+    },{
+      name:'ShotgunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
+      damageBuff:0.75,reloadBuff:2,crit:1,weapon:0,
     },{
       name:'RocketLauncherStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:108,
@@ -10747,6 +10756,12 @@ types={
     },{
       name:'TinyBonker',sizeBuff:0.8,lifeBuff:0.9,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:242,
+    },{
+      name:'TinyCritBonker',sizeBuff:0.8,lifeBuff:0.9,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:242,
+    },{
+      name:'TinyCritFastBonker',sizeBuff:0.8,lifeBuff:0.9,speedBuff:1.8,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:242,
     },{
       name:'LongHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
@@ -21744,6 +21759,15 @@ types={
 			reload:40,
 			speed:1.05,
       uses:18,
+		},{
+			name:'Sunrise W',
+			ammo:1,
+			damage:20,
+			cooldown:1,
+			stop:100,
+			reload:3,
+			speed:1.05,
+      uses:8,
 		},
 
     /*{

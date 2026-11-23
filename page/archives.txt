@@ -6,9 +6,11 @@
 1243 - super sticky jumper, 1210
 1244 - kerosene c, 8, 915
 1245 - fast stickybomb launcher, 1211
+1246 - sunrise w, 1198
 
 537 - rocket jump w, 379
 538 - fast stickybomb launcher, 348
+539 - sunrise w, 133
 
 
 

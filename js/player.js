@@ -9101,6 +9101,16 @@ class player{
                                 entities.projectiles[entities.projectiles.length-1].detTick-=5
                             }
                         break
+                        case 1246:
+                            for(let a=0,la=8;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1],222,faced-25+a*50/7,this.id,weaponData.damage*damageBuff,15,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed*=random(0.6,1)
+                            }
+                            for(let a=0,la=9;a<la;a++){
+                                entities.projectiles.push(new projectile(this.layer,spawn[0],spawn[1]-5+weapon.ammo%2*10,539,faced-10+a*2.5,this.id,weaponData.damage*damageBuff*5,300,crit,this.index))
+                                entities.projectiles[entities.projectiles.length-1].speed*=1.6-abs(a-4)*0.2
+                            }
+                        break
 
                         //mark
                     }
@@ -9328,7 +9338,7 @@ class player{
             medA:this.subWeaponAType==11||this.subWeaponAType==703||this.subWeaponAType==727||this.subWeaponAType==800||
                 this.subWeaponAType==854||this.subWeaponAType==862||this.subWeaponAType==887||this.subWeaponAType==926||
                 this.subWeaponAType==932||this.subWeaponAType==986||this.subWeaponAType==1020||this.subWeaponAType==1118||
-                this.subWeaponAType==1172||this.subWeaponAType==1209,
+                this.subWeaponAType==1172||this.subWeaponAType==1209||this.subWeaponAType==1227,
             fastHeal:this.weaponType==11||this.weaponType==13||this.weaponType==14||this.weaponType==62||this.weaponType==66||
                 this.weaponType==83||this.weaponType==100||this.weaponType==127||this.weaponType==185||this.weaponType==250||
                 this.weaponType==356||this.weaponType==514||this.weaponType==589||this.weaponType==681||this.weaponType==696||
@@ -10662,6 +10672,7 @@ class player{
                 (!game.peakWeapon&&this.fort?0.5:1)*
                 ((!game.peakWeapon||game.classicWeapon&&this.id>0&&this.id<=game.gaming)&&(this.playerData.name.includes('Deployer'))?2:1)*
                 (this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&!game.classWeapon&&(!game.pvp||game.gaming==1||game.level==27)?2:1)*
+                //(this.effectiveId()>game.gaming&&!this.construct&&!this.auto&&!this.fort&&!game.classWeapon&&(!game.pvp||game.level==27)?2:1)*
                 (this.playerData.name.includes('Deployer')&&this.storeWeapon?3:1)
             if(this.weapon.cooldown>0){
                 this.weapon.cooldown-=this.playerData.reloadBuff*rate
