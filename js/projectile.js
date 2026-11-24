@@ -14477,7 +14477,11 @@ class projectile{
 		if(target.life>base){
 			for(let d=0,ld=entities.players.length;d<ld;d++){
 				if(entities.players[d].index==this.index){
-					entities.players[d].stats.damage+=(target.life-base)*0.25
+					//entities.players[d].stats.damage+=(target.life-base)*0.25
+					let amount=target.life-base
+					entities.players[d].stats.healing+=amount
+					entities.players[d].stats.lifeHealing+=amount
+					entities.players[d].stats.subHealing[this.subWeapon]+=amount
 				}
 			}
 		}

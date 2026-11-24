@@ -12126,19 +12126,19 @@ function outKD(bypass){
     ${data[0].name}:
     ${round(player.stats.subIdealKills[0])} Kills
     ${round(player.stats.subDamage[0])} Damage Dealt
-    ${round(player.stats.subTaken[0])} Damage Taken${round(player.stats.subTaken[0])>0?` (${round(player.stats.subSelfTaken[0])} Self)`:``}
+    ${round(player.stats.subTaken[0])} Damage Taken${round(player.stats.subTaken[0])>0?` (${round(player.stats.subSelfTaken[0])} Self)`:``}${round(player.stats.subHealing[0])>0?`\n\t${round(player.stats.subHealing[0])} Health Healed`:``}
     ${player.stats.subTaken[0]==0?`Infinity`:round(player.stats.subDamage[0]/player.stats.subTaken[0]*100)/100} D/T
 
     ${data[1].name}:
     ${round(player.stats.subIdealKills[1])} Kills
     ${round(player.stats.subDamage[1])} Damage Dealt
-    ${round(player.stats.subTaken[1])} Damage Taken${round(player.stats.subTaken[1])>0?` (${round(player.stats.subSelfTaken[1])} Self)`:``}
+    ${round(player.stats.subTaken[1])} Damage Taken${round(player.stats.subTaken[1])>0?` (${round(player.stats.subSelfTaken[1])} Self)`:``}${round(player.stats.subHealing[1])>0?`\n\t${round(player.stats.subHealing[1])} Health Healed`:``}
     ${player.stats.subTaken[1]==0?`Infinity`:round(player.stats.subDamage[1]/player.stats.subTaken[1]*100)/100} D/T${player.swap3()||player.playerData.name=='PlayerEngineerW'?`
 
     ${data[2].name}:
     ${round(player.stats.subIdealKills[2])} Kills
     ${round(player.stats.subDamage[2])} Damage Dealt
-    ${round(player.stats.subTaken[2])} Damage Taken${round(player.stats.subTaken[2])>0?` (${round(player.stats.subSelfTaken[2])} Self)`:``}
+    ${round(player.stats.subTaken[2])} Damage Taken${round(player.stats.subTaken[2])>0?` (${round(player.stats.subSelfTaken[2])} Self)`:``}${round(player.stats.subHealing[2])>0?`\n\t${round(player.stats.subHealing[2])} Health Healed`:``}
     ${player.stats.subTaken[2]==0?`Infinity`:round(player.stats.subDamage[2]/player.stats.subTaken[2]*100)/100} D/T`:player.rules.insurgentLine?`
 
     ${data[2].name}:

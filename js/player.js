@@ -46,6 +46,7 @@ class player{
             idealKills:0,subIdealKills:[0,0,0],
             damage:0,subDamage:[0,0,0],lifeDamage:0,
             taken:0,subTaken:[0,0,0],lifeTaken:0,selfTaken:0,subSelfTaken:[0,0,0],
+            healing:0,subHealing:[0,0,0],lifeHealing:0,
             killStreak:0,deaths:0,
             bust:0,bustCount:0,
             lifeTime:0,
@@ -2977,6 +2978,7 @@ class player{
         this.storeWeapon=false
         this.stats.lifeDamage=0
         this.stats.lifeTaken=0
+        this.stats.lifeHealing=0
         this.stats.lifeTime=0
         this.assort.banner=0
         this.assort.bannerActive=[0,0]
@@ -10176,7 +10178,9 @@ class player{
                                         this.subWeaponBData.name.includes('Build')&&this.subWeaponB.ammo>0||
                                         this.subWeaponCData.name.includes('Build')&&this.subWeaponC.ammo>0
                                     )||*/
-                                    this.rules.medicLine&&(this.jump.time<=0&&this.jump.active<=8||this.target.heal)&&(this.subWeaponAType==133||this.subWeaponAType==688||this.subWeaponAType==705)
+                                    this.rules.medicLine&&
+                                    (this.jump.time<=0&&this.jump.active<=8||this.target.heal)&&
+                                    (this.subWeaponAType==133||this.subWeaponAType==688||this.subWeaponAType==705||this.subWeaponAType==910||this.subWeaponAType==1015||this.subWeaponAType==1215)
                                 )&&floor(random(0,15))==0
                             ){
                                 this.swapSubWeapons()
@@ -14082,10 +14086,14 @@ class player{
                             ){
                                 this.life=0
                                 this.dead=true
-                                entities.players[a].velocity.x=(lsin(this.direction.main)<0?-1:1)*40
-                                entities.players[a].lastingForce[0]+=(lsin(this.direction.main)<0?-1:1)*10
-                                entities.players[a].velocity.y=-30
-                                entities.players[a].lastingForce[1]-=(lsin(this.direction.main)<0?-1:1)*2
+                                //entities.players[a].velocity.x=(lsin(this.direction.main)<0?-1:1)*40
+                                entities.players[a].velocity.x=(lsin(this.direction.main)<0?-1:1)*40*entities.players[a].getKnockback()
+                                //entities.players[a].lastingForce[0]+=(lsin(this.direction.main)<0?-1:1)*10
+                                entities.players[a].lastingForce[0]+=(lsin(this.direction.main)<0?-1:1)*10*entities.players[a].getKnockback()
+                                //entities.players[a].velocity.y=-30
+                                entities.players[a].velocity.y=-30*entities.players[a].getKnockback()
+                                //entities.players[a].lastingForce[1]-=(lsin(this.direction.main)<0?-1:1)*2
+                                entities.players[a].lastingForce[1]-=(lsin(this.direction.main)<0?-1:1)*2*entities.players[a].getKnockback()
                             }
                         }
                     }

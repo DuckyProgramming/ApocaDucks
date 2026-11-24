@@ -1820,6 +1820,9 @@ function mainloop(){
                             graphics.main[c].text(`Spectating`,center.position.x,center.position.y+60)
                             graphics.main[c].textSize(10)
                             graphics.main[c].text(`Damage Last Life: ${floor(entities.players[c].stats.lifeDamage)}`,center.position.x,center.position.y+80)
+                            if(entities.players[c].rules.medicLine){
+                                graphics.main[c].text(`Healing Last Life: ${floor(entities.players[c].stats.lifeHealing)}`,center.position.x,center.position.y+95)
+                            }
                         }
                     }
                 }
