@@ -10172,16 +10172,18 @@ class player{
                             }
                         }else if(this.playerData.name=='PlayerSwapper'||this.rules.class){
                             if(
-                                (
+                                //(
                                     //this.rules.engineerLine&&this.subWeaponBData.name.includes('Sentry')&&this.subWeaponB.ammo>0||
                                     /*this.playerData.name=='PlayerEngineerW'&&(
                                         this.subWeaponBData.name.includes('Build')&&this.subWeaponB.ammo>0||
                                         this.subWeaponCData.name.includes('Build')&&this.subWeaponC.ammo>0
                                     )||*/
-                                    this.rules.medicLine&&
+                                    /*this.rules.medicLine&&
                                     (this.jump.time<=0&&this.jump.active<=8||this.target.heal)&&
                                     (this.subWeaponAType==133||this.subWeaponAType==688||this.subWeaponAType==705||this.subWeaponAType==910||this.subWeaponAType==1015||this.subWeaponAType==1215)
-                                )&&floor(random(0,15))==0
+                                )&&floor(random(0,15))==0*/
+                                this.rules.medicLine&&this.target.heal&&
+                                (this.subWeaponAType==133||this.subWeaponAType==688||this.subWeaponAType==705||this.subWeaponAType==910||this.subWeaponAType==1015||this.subWeaponAType==1215)
                             ){
                                 this.swapSubWeapons()
                             }

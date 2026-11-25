@@ -9076,6 +9076,7 @@ function generateLevel(info,layer){
                 }
 
                 //classPick=[3,5]
+                //classPick=[6,6]
                 classPick=game.classPick.length>0?game.classPick:classPick
 
                 options=[range(0,num),range(0,num)]
