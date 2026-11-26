@@ -147,7 +147,7 @@ class player{
             firing:0,firingTick:0,firingTime:0,detonate:0,glove:0,gas:0,ultraviolet:0,elevate:0,missile:false,remote:false,
             intel:false,swivel:floor(random(0,100)),threshold:360,storeSubWeapon:[],coreTick:0,tired:0,tiredTick:0,vault:false,ramp:0,autoTarget:[],
             ender:50,pivot:0,penalty:0,build:-1,building:0,radial:lsin(this.direction.main)<0?180:0,spectate:-1,vaultTimer:0,brutal:false,drone:-1,
-            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:[0,0],facing:this.direction.main,
+            stickyJump:false,buildMash:0,juggled:false,banner:0,bannerActive:[0,0],facing:this.direction.main,time:0,
         }
         this.sidekicks=[]
         this.bump=[false,false]
@@ -2955,6 +2955,7 @@ class player{
         this.size=0.5*this.playerData.sizeBuff
         this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
         this.assort.build=-1
+        this.assort.time=0
         if((game.level==8||game.level==17||game.level==136)&&this.base.position.y<game.tileset[1]*5){
             this.position.x=game.edge[0]/2
             this.position.y=1000
@@ -3438,7 +3439,8 @@ class player{
                                 entities.players[a].playerData.name=='ConstructLevel3'
                             )&&(
                                 dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
-                                this.effectiveId()>game.gaming
+                                //this.effectiveId()>game.gaming
+                                this.effectiveId()>game.gaming&&entities.players[a].stats.damage>0
                             )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                 //entities.players[a].life=max(min(entities.players[a].base.life*2,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
                                 //entities.players[a].life=max(min(entities.players[a].base.life,entities.players[a].life+entities.players[a].base.life*0.5),entities.players[a].life)
@@ -3457,7 +3459,8 @@ class player{
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if(entities.players[a].playerData.name=='ConstructLevel2'&&entities.players[a].life>=entities.players[a].base.life&&(
                                     dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
-                                    this.effectiveId()>game.gaming
+                                    //this.effectiveId()>game.gaming
+                                    this.effectiveId()>game.gaming&&entities.players[a].stats.damage>0
                                 )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                     entities.players[a].newWeaponSet(findName('ConstructLevel3',types.player))
                                     entities.players[a].multBuild(1.2)
@@ -3472,7 +3475,8 @@ class player{
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if(entities.players[a].playerData.name=='ConstructLevel1'&&entities.players[a].life>=entities.players[a].base.life&&(
                                     dist(this.position.x,this.position.y,entities.players[a].position.x,entities.players[a].position.y)<100||
-                                    this.effectiveId()>game.gaming
+                                    //this.effectiveId()>game.gaming
+                                    this.effectiveId()>game.gaming&&entities.players[a].stats.damage>0
                                 )&&entities.players[a].builder==this.index&&entities.players[a].life>0){
                                     entities.players[a].newWeaponSet(findName('ConstructLevel2',types.player))
                                     entities.players[a].multBuild(1.2)
@@ -9387,6 +9391,7 @@ class player{
         let projectilesLength=entities.projectiles.length
         this.attacking=false
         this.time++
+        this.assort.time++
         this.getColor()
         switch(this.weaponType){
             case 6: case 12: case 17: case 45: case 54: case 69: case 75: case 79: case 92: case 93:
@@ -10087,7 +10092,9 @@ class player{
                         }else if(floor(random(0,120))==0&&this.subWeaponAData.name.includes('Build')&&this.subWeaponA.ammo>0){
                             this.attack(1)
                         }*/
-                        if(this.subWeaponC.ammo>0){
+                        //if(this.subWeaponC.ammo>0){
+                        if(this.subWeaponC.ammo>0&&!(this.assort.time<60&&(game.level==44||game.level==65))){
+                            //don't build in spawn
                             this.attack(3)
                             if(this.subWeaponC.uses<=0&&this.id>0&&!game.randomizer){
                                 this.weaponType=-1

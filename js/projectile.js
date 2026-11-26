@@ -8817,7 +8817,8 @@ class projectile{
 	explode(){
 		this.exploded=true
 		let radius=60
-		let falloff
+		let totalHeal
+		//let falloff
 		switch(this.type){
 			case 2: case 26: case 31: case 32: case 41: case 48: case 80: case 266: case 307:
 				radius=120
@@ -9857,15 +9858,29 @@ class projectile{
 			break
 			case 378:
 				radius=90
+				totalHeal=0
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					let ver=this.validExplodeRadius(c,radius,entities.players[b])
 					if(entities.players[b].explodable()&&c<ver){
+						let base=entities.players[b].life
 						if(this.onTeam(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/ver)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-this.timer/this.base.time*4,0.2,1)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.validExplodeTarget(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].takeDamage(this.damage*(1-c/ver)*0.8*entities.players[b].selfDamageCheck(this.index)*constrain(1.2-this.timer/this.base.time*4,0.2,1))
 							entities.players[b].generalizedTake(this)
+						}
+						if(entities.players[b].life>base){
+							totalHeal+=entities.players[b].life-base
+						}
+					}
+				}
+				if(totalHeal>0){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].stats.healing+=totalHeal
+							entities.players[d].stats.lifeHealing+=totalHeal
+							entities.players[d].stats.subHealing[this.subWeapon]+=totalHeal
 						}
 					}
 				}
@@ -10523,15 +10538,29 @@ class projectile{
 			break
 			case 521:
 				radius=100
+				totalHeal=0
 				for(let b=0,lb=entities.players.length;b<lb;b++){
 					let c=this.distExplosion(entities.players[b],0)
 					let ver=this.validExplodeRadius(c,radius,entities.players[b])
 					if(entities.players[b].explodable()&&c<ver){
+						let base=entities.players[b].life
 						if(this.onTeam(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].life=min(entities.players[b].life+this.damage*(1-c/ver)*entities.players[b].selfDamageCheck(this.index)*(min(2,entities.players[b].base.life/125)),max(entities.players[b].life,entities.players[b].base.life*2))
 						}else if(this.validExplodeTarget(entities.players[b])&&this.index!=entities.players[b].index){
 							entities.players[b].takeDamage(this.damage*(1-c/ver))
 							entities.players[b].generalizedTake(this)
+						}
+						if(entities.players[b].life>base){
+							totalHeal+=entities.players[b].life-base
+						}
+					}
+				}
+				if(totalHeal>0){
+					for(let d=0,ld=entities.players.length;d<ld;d++){
+						if(entities.players[d].index==this.index){
+							entities.players[d].stats.healing+=totalHeal
+							entities.players[d].stats.lifeHealing+=totalHeal
+							entities.players[d].stats.subHealing[this.subWeapon]+=totalHeal
 						}
 					}
 				}
@@ -14449,7 +14478,7 @@ class projectile{
 			break*/
 			default:
 				if(this.rules.exploder&&this.type!=389&&this.type!=527){
-					if(this.rules.fast||this.speed>=10){
+					if(this.rules.fast||this.speed>=10||this.rules.hitRocket){
 						if(intersect(this.position,this.previous.position,
 							{x:target.position.x-target.width*0.5-this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5},
 							{x:target.position.x+target.width*0.5+this.width*0.5,y:target.position.y-target.height*0.5-this.height*0.5}
@@ -14504,7 +14533,7 @@ class projectile{
 				}
 			break
 		}
-		if(target.life>base){
+		if(target.life>base&&this.type!=378&&this.type!=521){
 			for(let d=0,ld=entities.players.length;d<ld;d++){
 				if(entities.players[d].index==this.index){
 					//entities.players[d].stats.damage+=(target.life-base)*0.25
