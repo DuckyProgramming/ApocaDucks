@@ -12309,10 +12309,13 @@ class projectile{
 				case 209: case 216: case 220: case 221: case 243: case 250: case 263: case 284: case 286: case 304:
 				case 314: case 323: case 329: case 349: case 360: case 368: case 372: case 375: case 392: case 417:
 				case 435: case 438: case 448: case 509: case 514: case 519: case 538:
+					//for several weeks this mechanic actually forced players to shoot stickies...
 					if(this.rules.stickybomb&&this.type!=360&&/*(this.stop||this.timer>=this.detTick)*/this.stop&&this.active){
 						for(let b=0,lb=entities.players.length;b<lb;b++){
 							if(
-								(entities.players[b].id!=this.id&&!(!game.pvp&&entities.players[b].id>0&&this.id>0))&&
+								entities.players[b].effectiveId()>game.gaming&&
+								//(entities.players[b].id!=this.id&&!(!game.pvp&&entities.players[b].id>0&&this.id>0))&&
+								this.validExplodeTarget(entities.players[b])&&
 								entities.players[b].rules.class&&(
 									lsin(entities.players[b].direction.main)<0&&this.position.x<entities.players[b].position.x||
 									lsin(entities.players[b].direction.main)>0&&this.position.x>entities.players[b].position.x
@@ -13743,7 +13746,9 @@ class projectile{
 					if(this.active){
 						for(let b=0,lb=entities.players.length;b<lb;b++){
 							if(
-								(entities.players[b].id!=this.id&&!(!game.pvp&&entities.players[b].id>0&&this.id>0))&&
+								entities.players[b].effectiveId()>game.gaming&&
+								//(entities.players[b].id!=this.id&&!(!game.pvp&&entities.players[b].id>0&&this.id>0))&&
+								this.validExplodeTarget(entities.players[b])&&
 								entities.players[b].rules.class&&(
 									lsin(entities.players[b].direction.main)<0&&this.position.x<entities.players[b].position.x||
 									lsin(entities.players[b].direction.main)>0&&this.position.x>entities.players[b].position.x

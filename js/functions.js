@@ -365,7 +365,12 @@ function shotgun(name){
         name.includes(`Scattergun`)||
         name==`Peppergun`||
         name==`Peppergun C`||
-        name==`Securer`
+        name==`Securer`||
+        name==`Pomson C`||
+        name==`Widowmaker`||
+        name==`Widowmaker C`||
+        name==`Tapper`||
+        name==`Tapper C`
 }
 function playerColor(owner){
     switch(owner){
